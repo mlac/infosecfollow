@@ -1,0 +1,228 @@
+{
+  "date": "2026-06-12",
+  "headline": "The ShinyHunters extortion crew is mass-exploiting an actively abused Oracle PeopleSoft zero-day (CVE-2026-35273) to breach universities and enterprises, prompting CISA to add it to its Known Exploited Vulnerabilities catalog.",
+  "emerging_trends": [
+    "Authentication-bypass and unauthenticated-RCE flaws in enterprise edge and identity products (Oracle PeopleSoft, Ivanti Sentry, Check Point VPN, phpBB) are being weaponized within days of disclosure, driving emergency patch directives.",
+    "AI is now both an attack tool and a fresh attack surface, with Agentjacking against coding agents, an RCE chain in LangGraph, and Google suing a China-based network for abusing Gemini to run phishing scams.",
+    "Coordinated international law enforcement is striking cybercrime infrastructure and operators, dismantling the AudiA6 laundering service and Sniper Dz phishing platform and securing a Conti guilty plea.",
+    "Regulators and courts are imposing record financial consequences for data breaches, from South Korea's $409M Coupang fine to a $47M 23andMe settlement fund.",
+    "Software supply-chain and package-repository compromises remain a leading foothold, exemplified by 400+ malicious Arch Linux AUR packages pushing a rootkit and infostealer."
+  ],
+  "topics": [
+    {
+      "title": "Oracle PeopleSoft zero-day exploited by ShinyHunters (CVE-2026-35273)",
+      "last_24h": "Google's Mandiant confirmed ShinyHunters (UNC6240) exploited the unauthenticated PeopleSoft flaw against universities and enterprises, Oracle issued a mitigation, and CISA added CVE-2026-35273 to its KEV catalog.",
+      "summary": "CVE-2026-35273 is a missing-authentication-for-critical-function vulnerability in Oracle PeopleSoft Enterprise PeopleTools that enables unauthenticated remote code execution. The ShinyHunters extortion crew, tracked by Mandiant as UNC6240, exploited it as a zero-day between May 27 and June 9, stealing data and demanding payment, with universities hit hardest. Oracle did not publish its advisory until June 10 and has not publicly confirmed in-the-wild exploitation; organizations should apply Oracle's mitigation immediately and hunt for compromise. Federal agencies are now bound by CISA's KEV listing and BOD 26-04 to remediate on an accelerated timeline.",
+      "tags": [
+        "zero-day",
+        "breach",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Oracle mitigates PeopleSoft zero-day exploited in data theft attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/oracle-mitigates-peoplesoft-zero-day-exploited-in-data-theft-attacks/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "ShinyHunters Exploits Oracle PeopleSoft Zero-Day (CVE-2026-35273) to Breach Universities",
+          "url": "https://thehackernews.com/2026/06/shinyhunters-exploits-oracle-peoplesoft.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Google Confirms Exploitation of Oracle PeopleSoft Zero-Day by ShinyHunters",
+          "url": "https://www.securityweek.com/google-confirms-exploitation-of-oracle-peoplesoft-zero-day-by-shinyhunters/"
+        },
+        {
+          "source": "CISA Advisories",
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/06/12/cisa-adds-one-known-exploited-vulnerability-catalog"
+        }
+      ]
+    },
+    {
+      "title": "Ivanti Sentry flaw under active exploitation, 3-day federal patch order",
+      "last_24h": "CISA invoked the newly issued BOD 26-04 to give federal agencies just three days to patch an actively exploited Ivanti Sentry flaw, as exploitation attempts began hitting honeypots.",
+      "summary": "The critical OS command injection vulnerability in Ivanti Sentry allows attackers to execute arbitrary code with root privileges. Researchers observed exploitation attempts landing in honeypots, indicating opportunistic scanning and attacks are already underway. CISA's compressed remediation deadline under Binding Operational Directive 26-04 signals high urgency; administrators should patch immediately and review Sentry appliances for signs of root-level compromise.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "policy"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "CISA orders feds to patch actively exploited Ivanti flaw by Sunday",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-gives-feds-3-days-to-patch-ivanti-flaw-exploited-in-attacks/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Ivanti Sentry Exploitation Attempts Hitting Honeypots",
+          "url": "https://www.securityweek.com/ivanti-sentry-exploitation-attempts-hitting-honeypots/"
+        }
+      ]
+    },
+    {
+      "title": "Check Point VPN auth-bypass PoC released (CVE-2026-50751)",
+      "last_24h": "WatchTowr published a technical analysis and a 'Detection Artefact Generator' for CVE-2026-50751, an authentication bypass in Check Point Remote Access and Mobile Access VPN that the vendor confirmed is actively exploited.",
+      "summary": "CVE-2026-50751 is an authentication bypass affecting Check Point's Remote Access VPN and Mobile Access, patched by the vendor on June 8, 2026. Exploitation had been limited and silent, but with WatchTowr's detailed write-up and detection tooling now public, a larger wave of opportunistic attacks is expected. Organizations running affected Check Point VPN gateways should ensure the June 8 patch is applied and hunt for prior unauthorized access.",
+      "tags": [
+        "zero-day",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Researchers release details, PoC for exploited Check Point VPN flaw (CVE-2026-50751)",
+          "url": "https://www.helpnetsecurity.com/2026/06/12/cve-2026-50751-poc-exploit/"
+        }
+      ]
+    },
+    {
+      "title": "AI agents as attack tool and attack surface",
+      "last_24h": "Researchers disclosed Agentjacking against AI coding agents and an RCE flaw chain in LangGraph, while Google sued a China-based network for using Gemini to build phishing and scam infrastructure.",
+      "summary": "Tenet Security's Agentjacking tricks AI coding agents into running arbitrary code on developer machines via a fake Sentry error report, marking a new class of developer-targeted attack. Separately, three now-patched flaws in LangChain's LangGraph framework, including a critical SQL-injection-led chain, could yield remote code execution on self-hosted AI agents. On the offensive-AI front, Google filed suit against Outsider Enterprise, a China-based network it says abused Gemini and other AI tools to create over 9,000 fake sites and a million fraudulent URLs affecting hundreds of thousands of victims. Teams running agentic AI should patch LangGraph, isolate coding-agent execution, and treat AI-generated fraud infrastructure as a scaling threat.",
+      "tags": [
+        "apt",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Agentjacking Attack Tricks AI Coding Agents Into Running Malicious Code",
+          "url": "https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "LangGraph Flaw Chain Exposes Self-Hosted AI Agents to Remote Code Execution",
+          "url": "https://thehackernews.com/2026/06/langgraph-flaw-chain-exposes-self.html"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Google sues China-based scammers over Gemini AI abuse",
+          "url": "https://www.helpnetsecurity.com/2026/06/12/google-china-based-cybercrime-network-lawsuit/"
+        }
+      ]
+    },
+    {
+      "title": "Law enforcement takedowns of cybercrime infrastructure",
+      "last_24h": "Europol dismantled the AudiA6 crypto-laundering service that moved over €336 million for ransomware gangs, INTERPOL's Operation Ramz disrupted the Sniper Dz phishing platform with 201 arrests, and a Ukrainian national pleaded guilty to Conti ransomware charges.",
+      "summary": "Authorities continued a coordinated push against the cybercrime supply chain on multiple fronts. Europol's takedown of AudiA6 cut a key laundering pipeline that washed an estimated €336 million (~$389 million) in ransomware and fraud proceeds between 2022 and 2025. INTERPOL-led Operation Ramz, spanning 13 MENA countries, disrupted the decade-old Sniper Dz phishing-as-a-service platform and arrested its administrator 'Guedz' among 201 total arrests. In the US, an extradited Ukrainian national pleaded guilty to conspiracy charges tied to the Conti ransomware operation, reinforcing pressure on operators and their financial enablers.",
+      "tags": [
+        "ransomware",
+        "policy"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Authorities dismantle crypto laundering service that moved €336 million for cybercriminals",
+          "url": "https://www.helpnetsecurity.com/2026/06/12/europol-audia6-crypto-laundering-service-ransomware-groups/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "INTERPOL Operation Takes Down Sniper Dz Phishing Platform, Arrests Administrator",
+          "url": "https://thehackernews.com/2026/06/interpol-takes-down-sniper-dz-phishing.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Ukrainian national pleads guilty to role in Conti ransomware operation",
+          "url": "https://www.bleepingcomputer.com/news/security/ukrainian-national-pleads-guilty-to-role-in-conti-ransomware-operation/"
+        }
+      ]
+    },
+    {
+      "title": "Major breaches and record-setting regulatory fines",
+      "last_24h": "South Korea fined Coupang a record $409 million over a data breach, a bankruptcy admin approved a $47 million settlement fund for 23andMe breach victims, Novo Nordisk disclosed a clinical-trials data breach, and France confirmed its Tchap messenger breach hit over 73,000 public-sector accounts.",
+      "summary": "A wave of disclosures and enforcement underscored mounting consequences for breached organizations. South Korea's commission levied its largest-ever personal-data-breach penalty, $409 million, against e-commerce giant Coupang, surpassing the earlier SK Telecom fine. In the US, about 7 million 23andMe customers whose genetic data was stolen from April 2023 will share a $47 million settlement fund. Danish insulin maker Novo Nordisk reported exposure of patient information from some clinical trials, while the French government said its Tchap encrypted messaging breach affected more than 73,000 employees, illustrating broad exposure across healthcare, government, and consumer sectors.",
+      "tags": [
+        "breach",
+        "policy"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "South Korea hits Coupang with record $409 million fine over data breach",
+          "url": "https://therecord.media/south-korea-data-breach-record-fine-coupang"
+        },
+        {
+          "source": "The Record",
+          "title": "Bankruptcy admin approves settlement fund of $47 million for 23andMe data breach victims",
+          "url": "https://therecord.media/bankruptcy-admin-approves-settlement-for-23andme-breach-victims"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Pharma giant Novo Nordisk discloses breach of clinical trials data",
+          "url": "https://www.bleepingcomputer.com/news/security/pharmaceutical-giant-novo-nordisk-discloses-security-breach/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Over 73,000 French govt employees affected in Tchap messenger breach",
+          "url": "https://www.bleepingcomputer.com/news/security/french-govt-says-tchap-breach-affected-over-73-000-accounts/"
+        }
+      ]
+    },
+    {
+      "title": "Arch Linux AUR packages compromised with rootkit and infostealer",
+      "last_24h": "More than 400 packages in the Arch User Repository were found distributing a Linux rootkit and infostealer that targets credentials and access tokens.",
+      "summary": "The Arch User Repository, a community-maintained collection of Arch Linux build scripts, was abused to push over 400 malicious packages carrying a rootkit and credential/token-stealing malware. AUR packages are built from user-submitted recipes with limited vetting, making the repository an attractive supply-chain vector. Arch users should audit recently installed AUR packages, rotate any exposed credentials and access tokens, and scrutinize maintainer changes before building untrusted packages.",
+      "tags": [
+        "malware",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Over 400 Arch Linux packages compromised to push rootkit, infostealer",
+          "url": "https://www.bleepingcomputer.com/news/security/over-400-arch-linux-packages-compromised-to-push-rootkit-infostealer/"
+        }
+      ]
+    },
+    {
+      "title": "Phishing volume falls but risk climbs as attackers go targeted",
+      "last_24h": "Zscaler ThreatLabz reported phishing activity declined roughly 20% in both 2024 and 2025, with attackers shifting from mass campaigns to AI-enhanced, business-mimicking targeted lures.",
+      "summary": "Phishing volume, which had topped 2 billion hits in 2023, has fallen about 20% in each of the last two years, but researchers warn that blocked-email counts are no longer a reliable proxy for risk. Attackers are favoring quality over quantity, using AI to craft convincing campaigns that resemble routine business communications, with the services sector seeing a 65.5% year-over-year rise. Defenders should weight detection toward behavioral and content signals rather than raw volume, and prepare for more tailored social-engineering aimed at high-value targets.",
+      "tags": [
+        "phishing"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Cybercriminals are moving away from mass phishing campaigns",
+          "url": "https://www.helpnetsecurity.com/2026/06/12/zscaler-report-phishing-activity-trends/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Phishing Attack Volume Down 20%, But Risk Still Rising",
+          "url": "https://www.darkreading.com/cybersecurity-analytics/phishing-volume-down-20-risk-rising"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "generated_at": "2026-06-12 14:58 EDT",
+    "items_considered": 43,
+    "window_hours": 24,
+    "model": "claude-opus-4-8",
+    "feeds": [
+      "The Hacker News",
+      "BleepingComputer",
+      "Krebs on Security",
+      "Schneier on Security",
+      "Dark Reading",
+      "SecurityWeek",
+      "SANS Internet Storm Center",
+      "CISA Advisories",
+      "The Record",
+      "Ars Technica Security",
+      "Help Net Security",
+      "Securelist (Kaspersky)",
+      "Sophos News",
+      "Unit 42 (Palo Alto)",
+      "Google Online Security Blog",
+      "Cisco Talos",
+      "Graham Cluley",
+      "Microsoft Security Blog"
+    ]
+  }
+}
