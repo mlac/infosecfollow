@@ -4,7 +4,6 @@ game links into plaintextsports.com. Stdlib only, no API keys.
 """
 
 import json
-import textwrap
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -16,7 +15,6 @@ NWS_POINT = "https://api.weather.gov/points/40.4406,-79.9959"  # downtown Pittsb
 ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 LEAGUES = [("baseball", "mlb"), ("football", "nfl"), ("hockey", "nhl")]
 TEAM_ABBR = "PIT"
-PROSE_WIDTH = 58            # wrap recap/headline prose inside the block
 NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-season
 NEWS_MAX_AGE = timedelta(hours=48)
 
@@ -93,11 +91,6 @@ def _pts_url(league, when_local, away_abbr, home_abbr, event=None):
             f"{away}-{home}")
 
 
-def _wrap_prose(text, indent="  "):
-    return textwrap.wrap(text, width=PROSE_WIDTH, initial_indent=indent,
-                         subsequent_indent=indent)
-
-
 def _sides(comp):
     competitors = comp.get("competitors", [])
     if len(competitors) != 2:
@@ -107,8 +100,12 @@ def _sides(comp):
     return away, home
 
 
-def _game_lines(league, event, recaps):
-    """Lines for a finished or in-progress Pittsburgh game; None otherwise."""
+def _game_entry(league, event, recaps):
+    """Structured finished/in-progress Pittsburgh game; None otherwise.
+
+    Returns {date, result, url, recap}; the result string is the clickable
+    matchup text (the URL is hidden behind it in the rendered HTML).
+    """
     comp = event["competitions"][0]
     away, home = _sides(comp)
     if away is None:
@@ -120,28 +117,30 @@ def _game_lines(league, event, recaps):
     status = event.get("status", {}).get("type", {})
     state = status.get("state", "")
     if state == "pre":
-        return None  # upcoming games come from the team's nextEvent instead
+        return None  # upcoming games come from the schedule endpoint instead
 
     when = _parse_when(event["date"])
-    date_str = f"{when:%a %b} {when.day}"  # e.g. "Fri Jun 12"
     away_name = away["team"].get("shortDisplayName", "?")
     home_name = home["team"].get("shortDisplayName", "?")
     detail = status.get("shortDetail") or status.get("detail") or ""
+    entry = {"date": f"{when:%a %b} {when.day}",  # e.g. "Fri Jun 12"
+             "url": _pts_url(league, when, away_abbr, home_abbr, event),
+             "recap": ""}
 
     if state == "post" and not status.get("completed", True):
         # postponed/canceled/suspended games carry state=post with 0-0 scores
-        return [f"{date_str}: {away_name} @ {home_name}  {detail or 'Postponed'}"]
+        entry["result"] = f"{away_name} @ {home_name} · {detail or 'Postponed'}"
+        return entry
     if state == "post":
         d = detail.replace("Final", "").strip("/ ")
         detail = "Final" + (f" ({d})" if d else "")
-    lines = [f"{date_str}: {away_name} {away.get('score', '?')}  "
-             f"{home_name} {home.get('score', '?')}  {detail}"]
+    entry["result"] = (f"{away_name} {away.get('score', '?')} · "
+                       f"{home_name} {home.get('score', '?')} · {detail}")
     recap = (comp.get("headlines") or [{}])[0].get("shortLinkText", "")
     if recap:
         recaps.append(recap)
-        lines += _wrap_prose(recap)
-    lines.append(f"  {_pts_url(league, when, away_abbr, home_abbr, event)}")
-    return lines
+        entry["recap"] = recap
+    return entry
 
 
 def _schedule_next(sport, league, now_utc):
@@ -167,27 +166,25 @@ def _schedule_next(sport, league, now_utc):
     return best[1] if best else None
 
 
-def _next_event_lines(league, event):
+def _next_entry(league, event):
+    """Structured next game {matchup, when, url}; None if unparseable."""
     comp = (event.get("competitions") or [{}])[0]
     away, home = _sides(comp)
     if away is None:
-        return []
+        return None
     away_team = away.get("team") or {}
     home_team = home.get("team") or {}
     try:
         when = _parse_when(event["date"])
     except (KeyError, ValueError):
-        return []
-    venue = comp.get("venue") or {}
-    addr = venue.get("address") or {}
-    place = ", ".join(x for x in (venue.get("fullName"), addr.get("city")) if x)
-    lines = [f"Next: {away_team.get('shortDisplayName', '?')} @ "
-             f"{home_team.get('shortDisplayName', '?')}  "
-             f"{when:%a %b} {when.day}, {when:%-I:%M %p}"]  # e.g. "Sat Jun 14"
-    if place:
-        lines.append(f"  {place}")
-    lines.append(f"  {_pts_url(league, when, away_team.get('abbreviation', ''), home_team.get('abbreviation', ''), event)}")
-    return lines
+        return None
+    return {
+        "matchup": f"{away_team.get('shortDisplayName', '?')} @ "
+                   f"{home_team.get('shortDisplayName', '?')}",
+        "when": f"{when:%a %b} {when.day}, {when:%-I:%M %p}",  # e.g. "Sat Jun 14"
+        "url": _pts_url(league, when, away_team.get("abbreviation", ""),
+                        home_team.get("abbreviation", ""), event),
+    }
 
 
 def _team_news(sport, league, now_utc, recaps):
@@ -219,11 +216,12 @@ def _team_news(sport, league, now_utc, recaps):
 
 
 def _team_block(sport, league, now_local, now_utc):
+    """Structured block {team, record, games[], next, headlines[]} or None."""
     blob = _get_json(f"{ESPN}/{sport}/{league}/teams/{TEAM_ABBR.lower()}")["team"]
     name = blob.get("shortDisplayName", "Pittsburgh")
     record = blob.get("record", {}).get("items", [{}])[0].get("summary", "")
 
-    game_lines, recaps, seen = [], [], set()
+    games, recaps, seen = [], [], set()
     dates = [(now_local - timedelta(days=1)).strftime("%Y%m%d"),
              now_local.strftime("%Y%m%d")]
     for date in dates:
@@ -236,39 +234,34 @@ def _team_block(sport, league, now_local, now_utc):
             if event.get("id") in seen:
                 continue
             try:
-                lines = _game_lines(league, event, recaps)
+                entry = _game_entry(league, event, recaps)
             except Exception:
                 continue  # one malformed event must not sink the section
-            if lines:
+            if entry:
                 seen.add(event.get("id"))
-                game_lines += lines
+                games.append(entry)
 
     try:  # the cosmetic tail must not discard already-built scores
         nxt = _schedule_next(sport, league, now_utc)
-        next_lines = _next_event_lines(league, nxt) if nxt else []
+        next_entry = _next_entry(league, nxt) if nxt else None
     except Exception:
-        next_lines = []
-    if not game_lines and not next_lines:
-        return []  # off-season: skip the team entirely
+        next_entry = None
+    if not games and not next_entry:
+        return None  # off-season: skip the team entirely
 
-    block = [f"{name.upper()} ({record})" if record else name.upper()]
-    block += game_lines + next_lines
     try:
-        news = _team_news(sport, league, now_utc, recaps)
+        headlines = _team_news(sport, league, now_utc, recaps)
     except Exception:
-        news = []
-    if news:
-        block.append("Headlines:")
-        for headline in news:
-            block += _wrap_prose(headline)
-    return block
+        headlines = []
+    return {"team": name, "record": record, "games": games,
+            "next": next_entry, "headlines": headlines}
 
 
-def sports_lines():
-    """Per-team plaintextsports-style blocks for the Pirates, Steelers, Penguins."""
+def sports_blocks():
+    """Per-team structured blocks for the Pirates, Steelers, and Penguins."""
     now_local = datetime.now(TZ)
     now_utc = datetime.now(timezone.utc)
-    lines = []
+    blocks = []
     for sport, league in LEAGUES:
         try:
             block = _team_block(sport, league, now_local, now_utc)
@@ -276,13 +269,12 @@ def sports_lines():
             print(f"  sports: {league} unavailable: {str(exc)[:120]}")
             continue
         if block:
-            if lines:
-                lines.append("")
-            lines += block
-    return lines
+            blocks.append(block)
+    return blocks
 
 
 if __name__ == "__main__":
+    import json
     print("\n".join(weather_lines()))
     print()
-    print("\n".join(sports_lines()) or "no Pittsburgh games in the window")
+    print(json.dumps(sports_blocks(), indent=2, ensure_ascii=False))

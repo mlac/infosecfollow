@@ -559,7 +559,14 @@ PAGE_CSS = """
   nav { font-size: 0.85rem; margin-top: 0.25rem; }
   pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
         font-family: inherit; font-size: inherit; }
-  pre.scores { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .team { font-weight: bold; margin: 1rem 0 0.1rem; }
+  .gameline { margin: 0.35rem 0 0; }
+  .lbl { opacity: 0.6; }
+  .sub { opacity: 0.65; margin: 0.1rem 0 0 1.4em; }
+  a.game { color: #9a6f00; font-weight: bold; text-underline-offset: 2px;
+           overflow-wrap: anywhere; }
+  ul.headlines { margin: 0.25rem 0 0; }
+  @media (prefers-color-scheme: dark) { a.game { color: #ffd24a; } }
   .index { font-size: 0.85rem; opacity: 0.85; margin: 0.75rem 0; }
   .index a { margin-right: 0.25rem; }
   .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.7; }
@@ -603,11 +610,20 @@ def _local_items_html(items):
     return out
 
 
-_URL_RE = re.compile(r"https://[^\s<]+")
-
-
-def _linkify(escaped_line):
-    return _URL_RE.sub(lambda m: f'<a href="{m.group(0)}">{m.group(0)}</a>', escaped_line)
+def _clean_sports(blocks):
+    """Strip control chars and cap lengths on third-party ESPN sports strings."""
+    for b in blocks:
+        b["team"] = sanitize(b.get("team", ""))[:80]
+        b["record"] = sanitize(b.get("record", ""))[:20]
+        for g in b.get("games", []):
+            g["date"] = sanitize(g.get("date", ""))[:40]
+            g["result"] = sanitize(g.get("result", ""))[:160]
+            g["recap"] = sanitize(g.get("recap", ""))[:300]
+        if b.get("next"):
+            b["next"]["matchup"] = sanitize(b["next"].get("matchup", ""))[:80]
+            b["next"]["when"] = sanitize(b["next"].get("when", ""))[:60]
+        b["headlines"] = [sanitize(h)[:200] for h in b.get("headlines", [])]
+    return blocks
 
 
 def _trends_inner(digest):
@@ -650,10 +666,36 @@ def _pittsburgh_inner(local, weather):
     return parts
 
 
-def _sports_inner(sports):
-    if not sports:
+def _game_link(text, url):
+    """Matchup text as a yellow link to its plaintextsports page (URL hidden)."""
+    if url and url.startswith(("http://", "https://")):
+        return f'<a class="game" href="{esc(url)}">{esc(text)}</a>'
+    return esc(text)
+
+
+def _sports_inner(blocks):
+    if not blocks:
         return []
-    return ['<pre class="scores">' + "\n".join(_linkify(esc(l)) for l in sports) + "</pre>"]
+    out = []
+    for b in blocks:
+        head = esc(b["team"]) + (f" ({esc(b['record'])})" if b["record"] else "")
+        out.append(f'<p class="team">{head}</p>')
+        for g in b["games"]:
+            out.append('<p class="gameline">'
+                       f'<span class="lbl">{esc(g["date"])} &middot;</span> '
+                       f'{_game_link(g["result"], g["url"])}</p>')
+            if g["recap"]:
+                out.append(f'<p class="sub">{esc(g["recap"])}</p>')
+        nxt = b.get("next")
+        if nxt:
+            out.append('<p class="gameline"><span class="lbl">Up Next &middot;</span> '
+                       f'{_game_link(nxt["matchup"], nxt["url"])} '
+                       f'<span class="lbl">&middot; {esc(nxt["when"])}</span></p>')
+        if b["headlines"]:
+            out.append('<ul class="headlines">')
+            out += [f"<li>{esc(h)}</li>" for h in b["headlines"]]
+            out.append("</ul>")
+    return out
 
 
 def _reading_inner(local):
@@ -814,7 +856,26 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
             _text_local_items(lines, "Events", local.get("events", []))
 
     if sports:
-        lines += ["", "SPORTS", sub, ""] + list(sports)
+        lines += ["", "SPORTS", sub]
+        for b in sports:
+            head = f"{b['team']} ({b['record']})" if b["record"] else b["team"]
+            lines += ["", head]
+            for g in b["games"]:
+                lines.append(_fill(f"{g['date']} · {g['result']}", "  ", "    "))
+                if g["recap"]:
+                    lines.append(_fill(g["recap"], "    "))
+                if g["url"].startswith(("http://", "https://")):
+                    lines.append(f"    {g['url']}")
+            nxt = b.get("next")
+            if nxt:
+                lines.append(_fill(f"Up Next · {nxt['matchup']} · {nxt['when']}",
+                                   "  ", "    "))
+                if nxt["url"].startswith(("http://", "https://")):
+                    lines.append(f"    {nxt['url']}")
+            if b["headlines"]:
+                lines.append("  Headlines:")
+                for h in b["headlines"]:
+                    lines.append(_fill(h, "    · ", "      "))
 
     if local and local.get("reading"):
         lines += ["", "READING", sub]
@@ -936,7 +997,7 @@ def main():
     markets = attempt("markets", market_data.weekly_rows)
     # NWS/ESPN strings are third-party text: strip control chars, cap length
     weather = [sanitize(w)[:200] for w in attempt("weather", pgh_data.weather_lines)]
-    sports = [sanitize(s)[:200] for s in attempt("sports", pgh_data.sports_lines)]
+    sports = _clean_sports(attempt("sports", pgh_data.sports_blocks) or [])
 
     cli = find_claude_cli()
     print(f"[3/4] summarizing via claude ({MODEL}, using {cli})\n"
