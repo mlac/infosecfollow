@@ -17,7 +17,7 @@ ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 LEAGUES = [("baseball", "mlb"), ("football", "nfl"), ("hockey", "nhl")]
 TEAM_ABBR = "PIT"
 PROSE_WIDTH = 58            # wrap recap/headline prose inside the block
-NEXT_GAME_HORIZON = timedelta(days=10)
+NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-season
 NEWS_MAX_AGE = timedelta(hours=48)
 
 
@@ -61,9 +61,15 @@ def _pts_slug(league, abbr):
 
 
 def _nfl_week_seg(event):
-    """plaintextsports NFL path segment '{year}/{week-slug}' from an ESPN event."""
+    """plaintextsports NFL path segment '{year}/{week-slug}' from an ESPN event.
+
+    Scoreboard events carry season.type; schedule events carry seasonType.type.
+    """
     season = event.get("season", {})
-    year, stype = season.get("year"), season.get("type")
+    year = season.get("year")
+    stype = season.get("type")
+    if stype is None:
+        stype = event.get("seasonType", {}).get("type")
     num = event.get("week", {}).get("number")
     if not year:
         return None
@@ -117,7 +123,7 @@ def _game_lines(league, event, recaps):
         return None  # upcoming games come from the team's nextEvent instead
 
     when = _parse_when(event["date"])
-    date_str = f"{when:%b} {when.day}"
+    date_str = f"{when:%a %b} {when.day}"  # e.g. "Fri Jun 12"
     away_name = away["team"].get("shortDisplayName", "?")
     home_name = home["team"].get("shortDisplayName", "?")
     detail = status.get("shortDetail") or status.get("detail") or ""
@@ -138,34 +144,46 @@ def _game_lines(league, event, recaps):
     return lines
 
 
-def _next_event_lines(league, blob, now_local):
-    for event in blob.get("nextEvent", []):
-        comp = (event.get("competitions") or [{}])[0]
-        state = comp.get("status", {}).get("type", {}).get("state", "pre")
-        if state != "pre":
-            continue  # in progress or done: the scoreboard pass shows it
+def _schedule_next(sport, league, now_utc):
+    """Earliest upcoming game within the horizon, from the team schedule endpoint.
+
+    The teams endpoint's nextEvent field is unreliable (it returns the most
+    recent completed game), so query the full schedule instead.
+    """
+    sched = _get_json(f"{ESPN}/{sport}/{league}/teams/{TEAM_ABBR.lower()}/schedule")
+    horizon = now_utc + NEXT_GAME_HORIZON
+    best = None
+    for event in sched.get("events", []):
         try:
-            when = _parse_when(event["date"])
-        except (KeyError, ValueError):
+            when = datetime.fromisoformat(event["date"].replace("Z", "+00:00"))
+        except (KeyError, ValueError, AttributeError):
             continue
-        if when - now_local > NEXT_GAME_HORIZON:
-            continue
-        away, home = _sides(comp)
-        if away is None:
-            continue
-        away_team = away.get("team") or {}
-        home_team = home.get("team") or {}
-        venue = comp.get("venue", {})
-        place = ", ".join(x for x in (venue.get("fullName"),
-                                      venue.get("address", {}).get("city")) if x)
-        lines = [f"Next: {away_team.get('shortDisplayName', '?')} @ "
-                 f"{home_team.get('shortDisplayName', '?')}  "
-                 f"{when:%b} {when.day}, {when:%-I:%M %p}"]
-        if place:
-            lines.append(f"  {place}")
-        lines.append(f"  {_pts_url(league, when, away_team.get('abbreviation', ''), home_team.get('abbreviation', ''), event)}")
-        return lines
-    return []
+        if now_utc < when <= horizon and (best is None or when < best[0]):
+            best = (when, event)
+    return best[1] if best else None
+
+
+def _next_event_lines(league, event):
+    comp = (event.get("competitions") or [{}])[0]
+    away, home = _sides(comp)
+    if away is None:
+        return []
+    away_team = away.get("team") or {}
+    home_team = home.get("team") or {}
+    try:
+        when = _parse_when(event["date"])
+    except (KeyError, ValueError):
+        return []
+    venue = comp.get("venue", {})
+    place = ", ".join(x for x in (venue.get("fullName"),
+                                  venue.get("address", {}).get("city")) if x)
+    lines = [f"Next: {away_team.get('shortDisplayName', '?')} @ "
+             f"{home_team.get('shortDisplayName', '?')}  "
+             f"{when:%a %b} {when.day}, {when:%-I:%M %p}"]  # e.g. "Sat Jun 14"
+    if place:
+        lines.append(f"  {place}")
+    lines.append(f"  {_pts_url(league, when, away_team.get('abbreviation', ''), home_team.get('abbreviation', ''), event)}")
+    return lines
 
 
 def _team_news(sport, league, now_utc, recaps):
@@ -222,7 +240,8 @@ def _team_block(sport, league, now_local, now_utc):
                 game_lines += lines
 
     try:  # the cosmetic tail must not discard already-built scores
-        next_lines = _next_event_lines(league, blob, now_local)
+        nxt = _schedule_next(sport, league, now_utc)
+        next_lines = _next_event_lines(league, nxt) if nxt else []
     except Exception:
         next_lines = []
     if not game_lines and not next_lines:

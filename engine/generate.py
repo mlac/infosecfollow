@@ -544,7 +544,8 @@ PAGE_CSS = """
   header h1 { font-size: 1.3rem; margin: 0; letter-spacing: 0.04em; }
   header p, footer { font-size: 0.85rem; opacity: 0.75; }
   hr { border: 0; border-top: 1px solid currentColor; opacity: 0.25; margin: 1.5rem 0; }
-  h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 2rem 0 0.75rem; }
+  h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em;
+       margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
   h3 { font-size: 1rem; margin: 1.75rem 0 0.25rem; }
   ul { padding-left: 1.25rem; margin: 0.5rem 0; }
   li { margin: 0.4rem 0; }
@@ -559,8 +560,8 @@ PAGE_CSS = """
   pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
         font-family: inherit; font-size: inherit; }
   pre.scores { white-space: pre-wrap; overflow-wrap: anywhere; }
-  .topbar { display: flex; flex-wrap: wrap; gap: 0 2.5rem; align-items: center; }
-  .topbar .headline { flex: 1; min-width: 16rem; }
+  .index { font-size: 0.85rem; opacity: 0.85; margin: 0.75rem 0; }
+  .index a { margin-right: 0.25rem; }
   .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.7; }
   @media (prefers-color-scheme: dark) {
     .up { color: #5dd48f; } .down { color: #ff8a80; }
@@ -571,9 +572,14 @@ PAGE_CSS = """
 """
 
 
-def _markets_html(markets):
-    if not markets:
-        return []
+def _display_date(iso):
+    try:
+        return datetime.strptime(iso, "%Y-%m-%d").strftime("%A, %B %-d, %Y")
+    except ValueError:
+        return iso
+
+
+def _markets_inner(markets):
     width_label = max(len(r["label"]) for r in markets)
     width_value = max(len(r["value"]) for r in markets)
     rows = []
@@ -582,11 +588,8 @@ def _markets_html(markets):
         rows.append(f"{esc(r['label'].ljust(width_label))}  "
                     f"{esc(r['value'].rjust(width_value))}  "
                     f'<span class="{cls}">{esc(r["arrow"])} {esc(r["pct"])}</span>')
-    return ['<div class="markets-block">',
-            "<h2>Markets</h2>",
-            '<p class="tags">weekly average, change vs prior week</p>',
-            '<pre class="markets">' + "\n".join(rows) + "</pre>",
-            "</div>"]
+    return ['<p class="tags">weekly average, change vs prior week</p>',
+            '<pre class="markets">' + "\n".join(rows) + "</pre>"]
 
 
 def _local_items_html(items):
@@ -607,27 +610,56 @@ def _linkify(escaped_line):
     return _URL_RE.sub(lambda m: f'<a href="{m.group(0)}">{m.group(0)}</a>', escaped_line)
 
 
-def _pittsburgh_html(local, weather, sports):
+def _trends_inner(digest):
+    out = ["<ul>"]
+    out += [f"<li><strong>{esc(t['subject'])}:</strong> {esc(t['text'])}</li>"
+            for t in digest["emerging_trends"]]
+    out.append("</ul>")
+    return out
+
+
+def _security_inner(digest):
+    out, current_area = [], None
+    for n, topic in enumerate(digest["topics"], 1):
+        if topic["area"] != current_area:
+            current_area = topic["area"]
+            out.append(f'<h3 class="area">{esc(current_area)}</h3>')
+        out.append(f"<h4>{n}. {esc(topic['title'])}</h4>")
+        if topic["tags"]:
+            out.append(f'<p class="tags">[{esc(", ".join(topic["tags"]))}]</p>')
+        out.append(f'<p class="updated">Last 24h: {esc(topic["last_24h"])}</p>')
+        out.append(f"<p>{esc(topic['summary'])}</p>")
+        if topic["sources"]:
+            links = " &middot; ".join(
+                f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
+                for s in topic["sources"])
+            out.append(f'<p class="sources">Sources: {links}</p>')
+    return out
+
+
+def _pittsburgh_inner(local, weather):
     parts = []
     if weather:
         parts.append("<h3>Weather</h3>")
         parts += [f"<p>{esc(line)}</p>" for line in weather]
-    if sports:
-        parts.append("<h3>Sports</h3>")
-        parts.append('<pre class="scores">'
-                     + "\n".join(_linkify(esc(l)) for l in sports) + "</pre>")
-    for key, label in (("business", "Business"), ("around_town", "Around town"),
+    for key, label in (("business", "Business"), ("around_town", "Around Town"),
                        ("events", "Events")):
         if local and local.get(key):
             parts.append(f"<h3>{label}</h3>")
             parts += _local_items_html(local[key])
-    return (["<h2>Pittsburgh</h2>"] + parts) if parts else []
+    return parts
 
 
-def _reading_html(local):
+def _sports_inner(sports):
+    if not sports:
+        return []
+    return ['<pre class="scores">' + "\n".join(_linkify(esc(l)) for l in sports) + "</pre>"]
+
+
+def _reading_inner(local):
     if not local or not local.get("reading"):
         return []
-    parts = ["<h2>Reading</h2>", "<ul>"]
+    parts = ["<ul>"]
     for item in local["reading"]:
         parts.append(f'<li><strong>{esc(item["author"])}</strong> &mdash; '
                      f'<a href="{safe_url(item["url"])}">{esc(item["title"])}</a>. '
@@ -639,6 +671,21 @@ def _reading_html(local):
 def render_html(digest, local, markets, weather, sports, feeds,
                 generated_at, archive_href, text_href, depth=0):
     prefix = "../" * depth
+    biz = local.get("business_politics") if local else None
+    # Ordered most-frequently-updated first; the weekly markets average sits
+    # last. Only non-empty sections render and appear in the jump index.
+    sections = [
+        ("trends", "Emerging Trends", _trends_inner(digest)),
+        ("security", "Security", _security_inner(digest)),
+        ("business", "Business and Politics", _local_items_html(biz) if biz else []),
+        ("pittsburgh", "Pittsburgh", _pittsburgh_inner(local, weather)),
+        ("sports", "Sports", _sports_inner(sports)),
+        ("reading", "Reading", _reading_inner(local)),
+        ("markets", "Markets", _markets_inner(markets) if markets else []),
+    ]
+    present = [(anchor, title, body) for anchor, title, body in sections if body]
+    index = " &middot; ".join(f'<a href="#{a}">{esc(t)}</a>' for a, t, _ in present)
+
     parts = [
         "<!DOCTYPE html>",
         '<html lang="en">',
@@ -652,43 +699,17 @@ def render_html(digest, local, markets, weather, sports, feeds,
         "<header>",
         f'<h1><a href="{prefix}index.html" style="text-decoration:none">infosecfollow</a></h1>',
         "<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>",
-        f"<nav>{esc(digest['date'])} &middot; <a href=\"{archive_href}\">archive</a> &middot; "
-        f"<a href=\"{text_href}\">plain text</a></nav>",
+        f"<nav>{esc(_display_date(digest['date']))} &middot; "
+        f'<a href="{archive_href}">archive</a> &middot; '
+        f'<a href="{text_href}">plain text</a></nav>',
         "</header>",
-        '<div class="topbar">',
-    ]
-    parts += _markets_html(markets)
-    parts += [
         f'<p class="headline">{esc(digest["headline"])}</p>',
-        "</div>",
+        f'<nav class="index">Jump to: {index}</nav>',
         "<hr>",
-        "<h2>Emerging Trends</h2>",
-        "<ul>",
     ]
-    parts += [f"<li><strong>{esc(trend['subject'])}:</strong> {esc(trend['text'])}</li>"
-              for trend in digest["emerging_trends"]]
-    parts.append("</ul>")
-    parts.append("<h2>Topics</h2>")
-    current_area = None
-    for n, topic in enumerate(digest["topics"], 1):
-        if topic["area"] != current_area:
-            current_area = topic["area"]
-            parts.append(f'<h3 class="area">{esc(current_area)}</h3>')
-        parts.append(f"<h4>{n}. {esc(topic['title'])}</h4>")
-        if topic["tags"]:
-            parts.append(f'<p class="tags">[{esc(", ".join(topic["tags"]))}]</p>')
-        parts.append(f'<p class="updated">Last 24h: {esc(topic["last_24h"])}</p>')
-        parts.append(f"<p>{esc(topic['summary'])}</p>")
-        if topic["sources"]:
-            links = " &middot; ".join(
-                f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
-                for s in topic["sources"])
-            parts.append(f'<p class="sources">Sources: {links}</p>')
-    if local and local.get("business_politics"):
-        parts.append("<h2>Business and Politics</h2>")
-        parts += _local_items_html(local["business_politics"])
-    parts += _pittsburgh_html(local, weather, sports)
-    parts += _reading_html(local)
+    for anchor, title, body in present:
+        parts.append(f'<h2 id="{anchor}">{esc(title)}</h2>')
+        parts += body
     parts += [
         "<hr>",
         "<footer>",
@@ -724,26 +745,40 @@ def _text_local_items(lines, label, items):
 
 def render_text(digest, local, markets, weather, sports, feeds, generated_at):
     bar = "=" * TEXT_WIDTH
+    sub = "-" * TEXT_WIDTH
+    biz = local.get("business_politics") if local else None
+    has_pgh = bool(weather) or bool(local and any(
+        local.get(k) for k in ("business", "around_town", "events")))
+
+    contents = ["Emerging Trends", "Security"]
+    if biz:
+        contents.append("Business and Politics")
+    if has_pgh:
+        contents.append("Pittsburgh")
+    if sports:
+        contents.append("Sports")
+    if local and local.get("reading"):
+        contents.append("Reading")
+    if markets:
+        contents.append("Markets")
+
     lines = [
         bar,
         "INFOSECFOLLOW -- security, markets, business, pittsburgh",
-        digest["date"],
+        _display_date(digest["date"]),
         bar,
-    ]
-    if markets:
-        lines += ["", "MARKETS (weekly average, change vs prior week)",
-                  "-" * TEXT_WIDTH]
-        lines += market_data.as_lines(markets)
-    lines += [
         "",
         _fill(digest["headline"]),
         "",
-        "EMERGING TRENDS",
-        "-" * TEXT_WIDTH,
+        _fill("CONTENTS: " + " | ".join(contents)),
     ]
+
+    # Most frequently updated first.
+    lines += ["", "EMERGING TRENDS", sub]
     lines += [_fill(f"{t['subject']}: {t['text']}", "* ", "  ")
               for t in digest["emerging_trends"]]
-    lines += ["", "TOPICS", "-" * TEXT_WIDTH]
+
+    lines += ["", "SECURITY", sub]
     current_area = None
     for n, topic in enumerate(digest["topics"], 1):
         if topic["area"] != current_area:
@@ -761,28 +796,28 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
             if src["url"].startswith(("http://", "https://")):
                 lines.append(f"   - {src['source']}: {src['url']}")
 
-    if local and local.get("business_politics"):
-        lines += ["", "BUSINESS AND POLITICS", "-" * TEXT_WIDTH]
-        for item in local["business_politics"]:
+    if biz:
+        lines += ["", "BUSINESS AND POLITICS", sub]
+        for item in biz:
             lines.append(_fill(item["text"], "* ", "  "))
             for src in item["sources"]:
                 if src["url"].startswith(("http://", "https://")):
                     lines.append(f"  - {src['source']}: {src['url']}")
 
-    if weather or sports or (local and any(local.get(k) for k in
-                                           ("business", "around_town", "events"))):
-        lines += ["", "PITTSBURGH", "-" * TEXT_WIDTH]
+    if has_pgh:
+        lines += ["", "PITTSBURGH", sub]
         if weather:
             lines += ["", "Weather:"] + [_fill(w, "  ", "    ") for w in weather]
-        if sports:
-            lines += ["", "Sports:"] + [f"  {s}" for s in sports]
         if local:
             _text_local_items(lines, "Business", local.get("business", []))
             _text_local_items(lines, "Around town", local.get("around_town", []))
             _text_local_items(lines, "Events", local.get("events", []))
 
+    if sports:
+        lines += ["", "SPORTS", sub, ""] + list(sports)
+
     if local and local.get("reading"):
-        lines += ["", "READING", "-" * TEXT_WIDTH]
+        lines += ["", "READING", sub]
         for item in local["reading"]:
             lines += [
                 "",
@@ -791,6 +826,11 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
             ]
             if item["url"].startswith(("http://", "https://")):
                 lines.append(f"  {item['url']}")
+
+    # Weekly average last.
+    if markets:
+        lines += ["", "MARKETS (weekly average, change vs prior week)", sub]
+        lines += market_data.as_lines(markets)
 
     lines += [
         "",
