@@ -455,6 +455,9 @@ def validate_local(digest, pgh_urls, read_urls, biz_urls, have_pgh, have_reading
     for key, allowed in (("business_politics", biz_urls), ("business", pgh_urls),
                          ("around_town", pgh_urls), ("events", pgh_urls)):
         section = digest.get(key)
+        if section is None:  # omitted/null key: treat as empty, not an error
+            digest[key] = []
+            continue
         if not isinstance(section, list):
             problems.append(f"{key} must be a list")
             digest[key] = []

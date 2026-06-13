@@ -46,9 +46,45 @@ def _parse_when(iso):
     return datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(TZ)
 
 
-def _pts_url(league, when_local, away_abbr, home_abbr):
+# ESPN abbreviations differ from plaintextsports slugs for some teams.
+_PTS_ABBR = {
+    "mlb": {"CHW": "cws"},
+    "nhl": {"TB": "tbl", "NJ": "njd", "SJ": "sjs", "LA": "lak"},
+    "nfl": {"WSH": "was"},
+}
+# ESPN season.type -> plaintextsports NFL week-slug prefix
+_NFL_PLAYOFF = {1: "wild-card", 2: "divisional", 3: "conference", 5: "super-bowl"}
+
+
+def _pts_slug(league, abbr):
+    return _PTS_ABBR.get(league, {}).get(abbr.upper(), abbr.lower())
+
+
+def _nfl_week_seg(event):
+    """plaintextsports NFL path segment '{year}/{week-slug}' from an ESPN event."""
+    season = event.get("season", {})
+    year, stype = season.get("year"), season.get("type")
+    num = event.get("week", {}).get("number")
+    if not year:
+        return None
+    if stype == 1 and num:
+        return f"{year}/preseason-week{num}"
+    if stype == 2 and num:
+        return f"{year}/week{num}"  # no hyphen: pts uses week1, not week-1
+    if stype == 3 and num in _NFL_PLAYOFF:
+        return f"{year}/{_NFL_PLAYOFF[num]}"
+    return None
+
+
+def _pts_url(league, when_local, away_abbr, home_abbr, event=None):
+    away, home = _pts_slug(league, away_abbr), _pts_slug(league, home_abbr)
+    if league == "nfl":
+        # plaintextsports keys NFL by week, not date; fall back to the index
+        seg = _nfl_week_seg(event or {})
+        return (f"https://plaintextsports.com/nfl/{seg}/{away}-{home}"
+                if seg else "https://plaintextsports.com/nfl/")
     return (f"https://plaintextsports.com/{league}/{when_local:%Y-%m-%d}/"
-            f"{away_abbr.lower()}-{home_abbr.lower()}")
+            f"{away}-{home}")
 
 
 def _wrap_prose(text, indent="  "):
@@ -98,7 +134,7 @@ def _game_lines(league, event, recaps):
     if recap:
         recaps.append(recap)
         lines += _wrap_prose(recap)
-    lines.append(f"  {_pts_url(league, when, away_abbr, home_abbr)}")
+    lines.append(f"  {_pts_url(league, when, away_abbr, home_abbr, event)}")
     return lines
 
 
@@ -117,15 +153,17 @@ def _next_event_lines(league, blob, now_local):
         away, home = _sides(comp)
         if away is None:
             continue
+        away_team = away.get("team") or {}
+        home_team = home.get("team") or {}
         venue = comp.get("venue", {})
         place = ", ".join(x for x in (venue.get("fullName"),
                                       venue.get("address", {}).get("city")) if x)
-        lines = [f"Next: {away['team'].get('shortDisplayName', '?')} @ "
-                 f"{home['team'].get('shortDisplayName', '?')}  "
+        lines = [f"Next: {away_team.get('shortDisplayName', '?')} @ "
+                 f"{home_team.get('shortDisplayName', '?')}  "
                  f"{when:%b} {when.day}, {when:%-I:%M %p}"]
         if place:
             lines.append(f"  {place}")
-        lines.append(f"  {_pts_url(league, when, away['team'].get('abbreviation', ''), home['team'].get('abbreviation', ''))}")
+        lines.append(f"  {_pts_url(league, when, away_team.get('abbreviation', ''), home_team.get('abbreviation', ''), event)}")
         return lines
     return []
 
@@ -140,11 +178,13 @@ def _team_news(sport, league, now_utc, recaps):
         return []
     headlines = []
     for article in articles:
-        headline = article.get("headline", "").strip()
+        headline = (article.get("headline") or "").strip()
         try:
             published = datetime.fromisoformat(
                 article.get("published", "").replace("Z", "+00:00"))
         except ValueError:
+            continue
+        if published.tzinfo is None:  # avoid naive/aware subtraction below
             continue
         if not headline or now_utc - published > NEWS_MAX_AGE:
             continue
@@ -181,13 +221,19 @@ def _team_block(sport, league, now_local, now_utc):
                 seen.add(event.get("id"))
                 game_lines += lines
 
-    next_lines = _next_event_lines(league, blob, now_local)
+    try:  # the cosmetic tail must not discard already-built scores
+        next_lines = _next_event_lines(league, blob, now_local)
+    except Exception:
+        next_lines = []
     if not game_lines and not next_lines:
         return []  # off-season: skip the team entirely
 
     block = [f"{name.upper()} ({record})" if record else name.upper()]
     block += game_lines + next_lines
-    news = _team_news(sport, league, now_utc, recaps)
+    try:
+        news = _team_news(sport, league, now_utc, recaps)
+    except Exception:
+        news = []
     if news:
         block.append("Headlines:")
         for headline in news:
