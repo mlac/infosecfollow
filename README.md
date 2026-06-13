@@ -1,15 +1,21 @@
 # infosecfollow
 
-A daily, plain-text security briefing site. An engine pulls 18 security RSS/Atom
-feeds, keeps the last 24 hours of items, asks Claude to cluster them into the
-day's trending topics (each with a one-sentence "last 24h" update and a short
-summary plus emerging trends), and renders a static site.
+A daily, plain-text briefing site: security, markets, and Pittsburgh.
+The engine pulls 18 security feeds plus 9 Pittsburgh-local feeds and 3
+commentary feeds (Ed Zitron, Stratechery, Cal Newport), asks Claude to cluster
+them into the day's topics (security trends/topics; Pittsburgh business,
+around-town, and events — violent-crime stories excluded), pulls weekly-average
+market data (S&P 500, Dow, Nasdaq, WTI crude, EUR/GBP/JPY — Yahoo Finance) with
+week-over-week trend arrows, Pittsburgh weather (NWS), and Pirates/Steelers/
+Penguins scores (ESPN, plaintextsports-style), and renders a static site.
 
 ## Layout
 
 ```
-engine/generate.py   the whole pipeline (Python 3, stdlib only)
-engine/feeds.json    curated feed list (all URLs verified)
+engine/generate.py   pipeline orchestrator + renderers (Python 3, stdlib only)
+engine/market_data.py  weekly-average indexes/oil/FX via Yahoo Finance
+engine/pittsburgh.py   NWS weather + ESPN scores for Pittsburgh teams
+engine/feeds.json    curated feed groups: security, pittsburgh, reading
 docs/index.html      today's briefing (generated)
 docs/digest.txt      plain-text rendition of today's briefing
 docs/archive/        one .html + .txt per day, plus an index

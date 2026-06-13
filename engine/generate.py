@@ -27,6 +27,9 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 from xml.etree import ElementTree
 
+import market_data
+import pittsburgh as pgh_data
+
 ENGINE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = ENGINE_DIR.parent
 SITE_DIR = PROJECT_DIR / "docs"  # "docs" because GitHub Pages serves main:/docs
@@ -47,9 +50,19 @@ CLI_TIMEOUT = 900           # seconds for the summarization call
 
 # --------------------------------------------------------------------------- fetch
 
+PGH_WINDOW_HOURS = 48       # Pittsburgh items lookback
+PGH_MAX_ITEMS = 60
+READING_WINDOW_HOURS = 14 * 24  # commentary authors post ~weekly
+READING_MAX_ITEMS = 12
+
+
 def load_feeds():
     with open(ENGINE_DIR / "feeds.json", encoding="utf-8") as f:
-        return json.load(f)["feeds"]
+        groups = json.load(f)
+    for key in ("security", "pittsburgh", "reading"):
+        if key not in groups:
+            raise ValueError(f"feeds.json missing group '{key}'")
+    return groups
 
 
 def http_get(url):
@@ -133,7 +146,8 @@ def clean_text(text, limit):
 
 def parse_feed(source_name, raw):
     """Yield item dicts from RSS 2.0, RSS 1.0 (RDF), or Atom bytes."""
-    root = ElementTree.fromstring(raw)
+    # tolerate a UTF-8 BOM or blank lines before the XML declaration (TribLive)
+    root = ElementTree.fromstring(raw.lstrip(b"\xef\xbb\xbf\r\n\t "))
     root_name = _local(root.tag)
     if root_name == "rss":
         channel = next((c for c in root if _local(c.tag) == "channel"), None)
@@ -184,27 +198,28 @@ def fetch_all(feeds):
     return items, failures
 
 
-def select_window(items, now):
-    """Keep items from the last 24h (48h if the day is thin), dedupe, cap."""
+def recent_items(items, now, hours, cap):
+    """Items from the last `hours`, future-dated dropped, deduped, newest first."""
     horizon = now + timedelta(hours=FUTURE_SLACK_HOURS)  # drop bogus future dates
-
-    def within(hours):
-        cutoff = now - timedelta(hours=hours)
-        return [i for i in items if i["published"] and cutoff <= i["published"] <= horizon]
-
-    window = WINDOW_HOURS
-    selected = within(window)
-    if len(selected) < MIN_ITEMS:
-        window = FALLBACK_WINDOW_HOURS
-        selected = within(window)
-
+    cutoff = now - timedelta(hours=hours)
+    selected = [i for i in items if i["published"] and cutoff <= i["published"] <= horizon]
     seen, deduped = set(), []
     for item in sorted(selected, key=lambda i: i["published"], reverse=True):
         key = re.sub(r"\W+", "", item["title"].lower())
         if key not in seen:
             seen.add(key)
             deduped.append(item)
-    return deduped[:MAX_ITEMS], window
+    return deduped[:cap]
+
+
+def select_window(items, now):
+    """Keep items from the last 24h (48h if the day is thin), dedupe, cap."""
+    window = WINDOW_HOURS
+    selected = recent_items(items, now, window, MAX_ITEMS)
+    if len(selected) < MIN_ITEMS:
+        window = FALLBACK_WINDOW_HOURS
+        selected = recent_items(items, now, window, MAX_ITEMS)
+    return selected, window
 
 
 # --------------------------------------------------------------------------- summarize
@@ -229,8 +244,8 @@ def find_claude_cli():
         "or install the Claude desktop app")
 
 
-def build_prompt(items, window, today):
-    corpus = [
+def corpus_of(items):
+    return [
         {
             "source": i["source"],
             "title": i["title"],
@@ -240,6 +255,10 @@ def build_prompt(items, window, today):
         }
         for i in items
     ]
+
+
+def build_prompt(items, window, today):
+    corpus = corpus_of(items)
     return f"""You are the editor of "infosecfollow", a daily plain-text briefing on information security. Below are {len(corpus)} news items published in the last {window} hours by major security outlets, vendors, and government sources, as a JSON array.
 
 Cluster them into the day's trending topics and respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
@@ -268,6 +287,39 @@ Rules:
 
 Items:
 {json.dumps(corpus, ensure_ascii=False, indent=1)}
+"""
+
+
+def build_local_prompt(pgh_items, reading_items, today):
+    return f"""You are the editor of the Pittsburgh and Reading sections of "infosecfollow", a daily plain-text briefing. Below are two JSON arrays: PITTSBURGH_ITEMS ({len(pgh_items)} local Pittsburgh news items from the last {PGH_WINDOW_HOURS} hours) and READING_ITEMS ({len(reading_items)} recent posts by the commentary writers Ed Zitron, Stratechery, and Cal Newport).
+
+Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
+
+{{
+  "business": [
+    {{"text": "One or two plain-text sentences on a Pittsburgh business/economy story.",
+      "sources": [{{"source": "outlet", "title": "article title", "url": "exact url from the items"}}]}}
+  ],
+  "around_town": [same shape: civic news, development, transit, education, and other useful-to-know local items],
+  "events": [same shape: things happening today or in the next few days that a reader could attend],
+  "reading": [
+    {{"author": "Ed Zitron|Stratechery|Cal Newport", "title": "post title", "url": "exact url", "summary": "One or two sentences on what the post argues."}}
+  ]
+}}
+
+Rules:
+- business: 2-4 items. around_town: 3-5 items. events: 0-5 items (only genuinely current or upcoming; include day/venue when the item mentions them).
+- ABSOLUTE EXCLUSION: do not include any item about murder, shootings, stabbings, assault, fatal crashes, abuse, or other violent or graphic subject matter — skip those stories entirely no matter how prominent. Policy or court stories that are not centered on violence are fine.
+- Every business/around_town/events item cites 1-2 sources with "url" copied EXACTLY from PITTSBURGH_ITEMS. Never invent or modify a URL.
+- reading: pick the newest worthwhile post(s) per author from READING_ITEMS, up to 6 total; "url" copied EXACTLY. Skip housekeeping posts (podcast episode lists, link roundups) when a substantive essay is available.
+- Plain text only in every field: no markdown, no HTML, no bullet characters. Be concrete and useful, not promotional.
+- Today is {today}.
+
+PITTSBURGH_ITEMS:
+{json.dumps(corpus_of(pgh_items), ensure_ascii=False, indent=1)}
+
+READING_ITEMS:
+{json.dumps(corpus_of(reading_items), ensure_ascii=False, indent=1)}
 """
 
 
@@ -345,16 +397,65 @@ def run_claude(cli, prompt):
     return proc.stdout
 
 
-def summarize(items, window, today):
-    cli = find_claude_cli()
-    print(f"  using {cli}\n  model {MODEL}, {len(items)} items, {window}h window")
-    prompt = build_prompt(items, window, today)
-    allowed_urls = {i["url"] for i in items}
+def _valid_sources(raw, allowed_urls):
+    sources = []
+    for src in (raw if isinstance(raw, list) else []):
+        url = src.get("url", "") if isinstance(src, dict) else ""
+        if url in allowed_urls:
+            sources.append({
+                "source": str(src.get("source", "")),
+                "title": str(src.get("title", "")),
+                "url": url,
+            })
+    return sources
+
+
+def validate_local(digest, pgh_urls, read_urls, have_pgh, have_reading):
+    problems = []
+    if not isinstance(digest, dict):
+        raise ValueError("local digest must be an object")
+    for key in ("business", "around_town", "events"):
+        section = digest.get(key)
+        if not isinstance(section, list):
+            problems.append(f"{key} must be a list")
+            digest[key] = []
+            continue
+        kept = []
+        for item in section:
+            if not isinstance(item, dict) or not isinstance(item.get("text"), str) \
+                    or not item.get("text").strip():
+                continue
+            sources = _valid_sources(item.get("sources"), pgh_urls)
+            if sources:  # drop items whose citations failed the allowlist
+                kept.append({"text": item["text"].strip(), "sources": sources})
+        digest[key] = kept
+    if have_pgh and not any(digest[k] for k in ("business", "around_town", "events")):
+        problems.append("business, around_town, and events are all empty; cite urls "
+                        "exactly as given in PITTSBURGH_ITEMS")
+
+    reading = digest.get("reading")
+    kept = []
+    for item in (reading if isinstance(reading, list) else []):
+        if isinstance(item, dict) and item.get("url") in read_urls \
+                and all(isinstance(item.get(k), str) and item.get(k).strip()
+                        for k in ("author", "title", "summary")):
+            kept.append({k: item[k].strip() for k in ("author", "title", "url", "summary")})
+    digest["reading"] = kept
+    if have_reading and not kept:
+        problems.append("reading is empty; pick posts from READING_ITEMS with exact urls")
+
+    if problems:
+        raise ValueError("; ".join(problems))
+    return digest
+
+
+def ask_claude(cli, prompt, validate):
+    """Run the locked-down headless call, parse + validate JSON, retry once."""
     last_error = None
     for attempt in (1, 2):
         try:
             output = run_claude(cli, prompt)
-            return validate_digest(extract_json(output), allowed_urls)
+            return validate(extract_json(output))
         except (ValueError, TypeError, AttributeError, KeyError,
                 subprocess.TimeoutExpired) as exc:
             last_error = exc
@@ -363,6 +464,20 @@ def summarize(items, window, today):
                        f"({sanitize(exc)[:300]}). Respond again with ONLY a single valid "
                        "JSON object in the required shape, nothing else.")
     raise RuntimeError(f"model never produced a valid digest: {last_error}")
+
+
+def summarize(cli, items, window, today):
+    allowed = {i["url"] for i in items}
+    return ask_claude(cli, build_prompt(items, window, today),
+                      lambda digest: validate_digest(digest, allowed))
+
+
+def summarize_local(cli, pgh_items, reading_items, today):
+    pgh_urls = {i["url"] for i in pgh_items}
+    read_urls = {i["url"] for i in reading_items}
+    return ask_claude(cli, build_local_prompt(pgh_items, reading_items, today),
+                      lambda digest: validate_local(digest, pgh_urls, read_urls,
+                                                    bool(pgh_items), bool(reading_items)))
 
 
 # --------------------------------------------------------------------------- render
@@ -398,10 +513,61 @@ PAGE_CSS = """
   .sources a { overflow-wrap: anywhere; }
   .headline { font-size: 1.05rem; font-weight: bold; margin-top: 1rem; }
   nav { font-size: 0.85rem; margin-top: 0.25rem; }
+  pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
+        font-family: inherit; font-size: inherit; }
 """
 
 
-def render_html(digest, feeds, generated_at, archive_href, text_href, depth=0):
+def _markets_html(markets):
+    if not markets:
+        return []
+    lines = market_data.as_lines(markets)
+    return ["<h2>Markets</h2>",
+            '<p class="tags">weekly average, change vs prior week</p>',
+            '<pre class="markets">' + "\n".join(esc(l) for l in lines) + "</pre>"]
+
+
+def _local_items_html(items):
+    out = ["<ul>"]
+    for item in items:
+        links = " &middot; ".join(
+            f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
+            for s in item["sources"])
+        out.append(f'<li>{esc(item["text"])} <span class="sources">({links})</span></li>')
+    out.append("</ul>")
+    return out
+
+
+def _pittsburgh_html(local, weather, sports):
+    parts = []
+    if weather:
+        parts.append("<h3>Weather</h3>")
+        parts += [f"<p>{esc(line)}</p>" for line in weather]
+    if sports:
+        parts.append("<h3>Sports</h3>")
+        parts.append('<pre class="scores">' + "\n".join(esc(l) for l in sports) + "</pre>")
+    for key, label in (("business", "Business"), ("around_town", "Around town"),
+                       ("events", "Events")):
+        if local and local.get(key):
+            parts.append(f"<h3>{label}</h3>")
+            parts += _local_items_html(local[key])
+    return (["<h2>Pittsburgh</h2>"] + parts) if parts else []
+
+
+def _reading_html(local):
+    if not local or not local.get("reading"):
+        return []
+    parts = ["<h2>Reading</h2>", "<ul>"]
+    for item in local["reading"]:
+        parts.append(f'<li><strong>{esc(item["author"])}</strong> &mdash; '
+                     f'<a href="{safe_url(item["url"])}">{esc(item["title"])}</a>. '
+                     f'{esc(item["summary"])}</li>')
+    parts.append("</ul>")
+    return parts
+
+
+def render_html(digest, local, markets, weather, sports, feeds,
+                generated_at, archive_href, text_href, depth=0):
     prefix = "../" * depth
     parts = [
         "<!DOCTYPE html>",
@@ -415,10 +581,13 @@ def render_html(digest, feeds, generated_at, archive_href, text_href, depth=0):
         "<body>",
         "<header>",
         f'<h1><a href="{prefix}index.html" style="text-decoration:none">infosecfollow</a></h1>',
-        "<p>daily plain-text briefing on trending topics in security</p>",
+        "<p>daily plain-text briefing: security, markets, and pittsburgh</p>",
         f"<nav>{esc(digest['date'])} &middot; <a href=\"{archive_href}\">archive</a> &middot; "
         f"<a href=\"{text_href}\">plain text</a></nav>",
         "</header>",
+    ]
+    parts += _markets_html(markets)
+    parts += [
         f'<p class="headline">{esc(digest["headline"])}</p>',
         "<hr>",
         "<h2>Emerging trends</h2>",
@@ -438,11 +607,16 @@ def render_html(digest, feeds, generated_at, archive_href, text_href, depth=0):
                 f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
                 for s in topic["sources"])
             parts.append(f'<p class="sources">Sources: {links}</p>')
+    parts += _pittsburgh_html(local, weather, sports)
+    parts += _reading_html(local)
     parts += [
         "<hr>",
         "<footer>",
-        f"<p>Generated {esc(generated_at)} from {len(feeds)} feeds: "
-        f"{esc(', '.join(f['name'] for f in feeds))}.</p>",
+        f"<p>Generated {esc(generated_at)}. Sources: {len(feeds['security'])} security feeds, "
+        f"{len(feeds['pittsburgh'])} Pittsburgh feeds, and "
+        f"{esc(', '.join(f['name'] for f in feeds['reading']))}; market data from Yahoo "
+        "Finance (weekly averages), weather from the National Weather Service, scores "
+        "from ESPN.</p>",
         "<p>Summaries are AI-generated from the linked reporting; verify details at the sources.</p>",
         "</footer>",
         "</body></html>",
@@ -456,13 +630,30 @@ def _fill(text, initial="", subsequent=None):
                          break_long_words=False, break_on_hyphens=False)
 
 
-def render_text(digest, feeds, generated_at):
+def _text_local_items(lines, label, items):
+    if not items:
+        return
+    lines += ["", f"{label}:"]
+    for item in items:
+        lines.append(_fill(item["text"], "* ", "  "))
+        for src in item["sources"]:
+            if src["url"].startswith(("http://", "https://")):
+                lines.append(f"  - {src['source']}: {src['url']}")
+
+
+def render_text(digest, local, markets, weather, sports, feeds, generated_at):
     bar = "=" * TEXT_WIDTH
     lines = [
         bar,
-        "INFOSECFOLLOW -- daily briefing on trending topics in security",
+        "INFOSECFOLLOW -- daily briefing: security, markets, pittsburgh",
         digest["date"],
         bar,
+    ]
+    if markets:
+        lines += ["", "MARKETS (weekly average, change vs prior week)",
+                  "-" * TEXT_WIDTH]
+        lines += market_data.as_lines(markets)
+    lines += [
         "",
         _fill(digest["headline"]),
         "",
@@ -483,10 +674,37 @@ def render_text(digest, feeds, generated_at):
         for src in topic["sources"]:
             if src["url"].startswith(("http://", "https://")):
                 lines.append(f"   - {src['source']}: {src['url']}")
+
+    if weather or sports or (local and any(local.get(k) for k in
+                                           ("business", "around_town", "events"))):
+        lines += ["", "PITTSBURGH", "-" * TEXT_WIDTH]
+        if weather:
+            lines += ["", "Weather:"] + [_fill(w, "  ", "    ") for w in weather]
+        if sports:
+            lines += ["", "Sports:"] + [f"  {s}" for s in sports]
+        if local:
+            _text_local_items(lines, "Business", local.get("business", []))
+            _text_local_items(lines, "Around town", local.get("around_town", []))
+            _text_local_items(lines, "Events", local.get("events", []))
+
+    if local and local.get("reading"):
+        lines += ["", "READING", "-" * TEXT_WIDTH]
+        for item in local["reading"]:
+            lines += [
+                "",
+                _fill(f"{item['author']} -- {item['title']}", "* ", "  "),
+                _fill(item["summary"], "  "),
+            ]
+            if item["url"].startswith(("http://", "https://")):
+                lines.append(f"  {item['url']}")
+
     lines += [
         "",
         bar,
-        _fill(f"Generated {generated_at} from {len(feeds)} feeds. Summaries are "
+        _fill(f"Generated {generated_at}. Sources: {len(feeds['security'])} security "
+              f"feeds, {len(feeds['pittsburgh'])} Pittsburgh feeds, and "
+              f"{', '.join(f['name'] for f in feeds['reading'])}; markets from Yahoo "
+              "Finance, weather from the NWS, scores from ESPN. Summaries are "
               "AI-generated from the linked reporting; verify at the sources."),
         bar,
         "",
@@ -511,28 +729,33 @@ def render_archive_index():
         f"<ul>\n{items}\n</ul>\n</body></html>\n")
 
 
-def write_site(digest, feeds, items_count, window):
+def write_site(digest, local, markets, weather, sports, feeds, items_count, window):
     generated_at = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M %Z")
     today = digest["date"]
     (SITE_DIR / "archive").mkdir(parents=True, exist_ok=True)
     (SITE_DIR / "data").mkdir(parents=True, exist_ok=True)
 
     record = dict(digest)
+    record["markets"] = markets
+    record["weather"] = weather
+    record["sports"] = sports
+    record["local"] = local
     record["meta"] = {
         "generated_at": generated_at,
         "items_considered": items_count,
         "window_hours": window,
         "model": MODEL,
-        "feeds": [f["name"] for f in feeds],
+        "feeds": {group: [f["name"] for f in entries]
+                  for group, entries in feeds.items()},
     }
     (SITE_DIR / "data" / f"{today}.json").write_text(
         json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    index_html = render_html(digest, feeds, generated_at,
-                             "archive/index.html", "digest.txt", depth=0)
-    archive_html = render_html(digest, feeds, generated_at,
-                               "index.html", f"{today}.txt", depth=1)
-    text = render_text(digest, feeds, generated_at)
+    index_html = render_html(digest, local, markets, weather, sports, feeds,
+                             generated_at, "archive/index.html", "digest.txt", depth=0)
+    archive_html = render_html(digest, local, markets, weather, sports, feeds,
+                               generated_at, "index.html", f"{today}.txt", depth=1)
+    text = render_text(digest, local, markets, weather, sports, feeds, generated_at)
 
     (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
     (SITE_DIR / "digest.txt").write_text(text, encoding="utf-8")
@@ -549,23 +772,66 @@ def main():
     today = datetime.now().astimezone().strftime("%Y-%m-%d")
     feeds = load_feeds()
 
-    print(f"[1/3] fetching {len(feeds)} feeds")
-    items, failures = fetch_all(feeds)
-    healthy = len(feeds) - len(failures)
-    if healthy < 2:
-        sys.exit(f"only {healthy} feeds reachable; aborting")
+    print(f"[1/4] fetching feeds "
+          f"(security {len(feeds['security'])}, pittsburgh {len(feeds['pittsburgh'])}, "
+          f"reading {len(feeds['reading'])})")
+    sec_items, sec_failures = fetch_all(feeds["security"])
+    pgh_items, pgh_failures = fetch_all(feeds["pittsburgh"])
+    read_items, read_failures = fetch_all(feeds["reading"])
+    failures = sec_failures + pgh_failures + read_failures
+    if len(feeds["security"]) - len(sec_failures) < 2:
+        sys.exit(f"only {len(feeds['security']) - len(sec_failures)} security feeds "
+                 "reachable; aborting")
 
-    selected, window = select_window(items, now)
+    selected, window = select_window(sec_items, now)
     if not selected:
-        sys.exit("no recent items found in any feed; aborting")
+        sys.exit("no recent security items found; aborting")
+    pgh_selected = recent_items(pgh_items, now, PGH_WINDOW_HOURS, PGH_MAX_ITEMS)
+    read_selected = recent_items(read_items, now, READING_WINDOW_HOURS, READING_MAX_ITEMS)
 
-    print(f"[2/3] summarizing {len(selected)} items via claude")
-    digest = summarize(selected, window, today)
+    print("[2/4] markets, weather, sports")
+    def attempt(label, fn):
+        try:
+            return fn()
+        except Exception as exc:
+            print(f"  {label} unavailable: {sanitize(exc)[:200]}")
+            return []
+    markets = attempt("markets", market_data.weekly_rows)
+    # NWS/ESPN strings are third-party text: strip control chars, cap length
+    weather = [sanitize(w)[:200] for w in attempt("weather", pgh_data.weather_lines)]
+    sports = [sanitize(s)[:200] for s in attempt("sports", pgh_data.sports_lines)]
+
+    cli = find_claude_cli()
+    print(f"[3/4] summarizing via claude ({MODEL}, using {cli})\n"
+          f"  security: {len(selected)} items ({window}h); pittsburgh: "
+          f"{len(pgh_selected)} items; reading: {len(read_selected)} items")
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        digest_future = pool.submit(summarize, cli, selected, window, today)
+        local_future = (pool.submit(summarize_local, cli, pgh_selected,
+                                    read_selected, today)
+                        if pgh_selected or read_selected else None)
+        try:
+            digest = digest_future.result()
+        except Exception:
+            if local_future is not None and not local_future.cancel():
+                print("  security digest failed; waiting for the in-flight "
+                      "pittsburgh/reading call to finish before aborting")
+            raise
+        local = None
+        if local_future is not None:
+            try:
+                local = local_future.result()
+            except Exception as exc:
+                print(f"  pittsburgh/reading sections unavailable: {sanitize(exc)[:200]}")
     digest["date"] = today  # never trust the model with the filename
 
-    print("[3/3] writing site")
-    write_site(digest, feeds, len(selected), window)
-    print(f"done: {len(digest['topics'])} topics, {len(digest['emerging_trends'])} trends"
+    print("[4/4] writing site")
+    write_site(digest, local, markets, weather, sports, feeds, len(selected), window)
+    print(f"done: {len(digest['topics'])} security topics, "
+          f"{len(digest['emerging_trends'])} trends, "
+          f"{sum(len(local.get(k, [])) for k in ('business', 'around_town', 'events')) if local else 0} "
+          f"local items, {len(local.get('reading', [])) if local else 0} reading items, "
+          f"{len(markets)} market rows"
           + (f" (feed failures: {', '.join(failures)})" if failures else ""))
 
 
