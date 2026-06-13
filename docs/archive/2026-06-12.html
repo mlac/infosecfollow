@@ -29,113 +29,145 @@
   nav { font-size: 0.85rem; margin-top: 0.25rem; }
   pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
         font-family: inherit; font-size: inherit; }
+  .topbar { display: flex; flex-wrap: wrap; gap: 0 2.5rem; align-items: center; }
+  .topbar .headline { flex: 1; min-width: 16rem; }
+  .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.7; }
+  @media (prefers-color-scheme: dark) {
+    .up { color: #5dd48f; } .down { color: #ff8a80; }
+  }
+  h3.area { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
+            opacity: 0.75; margin: 2rem 0 0; }
+  h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; }
 </style>
 </head>
 <body>
 <header>
 <h1><a href="../index.html" style="text-decoration:none">infosecfollow</a></h1>
-<p>daily plain-text briefing: security, markets, and pittsburgh</p>
+<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>
 <nav>2026-06-12 &middot; <a href="index.html">archive</a> &middot; <a href="2026-06-12.txt">plain text</a></nav>
 </header>
+<div class="topbar">
+<div class="markets-block">
 <h2>Markets</h2>
 <p class="tags">weekly average, change vs prior week</p>
-<pre class="markets">S&amp;P 500     7,377.03  ▼ -2.2%
-Dow        50,725.58  ▼ -0.7%
-Nasdaq     25,695.30  ▼ -3.8%
-WTI crude      88.31  ▼ -5.2%
-EUR/USD       1.1550  ▼ -0.4%
-GBP/USD       1.3378  ▼ -0.3%
-USD/JPY       160.28  ▲ +0.2%</pre>
-<p class="headline">An actively exploited Oracle PeopleSoft zero-day (CVE-2026-35273) is letting ShinyHunters steal gigabytes of data from hundreds of organizations, with American universities hit hardest.</p>
+<pre class="markets">S&amp;P 500     7,377.03  <span class="down">▼ -2.2%</span>
+Dow        50,725.58  <span class="down">▼ -0.7%</span>
+Nasdaq     25,695.30  <span class="down">▼ -3.8%</span>
+WTI crude      88.31  <span class="down">▼ -5.2%</span>
+EUR/USD       1.1550  <span class="down">▼ -0.4%</span>
+GBP/USD       1.3378  <span class="down">▼ -0.3%</span>
+USD/JPY       160.28  <span class="up">▲ +0.2%</span></pre>
+</div>
+<p class="headline">ShinyHunters looted gigabytes from hundreds of organizations through an Oracle PeopleSoft zero-day, capping a day that turned on actively exploited enterprise software and AI-driven crime.</p>
+</div>
 <hr>
-<h2>Emerging trends</h2>
+<h2>Emerging Trends</h2>
 <ul>
-<li>AI is simultaneously a weapon and a target: Google is suing a China-based network for abusing Gemini in phishing, while new Agentjacking and LangGraph attacks turn AI coding agents and frameworks into remote-code-execution surfaces.</li>
-<li>Long-dormant footholds are surfacing en masse, from a decade-old phpBB authentication bypass to Velvet Ant&#x27;s nearly ten-year backdoor buried inside Linux PAM and OpenSSH login components.</li>
-<li>Software and developer supply chains remain a prime entry point, with over 400 Arch Linux AUR packages hijacked to drop an infostealer and eBPF rootkit.</li>
-<li>Regulators are escalating breach penalties, with South Korea fining Coupang a record $409 million and a $47 million settlement fund approved for 23andMe victims.</li>
-<li>Coordinated law enforcement is dismantling cybercrime infrastructure, taking down the AudiA6 laundering service and Sniper Dz phishing platform and securing a Conti guilty plea.</li>
+<li><strong>AI Weaponization:</strong> Criminals and researchers bend AI both directions, from Gemini-powered smishing to Agentjacking and LangGraph flaws that turn AI agents themselves into targets.</li>
+<li><strong>Enterprise Edge Exploitation:</strong> Live exploitation of PeopleSoft, Ivanti Sentry, and Check Point VPN shows attackers racing defenders to internet-facing enterprise software.</li>
+<li><strong>Supply Chain:</strong> Hijacked Arch AUR packages and dark-web sales of repository access mark developer code as a prime attacker foothold.</li>
+<li><strong>Law Enforcement Momentum:</strong> Takedowns of AudiA6 and Sniper Dz alongside a Conti guilty plea squeeze cybercrime&#x27;s money and infrastructure at once.</li>
+<li><strong>Costly Breaches:</strong> Coupang&#x27;s record $409 million fine and the 23andMe settlement fund push the price of data loss to new highs.</li>
 </ul>
 <h2>Topics</h2>
-<h3>1. Oracle PeopleSoft zero-day exploited by ShinyHunters</h3>
-<p class="tags">[zero-day, breach, patch]</p>
-<p class="updated">Last 24h: Researchers and CISA confirmed active exploitation of CVE-2026-35273 in Oracle PeopleSoft/PeopleTools, with Google attributing data theft from hundreds of organizations to ShinyHunters.</p>
-<p>CVE-2026-35273 is a missing-authentication-for-critical-function flaw in Oracle PeopleSoft Enterprise PeopleTools that allows unauthenticated attackers to steal large volumes of data. The ShinyHunters group has weaponized it broadly, disproportionately affecting American universities running the ERP software. Oracle has issued mitigations but has not publicly confirmed in-the-wild exploitation; CISA added the bug to its Known Exploited Vulnerabilities catalog. Organizations running PeopleSoft should apply Oracle&#x27;s fixes immediately and hunt for signs of bulk data exfiltration.</p>
+<h3 class="area">Vulnerabilities and Exploits</h3>
+<h4>1. Oracle PeopleSoft Zero-Day Ravages Universities</h4>
+<p class="tags">[zero-day, exploit, breach]</p>
+<p class="updated">Last 24h: Google confirmed ShinyHunters exploited CVE-2026-35273, a missing-authentication flaw in Oracle PeopleSoft, and CISA added it to the known exploited vulnerabilities catalog.</p>
+<p>The bug lets attackers reach a critical PeopleTools function with no authentication. Oracle has mitigated it, though the company has not publicly confirmed in-the-wild abuse. ShinyHunters used the access to steal gigabytes from hundreds of organizations, hitting American universities hardest. Administrators running PeopleSoft should apply Oracle&#x27;s fix and hunt for data exfiltration now.</p>
 <p class="sources">Sources: <a href="https://arstechnica.com/security/2026/06/peoplesoft-0-day-affecting-hundreds-of-organizations-steals-gigabytes-of-data/">Ars Technica Security</a> &middot; <a href="https://www.darkreading.com/vulnerabilities-threats/shinyhunters-oracle-zero-day-higher-ed">Dark Reading</a> &middot; <a href="https://www.securityweek.com/google-confirms-exploitation-of-oracle-peoplesoft-zero-day-by-shinyhunters/">SecurityWeek</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/06/12/cisa-adds-one-known-exploited-vulnerability-catalog">CISA Advisories</a></p>
-<h3>2. Ivanti Sentry flaw under attack, CISA issues 3-day patch order</h3>
-<p class="tags">[zero-day, patch, policy]</p>
-<p class="updated">Last 24h: CISA invoked new Binding Operational Directive 26-04 to give federal agencies three days to patch an actively exploited Ivanti Sentry flaw, as exploitation attempts hit honeypots.</p>
-<p>A critical OS command injection vulnerability in Ivanti Sentry allows attackers to execute arbitrary code with root privileges. Security researchers are already observing exploitation attempts against internet-facing honeypots, indicating opportunistic scanning and attacks. CISA ordered federal agencies to remediate by Sunday under the newly issued BOD 26-04, which prioritizes patching based on risk. Administrators should patch Sentry immediately and review systems for signs of root-level compromise.</p>
+<h4>2. CISA Orders 3-Day Ivanti Sentry Patch</h4>
+<p class="tags">[patch, exploit]</p>
+<p class="updated">Last 24h: CISA&#x27;s new Binding Operational Directive 26-04 gives federal agencies until Sunday to patch an actively exploited Ivanti Sentry command-injection flaw as honeypots log exploitation attempts.</p>
+<p>The critical OS command-injection bug lets attackers run code with root privileges on Ivanti Sentry gateways. Researchers watching honeypots see attackers probing the flaw, a sign of broad opportunistic scanning. Federal agencies face a three-day deadline under BOD 26-04, and private operators should move on the same urgency.</p>
 <p class="sources">Sources: <a href="https://www.bleepingcomputer.com/news/security/cisa-gives-feds-3-days-to-patch-ivanti-flaw-exploited-in-attacks/">BleepingComputer</a> &middot; <a href="https://www.securityweek.com/ivanti-sentry-exploitation-attempts-hitting-honeypots/">SecurityWeek</a></p>
-<h3>3. Over 400 Arch Linux AUR packages hijacked</h3>
-<p class="tags">[supply-chain, malware, rootkit]</p>
-<p class="updated">Last 24h: Attackers took over more than 400 packages in the Arch User Repository, rewriting build scripts to deploy a Rust infostealer and an eBPF rootkit.</p>
-<p>The Arch User Repository (AUR) is Arch Linux&#x27;s community package collection where build scripts run on users&#x27; machines. Attackers compromised over 400 packages and altered their build scripts to install a Rust-based credential stealer that harvests developer secrets and access tokens. When it runs with root, the malware can also load an eBPF rootkit to hide its presence. Arch users who built any AUR packages this week should assume credential compromise, rotate secrets, and inspect systems for the rootkit.</p>
+<h3 class="area">Ransomware and Cybercrime</h3>
+<h4>3. 400 Arch Linux AUR Packages Hijacked</h4>
+<p class="tags">[supply-chain, malware]</p>
+<p class="updated">Last 24h: Attackers rewrote build scripts in more than 400 Arch User Repository packages this week to drop a Rust infostealer and an eBPF rootkit.</p>
+<p>The AUR is Arch Linux&#x27;s community package collection, where build scripts run on a user&#x27;s own machine. The hijacked packages install a Rust binary that harvests developer credentials and access tokens, and with root it loads an eBPF rootkit to hide itself. Developers who built any AUR package this week should rotate secrets and inspect their systems for the rootkit.</p>
 <p class="sources">Sources: <a href="https://thehackernews.com/2026/06/over-400-arch-linux-aur-packages.html">The Hacker News</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/over-400-arch-linux-packages-compromised-to-push-rootkit-infostealer/">BleepingComputer</a></p>
-<h3>4. AI abused by criminals and exposed as new attack surface</h3>
-<p class="tags">[ai, phishing, zero-day]</p>
-<p class="updated">Last 24h: Google sued a China-based network for weaponizing Gemini in smishing, while researchers disclosed Agentjacking against AI coding agents and an RCE chain in LangGraph.</p>
-<p>Google is pursuing legal action against Outsider Enterprise, a China-based cybercrime network behind the Outsider phishing-as-a-service kit, which abused Gemini to build phishing sites and send scam texts affecting hundreds of thousands of victims. Separately, Tenet Security described Agentjacking, a technique using fake Sentry error reports to trick AI coding agents into running arbitrary code on developer machines. Researchers also disclosed three patched LangGraph flaws, including an SQL-injection-based chain leading to remote code execution in self-hosted AI agents. Teams deploying AI agents should patch LangGraph, scrutinize agent inputs, and govern agent behavior using NIST and ISO frameworks.</p>
-<p class="sources">Sources: <a href="https://thehackernews.com/2026/06/google-sues-chinese-smishing-network.html">The Hacker News</a> &middot; <a href="https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html">The Hacker News</a> &middot; <a href="https://thehackernews.com/2026/06/langgraph-flaw-chain-exposes-self.html">The Hacker News</a> &middot; <a href="https://www.helpnetsecurity.com/2026/06/12/google-china-based-cybercrime-network-lawsuit/">Help Net Security</a></p>
-<h3>5. Law enforcement disrupts cybercrime infrastructure</h3>
-<p class="tags">[ransomware, phishing, law-enforcement]</p>
-<p class="updated">Last 24h: Europol dismantled the AudiA6 crypto-laundering service, INTERPOL took down the Sniper Dz phishing platform, and a Ukrainian national pleaded guilty to Conti ransomware charges.</p>
-<p>An international operation dismantled AudiA6, a cryptocurrency laundering service that washed more than €336 million (~$389 million) in illicit funds for ransomware gangs and other criminals between 2022 and 2025. INTERPOL&#x27;s Operation Ramz disrupted Sniper Dz, a decade-old phishing-as-a-service platform, with 201 arrests across 13 MENA-region countries, including its primary operator. In the US, a Ukrainian national extradited from Ireland pleaded guilty to conspiracy charges tied to the Conti ransomware operation. The coordinated actions cut financial pipelines and operator capacity behind major cybercrime ecosystems.</p>
-<p class="sources">Sources: <a href="https://thehackernews.com/2026/06/europol-disrupts-audia6-crypto.html">The Hacker News</a> &middot; <a href="https://thehackernews.com/2026/06/interpol-takes-down-sniper-dz-phishing.html">The Hacker News</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/ukrainian-national-pleads-guilty-to-role-in-conti-ransomware-operation/">BleepingComputer</a></p>
-<h3>6. Major breaches and record regulatory fines</h3>
-<p class="tags">[breach, policy]</p>
-<p class="updated">Last 24h: South Korea fined Coupang a record $409 million over a data breach, a $47 million 23andMe settlement was approved, and Novo Nordisk and France&#x27;s Tchap disclosed breaches.</p>
-<p>South Korea&#x27;s privacy commission issued its largest-ever data breach penalty, $409 million against e-commerce giant Coupang, surpassing the earlier SK Telecom fine. A bankruptcy administrator approved a $47 million settlement fund for the roughly 7 million 23andMe customers whose genetic data was stolen starting in 2023. Pharmaceutical giant Novo Nordisk disclosed a breach of clinical trial patient data, and the French government said a breach of its Tchap encrypted messenger exposed over 73,000 public-sector accounts. The cluster underscores rising regulatory costs and continued exposure of sensitive health and government data.</p>
-<p class="sources">Sources: <a href="https://therecord.media/south-korea-data-breach-record-fine-coupang">The Record</a> &middot; <a href="https://therecord.media/bankruptcy-admin-approves-settlement-for-23andme-breach-victims">The Record</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/pharmaceutical-giant-novo-nordisk-discloses-security-breach/">BleepingComputer</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/french-govt-says-tchap-breach-affected-over-73-000-accounts/">BleepingComputer</a></p>
-<h3>7. Velvet Ant backdoored Linux login software for nearly a decade</h3>
-<p class="tags">[apt, backdoor]</p>
-<p class="updated">Last 24h: Sygnia disclosed that China-nexus group Velvet Ant hid inside Linux PAM and OpenSSH login components for close to ten years to evade detection.</p>
-<p>Rather than hiding on closely monitored endpoints, the China-linked Velvet Ant group backdoored the PAM and OpenSSH components that govern authentication on a targeted network. By embedding access in the Linux login system itself, the attackers placed their foothold where routine cleanup and standard monitoring could not reach. The intrusion persisted for nearly a decade. Defenders should verify the integrity of PAM modules and SSH binaries and treat authentication infrastructure as a high-value detection target.</p>
+<h4>4. Police Hit Crypto Laundering and Phishing Networks</h4>
+<p class="tags">[ransomware, law-enforcement]</p>
+<p class="updated">Last 24h: Europol dismantled AudiA6, a crypto-laundering service that washed over €336 million for ransomware gangs, as a Ukrainian pleaded guilty to Conti charges and INTERPOL&#x27;s Operation Ramz felled the Sniper Dz phishing platform.</p>
+<p>AudiA6 laundered more than €336 million (~$389 million) in ransomware and cybercrime proceeds between 2022 and 2025 before authorities seized it. INTERPOL&#x27;s Operation Ramz arrested 201 people across 13 MENA countries and shut the decade-old Sniper Dz PhaaS platform. A Ukrainian national extradited from Ireland admitted conspiracy tied to Conti, extending the pressure on ransomware money flows.</p>
+<p class="sources">Sources: <a href="https://www.helpnetsecurity.com/2026/06/12/europol-audia6-crypto-laundering-service-ransomware-groups/">Help Net Security</a> &middot; <a href="https://thehackernews.com/2026/06/interpol-takes-down-sniper-dz-phishing.html">The Hacker News</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/ukrainian-national-pleads-guilty-to-role-in-conti-ransomware-operation/">BleepingComputer</a></p>
+<h3 class="area">AI Security</h3>
+<h4>5. Google Sues China-Based Gemini Smishing Network</h4>
+<p class="tags">[ai, phishing, fraud]</p>
+<p class="updated">Last 24h: Google sued Outsider Enterprise, a China-based network it accuses of weaponizing its Gemini AI to run a phishing-as-a-service kit that blasted scam texts at Americans.</p>
+<p>The operation built the Outsider PhaaS kit and used Gemini to generate phishing sites and scam infrastructure, linked to more than 9,000 fake sites and a million fraudulent URLs. Google estimates hundreds of thousands of victims and millions of dollars in losses. The suit marks a push to wield civil litigation against criminals who industrialize fraud with AI.</p>
+<p class="sources">Sources: <a href="https://thehackernews.com/2026/06/google-sues-chinese-smishing-network.html">The Hacker News</a> &middot; <a href="https://www.helpnetsecurity.com/2026/06/12/google-china-based-cybercrime-network-lawsuit/">Help Net Security</a></p>
+<h4>6. New Attacks Target AI Coding Agents</h4>
+<p class="tags">[ai, vulnerability, rce]</p>
+<p class="updated">Last 24h: Researchers detailed Agentjacking, which tricks AI coding agents into running arbitrary code through fake Sentry error reports, and a LangGraph vulnerability chain enabling remote code execution.</p>
+<p>Tenet Security&#x27;s Agentjacking abuses crafted Sentry error reports to push AI coding agents into executing attacker code on developer machines. Three now-patched LangGraph flaws, including an SQL injection, chain into remote code execution on self-hosted AI agents. The findings show autonomous agents widening the attack surface as they read documents, call APIs, and run code. Teams running self-hosted agents should patch LangGraph and constrain agent execution.</p>
+<p class="sources">Sources: <a href="https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html">The Hacker News</a> &middot; <a href="https://thehackernews.com/2026/06/langgraph-flaw-chain-exposes-self.html">The Hacker News</a></p>
+<h3 class="area">Nation-State Activity</h3>
+<h4>7. Velvet Ant Backdoored Linux Login for a Decade</h4>
+<p class="tags">[apt, espionage]</p>
+<p class="updated">Last 24h: Sygnia disclosed that the China-linked Velvet Ant group backdoored the PAM and OpenSSH components governing Linux logins, hiding for close to ten years.</p>
+<p>Velvet Ant planted its access in the authentication layer that decides who may sign in, where routine cleanup could not reach. Sygnia tracks the group as a China-nexus actor built for long-term espionage. Defenders should audit PAM modules and OpenSSH binaries for tampering across critical infrastructure.</p>
 <p class="sources">Sources: <a href="https://thehackernews.com/2026/06/china-linked-hackers-backdoored-linux.html">The Hacker News</a></p>
-<h3>8. Additional exploited and long-standing vulnerabilities patched</h3>
-<p class="tags">[patch, vulnerability]</p>
-<p class="updated">Last 24h: WatchTowr released PoC details for an exploited Check Point VPN auth bypass, phpBB fixed a decade-old auth bypass, and Chrome 149 patched 28 flaws.</p>
-<p>WatchTowr published technical analysis and a detection artifact generator for CVE-2026-50751, an authentication bypass in Check Point Remote Access and Mobile Access VPN that the vendor confirmed was actively exploited and patched on June 8; broader opportunistic attacks are now likely. Separately, phpBB forum software fixed a 10-year-old authentication bypass that let attackers log in as any user, including administrators. Google&#x27;s Chrome 149 update resolved 28 vulnerabilities, including a dozen use-after-free bugs. Administrators should patch Check Point gateways, phpBB installs, and Chrome promptly given confirmed or trivial exploitation paths.</p>
-<p class="sources">Sources: <a href="https://www.helpnetsecurity.com/2026/06/12/cve-2026-50751-poc-exploit/">Help Net Security</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/phpbb-forum-fixes-auth-bypass-bug-lurking-for-a-decade/">BleepingComputer</a> &middot; <a href="https://www.securityweek.com/chrome-149-update-patches-28-vulnerabilities/">SecurityWeek</a></p>
+<h3 class="area">Data Breaches</h3>
+<h4>8. Record Privacy Fines and Fresh Breaches Pile Up</h4>
+<p class="tags">[breach, policy, fine]</p>
+<p class="updated">Last 24h: South Korea fined Coupang a record $409 million over a data breach, a bankruptcy administrator approved a $47 million fund for 23andMe victims, and Novo Nordisk and France&#x27;s Tchap messenger disclosed new breaches.</p>
+<p>Coupang&#x27;s $409 million penalty is the largest ever from the commission, topping a $88.8 million fine against SK Telecom earlier this year. The 23andMe fund compensates 7 million customers whose genetic data leaked starting April 2023, much of it posted to the dark web. Novo Nordisk, the world&#x27;s largest insulin maker, exposed clinical-trial patient data, and a breach of France&#x27;s Tchap encrypted messenger hit over 73,000 public-sector accounts. Regulators and courts keep raising the cost of weak data stewardship.</p>
+<p class="sources">Sources: <a href="https://therecord.media/south-korea-data-breach-record-fine-coupang">The Record</a> &middot; <a href="https://therecord.media/bankruptcy-admin-approves-settlement-for-23andme-breach-victims">The Record</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/pharmaceutical-giant-novo-nordisk-discloses-security-breach/">BleepingComputer</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/french-govt-says-tchap-breach-affected-over-73-000-accounts/">BleepingComputer</a></p>
+<h2>Business and Politics</h2>
+<ul>
+<li>The United States and Iran agreed the text of a peace deal, Pakistan&#x27;s prime minister said, with both sides expecting to sign within days; the accord would dismantle Iran&#x27;s nuclear program in return for sanctions relief and reopen the Strait of Hormuz. Oil settled at three-month lows and Treasury yields fell on the week as the energy shock eased. <span class="sources">(<a href="https://www.ft.com/content/b91fc27b-8e50-48c1-b9e6-0c93aea19b76">FT World</a> &middot; <a href="https://www.ft.com/content/9d8b31b0-1269-458e-b831-9b5e079e564e">FT World</a>)</span></li>
+<li>SpaceX jumped nearly a fifth on its trading debut to a $2.1 trillion valuation after raising $75 billion in the largest initial public offering on record, making Elon Musk the world&#x27;s first trillionaire as investors bought into the rocket-and-AI vision. <span class="sources">(<a href="https://www.ft.com/content/16387550-4d13-4d2d-b487-c4f6f4a5e9c8">FT Markets</a> &middot; <a href="https://www.wsj.com/business/spacex-now-worth-2-1-trillion-pulls-off-goldilocks-debut-bcc59ace?mod=pls_whats_news_us_business_f">WSJ US Business</a>)</span></li>
+</ul>
 <h2>Pittsburgh</h2>
 <h3>Weather</h3>
 <p>Tonight: Mostly Clear, low 60F.</p>
 <p>Saturday: Sunny, high 86F.</p>
 <p>Saturday Night: Partly Cloudy, low 64F.</p>
 <h3>Sports</h3>
-<pre class="scores">Dodgers 8  Pirates 6  Final
-Marlins 2  Pirates 2  Top 7th</pre>
+<pre class="scores">PIRATES (35-35)
+Jun 11: Dodgers 8  Pirates 6  Final
+  Ohtani homers, leaves game with left knee inflammation
+  in Dodgers&#x27; 8-6 win over Pirates
+  <a href="https://plaintextsports.com/mlb/2026-06-11/lad-pit">https://plaintextsports.com/mlb/2026-06-11/lad-pit</a>
+Jun 12: Marlins 8  Pirates 3  Final
+  <a href="https://plaintextsports.com/mlb/2026-06-12/mia-pit">https://plaintextsports.com/mlb/2026-06-12/mia-pit</a>
+Headlines:
+  Marlins bring 5-game win streak into matchup with the
+  Pirates
+  2026 MLB ABS challenge system tracker: Team, player
+  rankings</pre>
 <h3>Business</h3>
 <ul>
-<li>Carnegie Mellon University is tightening its in-person requirement for staff, scaling back hybrid and remote arrangements. <span class="sources">(<a href="https://www.post-gazette.com/news/education/2026/06/12/carnegie-mellon-hybrid-remote/stories/202606120066">Pittsburgh Post-Gazette</a>)</span></li>
-<li>PennDOT announced $25 million for new electric-vehicle charging stations across Western Pennsylvania. <span class="sources">(<a href="https://www.post-gazette.com/business/tech-news/2026/06/12/ev-charging-stations-nevi-trump-shapiro/stories/202606120068">Pittsburgh Post-Gazette</a>)</span></li>
-<li>Pittsburgh landed a $250,000 grant to upgrade Smithfield Street downtown, where the Urban Redevelopment Authority has hired an architect to transform boarded-up storefronts below the park. <span class="sources">(<a href="https://www.wpxi.com/news/local/pittsburgh-receives-250k-grant-use-upgrades-smithfield-street/5S77JUWTAFD7RO6YKCCQ2B4LBM/">WPXI</a>)</span></li>
+<li>Pittsburgh&#x27;s Urban Redevelopment Authority won a $250,000 grant to upgrade Smithfield Street downtown and has hired an architect to transform the boarded-up storefronts below the park. <span class="sources">(<a href="https://www.wpxi.com/news/local/pittsburgh-receives-250k-grant-use-upgrades-smithfield-street/5S77JUWTAFD7RO6YKCCQ2B4LBM/">WPXI</a>)</span></li>
+<li>Pennsylvania&#x27;s Public Utility Commission will hold three public hearings on the proposed $32.8 million sale of the water authority serving the Donegal area and several Fayette County communities to the state&#x27;s largest private water utility. <span class="sources">(<a href="https://triblive.com/local/westmoreland/puc-to-hold-hearings-on-donegal-area-water-company-sale/">TribLive</a>)</span></li>
+<li>First National Bank closed its branch on Tarentum Bridge Road and referred customers to other locations. <span class="sources">(<a href="https://triblive.com/local/valley-news-dispatch/fnb-along-tarentum-bridge-road-closed-customers-referred-to-other-branches/">TribLive</a>)</span></li>
 </ul>
 <h3>Around town</h3>
 <ul>
-<li>Mark your calendar: the Parkway East&#x27;s Commercial Street Bridge will close for a 25-day replacement project starting July 10 at 9 p.m., shutting the stretch from the Squirrel Hill Tunnel to the Edgewood-Swissvale exit. PennDOT says it is working to minimize the disruption. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/parkway-east-closure-commercial-street-bridge-one-month-away/">KDKA</a>)</span></li>
-<li>City officials want to open a 110-year-old time capsule placed in the City-County Building under Mayor Joseph Armstrong in 1916, but they cannot figure out where it is hidden. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/pittsburgh-missing-time-capsule-city-county-building/">KDKA</a>)</span></li>
-<li>The demolition timeline for the Monroeville Mall remains uncertain, with no formal plans yet submitted, according to the borough&#x27;s mayor. <span class="sources">(<a href="https://www.wtae.com/article/monroeville-mall-demolition-timeline-uncertain/71572476">WTAE</a>)</span></li>
-<li>Mister Rogers&#x27; Neighborhood now has its first dedicated YouTube channel, offering full episodes, livestreams, clips, and compilations of the Pittsburgh-made classic. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/mister-rogers-neighborhood-youtube-channel-launches/">KDKA</a>)</span></li>
+<li>Mister Rogers&#x27; Neighborhood arrived on YouTube with its first dedicated channel, offering full episodes, livestreams, and clips of the Pittsburgh-made program to viewers worldwide. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/mister-rogers-neighborhood-youtube-channel-launches/">KDKA</a>)</span></li>
+<li>Pittsburgh officials want to open a 110-year-old time capsule that Mayor Joseph Armstrong placed in the City-County Building in 1916, holding newspaper clippings, a Bible, and city and national flags; they cannot find it. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/pittsburgh-missing-time-capsule-city-county-building/">KDKA</a>)</span></li>
+<li>Monroeville&#x27;s mayor says the timeline for demolishing Monroeville Mall remains uncertain, with no formal plans yet submitted. <span class="sources">(<a href="https://www.wtae.com/article/monroeville-mall-demolition-timeline-uncertain/71572476">WTAE</a>)</span></li>
+<li>South Greensburg will ask voters to shrink its borough council, part of officials&#x27; push for a smaller local government. <span class="sources">(<a href="https://triblive.com/local/westmoreland/south-greensburg-asks-voters-to-reduce-size-of-council/">TribLive</a>)</span></li>
 </ul>
 <h3>Events</h3>
 <ul>
-<li>The Three Rivers Arts Festival heads into its final weekend in the Cultural District, with vendors praising the festival&#x27;s new home at Arts Landing. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/vendors-approve-three-rivers-arts-festival/">KDKA</a>)</span></li>
-<li>The Holy Cross Greek Festival is back at Holy Cross Greek Orthodox Church in Mt. Lebanon, with traditional food on offer. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/video/the-holy-cross-greek-festival-is-back/">KDKA</a>)</span></li>
-<li>Butler County is hosting a weekend Jeep celebration honoring the Bantam Jeep, which was designed locally and credited with helping win World War II. <span class="sources">(<a href="https://www.wpxi.com/news/local/family-affair-butler-county-residents-celebrate-history-jeeps-their-community/X6MDOLVJ7ZAA3AVFHMG2Q6RVUI/">WPXI</a>)</span></li>
-<li>The North Park Swimming Pool is set to open for the season on Saturday after a mechanical issue delayed its start. <span class="sources">(<a href="https://www.wpxi.com/news/local/north-park-swimming-pool-scheduled-open-saturday-after-mechanical-issue-caused-delay/B3RURX2AHZAKZFLSGFHC3F4AFE/">WPXI</a>)</span></li>
-<li>Pogopalooza, the pogo stick competition and showcase, returns to Pittsburgh this weekend. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/video/pogopalooza-returns-to-pittsburgh-2/">KDKA</a>)</span></li>
+<li>The Three Rivers Arts Festival enters its final weekend at its new home, Arts Landing in the Cultural District, where vendors report a warm reception after Thursday&#x27;s storms cleared. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/vendors-approve-three-rivers-arts-festival/">KDKA</a>)</span></li>
+<li>Seton Hill University in Greensburg hosts the annual Jane Austen Summer Program, a four-day symposium of lectures, small-group discussions, and a formal ball. <span class="sources">(<a href="https://triblive.com/local/westmoreland/seton-hill-site-of-symposium-on-jane-austen/">TribLive</a>)</span></li>
+<li>1846 Farms in Westmoreland County hosts the Luke Bryan Farm Tour, the property&#x27;s first major concert. <span class="sources">(<a href="https://www.wtae.com/article/luke-bryan-farm-tour-pennsylvania-1846-farms/71564381">WTAE</a>)</span></li>
+<li>Butler County, where the Bantam Jeep was designed, marks the vehicle&#x27;s heritage with a weekend of Jeep gatherings for owners and enthusiasts. <span class="sources">(<a href="https://www.wpxi.com/news/local/family-affair-butler-county-residents-celebrate-history-jeeps-their-community/X6MDOLVJ7ZAA3AVFHMG2Q6RVUI/">WPXI</a>)</span></li>
 </ul>
 <h2>Reading</h2>
 <ul>
-<li><strong>Ed Zitron</strong> &mdash; <a href="https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-1/">Premium: The Silicon Valley Bubble (Part 1)</a>. Zitron argues the current tech era is ending, pointing to OpenAI and Anthropic filing to go public as a scramble for exit liquidity by companies burning billions with no clear path to profitability.</li>
-<li><strong>Stratechery</strong> &mdash; <a href="https://stratechery.com/2026/fable-5-anthropic-alignment-ai-tiers/">Fable 5, Anthropic Alignment, AI Tiers</a>. Thompson examines Fable 5 as the public release of Mythos, calling it very capable but warning that it establishes some troubling new precedents around alignment and model tiers.</li>
-<li><strong>Stratechery</strong> &mdash; <a href="https://stratechery.com/2026/the-iphones-last-stand/">The iPhone&#x27;s Last Stand</a>. Thompson contends Apple&#x27;s revamped Siri isn&#x27;t state of the art, but as long as it works it is good enough to satisfy the consumer market.</li>
-<li><strong>Cal Newport</strong> &mdash; <a href="https://calnewport.com/why-isnt-ai-taking-our-jobs/">Why Isn&#x27;t AI Taking Our Jobs?</a>. Newport questions the AI-industry analogy to industrial automation, exploring why predictions of AI broadly eliminating jobs haven&#x27;t materialized as promised.</li>
+<li><strong>Ed Zitron</strong> &mdash; <a href="https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-1/">Premium: The Silicon Valley Bubble (Part 1)</a>. Zitron argues the AI era is ending as OpenAI and Anthropic both file to go public, racing for exit liquidity while burning billions a year with no path to profitability.</li>
+<li><strong>Stratechery</strong> &mdash; <a href="https://stratechery.com/2026/fable-5-anthropic-alignment-ai-tiers/">Fable 5, Anthropic Alignment, AI Tiers</a>. Reviews Anthropic&#x27;s Fable 5, the public version of Mythos, judging it highly capable while warning that it sets troubling new precedents.</li>
+<li><strong>Stratechery</strong> &mdash; <a href="https://stratechery.com/2026/the-iphones-last-stand/">The iPhone&#x27;s Last Stand</a>. Contends Apple&#x27;s revamped Siri, short of state of the art, works well enough to satisfy the consumer market and carry the iPhone forward.</li>
+<li><strong>Cal Newport</strong> &mdash; <a href="https://calnewport.com/why-isnt-ai-taking-our-jobs/">Why Isn&#x27;t AI Taking Our Jobs?</a>. Newport asks why AI has yet to eliminate jobs despite industry leaders comparing it to industrial automation, probing the limits of the brawn-to-brains analogy.</li>
 </ul>
 <hr>
 <footer>
-<p>Generated 2026-06-12 20:31 EDT. Sources: 18 security feeds, 9 Pittsburgh feeds, and Ed Zitron, Stratechery, Cal Newport; market data from Yahoo Finance (weekly averages), weather from the National Weather Service, scores from ESPN.</p>
+<p>Generated 2026-06-12 21:32 EDT. Sources: 18 security feeds; 9 Pittsburgh feeds; the Wall Street Journal, the Economist, and the Financial Times; and Ed Zitron, Stratechery, Cal Newport. Market data from Yahoo Finance (weekly averages), weather from the National Weather Service, scores from ESPN.</p>
 <p>Summaries are AI-generated from the linked reporting; verify details at the sources.</p>
 </footer>
 </body></html>

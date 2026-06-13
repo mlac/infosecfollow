@@ -54,15 +54,25 @@ PGH_WINDOW_HOURS = 48       # Pittsburgh items lookback
 PGH_MAX_ITEMS = 60
 READING_WINDOW_HOURS = 14 * 24  # commentary authors post ~weekly
 READING_MAX_ITEMS = 12
+BIZPOL_WINDOW_HOURS = 36    # WSJ/Economist/FT lookback
+BIZPOL_MAX_ITEMS = 60
 
 
 def load_feeds():
     with open(ENGINE_DIR / "feeds.json", encoding="utf-8") as f:
         groups = json.load(f)
-    for key in ("security", "pittsburgh", "reading"):
+    for key in ("security", "pittsburgh", "bizpol", "reading"):
         if key not in groups:
             raise ValueError(f"feeds.json missing group '{key}'")
     return groups
+
+
+STYLE_RULES = """Style rules for every word you write:
+- Voice: write like John McPhee — factual, dense, and conversational, never flowery and never academic. Active voice only; eliminate every passive construction. No contrastive negation, antithesis, or "X, not Y" constructions. Compress hard: deliver the most information in the fewest words, suitable for a Fortune 500 CEO. Every item stands alone; the reader never needs the source for pertinent details.
+- Capitalization: capitalize only the formal names of specific entities, people, and places; lowercase common nouns, general concepts, and statistical metrics. Capitalize professional titles only immediately before a name ("Chief Executive Jane Roe" but "the chief executive said"). Capitalize compass points only when they name recognized regions (the Midwest, Western Pennsylvania); lowercase directional uses (the storm moved east).
+- Titles and headings (topic titles, trend subjects, area names): use title case — capitalize the first word, the last word, and all principal words; lowercase articles, coordinating conjunctions, and prepositions of fewer than four letters.
+- Mechanics: American spelling (color, realize, traveling). Use the Oxford comma in series of three or more. Put periods and commas inside quotation marks; put colons and semicolons outside. Use unspaced em dashes for parenthetical interruptions—like this. One space after terminal punctuation. Write dates as Month Day, Year (June 12, 2026). Corporate entities and organizations take singular verbs.
+"""
 
 
 def http_get(url):
@@ -266,10 +276,13 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 {{
   "date": "{today}",
   "headline": "One sentence capturing the most important security story or theme of the day.",
-  "emerging_trends": ["3 to 5 entries; each a single sentence naming a trend visible across multiple items and why it matters."],
+  "emerging_trends": [
+    {{"subject": "One or Two Words", "text": "A single sentence naming a trend visible across multiple items and why it matters."}}
+  ],
   "topics": [
     {{
-      "title": "Short topic name (a campaign, vulnerability, incident, or theme)",
+      "title": "Short Topic Name (a Campaign, Vulnerability, Incident, or Theme)",
+      "area": "The Area of Cybersecurity This Topic Belongs To",
       "last_24h": "One sentence describing the relevant updates on this topic in the last 24 hours.",
       "summary": "Two to four sentences of plain-text background and analysis: what it is, who is affected, what to do.",
       "tags": ["1-3 lowercase tags like ransomware, zero-day, apt, patch, breach, policy"],
@@ -280,26 +293,31 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 
 Rules:
 - 5 to 8 topics, ordered most to least important. Merge near-duplicate coverage of the same story into one topic.
+- emerging_trends: 3 to 5 entries; "subject" is a one-or-two-word title-case label for the trend.
+- Assign every topic an "area" naming its part of cybersecurity — e.g. Vulnerabilities and Exploits, Ransomware and Cybercrime, Nation-State Activity, AI Security, Data Breaches, Policy and Regulation. Use 2 to 5 distinct areas across the digest and repeat the exact same area string for topics that share it.
 - Each topic cites 1 to 4 sources whose "url" values are copied EXACTLY from the items below. Never invent or modify a URL.
 - Plain text only in every field: no markdown, no HTML, no bullet characters.
 - Be concrete: name the malware, CVE IDs, vendors, and threat actors that appear in the items. Do not speculate beyond them.
 - Skip vendor marketing and product-promo items unless they carry real news.
+
+{STYLE_RULES}
 
 Items:
 {json.dumps(corpus, ensure_ascii=False, indent=1)}
 """
 
 
-def build_local_prompt(pgh_items, reading_items, today):
-    return f"""You are the editor of the Pittsburgh and Reading sections of "infosecfollow", a daily plain-text briefing. Below are two JSON arrays: PITTSBURGH_ITEMS ({len(pgh_items)} local Pittsburgh news items from the last {PGH_WINDOW_HOURS} hours) and READING_ITEMS ({len(reading_items)} recent posts by the commentary writers Ed Zitron, Stratechery, and Cal Newport).
+def build_local_prompt(pgh_items, reading_items, biz_items, today):
+    return f"""You are the editor of the Business and Politics, Pittsburgh, and Reading sections of "infosecfollow", a daily plain-text briefing. Below are three JSON arrays: BUSINESS_POLITICS_ITEMS ({len(biz_items)} items from the Wall Street Journal, the Economist, and the Financial Times, last {BIZPOL_WINDOW_HOURS} hours), PITTSBURGH_ITEMS ({len(pgh_items)} local Pittsburgh news items, last {PGH_WINDOW_HOURS} hours), and READING_ITEMS ({len(reading_items)} recent posts by the commentary writers Ed Zitron, Stratechery, and Cal Newport).
 
 Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
 
 {{
-  "business": [
-    {{"text": "One or two plain-text sentences on a Pittsburgh business/economy story.",
-      "sources": [{{"source": "outlet", "title": "article title", "url": "exact url from the items"}}]}}
+  "business_politics": [
+    {{"text": "One or two plain-text sentences on the development and why it matters.",
+      "sources": [{{"source": "outlet", "title": "article title", "url": "exact url from BUSINESS_POLITICS_ITEMS"}}]}}
   ],
+  "business": [same shape: Pittsburgh business/economy stories, cited from PITTSBURGH_ITEMS],
   "around_town": [same shape: civic news, development, transit, education, and other useful-to-know local items],
   "events": [same shape: things happening today or in the next few days that a reader could attend],
   "reading": [
@@ -308,12 +326,17 @@ Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly t
 }}
 
 Rules:
-- business: 2-4 items. around_town: 3-5 items. events: 0-5 items (only genuinely current or upcoming; include day/venue when the item mentions them).
+- business_politics: 0 to 4 items, ONLY news of extraordinary significance — developments the chief risk officer of a globally systemically important bank must know: major central-bank decisions, sovereign-debt or currency crises, systemic market dislocations, failures or rescues of major institutions, landmark federal legislation or court rulings, wars or major escalations, and Pennsylvania or Pittsburgh developments of comparable weight. A typical day has zero or one item that clears this bar; return [] when nothing does. Cite urls EXACTLY from BUSINESS_POLITICS_ITEMS.
+- business: 2-4 items. around_town: 3-5 items. events: 0-5 items (only genuinely current or upcoming; include day/venue when the item mentions them). Cite urls EXACTLY from PITTSBURGH_ITEMS.
 - ABSOLUTE EXCLUSION: do not include any item about murder, shootings, stabbings, assault, fatal crashes, abuse, or other violent or graphic subject matter — skip those stories entirely no matter how prominent. Policy or court stories that are not centered on violence are fine.
-- Every business/around_town/events item cites 1-2 sources with "url" copied EXACTLY from PITTSBURGH_ITEMS. Never invent or modify a URL.
 - reading: pick the newest worthwhile post(s) per author from READING_ITEMS, up to 6 total; "url" copied EXACTLY. Skip housekeeping posts (podcast episode lists, link roundups) when a substantive essay is available.
-- Plain text only in every field: no markdown, no HTML, no bullet characters. Be concrete and useful, not promotional.
+- Plain text only in every field: no markdown, no HTML, no bullet characters. Never invent or modify a URL.
 - Today is {today}.
+
+{STYLE_RULES}
+
+BUSINESS_POLITICS_ITEMS:
+{json.dumps(corpus_of(biz_items), ensure_ascii=False, indent=1)}
 
 PITTSBURGH_ITEMS:
 {json.dumps(corpus_of(pgh_items), ensure_ascii=False, indent=1)}
@@ -336,8 +359,15 @@ def validate_digest(digest, allowed_urls):
     if not isinstance(digest.get("headline"), str) or not digest.get("headline").strip():
         problems.append("missing headline")
     trends = digest.get("emerging_trends")
-    if not isinstance(trends, list) or not all(isinstance(t, str) for t in trends) or not trends:
-        problems.append("missing emerging_trends")
+
+    def _trend_ok(t):
+        return (isinstance(t, dict)
+                and all(isinstance(t.get(k), str) and t.get(k).strip()
+                        for k in ("subject", "text")))
+
+    if not isinstance(trends, list) or not trends or not all(_trend_ok(t) for t in trends):
+        problems.append("emerging_trends must be a non-empty list of "
+                        "{subject, text} objects")
     topics = digest.get("topics")
     if not isinstance(topics, list) or not topics:
         problems.append("missing topics")
@@ -349,6 +379,8 @@ def validate_digest(digest, allowed_urls):
             for key in ("title", "last_24h", "summary"):
                 if not isinstance(topic.get(key), str) or not topic.get(key).strip():
                     problems.append(f"topic {n}: missing {key}")
+            area = topic.get("area")
+            topic["area"] = area.strip() if isinstance(area, str) and area.strip() else "Other"
             tags = topic.get("tags")
             topic["tags"] = [t for t in tags if isinstance(t, str)] if isinstance(tags, list) else []
             cited = topic.get("sources")
@@ -369,6 +401,12 @@ def validate_digest(digest, allowed_urls):
                     "url is copied exactly from the provided items")
     if problems:
         raise ValueError("; ".join(problems))
+    # group topics by area, preserving the order in which areas first appear
+    areas = []
+    for topic in topics:
+        if topic["area"] not in areas:
+            areas.append(topic["area"])
+    digest["topics"] = [t for a in areas for t in topics if t["area"] == a]
     return digest
 
 
@@ -410,11 +448,12 @@ def _valid_sources(raw, allowed_urls):
     return sources
 
 
-def validate_local(digest, pgh_urls, read_urls, have_pgh, have_reading):
+def validate_local(digest, pgh_urls, read_urls, biz_urls, have_pgh, have_reading):
     problems = []
     if not isinstance(digest, dict):
         raise ValueError("local digest must be an object")
-    for key in ("business", "around_town", "events"):
+    for key, allowed in (("business_politics", biz_urls), ("business", pgh_urls),
+                         ("around_town", pgh_urls), ("events", pgh_urls)):
         section = digest.get(key)
         if not isinstance(section, list):
             problems.append(f"{key} must be a list")
@@ -425,7 +464,7 @@ def validate_local(digest, pgh_urls, read_urls, have_pgh, have_reading):
             if not isinstance(item, dict) or not isinstance(item.get("text"), str) \
                     or not item.get("text").strip():
                 continue
-            sources = _valid_sources(item.get("sources"), pgh_urls)
+            sources = _valid_sources(item.get("sources"), allowed)
             if sources:  # drop items whose citations failed the allowlist
                 kept.append({"text": item["text"].strip(), "sources": sources})
         digest[key] = kept
@@ -472,11 +511,12 @@ def summarize(cli, items, window, today):
                       lambda digest: validate_digest(digest, allowed))
 
 
-def summarize_local(cli, pgh_items, reading_items, today):
+def summarize_local(cli, pgh_items, reading_items, biz_items, today):
     pgh_urls = {i["url"] for i in pgh_items}
     read_urls = {i["url"] for i in reading_items}
-    return ask_claude(cli, build_local_prompt(pgh_items, reading_items, today),
-                      lambda digest: validate_local(digest, pgh_urls, read_urls,
+    biz_urls = {i["url"] for i in biz_items}
+    return ask_claude(cli, build_local_prompt(pgh_items, reading_items, biz_items, today),
+                      lambda digest: validate_local(digest, pgh_urls, read_urls, biz_urls,
                                                     bool(pgh_items), bool(reading_items)))
 
 
@@ -515,16 +555,34 @@ PAGE_CSS = """
   nav { font-size: 0.85rem; margin-top: 0.25rem; }
   pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
         font-family: inherit; font-size: inherit; }
+  .topbar { display: flex; flex-wrap: wrap; gap: 0 2.5rem; align-items: center; }
+  .topbar .headline { flex: 1; min-width: 16rem; }
+  .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.7; }
+  @media (prefers-color-scheme: dark) {
+    .up { color: #5dd48f; } .down { color: #ff8a80; }
+  }
+  h3.area { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
+            opacity: 0.75; margin: 2rem 0 0; }
+  h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; }
 """
 
 
 def _markets_html(markets):
     if not markets:
         return []
-    lines = market_data.as_lines(markets)
-    return ["<h2>Markets</h2>",
+    width_label = max(len(r["label"]) for r in markets)
+    width_value = max(len(r["value"]) for r in markets)
+    rows = []
+    for r in markets:
+        cls = "up" if r["arrow"] == "▲" else ("down" if r["arrow"] == "▼" else "flat")
+        rows.append(f"{esc(r['label'].ljust(width_label))}  "
+                    f"{esc(r['value'].rjust(width_value))}  "
+                    f'<span class="{cls}">{esc(r["arrow"])} {esc(r["pct"])}</span>')
+    return ['<div class="markets-block">',
+            "<h2>Markets</h2>",
             '<p class="tags">weekly average, change vs prior week</p>',
-            '<pre class="markets">' + "\n".join(esc(l) for l in lines) + "</pre>"]
+            '<pre class="markets">' + "\n".join(rows) + "</pre>",
+            "</div>"]
 
 
 def _local_items_html(items):
@@ -538,6 +596,13 @@ def _local_items_html(items):
     return out
 
 
+_URL_RE = re.compile(r"https://[^\s<]+")
+
+
+def _linkify(escaped_line):
+    return _URL_RE.sub(lambda m: f'<a href="{m.group(0)}">{m.group(0)}</a>', escaped_line)
+
+
 def _pittsburgh_html(local, weather, sports):
     parts = []
     if weather:
@@ -545,7 +610,8 @@ def _pittsburgh_html(local, weather, sports):
         parts += [f"<p>{esc(line)}</p>" for line in weather]
     if sports:
         parts.append("<h3>Sports</h3>")
-        parts.append('<pre class="scores">' + "\n".join(esc(l) for l in sports) + "</pre>")
+        parts.append('<pre class="scores">'
+                     + "\n".join(_linkify(esc(l)) for l in sports) + "</pre>")
     for key, label in (("business", "Business"), ("around_town", "Around town"),
                        ("events", "Events")):
         if local and local.get(key):
@@ -581,23 +647,30 @@ def render_html(digest, local, markets, weather, sports, feeds,
         "<body>",
         "<header>",
         f'<h1><a href="{prefix}index.html" style="text-decoration:none">infosecfollow</a></h1>',
-        "<p>daily plain-text briefing: security, markets, and pittsburgh</p>",
+        "<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>",
         f"<nav>{esc(digest['date'])} &middot; <a href=\"{archive_href}\">archive</a> &middot; "
         f"<a href=\"{text_href}\">plain text</a></nav>",
         "</header>",
+        '<div class="topbar">',
     ]
     parts += _markets_html(markets)
     parts += [
         f'<p class="headline">{esc(digest["headline"])}</p>',
+        "</div>",
         "<hr>",
-        "<h2>Emerging trends</h2>",
+        "<h2>Emerging Trends</h2>",
         "<ul>",
     ]
-    parts += [f"<li>{esc(trend)}</li>" for trend in digest["emerging_trends"]]
+    parts += [f"<li><strong>{esc(trend['subject'])}:</strong> {esc(trend['text'])}</li>"
+              for trend in digest["emerging_trends"]]
     parts.append("</ul>")
     parts.append("<h2>Topics</h2>")
+    current_area = None
     for n, topic in enumerate(digest["topics"], 1):
-        parts.append(f"<h3>{n}. {esc(topic['title'])}</h3>")
+        if topic["area"] != current_area:
+            current_area = topic["area"]
+            parts.append(f'<h3 class="area">{esc(current_area)}</h3>')
+        parts.append(f"<h4>{n}. {esc(topic['title'])}</h4>")
         if topic["tags"]:
             parts.append(f'<p class="tags">[{esc(", ".join(topic["tags"]))}]</p>')
         parts.append(f'<p class="updated">Last 24h: {esc(topic["last_24h"])}</p>')
@@ -607,14 +680,18 @@ def render_html(digest, local, markets, weather, sports, feeds,
                 f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
                 for s in topic["sources"])
             parts.append(f'<p class="sources">Sources: {links}</p>')
+    if local and local.get("business_politics"):
+        parts.append("<h2>Business and Politics</h2>")
+        parts += _local_items_html(local["business_politics"])
     parts += _pittsburgh_html(local, weather, sports)
     parts += _reading_html(local)
     parts += [
         "<hr>",
         "<footer>",
-        f"<p>Generated {esc(generated_at)}. Sources: {len(feeds['security'])} security feeds, "
-        f"{len(feeds['pittsburgh'])} Pittsburgh feeds, and "
-        f"{esc(', '.join(f['name'] for f in feeds['reading']))}; market data from Yahoo "
+        f"<p>Generated {esc(generated_at)}. Sources: {len(feeds['security'])} security feeds; "
+        f"{len(feeds['pittsburgh'])} Pittsburgh feeds; the Wall Street Journal, the "
+        "Economist, and the Financial Times; and "
+        f"{esc(', '.join(f['name'] for f in feeds['reading']))}. Market data from Yahoo "
         "Finance (weekly averages), weather from the National Weather Service, scores "
         "from ESPN.</p>",
         "<p>Summaries are AI-generated from the linked reporting; verify details at the sources.</p>",
@@ -645,7 +722,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
     bar = "=" * TEXT_WIDTH
     lines = [
         bar,
-        "INFOSECFOLLOW -- daily briefing: security, markets, pittsburgh",
+        "INFOSECFOLLOW -- daily briefing: security, markets, business, pittsburgh",
         digest["date"],
         bar,
     ]
@@ -660,9 +737,14 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
         "EMERGING TRENDS",
         "-" * TEXT_WIDTH,
     ]
-    lines += [_fill(trend, "* ", "  ") for trend in digest["emerging_trends"]]
+    lines += [_fill(f"{t['subject']}: {t['text']}", "* ", "  ")
+              for t in digest["emerging_trends"]]
     lines += ["", "TOPICS", "-" * TEXT_WIDTH]
+    current_area = None
     for n, topic in enumerate(digest["topics"], 1):
+        if topic["area"] != current_area:
+            current_area = topic["area"]
+            lines += ["", f":: {current_area.upper()}"]
         lines += [
             "",
             _fill(topic["title"].upper()
@@ -674,6 +756,14 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
         for src in topic["sources"]:
             if src["url"].startswith(("http://", "https://")):
                 lines.append(f"   - {src['source']}: {src['url']}")
+
+    if local and local.get("business_politics"):
+        lines += ["", "BUSINESS AND POLITICS", "-" * TEXT_WIDTH]
+        for item in local["business_politics"]:
+            lines.append(_fill(item["text"], "* ", "  "))
+            for src in item["sources"]:
+                if src["url"].startswith(("http://", "https://")):
+                    lines.append(f"  - {src['source']}: {src['url']}")
 
     if weather or sports or (local and any(local.get(k) for k in
                                            ("business", "around_town", "events"))):
@@ -702,8 +792,9 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
         "",
         bar,
         _fill(f"Generated {generated_at}. Sources: {len(feeds['security'])} security "
-              f"feeds, {len(feeds['pittsburgh'])} Pittsburgh feeds, and "
-              f"{', '.join(f['name'] for f in feeds['reading'])}; markets from Yahoo "
+              f"feeds; {len(feeds['pittsburgh'])} Pittsburgh feeds; the Wall Street "
+              "Journal, the Economist, and the Financial Times; and "
+              f"{', '.join(f['name'] for f in feeds['reading'])}. Markets from Yahoo "
               "Finance, weather from the NWS, scores from ESPN. Summaries are "
               "AI-generated from the linked reporting; verify at the sources."),
         bar,
@@ -774,11 +865,12 @@ def main():
 
     print(f"[1/4] fetching feeds "
           f"(security {len(feeds['security'])}, pittsburgh {len(feeds['pittsburgh'])}, "
-          f"reading {len(feeds['reading'])})")
+          f"bizpol {len(feeds['bizpol'])}, reading {len(feeds['reading'])})")
     sec_items, sec_failures = fetch_all(feeds["security"])
     pgh_items, pgh_failures = fetch_all(feeds["pittsburgh"])
+    biz_items, biz_failures = fetch_all(feeds["bizpol"])
     read_items, read_failures = fetch_all(feeds["reading"])
-    failures = sec_failures + pgh_failures + read_failures
+    failures = sec_failures + pgh_failures + biz_failures + read_failures
     if len(feeds["security"]) - len(sec_failures) < 2:
         sys.exit(f"only {len(feeds['security']) - len(sec_failures)} security feeds "
                  "reachable; aborting")
@@ -788,6 +880,7 @@ def main():
         sys.exit("no recent security items found; aborting")
     pgh_selected = recent_items(pgh_items, now, PGH_WINDOW_HOURS, PGH_MAX_ITEMS)
     read_selected = recent_items(read_items, now, READING_WINDOW_HOURS, READING_MAX_ITEMS)
+    biz_selected = recent_items(biz_items, now, BIZPOL_WINDOW_HOURS, BIZPOL_MAX_ITEMS)
 
     print("[2/4] markets, weather, sports")
     def attempt(label, fn):
@@ -804,12 +897,13 @@ def main():
     cli = find_claude_cli()
     print(f"[3/4] summarizing via claude ({MODEL}, using {cli})\n"
           f"  security: {len(selected)} items ({window}h); pittsburgh: "
-          f"{len(pgh_selected)} items; reading: {len(read_selected)} items")
+          f"{len(pgh_selected)}; bizpol: {len(biz_selected)}; "
+          f"reading: {len(read_selected)}")
     with ThreadPoolExecutor(max_workers=2) as pool:
         digest_future = pool.submit(summarize, cli, selected, window, today)
         local_future = (pool.submit(summarize_local, cli, pgh_selected,
-                                    read_selected, today)
-                        if pgh_selected or read_selected else None)
+                                    read_selected, biz_selected, today)
+                        if pgh_selected or read_selected or biz_selected else None)
         try:
             digest = digest_future.result()
         except Exception:
