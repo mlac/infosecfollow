@@ -154,6 +154,10 @@ def _schedule_next(sport, league, now_utc):
     horizon = now_utc + NEXT_GAME_HORIZON
     best = None
     for event in sched.get("events", []):
+        comp = (event.get("competitions") or [{}])[0]
+        state = comp.get("status", {}).get("type", {}).get("state")
+        if state and state != "pre":
+            continue  # skip postponed/suspended/done rows that keep a future date
         try:
             when = datetime.fromisoformat(event["date"].replace("Z", "+00:00"))
         except (KeyError, ValueError, AttributeError):
@@ -174,9 +178,9 @@ def _next_event_lines(league, event):
         when = _parse_when(event["date"])
     except (KeyError, ValueError):
         return []
-    venue = comp.get("venue", {})
-    place = ", ".join(x for x in (venue.get("fullName"),
-                                  venue.get("address", {}).get("city")) if x)
+    venue = comp.get("venue") or {}
+    addr = venue.get("address") or {}
+    place = ", ".join(x for x in (venue.get("fullName"), addr.get("city")) if x)
     lines = [f"Next: {away_team.get('shortDisplayName', '?')} @ "
              f"{home_team.get('shortDisplayName', '?')}  "
              f"{when:%a %b} {when.day}, {when:%-I:%M %p}"]  # e.g. "Sat Jun 14"
