@@ -4,6 +4,14 @@
 set -eu
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# The embedded Claude CLI reads its OAuth credential from the login keychain,
+# keyed to the account name. Schedulers (cron, launchd) start with a stripped
+# environment missing USER/LOGNAME, which makes the CLI report "Not logged in".
+# Restore them so the keychain lookup succeeds.
+export HOME="${HOME:-$(eval echo "~$(id -un)")}"
+export USER="$(id -un)"
+export LOGNAME="$USER"
+
 # Prefer the interpreter the project is developed against (a minimal scheduler
 # PATH would otherwise pick the stale Apple /usr/bin/python3).
 PYTHON="${INFOSECFOLLOW_PYTHON:-}"
