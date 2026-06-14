@@ -4,7 +4,6 @@ game links into plaintextsports.com. Stdlib only, no API keys.
 """
 
 import json
-import re
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -17,17 +16,6 @@ ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 LEAGUES = [("baseball", "mlb"), ("football", "nfl"), ("hockey", "nhl")]
 TEAM_ABBR = "PIT"
 NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-season
-NEWS_MAX_AGE = timedelta(hours=48)
-
-# ESPN's team-news feed mixes real reporting with pregame previews, video-clip
-# titles, and league-wide trackers. Those read as dangling fragments next to the
-# scores, so drop any headline matching one of these case-insensitive markers.
-_JUNK_HEADLINE_RE = re.compile(
-    r"matchup|try to|look to|\bvs\.|game highlights|highlights|watch:|how to watch|"
-    r"tracker|power rankings|rankings|preview|odds|predictions|live updates|"
-    r"starting lineups|lineup|square off|rubber match|series|set to|set for|"
-    r"take on|go for|\bhost\b|\bvisit\b|\bface\b|battle|clash",
-    re.IGNORECASE)
 
 
 def _get_json(url):
@@ -145,6 +133,10 @@ def _game_entry(league, event, recaps):
     if state == "post":
         d = detail.replace("Final", "").strip("/ ")
         detail = "Final" + (f" ({d})" if d else "")
+    elif state == "in":
+        # The site is static and refreshes a few times a day, so a live score is
+        # a frozen snapshot. Label it so a mid-game freeze reads honestly.
+        detail = f"{detail} (in progress at last update)".strip()
     entry["result"] = (f"{away_name} {away.get('score', '?')} · "
                        f"{home_name} {home.get('score', '?')} · {detail}")
     recap = (comp.get("headlines") or [{}])[0].get("shortLinkText", "")
@@ -198,38 +190,13 @@ def _next_entry(league, event):
     }
 
 
-def _team_news(sport, league, now_utc, recaps):
-    """Up to two fresh team headlines, minus the game recap already shown."""
-    try:
-        articles = _get_json(
-            f"{ESPN}/{sport}/{league}/news?team={TEAM_ABBR.lower()}&limit=6"
-        ).get("articles", [])
-    except Exception:
-        return []
-    headlines = []
-    for article in articles:
-        headline = (article.get("headline") or "").strip()
-        try:
-            published = datetime.fromisoformat(
-                article.get("published", "").replace("Z", "+00:00"))
-        except ValueError:
-            continue
-        if published.tzinfo is None:  # avoid naive/aware subtraction below
-            continue
-        if not headline or now_utc - published > NEWS_MAX_AGE:
-            continue
-        if _JUNK_HEADLINE_RE.search(headline):
-            continue  # pregame preview, video clip, or league-wide tracker
-        if any(headline in r or r in headline for r in recaps):
-            continue
-        headlines.append(headline)
-        if len(headlines) == 2:
-            break
-    return headlines
-
-
 def _team_block(sport, league, now_local, now_utc):
-    """Structured block {team, record, games[], next, headlines[]} or None."""
+    """Structured block {team, record, games[], next, headlines[]} or None.
+
+    headlines is always empty: ESPN's news endpoint returned stale, often
+    contradictory blurbs, so team news now comes from the model-summarized
+    "Around the Teams" section (beat writers and team podcasts) instead.
+    """
     blob = _get_json(f"{ESPN}/{sport}/{league}/teams/{TEAM_ABBR.lower()}")["team"]
     name = blob.get("shortDisplayName", "Pittsburgh")
     record = blob.get("record", {}).get("items", [{}])[0].get("summary", "")
@@ -262,12 +229,8 @@ def _team_block(sport, league, now_local, now_utc):
     if not games and not next_entry:
         return None  # off-season: skip the team entirely
 
-    try:
-        headlines = _team_news(sport, league, now_utc, recaps)
-    except Exception:
-        headlines = []
     return {"team": name, "record": record, "games": games,
-            "next": next_entry, "headlines": headlines}
+            "next": next_entry, "headlines": []}
 
 
 def sports_blocks():

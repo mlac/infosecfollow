@@ -1,148 +1,87 @@
 {
   "date": "2026-06-14",
-  "headline": "Unauthenticated remote-code flaws tore through Splunk and Oracle PeopleSoft as Washington tightened its grip on which humans may touch frontier AI.",
+  "headline": "Defenders harden the software supply chain and turn AI loose on their own code, even as the same technology fuels the phishing machines law enforcement keeps tearing down.",
   "emerging_trends": [
     {
-      "subject": "Unauthenticated RCE",
-      "text": "Critical 9.8-severity flaws in Splunk Enterprise and Oracle PeopleSoft both let attackers run code with no login, putting enterprise data stores one request away from compromise."
+      "subject": "AI Dual Use",
+      "text": "Claude Opus 4.8 surfaced a critical Zcash flaw the same week the FBI dismantled an AI-powered phishing service, putting the technology on both sides of the fight."
     },
     {
-      "subject": "AI Governance",
-      "text": "The Anthropic export order and Bernie Sanders's sovereign-wealth proposal show governments moving to control who builds, owns, and accesses frontier AI."
+      "subject": "Authentication Under Siege",
+      "text": "A jailed school-district insider with lingering admin rights and Chinese operators who owned a target's auth stack for a decade show attackers winning by controlling who gets to log in."
     },
     {
-      "subject": "Weaponized AI",
-      "text": "The FBI takedown of the Gemini-powered Outsider phishing service confirms criminals now wire large language models directly into mass fraud infrastructure."
-    },
-    {
-      "subject": "Self-Inflicted Exposure",
-      "text": "A botched redaction of Argentina's World Cup passports shows human error still leaks sensitive data faster than any intruder."
+      "subject": "Supply Chain Hardening",
+      "text": "npm's move to stop running dependency scripts by default attacks the install-time code execution behind a run of recent package compromises."
     }
   ],
   "topics": [
     {
-      "title": "Critical Splunk Enterprise Code-Execution Flaw",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Splunk shipped emergency fixes for CVE-2026-20253, a 9.8-severity bug that lets an unauthenticated attacker create or truncate arbitrary files and run code remotely.",
-      "summary": "The flaw affects Splunk Enterprise versions below 10.2.4 and 10.0.7. Because Splunk ingests an organization's logs and security telemetry, a compromise hands attackers both the crown-jewel data and a blind spot in monitoring. Administrators should upgrade to a patched build immediately and review file-system access on exposed instances.",
+      "title": "npm 12 Disables Dependency Scripts by Default",
+      "area": "Software Supply Chain",
+      "latest_developments": "npm 12 will stop running install scripts from dependencies unless a developer explicitly allows each one.",
+      "summary": "Today npm install runs the lifecycle scripts a package defines, the exact mechanism attackers abuse to execute code the moment a developer pulls a poisoned dependency. Version 12 flips the default so those scripts stay dormant until a developer opts in per package. The change goes after the install-time execution behind a string of JavaScript ecosystem compromises. Teams should expect builds that genuinely need scripts to declare them.",
       "tags": [
-        "zero-day",
-        "patch",
-        "rce"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Critical Splunk Enterprise Flaw Lets Attackers Run Code Without Authentication",
-          "url": "https://thehackernews.com/2026/06/critical-splunk-enterprise-flaw-lets.html"
-        }
-      ]
-    },
-    {
-      "title": "ShinyHunters PeopleSoft Zero-Day Hits Universities",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Fresh reporting shows the Oracle PeopleSoft flaw CVE-2026-35273 fell hardest on American universities, with ShinyHunters siphoning gigabytes of records from hundreds of organizations.",
-      "summary": "The missing-authentication bug in Oracle's PeopleSoft ERP software lets attackers reach data with no credentials. Higher-education institutions, heavy PeopleSoft users, absorbed the brunt as the gang exfiltrated student and staff records at scale. CISA already lists the flaw as known-exploited; affected schools should patch and hunt their logs for bulk data pulls.",
-      "tags": [
-        "zero-day",
-        "breach",
+        "supply-chain",
         "patch"
       ],
       "sources": [
         {
-          "source": "Dark Reading",
-          "title": "ShinyHunters Uses Oracle Zero-Day to Rampage Higher Ed",
-          "url": "https://www.darkreading.com/vulnerabilities-threats/shinyhunters-oracle-zero-day-higher-ed"
-        },
-        {
-          "source": "Ars Technica Security",
-          "title": "PeopleSoft 0-day affecting hundreds of organizations steals gigabytes of data",
-          "url": "https://arstechnica.com/security/2026/06/peoplesoft-0-day-affecting-hundreds-of-organizations-steals-gigabytes-of-data/"
-        }
-      ]
-    },
-    {
-      "title": "Anthropic Disputes Foreign-Access Ban",
-      "area": "AI Security",
-      "latest_developments": "Anthropic publicly pushed back on the Trump administration's order, calling the cited jailbreak narrow and the underlying capability widely available elsewhere, even as it complied and pulled Fable 5 and Mythos 5 worldwide.",
-      "summary": "The government directive, delivered the evening of June 13, ordered Anthropic to block all foreign nationals from its two most advanced models, citing national security. Rather than partition users, the company suspended both models globally for everyone. Anthropic frames the move as export-control overreach against a single vendor; the episode signals how aggressively Washington will police access to frontier systems.",
-      "tags": [
-        "policy",
-        "ai",
-        "export-controls"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "US Gov asks Anthropic to ban 'foreign national' access to Fable, Mythos",
-          "url": "https://www.bleepingcomputer.com/news/security/us-gov-asks-anthropic-to-ban-foreign-national-access-to-fable-mythos/"
-        },
-        {
           "source": "SecurityWeek",
-          "title": "Anthropic Says It Has Taken Its Latest AI Models Offline to Comply With New Export Controls",
-          "url": "https://www.securityweek.com/anthropic-says-it-has-taken-its-latest-ai-models-offline-to-comply-with-new-export-controls/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "U.S. Orders Anthropic to Suspend Fable 5 and Mythos 5 Access for Foreign Nationals",
-          "url": "https://thehackernews.com/2026/06/us-orders-anthropic-to-suspend-fable-5.html"
+          "title": "NPM 12 Will Change Script Execution Behavior to Prevent Supply Chain Attacks",
+          "url": "https://www.securityweek.com/npm-12-will-change-script-execution-behavior-to-prevent-supply-chain-attacks/"
         }
       ]
     },
     {
-      "title": "FBI Dismantles Outsider Phishing Service",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Newly disclosed scale figures put the FBI, Google, and Black Lotus Labs takedown of Outsider Enterprise at roughly a million malicious URLs across thousands of phishing sites.",
-      "summary": "Outsider Enterprise ran a Chinese phishing-as-a-service kit that weaponized Google's Gemini to mass-produce scam pages harvesting credit-card data and passwords. The coordinated seizure follows Google's earlier civil suit against the same network. The million-URL footprint shows how AI now lets a single operation industrialize credential theft.",
+      "title": "Claude Opus 4.8 Surfaces Critical Zcash Orchard Flaw",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Researcher Taylor Hornby, working with Claude Opus 4.8, found a critical vulnerability in the Zcash Orchard privacy pool on May 29, and the Zcash team fixed it.",
+      "summary": "Orchard, Zcash's newest privacy pool, arrived in 2022 to let users send shielded transactions. The Zcash team hired Hornby specifically to hunt for flaws, and he surfaced a critical one fast with help from Claude Opus 4.8. Developers patched it. Anyone holding Zcash should confirm they run the corrected software.",
       "tags": [
-        "phishing",
-        "ai",
-        "takedown"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "FBI disrupts massive AI-powered phishing service using a million URLs",
-          "url": "https://www.bleepingcomputer.com/news/security/fbi-disrupts-massive-ai-powered-phishing-service-using-a-million-urls/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Google Sues Chinese Smishing Network Accused of Using Gemini AI in Phishing",
-          "url": "https://thehackernews.com/2026/06/google-sues-chinese-smishing-network.html"
-        }
-      ]
-    },
-    {
-      "title": "Sanders Pitches AI Sovereign Wealth Fund",
-      "area": "Policy and Regulation",
-      "latest_developments": "Senator Bernie Sanders used a New York Times op-ed to propose an AI sovereign wealth fund, arguing the public should share in the wealth a handful of billionaires now stand to capture.",
-      "summary": "Sanders's piece asks whether a few AI-owning billionaires should determine humanity's future with little democratic input. Security commentator Bruce Schneier endorsed the framing, tying it to debates over concentrated control of powerful systems. The proposal lands amid sharpening fights over how governments tax, fund, and govern AI development.",
-      "tags": [
-        "policy",
+        "vulnerability",
+        "cryptocurrency",
         "ai"
       ],
       "sources": [
         {
           "source": "Schneier on Security",
-          "title": "Bernie Sanders' AI Sovereign Wealth Fund Plan",
-          "url": "https://www.schneier.com/blog/archives/2026/06/bernie-sanders-ai-sovereign-wealth-fund-plan.html"
+          "title": "Critical Zcash Vulnerability Found and Fixed",
+          "url": "https://www.schneier.com/blog/archives/2026/06/critical-zcash-vulnerability-found-and-fixed.html"
         }
       ]
     },
     {
-      "title": "World Cup Document Leaks Messi's Passport",
-      "area": "Data Breaches",
-      "latest_developments": "A poorly redacted World Cup document exposed the passport numbers of Argentina's entire squad, Lionel Messi included, before the tournament kicked off.",
-      "summary": "No intruder caused this exposure; someone simply failed to black out sensitive fields before publishing the file. Passport numbers feed identity fraud and travel impersonation, making the slip a real risk for the players. The incident is a reminder that redaction failures leak high-value personal data as readily as any breach.",
+      "title": "Former School District IT Worker Jailed for Sabotage",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "A court sentenced a former Iowa school district IT employee to 21 months in prison for a prolonged attack that deleted accounts and disrupted classrooms.",
+      "summary": "The former administrator kept access after leaving and used it to wage a drawn-out attack on the district, deleting accounts, halting classroom operations, and running up tens of thousands of dollars in damage. The 21-month sentence measures the harm a trusted insider with lingering credentials still inflicts. Organizations should cut departing staff access the day they leave and watch privileged accounts for abuse.",
       "tags": [
-        "breach",
-        "privacy"
+        "insider-threat",
+        "breach"
       ],
       "sources": [
         {
-          "source": "Graham Cluley",
-          "title": "Privacy own-goal: World Cup blunder leaks Lionel Messi's passport details",
-          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/privacy-own-goal-world-cup-blunder-leaks-lionel-messis-passport-details"
+          "source": "BleepingComputer",
+          "title": "Ex-school district employee jailed for hacks on former employer",
+          "url": "https://www.bleepingcomputer.com/news/security/ex-school-district-employee-jailed-for-hacks-on-former-employer/"
+        }
+      ]
+    },
+    {
+      "title": "New macOS Tahoe 26 Artifact Tracks User Menu Choices",
+      "area": "Threat Detection and Forensics",
+      "latest_developments": "Unit 42 disclosed a previously unknown macOS Tahoe 26 forensic artifact that records the menu selections a user makes across the operating system.",
+      "summary": "Palo Alto's Unit 42 found that macOS Tahoe 26 logs user menu selections throughout the system, a trail investigators can mine to reconstruct what someone did during an incident. The artifact hands forensic analysts a finer record of intent on a Mac. Defenders writing macOS investigation playbooks should fold it into their collection routines.",
+      "tags": [
+        "forensics",
+        "macos"
+      ],
+      "sources": [
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "Tracing Digital Intent: New MacOS Tahoe 26 Artifact Discovered",
+          "url": "https://unit42.paloaltonetworks.com/new-macos-artifact-discovered/"
         }
       ]
     }
@@ -199,7 +138,7 @@
   "sports": [
     {
       "team": "Pirates",
-      "record": "36-35",
+      "record": "36-36",
       "games": [
         {
           "date": "Sat Jun 13",
@@ -210,8 +149,8 @@
         {
           "date": "Sun Jun 14",
           "url": "https://plaintextsports.com/mlb/2026-06-14/mia-pit",
-          "recap": "",
-          "result": "Marlins 4 · Pirates 1 · Top 8th"
+          "recap": "Meyer outduels Skenes, allows one run in six innings as Marlins top Pirates 4-2",
+          "result": "Marlins 4 · Pirates 2 · Final"
         }
       ],
       "next": {
@@ -219,17 +158,15 @@
         "when": "Mon Jun 15, 9:40 PM",
         "url": "https://plaintextsports.com/mlb/2026-06-15/pit-ath"
       },
-      "headlines": [
-        "Marlins beat the Pirates 8-3 for their 6th straight victory"
-      ]
+      "headlines": []
     }
   ],
   "local": {
     "business_politics": [
       {
-        "title": "Iran Deal at Risk as Israel Strikes Beirut",
-        "latest_developments": "Tehran threatened to abandon talks and retaliate after Israel hit what it called a Hezbollah command center, and Trump ordered both sides to stand down hours before he expects to seal the Strait of Hormuz agreement Sunday.",
-        "summary": "The United States and Iran stand at the cusp of an accord that would end their war, reopen the Strait of Hormuz, and dismantle Iran's nuclear program in exchange for sanctions relief, after a helicopter-crash escalation pushed them from renewed fighting back toward a ceasefire. Israel's strike on Beirut's outskirts now threatens to unravel the deal, with oil prices and the wider energy shock hinging on whether the signing holds.",
+        "title": "Trump Rebukes Israel Over Beirut Strike",
+        "latest_developments": "Trump publicly rebuked Israel and ordered Israel and Hezbollah to stand down after the Beirut strike, insisting the U.S.-Iran deal to reopen the Strait of Hormuz can still close Sunday.",
+        "summary": "Israel hit what it called a Hezbollah command center on Beirut's outskirts, and Iran threatened to abandon the U.S. talks and retaliate. President Trump told both sides to halt attacks, racing to finalize an agreement that would end the U.S.-Iran war and reopen the Strait of Hormuz.",
         "sources": [
           {
             "source": "WSJ World News",
@@ -238,106 +175,77 @@
           },
           {
             "source": "FT World",
-            "title": "Trump tells Israel and Hizbollah to 'stand down' as he pushes for Iran deal",
+            "title": "Trump tells Israel and Hizbollah to ‘stand down’ as he pushes for Iran deal",
             "url": "https://www.ft.com/content/ce9286fb-b37c-4113-9ec3-0464144c4977"
-          },
+          }
+        ]
+      },
+      {
+        "title": "China Launches Cross-Border Payments System to Rival Dollar",
+        "latest_developments": "Beijing unveiled a cross-border currency platform backed by the central banks of Hong Kong, Thailand, the UAE, and Saudi Arabia, its most concrete move yet to cut reliance on the dollar.",
+        "summary": "China teed up a digital payments system to settle cross-border transactions outside dollar channels, drawing in Gulf and Southeast Asian central banks. The platform advances Beijing's long campaign to internationalize the yuan and blunt the reach of U.S. financial sanctions.",
+        "sources": [
           {
-            "source": "FT World",
-            "title": "Israel strikes Beirut, threatening to complicate push for Iran deal",
-            "url": "https://www.ft.com/content/726f4afe-c3ff-4ec0-bfc9-b572b419e11f"
+            "source": "FT Markets",
+            "title": "China tees up digital payments system to compete with dollar",
+            "url": "https://www.ft.com/content/76de5ca6-9ae8-49ae-a0cb-64d09040f327"
           }
         ]
       }
     ],
     "business": [
       {
-        "title": "LeMont Marks 66 Years on Mount Washington",
-        "latest_developments": "TribLive profiled the restaurant's longtime staff, who together count nearly 175 years of service.",
-        "summary": "LeMont, the fine-dining landmark perched on Mount Washington with a sweeping view of the city, has run for 66 years, its kitchen and floor crew anchoring one of Pittsburgh's enduring restaurants even as the skyline below it changed.",
+        "title": "Nara Organics Recalls Baby Formula",
+        "latest_developments": "Nara Organics recalled infant formula sold at Target and online after a multistate infant botulism outbreak.",
+        "summary": "Federal regulators linked the formula to infant botulism cases across several states. The recall covers products sold in Target stores and online, and parents should stop using affected lots.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "At LeMont, nearly 175 years of combined service help define a landmark",
-            "url": "https://triblive.com/lifestyles/food-drink/at-lemont-nearly-175-years-of-combined-service-help-define-a-landmark/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Nara Organics recalls baby formula sold at Target after multistate infant botulism outbreak",
+            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/06/14/nara-organics-formula-recall/stories/202606140073"
+          },
+          {
+            "source": "WTAE",
+            "title": "Baby formula sold at Target and online recalled after infant botulism cases reported",
+            "url": "https://www.wtae.com/article/nara-organics-infant-formula-recall-botulism/71581963"
           }
         ]
       },
       {
-        "title": "Single-Employer Towns Face Collapse Risk",
-        "latest_developments": "A TribLive editorial argues the loss of Spirit shows how small towns built around one employer cascade toward collapse when that company leaves.",
-        "summary": "Many Western Pennsylvania communities depend on a single dominant employer, and the editorial warns that when such a factory closes, the lost jobs ripple through tax revenue, local businesses, and population in a chain reaction that hollows out the town.",
+        "title": "Pennsylvania Quarantines Farm Animals Over Screwworm",
+        "latest_developments": "Pennsylvania issued a quarantine order on farm animals as it tracks New World screwworm cases spreading through southwestern states.",
+        "summary": "The flesh-eating parasite, contained for decades, has resurged in the U.S. Pennsylvania's order restricts animal movement to keep the pest out of the state's livestock.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Editorial: Spirit loss sets off domino effect",
-            "url": "https://triblive.com/opinion/editorial-spirit-loss-sets-off-domino-effect/"
-          }
-        ]
-      },
-      {
-        "title": "Shadyside Victorian Listed After 150 Years",
-        "latest_developments": "Pittsburgh Magazine featured the listing of 719 Amberson Avenue, a home that hosted piano concerts for decades.",
-        "summary": "A Queen Anne Victorian built in 1885 at 719 Amberson Avenue in West Shadyside has come on the market after nearly 150 years of preservation, one of the neighborhood's longest-held historic houses.",
-        "sources": [
-          {
-            "source": "Pittsburgh Magazine",
-            "title": "Decades of Piano Concerts Took Place in This Shadyside Home on Amberson Avenue",
-            "url": "https://www.pittsburghmagazine.com/hot-property-719-amberson-ave-shadyside/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pa. issues quarantine order on farm animals, as wary states track screwworm cases in southwestern states",
+            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/06/14/new-world-screwworm-quarantine-animals/stories/202606140069"
           }
         ]
       }
     ],
     "around_town": [
       {
-        "title": "Severe Thunderstorm Watch Through Sundown",
-        "latest_developments": "The National Weather Service upgraded today's outlook to a severe thunderstorm watch, with a line of storms tracking through between 4 p.m. and 8 p.m.",
-        "summary": "Damaging winds and heavy downpours are the leading threats across western Pennsylvania this afternoon, with most rain clearing east by 9 or 10 p.m. before drier, cooler air settles in overnight.",
+        "title": "Hampton Township Road Project Restricts Traffic",
+        "latest_developments": "A $10.57 million improvement project will restrict traffic on a Hampton Township roadway for more than a month.",
+        "summary": "The work covers drainage upgrades, milling and paving, and base repair. Drivers face restrictions through the duration of the job.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "NWS issues severe thunderstorm watch through sundown",
-            "url": "https://www.post-gazette.com/news/weather-news/2026/06/14/pittsburgh-weather-outlook-today-june-14-2026/stories/202606140075"
-          },
-          {
-            "source": "WTAE",
-            "title": "Thunderstorm Watch: Damaging winds, downpours expected for Western PA",
-            "url": "https://www.wtae.com/article/pittsburgh-area-thunderstorm-watch-june-14/71582006"
+            "source": "WPXI",
+            "title": "Improvement project to restrict traffic on Hampton Township roadway for over a month",
+            "url": "https://www.wpxi.com/news/local/improvement-project-restrict-traffic-hampton-township-roadway-over-month/FQKY3MOKDRCC3PTPXYXSYFNHBU/"
           }
         ]
       },
       {
-        "title": "State Police Fine Nearly 700 for Held Cellphones",
-        "latest_developments": "State police have issued nearly 700 fines under Pennsylvania's Paul Miller Law, which bars holding a cellphone while driving.",
-        "summary": "The Paul Miller Law makes it illegal to hold a phone behind the wheel in Pennsylvania, and troopers have begun enforcing it with citations, the early count of penalties signaling the start of active enforcement statewide.",
+        "title": "Report Faults Pa. Teacher Reading Training",
+        "latest_developments": "A new report found nearly half of Pennsylvania's educator preparation programs fail to adequately train future teachers in how to teach reading.",
+        "summary": "The finding lands as states overhaul reading instruction through new laws. The gap touches the colleges that supply Pennsylvania's classroom teachers.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "State police fine nearly 700 for holding a cellphone while driving",
-            "url": "https://www.post-gazette.com/news/transportation/2026/06/14/cellphone-ban-tickets-paul-miller-law-fine/stories/202606140071"
-          }
-        ]
-      },
-      {
-        "title": "Triadelphia Still Rebuilding a Year After Floods",
-        "latest_developments": "A year after deadly floods, recovery in tiny Triadelphia, West Virginia, remains slow and residents still carry the trauma.",
-        "summary": "Triadelphia, a small community in the Northern Panhandle of West Virginia, suffered flooding that killed residents and wrecked homes last year, and rebuilding has lagged as families wait on aid and contend with lasting emotional damage.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "A year after deadly floods, rebuilding is slow and trauma lingers in tiny Triadelphia, W.Va.",
-            "url": "https://www.post-gazette.com/news/weather-news/2026/06/14/triadelphia-west-virginia-flood-recovery/stories/202606120055"
-          }
-        ]
-      },
-      {
-        "title": "WVU Baseball Plays in College World Series",
-        "latest_developments": "West Virginia, 46-15 and winners of six straight, faces North Carolina tonight in Omaha after notching the program's first-ever College World Series game victory over Troy on Friday.",
-        "summary": "The Mountaineers reached the Men's College World Series for the first time in program history, sweeping through the Morgantown Regional and the Cal Poly Super Regional, and tonight's game against North Carolina airs from Omaha, Nebraska.",
-        "sources": [
-          {
-            "source": "KDKA",
-            "title": "How to watch tonight's West Virginia vs. North Carolina baseball game in the College World Series",
-            "url": "https://www.cbsnews.com/pittsburgh/news/how-to-watch-west-virginia-north-carolina-baseball-tonight-college-world-series/"
+            "source": "TribLive",
+            "title": "Many Pa. colleges aren’t properly training future teachers how to teach reading, report finds",
+            "url": "https://triblive.com/news/pennsylvania/many-pa-colleges-arent-properly-training-future-teachers-how-to-teach-reading-report-finds/"
           }
         ]
       }
@@ -345,8 +253,8 @@
     "events": [
       {
         "title": "Pennsylvania Firefly Festival in Tionesta",
-        "latest_developments": "The 14th annual festival runs June 26 and 27 in the Allegheny National Forest, and the guided nighttime firefly sightings have already sold out.",
-        "summary": "The Pennsylvania Firefly Festival celebrates the 15-plus firefly species that light the Allegheny National Forest each June, in Tionesta, Pennsylvania, about 100 miles north of Pittsburgh. The booked-up nocturnal tours are gone, but free daytime nature exhibits, music, and firefly-themed happenings remain open on June 26 and 27.",
+        "latest_developments": "The festival, June 26 and 27, opens free daytime programming even as its guided nocturnal firefly sightings have sold out.",
+        "summary": "The 14th annual Pennsylvania Firefly Festival runs Friday and Saturday, June 26 and 27, in Tionesta, in the Allegheny National Forest, about 100 miles north of Pittsburgh. The guided nighttime viewings are booked, though free daytime nature exhibits, music, and activities remain open. The forest holds at least 15 firefly species, all glowing this time of year.",
         "sources": [
           {
             "source": "NEXTpittsburgh Events",
@@ -354,28 +262,42 @@
             "url": "https://nextpittsburgh.com/environment/this-firefly-festival-about-100-miles-from-pittsburgh-sells-out-every-year/"
           }
         ]
-      },
+      }
+    ],
+    "around_teams": [
       {
-        "title": "Honeck Extends Pittsburgh Symphony Tenure",
-        "latest_developments": "Manfred Honeck signed an extension that will carry his music directorship of the Pittsburgh Symphony Orchestra to 25 years.",
-        "summary": "Honeck, the Austrian conductor who has led the Pittsburgh Symphony since 2008 and built its international reputation, will stay through a quarter-century at the podium under the new deal, one of the longest such partnerships in American orchestras.",
+        "title": "Oneil Cruz Out Four to Six Weeks",
+        "latest_developments": "The Pirates expect Oneil Cruz to miss four to six weeks and have recalled Esmerlyn Valdez to fill the roster spot.",
+        "summary": "Cruz's absence pulls a power bat from the Pirates lineup. Valdez gets the call-up to cover the opening.",
         "sources": [
           {
-            "source": "Post-Gazette Music",
-            "title": "The million-dollar maestro: Manfred Honeck extends contract with Pittsburgh Symphony to 25 years",
-            "url": "https://www.post-gazette.com/ae/music/2026/06/10/manfred-honeck-pso-contract/stories/202606100041"
+            "source": "Post-Gazette Pirates",
+            "title": "With Oneil Cruz expected to miss 4-6 weeks, the Pirates have recalled Esmerlyn Valdez",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/11/oneil-cruz-injury-timeline-endy-rodriguez-esmerlyn-valdez/stories/202606110064"
           }
         ]
       },
       {
-        "title": "App Maps Pittsburgh's Film Locations",
-        "latest_developments": "The PastFinders app now guides users to spots where movies such as 'The Dark Knight Rises' filmed downtown.",
-        "summary": "A self-guided walking tour through the PastFinders app lets visitors stand on the exact downtown Pittsburgh sites used in major films, a free-roaming thing to do for movie fans across the city.",
+        "title": "Skenes Urges Players to Dig In on Labor Fight",
+        "latest_developments": "Paul Skenes, at the center of MLB's labor battle, said the players need to dig in ahead of a possible work stoppage.",
+        "summary": "The Post-Gazette laid out how the Pirates ace views the fight over payroll, a salary cap, and the next collective bargaining agreement. Skenes argues players should hold firm against the owners.",
         "sources": [
           {
-            "source": "Post-Gazette Arts & Entertainment",
-            "title": "You could be standing right where 'The Dark Knight Rises' was filmed in Downtown",
-            "url": "https://www.post-gazette.com/ae/movies/2026/06/11/pittsburgh-film-tour-app-pastfinders/stories/202605290043"
+            "source": "Post-Gazette Pirates",
+            "title": "Why Paul Skenes, at the center of MLB's labor battle, believes the players need to dig in",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/13/mlb-labor-payroll-skenes-nutting-cba-mlbpa-manfred/stories/202606130024"
+          }
+        ]
+      },
+      {
+        "title": "Ten Takeaways on McCarthy's Steelers",
+        "latest_developments": "The Post-Gazette distilled 10 things it learned about Mike McCarthy and the Steelers during spring workouts, spanning Aaron Rodgers, Joey Porter Jr., DK Metcalf, and the backfield.",
+        "summary": "The team wrapped its 2026 offseason program this week. The lessons cover the new offense under McCarthy, the quarterback room, and roster competition heading toward training camp at Saint Vincent College.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "10 things we learned about Mike McCarthy and the Steelers during spring workouts",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/12/nfl-offseason-news-rodgers-mccarthy-porter-metcalf-dowdle-bernard/stories/202606120049"
           }
         ]
       }
@@ -385,25 +307,25 @@
         "author": "Ed Zitron",
         "title": "Premium: The Silicon Valley Bubble (Part 1)",
         "url": "https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-1/",
-        "summary": "Zitron argues the AI era is ending as OpenAI and Anthropic file to go public, framing the IPOs as a race for exit liquidity by two companies that burn billions a year with no path to profit."
+        "summary": "Zitron argues Silicon Valley's AI era is ending, reading OpenAI's and Anthropic's moves to go public as a scramble for exit liquidity by companies that burn billions a year with no path to profitability."
       },
       {
         "author": "Stratechery",
-        "title": "Fable 5, Anthropic Alignment, AI Tiers",
-        "url": "https://stratechery.com/2026/fable-5-anthropic-alignment-ai-tiers/",
-        "summary": "Thompson examines Fable 5 as the public version of Mythos, judging it highly capable while warning that its release sets troubling new precedents around alignment and the tiering of AI models."
+        "title": "An Interview with Ben Bajarin About Apple, AI, and Compute",
+        "url": "https://stratechery.com/2026/an-interview-with-ben-bajarin-about-apple-ai-and-compute/",
+        "summary": "Ben Thompson interviews Ben Bajarin on Apple's WWDC, its AI strategy, and the state of the AI compute industry."
       },
       {
         "author": "Cal Newport",
-        "title": "Why Isn't AI Taking Our Jobs?",
+        "title": "Why Isn’t AI Taking Our Jobs?",
         "url": "https://calnewport.com/why-isnt-ai-taking-our-jobs/",
-        "summary": "Newport questions the standard comparison between AI and industrial automation, arguing that knowledge work has not collapsed the way AI leaders predicted and probing why their job-loss forecasts have not borne out."
+        "summary": "Newport questions why AI has yet to eliminate jobs the way industrial automation did, challenging the analogy AI leaders draw between their technology and the machines that replaced human brawn."
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-14 14:47 EDT",
-    "items_considered": 20,
+    "generated_at": "2026-06-14 15:46 EDT",
+    "items_considered": 16,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {
@@ -425,7 +347,11 @@
         "Google Online Security Blog",
         "Cisco Talos",
         "Graham Cluley",
-        "Microsoft Security Blog"
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media"
       ],
       "pittsburgh": [
         "TribLive",
@@ -453,6 +379,14 @@
         "Post-Gazette Music",
         "NEXTpittsburgh Events",
         "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
       ],
       "reading": [
         "Ed Zitron",
