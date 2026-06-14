@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>infosecfollow — 2026-06-14</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0 auto; padding: 1.25rem 1rem 3rem; max-width: 44rem;
+         font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+         font-size: 15px; line-height: 1.6; overflow-wrap: break-word;
+         background: #fdfdfa; color: #1c1c1a; }
+  @media (prefers-color-scheme: dark) { body { background: #161614; color: #d8d8d2; } }
+  header h1 { font-size: 1.3rem; margin: 0; letter-spacing: 0.04em; }
+  header p, footer { font-size: 0.85rem; opacity: 0.75; }
+  hr { border: 0; border-top: 1px solid currentColor; opacity: 0.25; margin: 1.5rem 0; }
+  h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em;
+       margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
+  h3 { font-size: 1rem; margin: 1.75rem 0 0.25rem; }
+  ul { padding-left: 1.25rem; margin: 0.5rem 0; }
+  li { margin: 0.4rem 0; }
+  p { margin: 0.5rem 0; }
+  a { color: inherit; }
+  .updated { font-style: italic; }
+  details.more summary { cursor: pointer; opacity: 0.7; font-size: 0.85rem; }
+  details.more[open] summary { margin-bottom: 0.25rem; }
+  .tags { font-size: 0.8rem; opacity: 0.7; }
+  .sources { font-size: 0.85rem; margin-top: 0.4rem; }
+  .sources a { overflow-wrap: anywhere; }
+  .headline { font-size: 1.05rem; font-weight: bold; margin-top: 1rem; }
+  nav { font-size: 0.85rem; margin-top: 0.25rem; }
+  pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
+        font-family: inherit; font-size: inherit; }
+  .team { font-weight: bold; margin: 1rem 0 0.1rem; }
+  .gameline { margin: 0.35rem 0 0; }
+  .lbl { opacity: 0.6; }
+  .sub { opacity: 0.65; margin: 0.1rem 0 0 1.4em; }
+  a.game { color: #9a6f00; font-weight: bold; text-underline-offset: 2px;
+           overflow-wrap: anywhere; }
+  ul.headlines { margin: 0.25rem 0 0; }
+  @media (prefers-color-scheme: dark) { a.game { color: #ffd24a; } }
+  .index { font-size: 0.85rem; opacity: 0.85; margin: 0.75rem 0; }
+  .index a { margin-right: 0.25rem; }
+  .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.7; }
+  @media (prefers-color-scheme: dark) {
+    .up { color: #5dd48f; } .down { color: #ff8a80; }
+  }
+  h3.area { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
+            opacity: 0.75; margin: 2rem 0 0; }
+  h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; }
+</style>
+</head>
+<body>
+<header>
+<h1><a href="../index.html" style="text-decoration:none">infosecfollow</a></h1>
+<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>
+<nav>Sunday, June 14, 2026 &middot; <a href="index.html">archive</a> &middot; <a href="2026-06-14-1158.txt">plain text</a></nav>
+</header>
+<p class="headline">Splunk patched a 9.8-severity hole that hands unauthenticated attackers code execution on the monitoring platform security teams lean on, the freshest danger on a day filled with AI-governance fights and self-inflicted data leaks.</p>
+<nav class="index">Jump to: <a href="#trends">Emerging Trends</a> &middot; <a href="#security">Security</a> &middot; <a href="#business">Business and Politics</a> &middot; <a href="#pittsburgh">Pittsburgh</a> &middot; <a href="#sports">Sports</a> &middot; <a href="#reading">Reading</a> &middot; <a href="#markets">Markets</a></nav>
+<hr>
+<h2 id="trends">Emerging Trends</h2>
+<ul>
+<li><strong>Pre-Auth RCE:</strong> Critical unauthenticated code-execution flaws keep landing in core enterprise software, with Splunk, Oracle PeopleSoft, and Check Point VPN all letting attackers in before any login.</li>
+<li><strong>AI Governance:</strong> Policymakers and vendors scramble to govern AI, from Senator Sanders&#x27;s sovereign-wealth proposal to Washington&#x27;s export curbs on Anthropic to Microsoft&#x27;s new AI incident-response playbook.</li>
+<li><strong>Long Dormancy:</strong> Defenders keep uncovering flaws and intruders that sat undisturbed for a decade, including phpBB&#x27;s authentication bypass and Velvet Ant&#x27;s grip on Linux logins.</li>
+<li><strong>Human Error:</strong> Self-inflicted exposure rivals hacking, as a redaction slip leaked Argentina&#x27;s World Cup passports and fraudsters seeded fake filings into Maine&#x27;s breach portal.</li>
+<li><strong>Enforcement Wins:</strong> Law enforcement pressed cybercrime hard, with the FBI dismantling the Outsider phishing service, a Conti operator pleading guilty, and Europol felling the AudiA6 laundering network.</li>
+</ul>
+<h2 id="security">Security</h2>
+<h3 class="area">Vulnerabilities and Exploits</h3>
+<h4>1. Splunk Enterprise Pre-Auth Code Execution Flaw</h4>
+<p class="tags">[patch, rce]</p>
+<p class="updated">Latest developments: Splunk shipped patches for CVE-2026-20253, a 9.8-severity flaw that lets an unauthenticated attacker create or truncate arbitrary files and run code on Splunk Enterprise.</p>
+<details class="more"><summary>read more</summary><p>The bug hits Splunk Enterprise versions below 10.2.4 and 10.0.7, where an unauthenticated user performs arbitrary file operations that escalate to remote code execution. Splunk runs at the heart of many security operations centers, so a compromise hands attackers the monitoring platform itself. Administrators should upgrade to 10.2.4 or 10.0.7 at once and lock down management-interface exposure.</p></details>
+<p class="sources">Sources: <a href="https://thehackernews.com/2026/06/critical-splunk-enterprise-flaw-lets.html">The Hacker News</a></p>
+<h3 class="area">Data Breaches</h3>
+<h4>2. Hack Cover-Up Claims Hit IBM and AT&amp;T</h4>
+<p class="tags">[breach, policy]</p>
+<p class="updated">Latest developments: SecurityWeek reported accusations that IBM and AT&amp;T concealed past hacks from the public, alongside news that Google cut staff from its security organization.</p>
+<details class="more"><summary>read more</summary><p>The roundup surfaces claims that IBM and AT&amp;T hid security incidents from customers and regulators, conduct that breach-notification laws penalize. Google laid off members of its security team even as attack surfaces widen. The same dispatch flagged flat industrial-control-system exposure and a fresh Microsoft incident-response playbook for AI.</p></details>
+<p class="sources">Sources: <a href="https://www.securityweek.com/in-other-news-google-security-layoffs-audia6-takedown-400-million-coupang-fine/">SecurityWeek</a></p>
+<h4>3. Argentina World Cup Squad Passport Leak</h4>
+<p class="tags">[breach, privacy]</p>
+<p class="updated">Latest developments: A botched document redaction exposed the passport numbers of Lionel Messi and the rest of Argentina&#x27;s World Cup squad before the tournament kicked off.</p>
+<details class="more"><summary>read more</summary><p>Someone published a team document without properly redacting it, spilling players&#x27; passport details to anyone who looked. No hacker touched the file; the leak came from ordinary human error, a recurring source of data exposure. The episode shows how a redaction slip exposes sensitive identity data as reliably as any breach.</p></details>
+<p class="sources">Sources: <a href="https://www.bitdefender.com/en-us/blog/hotforsecurity/privacy-own-goal-world-cup-blunder-leaks-lionel-messis-passport-details">Graham Cluley</a></p>
+<h3 class="area">Policy and Regulation</h3>
+<h4>4. Sanders Floats an AI Sovereign Wealth Fund</h4>
+<p class="tags">[policy, ai]</p>
+<p class="updated">Latest developments: Senator Bernie Sanders, in a New York Times essay, proposed an AI sovereign wealth fund and warned that a handful of billionaires steer artificial intelligence with little democratic input.</p>
+<details class="more"><summary>read more</summary><p>Sanders argues that the people building and profiting from AI wield power that escapes public accountability, and he wants a sovereign-wealth structure to spread the gains. Security commentator Bruce Schneier amplified the question through the lens of his book on rewiring democracy. The proposal widens a policy fight over who governs AI, days after Washington forced Anthropic to pull two models over export concerns.</p></details>
+<p class="sources">Sources: <a href="https://www.schneier.com/blog/archives/2026/06/bernie-sanders-ai-sovereign-wealth-fund-plan.html">Schneier on Security</a></p>
+<h3 class="area">Threat Detection and Forensics</h3>
+<h4>5. New MacOS Tahoe Forensic Artifact</h4>
+<p class="tags">[forensics, macos]</p>
+<p class="updated">Latest developments: Palo Alto&#x27;s Unit 42 disclosed a previously unknown macOS Tahoe 26 artifact that records a user&#x27;s menu selections across the operating system.</p>
+<details class="more"><summary>read more</summary><p>The artifact logs which menu items a user picks system-wide, giving investigators a fresh timeline of on-device activity. Forensic analysts and incident responders can mine it to reconstruct what someone actually did on a Mac. Defenders gain a new evidence source, and the same trail could expose user behavior in ways privacy-minded owners never anticipate.</p></details>
+<p class="sources">Sources: <a href="https://unit42.paloaltonetworks.com/new-macos-artifact-discovered/">Unit 42 (Palo Alto)</a></p>
+<h2 id="business">Business and Politics</h2>
+<ul>
+<li>Israel struck Hezbollah targets in Beirut&#x27;s outskirts after drone attacks, and Iran threatened to abandon talks, endangering a near-final deal to end the U.S.-Iran war; President Trump rebuked Israel for a response he called disproportionate. <span class="sources">(<a href="https://www.wsj.com/world/middle-east/iran-threatens-to-pull-out-of-talks-after-israel-strikes-beiruts-outskirts-d0390e22">WSJ World News</a> &middot; <a href="https://www.ft.com/content/726f4afe-c3ff-4ec0-bfc9-b572b419e11f">FT World</a>)</span></li>
+<li>SpaceX completed the largest IPO in history, and do-it-yourself traders bought $118 million of the stock on day one, steadying shaky markets; the deal capped a record Wall Street fundraising run alongside Anthropic and Alphabet financings. <span class="sources">(<a href="https://www.wsj.com/finance/stocks/spacexs-retail-powered-debut-helps-steady-shaky-markets-2e52cbee?mod=rss_markets_main">WSJ Markets</a> &middot; <a href="https://www.ft.com/content/db05efcb-9035-4d55-aca4-7253656a1c06">FT Markets</a>)</span></li>
+<li>U.S. headline annual inflation reached 4.2 percent, the highest since April 2023, raising the stakes for Kevin Warsh&#x27;s first meeting this week as Federal Reserve Chair. <span class="sources">(<a href="https://www.ft.com/content/20509c5d-e995-4670-83f5-d3d705671ee1">FT Markets</a> &middot; <a href="https://www.ft.com/content/c17424f0-244e-45f4-b1d7-a0ffcebc4cf0">FT World</a>)</span></li>
+<li>China launched a cross-border digital payments platform to challenge the dollar, backed by the central banks of Hong Kong, Thailand, the United Arab Emirates, and Saudi Arabia. <span class="sources">(<a href="https://www.ft.com/content/76de5ca6-9ae8-49ae-a0cb-64d09040f327">FT Markets</a>)</span></li>
+</ul>
+<h2 id="pittsburgh">Pittsburgh</h2>
+<h3>Weather</h3>
+<p>Today: Chance Showers And Thunderstorms, high 84F.</p>
+<p>Tonight: Showers And Thunderstorms then Mostly Cloudy, low 56F.</p>
+<p>Monday: Mostly Sunny, high 71F.</p>
+<h3>Business</h3>
+<ul>
+<li>Alcosan began a billion-dollar Ohio River tunnel, the first piece of a 10-year program to overhaul Pittsburgh&#x27;s sewer and stormwater system and reshape the region&#x27;s waterways. <span class="sources">(<a href="https://www.post-gazette.com/local/region/2026/06/14/alcosan-ohio-river-tunnel-pittsburgh-water/stories/202606120073">Pittsburgh Post-Gazette</a>)</span></li>
+<li>Allegheny County weighs a paid parental leave mandate, and area businesses warn it would raise their costs, pressing concerns before the policy advances. <span class="sources">(<a href="https://www.post-gazette.com/news/health/2026/06/14/paid-parental-leave-allegheny-county/stories/202606110032">Pittsburgh Post-Gazette</a>)</span></li>
+<li>Pennsylvania issued a quarantine order on farm animals as the New World screwworm, a flesh-eating livestock parasite, spreads through southwestern states, reviving a threat the U.S. had contained for decades. <span class="sources">(<a href="https://www.post-gazette.com/business/pittsburgh-company-news/2026/06/14/new-world-screwworm-quarantine-animals/stories/202606140069">Pittsburgh Post-Gazette</a>)</span></li>
+</ul>
+<h3>Around Town</h3>
+<ul>
+<li>A $10.57 million project will restrict traffic on a Hampton Township roadway for more than a month, delivering drainage upgrades, milling, paving, and base repairs. <span class="sources">(<a href="https://www.wpxi.com/news/local/improvement-project-restrict-traffic-hampton-township-roadway-over-month/FQKY3MOKDRCC3PTPXYXSYFNHBU/">WPXI</a>)</span></li>
+<li>Nara Organics recalled baby formula sold at Target after a multistate infant botulism outbreak; the rare illness strikes babies under age 1 when ingested spores produce a toxin in the gut. <span class="sources">(<a href="https://www.wpxi.com/news/local/nara-organics-recalls-baby-formula-sold-target-after-multistate-infant-botulism-outbreak/FAAJXB4MHRG7TERVLOJ5N6RTRY/">WPXI</a>)</span></li>
+<li>Pennsylvania crime victim services face funding cuts as white-collar prosecutions dropped under the Trump administration, shrinking the fee revenue that pays for them. <span class="sources">(<a href="https://www.post-gazette.com/news/social-services/2026/06/14/victim-services-pennsylvania/stories/202606110006">Pittsburgh Post-Gazette</a>)</span></li>
+<li>Scattered thunderstorms hit western Pennsylvania this afternoon, with damaging winds the main hazard between 3 and 8 p.m.; the rain clears east by 9 or 10 p.m. as drier, cooler air follows. <span class="sources">(<a href="https://www.wtae.com/article/impact-day-scattered-afternoon-thunderstorms-for-western-pa/71580602">WTAE</a>)</span></li>
+</ul>
+<h3>Events</h3>
+<ul>
+<li>West Virginia&#x27;s baseball team, winners of six straight and fresh off the program&#x27;s first-ever tournament victory, plays North Carolina tonight in the Men&#x27;s College World Series in Omaha. <span class="sources">(<a href="https://www.cbsnews.com/pittsburgh/news/how-to-watch-west-virginia-north-carolina-baseball-tonight-college-world-series/">KDKA</a>)</span></li>
+</ul>
+<h2 id="sports">Sports</h2>
+<p class="team">Pirates (36-35)</p>
+<p class="gameline"><span class="lbl">Sat Jun 13 &middot;</span> <a class="game" href="https://plaintextsports.com/mlb/2026-06-13/mia-pit">Marlins 2 · Pirates 3 · Final</a></p>
+<p class="sub">Spencer Horwitz hit by pitch with the bases loaded to lift the Pirates past the Marlins, 3-2</p>
+<p class="gameline"><span class="lbl">Up Next &middot;</span> <a class="game" href="https://plaintextsports.com/mlb/2026-06-14/mia-pit">Marlins @ Pirates</a> <span class="lbl">&middot; Sun Jun 14, 12:15 PM</span></p>
+<ul class="headlines">
+<li>Marlins beat the Pirates 8-3 for their 6th straight victory</li>
+</ul>
+<h2 id="reading">Reading</h2>
+<ul>
+<li><strong>Ed Zitron</strong> &mdash; <a href="https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-1/">Premium: The Silicon Valley Bubble (Part 1)</a>. Zitron argues the AI era is ending, pointing to OpenAI and Anthropic both filing to go public as a race for exit liquidity despite burning billions a year with no path to profitability.</li>
+<li><strong>Stratechery</strong> &mdash; <a href="https://stratechery.com/2026/fable-5-anthropic-alignment-ai-tiers/">Fable 5, Anthropic Alignment, AI Tiers</a>. Thompson examines Fable 5, the public version of Mythos, finding it very capable yet setting troubling new precedents around alignment and tiered AI access.</li>
+<li><strong>Cal Newport</strong> &mdash; <a href="https://calnewport.com/why-isnt-ai-taking-our-jobs/">Why Isn’t AI Taking Our Jobs?</a>. Newport challenges the AI industry&#x27;s comparison of its technology to industrial automation, asking why AI has yet to eliminate cognitive work the way machines replaced manual labor.</li>
+</ul>
+<h2 id="markets">Markets</h2>
+<p class="tags">weekly average, change vs prior week</p>
+<pre class="markets">S&amp;P 500     7,377.03  <span class="down">▼ -2.2%</span>
+Dow        50,725.58  <span class="down">▼ -0.7%</span>
+Nasdaq     25,695.30  <span class="down">▼ -3.8%</span>
+WTI crude      88.42  <span class="down">▼ -5.0%</span>
+EUR/USD       1.1550  <span class="down">▼ -0.4%</span>
+GBP/USD       1.3363  <span class="down">▼ -0.6%</span>
+USD/JPY       160.31  <span class="up">▲ +0.3%</span></pre>
+<hr>
+<footer>
+<p>Generated 2026-06-14 11:58 EDT. Sources: 18 security feeds; 9 Pittsburgh feeds; the Wall Street Journal, the Economist, and the Financial Times; and Ed Zitron, Stratechery, Cal Newport. Market data from Yahoo Finance (weekly averages), weather from the National Weather Service, scores from ESPN.</p>
+<p>Summaries are AI-generated from the linked reporting; verify details at the sources.</p>
+</footer>
+</body></html>
