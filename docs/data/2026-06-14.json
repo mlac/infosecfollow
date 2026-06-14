@@ -1,30 +1,99 @@
 {
   "date": "2026-06-14",
-  "headline": "The FBI dismantled a China-based AI-powered phishing service spanning a million URLs, as Section 702 surveillance authority neared its first-ever lapse.",
+  "headline": "Unauthenticated remote-code flaws tore through Splunk and Oracle PeopleSoft as Washington tightened its grip on which humans may touch frontier AI.",
   "emerging_trends": [
     {
-      "subject": "AI Weaponization",
-      "text": "Criminals keep bending mainstream models to crime, with the Outsider network steering Google's Gemini to mass-produce scam texts behind a phishing-as-a-service kit."
+      "subject": "Unauthenticated RCE",
+      "text": "Critical 9.8-severity flaws in Splunk Enterprise and Oracle PeopleSoft both let attackers run code with no login, putting enterprise data stores one request away from compromise."
     },
     {
-      "subject": "Dormant Flaws",
-      "text": "Two separate disclosures—a ten-year phpBB authentication bypass and Velvet Ant's decade inside Linux login software—show how long a single weakness can sit unnoticed."
+      "subject": "AI Governance",
+      "text": "The Anthropic export order and Bernie Sanders's sovereign-wealth proposal show governments moving to control who builds, owns, and accesses frontier AI."
     },
     {
-      "subject": "Supply Chain",
-      "text": "npm's move to stop running dependency scripts by default answers the same threat that hijacked hundreds of Arch Linux AUR packages this week."
+      "subject": "Weaponized AI",
+      "text": "The FBI takedown of the Gemini-powered Outsider phishing service confirms criminals now wire large language models directly into mass fraud infrastructure."
     },
     {
-      "subject": "AI Tooling",
-      "text": "Defenders now lean on frontier models for the work, with a researcher using Claude Opus 4.8 to find a critical Zcash flaw and Microsoft publishing an AI incident-response playbook."
+      "subject": "Self-Inflicted Exposure",
+      "text": "A botched redaction of Argentina's World Cup passports shows human error still leaks sensitive data faster than any intruder."
     }
   ],
   "topics": [
     {
-      "title": "FBI Dismantles Outsider AI Phishing Service",
+      "title": "Critical Splunk Enterprise Code-Execution Flaw",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Splunk shipped emergency fixes for CVE-2026-20253, a 9.8-severity bug that lets an unauthenticated attacker create or truncate arbitrary files and run code remotely.",
+      "summary": "The flaw affects Splunk Enterprise versions below 10.2.4 and 10.0.7. Because Splunk ingests an organization's logs and security telemetry, a compromise hands attackers both the crown-jewel data and a blind spot in monitoring. Administrators should upgrade to a patched build immediately and review file-system access on exposed instances.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Critical Splunk Enterprise Flaw Lets Attackers Run Code Without Authentication",
+          "url": "https://thehackernews.com/2026/06/critical-splunk-enterprise-flaw-lets.html"
+        }
+      ]
+    },
+    {
+      "title": "ShinyHunters PeopleSoft Zero-Day Hits Universities",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Fresh reporting shows the Oracle PeopleSoft flaw CVE-2026-35273 fell hardest on American universities, with ShinyHunters siphoning gigabytes of records from hundreds of organizations.",
+      "summary": "The missing-authentication bug in Oracle's PeopleSoft ERP software lets attackers reach data with no credentials. Higher-education institutions, heavy PeopleSoft users, absorbed the brunt as the gang exfiltrated student and staff records at scale. CISA already lists the flaw as known-exploited; affected schools should patch and hunt their logs for bulk data pulls.",
+      "tags": [
+        "zero-day",
+        "breach",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "Dark Reading",
+          "title": "ShinyHunters Uses Oracle Zero-Day to Rampage Higher Ed",
+          "url": "https://www.darkreading.com/vulnerabilities-threats/shinyhunters-oracle-zero-day-higher-ed"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "PeopleSoft 0-day affecting hundreds of organizations steals gigabytes of data",
+          "url": "https://arstechnica.com/security/2026/06/peoplesoft-0-day-affecting-hundreds-of-organizations-steals-gigabytes-of-data/"
+        }
+      ]
+    },
+    {
+      "title": "Anthropic Disputes Foreign-Access Ban",
+      "area": "AI Security",
+      "latest_developments": "Anthropic publicly pushed back on the Trump administration's order, calling the cited jailbreak narrow and the underlying capability widely available elsewhere, even as it complied and pulled Fable 5 and Mythos 5 worldwide.",
+      "summary": "The government directive, delivered the evening of June 13, ordered Anthropic to block all foreign nationals from its two most advanced models, citing national security. Rather than partition users, the company suspended both models globally for everyone. Anthropic frames the move as export-control overreach against a single vendor; the episode signals how aggressively Washington will police access to frontier systems.",
+      "tags": [
+        "policy",
+        "ai",
+        "export-controls"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "US Gov asks Anthropic to ban 'foreign national' access to Fable, Mythos",
+          "url": "https://www.bleepingcomputer.com/news/security/us-gov-asks-anthropic-to-ban-foreign-national-access-to-fable-mythos/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Anthropic Says It Has Taken Its Latest AI Models Offline to Comply With New Export Controls",
+          "url": "https://www.securityweek.com/anthropic-says-it-has-taken-its-latest-ai-models-offline-to-comply-with-new-export-controls/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "U.S. Orders Anthropic to Suspend Fable 5 and Mythos 5 Access for Foreign Nationals",
+          "url": "https://thehackernews.com/2026/06/us-orders-anthropic-to-suspend-fable-5.html"
+        }
+      ]
+    },
+    {
+      "title": "FBI Dismantles Outsider Phishing Service",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "The FBI, Google, and Lumen's Black Lotus Labs seized the infrastructure behind Outsider Enterprise, escalating beyond Google's civil suit of last week to a coordinated takedown.",
-      "summary": "Outsider Enterprise sold phishing-as-a-service from China, weaponizing Google's Gemini AI to churn out scam text messages and running thousands of sites across roughly a million URLs to harvest credit card numbers and passwords. The FBI, working with Google and Black Lotus Labs, took down the operation. The action builds on Google's lawsuit naming the same network. Defenders should treat AI-generated smishing as a maturing commodity threat.",
+      "latest_developments": "Newly disclosed scale figures put the FBI, Google, and Black Lotus Labs takedown of Outsider Enterprise at roughly a million malicious URLs across thousands of phishing sites.",
+      "summary": "Outsider Enterprise ran a Chinese phishing-as-a-service kit that weaponized Google's Gemini to mass-produce scam pages harvesting credit-card data and passwords. The coordinated seizure follows Google's earlier civil suit against the same network. The million-URL footprint shows how AI now lets a single operation industrialize credential theft.",
       "tags": [
         "phishing",
         "ai",
@@ -44,104 +113,36 @@
       ]
     },
     {
-      "title": "Ex-IT Employee Jailed for Attacking School District",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "A federal court sentenced a former IT employee of an Iowa school district to 21 months in prison for a prolonged attack on his old employer.",
-      "summary": "The former insider mounted a sustained cyberattack against the district after leaving. He deleted accounts, disrupted classroom operations, and caused tens of thousands of dollars in damage. The sentence underscores the persistent risk that departing administrators with lingering access pose. Organizations should revoke credentials promptly when staff leave.",
-      "tags": [
-        "insider",
-        "cybercrime"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Ex-school district employee jailed for hacks on former employer",
-          "url": "https://www.bleepingcomputer.com/news/security/ex-school-district-employee-jailed-for-hacks-on-former-employer/"
-        }
-      ]
-    },
-    {
-      "title": "Section 702 Surveillance Power Set to Lapse",
+      "title": "Sanders Pitches AI Sovereign Wealth Fund",
       "area": "Policy and Regulation",
-      "latest_developments": "A legislative deadlock pushed Section 702 of the Foreign Intelligence Surveillance Act toward its first lapse since Congress passed it in 2008.",
-      "summary": "Section 702 lets US intelligence agencies collect the communications of foreign targets without a warrant, a power critics say sweeps in Americans' data along the way. With Congress unable to agree on reauthorization, the authority now faces an expiration that has never happened before. Agencies that rely on the program for foreign-intelligence collection confront an abrupt gap in capability.",
+      "latest_developments": "Senator Bernie Sanders used a New York Times op-ed to propose an AI sovereign wealth fund, arguing the public should share in the wealth a handful of billionaires now stand to capture.",
+      "summary": "Sanders's piece asks whether a few AI-owning billionaires should determine humanity's future with little democratic input. Security commentator Bruce Schneier endorsed the framing, tying it to debates over concentrated control of powerful systems. The proposal lands amid sharpening fights over how governments tax, fund, and govern AI development.",
       "tags": [
         "policy",
-        "surveillance"
-      ],
-      "sources": [
-        {
-          "source": "The Record",
-          "title": "Major US surveillance program poised to lapse after legislative deadlock",
-          "url": "https://therecord.media/major-us-surveillance-program-set-to-lapse-702-fisa"
-        }
-      ]
-    },
-    {
-      "title": "NPM 12 Halts Dependency Install Scripts",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "npm announced that version 12 will stop running dependency install scripts by default, requiring an explicit allowlist to permit them.",
-      "summary": "Malicious packages routinely abuse install scripts to run code the instant a developer pulls a dependency, the same trick that poisoned hundreds of Arch Linux AUR packages this week. The change forces developers to opt in before any dependency script executes. It blunts one of the most reliable supply-chain vectors. Teams should plan for build pipelines that previously depended on automatic script execution.",
-      "tags": [
-        "supply chain",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "NPM 12 Will Change Script Execution Behavior to Prevent Supply Chain Attacks",
-          "url": "https://www.securityweek.com/npm-12-will-change-script-execution-behavior-to-prevent-supply-chain-attacks/"
-        }
-      ]
-    },
-    {
-      "title": "phpBB Fixes Decade-Old Authentication Bypass",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Maintainers patched a phpBB authentication bypass that sat in the forum software for ten years and let an attacker log in as any user, administrators included.",
-      "summary": "phpBB powers countless online community forums. The flaw allowed an attacker to assume any account, including administrator accounts, by sidestepping the login check entirely. Maintainers have shipped a fix. Forum operators should update immediately, since the bug grants full control of vulnerable boards.",
-      "tags": [
-        "vulnerability",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "phpBB forum fixes auth bypass bug lurking for a decade",
-          "url": "https://www.bleepingcomputer.com/news/security/phpbb-forum-fixes-auth-bypass-bug-lurking-for-a-decade/"
-        }
-      ]
-    },
-    {
-      "title": "Critical Zcash Orchard Flaw Found and Fixed",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researcher Taylor Hornby disclosed a critical vulnerability he found in Zcash's Orchard privacy pool on May 29 using Claude Opus 4.8, and the Zcash team has patched it.",
-      "summary": "Zcash shields transactions with zero-knowledge proofs, and Orchard, introduced in 2022, is its most advanced shielded pool. The Zcash team hired Hornby to hunt exactly this class of bug, and he surfaced one quickly. The team fixed the flaw before any known exploitation. Holders of the cryptocurrency should update their software.",
-      "tags": [
-        "vulnerability",
-        "cryptocurrency"
+        "ai"
       ],
       "sources": [
         {
           "source": "Schneier on Security",
-          "title": "Critical Zcash Vulnerability Found and Fixed",
-          "url": "https://www.schneier.com/blog/archives/2026/06/critical-zcash-vulnerability-found-and-fixed.html"
+          "title": "Bernie Sanders' AI Sovereign Wealth Fund Plan",
+          "url": "https://www.schneier.com/blog/archives/2026/06/bernie-sanders-ai-sovereign-wealth-fund-plan.html"
         }
       ]
     },
     {
-      "title": "Maine Pulls Breach Portal After Fake Filings",
+      "title": "World Cup Document Leaks Messi's Passport",
       "area": "Data Breaches",
-      "latest_developments": "Maine took its public data breach reporting portal offline after fraudsters published fake breach disclosures on the state's website.",
-      "summary": "Maine runs a portal where companies file the data breach notices that state law requires. Bad actors abused it to post fraudulent disclosures, eroding trust in an official source defenders and victims rely on. The state pulled the portal and began reviewing its procedures to prevent future abuse. The episode shows how open disclosure systems invite manipulation.",
+      "latest_developments": "A poorly redacted World Cup document exposed the passport numbers of Argentina's entire squad, Lionel Messi included, before the tournament kicked off.",
+      "summary": "No intruder caused this exposure; someone simply failed to black out sensitive fields before publishing the file. Passport numbers feed identity fraud and travel impersonation, making the slip a real risk for the players. The incident is a reminder that redaction failures leak high-value personal data as readily as any breach.",
       "tags": [
         "breach",
-        "policy"
+        "privacy"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "Maine disables data breach notification portal after fake disclosures",
-          "url": "https://www.bleepingcomputer.com/news/security/maine-disables-data-breach-notification-portal-after-fake-disclosures/"
+          "source": "Graham Cluley",
+          "title": "Privacy own-goal: World Cup blunder leaks Lionel Messi's passport details",
+          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/privacy-own-goal-world-cup-blunder-leaks-lionel-messis-passport-details"
         }
       ]
     }
@@ -191,9 +192,9 @@
     }
   ],
   "weather": [
-    "Today: Chance Showers And Thunderstorms, high 84F.",
+    "This Afternoon: Showers And Thunderstorms Likely, high 84F.",
     "Tonight: Showers And Thunderstorms then Mostly Cloudy, low 56F.",
-    "Monday: Mostly Sunny, high 71F."
+    "Monday: Partly Sunny, high 71F."
   ],
   "sports": [
     {
@@ -205,12 +206,18 @@
           "url": "https://plaintextsports.com/mlb/2026-06-13/mia-pit",
           "recap": "Spencer Horwitz hit by pitch with the bases loaded to lift the Pirates past the Marlins, 3-2",
           "result": "Marlins 2 · Pirates 3 · Final"
+        },
+        {
+          "date": "Sun Jun 14",
+          "url": "https://plaintextsports.com/mlb/2026-06-14/mia-pit",
+          "recap": "",
+          "result": "Marlins 4 · Pirates 1 · Top 8th"
         }
       ],
       "next": {
-        "matchup": "Marlins @ Pirates",
-        "when": "Sun Jun 14, 12:15 PM",
-        "url": "https://plaintextsports.com/mlb/2026-06-14/mia-pit"
+        "matchup": "Pirates @ Athletics",
+        "when": "Mon Jun 15, 9:40 PM",
+        "url": "https://plaintextsports.com/mlb/2026-06-15/pit-ath"
       },
       "headlines": [
         "Marlins beat the Pirates 8-3 for their 6th straight victory"
@@ -220,143 +227,155 @@
   "local": {
     "business_politics": [
       {
-        "text": "Israel struck Hezbollah targets on Beirut's outskirts in response to drone attacks, and Trump rebuked the strikes as disproportionate, warning they could unravel a deal to end the U.S.-Iran war that both sides had reached after a helicopter-crash escalation pushed them from renewed fighting to the cusp of a ceasefire.",
+        "title": "Iran Deal at Risk as Israel Strikes Beirut",
+        "latest_developments": "Tehran threatened to abandon talks and retaliate after Israel hit what it called a Hezbollah command center, and Trump ordered both sides to stand down hours before he expects to seal the Strait of Hormuz agreement Sunday.",
+        "summary": "The United States and Iran stand at the cusp of an accord that would end their war, reopen the Strait of Hormuz, and dismantle Iran's nuclear program in exchange for sanctions relief, after a helicopter-crash escalation pushed them from renewed fighting back toward a ceasefire. Israel's strike on Beirut's outskirts now threatens to unravel the deal, with oil prices and the wider energy shock hinging on whether the signing holds.",
         "sources": [
           {
             "source": "WSJ World News",
-            "title": "Trump Rebukes Israel After Beirut Strikes Threaten to Scuttle Iran Deal",
+            "title": "Trump Rebukes Israel Over Strike on Beirut",
             "url": "https://www.wsj.com/world/middle-east/iran-threatens-to-pull-out-of-talks-after-israel-strikes-beiruts-outskirts-d0390e22"
           },
           {
-            "source": "WSJ World News",
-            "title": "How the U.S. and Iran Turned From Renewed War to the Cusp of Peace",
-            "url": "https://www.wsj.com/world/middle-east/iran-war-peace-talks-what-happened-d033900f"
-          }
-        ]
-      },
-      {
-        "text": "U.S. headline inflation reached 4.2 percent, its highest reading since April 2023, days before Kevin Warsh chairs his first Federal Reserve meeting, where markets will gauge how the new chair balances persistent price pressure against political demands for lower rates.",
-        "sources": [
-          {
-            "source": "FT Markets",
-            "title": "Chart of the Week: US headline inflation matters to consumers",
-            "url": "https://www.ft.com/content/20509c5d-e995-4670-83f5-d3d705671ee1"
+            "source": "FT World",
+            "title": "Trump tells Israel and Hizbollah to 'stand down' as he pushes for Iran deal",
+            "url": "https://www.ft.com/content/ce9286fb-b37c-4113-9ec3-0464144c4977"
           },
           {
             "source": "FT World",
-            "title": "What should investors expect from Kevin Warsh's first Fed meeting?",
-            "url": "https://www.ft.com/content/c17424f0-244e-45f4-b1d7-a0ffcebc4cf0"
-          }
-        ]
-      },
-      {
-        "text": "SpaceX completed the largest IPO in history, with roughly $118 million of first-day retail buying helping steady jittery markets, part of a record fundraising wave that also drew Anthropic and Alphabet financings as the capital race behind artificial intelligence intensified.",
-        "sources": [
-          {
-            "source": "WSJ Markets",
-            "title": "SpaceX's Retail-Powered Debut Helps Steady Shaky Markets",
-            "url": "https://www.wsj.com/finance/stocks/spacexs-retail-powered-debut-helps-steady-shaky-markets-2e52cbee?mod=rss_markets_main"
-          },
-          {
-            "source": "FT World",
-            "title": "Wall Street digests record fundraising haul as AI race intensifies",
-            "url": "https://www.ft.com/content/db05efcb-9035-4d55-aca4-7253656a1c06"
-          }
-        ]
-      },
-      {
-        "text": "China launched a cross-border digital payments platform to challenge the dollar, backed by the central banks of Hong Kong, Thailand, the United Arab Emirates, and Saudi Arabia.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "China tees up digital payments system to compete with dollar",
-            "url": "https://www.ft.com/content/76de5ca6-9ae8-49ae-a0cb-64d09040f327"
+            "title": "Israel strikes Beirut, threatening to complicate push for Iran deal",
+            "url": "https://www.ft.com/content/726f4afe-c3ff-4ec0-bfc9-b572b419e11f"
           }
         ]
       }
     ],
     "business": [
       {
-        "text": "Alcosan has begun a billion-dollar tunnel beneath the Ohio River, the first piece of a 10-year program to overhaul the regional sewer system and curb overflows into Pittsburgh's waterways.",
+        "title": "LeMont Marks 66 Years on Mount Washington",
+        "latest_developments": "TribLive profiled the restaurant's longtime staff, who together count nearly 175 years of service.",
+        "summary": "LeMont, the fine-dining landmark perched on Mount Washington with a sweeping view of the city, has run for 66 years, its kitchen and floor crew anchoring one of Pittsburgh's enduring restaurants even as the skyline below it changed.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "A billion-dollar Ohio River tunnel is kicking off Alcosan's 10-year project to reshape Pittsburgh's waterways",
-            "url": "https://www.post-gazette.com/local/region/2026/06/14/alcosan-ohio-river-tunnel-pittsburgh-water/stories/202606120073"
+            "source": "TribLive",
+            "title": "At LeMont, nearly 175 years of combined service help define a landmark",
+            "url": "https://triblive.com/lifestyles/food-drink/at-lemont-nearly-175-years-of-combined-service-help-define-a-landmark/"
           }
         ]
       },
       {
-        "text": "Allegheny County is weighing a paid parental leave policy, and area businesses warn the cost could strain smaller employers.",
+        "title": "Single-Employer Towns Face Collapse Risk",
+        "latest_developments": "A TribLive editorial argues the loss of Spirit shows how small towns built around one employer cascade toward collapse when that company leaves.",
+        "summary": "Many Western Pennsylvania communities depend on a single dominant employer, and the editorial warns that when such a factory closes, the lost jobs ripple through tax revenue, local businesses, and population in a chain reaction that hollows out the town.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Why businesses are concerned about Allegheny County's proposed paid leave policy.",
-            "url": "https://www.post-gazette.com/news/health/2026/06/14/paid-parental-leave-allegheny-county/stories/202606110032"
+            "source": "TribLive",
+            "title": "Editorial: Spirit loss sets off domino effect",
+            "url": "https://triblive.com/opinion/editorial-spirit-loss-sets-off-domino-effect/"
           }
         ]
       },
       {
-        "text": "Pennsylvania ordered a quarantine on farm animals as the New World screwworm, a flesh-eating parasite, spreads through southwestern states and threatens livestock.",
+        "title": "Shadyside Victorian Listed After 150 Years",
+        "latest_developments": "Pittsburgh Magazine featured the listing of 719 Amberson Avenue, a home that hosted piano concerts for decades.",
+        "summary": "A Queen Anne Victorian built in 1885 at 719 Amberson Avenue in West Shadyside has come on the market after nearly 150 years of preservation, one of the neighborhood's longest-held historic houses.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Pa. issues quarantine order on farm animals, as wary states track screwworm cases in southwestern states",
-            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/06/14/new-world-screwworm-quarantine-animals/stories/202606140069"
+            "source": "Pittsburgh Magazine",
+            "title": "Decades of Piano Concerts Took Place in This Shadyside Home on Amberson Avenue",
+            "url": "https://www.pittsburghmagazine.com/hot-property-719-amberson-ave-shadyside/"
           }
         ]
       }
     ],
     "around_town": [
       {
-        "text": "Scattered thunderstorms will move through western Pennsylvania this afternoon, with damaging winds the main threat between 3 p.m. and 8 p.m. before drier, cooler air settles in overnight.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "Impact Day: Scattered afternoon thunderstorms for western PA",
-            "url": "https://www.wtae.com/article/impact-day-scattered-afternoon-thunderstorms-for-western-pa/71580602"
-          }
-        ]
-      },
-      {
-        "text": "A $10.57 million project will restrict traffic on a Hampton Township roadway for more than a month, covering drainage upgrades, milling, paving, and base repair.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Improvement project to restrict traffic on Hampton Township roadway for over a month",
-            "url": "https://www.wpxi.com/news/local/improvement-project-restrict-traffic-hampton-township-roadway-over-month/FQKY3MOKDRCC3PTPXYXSYFNHBU/"
-          }
-        ]
-      },
-      {
-        "text": "Nara Organics recalled baby formula sold at Target after a multistate infant botulism outbreak, an illness that strikes babies under a year old when ingested spores produce a toxin in the gut.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Nara Organics recalls baby formula sold at Target after multistate infant botulism outbreak",
-            "url": "https://www.wpxi.com/news/local/nara-organics-recalls-baby-formula-sold-target-after-multistate-infant-botulism-outbreak/FAAJXB4MHRG7TERVLOJ5N6RTRY/"
-          }
-        ]
-      },
-      {
-        "text": "Pennsylvania crime victim services face funding cuts as white-collar prosecutions dropped under the Trump administration, shrinking the fines and forfeitures that bankroll the programs.",
+        "title": "Severe Thunderstorm Watch Through Sundown",
+        "latest_developments": "The National Weather Service upgraded today's outlook to a severe thunderstorm watch, with a line of storms tracking through between 4 p.m. and 8 p.m.",
+        "summary": "Damaging winds and heavy downpours are the leading threats across western Pennsylvania this afternoon, with most rain clearing east by 9 or 10 p.m. before drier, cooler air settles in overnight.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Pennsylvania crime victim services face funding cuts after drop in white-collar prosecutions under Trump",
-            "url": "https://www.post-gazette.com/news/social-services/2026/06/14/victim-services-pennsylvania/stories/202606110006"
+            "title": "NWS issues severe thunderstorm watch through sundown",
+            "url": "https://www.post-gazette.com/news/weather-news/2026/06/14/pittsburgh-weather-outlook-today-june-14-2026/stories/202606140075"
+          },
+          {
+            "source": "WTAE",
+            "title": "Thunderstorm Watch: Damaging winds, downpours expected for Western PA",
+            "url": "https://www.wtae.com/article/pittsburgh-area-thunderstorm-watch-june-14/71582006"
+          }
+        ]
+      },
+      {
+        "title": "State Police Fine Nearly 700 for Held Cellphones",
+        "latest_developments": "State police have issued nearly 700 fines under Pennsylvania's Paul Miller Law, which bars holding a cellphone while driving.",
+        "summary": "The Paul Miller Law makes it illegal to hold a phone behind the wheel in Pennsylvania, and troopers have begun enforcing it with citations, the early count of penalties signaling the start of active enforcement statewide.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "State police fine nearly 700 for holding a cellphone while driving",
+            "url": "https://www.post-gazette.com/news/transportation/2026/06/14/cellphone-ban-tickets-paul-miller-law-fine/stories/202606140071"
+          }
+        ]
+      },
+      {
+        "title": "Triadelphia Still Rebuilding a Year After Floods",
+        "latest_developments": "A year after deadly floods, recovery in tiny Triadelphia, West Virginia, remains slow and residents still carry the trauma.",
+        "summary": "Triadelphia, a small community in the Northern Panhandle of West Virginia, suffered flooding that killed residents and wrecked homes last year, and rebuilding has lagged as families wait on aid and contend with lasting emotional damage.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "A year after deadly floods, rebuilding is slow and trauma lingers in tiny Triadelphia, W.Va.",
+            "url": "https://www.post-gazette.com/news/weather-news/2026/06/14/triadelphia-west-virginia-flood-recovery/stories/202606120055"
+          }
+        ]
+      },
+      {
+        "title": "WVU Baseball Plays in College World Series",
+        "latest_developments": "West Virginia, 46-15 and winners of six straight, faces North Carolina tonight in Omaha after notching the program's first-ever College World Series game victory over Troy on Friday.",
+        "summary": "The Mountaineers reached the Men's College World Series for the first time in program history, sweeping through the Morgantown Regional and the Cal Poly Super Regional, and tonight's game against North Carolina airs from Omaha, Nebraska.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "How to watch tonight's West Virginia vs. North Carolina baseball game in the College World Series",
+            "url": "https://www.cbsnews.com/pittsburgh/news/how-to-watch-west-virginia-north-carolina-baseball-tonight-college-world-series/"
           }
         ]
       }
     ],
     "events": [
       {
-        "text": "The Stroller publishes free listings of upcoming community events, fundraisers, and club meetings across the Alle-Kiski Valley.",
+        "title": "Pennsylvania Firefly Festival in Tionesta",
+        "latest_developments": "The 14th annual festival runs June 26 and 27 in the Allegheny National Forest, and the guided nighttime firefly sightings have already sold out.",
+        "summary": "The Pennsylvania Firefly Festival celebrates the 15-plus firefly species that light the Allegheny National Forest each June, in Tionesta, Pennsylvania, about 100 miles north of Pittsburgh. The booked-up nocturnal tours are gone, but free daytime nature exhibits, music, and firefly-themed happenings remain open on June 26 and 27.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "The Stroller, June 14, 2026: Events in the Alle-Kiski Valley",
-            "url": "https://triblive.com/local/valley-news-dispatch/the-stroller-june-14-2026-events-in-the-alle-kiski-valley/"
+            "source": "NEXTpittsburgh Events",
+            "title": "What happens at a firefly festival?",
+            "url": "https://nextpittsburgh.com/environment/this-firefly-festival-about-100-miles-from-pittsburgh-sells-out-every-year/"
+          }
+        ]
+      },
+      {
+        "title": "Honeck Extends Pittsburgh Symphony Tenure",
+        "latest_developments": "Manfred Honeck signed an extension that will carry his music directorship of the Pittsburgh Symphony Orchestra to 25 years.",
+        "summary": "Honeck, the Austrian conductor who has led the Pittsburgh Symphony since 2008 and built its international reputation, will stay through a quarter-century at the podium under the new deal, one of the longest such partnerships in American orchestras.",
+        "sources": [
+          {
+            "source": "Post-Gazette Music",
+            "title": "The million-dollar maestro: Manfred Honeck extends contract with Pittsburgh Symphony to 25 years",
+            "url": "https://www.post-gazette.com/ae/music/2026/06/10/manfred-honeck-pso-contract/stories/202606100041"
+          }
+        ]
+      },
+      {
+        "title": "App Maps Pittsburgh's Film Locations",
+        "latest_developments": "The PastFinders app now guides users to spots where movies such as 'The Dark Knight Rises' filmed downtown.",
+        "summary": "A self-guided walking tour through the PastFinders app lets visitors stand on the exact downtown Pittsburgh sites used in major films, a free-roaming thing to do for movie fans across the city.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "You could be standing right where 'The Dark Knight Rises' was filmed in Downtown",
+            "url": "https://www.post-gazette.com/ae/movies/2026/06/11/pittsburgh-film-tour-app-pastfinders/stories/202605290043"
           }
         ]
       }
@@ -366,25 +385,25 @@
         "author": "Ed Zitron",
         "title": "Premium: The Silicon Valley Bubble (Part 1)",
         "url": "https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-1/",
-        "summary": "Zitron argues the AI era is ending as OpenAI and Anthropic file to go public, racing for exit liquidity despite burning billions a year with no path to profitability."
+        "summary": "Zitron argues the AI era is ending as OpenAI and Anthropic file to go public, framing the IPOs as a race for exit liquidity by two companies that burn billions a year with no path to profit."
       },
       {
         "author": "Stratechery",
         "title": "Fable 5, Anthropic Alignment, AI Tiers",
         "url": "https://stratechery.com/2026/fable-5-anthropic-alignment-ai-tiers/",
-        "summary": "Thompson examines Fable 5, the public version of Mythos, finding it very capable yet setting troubling precedents, alongside questions of Anthropic's alignment approach and emerging tiers of AI capability."
+        "summary": "Thompson examines Fable 5 as the public version of Mythos, judging it highly capable while warning that its release sets troubling new precedents around alignment and the tiering of AI models."
       },
       {
         "author": "Cal Newport",
         "title": "Why Isn't AI Taking Our Jobs?",
         "url": "https://calnewport.com/why-isnt-ai-taking-our-jobs/",
-        "summary": "Newport challenges the comparison AI executives draw between their technology and industrial automation, examining why mass job displacement has yet to arrive."
+        "summary": "Newport questions the standard comparison between AI and industrial automation, arguing that knowledge work has not collapsed the way AI leaders predicted and probing why their job-loss forecasts have not borne out."
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-14 12:01 EDT",
-    "items_considered": 26,
+    "generated_at": "2026-06-14 14:47 EDT",
+    "items_considered": 20,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {
@@ -428,6 +447,12 @@
         "FT Home",
         "FT World",
         "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
       ],
       "reading": [
         "Ed Zitron",
