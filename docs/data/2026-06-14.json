@@ -1,215 +1,148 @@
 {
   "date": "2026-06-14",
-  "headline": "An Oracle PeopleSoft zero-day is bleeding gigabytes from hundreds of organizations as Washington forces Anthropic to pull its two newest AI models offline worldwide.",
+  "headline": "Federal agents and Google tore down Outsider Enterprise, a China-based AI-powered phishing service running a million malicious URLs, as Washington let its Section 702 surveillance authority lapse for the first time.",
   "emerging_trends": [
     {
-      "subject": "Weaponized AI",
-      "text": "AI sits on both sides of the fight this week, from Washington pulling Anthropic's Fable 5 and Mythos 5 offline to Google suing a Gemini-powered smishing ring and Agentjacking tricking coding agents into running attacker code."
+      "subject": "AI Crackdown",
+      "text": "Law enforcement and vendors moved hard against AI-enabled crime as the FBI dismantled the Gemini-fueled Outsider phishing kit, while a researcher used Claude Opus 4.8 to find a critical Zcash flaw, showing AI cuts both ways."
     },
     {
-      "subject": "Decade-Long Footholds",
-      "text": "Broken authentication that lingered for years surfaced all at once—Velvet Ant's ten years in Linux login, a decade-old phpBB auth bypass, and Check Point's exploited VPN bypass—proving how long access flaws hide."
+      "subject": "Dormant Flaws",
+      "text": "Decade-old defects keep surfacing, with phpBB patching a ten-year authentication bypass that grants admin login, echoing the long-buried bugs found this week in Linux login software and Check Point VPNs."
     },
     {
-      "subject": "Poisoned Repositories",
-      "text": "Supply-chain footholds keep moving upstream, with attackers hijacking 400-plus Arch AUR packages and npm 12 preparing to stop running dependency scripts by default."
+      "subject": "Supply Chain",
+      "text": "Registry defenders are rewriting defaults, as npm 12 will stop running dependency install scripts automatically, the same vector behind this week's Arch Linux package hijacks."
     },
     {
-      "subject": "Breach Bills",
-      "text": "Regulators and courts are pricing breaches steeply this week, from Coupang's record $409 million Korean fine to a $47 million 23andMe victim settlement."
+      "subject": "Surveillance Politics",
+      "text": "Government intelligence powers face open contest, with Section 702 of FISA lapsing amid congressional deadlock and Bernie Sanders pressing the question of who controls AI."
     }
   ],
   "topics": [
     {
-      "title": "Oracle PeopleSoft Zero-Day (CVE-2026-35273)",
-      "area": "Vulnerabilities and Exploits",
-      "last_24h": "CISA added CVE-2026-35273 to its known-exploited catalog and ordered federal agencies to patch under Binding Operational Directive 26-04.",
-      "summary": "A missing-authentication flaw in Oracle PeopleSoft Enterprise PeopleTools lets attackers reach critical functions with no credentials. The ShinyHunters crew has exploited it to steal gigabytes from hundreds of organizations, hitting American universities hardest because so many run PeopleSoft for HR and finance. Apply Oracle's fix at once and hunt logs for bulk data exfiltration.",
+      "title": "FBI Dismantles Outsider Phishing-as-a-Service",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "The FBI, working with Google and Black Lotus Labs, seized and dismantled Outsider Enterprise, escalating from Google's earlier lawsuit to a full takedown of thousands of phishing sites spanning roughly a million URLs.",
+      "summary": "Outsider Enterprise ran a phishing-as-a-service kit out of China, weaponizing Google's Gemini to mass-produce scam texts and fraudulent websites that harvested credit card numbers and passwords from Americans. Operators rented the toolkit to blast smishing links across a million URLs. The coalition shut down the infrastructure and exposed the network behind it. Defenders should block known Outsider domains and warn staff about credential-stealing text lures.",
       "tags": [
-        "zero-day",
-        "exploit",
-        "breach"
-      ],
-      "sources": [
-        {
-          "source": "Ars Technica Security",
-          "title": "PeopleSoft 0-day affecting hundreds of organizations steals gigabytes of data",
-          "url": "https://arstechnica.com/security/2026/06/peoplesoft-0-day-affecting-hundreds-of-organizations-steals-gigabytes-of-data/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "ShinyHunters Uses Oracle Zero-Day to Rampage Higher Ed",
-          "url": "https://www.darkreading.com/vulnerabilities-threats/shinyhunters-oracle-zero-day-higher-ed"
-        },
-        {
-          "source": "CISA Advisories",
-          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
-          "url": "https://www.cisa.gov/news-events/alerts/2026/06/12/cisa-adds-one-known-exploited-vulnerability-catalog"
-        }
-      ]
-    },
-    {
-      "title": "Check Point VPN Auth Bypass (CVE-2026-50751)",
-      "area": "Vulnerabilities and Exploits",
-      "last_24h": "WatchTowr released a technical analysis and a detection-artefact generator for CVE-2026-50751, raising the odds of a broad opportunistic wave.",
-      "summary": "The authentication-bypass flaw in Check Point Remote Access VPN and Mobile Access lets attackers walk past login. Check Point patched it June 8, 2026, and confirmed limited active exploitation before the disclosure. Now that working detection tooling and analysis sit in public view, expect wider scanning and attacks. Patch immediately and review VPN authentication logs.",
-      "tags": [
-        "zero-day",
-        "patch",
-        "vpn"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Researchers release details, PoC for exploited Check Point VPN flaw (CVE-2026-50751)",
-          "url": "https://www.helpnetsecurity.com/2026/06/12/cve-2026-50751-poc-exploit/"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Week in review: Exploited Check Point VPN zero-day, Oracle PeopleSoft servers under attack",
-          "url": "https://www.helpnetsecurity.com/2026/06/14/week-in-review-exploited-check-point-vpn-zero-day-oracle-peoplesoft-servers-under-attack/"
-        }
-      ]
-    },
-    {
-      "title": "Critical Splunk Enterprise RCE (CVE-2026-20253)",
-      "area": "Vulnerabilities and Exploits",
-      "last_24h": "Splunk shipped fixes for CVE-2026-20253, a 9.8 flaw that lets unauthenticated users run code.",
-      "summary": "In Splunk Enterprise below versions 10.2.4 and 10.0.7, an unauthenticated user can create or truncate arbitrary files and escalate to remote code execution. Splunk often sits at the center of a security operations center, so a compromise hands attackers the monitoring system itself. Upgrade to a fixed release now.",
-      "tags": [
-        "rce",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Critical Splunk Enterprise Flaw Lets Attackers Run Code Without Authentication",
-          "url": "https://thehackernews.com/2026/06/critical-splunk-enterprise-flaw-lets.html"
-        }
-      ]
-    },
-    {
-      "title": "U.S. Pulls Anthropic's Fable 5 and Mythos 5 Offline",
-      "area": "AI Security",
-      "last_24h": "Anthropic disabled Fable 5 and Mythos 5 globally after a 5:21 p.m. federal order barred all foreign-national access.",
-      "summary": "The Trump administration invoked export controls and cited national security plus a jailbreak to bar every foreign national, inside or outside the United States, from the two models. Anthropic complied and suspended both worldwide, yet disputes the basis, calling the jailbreak narrow and the capability common elsewhere. The directive knocked Anthropic's most advanced systems offline for all users. Industry voices split over dual-use risk, safeguards, and tiered access.",
-      "tags": [
-        "ai",
-        "policy",
-        "export-controls"
+        "cybercrime",
+        "phishing",
+        "ai"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "US Gov asks Anthropic to ban 'foreign national' access to Fable, Mythos",
-          "url": "https://www.bleepingcomputer.com/news/security/us-gov-asks-anthropic-to-ban-foreign-national-access-to-fable-mythos/"
+          "title": "FBI disrupts massive AI-powered phishing service using a million URLs",
+          "url": "https://www.bleepingcomputer.com/news/security/fbi-disrupts-massive-ai-powered-phishing-service-using-a-million-urls/"
         },
-        {
-          "source": "The Hacker News",
-          "title": "U.S. Orders Anthropic to Suspend Fable 5 and Mythos 5 Access for Foreign Nationals",
-          "url": "https://thehackernews.com/2026/06/us-orders-anthropic-to-suspend-fable-5.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Anthropic Says It Has Taken Its Latest AI Models Offline to Comply With New Export Controls",
-          "url": "https://www.securityweek.com/anthropic-says-it-has-taken-its-latest-ai-models-offline-to-comply-with-new-export-controls/"
-        }
-      ]
-    },
-    {
-      "title": "Google Sues China-Based Gemini Smishing Network",
-      "area": "AI Security",
-      "last_24h": "Google filed suit against Outsider Enterprise, accusing it of weaponizing Gemini to mass-produce phishing infrastructure.",
-      "summary": "The China-based network runs a phishing-as-a-service kit called Outsider and leaned on Google's Gemini agent to build phishing sites and scam infrastructure aimed at Americans. Google ties the group to more than 9,000 fake websites, a million fraudulent URLs, and hundreds of thousands of victims with losses in the millions of dollars. The lawsuit pairs civil claims with takedown pressure on the operation.",
-      "tags": [
-        "ai",
-        "phishing",
-        "cybercrime"
-      ],
-      "sources": [
         {
           "source": "The Hacker News",
           "title": "Google Sues Chinese Smishing Network Accused of Using Gemini AI in Phishing",
           "url": "https://thehackernews.com/2026/06/google-sues-chinese-smishing-network.html"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Google sues China-based scammers over Gemini AI abuse",
-          "url": "https://www.helpnetsecurity.com/2026/06/12/google-china-based-cybercrime-network-lawsuit/"
         }
       ]
     },
     {
-      "title": "Velvet Ant's Decade in the Linux Login Stack",
-      "area": "Nation-State Activity",
-      "last_24h": "Sygnia detailed how the China-nexus group Velvet Ant backdoored PAM and OpenSSH to hide for nearly ten years.",
-      "summary": "Velvet Ant seized a target's authentication stack, planting implants in the PAM and OpenSSH components that decide who signs in, and held persistence for a decade with full view of administrative activity. The targeted network had no internet access, yet routine cleanup never reached binaries buried that deep. Defenders should verify the integrity of login binaries and authentication modules rather than trust them.",
+      "title": "Iowa School IT Insider Jailed for Sabotage",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "A federal court sentenced a former IT employee of an Iowa school district to 21 months in prison for a prolonged cyberattack on his ex-employer.",
+      "summary": "The insider deleted accounts, disrupted classroom operations, and ran up tens of thousands of dollars in damage after leaving the district. The case turns on access that outlasted his employment. It underscores the danger of credentials that survive a departure. Organizations should revoke accounts the moment staff exit.",
       "tags": [
-        "apt",
-        "china",
-        "persistence"
+        "insider",
+        "cybercrime"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "Chinese hackers hijack auth flow, spy on isolated network for a decade",
-          "url": "https://www.bleepingcomputer.com/news/security/chinese-hackers-hijack-auth-flow-spy-on-isolated-network-for-a-decade/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "China-Linked Hackers Backdoored Linux Login Software to Hide for Nearly a Decade",
-          "url": "https://thehackernews.com/2026/06/china-linked-hackers-backdoored-linux.html"
+          "title": "Ex-school district employee jailed for hacks on former employer",
+          "url": "https://www.bleepingcomputer.com/news/security/ex-school-district-employee-jailed-for-hacks-on-former-employer/"
         }
       ]
     },
     {
-      "title": "400-Plus Arch Linux AUR Packages Hijacked",
+      "title": "Section 702 Surveillance Authority Lapses",
+      "area": "Policy and Regulation",
+      "latest_developments": "Section 702 of the Foreign Intelligence Surveillance Act lapsed for the first time since its 2008 passage after Congress deadlocked, halting a cornerstone US foreign-intelligence collection program.",
+      "summary": "Section 702 lets US agencies collect the communications of foreign targets abroad, a backbone of signals intelligence that also sweeps in Americans' data and has drawn privacy fights for years. Legislative deadlock let the authority expire outright. Intelligence agencies lose a key surveillance tool until Congress reauthorizes it. The lapse leaves ongoing collection in legal limbo.",
+      "tags": [
+        "policy",
+        "surveillance"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Major US surveillance program poised to lapse after legislative deadlock",
+          "url": "https://therecord.media/major-us-surveillance-program-set-to-lapse-702-fisa"
+        }
+      ]
+    },
+    {
+      "title": "Npm 12 Disables Dependency Scripts by Default",
       "area": "Supply Chain Security",
-      "last_24h": "Attackers rewrote build scripts across more than 400 Arch User Repository packages to drop a credential stealer.",
-      "summary": "The malware is a Rust binary that harvests developer secrets and access tokens, and with root it loads an eBPF rootkit to hide itself. Any machine that builds a poisoned package executes the code during the build. The AUR is Arch Linux's community collection, separate from official repositories and largely user-trusted. Rebuild from clean sources and rotate every credential the build host touched.",
+      "latest_developments": "Npm announced that version 12 will stop running dependency lifecycle scripts on install by default, requiring developers to explicitly allow them.",
+      "summary": "Supply chain attackers have long abused npm's automatic execution of install scripts to run malware the moment a developer pulls a package. Npm 12 flips the default so install no longer executes those scripts unless whitelisted. The change blunts a favorite infection vector behind recent registry compromises. Developers relying on legitimate post-install scripts must opt them back in.",
       "tags": [
         "supply-chain",
-        "rootkit",
-        "infostealer"
+        "patch"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Over 400 Arch Linux AUR Packages Hijacked to Deploy Infostealer and eBPF Rootkit",
-          "url": "https://thehackernews.com/2026/06/over-400-arch-linux-aur-packages.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Over 400 Arch Linux packages compromised to push rootkit, infostealer",
-          "url": "https://www.bleepingcomputer.com/news/security/over-400-arch-linux-packages-compromised-to-push-rootkit-infostealer/"
+          "source": "SecurityWeek",
+          "title": "NPM 12 Will Change Script Execution Behavior to Prevent Supply Chain Attacks",
+          "url": "https://www.securityweek.com/npm-12-will-change-script-execution-behavior-to-prevent-supply-chain-attacks/"
         }
       ]
     },
     {
-      "title": "Regulators and Courts Tally the Cost of Breaches",
+      "title": "Critical Zcash Orchard Flaw Found and Fixed",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Researcher Taylor Hornby disclosed a critical vulnerability in Zcash's Orchard shielded pool, found on May 29 using Claude Opus 4.8, and the Zcash team patched it.",
+      "summary": "Orchard is Zcash's newest privacy system for shielded transactions, live since 2022. The Zcash team hired Hornby to hunt for exactly this class of bug, and he found a critical one fast with AI assistance. Developers fixed it before any known exploitation surfaced. Zcash holders should move to the patched software.",
+      "tags": [
+        "vulnerability",
+        "cryptocurrency",
+        "ai"
+      ],
+      "sources": [
+        {
+          "source": "Schneier on Security",
+          "title": "Critical Zcash Vulnerability Found and Fixed",
+          "url": "https://www.schneier.com/blog/archives/2026/06/critical-zcash-vulnerability-found-and-fixed.html"
+        }
+      ]
+    },
+    {
+      "title": "phpBB Patches Decade-Old Auth Bypass",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "phpBB fixed a ten-year-old authentication bypass that let an attacker log in as any user, administrators included.",
+      "summary": "phpBB is widely deployed open-source forum software running countless community sites. The flaw lurked for a decade and allowed full account takeover, including admin access. Maintainers shipped a patch. Forum operators should upgrade at once.",
+      "tags": [
+        "vulnerability",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "phpBB forum fixes auth bypass bug lurking for a decade",
+          "url": "https://www.bleepingcomputer.com/news/security/phpbb-forum-fixes-auth-bypass-bug-lurking-for-a-decade/"
+        }
+      ]
+    },
+    {
+      "title": "Maine Pulls Breach Portal Over Fake Filings",
       "area": "Data Breaches",
-      "last_24h": "South Korea fined Coupang a record $409 million while a US bankruptcy administrator approved a $47 million 23andMe settlement fund.",
-      "summary": "South Korea's privacy commission levied its largest-ever data-breach penalty, $409 million against Coupang, topping the $88.8 million SK Telecom fine from earlier this year. In the United States, an administrator approved a $47 million fund for 7 million 23andMe customers whose genetic data hackers stole starting April 2023 and posted to the dark web. Novo Nordisk, the world's largest insulin maker, separately disclosed a breach exposing clinical-trial patient data.",
+      "latest_developments": "Maine took its public data breach notification portal offline after fraudsters published fake breach disclosures on the state website.",
+      "summary": "Maine runs a public portal where companies file data breach reports and citizens read them. Bad actors submitted bogus disclosures that the state published, undermining trust in the record. Officials pulled the portal and launched a review of submission controls. The episode exposes weak validation on government self-service intake.",
       "tags": [
         "breach",
-        "fine",
         "policy"
       ],
       "sources": [
         {
-          "source": "The Record",
-          "title": "South Korea hits Coupang with record $409 million fine over data breach",
-          "url": "https://therecord.media/south-korea-data-breach-record-fine-coupang"
-        },
-        {
-          "source": "The Record",
-          "title": "Bankruptcy admin approves settlement fund of $47 million for 23andMe data breach victims",
-          "url": "https://therecord.media/bankruptcy-admin-approves-settlement-for-23andme-breach-victims"
-        },
-        {
           "source": "BleepingComputer",
-          "title": "Pharma giant Novo Nordisk discloses breach of clinical trials data",
-          "url": "https://www.bleepingcomputer.com/news/security/pharmaceutical-giant-novo-nordisk-discloses-security-breach/"
+          "title": "Maine disables data breach notification portal after fake disclosures",
+          "url": "https://www.bleepingcomputer.com/news/security/maine-disables-data-breach-notification-portal-after-fake-disclosures/"
         }
       ]
     }
@@ -281,45 +214,29 @@
         "url": "https://plaintextsports.com/mlb/2026-06-14/mia-pit"
       },
       "headlines": [
-        "Miami Marlins vs. Pittsburgh Pirates: Game Highlights",
-        "Marlins try to extend road win streak in matchup against the Pirates"
+        "Marlins beat the Pirates 8-3 for their 6th straight victory"
       ]
     }
   ],
   "local": {
     "business_politics": [
       {
-        "text": "SpaceX completed the largest initial public offering in history at a $2.1 trillion valuation, making Elon Musk the world's first trillionaire. An army of do-it-yourself traders bought roughly $118 million of stock on the first day, and the smooth debut steadied otherwise jittery markets.",
+        "text": "Israel struck Hezbollah targets in Beirut's southern outskirts on Sunday, and Iran threatened to walk away from talks to end its war with the United States, imperiling a ceasefire President Trump expected to firm up within days. Trump publicly rebuked the strikes as a disproportionate response that could scuttle the deal.",
         "sources": [
-          {
-            "source": "WSJ Markets",
-            "title": "SpaceX, Now Worth $2.1 Trillion, Pulls Off Goldilocks Debut",
-            "url": "https://www.wsj.com/business/spacex-now-worth-2-1-trillion-pulls-off-goldilocks-debut-bcc59ace?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "SpaceX's Retail-Powered Debut Helps Steady Shaky Markets",
-            "url": "https://www.wsj.com/finance/stocks/spacexs-retail-powered-debut-helps-steady-shaky-markets-2e52cbee?mod=rss_markets_main"
-          }
-        ]
-      },
-      {
-        "text": "President Trump said the United States and Iran will sign an agreement Sunday to reopen the Strait of Hormuz, the chokepoint for a fifth of seaborne oil, though Tehran cautioned that the timing remains uncertain. The deal would cap an escalation that a U.S. helicopter crash had set off.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "Trump says US and Iran will sign deal on Sunday to reopen Strait",
-            "url": "https://www.ft.com/content/726f4afe-c3ff-4ec0-bfc9-b572b419e11f"
-          },
           {
             "source": "WSJ World News",
-            "title": "How the U.S. and Iran Turned From Renewed War to the Cusp of Peace",
-            "url": "https://www.wsj.com/world/middle-east/iran-war-peace-talks-what-happened-d033900f"
+            "title": "Iran Threatens to Pull Out of Talks After Israel Strikes Beirut’s Outskirts",
+            "url": "https://www.wsj.com/world/middle-east/iran-threatens-to-pull-out-of-talks-after-israel-strikes-beiruts-outskirts-d0390e22"
+          },
+          {
+            "source": "FT World",
+            "title": "Israel strikes Beirut, threatening to complicate push for Iran deal",
+            "url": "https://www.ft.com/content/726f4afe-c3ff-4ec0-bfc9-b572b419e11f"
           }
         ]
       },
       {
-        "text": "U.S. headline annual inflation climbed to 4.2%, the highest since April 2023, tightening the squeeze on the Federal Reserve as a wait-and-see stance risks repeating the policy errors of 2008.",
+        "text": "US headline inflation reached 4.2 percent, the highest since April 2023, just as Kevin Warsh prepares to chair his first Federal Reserve meeting this week. The timing sets an early test of how the new chair weighs renewed price pressure against political demands for lower rates.",
         "sources": [
           {
             "source": "FT Markets",
@@ -328,16 +245,16 @@
           },
           {
             "source": "FT World",
-            "title": "Taming the inflation python",
-            "url": "https://www.ft.com/content/01c5ea35-a0fa-469f-b8bb-356d98c05fb0"
+            "title": "What should investors expect from Kevin Warsh’s first Fed meeting?",
+            "url": "https://www.ft.com/content/c17424f0-244e-45f4-b1d7-a0ffcebc4cf0"
           }
         ]
       },
       {
-        "text": "China is preparing a cross-border digital payments platform to challenge the dollar, with the central banks of Hong Kong, Thailand, the United Arab Emirates, and Saudi Arabia backing it.",
+        "text": "China launched a cross-border digital payments platform backed by the central banks of Hong Kong, Thailand, the United Arab Emirates, and Saudi Arabia, its most concrete move yet to build settlement rails that route around the dollar.",
         "sources": [
           {
-            "source": "FT Markets",
+            "source": "FT World",
             "title": "China tees up digital payments system to compete with dollar",
             "url": "https://www.ft.com/content/76de5ca6-9ae8-49ae-a0cb-64d09040f327"
           }
@@ -346,39 +263,39 @@
     ],
     "business": [
       {
-        "text": "Alcosan began a billion-dollar tunnel beneath the Ohio River, the opening piece of a ten-year program to overhaul the region's sewer and stormwater system and reshape Pittsburgh's waterways.",
+        "text": "Alcosan began a billion-dollar tunnel beneath the Ohio River, the first piece of a 10-year program to overhaul the region's sewer and stormwater system and cut overflows into Pittsburgh's rivers.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "A billion-dollar Ohio River tunnel is kicking off Alcosan's 10-year project to reshape Pittsburgh's waterways",
+            "title": "A billion-dollar Ohio River tunnel is kicking off Alcosan’s 10-year project to reshape Pittsburgh’s waterways",
             "url": "https://www.post-gazette.com/local/region/2026/06/14/alcosan-ohio-river-tunnel-pittsburgh-water/stories/202606120073"
           }
         ]
       },
       {
-        "text": "Area businesses are voicing concern over Allegheny County's proposed paid parental leave policy, pointing to added cost and the burden of compliance.",
+        "text": "Allegheny County weighs a paid parental leave mandate, and business groups warn the cost and administrative load could fall hardest on small employers.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Why businesses are concerned about Allegheny County's proposed paid leave policy",
+            "title": "Why businesses are concerned about Allegheny County’s proposed paid leave policy.",
             "url": "https://www.post-gazette.com/news/health/2026/06/14/paid-parental-leave-allegheny-county/stories/202606110032"
           }
         ]
       },
       {
-        "text": "A Pittsburgh restaurant gutted by fire more than two years ago will sell its building, abandoning its plans to reopen.",
+        "text": "Pennsylvania issued a quarantine order on farm animals as the New World screwworm, a flesh-eating parasite, spread through southwestern states, putting livestock producers on alert.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Pittsburgh restaurant destroyed by fire to sell its building after being unable to reopen",
-            "url": "https://www.wpxi.com/news/local/pittsburgh-restaurant-destroyed-by-fire-sell-its-building-after-being-unable-reopen/QAWE4U7CCZBSBPO4LHQBLARBAM/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pa. issues quarantine order on farm animals, as wary states track screwworm cases in southwestern states",
+            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/06/14/new-world-screwworm-quarantine-animals/stories/202606140069"
           }
         ]
       }
     ],
     "around_town": [
       {
-        "text": "Forecasters flagged Sunday as an Impact Day for western Pennsylvania, with scattered afternoon and evening thunderstorms; damaging winds pose the leading threat between 3 p.m. and 8 p.m.",
+        "text": "Forecasters flagged Sunday as an impact day across western Pennsylvania, with scattered afternoon thunderstorms capable of damaging winds between 3 and 8 p.m. before drier, cooler air settles in overnight.",
         "sources": [
           {
             "source": "WTAE",
@@ -388,44 +305,54 @@
         ]
       },
       {
-        "text": "A water main break buckled a road in Forest Hills, and crews closed the crumbling stretch Saturday.",
+        "text": "A $10.57 million improvement project will restrict traffic on a Hampton Township roadway for more than a month, covering drainage upgrades, milling, paving, and base repairs.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Crumbling road closed after water main break in Forest Hills",
-            "url": "https://www.wpxi.com/news/local/crumbling-road-closed-after-water-main-break-forest-hills/XEBP2OBCZRD3XED2BQ4HDSAN2I/"
+            "title": "Improvement project to restrict traffic on Hampton Township roadway for over a month",
+            "url": "https://www.wpxi.com/news/local/improvement-project-restrict-traffic-hampton-township-roadway-over-month/FQKY3MOKDRCC3PTPXYXSYFNHBU/"
           }
         ]
       },
       {
-        "text": "A crash and vehicle fire briefly shut down westbound Interstate 376 in Robinson Township before crews reopened the lanes.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Fiery crash temporarily shuts down westbound I-376 in Robinson Township",
-            "url": "https://www.wpxi.com/news/local/crash-closes-westbound-i-376-robinson-township-vehicle-catches-fire/G4VIMJCXKRGJJK2G3OLQKYCFRU/"
-          }
-        ]
-      },
-      {
-        "text": "A year after catastrophic flooding, rebuilding crawls in tiny Triadelphia, West Virginia, and residents there still carry the trauma.",
+        "text": "Pennsylvania's crime victim services face funding cuts as white-collar prosecutions, whose fines bankroll the programs, dropped under the Trump administration.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "A year after deadly floods, rebuilding is slow and trauma lingers in tiny Triadelphia, W.Va.",
-            "url": "https://www.post-gazette.com/news/weather-news/2026/06/14/triadelphia-west-virginia-flood-recovery/stories/202606120055"
+            "title": "Pennsylvania crime victim services face funding cuts after drop in white-collar prosecutions under Trump",
+            "url": "https://www.post-gazette.com/news/social-services/2026/06/14/victim-services-pennsylvania/stories/202606110006"
+          }
+        ]
+      },
+      {
+        "text": "Nara Organics recalled baby formula sold at Target after a multistate infant botulism outbreak; the rare illness strikes babies under a year old when ingested spores produce a toxin in the immature gut.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Nara Organics recalls baby formula sold at Target after multistate infant botulism outbreak",
+            "url": "https://www.wpxi.com/news/local/nara-organics-recalls-baby-formula-sold-target-after-multistate-infant-botulism-outbreak/FAAJXB4MHRG7TERVLOJ5N6RTRY/"
           }
         ]
       }
     ],
     "events": [
       {
-        "text": "Living Dead Weekend draws horror fans to the Monroeville Mall, the setting of George Romero's 'Dawn of the Dead,' through Sunday.",
+        "text": "West Virginia's baseball team faces North Carolina on Sunday evening in the Men's College World Series in Omaha, the Mountaineers carrying a six-game winning streak after their first-ever series win.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Zombie movie fans flock to Monroeville Mall for Living Dead Weekend",
-            "url": "https://www.wpxi.com/news/local/zombie-fans-flock-monroeville-mall-living-dead-weekend/5H36BF3UCJFZ5B5KVBXG3GQIEM/"
+            "source": "KDKA",
+            "title": "How to watch tonight's West Virginia vs. North Carolina baseball game in the College World Series",
+            "url": "https://www.cbsnews.com/pittsburgh/news/how-to-watch-west-virginia-north-carolina-baseball-tonight-college-world-series/"
+          }
+        ]
+      },
+      {
+        "text": "The Stroller's June 14 column rounds up upcoming nonprofit fundraisers, club meetings, and community events across the Alle-Kiski Valley.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "The Stroller, June 14, 2026: Events in the Alle-Kiski Valley",
+            "url": "https://triblive.com/local/valley-news-dispatch/the-stroller-june-14-2026-events-in-the-alle-kiski-valley/"
           }
         ]
       }
@@ -435,25 +362,25 @@
         "author": "Ed Zitron",
         "title": "Premium: The Silicon Valley Bubble (Part 1)",
         "url": "https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-1/",
-        "summary": "Zitron argues the AI era is ending as OpenAI and Anthropic both file to go public, racing for exit liquidity despite burning billions a year with no path to profitability."
+        "summary": "Zitron argues the AI era is nearing its end, reading the simultaneous IPO filings of OpenAI and Anthropic as a race for exit liquidity by two firms that burn billions a year with no path to profit."
       },
       {
         "author": "Stratechery",
-        "title": "Fable 5, Anthropic Alignment, AI Tiers",
-        "url": "https://stratechery.com/2026/fable-5-anthropic-alignment-ai-tiers/",
-        "summary": "Thompson examines Fable 5, the public version of Mythos, judging it highly capable while warning that it establishes troubling new precedents around alignment and AI tiers."
+        "title": "An Interview with Ben Bajarin About Apple, AI, and Compute",
+        "url": "https://stratechery.com/2026/an-interview-with-ben-bajarin-about-apple-ai-and-compute/",
+        "summary": "Thompson and analyst Ben Bajarin take stock of Apple's WWDC and the broader scramble for AI compute capacity, weighing what Apple's newly shipped Intelligence means for the industry."
       },
       {
         "author": "Cal Newport",
         "title": "Why Isn’t AI Taking Our Jobs?",
         "url": "https://calnewport.com/why-isnt-ai-taking-our-jobs/",
-        "summary": "Newport probes why AI has yet to eliminate work, questioning the industry's habit of comparing the technology to the industrial automation that displaced manual labor."
+        "summary": "Newport challenges the favorite analogy of AI executives, that their technology will eliminate cognitive jobs the way machines eliminated manual ones, and digs into why the predicted wave of displacement has not arrived."
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-14 06:02 EDT",
-    "items_considered": 38,
+    "generated_at": "2026-06-14 11:50 EDT",
+    "items_considered": 27,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {

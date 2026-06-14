@@ -267,8 +267,14 @@ def corpus_of(items):
     ]
 
 
-def build_prompt(items, window, today):
+def build_prompt(items, window, today, prior=None):
     corpus = corpus_of(items)
+    prior_block = ""
+    if prior:
+        prior_block = f"""
+PREVIOUSLY_REPORTED — topics this briefing already covered over the last week (most recent runs first), as a JSON array. Use it to tell new developments from old news:
+{json.dumps(prior, ensure_ascii=False, indent=1)}
+"""
     return f"""You are the editor of "infosecfollow", a daily plain-text briefing on information security. Below are {len(corpus)} news items published in the last {window} hours by major security outlets, vendors, and government sources, as a JSON array.
 
 Cluster them into the day's trending topics and respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
@@ -283,7 +289,7 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
     {{
       "title": "Short Topic Name (a Campaign, Vulnerability, Incident, or Theme)",
       "area": "The Area of Cybersecurity This Topic Belongs To",
-      "last_24h": "One sentence describing the relevant updates on this topic in the last 24 hours.",
+      "latest_developments": "One sentence describing what is genuinely NEW about this topic today, relative to PREVIOUSLY_REPORTED.",
       "summary": "Two to four sentences of plain-text background and analysis: what it is, who is affected, what to do.",
       "tags": ["1-3 lowercase tags like ransomware, zero-day, apt, patch, breach, policy"],
       "sources": [{{"source": "outlet name", "title": "article title", "url": "exact url copied from the items below"}}]
@@ -292,7 +298,8 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 }}
 
 Rules:
-- 5 to 8 topics, ordered most to least important. Merge near-duplicate coverage of the same story into one topic.
+- Aim for 5 to 8 topics, ordered most to least important. Merge near-duplicate coverage of the same story into one topic.
+- Continuity with PREVIOUSLY_REPORTED (when present): "latest_developments" must describe only what is new today versus what was already reported. Include a topic ONLY if it has a genuinely new development; let a story that has stagnated with nothing new age out by dropping it entirely, even if that leaves fewer than 5 topics. Brand-new topics not in PREVIOUSLY_REPORTED are always welcome. If there is no prior coverage of a topic, "latest_developments" states the key current update.
 - emerging_trends: 3 to 5 entries; "subject" is a one-or-two-word title-case label for the trend.
 - Assign every topic an "area" naming its part of cybersecurity — e.g. Vulnerabilities and Exploits, Ransomware and Cybercrime, Nation-State Activity, AI Security, Data Breaches, Policy and Regulation. Use 2 to 5 distinct areas across the digest and repeat the exact same area string for topics that share it.
 - Each topic cites 1 to 4 sources whose "url" values are copied EXACTLY from the items below. Never invent or modify a URL.
@@ -301,7 +308,7 @@ Rules:
 - Skip vendor marketing and product-promo items unless they carry real news.
 
 {STYLE_RULES}
-
+{prior_block}
 Items:
 {json.dumps(corpus, ensure_ascii=False, indent=1)}
 """
@@ -376,7 +383,7 @@ def validate_digest(digest, allowed_urls):
             if not isinstance(topic, dict):
                 problems.append(f"topic {n}: must be an object")
                 continue
-            for key in ("title", "last_24h", "summary"):
+            for key in ("title", "latest_developments", "summary"):
                 if not isinstance(topic.get(key), str) or not topic.get(key).strip():
                     problems.append(f"topic {n}: missing {key}")
             area = topic.get("area")
@@ -508,9 +515,42 @@ def ask_claude(cli, prompt, validate):
     raise RuntimeError(f"model never produced a valid digest: {last_error}")
 
 
-def summarize(cli, items, window, today):
+def recent_archive_digests(today_iso, days=7):
+    """Compact topic history from the last `days` of data archives, newest first.
+
+    Feeds the summarizer so it can separate new developments from old news and
+    age out stagnated stories. Includes earlier runs of the same day, since the
+    per-day data file still holds the prior run until this run overwrites it.
+    """
+    try:
+        cutoff = (datetime.strptime(today_iso, "%Y-%m-%d")
+                  - timedelta(days=days)).strftime("%Y-%m-%d")
+    except ValueError:
+        return []
+    out = []
+    for path in sorted((SITE_DIR / "data").glob("*.json"), reverse=True):
+        m = re.match(r"(\d{4}-\d{2}-\d{2})", path.stem)
+        if not m or m.group(1) < cutoff:
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        topics = [
+            {"title": t.get("title", ""),
+             "area": t.get("area", ""),
+             "development": (t.get("latest_developments") or t.get("last_24h")
+                             or t.get("summary", ""))}
+            for t in data.get("topics", []) if isinstance(t, dict)
+        ]
+        if topics:
+            out.append({"date": data.get("date", m.group(1)), "topics": topics})
+    return out
+
+
+def summarize(cli, items, window, today, prior=None):
     allowed = {i["url"] for i in items}
-    return ask_claude(cli, build_prompt(items, window, today),
+    return ask_claude(cli, build_prompt(items, window, today, prior),
                       lambda digest: validate_digest(digest, allowed))
 
 
@@ -552,6 +592,8 @@ PAGE_CSS = """
   p { margin: 0.5rem 0; }
   a { color: inherit; }
   .updated { font-style: italic; }
+  details.more summary { cursor: pointer; opacity: 0.7; font-size: 0.85rem; }
+  details.more[open] summary { margin-bottom: 0.25rem; }
   .tags { font-size: 0.8rem; opacity: 0.7; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
   .sources a { overflow-wrap: anywhere; }
@@ -643,8 +685,9 @@ def _security_inner(digest):
         out.append(f"<h4>{n}. {esc(topic['title'])}</h4>")
         if topic["tags"]:
             out.append(f'<p class="tags">[{esc(", ".join(topic["tags"]))}]</p>')
-        out.append(f'<p class="updated">Last 24h: {esc(topic["last_24h"])}</p>')
-        out.append(f"<p>{esc(topic['summary'])}</p>")
+        out.append(f'<p class="updated">Latest developments: {esc(topic["latest_developments"])}</p>')
+        out.append(f'<details class="more"><summary>read more</summary>'
+                   f'<p>{esc(topic["summary"])}</p></details>')
         if topic["sources"]:
             links = " &middot; ".join(
                 f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
@@ -831,7 +874,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
             _fill(topic["title"].upper()
                   + (f"  [{', '.join(topic['tags'])}]" if topic["tags"] else ""),
                   f"{n}. ", "   "),
-            _fill(f"Last 24h: {topic['last_24h']}", "   "),
+            _fill(f"Latest developments: {topic['latest_developments']}", "   "),
             _fill(topic["summary"], "   "),
         ]
         for src in topic["sources"]:
@@ -909,24 +952,39 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
 
 
 def render_archive_index():
-    pages = sorted(
-        (p.stem for p in (SITE_DIR / "archive").glob("*.html") if p.stem != "index"),
-        reverse=True)
-    items = "\n".join(
-        f'<li><a href="{esc(d)}.html">{esc(d)}</a> (<a href="{esc(d)}.txt">txt</a>)</li>'
-        for d in pages)
+    # Stems are either "YYYY-MM-DD" (legacy, one per day) or "YYYY-MM-DD-HHMM"
+    # (one per run). Group every run under its day, newest day and run first.
+    runs = {}  # date -> list of (stem, time_label), newest run first
+    for path in (SITE_DIR / "archive").glob("*.html"):
+        if path.stem == "index":
+            continue
+        m = re.match(r"(\d{4}-\d{2}-\d{2})(?:-(\d{2})(\d{2}))?$", path.stem)
+        if not m:
+            continue
+        label = f"{m.group(2)}:{m.group(3)}" if m.group(2) else "briefing"
+        runs.setdefault(m.group(1), []).append((path.stem, label))
+    sections = []
+    for date in sorted(runs, reverse=True):
+        rows = "\n".join(
+            f'<li><a href="{esc(stem)}.html">{esc(label)}</a> '
+            f'(<a href="{esc(stem)}.txt">txt</a>)</li>'
+            for stem, label in sorted(runs[date], reverse=True))
+        sections.append(f"<h3>{esc(date)}</h3>\n<ul>\n{rows}\n</ul>")
+    items = "\n".join(sections)
     return (
         "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         "<title>infosecfollow — archive</title>\n"
         f"<style>{PAGE_CSS}</style>\n</head>\n<body>\n<header>"
         '<h1><a href="../index.html" style="text-decoration:none">infosecfollow</a></h1>'
-        "<p>archive of daily briefings</p></header>\n"
-        f"<ul>\n{items}\n</ul>\n</body></html>\n")
+        "<p>archive of briefings (multiple runs per day)</p></header>\n"
+        f"{items}\n</body></html>\n")
 
 
 def write_site(digest, local, markets, weather, sports, feeds, items_count, window):
-    generated_at = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M %Z")
+    now_local = datetime.now().astimezone()
+    generated_at = now_local.strftime("%Y-%m-%d %H:%M %Z")
+    stamp = now_local.strftime("%Y-%m-%d-%H%M")  # one archive page per run
     today = digest["date"]
     (SITE_DIR / "archive").mkdir(parents=True, exist_ok=True)
     (SITE_DIR / "data").mkdir(parents=True, exist_ok=True)
@@ -950,13 +1008,13 @@ def write_site(digest, local, markets, weather, sports, feeds, items_count, wind
     index_html = render_html(digest, local, markets, weather, sports, feeds,
                              generated_at, "archive/index.html", "digest.txt", depth=0)
     archive_html = render_html(digest, local, markets, weather, sports, feeds,
-                               generated_at, "index.html", f"{today}.txt", depth=1)
+                               generated_at, "index.html", f"{stamp}.txt", depth=1)
     text = render_text(digest, local, markets, weather, sports, feeds, generated_at)
 
     (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
     (SITE_DIR / "digest.txt").write_text(text, encoding="utf-8")
-    (SITE_DIR / "archive" / f"{today}.html").write_text(archive_html, encoding="utf-8")
-    (SITE_DIR / "archive" / f"{today}.txt").write_text(text, encoding="utf-8")
+    (SITE_DIR / "archive" / f"{stamp}.html").write_text(archive_html, encoding="utf-8")
+    (SITE_DIR / "archive" / f"{stamp}.txt").write_text(text, encoding="utf-8")
     (SITE_DIR / "archive" / "index.html").write_text(render_archive_index(), encoding="utf-8")
     print(f"  wrote {SITE_DIR / 'index.html'}")
 
@@ -1004,8 +1062,12 @@ def main():
           f"  security: {len(selected)} items ({window}h); pittsburgh: "
           f"{len(pgh_selected)}; bizpol: {len(biz_selected)}; "
           f"reading: {len(read_selected)}")
+    prior = recent_archive_digests(today)
+    if prior:
+        print(f"  prior coverage: {sum(len(d['topics']) for d in prior)} topics "
+              f"across {len(prior)} archived runs (last week)")
     with ThreadPoolExecutor(max_workers=2) as pool:
-        digest_future = pool.submit(summarize, cli, selected, window, today)
+        digest_future = pool.submit(summarize, cli, selected, window, today, prior)
         local_future = (pool.submit(summarize_local, cli, pgh_selected,
                                     read_selected, biz_selected, today)
                         if pgh_selected or read_selected or biz_selected else None)

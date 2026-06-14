@@ -4,6 +4,7 @@ game links into plaintextsports.com. Stdlib only, no API keys.
 """
 
 import json
+import re
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -17,6 +18,16 @@ LEAGUES = [("baseball", "mlb"), ("football", "nfl"), ("hockey", "nhl")]
 TEAM_ABBR = "PIT"
 NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-season
 NEWS_MAX_AGE = timedelta(hours=48)
+
+# ESPN's team-news feed mixes real reporting with pregame previews, video-clip
+# titles, and league-wide trackers. Those read as dangling fragments next to the
+# scores, so drop any headline matching one of these case-insensitive markers.
+_JUNK_HEADLINE_RE = re.compile(
+    r"matchup|try to|look to|\bvs\.|game highlights|highlights|watch:|how to watch|"
+    r"tracker|power rankings|rankings|preview|odds|predictions|live updates|"
+    r"starting lineups|lineup|square off|rubber match|series|set to|set for|"
+    r"take on|go for|\bhost\b|\bvisit\b|\bface\b|battle|clash",
+    re.IGNORECASE)
 
 
 def _get_json(url):
@@ -207,6 +218,8 @@ def _team_news(sport, league, now_utc, recaps):
             continue
         if not headline or now_utc - published > NEWS_MAX_AGE:
             continue
+        if _JUNK_HEADLINE_RE.search(headline):
+            continue  # pregame preview, video clip, or league-wide tracker
         if any(headline in r or r in headline for r in recaps):
             continue
         headlines.append(headline)
