@@ -1,168 +1,45 @@
 {
   "date": "2026-06-15",
-  "headline": "A China-linked crew hid in North American research networks for a year by rewiring victims' own Google Workspace mail rules, as fresh exploits turned Microsoft Copilot and open-source AI gateways into one-click data-theft tools.",
+  "headline": "Attackers hammered remote-access and VPN software with fresh zero-days while the FBI and Google tore down a phishing service that drained $1.9 billion.",
   "emerging_trends": [
     {
-      "subject": "AI Attack Surface",
-      "text": "Researchers turned Microsoft 365 Copilot, the LiteLLM gateway, and Reddit-fed AI search agents into data-theft and scam engines, marking AI assistants as a primary breach vector."
+      "subject": "Edge Exploitation",
+      "text": "Attackers keep turning remote-access and VPN software—SimpleHelp, PAN-OS GlobalProtect, Cisco SD-WAN—into entry points, making perimeter software the soft underbelly of the enterprise."
     },
     {
-      "subject": "China-Linked Espionage",
-      "text": "UNC6508's year-long REDCap campaign and Sygnia's decade-long Velvet Ant findings show Beijing-aligned actors prizing stealthy, long-dwell persistence inside research and enterprise networks."
+      "subject": "Non-Human Identity",
+      "text": "A wave of launches from Omada, Trust3, 1Password, Delinea, and NewCore all aim to govern AI agents and machine identities, marking non-human identity as the year's hottest security category."
     },
     {
-      "subject": "Supply-Chain Compromise",
-      "text": "Attackers poisoned the Awesome Motive CDN behind three WordPress plugins, extending a run of supply-chain abuse from npm scripts to Arch packages to plugin updates."
+      "subject": "Disclosure Integrity",
+      "text": "Fake filings that forced Maine to pull its breach portal and a survey finding most CISOs feel pressure to bury bad news both expose cracks in how breaches reach the public."
     },
     {
-      "subject": "Nonhuman Identity",
-      "text": "A wave of launches from Omada, Trust3, 1Password, Delinea, and NewCore signals that governing AI agents and machine identities has become the industry's fastest-growing control gap."
+      "subject": "AI Bug Hunting",
+      "text": "FIRST's forecast of 66,000 CVEs in 2026, driven by AI tools that autonomously find flaws, signals defenders and attackers now race across an exploding vulnerability surface."
     }
   ],
   "topics": [
     {
-      "title": "China-Linked UNC6508 Loots Research Networks via REDCap",
-      "area": "Nation-State Activity",
-      "latest_developments": "Google's Threat Intelligence Group disclosed UNC6508, which spent more than a year inside North American medical, academic, and military research networks, breaching exposed REDCap servers and rewiring victims' own Google Workspace mail rules to copy out research and defense email.",
-      "summary": "The group planted a credential-stealing backdoor called InfiniteRed on internet-facing REDCap research servers, then used the stolen logins to auto-forward sensitive messages through victims' Workspace settings, evading exfiltration alarms. Targets spanned medical, AI, and defense research institutions, and the actor sat undetected since early 2025. Organizations running REDCap should patch and isolate those servers, audit Workspace forwarding rules, and rotate credentials.",
-      "tags": [
-        "apt",
-        "espionage",
-        "breach"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Chinese Hackers Abused Google Workspace Rules to Steal Research and Defense Emails",
-          "url": "https://thehackernews.com/2026/06/chinese-hackers-abused-google-workspace.html"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Chinese hackers breached North American research institutions via REDCap servers",
-          "url": "https://www.helpnetsecurity.com/2026/06/15/chinese-hackers-redcap-medical-research-institutions-breach/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "China-Nexus Actor Spy on US Researchers Undetected for a Year",
-          "url": "https://www.darkreading.com/threat-intelligence/china-nexus-actor-us-researchers-undetected"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Chinese Hackers Target Medical, Military, and AI Research in North America",
-          "url": "https://www.securityweek.com/chinese-hackers-target-medical-military-and-ai-research-in-north-america/"
-        }
-      ]
-    },
-    {
-      "title": "North Korea Weaponizes Developer Recruitment Lures",
-      "area": "Nation-State Activity",
-      "latest_developments": "Proofpoint tied two fresh campaigns to North Korea's Contagious Interview cluster, also called Famous Chollima, which now phishes developers with job-recruitment and code-review themes to deliver malware through development tools.",
-      "summary": "The actor lures software engineers with fake hiring or peer-review prompts, then pushes malicious code through trusted developer channels. The approach exploits the openness of coding workflows to slip past endpoint defenses. Engineering teams should verify recruiter and reviewer identities, sandbox unfamiliar code, and restrict what developer tooling can fetch and run.",
-      "tags": [
-        "apt",
-        "north-korea",
-        "phishing"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "North Korean Hackers Are Turning Developer Tools Into Malware Delivery Channels",
-          "url": "https://thehackernews.com/2026/06/north-korean-hackers-are-turning.html"
-        }
-      ]
-    },
-    {
-      "title": "Microsoft Copilot and AI Gateways Become Data-Theft Tools",
-      "area": "AI Security",
-      "latest_developments": "Varonis chained three bugs into SearchLeak, a one-click flaw that pulled emails, files, and MFA codes from Microsoft 365 Copilot Enterprise Search through a genuine microsoft.com link, while Obsidian Security disclosed a LiteLLM chain that lets a default low-privilege account seize the AI gateway and every model-provider key it holds.",
-      "summary": "SearchLeak abused prompt injection and hidden URLs so that anti-phishing and URL filters waved the trusted Microsoft domain straight through; Microsoft has patched it. The LiteLLM chain, in a gateway that brokers calls to more than 100 model providers, escalates to admin and remote code execution, exposing stored secrets. Separate research showed a 13-word snippet planted on Reddit or Wikipedia can steer AI search agents into emitting scam content. Patch Copilot and LiteLLM, and treat all AI-assistant inputs as untrusted.",
-      "tags": [
-        "ai",
-        "prompt-injection",
-        "vulnerability"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "One-Click Microsoft 365 Copilot Flaw Could Have Let Attackers Steal Emails, Files, and MFA Codes",
-          "url": "https://thehackernews.com/2026/06/one-click-microsoft-365-copilot-flaw.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "New attack turned Microsoft 365 Copilot into 1-click data theft tool",
-          "url": "https://www.bleepingcomputer.com/news/security/new-attack-turned-microsoft-365-copilot-into-1-click-data-theft-tool/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "LiteLLM Vulnerability Chain Lets Low-Privilege Users Take Over AI Gateway Servers",
-          "url": "https://thehackernews.com/2026/06/litellm-vulnerability-chain-lets-low.html"
-        },
-        {
-          "source": "404 Media",
-          "title": "It Is Trivially Easy to Use Reddit to Manipulate AI Search, Research Suggests",
-          "url": "https://www.404media.co/it-is-trivially-easy-to-use-reddit-to-manipulate-ai-search-research-suggests/"
-        }
-      ]
-    },
-    {
-      "title": "AI Bug Hunters Push 2026 CVE Count Toward 66,000",
-      "area": "AI Security",
-      "latest_developments": "The Forum of Incident Response and Security Teams raised its 2026 forecast toward 66,000 CVEs, well above its start-of-year projection, crediting AI tools that now autonomously hunt software flaws and find them effectively.",
-      "summary": "Disclosure volume for the first months of 2026 already outran expectations as automated discovery floods researchers and vendors with new findings. The surge strains patch pipelines and vulnerability-management teams who must triage far more reports. Security leaders should prioritize by exploitability and asset exposure rather than chase raw counts.",
-      "tags": [
-        "ai",
-        "vulnerability"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "AI vulnerability discovery is pushing 2026 CVEs toward 66,000",
-          "url": "https://www.helpnetsecurity.com/2026/06/15/first-2026-cve-forecast/"
-        }
-      ]
-    },
-    {
-      "title": "ShinyHunters Extortion Spree Hits Council of Europe and Schools",
-      "area": "Data Breaches",
-      "latest_developments": "ShinyHunters claimed it stole 297 GB from the Council of Europe, prompting an official probe, and disclosed that a March Salesforce theft against the Infinite Campus K-12 platform exposed personal data on more than 137,000 school staff.",
-      "summary": "The extortion gang keeps milking earlier Salesforce data-theft campaigns. The Council of Europe, the continent's oldest intergovernmental body, is investigating the claim, which allegedly includes employee personal information and carries a leak threat. The Infinite Campus haul affects school districts across the United States. Defenders should review Salesforce access, revoke stale OAuth tokens, and ready breach-notification procedures.",
-      "tags": [
-        "breach",
-        "extortion"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Council of Europe investigates ShinyHunters data breach claims",
-          "url": "https://www.bleepingcomputer.com/news/security/council-of-europe-investigates-shinyhunters-data-breach-claims/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "ShinyHunters Claims Council of Europe Hack",
-          "url": "https://www.securityweek.com/shinyhunters-claims-council-of-europe-hack/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Infinite Campus data breach affects 137,000 school staff accounts",
-          "url": "https://www.bleepingcomputer.com/news/security/infinite-campus-data-breach-affects-137-000-school-staff-accounts/"
-        }
-      ]
-    },
-    {
-      "title": "Cisco SD-WAN and LiteSpeed Flaws Exploited as Zero-Days",
+      "title": "Remote Access and VPN Software Under Active Attack",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Cisco patched CVE-2026-20262, a path-traversal bug in Catalyst SD-WAN Manager that attackers exploited to escalate to root, and CISA added it plus the LiteSpeed cPanel plugin symlink flaw CVE-2026-54420 to its known-exploited catalog.",
-      "summary": "Both flaws sit in widely deployed management and hosting infrastructure, where a foothold yields broad control. The vManage bug grants root on the SD-WAN controller; the LiteSpeed plugin flaw enables symlink-following privilege abuse on cPanel servers. CISA's catalog listing binds federal agencies to fixed remediation deadlines. Apply Cisco's updates and the LiteSpeed patch immediately.",
+      "latest_developments": "Palo Alto Networks confirmed an unknown actor actively exploits CVE-2026-0257, an authentication-bypass flaw in PAN-OS GlobalProtect portals, and researchers disclosed a SimpleHelp bug that lets unauthenticated attackers mint privileged technician accounts on servers using OpenID Connect.",
+      "summary": "SimpleHelp's flaw hands an unauthenticated attacker the power to create privileged technician accounts on any server that uses OpenID Connect, granting full remote control. Palo Alto's CVE-2026-0257 lets an attacker bypass authentication on GlobalProtect portals and gateways, and exploitation is already under way. CISA the same day added Cisco's Catalyst SD-WAN Manager path-traversal bug and the LiteSpeed cPanel symlink flaw to its exploited catalog. Administrators should patch all four and audit any accounts created since.",
       "tags": [
         "zero-day",
         "patch",
-        "exploit"
+        "vpn"
       ],
       "sources": [
         {
+          "source": "The Hacker News",
+          "title": "Palo Alto Warns of Active Exploitation of PAN-OS GlobalProtect VPN Flaw",
+          "url": "https://thehackernews.com/2026/06/palo-alto-warns-of-active-exploitation.html"
+        },
+        {
           "source": "BleepingComputer",
-          "title": "Cisco fixes SD-WAN vManage flaw exploited in zero-day attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/cisco-fixes-sd-wan-vmanage-flaw-exploited-in-zero-day-attacks/"
+          "title": "SimpleHelp bug lets hackers create rogue remote support accounts",
+          "url": "https://www.bleepingcomputer.com/news/security/simplehelp-bug-lets-hackers-create-rogue-remote-support-accounts/"
         },
         {
           "source": "CISA Advisories",
@@ -172,41 +49,148 @@
       ]
     },
     {
-      "title": "Tampered WordPress Plugin Scripts Plant Site Backdoors",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Attackers compromised the Awesome Motive content distribution network feeding OptinMonster, TrustPulse, and PushEngage, swapping trusted JavaScript so that an admin loading a page silently created a rogue admin account and installed a hidden plugin.",
-      "summary": "The poisoned files triggered only when a logged-in administrator loaded them, sparing ordinary visitors and slowing detection. The backdoor account and concealed plugin reopen access even after cleanup. Sites running any of the three plugins should audit administrator accounts, hunt for unknown plugins, and reinstall clean versions once the CDN is verified safe.",
-      "tags": [
-        "supply-chain",
-        "wordpress",
-        "backdoor"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "OptinMonster WordPress plugin hacked in CDN supply-chain attack",
-          "url": "https://www.bleepingcomputer.com/news/security/optinmonster-wordpress-plugin-hacked-in-cdn-supply-chain-attack/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Popular WordPress Plugin Scripts Tampered to Plant Hidden Backdoors on Sites",
-          "url": "https://thehackernews.com/2026/06/popular-wordpress-plugin-scripts.html"
-        }
-      ]
-    },
-    {
-      "title": "Ransomware Halts Australia's Mackay Sugar Mills",
+      "title": "FBI and Google Dismantle Outsider Enterprise Phishing Service",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "A group calling itself The Gentlemen hit Mackay Sugar, Australia's second-largest sugar producer, shutting down milling operations.",
-      "summary": "The attack disrupted industrial processing at a major food producer, the latest ransomware strike to cross from IT into operational systems. Outages at a seasonal processor threaten supply and grower payments. Manufacturers should segment operational technology from corporate networks, test offline backups, and rehearse production-loss recovery.",
+      "latest_developments": "The FBI and Google together took down Outsider Enterprise, the China-based phishing-as-a-service operation, after counting more than 9,000 phishing sites, the theft of nearly 4 million credit cards, and roughly $1.9 billion in losses.",
+      "summary": "Outsider Enterprise rented a phishing kit built on Google's Gemini that blasted scam texts at Americans and harvested payment cards at scale. The joint takedown follows Google's earlier lawsuit against the operators. The figures—4 million stolen cards and $1.9 billion in losses—rank it among the larger phishing operations dismantled this year.",
       "tags": [
-        "ransomware"
+        "phishing",
+        "takedown",
+        "cybercrime"
       ],
       "sources": [
         {
           "source": "SecurityWeek",
-          "title": "Ransomware Attack Shuts Down Mills of Australia's Second-Largest Sugar Producer",
-          "url": "https://www.securityweek.com/ransomware-attack-shuts-down-mills-of-australias-second-largest-sugar-producer/"
+          "title": "FBI, Google Dismantle 'Outsider Enterprise' Phishing Service",
+          "url": "https://www.securityweek.com/fbi-google-dismantle-outsider-enterprise-phishing-service/"
+        }
+      ]
+    },
+    {
+      "title": "UNC6508 Loots Research Networks With InfiniteRed",
+      "area": "Nation-State Activity",
+      "latest_developments": "Google's Threat Intelligence Group named the group's custom malware InfiniteRed, revealed it has tracked the China-linked actor since early 2025, and added artificial-intelligence research to the medical, academic, and military targets it pursues.",
+      "summary": "UNC6508, a People's Republic of China contractor, breaks into exposed REDCap research servers and drops InfiniteRed to steal credentials and data. The group rewires victims' own Google Workspace mail rules to copy research and defense email out, a tactic that sidesteps conventional exfiltration detection. It lurked undetected for more than a year across North American institutions. Institutions should lock down internet-facing REDCap servers and review Workspace forwarding rules.",
+      "tags": [
+        "apt",
+        "espionage",
+        "china"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Chinese hackers breached North American research institutions via REDCap servers",
+          "url": "https://www.helpnetsecurity.com/2026/06/15/chinese-hackers-redcap-medical-research-institutions-breach/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Chinese hackers breach REDCap servers, steal medical research",
+          "url": "https://www.bleepingcomputer.com/news/security/chinese-hackers-breach-redcap-servers-steal-medical-research/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Chinese Hackers Target Medical, Military, and AI Research in North America",
+          "url": "https://www.securityweek.com/chinese-hackers-target-medical-military-and-ai-research-in-north-america/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Chinese Hackers Abused Google Workspace Rules to Steal Research and Defense Emails",
+          "url": "https://thehackernews.com/2026/06/chinese-hackers-abused-google-workspace.html"
+        }
+      ]
+    },
+    {
+      "title": "Finland Charges Ship Officers in Undersea Cable Sabotage",
+      "area": "Nation-State Activity",
+      "latest_developments": "Finland's deputy prosecutor general charged the officers of a cargo ship with damaging two subsea telecommunications cables and attempting to damage eight more connections.",
+      "summary": "Finnish prosecutors brought criminal charges against a cargo ship's officers for severing two Baltic Sea telecom cables and trying to cut eight others. The case adds to a string of cable-cutting incidents that have rattled European critical infrastructure. A conviction would mark a rare criminal accounting for undersea-infrastructure damage.",
+      "tags": [
+        "critical-infrastructure",
+        "sabotage"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Finland brings charges against cargo ship officers for cutting submarine cables",
+          "url": "https://therecord.media/finland-brings-charges-against-cargo-ship-undersea-cables"
+        }
+      ]
+    },
+    {
+      "title": "Ghostwriter Phishes Polish Officials' Personal Gmail",
+      "area": "Nation-State Activity",
+      "latest_developments": "Poland warned that the Belarus-linked Ghostwriter group has expanded its phishing to the personal Gmail accounts of senior public figures and their relatives.",
+      "summary": "Ghostwriter, tied to Belarus, has phished Polish targets for years through official systems. Poland now reports the group has shifted to personal Gmail accounts belonging to senior officials and their families, widening the reach to relatives who lack institutional defenses. Targets should turn on hardware-key two-factor authentication.",
+      "tags": [
+        "apt",
+        "phishing"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Belarus-linked hackers target Gmail accounts of Polish public figures and their families",
+          "url": "https://therecord.media/ghostwriter-targets-personal-gmail-accounts-in-poland"
+        }
+      ]
+    },
+    {
+      "title": "Maine Pulls Breach Portal After Fake Filings",
+      "area": "Policy and Regulation",
+      "latest_developments": "Maine took its public data breach notification portal offline after someone filed fraudulent disclosures impersonating VRChat and Discord, and will keep it restricted until an audit hardens submission checks.",
+      "summary": "An unknown party posted fake breach reports on Maine's public portal in the names of well-known technology firms. The state attorney general removed public access and will keep it limited pending an audit of its procedures. Companies can still file breach notices; the public simply loses easy visibility for now.",
+      "tags": [
+        "policy",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Maine closes data breach portal to the public after fake reports",
+          "url": "https://therecord.media/maine-turns-off-breach-portal-fake-reports"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Maine Disables Data Breach Portal Due to Fake Submissions",
+          "url": "https://www.securityweek.com/maine-disables-data-breach-portal-due-to-fake-submissions/"
+        },
+        {
+          "source": "Graham Cluley",
+          "title": "Maine forced to take down data breach portal after fake notices filed with authorities",
+          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/maine-take-down-data-breach-portal"
+        }
+      ]
+    },
+    {
+      "title": "FCC Moves to End Burner Phones",
+      "area": "Policy and Regulation",
+      "latest_developments": "The FCC proposed a rule forcing U.S. telecoms to store a government-issued identification number and physical address for essentially every phone customer, ending anonymous prepaid accounts.",
+      "summary": "The proposed FCC rule would compel carriers to attach a verified identity to each phone account, killing the burner phone. Privacy and civil-rights advocates warn the mandated database of names, IDs, and addresses resembles surveillance regimes in authoritarian states. The plan would reshape how Americans buy and use prepaid service.",
+      "tags": [
+        "policy",
+        "privacy"
+      ],
+      "sources": [
+        {
+          "source": "Schneier on Security",
+          "title": "The FCC Wants to Eliminate Burner Phones",
+          "url": "https://www.schneier.com/blog/archives/2026/06/the-fcc-wants-to-eliminate-burner-phones.html"
+        }
+      ]
+    },
+    {
+      "title": "DOJ Seizes Deepfake Nude Sites Under TAKE IT DOWN Act",
+      "area": "Policy and Regulation",
+      "latest_developments": "The Justice Department seized CFAKE.com and SOCFAKE.com in what appears to be the first publicly announced domain seizure under the TAKE IT DOWN Act.",
+      "summary": "The two sites hosted nonconsensual AI-generated nude images and videos of women. The Justice Department's seizure marks the debut use of the TAKE IT DOWN Act's domain authority against deepfake-abuse infrastructure. The action signals the government will wield the statute to pull such platforms offline.",
+      "tags": [
+        "policy",
+        "deepfake"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "DOJ seizes CFAKE, SOCFAKE deepfake nude sites under TAKE IT DOWN Act",
+          "url": "https://www.bleepingcomputer.com/news/security/doj-seizes-cfake-socfake-deepfake-nude-sites-under-take-it-down-act/"
         }
       ]
     }
@@ -256,9 +240,9 @@
     }
   ],
   "weather": [
-    "This Afternoon: Mostly Sunny, high 72F.",
     "Tonight: Mostly Clear, low 51F.",
-    "Tuesday: Mostly Sunny, high 77F."
+    "Tuesday: Mostly Sunny, high 77F.",
+    "Tuesday Night: Mostly Cloudy then Chance Rain Showers, low 58F."
   ],
   "sports": [
     {
@@ -283,88 +267,76 @@
   "local": {
     "business_politics": [
       {
-        "title": "Iran Deal Heads to Friday Signing, Hormuz Reopening",
-        "latest_developments": "Trump said the Strait of Hormuz will fully reopen by Friday and that he and Iran's top negotiator have already signed the memorandum electronically ahead of a Friday ceremony, while the administration weighs a $300 billion incentive fund tied to Tehran's compliance.",
-        "summary": "The interim accord ends the U.S.-Iran war and lifts the naval blockade, reopening the world's busiest oil chokepoint. Oil settled at its lowest since March 4, average U.S. gasoline fell below $4 a gallon, and global stocks hit records, though shippers call passage still too risky and analysts expect weeks before traffic returns to half its prewar level.",
+        "title": "Markets Hit Records as Iran Deal Finalizes",
+        "latest_developments": "Beyond the signed memorandum and Friday timeline already reported, markets delivered the verdict Monday: the Dow industrials closed at a record, oil settled at its lowest since March 4, and average U.S. gasoline fell below $4 a gallon.",
+        "summary": "President Trump announced a deal ending the war with Iran, signed electronically ahead of a June 19 ceremony in Switzerland, that reopens the Strait of Hormuz, dismantles Tehran's nuclear program, and trades sanctions relief the administration may anchor with a $300 billion incentive fund tied to Iran's compliance. Global stocks rallied and gold settled 2.7% higher, though shipping groups still call the strait too risky, and only one vessel transited Monday.",
         "sources": [
+          {
+            "source": "WSJ Markets",
+            "title": "Stocks Have Even More Room to Fly if Hormuz Reopens",
+            "url": "https://www.wsj.com/finance/global-stocks-markets-dow-news-06-15-2026-c6898869?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Markets",
+            "title": "Stocks surge as US-Iran deal ignites global rally",
+            "url": "https://www.ft.com/content/8a6849de-b27c-4680-a80d-42b85b0e77eb"
+          },
           {
             "source": "WSJ World News",
             "title": "Trump Says Strait of Hormuz Will Be Fully Open by Friday Under Iran Deal",
             "url": "https://www.wsj.com/world/middle-east/questions-about-trumps-iran-deal-set-to-dominate-g-7-fcd7fcbc"
           },
           {
-            "source": "FT World",
-            "title": "Trump administration considers $300bn fund for Iran if deal is upheld",
-            "url": "https://www.ft.com/content/088c14d3-f708-44d8-a306-7996aa5211de"
-          },
-          {
-            "source": "FT World",
-            "title": "Stocks surge as US-Iran deal ignites global rally",
-            "url": "https://www.ft.com/content/8a6849de-b27c-4680-a80d-42b85b0e77eb"
-          },
-          {
-            "source": "FT World",
+            "source": "FT Markets",
             "title": "Average US petrol price falls below $4 on deal to reopen Strait of Hormuz",
             "url": "https://www.ft.com/content/ff17e2a2-7744-4e19-9e1d-23bc5892191c"
-          }
-        ]
-      },
-      {
-        "title": "EU Opens Membership Talks With Ukraine",
-        "latest_developments": "The European Union began accession negotiations with Ukraine after Hungary's new leadership dropped the veto that had stalled the process.",
-        "summary": "Ukraine enters a reform path expected to run years while it still fights Russia. Membership would extend the bloc eastward and bind Kyiv to EU law, the largest enlargement step in two decades.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "EU starts membership talks with Ukraine",
-            "url": "https://www.ft.com/content/19d88dc2-963b-45f2-9a23-9e328cc45948"
           }
         ]
       }
     ],
     "business": [
       {
-        "title": "Astrobotic's Griffin Lander Ships for Testing",
-        "latest_developments": "Pittsburgh's Astrobotic sent its Griffin lunar lander out for environmental testing, the last major step before launch and a follow-on to its earlier Peregrine mission.",
-        "summary": "Griffin, built on the North Side, carries cargo toward a planned NASA moon base and counts as the region's second moonshot. SpaceX will handle the launch.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Goodbye, Griffin: Pittsburgh's second moonshot sent off for environmental testing before launch",
-            "url": "https://www.post-gazette.com/business/tech-news/2026/06/15/astrobotic-spacex-nasa-moon-base-griffin-peregrine/stories/202606150033"
-          }
-        ]
-      },
-      {
-        "title": "Pittsburgh International Named a Most Beautiful Airport",
-        "latest_developments": "The Prix Versailles placed Pittsburgh International on its annual World's Most Beautiful Airports list.",
-        "summary": "The recognition spotlights the airport's recently completed terminal in Findlay Township, a marquee piece of regional development.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Pittsburgh International named to annual 'World's Most Beautiful Airports' list",
-            "url": "https://www.post-gazette.com/business/development/2026/06/15/pittsburgh-international-worlds-most-beautiful-airports-prix-versailles/stories/202606150032"
-          }
-        ]
-      },
-      {
-        "title": "Cuban Food Truck Opens McKees Rocks Restaurant",
-        "latest_developments": "Milanes Cuban Corner, run by Carlos and Collyn Milanes, grew from a popular food truck into a brick-and-mortar restaurant in McKees Rocks.",
-        "summary": "The couple built a following on pressed Cuban sandwiches of pork and pickles and now serve them from a fixed location.",
+        "title": "Pittsburgh Weddings Top the National Average",
+        "latest_developments": "A new local study puts the average cost of a Pittsburgh wedding above the national figure, the subject of KDKA's \"Talk the Talk\" segment Monday.",
+        "summary": "Couples marrying in Pittsburgh now spend more than the typical American wedding costs, according to a local study KDKA examined, a finding at odds with the region's reputation for low prices.",
         "sources": [
           {
             "source": "KDKA",
-            "title": "Pickles, pork and perfectly-pressed bread with Milanes Cuban Corner",
-            "url": "https://www.cbsnews.com/pittsburgh/video/pickles-pork-and-perfectly-pressed-bread-with-milanes-cuban-corner/"
+            "title": "Talk the Talk: June 15, 2026",
+            "url": "https://www.cbsnews.com/pittsburgh/video/talk-the-talk-june-15-2026/"
+          }
+        ]
+      },
+      {
+        "title": "Aldi Recalls Macaroni and Cheese",
+        "latest_developments": "Aldi pulled more than 500,000 packages of Park Street Deli Macaroni & Cheese nationwide over an allergen the label failed to declare.",
+        "summary": "The recall covers Park Street Deli Macaroni & Cheese sold at Aldi stores, a chain with locations across the Pittsburgh region, affecting more than 500,000 packages flagged for an undeclared allergen.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "More than 500,000 packages of Aldi macaroni and cheese recalled",
+            "url": "https://www.wtae.com/article/park-st-deli-macaroni-and-cheese-recall/71594788"
           }
         ]
       }
     ],
     "around_town": [
       {
-        "title": "Surveys Confirm Tornadoes as Cleanup Continues",
-        "latest_developments": "The National Weather Service confirmed at least three tornadoes from Sunday's storms across northwestern Pennsylvania and eastern Ohio, including one that crossed into Beaver County, while crews cleared downed trees in Elizabeth Township and Darlington.",
-        "summary": "Sunday's severe weather toppled trees onto cars and power lines across the region. Surveys remain ongoing and no EF ratings are set.",
+        "title": "Parkway North to Close for Bridge Demolition",
+        "latest_developments": "Crews will fully close a stretch of the Parkway North later this week to demolish the Jacks Run Road Bridge over the highway, after equipment problems postponed a Monday-night start.",
+        "summary": "A section of the Parkway North will shut completely for the demolition of the Jacks Run Road Bridge that spans the highway; the work, first scheduled for Monday night, slipped to later in the week.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Part of Parkway North to close for bridge demolition",
+            "url": "https://www.cbsnews.com/pittsburgh/video/part-of-parkway-north-to-close-for-bridge-demolition/"
+          }
+        ]
+      },
+      {
+        "title": "Storm Surveys Confirm Tornado Touchdowns",
+        "latest_developments": "The National Weather Service confirmed two tornado touchdowns in Columbiana County, Ohio, near the Beaver County line plus a third that crossed into Beaver County, while a Butler County farm tallied a machine shed torn from its foundation along with ruined crops and fruit trees.",
+        "summary": "Sunday's severe storms spawned at least three tornadoes across eastern Ohio and northwestern Pennsylvania, the weather service said Monday as surveys continued; cleanup of downed trees and power lines ran through Beaver County, Elizabeth Township, and the damaged Butler County farm.",
         "sources": [
           {
             "source": "KDKA",
@@ -372,62 +344,38 @@
             "url": "https://www.cbsnews.com/pittsburgh/news/confirmed-tornadoes-pennsylvania-ohio-storm-damage/"
           },
           {
-            "source": "WPXI",
-            "title": "NWS confirms tornado crossed into Beaver County on Sunday",
-            "url": "https://www.wpxi.com/news/local/nws-confirms-tornado-crossed-into-beaver-county-sunday/VTVUUIIGJ5ANNB75Y6TBDFEZVU/"
+            "source": "WTAE",
+            "title": "Machine shed ripped from foundation at Western Pa. farm after strong storms",
+            "url": "https://www.wtae.com/article/severe-storms-cause-damage-at-butler-county-farm/71595229"
           },
           {
             "source": "WPXI",
-            "title": "Cleanup continues after damaging winds tear through parts of Elizabeth Township",
-            "url": "https://www.wpxi.com/news/local/cleanup-continues-after-damaging-winds-tear-through-parts-elizabeth-township/45FZ5KPUHFHU5GMCJLAFQBPUBA/"
+            "title": "NWS confirms tornado crossed into Beaver County on Sunday",
+            "url": "https://www.wpxi.com/news/local/nws-confirms-tornado-crossed-into-beaver-county-sunday/VTVUUIIGJ5ANNB75Y6TBDFEZVU/"
           }
         ]
       },
       {
-        "title": "Transit Schedule Set for Juneteenth",
-        "latest_developments": "Pittsburgh Regional Transit announced its service schedule for Juneteenth National Freedom Day on June 19.",
-        "summary": "Riders should check adjusted bus and rail times for the federal holiday before traveling.",
+        "title": "Comfortable Week, Thursday Impact Day",
+        "latest_developments": "Forecasters call for dry, comfortable conditions through midweek before rain returns Wednesday night and Thursday becomes an Impact Day for rain and storms.",
+        "summary": "Western Pennsylvania holds onto comfortable, dry weather to start the week, with rain arriving Wednesday night and Thursday flagged as an Impact Day for rain and thunderstorms.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Pittsburgh Regional Transit announces service schedule for Juneteenth National Freedom Day",
-            "url": "https://www.wpxi.com/news/local/pittsburgh-regional-transit-announces-service-schedule-juneteenth-national-freedom-day/QCVRWU3BTZD4ZCZL2RU7723B6M/"
+            "source": "WTAE",
+            "title": "Western PA: Comfortable until an Impact Day Thursday",
+            "url": "https://www.wtae.com/article/western-pa-dry-and-comfortable-to-begin-the-week/71585333"
           }
         ]
       },
       {
-        "title": "Pittsburgh Nears Final Fern Hollow Settlements",
-        "latest_developments": "Pittsburgh is closing in on final settlements with most people hurt in the 2022 Fern Hollow Bridge collapse.",
-        "summary": "The Forbes Avenue span over Frick Park fell in January 2022, injuring people aboard a transit bus and in cars below; the city has worked through claims since.",
+        "title": "Bears Turn Up in City Neighborhoods",
+        "latest_developments": "A black bear turned up on camera in a Pittsburgh neighborhood again, prompting KDKA to ask an expert how many bears now live within city limits.",
+        "summary": "Cameras keep capturing black bears moving through Pittsburgh neighborhoods; a wildlife expert told KDKA the repeated sightings raise the question of how many bears now range inside the city.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Years after the Fern Hollow Bridge collapse, Pittsburgh nears final settlements with most victims",
-            "url": "https://www.post-gazette.com/local/city/2026/06/15/fern-hollow-bridge-collapse-settlements/stories/202606150036"
-          }
-        ]
-      },
-      {
-        "title": "City Pools Open for the Season",
-        "latest_developments": "Pittsburgh's public pools opened for the summer, and the city published hours, fees, and a roster of other summer events.",
-        "summary": "Residents can find pool hours, admission costs, and a calendar of city programming for the warm months ahead.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Pittsburgh pools are open for the season. Here are the hours and fees, plus other summer events in the city",
-            "url": "https://www.post-gazette.com/local/city/2026/06/15/pittsburgh-pools-hours-fees/stories/202606150035"
-          }
-        ]
-      },
-      {
-        "title": "County Weighs Mandatory Paid Parental Leave",
-        "latest_developments": "A proposal before Allegheny County would require 18 weeks of paid parental leave from every employer with no exemptions, prompting a chief financial officer to make a public case for it in TribLive.",
-        "summary": "The mandate would cover all county employers regardless of size, leaving business owners to weigh the cost against retention and recruiting.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Dirk Doebler: A CFO's case for paid parental leave in Allegheny County",
-            "url": "https://triblive.com/opinion/dirk-doebler-a-cfos-case-for-paid-parental-leave-in-allegheny-county/"
+            "source": "KDKA",
+            "title": "Bear caught on camera in Pittsburgh neighborhood",
+            "url": "https://www.cbsnews.com/pittsburgh/video/bear-caught-on-camera-in-pittsburgh-neighborhood-1/"
           }
         ]
       }
@@ -435,50 +383,43 @@
     "events": [],
     "around_teams": [
       {
-        "title": "Which Steelers Rookies Could Contribute Early",
-        "latest_developments": "After OTAs and minicamp, Post-Gazette writers flagged rookies Germie Bernard and Max Iheanachor as candidates to contribute quickly.",
-        "summary": "The video review weighed which first-year Steelers stood out in spring work ahead of training camp.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "WATCH: Are any Steelers rookies looking like quick contributors after OTAs, minicamp?",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/06/15/nfl-news-rumors-germie-bernard-max-iheanachor/stories/202606150028"
-          }
-        ]
-      },
-      {
-        "title": "Termarr Johnson's Turnaround in the Minors",
-        "latest_developments": "The Post-Gazette's MiLB Monday asked whether former top Pirates pick Termarr Johnson is turning his season around in the farm system.",
-        "summary": "Johnson, an early first-round draft choice, has worked to find form; the column also tracked prospects Edward Florentino and Tony Blanco.",
+        "title": "Pirates Bullpen at a Breaking Point",
+        "latest_developments": "Post-Gazette columnist Noah Hiles wrote that the Pirates must fix their bullpen now or watch it sink the season.",
+        "summary": "In his weekend column, the Post-Gazette's Noah Hiles called the relief corps the team's central flaw and pressed manager Don Kelly and general manager Ben Cherington to address it before the year slips away.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "MiLB Monday: Is former top Pirates pick Termarr Johnson turning things around?",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/15/mlb-prospects-termarr-johnson-edward-florentino-tony-blanco/stories/202606150020"
+            "title": "Noah Hiles' weekend thoughts: The Pirates must fix their bullpen now or it will sink their season",
+            "url": "https://www.post-gazette.com/sports/columns/2026/06/15/mlb-pirates-bullpen-don-kelly-jake-mangum-ben-cherington/stories/202606140080"
           }
         ]
       },
       {
-        "title": "SNR Drive Ranks Divisions by QB Talent",
-        "latest_developments": "On the Steelers' SNR Drive, Matt Williamson and Wes Uhler ranked each NFL division by quarterback talent.",
-        "summary": "The team show broke down where the AFC North sits among the league's passing groups.",
+        "title": "Pirates Call Up Antwone Kelly for the Bullpen",
+        "latest_developments": "A source told the Post-Gazette the Pirates will promote pitcher Antwone Kelly, their No. 7 prospect, to reinforce a struggling bullpen.",
+        "summary": "The Pirates plan to call up Antwone Kelly, a pitching prospect ranked seventh in their system and a native of Aruba, to help a relief corps that has dragged on the season.",
         "sources": [
           {
-            "source": "Pittsburgh Steelers (YouTube)",
-            "title": "Ranking Divisions by QB Talent | SNR Drive | Pittsburgh Steelers",
-            "url": "https://www.youtube.com/watch?v=yFuV9I1SkMw"
+            "source": "Post-Gazette Pirates",
+            "title": "Source: Pirates to call up No. 7 prospect Antwone Kelly to help bullpen",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/12/pirates-bullpen-antwone-kelly-debut-aruba-1/stories/202606120034"
           }
         ]
       },
       {
-        "title": "Heyward Podcast Revisits Near-Upset of Cowboys",
-        "latest_developments": "On Not Just Football with Cam Heyward, the show recounted how a team nearly ended the Cowboys dynasty.",
-        "summary": "The episode dug into the matchup as part of the podcast's football-history segments.",
+        "title": "Building a Core Around Porter and Herbig",
+        "latest_developments": "The Post-Gazette weighed whether the Steelers can build their next defensive core around cornerback Joey Porter Jr. and edge rusher Nick Herbig, whose new contract Cam Heyward's podcast marked as a long-awaited payoff.",
+        "summary": "A Post-Gazette video asked whether Pittsburgh can form a young defensive core around Joey Porter Jr. and Nick Herbig; on \"Not Just Football with Cam Heyward,\" the show framed Herbig's new deal as the reward for a 20-year climb.",
         "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "WATCH: Can the Steelers form a new core around Joey Porter Jr. and Nick Herbig?",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/12/nfl-draft-news-rumors-joey-porter-jr-nick-herbig/stories/202606120048"
+          },
           {
             "source": "Not Just Football with Cam Heyward",
-            "title": "How They Nearly Ended The Cowboys Dynasty",
-            "url": "https://www.youtube.com/watch?v=TFO8VCU4tp4"
+            "title": "Nick Herbig's contract was 20 years in the making. Hard work pays off #steelers",
+            "url": "https://www.youtube.com/shorts/0rfyueiCpE4"
           }
         ]
       }
@@ -488,25 +429,25 @@
         "author": "Ed Zitron",
         "title": "AI's Brokenomics",
         "url": "https://www.wheresyoured.at/brokenomics/",
-        "summary": "Zitron argues the economics underpinning the AI boom are fundamentally broken, with leading labs burning billions a year and no credible path to profitability."
+        "summary": "Zitron argues the economics underpinning the AI boom are fundamentally broken, with leading model makers burning billions and no credible path to profit."
       },
       {
         "author": "Cal Newport",
         "title": "AI Isn't Breaking Work. It's Already Broken.",
         "url": "https://calnewport.com/ai-isnt-breaking-work-its-already-broken/",
-        "summary": "Reacting to a survey of 6,000 digital workers, Newport argues knowledge work was already dysfunctional before AI arrived, so the technology mostly exposes problems that existed all along."
+        "summary": "Drawing on a survey of 6,000 digital workers, Newport contends AI exposes dysfunction already baked into knowledge work rather than creating it."
       },
       {
         "author": "Stratechery",
         "title": "Anthropic's Safety Superpower",
         "url": "https://stratechery.com/2026/anthropics-safety-superpower/",
-        "summary": "Thompson argues Anthropic's belief in its own safety commitment gives it license to aggressively favor its business and even challenge the U.S. government."
+        "summary": "Ben Thompson argues Anthropic's conviction in its own safety mission gives it license to aggressively favor its business and even challenge the U.S. government."
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-15 17:47 EDT",
-    "items_considered": 61,
+    "generated_at": "2026-06-15 18:41 EDT",
+    "items_considered": 62,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
