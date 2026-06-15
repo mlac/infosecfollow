@@ -45,5 +45,11 @@ fi
 git -c user.name="${GIT_AUTHOR_NAME:-infosecfollow-bot}" \
     -c user.email="${GIT_AUTHOR_EMAIL:-infosecfollow@users.noreply.github.com}" \
     commit -m "briefing $(date '+%Y-%m-%d %H:%M %Z')"
-git push origin HEAD:main
-echo "published"
+# A concurrent push (e.g. you pushing from the Mac at the same moment) makes this
+# non-fast-forward. Don't error out — the next run starts from a fresh
+# `git reset --hard origin/main` and regenerates, so it self-heals.
+if git push origin HEAD:main; then
+    echo "published"
+else
+    echo "push rejected (concurrent update?); next run will regenerate from origin"
+fi

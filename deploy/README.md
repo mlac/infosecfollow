@@ -5,8 +5,8 @@ on a 6am / noon / 4pm / 9pm ET schedule, so your Mac no longer has to be on. The
 container regenerates the site and pushes it to GitHub Pages, exactly like the old
 macOS LaunchAgent did.
 
-**How it works:** the container holds Python + the Claude Code CLI + git + a cron
-(`supercronic`). You fetch a few build files with `curl`, build the image
+**How it works:** the container holds Python + the Claude Code CLI + git + a tiny
+shell scheduler. You fetch a few build files with `curl`, build the image
 locally, and on first run the container **clones the app into a Docker volume
 itself** (using the git bundled inside the image) — so the NAS host needs no git
 at all. Authentication uses your **Claude subscription** via a long-lived token
@@ -64,7 +64,7 @@ so we don't clone — the container does its own clone at runtime):
 
 ```sh
 base=https://raw.githubusercontent.com/mlac/infosecfollow/main/deploy
-for f in Dockerfile run-briefing.sh crontab docker-compose.yml; do
+for f in Dockerfile run-briefing.sh scheduler.sh docker-compose.yml; do
   curl -fsSLo "$f" "$base/$f"
 done
 ```
@@ -80,7 +80,7 @@ docker compose up -d --build
 
 This builds the image from the local folder and starts the container, which
 clones the app into a Docker volume and runs one briefing immediately, then
-follows the cron schedule. Watch it:
+follows the schedule. Watch it:
 
 ```sh
 docker logs -f infosecfollow
@@ -129,13 +129,13 @@ docker exec infosecfollow /app/run-briefing.sh
 ```
 
 **Container plumbing** (`deploy/Dockerfile`, `deploy/run-briefing.sh`,
-`deploy/crontab`) is baked into the image — the container runs `/app/...`, not the
-repo copies — so changing it needs a rebuild on the NAS after you push:
+`deploy/scheduler.sh`) is baked into the image — the container runs `/app/...`, not
+the repo copies — so changing it needs a rebuild on the NAS after you push:
 
 ```sh
 cd /volume1/docker/infosecfollow
 base=https://raw.githubusercontent.com/mlac/infosecfollow/main/deploy
-for f in Dockerfile run-briefing.sh crontab docker-compose.yml; do curl -fsSLo "$f" "$base/$f"; done
+for f in Dockerfile run-briefing.sh scheduler.sh docker-compose.yml; do curl -fsSLo "$f" "$base/$f"; done
 docker compose up -d --build
 ```
 
