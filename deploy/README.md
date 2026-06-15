@@ -5,12 +5,12 @@ on a 6am / noon / 4pm / 9pm ET schedule, so your Mac no longer has to be on. The
 container regenerates the site and pushes it to GitHub Pages, exactly like the old
 macOS LaunchAgent did.
 
-**How it works:** the container holds Python + the Claude Code CLI + a cron
-(`supercronic`). It builds straight from this public repo's `deploy/` folder and,
-on first run, **clones the app into a Docker volume itself** — so the NAS host
-needs nothing but Docker (no `git` required). Authentication uses your **Claude
-subscription** via a long-lived token (no API-key billing) and a **GitHub token**
-for the clone/push.
+**How it works:** the container holds Python + the Claude Code CLI + git + a cron
+(`supercronic`). You fetch a few build files with `curl`, build the image
+locally, and on first run the container **clones the app into a Docker volume
+itself** (using the git bundled inside the image) — so the NAS host needs no git
+at all. Authentication uses your **Claude subscription** via a long-lived token
+(no API-key billing) and a **GitHub token** for the clone/push.
 
 Prereqs on the NAS: Container Manager (Docker) — confirmed present — and your user
 in the `docker` group (so no `sudo`).
@@ -59,11 +59,14 @@ vi .env   # paste your two tokens after the = signs
 
 `.env` stays on the NAS and is never committed.
 
-Then grab the compose file (no git needed — curl it from the public repo):
+Then fetch the four build files into this folder with `curl` (the NAS has no git,
+so we don't clone — the container does its own clone at runtime):
 
 ```sh
-curl -fsSLo docker-compose.yml \
-  https://raw.githubusercontent.com/mlac/infosecfollow/main/deploy/docker-compose.yml
+base=https://raw.githubusercontent.com/mlac/infosecfollow/main/deploy
+for f in Dockerfile run-briefing.sh crontab docker-compose.yml; do
+  curl -fsSLo "$f" "$base/$f"
+done
 ```
 
 ---
@@ -75,8 +78,8 @@ cd /volume1/docker/infosecfollow
 docker compose up -d --build
 ```
 
-This builds the image from the repo's `deploy/` folder and starts the container,
-which clones the app into a Docker volume and runs one briefing immediately, then
+This builds the image from the local folder and starts the container, which
+clones the app into a Docker volume and runs one briefing immediately, then
 follows the cron schedule. Watch it:
 
 ```sh
@@ -85,14 +88,6 @@ docker logs -f infosecfollow
 
 You should see `cloning …`, the engine's `[1/4]…[4/4]` lines, and `published`.
 Within a minute the live site updates.
-
-> **If the build errors on the URL context** (older Compose): build the image
-> directly, then start.
-> ```sh
-> docker build -t infosecfollow-runner \
->   "https://github.com/mlac/infosecfollow.git#main:deploy"
-> docker compose up -d          # uses the prebuilt infosecfollow-runner image
-> ```
 
 ---
 
