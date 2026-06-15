@@ -46,6 +46,8 @@ MAX_ITEMS = 120             # cap on corpus size sent to the model
 SUMMARY_CHARS = 480         # per-item summary truncation
 MODEL = os.environ.get("INFOSECFOLLOW_MODEL", "claude-opus-4-8")
 CLI_TIMEOUT = 900           # seconds for the summarization call
+ARCHIVE_RETENTION_DAYS = int(  # prune archive pages + data files older than this
+    os.environ.get("INFOSECFOLLOW_ARCHIVE_RETENTION_DAYS", "90"))
 
 
 # --------------------------------------------------------------------------- fetch
@@ -1075,6 +1077,36 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at, ge
     return "\n".join(lines)
 
 
+def prune_old_archives(today_iso, days):
+    """Delete archive pages and per-day data files older than `days` to bound
+    growth (the per-run archives accumulate otherwise). Memory loaders only look
+    back a week, so any sane retention keeps what they need."""
+    if days <= 0:
+        return
+    try:
+        cutoff = (datetime.strptime(today_iso, "%Y-%m-%d")
+                  - timedelta(days=days)).strftime("%Y-%m-%d")
+    except ValueError:
+        return
+    removed = 0
+    for sub in ("archive", "data"):
+        directory = SITE_DIR / sub
+        if not directory.is_dir():
+            continue
+        for path in directory.iterdir():
+            if path.stem == "index" or not path.is_file():
+                continue
+            m = re.match(r"(\d{4}-\d{2}-\d{2})", path.stem)
+            if m and m.group(1) < cutoff:
+                try:
+                    path.unlink()
+                    removed += 1
+                except OSError:
+                    pass
+    if removed:
+        print(f"  pruned {removed} archive/data files older than {days} days")
+
+
 def render_archive_index():
     # Stems are either "YYYY-MM-DD" (legacy, one per day) or "YYYY-MM-DD-HHMM"
     # (one per run). Group every run under its day, newest day and run first.
@@ -1143,6 +1175,7 @@ def write_site(digest, local, markets, weather, sports, feeds, items_count, wind
     (SITE_DIR / "digest.txt").write_text(text, encoding="utf-8")
     (SITE_DIR / "archive" / f"{stamp}.html").write_text(archive_html, encoding="utf-8")
     (SITE_DIR / "archive" / f"{stamp}.txt").write_text(text, encoding="utf-8")
+    prune_old_archives(today, ARCHIVE_RETENTION_DAYS)  # before the index, so it reflects the prune
     (SITE_DIR / "archive" / "index.html").write_text(render_archive_index(), encoding="utf-8")
     print(f"  wrote {SITE_DIR / 'index.html'}")
 

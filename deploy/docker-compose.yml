@@ -12,10 +12,16 @@ services:
     env_file:
       - .env
     environment:
-      # Drives both the cron schedule and the date stamps in the site.
+      # Drives both the schedule and the date stamps in the site.
       TZ: America/New_York
     volumes:
       - infosecfollow-data:/data/infosecfollow
+    # Cap container logs at 3 x 10MB so they can't grow without bound.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   infosecfollow-data:
