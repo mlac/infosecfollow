@@ -866,7 +866,7 @@ def _reading_inner(local):
 
 
 def render_html(digest, local, markets, weather, sports, feeds,
-                generated_at, archive_href, text_href, depth=0):
+                generated_at, generated_time, archive_href, text_href, depth=0):
     prefix = "../" * depth
     biz = local.get("business_politics") if local else None
     # Ordered most-frequently-updated first; the weekly markets average sits
@@ -896,7 +896,7 @@ def render_html(digest, local, markets, weather, sports, feeds,
         "<header>",
         f'<h1><a href="{prefix}index.html" style="text-decoration:none">infosecfollow</a></h1>',
         "<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>",
-        f"<nav>{esc(_display_date(digest['date']))} &middot; "
+        f"<nav>{esc(_display_date(digest['date']))} &middot; {esc(generated_time)} &middot; "
         f'<a href="{archive_href}">archive</a> &middot; '
         f'<a href="{text_href}">plain text</a></nav>',
         "</header>",
@@ -951,7 +951,7 @@ def _text_local_items(lines, label, items):
         lines += _text_local_item(item)
 
 
-def render_text(digest, local, markets, weather, sports, feeds, generated_at):
+def render_text(digest, local, markets, weather, sports, feeds, generated_at, generated_time):
     bar = "=" * TEXT_WIDTH
     sub = "-" * TEXT_WIDTH
     biz = local.get("business_politics") if local else None
@@ -974,7 +974,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at):
     lines = [
         bar,
         "INFOSECFOLLOW -- security, markets, business, pittsburgh",
-        _display_date(digest["date"]),
+        f"{_display_date(digest['date'])} - {generated_time}",
         bar,
         "",
         _fill(digest["headline"]),
@@ -1108,6 +1108,7 @@ def render_archive_index():
 def write_site(digest, local, markets, weather, sports, feeds, items_count, window):
     now_local = datetime.now().astimezone()
     generated_at = now_local.strftime("%Y-%m-%d %H:%M %Z")
+    generated_time = now_local.strftime("%-I:%M %p %Z")  # e.g. "6:02 AM EDT", for the header
     stamp = now_local.strftime("%Y-%m-%d-%H%M")  # one archive page per run
     today = digest["date"]
     (SITE_DIR / "archive").mkdir(parents=True, exist_ok=True)
@@ -1130,10 +1131,13 @@ def write_site(digest, local, markets, weather, sports, feeds, items_count, wind
         json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
 
     index_html = render_html(digest, local, markets, weather, sports, feeds,
-                             generated_at, "archive/index.html", "digest.txt", depth=0)
+                             generated_at, generated_time, "archive/index.html",
+                             "digest.txt", depth=0)
     archive_html = render_html(digest, local, markets, weather, sports, feeds,
-                               generated_at, "index.html", f"{stamp}.txt", depth=1)
-    text = render_text(digest, local, markets, weather, sports, feeds, generated_at)
+                               generated_at, generated_time, "index.html",
+                               f"{stamp}.txt", depth=1)
+    text = render_text(digest, local, markets, weather, sports, feeds,
+                       generated_at, generated_time)
 
     (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
     (SITE_DIR / "digest.txt").write_text(text, encoding="utf-8")

@@ -1,7 +1,7 @@
 # Running infosecfollow on a Synology NAS
 
 This runs the briefing engine in a Docker container on your NAS (`workbench-nas`)
-on a 6am / noon / 4pm / 9pm ET schedule, so your Mac no longer has to be on. The
+on a 6am / 9am / noon / 4pm / 9pm ET schedule, so your Mac no longer has to be on. The
 container regenerates the site and pushes it to GitHub Pages, exactly like the old
 macOS LaunchAgent did.
 
@@ -140,7 +140,7 @@ docker compose up -d --build
 ```
 
 **Gotcha — pull before you push.** The NAS pushes a `briefing …` commit to `main`
-~4×/day, so your Mac's local `main` falls behind constantly. Start every editing
+~5×/day, so your Mac's local `main` falls behind constantly. Start every editing
 session with `git pull --rebase`; if a push is rejected as non-fast-forward, just
 `git pull --rebase` and push again. Your `engine/` edits and the NAS's `docs/`
 commits never touch the same files, so it replays cleanly.
