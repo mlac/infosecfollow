@@ -1,26 +1,30 @@
 #!/bin/sh
 # One briefing cycle: sync the repo, regenerate the site, publish to GitHub Pages.
 # Invoked on container start and by supercronic on the schedule in ./crontab.
-# Secrets come from the container environment (see .env): CLAUDE_CODE_OAUTH_TOKEN
-# authenticates the Claude CLI; GITHUB_TOKEN authorises the push.
+# The repo lives in a Docker volume that this script clones on first run, so the
+# NAS host needs no git. Secrets come from the container environment (see .env):
+# CLAUDE_CODE_OAUTH_TOKEN authenticates the Claude CLI; GITHUB_TOKEN authorises
+# the clone/fetch/push.
 set -eu
 
 REPO_DIR=/data/infosecfollow
-cd "$REPO_DIR"
+REMOTE="${GIT_REMOTE_URL:-https://github.com/mlac/infosecfollow.git}"
 
 echo "===== run $(date '+%Y-%m-%d %H:%M:%S %Z') ====="
 
-# The repo is bind-mounted from the NAS, so git sees a different owner uid.
-git config --global --add safe.directory "$REPO_DIR"
-# Supply the GitHub token for fetch/push without writing it to disk. The helper
-# runs in a subshell where $GITHUB_TOKEN is read from the environment.
+# Supply the GitHub token for clone/fetch/push without writing it to disk. The
+# helper runs in a subshell where $GITHUB_TOKEN is read from the environment.
 git config --global credential.helper \
     '!f() { echo username=x-access-token; echo "password=${GITHUB_TOKEN}"; }; f'
 
-# Make sure we push over HTTPS (the token helper only applies to https remotes).
-if [ -n "${GIT_REMOTE_URL:-}" ]; then
-    git remote set-url origin "$GIT_REMOTE_URL"
+# First run: clone into the data volume. Later runs: the clone already exists.
+if [ ! -d "$REPO_DIR/.git" ]; then
+    echo "cloning $REMOTE"
+    git clone "$REMOTE" "$REPO_DIR"
 fi
+cd "$REPO_DIR"
+git config --global --add safe.directory "$REPO_DIR"
+git remote set-url origin "$REMOTE"   # ensure HTTPS so the token helper applies
 
 # Start from a clean, current tree. The container is the only writer and always
 # pushes, so origin/main is authoritative; this also picks up engine changes you
@@ -31,7 +35,8 @@ git reset --hard origin/main
 # Generate the site (stdlib-only Python; calls the Claude CLI for summaries).
 python3 engine/generate.py
 
-# Publish only if something changed.
+# Publish only if something changed. Note: only docs/ is ever staged, so a
+# stray file in the volume can never be committed.
 git add docs
 if git diff --cached --quiet; then
     echo "no site changes to publish"

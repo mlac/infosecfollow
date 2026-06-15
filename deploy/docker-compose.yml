@@ -1,9 +1,14 @@
 # Synology Container Manager project for the infosecfollow runner.
-# Deploy: clone this repo onto the NAS, copy .env.example to .env and fill it in,
-# then build + start. See README.md for the full walkthrough.
+# Builds straight from the public repo's deploy/ folder (no host git needed) and
+# clones the app into a named Docker volume on first run. Deploy: create .env
+# beside this file, then `docker compose up -d --build`. See README.md.
 services:
   infosecfollow:
-    build: .
+    build:
+      # Remote git context: Docker fetches deploy/ from the public repo, so the
+      # NAS needs no local checkout. Falls back to a prebuilt image (below) if
+      # your Compose can't use a URL context — see README.
+      context: "https://github.com/mlac/infosecfollow.git#main:deploy"
     image: infosecfollow-runner
     container_name: infosecfollow
     restart: unless-stopped
@@ -13,7 +18,7 @@ services:
       # Drives both the cron schedule and the date stamps in the site.
       TZ: America/New_York
     volumes:
-      # Bind-mount the repo checkout on the NAS into the container. The left side
-      # must be the absolute path where you cloned this repo on the NAS; the
-      # default is the standard Synology Docker shared folder. Adjust if needed.
-      - /volume1/docker/infosecfollow:/data/infosecfollow
+      - infosecfollow-data:/data/infosecfollow
+
+volumes:
+  infosecfollow-data:
