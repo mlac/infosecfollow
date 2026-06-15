@@ -104,6 +104,49 @@ The Mac can stay off from here on.
 
 ---
 
+## Development workflow (editing the code afterwards)
+
+GitHub `main` is the single source of truth. **Always edit on the Mac and push;
+never edit on the NAS** — the container runs `git reset --hard origin/main` every
+cycle, so any local change in its volume is wiped on the next run.
+
+**Engine / content / feeds** (`engine/*.py`, `feeds.json`) update **automatically**
+— the container resets to `origin/main` before each run, so the next scheduled run
+uses your new code. From the Mac:
+
+```sh
+git pull --rebase        # see the gotcha below
+# ...edit...
+git commit -am "..."
+git push
+```
+
+To apply a change immediately instead of waiting for the next slot, run one cycle
+on the NAS:
+
+```sh
+docker exec infosecfollow /app/run-briefing.sh
+```
+
+**Container plumbing** (`deploy/Dockerfile`, `deploy/run-briefing.sh`,
+`deploy/crontab`) is baked into the image — the container runs `/app/...`, not the
+repo copies — so changing it needs a rebuild on the NAS after you push:
+
+```sh
+cd /volume1/docker/infosecfollow
+base=https://raw.githubusercontent.com/mlac/infosecfollow/main/deploy
+for f in Dockerfile run-briefing.sh crontab docker-compose.yml; do curl -fsSLo "$f" "$base/$f"; done
+docker compose up -d --build
+```
+
+**Gotcha — pull before you push.** The NAS pushes a `briefing …` commit to `main`
+~4×/day, so your Mac's local `main` falls behind constantly. Start every editing
+session with `git pull --rebase`; if a push is rejected as non-fast-forward, just
+`git pull --rebase` and push again. Your `engine/` edits and the NAS's `docs/`
+commits never touch the same files, so it replays cleanly.
+
+---
+
 ## Run on demand / troubleshooting
 
 ```sh
