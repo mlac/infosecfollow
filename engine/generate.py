@@ -678,6 +678,7 @@ PAGE_CSS = """
   @media (prefers-color-scheme: dark) { body { background: #161614; color: #d8d8d2; } }
   header h1 { font-size: 1.3rem; margin: 0; letter-spacing: 0.04em; }
   header p, footer { font-size: 0.85rem; opacity: 0.75; }
+  header p.runtime { margin: 0.35rem 0 0; opacity: 0.9; font-style: italic; }
   hr { border: 0; border-top: 1px solid currentColor; opacity: 0.25; margin: 1.5rem 0; }
   h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em;
        margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
@@ -721,6 +722,19 @@ def _display_date(iso):
         return datetime.strptime(iso, "%Y-%m-%d").strftime("%A, %B %-d, %Y")
     except ValueError:
         return iso
+
+
+def _ordinal(n):
+    if 10 <= n % 100 <= 20:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
+
+
+def _friendly_run_time(dt):
+    """e.g. 'Monday, June 15th 2026 @ 9:00 AM EST'."""
+    return dt.strftime(f"%A, %B {_ordinal(dt.day)} %Y @ %-I:%M %p %Z")
 
 
 def _markets_inner(markets):
@@ -866,7 +880,7 @@ def _reading_inner(local):
 
 
 def render_html(digest, local, markets, weather, sports, feeds,
-                generated_at, archive_href, text_href, depth=0):
+                generated_at, archive_href, text_href, run_time=None, depth=0):
     prefix = "../" * depth
     biz = local.get("business_politics") if local else None
     # Ordered most-frequently-updated first; the weekly markets average sits
@@ -896,6 +910,7 @@ def render_html(digest, local, markets, weather, sports, feeds,
         "<header>",
         f'<h1><a href="{prefix}index.html" style="text-decoration:none">infosecfollow</a></h1>',
         "<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>",
+        *([f'<p class="runtime">{esc(run_time)}</p>'] if run_time else []),
         f"<nav>{esc(_display_date(digest['date']))} &middot; "
         f'<a href="{archive_href}">archive</a> &middot; '
         f'<a href="{text_href}">plain text</a></nav>',
@@ -1108,6 +1123,7 @@ def render_archive_index():
 def write_site(digest, local, markets, weather, sports, feeds, items_count, window):
     now_local = datetime.now().astimezone()
     generated_at = now_local.strftime("%Y-%m-%d %H:%M %Z")
+    run_time = _friendly_run_time(now_local)
     stamp = now_local.strftime("%Y-%m-%d-%H%M")  # one archive page per run
     today = digest["date"]
     (SITE_DIR / "archive").mkdir(parents=True, exist_ok=True)
@@ -1130,9 +1146,11 @@ def write_site(digest, local, markets, weather, sports, feeds, items_count, wind
         json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
 
     index_html = render_html(digest, local, markets, weather, sports, feeds,
-                             generated_at, "archive/index.html", "digest.txt", depth=0)
+                             generated_at, "archive/index.html", "digest.txt",
+                             run_time=run_time, depth=0)
     archive_html = render_html(digest, local, markets, weather, sports, feeds,
-                               generated_at, "index.html", f"{stamp}.txt", depth=1)
+                               generated_at, "index.html", f"{stamp}.txt",
+                               run_time=run_time, depth=1)
     text = render_text(digest, local, markets, weather, sports, feeds, generated_at)
 
     (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
