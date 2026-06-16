@@ -1,45 +1,155 @@
 {
   "date": "2026-06-16",
-  "headline": "China- and North Korea-linked crews burrowed into research, defense, and developer networks as attackers turned Fortinet's threat-verdict engine and Microsoft Teams relays into weapons.",
+  "headline": "A critical SimpleHelp remote-support flaw and a cross-tenant Google Vertex AI bug widen the enterprise attack surface as attackers burrow into trusted platforms from Steam to Microsoft Teams.",
   "emerging_trends": [
     {
-      "subject": "Trusted-Channel Abuse",
-      "text": "Attackers increasingly hide malice inside services defenders trust, routing command traffic through Microsoft Teams relays and rewiring victims' own Google Workspace mail rules to exfiltrate data past detection."
+      "subject": "Trusted Platforms",
+      "text": "Attackers increasingly hide inside legitimate services—Steam Workshop, Roblox, Microsoft Teams relays, compromised WordPress, and fake update prompts—to deliver malware that endpoint tools trust by default."
     },
     {
-      "subject": "State-Sponsored Surge",
-      "text": "China- and North Korea-linked actors dominated the day with espionage and social-engineering campaigns spanning research servers, government networks, and developer workflows."
+      "subject": "AI Attack Surface",
+      "text": "Flaws now sit in the AI infrastructure itself, from cross-tenant code execution in Google Vertex AI to the Copilot SearchLeak prompt-injection chain, turning machine-learning platforms into a fresh class of target."
     },
     {
-      "subject": "Prompt Injection",
-      "text": "The Copilot SearchLeak attack shows hidden instructions smuggled into content an AI assistant reads can steal secrets in one click, a recurring weakness across large-language-model security."
+      "subject": "Remote Tooling",
+      "text": "Critical bugs in remote-management and security appliances—SimpleHelp, FortiSandbox, Cisco SD-WAN, the LiteSpeed cPanel plugin—hand attackers privileged footholds across whole fleets at once."
     },
     {
-      "subject": "Supply-Chain Compromise",
-      "text": "Poisoned Arch User Repository packages and a tainted WordPress CDN show attackers keep targeting the distribution channels developers and site operators trust by default."
+      "subject": "Scam Economy",
+      "text": "Record imposter-scam losses and FBI warnings of couriers collecting cash in person show fraud operations scaling into logistics, not just phishing."
     }
   ],
   "topics": [
     {
-      "title": "China Burrows Into Research Networks via Google Workspace and SprySOCKS",
-      "area": "Nation-State Activity",
-      "latest_developments": "Google disclosed a China-linked group that lived inside North American medical, academic, and military research networks for over a year, planting a credential-stealing backdoor on REDCap servers then rewiring victims' own Google Workspace mail rules to copy every message out, while ESET documented two Windows variants of the previously Linux-only SprySOCKS backdoor, marked WIN_DRV and WIN_PLUS, hitting government organizations in at least four countries.",
-      "summary": "A China-linked espionage group spent more than a year inside North American medical, academic, and military research networks. It first compromised REDCap research servers with a credential-stealing backdoor, then abused the victims' own Google Workspace mail-forwarding rules to siphon sensitive research and defense email past detection. ESET's parallel finding shows the actors' Windows toolset growing: SprySOCKS, long considered Linux-only, now ships WIN_DRV and WIN_PLUS variants with hard-coded command-and-control and driver-based stealth. Organizations running REDCap should audit Workspace forwarding rules and hunt for the new variants.",
+      "title": "SimpleHelp Flaw Lets Attackers Forge Remote-Support Accounts",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Horizon3.ai disclosed CVE-2026-48558, a critical authentication-bypass flaw in SimpleHelp deployments that use OpenID Connect, letting an unauthenticated remote attacker forge a privileged Technician account.",
+      "summary": "SimpleHelp is a widely used remote monitoring and management tool. Through the forged Technician account, an attacker can remote into every managed endpoint, run scripts, and push files. Remote-management software grants broad reach across customer networks, so ransomware crews prize exactly this kind of flaw. Administrators running OIDC-configured SimpleHelp should patch at once and audit Technician accounts for unauthorized additions.",
       "tags": [
-        "apt",
-        "espionage",
-        "backdoor"
+        "vulnerability",
+        "rmm",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "SimpleHelp RMM flaw could give attackers full access to managed endpoints (CVE-2026-48558)",
+          "url": "https://www.helpnetsecurity.com/2026/06/16/simplehelp-rmm-cve-2026-48558/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "SimpleHelp bug lets hackers create rogue remote support accounts",
+          "url": "https://www.bleepingcomputer.com/news/security/simplehelp-bug-lets-hackers-create-rogue-remote-support-accounts/"
+        }
+      ]
+    },
+    {
+      "title": "Pickle in the Middle Hijacks Google Vertex AI Uploads",
+      "area": "AI Security",
+      "latest_developments": "Palo Alto Networks Unit 42 disclosed a Vertex AI Python SDK flaw it calls Pickle in the Middle, which let an attacker with no access to a victim's project hijack a model upload through bucket squatting and run code inside Google's serving infrastructure.",
+      "summary": "Vertex AI is Google Cloud's machine-learning platform. The technique abused predictable storage-bucket names to intercept a victim's model upload and achieve cross-tenant remote code execution. Unit 42 reported the bug through Google's bug bounty program and saw no exploitation in the wild; Google fixed it. The case shows how shared AI infrastructure can expose one customer's workloads to another.",
+      "tags": [
+        "ai",
+        "vulnerability",
+        "cloud"
+      ],
+      "sources": [
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "Pickle in the Middle – Hijacking Vertex AI Model Uploads for Cross-Tenant RCE",
+          "url": "https://unit42.paloaltonetworks.com/hijacking-vertex-ai-model/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Google Vertex AI SDK Flaw Let Attackers Hijack Model Uploads via Bucket Squatting",
+          "url": "https://thehackernews.com/2026/06/google-vertex-ai-sdk-flaw-let-attackers.html"
+        }
+      ]
+    },
+    {
+      "title": "ClickFix Campaigns Push Three New Malware Loaders",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Morphisec, BlueVoyant, and Huntress documented expanding ClickFix campaigns that deliver three loaders—BabaDeda, Lorem Ipsum, and Potemkin—with Dark Reading tying the Lorem Ipsum campaign, run through compromised WordPress sites, to the Vice Society extortion group.",
+      "summary": "ClickFix tricks users into pasting malicious commands by posing as a fake software update or verification prompt. BabaDeda attacks in April 2026 struck education and financial organizations. The loaders fetch follow-on payloads that lead toward data theft and extortion. Defenders should train staff never to paste commands into a Run dialog or terminal and should monitor for the new loader signatures.",
+      "tags": [
+        "malware",
+        "clickfix",
+        "ransomware"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "Chinese Hackers Abused Google Workspace Rules to Steal Research and Defense Emails",
-          "url": "https://thehackernews.com/2026/06/chinese-hackers-abused-google-workspace.html"
+          "title": "ClickFix Campaigns Expand Malware Delivery With New Loaders and Fake Update Lures",
+          "url": "https://thehackernews.com/2026/06/clickfix-campaigns-expand-malware.html"
         },
         {
           "source": "Dark Reading",
-          "title": "China-Nexus Actor Spies on US Researchers Undetected for a Year",
-          "url": "https://www.darkreading.com/threat-intelligence/china-nexus-actor-us-researchers-undetected"
+          "title": "'Lorem Ipsum' Malware Pivots to ClickFix Delivery",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/lorem-ipsum-malware-clickfix-delivery"
+        }
+      ]
+    },
+    {
+      "title": "Rokarolla Android Trojan Seizes Full Phone Control",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Zimperium's zLabs documented Rokarolla, a new Android banking trojan that targets 217 banking and cryptocurrency apps, carries 137 remote commands, and spreads through fake TikTok and Chrome downloads.",
+      "summary": "Rokarolla lifts lock-screen PINs, reads and sends SMS to harvest one-time codes, rewrites the clipboard to redirect crypto payments, and switches off Google Play Protect. The mix of banking fraud and full device surveillance hands an operator near-total control of an infected phone. The malware marks a clear evolution toward combined theft and espionage on mobile. Users should install apps only from official stores and refuse sideloaded updates.",
+      "tags": [
+        "malware",
+        "android",
+        "banking"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "New Rokarolla Android Malware Steals PINs, SMS Codes, and Crypto Wallet Funds",
+          "url": "https://thehackernews.com/2026/06/new-rokarolla-android-malware-steals.html"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Rokarolla Android Trojan Levels Up to Full Device Control, Persistence",
+          "url": "https://www.darkreading.com/endpoint-security/rokarolla-android-trojan"
+        }
+      ]
+    },
+    {
+      "title": "Imposter-Scam Losses Hit Record $3.5 Billion",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "The FTC reported Americans lost $3.5 billion to imposter scams in 2025, nearly triple the 2020 figure, as the FBI warned that cryptocurrency-investment scammers now dispatch couriers to collect cash from victims in person.",
+      "summary": "Imposter scams ride on fake personas across social media, text messages, and bogus trading platforms that show fabricated returns to lure deeper deposits. When banks block suspicious transfers, scammers pivot to in-person cash pickups to sidestep fraud controls. The shift turns online fraud into a physical logistics operation. Financial institutions and families should treat any request for cash handoffs or crypto deposits to a stranger as fraud.",
+      "tags": [
+        "scam",
+        "fraud",
+        "cryptocurrency"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "FTC warns of record $3.5 billion losses to imposter scams in 2025",
+          "url": "https://www.bleepingcomputer.com/news/security/ftc-warns-of-record-35-billion-losses-to-imposter-scams-in-2025/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Crypto scammers are sending couriers to victims’ homes to collect cash",
+          "url": "https://www.helpnetsecurity.com/2026/06/16/crypto-scammers-couriers-cash-pickups-fbi-warning/"
+        }
+      ]
+    },
+    {
+      "title": "FishMonger Ports SprySOCKS Backdoor to Windows",
+      "area": "Nation-State Activity",
+      "latest_developments": "ESET attributed two Windows variants of the previously Linux-only SprySOCKS backdoor, marked WIN_DRV and WIN_PLUS, to the China-nexus group FishMonger, naming government targets in Honduras, Taiwan, Thailand, and Pakistan, with the WIN_DRV build loading a kernel driver to evade detection.",
+      "summary": "SprySOCKS communicates over TCP and UDP using hard-coded command-and-control settings. FishMonger traces to China's contract-hacking ecosystem and now reaches Windows estates it once could not touch. The kernel-driver variant blinds endpoint defenses from below the operating system. Government and research organizations across Asia and Latin America face the highest exposure.",
+      "tags": [
+        "apt",
+        "china",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Dark Reading",
+          "title": "SprySOCKS Windows Variant Abuses Kernel Drivers to Evade Detection",
+          "url": "https://www.darkreading.com/threat-intelligence/sprysocks-windows-variant-kernel-drivers"
         },
         {
           "source": "The Hacker News",
@@ -54,180 +164,42 @@
       ]
     },
     {
-      "title": "North Korean Crews Phish Developers and Account Holders",
+      "title": "Iranian Hackers Claim California Water Utility Breach",
       "area": "Nation-State Activity",
-      "latest_developments": "Genians documented ScarCruft, also tracked as APT37, sending spear-phishing emails that impersonate Microsoft account security alerts to deliver NarwhalRAT, while Proofpoint tied two fresh campaigns using developer-recruitment and code-review lures to the Contagious Interview cluster known as Famous Chollima.",
-      "summary": "Two North Korean clusters ran fresh social-engineering campaigns. ScarCruft, also tracked as APT37, sent emails posing as Microsoft account security alerts to plant NarwhalRAT on targets. The Contagious Interview crew, known as Famous Chollima, leaned on developer-recruitment and code-review lures, turning trusted developer workflows into malware-delivery channels. Both rely on the target opening a convincing message, so verify unexpected security alerts and job outreach through separate channels.",
+      "latest_developments": "California Water Service said it is investigating claims by Iranian hackers and so far finds no indication of operational disruption to its water and wastewater systems.",
+      "summary": "Cal Water is one of the largest investor-owned water utilities in California. Iranian crews have repeatedly probed U.S. water and wastewater systems, often targeting exposed industrial control devices. The utility says treatment and delivery operations remain unaffected while it verifies the intrusion claims. Water operators should review remote-access exposure and segment control networks from corporate IT.",
       "tags": [
         "apt",
-        "phishing",
-        "malware"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Fake Microsoft Alerts Used to Deploy North Korean NarwhalRAT Malware",
-          "url": "https://thehackernews.com/2026/06/fake-microsoft-alerts-used-to-deploy.html"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "North Korean Hackers Are Turning Developer Tools Into Malware Delivery Channels",
-          "url": "https://thehackernews.com/2026/06/north-korean-hackers-are-turning.html"
-        }
-      ]
-    },
-    {
-      "title": "Attackers Exploit Fortinet's FortiSandbox Verdict Engine",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Defused reported active exploitation over the past 24 hours of three FortiSandbox flaws—CVE-2026-39813, a 9.1-severity path-traversal bug in the JRPC API, plus CVE-2026-39808 and CVE-2026-25089—one of them patched only last week, with the exploit for one flaw apparently vibecoded and likely faulty.",
-      "summary": "FortiSandbox analyzes suspicious files and returns the verdicts other Fortinet products use to block threats and launch automated responses, so an attacker who subverts it blinds the surrounding stack. CVE-2026-39813 carries a 9.1 severity score; Fortinet patched it last week, yet exploitation continues. Defused noted that one public exploit appears vibecoded and likely faulty, which may limit reliability but not intent. Administrators should apply the latest FortiSandbox fixes immediately.",
-      "tags": [
-        "zero-day",
-        "exploit",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Attackers are exploiting FortiSandbox vulnerabilities",
-          "url": "https://www.helpnetsecurity.com/2026/06/16/fortisandbox-vulnerabilities-cve-2026-39813-cve-2026-39808-cve-2026-25089/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Attackers Exploit Three Fortinet FortiSandbox Flaws, One Patched Last Week",
-          "url": "https://thehackernews.com/2026/06/attackers-exploit-three-fortinet.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Critical Fortinet FortiSandbox flaws now exploited in attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/critical-fortinet-fortisandbox-flaws-now-exploited-in-attacks/"
-        }
-      ]
-    },
-    {
-      "title": "Supply-Chain Attacks Spread Across AUR and WordPress",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "The Arch User Repository poisoning expanded to roughly 1,500 malicious packages, prompting Arch Linux to suspend new account registrations, while a content-distribution-network compromise at Awesome Motive tainted the OptinMonster, TrustPulse, and PushEngage WordPress plugins.",
-      "summary": "Two supply-chain compromises widened. The poisoning of the Arch User Repository grew to roughly 1,500 packages laced with malware, and Arch Linux suspended new account registrations to stem the flood. Separately, a compromise of Awesome Motive's content distribution network tainted the popular OptinMonster, TrustPulse, and PushEngage WordPress plugins. Site operators and Arch users should review recently installed packages and verify plugin integrity.",
-      "tags": [
-        "supply-chain",
-        "malware"
+        "iran",
+        "critical-infrastructure"
       ],
       "sources": [
         {
           "source": "SecurityWeek",
-          "title": "Atomic Arch Supply Chain Attack Hits 1,500 AUR Packages",
-          "url": "https://www.securityweek.com/atomic-arch-supply-chain-attack-hits-1500-aur-packages/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "OptinMonster WordPress plugin hacked in CDN supply-chain attack",
-          "url": "https://www.bleepingcomputer.com/news/security/optinmonster-wordpress-plugin-hacked-in-cdn-supply-chain-attack/"
+          "title": "Cal Water Investigating Iranian Hackers’ Claims",
+          "url": "https://www.securityweek.com/cal-water-investigating-iranian-hackers-claims/"
         }
       ]
     },
     {
-      "title": "DragonForce Hides Command Traffic in Microsoft Teams Relays",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Symantec reported the DragonForce ransomware-as-a-service group used custom malware it calls Backdoor.Turn to tunnel command-and-control traffic through Microsoft Teams TURN relay infrastructure during an intrusion at a US services company, the first known abuse of Teams relays for this purpose.",
-      "summary": "DragonForce, a ransomware-as-a-service operation active since 2023, breached a US services company and routed its command-and-control traffic through Microsoft Teams TURN relay infrastructure using custom malware Symantec calls Backdoor.Turn. Hiding inside Teams relays lets the traffic blend with legitimate collaboration connections, the first known abuse of this channel. Defenders should scrutinize Teams relay connections and treat unexpected TURN traffic as suspect.",
-      "tags": [
-        "ransomware",
-        "malware"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Cybercriminals mask malicious communications through Microsoft Teams relays",
-          "url": "https://www.helpnetsecurity.com/2026/06/16/dragonforce-microsoft-teams-malware-backdoor-turn/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Ransomware gang abuses Microsoft Teams relays to hide malicious traffic",
-          "url": "https://www.bleepingcomputer.com/news/security/ransomware-gang-abuses-microsoft-teams-relays-to-hide-malicious-traffic/"
-        }
-      ]
-    },
-    {
-      "title": "Extortion Crews Pile Up Health and Entertainment Breaches",
-      "area": "Data Breaches",
-      "latest_developments": "iRhythm confirmed attackers stole patient personal and health data from third-party-hosted applications and demanded a ransom after the company learned of the intrusion on June 8, FulcrumSec claimed 1.3 terabytes taken from Novo Nordisk, hackers published Knicks and Madison Square Garden records including a talent risk list and customer emails, and the Council of Europe opened a probe into ShinyHunters' breach claims.",
-      "summary": "A run of breaches and extortion claims surfaced in a single day. iRhythm, which makes cardiac-monitoring devices, confirmed attackers stole patient personal and health data from third-party-hosted applications and demanded a ransom after it learned of the intrusion on June 8. FulcrumSec claimed 1.3 terabytes taken from Novo Nordisk, hackers dumped Knicks and Madison Square Garden records including a talent risk list and customer emails, and the Council of Europe opened a probe into ShinyHunters' claims. Affected individuals face phishing and identity-fraud exposure.",
-      "tags": [
-        "breach",
-        "extortion",
-        "healthcare"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "iRhythm Confirms Data Stolen in Hack",
-          "url": "https://www.securityweek.com/irhythm-confirms-data-stolen-in-hack/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Cybercrime Group Claims Novo Nordisk Hack",
-          "url": "https://www.securityweek.com/cybercrime-group-claims-novo-nordisk-hack/"
-        },
-        {
-          "source": "404 Media",
-          "title": "Hackers Publish Knicks and Madison Square Garden Data Online",
-          "url": "https://www.404media.co/hackers-publish-knicks-and-madison-square-garden-data-online/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Council of Europe investigates ShinyHunters data breach claims",
-          "url": "https://www.bleepingcomputer.com/news/security/council-of-europe-investigates-shinyhunters-data-breach-claims/"
-        }
-      ]
-    },
-    {
-      "title": "Copilot SearchLeak Steals 2FA Codes in One Click",
-      "area": "AI Security",
-      "latest_developments": "Researchers disclosed SearchLeak, a now-patched three-stage prompt-injection attack against Microsoft Copilot that planted hidden URLs and variables to exfiltrate user data, including two-factor authentication codes, with a single click.",
-      "summary": "Researchers disclosed SearchLeak, a three-stage prompt-injection attack against Microsoft Copilot that used hidden URLs and variables to exfiltrate user data, including two-factor authentication codes, with a single click. Microsoft has patched it. The flaw joins a growing class of injection attacks that smuggle instructions into the content an AI assistant reads, which researchers argue exposes a recurring weakness in how the industry secures large language models.",
-      "tags": [
-        "ai",
-        "prompt-injection",
-        "vulnerability"
-      ],
-      "sources": [
-        {
-          "source": "Ars Technica Security",
-          "title": "Critical Copilot vulnerability allowed hackers to steal 2FA code from users",
-          "url": "https://arstechnica.com/security/2026/06/critical-copilot-vulnerability-allowed-hackers-to-seal-2fa-code-from-users/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "Copilot 'SearchLeak' Attack Allows 1-Click Data Theft",
-          "url": "https://www.darkreading.com/application-security/copilot-searchleak-attack-1-click-data-theft"
-        }
-      ]
-    },
-    {
-      "title": "Governments Move to Gate Online Access by Age and ID",
+      "title": "Governments Wall Off Russian Email and Reorganize National Systems",
       "area": "Policy and Regulation",
-      "latest_developments": "The UK said opening a social media account will require proving you are over 16 through an ID upload or a facial age scan under a ban on under-16s taking effect in spring 2027, and India temporarily blocked Telegram over fears scammers exploited the platform to leak medical-exam questions.",
-      "summary": "Two governments moved to restrict online access. The UK will require new social media users to prove they are over 16 through an ID upload or a facial age scan, part of a ban on under-16s taking effect in spring 2027; security experts warn the checks are easy to circumvent and create fresh troves of personal data to breach. India temporarily blocked Telegram amid fears scammers exploited the platform to leak medical-exam questions. Both measures trade anonymity and data exposure for claimed safety gains.",
+      "latest_developments": "Estonia will route emails from Russia's .ru top-level domain through extra security screening before they reach government officials, while the White House issued national security policy memorandum NSPM-12 to restructure governance of national security systems and reestablish the Committee on National Security Systems.",
+      "summary": "Estonia's measure treats an entire national domain as suspect, reflecting how heavily phishing rides on Russian infrastructure against neighboring states. NSPM-12 sets a clearer accountability structure for U.S. classified and defense networks and revives the interagency body that sets their standards. Both moves favor structural defense over reactive cleanup. Agencies and contractors tied to national security systems should expect tighter baseline requirements.",
       "tags": [
         "policy",
-        "privacy"
+        "government"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "UK to require ID or face scan before you can make social media accounts",
-          "url": "https://www.bleepingcomputer.com/news/security/uk-to-require-id-or-face-scan-before-you-can-make-social-media-accounts/"
+          "source": "The Record",
+          "title": "Estonia to quarantine emails sent from Russian .ru domain before they reach government officials",
+          "url": "https://therecord.media/estonia-quarantine-russian-emails"
         },
         {
-          "source": "The Record",
-          "title": "UK to ban social media access for children under 16",
-          "url": "https://therecord.media/uk-to-ban-social-media-access-for-children-under-16"
-        },
-        {
-          "source": "The Record",
-          "title": "India temporarily blocks Telegram over medical exam cheating fears",
-          "url": "https://therecord.media/india-blocks-telegram-over-cheating-fears"
+          "source": "SecurityWeek",
+          "title": "White House Issues Memo to Bolster NSS Cybersecurity",
+          "url": "https://www.securityweek.com/white-house-issues-memo-to-bolster-nss-cybersecurity/"
         }
       ]
     }
@@ -235,20 +207,20 @@
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,377.03",
-      "pct": "-2.2%",
+      "value": "7,406.74",
+      "pct": "-1.3%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "50,725.58",
-      "pct": "-0.7%",
+      "value": "50,902.59",
+      "pct": "-0.3%",
       "arrow": "▼"
     },
     {
       "label": "Nasdaq",
-      "value": "25,695.30",
-      "pct": "-3.8%",
+      "value": "25,846.15",
+      "pct": "-2.4%",
       "arrow": "▼"
     },
     {
@@ -277,9 +249,9 @@
     }
   ],
   "weather": [
-    "Today: Mostly Sunny, high 77F.",
-    "Tonight: Mostly Cloudy then Scattered Showers And Thunderstorms, low 59F.",
-    "Wednesday: Mostly Sunny, high 80F."
+    "This Afternoon: Mostly Sunny, high 76F.",
+    "Tonight: Mostly Cloudy then Chance Rain Showers, low 59F.",
+    "Wednesday: Mostly Sunny, high 81F."
   ],
   "sports": [
     {
@@ -304,214 +276,238 @@
   "local": {
     "business_politics": [
       {
-        "title": "Fed Meeting Opens Under Chair Warsh",
-        "latest_developments": "The Federal Reserve's first two-day policy meeting under new chair Kevin Warsh began Tuesday, with markets focused on his opening moves on interest rates.",
-        "summary": "Kevin Warsh chairs his first Federal Reserve policy meeting this week, and demand for Treasurys rose, pushing yields lower, as traders awaited both his rate stance and the still-unclear terms of the US-Iran deal. The decision sets the tone for how the new chair handles inflation running above 4%.",
+        "title": "Oil Sinks Below $80 as Iran Ceasefire Extends",
+        "latest_developments": "Brent crude tumbled to a three-month low under $80 on Tuesday, its fourth straight session of declines, after Washington and Tehran agreed to extend their ceasefire.",
+        "summary": "The published US-Iran terms let Tehran immediately resume oil sales and waive banking and transport sanctions, and traders now expect Strait of Hormuz shipments to flow freely, unwinding the war's energy shock.",
+        "sources": [
+          {
+            "source": "FT Markets",
+            "title": "Oil sinks below $80 as traders bet Strait of Hormuz flows will return",
+            "url": "https://www.ft.com/content/45340e55-aa6a-4302-a606-a869f5cb6189"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "The Trump-Iran Deal Allows Tehran to Immediately Sell Oil",
+            "url": "https://www.wsj.com/world/middle-east/the-trump-iran-deal-allows-tehran-to-immediately-sell-oil-37a1ebe5"
+          }
+        ]
+      },
+      {
+        "title": "Yields Fall Ahead of Expected Fed Hold",
+        "latest_developments": "Treasury yields fell for a second straight session as investors positioned for the Federal Reserve, holding its first meeting under new chair Kevin Warsh, to keep rates steady in Wednesday's decision.",
+        "summary": "The peace agreement and falling oil have eased the inflation fears that complicated the central bank's path, and markets read the combination as cover for a hold.",
         "sources": [
           {
             "source": "WSJ Markets",
-            "title": "Treasury Yields Ease as Markets Await Iran Deal Details, Fed",
+            "title": "Treasury Yields Fall Ahead of Expected Fed Hold",
             "url": "https://www.wsj.com/finance/jgb-futures-edge-lower-ahead-of-bojs-rate-decision-6b5d01ff?mod=rss_markets_main"
           }
         ]
       },
       {
-        "title": "Iran Deal Frees Tehran to Sell Oil, Waives Bank Sanctions",
-        "latest_developments": "Published terms show the agreement lets Iran immediately resume oil sales and waives banking and transport sanctions, and the Trump administration is weighing a $300 billion fund to rebuild Iran.",
-        "summary": "The US-Iran memorandum extending the ceasefire carries early financial benefits for Tehran: immediate oil sales and waived banking and transport sanctions that ease transactions. Washington is considering a $300 billion reconstruction fund if the peace holds, while Iran says the deal also requires Israel to withdraw from Lebanon, a condition that keeps the still-unpublished accord uncertain.",
+        "title": "G7 Agrees to Tighten Russian Energy Sanctions",
+        "latest_developments": "G7 leaders agreed at their summit to raise pressure on Moscow notably through new limits on Russian oil and gas exports, turning attention back to Ukraine after months focused on Iran.",
+        "summary": "The coordinated move by the wealthy-nations club aims to squeeze the revenue funding Russia's war, and it lands as the bloc weighs tighter enforcement against Moscow's shadow oil fleet.",
         "sources": [
           {
-            "source": "WSJ World News",
-            "title": "The Trump-Iran Deal Allows Tehran to Immediately Sell Oil",
-            "url": "https://www.wsj.com/world/middle-east/the-trump-iran-deal-allows-tehran-to-immediately-sell-oil-37a1ebe5"
-          },
-          {
             "source": "FT World",
-            "title": "FirstFT: $300bn reconstruction fund to rebuild Iran",
-            "url": "https://www.ft.com/content/b6cbba15-9b4e-44ef-84e4-e5a5f031df36"
+            "title": "G7 leaders agree to increase sanctions on Russian energy",
+            "url": "https://www.ft.com/content/a7b956d0-97ce-4a54-ba1d-e1c6eee9a293"
           }
         ]
       }
     ],
     "business": [
       {
-        "title": "Housing Authority Bought Its Building, Then Left",
-        "latest_developments": "The Post-Gazette details how Pittsburgh's Housing Authority purchased its own headquarters only to vacate it.",
-        "summary": "Pittsburgh's Housing Authority bought the building it occupied and then had to leave it, the Post-Gazette reports, raising questions about the agency's real-estate decisions as it works to expand affordable housing across the city.",
+        "title": "Pennsylvania Court Rules Skill Games Are Slot Machines",
+        "latest_developments": "The Pennsylvania Supreme Court ruled Monday, 5-2, that the loosely regulated skill games in bars, convenience stores, and VFW halls are slot machines subject to state gambling law.",
+        "summary": "Justice David Wecht wrote that the machines meet several legal definitions of a slot machine, a decision that exposes thousands of devices across the commonwealth to taxation and regulation and leaves their future uncertain.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Pittsburgh's Housing Authority bought their building. Then they had to leave.",
-            "url": "https://www.post-gazette.com/business/development/2026/06/16/housing-authority-pittsburgh-affordable-housing/stories/202606140032"
+            "source": "WTAE",
+            "title": "Skill games are slot machines, must adhere to Pennsylvania's gambling law, Pa. Supreme Court rules",
+            "url": "https://www.wtae.com/article/pennsylvania-skill-games-gambling-slot-machines/71604213"
+          },
+          {
+            "source": "KDKA",
+            "title": "Pennsylvania Supreme Court rules \"skill games\" are slot machines, leaving their future uncertain",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pennsylvania-skill-games-ruling-supreme-court/"
           }
         ]
       },
       {
-        "title": "Yum Brands Sells Pizza Hut for $2.7 Billion",
-        "latest_developments": "Yum Brands formalized the sale Tuesday, splitting Pizza Hut between private-equity firm LongRange Capital, which pays $1.5 billion for operations outside mainland China, and Yum China, which takes the China business for $1.2 billion.",
-        "summary": "Pizza Hut, whose sales lagged as delivery-first rivals gained ground, changes hands in a $2.7 billion deal. LongRange Capital buys the chain outside mainland China for $1.5 billion and Yum China takes the China operations for $1.2 billion.",
+        "title": "CMU Pledges $3 Million to Pittsburgh",
+        "latest_developments": "Carnegie Mellon University committed $3 million over five years to support city education programs, the latest tax-exempt nonprofit to make a voluntary contribution to municipal finances.",
+        "summary": "The pledge, directed in part to the Rec2Tech program, adds to a string of payments from large tax-exempt institutions as Pittsburgh presses universities and hospitals to help fund city services.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Pizza Hut, where sales have lagged with arrival of delivery culture, will be sold for $2.7 billion",
-            "url": "https://www.post-gazette.com/business/career-workplace/2026/06/16/pizza-hut-sold-for-2-7-billion/stories/202606170010"
+            "title": "CMU commits $3 million to support city education programs",
+            "url": "https://www.post-gazette.com/news/politics-local/2026/06/16/carnegie-mellon-university-rec2tech-nonprofit-pittsburgh-finances/stories/202606160044"
           },
           {
-            "source": "KDKA",
-            "title": "Yum! Brands sells struggling Pizza Hut in $2.7 billion deal",
-            "url": "https://www.cbsnews.com/pittsburgh/news/pizza-hut-sale-yum-brands/"
+            "source": "PublicSource",
+            "title": "CMU to give Pittsburgh $3 million over five years",
+            "url": "https://www.publicsource.org/cmu-pittsburgh-3-million-contribution/"
+          }
+        ]
+      },
+      {
+        "title": "Walnut Capital Plans Bakery Square Apartments",
+        "latest_developments": "Walnut Capital presented plans to Pittsburgh's Planning Commission to expand Bakery Square with a six-story residential building next to the tech hub.",
+        "summary": "The proposal would add apartments to the East End development that anchors the city's technology corridor, deepening the residential side of a complex built around offices and retail.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "Walnut Capital eyes new apartments for Bakery Square expansion",
+            "url": "https://www.publicsource.org/bakery-square-proposed-housing-development/"
           }
         ]
       }
     ],
     "around_town": [
       {
-        "title": "Commercial Street Bridge Demolition Nears",
-        "latest_developments": "Crews will demolish the old Commercial Street Bridge, including a planned controlled explosion, before sliding the new span into place.",
-        "summary": "Before Pittsburgh's new Commercial Street Bridge can move into position, crews must take down the old one, a job that includes a controlled explosion, WTAE reports.",
+        "title": "Alert Day Thursday for Flooding and Wind",
+        "latest_developments": "Forecasters flagged Thursday as an alert day for the Pittsburgh region, with rain returning late Wednesday and a threat of flooding, severe storms, and damaging wind.",
+        "summary": "The system follows a stretch of severe weather that spawned tornadoes across Western Pennsylvania and eastern Ohio, and it raises the risk of flooding on already saturated ground.",
         "sources": [
           {
             "source": "WTAE",
-            "title": "Get a closer look at the demolition of the old Commercial Street Bridge",
-            "url": "https://www.wtae.com/article/pittsburgh-commercial-street-bridge-demolition/71600255"
+            "title": "Pittsburgh: Alert Day Thursday for flooding, severe, wind threat",
+            "url": "https://www.wtae.com/article/rain-returns-late-wednesday-impact-day-thursday/71598337"
           }
         ]
       },
       {
-        "title": "Council Weighs Fern Hollow Bridge Settlements",
-        "latest_developments": "Pittsburgh City Council could vote this month on settlements for 11 people hurt in the 2022 Fern Hollow Bridge collapse.",
-        "summary": "Pittsburgh City Council may vote this month on whether to pay settlements to 11 victims of the January 2022 Fern Hollow Bridge collapse in Frick Park, TribLive reports.",
+        "title": "Parkway North Closes Overnight for Bridge Work",
+        "latest_developments": "Crews begin the next phase of demolishing the Jacks Run Road Bridge this week, fully closing part of the Parkway North overnight after equipment problems delayed the earlier start.",
+        "summary": "The closures support replacement of the span over Interstate 279, one of the main commuter routes between the North Hills and downtown Pittsburgh.",
         "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Parkway North closing overnight this week as next phase of Jacks Run bridge demolition begins",
+            "url": "https://www.post-gazette.com/news/transportation/2026/06/16/jacks-run-bridge-demolition-construction/stories/202606160047"
+          }
+        ]
+      },
+      {
+        "title": "Beaver and Butler Residents Turn to Bottled Water",
+        "latest_developments": "Residents served by the Beaver Falls Municipal Authority have switched to bottled water after weeks of foul odor and taste, and the authority says the water is safe and has begun flushing its system.",
+        "summary": "The utility draws from the river before treating its supply; communities in Beaver and Butler counties report the problem began weeks ago, affecting drinking and cleaning.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Residents in Beaver, Butler counties turn to bottled water amid ongoing taste and odor concerns",
+            "url": "https://www.cbsnews.com/pittsburgh/news/water-taste-odor-issue-beaver-butler-counties/"
+          }
+        ]
+      },
+      {
+        "title": "Black Bear Swims in North Park Lake",
+        "latest_developments": "A black bear swam across North Park Lake in McCandless Township on Tuesday, and Allegheny County urged onlookers to admire it from a distance and avoid contact.",
+        "summary": "The sighting follows several bear reports around the region in recent days, part of a pattern of bears wandering closer to populated areas in early summer.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Black bear spotted swimming in North Park Lake, Allegheny County",
+            "url": "https://www.wtae.com/article/pittsburgh-area-black-bear-swims-in-north-park-lake/71604188"
+          },
           {
             "source": "TribLive",
-            "title": "Pittsburgh City Council to vote on settlements for Fern Hollow Bridge victims",
-            "url": "https://triblive.com/local/pittsburgh-city-council-to-vote-on-settlements-for-fern-hollow-bridge-victims/"
-          }
-        ]
-      },
-      {
-        "title": "Two More Tornadoes Confirmed in Butler County",
-        "latest_developments": "The National Weather Service confirmed two tornadoes from Sunday's storms touched down in Butler County, including an EF1 near Moraine State Park, bringing the two-week regional total to nine.",
-        "summary": "Surveys confirmed two tornadoes struck Butler County during Sunday's line of severe storms, one an EF1 near Moraine State Park. Nine tornadoes have now hit Western Pennsylvania communities in two weeks.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "Two tornadoes confirmed in Butler County during Sunday's line of severe storms",
-            "url": "https://www.wtae.com/article/butler-county-tornadoes-confirmed-moraine-state-park/71603043"
-          },
-          {
-            "source": "WPXI",
-            "title": "2 tornadoes moved through Butler County during Sunday storms",
-            "url": "https://www.wpxi.com/news/local/2-tornadoes-moved-through-butler-county-during-sunday-storms/J5AN64JR4BDUXFWP443KLNEOKA/"
-          }
-        ]
-      },
-      {
-        "title": "Acid Spill at Cleveland Cliffs Reaches Creek",
-        "latest_developments": "Hazmat crews responded Tuesday to an acid leak at the Cleveland Cliffs plant in Butler County after the spill reached Connoquenessing Creek.",
-        "summary": "An acid leak at the Cleveland Cliffs plant in Butler County spilled into Connoquenessing Creek on Tuesday, drawing hazmat teams, WTAE and WPXI report.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "Acid leak from Butler County plants spills into creek",
-            "url": "https://www.wtae.com/article/butler-county-cleveland-cliffs-acid-leak/71601375"
-          },
-          {
-            "source": "WPXI",
-            "title": "Hazmat called to Cleveland Cliffs in Butler County for spill",
-            "url": "https://www.wpxi.com/news/local/hazmat-called-cleveland-cliffs-butler-county-acid-spill-connoquenessing-creek/QS22FGF4CBASHDBL5ZROFJWHHM/"
-          }
-        ]
-      },
-      {
-        "title": "Pittsburgh Zoo Seeks Name for Lion Cub",
-        "latest_developments": "The Pittsburgh Zoo is asking the public to suggest a name for its growing female lion cub.",
-        "summary": "The Pittsburgh Zoo invited the public to suggest names for its new female lion cub, WPXI reports.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "You can help choose the name for Pittsburgh Zoo's new baby lion",
-            "url": "https://www.wpxi.com/news/local/you-can-help-choose-name-pittsburgh-zoos-new-baby-lion/N525JNHIVFE5JNVZF5P5GDAX7M/"
+            "title": "Black bear seen swimming in North Park Lake",
+            "url": "https://triblive.com/local/black-bear-seen-swimming-in-north-park-lake/"
           }
         ]
       }
     ],
     "events": [
       {
-        "title": "Juneteenth Events Across Pittsburgh",
-        "latest_developments": "The Post-Gazette rounds up Pittsburgh-area Juneteenth festivals, films, and observances ahead of the June 19 holiday.",
-        "summary": "Pittsburgh marks Juneteenth, Friday, June 19, 2026, with festivals, film screenings, and other observances across the region, the Post-Gazette reports.",
+        "title": "Monster Jam at Acrisure Stadium",
+        "latest_developments": "Monster Jam returns to Acrisure Stadium on Saturday, June 20, transforming the field into a dirt race track for only the second time.",
+        "summary": "Monster Jam, a live motor-sport event featuring massive custom-built monster trucks, runs Saturday at Acrisure Stadium on Pittsburgh's North Shore, replacing the turf with a dirt course for racing and freestyle competition.",
         "sources": [
           {
-            "source": "Post-Gazette Arts & Entertainment",
-            "title": "Juneteenth events in Pittsburgh include festivals, films and more",
-            "url": "https://www.post-gazette.com/life/recreation/2026/06/16/juneteenth-events-pittsburgh-2026/stories/202606170002"
+            "source": "TribLive",
+            "title": "Monster Jam returns full-throttle to Acrisure Stadium",
+            "url": "https://triblive.com/local/monster-jam-returns-full-throttle-to-acrisure-stadium/"
           }
         ]
       },
       {
-        "title": "Little Queer Libraries Share Banned Books",
-        "latest_developments": "The Post-Gazette profiles Little Queer Libraries, which distribute banned books across the Pittsburgh region through the Equality Center.",
-        "summary": "Little Queer Libraries place banned books in small lending boxes across the Pittsburgh region, run with help from the Equality Center, the Post-Gazette reports.",
+        "title": "Tropical Pop-Up at Palm Palm",
+        "latest_developments": "Palm Palm, one of Pittsburgh's popular restaurants, has reworked its dining experience with a tropical-themed pop-up.",
+        "summary": "The downtown spot has redecorated and refreshed its menu around a tropical theme, offering a seasonal change of scene for diners.",
         "sources": [
           {
-            "source": "Post-Gazette Arts & Entertainment",
-            "title": "Little Queer Libraries offer banned books across the Pittsburgh region",
-            "url": "https://www.post-gazette.com/life/goodness/2026/06/16/little-queer-libraries-banned-books-equality-center/stories/202606080063"
+            "source": "KDKA",
+            "title": "A tropical escape just popped up at one of Pittsburgh's most popular restaurants",
+            "url": "https://www.cbsnews.com/pittsburgh/video/a-tropical-escape-just-popped-up-at-one-of-pittsburghs-most-popular-restaurants/"
           }
         ]
       }
     ],
     "around_teams": [
       {
-        "title": "Termarr Johnson Shows Signs of Turning Around",
-        "latest_developments": "The Post-Gazette's MiLB Monday weighs whether former top Pirates pick Termarr Johnson is finally turning his prospect career around.",
-        "summary": "The Post-Gazette examined whether Termarr Johnson, a former top Pirates draft pick, is rebounding in the minor leagues after a slow start to his professional career.",
+        "title": "Steelers Pass on Supplemental Draft QB",
+        "latest_developments": "The Post-Gazette reports the Steelers are unlikely to bid for quarterback Brendan Sorsby in the NFL's supplemental draft, comfortable with Drew Allar and Will Howard at the position.",
+        "summary": "Sorsby, who entered the supplemental pool after a gambling matter, drew speculation about Pittsburgh's interest, but the beat expects the team to hold its current quarterback room.",
         "sources": [
           {
-            "source": "Post-Gazette Pirates",
-            "title": "MiLB Monday: Is former top Pirates pick Termarr Johnson turning things around?",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/15/mlb-prospects-termarr-johnson-edward-florentino-tony-blanco/stories/202606150020"
+            "source": "Post-Gazette Steelers",
+            "title": "Don't expect the Steelers to make a bid for Brendan Sorsby in the NFL's supplemental draft",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/16/sorsby-gambling-supplemental-draft-allar-howard/stories/202606160042"
           }
         ]
       },
       {
-        "title": "Which Steelers Rookies Could Contribute Early",
-        "latest_developments": "A Post-Gazette video assesses which Steelers rookies, including Germie Bernard and Max Iheanachor, looked ready to contribute after OTAs and minicamp.",
-        "summary": "The Post-Gazette weighed which Steelers rookies showed enough during OTAs and minicamp to contribute right away, singling out Germie Bernard and Max Iheanachor.",
+        "title": "SNR Drive Scouts the 2027 QB Class",
+        "latest_developments": "On the Steelers' SNR Drive, Matt Williamson and Wes Uhler broke down the next generation of quarterbacks heading toward the 2027 NFL Draft.",
+        "summary": "The team podcast surveyed college passers who could shape the league's future, a long-range look at the position as Pittsburgh weighs its own quarterback plans.",
         "sources": [
           {
-            "source": "Post-Gazette Steelers",
-            "title": "WATCH: Are any Steelers rookies looking like quick contributors after OTAs, minicamp?",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/06/15/nfl-news-rumors-germie-bernard-max-iheanachor/stories/202606150028"
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Scouting the Next Generation of QBs | SNR Drive | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=5tvT88338iI"
+          }
+        ]
+      },
+      {
+        "title": "Forging Steel Goes Inside the Draft",
+        "latest_developments": "The Steelers released the second episode of Forging Steel, an inside look at the team's 2026 NFL Draft, with coach Mike McCarthy addressing the squad.",
+        "summary": "The team's documentary series takes viewers behind the scenes of draft preparation and decisions, part of the club's offseason content as the season nears.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Forging Steel: Pittsburgh is on the Clock (Season 1, Episode 2) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=TkV9_btUE3c"
           }
         ]
       }
     ],
     "reading": [
       {
-        "author": "Stratechery",
-        "title": "Fox Buys Roku, The Problem With Fox's Smart Strategy, Streaming That Works",
-        "url": "https://stratechery.com/2026/fox-buys-roku-the-problem-with-foxs-smart-strategy-streaming-that-works/",
-        "summary": "Stratechery argues Fox's purchase of Roku trades extracting value from rights holders for leverage as a distribution renter, a deal the market dislikes."
-      },
-      {
         "author": "Ed Zitron",
         "title": "Exclusive: OpenAI Losses Increased Nearly 8X in 2025, With Spending Hitting $34 Billion",
         "url": "https://www.wheresyoured.at/exclusive-openai-financials/",
-        "summary": "Zitron reports OpenAI's losses grew nearly eightfold in 2025 as spending reached $34 billion, and he argues the company has no path to profitability."
+        "summary": "Zitron reports OpenAI's losses grew nearly eightfold in 2025 as spending reached $34 billion, arguing the figures show a company with no credible path to profitability."
+      },
+      {
+        "author": "Stratechery",
+        "title": "Fox Buys Roku, The Problem With Fox's Smart Strategy, Streaming That Works",
+        "url": "https://stratechery.com/2026/fox-buys-roku-the-problem-with-foxs-smart-strategy-streaming-that-works/",
+        "summary": "Thompson argues Fox's acquisition of Roku trades the leverage of extracting fees from rights holders for the weaker position of a distribution renter, explaining why the market disliked the deal."
       },
       {
         "author": "Cal Newport",
         "title": "AI Isn't Breaking Work. It's Already Broken.",
         "url": "https://calnewport.com/ai-isnt-breaking-work-its-already-broken/",
-        "summary": "Newport contends AI is exposing dysfunction that already plagued knowledge work, drawing on an interview about a survey of 6,000 digital workers."
+        "summary": "Newport contends that knowledge work was already dysfunctional before AI, and that the technology mostly exposes and amplifies existing problems with how digital work is organized."
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-16 12:02 EDT",
-    "items_considered": 70,
+    "generated_at": "2026-06-16 16:04 EDT",
+    "items_considered": 63,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
