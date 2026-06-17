@@ -10,6 +10,8 @@ import urllib.request
 from datetime import datetime, timezone
 from statistics import mean
 
+import safefetch
+
 TIMEOUT = 20
 SYMBOLS = [
     # label, yahoo symbol, decimal places
@@ -27,7 +29,7 @@ def _closes(symbol):
     url = ("https://query1.finance.yahoo.com/v8/finance/chart/"
            f"{urllib.parse.quote(symbol)}?range=1mo&interval=1d")
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (infosecfollow)"})
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+    with safefetch.safe_open(req, timeout=TIMEOUT) as resp:
         data = json.loads(resp.read(4_000_000).decode("utf-8", "replace"))
     result = data["chart"]["result"][0]
     timestamps = result.get("timestamp") or []

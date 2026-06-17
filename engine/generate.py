@@ -25,10 +25,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from xml.etree import ElementTree
 
 import market_data
 import pittsburgh as pgh_data
+import safefetch
 
 ENGINE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = ENGINE_DIR.parent
@@ -86,7 +86,7 @@ def http_get(url):
         "User-Agent": USER_AGENT,
         "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
     })
-    with urllib.request.urlopen(req, timeout=FETCH_TIMEOUT) as resp:
+    with safefetch.safe_open(req, timeout=FETCH_TIMEOUT) as resp:
         raw = resp.read(MAX_FEED_BYTES + 1)
         if len(raw) > MAX_FEED_BYTES:
             raise ValueError(f"response larger than {MAX_FEED_BYTES} bytes")
@@ -162,8 +162,9 @@ def clean_text(text, limit):
 
 def parse_feed(source_name, raw):
     """Yield item dicts from RSS 2.0, RSS 1.0 (RDF), or Atom bytes."""
-    # tolerate a UTF-8 BOM or blank lines before the XML declaration (TribLive)
-    root = ElementTree.fromstring(raw.lstrip(b"\xef\xbb\xbf\r\n\t "))
+    # safe_fromstring tolerates a UTF-8 BOM/blank prolog (TribLive) and forbids
+    # DTDs/entities (billion-laughs/XXE), matching ElementTree's output otherwise
+    root = safefetch.safe_fromstring(raw)
     root_name = _local(root.tag)
     if root_name == "rss":
         channel = next((c for c in root if _local(c.tag) == "channel"), None)
