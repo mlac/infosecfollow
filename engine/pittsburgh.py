@@ -8,6 +8,8 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
+import safefetch
+
 TIMEOUT = 20
 TZ = ZoneInfo("America/New_York")
 USER_AGENT = "infosecfollow/1.0 (https://infosecfollow.com)"
@@ -21,7 +23,7 @@ NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-seas
 def _get_json(url):
     req = urllib.request.Request(url, headers={
         "User-Agent": USER_AGENT, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+    with safefetch.safe_open(req, timeout=TIMEOUT) as resp:
         return json.loads(resp.read(4_000_000).decode("utf-8", "replace"))
 
 
