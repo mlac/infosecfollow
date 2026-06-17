@@ -1,36 +1,41 @@
 {
   "date": "2026-06-17",
-  "headline": "A sweeping credential heist handed attackers working VPN logins for tens of thousands of Fortinet firewalls across nearly 200 countries, the day's widest exposure.",
+  "headline": "A leak called FortiBleed hands attackers working VPN credentials for tens of thousands of Fortinet firewalls at Oracle, Lenovo, FedEx, and a NATO contractor, even as Microsoft races to patch a Defender zero-day and Britain warns of hostile states burrowing into critical infrastructure.",
   "emerging_trends": [
     {
       "subject": "AI Offense",
-      "text": "Recovered agent sessions, underground chatter, and policy fights all point the same way—AI coding agents now lower the skill floor enough to let novices run real intrusions."
+      "text": "AI agents and commodity tooling keep lowering the skill floor for intrusions, from a novice breaching 14 firms with Claude and Codex to a junior hacker chaining off-the-shelf software for persistence."
     },
     {
-      "subject": "Supply Chain",
-      "text": "Hijacked maintainer accounts and a self-spreading worm hit 144 Mastra npm packages and hundreds more, showing open-source registries remain the softest path into developer machines."
+      "subject": "Edge Exposure",
+      "text": "Credential leaks and exploited internet-facing software—Fortinet firewalls, Joomla and LiteSpeed plugins—hand attackers a foothold without a zero-day."
     },
     {
-      "subject": "Agent Governance",
-      "text": "A wave of vendors—WitnessAI, Tigera, Tenet—rushed out controls for AI agents and MCP servers, a sign enterprises now treat their own agents as an attack surface."
+      "subject": "State Prepositioning",
+      "text": "Governments warn that hostile states are embedding in critical infrastructure, and the EU is rallying allied cyber reserves in response."
     },
     {
-      "subject": "State Control",
-      "text": "India's Telegram block, a UK ban on under-16s, and ICE's purchase of immigrant tax data mark governments reaching deeper into communications and personal records."
+      "subject": "Patch Pressure",
+      "text": "A Defender zero-day, 245 Oracle fixes, browser remote-code-execution bugs, and expiring Secure Boot keys pile urgent updates on defenders at once."
     }
   ],
   "topics": [
     {
-      "title": "FortiBleed Exposes 73,000 Fortinet Firewalls",
+      "title": "FortiBleed Spills Credentials for Major Networks",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "A leak dubbed FortiBleed published VPN credentials tied to 73,932 FortiGate firewall URLs worldwide, and SOCRadar counted roughly 30,000 already compromised devices as attackers worked three recently patched FortiSandbox flaws.",
-      "summary": "The harvested set spans organizations in nearly 200 countries, and attackers have compiled validated logins for tens of thousands of edge firewalls, handing them a ready foothold into corporate networks. The activity rides FortiSandbox bugs CVE-2026-39813, CVE-2026-39808, and CVE-2026-25089, all fixed in recent weeks. Administrators should rotate every VPN credential, force multifactor authentication, and confirm the FortiSandbox patches landed.",
+      "latest_developments": "Ars Technica named victims among the exposed networks—Oracle, Lenovo, FedEx, a NATO contractor, and Fortinet itself—and Dark Reading reported attackers have compiled working credential lists for tens of thousands of devices across nearly 200 countries.",
+      "summary": "FortiBleed published Fortinet and FortiGate VPN credentials for 73,932 firewall URLs, and SOCRadar counts roughly 30,000 devices already compromised. The exposed networks span nearly 200 countries and include Oracle, Lenovo, FedEx, a NATO contractor, and Fortinet itself. Attackers reached the credentials by working three recently patched FortiSandbox flaws. Organizations should rotate VPN credentials immediately and confirm the FortiSandbox patches.",
       "tags": [
         "breach",
-        "patch",
+        "credentials",
         "vpn"
       ],
       "sources": [
+        {
+          "source": "Ars Technica Security",
+          "title": "Massive breach spills credentials for thousands of sensitive networks",
+          "url": "https://arstechnica.com/security/2026/06/massive-breach-spills-credentials-for-thousands-of-sensitive-networks/"
+        },
         {
           "source": "BleepingComputer",
           "title": "FortiBleed leak exposes Fortinet VPN credentials for 73,000 devices.",
@@ -49,41 +54,99 @@
       ]
     },
     {
-      "title": "Mastra npm Packages and Shai-Hulud Worm Spread",
+      "title": "RoguePlanet Defender Zero-Day Awaits a Fix",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Attackers compromised as many as 144 @mastra npm packages through a hijacked contributor account in a campaign named easy-day-js, and researchers said GitHub dismissed two vulnerability reports whose flaws now feed the Shai-Hulud worm infecting hundreds of packages.",
-      "summary": "A single npm account, ehindero, pushed the poisoned Mastra builds for the popular AI application framework, a finding confirmed by Endor Labs, JFrog, SafeDep, Socket, and StepSecurity. Researchers say GitHub rejected formal reports of design flaws that Shai-Hulud variants exploit to compromise developer accounts and packages worldwide. Developers should pin and verify dependencies, audit recent installs, and rotate any exposed tokens.",
+      "latest_developments": "Microsoft confirmed the RoguePlanet zero-day as CVE-2026-50656 and said a patch is in development, one week after the flaw surfaced with public proof-of-concept code that races the Defender engine to spawn a System-level command prompt.",
+      "summary": "RoguePlanet, now CVE-2026-50656 at CVSS 7.8, is a privilege-escalation flaw in the Microsoft Malware Protection Engine that powers Defender. Public proof-of-concept code wins a race condition to spawn a command prompt with System privileges. Microsoft acknowledged the zero-day a week after it surfaced and says a fix is on the way. Defender refreshes its engine automatically, so administrators should verify the engine updates once Microsoft ships the patch.",
       "tags": [
-        "supply-chain",
-        "npm"
+        "zero-day",
+        "patch",
+        "privilege-escalation"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "144 Mastra npm Packages Compromised via Hijacked Contributor Account",
-          "url": "https://thehackernews.com/2026/06/144-mastra-npm-packages-compromised-via.html"
+          "title": "Microsoft Confirms RoguePlanet Defender Zero-Day, Says Patch is in Development",
+          "url": "https://thehackernews.com/2026/06/microsoft-confirms-rogueplanet-defender_02022423645.html"
         },
         {
-          "source": "The Record",
-          "title": "GitHub dismissed security reports on flaws now exploited by supply-chain worm, researchers say",
-          "url": "https://therecord.media/github-dismissed-reports-shai-hulud-deep-specter"
+          "source": "SecurityWeek",
+          "title": "Microsoft Working on Patch for ‘RoguePlanet’ Zero-Day",
+          "url": "https://www.securityweek.com/microsoft-working-on-patch-for-rogueplanet-zero-day/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft working on Defender patch for RoguePlanet zero-day",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-working-on-defender-patch-for-rogueplanet-zero-day/"
         }
       ]
     },
     {
-      "title": "AI Agents Breach 14 Companies for a Novice",
-      "area": "AI Security",
-      "latest_developments": "OALABS recovered more than 1,000 agent sessions from a compromised server and found a low-skilled attacker drove Anthropic's Claude Code and OpenAI's Codex to slip past most guardrails and breach 14 companies.",
-      "summary": "The recovered logs show how little expertise the intruder needed once the agents handled reconnaissance, exploitation, and lateral movement. Sophos found underground operators still split between embracing AI and doubting it, while Wired argued models with strong hacking ability will soon be common no matter what export rules say. Together the reports sharpen the case that offensive automation has arrived for ordinary criminals.",
+      "title": "Exploited Plugins Drive a Wide Patch Wave",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CISA ordered agencies to patch maximum-severity Joomla Content Editor flaw CVE-2026-48907 by Friday as SecurityWeek confirmed attackers chaining it with a LiteSpeed cPanel flaw for PHP execution and root, while Oracle shipped 245 fixes and Chrome and Firefox closed critical memory-safety bugs.",
+      "summary": "CISA added the maximum-severity Joomla Content Editor flaw CVE-2026-48907 to its exploited-vulnerabilities catalog and set a Friday deadline for federal agencies. SecurityWeek confirmed attackers chaining the Joomla bug and a LiteSpeed cPanel flaw to run arbitrary PHP and seize root on shared hosts. Oracle's June update delivered 245 fixes, and Chrome and Firefox patched critical memory-safety bugs that could enable remote code execution. Anyone running these products should apply the updates now.",
       "tags": [
-        "ai",
-        "apt"
+        "patch",
+        "exploit",
+        "cisa"
       ],
       "sources": [
         {
-          "source": "Help Net Security",
-          "title": "Low-skilled attacker used Claude, Codex to breach 14 companies",
-          "url": "https://www.helpnetsecurity.com/2026/06/17/ai-agents-offensive-cyber-operations-claude-codex/"
+          "source": "BleepingComputer",
+          "title": "CISA orders feds to patch max severity Joomla plugin flaw by Friday",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-max-severity-joomla-plugin-flaw-by-friday/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Joomla, LiteSpeed Vulnerabilities Exploited in Attacks",
+          "url": "https://www.securityweek.com/joomla-litespeed-vulnerabilities-exploited-in-attacks/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Oracle’s Second Monthly Security Updates Deliver 245 Patches",
+          "url": "https://www.securityweek.com/oracles-second-monthly-security-updates-deliver-245-patches/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Chrome and Firefox Updated to Patch Critical, High-Severity Vulnerabilities",
+          "url": "https://www.securityweek.com/chrome-and-firefox-updated-to-patch-critical-high-severity-vulnerabilities/"
+        }
+      ]
+    },
+    {
+      "title": "Britain Warns of States Inside Critical Infrastructure",
+      "area": "Nation-State Activity",
+      "latest_developments": "NCSC chief executive Richard Horne told a RUSI audience that hostile states drive three-quarters of the attacks on Britain's critical infrastructure and are prepositioning across it for future conflict.",
+      "summary": "Richard Horne, who runs Britain's National Cyber Security Centre, warned that nation-state adversaries account for most attacks on the country's critical infrastructure and are embedding themselves to map networks. He cautioned that 'kinetic targeting in any conflict tomorrow will be based on intelligence gathered today.' Operators of energy, water, telecoms, and transport face attackers laying groundwork for disruption. The warning pushes infrastructure defenders to hunt for dormant intrusions rather than wait for overt attacks.",
+      "tags": [
+        "apt",
+        "critical-infrastructure",
+        "nation-state"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Hostile states behind three-quarters of attacks on Britain's critical infrastructure, cyber chief warns",
+          "url": "https://therecord.media/britain-nation-state-cyberattacks-richard-horne-rusi"
+        }
+      ]
+    },
+    {
+      "title": "Low-Skill Attackers Lean on AI and Off-the-Shelf Tools",
+      "area": "AI Security",
+      "latest_developments": "The Hacker News detailed a junior attacker who installed OpenSSH and Tailscale on a victim before his Havoc command-and-control server went offline to keep a backdoor, and Sophos reported that some underground actors stay skeptical that AI sharpens their craft.",
+      "summary": "Researchers keep documenting how AI tools and commodity software lower the bar for intrusions. In the latest case a French-speaking attacker broke into a small automotive firm, planted a keylogger, and—before his Havoc command-and-control server went dark—installed OpenSSH and Tailscale to preserve access outside the C2. Sophos found that some underground actors doubt AI improves their operations, even as analysts argue models with strong hacking ability will soon be common. Defenders should flag legitimate remote-access tools appearing where they do not belong.",
+      "tags": [
+        "ai",
+        "persistence",
+        "threat-intel"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Junior Hacker Used Tailscale and OpenSSH to Keep Access After His C2 Went Offline",
+          "url": "https://thehackernews.com/2026/06/junior-hacker-used-tailscale-and.html"
         },
         {
           "source": "Sophos News",
@@ -91,124 +154,72 @@
           "url": "https://www.sophos.com/en-us/blog/ai-in-the-underground-curiosity-claims-and-concerns"
         },
         {
-          "source": "Wired Security",
-          "title": "‘Dangerous’ AI Models Are Coming No Matter What",
-          "url": "https://www.wired.com/story/dangerous-ai-models-are-coming-no-matter-what/"
+          "source": "Ars Technica Security",
+          "title": "\"Dangerous\" AI models are coming no matter what",
+          "url": "https://arstechnica.com/ai/2026/06/dangerous-ai-models-are-coming-no-matter-what/"
         }
       ]
     },
     {
-      "title": "Rokarolla Android Trojan Hits 217 Banking Apps",
+      "title": "ShinyHunters Claims Kodak as iRhythm Loses Patient Data",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "Zimperium detailed Rokarolla, a new Android banking trojan that targets 217 banking and cryptocurrency apps, wields 137 commands, and seizes full control of infected phones.",
-      "summary": "Rokarolla, named for its command-and-control infrastructure, spreads through malicious sites that impersonate popular apps such as TikTok and Google Chrome, tricking victims into installing a fake build. Once on the device it combines banking fraud with broad surveillance, remote control, and persistence. Android users should install apps only from official stores and treat sideloading prompts as a red flag.",
+      "latest_developments": "Kodak confirmed a data breach that the ShinyHunters extortion gang claimed, and iRhythm disclosed that intruders stole patient health data from third-party-hosted apps and issued a ransom demand.",
+      "summary": "Kodak said it is working with outside experts after intruders accessed company data, a breach ShinyHunters claimed. Days earlier medical-device maker iRhythm disclosed that attackers stole patient protected health information and other personal data from third-party-hosted applications, then demanded a ransom. Both join a run of extortion-driven thefts hitting healthcare and consumer brands. Affected customers and patients should expect notification and watch for fraud.",
       "tags": [
-        "malware",
-        "mobile"
+        "breach",
+        "extortion",
+        "healthcare"
       ],
       "sources": [
         {
-          "source": "Help Net Security",
-          "title": "Rokarolla Android trojan targets banking and crypto users, enables device takeover",
-          "url": "https://www.helpnetsecurity.com/2026/06/17/rokarolla-android-banking-trojan-device-takeover/"
-        },
-        {
           "source": "BleepingComputer",
-          "title": "New Rokarolla Android malware targets 217 banking, crypto apps",
-          "url": "https://www.bleepingcomputer.com/news/security/new-rokarolla-android-malware-targets-217-banking-crypto-apps/"
+          "title": "Kodak confirms data breach claimed by ShinyHunters extortion gang",
+          "url": "https://www.bleepingcomputer.com/news/security/kodak-confirms-data-breach-claimed-by-shinyhunters-extortion-gang/"
         },
         {
-          "source": "Dark Reading",
-          "title": "Rokarolla Android Trojan Levels Up to Full Device Control, Persistence",
-          "url": "https://www.darkreading.com/endpoint-security/rokarolla-android-trojan"
+          "source": "Help Net Security",
+          "title": "Another healthcare firm attacked days after Novo Nordisk breach",
+          "url": "https://www.helpnetsecurity.com/2026/06/17/irhythm-data-breach-patient-health-information-stolen/"
         }
       ]
     },
     {
-      "title": "ClickFix Loaders and Poisoned Stores Push Malware",
+      "title": "Crypto Clipper Campaign Games Reviews and VirusTotal",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "Morphisec, BlueVoyant, and Huntress tracked fresh ClickFix campaigns delivering three loaders—BabaDeda, Lorem Ipsum, and Potemkin—while attackers hid malware in Steam Workshop wallpaper packs and a fileless Phantom Stealer drained browser credentials entirely in memory.",
-      "summary": "The ClickFix lures use fake update prompts to trick users into running commands, and the April BabaDeda wave struck education and financial organizations. Separately, threat actors abused Valve's Steam Workshop through the Wallpaper Engine app, and Phantom Stealer ran wholly in memory with anti-analysis tricks to dodge detection. Users should distrust copy-and-run fix instructions and harden browser credential storage.",
+      "latest_developments": "Check Point Research exposed a crypto-clipper operation that pays for promoted posts on legitimate news sites and seeds fake reviews, AI-voiced videos, and VirusTotal comments to push wallet-swapping malware through a WordPress phishing hub.",
+      "summary": "Check Point Research traced a crypto-clipper operation that buys promoted posts on real news sites to manufacture buzz, then funnels victims through a WordPress phishing hub backed by fake GitHub and SourceForge projects, a YouTube channel, and AI-narrated videos. The malware swaps cryptocurrency wallet addresses on the clipboard to redirect payments to the attacker. The actor even seeded VirusTotal comments to lend the warez credibility. Users should verify wallet addresses after pasting and download tools only from vetted sources.",
       "tags": [
+        "cryptocurrency",
         "malware",
         "phishing"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "ClickFix Campaigns Expand Malware Delivery With New Loaders and Fake Update Lures",
-          "url": "https://thehackernews.com/2026/06/clickfix-campaigns-expand-malware.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Steam Workshop abused to spread malware via Wallpaper Engine app",
-          "url": "https://www.bleepingcomputer.com/news/security/steam-workshop-abused-to-spread-malware-via-wallpaper-engine-app/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "Fileless Phantom Stealer Targets Browser Credentials",
-          "url": "https://www.darkreading.com/cyberattacks-data-breaches/fileless-phantom-stealer-targets-browser-credentials"
+          "title": "Crypto Clipper Campaign Abuses Fake Reviews, AI Narrators, and VirusTotal Comments",
+          "url": "https://thehackernews.com/2026/06/crypto-clipper-campaign-abuses-fake.html"
         }
       ]
     },
     {
-      "title": "FishMonger Deploys Windows SprySOCKS Variant",
-      "area": "Nation-State Activity",
-      "latest_developments": "Dark Reading reported that the China-nexus group FishMonger deployed an undocumented Windows version of the SprySOCKS backdoor, abusing kernel drivers to evade detection against government targets in Honduras, Taiwan, Thailand, and Pakistan.",
-      "summary": "SprySOCKS began as a Linux backdoor, and the new build extends it to Windows with kernel-driver tricks that blind endpoint sensors. The targeting points at espionage across governments in Asia and Central America. Defenders should watch for unsigned or anomalous kernel drivers and tighten driver-loading policy.",
-      "tags": [
-        "apt",
-        "espionage"
-      ],
-      "sources": [
-        {
-          "source": "Dark Reading",
-          "title": "SprySOCKS Windows Variant Abuses Kernel Drivers to Evade Detection",
-          "url": "https://www.darkreading.com/threat-intelligence/sprysocks-windows-variant-kernel-drivers"
-        }
-      ]
-    },
-    {
-      "title": "India's Telegram Ban Spills Into the UAE",
+      "title": "Warner Flags CISA Cuts as EU Opens Cyber Reserve to Ukraine",
       "area": "Policy and Regulation",
-      "latest_developments": "India ordered Telegram restricted nationwide until June 22 after leaked exam papers circulated, and CEO Pavel Durov accused telecom Reliance of BGP hijacking that knocked the app offline as far as the UAE as Telegram challenged the order in court.",
-      "summary": "Authorities imposed the block ahead of a major medical entrance exam to curb cheating. Durov says the network-routing disruption spread well beyond India's borders, hitting users in the UAE. Telegram is fighting the order, and observers can route around the block with an MTProto proxy.",
+      "latest_developments": "Senator Mark Warner warned CISA's acting chief and DHS Secretary Markwayne Mullin that staffing gaps and budget cuts threaten the agency and MS-ISAC funding, while the EU granted Ukraine access to its pool of pre-approved incident-response firms.",
+      "summary": "Senator Mark Warner pressed CISA's acting chief and DHS Secretary Markwayne Mullin over staffing shortages and budget cuts, urging DHS to prioritize the agency and fund the MS-ISAC that defends state and local governments. Across the Atlantic, the EU granted Ukraine access to its reserve of pre-approved incident-response companies as Kyiv moves toward formal accession. Both moves show how defensive cyber capacity tracks political will and funding. Defenders relying on shared federal resources should plan for possible gaps.",
       "tags": [
         "policy",
-        "censorship"
+        "government"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "India's Telegram ban hit the UAE too. Here's how to get around it",
-          "url": "https://www.bleepingcomputer.com/news/security/indias-telegram-ban-hit-the-uae-too-heres-how-to-get-around-it/"
+          "source": "The Record",
+          "title": "Warner warns of CISA cuts, staffing gaps in letter to acting chief",
+          "url": "https://therecord.media/warner-warns-of-cisa-cuts-staffing-shortages"
         },
         {
           "source": "The Record",
-          "title": "India's Telegram ban draws criticism from Durov as company challenges order in court",
-          "url": "https://therecord.media/india-telegram-ban-challenged-in-court"
-        }
-      ]
-    },
-    {
-      "title": "ICE Data Buys and a UK Teen Social Ban",
-      "area": "Policy and Regulation",
-      "latest_developments": "A $10 million procurement reviewed by 404 Media shows ICE buying immigrants' tax identifiers from a data broker, prompting Senator Ron Wyden to charge that the move skirts a court order, while the UK moved to bar under-16s from user-to-user social platforms.",
-      "summary": "Wyden says the purchase looks like an effort to evade the law and fuel mass deportations using records ICE could not otherwise reach. In Britain, the under-16 ban arrives despite unresolved age-verification problems and privacy objections from experts who warn it will push more identity checks onto everyone. Both moves test how far states will go to gather or gate personal data.",
-      "tags": [
-        "policy",
-        "privacy"
-      ],
-      "sources": [
-        {
-          "source": "404 Media",
-          "title": "ICE Appears to Be Buying Immigrants’ Tax Identifiers from a Data Broker",
-          "url": "https://www.404media.co/ice-appears-to-be-buying-immigrants-tax-identifiers-from-a-data-broker/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "UK Social Media Ban for Minors Has Privacy Experts Worried",
-          "url": "https://www.darkreading.com/cyber-risk/uk-social-media-ban-privacy-experts-worried"
+          "title": "EU grants Ukraine access to cybersecurity reserve for major attacks",
+          "url": "https://therecord.media/ukraine-access-eu-cybersecurity-reserve"
         }
       ]
     }
@@ -258,7 +269,7 @@
     }
   ],
   "weather": [
-    "This Afternoon: Partly Sunny, high 81F.",
+    "This Afternoon: Mostly Cloudy, high 81F.",
     "Tonight: Showers And Thunderstorms, low 68F.",
     "Thursday: Showers And Thunderstorms then Mostly Sunny, high 83F."
   ],
@@ -285,203 +296,193 @@
   "local": {
     "business_politics": [
       {
-        "title": "Fed's First Decision Under Warsh",
-        "latest_developments": "The Federal Reserve delivers its rate decision today, the first led by new chairman Kevin Warsh, with markets pricing in no change.",
-        "summary": "The Federal Reserve's policy committee meets June 17, 2026, its first decision under Chairman Kevin Warsh. Traders expect rates to hold steady, though odds of at least one hike later this year remain high, and Treasury yields ticked up ahead of the announcement.",
+        "title": "Fed Holds Rates in Warsh's First Decision",
+        "latest_developments": "The Federal Reserve held its benchmark rate steady today as expected, and in Kevin Warsh's debut as chairman it scrapped explicit forward guidance and dropped its bias toward cuts, with projections showing nearly half of policymakers favor at least one hike this year.",
+        "summary": "Warsh chaired his first Federal Open Market Committee meeting, which left rates unchanged in a unanimous vote against a backdrop of inflation running near double the 2% target after the war in Iran. Treasury yields and the dollar rose and gold slipped after the announcement.",
         "sources": [
           {
-            "source": "WSJ Markets",
-            "title": "Treasury Yields Rise Ahead of First Fed Decision Under Warsh",
+            "source": "FT",
+            "title": "Federal Reserve holds rates with short statement and hawkish projections",
+            "url": "https://www.ft.com/content/0fda593c-7de5-44e2-825c-53d7451d5f70"
+          },
+          {
+            "source": "WSJ",
+            "title": "Treasury Yields Climb After Fed Decision",
             "url": "https://www.wsj.com/finance/investing/jgb-futures-rise-tracking-gains-in-u-s-treasury-market-7a7462ac?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Tech Stocks Advance as Investors Await Rate Decision",
-            "url": "https://www.wsj.com/finance/stocks/oil-below-80-stock-futures-rise-before-warshs-first-fed-meeting-95970810?mod=rss_markets_main"
-          }
-        ]
-      },
-      {
-        "title": "Trump Says Iran Deal Not Final",
-        "latest_developments": "Trump warned the U.S.-Iran interim deal set for signing Friday is not final and could still collapse, lifting oil 2%, and he ruled out American money for a reported $300 billion Iran fund.",
-        "summary": "The agreement would reopen the Strait of Hormuz and let Iran sell oil freely, ending months of war. G7 leaders endorsed it Wednesday even as bipartisan critics in Washington demanded the text, which Vice President JD Vance says will appear by Friday at the latest.",
-        "sources": [
-          {
-            "source": "WSJ Markets",
-            "title": "Oil Rises 2% After Trump Says Iran Deal Not Final",
-            "url": "https://www.wsj.com/finance/commodities-futures/oil-futures-rise-on-likely-technical-recovery-30bb6a90?mod=rss_markets_main"
-          },
-          {
-            "source": "FT World",
-            "title": "Trump says US will not invest in $300bn fund for Iran",
-            "url": "https://www.ft.com/content/c6dbc33e-f12c-4608-bdf2-c8c4b1cdc211"
-          },
-          {
-            "source": "WSJ World News",
-            "title": "At G-7, a Subdued Trump Spells Relief for Allies",
-            "url": "https://www.wsj.com/world/at-g-7-a-subdued-trump-spells-relief-for-allies-a7efe03f"
           }
         ]
       }
     ],
     "business": [
       {
-        "title": "Dynamic Coffee Roasters Adds Second Shop",
-        "latest_developments": "Dynamic Coffee Roasters opened a second Pittsburgh location, this one in East Liberty.",
-        "summary": "Dynamic Coffee Roasters, founded in 2022, opened its second brick-and-mortar café in East Liberty, expanding from its first shop in the Highline building on the South Side.",
+        "title": "Carnegie Mellon Gives City $3 Million",
+        "latest_developments": "Carnegie Mellon University committed $3 million to Pittsburgh to support education and infrastructure work alongside Mayor Corey O'Connor's administration.",
+        "summary": "The gift extends a long partnership between the university and the city, funding shared priorities for schools and public infrastructure.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Dynamic Coffee Roasters expands, adds second Pittsburgh location in East Liberty",
-            "url": "https://www.wpxi.com/news/local/dynamic-coffee-roasters-expands-adds-second-pittsburgh-location-east-liberty/FBGZKVEW4ZD63JQS7I4ZF34QJA/"
+            "source": "Pittsburgh Magazine",
+            "title": "Local University Gifts $3 Million to Pittsburgh, Supporting Education and Infrastructure",
+            "url": "https://www.pittsburghmagazine.com/local-university-gifts-3-million-to-pittsburgh-supporting-education-and-infrastructure/"
           }
         ]
       },
       {
-        "title": "Larrimor's Matriarch Dies at 87",
-        "latest_developments": "Carol Slesinger, who built the women's apparel business at downtown clothier Larrimor's, died at 87.",
-        "summary": "Carol Slesinger, who with her late husband Carl expanded Larrimor's, the upscale downtown Pittsburgh clothing store favored by corporate executives and celebrities, died at 87 after growing the family business's women's line.",
+        "title": "World Cup Fills Pittsburgh Bars",
+        "latest_developments": "Though no World Cup matches play near Pittsburgh, some local bars report soccer crowds rivaling a home Steelers game.",
+        "summary": "Bar owners say the tournament has drawn heavy weekday turnout, a notable lift for hospitality businesses in a city with no host venue.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Carol Slesinger, who built Larrimor's women's business, dies at 87",
-            "url": "https://www.wpxi.com/news/local/carol-slesinger-who-built-larrimors-womens-business-dies-87/ODFZX3UZ7FE2LH2BGUBI5PF3D4/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "World Cup soccer matches are nowhere near Pittsburgh, but for some bars here, fan turnout has been 'like a home Steelers game'",
+            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/06/17/fifa-world-cup-soccer-business-impact/stories/202606170045"
           }
         ]
       }
     ],
     "around_town": [
       {
-        "title": "Vape Shop Zoning Ordinance Signed",
-        "latest_developments": "Mayor Corey O'Connor signed an ordinance limiting where vape shops can open, banning new ones downtown and near schools.",
-        "summary": "Pittsburgh Mayor Corey O'Connor signed legislation June 17, 2026, to curb the spread of vape shops across the city, prohibiting new vape retailers downtown and near schools.",
+        "title": "Parkway East Closure Starts June 29",
+        "latest_developments": "The first major closure for the Commercial Street Bridge project will begin June 29 in Frick Park, setting a firm date after earlier detour planning.",
+        "summary": "Replacing the Commercial Street Bridge requires a lengthy full closure along the Parkway East corridor near Frick Park, rerouting one of the region's busiest commutes.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Pittsburgh Mayor Corey O'Connor signs new vape shop zoning ordinance",
-            "url": "https://www.wpxi.com/news/local/pittsburgh-mayor-corey-oconnor-signs-new-vape-shop-zoning-ordinance/YB5DRTKJN5DWFGLSMNLBG4SDOI/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Here it comes: First major closure for Parkway East bridge project begins June 29 in Frick Park",
+            "url": "https://www.post-gazette.com/news/transportation/2026/06/17/commercial-street-bridge-road-closures-begin-june-29-frick-park/stories/202606170052"
           }
         ]
       },
       {
-        "title": "Oakland Traffic Shifts for University Line",
-        "latest_developments": "Pittsburgh Regional Transit begins temporary traffic pattern changes Friday on Fifth Avenue in Oakland for its University Line project.",
-        "summary": "Pittsburgh Regional Transit will start temporary traffic changes Friday, June 19, 2026, on Fifth Avenue in Oakland, part of construction for the University Line bus rapid transit route.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "New traffic pattern changes coming to Oakland as part of PRT's University Line project",
-            "url": "https://www.wpxi.com/news/local/new-traffic-pattern-changes-coming-oakland-part-prts-university-line-project/PZFOCYP4AVCLNB7NWXIVKE4DAE/"
-          }
-        ]
-      },
-      {
-        "title": "Parkway East Detours Detailed",
-        "latest_developments": "PennDOT released detour routes for the coming 25-day full closure of the Parkway East and floated a possible livestream of the Commercial Street Bridge demolition.",
-        "summary": "PennDOT mapped detours through Pittsburgh neighborhoods ahead of a 25-day shutdown of part of the Parkway East (Interstate 376), where crews will demolish the old Commercial Street Bridge behind an 800-foot safety perimeter and slide a new span into place.",
+        "title": "Severe Storms, Tornado Risk Thursday",
+        "latest_developments": "Forecasters declared Thursday a severe weather alert day, warning of flash flooding, damaging winds, and an early-morning tornado risk for parts of the Pittsburgh area.",
+        "summary": "Storms move back into Western Pennsylvania overnight into Thursday, threatening the morning commute with heavy rain, gusts of 30 to 40 mph, and isolated tornadoes.",
         "sources": [
           {
             "source": "WTAE",
-            "title": "PennDOT details detours ahead of 25-day Parkway East closure",
-            "url": "http://www.wtae.com/article/376-bridge-closure/71612876"
+            "title": "Pittsburgh: Severe Weather Alert Day for rain, wind on Thursday",
+            "url": "https://www.wtae.com/article/severe-weather-alert-day-thursday-risk-for-flash-flooding-and-gusty-winds/71610265"
           },
           {
-            "source": "WTAE",
-            "title": "Get the Facts: Will I be able to watch the work on the Commercial Street Bridge?",
-            "url": "https://www.wtae.com/article/376-bridge-project-watching-closure/71612892"
+            "source": "KDKA",
+            "title": "Severe weather brings tornado risk to Pittsburgh area on Thursday morning",
+            "url": "https://www.cbsnews.com/pittsburgh/news/tornado-strong-winds-thursday-morning-pittsburgh/"
           }
         ]
       },
       {
-        "title": "Tornado Confirmed in Venango County",
-        "latest_developments": "The National Weather Service confirmed a tornado near the Titusville Airport in Venango County, adding to the count from last weekend's storms.",
-        "summary": "The National Weather Service confirmed another Western Pennsylvania tornado, this one in Venango County near the Titusville Airport, after severe storms battered the region last weekend.",
+        "title": "Ross Township Cuts Garbage Bills",
+        "latest_developments": "Ross Township voted to switch trash contractors, a change that will lower residents' garbage bills and alter their service.",
+        "summary": "The North Hills township's new hauler contract reduces what households pay for trash pickup.",
         "sources": [
           {
-            "source": "WTAE",
-            "title": "Tornado confirmed in Venango County near Titusville Airport",
-            "url": "https://www.wtae.com/article/pennsylvania-tornado-venango-county/71614733"
-          },
-          {
-            "source": "WPXI",
-            "title": "NWS confirms tornado in Venango County",
-            "url": "https://www.wpxi.com/news/local/nws-confirms-tornado-venango-county/5373LTZRT5ALPLUKH567XWEJDA/"
+            "source": "KDKA",
+            "title": "Ross Township residents to see lower garbage bills following vote to switch trash contractors",
+            "url": "https://www.cbsnews.com/pittsburgh/video/ross-township-residents-to-see-lower-garbage-bills-following-vote-to-switch-trash-contractors/"
           }
         ]
       },
       {
-        "title": "Free Bikeshare on Juneteenth",
-        "latest_developments": "Pittsburgh's bikeshare program will offer free rides across the city on Juneteenth, Friday, June 19.",
-        "summary": "Pittsburgh's bikeshare system will give free rides on Juneteenth, Friday, June 19, 2026, for residents traveling to holiday celebrations around town.",
+        "title": "Duquesne Weighs Government Overhaul",
+        "latest_developments": "Duquesne residents got their first look at a proposal to reshape the city's government.",
+        "summary": "Officials presented a plan to restructure how the small Mon Valley city governs itself.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Here's how to get free bikeshare rides in Pittsburgh on Juneteenth",
-            "url": "https://www.wpxi.com/news/local/heres-how-get-free-bikeshare-rides-pittsburgh-juneteenth/BGNE4MZ2BVDORLSU6JBOSPA2HA/"
+            "title": "Duquesne residents get first look at proposal to reshape city government",
+            "url": "https://www.wpxi.com/news/local/duquesne-residents-get-first-look-proposal-reshape-city-government/SXINFZUZ4NDMHIEEG7C5IB3NPI/"
+          }
+        ]
+      },
+      {
+        "title": "Help Name the Zoo's Lion Cub",
+        "latest_developments": "The Pittsburgh Zoo & Aquarium opened public voting to name its two-month-old female lion cub, born in April.",
+        "summary": "The cub stays behind the scenes until later this summer, and the zoo invites the public to choose her name.",
+        "sources": [
+          {
+            "source": "Pittsburgh Magazine",
+            "title": "Dub the Cub: How You Can Help Name the Zoo's Newest Resident",
+            "url": "https://www.pittsburghmagazine.com/pittsburgh-zoo-new-lion-cub-name-contest/"
           }
         ]
       }
     ],
     "events": [
       {
-        "title": "Juneteenth in the Square",
-        "latest_developments": "Juneteenth in the Square opens Friday, June 19, in Market Square and runs through Sunday.",
-        "summary": "Juneteenth in the Square runs Friday through Sunday, June 19-21, 2026, in Market Square downtown, featuring Black musicians with Pittsburgh roots, an echo of the Hill District's Crawford Grill jazz era.",
+        "title": "Monster Jam at Acrisure Stadium",
+        "latest_developments": "Crews are laying thousands of yards of dirt at Acrisure Stadium ahead of a Monster Jam weekend.",
+        "summary": "Monster Jam runs this weekend at Acrisure Stadium on the North Shore, turning the Steelers' field into a dirt track for the truck show.",
         "sources": [
           {
-            "source": "Pittsburgh Magazine",
-            "title": "5 Things to Do in Pittsburgh This Weekend",
-            "url": "https://www.pittsburghmagazine.com/things-to-do-this-weekend-in-pittsburgh/"
+            "source": "WTAE",
+            "title": "Preparations underway at Acrisure Stadium for Monster Jam this weekend",
+            "url": "https://www.wtae.com/article/acrisure-stadium-monster-jam-pittsburgh-dirt-track/71614784"
           }
         ]
       },
       {
-        "title": "America's 250th Anniversary Events",
-        "latest_developments": "WPXI compiled fireworks, parades, and celebrations across the region marking the nation's 250th anniversary.",
-        "summary": "WPXI rounded up fireworks displays, parades, and festivals across the Pittsburgh region for the United States' 250th anniversary, the semiquincentennial, clustered around the July 4 holiday.",
+        "title": "Young the Giant's Victory Garden Tour",
+        "latest_developments": "Alternative rock band Young the Giant brings its Victory Garden tour to Pittsburgh.",
+        "summary": "Young the Giant, the alternative rock group whose bassist favors Pittsburgh-made jewelry, plays the city on the tour.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Young the Giant brings 'Victory Garden' tour to Pittsburgh",
+            "url": "https://triblive.com/aande/music/young-the-giant-brings-victory-garden-tour-to-pittsburgh/"
+          }
+        ]
+      },
+      {
+        "title": "Fourth of July Fireworks Guide",
+        "latest_developments": "WPXI published a town-by-town list of Fourth of July fireworks displays across the Pittsburgh area.",
+        "summary": "The guide maps parades, music, food, and fireworks in communities throughout Western Pennsylvania for the July 4 holiday.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "America's 250th anniversary: Fireworks, parades, and more in Pittsburgh region",
-            "url": "https://www.wpxi.com/news/local/americas-250th-anniversary-fireworks-parades-more-pittsburgh-region/EX6BRL6XOZB6BDUWH3W2ZH7IOM/"
+            "title": "4th of July 2026: Town-by-town list of fireworks displays in Pittsburgh area",
+            "url": "https://www.wpxi.com/news/local/fourth-july-2026-town-by-town-list-fireworks-displays-pittsburgh-area/MI5V2HMJTBDJ5KYH5QMI65DS4M/"
           }
         ]
       }
     ],
     "around_teams": [
       {
-        "title": "Former Pirates Wilson and Williams Return",
-        "latest_developments": "The Post-Gazette caught up with infielders Jacob Wilson and Alika Williams, now with the Athletics, as they faced their old club.",
-        "summary": "Jacob Wilson and Alika Williams, both former Pirates infielders now playing for the Athletics, told the Post-Gazette they cherish their Pittsburgh memories during the teams' series in West Sacramento.",
+        "title": "Washington Talks $42 Million Extension",
+        "latest_developments": "Tight end Darnell Washington joined Not Just Football with Cam Heyward fresh off signing a four-year, $42 million extension with the Steelers.",
+        "summary": "On the podcast Washington discussed the new deal, Connor Heyward's departure, his back-to-back Georgia championships, and life as a 6-foot-7 tight end.",
+        "sources": [
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Darnell Washington Joins To Talk New Extension and The Upcoming Season!",
+            "url": "https://www.youtube.com/watch?v=bI9k0IEdvzA"
+          }
+        ]
+      },
+      {
+        "title": "Steelers Pass on Brendan Sorsby",
+        "latest_developments": "Post-Gazette reporting says the Steelers should, and likely will, avoid quarterback Brendan Sorsby in the NFL's supplemental draft.",
+        "summary": "Sorsby enters the supplemental draft amid a gambling matter, but the beat writers expect no bid from Pittsburgh given its quarterback room behind Will Howard and Drew Allar.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "WATCH: Why the Steelers would be right to avoid Brendan Sorsby",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/17/nfl-news-rumors-brendan-sorsby/stories/202606170039"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Don't expect the Steelers to make a bid for Brendan Sorsby in the NFL's supplemental draft",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/16/sorsby-gambling-supplemental-draft-allar-howard/stories/202606160042"
+          }
+        ]
+      },
+      {
+        "title": "Hiles on Pirates' Trade-Deadline Stakes",
+        "latest_developments": "Noah Hiles argued the Pirates must improve before the trade deadline, warning Ben Cherington against standing pat with Paul Skenes and prospect Konnor Griffin in the picture.",
+        "summary": "The Post-Gazette columnist weighed deadline scenarios and the cost of another lost season around ace Paul Skenes.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "Now with the Athletics, Jacob Wilson and Alika Williams relish their Pittsburgh memories",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/17/athletics-jack-jacob-wilson-alika-williams-mlb/stories/202606170031"
-          }
-        ]
-      },
-      {
-        "title": "Forging Steel Draft Episode",
-        "latest_developments": "The Steelers released the second episode of their Forging Steel series, an inside look at the 2026 NFL Draft.",
-        "summary": "Forging Steel, the team's video series, dropped its season-one second episode, Pittsburgh is on the Clock, taking viewers behind the scenes of the Steelers' 2026 draft and into a McCarthy address to the team.",
-        "sources": [
-          {
-            "source": "Pittsburgh Steelers (YouTube)",
-            "title": "Forging Steel: Pittsburgh is on the Clock (Season 1, Episode 2) | Pittsburgh Steelers",
-            "url": "https://www.youtube.com/watch?v=TkV9_btUE3c"
-          }
-        ]
-      },
-      {
-        "title": "SNR Drive Scouts 2027 Quarterbacks",
-        "latest_developments": "On SNR Drive, Matt Williamson and Wes Uhler broke down the 2027 NFL Draft's quarterback class.",
-        "summary": "The Steelers' SNR Drive podcast turned to the next generation of passers, with Matt Williamson and Wes Uhler scouting the 2027 draft's quarterback prospects.",
-        "sources": [
-          {
-            "source": "Pittsburgh Steelers (YouTube)",
-            "title": "Scouting the Next Generation of QBs | SNR Drive | Pittsburgh Steelers",
-            "url": "https://www.youtube.com/watch?v=5tvT88338iI"
+            "title": "Noah Hiles: What happens if the Pirates don't improve? Ben Cherington should hope we don't find out",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/17/mlb-rumors-trade-deadline-skenes-konnor-griffin-cherington/stories/202606170046"
           }
         ]
       }
@@ -491,25 +492,25 @@
         "author": "Stratechery",
         "title": "The State of Fable, The Jailbreak Problem, SpaceX Acquires Cursor",
         "url": "https://stratechery.com/2026/the-state-of-fable-the-jailbreak-problem-spacex-acquires-cursor/",
-        "summary": "Ben Thompson argues the administration is likely wrong in its alarm over Anthropic's Fable model, lays the responsibility for jailbreak risk at Anthropic's feet, and reads SpaceX's purchase of coding startup Cursor as a possible turning point."
+        "summary": "Ben Thompson argues the administration is very likely wrong about the Fable model, but contends the jailbreak problem and its handling ultimately fall to Anthropic's responsibility."
       },
       {
         "author": "Ed Zitron",
         "title": "Exclusive: OpenAI Losses Increased Nearly 8X in 2025, With Spending Hitting $34 Billion",
         "url": "https://www.wheresyoured.at/exclusive-openai-financials/",
-        "summary": "Zitron reports OpenAI's losses grew nearly eightfold in 2025 as spending reached $34 billion, marshaling the figures as evidence the company has no path to profitability."
+        "summary": "Zitron presents financials showing OpenAI's losses grew nearly eightfold in 2025 as spending reached $34 billion, casting doubt on the company's path to profitability."
       },
       {
         "author": "Cal Newport",
         "title": "AI Isn't Breaking Work. It's Already Broken.",
         "url": "https://calnewport.com/ai-isnt-breaking-work-its-already-broken/",
-        "summary": "Responding to a Financial Times interview and a survey of 6,000 digital workers, Newport argues knowledge work was already dysfunctional before AI arrived, and the technology merely exposes problems that long predate it."
+        "summary": "Newport responds to a survey of 6,000 digital workers, arguing that AI exposes dysfunction already baked into knowledge work rather than creating new problems."
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-17 12:04 EDT",
-    "items_considered": 55,
+    "generated_at": "2026-06-17 16:05 EDT",
+    "items_considered": 58,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
