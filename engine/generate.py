@@ -763,53 +763,6 @@ def order_topics(digest, pub_index):
                                              key=key, reverse=True)]
 
 
-def archive_first_seen_index(today_iso):
-    """{normalized source url: earliest archive date (YYYY-MM-DD) it appeared in}.
-
-    Scans the full retained archive so a long-running story can be dated back to
-    when our briefing first surfaced it."""
-    idx = {}
-    for path, date_str in _archive_dates_within(today_iso, ARCHIVE_RETENTION_DAYS):
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-        except (ValueError, OSError):
-            continue
-        day = data.get("date") or date_str
-        for topic in data.get("topics", []):
-            if not isinstance(topic, dict):
-                continue
-            for src in (topic.get("sources") or []):
-                if isinstance(src, dict):
-                    url = _norm_url(src.get("url"))
-                    if url and (url not in idx or day < idx[url]):
-                        idx[url] = day
-    return idx
-
-
-def annotate_first_seen(digest, today_iso, pub_index, archive_index=None):
-    """Set each topic's `first_seen` to the earliest of: first appearance of any of
-    its source URLs in our archives, or the earliest source-article publish date.
-    Brand-new stories with no signal fall back to today; never exceeds today."""
-    if archive_index is None:
-        archive_index = archive_first_seen_index(today_iso)
-    for topic in (digest.get("topics") or []):
-        if not isinstance(topic, dict):
-            continue
-        dates = []
-        for src in (topic.get("sources") or []):
-            if not isinstance(src, dict):
-                continue
-            url = _norm_url(src.get("url"))
-            if not url:
-                continue
-            if url in archive_index:
-                dates.append(archive_index[url])
-            pub = pub_index.get(url)
-            if pub:
-                dates.append(pub.date().isoformat())
-        topic["first_seen"] = min(min(dates), today_iso) if dates else today_iso
-
-
 def _topic_text(t):
     return t.get("latest_developments") or t.get("last_24h") or t.get("summary") or ""
 
@@ -1004,7 +957,6 @@ PAGE_CSS = """
   details.more summary { cursor: pointer; opacity: 0.7; font-size: 0.85rem; }
   details.more[open] summary { margin-bottom: 0.25rem; }
   .tags { font-size: 0.8rem; opacity: 0.7; }
-  .first-identified { font-size: 0.8rem; font-style: italic; opacity: 0.55; margin-top: 0; }
   .change-mark { font-size: 0.8rem; opacity: 0.55; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
   .sources a { overflow-wrap: anywhere; }
@@ -1045,13 +997,6 @@ PAGE_CSS = """
 def _display_date(iso):
     try:
         return datetime.strptime(iso, "%Y-%m-%d").strftime("%A, %B %-d, %Y")
-    except ValueError:
-        return iso
-
-
-def _short_date(iso):
-    try:
-        return datetime.strptime(iso, "%Y-%m-%d").strftime("%b %-d, %Y")
     except ValueError:
         return iso
 
@@ -1138,9 +1083,6 @@ def _security_inner(digest):
             meta.append("[" + esc(", ".join(topic["tags"])) + "]")
         if meta:
             out.append(f'<p class="tags">{" &middot; ".join(meta)}</p>')
-        if topic.get("first_seen"):
-            out.append('<p class="first-identified">first identified '
-                       f'{esc(_short_date(topic["first_seen"]))}</p>')
         out.append(f'<p class="updated">Latest developments: {esc(topic["latest_developments"])}</p>')
         out.append(f'<details class="more"><summary>read more</summary>'
                    f'<p>{esc(topic["summary"])}</p></details>')
@@ -1396,8 +1338,6 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
             meta.append(topic["area"])
         if topic.get("tags"):
             meta.append(f"[{', '.join(topic['tags'])}]")
-        if topic.get("first_seen"):
-            meta.append(f"first identified {_short_date(topic['first_seen'])}")
         if meta:
             lines.append(_fill(" · ".join(meta), "   "))
         lines += [
@@ -1660,14 +1600,10 @@ def main():
                 print(f"  pittsburgh/reading sections unavailable: {sanitize(exc)[:200]}")
     digest["date"] = today  # never trust the model with the filename
 
-    # Order security stories (flat: newest then most-covered) and date each one,
-    # then diff against the most recent prior run for the "what's changed" list.
+    # Order security stories (flat: newest then most-covered), then diff against
+    # the most recent prior run for the "what's changed" list.
     # All of this is best-effort and must never break a run.
     pub_index = published_index(selected)
-    try:
-        annotate_first_seen(digest, today, pub_index)
-    except Exception as exc:
-        print(f"  first-seen annotation skipped: {sanitize(exc)[:200]}")
     try:
         order_topics(digest, pub_index)
     except Exception as exc:
