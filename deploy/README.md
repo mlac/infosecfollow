@@ -128,6 +128,21 @@ on the NAS:
 docker exec infosecfollow /app/run-briefing.sh
 ```
 
+To sanity-check **rendering only** — the flat story ranking, the "first
+identified" tags, and the "what's changed" diff — without a model call, a
+network fetch, or touching the published site, render from the existing data
+archives:
+
+```sh
+docker exec infosecfollow python3 engine/generate.py --selftest
+```
+
+It rebuilds the page from the two most recent `docs/data/*.json` files, writes
+`index.html` + `digest.txt` to a temp dir, and prints their paths plus a summary
+(topic count, changes detected, per-story first-identified dates). Note: archives
+don't retain per-item publish times, so the recency arm of the ranking is inert
+under `--selftest`; a real run orders newest-first as designed.
+
 **Container plumbing** (`deploy/Dockerfile`, `deploy/run-briefing.sh`,
 `deploy/scheduler.sh`) is baked into the image — the container runs `/app/...`, not
 the repo copies — so changing it needs a rebuild on the NAS after you push:

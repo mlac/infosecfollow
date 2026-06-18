@@ -1657,5 +1657,69 @@ def main():
           + (f" (feed failures: {', '.join(failures)})" if failures else ""))
 
 
+def selftest():
+    """Render the site from the two most recent data archives — no model and no
+    network — so a deployment can sanity-check rendering (the flat story list,
+    "first identified" tags, and the "what's changed" diff) without waiting for
+    two live runs. Writes to a temp dir and never touches the live site."""
+    today = datetime.now().astimezone().strftime("%Y-%m-%d")
+    dated = _archive_dates_within(today, ARCHIVE_RETENTION_DAYS)
+    if not dated:
+        sys.exit("selftest: no docs/data/*.json archives found to render from")
+    record = json.loads(dated[0][0].read_text(encoding="utf-8"))
+    prev = None
+    if len(dated) > 1:
+        try:
+            prev = json.loads(dated[1][0].read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            prev = None
+
+    digest = {"date": record.get("date", today),
+              "headline": record.get("headline", ""),
+              "emerging_trends": record.get("emerging_trends") or [],
+              "topics": record.get("topics") or []}
+    local = record.get("local")
+    markets = record.get("markets") or []
+    weather = record.get("weather") or []
+    sports = record.get("sports") or []
+    feeds = load_feeds()
+
+    # Archives don't retain per-item publish times, so the recency arm of
+    # ordering/first-seen is inert here; the archive arm of first-seen and the
+    # diff still exercise. This checks rendering, not the live ranking.
+    pub_index = {}
+    annotate_first_seen(digest, digest["date"], pub_index)
+    order_topics(digest, pub_index)
+    assign_anchors(digest, local)
+    candidates = build_candidates(prev, digest, local) if isinstance(prev, dict) else []
+    changes = [{"section": c["section"], "title": c["title"],
+                "anchor": c["anchor"], "status": c["status"]} for c in candidates]
+
+    now_local = datetime.now().astimezone()
+    generated_at = now_local.strftime("%Y-%m-%d %H:%M %Z")
+    generated_time = now_local.strftime("%-I:%M %p %Z")
+    out_dir = Path(tempfile.mkdtemp(prefix="infosecfollow-selftest-"))
+    (out_dir / "index.html").write_text(
+        render_html(digest, local, markets, weather, sports, feeds, generated_at,
+                    generated_time, "archive/index.html", "digest.txt", depth=0,
+                    changes=changes), encoding="utf-8")
+    (out_dir / "digest.txt").write_text(
+        render_text(digest, local, markets, weather, sports, feeds, generated_at,
+                    generated_time, changes=changes), encoding="utf-8")
+
+    print(f"selftest: rendered {dated[0][0].name}"
+          + (f", diffed against {dated[1][0].name}" if prev
+             else " (no prior archive — 'what's changed' omitted)"))
+    print(f"  topics: {len(digest['topics'])}; changes detected: {len(changes)}")
+    for topic in digest["topics"][:5]:
+        print(f"    - {topic.get('title', '?')[:48]!r} "
+              f"first_identified={topic.get('first_seen')}")
+    print(f"  wrote {out_dir / 'index.html'}")
+    print(f"  wrote {out_dir / 'digest.txt'}")
+
+
 if __name__ == "__main__":
-    main()
+    if "--selftest" in sys.argv[1:]:
+        selftest()
+    else:
+        main()
