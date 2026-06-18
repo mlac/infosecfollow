@@ -10,6 +10,7 @@ Stdlib only. Run:  python3 engine/generate.py
 
 import glob
 import gzip
+import hashlib
 import html
 import io
 import json
@@ -22,7 +23,7 @@ import tempfile
 import textwrap
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
@@ -661,6 +662,315 @@ def summarize_local(cli, pgh_items, reading_items, biz_items, event_items, sport
                                       sports_urls, bool(pgh_items), bool(reading_items)))
 
 
+# --------------------------------------------------- ordering, anchors, what's-changed
+
+def _norm_url(url):
+    return (url or "").strip().lower()
+
+
+def _norm_text(s):
+    return " ".join(str(s or "").split()).strip().lower()
+
+
+def _primary_url(item):
+    """The URL that identifies an item: its own (reading) or its first source."""
+    if not isinstance(item, dict):
+        return None
+    if item.get("url"):
+        return item["url"]
+    sources = item.get("sources")
+    if isinstance(sources, list) and sources and isinstance(sources[0], dict):
+        return sources[0].get("url") or None
+    return None
+
+
+def item_anchor(url):
+    if not url:
+        return None
+    return "i-" + hashlib.sha1(_norm_url(url).encode("utf-8")).hexdigest()[:10]
+
+
+def assign_anchors(digest, local):
+    """Stamp every linkable item with a stable, unique `_anchor` id (in place).
+
+    Keyed on the item's primary URL so an item keeps its anchor across runs even
+    if its title changes; trends (no URL) get positional ids. Collisions within a
+    run are de-duplicated so renderer and diff agree on the exact id."""
+    seen = set()
+
+    def take(base):
+        if not base:
+            return None
+        anchor, n = base, 1
+        while anchor in seen:
+            n += 1
+            anchor = f"{base}-{n}"
+        seen.add(anchor)
+        return anchor
+
+    for topic in (digest.get("topics") or []):
+        if isinstance(topic, dict):
+            topic["_anchor"] = take(item_anchor(_primary_url(topic)))
+    for n, trend in enumerate(digest.get("emerging_trends") or [], 1):
+        if isinstance(trend, dict):
+            trend["_anchor"] = take(f"trend-{n}")
+    if isinstance(local, dict):
+        for key in _LOCAL_SECTIONS:
+            for item in (local.get(key) or []):
+                if isinstance(item, dict):
+                    item["_anchor"] = take(item_anchor(_primary_url(item)))
+        for item in (local.get("reading") or []):
+            if isinstance(item, dict):
+                item["_anchor"] = take(item_anchor(_primary_url(item)))
+
+
+def published_index(items):
+    """{normalized url: published datetime} from a fetched corpus."""
+    idx = {}
+    for i in items:
+        url = _norm_url(i.get("url"))
+        pub = i.get("published")
+        if url and pub:
+            idx[url] = pub
+    return idx
+
+
+def _topic_recency(topic, pub_index):
+    best = None
+    for src in (topic.get("sources") or []):
+        if isinstance(src, dict):
+            pub = pub_index.get(_norm_url(src.get("url")))
+            if pub and (best is None or pub > best):
+                best = pub
+    return best
+
+
+def order_topics(digest, pub_index):
+    """Replace the model's area-grouped order with a flat ranking: newest source
+    day first, then cross-feed popularity, then original order (stable)."""
+    topics = digest.get("topics")
+    if not isinstance(topics, list):
+        return
+
+    def key(pair):
+        idx, topic = pair
+        rec = _topic_recency(topic, pub_index)
+        rec_day = rec.date() if rec else date.min
+        return (rec_day, len(topic.get("sources") or []), -idx)
+
+    digest["topics"] = [t for _, t in sorted(list(enumerate(topics)),
+                                             key=key, reverse=True)]
+
+
+def archive_first_seen_index(today_iso):
+    """{normalized source url: earliest archive date (YYYY-MM-DD) it appeared in}.
+
+    Scans the full retained archive so a long-running story can be dated back to
+    when our briefing first surfaced it."""
+    idx = {}
+    for path, date_str in _archive_dates_within(today_iso, ARCHIVE_RETENTION_DAYS):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        day = data.get("date") or date_str
+        for topic in data.get("topics", []):
+            if not isinstance(topic, dict):
+                continue
+            for src in (topic.get("sources") or []):
+                if isinstance(src, dict):
+                    url = _norm_url(src.get("url"))
+                    if url and (url not in idx or day < idx[url]):
+                        idx[url] = day
+    return idx
+
+
+def annotate_first_seen(digest, today_iso, pub_index, archive_index=None):
+    """Set each topic's `first_seen` to the earliest of: first appearance of any of
+    its source URLs in our archives, or the earliest source-article publish date.
+    Brand-new stories with no signal fall back to today; never exceeds today."""
+    if archive_index is None:
+        archive_index = archive_first_seen_index(today_iso)
+    for topic in (digest.get("topics") or []):
+        if not isinstance(topic, dict):
+            continue
+        dates = []
+        for src in (topic.get("sources") or []):
+            if not isinstance(src, dict):
+                continue
+            url = _norm_url(src.get("url"))
+            if not url:
+                continue
+            if url in archive_index:
+                dates.append(archive_index[url])
+            pub = pub_index.get(url)
+            if pub:
+                dates.append(pub.date().isoformat())
+        topic["first_seen"] = min(min(dates), today_iso) if dates else today_iso
+
+
+def _topic_text(t):
+    return t.get("latest_developments") or t.get("last_24h") or t.get("summary") or ""
+
+
+def _local_text(it):
+    return it.get("latest_developments") or it.get("text") or it.get("summary") or ""
+
+
+_CHANGE_SECTION_LABELS = {
+    "business_politics": "Business and Politics", "business": "Business",
+    "around_town": "Around Town", "events": "Events",
+    "around_teams": "Around the Teams",
+}
+
+
+def _prev_index(prev):
+    """Combined {key: normalized text} across the whole prior record. Items are
+    URL-keyed (so moves between sections aren't read as new); trends keyed by
+    subject. Used to tell new/updated items from unchanged ones."""
+    idx = {}
+    if not isinstance(prev, dict):
+        return idx
+    for topic in prev.get("topics", []):
+        if isinstance(topic, dict):
+            url = _norm_url(_primary_url(topic))
+            if url:
+                idx[url] = _norm_text(_topic_text(topic))
+    local = prev.get("local") or {}
+    if isinstance(local, dict):
+        for key in _LOCAL_SECTIONS:
+            for item in (local.get(key) or []):
+                if isinstance(item, dict):
+                    url = _norm_url(_primary_url(item))
+                    if url:
+                        idx[url] = _norm_text(_local_text(item))
+        for item in (local.get("reading") or []):
+            if isinstance(item, dict):
+                url = _norm_url(_primary_url(item))
+                if url:
+                    idx[url] = _norm_text(item.get("summary") or "")
+    for trend in prev.get("emerging_trends", []):
+        if isinstance(trend, dict):
+            subj = _norm_text(trend.get("subject") or "")
+            if subj:
+                idx["trend:" + subj] = _norm_text(trend.get("text") or "")
+    return idx
+
+
+def build_candidates(prev, digest, local):
+    """Mechanical diff of the new version against the most recent prior one.
+    Returns a list of {id, status, section, title, anchor, new_text, old_text}
+    for items that are new (URL absent before) or whose text changed."""
+    prev_idx = _prev_index(prev)
+    candidates = []
+
+    def consider(section, title, anchor, key, new_text):
+        if not anchor or not key:
+            return  # can't link or can't diff -> skip
+        new_norm = _norm_text(new_text)
+        if key not in prev_idx:
+            status, old = "new", None
+        elif prev_idx[key] and new_norm != prev_idx[key]:
+            status, old = "updated", prev_idx[key]
+        else:
+            return  # unchanged, or prior had no comparable text
+        candidates.append({
+            "id": len(candidates), "status": status, "section": section,
+            "title": title, "anchor": anchor,
+            "new_text": new_text or "", "old_text": old,
+        })
+
+    for trend in (digest.get("emerging_trends") or []):
+        if isinstance(trend, dict):
+            subj = _norm_text(trend.get("subject") or "")
+            consider("Emerging Trends", trend.get("subject", ""), trend.get("_anchor"),
+                     ("trend:" + subj) if subj else None, trend.get("text", ""))
+    for topic in (digest.get("topics") or []):
+        if isinstance(topic, dict):
+            consider("Security", topic.get("title", ""), topic.get("_anchor"),
+                     _norm_url(_primary_url(topic)), _topic_text(topic))
+    if isinstance(local, dict):
+        for key in _LOCAL_SECTIONS:
+            for item in (local.get(key) or []):
+                if isinstance(item, dict):
+                    consider(_CHANGE_SECTION_LABELS[key], item.get("title", ""),
+                             item.get("_anchor"), _norm_url(_primary_url(item)),
+                             _local_text(item))
+        for item in (local.get("reading") or []):
+            if isinstance(item, dict):
+                consider("Reading", item.get("title", ""), item.get("_anchor"),
+                         _norm_url(_primary_url(item)), item.get("summary", ""))
+    return candidates
+
+
+def _changes_prompt(candidates):
+    listing = []
+    for c in candidates:
+        entry = {"id": c["id"], "section": c["section"], "title": c["title"],
+                 "status": c["status"], "new": c["new_text"][:400]}
+        if c["old_text"]:
+            entry["old"] = c["old_text"][:400]
+        listing.append(entry)
+    return f"""You curate a short "What's changed since the last update" list for a daily security briefing that is regenerated several times a day. Below is a JSON array of CANDIDATE changes detected mechanically by comparing the previous version to the new one. Each has an integer "id", its "section", "title", a "status" of "new" (absent from the previous version) or "updated" (present before but its text changed), the "new" text, and for updates the "old" text.
+
+Select ONLY the genuinely notable changes a returning reader would care about: real new stories and substantive new developments. Drop trivial rewordings, copy-edits, and minor phrasing changes. Keep the list short and high-signal — fewer is better, and it is fine to return an empty list when nothing is materially new.
+
+Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
+{{"changes": [{{"id": <one of the integer ids below>, "status": "new"|"updated", "note": "concise description, at most 14 words, of what is new or changed"}}]}}
+
+Use only ids that appear below; never invent ids, urls, or items. Order the list most important first.
+
+CANDIDATES:
+{json.dumps(listing, ensure_ascii=False, indent=1)}
+"""
+
+
+def build_changes(cli, prev, digest, local):
+    """Assign anchors, diff against the prior run, and let the model curate a
+    succinct, link-ready 'what's changed' list. Never raises: falls back to the
+    mechanical candidate list, then to [], so a run is never broken."""
+    assign_anchors(digest, local)
+    if not isinstance(prev, dict):
+        return []
+    candidates = build_candidates(prev, digest, local)
+    if not candidates:
+        return []
+    by_id = {c["id"]: c for c in candidates}
+
+    def entry_for(candidate, note=None, status=None):
+        return {"section": candidate["section"],
+                "title": note or candidate["title"],
+                "anchor": candidate["anchor"],
+                "status": status or candidate["status"]}
+
+    try:
+        data = extract_json(run_claude(cli, _changes_prompt(candidates)))
+        picked = data.get("changes") if isinstance(data, dict) else None
+        if not isinstance(picked, list):
+            raise ValueError("model output had no 'changes' array")
+        out, used = [], set()
+        for entry in picked:
+            if not isinstance(entry, dict):
+                continue
+            cid = entry.get("id")
+            if isinstance(cid, bool) or not isinstance(cid, int):
+                continue
+            if cid not in by_id or cid in used:
+                continue
+            used.add(cid)
+            note = entry.get("note")
+            note = note.strip() if isinstance(note, str) and note.strip() else None
+            status = entry.get("status")
+            status = status if status in ("new", "updated") else None
+            out.append(entry_for(by_id[cid], note, status))
+        return out
+    except (ValueError, TypeError, AttributeError, KeyError, RuntimeError,
+            subprocess.TimeoutExpired) as exc:
+        print(f"  what's-changed curation failed ({type(exc).__name__}: "
+              f"{sanitize(exc)[:200]}); using mechanical list")
+        return [entry_for(c) for c in candidates]
+
+
 # --------------------------------------------------------------------------- render
 
 def esc(text):
@@ -693,6 +1003,8 @@ PAGE_CSS = """
   details.more summary { cursor: pointer; opacity: 0.7; font-size: 0.85rem; }
   details.more[open] summary { margin-bottom: 0.25rem; }
   .tags { font-size: 0.8rem; opacity: 0.7; }
+  .first-identified { font-size: 0.8rem; font-style: italic; opacity: 0.55; margin-top: 0; }
+  .change-mark { font-size: 0.8rem; opacity: 0.55; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
   .sources a { overflow-wrap: anywhere; }
   .headline { font-size: 1.05rem; font-weight: bold; margin-top: 1rem; }
@@ -726,6 +1038,13 @@ def _display_date(iso):
         return iso
 
 
+def _short_date(iso):
+    try:
+        return datetime.strptime(iso, "%Y-%m-%d").strftime("%b %-d, %Y")
+    except ValueError:
+        return iso
+
+
 def _markets_inner(markets):
     width_label = max(len(r["label"]) for r in markets)
     width_value = max(len(r["value"]) for r in markets)
@@ -744,7 +1063,9 @@ def _local_items_html(items):
     a collapsible summary, and sources."""
     out = []
     for item in items:
-        out.append(f'<h4>{esc(item["title"])}</h4>')
+        anchor = item.get("_anchor")
+        idattr = f' id="{esc(anchor)}"' if anchor else ""
+        out.append(f'<h4{idattr}>{esc(item["title"])}</h4>')
         out.append('<p class="updated">Latest developments: '
                    f'{esc(item["latest_developments"])}</p>')
         if item.get("summary"):
@@ -775,21 +1096,39 @@ def _clean_sports(blocks):
 
 def _trends_inner(digest):
     out = ["<ul>"]
-    out += [f"<li><strong>{esc(t['subject'])}:</strong> {esc(t['text'])}</li>"
-            for t in digest["emerging_trends"]]
+    for t in digest["emerging_trends"]:
+        anchor = t.get("_anchor")
+        idattr = f' id="{esc(anchor)}"' if anchor else ""
+        out.append(f"<li{idattr}><strong>{esc(t['subject'])}:</strong> {esc(t['text'])}</li>")
+    out.append("</ul>")
+    return out
+
+
+def _changes_inner(changes):
+    out = ["<ul>"]
+    for c in changes:
+        out.append(f'<li><a href="#{esc(c["anchor"])}">{esc(c["title"])}</a> '
+                   f'<span class="change-mark">[{esc(c["status"])}]</span></li>')
     out.append("</ul>")
     return out
 
 
 def _security_inner(digest):
-    out, current_area = [], None
+    out = []
     for n, topic in enumerate(digest["topics"], 1):
-        if topic["area"] != current_area:
-            current_area = topic["area"]
-            out.append(f'<h3 class="area">{esc(current_area)}</h3>')
-        out.append(f"<h4>{n}. {esc(topic['title'])}</h4>")
-        if topic["tags"]:
-            out.append(f'<p class="tags">[{esc(", ".join(topic["tags"]))}]</p>')
+        anchor = topic.get("_anchor")
+        idattr = f' id="{esc(anchor)}"' if anchor else ""
+        out.append(f"<h4{idattr}>{n}. {esc(topic['title'])}</h4>")
+        meta = []
+        if topic.get("area"):
+            meta.append(esc(topic["area"]))
+        if topic.get("tags"):
+            meta.append("[" + esc(", ".join(topic["tags"])) + "]")
+        if meta:
+            out.append(f'<p class="tags">{" &middot; ".join(meta)}</p>')
+        if topic.get("first_seen"):
+            out.append('<p class="first-identified">first identified '
+                       f'{esc(_short_date(topic["first_seen"]))}</p>')
         out.append(f'<p class="updated">Latest developments: {esc(topic["latest_developments"])}</p>')
         out.append(f'<details class="more"><summary>read more</summary>'
                    f'<p>{esc(topic["summary"])}</p></details>')
@@ -861,7 +1200,9 @@ def _reading_inner(local):
         return []
     parts = ["<ul>"]
     for item in local["reading"]:
-        parts.append(f'<li><strong>{esc(item["author"])}</strong> &mdash; '
+        anchor = item.get("_anchor")
+        idattr = f' id="{esc(anchor)}"' if anchor else ""
+        parts.append(f'<li{idattr}><strong>{esc(item["author"])}</strong> &mdash; '
                      f'<a href="{safe_url(item["url"])}">{esc(item["title"])}</a>. '
                      f'{esc(item["summary"])}</li>')
     parts.append("</ul>")
@@ -869,7 +1210,8 @@ def _reading_inner(local):
 
 
 def render_html(digest, local, markets, weather, sports, feeds,
-                generated_at, generated_time, archive_href, text_href, depth=0):
+                generated_at, generated_time, archive_href, text_href, depth=0,
+                changes=None):
     prefix = "../" * depth
     biz = local.get("business_politics") if local else None
     # Ordered most-frequently-updated first; the weekly markets average sits
@@ -884,7 +1226,11 @@ def render_html(digest, local, markets, weather, sports, feeds,
         ("markets", "Markets", _markets_inner(markets) if markets else []),
     ]
     present = [(anchor, title, body) for anchor, title, body in sections if body]
-    index = " &middot; ".join(f'<a href="#{a}">{esc(t)}</a>' for a, t, _ in present)
+    index_links = []
+    if changes:
+        index_links.append('<a href="#changes">What’s changed</a>')
+    index_links += [f'<a href="#{a}">{esc(t)}</a>' for a, t, _ in present]
+    index = " &middot; ".join(index_links)
 
     parts = [
         "<!DOCTYPE html>",
@@ -907,6 +1253,10 @@ def render_html(digest, local, markets, weather, sports, feeds,
         f'<nav class="index">Jump to: {index}</nav>',
         "<hr>",
     ]
+    if changes:
+        parts.append('<h2 id="changes">What’s changed since the last update</h2>')
+        parts += _changes_inner(changes)
+        parts.append("<hr>")
     for anchor, title, body in present:
         parts.append(f'<h2 id="{anchor}">{esc(title)}</h2>')
         parts += body
@@ -954,7 +1304,8 @@ def _text_local_items(lines, label, items):
         lines += _text_local_item(item)
 
 
-def render_text(digest, local, markets, weather, sports, feeds, generated_at, generated_time):
+def render_text(digest, local, markets, weather, sports, feeds, generated_at,
+                generated_time, changes=None):
     bar = "=" * TEXT_WIDTH
     sub = "-" * TEXT_WIDTH
     biz = local.get("business_politics") if local else None
@@ -962,7 +1313,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at, ge
         local.get(k) for k in ("business", "around_town", "events")))
 
     around_teams = local.get("around_teams") if local else None
-    contents = ["Emerging Trends", "Security"]
+    contents = (["What's changed"] if changes else []) + ["Emerging Trends", "Security"]
     if biz:
         contents.append("Business and Politics")
     if has_pgh:
@@ -985,22 +1336,29 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at, ge
         _fill("CONTENTS: " + " | ".join(contents)),
     ]
 
+    if changes:
+        lines += ["", "WHAT'S CHANGED SINCE THE LAST UPDATE", sub]
+        for c in changes:
+            lines.append(_fill(f"{c['title']} [{c['status']}]", "* ", "  "))
+
     # Most frequently updated first.
     lines += ["", "EMERGING TRENDS", sub]
     lines += [_fill(f"{t['subject']}: {t['text']}", "* ", "  ")
               for t in digest["emerging_trends"]]
 
     lines += ["", "SECURITY", sub]
-    current_area = None
     for n, topic in enumerate(digest["topics"], 1):
-        if topic["area"] != current_area:
-            current_area = topic["area"]
-            lines += ["", f":: {current_area.upper()}"]
+        lines += ["", _fill(topic["title"].upper(), f"{n}. ", "   ")]
+        meta = []
+        if topic.get("area"):
+            meta.append(topic["area"])
+        if topic.get("tags"):
+            meta.append(f"[{', '.join(topic['tags'])}]")
+        if topic.get("first_seen"):
+            meta.append(f"first identified {_short_date(topic['first_seen'])}")
+        if meta:
+            lines.append(_fill(" · ".join(meta), "   "))
         lines += [
-            "",
-            _fill(topic["title"].upper()
-                  + (f"  [{', '.join(topic['tags'])}]" if topic["tags"] else ""),
-                  f"{n}. ", "   "),
             _fill(f"Latest developments: {topic['latest_developments']}", "   "),
             _fill(topic["summary"], "   "),
         ]
@@ -1138,7 +1496,8 @@ def render_archive_index():
         f"{items}\n</body></html>\n")
 
 
-def write_site(digest, local, markets, weather, sports, feeds, items_count, window):
+def write_site(digest, local, markets, weather, sports, feeds, items_count, window,
+               changes=None):
     now_local = datetime.now().astimezone()
     generated_at = now_local.strftime("%Y-%m-%d %H:%M %Z")
     generated_time = now_local.strftime("%-I:%M %p %Z")  # e.g. "6:02 AM EDT", for the header
@@ -1165,12 +1524,12 @@ def write_site(digest, local, markets, weather, sports, feeds, items_count, wind
 
     index_html = render_html(digest, local, markets, weather, sports, feeds,
                              generated_at, generated_time, "archive/index.html",
-                             "digest.txt", depth=0)
+                             "digest.txt", depth=0, changes=changes)
     archive_html = render_html(digest, local, markets, weather, sports, feeds,
                                generated_at, generated_time, "index.html",
-                               f"{stamp}.txt", depth=1)
+                               f"{stamp}.txt", depth=1, changes=changes)
     text = render_text(digest, local, markets, weather, sports, feeds,
-                       generated_at, generated_time)
+                       generated_at, generated_time, changes=changes)
 
     (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
     (SITE_DIR / "digest.txt").write_text(text, encoding="utf-8")
@@ -1259,8 +1618,36 @@ def main():
                 print(f"  pittsburgh/reading sections unavailable: {sanitize(exc)[:200]}")
     digest["date"] = today  # never trust the model with the filename
 
+    # Order security stories (flat: newest then most-covered) and date each one,
+    # then diff against the most recent prior run for the "what's changed" list.
+    # All of this is best-effort and must never break a run.
+    pub_index = published_index(selected)
+    try:
+        annotate_first_seen(digest, today, pub_index)
+    except Exception as exc:
+        print(f"  first-seen annotation skipped: {sanitize(exc)[:200]}")
+    try:
+        order_topics(digest, pub_index)
+    except Exception as exc:
+        print(f"  topic ordering skipped: {sanitize(exc)[:200]}")
+    prev = None
+    dated = _archive_dates_within(today, ARCHIVE_RETENTION_DAYS)
+    if dated:
+        try:
+            prev = json.loads(dated[0][0].read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            prev = None
+    try:
+        changes = build_changes(cli, prev, digest, local)
+    except Exception as exc:
+        print(f"  what's-changed section skipped: {sanitize(exc)[:200]}")
+        changes = []
+    if changes:
+        print(f"  what's changed: {len(changes)} item(s)")
+
     print("[4/4] writing site")
-    write_site(digest, local, markets, weather, sports, feeds, len(selected), window)
+    write_site(digest, local, markets, weather, sports, feeds, len(selected), window,
+               changes=changes)
     print(f"done: {len(digest['topics'])} security topics, "
           f"{len(digest['emerging_trends'])} trends, "
           f"{sum(len(local.get(k, [])) for k in ('business', 'around_town', 'events')) if local else 0} "
