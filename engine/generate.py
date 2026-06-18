@@ -304,7 +304,9 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
   "date": "{today}",
   "headline": "One sentence capturing the most important security story or theme of the day.",
   "emerging_trends": [
-    {{"subject": "One or Two Words", "text": "A single sentence naming a trend visible across multiple items and why it matters."}}
+    {{"text": "A flowing natural-language sentence naming a trend visible across multiple items and why it matters (no 'Label:' prefix).",
+      "topic_title": "the EXACT title, copied verbatim, of the topic in `topics` below that this trend most relates to",
+      "link_phrase": "a one- or two-word phrase that appears verbatim inside `text` (a distinctive entity or term) to hyperlink to that topic"}}
   ],
   "topics": [
     {{
@@ -321,7 +323,7 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 Rules:
 - Aim for 5 to 6 topics, ordered most to least important. Merge near-duplicate coverage of the same story into one topic.
 - Continuity with PREVIOUSLY_REPORTED (when present): "latest_developments" must describe only what is new today versus what was already reported. Include a topic ONLY if it has a genuinely new development; let a story that has stagnated with nothing new age out by dropping it entirely, even if that leaves fewer than 5 topics. Brand-new topics not in PREVIOUSLY_REPORTED are always welcome. If there is no prior coverage of a topic, "latest_developments" states the key current update.
-- emerging_trends: exactly 3 entries; "subject" is a one-or-two-word title-case label for the trend.
+- emerging_trends: exactly 3 entries, each a flowing sentence in "text" (no "Label:" prefix). Set "topic_title" to the exact title of the related topic from `topics`, and "link_phrase" to a 1-2 word phrase that appears verbatim inside "text" — a distinctive entity or term, never a generic word like "the" or "security" — which becomes a link jumping to that topic.
 - Assign every topic an "area" naming its part of cybersecurity — e.g. Vulnerabilities and Exploits, Ransomware and Cybercrime, Nation-State Activity, AI Security, Data Breaches, Policy and Regulation. Use 2 to 5 distinct areas across the digest and repeat the exact same area string for topics that share it.
 - Each topic cites 1 to 4 sources whose "url" values are copied EXACTLY from the items below. Never invent or modify a URL.
 - Plain text only in every field: no markdown, no HTML, no bullet characters.
@@ -410,12 +412,11 @@ def validate_digest(digest, allowed_urls):
 
     def _trend_ok(t):
         return (isinstance(t, dict)
-                and all(isinstance(t.get(k), str) and t.get(k).strip()
-                        for k in ("subject", "text")))
+                and isinstance(t.get("text"), str) and t.get("text").strip())
 
     if not isinstance(trends, list) or not trends or not all(_trend_ok(t) for t in trends):
-        problems.append("emerging_trends must be a non-empty list of "
-                        "{subject, text} objects")
+        problems.append("emerging_trends must be a non-empty list of objects each "
+                        "with a non-empty 'text' (plus optional topic_title/link_phrase)")
     topics = digest.get("topics")
     if not isinstance(topics, list) or not topics:
         problems.append("missing topics")
@@ -803,11 +804,6 @@ def _prev_index(prev):
                 url = _norm_url(_primary_url(item))
                 if url:
                     idx[url] = _norm_text(item.get("summary") or "")
-    for trend in prev.get("emerging_trends", []):
-        if isinstance(trend, dict):
-            subj = _norm_text(trend.get("subject") or "")
-            if subj:
-                idx["trend:" + subj] = _norm_text(trend.get("text") or "")
     return idx
 
 
@@ -834,11 +830,6 @@ def build_candidates(prev, digest, local):
             "new_text": new_text or "", "old_text": old,
         })
 
-    for trend in (digest.get("emerging_trends") or []):
-        if isinstance(trend, dict):
-            subj = _norm_text(trend.get("subject") or "")
-            consider("Emerging Trends", trend.get("subject", ""), trend.get("_anchor"),
-                     ("trend:" + subj) if subj else None, trend.get("text", ""))
     for topic in (digest.get("topics") or []):
         if isinstance(topic, dict):
             consider("Security", topic.get("title", ""), topic.get("_anchor"),
@@ -870,9 +861,9 @@ def _changes_prompt(candidates):
 Select ONLY the genuinely notable changes a returning reader would care about: real new stories and substantive new developments. Drop trivial rewordings, copy-edits, and minor phrasing changes. Keep the list short and high-signal — fewer is better, and it is fine to return an empty list when nothing is materially new.
 
 Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
-{{"changes": [{{"id": <one of the integer ids below>, "status": "new"|"updated", "note": "concise description, at most 14 words, of what is new or changed"}}]}}
+{{"changes": [{{"id": <one of the integer ids below>, "status": "new"|"updated", "note": "a flowing natural-language sentence, at most 16 words, summarizing what is new or changed", "link_phrase": "a one- or two-word phrase appearing verbatim inside `note` (a distinctive entity or term) to hyperlink to the story"}}]}}
 
-Use only ids that appear below; never invent ids, urls, or items. Order the list most important first.
+Use only ids that appear below; never invent ids, urls, or items. Order the list most important first. Each "note" reads as a sentence (no "Label:" prefix); each "link_phrase" must appear verbatim within its "note".
 
 CANDIDATES:
 {json.dumps(listing, ensure_ascii=False, indent=1)}
@@ -891,11 +882,12 @@ def build_changes(cli, prev, digest, local):
         return []
     by_id = {c["id"]: c for c in candidates}
 
-    def entry_for(candidate, note=None, status=None):
+    def entry_for(candidate, note=None, status=None, link_phrase=None):
         return {"section": candidate["section"],
                 "title": note or candidate["title"],
                 "anchor": candidate["anchor"],
-                "status": status or candidate["status"]}
+                "status": status or candidate["status"],
+                "link_phrase": link_phrase}
 
     try:
         data = extract_json(run_claude(cli, _changes_prompt(candidates)))
@@ -916,7 +908,9 @@ def build_changes(cli, prev, digest, local):
             note = note.strip() if isinstance(note, str) and note.strip() else None
             status = entry.get("status")
             status = status if status in ("new", "updated") else None
-            out.append(entry_for(by_id[cid], note, status))
+            phrase = entry.get("link_phrase")
+            phrase = phrase.strip() if isinstance(phrase, str) and phrase.strip() else None
+            out.append(entry_for(by_id[cid], note, status, phrase))
         return out
     except (ValueError, TypeError, AttributeError, KeyError, RuntimeError,
             subprocess.TimeoutExpired) as exc:
@@ -957,7 +951,6 @@ PAGE_CSS = """
   details.more summary { cursor: pointer; opacity: 0.7; font-size: 0.85rem; }
   details.more[open] summary { margin-bottom: 0.25rem; }
   .tags { font-size: 0.8rem; opacity: 0.7; }
-  .change-mark { font-size: 0.8rem; opacity: 0.55; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
   .sources a { overflow-wrap: anywhere; }
   .headline { font-size: 1.05rem; font-weight: bold; margin-top: 1rem; }
@@ -981,16 +974,11 @@ PAGE_CSS = """
   h3.area { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
             opacity: 0.75; margin: 2rem 0 0; }
   h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; }
-  /* "At a glance" skim index */
-  .glance { font-size: 0.9rem; margin: 0.5rem 0 0; }
-  .glance .sec { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
-                 opacity: 0.6; margin: 0.7rem 0 0.15rem; }
-  .glance ul { list-style: none; padding-left: 0; margin: 0; }
-  .glance li { margin: 0.12rem 0; line-height: 1.35; }
-  .glance .badge { font-size: 0.72rem; opacity: 0.6; }
   /* per-story "back to top" */
   a.totop { font-size: 0.78rem; opacity: 0.5; text-decoration: none; white-space: nowrap; }
   h2 { scroll-margin-top: 0.5rem; }
+  /* combined trends + key-updates list: clearly underline the inline jump links */
+  h2#top + ul a { text-decoration: underline; text-underline-offset: 2px; }
 """
 
 
@@ -1051,21 +1039,38 @@ def _clean_sports(blocks):
     return blocks
 
 
-def _trends_inner(digest):
-    out = ["<ul>"]
-    for t in digest["emerging_trends"]:
-        anchor = t.get("_anchor")
-        idattr = f' id="{esc(anchor)}"' if anchor else ""
-        out.append(f"<li{idattr}><strong>{esc(t['subject'])}:</strong> {esc(t['text'])}</li>")
-    out.append("</ul>")
-    return out
+def _link_phrase(text, phrase, anchor):
+    """HTML-escape `text` and, if `anchor` is set, hyperlink the first verbatim
+    occurrence of `phrase` to it (case-insensitive). Falls back to linking the
+    whole sentence if the phrase isn't found, or to plain text if no anchor."""
+    text = str(text or "")
+    if not anchor:
+        return esc(text)
+    if isinstance(phrase, str) and phrase.strip():
+        i = text.lower().find(phrase.strip().lower())
+        if i != -1:
+            j = i + len(phrase.strip())
+            return (f"{esc(text[:i])}"
+                    f'<a href="#{esc(anchor)}">{esc(text[i:j])}</a>'
+                    f"{esc(text[j:])}")
+    return f'<a href="#{esc(anchor)}">{esc(text)}</a>'
 
 
-def _changes_inner(changes):
+def _trends_updates_inner(digest, changes):
+    """Combined 'Emerging Trends and Key Updates': trend sentences (each linking a
+    phrase to its related topic) followed by changed-story update sentences (each
+    linking a phrase to that story)."""
+    title_anchor = {}
+    for t in (digest.get("topics") or []):
+        if isinstance(t, dict) and t.get("title") and t.get("_anchor"):
+            title_anchor.setdefault(_norm_text(t["title"]), t["_anchor"])
     out = ["<ul>"]
-    for c in changes:
-        out.append(f'<li><a href="#{esc(c["anchor"])}">{esc(c["title"])}</a> '
-                   f'<span class="change-mark">[{esc(c["status"])}]</span></li>')
+    for tr in digest.get("emerging_trends", []):
+        anchor = title_anchor.get(_norm_text(tr.get("topic_title") or ""))
+        out.append(f'<li>{_link_phrase(tr.get("text", ""), tr.get("link_phrase"), anchor)}</li>')
+    for c in (changes or []):
+        out.append('<li class="update">'
+                   f'{_link_phrase(c.get("title", ""), c.get("link_phrase"), c.get("anchor"))}</li>')
     out.append("</ul>")
     return out
 
@@ -1164,38 +1169,6 @@ def _reading_inner(local):
     return parts
 
 
-def _skim_index(digest, local):
-    """One-line-per-story 'At a glance' index, grouped by section, each linking to
-    its story anchor. Skips data-only sections (weather, scoreboard, markets)."""
-    loc = local or {}
-    groups = [
-        ("Security", [(f"{n}. {t.get('title','')}", t.get("_anchor"))
-                      for n, t in enumerate(digest.get("topics") or [], 1)]),
-        ("Business & Politics", [(i.get("title", ""), i.get("_anchor"))
-                                 for i in (loc.get("business_politics") or [])]),
-        ("Pittsburgh", [(i.get("title", ""), i.get("_anchor"))
-                        for key in ("business", "around_town", "events")
-                        for i in (loc.get(key) or [])]),
-        ("Sports", [(i.get("title", ""), i.get("_anchor"))
-                    for i in (loc.get("around_teams") or [])]),
-        ("Reading", [(f"{i.get('author','')} — {i.get('title','')}", i.get("_anchor"))
-                     for i in (loc.get("reading") or [])]),
-    ]
-    out = ['<div class="glance">']
-    present = False
-    for label, items in groups:
-        items = [(t, a) for t, a in items if a and t]
-        if not items:
-            continue
-        present = True
-        out.append(f'<p class="sec">{esc(label)}</p>')
-        out.append("<ul>")
-        out += [f'<li><a href="#{esc(a)}">{esc(t)}</a></li>' for t, a in items]
-        out.append("</ul>")
-    out.append("</div>")
-    return out if present else []
-
-
 def render_html(digest, local, markets, weather, sports, feeds,
                 generated_at, generated_time, archive_href, text_href, depth=0,
                 changes=None):
@@ -1204,7 +1177,7 @@ def render_html(digest, local, markets, weather, sports, feeds,
     # Ordered most-frequently-updated first; the weekly markets average sits
     # last. Only non-empty sections render and appear in the jump index.
     sections = [
-        ("trends", "Emerging Trends", _trends_inner(digest)),
+        ("top", "Emerging Trends and Key Updates", _trends_updates_inner(digest, changes)),
         ("security", "Security", _security_inner(digest)),
         ("business", "Business and Politics", _local_items_html(biz) if biz else []),
         ("pittsburgh", "Pittsburgh", _pittsburgh_inner(local, weather)),
@@ -1232,15 +1205,8 @@ def render_html(digest, local, markets, weather, sports, feeds,
         f'<a href="{text_href}">plain text</a></nav>',
         "</header>",
         f'<p class="headline">{esc(digest["headline"])}</p>',
+        "<hr>",
     ]
-    skim = _skim_index(digest, local)
-    if skim:
-        parts.append('<h2 id="top">At a Glance</h2>')
-        parts += skim
-    if changes:
-        parts.append('<h2 id="changes">What’s changed since the last update</h2>')
-        parts += _changes_inner(changes)
-    parts.append("<hr>")
     for anchor, title, body in present:
         parts.append(f'<h2 id="{anchor}">{esc(title)}</h2>')
         parts += body
@@ -1297,7 +1263,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
         local.get(k) for k in ("business", "around_town", "events")))
 
     around_teams = local.get("around_teams") if local else None
-    contents = (["What's changed"] if changes else []) + ["Emerging Trends", "Security"]
+    contents = ["Emerging Trends and Key Updates", "Security"]
     if biz:
         contents.append("Business and Politics")
     if has_pgh:
@@ -1320,15 +1286,11 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
         _fill("CONTENTS: " + " | ".join(contents)),
     ]
 
-    if changes:
-        lines += ["", "WHAT'S CHANGED SINCE THE LAST UPDATE", sub]
-        for c in changes:
-            lines.append(_fill(f"{c['title']} [{c['status']}]", "* ", "  "))
-
-    # Most frequently updated first.
-    lines += ["", "EMERGING TRENDS", sub]
-    lines += [_fill(f"{t['subject']}: {t['text']}", "* ", "  ")
-              for t in digest["emerging_trends"]]
+    # Trends plus the changed-story updates, most frequently updated first.
+    lines += ["", "EMERGING TRENDS AND KEY UPDATES", sub]
+    lines += [_fill(t.get("text", ""), "* ", "  ") for t in digest["emerging_trends"]]
+    for c in (changes or []):
+        lines.append(_fill(c.get("title", ""), "* ", "  "))
 
     lines += ["", "SECURITY", sub]
     for n, topic in enumerate(digest["topics"], 1):
