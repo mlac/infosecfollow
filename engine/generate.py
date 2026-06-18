@@ -49,6 +49,7 @@ MODEL = os.environ.get("INFOSECFOLLOW_MODEL", "claude-opus-4-8")
 CLI_TIMEOUT = 900           # seconds for the summarization call
 ARCHIVE_RETENTION_DAYS = int(  # prune archive pages + data files older than this
     os.environ.get("INFOSECFOLLOW_ARCHIVE_RETENTION_DAYS", "90"))
+MAX_GLANCE = 7              # cap on "Emerging Trends and Key Updates" entries
 
 
 # --------------------------------------------------------------------------- fetch
@@ -786,7 +787,7 @@ def _prev_index(prev):
     idx = {}
     if not isinstance(prev, dict):
         return idx
-    for topic in prev.get("topics", []):
+    for topic in (prev.get("topics") or []):
         if isinstance(topic, dict):
             url = _norm_url(_primary_url(topic))
             if url:
@@ -848,75 +849,193 @@ def build_candidates(prev, digest, local):
     return candidates
 
 
-def _changes_prompt(candidates):
-    listing = []
-    for c in candidates:
-        entry = {"id": c["id"], "section": c["section"], "title": c["title"],
-                 "status": c["status"], "new": c["new_text"][:400]}
-        if c["old_text"]:
-            entry["old"] = c["old_text"][:400]
-        listing.append(entry)
-    return f"""You curate a short "What's changed since the last update" list for a daily security briefing that is regenerated several times a day. Below is a JSON array of CANDIDATE changes detected mechanically by comparing the previous version to the new one. Each has an integer "id", its "section", "title", a "status" of "new" (absent from the previous version) or "updated" (present before but its text changed), the "new" text, and for updates the "old" text.
+def _allowed_anchors(digest, local):
+    """The set of every real story _anchor (topics + local items + reading).
+    Trend positional anchors are excluded so a stray 'trend-N' can never link."""
+    allowed = set()
+    for topic in (digest.get("topics") or []):
+        if isinstance(topic, dict) and topic.get("_anchor"):
+            allowed.add(topic["_anchor"])
+    if isinstance(local, dict):
+        for key in _LOCAL_SECTIONS:
+            for item in (local.get(key) or []):
+                if isinstance(item, dict) and item.get("_anchor"):
+                    allowed.add(item["_anchor"])
+        for item in (local.get("reading") or []):
+            if isinstance(item, dict) and item.get("_anchor"):
+                allowed.add(item["_anchor"])
+    return allowed
 
-Select ONLY the genuinely notable changes a returning reader would care about: real new stories and substantive new developments. Drop trivial rewordings, copy-edits, and minor phrasing changes. Keep the list short and high-signal — fewer is better, and it is fine to return an empty list when nothing is materially new.
+
+def build_catalog(digest, local, status_by_anchor):
+    """Flat cross-section list of linkable stories, fed to the glance curator as
+    STORIES: {anchor, section, title, gist, status}. Skips items without _anchor."""
+    catalog = []
+
+    def add(section, item, gist):
+        anchor = item.get("_anchor")
+        if not anchor:
+            return
+        catalog.append({
+            "anchor": anchor, "section": section,
+            "title": str(item.get("title") or item.get("author") or ""),
+            "gist": (gist or "")[:240],
+            "status": status_by_anchor.get(anchor, "unchanged"),
+        })
+
+    for topic in (digest.get("topics") or []):
+        if isinstance(topic, dict):
+            add("Security", topic, _topic_text(topic))
+    if isinstance(local, dict):
+        for key in _LOCAL_SECTIONS:
+            for item in (local.get(key) or []):
+                if isinstance(item, dict):
+                    add(_CHANGE_SECTION_LABELS[key], item, _local_text(item))
+        for item in (local.get("reading") or []):
+            if isinstance(item, dict):
+                add("Reading", item, item.get("summary", ""))
+    return catalog
+
+
+def _glance_prompt(catalog, themes):
+    return f"""You assemble the top "At a glance" section of a daily security-and-local briefing that is regenerated several times a day. A reader skims this section to learn the day's themes and what changed since the last run, then clicks a highlighted phrase to jump to the full story.
+
+You are given STORIES — a JSON array of every linkable story in today's run. Each has:
+- "anchor": an opaque id string you copy EXACTLY when you link to that story (never modify it, never invent one),
+- "section": one of Security, Business and Politics, Business, Around Town, Events, Around the Teams, Reading,
+- "title": the story's title,
+- "gist": a sentence or two of what it is / what is newest,
+- "status": "new" (absent from the previous run), "updated" (present before, materially changed), or "unchanged".
+
+You are also given THEMES — short trend notes the section editor drafted across several stories. Use them as inspiration for "Trend" entries, but rewrite freely; do not copy them verbatim.
+
+Write a SHORT, high-signal list of entries. Two kinds:
+- "Trend": a cross-cutting theme visible across one or more stories (status may be anything, including unchanged). Lead with the most important themes of the day.
+- "Update": a concrete thing that is new or changed since the last run. Use status "new" or "updated" stories for these; do not build an Update around an unchanged story.
+
+Grouping and linking rules:
+- GROUP related stories: when several stories share a theme, write ONE entry whose single flowing sentence naturally names each, and link each story. Prefer one grouped entry over several thin ones.
+- Each entry's "links" is a list of {{"anchor","phrase"}}. "anchor" is copied EXACTLY from a STORIES item. "phrase" is a distinctive 1-3 word substring that appears VERBATIM (same characters) inside THIS entry's "text" — a named entity, vendor, CVE, place, team, or company, never a generic word like "the", "security", or "update". The phrases within one entry must be different substrings and must not overlap.
+- NEVER link the same anchor more than once in the WHOLE list. Every story appears at most once, in the single entry where it fits best. It is fine to leave stories unlinked — do not force coverage.
+- Keep it short: roughly 3 to 6 entries total. Order most important first: biggest themes, then the most notable updates.
+- Each "text" is ONE flowing plain-text sentence, at most ~28 words, no "Trend:"/"Update:" prefix, no markdown, no bullet. Be concrete: name the actors, vendors, CVEs, companies, places, teams.
 
 Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
-{{"changes": [{{"id": <one of the integer ids below>, "status": "new"|"updated", "note": "a flowing natural-language sentence, at most 16 words, summarizing what is new or changed", "link_phrase": "a one- or two-word phrase appearing verbatim inside `note` (a distinctive entity or term) to hyperlink to the story"}}]}}
+{{"entries": [{{"kind": "Trend", "text": "one flowing sentence", "links": [{{"anchor": "<id from STORIES>", "phrase": "verbatim substring of text"}}]}}]}}
 
-Use only ids that appear below; never invent ids, urls, or items. Order the list most important first. Each "note" reads as a sentence (no "Label:" prefix); each "link_phrase" must appear verbatim within its "note".
+THEMES:
+{json.dumps(themes, ensure_ascii=False, indent=1)}
 
-CANDIDATES:
-{json.dumps(listing, ensure_ascii=False, indent=1)}
+STORIES:
+{json.dumps(catalog, ensure_ascii=False, indent=1)}
 """
 
 
-def build_changes(cli, prev, digest, local):
-    """Assign anchors, diff against the prior run, and let the model curate a
-    succinct, link-ready 'what's changed' list. Never raises: falls back to the
-    mechanical candidate list, then to [], so a run is never broken."""
+def _normalize_glance(entries, catalog_by_anchor, allowed):
+    """Validate the curator's entries into the single shape both renderers consume:
+    {kind, status, text, links:[{anchor, phrase, start, end, title}]}. Guarantees,
+    in code regardless of model output, that no _anchor is linked more than once in
+    the whole section, that every linked anchor is a real story, and that every
+    phrase is a verbatim, non-overlapping span of its entry's text."""
+    used = set()           # anchors linked anywhere in the list -> the no-twice invariant
+    out = []
+    for e in (entries or []):
+        if not isinstance(e, dict):
+            continue
+        kind = e.get("kind")
+        kind = kind if kind in ("Trend", "Update") else "Update"
+        text = e.get("text")
+        if not (isinstance(text, str) and text.strip()):
+            continue
+        text = text.strip()
+        spans, links = [], []      # spans: claimed [start,end) in THIS entry
+        for ln in (e.get("links") if isinstance(e.get("links"), list) else []):
+            if not isinstance(ln, dict):
+                continue
+            anchor, phrase = ln.get("anchor"), ln.get("phrase")
+            if not (isinstance(anchor, str) and anchor in allowed) or anchor in used:
+                continue
+            if not (isinstance(phrase, str) and phrase.strip()):
+                continue
+            p = phrase.strip()
+            # Search case-insensitively in `text` itself so start/end are real
+            # indices into `text` (str.lower() is not length-preserving — e.g. 'İ'
+            # — which would otherwise desync the span). Take the first match that
+            # doesn't overlap a phrase already linked in this entry.
+            i = j = -1
+            for m in re.finditer(re.escape(p), text, re.IGNORECASE):
+                if all(m.end() <= s or m.start() >= en for s, en in spans):
+                    i, j = m.start(), m.end()
+                    break
+            if i == -1:
+                continue           # phrase absent or only overlaps an existing link
+            spans.append((i, j))
+            used.add(anchor)       # commit only after a valid in-range span exists
+            links.append({"anchor": anchor, "phrase": text[i:j], "start": i, "end": j,
+                          "title": (catalog_by_anchor.get(anchor) or {}).get("title", "")})
+        links.sort(key=lambda l: l["start"])
+        if not links and kind == "Update":
+            continue               # an Update with nothing to jump to is noise
+        status = None
+        if kind == "Update" and links:
+            st = (catalog_by_anchor.get(links[0]["anchor"]) or {}).get("status")
+            status = st if st in ("new", "updated") else None
+        out.append({"kind": kind, "status": status, "text": text, "links": links})
+        if len(out) >= MAX_GLANCE:
+            break
+    return out
+
+
+def _legacy_glance(digest, candidates, catalog_by_anchor, allowed):
+    """Deterministic fallback that reproduces today's content: a Trend per
+    emerging_trend (linked to its topic) then an Update per changed story, run
+    through _normalize_glance for identical shape and the same global dedup."""
+    title_anchor = {}
+    for t in (digest.get("topics") or []):
+        if isinstance(t, dict) and t.get("title") and t.get("_anchor"):
+            title_anchor.setdefault(_norm_text(t["title"]), t["_anchor"])
+    raw = []
+    for tr in (digest.get("emerging_trends") or []):
+        if not isinstance(tr, dict):
+            continue
+        anchor = title_anchor.get(_norm_text(tr.get("topic_title") or ""))
+        raw.append({"kind": "Trend", "text": tr.get("text", ""),
+                    "links": ([{"anchor": anchor, "phrase": tr.get("link_phrase") or ""}]
+                              if anchor else [])})
+    for c in (candidates or []):
+        title = c.get("title", "")
+        raw.append({"kind": "Update", "text": title,
+                    "links": [{"anchor": c.get("anchor"), "phrase": title}]})
+    return _normalize_glance(raw, catalog_by_anchor, allowed)
+
+
+def build_glance(cli, prev, digest, local):
+    """Unified 'At a glance' curation (reuses the what's-changed model-call slot):
+    stamp anchors, diff against the prior run, then let the model weave the day's
+    stories into labeled, grouped, multi-linked entries. Never raises — falls back
+    to a deterministic legacy synthesis, so a run is never broken."""
     assign_anchors(digest, local)
-    if not isinstance(prev, dict):
-        return []
-    candidates = build_candidates(prev, digest, local)
-    if not candidates:
-        return []
-    by_id = {c["id"]: c for c in candidates}
-
-    def entry_for(candidate, note=None, status=None, link_phrase=None):
-        return {"section": candidate["section"],
-                "title": note or candidate["title"],
-                "anchor": candidate["anchor"],
-                "status": status or candidate["status"],
-                "link_phrase": link_phrase}
-
+    allowed = _allowed_anchors(digest, local)
+    candidates = build_candidates(prev, digest, local) if isinstance(prev, dict) else []
+    status_by_anchor = {c["anchor"]: c["status"] for c in candidates if c.get("anchor")}
+    catalog = build_catalog(digest, local, status_by_anchor)
+    catalog_by_anchor = {c["anchor"]: c for c in catalog}
+    themes = [{"text": t.get("text", ""), "topic_title": t.get("topic_title", "")}
+              for t in (digest.get("emerging_trends") or []) if isinstance(t, dict)]
+    if not catalog:
+        return _legacy_glance(digest, candidates, catalog_by_anchor, allowed)
     try:
-        data = extract_json(run_claude(cli, _changes_prompt(candidates)))
-        picked = data.get("changes") if isinstance(data, dict) else None
-        if not isinstance(picked, list):
-            raise ValueError("model output had no 'changes' array")
-        out, used = [], set()
-        for entry in picked:
-            if not isinstance(entry, dict):
-                continue
-            cid = entry.get("id")
-            if isinstance(cid, bool) or not isinstance(cid, int):
-                continue
-            if cid not in by_id or cid in used:
-                continue
-            used.add(cid)
-            note = entry.get("note")
-            note = note.strip() if isinstance(note, str) and note.strip() else None
-            status = entry.get("status")
-            status = status if status in ("new", "updated") else None
-            phrase = entry.get("link_phrase")
-            phrase = phrase.strip() if isinstance(phrase, str) and phrase.strip() else None
-            out.append(entry_for(by_id[cid], note, status, phrase))
-        return out
+        data = extract_json(run_claude(cli, _glance_prompt(catalog, themes)))
+        raw = data.get("entries") if isinstance(data, dict) else None
+        if not isinstance(raw, list):
+            raise ValueError("model output had no 'entries' array")
+        glance = _normalize_glance(raw, catalog_by_anchor, allowed)
+        return glance or _legacy_glance(digest, candidates, catalog_by_anchor, allowed)
     except (ValueError, TypeError, AttributeError, KeyError, RuntimeError,
-            subprocess.TimeoutExpired) as exc:
-        print(f"  what's-changed curation failed ({type(exc).__name__}: "
-              f"{sanitize(exc)[:200]}); using mechanical list")
-        return [entry_for(c) for c in candidates]
+            OSError, subprocess.SubprocessError) as exc:
+        print(f"  glance curation failed ({type(exc).__name__}: "
+              f"{sanitize(exc)[:200]}); using legacy synthesis")
+        return _legacy_glance(digest, candidates, catalog_by_anchor, allowed)
 
 
 # --------------------------------------------------------------------------- render
@@ -978,7 +1097,17 @@ PAGE_CSS = """
   a.totop { font-size: 0.78rem; opacity: 0.5; text-decoration: none; white-space: nowrap; }
   h2 { scroll-margin-top: 0.5rem; }
   /* combined trends + key-updates list: clearly underline the inline jump links */
-  h2#top + ul a { text-decoration: underline; text-underline-offset: 2px; }
+  h2#glance + ul a { text-decoration: underline; text-underline-offset: 2px; }
+  li.glance { margin: 0.5rem 0; }
+  .glabel { display: inline-block; font-size: 0.72rem; text-transform: uppercase;
+            letter-spacing: 0.06em; font-weight: bold; opacity: 0.85;
+            padding: 0 0.35rem; margin-right: 0.4rem; border-radius: 3px; }
+  li.trend .glabel { color: #157f3b; background: rgba(21,127,59,.14); }
+  li.update .glabel { color: #9a6f00; background: rgba(154,111,0,.16); }
+  @media (prefers-color-scheme: dark) {
+    li.trend .glabel { color: #5dd48f; background: rgba(93,212,143,.16); }
+    li.update .glabel { color: #ffd24a; background: rgba(255,210,74,.16); }
+  }
 """
 
 
@@ -1039,38 +1168,40 @@ def _clean_sports(blocks):
     return blocks
 
 
-def _link_phrase(text, phrase, anchor):
-    """HTML-escape `text` and, if `anchor` is set, hyperlink the first verbatim
-    occurrence of `phrase` to it (case-insensitive). Falls back to linking the
-    whole sentence if the phrase isn't found, or to plain text if no anchor."""
+def _link_phrases(text, links):
+    """HTML-escape `text` and hyperlink each link's pre-computed [start,end) span
+    (non-overlapping and ascending, per _normalize_glance) to its #anchor."""
     text = str(text or "")
-    if not anchor:
+    if not links:
         return esc(text)
-    if isinstance(phrase, str) and phrase.strip():
-        i = text.lower().find(phrase.strip().lower())
-        if i != -1:
-            j = i + len(phrase.strip())
-            return (f"{esc(text[:i])}"
-                    f'<a href="#{esc(anchor)}">{esc(text[i:j])}</a>'
-                    f"{esc(text[j:])}")
-    return f'<a href="#{esc(anchor)}">{esc(text)}</a>'
+    parts, cur = [], 0
+    for l in sorted(links, key=lambda x: x.get("start", 0)):
+        s, en, anc = l.get("start"), l.get("end"), l.get("anchor")
+        if not (isinstance(s, int) and isinstance(en, int)
+                and 0 <= cur <= s < en <= len(text) and anc):
+            continue  # defensive: skip any malformed span
+        parts.append(esc(text[cur:s]))
+        parts.append(f'<a href="#{esc(anc)}">{esc(text[s:en])}</a>')
+        cur = en
+    parts.append(esc(text[cur:]))
+    return "".join(parts)
 
 
-def _trends_updates_inner(digest, changes):
-    """Combined 'Emerging Trends and Key Updates': trend sentences (each linking a
-    phrase to its related topic) followed by changed-story update sentences (each
-    linking a phrase to that story)."""
-    title_anchor = {}
-    for t in (digest.get("topics") or []):
-        if isinstance(t, dict) and t.get("title") and t.get("_anchor"):
-            title_anchor.setdefault(_norm_text(t["title"]), t["_anchor"])
+def _glance_inner(glance):
+    """'Emerging Trends and Key Updates': one <li> per entry with an explicit
+    Trend/Update label and the entry's inline jump-links."""
+    if not glance:
+        return []
     out = ["<ul>"]
-    for tr in digest.get("emerging_trends", []):
-        anchor = title_anchor.get(_norm_text(tr.get("topic_title") or ""))
-        out.append(f'<li>{_link_phrase(tr.get("text", ""), tr.get("link_phrase"), anchor)}</li>')
-    for c in (changes or []):
-        out.append('<li class="update">'
-                   f'{_link_phrase(c.get("title", ""), c.get("link_phrase"), c.get("anchor"))}</li>')
+    for e in glance:
+        kind = e.get("kind", "Update")
+        cls = "trend" if kind == "Trend" else "update"
+        label = esc(kind)
+        if kind == "Update" and e.get("status"):
+            label += " &middot; " + esc(e["status"])
+        out.append(f'<li class="glance {cls}">'
+                   f'<span class="glabel">{label}</span> '
+                   f'{_link_phrases(e.get("text", ""), e.get("links") or [])}</li>')
     out.append("</ul>")
     return out
 
@@ -1171,13 +1302,13 @@ def _reading_inner(local):
 
 def render_html(digest, local, markets, weather, sports, feeds,
                 generated_at, generated_time, archive_href, text_href, depth=0,
-                changes=None):
+                glance=None):
     prefix = "../" * depth
     biz = local.get("business_politics") if local else None
     # Ordered most-frequently-updated first; the weekly markets average sits
     # last. Only non-empty sections render and appear in the jump index.
     sections = [
-        ("top", "Emerging Trends and Key Updates", _trends_updates_inner(digest, changes)),
+        ("glance", "Emerging Trends and Key Updates", _glance_inner(glance)),
         ("security", "Security", _security_inner(digest)),
         ("business", "Business and Politics", _local_items_html(biz) if biz else []),
         ("pittsburgh", "Pittsburgh", _pittsburgh_inner(local, weather)),
@@ -1204,7 +1335,7 @@ def render_html(digest, local, markets, weather, sports, feeds,
         f'<a href="{archive_href}">archive</a> &middot; '
         f'<a href="{text_href}">plain text</a></nav>',
         "</header>",
-        f'<p class="headline">{esc(digest["headline"])}</p>',
+        f'<p id="top" class="headline">{esc(digest["headline"])}</p>',
         "<hr>",
     ]
     for anchor, title, body in present:
@@ -1254,8 +1385,26 @@ def _text_local_items(lines, label, items):
         lines += _text_local_item(item)
 
 
+def _text_glance(lines, glance):
+    """Plain-text 'Emerging Trends and Key Updates': one labeled sentence per
+    entry, plus the linked story titles (the .txt cannot carry jump anchors)."""
+    for e in (glance or []):
+        kind = e.get("kind", "Update")
+        label = kind.upper()
+        if kind == "Update" and e.get("status"):
+            label += f" ({e['status']})"
+        lines.append(_fill(f"[{label}] {e.get('text', '')}", "* ", "  "))
+        titles = []
+        for l in (e.get("links") or []):
+            t = l.get("title")
+            if t and t not in titles:
+                titles.append(t)
+        if titles:
+            lines.append(_fill("see: " + "; ".join(titles), "  "))
+
+
 def render_text(digest, local, markets, weather, sports, feeds, generated_at,
-                generated_time, changes=None):
+                generated_time, glance=None):
     bar = "=" * TEXT_WIDTH
     sub = "-" * TEXT_WIDTH
     biz = local.get("business_politics") if local else None
@@ -1263,7 +1412,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
         local.get(k) for k in ("business", "around_town", "events")))
 
     around_teams = local.get("around_teams") if local else None
-    contents = ["Emerging Trends and Key Updates", "Security"]
+    contents = (["Emerging Trends and Key Updates"] if glance else []) + ["Security"]
     if biz:
         contents.append("Business and Politics")
     if has_pgh:
@@ -1286,11 +1435,10 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
         _fill("CONTENTS: " + " | ".join(contents)),
     ]
 
-    # Trends plus the changed-story updates, most frequently updated first.
-    lines += ["", "EMERGING TRENDS AND KEY UPDATES", sub]
-    lines += [_fill(t.get("text", ""), "* ", "  ") for t in digest["emerging_trends"]]
-    for c in (changes or []):
-        lines.append(_fill(c.get("title", ""), "* ", "  "))
+    # Trends plus the changed-story updates, most important first.
+    if glance:
+        lines += ["", "EMERGING TRENDS AND KEY UPDATES", sub]
+        _text_glance(lines, glance)
 
     lines += ["", "SECURITY", sub]
     for n, topic in enumerate(digest["topics"], 1):
@@ -1441,7 +1589,7 @@ def render_archive_index():
 
 
 def write_site(digest, local, markets, weather, sports, feeds, items_count, window,
-               changes=None):
+               glance=None):
     now_local = datetime.now().astimezone()
     generated_at = now_local.strftime("%Y-%m-%d %H:%M %Z")
     generated_time = now_local.strftime("%-I:%M %p %Z")  # e.g. "6:02 AM EDT", for the header
@@ -1468,12 +1616,12 @@ def write_site(digest, local, markets, weather, sports, feeds, items_count, wind
 
     index_html = render_html(digest, local, markets, weather, sports, feeds,
                              generated_at, generated_time, "archive/index.html",
-                             "digest.txt", depth=0, changes=changes)
+                             "digest.txt", depth=0, glance=glance)
     archive_html = render_html(digest, local, markets, weather, sports, feeds,
                                generated_at, generated_time, "index.html",
-                               f"{stamp}.txt", depth=1, changes=changes)
+                               f"{stamp}.txt", depth=1, glance=glance)
     text = render_text(digest, local, markets, weather, sports, feeds,
-                       generated_at, generated_time, changes=changes)
+                       generated_at, generated_time, glance=glance)
 
     (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
     (SITE_DIR / "digest.txt").write_text(text, encoding="utf-8")
@@ -1562,9 +1710,9 @@ def main():
                 print(f"  pittsburgh/reading sections unavailable: {sanitize(exc)[:200]}")
     digest["date"] = today  # never trust the model with the filename
 
-    # Order security stories (flat: newest then most-covered), then diff against
-    # the most recent prior run for the "what's changed" list.
-    # All of this is best-effort and must never break a run.
+    # Order security stories (flat: newest then most-covered), then curate the
+    # top "Emerging Trends and Key Updates" section against the most recent prior
+    # run. All of this is best-effort and must never break a run.
     pub_index = published_index(selected)
     try:
         order_topics(digest, pub_index)
@@ -1578,16 +1726,17 @@ def main():
         except (ValueError, OSError):
             prev = None
     try:
-        changes = build_changes(cli, prev, digest, local)
+        glance = build_glance(cli, prev, digest, local)
     except Exception as exc:
-        print(f"  what's-changed section skipped: {sanitize(exc)[:200]}")
-        changes = []
-    if changes:
-        print(f"  what's changed: {len(changes)} item(s)")
+        print(f"  glance section skipped: {sanitize(exc)[:200]}")
+        glance = []
+    if glance:
+        print(f"  glance: {len(glance)} entr(y/ies), "
+              f"{sum(len(e.get('links') or []) for e in glance)} story links")
 
     print("[4/4] writing site")
     write_site(digest, local, markets, weather, sports, feeds, len(selected), window,
-               changes=changes)
+               glance=glance)
     print(f"done: {len(digest['topics'])} security topics, "
           f"{len(digest['emerging_trends'])} trends, "
           f"{sum(len(local.get(k, [])) for k in ('business', 'around_town', 'events')) if local else 0} "
