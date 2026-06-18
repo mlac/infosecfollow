@@ -76,6 +76,7 @@ def load_feeds():
 
 STYLE_RULES = """Style rules for every word you write:
 - Voice: write like John McPhee — factual, dense, and conversational, never flowery and never academic. Active voice only; eliminate every passive construction. No contrastive negation, antithesis, or "X, not Y" constructions. Compress hard: deliver the most information in the fewest words, suitable for a Fortune 500 CEO. Every item stands alone; the reader never needs the source for pertinent details.
+- Name names: identify the specific people, organizations, and places by their actual names — the exact borough, township, municipality, company, agency, institution, and the officials involved. NEVER use vague placeholders such as "a local borough," "the neighboring township," "a local company," "a regional hospital," "officials," or "commissioners" without saying which. If a source does not supply the specific names and facts an item needs to stand alone, DROP that item entirely rather than publish a vague one — a thin, nameless item is worse than no item.
 - Capitalization: capitalize only the formal names of specific entities, people, and places; lowercase common nouns, general concepts, and statistical metrics. Capitalize professional titles only immediately before a name ("Chief Executive Jane Roe" but "the chief executive said"). Capitalize compass points only when they name recognized regions (the Midwest, Western Pennsylvania); lowercase directional uses (the storm moved east).
 - Titles and headings (topic titles, trend subjects, area names): use title case — capitalize the first word, the last word, and all principal words; lowercase articles, coordinating conjunctions, and prepositions of fewer than four letters.
 - Mechanics: American spelling (color, realize, traveling). Use the Oxford comma in series of three or more. Put periods and commas inside quotation marks; put colons and semicolons outside. Use unspaced em dashes for parenthetical interruptions—like this. One space after terminal punctuation. Write dates as Month Day, Year (June 12, 2026). Corporate entities and organizations take singular verbs.
@@ -310,7 +311,7 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
       "title": "Short Topic Name (a Campaign, Vulnerability, Incident, or Theme)",
       "area": "The Area of Cybersecurity This Topic Belongs To",
       "latest_developments": "One sentence describing what is genuinely NEW about this topic today, relative to PREVIOUSLY_REPORTED.",
-      "summary": "Two to four sentences of plain-text background and analysis: what it is, who is affected, what to do.",
+      "summary": "One to two tight sentences of plain-text background: what it is, who is affected, what to do.",
       "tags": ["1-3 lowercase tags like ransomware, zero-day, apt, patch, breach, policy"],
       "sources": [{{"source": "outlet name", "title": "article title", "url": "exact url copied from the items below"}}]
     }}
@@ -318,9 +319,9 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 }}
 
 Rules:
-- Aim for 5 to 8 topics, ordered most to least important. Merge near-duplicate coverage of the same story into one topic.
+- Aim for 5 to 6 topics, ordered most to least important. Merge near-duplicate coverage of the same story into one topic.
 - Continuity with PREVIOUSLY_REPORTED (when present): "latest_developments" must describe only what is new today versus what was already reported. Include a topic ONLY if it has a genuinely new development; let a story that has stagnated with nothing new age out by dropping it entirely, even if that leaves fewer than 5 topics. Brand-new topics not in PREVIOUSLY_REPORTED are always welcome. If there is no prior coverage of a topic, "latest_developments" states the key current update.
-- emerging_trends: 3 to 5 entries; "subject" is a one-or-two-word title-case label for the trend.
+- emerging_trends: exactly 3 entries; "subject" is a one-or-two-word title-case label for the trend.
 - Assign every topic an "area" naming its part of cybersecurity — e.g. Vulnerabilities and Exploits, Ransomware and Cybercrime, Nation-State Activity, AI Security, Data Breaches, Policy and Regulation. Use 2 to 5 distinct areas across the digest and repeat the exact same area string for topics that share it.
 - Each topic cites 1 to 4 sources whose "url" values are copied EXACTLY from the items below. Never invent or modify a URL.
 - Plain text only in every field: no markdown, no HTML, no bullet characters.
@@ -350,7 +351,7 @@ Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly t
   "business_politics": [
     {{"title": "Short Title Naming the Story",
       "latest_developments": "One sentence on what is genuinely NEW about this story today, relative to PREVIOUSLY_REPORTED_LOCAL.",
-      "summary": "One to three plain-text sentences of standalone background: what happened, who is affected, and why it matters.",
+      "summary": "One to two tight plain-text sentences of standalone background, naming the specific people, organizations, and places: what happened, who is affected, and why it matters.",
       "sources": [{{"source": "outlet", "title": "article title", "url": "exact url from BUSINESS_POLITICS_ITEMS"}}]}}
   ],
   "business": [same shape: Pittsburgh business/economy stories, cited from PITTSBURGH_ITEMS],
@@ -366,11 +367,11 @@ Rules:
 - Every item in business_politics, business, around_town, events, and around_teams is an object with "title", "latest_developments", "summary", and "sources". Keep "title" a short title-case label; put the standalone detail in "summary".
 - Continuity with PREVIOUSLY_REPORTED_LOCAL (when present): "latest_developments" states only what is new today versus what was already reported. Include an item ONLY if it is new or has a materially new development; let stories and events that have nothing new age out by dropping them — especially events whose date has already passed. Brand-new items are always welcome. When there is no prior coverage, "latest_developments" states the key current update.
 - business_politics: 0 to 4 items, ONLY news of extraordinary significance — developments the chief risk officer of a globally systemically important bank must know: major central-bank decisions, sovereign-debt or currency crises, systemic market dislocations, failures or rescues of major institutions, landmark federal legislation or court rulings, wars or major escalations, and Pennsylvania or Pittsburgh developments of comparable weight. A typical day has zero or one item that clears this bar; return [] when nothing does. Cite urls EXACTLY from BUSINESS_POLITICS_ITEMS.
-- business: 2-4 items. around_town: 3-5 items. Cite urls EXACTLY from PITTSBURGH_ITEMS.
-- events: 0-6 items, only genuinely current or upcoming relative to {today}. Make each event stand alone: in "summary" include the event name, what it is, the date and day of week, the start time, the venue and its neighborhood or address, the ticket price or range, the on-sale date, and how or where to buy — whenever the source provides them. Never invent specifics the source does not state. Specifically surface tickets going on sale for future events, what is happening at the Pittsburgh Symphony, and notable concerts around town. Cite urls EXACTLY from EVENTS_ITEMS or PITTSBURGH_ITEMS.
-- around_teams: 0-5 items covering the Pittsburgh Steelers, Pirates, and Penguins through their beat writers and team podcasts and video channels (for example "Footbahlin with Ben Roethlisberger" and "Not Just Football with Cam Heyward"). Summarize what was actually reported or said — roster moves, injuries, signings, draft and schedule talk, and notable opinions — so the item stands alone; name the show or writer in "summary" when the take comes from one. Do NOT restate box scores or final scores; the scoreboard already covers results. Cite urls EXACTLY from SPORTS_MEDIA_ITEMS.
+- business: 2-3 items. around_town: up to 3 items. Cite urls EXACTLY from PITTSBURGH_ITEMS. Prefer fewer, fully-specified items over more thin ones — drop any item you cannot name concretely.
+- events: 0-4 items, only genuinely current or upcoming relative to {today}. Make each event stand alone: in "summary" include the event name, what it is, the date and day of week, the start time, the venue and its neighborhood or address, the ticket price or range, the on-sale date, and how or where to buy — whenever the source provides them. Never invent specifics the source does not state. Specifically surface tickets going on sale for future events, what is happening at the Pittsburgh Symphony, and notable concerts around town. Cite urls EXACTLY from EVENTS_ITEMS or PITTSBURGH_ITEMS.
+- around_teams: 0-3 items covering the Pittsburgh Steelers, Pirates, and Penguins through their beat writers and team podcasts and video channels (for example "Footbahlin with Ben Roethlisberger" and "Not Just Football with Cam Heyward"). Summarize what was actually reported or said — roster moves, injuries, signings, draft and schedule talk, and notable opinions — so the item stands alone; name the show or writer in "summary" when the take comes from one. Do NOT restate box scores or final scores; the scoreboard already covers results. Cite urls EXACTLY from SPORTS_MEDIA_ITEMS.
 - ABSOLUTE EXCLUSION: do not include any item about murder, shootings, stabbings, assault, fatal crashes, abuse, or other violent or graphic subject matter — skip those stories entirely no matter how prominent. Policy or court stories that are not centered on violence are fine.
-- reading: pick the newest worthwhile post(s) per author from READING_ITEMS, up to 6 total; "url" copied EXACTLY. Skip housekeeping posts (podcast episode lists, link roundups) when a substantive essay is available.
+- reading: pick the single newest worthwhile post per author from READING_ITEMS, up to 3 total; "url" copied EXACTLY. Skip housekeeping posts (podcast episode lists, link roundups) when a substantive essay is available.
 - Plain text only in every field: no markdown, no HTML, no bullet characters. Never invent or modify a URL.
 - Today is {today}.
 
@@ -1028,6 +1029,16 @@ PAGE_CSS = """
   h3.area { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
             opacity: 0.75; margin: 2rem 0 0; }
   h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; }
+  /* "At a glance" skim index */
+  .glance { font-size: 0.9rem; margin: 0.5rem 0 0; }
+  .glance .sec { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
+                 opacity: 0.6; margin: 0.7rem 0 0.15rem; }
+  .glance ul { list-style: none; padding-left: 0; margin: 0; }
+  .glance li { margin: 0.12rem 0; line-height: 1.35; }
+  .glance .badge { font-size: 0.72rem; opacity: 0.6; }
+  /* per-story "back to top" */
+  a.totop { font-size: 0.78rem; opacity: 0.5; text-decoration: none; white-space: nowrap; }
+  h2 { scroll-margin-top: 0.5rem; }
 """
 
 
@@ -1074,7 +1085,8 @@ def _local_items_html(items):
         links = " &middot; ".join(
             f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
             for s in item["sources"])
-        out.append(f'<p class="sources">Sources: {links}</p>')
+        out.append(f'<p class="sources">Sources: {links} &middot; '
+                   '<a class="totop" href="#top">↑ top</a></p>')
     return out
 
 
@@ -1136,7 +1148,8 @@ def _security_inner(digest):
             links = " &middot; ".join(
                 f'<a href="{safe_url(s["url"])}">{esc(s["source"] or s["title"] or "source")}</a>'
                 for s in topic["sources"])
-            out.append(f'<p class="sources">Sources: {links}</p>')
+            out.append(f'<p class="sources">Sources: {links} &middot; '
+                       '<a class="totop" href="#top">↑ top</a></p>')
     return out
 
 
@@ -1209,6 +1222,38 @@ def _reading_inner(local):
     return parts
 
 
+def _skim_index(digest, local):
+    """One-line-per-story 'At a glance' index, grouped by section, each linking to
+    its story anchor. Skips data-only sections (weather, scoreboard, markets)."""
+    loc = local or {}
+    groups = [
+        ("Security", [(f"{n}. {t.get('title','')}", t.get("_anchor"))
+                      for n, t in enumerate(digest.get("topics") or [], 1)]),
+        ("Business & Politics", [(i.get("title", ""), i.get("_anchor"))
+                                 for i in (loc.get("business_politics") or [])]),
+        ("Pittsburgh", [(i.get("title", ""), i.get("_anchor"))
+                        for key in ("business", "around_town", "events")
+                        for i in (loc.get(key) or [])]),
+        ("Sports", [(i.get("title", ""), i.get("_anchor"))
+                    for i in (loc.get("around_teams") or [])]),
+        ("Reading", [(f"{i.get('author','')} — {i.get('title','')}", i.get("_anchor"))
+                     for i in (loc.get("reading") or [])]),
+    ]
+    out = ['<div class="glance">']
+    present = False
+    for label, items in groups:
+        items = [(t, a) for t, a in items if a and t]
+        if not items:
+            continue
+        present = True
+        out.append(f'<p class="sec">{esc(label)}</p>')
+        out.append("<ul>")
+        out += [f'<li><a href="#{esc(a)}">{esc(t)}</a></li>' for t, a in items]
+        out.append("</ul>")
+    out.append("</div>")
+    return out if present else []
+
+
 def render_html(digest, local, markets, weather, sports, feeds,
                 generated_at, generated_time, archive_href, text_href, depth=0,
                 changes=None):
@@ -1226,11 +1271,6 @@ def render_html(digest, local, markets, weather, sports, feeds,
         ("markets", "Markets", _markets_inner(markets) if markets else []),
     ]
     present = [(anchor, title, body) for anchor, title, body in sections if body]
-    index_links = []
-    if changes:
-        index_links.append('<a href="#changes">What’s changed</a>')
-    index_links += [f'<a href="#{a}">{esc(t)}</a>' for a, t, _ in present]
-    index = " &middot; ".join(index_links)
 
     parts = [
         "<!DOCTYPE html>",
@@ -1250,13 +1290,15 @@ def render_html(digest, local, markets, weather, sports, feeds,
         f'<a href="{text_href}">plain text</a></nav>',
         "</header>",
         f'<p class="headline">{esc(digest["headline"])}</p>',
-        f'<nav class="index">Jump to: {index}</nav>',
-        "<hr>",
     ]
+    skim = _skim_index(digest, local)
+    if skim:
+        parts.append('<h2 id="top">At a Glance</h2>')
+        parts += skim
     if changes:
         parts.append('<h2 id="changes">What’s changed since the last update</h2>')
         parts += _changes_inner(changes)
-        parts.append("<hr>")
+    parts.append("<hr>")
     for anchor, title, body in present:
         parts.append(f'<h2 id="{anchor}">{esc(title)}</h2>')
         parts += body
