@@ -1,170 +1,173 @@
 {
   "date": "2026-06-19",
-  "headline": "A breach of the Klue Battlecards app handed the Icarus extortion crew Salesforce data from security firms Huntress and Recorded Future, extending a run of SaaS supply-chain compromises.",
+  "headline": "Defenders scrambled on two fronts as attackers turned an unauthenticated Splunk Enterprise flaw into live remote code execution and the FortiBleed leak laid bare credentials for 86,000 Fortinet devices.",
   "emerging_trends": [
     {
-      "text": "Microsoft's AutoJack chain shows a single malicious webpage can hijack an AI browsing agent into running code on its host, the latest proof that autonomous agents and the orphaned ones left behind widen the enterprise attack surface.",
-      "topic_title": "AutoJack Turns AI Browsing Agents Into RCE",
-      "link_phrase": "AutoJack",
+      "text": "Attackers are weaponizing freshly disclosed enterprise software within days, and Splunk Enterprise's unauthenticated remote code execution flaw reached in-the-wild full-system compromise before federal agencies could finish patching.",
+      "topic_title": "Splunk Enterprise RCE Under Active Attack",
+      "link_phrase": "unauthenticated remote code execution",
       "_anchor": "trend-1"
     },
     {
-      "text": "Stolen OAuth tokens from the Klue Battlecards app let the Icarus crew loot Salesforce records from Huntress and Recorded Future, the third trusted integration attackers have abused as a back door into customers' CRM data.",
-      "topic_title": "Klue OAuth Breach Feeds Salesforce Data Theft",
+      "text": "Trust placed in third-party integrations keeps collapsing into customer data theft, with the Klue OAuth compromise becoming the third connected app abused to drain Salesforce records in this campaign.",
+      "topic_title": "Klue Breach Cascades Into Salesforce Theft",
       "link_phrase": "Klue",
       "_anchor": "trend-2"
     },
     {
-      "text": "Attackers reached the Splunk Enterprise remote-code-execution flaw within days of disclosure, forcing a three-day CISA patch deadline as F5 rushed out-of-band fixes for two critical NGINX bugs.",
-      "topic_title": "Splunk and NGINX Flaws Draw Urgent Patches",
-      "link_phrase": "Splunk Enterprise",
+      "text": "Cryptocurrency-stealing crews increasingly cloak their tools in fabricated reputation and anonymizing networks, inflating GitHub stars and routing CryptoBandits traffic through Tor to dodge scrutiny.",
+      "topic_title": "Crypto-Stealing Malware Cloaks Itself in Trust",
+      "link_phrase": "CryptoBandits",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Klue OAuth Breach Feeds Salesforce Data Theft",
+      "title": "Klue Breach Cascades Into Salesforce Theft",
       "area": "Data Breaches",
-      "latest_developments": "Salesforce disabled the Klue Battlecards app integration after the Icarus threat actors abused OAuth tokens from a June 11 incident to steal CRM data from customers including Huntress and Recorded Future.",
-      "summary": "Klue, a competitive-intelligence platform, marks the third integrated Salesforce app attackers have compromised to siphon customer data in an ongoing extortion campaign. Organizations should audit connected-app permissions and rotate OAuth tokens.",
+      "latest_developments": "Huntress published a detailed June 18 account calling the incident a \"security domino effect\" that began with one compromised integration credential, and Dark Reading noted Klue's Battlecards is now the third connected app abused to siphon customers' Salesforce data.",
+      "summary": "The Icarus threat actors exploited OAuth tokens from a June 11 breach at market-intelligence platform Klue to steal Salesforce CRM data from customers including Huntress and Recorded Future. Salesforce has disabled the Klue Battlecards integration, and affected firms face an ongoing extortion campaign.",
       "tags": [
         "breach",
-        "supply-chain"
+        "supply-chain",
+        "extortion"
       ],
       "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Klue breach lead to Salesforce data theft, Huntress affected",
+          "url": "https://www.helpnetsecurity.com/2026/06/19/klue-salesforce-data-breach-huntress/"
+        },
         {
           "source": "SecurityWeek",
           "title": "Cybersecurity Firms Impacted by Klue Supply Chain Attack",
           "url": "https://www.securityweek.com/cybersecurity-firms-impacted-by-klue-supply-chain-attack/"
         },
         {
-          "source": "The Hacker News",
-          "title": "Salesforce Disables Klue App Integration After OAuth Token Abuse Exposes Customer Data",
-          "url": "https://thehackernews.com/2026/06/salesforce-disables-klue-app.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Klue OAuth breach linked to 'Icarus' Salesforce data theft attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/klue-oauth-breach-linked-to-icarus-salesforce-data-theft-attacks/"
-        },
-        {
           "source": "Dark Reading",
           "title": "Salesforce Data Thefts Continue via Klue App Compromise",
           "url": "https://www.darkreading.com/cyberattacks-data-breaches/salesforce-data-thefts-klue-app-compromise"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Salesforce Disables Klue App Integration After OAuth Token Abuse Exposes Customer Data",
+          "url": "https://thehackernews.com/2026/06/salesforce-disables-klue-app.html"
         }
       ],
-      "_anchor": "i-9fe140fe1b"
+      "_anchor": "i-fcc3fa0606"
     },
     {
-      "title": "Splunk and NGINX Flaws Draw Urgent Patches",
+      "title": "Splunk Enterprise RCE Under Active Attack",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "CISA added Splunk Enterprise flaw CVE-2026-20253, an unauthenticated remote-code-execution bug, to its known exploited catalog and gave agencies three days to patch, while F5 shipped out-of-band fixes for two critical NGINX Open Source flaws led by CVE-2026-42530, a use-after-free in the ngx_http_v3_module.",
-      "summary": "Attackers exploited the Splunk missing-authentication flaw within days of its disclosure; the NGINX bugs let a remote unauthenticated attacker run code on HTTP/3-enabled servers. Splunk separately patched an OS command injection in its AI Toolkit, and Atlassian fixed dozens of dependency flaws.",
+      "latest_developments": "Splunk and Resecurity confirmed live exploitation of CVE-2026-20253 and published indicators of compromise, while CISA set a June 21, 2026 mitigation deadline for federal civilian agencies.",
+      "summary": "CVE-2026-20253 is a critical unauthenticated remote-code-execution flaw in Splunk Enterprise that can yield full system compromise. Operators should apply mitigations now and hunt for the suspicious requests Resecurity flagged as compromise indicators.",
       "tags": [
+        "zero-day",
         "patch",
-        "rce",
-        "zero-day"
+        "exploit"
       ],
       "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Unauthenticated RCE in Splunk Enterprise under active attack (CVE-2026-20253)",
+          "url": "https://www.helpnetsecurity.com/2026/06/19/splunk-vulnerability-cve-2026-20253-exploited/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "CISA: Splunk Enterprise flaw actively exploited, patch by Sunday",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-splunk-enterprise-flaw-actively-exploited-patch-by-sunday/"
+        },
         {
           "source": "SecurityWeek",
           "title": "Splunk Enterprise Vulnerability Exploited in Attacks Days After Disclosure",
           "url": "https://www.securityweek.com/splunk-enterprise-vulnerability-exploited-in-attacks-days-after-disclosure/"
-        },
-        {
-          "source": "CISA Advisories",
-          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
-          "url": "https://www.cisa.gov/news-events/alerts/2026/06/18/cisa-adds-one-known-exploited-vulnerability-catalog"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "F5 Patches Two Critical NGINX Open Source Flaws Enabling Remote Code Execution",
-          "url": "https://thehackernews.com/2026/06/f5-patches-two-critical-nginx-open.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "F5 issues out-of-band patches for critical NGINX vulnerabilities",
-          "url": "https://www.bleepingcomputer.com/news/security/f5-issues-out-of-band-patches-for-critical-nginx-vulnerabilities/"
         }
       ],
-      "_anchor": "i-320d661025"
+      "_anchor": "i-19131ff9c7"
     },
     {
-      "title": "AutoJack Turns AI Browsing Agents Into RCE",
-      "area": "AI Security",
-      "latest_developments": "Microsoft detailed AutoJack, an exploit chain in which a single malicious webpage drives an AI browsing agent into remote code execution on its host by abusing localhost trust, missing authentication, and unsafe parameter handling in AutoGen Studio's MCP WebSocket.",
-      "summary": "The research shows that when agents browse untrusted content and reach local services, traditional boundaries collapse. The risk compounds with orphaned agents left running after their creators leave, which carry standing privileges no one tracks.",
+      "title": "FortiBleed Leak Exposes 86,000 Fortinet Devices",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "SecurityWeek quantified the FortiBleed credential-theft campaign at 86,000 compromised Fortinet device logins—roughly half of all internet-accessible Fortinet firewalls and VPNs—as CISA urged customers to lock down the nearly 74,000 gateways it counted.",
+      "summary": "FortiBleed dumped credentials for tens of thousands of internet-facing Fortinet firewalls and VPN gateways across government and private networks. Administrators should rotate credentials, harden exposed devices, and assume the leaked logins are already in use.",
       "tags": [
-        "ai",
-        "rce"
-      ],
-      "sources": [
-        {
-          "source": "Microsoft Security Blog",
-          "title": "AutoJack: How a single page can RCE the host running your AI agent",
-          "url": "https://www.microsoft.com/en-us/security/blog/2026/06/18/autojack-single-page-rce-host-running-ai-agent/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Orphaned AI Agents: How to Find Hidden Access Risks Inside Your Network",
-          "url": "https://thehackernews.com/2026/06/orphaned-ai-agents-how-to-find-hidden.html"
-        }
-      ],
-      "_anchor": "i-f89169b031"
-    },
-    {
-      "title": "INC Ransomware Tops 830 Victims",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Acronis charted INC's rise to at least 830 victims since August 2023, crediting affiliates who migrated after the disruption of LockBit and the shutdown of BlackCat.",
-      "summary": "INC operates as a ransomware-as-a-service business that has become one of 2026's most prolific extortion groups, favoring healthcare and other sectors where disruption forces a fast payout. Defenders should harden remote access and segment recovery backups.",
-      "tags": [
-        "ransomware",
-        "raas"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "INC Ransomware Emerges as Major RaaS Threat in 2026 with 830+ Victims Since 2023",
-          "url": "https://thehackernews.com/2026/06/inc-ransomware-claims-830-victims-since.html"
-        }
-      ],
-      "_anchor": "i-c2a16a69e5"
-    },
-    {
-      "title": "Popa Botnet Tied to NASDAQ-Listed Alarum",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Researchers from multiple firms concluded that the four-year-old Popa botnet, which forces millions of consumer Android TV boxes to relay traffic for advertising fraud, account takeovers, and mass scraping, links to NetNut, a residential-proxy provider run by publicly traded Israeli firm Alarum Technologies Ltd.",
-      "summary": "Popa converts compromised TV boxes into exit nodes for paying proxy customers, hiding malicious traffic behind ordinary home IP addresses. The finding ties a commercial residential-proxy business to a long-running consumer-device botnet.",
-      "tags": [
-        "botnet",
-        "cybercrime"
-      ],
-      "sources": [
-        {
-          "source": "Krebs on Security",
-          "title": "'Popa' Botnet Linked to Publicly-Traded Israeli Firm",
-          "url": "https://krebsonsecurity.com/2026/06/popa-botnet-linked-to-publicly-traded-israeli-firm/"
-        }
-      ],
-      "_anchor": "i-69b2737ea9"
-    },
-    {
-      "title": "China's UNC6508 Hunts Outdated REDCap Servers",
-      "area": "Nation-State Activity",
-      "latest_developments": "SecurityWeek reported that most internet-accessible REDCap research-data servers run outdated software, and that China-linked UNC6508 regularly targets them for initial access and backdoor deployment.",
-      "summary": "REDCap is a widely used clinical and research data-capture platform run by universities and medical institutions. Operators should update to current releases and pull exposed instances behind authentication to deny UNC6508 a foothold.",
-      "tags": [
-        "apt",
-        "china"
+        "breach",
+        "patch",
+        "credentials"
       ],
       "sources": [
         {
           "source": "SecurityWeek",
-          "title": "Majority of Internet-Accessible REDCap Servers Outdated",
-          "url": "https://www.securityweek.com/majority-of-internet-accessible-redcap-servers-outdated/"
+          "title": "FortiBleed: 86,000 Fortinet Device Credentials Compromised",
+          "url": "https://www.securityweek.com/fortibleed-86000-fortinet-device-credentials-compromised/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "CISA warns Fortinet users to secure devices after FortiBleed leak",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-fortinet-users-to-secure-devices-after-fortibleed-leak/"
         }
       ],
-      "_anchor": "i-a15816fd5c"
+      "_anchor": "i-26e0e341a3"
+    },
+    {
+      "title": "Crypto-Stealing Malware Cloaks Itself in Trust",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Check Point exposed a campaign that inflated GitHub activity, YouTube tutorials, and VirusTotal comments to make crypto-stealing sniper bots and gambling \"predictors\" look trustworthy, while SecurityWeek detailed CryptoBandits, a backdoor that blends data theft with remote code execution through a local SOCKS5 proxy over Tor.",
+      "summary": "Two fresh operations target cryptocurrency users: one launders the reputation of malicious trading tools through fake stars and reviews, the other hides theft and remote control inside Tor traffic. Users should distrust money-making bots regardless of their apparent ratings.",
+      "tags": [
+        "malware",
+        "cryptocurrency",
+        "backdoor"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Cybercriminals abused GitHub, YouTube and VirusTotal to push crypto-stealing malware",
+          "url": "https://www.helpnetsecurity.com/2026/06/19/fake-github-stars-crypto-stealing-malware/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "CryptoBandits Malware Doubles as a Backdoor, Abuses Tor",
+          "url": "https://www.securityweek.com/cryptobandits-malware-doubles-as-a-backdoor-abuses-tor/"
+        }
+      ],
+      "_anchor": "i-2c53c05848"
+    },
+    {
+      "title": "FIFA World Cup Streams Exposed to Takeover",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Dark Reading revealed that FIFA left Microsoft Entra access controls unenforced on its streaming platform, a gap that let an attacker hijack live 2026 World Cup video feeds and broadcast their own content.",
+      "summary": "An identity-policy oversight in FIFA's streaming setup opened official World Cup broadcasts to remote takeover, where a hacker could replace a match feed with arbitrary video. The flaw shows how unenforced cloud access rules undercut even high-profile global events.",
+      "tags": [
+        "vulnerability",
+        "access-control"
+      ],
+      "sources": [
+        {
+          "source": "Dark Reading",
+          "title": "FIFA Bug Exposes World Cup Streams to Remote Takeover",
+          "url": "https://www.darkreading.com/application-security/fifa-bug-world-cup-streams-remote-takeover"
+        }
+      ],
+      "_anchor": "i-da61e9a5ac"
+    },
+    {
+      "title": "Nintendo Survey Data Stolen via TinyPulse",
+      "area": "Data Breaches",
+      "latest_developments": "Nintendo of America confirmed that attackers stole internal survey data from TinyPulse, a third-party service run by a WebMD subsidiary, while insisting its own systems stayed intact.",
+      "summary": "The breach hit a vendor Nintendo used internally rather than Nintendo's infrastructure, exposing employee survey records. The case underscores how third-party tools widen a company's attack surface even when core systems hold.",
+      "tags": [
+        "breach",
+        "supply-chain"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Nintendo confirms data stolen in WebMD subsidiary cyberattack",
+          "url": "https://www.bleepingcomputer.com/news/security/nintendo-confirms-data-stolen-in-webmd-subsidiary-cyberattack/"
+        }
+      ],
+      "_anchor": "i-19cb07773d"
     }
   ],
   "markets": [
@@ -232,126 +235,103 @@
   "local": {
     "business_politics": [
       {
-        "title": "Burnham Wins By-Election, Eyes Starmer's Job",
-        "latest_developments": "Andy Burnham won the Makerfield by-election on June 19, taking a Commons seat that lets him challenge Keir Starmer for the Labour leadership, and Starmer said he would stand in any contest; ten-year gilt yields rose 6.5 basis points to 4.809%.",
-        "summary": "Greater Manchester mayor Andy Burnham defeated Nigel Farage's Reform UK in the Makerfield special election, returning to Parliament with a platform to mount a leadership challenge against Prime Minister Keir Starmer, a fight that would reshape British government as May public-sector borrowing hit £23.3 billion.",
+        "title": "Iran Deal Falters as Israel Strikes Lebanon",
+        "latest_developments": "Israel struck targets across southern Lebanon overnight and Iran fired warning shots in the Strait of Hormuz, while Tehran moved to require Tehran-approved insurance for vessels using the strait and lined up access to $6 billion in frozen Qatari funds.",
+        "summary": "The United States and Iran signed an interim accord on June 17 to end their war and reopen the Strait of Hormuz, but clashes between Israel and Hezbollah have stalled the follow-on nuclear talks in Switzerland and prompted Vice President JD Vance to postpone his trip, pushing Brent crude back above $80 a barrel and keeping inflation-wary central bankers on edge.",
         "sources": [
           {
             "source": "WSJ World News",
-            "title": "Rebel Lawmaker’s Election Win Clears Path to Oust U.K.’s Starmer",
-            "url": "https://www.wsj.com/world/uk/rebel-lawmaker-set-to-try-a-knockout-blow-to-u-k-s-starmer-75ff91ab"
+            "title": "Israel-Hezbollah Clashes Put Iran Deal Under Early Pressure",
+            "url": "https://www.wsj.com/world/middle-east/israel-hezbollah-clashes-put-iran-deal-under-early-pressure-0aa5ae90"
           },
           {
             "source": "FT World",
-            "title": "Burnham storms to by-election victory in challenge to Starmer",
-            "url": "https://www.ft.com/content/095b3f3d-8c66-46fa-bb2a-1b8186f3f054"
+            "title": "Iran to seek ‘insurance fees’ for passage through Strait of Hormuz",
+            "url": "https://www.ft.com/content/e1068044-5124-47d9-81ba-c4a3efc16384"
           },
-          {
-            "source": "The Economist",
-            "title": "Andy Burnham is now Britain’s prime-minister-in-waiting",
-            "url": "https://www.economist.com/britain/2026/06/19/andy-burnham-is-now-britains-prime-minister-in-waiting"
-          }
-        ],
-        "_anchor": "i-1156ba05d8"
-      },
-      {
-        "title": "Iran Talks Stall, Vance Cancels Switzerland Trip",
-        "latest_developments": "Vice President JD Vance called off his trip to Switzerland and Iran postponed the nuclear negotiations after Israeli strikes on southern Lebanon, casting doubt on Wednesday's interim accord and pushing Brent crude back above $80 a barrel.",
-        "summary": "The United States and Iran signed an interim deal on June 17 to end their war and reopen the Strait of Hormuz, and the U.S. Navy has since let more than a dozen ships reach Iranian ports, while the Pentagon told lawmakers it needs $80 billion to cover the war's costs.",
-        "sources": [
           {
             "source": "FT World",
-            "title": "Iran postponed US talks due to Israeli strikes on Lebanon, diplomats say",
-            "url": "https://www.ft.com/content/9cd814af-6144-4646-ad1c-a6292391e613"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Oil Rises After Vance Postpones Travel to Switzerland For Iran Talks",
-            "url": "https://www.wsj.com/finance/commodities-futures/oil-falls-on-signs-of-strait-of-hormuzs-reopening-e18fac1e?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Politics",
-            "title": "Pentagon Tells Lawmakers It Needs $80 Billion for Iran War and Other Bills",
-            "url": "https://www.wsj.com/politics/national-security/pentagon-tells-lawmakers-it-needs-80-billion-for-iran-war-and-other-bills-c4b8ff91"
+            "title": "Iran to get access to $6bn of frozen funds to buy US goods",
+            "url": "https://www.ft.com/content/905e17e6-0659-4e28-bab8-b733ba6be990"
           }
         ],
-        "_anchor": "i-4af0c9ac00"
+        "_anchor": "i-d9cb23a7c8"
       }
     ],
     "business": [
       {
-        "title": "PRT Keeps Bus Service at the Waterfront",
-        "latest_developments": "Pittsburgh Regional Transit starts serving two new stops at the Waterfront shopping center in Homestead on Sunday, the result of a fall agreement that reversed the center's move to push buses off the property near Target and Giant Eagle.",
-        "summary": "Pittsburgh Regional Transit and the Waterfront's management settled a fight over bus access to the Homestead retail complex, and the agency will begin using two relocated stops this weekend, preserving service for the shoppers and workers who reach the stores by transit.",
-        "sources": [
-          {
-            "source": "KDKA",
-            "title": "PRT to begin serving new bus stops at The Waterfront this weekend",
-            "url": "https://www.cbsnews.com/pittsburgh/news/prt-to-begin-serving-new-bus-stops-at-the-waterfront-this-weekend/"
-          }
-        ],
-        "_anchor": "i-f42e60b1c4"
-      },
-      {
-        "title": "Nine-Story Tower Proposed on Mt. Washington",
-        "latest_developments": "WPXI reports some neighbors now oppose the nine-story residential building a developer wants to raise at 301 Grandview Avenue, a project that still requires demolishing the church on the lot.",
-        "summary": "A developer has proposed a nine-story apartment building at 301 Grandview Avenue atop Mt. Washington, a high-profile site along the Grandview promenade overlooking downtown Pittsburgh, and the plan would tear down the church that occupies the lot.",
+        "title": "Schwebel Baking to Liquidate",
+        "latest_developments": "Schwebel Baking Company said Wednesday it will wind down operations and liquidate the business, formalizing the closure flagged earlier in the week.",
+        "summary": "Schwebel Baking Company, which has supplied bread and rolls for more than 120 years, will shut down and pull its brand from Western Pennsylvania grocery shelves.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "9-story high-rise planned on site of Mt. Washington church, though some neighbors not sold",
-            "url": "https://www.wpxi.com/news/local/9-story-high-rise-planned-site-mt-washington-church-though-some-neighbors-not-sold/QNMFSP32QFGMVIPTJFUOIXOPOI/"
+            "title": "Schwebel Baking Co. to wind down operations, liquidate its business",
+            "url": "https://www.wpxi.com/news/local/schwebel-baking-co-wind-down-operations-liquidate-its-business/OUXRVQDC2VGUXNDNZYQHNID3JU/"
           }
         ],
-        "_anchor": "i-d6eaf47ba4"
+        "_anchor": "i-9594147f5f"
+      },
+      {
+        "title": "Westmoreland Authority Buys West Newton Sewage Plant",
+        "latest_developments": "The Municipal Authority of Westmoreland County agreed to buy West Newton's sewage treatment plant and its collection pipes for $1.2 million.",
+        "summary": "The Municipal Authority of Westmoreland County will take over the West Newton borough sewage system, adding the treatment plant and the network of collection lines to its operations.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Water authority buys West Newton sewage plant for $1.2 million",
+            "url": "https://triblive.com/local/westmoreland/water-authority-buys-west-newton-sewage-plant-for-1-2-million/"
+          }
+        ],
+        "_anchor": "i-0beee61f5f"
       }
     ],
     "around_town": [
       {
-        "title": "City Adds $800,000 for Homeless Street Outreach",
-        "latest_developments": "Pittsburgh is directing $800,000 to its Roots street outreach team to expand support for homeless residents, though advocates told the Post-Gazette that significant gaps in services remain.",
-        "summary": "Pittsburgh's Roots street outreach team, which works directly with people living unsheltered across the city, will receive $800,000 in new funding, money advocates welcome even as they warn it falls short of the need.",
+        "title": "SEA Hires Geese Police for North Shore Park",
+        "latest_developments": "The Sports & Exhibition Authority brought in a dog-handling 'Geese Police' service to clear Canada geese fouling North Shore Riverfront Park.",
+        "summary": "Goose droppings have overrun North Shore Riverfront Park along the Allegheny River, so the Sports & Exhibition Authority recruited a 'Geese Police' contractor that uses herding dogs to drive the birds off.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "SEA recruits ‘Geese Police’ to handle North Shore poop problem",
+            "url": "https://triblive.com/local/sea-recruits-geese-police-to-handle-north-shore-poop-problem/"
+          }
+        ],
+        "_anchor": "i-c22d37d370"
+      },
+      {
+        "title": "Juneteenth Recognition Varies Across Region",
+        "latest_developments": "On Juneteenth itself, the Post-Gazette reports Pittsburgh-area municipalities still differ widely in how they mark the holiday five years after it became federal.",
+        "summary": "Juneteenth, which commemorates the end of slavery and became a federal holiday in 2021, draws uneven recognition across the Pittsburgh region, with some communities staging festivals and others doing little.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Pittsburgh’s street outreach team is getting $800K to help support homeless people. Advocates say plenty of gaps remain.",
-            "url": "https://www.post-gazette.com/news/social-services/2026/06/19/pittsburgh-roots-street-outreach/stories/202606160038"
+            "title": "Recognition of Juneteenth varies across Pittsburgh region 5 years after it became a federal holiday",
+            "url": "https://www.post-gazette.com/life/holidays/2026/06/19/juneteenth-slavery-emancipation-holiday/stories/202606180077"
           }
         ],
-        "_anchor": "i-5747173dfb"
+        "_anchor": "i-d065195cd7"
       },
       {
-        "title": "Pittsburgh Expands Dolly Parton's Imagination Library",
-        "latest_developments": "Pittsburgh first lady Katie O'Connor announced Thursday in Carrick that the city, backed by Benter Foundation funding, is widening its rollout of Dolly Parton's Imagination Library to reach more children.",
-        "summary": "Dolly Parton's Imagination Library mails free books each month to enrolled children, and Pittsburgh is enrolling more families citywide with Benter Foundation support to lift early literacy.",
+        "title": "Leet Township Shelves Meeting Livestreams",
+        "latest_developments": "Leet Township commissioners postponed a plan to livestream and video-record their public meetings.",
+        "summary": "Leet Township, in the Sewickley area of Allegheny County, decided to set aside a proposal to livestream and record commissioners' meetings.",
         "sources": [
           {
-            "source": "KDKA",
-            "title": "Pittsburgh expands efforts to get free books to kids through Dolly Parton's Imagination Library",
-            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-expands-dolly-parton-imagination-library/"
+            "source": "TribLive",
+            "title": "Leet officials postpone livestreaming, video recording meetings",
+            "url": "https://triblive.com/local/sewickley/leet-officials-postpone-livestreaming-video-recording-meetings/"
           }
         ],
-        "_anchor": "i-9a4123b546"
-      },
-      {
-        "title": "Rodef Shalom and Temple Sinai Merge as Beit Kulanu",
-        "latest_developments": "In a Post-Gazette conversation, Rabbi Daniel Fellman described the merger of Pittsburgh's Rodef Shalom and Temple Sinai congregations into a single Reform community, Beit Kulanu, which he calls 'a house for all peoples.'",
-        "summary": "Two longtime Pittsburgh Reform Jewish congregations, Rodef Shalom and Temple Sinai, are combining into one community named Beit Kulanu under Rabbi Daniel Fellman, consolidating membership and worship under a single roof.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Brandon McGinley: 'A house for all peoples': A conversation with Rabbi Daniel Fellman",
-            "url": "https://www.post-gazette.com/local/city/2026/06/19/rodef-shalom-temple-sinai-judaism-congregation-merger-beit-kulanu/stories/202606210032"
-          }
-        ],
-        "_anchor": "i-68b708671d"
+        "_anchor": "i-19b7642a9b"
       }
     ],
     "events": [
       {
         "title": "Western Pa. Juneteenth and Black Music Celebration",
-        "latest_developments": "The four-day festival continues through Sunday, June 21, with the Juneteenth holiday itself falling on Friday, June 19.",
-        "summary": "The Western Pennsylvania Juneteenth and Black Music Celebration, the largest Juneteenth festival in North America, runs Thursday through Sunday, June 18 to 21, from 11 a.m. to 10 p.m. across Point State Park, Market Square, and Liberty Avenue downtown; Stop the Violence Pittsburgh presents the 161st-anniversary event.",
+        "latest_developments": "Today is Juneteenth, and the four-day festival runs through Sunday, June 21.",
+        "summary": "Stop the Violence Pittsburgh's Western Pennsylvania Juneteenth and Black Music Celebration, billed as the largest Juneteenth festival in North America, runs 11 a.m. to 10 p.m. daily through Sunday, June 21, across Point State Park, Market Square, and Liberty Avenue downtown.",
         "sources": [
           {
             "source": "NEXTpittsburgh Events",
@@ -360,60 +340,21 @@
           }
         ],
         "_anchor": "i-ade4dc5be1"
-      },
-      {
-        "title": "Plum Summerfest at Larry Mills Park",
-        "latest_developments": "Plum's Summerfest opens this weekend at Larry Mills Park with a Ferris wheel, fishing games, funnel cakes, and corn dogs.",
-        "summary": "Summerfest, Plum's community fair, sets up at Larry Mills Park this weekend with carnival rides including a Ferris wheel, fishing games, and fair food such as funnel cakes and corn dogs.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Summerfest event kicks off at Larry Mills Park in Plum",
-            "url": "https://triblive.com/local/valley-news-dispatch/plum-summerfest-event-kicks-off-at-larry-mills-park/"
-          }
-        ],
-        "_anchor": "i-d3a2401c77"
       }
     ],
     "around_teams": [
       {
-        "title": "Pirates Trade Joey Bart to Braves for Hunter Stratton",
-        "latest_developments": "The Pirates sent catcher Joey Bart to the Atlanta Braves on Thursday night for right-handed reliever Hunter Stratton, a move the Post-Gazette frames as adding bullpen depth and clearing a logjam behind the plate.",
-        "summary": "Hunter Stratton, a 2017 Pirates draft pick who pitched in Pittsburgh from 2023 to 2025 before Atlanta acquired him last summer, returns to the organization and reports to Triple-A Indianapolis, while Bart's exit thins a crowded Pirates catching picture.",
+        "title": "Pirates' Catcher Plan After Bart Trade",
+        "latest_developments": "A Post-Gazette mailbag lays out the Pirates' plan behind the plate after trading Joey Bart, weighing whether Henry Davis takes over and whether Marcell Ozuna sticks around.",
+        "summary": "Having sent catcher Joey Bart to Atlanta for reliever Hunter Stratton, the Pirates turn to filling the position, with the Post-Gazette pointing to Henry Davis and addressing whether designated hitter Marcell Ozuna stays after a strong night against Sacramento.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "The Pirates trade Joey Bart, adding bullpen help and solving their logjam at catcher",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/18/pirates-bart-hunter-stratton-braves-endy-davis/stories/202606180080"
+            "title": "Pirates mailbag: What's the plan at catcher after the Joey Bart trade? Is Marcell Ozuna back?",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/19/mlb-trade-bart-stratton-henry-davis-marcell-ozuna/stories/202606190033"
           }
         ],
-        "_anchor": "i-05d41db94b"
-      },
-      {
-        "title": "Steelers Expected to Pass on Brendan Sorsby",
-        "latest_developments": "Post-Gazette writers say the Steelers will likely avoid quarterback Brendan Sorsby in the NFL's supplemental draft, pointing to the gambling matter that pushed him from the college ranks.",
-        "summary": "Brendan Sorsby, a college quarterback who entered the NFL supplemental draft amid a gambling matter, has surfaced as a possible Steelers target; the team's beat writers expect Pittsburgh to steer clear, citing the risk and a settled quarterback room.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "Don’t expect the Steelers to make a bid for Brendan Sorsby in the NFL’s supplemental draft",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/06/16/sorsby-gambling-supplemental-draft-allar-howard/stories/202606160042"
-          }
-        ],
-        "_anchor": "i-53c4a7784b"
-      },
-      {
-        "title": "Rookie Safety Spears-Jennings's 4.32 Forty",
-        "latest_developments": "A Post-Gazette feature details how rookie safety Robert Spears-Jennings ran a 4.32-second 40-yard dash at the NFL combine and turned the time into a Steelers selection.",
-        "summary": "Robert Spears-Jennings, a safety the Steelers drafted, traces his rise to a 4.32-second 40-yard dash at the scouting combine, a number that vaulted him up draft boards and into Pittsburgh's plans.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "How Steelers rookie safety Robert Spears-Jennings changed his NFL trajectory in 4.32 seconds",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/06/18/40yarddash-nfl-combine-spears-jennings-murphy-draft/stories/202606170001"
-          }
-        ],
-        "_anchor": "i-f93fac2f97"
+        "_anchor": "i-3f10820925"
       }
     ],
     "reading": [
@@ -421,28 +362,28 @@
         "author": "Stratechery",
         "title": "An Interview with Michael Morton About E-Commerce in the Age of AI",
         "url": "https://stratechery.com/2026/an-interview-with-michael-morton-about-e-commerce-in-the-age-of-ai/",
-        "summary": "Ben Thompson talks with Michael Morton about how AI reshapes e-commerce, weighing unfalsifiable bear cases, the difference between distribution and referral models, and AI's reach into grocery and autonomous vehicles.",
+        "summary": "Ben Thompson interviews Michael Morton on how AI reshapes e-commerce, covering unfalsifiable bear cases, distribution versus referral models, grocery, and autonomous vehicles.",
         "_anchor": "i-49be6de7fe"
       },
       {
         "author": "Ed Zitron",
         "title": "Exclusive: OpenAI Losses Increased Nearly 8X in 2025, With Spending Hitting $34 Billion",
         "url": "https://www.wheresyoured.at/exclusive-openai-financials/",
-        "summary": "Zitron publishes financials showing OpenAI's losses grew nearly eightfold in 2025 as spending reached $34 billion, arguing the company burns cash at a pace that leaves it with no path to profitability.",
+        "summary": "Zitron reports OpenAI's losses grew nearly eightfold in 2025 as spending reached $34 billion, arguing the company still has no credible path to profitability.",
         "_anchor": "i-7474a766f4"
       },
       {
         "author": "Cal Newport",
         "title": "AI Isn’t Breaking Work. It’s Already Broken.",
         "url": "https://calnewport.com/ai-isnt-breaking-work-its-already-broken/",
-        "summary": "Reacting to a Financial Times interview with the Work AI Institute's Rebecca Hinds about a 6,000-person survey, Newport argues knowledge work already buckled under overload and busywork, so AI lands on a system that broke long before it arrived.",
+        "summary": "Responding to a Financial Times interview with Rebecca Hinds of the Work AI Institute about a survey of 6,000 workers, Newport argues knowledge work was already dysfunctional well before AI arrived.",
         "_anchor": "i-16eace995a"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-19 06:09 EDT",
-    "items_considered": 73,
+    "generated_at": "2026-06-19 09:05 EDT",
+    "items_considered": 60,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
