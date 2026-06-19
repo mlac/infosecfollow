@@ -64,12 +64,15 @@ EVENTS_WINDOW_HOURS = 120   # arts/events: weekly roundups + upcoming-event/tick
 EVENTS_MAX_ITEMS = 50
 SPORTS_MEDIA_WINDOW_HOURS = 96  # team podcasts post ~weekly; beat writers daily
 SPORTS_MEDIA_MAX_ITEMS = 30
+TEAM_USA_WINDOW_HOURS = 72   # national-team / Olympic news; busy during tournaments
+TEAM_USA_MAX_ITEMS = 40
 
 
 def load_feeds():
     with open(ENGINE_DIR / "feeds.json", encoding="utf-8") as f:
         groups = json.load(f)
-    for key in ("security", "pittsburgh", "bizpol", "events", "sports_media", "reading"):
+    for key in ("security", "pittsburgh", "bizpol", "events", "sports_media",
+                "team_usa", "reading"):
         if key not in groups:
             raise ValueError(f"feeds.json missing group '{key}'")
     return groups
@@ -339,14 +342,14 @@ Items:
 
 
 def build_local_prompt(pgh_items, reading_items, biz_items, event_items, sports_items,
-                       today, prior=None):
+                       team_usa_items, today, prior=None):
     prior_block = ""
     if prior:
         prior_block = f"""
 PREVIOUSLY_REPORTED_LOCAL — items this briefing already covered over the last week (most recent runs first), grouped by section, as a JSON array. Use it to tell new developments from old news and to retire items that have nothing new:
 {json.dumps(prior, ensure_ascii=False, indent=1)}
 """
-    return f"""You are the editor of the Business and Politics, Pittsburgh, Events, Sports, and Reading sections of "infosecfollow", a daily plain-text briefing. Below are five JSON arrays: BUSINESS_POLITICS_ITEMS ({len(biz_items)} items from the Wall Street Journal, the Economist, and the Financial Times, last {BIZPOL_WINDOW_HOURS} hours), PITTSBURGH_ITEMS ({len(pgh_items)} local Pittsburgh news items, last {PGH_WINDOW_HOURS} hours), EVENTS_ITEMS ({len(event_items)} Pittsburgh arts, music, and things-to-do items, last {EVENTS_WINDOW_HOURS} hours), SPORTS_MEDIA_ITEMS ({len(sports_items)} items from Pittsburgh sports beat writers and team podcasts and video channels, last {SPORTS_MEDIA_WINDOW_HOURS} hours), and READING_ITEMS ({len(reading_items)} recent posts by the commentary writers Ed Zitron, Stratechery, and Cal Newport).
+    return f"""You are the editor of the Business and Politics, Pittsburgh, Events, Sports, and Reading sections of "infosecfollow", a daily plain-text briefing. Below are six JSON arrays: BUSINESS_POLITICS_ITEMS ({len(biz_items)} items from the Wall Street Journal, the Economist, and the Financial Times, last {BIZPOL_WINDOW_HOURS} hours), PITTSBURGH_ITEMS ({len(pgh_items)} local Pittsburgh news items, last {PGH_WINDOW_HOURS} hours), EVENTS_ITEMS ({len(event_items)} Pittsburgh arts, music, and things-to-do items, last {EVENTS_WINDOW_HOURS} hours), SPORTS_MEDIA_ITEMS ({len(sports_items)} items from Pittsburgh sports beat writers and team podcasts and video channels, last {SPORTS_MEDIA_WINDOW_HOURS} hours), TEAM_USA_ITEMS ({len(team_usa_items)} items on United States national teams and Olympic athletes from ESPN and the Guardian, last {TEAM_USA_WINDOW_HOURS} hours), and READING_ITEMS ({len(reading_items)} recent posts by the commentary writers Ed Zitron, Stratechery, and Cal Newport).
 
 Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
 
@@ -361,6 +364,7 @@ Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly t
   "around_town": [same shape: civic news, development, transit, education, and other useful-to-know local items],
   "events": [same shape: arts, concerts, and things to attend; cited from EVENTS_ITEMS or PITTSBURGH_ITEMS],
   "around_teams": [same shape: what beat writers and team podcasts/channels are saying about the Steelers, Pirates, and Penguins; cited from SPORTS_MEDIA_ITEMS],
+  "team_usa": [same shape: news about United States national teams and Team USA athletes; cited from TEAM_USA_ITEMS],
   "reading": [
     {{"author": "Ed Zitron|Stratechery|Cal Newport", "title": "post title", "url": "exact url", "summary": "One or two sentences on what the post argues."}}
   ]
@@ -373,6 +377,7 @@ Rules:
 - business: 2-3 items. around_town: up to 3 items. Cite urls EXACTLY from PITTSBURGH_ITEMS. Prefer fewer, fully-specified items over more thin ones — drop any item you cannot name concretely.
 - events: 0-4 items, only genuinely current or upcoming relative to {today}. Make each event stand alone: in "summary" include the event name, what it is, the date and day of week, the start time, the venue and its neighborhood or address, the ticket price or range, the on-sale date, and how or where to buy — whenever the source provides them. Never invent specifics the source does not state. Specifically surface tickets going on sale for future events, what is happening at the Pittsburgh Symphony, and notable concerts around town. Cite urls EXACTLY from EVENTS_ITEMS or PITTSBURGH_ITEMS.
 - around_teams: 0-3 items covering the Pittsburgh Steelers, Pirates, and Penguins through their beat writers and team podcasts and video channels (for example "Footbahlin with Ben Roethlisberger" and "Not Just Football with Cam Heyward"). Summarize what was actually reported or said — roster moves, injuries, signings, draft and schedule talk, and notable opinions — so the item stands alone; name the show or writer in "summary" when the take comes from one. Do NOT restate box scores or final scores; the scoreboard already covers results. Cite urls EXACTLY from SPORTS_MEDIA_ITEMS.
+- team_usa: 0-3 items on United States national teams and Team USA athletes — the men's and women's national soccer teams (including the 2026 World Cup hosted across the United States, Canada, and Mexico), and U.S. Olympic and Paralympic athletes and teams. Cover roster moves, qualifying and tournament results and fixtures, injuries, and notable performances; name the specific players, coaches, opponents, competitions, and dates so the item stands alone. Include ONLY items genuinely about United States teams or athletes; drop general international sports news that does not involve Team USA. Cite urls EXACTLY from TEAM_USA_ITEMS.
 - ABSOLUTE EXCLUSION: do not include any item about murder, shootings, stabbings, assault, fatal crashes, abuse, or other violent or graphic subject matter — skip those stories entirely no matter how prominent. Policy or court stories that are not centered on violence are fine.
 - reading: pick the single newest worthwhile post per author from READING_ITEMS, up to 3 total; "url" copied EXACTLY. Skip housekeeping posts (podcast episode lists, link roundups) when a substantive essay is available.
 - Plain text only in every field: no markdown, no HTML, no bullet characters. Never invent or modify a URL.
@@ -391,6 +396,9 @@ EVENTS_ITEMS:
 
 SPORTS_MEDIA_ITEMS:
 {json.dumps(corpus_of(sports_items), ensure_ascii=False, indent=1)}
+
+TEAM_USA_ITEMS:
+{json.dumps(corpus_of(team_usa_items), ensure_ascii=False, indent=1)}
 
 READING_ITEMS:
 {json.dumps(corpus_of(reading_items), ensure_ascii=False, indent=1)}
@@ -499,13 +507,13 @@ def _valid_sources(raw, allowed_urls):
 
 
 def validate_local(digest, pgh_urls, read_urls, biz_urls, event_urls, sports_urls,
-                   have_pgh, have_reading):
+                   team_usa_urls, have_pgh, have_reading):
     problems = []
     if not isinstance(digest, dict):
         raise ValueError("local digest must be an object")
     for key, allowed in (("business_politics", biz_urls), ("business", pgh_urls),
                          ("around_town", pgh_urls), ("events", event_urls | pgh_urls),
-                         ("around_teams", sports_urls)):
+                         ("around_teams", sports_urls), ("team_usa", team_usa_urls)):
         section = digest.get(key)
         if section is None:  # omitted/null key: treat as empty, not an error
             digest[key] = []
@@ -601,7 +609,8 @@ def summarize(cli, items, window, today, prior=None):
                       lambda digest: validate_digest(digest, allowed))
 
 
-_LOCAL_SECTIONS = ("business_politics", "business", "around_town", "events", "around_teams")
+_LOCAL_SECTIONS = ("business_politics", "business", "around_town", "events",
+                   "around_teams", "team_usa")
 
 
 def _archive_dates_within(today_iso, days):
@@ -652,17 +661,19 @@ def recent_archive_local(today_iso, days=7):
 
 
 def summarize_local(cli, pgh_items, reading_items, biz_items, event_items, sports_items,
-                    today, prior=None):
+                    team_usa_items, today, prior=None):
     pgh_urls = {i["url"] for i in pgh_items}
     read_urls = {i["url"] for i in reading_items}
     biz_urls = {i["url"] for i in biz_items}
     event_urls = {i["url"] for i in event_items}
     sports_urls = {i["url"] for i in sports_items}
+    team_usa_urls = {i["url"] for i in team_usa_items}
     return ask_claude(
         cli, build_local_prompt(pgh_items, reading_items, biz_items, event_items,
-                                sports_items, today, prior),
+                                sports_items, team_usa_items, today, prior),
         lambda digest: validate_local(digest, pgh_urls, read_urls, biz_urls, event_urls,
-                                      sports_urls, bool(pgh_items), bool(reading_items)))
+                                      sports_urls, team_usa_urls, bool(pgh_items),
+                                      bool(reading_items)))
 
 
 # --------------------------------------------------- ordering, anchors, what's-changed
@@ -776,7 +787,7 @@ def _local_text(it):
 _CHANGE_SECTION_LABELS = {
     "business_politics": "Business and Politics", "business": "Business",
     "around_town": "Around Town", "events": "Events",
-    "around_teams": "Around the Teams",
+    "around_teams": "Around the Teams", "team_usa": "Team USA",
 }
 
 
@@ -1283,6 +1294,10 @@ def _sports_section(sports, local):
     if around:
         out.append("<h3>Around the Teams</h3>")
         out += _local_items_html(around)
+    team_usa = local.get("team_usa") if local else None
+    if team_usa:
+        out.append("<h3>Team USA</h3>")
+        out += _local_items_html(team_usa)
     return out
 
 
@@ -1347,7 +1362,7 @@ def render_html(digest, local, markets, weather, sports, feeds,
         f"<p>Generated {esc(generated_at)}. Sources: {len(feeds['security'])} security feeds; "
         f"{len(feeds['pittsburgh'])} Pittsburgh feeds; {len(feeds['events'])} Pittsburgh "
         f"arts and events feeds; {len(feeds['sports_media'])} Pittsburgh sports beat and "
-        "podcast feeds; the Wall Street Journal, the "
+        f"podcast feeds; {len(feeds['team_usa'])} Team USA feeds; the Wall Street Journal, the "
         "Economist, and the Financial Times; and "
         f"{esc(', '.join(f['name'] for f in feeds['reading']))}. Market data from Yahoo "
         "Finance (weekly averages), weather from the National Weather Service, scores "
@@ -1412,12 +1427,13 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
         local.get(k) for k in ("business", "around_town", "events")))
 
     around_teams = local.get("around_teams") if local else None
+    team_usa = local.get("team_usa") if local else None
     contents = (["Emerging Trends and Key Updates"] if glance else []) + ["Security"]
     if biz:
         contents.append("Business and Politics")
     if has_pgh:
         contents.append("Pittsburgh")
-    if sports or around_teams:
+    if sports or around_teams or team_usa:
         contents.append("Sports")
     if local and local.get("reading"):
         contents.append("Reading")
@@ -1472,7 +1488,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
             _text_local_items(lines, "Around town", local.get("around_town", []))
             _text_local_items(lines, "Events", local.get("events", []))
 
-    if sports or around_teams:
+    if sports or around_teams or team_usa:
         lines += ["", "SPORTS", sub]
         for b in (sports or []):
             head = f"{b['team']} ({b['record']})" if b["record"] else b["team"]
@@ -1494,6 +1510,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
                 for h in b["headlines"]:
                     lines.append(_fill(h, "    · ", "      "))
         _text_local_items(lines, "Around the Teams", around_teams or [])
+        _text_local_items(lines, "Team USA", team_usa or [])
 
     if local and local.get("reading"):
         lines += ["", "READING", sub]
@@ -1517,7 +1534,8 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
         _fill(f"Generated {generated_at}. Sources: {len(feeds['security'])} security "
               f"feeds; {len(feeds['pittsburgh'])} Pittsburgh feeds; {len(feeds['events'])} "
               f"Pittsburgh arts and events feeds; {len(feeds['sports_media'])} Pittsburgh "
-              "sports beat and podcast feeds; the Wall Street "
+              f"sports beat and podcast feeds; {len(feeds['team_usa'])} Team USA feeds; "
+              "the Wall Street "
               "Journal, the Economist, and the Financial Times; and "
               f"{', '.join(f['name'] for f in feeds['reading'])}. Markets from Yahoo "
               "Finance, weather from the NWS, scores from ESPN. Summaries are "
@@ -1642,15 +1660,17 @@ def main():
     print(f"[1/4] fetching feeds "
           f"(security {len(feeds['security'])}, pittsburgh {len(feeds['pittsburgh'])}, "
           f"bizpol {len(feeds['bizpol'])}, events {len(feeds['events'])}, "
-          f"sports_media {len(feeds['sports_media'])}, reading {len(feeds['reading'])})")
+          f"sports_media {len(feeds['sports_media'])}, team_usa {len(feeds['team_usa'])}, "
+          f"reading {len(feeds['reading'])})")
     sec_items, sec_failures = fetch_all(feeds["security"])
     pgh_items, pgh_failures = fetch_all(feeds["pittsburgh"])
     biz_items, biz_failures = fetch_all(feeds["bizpol"])
     event_items, event_failures = fetch_all(feeds["events"])
     sports_items, sports_failures = fetch_all(feeds["sports_media"])
+    team_usa_items, team_usa_failures = fetch_all(feeds["team_usa"])
     read_items, read_failures = fetch_all(feeds["reading"])
     failures = (sec_failures + pgh_failures + biz_failures
-                + event_failures + sports_failures + read_failures)
+                + event_failures + sports_failures + team_usa_failures + read_failures)
     if len(feeds["security"]) - len(sec_failures) < 2:
         sys.exit(f"only {len(feeds['security']) - len(sec_failures)} security feeds "
                  "reachable; aborting")
@@ -1664,6 +1684,8 @@ def main():
     event_selected = recent_items(event_items, now, EVENTS_WINDOW_HOURS, EVENTS_MAX_ITEMS)
     sports_selected = recent_items(sports_items, now, SPORTS_MEDIA_WINDOW_HOURS,
                                    SPORTS_MEDIA_MAX_ITEMS)
+    team_usa_selected = recent_items(team_usa_items, now, TEAM_USA_WINDOW_HOURS,
+                                     TEAM_USA_MAX_ITEMS)
 
     print("[2/4] markets, weather, sports")
     def attempt(label, fn):
@@ -1682,7 +1704,7 @@ def main():
           f"  security: {len(selected)} items ({window}h); pittsburgh: "
           f"{len(pgh_selected)}; bizpol: {len(biz_selected)}; "
           f"events: {len(event_selected)}; sports_media: {len(sports_selected)}; "
-          f"reading: {len(read_selected)}")
+          f"team_usa: {len(team_usa_selected)}; reading: {len(read_selected)}")
     prior = recent_archive_digests(today)
     prior_local = recent_archive_local(today)
     if prior:
@@ -1692,9 +1714,10 @@ def main():
         digest_future = pool.submit(summarize, cli, selected, window, today, prior)
         local_future = (pool.submit(summarize_local, cli, pgh_selected, read_selected,
                                     biz_selected, event_selected, sports_selected,
-                                    today, prior_local)
+                                    team_usa_selected, today, prior_local)
                         if pgh_selected or read_selected or biz_selected
-                        or event_selected or sports_selected else None)
+                        or event_selected or sports_selected or team_usa_selected
+                        else None)
         try:
             digest = digest_future.result()
         except Exception:
@@ -1741,6 +1764,7 @@ def main():
           f"{len(digest['emerging_trends'])} trends, "
           f"{sum(len(local.get(k, [])) for k in ('business', 'around_town', 'events')) if local else 0} "
           f"local items, {len(local.get('around_teams', [])) if local else 0} around-teams, "
+          f"{len(local.get('team_usa', [])) if local else 0} team-usa, "
           f"{len(local.get('reading', [])) if local else 0} reading items, "
           f"{len(markets)} market rows"
           + (f" (feed failures: {', '.join(failures)})" if failures else ""))
