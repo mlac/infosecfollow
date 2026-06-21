@@ -1,123 +1,64 @@
 {
   "date": "2026-06-21",
-  "headline": "The cryptographic certificates that anchor Secure Boot on Windows and Linux machines begin expiring June 24, leaving any device that skips firmware updates exposed.",
+  "headline": "Attackers turn neglected software and aging hardware into instruments of theft, exploiting a Gravity SMTP plugin flaw to harvest secrets while the new AryStinger botnet conscripts thousands of outdated D-Link routers.",
   "emerging_trends": [
     {
-      "text": "The bedrock of hardware trust is cracking as Secure Boot certificates count down to expiration and researchers plant HAMLOCK inside the FPGA and ASIC silicon that runs edge AI.",
-      "topic_title": "HAMLOCK Hardware Backdoor",
-      "link_phrase": "HAMLOCK",
+      "text": "Unauthenticated WordPress plugins keep bleeding the credentials that unlock everything downstream, as the Gravity SMTP flaw hands attackers API keys, OAuth tokens, and configuration data from roughly 100,000 sites.",
+      "topic_title": "Gravity SMTP Plugin Leaks WordPress Secrets",
+      "link_phrase": "Gravity SMTP",
       "_anchor": "trend-1"
     },
     {
-      "text": "Apple's reputation as the privacy-first vendor frays as its Hide My Email rework makes the masked addresses easier for websites to detect and refuse.",
-      "topic_title": "Apple Hide My Email Privacy Change",
-      "link_phrase": "Hide My Email",
+      "text": "Aging consumer hardware stays free real estate for criminals, with the AryStinger botnet quietly pulling more than 4,000 unpatched routers into a network that launders malicious traffic.",
+      "topic_title": "AryStinger Botnet Hijacks D-Link Routers",
+      "link_phrase": "AryStinger",
       "_anchor": "trend-2"
     },
     {
-      "text": "Regulators keep settling accounts from past failures, with the Transportation Department closing its probe of Delta's response to the 2024 CrowdStrike outage.",
-      "topic_title": "DOT Closes Delta CrowdStrike Outage Probe",
-      "link_phrase": "CrowdStrike",
+      "text": "End-of-life D-Link routers running firmware that no longer receives fixes have become a durable proxy layer for attackers who route their traffic through someone else's hardware.",
+      "topic_title": "AryStinger Botnet Hijacks D-Link Routers",
+      "link_phrase": "D-Link",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Secure Boot Keys Expire June 24",
+      "title": "AryStinger Botnet Hijacks D-Link Routers",
+      "area": "Malware and Botnets",
+      "latest_developments": "Researchers documented AryStinger for the first time, a previously unknown botnet that has compromised more than 4,000 outdated D-Link routers worldwide and turned them into proxies for malicious traffic.",
+      "summary": "AryStinger infects aging D-Link routers and relays attacker traffic through them, masking its origin. Owners of old D-Link hardware should patch where fixes exist or replace devices that no longer receive firmware updates.",
+      "tags": [
+        "botnet",
+        "malware",
+        "iot"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "AryStinger botnet infected thousands of D-Link routers worldwide",
+          "url": "https://www.bleepingcomputer.com/news/security/arystinger-botnet-infected-thousands-of-d-link-routers-worldwide/"
+        }
+      ],
+      "_anchor": "i-3f569937ed"
+    },
+    {
+      "title": "Gravity SMTP Plugin Leaks WordPress Secrets",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Wired published a detailed explainer June 21 warning that the certificates anchoring Secure Boot start expiring in three days, on June 24, 2026.",
-      "summary": "Microsoft's Secure Boot certificates, which firmware uses to verify that a machine boots trusted code, reach expiration starting June 24, 2026, and Windows and Linux PCs that skip firmware updates risk losing the protection or failing to boot. Users should apply pending firmware and operating-system updates now.",
+      "latest_developments": "Threat actors began actively exploiting CVE-2026-4020, a CVSS 5.3 information-disclosure bug in the Gravity SMTP WordPress plugin, to pull configuration data, API keys, secrets, and OAuth tokens from unauthenticated requests.",
+      "summary": "Gravity SMTP routes outgoing mail for about 100,000 WordPress sites. The flaw lets unauthenticated attackers read sensitive configuration and credential data, so administrators should update the plugin and rotate any exposed keys and tokens at once.",
       "tags": [
-        "firmware",
-        "patch",
-        "vulnerability"
+        "vulnerability",
+        "exploit",
+        "wordpress"
       ],
       "sources": [
         {
-          "source": "Wired Security",
-          "title": "A Critical Deadline Is Approaching for Windows and Linux Security",
-          "url": "https://www.wired.com/story/a-critical-deadline-is-approaching-for-windows-and-linux-security/"
+          "source": "BleepingComputer",
+          "title": "Hackers exploit info disclosure bug in Gravity SMTP WordPress plugin",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-info-disclosure-bug-in-gravity-smtp-wordpress-plugin/"
         }
       ],
-      "_anchor": "i-02c0ffd403"
-    },
-    {
-      "title": "HAMLOCK Hardware Backdoor",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researchers at the University of Tennessee and the University of Florida unveiled HAMLOCK, a backdoor that splits its malicious logic across the FPGA and ASIC silicon that edge devices use to run neural networks.",
-      "summary": "Edge AI systems often lean on third-party-designed FPGAs and ASICs for speed and efficiency, opening a supply-chain risk. HAMLOCK divides its function between hardware blocks so neither half looks malicious on its own, hiding the implant in plain sight.",
-      "tags": [
-        "hardware",
-        "backdoor",
-        "supply-chain"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Week in review: 74k Fortinet firewall credentials stolen, Splunk Enterprise RCE under active attack",
-          "url": "https://www.helpnetsecurity.com/2026/06/21/week-in-review-74k-fortinet-firewall-credentials-stolen-splunk-enterprise-rce-under-active-attack/"
-        }
-      ],
-      "_anchor": "i-77e4c87177"
-    },
-    {
-      "title": "Apple Hide My Email Privacy Change",
-      "area": "Policy and Regulation",
-      "latest_developments": "Apple is reworking Hide My Email so websites can detect and block its masked addresses, a shift Graham Cluley and Wired flagged June 19 and June 20.",
-      "summary": "Hide My Email generates random forwarding addresses that keep a user's real inbox private. Apple's change lets sites refuse anonymous sign-ups, eroding a feature the company long marketed as proof of its privacy-first stance.",
-      "tags": [
-        "privacy",
-        "policy"
-      ],
-      "sources": [
-        {
-          "source": "Graham Cluley",
-          "title": "Apple's Hide My Email tweak leaves privacy fans fuming",
-          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/apples-hide-my-email-tweak-leaves-privacy-fans-fuming"
-        },
-        {
-          "source": "Wired Security",
-          "title": "Hackers Claim to Leak Stolen Madison Square Garden Data",
-          "url": "https://www.wired.com/story/security-news-this-week-hackers-claim-to-leak-stolen-madison-square-garden-data/"
-        }
-      ],
-      "_anchor": "i-fb50a11c8b"
-    },
-    {
-      "title": "Madison Square Garden Data Leak",
-      "area": "Data Breaches",
-      "latest_developments": "The crew behind the Madison Square Garden breach now claims it leaked the stolen files, escalating a June theft that swept up a risk-rated list of celebrities and players.",
-      "summary": "Attackers hit Madison Square Garden Entertainment and the New York Knicks, taking internal data that included a ranked list of high-profile attendees, and they say they have published it.",
-      "tags": [
-        "breach",
-        "data-leak"
-      ],
-      "sources": [
-        {
-          "source": "Wired Security",
-          "title": "Hackers Claim to Leak Stolen Madison Square Garden Data",
-          "url": "https://www.wired.com/story/security-news-this-week-hackers-claim-to-leak-stolen-madison-square-garden-data/"
-        }
-      ],
-      "_anchor": "i-ed15daef82"
-    },
-    {
-      "title": "DOT Closes Delta CrowdStrike Outage Probe",
-      "area": "Policy and Regulation",
-      "latest_developments": "The U.S. Department of Transportation closed its investigation into Delta Air Lines' handling of the July 2024 CrowdStrike outage that grounded thousands of flights.",
-      "summary": "A faulty CrowdStrike update crashed Windows systems worldwide in July 2024 and stranded Delta passengers for days. The Transportation Department's now-closed probe examined how Delta treated affected travelers.",
-      "tags": [
-        "policy",
-        "outage"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "In Other News: Apple Patches Beats Eavesdropping Flaw, DOT Closes Delta CrowdStrike Probe, AWS Continuum",
-          "url": "https://www.securityweek.com/in-other-news-apple-patches-beats-eavesdropping-flaw-dot-closes-delta-crowdstrike-probe-aws-continuum/"
-        }
-      ],
-      "_anchor": "i-9007e46373"
+      "_anchor": "i-0d4cb7fe0b"
     }
   ],
   "markets": [
@@ -192,27 +133,32 @@
   "local": {
     "business_politics": [
       {
-        "title": "US-Iran Talks Open in Switzerland Under Lebanon Shadow",
-        "latest_developments": "Vice President JD Vance and senior Iranian negotiators formally opened the negotiations in Switzerland on Sunday, June 21, beginning with the renewed Israel-Hezbollah fighting in Lebanon before turning to Tehran's nuclear program.",
-        "summary": "Vance and Iranian officials began a 60-day sprint to settle the technical terms of last week's framework, a push that holds large implications for the world economy, even as Iran's joint command again declared the Strait of Hormuz closed following a fresh exchange of fire.",
+        "title": "Trump Threatens Iran Strike as Hormuz Closes Anew",
+        "latest_developments": "Trump threatened today to strike Iran over renewed Israel-Hezbollah fighting in Lebanon, and Tehran said it has again closed the Strait of Hormuz, both escalations beyond Sunday's opening of talks.",
+        "summary": "Vice President JD Vance and senior Iranian negotiators opened talks in Switzerland on Sunday, June 21, meant to lock in Trump's earlier accord; fresh Hezbollah-Israel combat and Iran's closure of the Strait of Hormuz, the chokepoint for roughly a fifth of seaborne oil, now jeopardize the deal.",
         "sources": [
           {
             "source": "WSJ World News",
-            "title": "War in Lebanon Casts Shadow Over Renewed Iran-U.S. Nuclear Talks",
+            "title": "Trump Threatens to Strike Iran Over Hezbollah as Lebanon Snarls Talks",
             "url": "https://www.wsj.com/world/middle-east/war-in-lebanon-casts-shadow-over-renewed-iran-u-s-nuclear-talks-f457c7e9"
           },
           {
             "source": "FT World",
-            "title": "Vance arrives in Switzerland for crunch US-Iran talks",
+            "title": "Iran says it closed Strait of Hormuz after Israel and Hizbollah exchange fire",
+            "url": "https://www.ft.com/content/fad77f6e-b1db-460a-a0c8-c2fd132932f5"
+          },
+          {
+            "source": "FT World",
+            "title": "US and Iran hold crunch talks in Switzerland",
             "url": "https://www.ft.com/content/c1014643-940c-4874-998a-0a52eb517c49"
           }
         ],
         "_anchor": "i-12992beeda"
       },
       {
-        "title": "Starmer on Brink of Quitting as UK Premier",
-        "latest_developments": "The Financial Times reported Sunday that Keir Starmer stands on the brink of resigning, an escalation from the earlier expectation that he might merely set a departure timetable.",
-        "summary": "Prime Minister Keir Starmer faces intense pressure to quit after Manchester mayor Andy Burnham's by-election win, a move that would make Burnham Britain's seventh leader since the 2016 Brexit vote and that markets are watching for pressure on gilts amid worsening UK finances.",
+        "title": "Starmer Near Quitting After Burnham By-Election Win",
+        "latest_developments": "Andy Burnham's by-election victory pushed Keir Starmer to the brink of resigning, with some ministers expecting him to announce his exit next week.",
+        "summary": "Keir Starmer, Britain's Labour prime minister, faces resignation after Andy Burnham, the Greater Manchester mayor, won a Commons seat, positioning Burnham to become the country's seventh prime minister since the 2016 Brexit vote as gilt markets weigh the turnover.",
         "sources": [
           {
             "source": "FT World",
@@ -230,120 +176,129 @@
     ],
     "business": [
       {
-        "title": "Independence Health Opens Latrobe Behavioral Unit",
-        "latest_developments": "Independence Health System will open a new behavioral health unit at Latrobe Hospital on Wednesday, June 24, 2026.",
-        "summary": "Independence Health System, the Westmoreland County hospital network, adds inpatient behavioral health capacity at Latrobe Hospital, expanding mental-health treatment in the region.",
+        "title": "POGOH Wins Grant to Expand Bike Share",
+        "latest_developments": "POGOH landed a $1.5 million grant to extend its bike-share network past Pittsburgh's borders.",
+        "summary": "POGOH, Pittsburgh's nonprofit bike-share operator, won a $1.5 million grant to add stations in communities beyond the city limits, widening the system's reach into surrounding municipalities.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Independence Health to open new behavioral health unit",
-            "url": "https://triblive.com/local/westmoreland/independence-health-to-open-new-behavioral-health-unit/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "POGOH’s next ride: $1.5M grant to fuel expansion of bike share program beyond city limits",
+            "url": "https://www.post-gazette.com/local/city/2026/06/21/pogoh-pittsburgh-bike-share-expansion/stories/202606180058"
           }
         ],
-        "_anchor": "i-818f3a4cbd"
+        "_anchor": "i-e7b035ecab"
       },
       {
-        "title": "Hempfield Senior Tax Rebate Draws Heavy Demand",
-        "latest_developments": "Hempfield Township reports more applicants than expected for its new senior property-tax rebate, with approved residents to receive checks in the next few months.",
-        "summary": "Hempfield Township in Westmoreland County launched a senior property-tax rebate program and drew applications beyond projections, with the first rebate checks due in coming months.",
+        "title": "Post-Gazette Revives Dateline Pittsburgh",
+        "latest_developments": "The Pittsburgh Post-Gazette announced it will bring back Dateline Pittsburgh and explained how local companies can take part.",
+        "summary": "The Pittsburgh Post-Gazette is reviving Dateline Pittsburgh, a feature that publishes news and announcements from area companies, and laid out how local businesses can submit theirs.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Applicants for Hempfield tax rebate 'more than expected'",
-            "url": "https://triblive.com/local/westmoreland/applicants-for-hempfield-tax-rebate-more-than-expected/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Dateline Pittsburgh is returning. Here's how local companies can participate",
+            "url": "https://www.post-gazette.com/business/career-workplace/2026/06/21/dateline-pittsburgh-returning-business/stories/202606210031"
           }
         ],
-        "_anchor": "i-805bbefb14"
+        "_anchor": "i-6bfc4c74fa"
       }
     ],
     "around_town": [
       {
-        "title": "Heavy Rain to Hit Monday Commute",
-        "latest_developments": "After a dry Father's Day, forecasters now expect heavy rain overnight into Monday, June 22, soaking the morning commute and dropping about an inch north of Pittsburgh.",
-        "summary": "KDKA and WTAE meteorologists flagged Monday, June 22, as an impact day, with heavy rain arriving overnight and lingering until about noon across western Pennsylvania.",
+        "title": "County Paid-Leave Plan May Sideline Teachers",
+        "latest_developments": "Allegheny County's proposed paid parental leave benefit could keep teachers out for up to half a school year, prompting districts to question how they would staff the gaps.",
+        "summary": "Allegheny County's proposed paid parental leave policy could let teachers take leave covering as much as half a school year, and the Post-Gazette reports school districts wonder how they would cover such long absences.",
         "sources": [
           {
-            "source": "WTAE",
-            "title": "Pittsburgh: Impact Day for heavy rain Monday morning",
-            "url": "https://www.wtae.com/article/pittsburgh-impact-day-for-heavy-rain-monday-morning/71650015"
-          },
-          {
-            "source": "KDKA",
-            "title": "The first official day of summer in Pittsburgh comes with clouds and overnight rain",
-            "url": "https://www.cbsnews.com/pittsburgh/news/the-first-official-day-of-summer-in-pittsburgh-comes-with-clouds-and-overnight-rain/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Allegheny County’s paid parental leave proposal could have teachers out for half the school year. Can districts accommodate?",
+            "url": "https://www.post-gazette.com/news/education/2026/06/21/allegheny-county-paid-leave-teachers/stories/202606180040"
           }
         ],
-        "_anchor": "i-678a7b124b"
+        "_anchor": "i-27c6280428"
       },
       {
-        "title": "North Huntingdon Studies Irwin-to-Larimer Trail",
-        "latest_developments": "North Huntingdon officials approved hiring a consultant for a feasibility study of a walking and biking trail linking downtown Irwin to the township's Larimer village.",
-        "summary": "North Huntingdon Township in Westmoreland County will seek proposals to study a proposed trail connecting downtown Irwin to its Larimer village.",
+        "title": "New Kensington Residents Form Advocacy Group",
+        "latest_developments": "Jurgen Koster formed a New Kensington community group to tackle local problems and will host a cookout Tuesday, June 23.",
+        "summary": "Jurgen Koster, a three-year New Kensington resident frustrated that little has changed since he arrived, started a community advocacy group that holds a cookout Tuesday, June 23, to draw neighbors in.",
         "sources": [
           {
             "source": "TribLive",
-            "title": "North Huntingdon seeks proposals for trail study",
-            "url": "https://triblive.com/local/westmoreland/north-huntingdon-seeks-proposals-for-trail-study/"
+            "title": "New Kensington community group forms to tackle local issues, hosting cookout Tuesday",
+            "url": "https://triblive.com/local/valley-news-dispatch/new-kensington-community-group-forms-to-tackle-local-issues-hosting-cookout-tuesday/"
           }
         ],
-        "_anchor": "i-ebce0a323b"
-      },
+        "_anchor": "i-22e1262ea8"
+      }
+    ],
+    "events": [
       {
-        "title": "Frontline Dignity Mobilizes Around ICE Raids",
-        "latest_developments": "KDKA profiled Frontline Dignity, the Pittsburgh immigrant-rights group whose legal observers respond to Immigration and Customs Enforcement raids.",
-        "summary": "Frontline Dignity, founded and led by Jaime Martinez, deploys legal observers and neighbor volunteers across the Pittsburgh region in response to ICE enforcement actions.",
+        "title": "South Side Street Fest Opens Strong",
+        "latest_developments": "The South Side Street Fest opened Saturday, June 20, drawing largely positive reviews on a calmer-than-usual weekend along East Carson Street.",
+        "summary": "The South Side Hospitality Partnership's new South Side Street Fest, which closes East Carson Street on the South Side, opened Saturday, June 20, with attendees telling KDKA the event felt safe and welcoming.",
         "sources": [
           {
             "source": "KDKA",
-            "title": "How a Pittsburgh-based immigration rights group says it is making an impact",
-            "url": "https://www.cbsnews.com/pittsburgh/news/frontline-dignity-pittsburgh-ice-raids/"
+            "title": "South Side Street Fest opens to largely positive reviews",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-south-side-street-fest-opens/"
           }
         ],
-        "_anchor": "i-1588325188"
+        "_anchor": "i-ddef7c023e"
+      },
+      {
+        "title": "Carnegie Museum Plans 'Egypt on the Nile'",
+        "latest_developments": "The Carnegie Museum of Natural History announced 'Egypt on the Nile,' an exhibition opening May 1, 2027.",
+        "summary": "The Carnegie Museum of Natural History in Oakland will open 'Egypt on the Nile' on May 1, 2027, an exhibition tracing how ancient Egyptians lived along the Nile River and the landscapes around it.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Carnegie Museum of Natural History to open ‘Egypt on the Nile’ exhibition in 2027",
+            "url": "https://www.wpxi.com/news/local/carnegie-museum-natural-history-open-egypt-nile-exhibition-2027/HKBJ3JDLLJAAPP646AQPBUIZQU/"
+          }
+        ],
+        "_anchor": "i-6913586ec0"
       }
     ],
-    "events": [],
     "around_teams": [
       {
-        "title": "Brandon Lowe on Fatherhood After Infertility",
-        "latest_developments": "A Post-Gazette Father's Day feature told how Pirates infielder Brandon Lowe and his wife reached parenthood through IVF after a battle with infertility.",
-        "summary": "The Post-Gazette profiled Pittsburgh Pirates second baseman Brandon Lowe, who called fatherhood 'the greatest gift' after he and his wife overcame infertility through in vitro fertilization.",
+        "title": "Pirates Weigh Catching Plan After Bart Trade",
+        "latest_developments": "A Post-Gazette mailbag laid out the Pirates' catching options after the Joey Bart trade and weighed whether Marcell Ozuna returns.",
+        "summary": "Having dealt catcher Joey Bart to the Braves for reliever Hunter Stratton, the Pirates now lean on Henry Davis behind the plate, the Post-Gazette mailbag explained, and addressed whether designated hitter Marcell Ozuna comes back.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "After a battle with infertility, the Pirates' Brandon Lowe sees fatherhood as 'the greatest gift'",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/21/brandon-lowe-kids-infertility-ivf-fathers-day-mlb/stories/202606210057"
+            "title": "Pirates mailbag: What's the plan at catcher after the Joey Bart trade? Is Marcell Ozuna back?",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/19/mlb-trade-bart-stratton-henry-davis-marcell-ozuna/stories/202606190033"
           }
         ],
-        "_anchor": "i-a2eec68cfd"
+        "_anchor": "i-3f10820925"
+      },
+      {
+        "title": "Spears-Jennings's 40 Time Lifted His Draft Stock",
+        "latest_developments": "The Post-Gazette detailed how rookie safety Robert Spears-Jennings's 4.32-second 40-yard dash reshaped his draft trajectory.",
+        "summary": "Steelers rookie safety Robert Spears-Jennings ran the 40-yard dash in 4.32 seconds at the NFL combine, a time the Post-Gazette reports vaulted his draft stock and changed how teams saw him.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "How Steelers rookie safety Robert Spears-Jennings changed his NFL trajectory in 4.32 seconds",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/18/40yarddash-nfl-combine-spears-jennings-murphy-draft/stories/202606170001"
+          }
+        ],
+        "_anchor": "i-f93fac2f97"
       }
     ],
     "team_usa": [
       {
-        "title": "Alex Freeman's NFL Roots Shape USMNT Run",
-        "latest_developments": "ESPN detailed how Antonio Freeman, the former Green Bay Packers Pro Bowl receiver, shaped his son Alex Freeman, the U.S. defender whose goal helped beat Australia.",
-        "summary": "Alex Freeman, the U.S. men's national team right back who scored in the 2-0 World Cup win over Australia, grew up the son of Pro Bowl Packers receiver Antonio Freeman, though his mother and stepfather taught him to love soccer.",
+        "title": "USMNT Reaches Round of 32",
+        "latest_developments": "After topping Group D, the United States men's team advances to the round of 32, and ESPN makes the case this squad feels genuinely different.",
+        "summary": "The United States men's national team, co-host of the 2026 World Cup, won Group D and reached the round of 32, with ESPN arguing the team's belief and chemistry give supporters real reason to dream.",
         "sources": [
           {
             "source": "ESPN Soccer",
-            "title": "How Alex Freeman's Pro Bowl dad helped him live his World Cup dream",
-            "url": "https://www.espn.com/soccer/story/_/id/49003063/how-alex-freeman-pro-bowl-dad-green-bay-packers-antonio-freeman-helped-world-cup-dream-usmnt"
+            "title": "If there was a time to dream big about the USMNT",
+            "url": "https://www.espn.com/soccer/story/_/id/49121797/ok-dream-big-usmnt-world-cup"
           }
         ],
-        "_anchor": "i-5c50225685"
-      },
-      {
-        "title": "Country Roads Becomes USMNT Anthem",
-        "latest_developments": "The Guardian noted John Denver's 'Take Me Home, Country Roads' has become the song U.S. supporters belt out at the team's home World Cup matches.",
-        "summary": "American fans have made John Denver's 'Take Me Home, Country Roads' the unofficial anthem of the U.S. men's national team, singing it as the squad celebrated its win over Australia at Lumen Field in Seattle.",
-        "sources": [
-          {
-            "source": "Guardian World Cup 2026",
-            "title": "Take me home: why Country Roads has struck a chord at the World Cup",
-            "url": "https://www.theguardian.com/football/2026/jun/20/take-me-home-country-roads-world-cup-usmnt"
-          }
-        ],
-        "_anchor": "i-ab7e09e35e"
+        "_anchor": "i-28c72c744b"
       }
     ],
     "reading": [
@@ -351,7 +306,7 @@
         "author": "Ed Zitron",
         "title": "Premium: The Silicon Valley Bubble (Part 2)",
         "url": "https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-2/",
-        "summary": "Zitron extends his case that the AI era is nearing its end, building on his exclusive reporting that OpenAI's audited financials show it spent $34 billion to generate roughly $13 billion in revenue.",
+        "summary": "Ed Zitron extends his case that Silicon Valley sits in an unsustainable bubble, building on his scoop that OpenAI spent $34 billion in 2025 to generate $13.07 billion in revenue.",
         "_anchor": "i-10bcd6f4e8"
       },
       {
@@ -363,16 +318,16 @@
       },
       {
         "author": "Cal Newport",
-        "title": "AI Isn't Breaking Work. It's Already Broken.",
+        "title": "AI Isn’t Breaking Work. It’s Already Broken.",
         "url": "https://calnewport.com/ai-isnt-breaking-work-its-already-broken/",
-        "summary": "Responding to a Financial Times interview with Work AI Institute head Rebecca Hinds, Newport argues AI exposes dysfunctions that already plagued digital knowledge work rather than creating new ones.",
+        "summary": "Cal Newport argues that knowledge work broke long before AI arrived, and AI merely exposes the dysfunction already built into how people work.",
         "_anchor": "i-16eace995a"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-21 09:04 EDT",
-    "items_considered": 23,
+    "generated_at": "2026-06-21 12:07 EDT",
+    "items_considered": 17,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {
