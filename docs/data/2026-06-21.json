@@ -1,33 +1,34 @@
 {
   "date": "2026-06-21",
-  "headline": "Microsoft's 2011 Secure Boot certificates begin expiring June 24 across Windows and Linux machines, even as actively exploited Splunk and WordPress flaws and a novel AI-agent code-execution attack press defenders.",
+  "headline": "The cryptographic certificates that anchor Secure Boot on Windows and Linux machines begin expiring June 24, leaving any device that skips firmware updates exposed.",
   "emerging_trends": [
     {
-      "text": "Attackers keep turning AI agents into weapons, and Microsoft's AutoJack chain shows that a single attacker-controlled web page can drive a browsing agent into running code on its host.",
-      "topic_title": "AutoJack Turns AI Browsers Into RCE Vectors",
-      "link_phrase": "AutoJack",
+      "text": "The bedrock of hardware trust is cracking as Secure Boot certificates count down to expiration and researchers plant HAMLOCK inside the FPGA and ASIC silicon that runs edge AI.",
+      "topic_title": "HAMLOCK Hardware Backdoor",
+      "link_phrase": "HAMLOCK",
       "_anchor": "trend-1"
     },
     {
-      "text": "Defenders face stacked patch deadlines as actively exploited software flaws pile up, from the Splunk Enterprise federal mitigation cutoff to the Gravity SMTP WordPress disclosure bug already under attack.",
-      "topic_title": "Splunk Enterprise RCE Federal Deadline Arrives",
-      "link_phrase": "Splunk Enterprise",
+      "text": "Apple's reputation as the privacy-first vendor frays as its Hide My Email rework makes the masked addresses easier for websites to detect and refuse.",
+      "topic_title": "Apple Hide My Email Privacy Change",
+      "link_phrase": "Hide My Email",
       "_anchor": "trend-2"
     },
     {
-      "text": "Impersonation fraud keeps scaling, with imposter scams draining $3.5 billion from Americans in 2025 by posing as their banks, governments, and local planning offices.",
-      "topic_title": "Imposter Scams Cost Americans $3.5 Billion",
-      "link_phrase": "imposter scams",
+      "text": "Regulators keep settling accounts from past failures, with the Transportation Department closing its probe of Delta's response to the 2024 CrowdStrike outage.",
+      "topic_title": "DOT Closes Delta CrowdStrike Outage Probe",
+      "link_phrase": "CrowdStrike",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Secure Boot Keys Begin Expiring June 24",
+      "title": "Secure Boot Keys Expire June 24",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Wired reports the cryptographic certificates that anchor a computer's Secure Boot sequence start expiring June 24, 2026, threatening Windows and Linux machines that miss firmware updates.",
-      "summary": "Microsoft's original 2011 Secure Boot signing certificates expire, and devices that never received replacement keys can lose the ability to verify trusted bootloaders or block tampered ones. PC owners and administrators should apply the UEFI firmware and operating-system updates that install the new certificates before the cutoff.",
+      "latest_developments": "Wired published a detailed explainer June 21 warning that the certificates anchoring Secure Boot start expiring in three days, on June 24, 2026.",
+      "summary": "Microsoft's Secure Boot certificates, which firmware uses to verify that a machine boots trusted code, reach expiration starting June 24, 2026, and Windows and Linux PCs that skip firmware updates risk losing the protection or failing to boot. Users should apply pending firmware and operating-system updates now.",
       "tags": [
+        "firmware",
         "patch",
         "vulnerability"
       ],
@@ -41,103 +42,82 @@
       "_anchor": "i-02c0ffd403"
     },
     {
-      "title": "Gravity SMTP WordPress Flaw Under Active Exploitation",
+      "title": "HAMLOCK Hardware Backdoor",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Threat actors are exploiting CVE-2026-4020, a medium-severity unauthenticated information-disclosure bug in the Gravity SMTP WordPress plugin, which runs on roughly 100,000 sites.",
-      "summary": "The CVSS 5.3 flaw lets unauthenticated attackers extract configuration data, API keys, secrets, and OAuth tokens from affected sites. Site operators should update the plugin to the patched release and rotate any exposed credentials.",
+      "latest_developments": "Researchers at the University of Tennessee and the University of Florida unveiled HAMLOCK, a backdoor that splits its malicious logic across the FPGA and ASIC silicon that edge devices use to run neural networks.",
+      "summary": "Edge AI systems often lean on third-party-designed FPGAs and ASICs for speed and efficiency, opening a supply-chain risk. HAMLOCK divides its function between hardware blocks so neither half looks malicious on its own, hiding the implant in plain sight.",
       "tags": [
-        "patch",
-        "vulnerability"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Hackers Exploit Gravity SMTP WordPress Plugin Bug to Expose API Keys",
-          "url": "https://thehackernews.com/2026/06/hackers-exploit-gravity-smtp-wordpress.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Hackers exploit info disclosure bug in Gravity SMTP WordPress plugin",
-          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-info-disclosure-bug-in-gravity-smtp-wordpress-plugin/"
-        }
-      ],
-      "_anchor": "i-3b6dc0ee99"
-    },
-    {
-      "title": "Splunk Enterprise RCE Federal Deadline Arrives",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "The June 21, 2026, deadline CISA set for federal civilian agencies to mitigate actively exploited Splunk Enterprise flaw CVE-2026-20253 lands today.",
-      "summary": "Splunk and Resecurity confirmed in-the-wild exploitation of the critical, unauthenticated remote-code-execution bug, which can lead to full system compromise. CISA listed it in its known exploited vulnerabilities catalog and urged operators to patch and hunt for indicators of compromise.",
-      "tags": [
-        "patch",
-        "vulnerability"
+        "hardware",
+        "backdoor",
+        "supply-chain"
       ],
       "sources": [
         {
           "source": "Help Net Security",
-          "title": "Unauthenticated RCE in Splunk Enterprise under active attack (CVE-2026-20253)",
-          "url": "https://www.helpnetsecurity.com/2026/06/19/splunk-vulnerability-cve-2026-20253-exploited/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "CISA: Splunk Enterprise flaw actively exploited, patch by Sunday",
-          "url": "https://www.bleepingcomputer.com/news/security/cisa-splunk-enterprise-flaw-actively-exploited-patch-by-sunday/"
+          "title": "Week in review: 74k Fortinet firewall credentials stolen, Splunk Enterprise RCE under active attack",
+          "url": "https://www.helpnetsecurity.com/2026/06/21/week-in-review-74k-fortinet-firewall-credentials-stolen-splunk-enterprise-rce-under-active-attack/"
         }
       ],
-      "_anchor": "i-19131ff9c7"
+      "_anchor": "i-77e4c87177"
     },
     {
-      "title": "AutoJack Turns AI Browsers Into RCE Vectors",
-      "area": "AI Security",
-      "latest_developments": "Microsoft researchers detailed AutoJack, an exploit chain that steers an AI browsing agent to an attacker's web page whose JavaScript reaches a privileged local service and spawns a process on the host.",
-      "summary": "AutoJack needs no credentials, sign-in, or further user interaction once the agent loads the malicious page, turning an AI browser into a delivery vehicle for remote code execution on the user's machine. Organizations deploying agentic browsing tools should isolate them from privileged local services.",
-      "tags": [
-        "ai",
-        "zero-day"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "AutoJack Attack Lets One Web Page Hijack AI Agent for Host Code Execution",
-          "url": "https://thehackernews.com/2026/06/autojack-attack-lets-one-web-page.html"
-        }
-      ],
-      "_anchor": "i-89ac876217"
-    },
-    {
-      "title": "Imposter Scams Cost Americans $3.5 Billion",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Fortra, citing Federal Trade Commission figures, reports imposter scams cost Americans $3.5 billion in 2025 and the losses keep climbing.",
-      "summary": "Fraudsters impersonate victims' banks, government agencies, and local planning offices to extract money and data, and the FTC ranks impersonation among the costliest fraud categories. Individuals should verify any unexpected contact through an independently sourced phone number before acting.",
-      "tags": [
-        "fraud",
-        "cybercrime"
-      ],
-      "sources": [
-        {
-          "source": "Graham Cluley",
-          "title": "Imposter scams cost Americans $3.5 billion in 2025 – and it’s getting worse",
-          "url": "https://www.fortra.com/blog/imposter-scams-cost-americans-35-billion-2025-and-its-getting-worse"
-        }
-      ],
-      "_anchor": "i-81d3bc0fc0"
-    },
-    {
-      "title": "UK Information Commissioner Resigns",
+      "title": "Apple Hide My Email Privacy Change",
       "area": "Policy and Regulation",
-      "latest_developments": "John Edwards resigned as the United Kingdom's information commissioner, writing on LinkedIn that his position had become untenable amid an investigation into 'inappropriate humour.'",
-      "summary": "Edwards led the Information Commissioner's Office, Britain's data-protection and privacy regulator, and said he disagreed with how the investigation proceeded yet accepted he could no longer stay. His departure leaves the watchdog seeking new leadership.",
+      "latest_developments": "Apple is reworking Hide My Email so websites can detect and block its masked addresses, a shift Graham Cluley and Wired flagged June 19 and June 20.",
+      "summary": "Hide My Email generates random forwarding addresses that keep a user's real inbox private. Apple's change lets sites refuse anonymous sign-ups, eroding a feature the company long marketed as proof of its privacy-first stance.",
       "tags": [
+        "privacy",
         "policy"
       ],
       "sources": [
         {
-          "source": "The Record",
-          "title": "UK's information commissioner resigns over ‘inappropriate humour’",
-          "url": "https://therecord.media/uk-information-commissioner-resigns-over-inappropriate-humor"
+          "source": "Graham Cluley",
+          "title": "Apple's Hide My Email tweak leaves privacy fans fuming",
+          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/apples-hide-my-email-tweak-leaves-privacy-fans-fuming"
+        },
+        {
+          "source": "Wired Security",
+          "title": "Hackers Claim to Leak Stolen Madison Square Garden Data",
+          "url": "https://www.wired.com/story/security-news-this-week-hackers-claim-to-leak-stolen-madison-square-garden-data/"
         }
       ],
-      "_anchor": "i-a1d68fa694"
+      "_anchor": "i-fb50a11c8b"
+    },
+    {
+      "title": "Madison Square Garden Data Leak",
+      "area": "Data Breaches",
+      "latest_developments": "The crew behind the Madison Square Garden breach now claims it leaked the stolen files, escalating a June theft that swept up a risk-rated list of celebrities and players.",
+      "summary": "Attackers hit Madison Square Garden Entertainment and the New York Knicks, taking internal data that included a ranked list of high-profile attendees, and they say they have published it.",
+      "tags": [
+        "breach",
+        "data-leak"
+      ],
+      "sources": [
+        {
+          "source": "Wired Security",
+          "title": "Hackers Claim to Leak Stolen Madison Square Garden Data",
+          "url": "https://www.wired.com/story/security-news-this-week-hackers-claim-to-leak-stolen-madison-square-garden-data/"
+        }
+      ],
+      "_anchor": "i-ed15daef82"
+    },
+    {
+      "title": "DOT Closes Delta CrowdStrike Outage Probe",
+      "area": "Policy and Regulation",
+      "latest_developments": "The U.S. Department of Transportation closed its investigation into Delta Air Lines' handling of the July 2024 CrowdStrike outage that grounded thousands of flights.",
+      "summary": "A faulty CrowdStrike update crashed Windows systems worldwide in July 2024 and stranded Delta passengers for days. The Transportation Department's now-closed probe examined how Delta treated affected travelers.",
+      "tags": [
+        "policy",
+        "outage"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "In Other News: Apple Patches Beats Eavesdropping Flaw, DOT Closes Delta CrowdStrike Probe, AWS Continuum",
+          "url": "https://www.securityweek.com/in-other-news-apple-patches-beats-eavesdropping-flaw-dot-closes-delta-crowdstrike-probe-aws-continuum/"
+        }
+      ],
+      "_anchor": "i-9007e46373"
     }
   ],
   "markets": [
@@ -185,7 +165,7 @@
     }
   ],
   "weather": [
-    "Today: Mostly Sunny, high 81F.",
+    "Today: Partly Sunny, high 81F.",
     "Tonight: Mostly Cloudy then Slight Chance Showers And Thunderstorms, low 62F.",
     "Monday: Chance Showers And Thunderstorms then Showers And Thunderstorms, high 77F."
   ],
@@ -212,129 +192,158 @@
   "local": {
     "business_politics": [
       {
-        "title": "Vance Reaches Switzerland as Iran Shuts Hormuz Again",
-        "latest_developments": "Vice President JD Vance landed in Switzerland on Sunday, June 21, for talks that open by addressing the Israel-Hizbollah fighting in Lebanon, after Iran's joint military command declared the Strait of Hormuz closed again following a fresh exchange of fire.",
-        "summary": "The United States and Iran sit down Sunday in Switzerland to negotiate a permanent end to the war; renewed Israel-Hizbollah clashes in Lebanon prompted Tehran to reclose the Strait of Hormuz, the chokepoint for roughly a fifth of the world's oil, threatening the supply relief that followed last week's interim accord.",
+        "title": "US-Iran Talks Open in Switzerland Under Lebanon Shadow",
+        "latest_developments": "Vice President JD Vance and senior Iranian negotiators formally opened the negotiations in Switzerland on Sunday, June 21, beginning with the renewed Israel-Hezbollah fighting in Lebanon before turning to Tehran's nuclear program.",
+        "summary": "Vance and Iranian officials began a 60-day sprint to settle the technical terms of last week's framework, a push that holds large implications for the world economy, even as Iran's joint command again declared the Strait of Hormuz closed following a fresh exchange of fire.",
         "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "War in Lebanon Casts Shadow Over Renewed Iran-U.S. Nuclear Talks",
+            "url": "https://www.wsj.com/world/middle-east/war-in-lebanon-casts-shadow-over-renewed-iran-u-s-nuclear-talks-f457c7e9"
+          },
           {
             "source": "FT World",
             "title": "Vance arrives in Switzerland for crunch US-Iran talks",
             "url": "https://www.ft.com/content/c1014643-940c-4874-998a-0a52eb517c49"
-          },
-          {
-            "source": "WSJ World News",
-            "title": "Vance Heads to Peace Talks, After Iran Says It Closed Strait of Hormuz",
-            "url": "https://www.wsj.com/world/middle-east/fighting-flares-again-in-lebanon-despite-israel-hezbollah-ceasefire-4d0ffae8"
-          },
-          {
-            "source": "FT World",
-            "title": "Iran says it closed Strait of Hormuz after Israel and Hizbollah exchange fire",
-            "url": "https://www.ft.com/content/fad77f6e-b1db-460a-a0c8-c2fd132932f5"
           }
         ],
-        "_anchor": "i-2723abb1ab"
+        "_anchor": "i-12992beeda"
       },
       {
-        "title": "Starmer Nears Exit as UK Finances Worsen",
-        "latest_developments": "Some UK ministers now believe Prime Minister Keir Starmer could set out a departure timetable as soon as next week, after Andy Burnham's by-election win positioned the Manchester mayor to succeed him.",
-        "summary": "Pressure mounts on Starmer to name a leaving date as Labour's leadership question opens; Burnham's camp debates a chancellor pick among Ed Miliband, Shabana Mahmood, and Yvette Cooper while bond markets seek reassurance on deteriorating British public finances.",
+        "title": "Starmer on Brink of Quitting as UK Premier",
+        "latest_developments": "The Financial Times reported Sunday that Keir Starmer stands on the brink of resigning, an escalation from the earlier expectation that he might merely set a departure timetable.",
+        "summary": "Prime Minister Keir Starmer faces intense pressure to quit after Manchester mayor Andy Burnham's by-election win, a move that would make Burnham Britain's seventh leader since the 2016 Brexit vote and that markets are watching for pressure on gilts amid worsening UK finances.",
         "sources": [
+          {
+            "source": "FT World",
+            "title": "Starmer on brink of quitting as UK prime minister",
+            "url": "https://www.ft.com/content/ed96e673-8d46-4dec-aebc-d69863b9e801"
+          },
           {
             "source": "FT World",
             "title": "Starmer could announce exit next week, some ministers believe",
             "url": "https://www.ft.com/content/e586d110-34cf-47c6-8a05-68750ee425dd"
-          },
-          {
-            "source": "FT World",
-            "title": "Burnham camp divided over chancellor pick as UK finances worsen",
-            "url": "https://www.ft.com/content/4f4b1142-96bd-4a02-a7ae-6166ccb54e2b"
           }
         ],
-        "_anchor": "i-361806d142"
+        "_anchor": "i-c0a2b40817"
       }
     ],
     "business": [
       {
-        "title": "POGOH Bike Share Wins $1.5M to Expand",
-        "latest_developments": "POGOH secured a $1.5 million grant to extend Pittsburgh's bike-share network past the city line into surrounding municipalities.",
-        "summary": "POGOH, the nonprofit that operates Pittsburgh's bike-share system, will spend the $1.5 million to add stations beyond the city's borders, widening a program now concentrated within Pittsburgh proper.",
+        "title": "Independence Health Opens Latrobe Behavioral Unit",
+        "latest_developments": "Independence Health System will open a new behavioral health unit at Latrobe Hospital on Wednesday, June 24, 2026.",
+        "summary": "Independence Health System, the Westmoreland County hospital network, adds inpatient behavioral health capacity at Latrobe Hospital, expanding mental-health treatment in the region.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "POGOH's next ride: $1.5M grant to fuel expansion of bike share program beyond city limits",
-            "url": "https://www.post-gazette.com/local/city/2026/06/21/pogoh-pittsburgh-bike-share-expansion/stories/202606180058"
+            "source": "TribLive",
+            "title": "Independence Health to open new behavioral health unit",
+            "url": "https://triblive.com/local/westmoreland/independence-health-to-open-new-behavioral-health-unit/"
           }
         ],
-        "_anchor": "i-e7b035ecab"
+        "_anchor": "i-818f3a4cbd"
       },
       {
-        "title": "County Paid-Leave Plan Tests School Districts",
-        "latest_developments": "Allegheny County's proposed paid parental leave could keep teachers out for as much as half a school year, and district officials question whether they can cover the absences.",
-        "summary": "Allegheny County's paid parental leave proposal would grant new parents extended time off; school districts warn that a teacher gone for half the academic year strains staffing and budgets they must scramble to fill.",
+        "title": "Hempfield Senior Tax Rebate Draws Heavy Demand",
+        "latest_developments": "Hempfield Township reports more applicants than expected for its new senior property-tax rebate, with approved residents to receive checks in the next few months.",
+        "summary": "Hempfield Township in Westmoreland County launched a senior property-tax rebate program and drew applications beyond projections, with the first rebate checks due in coming months.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Allegheny County's paid parental leave proposal could have teachers out for half the school year. Can districts accommodate?",
-            "url": "https://www.post-gazette.com/news/education/2026/06/21/allegheny-county-paid-leave-teachers/stories/202606180040"
+            "source": "TribLive",
+            "title": "Applicants for Hempfield tax rebate 'more than expected'",
+            "url": "https://triblive.com/local/westmoreland/applicants-for-hempfield-tax-rebate-more-than-expected/"
           }
         ],
-        "_anchor": "i-27c6280428"
+        "_anchor": "i-805bbefb14"
       }
     ],
     "around_town": [
       {
-        "title": "South Side Street Fest Opens to Good Reviews",
-        "latest_developments": "The new South Side Street Fest drew largely positive reviews on its opening weekend, and organizers plan to repeat it every Friday and Saturday night through the rest of the summer.",
-        "summary": "The South Side Hospitality Partnership's festival closes East Carson Street on the South Side to tame the neighborhood's chaotic summer weekends; opening-night attendees told KDKA they felt safe, and the event will run each Friday and Saturday through summer.",
+        "title": "Heavy Rain to Hit Monday Commute",
+        "latest_developments": "After a dry Father's Day, forecasters now expect heavy rain overnight into Monday, June 22, soaking the morning commute and dropping about an inch north of Pittsburgh.",
+        "summary": "KDKA and WTAE meteorologists flagged Monday, June 22, as an impact day, with heavy rain arriving overnight and lingering until about noon across western Pennsylvania.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Pittsburgh: Impact Day for heavy rain Monday morning",
+            "url": "https://www.wtae.com/article/pittsburgh-impact-day-for-heavy-rain-monday-morning/71650015"
+          },
+          {
+            "source": "KDKA",
+            "title": "The first official day of summer in Pittsburgh comes with clouds and overnight rain",
+            "url": "https://www.cbsnews.com/pittsburgh/news/the-first-official-day-of-summer-in-pittsburgh-comes-with-clouds-and-overnight-rain/"
+          }
+        ],
+        "_anchor": "i-678a7b124b"
+      },
+      {
+        "title": "North Huntingdon Studies Irwin-to-Larimer Trail",
+        "latest_developments": "North Huntingdon officials approved hiring a consultant for a feasibility study of a walking and biking trail linking downtown Irwin to the township's Larimer village.",
+        "summary": "North Huntingdon Township in Westmoreland County will seek proposals to study a proposed trail connecting downtown Irwin to its Larimer village.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "North Huntingdon seeks proposals for trail study",
+            "url": "https://triblive.com/local/westmoreland/north-huntingdon-seeks-proposals-for-trail-study/"
+          }
+        ],
+        "_anchor": "i-ebce0a323b"
+      },
+      {
+        "title": "Frontline Dignity Mobilizes Around ICE Raids",
+        "latest_developments": "KDKA profiled Frontline Dignity, the Pittsburgh immigrant-rights group whose legal observers respond to Immigration and Customs Enforcement raids.",
+        "summary": "Frontline Dignity, founded and led by Jaime Martinez, deploys legal observers and neighbor volunteers across the Pittsburgh region in response to ICE enforcement actions.",
         "sources": [
           {
             "source": "KDKA",
-            "title": "South Side Street Fest opens to largely positive reviews",
-            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-south-side-street-fest-opens/"
-          },
-          {
-            "source": "WPXI",
-            "title": "First night of Pittsburgh's new 'South Side Street Fest' kicks off",
-            "url": "https://www.wpxi.com/news/local/first-night-pittsburghs-new-south-side-street-fest-kicks-off/I52SUJRKRNAMJATSOJDT544DLM/"
+            "title": "How a Pittsburgh-based immigration rights group says it is making an impact",
+            "url": "https://www.cbsnews.com/pittsburgh/news/frontline-dignity-pittsburgh-ice-raids/"
           }
         ],
-        "_anchor": "i-ddef7c023e"
+        "_anchor": "i-1588325188"
       }
     ],
     "events": [],
     "around_teams": [
       {
-        "title": "Pirates' Catcher Plan After Bart Trade",
-        "latest_developments": "A Post-Gazette mailbag laid out the Pirates' catching plan now that Joey Bart is gone, leaning on Henry Davis and weighing whether Marcell Ozuna rejoins the club.",
-        "summary": "After dealing catcher Joey Bart to the Braves for reliever Hunter Stratton, the Pirates turn to Henry Davis behind the plate; the Post-Gazette mailbag also addressed whether designated hitter Marcell Ozuna returns to Pittsburgh.",
+        "title": "Brandon Lowe on Fatherhood After Infertility",
+        "latest_developments": "A Post-Gazette Father's Day feature told how Pirates infielder Brandon Lowe and his wife reached parenthood through IVF after a battle with infertility.",
+        "summary": "The Post-Gazette profiled Pittsburgh Pirates second baseman Brandon Lowe, who called fatherhood 'the greatest gift' after he and his wife overcame infertility through in vitro fertilization.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "Pirates mailbag: What's the plan at catcher after the Joey Bart trade? Is Marcell Ozuna back?",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/19/mlb-trade-bart-stratton-henry-davis-marcell-ozuna/stories/202606190033"
+            "title": "After a battle with infertility, the Pirates' Brandon Lowe sees fatherhood as 'the greatest gift'",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/21/brandon-lowe-kids-infertility-ivf-fathers-day-mlb/stories/202606210057"
           }
         ],
-        "_anchor": "i-3f10820925"
+        "_anchor": "i-a2eec68cfd"
       }
     ],
     "team_usa": [
       {
-        "title": "USMNT Rolls, World Cup Hopes Rise",
-        "latest_developments": "Convincing group-stage wins, capped by a 2-0 defeat of Australia, have lifted expectations for the U.S. men's national team, with defender Alex Freeman's goal confirmed onside after a VAR review.",
-        "summary": "The United States men's national team, co-hosting the 2026 World Cup, beat Australia 2-0 as Alex Freeman—son of former Green Bay Packers receiver Antonio Freeman—scored, and the flurry of goals has raised belief in a deep American run.",
+        "title": "Alex Freeman's NFL Roots Shape USMNT Run",
+        "latest_developments": "ESPN detailed how Antonio Freeman, the former Green Bay Packers Pro Bowl receiver, shaped his son Alex Freeman, the U.S. defender whose goal helped beat Australia.",
+        "summary": "Alex Freeman, the U.S. men's national team right back who scored in the 2-0 World Cup win over Australia, grew up the son of Pro Bowl Packers receiver Antonio Freeman, though his mother and stepfather taught him to love soccer.",
         "sources": [
-          {
-            "source": "ESPN Soccer",
-            "title": "Why Alex Freeman's USMNT goal wasn't offside",
-            "url": "https://www.espn.com/soccer/story/_/id/49119534/var-review-united-states-australia-alex-freeman-usmnt-goal-not-offside"
-          },
           {
             "source": "ESPN Soccer",
             "title": "How Alex Freeman's Pro Bowl dad helped him live his World Cup dream",
             "url": "https://www.espn.com/soccer/story/_/id/49003063/how-alex-freeman-pro-bowl-dad-green-bay-packers-antonio-freeman-helped-world-cup-dream-usmnt"
           }
         ],
-        "_anchor": "i-d5b2844469"
+        "_anchor": "i-5c50225685"
+      },
+      {
+        "title": "Country Roads Becomes USMNT Anthem",
+        "latest_developments": "The Guardian noted John Denver's 'Take Me Home, Country Roads' has become the song U.S. supporters belt out at the team's home World Cup matches.",
+        "summary": "American fans have made John Denver's 'Take Me Home, Country Roads' the unofficial anthem of the U.S. men's national team, singing it as the squad celebrated its win over Australia at Lumen Field in Seattle.",
+        "sources": [
+          {
+            "source": "Guardian World Cup 2026",
+            "title": "Take me home: why Country Roads has struck a chord at the World Cup",
+            "url": "https://www.theguardian.com/football/2026/jun/20/take-me-home-country-roads-world-cup-usmnt"
+          }
+        ],
+        "_anchor": "i-ab7e09e35e"
       }
     ],
     "reading": [
@@ -342,7 +351,7 @@
         "author": "Ed Zitron",
         "title": "Premium: The Silicon Valley Bubble (Part 2)",
         "url": "https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-2/",
-        "summary": "Zitron extends his argument that the AI-driven Silicon Valley boom is a bubble nearing its end, drawing on OpenAI's audited financials—roughly $34 billion spent against $13 billion in revenue—to contend the leading AI firms have no path to profitability.",
+        "summary": "Zitron extends his case that the AI era is nearing its end, building on his exclusive reporting that OpenAI's audited financials show it spent $34 billion to generate roughly $13 billion in revenue.",
         "_anchor": "i-10bcd6f4e8"
       },
       {
@@ -356,14 +365,14 @@
         "author": "Cal Newport",
         "title": "AI Isn't Breaking Work. It's Already Broken.",
         "url": "https://calnewport.com/ai-isnt-breaking-work-its-already-broken/",
-        "summary": "Newport argues that AI exposes dysfunction already embedded in modern knowledge work rather than creating it, responding to a Financial Times interview with Work AI Institute head Rebecca Hinds about a survey of 6,000 digital workers.",
+        "summary": "Responding to a Financial Times interview with Work AI Institute head Rebecca Hinds, Newport argues AI exposes dysfunctions that already plagued digital knowledge work rather than creating new ones.",
         "_anchor": "i-16eace995a"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-21 06:06 EDT",
-    "items_considered": 38,
+    "generated_at": "2026-06-21 09:04 EDT",
+    "items_considered": 23,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {
