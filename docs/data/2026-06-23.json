@@ -1,40 +1,46 @@
 {
   "date": "2026-06-23",
-  "headline": "A Russian access broker's FortiBleed campaign has turned hundreds of thousands of FortiGate firewalls into credential sniffers that harvested 110 million logins, leading a day defined by attacks on trusted systems.",
+  "headline": "Researchers reconstructed FortiBleed's fully automated pipeline that scraped 110 million credentials, while OAuth tokens pilfered in the Klue breach surfaced inside LastPass.",
   "emerging_trends": [
     {
-      "text": "Attackers increasingly weaponize the network's own edge, turning hundreds of thousands of FortiGate firewalls into credential sniffers that feed a market now holding 110 million stolen logins.",
-      "topic_title": "FortiBleed Campaign Harvests 110 Million Credentials",
-      "link_phrase": "FortiGate firewalls",
+      "text": "Stolen credentials now cascade between unrelated vendors, as FortiBleed sniffers scrape 110 million logins from FortiGate firewalls while OAuth tokens lifted in the Klue breach unlock LastPass customer data inside Salesforce.",
+      "topic_title": "FortiBleed Attack Chain Fully Reconstructed",
+      "link_phrase": "FortiBleed",
       "_anchor": "trend-1"
     },
     {
-      "text": "Defenders race to wield models like GPT-5.5-Cyber to patch flaws even as Anthropic's Fable 5 falls to a jailbreak within days, showing how thin the line runs between offensive and defensive AI.",
-      "topic_title": "Anthropic's Fable 5 Jailbroken Within Days",
-      "link_phrase": "Fable 5",
+      "text": "Decades-old code keeps detonating, with Squidbleed reaching back to a 1997 FTP-parsing change to leak cleartext HTTP requests from the default Squid proxy configuration.",
+      "topic_title": "Squidbleed Leaks Cleartext Through 29-Year-Old Squid Bug",
+      "link_phrase": "Squidbleed",
       "_anchor": "trend-2"
     },
     {
-      "text": "Public trust in safety infrastructure takes a hit as a hacker seizes Brazil's Civil Defense Alert system to blast false warnings to millions of phones.",
-      "topic_title": "Hacker Hijacks Brazil's Emergency Alert System",
-      "link_phrase": "Civil Defense Alert",
+      "text": "Attackers increasingly target the AI layer itself, poisoning Reddit comments to steer deep-research agents and corrupting the memory assistants carry between sessions.",
+      "topic_title": "Attackers Poison What AI Reads and Remembers",
+      "link_phrase": "Reddit",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "FortiBleed Campaign Harvests 110 Million Credentials",
+      "title": "FortiBleed Attack Chain Fully Reconstructed",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SOCRadar, Dark Reading, and SecurityWeek tied the operation to a Russian initial access broker whose Golang-based sniffer has targeted 430,000 FortiGate firewalls and identified 110 million credentials since February 2026, far beyond the roughly 86,000 figure reported earlier.",
-      "summary": "FortiBleed plants custom sniffers on compromised Fortinet FortiGate firewalls to siphon authentication secrets from organizations worldwide. Operators should rotate credentials and harden internet-facing devices.",
+      "latest_developments": "Analysts at ZenoX and CloudSEK rebuilt the campaign's full automated pipeline from a server the operators left exposed, detailing how the custom sniffer harvests and validates authentication secrets on compromised firewalls.",
+      "summary": "A Russian initial access broker runs custom Golang sniffers on compromised FortiGate firewalls, capturing more than 110 million credentials since February 2026 across 430,000 devices. Organizations running FortiGate should rotate credentials, hunt for the sniffer, and harden management interfaces.",
       "tags": [
         "credential-theft",
+        "apt",
         "exploit"
       ],
       "sources": [
         {
+          "source": "Help Net Security",
+          "title": "What the Fortibleed campaign means for organizations running FortiGate firewalls",
+          "url": "https://www.helpnetsecurity.com/2026/06/23/fortibleed-investigation-remediation/"
+        },
+        {
           "source": "Dark Reading",
-          "title": "FortiBleed Attackers Turn Firewalls Into Credentials Stealers as Heist Persists",
+          "title": "FortiBleed Attackers Turn Firewalls Into Credential Stealers as Heists Persist",
           "url": "https://www.darkreading.com/cyberattacks-data-breaches/fortibleed-attackers-firewalls-credentials-stealers"
         },
         {
@@ -48,107 +54,115 @@
           "url": "https://www.bleepingcomputer.com/news/security/fortibleed-campaign-used-custom-fortigate-sniffer-to-steal-credentials/"
         }
       ],
-      "_anchor": "i-77d4929daf"
+      "_anchor": "i-835af7eb6e"
     },
     {
-      "title": "Hacker Hijacks Brazil's Emergency Alert System",
-      "area": "Critical Infrastructure Security",
-      "latest_developments": "A hacker breached Brazil's Civil Defense Alert system early Saturday and pushed at least a dozen unauthorized warnings, including a message preaching misanthropy, to millions of phones.",
-      "summary": "Brazil's Civil Defense Alert platform exists to warn residents of floods, landslides, and other imminent threats. The false alerts erode public trust in a system that works only because people believe it.",
+      "title": "Utility, Health, and Manufacturing Breaches Pile Up",
+      "area": "Data Breaches",
+      "latest_developments": "London Hydro, Xsolis, and Tata Electronics each disclosed intrusions today, with Xsolis exposing protected health data on 1.4 million people and Tata's leak including documents allegedly tied to Apple and Tesla.",
+      "summary": "Ontario utility London Hydro lost customer names, addresses, and account information; healthcare analytics firm Xsolis exposed personal and protected health data on 1.4 million individuals; and India's Tata Electronics confirmed a cyberattack a crime group used to post confidential files. Affected customers should watch for phishing and identity fraud.",
       "tags": [
-        "incident",
-        "critical-infrastructure"
+        "breach",
+        "healthcare",
+        "manufacturing"
       ],
       "sources": [
         {
-          "source": "The Record",
-          "title": "Suspected cyberattack triggers false emergency alerts across parts of Brazil",
-          "url": "https://therecord.media/suspected-cyberattack-triggers-false-emergency-alerts-brazil"
+          "source": "SecurityWeek",
+          "title": "Canadian Electricity Provider London Hydro Discloses Data Breach",
+          "url": "https://www.securityweek.com/canadian-electricity-provider-london-hydro-discloses-data-breach/"
         },
         {
-          "source": "Graham Cluley",
-          "title": "Hacker hijacks Brazil's national alert system, sending \"misanthropy\" to millions of phones",
-          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/hacker-hijacks-brazils-national-alert-system"
+          "source": "SecurityWeek",
+          "title": "Xsolis Data Breach Affects 1.4 Million Individuals",
+          "url": "https://www.securityweek.com/xsolis-data-breach-affects-1-4-million-individuals/"
+        },
+        {
+          "source": "The Record",
+          "title": "Tata Electronics confirms cyberattack after alleged Apple, Tesla documents appear online",
+          "url": "https://therecord.media/tata-electronics-confirms-cyberattack"
         }
       ],
-      "_anchor": "i-fb9aba40e7"
+      "_anchor": "i-39eb45f4bd"
     },
     {
-      "title": "Law Enforcement Strikes Scattered Spider and Marketplace Operators",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Scattered Spider members Thalha Jubair, 20, of London and Owen Flowers, 18, of Walsall pleaded guilty to Computer Misuse Act offences over the 2024 Transport for London attack that cost £29 million, and U.S. prosecutors extradited 26-year-old Algerian Abdellah Belmili for running the Market0Day and Spoxy cybercrime marketplaces.",
-      "summary": "Scattered Spider is the English-speaking extortion crew tied to major 2024 intrusions. Jubair and Flowers face sentencing on July 16, while Belmili faces up to 30 years for the two marketplaces.",
+      "title": "Attackers Poison What AI Reads and Remembers",
+      "area": "AI Security",
+      "latest_developments": "A Cornell Tech study found that as few as 13 words in a Reddit comment can skew the cited reports of deep-research agents, and Microsoft published defenses for threat actors who poison the memory assistants carry between sessions.",
+      "summary": "Attackers now target the AI layer itself, planting tiny snippets of user-generated text to manipulate search agents and corrupting persistent assistant memory. Teams deploying agentic AI should validate sources, constrain memory writes, and monitor for poisoned context.",
       "tags": [
-        "arrest",
-        "cybercrime"
+        "ai",
+        "poisoning"
       ],
       "sources": [
         {
           "source": "Help Net Security",
-          "title": "Two Scattered Spider hackers plead guilty over Transport for London cyberattack",
-          "url": "https://www.helpnetsecurity.com/2026/06/23/transport-london-cyberattack-scattered-spider-members-plead-guilty/"
+          "title": "Using Reddit to manipulate AI search results is surprisingly easy",
+          "url": "https://www.helpnetsecurity.com/2026/06/23/reddit-ai-search-poisoning-research/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Algerian Man Extradited to US for Running Cybercrime Marketplaces",
-          "url": "https://www.securityweek.com/algerian-man-extradited-to-us-for-running-cybercrime-marketplaces/"
+          "source": "Microsoft Security Blog",
+          "title": "Guarding AI memory",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/06/22/guarding-ai-memory/"
         }
       ],
-      "_anchor": "i-97c3ae5773"
+      "_anchor": "i-d3befb02a8"
     },
     {
-      "title": "Eight-Year-Old Samsung KNOX Flaw Exposes Galaxy Devices",
+      "title": "LastPass Confirmed in Klue Supply-Chain Breach",
+      "area": "Data Breaches",
+      "latest_developments": "LastPass confirmed attackers reached its Salesforce environment and accessed customer data using OAuth tokens stolen in this month's Klue supply-chain attack, adding the password manager to the growing victim list.",
+      "summary": "The Klue compromise stole OAuth tokens that bridged into customers' Salesforce tenants, and the cascade has now reached LastPass. Firms linked to Klue should revoke tokens, audit Salesforce access logs, and watch for follow-on extortion.",
+      "tags": [
+        "breach",
+        "supply-chain",
+        "oauth"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "LastPass confirms data breach in Klue supply chain attack",
+          "url": "https://www.bleepingcomputer.com/news/security/lastpass-confirms-data-breach-in-klue-supply-chain-attack/"
+        }
+      ],
+      "_anchor": "i-b3e61e14dc"
+    },
+    {
+      "title": "Trump Order Accelerates Post-Quantum Migration",
+      "area": "Policy and Regulation",
+      "latest_developments": "President Trump signed an executive order requiring federal agencies to move high-value assets to post-quantum cryptography by the end of 2030 and high-impact systems by the end of 2031.",
+      "summary": "The order sets firm federal deadlines to adopt encryption resistant to future quantum computers capable of breaking today's algorithms. Agencies and their contractors must inventory cryptographic assets and plan the migration now.",
+      "tags": [
+        "policy",
+        "cryptography"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Trump Signs Executive Order Accelerating Post-Quantum Cryptography Migration",
+          "url": "https://www.securityweek.com/trump-signs-executive-order-accelerating-post-quantum-cryptography-migration/"
+        }
+      ],
+      "_anchor": "i-1a33fcd0f5"
+    },
+    {
+      "title": "Squidbleed Leaks Cleartext Through 29-Year-Old Squid Bug",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SecurityWeek detailed a high-severity use-after-free flaw that sat in Samsung's KNOX security framework for eight years, exposing Galaxy phones from the S9 through the S25 to kernel-level attacks.",
-      "summary": "The bug lived in Samsung's core Android security framework, putting millions of Galaxy devices at risk of kernel compromise. Users should apply Samsung's security update.",
+      "latest_developments": "Researchers at Calif.io disclosed Squidbleed, tracing a heap over-read to a 1997 FTP-parsing change that has lived in the Squid web proxy for 29 years and still ships in its default configuration.",
+      "summary": "Squidbleed leaks another user's cleartext HTTP request—credentials and session tokens included—to anyone allowed to send traffic through the same Squid proxy. Administrators running Squid should patch immediately, since the flaw is live by default.",
       "tags": [
         "vulnerability",
-        "android"
+        "patch",
+        "proxy"
       ],
       "sources": [
         {
-          "source": "SecurityWeek",
-          "title": "Eight-Year-Old Samsung KNOX Flaw Exposed Millions of Galaxy Devices to Kernel Attacks",
-          "url": "https://www.securityweek.com/eight-year-old-samsung-knox-flaw-exposed-millions-of-galaxy-devices-to-kernel-attacks/"
+          "source": "The Hacker News",
+          "title": "29-Year-Old Squid Proxy Bug 'Squidbleed' Can Leak Cleartext HTTP Requests",
+          "url": "https://thehackernews.com/2026/06/29-year-old-squid-proxy-bug-squidbleed.html"
         }
       ],
-      "_anchor": "i-960ae0d627"
-    },
-    {
-      "title": "Anthropic's Fable 5 Jailbroken Within Days",
-      "area": "AI Security",
-      "latest_developments": "Bruce Schneier reported that researchers bypassed the guardrails on Anthropic's Fable 5, the safety-tuned version of its Mythos Preview, within days of release, restoring the model's ability to help build cyberattacks.",
-      "summary": "Anthropic shipped Fable 5 as the constrained, export-friendly sibling of Mythos with controls against offensive use. The fast jailbreak shows such guardrails buy defenders little time.",
-      "tags": [
-        "ai",
-        "jailbreak"
-      ],
-      "sources": [
-        {
-          "source": "Schneier on Security",
-          "title": "Anthropic's Fable 5 Model Jailbroken Within Days",
-          "url": "https://www.schneier.com/blog/archives/2026/06/anthropics-fable-5-model-jailbroken-within-days.html"
-        }
-      ],
-      "_anchor": "i-ccd5d64893"
-    },
-    {
-      "title": "Universal Cloud Bucket Hijacking Technique",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Palo Alto Networks' Unit 42 published a universal bucket-hijacking technique that abuses the global uniqueness of storage names to redirect cloud data streams across the major providers.",
-      "summary": "Because storage bucket names are globally unique, an attacker who claims an abandoned name can intercept data meant for the original owner across major cloud providers. Teams should retire bucket references with care.",
-      "tags": [
-        "cloud",
-        "research"
-      ],
-      "sources": [
-        {
-          "source": "Unit 42 (Palo Alto)",
-          "title": "The Global Namespace Risk: Universal Bucket Hijacking Technique for Cloud Data Exfiltration",
-          "url": "https://unit42.paloaltonetworks.com/cloud-bucket-hijacking-risks/"
-        }
-      ],
-      "_anchor": "i-5c0c57747e"
+      "_anchor": "i-726cc507af"
     }
   ],
   "markets": [
@@ -196,7 +210,7 @@
     }
   ],
   "weather": [
-    "Today: Mostly Sunny, high 79F.",
+    "This Afternoon: Sunny, high 79F.",
     "Tonight: Mostly Clear, low 55F.",
     "Wednesday: Sunny, high 81F."
   ],
@@ -216,155 +230,255 @@
   "local": {
     "business_politics": [
       {
-        "title": "Tech Selloff Deepens, Dollar Hits One-Year High",
-        "latest_developments": "The rout ran into a second day as the dollar climbed to a fresh one-year high on bets the Federal Reserve will raise rates, gold slid below $4,200 an ounce, and SpaceX extended its plunge.",
-        "summary": "Big technology shares led a global equity selloff, with SpaceX down more than 16% from its blockbuster debut and Nasdaq futures sliding, as rising U.S. bond yields and expectations of rate increases under Federal Reserve chair Kevin Warsh pushed the dollar to a one-year high against major currencies and dragged Asian and European markets lower.",
+        "title": "Tech Selloff Accelerates on Rate Fears",
+        "latest_developments": "The rout entered another session led by chipmakers, dropping the Nasdaq 2.2% as Nvidia fell on bets the Federal Reserve will raise rates and gold sank toward $4,000 an ounce, its lowest since November.",
+        "summary": "A widening selloff in technology stocks, fueled by jitters over AI companies' heavy spending and looming Federal Reserve rate increases, pulled the Nasdaq lower and dragged Asian and European markets down, with SpaceX shares tumbling after their blockbuster market debut.",
         "sources": [
           {
-            "source": "FT World",
-            "title": "Big Tech leads sell-off in global stocks",
+            "source": "WSJ",
+            "title": "Nasdaq Moves Lower as Tech Selloff Deepens",
+            "url": "https://www.wsj.com/finance/stock-futures-slide-as-technology-selloff-spreads-79833610?mod=rss_markets_main"
+          },
+          {
+            "source": "FT",
+            "title": "US chipmakers lead Wall Street slide on rising rate rise worries",
             "url": "https://www.ft.com/content/10623865-5ff4-4357-9293-3c4ec841d1c4"
           },
           {
-            "source": "WSJ Markets",
-            "title": "Stock Market Today: Tech Selloff Deepens",
-            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-23-2026?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Dollar Could Ease as U.S. Rate Rise Bets Look Overdone",
-            "url": "https://www.wsj.com/finance/currencies/yen-consolidates-risk-of-fx-intervention-rising-098be64c?mod=rss_markets_main"
+            "source": "FT",
+            "title": "FirstFT: Global markets slump as tech sell-off deepens",
+            "url": "https://www.ft.com/content/1b51e703-54d3-4d2a-924e-af0575b7f153"
           }
         ],
-        "_anchor": "i-9ba052d209"
+        "_anchor": "i-77beb542a8"
+      },
+      {
+        "title": "U.S.-Iran Deal Nears as Trump Frees $6bn",
+        "latest_developments": "President Trump agreed to release $6 billion in frozen Iranian funds held in Qatar to buy US medical supplies and crops, Vice President JD Vance returned from talks reporting a successful foundation to fully reopen the Strait of Hormuz, and Iran's president flew to Pakistan to help finalize a permanent accord.",
+        "summary": "Washington and Tehran are negotiating an end to their war, with the United States waiving sanctions on Iranian oil and clearing the Strait of Hormuz to reopen, moves that sent oil futures lower as more crude returns to the market.",
+        "sources": [
+          {
+            "source": "FT",
+            "title": "Trump agrees to allow Iran to access $6bn of frozen funds to buy US goods",
+            "url": "https://www.ft.com/content/cc04e61e-7f1c-42b5-8238-f3f90f230510"
+          },
+          {
+            "source": "FT",
+            "title": "'Successful foundation' laid to fully reopen Strait of Hormuz, Vance says",
+            "url": "https://www.ft.com/content/13f4d592-0611-4199-847d-d2a4abc9eda7"
+          },
+          {
+            "source": "WSJ",
+            "title": "Oil Futures Decline on Prospects of Increased Supply",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-futures-rise-on-likely-technical-recovery-4d78de6f?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-0e2fdf0328"
       }
     ],
     "business": [
       {
-        "title": "Dean's Diner in Blairsville Goes Dark",
-        "latest_developments": "The Post-Gazette reports the region's last independently owned 24-hour diner has gone, sending all-night customers across the state line to Ohio.",
-        "summary": "Dean's Diner, the longtime independently owned around-the-clock restaurant in Blairsville, Indiana County, has ended its 24-hour service, leaving Western Pennsylvania without an independently owned all-night diner.",
+        "title": "Kraft Heinz Reorganizes Into Three Regions",
+        "latest_developments": "Kraft Heinz announced a reorganization into three global regions, the latest step in Chief Executive Cahillane's six-month revival that earlier paused the company's planned breakup.",
+        "summary": "Kraft Heinz, the food conglomerate co-headquartered in Pittsburgh, is restructuring its operations into three global regions after shelving the corporate separation it had planned for this year.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Want to go to an independently owned 24-hour diner? You're going to have to drive to Ohio now.",
-            "url": "https://www.post-gazette.com/life/dining/2026/06/23/deans-diner-blairsville-pa/stories/202606220033"
+            "source": "WPXI",
+            "title": "Kraft Heinz reorganizes into three global regions",
+            "url": "https://www.wpxi.com/news/local/kraft-heinz-reorganizes-into-three-global-regions/QC6X2R3PI5FJZF4KJZONOWVTIY/"
           }
         ],
-        "_anchor": "i-bc1347bb8f"
+        "_anchor": "i-97d3912d6e"
       },
       {
-        "title": "Westmoreland CTC Trains for Data-Center Jobs",
-        "latest_developments": "Northern Westmoreland Career and Technology Center in New Kensington is adding new equipment to train students for the data-center industry it expects to boom locally.",
-        "summary": "Northern Westmoreland Career and Technology Center in New Kensington is bringing in new equipment to prepare students for construction and operations jobs at the data centers projected to spread across the region.",
+        "title": "AGH Finishes $19 Million Cardiac Lab",
+        "latest_developments": "Allegheny General Hospital completed a $19 million expansion and renovation of its cardiac labs.",
+        "summary": "The North Side hospital's project enlarges the Mario Lemieux Center for Heart Rhythm Care within Allegheny Health Network's Allegheny General, adding space for electrophysiology and heart-rhythm treatment.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Northern Westmoreland CTC bringing in new equipment aimed at data center jobs",
-            "url": "https://triblive.com/local/valley-news-dispatch/northern-westmoreland-ctc-bringing-in-new-equipment-aimed-at-data-center-jobs/"
+            "source": "WPXI",
+            "title": "Allegheny General Hospital completes $19 million cardiac lab expansion",
+            "url": "https://www.wpxi.com/news/local/allegheny-general-hospital-completes-19-million-cardiac-lab-expansion/QJLASWSQVZBKDHEBHOW2MRKUXI/"
           }
         ],
-        "_anchor": "i-3acce3fade"
+        "_anchor": "i-0b7e2511f6"
       },
       {
-        "title": "Live Casino Pittsburgh Schools New Dealers",
-        "latest_developments": "Live Casino Pittsburgh is running table-games schools to train dealers for its gambling floor, with recruits like Elijah McBride learning to stack chips and run cards.",
-        "summary": "Live Casino Pittsburgh is holding table-games schools where trainees learn to deal blackjack and other games, building a pipeline of dealers for the casino floor.",
+        "title": "Pittsburgh Gas Prices Edge Down",
+        "latest_developments": "Pittsburgh-area gas prices began falling this week, though slower than elsewhere in Pennsylvania and the country.",
+        "summary": "GasBuddy petroleum analyst Patrick De Haan credits the United States-Iran agreement for easing prices, saying the local drop lags what drivers in other parts of the state are seeing.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Trainees learn to 'enjoy the moment' at casino table games schools",
-            "url": "https://triblive.com/local/westmoreland/trainees-learn-to-enjoy-the-moment-at-table-games-schools/"
+            "source": "KDKA",
+            "title": "Pittsburgh's gas prices are dropping, but not as fast as in other parts of Pennsylvania",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-gas-prices-dropping-pennsylvania-iran-war/"
           }
         ],
-        "_anchor": "i-e4769def26"
+        "_anchor": "i-1b472e9b38"
       }
     ],
     "around_town": [
       {
-        "title": "Hempfield Area Weighs Budget With Tax Increase",
-        "latest_developments": "The Hempfield Area School Board scheduled a vote next week on a $118.7 million budget carrying a 4.2% tax increase.",
-        "summary": "The Hempfield Area School Board in Westmoreland County votes next week on a $118.7 million spending plan for 2026-27 that would raise the average property-tax bill about $90 through a 4.2% increase.",
+        "title": "Turtle Creek Schoolhouse Becomes Apartments",
+        "latest_developments": "The Calvin Anderson Schoolhouse Apartments at St. Coleman opened Monday in Turtle Creek.",
+        "summary": "Developers converted the historic St. Coleman school into 24 two-bedroom affordable apartments for young adults aging out of foster care, a new affordable-housing community in the Allegheny County borough.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Hempfield Area to vote next week on $118.7M budget with 4.2% tax hike",
-            "url": "https://triblive.com/local/westmoreland/hempfield-area-to-vote-next-week-on-118-7m-budget-with-4-2-tax-hike/"
+            "source": "WPXI",
+            "title": "Former school in Turtle Creek opens as apartments for young adults transitioning out of foster care",
+            "url": "https://www.wpxi.com/news/local/former-school-turtle-creek-opens-apartments-young-adults-transitioning-out-foster-care/5LZI7X7QR5GA3PFOIBRCI4ID3M/"
           }
         ],
-        "_anchor": "i-6fad06f298"
+        "_anchor": "i-a18a3941e2"
       },
       {
-        "title": "Penn State Trustees' Closed Sessions Questioned",
-        "latest_developments": "A Post-Gazette review found some closed-door conferences of Penn State's board of trustees may run afoul of Pennsylvania's open-meetings law.",
-        "summary": "Some private conferences held by Penn State University's board of trustees potentially violate Pennsylvania's Sunshine Act, which requires public bodies to deliberate in the open, the Post-Gazette reported.",
+        "title": "Pennsylvania Election Board Sits Idle",
+        "latest_developments": "A Post-Gazette report found Pennsylvania's bipartisan election board languishing because Governor Josh Shapiro has not appointed new members.",
+        "summary": "The vacancies leave the panel that helps oversee election administration unable to function as the state heads toward another election cycle.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Some closed-door Penn State trustee conferences potentially run afoul of open meetings law",
-            "url": "https://www.post-gazette.com/news/education/2026/06/23/penn-state-trustees-sunshine-act/stories/202606230003"
+            "title": "Pennsylvania's bipartisan election board languishing as Shapiro fails to appoint new members",
+            "url": "https://www.post-gazette.com/news/politics-state/2026/06/23/pennsylvania-election-board-shapiro/stories/202606230002"
           }
         ],
-        "_anchor": "i-b711f871a9"
+        "_anchor": "i-95634cc0dc"
       },
       {
-        "title": "NWS to Survey Possible Fayette County Tornado",
-        "latest_developments": "The National Weather Service scheduled a Tuesday survey to confirm whether Monday's storms spun up a tornado in Fayette County.",
-        "summary": "The National Weather Service will send a team to Fayette County to determine whether a tornado touched down Monday, when storms felled trees and flooded roads across the area.",
+        "title": "Trump Visits Mack Trucks Plant",
+        "latest_developments": "President Trump traveled Tuesday to a Mack Trucks facility in a Pennsylvania battleground district, his fifth visit to the state in his second term.",
+        "summary": "The stop at the truck maker continues the administration's courtship of Pennsylvania industrial workers in a swing region.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "NWS to investigate possible Fayette County tornado",
-            "url": "https://triblive.com/local/regional/nws-to-investigate-possible-fayette-county-tornado/"
+            "source": "WTAE",
+            "title": "From peace talks to Pennsylvania: Trump visiting Mack Truck facility",
+            "url": "https://www.wtae.com/article/pennsylvania-president-donald-trump-mack-trucks/71669924"
           }
         ],
-        "_anchor": "i-1f05e111e2"
+        "_anchor": "i-d63094c9ac"
       }
     ],
     "events": [
       {
-        "title": "America250PA Concert at Point State Park",
-        "latest_developments": "Point State Park downtown will close temporarily to stage the weekend America250PA concert headlined by rapper Nelly and the band Third Eye Blind.",
-        "summary": "Point State Park in downtown Pittsburgh closes this weekend to host the America250PA concert, with Nelly and Third Eye Blind on the bill.",
+        "title": "America250PA Concert at the Point",
+        "latest_developments": "Organizers set the America250PA concert for Saturday, June 27, and Point State Park downtown will close temporarily to stage it.",
+        "summary": "Rapper Nelly and the band Third Eye Blind headline the free America250PA concert at Point State Park downtown on Saturday, June 27, under the theme \"Celebrating Educators and Innovators,\" part of a statewide series of free shows.",
         "sources": [
+          {
+            "source": "Pittsburgh Magazine",
+            "title": "5 Things to Do in Pittsburgh This Weekend",
+            "url": "https://www.pittsburghmagazine.com/things-to-do-this-weekend-in-pittsburgh/"
+          },
           {
             "source": "WPXI",
             "title": "Point State Park to temporarily close for America250PA Nelly, Third Eye Blind concert",
             "url": "https://www.wpxi.com/news/local/point-state-park-temporarily-close-america250pa-nelly-third-eye-blind-concert/MWL7HJCMFJHFRGFW6R62JGDPIU/"
           }
         ],
-        "_anchor": "i-e986400ac0"
+        "_anchor": "i-bc1a2538a9"
+      },
+      {
+        "title": "Andy Warhol Bridge Turns 100",
+        "latest_developments": "The Andy Warhol Bridge marks its 100th anniversary this weekend with a centennial celebration.",
+        "summary": "The yellow span over the Allegheny River, linking downtown Pittsburgh to the North Shore, reaches its centennial, and the city is throwing a birthday bash to mark it.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "This iconic Pittsburgh bridge is turning triple digits this weekend",
+            "url": "https://www.cbsnews.com/pittsburgh/video/this-iconic-pittsburgh-bridge-is-turning-triple-digits-this-weekend/"
+          }
+        ],
+        "_anchor": "i-3cc77917c0"
+      },
+      {
+        "title": "Pittsburgh Symphony's Summer Movie Music",
+        "latest_developments": "The Pittsburgh Symphony Orchestra laid out a summer series built around film scores.",
+        "summary": "The orchestra is devoting its summer programming to movie music, performing scores from the screen for Pittsburgh audiences.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "The Pittsburgh Symphony's summer of movie music",
+            "url": "https://www.post-gazette.com/ae/music/2026/06/22/pso-movie-music-pittsburgh-symphony-orchestra/stories/202606170061"
+          }
+        ],
+        "_anchor": "i-d499a2aae2"
       }
     ],
-    "around_teams": [],
-    "team_usa": [],
+    "around_teams": [
+      {
+        "title": "DK Metcalf's Year-Two Upside",
+        "latest_developments": "A June 22 Post-Gazette podcast weighed how much more DK Metcalf can give the Steelers in his second season with the team.",
+        "summary": "The discussion gauged the ceiling for receiver DK Metcalf as he enters a full second year in Pittsburgh's offense.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "WATCH: How much upside does DK Metcalf have in Year 2 with the Steelers?",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/22/nfl-news-rumors-podcast-dk-metcalf/stories/202606220030"
+          }
+        ],
+        "_anchor": "i-7f737a97c5"
+      },
+      {
+        "title": "Wietgrefe's Scoreless Streak in Altoona",
+        "latest_developments": "The Post-Gazette's MiLB Monday highlighted Pirates prospect Connor Wietgrefe's scoreless streak at Double-A Altoona.",
+        "summary": "The pitcher is turning heads in the Pirates' minor-league system with a run of scoreless outings for the Altoona Curve.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "MiLB Monday: Pirates prospect Connor Wietgrefe is turning heads with his scoreless streak in Altoona",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/22/milb-prospects-wietgrefe-murf-gray-stafura-brazoban-hernandez/stories/202606210084"
+          }
+        ],
+        "_anchor": "i-e6efddb051"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "USMNT Weighs Rotation for Türkiye Finale",
+        "latest_developments": "Having clinched a knockout spot by topping Group D, the United States men's national team debates whether to rotate its lineup for Thursday's group finale against Türkiye, with Christian Pulisic back in full training.",
+        "summary": "Coach Mauricio Pochettino's side, riding good vibes as World Cup co-host, must decide between resting starters and keeping its winning eleven, while Pulisic has recovered from the left calf injury that sidelined him since June 11.",
+        "sources": [
+          {
+            "source": "ESPN",
+            "title": "USMNT's World Cup success brings dilemma: Rotate the squad?",
+            "url": "https://www.espn.com/soccer/story/_/id/49140112/usmnt-faces-world-cup-dilemma-vs-turkiye-rotate-squad-keep-same-xi"
+          },
+          {
+            "source": "ESPN",
+            "title": "U.S. rides good vibes as Pulisic back in training",
+            "url": "https://www.espn.com/soccer/story/_/id/49145667/usmnt-riding-good-vibes-christian-pulisic-back-training"
+          }
+        ],
+        "_anchor": "i-97c5464a04"
+      }
+    ],
     "reading": [
+      {
+        "author": "Ed Zitron",
+        "title": "Cargo Culture",
+        "url": "https://www.wheresyoured.at/cargo-culture/",
+        "summary": "Zitron argues the tech and AI industry mimics the outward rituals and forms of past success while lacking the underlying substance that produced it.",
+        "_anchor": "i-dba85f639a"
+      },
       {
         "author": "Stratechery",
         "title": "Memory Chips and China, Microsoft and Chinese Models",
         "url": "https://stratechery.com/2026/memory-chips-and-china-microsoft-and-chinese-models/",
-        "summary": "Argues the three big memory makers may come to regret opening the door to Chinese memory rivals, while Microsoft has strong incentives to lean on Chinese AI models.",
+        "summary": "Thompson contends the big three memory makers may regret opening the door to Chinese rivals, and that Microsoft is strongly incentivized to adopt Chinese AI models.",
         "_anchor": "i-1272ff9a2f"
       },
       {
         "author": "Cal Newport",
         "title": "Dear AI Companies: Stop the \"Doom Trolling\"",
         "url": "https://calnewport.com/dear-ai-companies-stop-the-doom-trolling/",
-        "summary": "Newport faults AI companies for publicly fretting that their own products are dangerous, likening it to Ford issuing an alarming whitepaper worrying about the F-150.",
+        "summary": "Newport argues that AI firms marketing their own products through existential alarm makes no more sense than a carmaker warning its bestselling truck is dangerous, and urges them to drop the doom messaging.",
         "_anchor": "i-7ef15a31cb"
-      },
-      {
-        "author": "Ed Zitron",
-        "title": "Premium: The Silicon Valley Bubble (Part 2)",
-        "url": "https://www.wheresyoured.at/premium-the-silicon-valley-bubble-part-2/",
-        "summary": "Zitron extends his argument that Silicon Valley sits in a bubble, building on his reporting that OpenAI spent $34 billion to generate $13.07 billion in revenue.",
-        "_anchor": "i-10bcd6f4e8"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-23 09:05 EDT",
-    "items_considered": 53,
+    "generated_at": "2026-06-23 12:06 EDT",
+    "items_considered": 54,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
