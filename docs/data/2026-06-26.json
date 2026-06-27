@@ -1,235 +1,232 @@
 {
   "date": "2026-06-26",
-  "headline": "Russian intelligence escalated its assault on encrypted messaging by coaxing targets into surrendering Signal backup keys, while attackers weaponized a Cisco Unified CM flaw within a day of disclosure.",
+  "headline": "Russian and Chinese state hackers fielded new espionage backdoors as compromised third-party vendors drained $3 million from Polymarket and widened Europe's ransomware toll.",
   "emerging_trends": [
     {
-      "text": "Attackers keep slipping in through software repositories and third-party vendors—the Miasma worm spread across npm and into the Go ecosystem—pushing the Linux Foundation to launch its Akrites remediation framework.",
-      "topic_title": "Open-Source Supply Chain: Miasma Spreads as Akrites Launches",
-      "link_phrase": "Miasma",
+      "text": "Russia's Turla and a Chinese-speaking crew both surfaced fresh custom implants this week, with STOCKSTAY striking Ukrainian government and military networks and SharkLoader dropping Cobalt Strike on Asian governments, a reminder that state espionage keeps out-engineering signature-based defenses.",
+      "topic_title": "State-Sponsored Backdoors: SharkLoader and StockStay",
+      "link_phrase": "STOCKSTAY",
       "_anchor": "trend-1"
     },
     {
-      "text": "Enterprises are scrambling to govern AI agents and machine identities, with Cisco buying Astrix and WideField and Proof launching its x401 verification protocol, even as scammers impersonate companies through fraudulent OpenAI organization invites.",
-      "topic_title": "AI Agents Become an Identity Battleground",
-      "link_phrase": "x401",
+      "text": "Compromised third-party vendors funneled fresh damage in every direction—a malicious script that drained $3 million from Polymarket users, two dozen more Klue-Salesforce victims, and a Black Kite finding that suppliers now anchor Europe's ransomware surge—showing supply-chain trust remains the cheapest way in.",
+      "topic_title": "Polymarket and Klue: Third-Party Breaches Multiply",
+      "link_phrase": "Polymarket",
       "_anchor": "trend-2"
     },
     {
-      "text": "Russian intelligence services keep refining their attacks on encrypted communications, now persuading targets to surrender their Signal Backup Recovery Keys to seize entire message histories.",
-      "topic_title": "Russian Spies Hunt Signal Backup Keys",
-      "link_phrase": "Signal Backup Recovery Keys",
+      "text": "AI development tooling is becoming its own attack surface, as a flaw in Amazon Q Developer let a booby-trapped repository steal a developer's cloud credentials through Model Context Protocol server configs.",
+      "topic_title": "Amazon Q Developer Flaw Exposes Cloud Credentials",
+      "link_phrase": "Amazon Q",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Russian Spies Hunt Signal Backup Keys",
+      "title": "State-Sponsored Backdoors: SharkLoader and StockStay",
       "area": "Nation-State Activity",
-      "latest_developments": "The FBI and CISA updated their March 2026 warning on June 26, revealing that Russian Intelligence Services operators now talk targets into surrendering their Signal Backup Recovery Key, which lets the attacker restore the account's backup, read its private and group history, and keep persistent access.",
-      "summary": "Russian intelligence runs phishing campaigns against Signal and other commercial messaging apps; Ukraine's SBU traced a parallel long-running operation in which fake tech-support workers extracted messaging credentials. Treat unsolicited device-linking or backup-key requests as hostile.",
+      "latest_developments": "Kaspersky exposed SharkLoader, a previously undocumented dropper deploying Cobalt Strike Beacon in a campaign it calls StrikeShark against a diplomatic organization in Indonesia and government bodies in Taiwan, while Google's Threat Intelligence Group detailed STOCKSTAY, a new .NET backdoor Russia's Turla aims at Ukrainian government and military networks and parties tracking Italian foreign policy.",
+      "summary": "SharkLoader hands operators a Cobalt Strike foothold, and STOCKSTAY gives Turla persistent .NET access for long-term espionage. Government, diplomatic, and software-development targets across Asia and Ukraine should hunt for both.",
       "tags": [
         "apt",
-        "phishing",
-        "nation-state"
+        "nation-state",
+        "malware"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "FBI Warns Russian Intelligence Hackers Target Signal Backup Recovery Keys",
-          "url": "https://thehackernews.com/2026/06/fbi-warns-russian-intelligence-hackers.html"
+          "title": "New SharkLoader Malware Deploys Cobalt Strike in StrikeShark Cyberattacks",
+          "url": "https://thehackernews.com/2026/06/new-sharkloader-malware-deploys-cobalt.html"
         },
         {
-          "source": "CISA Advisories",
-          "title": "Russian Intelligence Services Continue to Target Commercial Messaging Applications",
-          "url": "https://www.cisa.gov/resources-tools/resources/russian-intelligence-services-continue-target-commercial-messaging-applications"
+          "source": "Help Net Security",
+          "title": "Mystery hackers use novel SharkLoader dropper against governments, software devs",
+          "url": "https://www.helpnetsecurity.com/2026/06/26/sharkloader-dropper-governments-software-developers/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Google Details Turla's New STOCKSTAY Backdoor Used in Ukraine Espionage Attacks",
+          "url": "https://thehackernews.com/2026/06/google-details-turlas-new-stockstay.html"
         },
         {
           "source": "The Record",
-          "title": "Russia used social engineering to breach prominent messaging accounts, Ukraine says",
-          "url": "https://therecord.media/russia-ukraine-social-engineering-messaging-accounts"
+          "title": "Turla group adds more malware to Russia's espionage efforts against Ukraine",
+          "url": "https://therecord.media/russia-turla-espionage-ukraine-stockstay-malware"
         }
       ],
-      "_anchor": "i-20c00d895e"
+      "_anchor": "i-263fc68bba"
     },
     {
-      "title": "Open-Source Supply Chain: Miasma Spreads as Akrites Launches",
-      "area": "Software Supply Chain",
-      "latest_developments": "The Miasma worm, part of the Mini Shai-Hulud and Hades family, infected fresh npm releases of LeoPlatform and RStreams, abused GitHub Actions workflows, and crossed into the Go ecosystem, while the Linux Foundation launched Akrites, an industry framework uniting tech firms, banks, and AI companies to report, patch, and disclose open-source vulnerabilities as AI compresses the time from discovery to exploitation.",
-      "summary": "Self-propagating malware keeps poisoning the package registries that feed enterprise builds, and a new coordinated-disclosure framework aims to speed remediation. Pin dependencies and audit CI/CD tokens.",
+      "title": "Amazon Q Developer Flaw Exposes Cloud Credentials",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "AWS patched CVE-2026-12957, a high-severity flaw in Amazon Q Developer that let a malicious repository abuse Model Context Protocol server configs to run commands and steal a developer's cloud credentials the moment they trusted the workspace, as SecurityWeek flagged a broader MCP overhaul that shifts security duties onto developers and platform operators.",
+      "summary": "Amazon Q Developer is AWS's AI coding assistant; opening a poisoned repository and trusting the workspace handed attackers the developer's AWS keys. AWS has patched the flaw and urges customers to update.",
       "tags": [
-        "supply-chain",
-        "npm",
-        "open-source"
+        "ai",
+        "patch",
+        "cloud"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Miasma Malware Targets npm Packages and GitHub Actions in Supply Chain Attack",
-          "url": "https://thehackernews.com/2026/06/miasma-malware-targets-npm-packages-and.html"
+          "source": "SecurityWeek",
+          "title": "Amazon Q Flaw Enabled Cloud Credential Theft via Malicious Repositories",
+          "url": "https://www.securityweek.com/amazon-q-flaw-enabled-cloud-credential-theft-via-malicious-repositories/"
         },
         {
-          "source": "Help Net Security",
-          "title": "Critical open-source projects get a new security framework",
-          "url": "https://www.helpnetsecurity.com/2026/06/26/akrites-open-source-security-framework/"
+          "source": "The Hacker News",
+          "title": "Amazon Q Developer Flaw Could Let Malicious Repos Run Code via MCP Configs",
+          "url": "https://thehackernews.com/2026/06/amazon-q-developer-flaw-could-let.html"
         },
         {
           "source": "SecurityWeek",
-          "title": "Linux Foundation Unveils New Open Source Security Project Akrites",
-          "url": "https://www.securityweek.com/linux-foundation-unveils-new-open-source-security-project-akrites/"
+          "title": "New Enterprise-Ready MCP Specification Brings New Security Challenges",
+          "url": "https://www.securityweek.com/new-enterprise-ready-mcp-specification-brings-new-security-challenges/"
         }
       ],
-      "_anchor": "i-1e3e7c8a75"
+      "_anchor": "i-9cb4c69420"
     },
     {
-      "title": "AI Agents Become an Identity Battleground",
-      "area": "AI Security",
-      "latest_developments": "Threat actors began creating OpenAI tenants that impersonate real companies and inviting employees to join, harvesting sensitive data through chats and projects, while Cisco acquired Astrix and WideField to secure non-human identities and Proof launched x401, an open protocol that verifies the identity behind AI agents before a service acts.",
-      "summary": "AI agents and machine identities now operate with human-level access and little oversight, drawing both attackers and a wave of governance tooling. Inventory non-human identities and scrutinize unexpected platform invitations.",
+      "title": "Polymarket and Klue: Third-Party Breaches Multiply",
+      "area": "Data Breaches",
+      "latest_developments": "Polymarket pledged to reimburse customers who lost about $3 million after attackers breached a third-party vendor and injected a malicious script into the prediction market's web frontend, while roughly two dozen more companies notified customers of the Klue-Salesforce breach and the hackers themselves got hacked.",
+      "summary": "Attackers reached Polymarket through a third-party vendor and slipped a script into its frontend to steal user funds, which the firm will reimburse. The parallel Klue-Salesforce breach keeps widening its victim list.",
       "tags": [
-        "ai",
-        "identity",
-        "phishing"
+        "breach",
+        "supply-chain"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "Cybersecurity firms targeted by fraudulent OpenAI organization invites",
-          "url": "https://www.bleepingcomputer.com/news/security/cybersecurity-firms-targeted-by-fraudulent-openai-organization-invites/"
+          "title": "Polymarket customers lose $3 million in supply-chain attack",
+          "url": "https://www.bleepingcomputer.com/news/security/polymarket-customers-lose-3-million-in-supply-chain-attack/"
         },
         {
+          "source": "SecurityWeek",
+          "title": "$3 Million Reportedly Stolen in Polymarket Hack",
+          "url": "https://www.securityweek.com/3-million-reportedly-stolen-in-polymarket-hack/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "More Klue Breach Victims Identified as Hackers Get Hacked",
+          "url": "https://www.securityweek.com/more-klue-breach-victims-identified-as-hackers-get-hacked/"
+        }
+      ],
+      "_anchor": "i-2232a64715"
+    },
+    {
+      "title": "PTC Windchill Flaw Exploited in the Wild",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CISA added CVE-2026-12569, a critical remote-code-execution flaw in PTC Windchill PDMlink and FlexPLM software, to its Known Exploited Vulnerabilities catalog on June 26 after spotting ongoing web-shell attacks, the first confirmed exploitation in the wild.",
+      "summary": "PTC Windchill manages product designs and engineering data for manufacturers, and the bug grants remote code execution on those servers. Operators should apply PTC's fix and inspect for web shells.",
+      "tags": [
+        "exploit",
+        "patch",
+        "zero-day"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "CISA Adds Exploited PTC Windchill RCE Flaw to KEV as Web Shell Attacks Continue",
+          "url": "https://thehackernews.com/2026/06/cisa-adds-exploited-ptc-windchill-rce.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "First-Ever Exploitation of PTC Windchill Vulnerability Discovered in the Wild",
+          "url": "https://www.securityweek.com/first-ever-exploitation-of-ptc-windchill-vulnerability-discovered-in-the-wild/"
+        }
+      ],
+      "_anchor": "i-8cbc814816"
+    },
+    {
+      "title": "Quantum Deadline Strains Budgets",
+      "area": "Policy and Regulation",
+      "latest_developments": "Dark Reading detailed how meeting President Trump's 2030 post-quantum migration deadline will strain budgets across multivendor IT and OT environments plagued by visibility gaps and misaligned update cycles, as ZeroTier shipped release candidate 2 of ZeroTier Quantum, pushing its CNSA 2.0-compliant quantum-secure networking toward general availability.",
+      "summary": "An executive order sets a 2030 deadline to migrate federal systems to post-quantum cryptography, and interoperability gaps make compliance costly and complex. Vendors like ZeroTier are racing CNSA 2.0-ready products to market.",
+      "tags": [
+        "policy",
+        "encryption"
+      ],
+      "sources": [
+        {
           "source": "Dark Reading",
-          "title": "Cisco Adds NHI to Security Stack With Astrix, WideField Acquisitions",
-          "url": "https://www.darkreading.com/identity-access-management-security/cisco-adds-nhi-security-stack-with-astrix-widefield"
+          "title": "Meeting Trump's 2030 Quantum Deadline Will be Expensive, Complex",
+          "url": "https://www.darkreading.com/cybersecurity-operations/meeting-2030-quantum-deadline-expensive-complex"
         },
         {
           "source": "Help Net Security",
-          "title": "Proof's x401 establishes an open protocol for AI agent identity and authorization",
-          "url": "https://www.helpnetsecurity.com/2026/06/26/proofs-x401-establishes-an-open-protocol-for-ai-agent-identity-and-authorization/"
+          "title": "ZeroTier Quantum RC2 brings post-quantum security closer to general availability",
+          "url": "https://www.helpnetsecurity.com/2026/06/26/zerotier-quantum-rc2/"
         }
       ],
-      "_anchor": "i-67d957804a"
+      "_anchor": "i-1d3ad20e4a"
     },
     {
-      "title": "Cisco Unified CM Flaw Draws CISA Deadline",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "CISA ordered federal civilian agencies to patch Cisco Unified Communications Manager flaw CVE-2026-20230 by Sunday, June 28, after attackers weaponized the server-side request forgery bug within 24 hours of disclosure to forge root-level access.",
-      "summary": "CVE-2026-20230 lets unauthenticated attackers reach internal services and escalate to root on Cisco Unified CM and Unified CM Session Management Edition deployments. Patch internet-facing systems immediately.",
+      "title": "European Ransomware Rides Third-Party Suppliers",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Black Kite's 2026 European Cyber Risk Report, drawn from 2,066 ransomware incidents across 31 countries between January 2025 and April 2026, found attacks on European organizations climbing in early 2026 with third-party suppliers now a leading point of entry.",
+      "summary": "The report ties Europe's rising ransomware toll to weak vendors in the supply chain. Organizations should vet, segment, and monitor their third-party suppliers as a primary defense.",
       "tags": [
-        "cisco",
-        "exploit",
-        "patch"
+        "ransomware",
+        "supply-chain"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "CISA sets urgent deadline to fix Cisco flaw exploited in attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/cisa-sets-urgent-deadline-to-fix-cisco-flaw-exploited-in-attacks/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "In Less Than 24 Hours, Attackers Weaponize Cisco CUCM Flaw",
-          "url": "https://www.darkreading.com/cyberattacks-data-breaches/less-than-24-hours-attackers-weaponize-cisco-cucm-flaw"
+          "source": "Help Net Security",
+          "title": "Ransomware gangs find Europe's weakest link in third-party suppliers",
+          "url": "https://www.helpnetsecurity.com/2026/06/26/black-kite-european-cyber-threats-report/"
         }
       ],
-      "_anchor": "i-0aea48d50a"
-    },
-    {
-      "title": "DirtyClone Joins Linux Kernel Root Exploits",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "JFrog Security Research published the first working exploit for DirtyClone, CVE-2026-43503, on June 25—a DirtyFrag-family kernel bug rated CVSS 8.8 that corrupts file-backed memory through a cloned network packet—landing days after a public exploit for pedit COW, CVE-2026-46331, gave local users root the same way.",
-      "summary": "Both flaws let an unprivileged local user gain root on Linux by poisoning shared page-cache memory through crafted packets. Apply kernel updates; Red Hat rates pedit COW high severity.",
-      "tags": [
-        "linux",
-        "privilege-escalation",
-        "exploit"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "New DirtyClone Linux Kernel Flaw Lets Local Users Gain Root via Cloned Packets",
-          "url": "https://thehackernews.com/2026/06/new-dirtyclone-linux-kernel-flaw-lets.html"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "New Linux pedit COW Exploit Enables Root Access by Poisoning Cached Binaries",
-          "url": "https://thehackernews.com/2026/06/new-linux-pedit-cow-exploit-enables.html"
-        }
-      ],
-      "_anchor": "i-e38fba2af3"
-    },
-    {
-      "title": "Surveillance Tools Reach Police, Military, and Officials' Data",
-      "area": "Privacy and Surveillance",
-      "latest_developments": "Meta began prototyping real-time facial recognition with a Pentagon supplier for police and military use, and the Pentagon opened an inquiry into the Dialog data exposure after leaked records unmasked a senior White House intelligence official and an active-duty special operations officer.",
-      "summary": "Government-linked surveillance prototypes and data-exposure incidents are putting the personal details of national security personnel at risk. Officials and agencies face mounting privacy and operational-security exposure.",
-      "tags": [
-        "surveillance",
-        "privacy",
-        "policy"
-      ],
-      "sources": [
-        {
-          "source": "Schneier on Security",
-          "title": "Meta Is Testing Facial Recognition for Police and Military",
-          "url": "https://www.schneier.com/blog/archives/2026/06/meta-is-testing-facial-recognition-for-police-and-military.html"
-        },
-        {
-          "source": "Wired Security",
-          "title": "The Pentagon Is Looking Into the Dialog Data Exposure for Unmasking National Security Officials",
-          "url": "https://www.wired.com/story/the-pentagon-is-looking-into-the-dialog-data-exposure-for-unmasking-national-security-officials/"
-        }
-      ],
-      "_anchor": "i-0ff87a556d"
+      "_anchor": "i-f6595c311c"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,410.91",
-      "pct": "-0.7%",
-      "arrow": "▼"
-    },
-    {
-      "label": "Dow",
-      "value": "51,742.75",
-      "pct": "+0.6%",
-      "arrow": "▲"
-    },
-    {
-      "label": "Nasdaq",
-      "value": "25,821.36",
-      "pct": "-1.3%",
-      "arrow": "▼"
-    },
-    {
-      "label": "WTI crude",
-      "value": "73.38",
-      "pct": "-9.7%",
-      "arrow": "▼"
-    },
-    {
-      "label": "EUR/USD",
-      "value": "1.1416",
+      "value": "7,381.60",
       "pct": "-1.4%",
       "arrow": "▼"
     },
     {
+      "label": "Dow",
+      "value": "51,805.04",
+      "pct": "+0.4%",
+      "arrow": "▲"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "25,577.30",
+      "pct": "-2.7%",
+      "arrow": "▼"
+    },
+    {
+      "label": "WTI crude",
+      "value": "72.11",
+      "pct": "-8.7%",
+      "arrow": "▼"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1382",
+      "pct": "-1.3%",
+      "arrow": "▼"
+    },
+    {
       "label": "GBP/USD",
-      "value": "1.3205",
-      "pct": "-1.5%",
+      "value": "1.3200",
+      "pct": "-0.8%",
       "arrow": "▼"
     },
     {
       "label": "USD/JPY",
-      "value": "161.53",
-      "pct": "+0.8%",
+      "value": "161.69",
+      "pct": "+0.6%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "This Afternoon: Mostly Cloudy, high 81F.",
-    "Tonight: Mostly Cloudy then Slight Chance Showers And Thunderstorms, low 64F.",
-    "Saturday: Showers And Thunderstorms, high 79F."
+    "Tonight: Cloudy then Slight Chance Showers And Thunderstorms, low 64F.",
+    "Saturday: Showers And Thunderstorms, high 79F.",
+    "Saturday Night: Showers And Thunderstorms Likely then Slight Chance Showers And Thunderstorms, low 65F."
   ],
   "sports": [
     {
@@ -241,12 +238,18 @@
           "url": "https://plaintextsports.com/mlb/2026-06-25/sea-pit",
           "recap": "Brandon Lowe, Henry Davis each homer to lead Pirates over Mariners 5-1",
           "result": "Mariners 1 · Pirates 5 · Final"
+        },
+        {
+          "date": "Fri Jun 26",
+          "url": "https://plaintextsports.com/mlb/2026-06-26/cin-pit",
+          "recap": "",
+          "result": "Reds 4 · Pirates 4 · Top 8th (in progress at last update)"
         }
       ],
       "next": {
         "matchup": "Reds @ Pirates",
-        "when": "Fri Jun 26, 6:40 PM",
-        "url": "https://plaintextsports.com/mlb/2026-06-26/cin-pit"
+        "when": "Sat Jun 27, 4:05 PM",
+        "url": "https://plaintextsports.com/mlb/2026-06-27/cin-pit"
       },
       "headlines": []
     }
@@ -254,232 +257,193 @@
   "local": {
     "business_politics": [
       {
-        "title": "Trump Threatens 100% Tariff Over Digital Services Taxes",
-        "latest_developments": "Trump issued a 100% tariff threat against Europe on June 26, a day after the European Union approved tariff cuts on American goods.",
-        "summary": "President Trump threatened a 100% tariff on any country that taxes United States digital services, saying the levy would override existing trade deals and putting major European economies on notice as they weigh new taxes on American tech companies.",
+        "title": "U.S. Strikes Iran, Threatening the Ceasefire",
+        "latest_developments": "The United States launched fresh military strikes on Iran on June 26, escalating past President Trump's earlier verbal blame for the cargo-ship attack a day before.",
+        "summary": "Washington hit Iran after a drone attack damaged a commercial vessel in the Strait of Hormuz, calling Tehran's move unwarranted aggression against commercial shipping and a breach of the framework ceasefire between the two adversaries; U.S. oil futures climbed back above $70 a barrel in late trading.",
         "sources": [
-          {
-            "source": "WSJ World News",
-            "title": "Trump Threatens 100% Tariff on European Countries That Impose Digital Services Tax",
-            "url": "https://www.wsj.com/politics/policy/trump-threatens-100-tariff-on-european-countries-that-impose-digital-services-tax-b642d12e"
-          },
           {
             "source": "FT World",
-            "title": "Trump warns of 100% tariff on countries implementing digital services tax",
-            "url": "https://www.ft.com/content/5d886d47-c509-44a4-9077-bcd25158b61e"
-          }
-        ],
-        "_anchor": "i-4bf1063849"
-      },
-      {
-        "title": "Iran Cargo-Ship Strike Tests Ceasefire",
-        "latest_developments": "Trump on June 26 blamed Iran for a drone strike on a cargo ship in the Strait of Hormuz, calling it a foolish violation of the ceasefire.",
-        "summary": "A drone strike hit a cargo ship in the Strait of Hormuz on Thursday, snarling traffic through the world's busiest oil chokepoint and threatening President Trump's preliminary deal to wind down the Iran war, even as oil futures settled near pre-war levels.",
-        "sources": [
-          {
-            "source": "WSJ World News",
-            "title": "Trump Says Iranian Attack on Cargo Ship Was Violation of Ceasefire Deal",
-            "url": "https://www.wsj.com/world/middle-east/trump-says-iranian-attack-on-cargo-ship-was-violation-of-ceasefire-deal-884c617c"
+            "title": "US launches strikes on Iran after Tehran’s attack on container ship",
+            "url": "https://www.ft.com/content/f9a4ca8d-d29c-4a7d-8791-8999d84317ae"
           },
           {
-            "source": "WSJ Markets",
-            "title": "Oil Returns to Pre-War Level on Middle East Optimism",
-            "url": "https://www.wsj.com/finance/commodities-futures/oil-futures-fall-on-likely-technical-correction-93e57fe0?mod=rss_markets_main"
+            "source": "WSJ World News",
+            "title": "U.S. Launches Fresh Attacks on Iran",
+            "url": "https://www.wsj.com/world/middle-east/trump-says-iranian-attack-on-cargo-ship-was-violation-of-ceasefire-deal-884c617c"
           }
         ],
-        "_anchor": "i-1f315d49f2"
+        "_anchor": "i-a456aa3091"
       }
     ],
     "business": [
       {
-        "title": "Cranberry Costco Starts Selling Beer and Wine",
-        "latest_developments": "WTAE reported June 26 that the Cranberry Township Costco became the first Costco in Pennsylvania to sell beer and wine.",
-        "summary": "The Costco warehouse in Cranberry Township, Butler County, began selling beer and wine, the first store in the chain's Pennsylvania locations to do so.",
+        "title": "Schwebel's Sets July 4 Shutdown",
+        "latest_developments": "KDKA reported June 26 that Schwebel Baking Company will begin liquidating and close for good starting July 4, putting a firm date on the previously announced wind-down.",
+        "summary": "The 120-year-old bread maker Schwebel Baking Company will end production and lay off workers across western Pennsylvania as it pursues a formal liquidation, shuttering a staple regional brand.",
         "sources": [
           {
-            "source": "WTAE",
-            "title": "Cranberry store is first Costco in Pennsylvania to sell beer and wine",
-            "url": "https://www.wtae.com/article/costco-cranberry-pennsylvania-beer-wine/69382999"
+            "source": "KDKA",
+            "title": "Schwebel Baking Company to shut down after 120 years in business",
+            "url": "https://www.cbsnews.com/pittsburgh/video/schwebel-baking-company-to-shut-down-after-120-years-in-business/"
           }
         ],
-        "_anchor": "i-e0b38536b4"
+        "_anchor": "i-c8dbdf618b"
       },
       {
-        "title": "Downtown Tax-Diversion District Draws Backlash",
-        "latest_developments": "Residents lashed out at the proposed Golden Triangle tax-diversion district at a Thursday meeting, TribLive reported June 26.",
-        "summary": "Pittsburgh's plan to earmark future tax revenue from new Downtown construction for Golden Triangle redevelopment met stiff opposition from residents who questioned its transparency and fairness.",
+        "title": "Allegheny County May Drop Spouses From Health Plan",
+        "latest_developments": "WPXI's 11 Investigates reported June 26 that Allegheny County employees are just learning their spouses could be removed from the county's medical insurance plan.",
+        "summary": "Allegheny County is weighing a major change to worker health benefits that would push employee spouses off the county insurance plan, a cost-cutting move affecting thousands of county workers and their families.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Pittsburghers lash out at proposed Downtown tax diversion district",
-            "url": "https://triblive.com/local/pittsburghers-lash-out-at-proposed-downtown-tax-diversion-district/"
+            "source": "WPXI",
+            "title": "11 Investigates Exclusive: County employees face major change to health care benefits",
+            "url": "https://www.wpxi.com/news/local/11-investigates-exclusive-spouses-allegheny-county-workers-could-be-removed-insurance-plan/5AABRKDSIRDK3GYSGW6FOQRW6Q/"
           }
         ],
-        "_anchor": "i-cba49b1677"
+        "_anchor": "i-14c3ba10c7"
       }
     ],
     "around_town": [
       {
-        "title": "Parkway East Closure Looms; PRT Urges Transit",
-        "latest_developments": "Pittsburgh Regional Transit on June 26 pressed drivers to ride the East Busway during next month's three-week Parkway East closure.",
-        "summary": "Pittsburgh Regional Transit is steering commuters toward public transit, especially the Wilkinsburg East Busway, ahead of a three-week Parkway East shutdown next month to replace the Commercial Street Bridge.",
-        "sources": [
-          {
-            "source": "KDKA",
-            "title": "PRT encourages Pittsburghers to utilize public transit during Parkway East closure",
-            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-regional-transit-and-parkway-east-closure/"
-          }
-        ],
-        "_anchor": "i-166433c23f"
-      },
-      {
-        "title": "Overnight I-279 Closures for Bridge Demolition",
-        "latest_developments": "Allegheny County released the schedule June 26 for overnight northbound I-279 closures next week.",
-        "summary": "The Allegheny County Department of Public Works will close northbound I-279 overnight next week to demolish Jacks Run Bridge No. 3, which carries Jacks Run Road over the highway.",
+        "title": "Code Red Heat Advisory, Cooling Centers Next Week",
+        "latest_developments": "Allegheny County issued a Code Red Heat Advisory for several days next week on June 26 and will open five Pittsburgh cooling centers from 8 a.m. to 7 p.m.",
+        "summary": "A heat wave will push temperatures high across Allegheny County early next week, prompting the county to open five cooling centers in Pittsburgh and warn residents, following a rainy start to the weekend.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Here's when northbound I-279 will close overnight next week for bridge demolition work",
-            "url": "https://www.wpxi.com/news/local/heres-when-northbound-i-279-will-close-overnight-next-week-bridge-demolition-work/4AP6VOPMUFB4FDEP5TNRY42WJA/"
+            "title": "Allegheny County issues ‘Code Red Heat Advisory’ for several days next week",
+            "url": "https://www.wpxi.com/news/local/allegheny-county-issues-code-red-heat-advisory-several-days-next-week/3NGORR2D45EYNPC2BTWV5DYRDM/"
+          },
+          {
+            "source": "WPXI",
+            "title": "5 cooling centers will open in Pittsburgh next week amid high temperatures",
+            "url": "https://www.wpxi.com/news/local/5-cooling-centers-will-open-pittsburgh-next-week-amid-high-temperatures/BHA5MKJMRFBNNL6NN3REQD7SVE/"
           }
         ],
-        "_anchor": "i-f62753d5c9"
+        "_anchor": "i-e5cfa79bf7"
       },
       {
-        "title": "Pennsylvania Measles Outbreak Worsens",
-        "latest_developments": "State health officials issued a strong call to action June 26 as Pennsylvania's measles count climbed.",
-        "summary": "Pennsylvania health officials, declaring they will not sit back as the virus spreads, escalated their response to a worsening statewide measles outbreak.",
+        "title": "Commercial Street Closed a Second Day for Bridge Testing",
+        "latest_developments": "PennDOT closed Commercial Street near Frick Park for a second straight day June 26 for added testing, without explaining why the extra day was needed.",
+        "summary": "PennDOT shut Commercial Street to test the system that will move a new bridge span into place near Frick Park, extending the closure beyond the single day originally scheduled.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Commercial Street closed for second day as PennDOT crews do more testing",
+            "url": "https://www.wtae.com/article/commercial-street-closed-for-second-day-as-penndot-crews-do-more-testing/71740865"
+          }
+        ],
+        "_anchor": "i-95af2eacb6"
+      },
+      {
+        "title": "Shapiro Pushes Data-Center Incentives as His Party Wants More",
+        "latest_developments": "The Post-Gazette reported June 26 that Governor Josh Shapiro favors incentives to make data centers behave, while fellow Pennsylvania Democrats want more aggressive limits.",
+        "summary": "Governor Josh Shapiro is pitching incentives to shape data-center development in Pennsylvania, splitting with members of his own party in Harrisburg who passed bills letting municipalities impose moratoriums and curb the projects' tax breaks.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "As Pa. measles outbreak worsens, state health officials issue strong call to action",
-            "url": "https://www.post-gazette.com/news/health/2026/06/26/measles-outbreak-pa/stories/202606260046"
+            "title": "Shapiro wants to use incentives to push data centers to behave better. His own party wants to be more aggressive.",
+            "url": "https://www.post-gazette.com/news/politics-state/2026/06/26/pa-data-centers-shapiro/stories/202606260052"
           }
         ],
-        "_anchor": "i-8b5d2a1958"
+        "_anchor": "i-94b897c83c"
       }
     ],
     "events": [
       {
-        "title": "Anthrocon Marks 20th Anniversary",
-        "latest_developments": "Organizers confirmed June 26 that Anthrocon returns July 2-5 for its 20th anniversary.",
-        "summary": "Anthrocon, one of the world's largest furry conventions, runs July 2 through July 5 at the David L. Lawrence Convention Center Downtown under the theme 'Critters, Cryptids and Curses,' with more than 16,000 pre-registered and an expected economic impact above $18 million.",
+        "title": "Nelly, Third Eye Blind Headline America250 Concert at the Point",
+        "latest_developments": "Pittsburgh and America250PA announced June 26 that Nelly and Third Eye Blind will headline the Commonwealth Concert at Point State Park on Saturday, June 27.",
+        "summary": "The America250PA Commonwealth Concert Series comes to Point State Park in Downtown Pittsburgh on Saturday, June 27, headlined by Nelly and Third Eye Blind, with Pittsburgh native Frzy as special guest and former Steelers quarterback Charlie Batch hosting.",
         "sources": [
           {
             "source": "KDKA",
-            "title": "Anthrocon returning to Pittsburgh for 20th anniversary celebration",
-            "url": "https://www.cbsnews.com/pittsburgh/news/anthrocon-pittsburgh-20th-anniversary/"
+            "title": "Nelly and Third Eye Blind to headline America250PA Commonwealth Concert in Pittsburgh",
+            "url": "https://www.cbsnews.com/pittsburgh/news/nelly-third-eye-blind-point-state-park-america250-pittsburgh-concert/"
           }
         ],
-        "_anchor": "i-057c78e083"
-      },
-      {
-        "title": "Danny Elfman Joins the Pittsburgh Symphony",
-        "latest_developments": "Pittsburgh Magazine reported June 26 that Danny Elfman will perform with the Pittsburgh Symphony Orchestra at Heinz Hall.",
-        "summary": "Composer Danny Elfman brings his 'Symphony of Chaos' to Heinz Hall, Downtown, with the Pittsburgh Symphony Orchestra, his first Pittsburgh appearance in nearly 40 years.",
-        "sources": [
-          {
-            "source": "Pittsburgh Magazine",
-            "title": "Danny Elfman Brings His 'Symphony of Chaos' to Pittsburgh",
-            "url": "https://www.pittsburghmagazine.com/danny-elfman-brings-his-symphony-of-chaos-to-pittsburgh/"
-          }
-        ],
-        "_anchor": "i-410f5b2fb1"
-      },
-      {
-        "title": "Picklesburgh Adds Pickleball Courts",
-        "latest_developments": "Organizers said June 26 that Picklesburgh will debut pickleball courts at Arts Landing this year.",
-        "summary": "Picklesburgh, the annual Downtown food festival, runs July 16-19 and will add pickleball courts at Arts Landing with tournament play, free instructional clinics, and courts featuring commissioned public artwork.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Picklesburgh to introduce pickleball courts at Arts Landing in Downtown Pittsburgh",
-            "url": "https://www.wpxi.com/news/local/picklesburgh-introduce-pickleball-courts-arts-landing-downtown-pittsburgh/R5WS7FOMSZEGTBRTITLBWZ4VA4/"
-          }
-        ],
-        "_anchor": "i-63813dadac"
+        "_anchor": "i-74b36daad9"
       }
     ],
     "around_teams": [
       {
-        "title": "Pirates Activate Konnor Griffin",
-        "latest_developments": "The Pirates activated rookie shortstop Konnor Griffin from the injured list June 26 and optioned Jack Brannigan to Double-A Altoona.",
-        "summary": "Pittsburgh reinstated top prospect Konnor Griffin, sidelined since May 31 with a right forearm strain, giving its injury-thinned lineup a boost after his strong rehab stint at Altoona.",
+        "title": "Why Chris Boswell Is Kicking Farther",
+        "latest_developments": "A Post-Gazette feature June 26 examined why Steelers kicker Chris Boswell and other NFL kickers are booting field goals farther than ever before.",
+        "summary": "The Post-Gazette dug into the league-wide surge in field-goal distance, using Steelers kicker Chris Boswell as a case study in the technique, equipment, and training behind today's record-long kicks.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Why are Chris Boswell and other NFL kickers booting the football farther than ever before?",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/06/26/nfl-field-goals-record-longest-kicks-boswell-little-tucker-mclaughlin/stories/202606180074"
+          }
+        ],
+        "_anchor": "i-8ff0117b88"
+      },
+      {
+        "title": "Pirates Mailbag Tackles ABS Struggles",
+        "latest_developments": "A Post-Gazette mailbag June 26 asked how the Pirates can fix their abysmal success rate on automated ball-strike challenges, alongside All-Star voting and trade-deadline questions.",
+        "summary": "Beat writers fielded reader questions on the Pirates' poor record challenging calls under the automated ball-strike system, Paul Skenes's All-Star candidacy, and the looming MLB trade deadline.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "Pirates activate Konnor Griffin from the IL, providing much-needed reinforcements",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/26/konnor-griffin-injury-il-activate-brannigan/stories/202606260067"
+            "title": "Pirates mailbag: How can they fix their abysmal ABS success rate?",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/26/mlb-allstar-skenes-mlodzinski-lowe-voting-trade-deadline-abs/stories/202606260028"
           }
         ],
-        "_anchor": "i-3af25beb4f"
+        "_anchor": "i-525e4db72c"
       },
       {
-        "title": "Eric Ebron on Cam Heyward's Podcast",
-        "latest_developments": "Former tight end Eric Ebron joined 'Not Just Football with Cam Heyward' in an episode posted June 24.",
-        "summary": "On 'Not Just Football with Cam Heyward,' Eric Ebron walked through his NFL journey across Detroit, Indianapolis, and Pittsburgh, his retirement at 28, and Andrew Luck's career.",
-        "sources": [
-          {
-            "source": "Not Just Football with Cam Heyward",
-            "title": "Eric Ebron Talks Andrew Luck's Retirement, The 11-0 Steelers Team, & More! | Not Just Football",
-            "url": "https://www.youtube.com/watch?v=KgmEBua4Rog"
-          }
-        ],
-        "_anchor": "i-5308ccfff5"
-      },
-      {
-        "title": "Pirates Celebrate Don Kelly's 100th Win",
-        "latest_developments": "The Post-Gazette reported June 26 that the Pirates marked manager Don Kelly's 100th career win.",
-        "summary": "Pittsburgh players and staff celebrated manager Don Kelly reaching 100 career wins, with teammates voicing hope that more follow in a postseason push.",
+        "title": "Is Marcell Ozuna Turning the Corner?",
+        "latest_developments": "A Post-Gazette piece June 25 assessed whether designated hitter Marcell Ozuna is breaking out of the slump that opened his Pirates tenure.",
+        "summary": "Marcell Ozuna started lousily after joining the Pirates, and the Post-Gazette weighed signs he may finally be hitting his stride under manager Don Kelly.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "'He deserves it': The Pirates celebrate Don Kelly's 100th win",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/26/kelly-100-wins-manager-mlb-postseason/stories/202606250057"
+            "title": "Marcell Ozuna got off to a lousy start with the Pirates. Might he finally be turning the corner?",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/25/mlb-news-marcell-ozuna-don-kelly-ryan-ohearn-oneil-cruz/stories/202606240038"
           }
         ],
-        "_anchor": "i-289db39c89"
+        "_anchor": "i-9d5002961c"
       }
     ],
     "team_usa": [
       {
-        "title": "USMNT Falls to Türkiye in Group Finale",
-        "latest_developments": "The United States lost 3-2 to Türkiye on June 25, with Pochettino defiantly noting the team still won Group D.",
-        "summary": "A second-string United States side, already through as Group D winners, fell 3-2 to Türkiye, and coach Mauricio Pochettino sparred with reporters afterward as Christian Pulisic returned from a calf injury before the round-of-32 match against Bosnia-Herzegovina.",
+        "title": "U.S. Soccer Offers Pochettino a Deal Through 2030",
+        "latest_developments": "Multiple sources told the Guardian June 26 that U.S. Soccer has formally offered Mauricio Pochettino an extension through the 2030 World Cup, moving past the earlier positive talks.",
+        "summary": "U.S. Soccer has offered men's national team coach Mauricio Pochettino, in charge since late 2024, a contract extension that would keep him through the 2030 World Cup, even as European clubs are likely to pursue him.",
         "sources": [
           {
-            "source": "ESPN Soccer",
-            "title": "Poch puzzled by 'weird' questions: We 'won group'",
-            "url": "https://www.espn.com/soccer/story/_/id/49183528/pochettino-puzzled-media-questions-us-wins-group"
+            "source": "Guardian World Cup 2026",
+            "title": "US Soccer offers contract renewal to Mauricio Pochettino through 2030 World Cup",
+            "url": "https://www.theguardian.com/football/2026/jun/26/mauricio-pochettino-extension-us-soccer-world-cup"
           }
         ],
-        "_anchor": "i-b3c13f3161"
+        "_anchor": "i-4afd0b9132"
       },
       {
-        "title": "Pochettino, US Soccer in Extension Talks",
-        "latest_developments": "Sources told ESPN on June 26 that Pochettino and U.S. Soccer are holding positive talks over a contract extension.",
-        "summary": "United States men's coach Mauricio Pochettino and U.S. Soccer have opened positive discussions about extending his contract as the co-hosts head into the World Cup knockout rounds.",
+        "title": "Pulisic Ready for the Knockout Round",
+        "latest_developments": "ESPN reported June 26 that Christian Pulisic, back from a calf injury, looks ready to make his mark as the United States heads into the World Cup round of 32.",
+        "summary": "Christian Pulisic returned in the 3-2 Group D finale loss to Türkiye after recovering from a left calf injury, and the United States, already through as group winners, plays its round-of-32 match July 1.",
         "sources": [
           {
             "source": "ESPN Soccer",
-            "title": "Sources: Poch in positive talks over USMNT deal",
-            "url": "https://www.espn.com/soccer/story/_/id/49188769/mauricio-pochettino-positive-talks-new-usmnt-contract-sources"
+            "title": "Pulisic looks ready to make his mark on USMNT's World Cup",
+            "url": "https://www.espn.com/soccer/story/_/id/49184846/christian-pulisic-return-vs-turkiye-looks-ready-make-mark-usmnt-world-cup"
           }
         ],
-        "_anchor": "i-7cba8e7736"
+        "_anchor": "i-47fa69c5b0"
       },
       {
-        "title": "Milan Rejects NYCFC Bid for Pulisic",
-        "latest_developments": "AC Milan named Massimo Calvelli chief executive June 26, a day after rejecting New York City FC's approach for Christian Pulisic.",
-        "summary": "AC Milan turned down New York City FC's approach for United States attacker Christian Pulisic and installed Massimo Calvelli as chief executive in a bid to restore a winning culture.",
+        "title": "Drug Case Against Bode Miller to Be Dropped",
+        "latest_developments": "An Idaho prosecutor said June 26 that misdemeanor drug charges against Olympic gold-medal skier Bode Miller will be dismissed.",
+        "summary": "Prosecutors will drop misdemeanor drug charges against former Olympic champion skier Bode Miller, despite an earlier finding of probable cause for his arrest, an Idaho prosecutor said.",
         "sources": [
           {
-            "source": "ESPN Soccer",
-            "title": "Milan name CEO amid Pulisic transfer approach",
-            "url": "https://www.espn.com/soccer/story/_/id/49187306/ac-milan-name-new-ceo-amid-christian-pulisic-transfer-approach"
+            "source": "ESPN Olympics",
+            "title": "Drug case vs. ex-Olympian Miller to be dropped",
+            "url": "https://www.espn.com/olympics/story/_/id/49187302/prosecutor-drop-drug-case-former-olympic-skier-bode-miller"
           }
         ],
-        "_anchor": "i-109d5dbac7"
+        "_anchor": "i-54f607884e"
       }
     ],
     "reading": [
@@ -487,28 +451,28 @@
         "author": "Ed Zitron",
         "title": "Cargo Culture",
         "url": "https://www.wheresyoured.at/cargo-culture/",
-        "summary": "Zitron argues that much of the tech industry imitates the surface rituals of successful companies without grasping the substance, a cargo-cult instinct he ties to the AI boom and its biggest names.",
+        "summary": "Zitron argues that much of the tech and AI industry runs on cargo-cult thinking, imitating the surface rituals and rhetoric of past successes while lacking the substance that would make the products actually deliver.",
         "_anchor": "i-dba85f639a"
       },
       {
         "author": "Stratechery",
         "title": "An Interview with Figma CEO Dylan Field About Design and AI",
         "url": "https://stratechery.com/2026/an-interview-with-figma-ceo-dylan-field-about-design-and-ai/",
-        "summary": "Ben Thompson interviews Figma chief executive Dylan Field on building the company and why Field believes AI gives Figma a tailwind rather than a threat.",
+        "summary": "Ben Thompson interviews Figma chief executive Dylan Field about building the design tool and why Field sees AI as a tailwind that strengthens, rather than threatens, Figma's position.",
         "_anchor": "i-0132d18e67"
       },
       {
         "author": "Cal Newport",
-        "title": "Dear AI Companies: Stop the \"Doom Trolling\"",
+        "title": "Dear AI Companies: Stop the “Doom Trolling”",
         "url": "https://calnewport.com/dear-ai-companies-stop-the-doom-trolling/",
-        "summary": "Newport argues that AI firms undercut their own credibility by issuing alarming warnings about their own products, likening it to a carmaker fear-mongering about the dangers of its best-selling truck.",
+        "summary": "Newport urges AI companies to stop publishing alarming warnings about their own products' supposed dangers as a marketing move, likening it to a carmaker hyping fears about its own best-selling vehicle to signal how powerful it is.",
         "_anchor": "i-7ef15a31cb"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-26 16:05 EDT",
-    "items_considered": 59,
+    "generated_at": "2026-06-26 21:05 EDT",
+    "items_considered": 54,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
