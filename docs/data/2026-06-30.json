@@ -1,191 +1,204 @@
 {
   "date": "2026-06-30",
-  "headline": "Microsoft and independent researchers proved that AI agents can be hijacked through poisoned MCP tool descriptions, decades-old shell tricks, and exposed Langflow endpoints, turning the autonomous agent layer into the day's softest attack surface.",
+  "headline": "Researchers turned six AI browsers and a wave of coding agents against their own users, as a Microsoft Defender zero-day and an Oracle payments flaw fell to active exploitation.",
   "emerging_trends": [
     {
-      "text": "Researchers turned AI agents against their owners through nothing more than a poisoned MCP tool description, a decades-old Bash shell trick, and an exposed Langflow endpoint, proving the agent layer now carries the same exploitable surface as the code it runs.",
-      "topic_title": "Poisoned MCP Tools and Shell Tricks Hijack AI Agents",
-      "link_phrase": "MCP tool",
+      "text": "Attackers keep turning AI agents and browsers against the people running them, with LayerX's BioShocking fooling six assistants into leaking credentials by convincing them they were only playing a game.",
+      "topic_title": "BioShocking and Agentjacking Turn AI Assistants on Their Users",
+      "link_phrase": "BioShocking",
       "_anchor": "trend-1"
     },
     {
-      "text": "China-linked operators sharpened their espionage as ToddyCat's new Umbrij tool stole Google OAuth tokens to read corporate Gmail while booby-trapped USB drives quietly infected Japanese military networks for nearly a year.",
-      "topic_title": "China-Linked Espionage Steals Gmail Tokens and Hits Japanese Military",
-      "link_phrase": "ToddyCat",
+      "text": "Enterprise defenders face a run of already-exploited flaws, from the BlueHammer zero-day in Microsoft Defender that ransomware crews now abuse to unauthenticated takeovers of Oracle's payment software.",
+      "topic_title": "BlueHammer Defender Flaw Fuels Ransomware",
+      "link_phrase": "BlueHammer",
       "_anchor": "trend-2"
     },
     {
-      "text": "Japan absorbed an outsized share of the day's damage as Aflac's Tokyo subsidiary lost data on 4.38 million policyholders, the Blackfield gang demanded $2 million from manufacturer Nidec, and military networks turned up year-old malware.",
-      "topic_title": "Aflac Japan Breach Exposes 4.38 Million",
-      "link_phrase": "Aflac",
+      "text": "Fake browser extensions and poisoned code packages point straight at cryptocurrency and stored secrets, with the Silent Swap clipper quietly rewriting wallet addresses in mid-transaction.",
+      "topic_title": "Rogue Browser Extensions and Poisoned Packages Proliferate",
+      "link_phrase": "Silent Swap",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Poisoned MCP Tools and Shell Tricks Hijack AI Agents",
+      "title": "China-Linked Crew Hits Southeast Asian Critical Systems",
+      "area": "Nation-State Activity",
+      "latest_developments": "Dark Reading reported that a China-linked group compromised at least 10 organizations across Southeast Asia, two of them state-owned, and deployed a previously unseen backdoor.",
+      "summary": "The campaign targets critical systems across the region, adding to a run of China-linked operations against governments and infrastructure. Defenders in the region should hunt for the new backdoor and review access on state-owned and critical-infrastructure networks.",
+      "tags": [
+        "apt",
+        "espionage",
+        "backdoor"
+      ],
+      "sources": [
+        {
+          "source": "Dark Reading",
+          "title": "China-Linked Group Targets Southeast Asia Critical Systems",
+          "url": "https://www.darkreading.com/threat-intelligence/china-linked-group-targets-southeast-asia-critical-systems"
+        }
+      ],
+      "_anchor": "i-52ee43ed8c"
+    },
+    {
+      "title": "BioShocking and Agentjacking Turn AI Assistants on Their Users",
       "area": "AI Security",
-      "latest_developments": "Microsoft Incident Response published research June 30 showing that attackers poison a Model Context Protocol tool's description to make an AI agent quietly forward company data to an outsider while every step looks routine, the same day Adversa AI disclosed GuardFall, a decades-old Bash shell trick that walks past the safety checks in ten of the eleven open-source coding and computer-use agents it tested.",
-      "summary": "Model Context Protocol lets AI agents call external tools, and a malicious tool description can order the agent to exfiltrate sensitive data without breaking any rule. The same agents fall to GuardFall's shell-quoting bypass, which turns a malicious repository into a supply-chain vector. Audit agent permissions and vet every tool source.",
+      "latest_developments": "LayerX disclosed BioShocking on June 30, a technique that convinced six AI browsers—including OpenAI's ChatGPT Atlas, Perplexity's Comet, and Anthropic's Claude browser extension—that risky actions were fiction, prompting them to copy a user's login details and send them to an attacker, while Dark Reading detailed Agentjacking, a fake bug report that hijacks AI coding agents at scale.",
+      "summary": "Both attacks exploit an AI's inability to separate content from instructions: telling a model that 2 plus 2 equals 5, or planting instructions in a bug report, makes it ignore its guardrails. Organizations deploying AI browsers and coding agents should tightly limit what those agents can read, reach, and act on.",
       "tags": [
         "ai",
-        "supply-chain",
+        "prompt-injection",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "New BioShocking Attack Tricks AI Browsers Into Leaking User Credentials",
+          "url": "https://thehackernews.com/2026/06/new-bioshocking-attack-tricks-ai.html"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "New attack provides one more reason why AI browsers are a bad idea",
+          "url": "https://arstechnica.com/security/2026/06/ai-browsers-can-be-lulled-into-a-dream-world-where-guardrails-no-longer-apply/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Fake Bug Report Hijacks AI Coding Agents at Scale",
+          "url": "https://www.darkreading.com/cyber-risk/fake-bug-report-hijacks-ai-coding-agents"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "New BioShocking attack manipulates AI browser into data theft",
+          "url": "https://www.bleepingcomputer.com/news/security/new-bioshocking-attack-manipulates-ai-browser-into-data-theft/"
+        }
+      ],
+      "_anchor": "i-6622633b2c"
+    },
+    {
+      "title": "Oracle E-Business Suite Payments Under Active Attack",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Defused Cyber confirmed the first in-the-wild exploitation of CVE-2026-46817, recorded June 27 against its Oracle E-Business Suite decoys, roughly six weeks after Oracle's May 2026 patch.",
+      "summary": "CVE-2026-46817, rated 9.8, is an improper-privilege-management and authentication flaw in Oracle Payments, the payment-processing module of Oracle's E-Business Suite, that lets unauthenticated attackers take over an instance. Organizations running the suite should apply the May 2026 fix at once.",
+      "tags": [
+        "vulnerability",
+        "patch",
         "exploit"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Microsoft Warns Poisoned MCP Tool Descriptions Can Make AI Agents Leak Data",
-          "url": "https://thehackernews.com/2026/06/microsoft-warns-poisoned-mcp-tool.html"
-        },
-        {
-          "source": "Microsoft Security Blog",
-          "title": "Securing AI agents: When AI tools move from reading to acting",
-          "url": "https://www.microsoft.com/en-us/security/blog/2026/06/30/securing-ai-agents-ai-tools-move-from-reading-acting/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "GuardFall Exposes Open-Source AI Coding Agents to Decades-Old Shell Injection Risks",
-          "url": "https://thehackernews.com/2026/06/guardfall-exposes-open-source-ai-coding.html"
+          "source": "Help Net Security",
+          "title": "Oracle E-Business Suite Payments flaw under attack (CVE-2026-46817)",
+          "url": "https://www.helpnetsecurity.com/2026/06/30/oracle-payments-cve-2026-46817-exploitation/"
         },
         {
           "source": "SecurityWeek",
-          "title": "Decades-Old Bash Tricks Expose AI Coding Agents to Supply Chain Attacks",
-          "url": "https://www.securityweek.com/decades-old-bash-tricks-expose-ai-coding-agents-to-supply-chain-attacks/"
-        }
-      ],
-      "_anchor": "i-b9f9067370"
-    },
-    {
-      "title": "China-Linked Espionage Steals Gmail Tokens and Hits Japanese Military",
-      "area": "Nation-State Activity",
-      "latest_developments": "Kaspersky's Securelist detailed Umbrij, a new ToddyCat tool that captures Google OAuth authorization tokens to read victims' corporate Gmail, while Bitdefender reported that USB drives carrying China-linked malware infected Japanese military networks for close to a year.",
-      "summary": "ToddyCat, a long-running APT, sidesteps passwords by hijacking OAuth tokens to reach Gmail and other Google services. A parallel China-linked operation seeded removable USB drives that quietly persisted on Japan's military networks. Both abuse trusted authorization and removable media rather than software flaws.",
-      "tags": [
-        "apt",
-        "espionage"
-      ],
-      "sources": [
-        {
-          "source": "Securelist (Kaspersky)",
-          "title": "ToddyCat: your hidden email assistant. Part 2",
-          "url": "https://securelist.com/toddycat-apt-umbrij-tool-and-oauth/120251/"
+          "title": "Exploitation of Recent Oracle E-Business Suite Vulnerability Begins",
+          "url": "https://www.securityweek.com/exploitation-of-recent-oracle-e-business-suite-vulnerability-begins/"
         },
         {
-          "source": "Graham Cluley",
-          "title": "USB drives carrying China-linked malware infected Japanese military networks for nearly a year",
-          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/usb-drives-carrying-china-linked-malware-infected-japanese-military-networks-for-nearly-a-year"
+          "source": "The Hacker News",
+          "title": "Oracle E-Business Suite Flaw CVE-2026-46817 Actively Exploited in the Wild",
+          "url": "https://thehackernews.com/2026/06/oracle-e-business-suite-flaw-cve-2026.html"
         }
       ],
-      "_anchor": "i-758934582a"
+      "_anchor": "i-3e8725dc3b"
     },
     {
-      "title": "Aflac Japan Breach Exposes 4.38 Million",
-      "area": "Data Breaches",
-      "latest_developments": "Aflac disclosed June 30 that attackers reached its Japan subsidiary's policyholder portal repeatedly between June 15 and June 25 and stole personal and bank-account information on 4.38 million policyholders.",
-      "summary": "Aflac, the American insurance giant, lost sensitive policyholder and banking data after intruders breached its Tokyo subsidiary's web portal over a ten-day window. Affected customers should monitor accounts and watch for notification.",
-      "tags": [
-        "breach",
-        "insurance"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Aflac Japan Data Breach Impacts 4.38 Million",
-          "url": "https://www.securityweek.com/aflac-japan-data-breach-impacts-4-38-million/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Insurance giant Aflac discloses data breach after subsidiary hack",
-          "url": "https://www.bleepingcomputer.com/news/security/insurance-giant-aflac-discloses-data-breach-after-subsidiary-hack/"
-        }
-      ],
-      "_anchor": "i-726d6b76bc"
-    },
-    {
-      "title": "Blackfield Ransoms Nidec as RustDuck Botnet Spreads",
+      "title": "Rogue Browser Extensions and Poisoned Packages Proliferate",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "The Blackfield ransomware gang demanded $2 million from Nidec Corporation, the Japanese motor and electronic-components maker, the same day QiAnXin's XLab detailed RustDuck, a two-stage botnet rebuilt in Rust that conscripts routers, cameras, and servers for DDoS.",
-      "summary": "Blackfield's extortion of Nidec adds another major Japanese manufacturer to the day's ransomware tally. RustDuck, tracked since February 2026, hijacks home routers, IP cameras, Android boxes, and weakly secured servers, stitching them into a fast-mutating network built to knock services offline.",
+      "latest_developments": "McAfee Labs named Silent Swap, a cryptocurrency clipper that ships as unsigned .NET and Golang installers and a fake Google Notes extension to swap wallet addresses mid-transaction; a counterfeit Perplexity extension on the Chrome Web Store intercepted users' search traffic; and trojanized Pyrogram forks on PyPI, active since November, handed attackers file-read access to Telegram bot servers.",
+      "summary": "Attackers are seeding legitimate-looking browser stores and package registries with tools that steal cryptocurrency, browsing data, and server files. Users and developers should install extensions and packages only from verified publishers and audit what they already run.",
       "tags": [
-        "ransomware",
-        "botnet",
-        "ddos"
+        "malware",
+        "supply-chain",
+        "cryptocurrency"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "Blackfield ransomware asks Nidec Corporation for $2 million ransom",
-          "url": "https://www.bleepingcomputer.com/news/security/blackfield-ransomware-asks-nidec-corporation-for-2-million-ransom/"
+          "source": "The Hacker News",
+          "title": "Silent Swap Crypto Clipper Uses Fake Google Notes Extension to Replace Wallet Addresses",
+          "url": "https://thehackernews.com/2026/06/silent-swap-crypto-clipper-uses-fake.html"
         },
         {
-          "source": "The Hacker News",
-          "title": "RustDuck Botnet Rebuilds in Rust to Hijack Routers and Servers for DDoS",
-          "url": "https://thehackernews.com/2026/06/rustduck-botnet-rebuilds-in-rust-to.html"
+          "source": "BleepingComputer",
+          "title": "Fake Perplexity extension on Chrome Web Store tracked searches",
+          "url": "https://www.bleepingcomputer.com/news/security/fake-perplexity-extension-on-chrome-web-store-tracked-searches/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Malicious PyPI packages give hackers control of Telegram bot servers",
+          "url": "https://www.bleepingcomputer.com/news/security/malicious-pypi-packages-give-hackers-control-of-telegram-bot-servers/"
         }
       ],
-      "_anchor": "i-a73a2678e5"
+      "_anchor": "i-3888bdd1a4"
     },
     {
-      "title": "Supreme Court Shields Phone Location Data as House Passes KIDS Act",
+      "title": "BlueHammer Defender Flaw Fuels Ransomware",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CISA confirmed June 30 that ransomware gangs now exploit CVE-2026-33825, a Microsoft Defender privilege-escalation flaw dubbed BlueHammer that attackers had already used as a zero-day before Microsoft released a patch.",
+      "summary": "BlueHammer lets an attacker escalate privileges through Microsoft Defender, and ransomware crews weaponized it before a fix existed. Windows administrators should apply Microsoft's patch immediately and treat affected systems as high priority.",
+      "tags": [
+        "zero-day",
+        "ransomware",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "BlueHammer Vulnerability Exploited in Ransomware Attacks",
+          "url": "https://www.securityweek.com/bluehammer-vulnerability-exploited-in-ransomware-attacks/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "CISA: Windows BlueHammer flaw now exploited by ransomware gangs",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-windows-bluehammer-flaw-now-exploited-by-ransomware-gangs/"
+        }
+      ],
+      "_anchor": "i-724a503411"
+    },
+    {
+      "title": "Microsoft Speeds Up Its Quantum-Safe Timeline",
       "area": "Policy and Regulation",
-      "latest_developments": "The Supreme Court ruled June 30 that constitutional privacy protections cover cellphone location history, deciding for a bank robber whom a geofence warrant had identified, while the House passed the Kids Internet and Digital Safety Act by a 267-117 margin that the Senate looks unlikely to advance.",
-      "summary": "The Court extended Fourth Amendment protection to the location trails phones leave behind, constraining geofence warrants nationwide. The House's KIDS Act would tighten online safeguards for minors but faces dim prospects in the Senate.",
+      "latest_developments": "Microsoft announced June 30 that it is accelerating its quantum-safe roadmap, warning that advances in quantum computing move up the deadline to replace today's encryption standards sooner than the company previously expected.",
+      "summary": "The shift follows President Trump's executive order 14409, which set firm federal post-quantum migration deadlines, and adds vendor pressure to a costly cross-industry cryptographic transition. Organizations should inventory their encryption now and plan migration to NIST's post-quantum algorithms.",
       "tags": [
         "policy",
-        "privacy"
+        "cryptography",
+        "quantum"
       ],
       "sources": [
         {
-          "source": "SecurityWeek",
-          "title": "Supreme Court Rules Constitutional Privacy Protections Apply to Cellphone Users' Location History",
-          "url": "https://www.securityweek.com/supreme-court-rules-constitutional-privacy-protections-apply-to-cellphone-users-location-history/"
+          "source": "Microsoft Security Blog",
+          "title": "Accelerating the quantum-safe timeline",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/06/30/microsoft-advances-quantum-safe-security-as-the-risk-timeline-shifts/"
         },
         {
-          "source": "The Record",
-          "title": "House passes kids' online safety bill, but Senate approval unlikely",
-          "url": "https://therecord.media/house-passes-kids-online-safety-bill-senate-unlikely"
+          "source": "BleepingComputer",
+          "title": "Microsoft accelerates quantum-safe roadmap as risks grow",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-accelerates-quantum-safe-roadmap-as-risks-grow/"
         }
       ],
-      "_anchor": "i-65a30ebfb7"
-    },
-    {
-      "title": "Langflow RCE Deploys Monero Miner",
-      "area": "AI Security",
-      "latest_developments": "Threat actors are scanning the internet for exposed Langflow instances and exploiting CVE-2026-33017, a 9.3-severity unauthenticated remote-code-execution flaw, to install a Monero cryptocurrency miner.",
-      "summary": "Langflow, a popular visual builder for AI workflows, carries an unauthenticated RCE bug that lets attackers run code on any exposed server. The current campaign drops a Monero miner. Patch immediately and pull Langflow off the public internet.",
-      "tags": [
-        "ai",
-        "rce",
-        "cryptomining"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Langflow RCE Exploited to Deploy Monero Miner on Exposed AI App Endpoints",
-          "url": "https://thehackernews.com/2026/06/langflow-rce-exploited-to-deploy-monero.html"
-        }
-      ],
-      "_anchor": "i-87f96e566a"
+      "_anchor": "i-66f1fbf62d"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,375.12",
-      "pct": "-1.6%",
+      "value": "7,401.90",
+      "pct": "-0.7%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "51,899.04",
-      "pct": "+0.4%",
+      "value": "52,029.51",
+      "pct": "+0.7%",
       "arrow": "▲"
     },
     {
       "label": "Nasdaq",
-      "value": "25,508.01",
-      "pct": "-3.2%",
+      "value": "25,633.34",
+      "pct": "-1.9%",
       "arrow": "▼"
     },
     {
@@ -196,27 +209,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1382",
-      "pct": "-1.3%",
+      "value": "1.1381",
+      "pct": "-1.0%",
       "arrow": "▼"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3200",
-      "pct": "-0.8%",
+      "value": "1.3201",
+      "pct": "-0.6%",
       "arrow": "▼"
     },
     {
       "label": "USD/JPY",
-      "value": "161.70",
-      "pct": "+0.6%",
+      "value": "161.78",
+      "pct": "+0.4%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "This Afternoon: Sunny, high 94F.",
     "Tonight: Mostly Clear, low 76F.",
-    "Wednesday: Sunny, high 98F."
+    "Wednesday: Sunny, high 98F.",
+    "Wednesday Night: Mostly Clear, low 75F."
   ],
   "sports": [
     {
@@ -228,187 +241,217 @@
           "url": "https://plaintextsports.com/mlb/2026-06-29/pit-phi",
           "recap": "Valdez, Triolo and Rodriguez homer for Pirates in 11-7 win over Phillies",
           "result": "Pirates 11 · Phillies 7 · Final"
+        },
+        {
+          "date": "Tue Jun 30",
+          "url": "https://plaintextsports.com/mlb/2026-06-30/pit-phi",
+          "recap": "",
+          "result": "Pirates 0 · Phillies 5 · Bot 8th (in progress at last update)"
         }
       ],
       "next": {
         "matchup": "Pirates @ Phillies",
-        "when": "Tue Jun 30, 6:40 PM",
-        "url": "https://plaintextsports.com/mlb/2026-06-30/pit-phi"
+        "when": "Wed Jul 1, 6:40 PM",
+        "url": "https://plaintextsports.com/mlb/2026-07-01/pit-phi"
       },
       "headlines": []
     }
   ],
   "local": {
-    "business_politics": [],
-    "business": [
+    "business_politics": [
       {
-        "title": "UPMC Profits Rebound as Pay Rises",
-        "latest_developments": "PublicSource reported June 30 that UPMC's profits have returned and executive compensation climbed even as the network expands into Ohio.",
-        "summary": "UPMC, Pittsburgh's largest healthcare network and employer, posted renewed profits and raised executive pay while pushing its expansion into Ohio, a recovery shadowed by recent layoffs and looming federal funding cuts.",
+        "title": "Supreme Court Upholds Birthright Citizenship",
+        "latest_developments": "The Supreme Court ruled 6-3 on June 30 that President Trump's executive order ending birthright citizenship is unlawful, a fresh decision distinct from June 29's ruling on his agency-removal power.",
+        "summary": "In Trump v. Barbara, Chief Justice John Roberts joined Justices Sonia Sotomayor and Elena Kagan among others to strike down Trump's day-one order denying citizenship to babies born to parents in the country illegally or temporarily, reaffirming the 14th Amendment's century-old guarantee and dealing a major blow to his immigration agenda.",
         "sources": [
           {
-            "source": "PublicSource",
-            "title": "UPMC's profits return and executive pay increases as expansion efforts continue",
-            "url": "https://www.publicsource.org/upmc-profits-increase-expansion-efforts-continue/"
+            "source": "FT World",
+            "title": "US Supreme Court rejects Trump’s bid to end birthright citizenship",
+            "url": "https://www.ft.com/content/8ee00f84-762c-48a5-ac21-774e216977fa"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "Justices Uphold Birthright Citizenship in Blow to Trump",
+            "url": "https://www.wsj.com/business/justices-uphold-birthright-citizenship-in-blow-to-trump-e31ed979?mod=pls_whats_news_us_business_f"
           }
         ],
-        "_anchor": "i-89edc46a88"
+        "_anchor": "i-b520748a99"
       },
       {
-        "title": "Meijer Advances Cranberry Township Store",
-        "latest_developments": "The Post-Gazette reported June 30 that Meijer moved a step closer to building at the Henderson Crossings development in Cranberry Township.",
-        "summary": "Michigan grocery chain Meijer advanced its plan for a store at the Henderson Crossings development in Cranberry Township, Butler County, extending the retailer's push into Pittsburgh's northern suburbs.",
+        "title": "Trump Sticks With Iran Talks",
+        "latest_developments": "Aides say Trump reviewed all-out war options on June 30 but chose to keep negotiating, telling them he accepts talks running past an August 18 nuclear deadline as Steve Witkoff and Jared Kushner arrived in Doha.",
+        "summary": "President Trump opted to pursue a long-term deal with Tehran rather than escalate, dispatching envoys Steve Witkoff and Jared Kushner to Qatar, which says it has no plans for the American delegation to meet Iranian officials directly.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "Trump Briefed on All-Out War Options in Iran but Opts to Stick With Talks",
+            "url": "https://www.wsj.com/world/middle-east/trump-briefed-on-all-out-war-options-in-iran-but-opts-to-stick-with-talks-98304b5b"
+          },
+          {
+            "source": "FT World",
+            "title": "Witkoff and Kushner arrive in Doha for talks over US-Iran deal",
+            "url": "https://www.ft.com/content/f35be117-8a25-4a22-871d-0e29cafc8494"
+          }
+        ],
+        "_anchor": "i-75c40ebff1"
+      }
+    ],
+    "business": [
+      {
+        "title": "Astrobotic Wins $298 Million in NASA Contracts",
+        "latest_developments": "NASA awarded Pittsburgh's Astrobotic two contracts worth roughly $298 million on June 30 for lunar lander and moon-base work.",
+        "summary": "Astrobotic, the Pittsburgh robotics firm, secured about $298 million from NASA tied to lunar landers and moon-base infrastructure, work that intersects with SpaceX's push to the moon.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Meijer is a few steps closer to Cranberry Township development",
-            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/06/30/meijer-henderson-crossings-cranberry-township-grocery/stories/202606290040"
+            "title": "NASA awards Astrobotic two contracts worth roughly $298 million",
+            "url": "https://www.post-gazette.com/business/tech-news/2026/06/30/astrobotic-spacex-nasa-moon-base-lunar-lander/stories/202606300044"
           }
         ],
-        "_anchor": "i-059ac5ef0e"
+        "_anchor": "i-0c20092978"
       },
       {
-        "title": "JetBlue Marks 20 Years at Pittsburgh Airport",
-        "latest_developments": "TribLive reported June 30 that Pittsburgh International Airport and JetBlue marked two decades since the carrier arrived.",
-        "summary": "Pittsburgh International Airport and JetBlue employees shared a plane-themed cake June 30 to mark 20 years since the airline's arrival, a move credited with helping reverse Western Pennsylvania's shrinking air service after the region lost its hub.",
+        "title": "Baxter's Rcade Closes in Canonsburg",
+        "latest_developments": "Baxter's Rcade, a Canonsburg restaurant and arcade in Washington County, announced on social media June 30 that it has permanently closed.",
+        "summary": "Baxter's Rcade, a combined restaurant and social arcade space in Canonsburg, Washington County, shut its doors for good, telling patrons through a social-media post.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "How JetBlue's arrival 20 years ago was turning point for Pittsburgh International Airport",
-            "url": "https://triblive.com/business/how-jetblues-arrival-20-years-ago-was-turning-point-for-pittsburgh-international-airport/"
+            "source": "WTAE",
+            "title": "Washington County restaurant, arcade space permanently closes",
+            "url": "https://www.wtae.com/article/baxters-rcade-in-canonsburg-washington-county-permanently-closes/71788416"
           }
         ],
-        "_anchor": "i-f47408fb4d"
+        "_anchor": "i-2ce5ef13c2"
       }
     ],
     "around_town": [
       {
-        "title": "Extreme Heat Warning Through Friday",
-        "latest_developments": "The National Weather Service upgraded most of the region to an extreme heat warning running through 10 p.m. Friday, July 3, escalating the earlier code red advisory.",
-        "summary": "Most of western Pennsylvania sits under an extreme heat warning through Friday, July 3, with heat-index values flirting with 100 degrees over the July 4 weekend; Pittsburgh-area communities shifted trash collection to early-morning hours to spare crews.",
+        "title": "Pennsylvania Misses Budget Deadline Again",
+        "latest_developments": "Pennsylvania blew its June 30 budget deadline once more, with no deal yet in sight, though education funding shows signs of smoother sailing than in past years.",
+        "summary": "Pennsylvania lawmakers passed the June 30 constitutional deadline without a spending plan, leaving Governor Josh Shapiro and the divided legislature to keep negotiating, with the perennial school-funding fight looking less contentious this cycle.",
         "sources": [
           {
-            "source": "KDKA",
-            "title": "Extreme heat warning in effect for most of Pittsburgh area through Friday",
-            "url": "https://www.cbsnews.com/pittsburgh/news/heat-advisory-pittsburgh-area-heat-wave-national-weather-service-high-temperatures/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pennsylvania blew its budget deadline again. Is a deal coming anytime soon?",
+            "url": "https://www.post-gazette.com/news/politics-state/2026/06/30/pennsylvania-budget-deadline-june-30/stories/202606300048"
           },
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Pittsburgh under extreme heat warning through Friday",
-            "url": "https://www.post-gazette.com/news/weather-news/2026/06/30/extreme-heat-warning-pittsburgh/stories/202606300035"
+            "title": "Will education again divide the Pa. legislature this budget cycle?",
+            "url": "https://www.post-gazette.com/news/education/2026/06/30/pennsylvania-budget-education-spending/stories/202606300046"
           }
         ],
-        "_anchor": "i-f95b7eb890"
+        "_anchor": "i-ba0028e1fc"
       },
       {
-        "title": "City Settles Fern Hollow Bridge Claims",
-        "latest_developments": "Pittsburgh City Council approved settlements June 30 with people hurt in the Fern Hollow Bridge collapse.",
-        "summary": "Pittsburgh City Council approved financial settlements with victims of the January 2022 Fern Hollow Bridge collapse in Frick Park, where the aging span gave way and dropped a city bus and several vehicles into the ravine below.",
+        "title": "Mars Area Teachers Push for Raises",
+        "latest_developments": "The Mars Area Education Association said June 30 that pay remains the main obstacle as its six-year contract expires that day.",
+        "summary": "Mars Area Education Association president Hollie Meckler said the union has bargained with the Mars Area School Board for a year and a half and rejects the district's proposed 3.5% raise over three years, with the current contract lapsing June 30.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Pittsburgh City Council approves settlements with victims of the Fern Hollow Bridge collapse",
-            "url": "https://www.post-gazette.com/news/transportation/2026/06/30/pittsburgh-fern-hollow-bridge-settlements/stories/202606300038"
+            "source": "WPXI",
+            "title": "Contract negotiations ongoing for Mars teachers, with increased pay as a main sticking point",
+            "url": "https://www.wpxi.com/news/local/contract-negotiations-ongoing-mars-teachers-with-increased-pay-main-sticking-point/O6LMBGQDJFGCNK3RH5ZGK7EOEU/"
           }
         ],
-        "_anchor": "i-2dadb9cafd"
+        "_anchor": "i-e372e61925"
       },
       {
-        "title": "Court Fight Over County Pension Fund",
-        "latest_developments": "TribLive reported June 30 that a court hearing opened over Allegheny County's underfunded employee pension.",
-        "summary": "A lawyer for the Allegheny County district attorney's office argued in court June 30 that the county and its retirement board have let the employee pension fund grow dangerously unhealthy, opening a legal fight over how to repair it.",
+        "title": "Pennsylvania Minimum Wage Bill Stalls",
+        "latest_developments": "Backers of House Bill 2189 called June 30 on the Republican-controlled state Senate to vote on the minimum-wage increase it has held since the House passed it 104-95.",
+        "summary": "House Bill 2189, which would raise Pennsylvania's minimum wage toward $15 an hour, sits stalled in the state Senate; supporters say it would stimulate the economy while opponents warn it would hurt employers.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "Legal battle over fixing Allegheny County pension fund crisis unfolds in court",
-            "url": "https://triblive.com/local/legal-battle-over-fixing-allegheny-county-pension-fund-crisis-unfolds-in-court/"
+            "source": "KDKA",
+            "title": "Pennsylvania minimum wage bill stalls in state senate amid push for $15 an hour",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pennsylvania-minimum-wage-increase-house-bill-2189/"
           }
         ],
-        "_anchor": "i-8e4b4ccfde"
+        "_anchor": "i-ef017776ff"
       }
     ],
     "events": [
       {
-        "title": "Great Pittsburgh Book Crawl Returns",
-        "latest_developments": "Pittsburgh Magazine detailed June 30 the Great Pittsburgh Book Crawl, running July 18 through 26.",
-        "summary": "The Great Pittsburgh Book Crawl runs Saturday, July 18, through Sunday, July 26, sending readers to 30 bookstores across neighborhoods from Lawrenceville to Squirrel Hill; a free passport, available while supplies last at any participating shop, collects stamps along the way.",
+        "title": "Picklesburgh, Goat Fest, and Anthrocon Fill July",
+        "latest_developments": "NEXTpittsburgh's July guide, published June 29, rounds up the month's festivals across the region.",
+        "summary": "NEXTpittsburgh highlights twelve July events, among them Picklesburgh with its 800 quarts of pickle juice, Goat Fest, and Anthrocon's Furry Parade, which draws some 18,000 furries downtown.",
         "sources": [
           {
-            "source": "Pittsburgh Magazine",
-            "title": "Know-It-All: The Great Pittsburgh Book Crawl",
-            "url": "https://www.pittsburghmagazine.com/know-it-all-the-great-pittsburgh-book-crawl/"
+            "source": "NEXTpittsburgh Events",
+            "title": "12 iconic Pittsburgh things to do in July, from Picklesburgh to Goat Fest to the Furry Parade",
+            "url": "https://nextpittsburgh.com/events/12-iconic-pittsburgh-things-to-do-in-july-2026/"
           }
         ],
-        "_anchor": "i-7c8bae9c0d"
+        "_anchor": "i-c106097ad8"
       },
       {
-        "title": "Brighton Heights Plans First Book Fair",
-        "latest_developments": "Pittsburgh Magazine reported June 30 that Brighton Heights will hold its first book fair this July at Legion Park.",
-        "summary": "Book-club organizer Anne Perri Cole and neighbors will stage the first Brighton Heights Book Fair this July at Legion Park, with the mobile bookstore Raven's Quill among the sellers on hand.",
+        "title": "'French Moderns' Opens at the Frick",
+        "latest_developments": "The Post-Gazette detailed June 30 the Frick Pittsburgh's 'French Moderns' exhibition exploring an era of artistic freedom.",
+        "summary": "The Frick Pittsburgh, in Point Breeze, mounts 'French Moderns,' an exhibition of works probing what it meant to be modern during a period of expanding artistic freedom.",
         "sources": [
           {
-            "source": "Pittsburgh Magazine",
-            "title": "First-Ever Brighton Heights Book Fair Will Kick Off This July",
-            "url": "https://www.pittsburghmagazine.com/brighton-heights-book-fair-2026-legion-park/"
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "‘What does it mean to be modern?’: The Frick’s ‘French Moderns’ delves into an era of artistic freedom",
+            "url": "https://www.post-gazette.com/ae/art-architecture/2026/06/30/french-moderns-frick-pittsburgh/stories/202606290023"
           }
         ],
-        "_anchor": "i-6b6a103afc"
+        "_anchor": "i-0d908aafbf"
       }
     ],
     "around_teams": [
       {
-        "title": "The Physics of PNC Park's River Homers",
-        "latest_developments": "A Post-Gazette feature June 29 examined why only seven home runs have reached the Allegheny River on the fly at PNC Park.",
-        "summary": "A Post-Gazette piece broke down the physics behind PNC Park's rare river home runs, noting only seven balls have cleared the right-field stands into the Allegheny on the fly in the park's history, with O'Neil Cruz among the sluggers cited as candidates to do it.",
+        "title": "Seth Hernandez Reaches 100 Strikeouts",
+        "latest_developments": "The Post-Gazette's MiLB Monday June 29 noted Pirates top prospect Seth Hernandez became the first pitcher in the minors this season to reach 100 strikeouts.",
+        "summary": "Seth Hernandez, the Pirates' top prospect, led all of the minor leagues to 100 strikeouts, the Post-Gazette reported in its weekly farm-system roundup.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "Why only 7 home runs at PNC Park have reached the Allegheny River on the fly",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/06/29/homerun-allegheny-river-science-physics-oneil-cruz/stories/202606260054"
+            "title": "MiLB Monday: Pirates top prospect Seth Hernandez becomes the first in the minors to hit 100 strikeouts",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/06/29/milb-prospects-hernandez-reinold-navarro-estuar-suero/stories/202606280113"
           }
         ],
-        "_anchor": "i-db5528305b"
-      },
-      {
-        "title": "Reading the Steelers' Reshaped Offense",
-        "latest_developments": "A Post-Gazette guide June 30 laid out seven things fantasy players and fans should know about the Steelers' 2026 offense.",
-        "summary": "A Post-Gazette breakdown weighed the Steelers' projected offense around quarterback Aaron Rodgers, receivers DK Metcalf and Michael Pittman, running backs Jaylen Warren and Rico Dowdle, and tight end Pat Freiermuth as training camp nears.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "7 things fantasy football players — and fans, too — should know about the Steelers' offense",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/06/30/fantasy-football-metcalf-pittman-rodgers-warren-dowdle-freiermuth/stories/202606300030"
-          }
-        ],
-        "_anchor": "i-655db796f3"
+        "_anchor": "i-161521d1a1"
       }
     ],
     "team_usa": [
       {
-        "title": "US Faces Bosnia and a Wisconsin Native",
-        "latest_developments": "The Guardian profiled June 30 Esmir Bajraktarevic, the Wisconsin-born midfielder who could face the United States with Bosnia and Herzegovina in the round of 32.",
-        "summary": "Esmir Bajraktarevic, raised in Appleton, Wisconsin, and developed through the Chicago Fire and New England Revolution academies and U.S. youth teams, chose to play for Bosnia and Herzegovina, his parents' homeland, and now lines up against the United States in the World Cup round of 32.",
-        "sources": [
-          {
-            "source": "Guardian World Cup 2026",
-            "title": "Meet Wisconsin-born Esmir Bajraktarević, the man who could bring down the US",
-            "url": "https://www.theguardian.com/football/2026/jun/30/esmir-bajraktarevic-bosnia-and-herzegovina-usmnt"
-          }
-        ],
-        "_anchor": "i-af65f91b4a"
-      },
-      {
-        "title": "Balogun Draws PSG, Chelsea, Spurs Interest",
-        "latest_developments": "ESPN's transfer roundup June 30 reported that USMNT striker Folarin Balogun has drawn interest from Paris Saint-Germain, Chelsea, and Tottenham Hotspur.",
-        "summary": "Folarin Balogun, the United States striker who scored twice in the group stage, has attracted transfer interest from Paris Saint-Germain, Chelsea, and Tottenham Hotspur, ESPN reported, as his World Cup form lifts his market value.",
+        "title": "Pulisic Fit for Bosnia Knockout",
+        "latest_developments": "Christian Pulisic said he is fit to go the full distance in the United States' World Cup round-of-32 match against Bosnia and Herzegovina on Wednesday, July 1.",
+        "summary": "USMNT attacker Christian Pulisic, recovered from a calf injury, declared himself ready for however long the knockout clash against Bosnia and Herzegovina lasts as the co-hosts open the round of 32.",
         "sources": [
           {
             "source": "ESPN Soccer",
-            "title": "Transfer rumors, news: Olise asks for Bayern meeting",
-            "url": "https://www.espn.com/soccer/story/_/id/49223257/transfer-rumors-news-michael-olise-asks-bayern-munich-meeting-amid-real-madrid-psg"
+            "title": "Pulisic says he is fit, ready to go for USMNT",
+            "url": "https://www.espn.com/soccer/story/_/id/49229606/christian-pulisic-says-fit-ready-go-distance-usmnt"
           }
         ],
-        "_anchor": "i-b22e5a3062"
+        "_anchor": "i-718ed6dbd7"
+      },
+      {
+        "title": "Malik Tillman Shines for USMNT",
+        "latest_developments": "ESPN profiled June 30 how Malik Tillman has flourished in an unfamiliar U.S. midfield role at the World Cup after a rough club season.",
+        "summary": "Malik Tillman, coming off a disappointing campaign with Bayer Leverkusen, has thrived in an unfamiliar midfield position for the United States, emerging as one of the team's standouts this tournament.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Malik Tillman is having a great World Cup for the USMNT",
+            "url": "https://www.espn.com/soccer/story/_/id/49214102/tillman-having-great-world-cup-usmnt-never-tell-himself"
+          }
+        ],
+        "_anchor": "i-fe33cbe163"
+      },
+      {
+        "title": "USMNT Preps for Penalty Drama",
+        "latest_developments": "The Guardian reported June 30 that the United States has hired outside firms, one measuring players' brainwaves, to decide its shootout takers.",
+        "summary": "Heading into the World Cup knockouts, Mauricio Pochettino's United States has leaned on consultants, including a company gauging players' brainwaves, to determine who shoots in a penalty shootout.",
+        "sources": [
+          {
+            "source": "Guardian World Cup 2026",
+            "title": "How USMNT prepare for World Cup penalty drama: confidence, composure and consultants",
+            "url": "https://www.theguardian.com/football/2026/jun/30/usmnt-penalty-kicks-mauricio-pochettino-world-cup"
+          }
+        ],
+        "_anchor": "i-ee2199797f"
       }
     ],
     "reading": [
@@ -416,28 +459,28 @@
         "author": "Ed Zitron",
         "title": "The AI Industry Is Losing",
         "url": "https://www.wheresyoured.at/the-ai-industry-is-losing/",
-        "summary": "Zitron argues the AI industry is structurally losing money, marshaling financial detail on Nvidia, Anthropic, and OpenAI to contend the boom cannot pay for itself.",
+        "summary": "Zitron argues the AI industry is failing to generate returns anywhere near its enormous spending, contending the boom is drifting toward a reckoning.",
         "_anchor": "i-1da004b0b1"
       },
       {
         "author": "Cal Newport",
         "title": "Beware of Productivity Paradoxes",
         "url": "https://calnewport.com/beware-of-productivity-paradoxes/",
-        "summary": "Newport revisits how the personal computer, a seeming productivity slam dunk, took years to show measurable economic gains, and warns the same paradox may dog AI.",
+        "summary": "Newport notes that technologies seemingly destined to boost productivity, like the personal computer, often fail to deliver the expected gains, and cautions against assuming AI will prove different.",
         "_anchor": "i-9c92dd3d7a"
       },
       {
         "author": "Stratechery",
         "title": "An Interview with Figma CEO Dylan Field About Design and AI",
         "url": "https://stratechery.com/2026/an-interview-with-figma-ceo-dylan-field-about-design-and-ai/",
-        "summary": "Ben Thompson interviews Figma chief executive Dylan Field on building the design tool and why Field believes AI gives the company a tailwind.",
+        "summary": "Thompson interviews Figma CEO Dylan Field about building the design company and why Field believes AI serves as a tailwind rather than a threat to its business.",
         "_anchor": "i-0132d18e67"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-06-30 16:05 EDT",
-    "items_considered": 67,
+    "generated_at": "2026-06-30 21:04 EDT",
+    "items_considered": 76,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
