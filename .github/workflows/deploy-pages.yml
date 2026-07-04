@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+# Custom Pages pipeline that replaces GitHub's auto-generated
+# "pages build and deployment" flow. The deploy step is retried so a
+# transient "Deployment failed, try again later." from the Pages backend
+# no longer fails the whole run. Requires Settings -> Pages -> Source to
+# be set to "GitHub Actions".
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let deploys pile up and wedge the github-pages environment.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.final.outputs.page_url || steps.try2.outputs.page_url || steps.try1.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages (attempt 1)
+        id: try1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Wait before retry
+        if: steps.try1.outcome == 'failure'
+        run: sleep 45
+
+      - name: Deploy to GitHub Pages (attempt 2)
+        id: try2
+        if: steps.try1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Wait before final attempt
+        if: steps.try1.outcome == 'failure' && steps.try2.outcome == 'failure'
+        run: sleep 90
+
+      - name: Deploy to GitHub Pages (final attempt)
+        id: final
+        if: steps.try1.outcome == 'failure' && steps.try2.outcome == 'failure'
+        uses: actions/deploy-pages@v4
