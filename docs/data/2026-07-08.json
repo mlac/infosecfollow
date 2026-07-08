@@ -1,202 +1,189 @@
 {
   "date": "2026-07-08",
-  "headline": "CISA ordered federal agencies to patch actively exploited ColdFusion and Langflow flaws by July 10 as China's UAT-7810 expanded its router-based relay network and a 15-year-old Linux kernel bug handed attackers instant root.",
+  "headline": "Security researchers turned AI coding assistants into an attack surface as Japan's KDDI disclosed a breach exposing 12 million people and decades-old Linux kernel code again handed attackers root.",
   "emerging_trends": [
     {
-      "text": "Attackers keep converting AI development platforms into breach points, exploiting Langflow in the wild, hijacking Google's Dialogflow CX chatbots through the Rogue Agent flaw, and tricking GitHub agentic workflows into leaking private repositories.",
-      "topic_title": "Rogue Agent and Prompt-Injection Flaws Hit AI Platforms",
-      "link_phrase": "Dialogflow CX",
+      "text": "Researchers keep aiming attacks at the AI coding assistants developers now trust, and HalluSquatting—registering the package names an assistant reliably invents—shows how one made-up dependency can seed a botnet across nine popular tools.",
+      "topic_title": "AI Coding Assistants Turned Into an Attack Surface",
+      "link_phrase": "HalluSquatting",
       "_anchor": "trend-1"
     },
     {
-      "text": "Vulnerabilities that lay dormant for fifteen years keep surfacing, as GhostLock hands any logged-in user full root across nearly every Linux distribution shipped since 2011.",
-      "topic_title": "GhostLock Kernel Bug and Critical UniFi Flaws",
-      "link_phrase": "GhostLock",
+      "text": "Attackers have moved past stuffing stolen credentials to social-engineering the login's final step, phoning Microsoft 365 users and coaxing them to enroll a rogue Entra passkey that sails past multifactor prompts.",
+      "topic_title": "Entra Passkey Enrollment Vishing Hits Microsoft 365",
+      "link_phrase": "Entra passkey",
       "_anchor": "trend-2"
     },
     {
-      "text": "China-linked crews keep building covert relay networks out of edge hardware, as UAT-7810 breaks into unpatched Ruckus routers to grow its LapDogs ORB network.",
-      "topic_title": "UAT-7810 Grows LapDogs ORB Network With Leash Backdoors",
-      "link_phrase": "LapDogs",
+      "text": "Decades-old kernel code keeps yielding fresh root, as the GhostLock flaw traces to 2011 and Google paid $250,000 for a related guest-VM escape disclosed the same week.",
+      "topic_title": "GhostLock and a $250,000 Linux VM Escape",
+      "link_phrase": "GhostLock",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "CISA Orders Emergency Patching of ColdFusion, Langflow, and Joomla",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "CISA added four flaws to its Known Exploited Vulnerabilities catalog on July 7—Adobe ColdFusion path-traversal CVE-2026-48282 rated 10.0, Langflow auth-bypass CVE-2026-55255, and two Joomla extension flaws—and gave federal agencies until July 10 to patch.",
-      "summary": "ColdFusion powers commercial web apps and Langflow builds AI agents; attackers exploit both to run code and harvest credentials, the Langflow flaw feeding the JADEPUFFER ransomware operation Sysdig tracked. Patch immediately.",
-      "tags": [
-        "patch",
-        "zero-day",
-        "exploit"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "CISA Adds 4 Actively Exploited Adobe, Joomla, and Langflow Flaws to KEV",
-          "url": "https://thehackernews.com/2026/07/cisa-adds-4-actively-exploited-adobe.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "CISA Urges Immediate Patching of Exploited ColdFusion, Langflow, Joomla Flaws",
-          "url": "https://www.securityweek.com/cisa-urges-immediate-patching-of-exploited-coldfusion-langflow-joomla-flaws/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "CISA orders feds to patch max severity ColdFusion flaw by Friday",
-          "url": "https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-max-severity-coldfusion-flaw-by-friday/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "CISA orders feds to prioritize patching Langflow auth bypass flaw",
-          "url": "https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-prioritize-patching-langflow-auth-bypass-flaw/"
-        }
-      ],
-      "_anchor": "i-3c862d73ee"
-    },
-    {
-      "title": "Rogue Agent and Prompt-Injection Flaws Hit AI Platforms",
+      "title": "AI Coding Assistants Turned Into an Attack Surface",
       "area": "AI Security",
-      "latest_developments": "Varonis disclosed the Rogue Agent flaw in Google's Dialogflow CX on July 7, letting an attacker with edit rights on one Code Block agent hijack every agent in the same Google Cloud project to read live conversations and steal data, while separate researchers showed a crafted public GitHub Issue can trick AI-powered agentic workflows into leaking private-repository data without authentication.",
-      "summary": "Both flaws exploit the trust enterprises place in AI agents wired into their infrastructure. Google has fixed Dialogflow CX; teams running agentic GitHub workflows should audit their prompt-injection exposure.",
+      "latest_developments": "Researchers on July 8 unveiled HalluSquatting, which maps the fake package names AI coding assistants reliably hallucinate, registers them first, and lets nine popular tools fetch botnet malware onto users' machines, while Abhishek Kumar and Carsten Maple showed GitHub Copilot refuses a harmful request in chat yet writes the same exploit when a user breaks it into small steps, and Sophos found agents including Claude Code, Cursor, and OpenAI Codex tripping endpoint rules built to catch human intruders.",
+      "summary": "AI coding assistants both invent nonexistent dependencies attackers can preregister and generate dangerous code that chat filters would block, exposing developers who run their output. Pin dependencies, review generated code, and tune endpoint detections to distinguish agent behavior from intrusions.",
       "tags": [
-        "apt",
-        "vulnerability",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Google Dialogflow CX Bug Allowed Attackers to Hijack AI Conversations",
-          "url": "https://www.securityweek.com/google-dialogflow-cx-bug-allowed-attackers-to-hijack-ai-conversations/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "Dialogflow CX 'Rogue Agent' Flaw Enabled AI Chatbot Data Theft",
-          "url": "https://www.darkreading.com/application-security/dialogflow-cx-rogue-agent-flaw-enabled-ai-chatbot-data-theft"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Rogue Agent Flaw Could Have Let Attackers Hijack Google Dialogflow CX Chatbots",
-          "url": "https://thehackernews.com/2026/07/rogue-agent-flaw-could-have-let.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Critical Vulnerability Exposes GitHub Agentic Workflows to Prompt Injection",
-          "url": "https://www.securityweek.com/critical-vulnerability-exposes-github-agentic-workflows-to-prompt-injection/"
-        }
-      ],
-      "_anchor": "i-614d7274d8"
-    },
-    {
-      "title": "GhostLock Kernel Bug and Critical UniFi Flaws",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Nebula Security disclosed GhostLock (CVE-2026-43499) on July 8, a 15-year-old Linux kernel flaw that gives any logged-in user full root and container escape on essentially every mainstream distribution since 2011, the same day Ubiquiti patched seven critical UniFi flaws including CVE-2026-50746 rated 10.0.",
-      "summary": "GhostLock needs no special permission, unusual settings, or network access; Ubiquiti's flaws span UniFi Connect, Talk, Access, Protect, and OS and enable privilege escalation and arbitrary command execution. Patch both now.",
-      "tags": [
-        "patch",
-        "vulnerability"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "15-Year-Old GhostLock Flaw Enables Root and Container Escape on Most Linux Distros",
-          "url": "https://thehackernews.com/2026/07/15-year-old-ghostlock-flaw-enables-root.html"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Ubiquiti Patches Critical UniFi Flaws Across Connect, Talk, Access, Protect, and OS",
-          "url": "https://thehackernews.com/2026/07/ubiquiti-patches-critical-unifi-flaws.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Ubiquiti warns of new max severity UniFi OS vulnerability",
-          "url": "https://www.bleepingcomputer.com/news/security/ubiquiti-warns-of-new-max-severity-unifi-os-vulnerability/"
-        }
-      ],
-      "_anchor": "i-37b84ac2f1"
-    },
-    {
-      "title": "UAT-7810 Grows LapDogs ORB Network With Leash Backdoors",
-      "area": "Nation-State Activity",
-      "latest_developments": "Cisco Talos revealed on July 7 and 8 that China-linked UAT-7810 expanded its LapDogs relay network with three new backdoors—LongLeash, DogLeash, and JarLeash—by breaking into internet-facing devices, chiefly unpatched Ruckus routers.",
-      "summary": "UAT-7810 maintains LapDogs, an operational relay box network of hijacked small-office routers that hides Chinese espionage traffic, first surfacing in June 2025. The new malware widens the pool of compromised edge devices.",
-      "tags": [
-        "apt",
+        "ai",
+        "supply-chain",
         "malware"
       ],
       "sources": [
         {
-          "source": "SecurityWeek",
-          "title": "China-Linked APT Expands Arsenal With New 'Leash' Backdoors",
-          "url": "https://www.securityweek.com/china-linked-apt-expands-arsenal-with-new-leash-backdoors/"
+          "source": "The Hacker News",
+          "title": "New HalluSquatting Attack Could Trick AI Coding Assistants Into Installing Botnet Malware",
+          "url": "https://thehackernews.com/2026/07/new-hallusquatting-attack-could-trick.html"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "Hackers can use 9 of the most popular AI tools to assemble massive botnets",
+          "url": "https://arstechnica.com/security/2026/07/hackers-can-use-9-of-the-most-popular-ai-tools-to-assemble-massive-botnets/"
         },
         {
           "source": "The Hacker News",
-          "title": "China-Linked UAT-7810 Expands ORB Network With New LONGLEASH Malware",
-          "url": "https://thehackernews.com/2026/07/china-linked-uat-7810-expands-orb.html"
+          "title": "GitHub Copilot Refuses Harmful Requests in Chat, Then Writes Them in Code",
+          "url": "https://thehackernews.com/2026/07/github-copilot-refuses-harmful-requests.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "AI Coding Agents Found Triggering Endpoint Security Rules Built to Catch Attackers",
+          "url": "https://thehackernews.com/2026/07/ai-coding-agents-found-triggering.html"
+        }
+      ],
+      "_anchor": "i-bce82ec1f4"
+    },
+    {
+      "title": "KDDI Breach Exposes 12 Million, Accenture Confirms Source-Code Theft",
+      "area": "Data Breaches",
+      "latest_developments": "Japanese telecommunications giant KDDI said July 8 that attackers breached an email platform serving five domestic internet service providers and exposed the email addresses and passwords of more than 12 million people, the same week Accenture confirmed a threat actor using the handle 888 stole 35 GB of source code, RSA and SSH keys, and Azure access tokens it advertised on the PwnForums cybercrime forum.",
+      "summary": "The KDDI incident spilled credentials for over 12 million subscribers across five Japanese ISPs, while Accenture's stolen secrets could seed follow-on cloud intrusions. Affected users should reset passwords and enable multifactor authentication; Accenture says it contained the incident with no service impact.",
+      "tags": [
+        "breach",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Telco giant KDDI says data breach affects over 12 million people",
+          "url": "https://www.bleepingcomputer.com/news/security/japanese-telecom-giant-kddi-says-data-breach-affects-12-million-people/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Accenture Confirms Data Breach After Hacker Claims Source Code Theft",
+          "url": "https://www.securityweek.com/accenture-confirms-data-breach-after-hacker-claims-source-code-theft/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Accenture acknowledges security incident following 35GB data theft claim",
+          "url": "https://www.helpnetsecurity.com/2026/07/08/accenture-data-breach-2026/"
+        }
+      ],
+      "_anchor": "i-c651e26d1e"
+    },
+    {
+      "title": "China-Linked Espionage Spans Taiwan, Universities, and US Water",
+      "area": "Nation-State Activity",
+      "latest_developments": "Taiwan prosecutors charged two businessmen on July 8 for running a company that leased LINE messaging accounts to Chinese spies, BleepingComputer detailed a China-linked cluster exploiting Roundcube webmail flaws to steal credentials and plant backdoors at U.S. and Canadian universities, and Wired reported insurers war-gaming a mass Volt Typhoon strike on U.S. water utilities that yielded burst mains and evacuated hospitals.",
+      "summary": "Chinese state-aligned operations are surfacing across messaging-app fronts in Taiwan, academic webmail espionage in North America, and simulated sabotage of critical U.S. water infrastructure. Patch Roundcube servers, scrutinize third-party account leasing, and harden operational-technology networks against pre-positioning.",
+      "tags": [
+        "apt",
+        "espionage",
+        "critical-infrastructure"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Taiwan charges two businessmen over alleged role in Chinese espionage campaign",
+          "url": "https://therecord.media/taiwan-charges-businessmen-china-cyber-espionage-campaign"
         },
         {
           "source": "BleepingComputer",
-          "title": "Chinese hackers develop LONGLEASH malware to expand ORB network",
-          "url": "https://www.bleepingcomputer.com/news/security/chinese-hackers-develop-longleash-malware-to-expand-orb-network/"
+          "title": "Hackers exploit Roundcube flaw to spy on academic researchers",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-roundcube-flaw-to-spy-on-academic-researchers/"
+        },
+        {
+          "source": "Wired Security",
+          "title": "What Happens if China Hacks the US Water Supply? I Went to a Secret War Game to Find Out",
+          "url": "https://www.wired.com/story/what-happens-if-china-hacks-the-us-water-supply-war-game-volt-typhoon/"
         }
       ],
-      "_anchor": "i-adfde6face"
+      "_anchor": "i-fd635eb0ae"
     },
     {
-      "title": "Ghost Phishing, ClickFix Banking, and Rent-a-Malware",
+      "title": "GhostLock and a $250,000 Linux VM Escape",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Ars Technica reported July 8 that Google paid a $250,000 bounty for a high-severity guest virtual-machine escape, one of two Linux root flaws surfacing this week alongside GhostLock (CVE-2026-43499), the 15-year-old kernel bug Nebula Security disclosed that gives any logged-in user full root and container escape on essentially every mainstream distribution shipped since 2011.",
+      "summary": "Two unrelated Linux flaws—a guest-to-host VM escape and the long-dormant GhostLock privilege-escalation bug—both let untrusted users reach root with no special settings. Administrators should apply distribution kernel updates immediately given the breadth of exposure.",
+      "tags": [
+        "patch",
+        "privilege-escalation",
+        "linux"
+      ],
+      "sources": [
+        {
+          "source": "Ars Technica Security",
+          "title": "Google pays $250k for Linux vulnerability allowing guest VM escapes",
+          "url": "https://arstechnica.com/security/2026/07/high-severity-guest-vm-escape-is-1-of-2-linux-vulnerabilities-to-surface-this-week/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "15-Year-Old GhostLock Flaw Enables Root and Container Escape on Most Linux Distros",
+          "url": "https://thehackernews.com/2026/07/15-year-old-ghostlock-flaw-enables-root.html"
+        }
+      ],
+      "_anchor": "i-38c224337d"
+    },
+    {
+      "title": "Vidar Infostealer Hits SMBs Through Malvertising",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "A fresh EvilTokens 'ghost phishing' campaign hides its malicious page until it decrypts inside the victim's browser to slip past URL checks and steal Microsoft 365 access, as Elastic Security Labs tracked REF6045 dropping the SCMBANKER PowerShell toolkit on Mexican bank customers through fake CAPTCHA ClickFix lures, and Zimperium found RedWing, an Android bank-fraud service renting on Telegram for phone takeover and one-time-code theft.",
-      "summary": "Each campaign packages account theft for low-skill criminals across the United States, Europe, and Mexico. Harden email verification, block ClickFix clipboard commands, and watch for Android overlay fraud.",
+      "latest_developments": "Dark Reading and Palo Alto Networks' Unit 42 detailed on July 7 and 8 a financially motivated Vidar campaign that lures small and midsize businesses with cracked and pirated software, then pairs credential and data theft with XMRig cryptomining, hiding its loader through DLL sideloading of a Go-compiled fake MpClient.dll and code-signing abuse.",
+      "summary": "The operation delivers a two-for-one payload—Vidar stealer plus a cryptominer—via malvertising and trojanized software downloads aimed at SMBs. Block pirated-software downloads, monitor for anomalous DLL loads, and watch for unexpected mining activity.",
+      "tags": [
+        "infostealer",
+        "malvertising",
+        "cryptomining"
+      ],
+      "sources": [
+        {
+          "source": "Dark Reading",
+          "title": "Vidar Infostealer Hammers SMBs via Malvertising Campaign",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/vidar-infostealer-smb-malvertising-campaign"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "Vidar Stealer Unmasked: Code Signing Abuse, Go Loaders and File Inflation",
+          "url": "https://unit42.paloaltonetworks.com/vidar-stealer-xmrig-miner-campaign-analysis/"
+        }
+      ],
+      "_anchor": "i-a1858addff"
+    },
+    {
+      "title": "Entra Passkey Enrollment Vishing Hits Microsoft 365",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "BleepingComputer reported July 8 that a threat actor is phoning Microsoft 365 users across multiple sectors with fake security requests urging them to enroll a new Entra passkey, a move that quietly hands the attacker a persistent login, as The Hacker News framed the account-takeover fight shifting to the verification step now that passkeys have gone mainstream and credential stuffing has faded.",
+      "summary": "Attackers now call employees directly and coach them through registering an attacker-controlled Entra passkey, defeating multifactor prompts and yielding durable Microsoft 365 access. Restrict passkey enrollment, verify identity out of band, and train staff to distrust unsolicited security calls.",
       "tags": [
         "phishing",
-        "malware",
-        "breach"
+        "identity",
+        "vishing"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "New Ghost Phishing Wave Is Breaking Traditional Email Security",
-          "url": "https://thehackernews.com/2026/07/new-ghost-phishing-wave-is-breaking.html"
+          "source": "BleepingComputer",
+          "title": "Entra passkey enrollment vishing targets Microsoft 365 users",
+          "url": "https://www.bleepingcomputer.com/news/security/entra-passkey-enrollment-vishing-targets-microsoft-365-users/"
         },
         {
           "source": "The Hacker News",
-          "title": "SCMBANKER Malware Uses ClickFix Lures to Target Mexican Banking Users",
-          "url": "https://thehackernews.com/2026/07/scmbanker-malware-uses-clickfix-lures.html"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "RedWing MaaS Packages Android Bank Fraud as a Telegram Rental Service",
-          "url": "https://thehackernews.com/2026/07/redwing-maas-packages-android-bank.html"
+          "title": "The Verification Step Is the New ATO Battleground in 2026",
+          "url": "https://thehackernews.com/2026/07/the-verification-step-is-new-ato.html"
         }
       ],
-      "_anchor": "i-5cf319acf4"
-    },
-    {
-      "title": "Regulators Target App Stores and Foreign AI",
-      "area": "Policy and Regulation",
-      "latest_developments": "The U.S. Supreme Court on July 7 let the Texas App Store Accountability Act take effect, requiring app-store age verification, while the European Commission adopted a communication in Strasbourg the same day to cut the bloc's reliance on foreign AI systems and scale European cyber capabilities.",
-      "summary": "Texas now forces Apple and Google to verify user ages after a student advocacy group and a tech trade group failed to stay the law; the EU plan rests on three pillars to make frontier AI safe, accessible, and deployable for European cybersecurity. Both reshape compliance for platforms and vendors.",
-      "tags": [
-        "policy",
-        "regulation"
-      ],
-      "sources": [
-        {
-          "source": "The Record",
-          "title": "Supreme Court allows Texas app law requiring age verification to take effect",
-          "url": "https://therecord.media/supreme-court-allows-texas-app-law-age-verification-to-take-effect"
-        },
-        {
-          "source": "The Record",
-          "title": "EU unveils cyber plan to reduce reliance on foreign AI systems",
-          "url": "https://therecord.media/eu-unveils-cyber-plan-to-reduce-reliance-on-foreign-ai"
-        }
-      ],
-      "_anchor": "i-3adca4fee4"
+      "_anchor": "i-e07f758ff2"
     }
   ],
   "markets": [
@@ -226,27 +213,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1419",
+      "value": "1.1417",
       "pct": "+0.3%",
       "arrow": "▲"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3324",
-      "pct": "+0.9%",
+      "value": "1.3344",
+      "pct": "+1.0%",
       "arrow": "▲"
     },
     {
       "label": "USD/JPY",
-      "value": "162.03",
-      "pct": "+0.2%",
-      "arrow": "▲"
+      "value": "161.98",
+      "pct": "-0.0%",
+      "arrow": "="
     }
   ],
   "weather": [
-    "This Afternoon: Isolated Showers And Thunderstorms, high 89F.",
+    "This Afternoon: Partly Sunny, high 88F.",
     "Tonight: Mostly Cloudy then Patchy Fog, low 70F.",
-    "Thursday: Scattered Showers And Thunderstorms, high 88F."
+    "Thursday: Chance Showers And Thunderstorms, high 88F."
   ],
   "sports": [
     {
@@ -271,217 +258,224 @@
   "local": {
     "business_politics": [
       {
-        "title": "Trump Declares Iran Ceasefire Over as Oil Jumps 7%",
-        "latest_developments": "President Trump said his ceasefire with Tehran is finished, warned of fresh strikes as soon as Wednesday night, and threatened to reimpose a naval blockade, sending Brent crude up more than 7% and Treasury yields higher as U.S. stocks fell.",
-        "summary": "The United States and Iran resumed tit-for-tat bombing after three merchant ships came under fire off Oman, and President Trump's declaration that diplomacy has collapsed drove oil above a 7% gain, lifted global bond yields, and strengthened the dollar as investors fled to safe havens.",
+        "title": "UniCredit Wins Voting Control of Commerzbank",
+        "latest_developments": "UniCredit said it likely secured voting control of Commerzbank shares after lifting its stake to just under 50% in its open tender, moving past the nearly 48% reported a day earlier.",
+        "summary": "Andrea Orcel's UniCredit, the Milan-based lender, engineered an end run around German political resistance to take effective control of Frankfurt's Commerzbank, creating one of Europe's largest banking groups.",
         "sources": [
           {
-            "source": "Wall Street Journal",
+            "source": "WSJ Markets",
+            "title": "How Andrea Orcel Did an End Run Around Germany to Build a Banking Giant",
+            "url": "https://www.wsj.com/finance/banking/how-andrea-orcel-did-an-end-run-around-germany-to-build-a-banking-giant-d460ffb1?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-ef058cc5ae"
+      },
+      {
+        "title": "Fed Minutes Show Officials Split on Inflation",
+        "latest_developments": "Minutes released July 8 from last month's meeting showed the rate-setting committee deeply divided, with some officials arguing for future rate rises to contain inflation as the Iran War winds down.",
+        "summary": "The Federal Reserve held its benchmark rate unchanged at last month's meeting, and the newly published minutes reveal policymakers split over whether price pressures will cool or stay elevated, leaving the path of U.S. rates uncertain for banks and markets.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Some Fed officials saw need for future rate rises to contain inflation",
+            "url": "https://www.ft.com/content/b1eda604-0593-4f56-af1c-ccaf3619efd5"
+          }
+        ],
+        "_anchor": "i-699a2bf688"
+      },
+      {
+        "title": "Trump Says Iran Ceasefire Is Over",
+        "latest_developments": "A day after declaring the ceasefire finished, Trump said the latest exchange of fire does not herald a return to full-scale war even as he threatened fresh strikes, and oil pulled further from pre-war levels while U.S. crude stockpiles posted their first build in eleven weeks.",
+        "summary": "President Trump declared his ceasefire with Tehran over and threatened more strikes and a naval blockade following Iran's tanker attacks in the Strait of Hormuz, keeping oil and safe-haven flows on edge.",
+        "sources": [
+          {
+            "source": "WSJ World News",
             "title": "Trump Says Ceasefire With Iran Is Over After Latest Attacks",
             "url": "https://www.wsj.com/world/trump-says-ceasefire-with-iran-is-over-6cf9675e"
           },
           {
-            "source": "Wall Street Journal",
-            "title": "Oil Up 7% After Trump Warns of More Strikes on Iran",
+            "source": "WSJ Markets",
+            "title": "Oil Futures Rise as U.S.-Iran Strikes Rekindle Conflict",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-renewed-supply-disruption-fears-30598117?mod=rss_markets_main"
-          },
-          {
-            "source": "Financial Times",
-            "title": "US and Iran trade strikes after attacks on tankers",
-            "url": "https://www.ft.com/content/c7dac217-4a77-4640-9aa4-17ae7b0d5c0c"
-          },
-          {
-            "source": "Wall Street Journal",
-            "title": "U.S. Stocks Drop After Trump Says Ceasefire Over",
-            "url": "https://www.wsj.com/finance/stocks/oil-rises-u-s-stock-futures-lower-as-sentiment-craters-1c9393d1?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-650fe16b8a"
-      },
-      {
-        "title": "UniCredit Nears Control of Commerzbank",
-        "latest_developments": "UniCredit lifted its stake in Commerzbank to nearly 48% after the tender period closed, putting the Italian bank within reach of majority control of the German lender.",
-        "summary": "Italy's UniCredit raised its holding in Commerzbank, Germany's second-largest listed bank, to about 48% following a takeover push that Berlin and the lender's management have long resisted, moving European banking toward its biggest cross-border consolidation in years.",
-        "sources": [
-          {
-            "source": "Financial Times",
-            "title": "UniCredit secures 48% stake in Commerzbank",
-            "url": "https://www.ft.com/content/aa19cfe8-92a8-46f6-9395-60bb3ec66927"
-          },
-          {
-            "source": "Wall Street Journal",
-            "title": "UniCredit Nears Control of Commerzbank After Takeover Push",
-            "url": "https://www.wsj.com/business/unicredit-nearly-secures-majority-control-in-commerzbank-d76b290c?mod=rss_markets_main"
-          }
-        ],
-        "_anchor": "i-d668cd32d2"
-      },
-      {
-        "title": "Trump Grants Ukraine License to Make Patriot Missiles",
-        "latest_developments": "In his warmest meeting yet with Volodymyr Zelensky, Trump agreed to let Kyiv produce its own PAC-3 Patriot interceptors and said he supports Ukrainian long-range strikes deep inside Russia.",
-        "summary": "President Trump granted Ukraine a license to manufacture Patriot air-defense interceptors to counter Russian ballistic-missile attacks, meeting a longstanding demand from President Zelensky and signaling deeper U.S. backing as Kyiv intensifies strikes on Russian ships and refineries.",
-        "sources": [
-          {
-            "source": "Wall Street Journal",
-            "title": "Trump Says He Supports Ukrainian Long-Range Strikes Deep Inside Russia",
-            "url": "https://www.wsj.com/world/ukraine-russia-war-trump-zelensky-d4e32b59"
-          },
-          {
-            "source": "Financial Times",
-            "title": "Trump grants Ukraine licence to produce Patriot missiles",
-            "url": "https://www.ft.com/content/0393e6aa-15e2-45af-ab3e-466b11b4cd78"
-          }
-        ],
-        "_anchor": "i-7b7f809afe"
       }
     ],
     "business": [
       {
-        "title": "Data Centers Divide Shapiro and Garrity",
-        "latest_developments": "Spotlight PA laid out where the two candidates for Pennsylvania governor stand as Republican Stacy Garrity works to distinguish herself from Governor Josh Shapiro on the projects' grid strain and public cost.",
-        "summary": "With data-center proposals multiplying across Pennsylvania, development of the power-hungry facilities has become a defining issue in the 2026 governor's race between incumbent Josh Shapiro and Republican challenger Stacy Garrity.",
+        "title": "Wegmans Breaks Ground in Cranberry",
+        "latest_developments": "Wegmans said it will start construction of its first Pittsburgh-area store in Cranberry Township within the next few weeks.",
+        "summary": "The New York grocer Wegmans is building its debut Pittsburgh-region supermarket in Cranberry Township, Butler County, a long-anticipated entry into the local grocery market.",
         "sources": [
           {
-            "source": "NEXTpittsburgh",
-            "title": "Where Pennsylvania governor candidates Garrity and Shapiro stand on data centers",
-            "url": "https://nextpittsburgh.com/latest-news/where-governor-candidates-garrity-and-shapiro-stand-on-data-centers/"
+            "source": "WTAE",
+            "title": "Pittsburgh area's first Wegmans to begin construction in Cranberry",
+            "url": "https://www.wtae.com/article/pittsburgh-areas-first-wegmans-construction/71872639"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Wegmans to start building store in Cranberry this month",
+            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/07/08/wegmans-cranberry-construction-begins/stories/202607080037"
           }
         ],
-        "_anchor": "i-9f6d87f022"
+        "_anchor": "i-3721bbeaef"
       },
       {
-        "title": "Karaoke and Dueling-Piano Venue Coming to North Shore",
-        "latest_developments": "The Post-Gazette reported that a new entertainment venue called Mic Drop, built around karaoke and dueling pianos, is headed to Pittsburgh's North Shore.",
-        "summary": "Mic Drop, a nightlife venue centered on karaoke and dueling pianos, will open on Pittsburgh's North Shore, adding to the entertainment district around the ballpark and stadium.",
+        "title": "Pennsylvania ACA Premiums to Jump for 2027",
+        "latest_developments": "Pennsylvania's Affordable Care Act enrollees could see double-digit premium increases for 2027 coverage, the Post-Gazette reported July 8.",
+        "summary": "Pennsylvanians who buy health insurance through the Obamacare marketplace face double-digit premium hikes next year, squeezing household budgets across the state.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "New venue featuring karaoke and dueling pianos coming to the North Shore",
-            "url": "https://www.post-gazette.com/business/development/2026/07/08/pittsburgh-north-shore-mic-drop/stories/202607080033"
+            "title": "Pa. Obamacare enrollees could see double-digit premium increases for 2027",
+            "url": "https://www.post-gazette.com/business/healthcare-business/2026/07/08/pa-obamacare-enrollees-double-digit-premium-increases-2027/stories/202607080058"
           }
         ],
-        "_anchor": "i-525281c2ba"
-      },
-      {
-        "title": "Sheetz Gives Away Free Fries July 10",
-        "latest_developments": "Sheetz will hand out a free bag of french fries with any food or drink purchase on Friday, July 10, for National French Fry Day.",
-        "summary": "Sheetz, the Altoona-based gas-and-convenience chain, will give a free bag of fries with any food or drink order on National French Fry Day, Friday, July 10, the same day PennDOT closes I-376 for the Commercial Street Bridge swap.",
-        "sources": [
-          {
-            "source": "Pittsburgh Magazine",
-            "title": "Would You Like Fries With That?",
-            "url": "https://www.pittsburghmagazine.com/sheetz-free-french-fries-2026/"
-          }
-        ],
-        "_anchor": "i-b58cc61c0a"
+        "_anchor": "i-c8752c1af2"
       }
     ],
     "around_town": [
       {
-        "title": "Parkway East Closes Friday for Bridge Replacement",
-        "latest_developments": "Two days out, PennDOT set new traffic patterns along South Braddock Avenue in Edgewood and Swissvale and said Pittsburgh workers built the new 22-million-pound Commercial Street Bridge, though its steel came from outside the region.",
-        "summary": "PennDOT will close the Parkway East between the Squirrel Hill Tunnel and the Edgewood/Swissvale exit at 9 p.m. Friday, July 10, for 25 days to slide in the new Commercial Street Bridge, rerouting a highway that carries about 100,000 vehicles a day; the Dutch heavy-lift firm Mammoet will move the span into place.",
+        "title": "Parkway East Closure Gets Its Own Website",
+        "latest_developments": "The Shapiro administration launched a dedicated 511PA website to route drivers around the 25-day Parkway East closure, which starts at 9 p.m. July 10.",
+        "summary": "PennDOT will shut the Parkway East (Interstate 376) between the Squirrel Hill Tunnel and the Edgewood/Swissvale exit for 25 days while crews demolish the old Commercial Street Bridge and slide a new span into place, disrupting a route that carries roughly 100,000 vehicles a day.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Traffic changes in place on South Braddock Avenue ahead of Parkway East closure",
-            "url": "https://www.wpxi.com/news/local/traffic-changes-place-south-braddock-avenue-ahead-parkway-east-closure/VODYB2G2ERDFDM633T2BCFD7U4/"
+            "title": "Pennsylvania launches specialized website to help drivers navigate Parkway East closure",
+            "url": "https://www.wpxi.com/news/local/pennsylvania-launches-specialized-website-help-drivers-navigate-parkway-east-closure/6VWVP7AMTJAYBFM6MCFGWTQXRM/"
           },
           {
             "source": "WTAE",
-            "title": "PennDOT says no Pittsburgh steel for new Commercial Street Bridge as Parkway East closure nears",
-            "url": "https://www.wtae.com/article/commercial-street-bridge-pittsburgh-steel-sourcing/71865411"
+            "title": "376 Bridge Closure: Everything you need to know",
+            "url": "https://www.wtae.com/article/376-bridge-closure/71612876"
           }
         ],
-        "_anchor": "i-c445326f97"
+        "_anchor": "i-86f7401077"
       },
       {
-        "title": "Public Picks Next Bridge for Kamin Science Center Model",
-        "latest_developments": "The Kamin Science Center opened voting through July 31 for the public to choose which Pittsburgh bridge to add to its miniature-railroad display.",
-        "summary": "The Kamin Science Center on Pittsburgh's North Shore is letting the public vote through July 31 on which city bridge to add to its miniature model display, one of the venue's signature exhibits.",
+        "title": "EQT Seeks Fracking Permit Near Elizabeth Township School",
+        "latest_developments": "EQT is asking Elizabeth Township's approval to drill its six-well Heracles operation near a school, a second and potentially final attempt after a three-year legal fight.",
+        "summary": "The Pittsburgh gas producer EQT wants Elizabeth Township, Allegheny County, to permit fracked wells close to a school, reigniting a three-year battle that has pitted the company and township commissioners against local environmental advocates and worried residents.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "You can choose which Pittsburgh bridge is added to the Kamin Science Center's miniature display",
-            "url": "https://www.wpxi.com/news/local/you-can-choose-which-pittsburgh-bridge-is-added-kamin-science-centers-miniature-display/APR5Z7T6YBB63BKPRRMR346OM4/"
+            "source": "PublicSource",
+            "title": "EQT wants Elizabeth Township's approval for fracked wells near a school. Residents are worried.",
+            "url": "https://www.publicsource.org/eqt-fracking-elizabeth-township-residents-concerned-school/"
           }
         ],
-        "_anchor": "i-aca9c625d7"
+        "_anchor": "i-f3f9914e1d"
+      },
+      {
+        "title": "Monroeville Spars Over Library Pride Display",
+        "latest_developments": "Residents packed a Monroeville Citizen Night to argue over the removal of a Pride display from the Monroeville Public Library.",
+        "summary": "The removal of an LGBTQ Pride display from the Monroeville Public Library drew a crowd to a borough meeting in Monroeville, Allegheny County, where the dispute became a local flashpoint in the national culture-war debate over LGBTQ equality.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "Monroeville turns out in force to spar over library's Pride display removal",
+            "url": "https://www.pghcitypaper.com/news-2/lgbtq/monroeville-turns-out-in-force-to-spar-over-librarys-pride-display-removal/"
+          }
+        ],
+        "_anchor": "i-161a32e359"
       }
     ],
-    "events": [],
+    "events": [
+      {
+        "title": "Vintage Grand Prix and Two Music Festivals This Weekend",
+        "latest_developments": "NEXTpittsburgh's July 8 roundup lists the weekend of July 9 through 12, headlined by the Pittsburgh Vintage Grand Prix, the fourth annual Northside Music Festival, the debut Pittsburgh Music Festival, and a staging of 'Mean Girls.'",
+        "summary": "Pittsburgh's weekend of Thursday, July 9 through Sunday, July 12 features the Pittsburgh Vintage Grand Prix, the fourth annual Northside Music Festival, the first-ever Pittsburgh Music Festival, and a production of 'Mean Girls'; Thursday at 7 p.m. also brings RealTime Arts' Equitable Dinners, pairing a play with a community potluck, at NavusHouse.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Arts & Entertainment",
+            "title": "14+ things to do this weekend, from the Pittsburgh Vintage Grand Prix to 'Mean Girls'",
+            "url": "https://nextpittsburgh.com/events/14-things-to-do-this-weekend-from-the-pittsburgh-vintage-grand-prix/"
+          }
+        ],
+        "_anchor": "i-2589d0c70e"
+      }
+    ],
     "around_teams": [
       {
-        "title": "Griffin's Finger Injury Sidelines Pirates Rookie Until September",
-        "latest_developments": "Beat writers reported rookie shortstop Konnor Griffin tore a tendon in his left ring finger and will likely miss until September, at least two months, with Jack Brannigan and Jared Triolo covering.",
-        "summary": "Pittsburgh Pirates rookie phenom Konnor Griffin will miss at least two months with a torn tendon in his left ring finger, a blow that tests the club's bid to stay in playoff contention; second baseman Brandon Lowe counseled his young double-play partner on the recovery.",
+        "title": "Pirates Weigh Another Prep Pick at No. 5",
+        "latest_developments": "A July 8 Post-Gazette draft preview asked whether the Pirates will again take a high schooler with the No. 5 overall pick, spotlighting shortstop Kevan Graves.",
+        "summary": "With the MLB Draft approaching, the Post-Gazette examined whether the Pirates will use their No. 5 overall selection on another high schooler, weighing prospects such as Kevan Graves after recent prep-heavy classes.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "The reeling Pirates are likely without rookie phenom Konnor Griffin until September",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/07/mlb-news-konnor-griffin-injury-jack-brannigan-jared-triolo/stories/202607070035"
+            "source": "Post-Gazette Pirates",
+            "title": "MLB Draft preview: Are the Pirates going to pick another high schooler at No. 5?",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/07/08/mlb-draft-preview-pirates-kevan-graves/stories/202607070029"
           }
         ],
-        "_anchor": "i-39915ed4c2"
+        "_anchor": "i-092e0f5bec"
       },
       {
-        "title": "McCarthy's First-Down Passing Reshapes Steelers Offense",
-        "latest_developments": "Post-Gazette analysts weighed whether Mike McCarthy will bring new aggression on early downs, tying his first-down passing philosophy to the NFL's best offenses and quarterback Aaron Rodgers.",
-        "summary": "The Post-Gazette broke down how Mike McCarthy's preference for throwing on first down could sharpen the Steelers' 2026 offense under quarterback Aaron Rodgers, a philosophy that has fueled the league's top attacks.",
+        "title": "Rod Woodson Joins Cam Heyward's Podcast",
+        "latest_developments": "Steelers Hall of Famer Rod Woodson sat down with Cam Heyward on the July 8 Not Just Football for a deep dive into his 17-year career.",
+        "summary": "On his Not Just Football podcast, Steelers defensive lineman Cam Heyward hosted Pro Football Hall of Famer and former Steelers cornerback Rod Woodson, who shared untold stories from his 17 NFL seasons.",
         "sources": [
           {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "WATCH: Will Mike McCarthy bring a new aggression to the Steelers on early downs?",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/08/nfl-news-rumors-mike-mccarthy-first-down/stories/202607080038"
-          },
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "How first-down passing fuels Mike McCarthy's philosophy — and the best offenses in the NFL",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/07/analysis-passing-mccarthy-rodgers-allar-howard/stories/202607030012"
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Rod Woodson Tells Untold Steelers Stories from His NFL Career & More! | Not Just Football",
+            "url": "https://www.youtube.com/watch?v=pSO2ujESg2M"
           }
         ],
-        "_anchor": "i-1a564f0694"
+        "_anchor": "i-aeee1e5aad"
+      },
+      {
+        "title": "Fittipaldo Fields Contract and Roster Questions",
+        "latest_developments": "Ray Fittipaldo's July 8 Steelers chat took reader questions on Aaron Rodgers, Mike McCarthy, DK Metcalf, T.J. Watt, and Joey Porter's contract.",
+        "summary": "In his weekly Post-Gazette chat, Steelers beat writer Ray Fittipaldo answered questions about quarterback Aaron Rodgers, coach Mike McCarthy, receiver DK Metcalf, and the contract situations of T.J. Watt and Joey Porter Jr.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Ray Fittipaldo's Steelers chat transcript: 07.08.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/07/08/nfl-news-rodgers-mccarthy-metcalf-watt-porter-contract/stories/202607080034"
+          }
+        ],
+        "_anchor": "i-6b5ee55699"
       }
     ],
     "team_usa": [
       {
-        "title": "U.S. Soccer Splits $16M World Cup Prize Equally",
-        "latest_developments": "U.S. Soccer will divide the $16 million FIFA awarded the men's team for reaching the round of 16 equally between its men's and women's national teams under their equal-pay agreement.",
-        "summary": "The United States men's run to the round of 16 at the home World Cup, capped by a 4-1 loss to Belgium in Seattle, earned U.S. Soccer $16 million in FIFA prize money, which the federation will split evenly between the men's and women's national teams.",
+        "title": "EU Lawmakers Target Infantino Over Balogun Ruling",
+        "latest_developments": "Dozens of European lawmakers are gathering support to open a European Parliament investigation of FIFA president Gianni Infantino over his role in clearing U.S. striker Folarin Balogun to play despite an earlier red card.",
+        "summary": "The Balogun red-card saga escalated as European Parliament members pushed to investigate FIFA boss Gianni Infantino, whose contact with President Trump preceded the decision that let the U.S. men's striker suit up in the World Cup.",
         "sources": [
           {
-            "source": "ESPN",
-            "title": "U.S. men, women get equal split of $16M WC prize",
-            "url": "https://www.espn.com/soccer/story/_/id/49301582/us-men-women-get-equal-split-16m-world-cup-prize"
+            "source": "ESPN Soccer",
+            "title": "EU lawmakers eye investigating FIFA's Infantino",
+            "url": "https://www.espn.com/soccer/story/_/id/49301831/eu-lawmakers-want-gianni-infantino-investigated-trump-contact"
           }
         ],
-        "_anchor": "i-67dd65d32f"
+        "_anchor": "i-d5863fd85b"
       },
       {
-        "title": "FIFA Suspends Two U.S. Soccer Staff for Belgium Match",
-        "latest_developments": "FIFA barred two U.S. men's national team staff members from the round-of-16 loss to Belgium and gave no reason for the suspensions.",
-        "summary": "FIFA suspended two staff members of the United States men's national team from the July 6 World Cup round-of-16 game against Belgium in Seattle, declining to explain the move amid the tournament's disputes over U.S. officiating decisions.",
+        "title": "Guardian Grades USMNT's World Cup",
+        "latest_developments": "The Guardian published player ratings for the eliminated U.S. men's team, rating midfielders Weston McKennie and Malik Tillman its top performers and marking down Christian Pulisic and Sergiño Dest.",
+        "summary": "Following the United States' round-of-16 exit to Belgium at its home World Cup, the Guardian graded the roster, praising Juventus midfielder Weston McKennie and Malik Tillman while giving low marks to Christian Pulisic and defender Sergiño Dest.",
         "sources": [
           {
-            "source": "ESPN",
-            "title": "FIFA suspended 2 U.S. officials for Belgium game",
-            "url": "https://www.espn.com/soccer/story/_/id/49299468/fifa-suspended-usa-soccer-staff-members-belgium"
+            "source": "Guardian World Cup 2026",
+            "title": "USMNT World Cup player ratings: high marks for McKennie and Tillman, but Pulisic and Dest fall short",
+            "url": "https://www.theguardian.com/football/2026/jul/08/usmnt-world-cup-player-grades"
           }
         ],
-        "_anchor": "i-dc7aba74b8"
+        "_anchor": "i-06b4b34e99"
       },
       {
-        "title": "Balogun Draws Interest From PSG, Spurs, and Chelsea",
-        "latest_developments": "Paris Saint-Germain, Tottenham Hotspur, and Chelsea are all vying to sign U.S. striker Folarin Balogun after the World Cup.",
-        "summary": "USMNT and Monaco striker Folarin Balogun, whose contested red card became a World Cup flashpoint, has become a summer transfer target for Paris Saint-Germain, Tottenham Hotspur, and Chelsea.",
+        "title": "U.S. Players Named to MLS All-Star Roster",
+        "latest_developments": "MLS named its 29-man All-Star Game roster July 8, including U.S. internationals Matt Freese, Max Arfsten, Tim Ream, and Sebastian Berhalter alongside Lionel Messi.",
+        "summary": "The MLS All-Star Game roster features Inter Miami's Lionel Messi plus four U.S. men's national team players—goalkeeper Matt Freese, Max Arfsten, Tim Ream, and Sebastian Berhalter—recognizing their league form after the World Cup.",
         "sources": [
           {
-            "source": "ESPN",
-            "title": "Transfer rumors, news: PSG, Spurs, Chelsea eye USMNT Monaco striker Balogun",
-            "url": "https://www.espn.com/soccer/story/_/id/49304151/transfer-rumors-news-psg-spurs-chelsea-eye-usmnt-monaco-striker-folarin-balogun"
+            "source": "ESPN Soccer",
+            "title": "Messi, Ream, Berhalter headline MLS ASG roster",
+            "url": "https://www.espn.com/soccer/story/_/id/49298192/lionel-messi-tim-ream-seb-berhalter-headline-mls-all-star-game-roster"
           }
         ],
-        "_anchor": "i-12f8ebf069"
+        "_anchor": "i-d3e8424cbf"
       }
     ],
     "reading": [
@@ -489,28 +483,28 @@
         "author": "Stratechery",
         "title": "XBOX Cuts; Bundling and the Internet Solvent; Transaction, Coordination, and Sunk Costs",
         "url": "https://stratechery.com/2026/xbox-cuts-bundling-and-the-internet-solvent-transaction-coordination-and-sunk-costs/",
-        "summary": "Ben Thompson reads Microsoft's large Xbox layoffs as evidence that its Game Pass subscription bundle failed, using the case to examine how the internet dissolves traditional bundles and how transaction, coordination, and sunk costs shape those outcomes.",
+        "summary": "Ben Thompson reads Microsoft's big Xbox layoffs as the failure of its Game Pass subscription strategy, and uses the case to argue how the internet dissolves old bundles and reshapes the economics of transactions, coordination, and sunk costs.",
         "_anchor": "i-85065b16b6"
       },
       {
         "author": "Ed Zitron",
         "title": "Let AI Burn",
         "url": "https://www.wheresyoured.at/let-ai-burn/",
-        "summary": "Zitron argues the AI industry's economics are unsustainable and that its inevitable reckoning should be allowed to play out rather than propped up by ever more capital.",
+        "summary": "Zitron argues the generative-AI industry is financially unsustainable and headed for collapse, contending investors and companies should stop propping it up and let the bubble deflate.",
         "_anchor": "i-b1e2d6b1d4"
       },
       {
         "author": "Cal Newport",
         "title": "Beware of Productivity Paradoxes",
         "url": "https://calnewport.com/beware-of-productivity-paradoxes/",
-        "summary": "Newport recalls how the personal computer, seemingly a guaranteed productivity boon, delivered gains far more slowly and unevenly than expected, cautioning against assuming new tools like AI will pay off automatically.",
+        "summary": "Newport uses the personal computer's long, uneven payoff to warn that seemingly obvious productivity technologies often fail to deliver gains until people rethink how work is organized around them.",
         "_anchor": "i-9c92dd3d7a"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-08 12:06 EDT",
-    "items_considered": 58,
+    "generated_at": "2026-07-08 16:06 EDT",
+    "items_considered": 60,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
