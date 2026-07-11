@@ -1,146 +1,137 @@
 {
   "date": "2026-07-11",
-  "headline": "Progress Software ordered ShareFile customers to power down their servers against a credible active threat, while researchers showed a single PNG image can hijack AI coding agents and drain a repository's secrets.",
+  "headline": "Attackers turned a JavaScript-security vendor's own npm package into an infostealer and abused GitHub's API for mass reconnaissance, driving home that the developer supply chain is the day's battleground.",
   "emerging_trends": [
     {
-      "text": "Attackers keep weaponizing AI coding agents, and the Ghostcommit technique shows a single booby-trapped PNG can slip past automated reviewers and drain a repository's secrets.",
-      "topic_title": "Ghostcommit Poisons AI Code Reviewers",
-      "link_phrase": "Ghostcommit",
+      "text": "Attackers keep bending developer infrastructure to their ends, poisoning the jscrambler npm package to drop a native infostealer while throwaway accounts quietly map GitHub organizations for their next round of targets.",
+      "topic_title": "Compromised jscrambler npm Package",
+      "link_phrase": "jscrambler",
       "_anchor": "trend-1"
     },
     {
-      "text": "Web-facing enterprise software drew fire from every direction, from Progress ShareFile's emergency shutdown to a fresh Zimbra remote-code-execution bug and a global campaign against content management systems.",
-      "topic_title": "Progress Orders ShareFile Servers Shut Down",
-      "link_phrase": "ShareFile",
+      "text": "Artificial intelligence now cuts both ways in vulnerability research, this week unearthing a root-privilege bug in the Linux kernel that human reviewers walked past for fifteen years.",
+      "topic_title": "AI Uncovers 15-Year-Old Linux Root Bug",
+      "link_phrase": "Linux kernel",
       "_anchor": "trend-2"
     },
     {
-      "text": "Prosecutors closed in on ransomware crews as a Ryuk operator pleaded guilty in Oregon and a Blackcat/AlphV conspirator drew a federal prison sentence in Florida.",
-      "topic_title": "Ryuk and AlphV Members Face Justice",
-      "link_phrase": "Ryuk",
+      "text": "Foundational open-source software carries decades-old wounds, from the 29-year-old Squidbleed flaw that leaks HTTP requests to a fresh batch of twelve fixes in Wireshark.",
+      "topic_title": "Squidbleed Squid Proxy Flaw",
+      "link_phrase": "Squidbleed",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Critical Zimbra Web Client Flaw",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Zimbra urged customers July 11, 2026 to patch a critical stored cross-site-scripting flaw in the Classic Web Client, still without a CVE, that lets a specially crafted email run malicious scripts and achieve arbitrary code execution inside a victim's session.",
-      "summary": "Zimbra runs email for governments and enterprises worldwide and draws frequent attacks; administrators should apply the update at once.",
+      "title": "Compromised jscrambler npm Package",
+      "area": "Supply Chain Security",
+      "latest_developments": "Attackers pushed a malicious jscrambler 8.14.0 release to npm on July 11, 2026, whose preinstall hook drops and runs a native Rust infostealer compiled for Windows, macOS, and Linux, and Socket flagged the version six minutes after publication.",
+      "summary": "Jscrambler builds JavaScript obfuscation and protection tools, so anyone who installed version 8.14.0 ran the infostealer automatically. Roll the package back, rotate any credentials the build touched, and hunt for the dropped binary.",
       "tags": [
-        "vulnerability",
-        "xss",
-        "rce"
+        "supply-chain",
+        "npm",
+        "infostealer"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "Critical Zimbra Flaw Could Let Crafted Emails Run Malicious Code in User Sessions",
-          "url": "https://thehackernews.com/2026/07/critical-zimbra-flaw-could-let-crafted_0483473395.html"
+          "title": "Compromised jscrambler 8.14.0 npm Release Drops Rust Infostealer During Install",
+          "url": "https://thehackernews.com/2026/07/compromised-jscrambler-8140-npm-release.html"
         }
       ],
-      "_anchor": "i-bb9511f020"
+      "_anchor": "i-de880be9b4"
     },
     {
-      "title": "Australia Warns of Global CMS Campaign",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "The Australian Cyber Security Centre issued an alert July 11, 2026 warning of a global campaign exploiting vulnerable content management systems and their plugins.",
-      "summary": "The ACSC flagged mass exploitation of outdated CMS platforms and add-ons that attackers use to plant web shells; site operators should patch core software and plugins and audit for compromise.",
+      "title": "Ghost Accounts Map GitHub Organizations",
+      "area": "Supply Chain Security",
+      "latest_developments": "SecurityWeek reported July 11, 2026 that multiple campaigns spin up disposable ghost accounts to abuse the GitHub API and enumerate organizations' repositories and members at scale.",
+      "summary": "The reconnaissance profiles GitHub organizations, likely to seed later targeted attacks against developers and their code. Restrict API exposure and watch for anomalous enumeration of members and repos.",
       "tags": [
-        "exploitation",
-        "cms"
+        "reconnaissance",
+        "github"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "Australia warns of global campaign targeting vulnerable CMS platforms",
-          "url": "https://www.bleepingcomputer.com/news/security/australia-warns-of-global-campaign-targeting-vulnerable-cms-platforms/"
+          "source": "SecurityWeek",
+          "title": "Ghost Accounts Abuse GitHub API in Mass Recon Campaign",
+          "url": "https://www.securityweek.com/ghost-accounts-abuse-github-api-in-mass-recon-campaign/"
         }
       ],
-      "_anchor": "i-b1f8a32d1e"
+      "_anchor": "i-1b87405a28"
     },
     {
-      "title": "Ghostcommit Poisons AI Code Reviewers",
+      "title": "Espionage Against Pakistani Police",
+      "area": "Nation-State Activity",
+      "latest_developments": "Researchers disclosed July 11, 2026 that suspected China- and India-aligned actors ran sustained espionage against Pakistani law enforcement from February 2024 through April 2026, compromising Balochistan Police servers that host web applications managing criminal and citizen records.",
+      "summary": "The intrusions struck several Pakistani law enforcement organizations and exposed police and citizen data across multiple espionage campaigns. Affected agencies should hunt for the compromise and lock down internet-facing web applications.",
+      "tags": [
+        "apt",
+        "espionage",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Hackers Weaponize Balochistan Police Portal in Multi-Group Espionage Campaigns",
+          "url": "https://thehackernews.com/2026/07/hackers-weaponize-balochistan-police.html"
+        }
+      ],
+      "_anchor": "i-88c62dd008"
+    },
+    {
+      "title": "AI Uncovers 15-Year-Old Linux Root Bug",
       "area": "AI Security",
-      "latest_developments": "Researchers unveiled Ghostcommit on July 11, 2026, a technique that buries a prompt injection inside a PNG image, sails past AI code reviewers CodeRabbit and Bugbot that never open image files, and tricks a coding agent into reading a repository's .env file and writing every secret into the code as a list of numbers.",
-      "summary": "The attack turns AI coding assistants into exfiltration tools; teams that let agents review or commit code should treat image files as untrusted input and cut off agent access to secrets.",
+      "latest_developments": "Wired reported July 11, 2026 that an AI system found a root-privilege bug in the Linux kernel that human reviewers overlooked for fifteen years.",
+      "summary": "AI-driven code analysis is surfacing long-buried kernel flaws that grant local root access. Administrators should track the forthcoming fix and update their kernels promptly.",
       "tags": [
         "ai",
-        "prompt-injection",
-        "supply-chain"
+        "vulnerability",
+        "linux"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "'Ghostcommit' hides prompt injection in images to fool AI agents, steal secrets",
-          "url": "https://www.bleepingcomputer.com/news/security/ghostcommit-hides-prompt-injection-in-images-to-fool-ai-agents-steal-secrets/"
+          "source": "Wired Security",
+          "title": "AI Found a Root Bug in Linux That Everyone Missed for 15 Years",
+          "url": "https://www.wired.com/story/security-news-this-week-ai-found-a-root-bug-in-linux-that-everyone-missed-for-15-years/"
         }
       ],
-      "_anchor": "i-5692c67fce"
+      "_anchor": "i-62e03464f4"
     },
     {
-      "title": "Progress Orders ShareFile Servers Shut Down",
+      "title": "Wireshark 4.6.7 Patches",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Progress Software emailed ShareFile customers on July 10, 2026 to immediately power down the Windows servers running their Storage Zone Controllers over a 'credible external security threat,' and temporarily cut access to affected accounts out of an abundance of caution.",
-      "summary": "Storage Zone Controllers move files for the on-premises version of Progress's ShareFile secure file-sharing platform; administrators should shut the servers down and watch for guidance while Progress investigates.",
+      "latest_developments": "The Wireshark project shipped version 4.6.7 on July 11, 2026, fixing 12 vulnerabilities and 16 bugs.",
+      "summary": "Wireshark is the standard network-protocol analyzer, and malformed captures can crash or exploit older builds. Update to 4.6.7.",
+      "tags": [
+        "patch",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "Wireshark 4.6.7 Released, (Sat, Jul 11th)",
+          "url": "https://isc.sans.edu/diary/rss/33146"
+        }
+      ],
+      "_anchor": "i-7393cfedb8"
+    },
+    {
+      "title": "Squidbleed Squid Proxy Flaw",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Bruce Schneier flagged July 10, 2026 a 29-year-old bug in the Squid proxy, dubbed Squidbleed, that can leak the contents of HTTP requests.",
+      "summary": "Squid is a widely deployed open-source caching proxy, and the flaw can expose sensitive request data to attackers. Operators should apply the fixed release.",
       "tags": [
         "vulnerability",
-        "patch"
+        "proxy"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "URGENT - Progress Tells ShareFile Customers to Shut Down Storage Zone Controllers Over Security Threat",
-          "url": "https://thehackernews.com/2026/07/urgent-progress-tells-sharefile.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Progress urges ShareFile admins to shut down servers over “credible” threat",
-          "url": "https://www.bleepingcomputer.com/news/security/progress-urges-sharefile-customers-to-shut-down-servers-over-credible-threat/"
+          "source": "Schneier on Security",
+          "title": "Friday Squid Blogging: \"Squidbleed\" Vulnerability",
+          "url": "https://www.schneier.com/blog/archives/2026/07/friday-squid-blogging-squidbleed-vulnerability.html"
         }
       ],
-      "_anchor": "i-e449797afe"
-    },
-    {
-      "title": "Ryuk and AlphV Members Face Justice",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "A 34-year-old Armenian man pleaded guilty July 10, 2026 in Oregon federal court to conspiracy and computer fraud for deploying Ryuk ransomware against U.S. companies, facing up to 15 years, while a Florida court handed a Blackcat/AlphV conspirator a 70-month sentence for helping extort multiple victims.",
-      "summary": "Ryuk encrypted companies and hospitals across the U.S. at its peak, and AlphV ran one of the most prolific extortion operations; the two cases mark continued law-enforcement pressure on ransomware affiliates years after the crimes.",
-      "tags": [
-        "ransomware",
-        "arrest"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Ryuk ransomware member pleads guilty in the US, faces 15 years in prison",
-          "url": "https://www.bleepingcomputer.com/news/security/ryuk-ransomware-member-pleads-guilty-in-the-us-faces-15-years-in-prison/"
-        },
-        {
-          "source": "The Record",
-          "title": "Ryuk operator pleads guilty; Blackcat/AlphV conspirator gets nearly 6-year sentence",
-          "url": "https://therecord.media/ryuk-operator-pleads-guilty-alphv-conspirator-sentenced"
-        }
-      ],
-      "_anchor": "i-d52e0e6da4"
-    },
-    {
-      "title": "New U-Boot Bootloader Flaws",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researchers disclosed six vulnerabilities July 10, 2026 in the widely used U-Boot bootloader that let attackers run malicious code during device boot, opening the door to stealthy firmware attacks and persistent malware.",
-      "summary": "U-Boot boots countless embedded and IoT devices; the flaws let an attacker subvert security protections before the operating system loads, so device vendors need to ship firmware fixes.",
-      "tags": [
-        "vulnerability",
-        "firmware"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "New U-Boot flaws could enable stealthy firmware attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/new-u-boot-flaws-could-enable-stealthy-firmware-attacks/"
-        }
-      ],
-      "_anchor": "i-3bbc0d594a"
+      "_anchor": "i-49f2065161"
     }
   ],
   "markets": [
@@ -188,156 +179,115 @@
     }
   ],
   "weather": [
-    "This Afternoon: Isolated Showers And Thunderstorms, high 83F.",
-    "Tonight: Scattered Showers And Thunderstorms then Mostly Cloudy, low 65F.",
+    "This Afternoon: Chance Showers And Thunderstorms, high 83F.",
+    "Tonight: Chance Showers And Thunderstorms then Mostly Cloudy, low 66F.",
     "Sunday: Mostly Sunny, high 86F."
   ],
   "sports": [
     {
       "team": "Pirates",
-      "record": "47-47",
+      "record": "48-47",
       "games": [
         {
           "date": "Fri Jul 10",
           "url": "https://plaintextsports.com/mlb/2026-07-10/mil-pit",
           "recap": "",
           "result": "Brewers @ Pirates · Postponed"
+        },
+        {
+          "date": "Sat Jul 11",
+          "url": "https://plaintextsports.com/mlb/2026-07-11/mil-pit",
+          "recap": "Esmerlyn Valdez's grand slam, two homers lead Pirates past Brewers 7-6 in first game of doubleheader",
+          "result": "Brewers 6 · Pirates 7 · Final"
         }
       ],
       "next": {
         "matchup": "Brewers @ Pirates",
-        "when": "Sat Jul 11, 12:05 PM",
+        "when": "Sat Jul 11, 4:05 PM",
         "url": "https://plaintextsports.com/mlb/2026-07-11/mil-pit"
       },
       "headlines": []
     }
   ],
   "local": {
-    "business_politics": [],
-    "business": [],
-    "around_town": [
+    "business_politics": [
       {
-        "title": "Homewood Pool Reopens",
-        "latest_developments": "The city of Pittsburgh celebrated the pool's grand opening Saturday, July 11.",
-        "summary": "Pittsburgh reopened the Homewood Pool as the centerpiece of a $22.87 million transformation of Homewood Park in the city's East End.",
+        "title": "Iran Hormuz Deadline Passes, Nuclear Talks Falter",
+        "latest_developments": "The Saturday, July 11, deadline for Iran to reopen the Strait of Hormuz arrived as the Trump administration signaled it now doubts any nuclear deal, and Trump and Iran's leadership traded fresh threats after Ayatollah Ali Khamenei's funeral.",
+        "summary": "A senior U.S. official demanded Iran reopen the Strait of Hormuz—the chokepoint carrying roughly a fifth of the world's crude—or face consequences, while mediators scrambled to salvage a crumbling agreement as the Trump administration grew pessimistic about reaching a nuclear accord with Tehran.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "The City of Pittsburgh celebrates the grand opening of Homewood Pool",
-            "url": "https://www.wpxi.com/news/local/city-pittsburgh-celebrates-grand-opening-homewood-pool/7AZZVVXAW5GCNHWJBHULHBONBU/"
-          }
-        ],
-        "_anchor": "i-3bd69a4eca"
-      },
-      {
-        "title": "Hamlin Runs Hometown Football Camp",
-        "latest_developments": "Hamlin's Chasing M's Foundation is sponsoring the weekend camp and all-star game.",
-        "summary": "Buffalo Bills safety Damar Hamlin, through his Chasing M's Foundation, is running a youth football camp and all-star game for Pittsburgh-area children this weekend in his hometown region.",
-        "sources": [
+            "source": "WSJ World News",
+            "title": "Trump Administration Increasingly Pessimistic of Clinching Iran Nuclear Deal",
+            "url": "https://www.wsj.com/world/middle-east/trump-administration-increasingly-pessimistic-of-clinching-iran-nuclear-deal-ec3ad92e"
+          },
           {
-            "source": "WPXI",
-            "title": "Damar Hamlin hosts hometown Youth Football Camp, All-Star Game",
-            "url": "https://www.wpxi.com/news/local/damar-hamlin-hosts-hometown-youth-football-camp-all-star-game/K2FC23A3EBE4HMW2IHOAAPBF24/"
+            "source": "FT World",
+            "title": "Inside the risky race through the Strait of Hormuz",
+            "url": "https://www.ft.com/content/68d396cd-2800-4ff8-b563-1f5c95beb9ba"
           }
         ],
-        "_anchor": "i-c866cca9d8"
-      },
-      {
-        "title": "Fort Pitt Museum Plans 1776 Symposium",
-        "latest_developments": "The museum announced the symposium as part of America's 250th commemoration.",
-        "summary": "The Fort Pitt Museum, at Point State Park in downtown Pittsburgh, will host a 1776 Symposium marking the nation's 250th anniversary of independence, exploring the American Revolution and the western frontier.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Fort Pitt Museum to host 1776 Symposium as part of America's 250th Anniversary",
-            "url": "https://www.wpxi.com/news/local/fort-pitt-museum-host-1776-symposium-part-americas-250th-anniversary/LIWPC2H2WZFSTB6A65N6YJDD44/"
-          }
-        ],
-        "_anchor": "i-51d92e112b"
+        "_anchor": "i-12522b92c8"
       }
     ],
-    "events": [
+    "business": [
       {
-        "title": "Big Boy Locomotive Stops in Leetsdale",
-        "latest_developments": "The locomotive's western Pennsylvania run Saturday, July 11, ends with a stop in Leetsdale.",
-        "summary": "Union Pacific's Big Boy No. 4014, the world's largest operating steam locomotive, rolls through western Pennsylvania on Saturday, July 11, on its cross-country tour marking America's 250th birthday, capping the day with a stop in Leetsdale in Allegheny County.",
+        "title": "Western Pennsylvania's Tipping Fatigue",
+        "latest_developments": "TribLive reported July 11 on a growing local backlash against gratuity prompts.",
+        "summary": "TribLive found Western Pennsylvania consumers pushing back as more businesses add tip suggestions and gratuity requests to checkout screens, testing where shoppers draw the line on prompted tipping.",
         "sources": [
           {
-            "source": "KDKA",
-            "title": "Here's how to see Big Boy, the world's largest steam locomotive, in western Pennsylvania today",
-            "url": "https://www.cbsnews.com/pittsburgh/news/big-boy-leetsdale-western-pennsylvania-how-to-see/"
+            "source": "TribLive",
+            "title": "Western Pennsylvanians react to growing tipping culture, gratuity requests",
+            "url": "https://triblive.com/local/regional/western-pennsylvanians-react-to-growing-tipping-culture-gratuity-requests/"
           }
         ],
-        "_anchor": "i-a6f9934c57"
-      },
-      {
-        "title": "Danny Elfman Coming to Pittsburgh",
-        "latest_developments": "The Post-Gazette published a Q&A with Elfman ahead of his appearance.",
-        "summary": "Film composer Danny Elfman, known for his scores for Tim Burton's movies and the theme to 'The Simpsons,' will appear in Pittsburgh, and in a Post-Gazette interview he discussed the shrinking audience for classical music.",
-        "sources": [
-          {
-            "source": "Post-Gazette Arts & Entertainment",
-            "title": "Q&A: Film composer Danny Elfman discusses classical music's shrinking audience ahead of a Pittsburgh appearance",
-            "url": "https://www.post-gazette.com/ae/music/2026/07/09/danny-elfman-classical-music-decline-film-pittsburgh/stories/202607090002"
-          }
-        ],
-        "_anchor": "i-76664ac2b9"
+        "_anchor": "i-9dd93678ec"
       }
     ],
+    "around_town": [],
+    "events": [],
     "around_teams": [
       {
-        "title": "Pirates Deal for White Sox Bat and Arm",
-        "latest_developments": "The Pirates closed the trade Friday night, July 10.",
-        "summary": "The Pirates acquired infielder Jacob Gonzalez and left-handed reliever Brandon Eisert from the Chicago White Sox, sending pitcher Jaden Woods and the No. 34 overall pick in the 2026 draft to Chicago; general manager Ben Cherington said the club weighed multiple ways to use the compensation pick to strengthen a roster battered by pitching injuries.",
+        "title": "Pirates' Use of Mlodzinski Questioned",
+        "latest_developments": "In a July 11 column, Post-Gazette writer Noah Hiles argued the Pirates must make better use of reliever Carmen Mlodzinski.",
+        "summary": "Post-Gazette columnist Noah Hiles wrote that manager Don Kelly and general manager Ben Cherington are underusing right-handed reliever Carmen Mlodzinski as the Pittsburgh Pirates work through bullpen struggles and mounting injuries.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "The Pirates acquire infielder Jacob Gonzalez, lefty reliever Brandon Eisert from the Chicago White Sox",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/10/pirates-trade-white-sox-eisert-gonzalez-griffin-chicago-mlb-draft-woods/stories/202607100076"
+            "title": "Noah Hiles: The Pirates must make better use of Carmen Mlodzinski",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/07/11/hiles-column-mlodzinski-bullpen-mlb-kelly-cherington/stories/202607110014"
           }
         ],
-        "_anchor": "i-d0d245355a"
+        "_anchor": "i-b7248b479c"
       },
       {
-        "title": "Porter Jr. Eyes a Booming Market",
-        "latest_developments": "The Post-Gazette reported July 10 on his extension leverage.",
-        "summary": "Steelers cornerback Joey Porter Jr. is angling for a contract extension as the cornerback market booms behind deals for Devon Witherspoon and Sauce Gardner, and the Post-Gazette weighed how much Pittsburgh will pay to keep him.",
+        "title": "Greg Hawthorne Dies at 69",
+        "latest_developments": "The Post-Gazette reported July 10 that Greg Hawthorne, the Steelers' first-round pick in 1979, died at 69.",
+        "summary": "Greg Hawthorne, whom the Pittsburgh Steelers selected in the first round of the 1979 NFL Draft, died at 69.",
         "sources": [
           {
             "source": "Post-Gazette Steelers",
-            "title": "Joey Porter Jr. is looking to cash in on a booming market. How much are the Steelers willing to pay?",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/10/porter-contract-extension-cornerback-nfl-offseason-witherspoon-gonzalez/stories/202607100048"
+            "title": "Greg Hawthorne, the Steelers' No. 1 pick in 1979, dies at 69",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/07/10/hawthorne-dies-obituary-nfl-player/stories/202607100049"
           }
         ],
-        "_anchor": "i-21514bd233"
-      },
-      {
-        "title": "Pirates Blow Past Their Home Run Total",
-        "latest_developments": "The Post-Gazette's July 11 Off The Bat charted the power surge.",
-        "summary": "The Pirates have already topped last season's full-year home run total, and the Post-Gazette traced the jump to bats including Bryan Reynolds, Brandon Lowe, and Ryan O'Hearn.",
-        "sources": [
-          {
-            "source": "Post-Gazette Pirates",
-            "title": "Off The Bat: The Pirates have already blown past last year's home run total. Here's how they've done it",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/11/pirates-mlb-home-run-reynolds-lowe-o-hearn/stories/202607100074"
-          }
-        ],
-        "_anchor": "i-f6b55f9f25"
+        "_anchor": "i-0107da59d1"
       }
     ],
     "team_usa": [
       {
-        "title": "Pulisic's World Cup Falls Flat",
-        "latest_developments": "ESPN examined whether Pulisic deserves blame for the exit.",
-        "summary": "Christian Pulisic, the U.S. men's national team's biggest star, underwhelmed at the home World Cup, and ESPN weighed how much blame he deserves for the round-of-16 loss to Belgium.",
+        "title": "America Embraces Its Home World Cup",
+        "latest_developments": "The Guardian reported July 11 on how the tournament captivated the United States even after the men's team's exit.",
+        "summary": "The Guardian described packed stadiums and record television audiences as the United States embraced hosting the 2026 World Cup, framing the tournament as a unifying, multicultural celebration that arrived despite President Trump's threats against co-hosts Canada and Mexico and his tightened travel restrictions.",
         "sources": [
           {
-            "source": "ESPN Soccer",
-            "title": "USMNT's Pulisic flopped at this World Cup, but does he deserve the blame?",
-            "url": "https://www.espn.com/soccer/story/_/id/49317008/instead-being-usmnt-biggest-world-cup-star-pulisic-was-biggest-mystery"
+            "source": "Guardian World Cup 2026",
+            "title": "'A brilliant reprieve, a unifying force': America falls in love with World Cup",
+            "url": "https://www.theguardian.com/football/2026/jul/11/america-world-cup-love-football"
           }
         ],
-        "_anchor": "i-7d7d4ff1cb"
+        "_anchor": "i-41343ffeca"
       }
     ],
     "reading": [
@@ -345,28 +295,28 @@
         "author": "Ed Zitron",
         "title": "Premium: The Hater's Guide To The Memory Crisis",
         "url": "https://www.wheresyoured.at/premium-the-haters-guide-to-the-memory-crisis/",
-        "summary": "Zitron delivers a skeptical breakdown of the memory-chip crisis, dissecting the surge in memory prices and the industry narrative around it.",
+        "summary": "Zitron delivers a skeptical, contrarian breakdown of the semiconductor memory-price crisis, questioning the narrative that surging chip prices signal a lasting shift in the technology industry.",
         "_anchor": "i-7aba240339"
       },
       {
         "author": "Stratechery",
         "title": "Muse Image, Grok 4.5, Alex Karp on CNBC",
         "url": "https://stratechery.com/2026/muse-image-grok-4-5-alex-karp-on-cnbc/",
-        "summary": "Ben Thompson argues the battle for verifiable data increasingly defines the AI race, running from Meta's Muse Image and xAI's Grok 4.5 to Palantir's Alex Karp and the frontier labs.",
+        "summary": "Ben Thompson argues the battle for verifiable data increasingly defines the AI race, tracing that contest across Meta, xAI's Grok, and the frontier labs.",
         "_anchor": "i-e9717fb151"
       },
       {
         "author": "Cal Newport",
         "title": "Beware of Productivity Paradoxes",
         "url": "https://calnewport.com/beware-of-productivity-paradoxes/",
-        "summary": "Newport warns that tools seemingly poised to be productivity slam dunks—like the personal computer—often fail to deliver clear gains, a paradox worth keeping in mind as new technologies arrive.",
+        "summary": "Newport examines why technologies seemingly destined to be productivity slam dunks, like the personal computer, often fail to deliver measurable gains, a caution he applies to today's assumptions about AI.",
         "_anchor": "i-9c92dd3d7a"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-11 12:09 EDT",
-    "items_considered": 21,
+    "generated_at": "2026-07-11 16:05 EDT",
+    "items_considered": 12,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
