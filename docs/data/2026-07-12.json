@@ -1,160 +1,134 @@
 {
   "date": "2026-07-12",
-  "headline": "A poisoned jscrambler npm release ran a Rust infostealer on developers' machines, the sharpest of a day's attacks reaching from software supply chains down to device bootloaders.",
+  "headline": "Cybercriminals pivot to healthcare's softer vendor targets as fresh breaches strike DHS and Dutch carrier Odido, and the NSA rebuilds its elite offensive-hacking unit.",
   "emerging_trends": [
     {
-      "text": "Attackers keep poisoning the developer supply chain, slipping a Rust infostealer into the jscrambler npm package on install and spinning up ghost accounts to map organizations' GitHub repositories and members.",
-      "topic_title": "Poisoned jscrambler npm Release and GitHub Recon",
-      "link_phrase": "jscrambler",
+      "text": "Cybercriminals are shifting from hospitals to their suppliers, with attacks on healthcare service providers more than doubling in the first half of 2026 because the softer supply-chain targets prove easier to breach.",
+      "topic_title": "Healthcare Service Providers Under Siege",
+      "link_phrase": "healthcare service providers",
       "_anchor": "trend-1"
     },
     {
-      "text": "Nation-state espionage is converging on shared targets, as suspected China- and India-aligned crews both breach Pakistan's Balochistan Police while China-linked Silver Fox fields a new Rust remote access trojan.",
-      "topic_title": "China and India Spy on Balochistan Police",
-      "link_phrase": "Balochistan Police",
+      "text": "The privacy tools people trust are leaking their data, as researchers found 281 free Android VPN apps installed more than 2.4 billion times spilling traffic and tracking users.",
+      "topic_title": "Free Android VPN Apps Leak User Traffic",
+      "link_phrase": "free Android VPN",
       "_anchor": "trend-2"
     },
     {
-      "text": "Flaws are moving down the stack toward firmware and network plumbing, with six fresh U-Boot bootloader bugs and an unpatched crash in Alibaba's XQUIC HTTP/3 library.",
-      "topic_title": "Six New U-Boot Bootloader Flaws",
-      "link_phrase": "U-Boot",
+      "text": "Governments are sharpening their offensive posture, with the NSA reviving its Tailored Access Operations hacking unit even as a Department of Homeland Security database falls to intruders.",
+      "topic_title": "NSA Revives TAO as DHS Database Falls",
+      "link_phrase": "Tailored Access Operations",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "China and India Spy on Balochistan Police",
-      "area": "Nation-State Activity",
-      "latest_developments": "SentinelOne disclosed that suspected China- and India-aligned threat actors ran separate espionage campaigns against Pakistan's Balochistan Police between February 2024 and April 2026, in some cases breaching the exact same servers that host web applications managing criminal and citizen records for the force policing the country's insurgency-hit southwestern province.",
-      "summary": "Two rival states independently compromised the same Pakistani law-enforcement systems, a rare case of adversaries and near-allies colliding on one target tied to the long-running Balochistan separatist conflict. The intrusions exposed police and citizen data across the province.",
-      "tags": [
-        "apt",
-        "espionage",
-        "breach"
-      ],
-      "sources": [
-        {
-          "source": "The Record",
-          "title": "China, India ran separate spying campaigns against same Pakistani police force",
-          "url": "https://therecord.media/china-india-ran-separate-spy-campaigns-against-same-police-force"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "China, India-Linked Hackers Both Targeted Same Pakistani Police Force",
-          "url": "https://www.securityweek.com/china-india-linked-hackers-both-targeted-same-pakistani-police-force/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Hackers Weaponize Balochistan Police Portal in Multi-Group Espionage Campaigns",
-          "url": "https://thehackernews.com/2026/07/hackers-weaponize-balochistan-police.html"
-        }
-      ],
-      "_anchor": "i-cd8f05c7ba"
-    },
-    {
-      "title": "Poisoned jscrambler npm Release and GitHub Recon",
+      "title": "Healthcare Service Providers Under Siege",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "The jscrambler package's 8.14.0 release, published July 11, 2026, carried a preinstall hook that dropped and ran a native Rust infostealer—separate Windows, macOS, and Linux builds—on any machine that installed it, and Socket flagged the release six minutes after publication, while SecurityWeek reported ghost accounts abusing the GitHub API to map organizations' repositories and members in a mass reconnaissance campaign.",
-      "summary": "Two developer-ecosystem threats surfaced together: a compromised jscrambler npm build that steals credentials at install time, and throwaway GitHub accounts quietly cataloging corporate repos and staff for later attacks. Pin dependency versions, audit recent installs, and lock down GitHub organization visibility.",
+      "latest_developments": "Dark Reading reported July 10, 2026 that cyberattacks on healthcare service providers and other healthcare businesses more than doubled in the first half of 2026, even as attacks on hospitals and clinics grew only modestly.",
+      "summary": "Attackers increasingly target the vendors, billing firms, and support businesses surrounding hospitals rather than the hospitals themselves, since these providers hold patient data and often run weaker defenses; healthcare organizations should extend monitoring and vendor-risk reviews to their third parties.",
       "tags": [
-        "supply-chain",
-        "malware",
-        "breach"
+        "healthcare",
+        "ransomware"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Compromised jscrambler 8.14.0 npm Release Drops Rust Infostealer During Install",
-          "url": "https://thehackernews.com/2026/07/compromised-jscrambler-8140-npm-release.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Ghost Accounts Abuse GitHub API in Mass Recon Campaign",
-          "url": "https://www.securityweek.com/ghost-accounts-abuse-github-api-in-mass-recon-campaign/"
+          "source": "Dark Reading",
+          "title": "Cybercriminals Flock to Healthcare Businesses as Attacks Surge",
+          "url": "https://www.darkreading.com/threat-intelligence/cybercriminals-healthcare-businesses-attacks-surge"
         }
       ],
-      "_anchor": "i-de880be9b4"
+      "_anchor": "i-7fed3296a4"
     },
     {
-      "title": "Six New U-Boot Bootloader Flaws",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Firmware security firm Binarly disclosed six new flaws in U-Boot, the bootloader that starts home routers, smart cameras, and data-center management chips, four of which crash a device and two of which let an attacker who slips a malicious image in front of the bootloader run code before the device raises its defenses.",
-      "summary": "U-Boot runs on an enormous range of hardware, so the code-execution bugs open a path to stealthy, persistent firmware implants that survive reinstalls and defeat later protections. Device makers should ship the patched builds; operators should track firmware updates from affected vendors.",
+      "title": "Jailed Launderer Steals Seized Crypto",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "BleepingComputer reported July 10, 2026 that a Bulgarian national serving a 121-month sentence for laundering millions stolen from American fraud victims now faces charges of stealing $290,000 in government-seized cryptocurrency from behind bars.",
+      "summary": "The case shows seized digital assets stay reachable even after conviction and imprisonment, deepening an existing money-laundering prosecution tied to US fraud proceeds.",
       "tags": [
-        "firmware",
-        "patch",
-        "vulnerability"
+        "cybercrime",
+        "cryptocurrency"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "New U-Boot flaws could enable stealthy firmware attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/new-u-boot-flaws-could-enable-stealthy-firmware-attacks/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Six New U-Boot Flaws Could Let Malicious Images Crash Devices or Run Code at Boot",
-          "url": "https://thehackernews.com/2026/07/six-new-u-boot-flaws-could-let.html"
+          "title": "Money launderer accused of stealing seized crypto while in prison",
+          "url": "https://www.bleepingcomputer.com/news/security/money-launderer-accused-of-stealing-seized-crypto-while-in-prison/"
         }
       ],
-      "_anchor": "i-3bbc0d594a"
+      "_anchor": "i-e021538945"
     },
     {
-      "title": "GigaWiper Destructive Malware",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "SecurityWeek detailed GigaWiper, a backdoor that bundles a standalone wiper, ransomware-style encryption, and a multi-pass wiping command into one tool built for system-level sabotage.",
-      "summary": "GigaWiper blurs the line between ransomware and pure destruction, giving operators the choice to extort or simply erase a compromised system beyond recovery. Organizations should treat it as a data-destruction threat and verify that backups sit beyond the reach of a compromised host.",
+      "title": "NSA Revives TAO as DHS Database Falls",
+      "area": "Nation-State Activity",
+      "latest_developments": "SecurityWeek reported July 10, 2026 that the National Security Agency is reviving its Tailored Access Operations offensive-hacking unit, that intruders hacked a Department of Homeland Security database, and that Canadian authorities disrupted ransomware operations, while Adobe boosted its patch cadence and Anthropic sued Abnormal AI.",
+      "summary": "The developments signal a more aggressive US government cyber stance alongside a fresh federal data exposure; agencies and contractors should watch for follow-on disclosures on the DHS breach.",
       "tags": [
-        "wiper",
-        "ransomware",
-        "malware"
+        "nation-state",
+        "breach"
       ],
       "sources": [
         {
           "source": "SecurityWeek",
-          "title": "GigaWiper Combines Multiple Malware for System-Level Sabotage",
-          "url": "https://www.securityweek.com/gigawiper-combines-multiple-malware-for-system-level-sabotage/"
+          "title": "In Other News: DHS Database Hacked, Adobe Boosts Patch Cadence, Canada Disrupts Ransomware Ops",
+          "url": "https://www.securityweek.com/in-other-news-dhs-database-hacked-adobe-boosts-patch-cadence-canada-disrupts-ransomware-ops/"
         }
       ],
-      "_anchor": "i-dd18d8ff6f"
+      "_anchor": "i-108d25e071"
     },
     {
-      "title": "Unpatched XRING Flaw in Alibaba's XQUIC",
+      "title": "Free Android VPN Apps Leak User Traffic",
+      "area": "Surveillance and Privacy",
+      "latest_developments": "The Hacker News reported July 10, 2026 that researchers ran 281 of the most popular free VPN apps on the Google Play Store through a new testing system and found many fail at basic privacy, with 29 apps leaking user traffic outside the tunnel across apps installed more than 2.4 billion times.",
+      "summary": "Free Android VPN apps marketed for privacy expose the very data they promise to protect through traffic leaks, unencrypted transmission, and tracking; users and employers should treat free mobile VPNs as untrusted and move to vetted paid services.",
+      "tags": [
+        "privacy",
+        "mobile"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Study of 281 Free Android VPN Apps Finds Traffic Leaks, Unencrypted Data, and Tracking",
+          "url": "https://thehackernews.com/2026/07/study-of-281-free-android-vpn-apps.html"
+        }
+      ],
+      "_anchor": "i-c2ab29ff76"
+    },
+    {
+      "title": "ATM and BitLocker Cryptographic Flaws",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "FoxIO researcher Sébastien Féry disclosed XRING on July 8, a single wrong variable in Alibaba's XQUIC QUIC and HTTP/3 library that lets any remote client crash the server with roughly 260 bytes of legal QPACK traffic, no login and no malformed packets required, and there is no patch.",
-      "summary": "XRING turns ordinary HTTP/3 requests into a reliable denial-of-service against anyone running XQUIC, a widely embedded library. With no fix available, operators should restrict exposure of XQUIC-backed services and monitor for repeated QPACK-triggered crashes.",
+      "latest_developments": "Dark Reading detailed July 10, 2026 fresh bugs in a Microsoft BitLocker security wrapper that put organizations, and possibly ATMs, at risk of compromise.",
+      "summary": "Holes in software that wraps Microsoft BitLocker disk encryption could let attackers undermine protected systems including cash machines; affected operators should track the vendor fix and audit BitLocker-dependent deployments.",
       "tags": [
-        "dos",
         "vulnerability",
-        "zero-day"
+        "encryption"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Unpatched XRING Flaw in XQUIC Lets Remote Clients Crash HTTP/3 Servers",
-          "url": "https://thehackernews.com/2026/07/unpatched-xring-flaw-in-xquic-lets.html"
+          "source": "Dark Reading",
+          "title": "Fresh ATM Crypto Software Bugs: Jackpot or Bust?",
+          "url": "https://www.darkreading.com/vulnerabilities-threats/atm-crypto-software-bugs-jackpot-bust"
         }
       ],
-      "_anchor": "i-28387fbe73"
+      "_anchor": "i-7a697bf9b4"
     },
     {
-      "title": "Silver Fox's MODBEACON RAT",
-      "area": "Nation-State Activity",
-      "latest_developments": "Chinese security firm QiAnXin attributed a new Rust-based remote access trojan called MODBEACON to the China-linked group Silver Fox, which uses gRPC streaming to encrypt its command-and-control traffic and spreads through counterfeit installers pushed by SEO poisoning.",
-      "summary": "MODBEACON reveals a more organized operation behind what looked like a high-volume, low-sophistication malware crew, with encrypted gRPC channels that blend into normal traffic. Defenders should watch for counterfeit software installers and unusual gRPC connections.",
+      "title": "Dutch Hackers Tied to Odido Telecom Breach",
+      "area": "Data Breaches",
+      "latest_developments": "BleepingComputer reported July 10, 2026 that the Dutch National Police found strong indications that Dutch hackers carried out the February 2026 breach of telecommunications provider Odido.",
+      "summary": "Odido, one of the Netherlands' largest mobile carriers, suffered a February intrusion that police now attribute to domestic hackers; customers should stay alert to phishing that abuses any exposed contact data.",
       "tags": [
-        "apt",
-        "malware",
-        "rat"
+        "breach",
+        "telecom"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "New MODBEACON RAT Uses gRPC Streaming for Encrypted C2 Traffic",
-          "url": "https://thehackernews.com/2026/07/new-modbeacon-rat-uses-grpc-streaming.html"
+          "source": "BleepingComputer",
+          "title": "Police suspects Dutch hackers were involved in Odido breach",
+          "url": "https://www.bleepingcomputer.com/news/security/police-suspects-dutch-hackers-were-involved-in-odido-breach/"
         }
       ],
-      "_anchor": "i-e4b38fb48a"
+      "_anchor": "i-7428c9d531"
     }
   ],
   "markets": [
@@ -202,9 +176,9 @@
     }
   ],
   "weather": [
-    "Overnight: Mostly Cloudy, low 67F.",
-    "Sunday: Mostly Sunny, high 87F.",
-    "Sunday Night: Mostly Clear, low 67F."
+    "Today: Mostly Sunny, high 87F.",
+    "Tonight: Mostly Clear, low 67F.",
+    "Monday: Sunny, high 87F."
   ],
   "sports": [
     {
@@ -235,166 +209,148 @@
   "local": {
     "business_politics": [
       {
-        "title": "Hormuz Fighting Escalates Again",
-        "latest_developments": "U.S. Central Command launched fresh strikes overnight into July 12 after Iran's Revolutionary Guard fired on a containership transiting the strait, left a crew member missing, again declared the waterway closed, and turned its threats on the Gulf Arab states.",
-        "summary": "Iran and the United States traded new attacks over the Strait of Hormuz, the chokepoint carrying roughly a fifth of the world's seaborne oil, as the Trump administration warned Tehran to reopen the passage and grew pessimistic about any nuclear deal. The Wall Street Journal reports Iran now treats control of the strait as cementing its regional power, keeping tanker traffic and oil prices at risk.",
+        "title": "Iran Strikes Gulf Arab States as Hormuz Fight Widens",
+        "latest_developments": "Iran fired on targets in Jordan, Oman, Kuwait, Bahrain, and Qatar, turning weeks of threats against its Gulf Arab neighbors into actual strikes as U.S. Central Command hit Iranian targets again.",
+        "summary": "Iran's Revolutionary Guard attacked a containership transiting the Strait of Hormuz, again declared the waterway closed, and drew fresh United States strikes, and Tehran has now retaliated across five Gulf Arab states, menacing the tenuous ceasefire and the world's most important oil chokepoint.",
         "sources": [
           {
-            "source": "WSJ",
-            "title": "U.S. and Iran Launch New Attacks in Fight to Control the Strait of Hormuz",
-            "url": "https://www.wsj.com/world/middle-east/u-s-launches-new-strikes-on-iran-after-hormuz-tensions-escalate-d6903c7f?mod=pls_whats_news_us_business_f"
-          },
-          {
-            "source": "FT",
-            "title": "US launches more strikes after Tehran declares Strait of Hormuz closed",
+            "source": "FT World",
+            "title": "US launches fresh strikes after Tehran declares Strait of Hormuz closed",
             "url": "https://www.ft.com/content/6b6c23e9-f24e-4c3e-bb1a-e5cb6860008d"
           },
           {
-            "source": "WSJ",
-            "title": "Aspiring to Regional Domination, Iran Is Ready to Escalate Over Hormuz",
-            "url": "https://www.wsj.com/world/middle-east/https-www-wsj-com-world-middle-east-iran-deal-strait-of-hormuz-b027c30f-580ee99f"
+            "source": "WSJ World News",
+            "title": "U.S. and Iran Launch New Attacks in Fight to Control the Strait of Hormuz",
+            "url": "https://www.wsj.com/world/middle-east/u-s-launches-new-strikes-on-iran-after-hormuz-tensions-escalate-d6903c7f"
           }
         ],
-        "_anchor": "i-bfe3bb5df5"
+        "_anchor": "i-d41b073355"
       }
     ],
     "business": [
       {
-        "title": "West Overton Revives Cherry Bounce",
-        "latest_developments": "West Overton Village's distillery in Scottdale, Westmoreland County, launched a historic cherry bounce, a colonial cherry-steeped whiskey liqueur, to mark the United States' semiquincentennial.",
-        "summary": "West Overton Village, the restored 19th-century industrial hamlet near Scottdale where Henry Clay Frick was born, runs a working distillery; its America 250 cherry bounce ties the region's whiskey heritage to the July 4 anniversary of independence.",
+        "title": "Housing Act Becomes Law With Pittsburgh Roots",
+        "latest_developments": "The 21st Century ROAD to Housing Act automatically became law at 12 a.m. Saturday, July 12, after President Trump declined to sign it to protest Senate inaction on the SAVE America Act.",
+        "summary": "The bipartisan 21st Century ROAD to Housing Act, the most comprehensive federal housing legislation in decades and shaped in part by Pittsburgh-area advocates, aims to expand housing supply, lower costs, and curb institutional investors from buying up homes.",
         "sources": [
           {
-            "source": "TribLive",
-            "title": "West Overton Village distillery launches historic cherry bounce for America 250",
-            "url": "https://triblive.com/local/westmoreland/west-overton-village-distillery-launches-historic-cherry-bounce-for-america-250/"
-          }
-        ],
-        "_anchor": "i-b1d5659113"
-      },
-      {
-        "title": "Jeannette Hires Three Officers to Curb Overtime",
-        "latest_developments": "Jeannette hired three police officers this week, which city officials said should ease the department's ballooning overtime costs.",
-        "summary": "Jeannette, a Westmoreland County city that has leaned on costly overtime to staff a short-handed police force, added three officers to bring those payroll costs down.",
-        "sources": [
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Sweeping housing bill with roots in Pittsburgh area has now become law — without Trump's signature",
+            "url": "https://www.post-gazette.com/local/region/2026/07/12/affordable-housing-bill-law-pittsburgh/stories/202607120064"
+          },
           {
-            "source": "TribLive",
-            "title": "Jeannette hires 3 police officers to help rein in ballooning overtime costs",
-            "url": "https://triblive.com/local/westmoreland/jeannette-hires-3-police-officers-to-help-rein-in-ballooning-overtime-costs/"
+            "source": "KDKA",
+            "title": "Bipartisan housing bill automatically becomes law after Trump refuses to sign it",
+            "url": "https://www.cbsnews.com/pittsburgh/news/housing-bill-becomes-law-trump-sign/"
           }
         ],
-        "_anchor": "i-537c9453f1"
+        "_anchor": "i-3f2698d093"
       }
     ],
     "around_town": [
       {
-        "title": "Big Boy Crowds Compound Parkway East Detour",
-        "latest_developments": "Thousands lined the rails in Homestead on Saturday, July 11, to watch Union Pacific's Big Boy No. 4014 steam locomotive, jamming a borough already absorbing detour traffic from the Parkway East closure and leaving drivers in hours of gridlock.",
-        "summary": "PennDOT closed the Parkway East (I-376) and the Squirrel Hill Tunnel on July 10 for a 25-day Commercial Street Bridge replacement, rerouting roughly 100,000 daily drivers through Homestead and the Waterfront; Union Pacific's Big Boy No. 4014, the world's largest operating steam locomotive, drew thousands to Homestead's rail lines on its Western Pennsylvania tour before stopping in Leetsdale on its way home. Homestead-area officials warned that weekday rush hour could worsen the congestion.",
+        "title": "Dangerous Heat Wave Builds Over Western Pennsylvania",
+        "latest_developments": "Forecasters expect temperatures to climb back into the 90s across the Pittsburgh region this week as an oppressive heat wave spreads over much of the United States.",
+        "summary": "Days after record rainfall soaked Allegheny County, meteorologists warn that a building heat dome will push Pittsburgh-area highs near 90 degrees this week, part of a dangerous stretch of heat blanketing much of the country.",
         "sources": [
           {
-            "source": "KDKA",
-            "title": "Thousands view Big Boy train in Homestead, adding to local Parkway East detour traffic",
-            "url": "https://www.cbsnews.com/pittsburgh/news/parkway-east-closure-big-boy-traffic-homestead/"
-          },
-          {
             "source": "Pittsburgh Post-Gazette",
-            "title": "United by intrigue and inconvenience, Pittsburghers begin 25 days without the Squirrel Hill Tunnel",
-            "url": "https://www.post-gazette.com/news/transportation/2026/07/11/commercial-bridge-closure-day-1/stories/202607110044"
+            "title": "Dangerous heat wave is building, will bring oppressive temperatures to much of the United States",
+            "url": "https://www.post-gazette.com/news/weather-news/2026/07/11/dangerous-heat-wave-building/stories/202607110043"
           },
           {
-            "source": "WPXI",
-            "title": "Big Boy locomotive draws massive crowds across Western Pennsylvania",
-            "url": "https://www.wpxi.com/news/local/big-boy-locomotive-draws-massive-crowds-across-western-pennsylvania/QHGET5EUUJHWXFHOOY54RSRXBI/"
+            "source": "WTAE",
+            "title": "Western PA: Warming to 90 again this week",
+            "url": "https://www.wtae.com/article/isolated-shower-today-sunny-sunday-ahead/71902557"
           }
         ],
-        "_anchor": "i-7374805792"
-      }
-    ],
-    "events": [
+        "_anchor": "i-6768c9c11c"
+      },
       {
-        "title": "Danny Elfman Heads to Pittsburgh",
-        "latest_developments": "Film composer Danny Elfman, in a Post-Gazette Q&A, discussed the shrinking audience for classical music ahead of an upcoming Pittsburgh appearance.",
-        "summary": "Danny Elfman, who scored Tim Burton's films, the 1989 'Batman,' and the theme to 'The Simpsons,' spoke with the Post-Gazette about the decline of classical music's audience before a coming performance in Pittsburgh.",
+        "title": "Washington Friendly-Fire Battlefield Grows Near Ligonier",
+        "latest_developments": "The protected footprint of the 1758 friendly-fire battlefield tied to George Washington near Ligonier has expanded as researchers work to confirm a mass burial of soldiers on the site.",
+        "summary": "In Westmoreland County near Ligonier, the ground where George Washington's Virginia troops mistakenly fired on fellow British soldiers in 1758 has grown as a preserved site, and researchers are trying to verify that a mass grave of the fallen lies within it.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
-            "title": "Q&A: Film composer Danny Elfman discusses classical music's shrinking audience ahead of a Pittsburgh appearance",
-            "url": "https://www.post-gazette.com/ae/music/2026/07/09/danny-elfman-classical-music-decline-film-pittsburgh/stories/202607090002"
+            "title": "George Washington's friendly fire battlefield grows while researchers try to confirm mass burial of soldiers",
+            "url": "https://www.post-gazette.com/life/recreation/2026/07/12/george-washington-battlefield-ligonier/stories/202607080068"
           }
         ],
-        "_anchor": "i-76664ac2b9"
+        "_anchor": "i-d4ce4dfb8b"
       }
     ],
+    "events": [],
     "around_teams": [
       {
-        "title": "Pirates' Bats Blow Past Last Year's Homers",
-        "latest_developments": "The Post-Gazette's 'Off The Bat' charted how the Pirates have already surpassed their entire 2025 home run total, crediting Bryan Reynolds, Brandon Lowe, and Ryan O'Hearn.",
-        "summary": "The Pittsburgh Pirates, long among baseball's weakest power-hitting teams, have found sustained pop in 2026 from Bryan Reynolds, Brandon Lowe, and Ryan O'Hearn, topping their full 2025 home run count with months of the season left.",
+        "title": "Brewers Scratch Misiorowski From Skenes Duel",
+        "latest_developments": "Milwaukee scratched hard-throwing rookie Jacob Misiorowski from his Sunday, July 12, start against Pirates ace Paul Skenes at PNC Park, scuttling the anticipated pitching matchup.",
+        "summary": "The Post-Gazette reported the Milwaukee Brewers pulled young flamethrower Jacob Misiorowski from his scheduled Sunday start at PNC Park, undoing the marquee duel with Pittsburgh's Paul Skenes that had drawn attention to the series finale.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "Off The Bat: The Pirates have already blown past last year's home run total. Here's how they've done it",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/11/pirates-mlb-home-run-reynolds-lowe-o-hearn/stories/202607100074"
+            "title": "Brewers star Jacob Misiorowski scratched from Sunday Skenes showdown",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/07/11/brewers-star-jacob-misiorowski-scratched-from-sunday-skenes-showdown/stories/202607110048"
           }
         ],
-        "_anchor": "i-f6b55f9f25"
+        "_anchor": "i-e54d2da95f"
       },
       {
-        "title": "Hiles: Pirates Are Misusing Mlodzinski",
-        "latest_developments": "Post-Gazette columnist Noah Hiles argued the Pirates must make better use of right-handed reliever Carmen Mlodzinski, faulting how the club deploys him.",
-        "summary": "Noah Hiles wrote that the Pittsburgh Pirates are wasting Carmen Mlodzinski by keeping him out of higher-leverage bullpen work, a critique aimed at how general manager Ben Cherington's staff manages its relief corps.",
+        "title": "Inside the Pirates' Konnor Griffin Draft Gambit",
+        "latest_developments": "The Post-Gazette detailed how general manager Ben Cherington's front office maneuvered around the Chicago White Sox and Washington Nationals to land shortstop Konnor Griffin in the MLB Draft.",
+        "summary": "In a beat deep-dive, the Post-Gazette recounted the behind-the-scenes machinations by Ben Cherington and the Pittsburgh Pirates that secured shortstop prospect Konnor Griffin, tracing how the picks around them fell.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "Noah Hiles: The Pirates must make better use of Carmen Mlodzinski",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/11/hiles-column-mlodzinski-bullpen-mlb-kelly-cherington/stories/202607110014"
+            "title": "The inside story of how the Pirates landed Konnor Griffin in the MLB Draft",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/07/10/konnor-griffin-mlb-draft-cherington-whitesox-nationals/stories/202607090056"
           }
         ],
-        "_anchor": "i-b7248b479c"
-      },
-      {
-        "title": "Greg Hawthorne, 1979 First-Round Pick, Dies at 69",
-        "latest_developments": "Greg Hawthorne, the back the Pittsburgh Steelers took in the first round of the 1979 NFL Draft, has died at 69, the Post-Gazette reported.",
-        "summary": "The Pittsburgh Steelers made Greg Hawthorne their first-round draft pick in 1979, during the closing years of the franchise's Steel Curtain dynasty; he has died at 69.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "Greg Hawthorne, the Steelers' No. 1 pick in 1979, dies at 69",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/10/hawthorne-dies-obituary-nfl-player/stories/202607100049"
-          }
-        ],
-        "_anchor": "i-0107da59d1"
+        "_anchor": "i-e01fe39bf7"
       }
     ],
-    "team_usa": [],
+    "team_usa": [
+      {
+        "title": "America Embraces Its Home World Cup",
+        "latest_developments": "With the United States men's team eliminated, the Guardian chronicled how packed stadiums and record television audiences have turned the co-hosted World Cup into a national phenomenon.",
+        "summary": "The Guardian reported that the 2026 World Cup, co-hosted by the United States, Canada, and Mexico, has filled stadiums and set American viewership records, becoming a unifying cultural moment even after the United States men's team exited in the round of 16 to Belgium.",
+        "sources": [
+          {
+            "source": "Guardian World Cup 2026",
+            "title": "'A brilliant reprieve, a unifying force': America falls in love with World Cup",
+            "url": "https://www.theguardian.com/football/2026/jul/11/america-world-cup-love-football"
+          }
+        ],
+        "_anchor": "i-41343ffeca"
+      }
+    ],
     "reading": [
       {
         "author": "Ed Zitron",
         "title": "Premium: The Hater's Guide To The Memory Crisis",
         "url": "https://www.wheresyoured.at/premium-the-haters-guide-to-the-memory-crisis/",
-        "summary": "Zitron dissects the surging prices and shortages gripping the computer-memory market, tying the squeeze to the AI data-center build-out and casting a skeptical eye on whether the boom can hold.",
+        "summary": "Zitron dissects the surge in memory-chip prices, arguing the industry's framing of a memory 'crisis' serves its own interests more than it reflects genuine scarcity.",
         "_anchor": "i-7aba240339"
       },
       {
         "author": "Stratechery",
         "title": "Muse Image, Grok 4.5, Alex Karp on CNBC",
         "url": "https://stratechery.com/2026/muse-image-grok-4-5-alex-karp-on-cnbc/",
-        "summary": "Ben Thompson argues the battle for verifiable data increasingly defines the AI race, threading Meta's Muse Image, xAI's Grok 4.5, and Palantir chief Alex Karp's CNBC remarks into one thesis.",
+        "summary": "Ben Thompson argues the fight for verifiable data increasingly defines the AI race, tracing the contest from Meta to Grok to the frontier labs.",
         "_anchor": "i-e9717fb151"
       },
       {
         "author": "Cal Newport",
         "title": "Beware of Productivity Paradoxes",
         "url": "https://calnewport.com/beware-of-productivity-paradoxes/",
-        "summary": "Newport warns that new tools, like the personal computer before them, often fail to deliver the productivity gains they promise, cautioning readers against assuming technology automatically makes work more efficient.",
+        "summary": "Newport warns that seemingly transformative tools like the personal computer often fail to deliver the productivity gains they promise, a cautionary lens for today's AI enthusiasm.",
         "_anchor": "i-9c92dd3d7a"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-12 02:17 EDT",
-    "items_considered": 61,
+    "generated_at": "2026-07-12 06:06 EDT",
+    "items_considered": 51,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {
