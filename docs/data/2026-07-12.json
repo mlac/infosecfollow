@@ -1,100 +1,99 @@
 {
   "date": "2026-07-12",
-  "headline": "Attackers worked the software supply chain and developer platforms, spreading an infostealer through a poisoned jscrambler npm release while ghost accounts quietly mapped GitHub organizations.",
+  "headline": "An expired 2013 Secure Boot certificate anchors a broad open-source patching day, as Debian ships its sixth trixie update, AI surfaces a 15-year-old Linux root flaw, and RedHook Android malware turns wireless debugging into a shell.",
   "emerging_trends": [
     {
-      "text": "A poisoned jscrambler npm release and ghost accounts scraping the GitHub API show attackers working the developer supply chain, seeding infostealers and reconnaissance where engineers least expect it.",
-      "topic_title": "Compromised jscrambler npm Package Drops Infostealer",
-      "link_phrase": "jscrambler",
+      "text": "Trust infrastructure baked into hardware a decade ago is reaching end of life, and the expired 2013 Secure Boot certificate that signs bootloaders on most PCs now forces mass firmware updates.",
+      "topic_title": "Expired Secure Boot Certificate Forces Firmware Updates",
+      "link_phrase": "Secure Boot",
       "_anchor": "trend-1"
     },
     {
-      "text": "Six fresh U-Boot bootloader flaws push the fight below the operating system, where malicious code that runs during boot survives reinstalls and hides from ordinary defenses.",
-      "topic_title": "U-Boot Bootloader Flaws Enable Firmware Attacks",
-      "link_phrase": "U-Boot",
+      "text": "AI has crossed from attack surface to bug hunter, with an AI system surfacing a Linux root flaw that reviewers overlooked for 15 years.",
+      "topic_title": "AI Uncovers a 15-Year-Old Linux Root Flaw",
+      "link_phrase": "15 years",
       "_anchor": "trend-2"
     },
     {
-      "text": "Sustained intrusions into the Balochistan Police and other Pakistani agencies underline how state-aligned actors treat law-enforcement databases as intelligence goldmines.",
-      "topic_title": "Espionage Campaigns Hit Pakistani Police Systems",
-      "link_phrase": "Balochistan",
+      "text": "Mobile banking malware keeps repurposing legitimate Android tooling, and RedHook now abuses Wireless ADB to grab shell privileges with no computer attached.",
+      "topic_title": "RedHook Android Malware Abuses Wireless ADB",
+      "link_phrase": "Wireless ADB",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Compromised jscrambler npm Package Drops Infostealer",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "The Hacker News reported July 11, 2026 that attackers pushed a malicious 8.14.0 release of the widely used jscrambler npm package whose preinstall hook drops and runs a native Rust infostealer on Windows, macOS, and Linux, a build for each; Socket flagged the release six minutes after publication.",
-      "summary": "jscrambler is a popular JavaScript-protection package, and simply installing its poisoned 8.14.0 version executes a platform-specific binary that harvests data from the machine. Anyone who pulled that version should remove it and rotate every credential the host touched.",
-      "tags": [
-        "supply-chain",
-        "npm",
-        "malware"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Compromised jscrambler 8.14.0 npm Release Drops Rust Infostealer During Install",
-          "url": "https://thehackernews.com/2026/07/compromised-jscrambler-8140-npm-release.html"
-        }
-      ],
-      "_anchor": "i-de880be9b4"
-    },
-    {
-      "title": "Ghost Accounts Map GitHub Organizations",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "SecurityWeek reported July 11, 2026 that multiple campaigns use throwaway ghost accounts to abuse the GitHub API and map target organizations, cataloging their repositories and members for reconnaissance.",
-      "summary": "The recon builds detailed inventories of a company's code and staff that attackers can turn into phishing lures or supply-chain intrusions. GitHub organizations should tighten member and repository visibility and watch for anomalous API scraping.",
-      "tags": [
-        "reconnaissance",
-        "github"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Ghost Accounts Abuse GitHub API in Mass Recon Campaign",
-          "url": "https://www.securityweek.com/ghost-accounts-abuse-github-api-in-mass-recon-campaign/"
-        }
-      ],
-      "_anchor": "i-1b87405a28"
-    },
-    {
-      "title": "Espionage Campaigns Hit Pakistani Police Systems",
-      "area": "Nation-State Activity",
-      "latest_developments": "The Hacker News reported July 11, 2026 that suspected China- and India-aligned threat actors ran sustained cyber espionage against Pakistani law enforcement from February 2024 through April 2026, compromising Balochistan Police servers that host web applications managing criminal and citizen data.",
-      "summary": "Multiple state-aligned groups broke into police web applications and servers holding criminal records and citizen data across several Pakistani agencies. The targeting shows adversaries mining law-enforcement databases for intelligence value.",
-      "tags": [
-        "apt",
-        "espionage"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Hackers Weaponize Balochistan Police Portal in Multi-Group Espionage Campaigns",
-          "url": "https://thehackernews.com/2026/07/hackers-weaponize-balochistan-police.html"
-        }
-      ],
-      "_anchor": "i-88c62dd008"
-    },
-    {
-      "title": "U-Boot Bootloader Flaws Enable Firmware Attacks",
+      "title": "Expired Secure Boot Certificate Forces Firmware Updates",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "BleepingComputer reported July 10, 2026 that researchers found six vulnerabilities in the widely deployed U-Boot bootloader that let an attacker run code during device boot, opening the door to stealthy firmware compromise and persistent malware.",
-      "summary": "U-Boot loads the operating system on countless embedded and Linux devices, and the flaws let an attacker execute code early in the boot chain, defeat security protections, and plant implants that survive reinstalls. Device makers shipping U-Boot should apply the fixes and reflash affected fleets.",
+      "latest_developments": "Debian released 13.6 'trixie' on July 12, 2026, bundling more than a hundred security advisories and routing a fix for the now-expired 2013 UEFI Secure Boot certificate through an updated fwupd.",
+      "summary": "Most PCs ship a UEFI Secure Boot certificate authority installed by default since 2013 that signs the bootloaders letting machines start with Secure Boot on; that certificate has expired, and Debian's point release patches the trust chain via fwupd. Administrators running Debian 13 should apply 13.6 and update firmware to keep Secure Boot functioning.",
       "tags": [
-        "firmware",
-        "vulnerability",
-        "iot"
+        "patch",
+        "firmware"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Debian 13.6 security update patches over a hundred advisories in trixie",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/debian-13-6-security-update-released/"
+        }
+      ],
+      "_anchor": "i-d85c5e91c2"
+    },
+    {
+      "title": "RedHook Android Malware Abuses Wireless ADB",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "BleepingComputer reported July 12, 2026 that a new RedHook variant abuses Android Wireless Debugging, or Wireless ADB, to gain shell-level privileges on a phone without any computer connection.",
+      "summary": "RedHook is Android malware that now escalates to shell access by turning on the operating system's own wireless debugging feature, a technique that sidesteps the usual requirement for a tethered computer. Android users should disable Wireless Debugging, avoid sideloaded apps, and watch for unexpected developer-mode prompts.",
+      "tags": [
+        "android",
+        "malware",
+        "banking"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "New U-Boot flaws could enable stealthy firmware attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/new-u-boot-flaws-could-enable-stealthy-firmware-attacks/"
+          "title": "RedHook Android malware now uses Wireless ADB for shell access",
+          "url": "https://www.bleepingcomputer.com/news/security/redhook-android-malware-now-uses-wireless-adb-for-shell-access/"
         }
       ],
-      "_anchor": "i-3bbc0d594a"
+      "_anchor": "i-37dd2c00d8"
+    },
+    {
+      "title": "Wireshark 4.6.7 Patches a Dozen Flaws",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "The SANS Internet Storm Center noted July 11, 2026 that Wireshark 4.6.7 fixes 12 vulnerabilities and 16 bugs in the widely used network protocol analyzer.",
+      "summary": "Wireshark, the packet-capture and protocol-analysis tool that security teams run daily, shipped a maintenance release closing a dozen security flaws. Analysts should upgrade to 4.6.7, since malformed captures can trigger dissector vulnerabilities.",
+      "tags": [
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "Wireshark 4.6.7 Released, (Sat, Jul 11th)",
+          "url": "https://isc.sans.edu/diary/rss/33146"
+        }
+      ],
+      "_anchor": "i-7393cfedb8"
+    },
+    {
+      "title": "AI Uncovers a 15-Year-Old Linux Root Flaw",
+      "area": "AI Security",
+      "latest_developments": "Wired reported July 11, 2026 that an AI system found a root-privilege bug in Linux that human reviewers had missed for 15 years, alongside word that the Pentagon is training amateurs into a hacker corps and that a Flock license-plate-reader error led police to surround a car reviewer.",
+      "summary": "An AI tool identified a long-buried root-level vulnerability in the Linux kernel, underscoring how machine analysis now finds flaws that eluded a decade and a half of human eyes. Linux operators should track the disclosure and patch once a fix lands.",
+      "tags": [
+        "ai",
+        "vulnerability",
+        "linux"
+      ],
+      "sources": [
+        {
+          "source": "Wired Security",
+          "title": "AI Found a Root Bug in Linux That Everyone Missed for 15 Years",
+          "url": "https://www.wired.com/story/security-news-this-week-ai-found-a-root-bug-in-linux-that-everyone-missed-for-15-years/"
+        }
+      ],
+      "_anchor": "i-62e03464f4"
     }
   ],
   "markets": [
@@ -136,15 +135,15 @@
     },
     {
       "label": "USD/JPY",
-      "value": "162.21",
+      "value": "162.16",
       "pct": "+0.1%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "This Afternoon: Mostly Sunny, high 86F.",
-    "Tonight: Slight Chance Showers And Thunderstorms then Mostly Clear, low 67F.",
-    "Monday: Sunny, high 88F."
+    "Tonight: Chance Rain Showers then Partly Cloudy, low 67F.",
+    "Monday: Sunny, high 88F.",
+    "Monday Night: Mostly Clear, low 66F."
   ],
   "sports": [
     {
@@ -181,151 +180,104 @@
   "local": {
     "business_politics": [
       {
-        "title": "U.S. and Iran Widen Hormuz War to Gulf Arab States",
-        "latest_developments": "Iran answered a fresh round of U.S. strikes by hitting Bahrain, Kuwait, Qatar, Oman, and Jordan, spreading the fight beyond the strait after an Iranian attack set a container ship ablaze and forced its crew to abandon it.",
-        "summary": "The United States struck Iran early Sunday, July 12, after Iran's Revolutionary Guard fired on a commercial vessel crossing the Strait of Hormuz; President Trump calls the waterway open while Tehran insists it stays closed 'until further notice,' menacing the ceasefire and the roughly fifth of the world's oil that moves through the chokepoint.",
+        "title": "U.S. and Iran Trade New Strikes Over Hormuz",
+        "latest_developments": "The United States launched multiple fresh waves of strikes on Iranian military targets Sunday, July 12, and Iranian forces fired on commercial vessels transiting the Strait of Hormuz, sending oil prices higher as the ceasefire collapsed further.",
+        "summary": "Iran insists it has closed the Strait of Hormuz, the chokepoint for roughly a fifth of the world's seaborne oil, while President Trump says the waterway stays open; the escalating tit-for-tat strikes threaten crude flows and revive inflation fears that could keep the Federal Reserve on hold.",
         "sources": [
           {
-            "source": "WSJ World News",
-            "title": "U.S. and Iran Ramp Up Attacks in Fight Over Strait of Hormuz",
-            "url": "https://www.wsj.com/world/middle-east/u-s-launches-new-strikes-on-iran-after-hormuz-tensions-escalate-d6903c7f"
+            "source": "WSJ",
+            "title": "U.S. and Iran Trade New Rounds of Attacks in Fight Over Strait of Hormuz",
+            "url": "https://www.wsj.com/world/middle-east/u-s-launches-new-strikes-on-iran-after-hormuz-tensions-escalate-d6903c7f?mod=pls_whats_news_us_business_f"
           },
           {
-            "source": "FT World",
-            "title": "US launches new strikes on Iran in battle over Strait of Hormuz",
-            "url": "https://www.ft.com/content/6b6c23e9-f24e-4c3e-bb1a-e5cb6860008d"
+            "source": "Financial Times",
+            "title": "US launches another round of strikes on Iran as ceasefire teeters",
+            "url": "https://www.ft.com/content/c5beec47-ba53-412e-910e-6b9ab2f3238d"
           },
           {
-            "source": "WSJ World News",
-            "title": "Aspiring to Regional Domination, Iran Is Ready to Escalate Over Hormuz",
-            "url": "https://www.wsj.com/world/middle-east/https-www-wsj-com-world-middle-east-iran-deal-strait-of-hormuz-b027c30f-580ee99f"
+            "source": "WSJ",
+            "title": "Oil Prices Rise After U.S. and Iran Exchange New Rounds of Attacks",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-prices-rise-after-u-s-and-iran-exchange-new-rounds-of-attacks-1a00c574?mod=rss_markets_main"
           }
         ],
-        "_anchor": "i-685576c0a1"
-      },
-      {
-        "title": "Senator Lindsey Graham Dies at 71",
-        "latest_developments": "Graham, the hawkish South Carolina Republican and close Trump ally, died Saturday evening, July 11, after a brief and sudden illness, and South Carolina Governor Henry McMaster will move quickly to appoint a successor.",
-        "summary": "Lindsey Graham, the longtime senator who pressed hard for backing Israel and Ukraine and for tough action against Iran, died at 71 just after returning from a trip to Ukraine; his death hands Governor Henry McMaster a Senate appointment and thins the chamber's Republican majority.",
-        "sources": [
-          {
-            "source": "WSJ Politics",
-            "title": "Longtime Republican Sen. Lindsey Graham has died after a brief and sudden illness, his office said. He was 71.",
-            "url": "https://www.wsj.com/politics/lindsey-graham-republican-senator-dies-71-bd02a353"
-          },
-          {
-            "source": "FT World",
-            "title": "US senator Lindsey Graham dies aged 71",
-            "url": "https://www.ft.com/content/b3b93565-652a-41e9-aabd-9ed35309bdeb"
-          },
-          {
-            "source": "WSJ Politics",
-            "title": "The scramble to replace Lindsey Graham after his sudden death",
-            "url": "https://www.wsj.com/politics/policy/the-scramble-to-replace-lindsey-graham-after-his-sudden-death-ad036b76"
-          }
-        ],
-        "_anchor": "i-8a553dcbc3"
+        "_anchor": "i-bfe3bb5df5"
       }
     ],
     "business": [
       {
-        "title": "Cash App Owner Settles for $45 Million",
-        "latest_developments": "Pennsylvania Attorney General Dave Sunday announced Sunday, July 12, a $45 million national settlement with Block, the owner of Cash App, that sends the commonwealth $1,137,695.72.",
-        "summary": "Block, the company behind the Cash App payment service, reached a $45 million multistate settlement, and Pennsylvania Attorney General Dave Sunday said the commonwealth will collect $1,137,695.72 of it.",
+        "title": "Pennsylvania Enacts $50.8 Billion Budget",
+        "latest_developments": "Governor Josh Shapiro signed a $50.8 billion state budget into law Sunday, July 12, twelve days past the statutory deadline, after the Pennsylvania Senate gave its approval.",
+        "summary": "The fifth consecutive overdue Pennsylvania budget steers additional aid to the commonwealth's poorest school districts and skips difficult policy fights; last year's impasse dragged into November.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Attorney General Sunday announces $45 million national settlement with Cash App owner",
-            "url": "https://www.wpxi.com/news/local/attorney-general-sunday-announces-45-million-national-settlement-with-cash-app-owner/JTYVKD6BFVAKBP4BVE7VULBR7M/"
-          }
-        ],
-        "_anchor": "i-9a9d1eb016"
-      },
-      {
-        "title": "Water Main Break Briefly Shuts Kennywood",
-        "latest_developments": "A water main break in West Mifflin delayed Kennywood's Sunday, July 12, opening until 1 p.m., and the park reopened once water returned.",
-        "summary": "Kennywood, the amusement park in West Mifflin, pushed back its Sunday opening to 1 p.m. after a water main break cut service near the grounds, then reopened for the day.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "Kennywood reopens after water main break Sunday, park says",
-            "url": "https://www.wtae.com/article/kennywood-delays-sunday-opening-water-main-break-west-mifflin/71909547"
+            "title": "Gov. Josh Shapiro signs $50.8 billion state budget into law",
+            "url": "https://www.wpxi.com/news/local/gov-josh-shapiro-signs-508-billion-budget-into-law/2QXXFY7J5VARXJ3VW2B5UPMJYM/"
           },
           {
             "source": "TribLive",
-            "title": "Kennywood's opening delayed until 1 p.m. today because of water main break",
-            "url": "https://triblive.com/local/regional/waterline-break-impact-kennywood-pass-holders/"
+            "title": "Pa. passes $50.8B budget that sends more money to poorest schools, skips difficult policy questions",
+            "url": "https://triblive.com/news/pennsylvania/pa-passes-50-8b-budget-that-sends-more-money-to-poorest-schools-skips-difficult-policy-questions/"
           }
         ],
-        "_anchor": "i-6a93a6da76"
+        "_anchor": "i-abc9a76f4a"
       }
     ],
     "around_town": [
       {
-        "title": "Parkway East Closure Snarls Allegheny County",
-        "latest_developments": "The Parkway East shutdown gridlocked Allegheny County through its first weekend, and crews on Saturday, July 11, began breaking apart and hauling off the old Commercial Street Bridge deck.",
-        "summary": "PennDOT's 25-day closure of the Parkway East (I-376) for the Commercial Street Bridge replacement pushed roughly 100,000 daily drivers onto detours and backed up traffic across Allegheny County as demolition of the old span got underway.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "Day 1: Parkway East closure causes traffic backups in Allegheny County",
-            "url": "https://www.wtae.com/article/parkway-east-closure-prompts-traffic-backups-around-pittsburgh/71908113"
-          },
-          {
-            "source": "WTAE",
-            "title": "WATCH: Debris falls from deck of old Commercial Street Bridge as replacement project begins",
-            "url": "https://www.wtae.com/article/deck-old-commercial-street-bridge-removed-replacement-project/71909794"
-          }
-        ],
-        "_anchor": "i-a526240af1"
-      },
-      {
-        "title": "PennDOT Launches Aggressive-Driving Crackdown",
-        "latest_developments": "PennDOT and its safety partners kicked off an enforcement campaign against aggressive driving, aiming at speeding, tailgating, and running red lights.",
-        "summary": "PennDOT and its safety partners began a regional enforcement push targeting aggressive-driving behaviors, singling out speeding, tailgating, and red-light running.",
+        "title": "Another Heat Wave Hits Midweek",
+        "latest_developments": "A strong heat dome centered over the Midwest will slide into Western Pennsylvania by midweek, driving highs into the 90s from Tuesday, July 14, through at least Thursday, July 16.",
+        "summary": "Meteorologists at WPXI expect the Midwest heat dome to nudge east over the Pittsburgh area, returning 90-degree temperatures for several days after a milder stretch.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "PennDOT, Safety Partners kick off Aggressive Driving Enforcement Campaign",
-            "url": "https://www.wpxi.com/news/local/penndot-safety-partners-kick-off-aggressive-driving-enforcement-campaign/D5Z6IRVOIZDGBMMMT3D67MNW6A/"
+            "title": "Another heat wave kicks off on Tuesday",
+            "url": "https://www.wpxi.com/weather/another-heat-wave-kicks-off-tuesday/WNOAQ34ITRGRTOQ6YWZ4ILDS4E/"
           }
         ],
-        "_anchor": "i-05af51538a"
+        "_anchor": "i-6751e50d1e"
       }
     ],
-    "events": [
-      {
-        "title": "Picklesburgh Returns July 16",
-        "latest_developments": "Ahead of the Thursday, July 16 opening, WTAE's '4 The Record' aired a preview with organizers, and Pittsburgh will close the Roberto Clemente and Andy Warhol bridges downtown with traffic detours for the crowds.",
-        "summary": "Picklesburgh, Pittsburgh's pickle-themed street festival, opens Thursday, July 16 downtown for its 11th year, and the city will shut the Roberto Clemente and Andy Warhol bridges, routing northbound and southbound traffic around the footprint.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "'Very uniquely Pittsburgh': Picklesburgh festival set to kick off on July 16",
-            "url": "https://www.wtae.com/article/very-uniquely-pittsburgh-picklesburgh-festival-set-to-kick-off-on-july-16/71875193"
-          },
-          {
-            "source": "WPXI",
-            "title": "Roberto Clemente, Andy Warhol Bridges to close for Picklesburgh",
-            "url": "https://www.wpxi.com/news/local/roberto-clemente-andy-warhol-bridges-close-picklesburgh/HJHYOUE5D5B2NLQRYW74NBQJ2M/"
-          }
-        ],
-        "_anchor": "i-3d3cbe872f"
-      }
-    ],
+    "events": [],
     "around_teams": [
       {
-        "title": "Hiles: Pirates Should Lean on Mlodzinski",
-        "latest_developments": "Post-Gazette columnist Noah Hiles argued the Pirates must make better use of right-hander Carmen Mlodzinski.",
-        "summary": "In a Post-Gazette column, Noah Hiles wrote that the Pirates are wasting reliever Carmen Mlodzinski and should hand him more high-leverage bullpen work down the stretch.",
+        "title": "Pirates Prospects Shine in Futures Game",
+        "latest_developments": "Pirates pitching prospect Seth Hernandez threw a scoreless inning in the MLB Futures Game during All-Star weekend, joined by outfielder Edward Florentino representing Pittsburgh's farm system.",
+        "summary": "The Post-Gazette reported Hernandez, one of the Pirates' top pitching prospects, aced his Futures Game inning in Philadelphia, spotlighting a system that ranks among baseball's deepest.",
         "sources": [
           {
-            "source": "Post-Gazette Pirates",
-            "title": "Noah Hiles: The Pirates must make better use of Carmen Mlodzinski",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/11/hiles-column-mlodzinski-bullpen-mlb-kelly-cherington/stories/202607110014"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pirates prospect Seth Hernandez aces Futures Game inning",
+            "url": "https://www.post-gazette.com/sports/mlb/2026/07/12/pirates-mlb-futures-game-seth-hernandez-edward-florentino/stories/202607120089"
           }
         ],
-        "_anchor": "i-b7248b479c"
+        "_anchor": "i-753afea3d3"
+      },
+      {
+        "title": "How the Pirates Found Power",
+        "latest_developments": "The Post-Gazette's 'Off The Bat' explained how the Pirates cleared their entire 2025 home run total well before the All-Star break.",
+        "summary": "The feature credited the resurgent bats of Bryan Reynolds, Brandon Lowe, and Ryan O'Hearn for a power surge that has transformed a lineup long starved for home runs.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Off The Bat: The Pirates have already blown past last year's home run total. Here's how they've done it",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/07/11/pirates-mlb-home-run-reynolds-lowe-o-hearn/stories/202607100074"
+          }
+        ],
+        "_anchor": "i-f6b55f9f25"
+      },
+      {
+        "title": "Steelers' Greg Hawthorne Dies at 69",
+        "latest_developments": "The Post-Gazette reported the death of Greg Hawthorne, whom the Steelers made their first-round draft pick in 1979.",
+        "summary": "Hawthorne, a running back and receiver Pittsburgh took in the opening round of the 1979 NFL draft, was 69.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Greg Hawthorne, the Steelers' No. 1 pick in 1979, dies at 69",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/07/10/hawthorne-dies-obituary-nfl-player/stories/202607100049"
+          }
+        ],
+        "_anchor": "i-0107da59d1"
       }
     ],
     "team_usa": [],
@@ -334,28 +286,28 @@
         "author": "Ed Zitron",
         "title": "Premium: The Hater's Guide To The Memory Crisis",
         "url": "https://www.wheresyoured.at/premium-the-haters-guide-to-the-memory-crisis/",
-        "summary": "Zitron's skeptical guide picks apart the narrative of an AI-driven computer-memory shortage, arguing the panic over surging prices owes more to industry hype than to a genuine crisis.",
+        "summary": "Zitron dissects the memory crisis, arguing the AI-driven surge in memory-chip demand and pricing is another symptom of an industry running on unsustainable hype.",
         "_anchor": "i-7aba240339"
       },
       {
         "author": "Stratechery",
         "title": "Muse Image, Grok 4.5, Alex Karp on CNBC",
         "url": "https://stratechery.com/2026/muse-image-grok-4-5-alex-karp-on-cnbc/",
-        "summary": "Ben Thompson argues the fight over verifiable data increasingly defines the AI race, running from Meta's Muse image model through xAI's Grok 4.5 to the frontier labs.",
+        "summary": "Ben Thompson argues the battle for verifiable data increasingly defines the AI race, tying together Meta, Grok, and the frontier labs.",
         "_anchor": "i-e9717fb151"
       },
       {
         "author": "Cal Newport",
         "title": "Beware of Productivity Paradoxes",
         "url": "https://calnewport.com/beware-of-productivity-paradoxes/",
-        "summary": "Newport argues that seemingly can't-miss technologies like the personal computer often fail to deliver their promised productivity gains, a caution he extends to today's tools.",
+        "summary": "Newport warns that powerful new tools, like the personal computer before them, often fail to deliver the obvious productivity gains they seem to promise.",
         "_anchor": "i-9c92dd3d7a"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-12 16:06 EDT",
-    "items_considered": 15,
+    "generated_at": "2026-07-12 21:06 EDT",
+    "items_considered": 14,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {
