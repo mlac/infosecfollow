@@ -1,176 +1,166 @@
 {
   "date": "2026-07-17",
-  "headline": "Ransomware knocked Coca-Cola's Fairlife, Japan's Nichirei, and naval builder TKMS offline as CISA raced to flag actively exploited SharePoint and Fortinet zero-days.",
+  "headline": "A publicly released Windows zero-day, a Chinese theft of DigiCert's code-signing trust, and a botnet ransacking exposed AI servers marked a day of attacks aimed at the internet's foundations.",
   "emerging_trends": [
     {
-      "text": "Ransomware crews are knocking physical production offline within days of each other, with Coca-Cola's Fairlife dairy, Japan's Nichirei frozen-food arm, and German naval builder TKMS all halting operations.",
-      "topic_title": "Ransomware Halts Food and Defense Manufacturers",
-      "link_phrase": "Fairlife",
+      "text": "Attackers now scan the internet for hastily exposed AI tooling like ComfyUI and Ollama, and the NadMesh botnet turned that habit into a harvest of thousands of cloud keys and Kubernetes tokens.",
+      "topic_title": "Botnets Hunt Exposed AI Services",
+      "link_phrase": "NadMesh",
       "_anchor": "trend-1"
     },
     {
-      "text": "Researchers are recasting prompt injection as the cross-site scripting of the web-agent era, as UC Berkeley's Prismata defense and a Claude for Chrome extension flaw show how any page or add-on can hijack an autonomous agent's authenticated access.",
-      "topic_title": "Prompt Injection Becomes the Web Agent's XSS",
-      "link_phrase": "prompt injection",
+      "text": "Malware authors keep burrowing into the npm registry, and ViteVenom's four-tier blockchain command-and-control shows how takedown-resistant that abuse has become.",
+      "topic_title": "Blockchain-Backed npm Supply Chain Attack",
+      "link_phrase": "ViteVenom",
       "_anchor": "trend-2"
     },
     {
-      "text": "Attackers keep weaponizing enterprise gear within hours of disclosure, forcing CISA to add a critical SharePoint deserialization zero-day and Fortinet FortiSandbox flaws to its exploited-vulnerabilities catalog on the same day.",
-      "topic_title": "SharePoint and Fortinet Flaws Under Active Exploitation",
-      "link_phrase": "SharePoint",
+      "text": "A publicly released LegacyHive exploit hands attackers administrator rights on fully patched Windows, extending a week of privilege-escalation pressure on defenders.",
+      "topic_title": "LegacyHive Windows Zero-Day Exploit Goes Public",
+      "link_phrase": "LegacyHive",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "Ransomware Halts Food and Defense Manufacturers",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Coca-Cola confirmed the Fairlife ransomware attack idled dairy plants in Michigan, New York, and Arizona, Japan's frozen-food giant Nichirei disconnected its systems July 13 and began gradually restoring operations, and ransomware also struck German naval-defense builder TKMS.",
-      "summary": "Ransomware operators are freezing manufacturing output; Fairlife, whose retail sales topped $1 billion in 2022, suspended US production while its Canada operations continue, and affected firms are pulling systems offline and rebuilding piecemeal.",
+      "title": "LegacyHive Windows Zero-Day Exploit Goes Public",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "A researcher using the \"Nightmare Eclipse\" handle published a working LegacyHive exploit that escalates local attackers to administrator on fully patched Windows, Palo Alto Networks' Unit 42 disclosed three chained Siemens ROX II OT-switch zero-days that yield persistent root, and the new HollowByte flaw crashes OpenSSL servers with an 11-byte payload.",
+      "summary": "LegacyHive grants admin rights on current Windows builds, the Siemens ROX II chain compromises industrial switches, and HollowByte lets any unauthenticated sender exhaust an OpenSSL server's memory. Administrators should apply the Siemens and OpenSSL fixes and hunt for LegacyHive privilege escalation.",
       "tags": [
-        "ransomware",
-        "breach"
+        "zero-day",
+        "ics",
+        "dos"
       ],
       "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "New Windows LegacyHive zero-day gives hackers admin privileges",
+          "url": "https://www.bleepingcomputer.com/news/security/new-windows-legacyhive-zero-day-exploit-grants-hackers-admin-access/"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "Three Steps to the Terminal: A Siemens ROX II Zero-Day Trilogy",
+          "url": "https://unit42.paloaltonetworks.com/siemens-rox-ii-zero-day-vulnerabilities/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "HollowByte DDoS flaw bloats OpenSSL server memory with 11-byte payload",
+          "url": "https://www.bleepingcomputer.com/news/security/hollowbyte-ddos-flaw-bloats-openssl-server-memory-with-11-byte-payload/"
+        }
+      ],
+      "_anchor": "i-1bff26a8f6"
+    },
+    {
+      "title": "Spirals Ransomware and Fairlife Shutdown",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Symantec's Threat Hunter Team detailed Spirals, a previously unknown Rust ransomware that moved from initial access to data theft and full encryption in under 24 hours against a South Asian IT-services firm, while The Record placed Coca-Cola's Fairlife shutdown at plants in Michigan, New York, and Arizona and Nichirei began restoring the systems it cut off July 13.",
+      "summary": "Spirals encrypts each file with a separate AES-128 key wrapped by attacker-controlled ECDH, leaving defenders little time to react, and the Fairlife and Nichirei incidents show ransomware still idling major food producers. Keep offline backups and rapid isolation playbooks ready.",
+      "tags": [
+        "ransomware"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Spirals ransomware locks down victim systems in under 24 hours",
+          "url": "https://www.helpnetsecurity.com/2026/07/17/spirals-ransomware-south-asia/"
+        },
         {
           "source": "The Record",
           "title": "Dairy company Fairlife suspends production in US after cyber incident",
           "url": "https://therecord.media/dairy-company-fairlife-suspends-production-us-cyber-incident"
         },
         {
-          "source": "Help Net Security",
-          "title": "Ransomware attack halts Coca-Cola's Fairlife US milk production",
-          "url": "https://www.helpnetsecurity.com/2026/07/17/coca-cola-fairlife-ransomware-attack/"
-        },
-        {
           "source": "SecurityWeek",
           "title": "Cyberattack Disrupts Operations of Japanese Frozen Food Giant Nichirei",
           "url": "https://www.securityweek.com/cyberattack-disrupts-operations-of-japanese-frozen-food-giant-nichirei/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "In Other News: Iran Tracks US Military Phones, CrashStealer macOS Malware, CVD Blueprint",
-          "url": "https://www.securityweek.com/in-other-news-iran-tracks-us-military-phones-crashstealer-macos-malware-cvd-blueprint/"
         }
       ],
-      "_anchor": "i-57738e5a1b"
+      "_anchor": "i-bc11c89ae1"
     },
     {
-      "title": "SharePoint and Fortinet Flaws Under Active Exploitation",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "CISA on July 17, 2026 added critical SharePoint deserialization remote-code-execution flaw CVE-2026-58644, rated 9.8, to its Known Exploited Vulnerabilities catalog with a July 19 federal patch deadline, and separately ordered agencies to fix two actively exploited Fortinet FortiSandbox flaws by Sunday.",
-      "summary": "The SharePoint bug lets remote, authenticated attackers run arbitrary code on on-premises servers, and attackers began exploiting it soon after disclosure; administrators of SharePoint Server and Fortinet FortiSandbox threat-detection appliances should patch immediately.",
+      "title": "Botnets Hunt Exposed AI Services",
+      "area": "AI Security",
+      "latest_developments": "A Go botnet called NadMesh surfaced in early July using a Shodan harvester to find exposed ComfyUI, Ollama, n8n, Open WebUI, Langflow, and Gradio instances, and its operator dashboard claims 3,811 stolen AWS keys alongside Kubernetes tokens, as Dark Reading warned that AI models allowed to both interpret and execute commands strip away human oversight.",
+      "summary": "Teams stand up AI model runners and workflow builders fast and firewall them late, leaving them open to credential theft. Restrict network access to AI services and rotate any cloud keys those services can reach.",
       "tags": [
-        "zero-day",
-        "patch",
-        "exploit"
+        "ai",
+        "botnet",
+        "cloud"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "CISA Adds Exploited SharePoint RCE Zero-Day CVE-2026-58644 to KEV",
-          "url": "https://thehackernews.com/2026/07/cisa-adds-exploited-sharepoint-rce-zero.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Fresh SharePoint Vulnerability Exploited Soon After Disclosure",
-          "url": "https://www.securityweek.com/fresh-sharepoint-vulnerability-exploited-soon-after-disclosure/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "CISA urges immediate action on actively exploited Fortinet flaws",
-          "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-feds-to-patch-exploited-fortinet-fortisandbox-flaws-by-sunday/"
-        }
-      ],
-      "_anchor": "i-f41ad026c7"
-    },
-    {
-      "title": "Prompt Injection Becomes the Web Agent's XSS",
-      "area": "AI Security",
-      "latest_developments": "UC Berkeley researchers framed Cross-Site Prompting, or XSP, as the web-agent version of cross-site scripting and built Prismata to sit between an agent and the pages it reads, as BleepingComputer detailed a Claude for Chrome extension flaw that lets a malicious extension simulate clicks to trigger Claude's authenticated access to Gmail, Google Docs, Calendar, and Salesforce.",
-      "summary": "Autonomous web agents read attacker-controlled text—reviews, listings, ads, rogue extensions—as instructions, letting any of it steer the agent; enterprises deploying agentic AI should isolate untrusted content and constrain what connected services an agent can touch.",
-      "tags": [
-        "ai",
-        "prompt-injection"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Prompt injection is becoming the XSS of the web agent era",
-          "url": "https://www.helpnetsecurity.com/2026/07/17/xss-web-agent-prompt-injection/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Claude Chrome extension flaw lets malicious extensions trigger AI actions",
-          "url": "https://www.bleepingcomputer.com/news/security/claude-chrome-extension-flaw-lets-malicious-extensions-trigger-ai-actions/"
+          "title": "New NadMesh Botnet Hunts Exposed AI Services for Cloud Keys and Kubernetes Tokens",
+          "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
         },
         {
           "source": "Dark Reading",
-          "title": "Agentic AI: Taming the Unpredictable",
-          "url": "https://www.darkreading.com/cybersecurity-operations/agentic-ai-untamable-ask-the-right-security-questions"
+          "title": "The Real AI Threat Is Blind Trust",
+          "url": "https://www.darkreading.com/application-security/real-ai-threat-blind-trust"
         }
       ],
-      "_anchor": "i-aad09bad9d"
+      "_anchor": "i-0ecfc57888"
     },
     {
-      "title": "North Korean and Kaspersky-Tracked Espionage Malware",
-      "area": "Nation-State Activity",
-      "latest_developments": "The Hacker News detailed North Korea's Contagious Interview crews hiding a four-stage OTTERCOOKIE payload—a browser-credential and crypto-wallet stealer plus a file stealer—inside steganographic SVG images delivered through fake coding challenges, while Kaspersky exposed the previously undocumented GoSerpent malware spying on Southeast Asian governments and diplomats since late 2025.",
-      "summary": "Both operations chase long-term access and intelligence; job-seeking developers who run the fake take-home projects and diplomatic staff across Southeast Asia are the targets, so treat unsolicited coding tests and unexpected attachments as hostile.",
+      "title": "REvil Suspect Detained, Fraud Launderers Charged",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Armenia has held Russian tourist Aleksandr Ermakov since June 28 on a US extradition request naming a REvil ransomware suspect of the same name, though his wife, Maria Yurova, and his lawyers say officers seized the wrong man, and US prosecutors charged a New York man and woman with laundering $43 million stolen through cyber investment-fraud scams.",
+      "summary": "The cases mark continued law-enforcement pressure on ransomware suspects and the money mules who cash out online fraud. Border stops and money-laundering charges remain the main tools reaching operators shielded inside Russia.",
       "tags": [
-        "apt",
-        "malware",
-        "espionage"
+        "arrest",
+        "fraud",
+        "ransomware"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "Fake Coding Tests Deliver OtterCookie-Aligned Malware Hidden in SVG Flag Images",
-          "url": "https://thehackernews.com/2026/07/north-korea-linked-hackers-hide.html"
+          "title": "Armenia Detains Russian Tourist on U.S. Warrant for REvil Hacker, Lawyers Say Wrong Man",
+          "url": "https://thehackernews.com/2026/07/armenia-detains-russian-tourist-on-us.html"
         },
         {
-          "source": "The Hacker News",
-          "title": "New GoSerpent Malware Targets Southeast Asian Governments and Diplomats for Espionage",
-          "url": "https://thehackernews.com/2026/07/new-goserpent-malware-targets-southeast.html"
+          "source": "BleepingComputer",
+          "title": "US charges two over laundering $43 million from investment fraud",
+          "url": "https://www.bleepingcomputer.com/news/security/us-charges-two-over-laundering-43-million-from-investment-fraud/"
         }
       ],
-      "_anchor": "i-66b19a41d9"
+      "_anchor": "i-41000770a9"
     },
     {
-      "title": "Ernst & Young Breach via Third-Party Support System",
+      "title": "DigiCert Breach Tied to China's GoldenEyeDog",
       "area": "Data Breaches",
-      "latest_developments": "Ernst & Young began notifying customers July 17, 2026 of a data breach after attackers compromised a third-party support-ticket system its IT personnel used.",
-      "summary": "The Big Four accounting and advisory firm's exposure came through a vendor system rather than its own core network, underscoring the risk that support and ticketing suppliers carry; affected clients should watch for follow-on phishing tied to leaked support data.",
+      "latest_developments": "Expel attributed the April 2026 DigiCert security incident to CylindricalCanine, a subgroup of the Chinese cybercrime group GoldenEyeDog—also tracked as APT-Q-27, Dragon Breath, and Miuuti Group—and linked the intrusion to the theft of code-signing certificates.",
+      "summary": "GoldenEyeDog, a Chinese crew known for hitting the gambling and gaming sectors, breached certificate authority DigiCert and stole code-signing certificates that let attackers sign malware as trusted software. Defenders should scrutinize recently signed binaries.",
       "tags": [
         "breach",
-        "supply-chain"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Ernst & Young discloses data breach after support system hack",
-          "url": "https://www.bleepingcomputer.com/news/security/ernst-and-young-discloses-data-breach-after-support-system-hack/"
-        }
-      ],
-      "_anchor": "i-a2011263dc"
-    },
-    {
-      "title": "Scattered Spider Members Sentenced for TfL Hack",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Woolwich Crown Court on July 16, 2026 sentenced Scattered Spider members Owen Flowers, 18, and Thalha Jubair, 20, to five and a half years each for the 2024 Transport for London hack that knocked out 148 systems and forced all 27,000 TfL staff to reset passwords in person.",
-      "summary": "The attack cost Transport for London roughly £29 million in losses and recovery; the sentencing marks continued law-enforcement pressure on the Scattered Spider social-engineering crew.",
-      "tags": [
-        "cybercrime",
-        "arrest"
+        "apt"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "Two Scattered Spider Hackers Get 5.5 Years Each for £29 Million TfL Hack",
-          "url": "https://thehackernews.com/2026/07/two-scattered-spider-hackers-get-55.html"
+          "title": "GoldenEyeDog Subgroup Linked to DigiCert Breach and Code-Signing Certificate Theft",
+          "url": "https://thehackernews.com/2026/07/goldeneyedog-subgroup-linked-to.html"
         }
       ],
-      "_anchor": "i-d6d4b2f48f"
+      "_anchor": "i-c63d54de55"
+    },
+    {
+      "title": "Blockchain-Backed npm Supply Chain Attack",
+      "area": "Software Supply Chain",
+      "latest_developments": "Checkmarx uncovered seven malicious npm packages, codenamed ViteVenom, that target the Vite frontend toolchain and expand the ChainVeil campaign with a four-tier blockchain command-and-control network spanning Tron to deliver a remote access trojan.",
+      "summary": "The packages impersonate Vite tooling and pull attacker instructions from blockchain contracts, which resist takedown. Developers should audit dependencies and pin trusted package versions.",
+      "tags": [
+        "supply-chain",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Seven Malicious Vite npm Packages Use Blockchain C2 to Deliver a RAT",
+          "url": "https://thehackernews.com/2026/07/seven-malicious-vite-npm-packages-use.html"
+        }
+      ],
+      "_anchor": "i-81c3ccc6cb"
     }
   ],
   "markets": [
@@ -218,9 +208,9 @@
     }
   ],
   "weather": [
-    "This Afternoon: Smoke, high 91F.",
+    "This Afternoon: Smoke, high 88F.",
     "Tonight: Smoke, low 71F.",
-    "Saturday: Patchy Smoke then Showers And Thunderstorms, high 86F."
+    "Saturday: Areas Of Smoke then Patchy Smoke, high 86F."
   ],
   "sports": [
     {
@@ -238,249 +228,146 @@
   "local": {
     "business_politics": [
       {
-        "title": "U.S. Widens Iran Campaign, Oil Climbs",
-        "latest_developments": "American forces bombed Iranian bridges and collapsed a tower at a key port Friday, July 17, as Iran retaliated against Qatar and a tanker in the Strait of Hormuz, and Brent crude rose 2.1% with WTI up 2.4%.",
-        "summary": "The United States has struck Iranian infrastructure and military targets for a sixth straight night, widening its target list to sever the supply routes Tehran uses to attack shipping near the Strait of Hormuz; House Republicans are pushing a smaller-than-requested package to fund the war amid party divisions.",
+        "title": "U.S.-Iran War Widens as House Weighs War Funding",
+        "latest_developments": "House Republicans pushed ahead Friday, July 17, on a package to fund the Iran war—much smaller than President Trump wants and uncertain to pass amid party divisions—as crude oil posted double-digit weekly gains.",
+        "summary": "American strikes on increasingly sensitive Persian Gulf targets risk spiraling into a wider war as Iran hits back at neighboring Gulf states, and oil futures climbed all week on fears of supply disruption near the Strait of Hormuz.",
         "sources": [
           {
-            "source": "FT World",
-            "title": "US escalates attacks on Iran as it expands range of targets",
-            "url": "https://www.ft.com/content/119c8222-89ce-4c45-ad77-9bb4aab06bdd?syn-25a6b1a6=1"
+            "source": "WSJ World News",
+            "title": "The U.S. and Iran Creep Toward a Wider War With Escalating Attacks",
+            "url": "https://www.wsj.com/world/middle-east/the-u-s-and-iran-creep-toward-a-wider-war-with-escalating-attacks-7323c060"
           },
           {
             "source": "WSJ Markets",
-            "title": "Oil Rises More Than 2% As U.S.-Iran Tensions Remain High",
+            "title": "Oil Futures Rise on Middle East Escalation Fears",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-escalating-supply-disruption-concerns-c3dcf86d?mod=rss_markets_main"
           },
           {
             "source": "WSJ Politics",
-            "title": "House Republicans are plunging ahead with a plan to approve extra military spending to fund the Iran war, but passage remains uncertain and Trump wants more",
+            "title": "GOP Package to Fund Iran War Runs Into Republican Doubts",
             "url": "https://www.wsj.com/politics/policy/gop-package-to-fund-iran-war-runs-into-republican-doubts-5502da4e"
           }
         ],
-        "_anchor": "i-c5359b0602"
-      },
-      {
-        "title": "Apple Retakes Crown as AI Trade Reverses",
-        "latest_developments": "Apple leapfrogged Nvidia on Friday, July 17, to become the most valuable U.S. public company, its shares escaping a selloff that drove the semiconductor index toward its worst week since 2025's 'liberation day' rout.",
-        "summary": "The reversal in the artificial-intelligence trade deepened as Netflix slid on its weakest revenue forecast in three years and chipmakers crashed, while investors rewarded Apple for consumer execution over hardware-supply exposure.",
-        "sources": [
-          {
-            "source": "WSJ Markets",
-            "title": "Apple Overthrows Nvidia to Reclaim Wall Street's Crown",
-            "url": "https://www.wsj.com/tech/apple-overthrows-nvidia-to-reclaim-wall-streets-crown-ddc74a38?mod=rss_markets_main"
-          },
-          {
-            "source": "FT Markets",
-            "title": "Wall Street tech stocks slide as AI trade goes into reverse",
-            "url": "https://www.ft.com/content/79a15abd-5892-4f1c-b038-b09a1ceecabb?syn-25a6b1a6=1"
-          },
-          {
-            "source": "FT World",
-            "title": "Netflix shares slide on disappointing growth forecasts",
-            "url": "https://www.ft.com/content/2c5151d9-738f-4808-bbd0-15aaf48d922e?syn-25a6b1a6=1"
-          }
-        ],
-        "_anchor": "i-dc5c9c1728"
+        "_anchor": "i-5d449c0a43"
       }
     ],
     "business": [
       {
-        "title": "Kiavi Sold in $717 Million Blockchain Deal",
-        "latest_developments": "A publicly traded blockchain-native capital marketplace agreed to buy Pittsburgh real-estate lender Kiavi for $717 million, WPXI reported Friday, July 17.",
-        "summary": "Kiavi, a Pittsburgh lender that uses artificial intelligence to underwrite loans to real-estate investors, will fold into a marketplace for tokenized assets under the $717 million transaction.",
+        "title": "Startup Bank Files for Pittsburgh Charter",
+        "latest_developments": "Two former bank executives and a Pittsburgh lawyer filed a national-charter application July 14, launching the region's first new bank in almost 20 years, WPXI reported.",
+        "summary": "A core group of six—led by former BNY and Huntington executives and a law-firm partner—applied to federal regulators to charter a startup bank in Pittsburgh, the first new bank in the region in nearly two decades.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Pittsburgh real estate lender Kiavi being bought for $717M in blockchain marketplace deal",
-            "url": "https://www.wpxi.com/news/local/pittsburgh-real-estate-lender-kiavi-being-bought-717m-blockchain-marketplace-deal/J6JCUBOIPBDF5GPSLZQDPSGRBE/"
+            "title": "Former BNY, Huntington execs and law firm partner file to launch startup bank in Pittsburgh",
+            "url": "https://www.wpxi.com/news/local/former-bny-huntington-execs-law-firm-partner-file-launch-startup-bank-pittsburgh/4HY55FEQHVBMRECQ6XPTUWQPPQ/"
           }
         ],
-        "_anchor": "i-363a3c6b56"
+        "_anchor": "i-f5f2e0d581"
       },
       {
-        "title": "Ryan Homes Garage Void in North Huntingdon",
-        "latest_developments": "Nicole Holderfield said her family found a large empty void beneath the two-car garage of their Ryan Homes house in North Huntingdon's Altman Farms neighborhood and is warning other buyers, KDKA reported July 17.",
-        "summary": "The Holderfields discovered dead space under the front-facing garage of their Westmoreland County home built by Ryan Homes and want other owners to check for similar construction.",
+        "title": "U.S. Steel Showcases Braddock Mill Investment",
+        "latest_developments": "U.S. Steel showcased job openings and its multibillion-dollar Edgar Thomson investment Friday, July 17, projecting the new Braddock hot strip mill will finish by 2029 and add $1.7 billion to Pennsylvania's economy, WTAE reported.",
+        "summary": "U.S. Steel is building a new hot strip mill at its Edgar Thomson plant in Braddock, with completion projected in 2029 and $1.7 billion in economic impact for the commonwealth.",
         "sources": [
           {
-            "source": "KDKA",
-            "title": "Family discovers large void under garage of their Pennsylvania house, built by Ryan Homes",
-            "url": "https://www.cbsnews.com/pittsburgh/news/void-under-garage-ryan-homes-westmoreland-county/"
+            "source": "WTAE",
+            "title": "US Steel showcases job opportunity, multibillion investment in new Braddock mill",
+            "url": "https://www.wtae.com/article/us-steel-investment-braddock-mill-edgar-thomson/72914201"
           }
         ],
-        "_anchor": "i-e640366877"
+        "_anchor": "i-e6c01cea36"
       }
     ],
     "around_town": [
       {
-        "title": "Nese Foundation Grants $1 Million for Public-Safety Hiring",
-        "latest_developments": "The Ross and Carol Nese Foundation gave the city of Pittsburgh a $1 million grant to expand public-safety recruitment, WPXI reported Friday, July 17.",
-        "summary": "Mayor Corey O'Connor and the Pittsburgh Department of Public Safety will use the Nese Foundation money to bolster hiring across the city's police, fire, and emergency-medical agencies.",
+        "title": "Wildfire Smoke to Clear With Saturday Storms",
+        "latest_developments": "Meteorologists said Friday, July 17, that strong to severe storms arriving late Saturday will wash out the wildfire smoke, ending the Code Purple alert that shut Kennywood, Sandcastle, and Idlewild and canceled Allegheny County events.",
+        "summary": "Thick smoke from Canadian and Minnesota wildfires held Pennsylvania under a statewide Code Purple \"very unhealthy\" alert Friday, closing the Kennywood, Sandcastle, and Idlewild amusement parks and prompting County Executive Sara Innamorato to urge residents to stay indoors.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Western PA: Strong to severe storms arrive late Saturday",
+            "url": "https://www.wtae.com/article/heavy-smoke-to-storms-two-alert-days-for-western-pa/73148972"
+          },
+          {
+            "source": "WTAE",
+            "title": "Kennywood, Sandcastle and Idlewild all closed due to Code Purple Air Quality Alert",
+            "url": "https://www.wtae.com/article/kennywood-sandcastle-and-idlewild-all-closed-due-to-code-purple-air-quality-alert/73168952"
+          }
+        ],
+        "_anchor": "i-271c776e5c"
+      },
+      {
+        "title": "I-279 North to Close Five Nights Next Week",
+        "latest_developments": "The Allegheny County Department of Public Works released a schedule Friday, July 17, to fully close northbound I-279 for five overnight stretches next week.",
+        "summary": "Crews will fully close a portion of northbound Interstate 279 for five nights next week to demolish Jacks Run Bridge No. 3, which carries Jacks Run Road over the highway.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "City of Pittsburgh receives $1M grant to expand public safety recruitment efforts",
-            "url": "https://www.wpxi.com/news/local/city-pittsburgh-receives-1m-grant-expand-public-safety-recruitment-efforts/RL7BJHSCYVHR7EVYKJN2P5EJQE/"
+            "title": "Portion of northbound I-279 to fully close 5 nights next week",
+            "url": "https://www.wpxi.com/news/local/portion-northbound-i-279-fully-close-5-nights-next-week/KRQQXCW7OJHDPDVKM75YBMGFBU/"
           }
         ],
-        "_anchor": "i-4ce7d2a521"
+        "_anchor": "i-7e09601b33"
       },
       {
-        "title": "Cyclospora Outbreak Traced to Taco Bell Lettuce",
-        "latest_developments": "The Food and Drug Administration traced the multistate cyclosporiasis outbreak—which sickened 11 people in Allegheny County—to a single Mexican iceberg-lettuce supplier used by Taco Bell, the CDC said Friday, July 17.",
-        "summary": "The tainted iceberg lettuce reached Taco Bell locations in Indiana, Kentucky, Michigan, Ohio, and West Virginia; the cyclospora parasite causes prolonged diarrheal illness.",
+        "title": "State Police, Turnpike Collect $2 Million in Tolls",
+        "latest_developments": "The Pennsylvania Turnpike and state police said their first joint toll-enforcement initiative recovered more than $2 million in unpaid tolls, KDKA reported July 17.",
+        "summary": "A one-month enforcement push by the Pennsylvania Turnpike and Pennsylvania State Police collected more than $2 million in unpaid tolls, stopping aggressive drivers and those with suspended registrations tied to unpaid bills.",
         "sources": [
           {
             "source": "KDKA",
-            "title": "Cyclosporiasis outbreak traced to lettuce from Mexico used by Taco Bell, CDC says",
-            "url": "https://www.cbsnews.com/pittsburgh/news/cyclosporiasis-outbreak-taco-bell-lettuce-mexico/"
+            "title": "Pa. State Police and Pa. Turnpike team up to collect more than $2 million in unpaid tolls",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pa-state-police-and-pa-turnpike-team-up-to-collect-more-than-2-million-in-unpaid-tolls/"
           }
         ],
-        "_anchor": "i-23e4a3e7f8"
-      },
-      {
-        "title": "Warhol Museum Names Hannah Klemm Curator",
-        "latest_developments": "The Andy Warhol Museum named Hannah Klemm its new Milton Fine Curator of Art, WPXI reported July 17.",
-        "summary": "Klemm takes the top curatorial post at the Andy Warhol Museum on Pittsburgh's North Shore.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Warhol Museum names new Milton Fine Curator of Art",
-            "url": "https://www.wpxi.com/news/local/warhol-museum-names-new-milton-fine-curator-art/5YNWLYQIYBF4TGHYNGEDSCIVU4/"
-          }
-        ],
-        "_anchor": "i-ff19e619b1"
+        "_anchor": "i-ecb831f060"
       }
     ],
-    "events": [
-      {
-        "title": "Picklesburgh Runs Downtown Through Sunday",
-        "latest_developments": "Picklesburgh opened as planned Friday, July 17, in Downtown Pittsburgh even as the Code Purple air-quality alert forced cancellation of other outdoor events such as America's Mile.",
-        "summary": "Picklesburgh, the city's pickle-themed food festival, runs Thursday through Sunday, July 16-19, in Downtown Pittsburgh, with hours of noon to 10 p.m. Thursday through Saturday and noon to 6 p.m. Sunday.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Picklesburgh to open as planned Friday despite poor air quality due to wildfire smoke",
-            "url": "https://www.wpxi.com/news/local/picklesburgh-open-planned-friday-despite-air-quality-concerns-wildfire-smoke/UFAYZNOWYBAE3MBEOJFGS6PAAY/"
-          },
-          {
-            "source": "NEXTpittsburgh Events",
-            "title": "14+ things to do this weekend, from Picklesburgh to the Pittsburgh Vintage Grand Prix",
-            "url": "https://nextpittsburgh.com/events/14-things-to-do-this-weekend-from-picklesburgh-to-the-pittsburgh-vintage-grand-prix/"
-          }
-        ],
-        "_anchor": "i-7a89767efe"
-      }
-    ],
-    "around_teams": [
-      {
-        "title": "Steelers See Bigger Role for Freiermuth",
-        "latest_developments": "A Post-Gazette training-camp countdown argued July 17 that tight end Pat Freiermuth should finally become a central member of the Steelers offense.",
-        "summary": "The Post-Gazette ties Freiermuth's expected leap to quarterback Aaron Rodgers and coach Mike McCarthy's scheme as camp nears at Saint Vincent College in Latrobe.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "Steelers training camp countdown: Why Pat Freiermuth should finally become a key member of the offense",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/17/training-camp-countdown-freiermuth-rodgers-offense-mccarthy/stories/202607170004"
-          }
-        ],
-        "_anchor": "i-8ddcb4d16a"
-      },
-      {
-        "title": "Steelers' Hold-In Tactic Amid Porter Talks",
-        "latest_developments": "A Post-Gazette piece July 17 detailed how the 'hold-in'—reporting to camp while sitting out drills—has become Steelers players' preferred tool in stalled contract talks, with cornerback Joey Porter Jr. among those seeking a new deal.",
-        "summary": "The Post-Gazette traced the hold-in from Le'Veon Bell's holdout era to the present, framing Porter's push for a raise as cornerback salaries around the NFL surge.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "How the hold-in has become the ploy of choice for Steelers with stalled contract talks",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/17/leveon-holdout-holdin-contract-negotiations-porter/stories/202607170040"
-          }
-        ],
-        "_anchor": "i-ecb1f3602b"
-      },
-      {
-        "title": "Pirates' Rotation Will Set Their Ceiling",
-        "latest_developments": "Post-Gazette columnist Noah Hiles argued July 17 that the starting rotation will ultimately decide how far the Pirates go in the second half.",
-        "summary": "Hiles pins the Pirates' playoff push on starters Paul Skenes, Braxton Ashcraft, and Mitch Keller as the club sits two games out of a wild-card spot at 50-47 after the All-Star break.",
-        "sources": [
-          {
-            "source": "Post-Gazette Pirates",
-            "title": "Noah Hiles: The Pirates' starting rotation will ultimately determine how far they go",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/17/hiles-column-rotation-skenes-ashcraft-jones-keller/stories/202607170043"
-          }
-        ],
-        "_anchor": "i-ccdced987e"
-      }
-    ],
+    "events": [],
+    "around_teams": [],
     "team_usa": [
       {
-        "title": "Pochettino to Decide U.S. Future Next Week",
-        "latest_developments": "Mauricio Pochettino said Friday, July 17, he will announce next week whether he stays as United States men's national team coach.",
-        "summary": "Pochettino's contract, funded in part by billionaire donors, expired with the Americans' round-of-16 World Cup exit to Belgium; U.S. Soccer earlier said it would 'take a break' before settling his future and the vacant sporting-director job.",
+        "title": "Lindsey Heaps Returns Home With Denver Summit",
+        "latest_developments": "ESPN reported July 17 that U.S. women's national team midfielder Lindsey Heaps, after stints with Paris Saint-Germain and abroad, joined NWSL expansion side Denver Summit FC, a return to her native Colorado.",
+        "summary": "United States women's national team midfielder Lindsey Heaps, a veteran of Paris Saint-Germain and Olympique Lyonnais, signed with new NWSL club Denver Summit FC, bringing her career back to the Colorado region where she grew up.",
         "sources": [
           {
             "source": "ESPN Soccer",
-            "title": "Poch to reveal decision on U.S. future next week",
-            "url": "https://www.espn.com/soccer/story/_/id/49382484/mauricio-pochettino-make-decision-usmnt-future-next-week"
+            "title": "After globetrotting with USWNT, PSG and more, Lindsey Heaps returns home with Denver Summit",
+            "url": "https://www.espn.com/soccer/story/_/id/49363167/for-uswnt-star-lindsey-heaps-transfer-denver-summit-marks-welcome-return-home"
           }
         ],
-        "_anchor": "i-f2672fb35c"
-      },
-      {
-        "title": "NYCFC Wants Pulisic, Milan Won't Sell",
-        "latest_developments": "New York City FC would like to bring United States captain Christian Pulisic to Major League Soccer, ESPN reported July 17, though it calls the move 'dead in the water' because AC Milan has no interest in selling.",
-        "summary": "Pulisic, the top American men's player, remains under contract at AC Milan following the U.S. World Cup exit.",
-        "sources": [
-          {
-            "source": "ESPN Soccer",
-            "title": "NYCFC eye Pulisic, deal 'dead in the water' for no...",
-            "url": "https://www.espn.com/soccer/story/_/id/49379980/nycfc-christian-pulisic-transfer-ac-milan-mls"
-          }
-        ],
-        "_anchor": "i-a71b7fce8e"
-      },
-      {
-        "title": "Team USA Women Feted at Las Vegas SHE Weekend",
-        "latest_developments": "Dozens of Team USA women Olympians and Paralympians received personalized keys to the Las Vegas Strip at the inaugural SHE Weekend parade Thursday, July 16, ESPN reported.",
-        "summary": "The SHE Weekend festivities in Las Vegas honored American women Olympic and Paralympic athletes.",
-        "sources": [
-          {
-            "source": "ESPN Olympics",
-            "title": "Team USA gets keys to L.V. Strip at SHE Weekend",
-            "url": "https://www.espn.com/olympics/story/_/id/49381919/team-usa-women-athletes-feted-weekend-get-keys-vegas-strip"
-          }
-        ],
-        "_anchor": "i-618259068c"
+        "_anchor": "i-c4dc82e5a7"
       }
     ],
     "reading": [
       {
+        "author": "Stratechery",
+        "title": "IBM Misses, IBM’s Mainframe Moat, IBM’s Many AI Problems",
+        "url": "https://stratechery.com/2026/ibm-misses-ibms-mainframe-moat-ibms-many-ai-problems/",
+        "summary": "Ben Thompson reads IBM's spooked-the-market preliminary results as a story about the durability and limits of its mainframe franchise, and why that franchise leaves the company poorly positioned for the AI era.",
+        "_anchor": "i-3fbdc1bddb"
+      },
+      {
         "author": "Ed Zitron",
         "title": "The OpenAI Bubble",
         "url": "https://www.wheresyoured.at/the-openai-bubble/",
-        "summary": "Zitron argues that OpenAI anchors an unsustainable artificial-intelligence bubble, picking apart the company's finances and the spending that props up the wider AI economy.",
+        "summary": "Zitron argues OpenAI's finances and growth story amount to an unsustainable bubble, a company burning cash without a path to the returns its valuation implies.",
         "_anchor": "i-fd12c7c4fe"
-      },
-      {
-        "author": "Stratechery",
-        "title": "IBM Misses, IBM's Mainframe Moat, IBM's Many AI Problems",
-        "url": "https://stratechery.com/2026/ibm-misses-ibms-mainframe-moat-ibms-many-ai-problems/",
-        "summary": "Ben Thompson dissects IBM's earnings miss that spooked software stocks, arguing its enduring mainframe franchise cannot shield it from the ways AI threatens the rest of its business.",
-        "_anchor": "i-3fbdc1bddb"
       },
       {
         "author": "Cal Newport",
         "title": "Why Reading Matters",
         "url": "https://calnewport.com/why-reading-matters/",
-        "summary": "Newport answers an Atlantic piece declaring the end of reading, defending the cognitive value of sustained deep reading against a cultural drift toward skimming and video.",
+        "summary": "Responding to an Atlantic piece declaring 'the end of reading,' Newport defends deep reading as a cognitive skill worth preserving against the drift toward shorter, shallower attention.",
         "_anchor": "i-d6a4747e23"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-17 12:06 EDT",
+    "generated_at": "2026-07-17 16:05 EDT",
     "items_considered": 54,
     "window_hours": 24,
     "model": "claude-opus-4-8",
