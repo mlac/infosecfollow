@@ -1,38 +1,43 @@
 {
   "date": "2026-07-18",
-  "headline": "Two easy-to-trigger, unauthenticated flaws land with working exploit code the same day—a WordPress core bug that runs code from one anonymous request and an OpenSSL denial-of-service that an 11-byte packet sets off.",
+  "headline": "Ready-to-run public exploits for a WordPress core flaw and a fresh 7-Zip archive bug hand attackers unauthenticated code execution across millions of installs.",
   "emerging_trends": [
     {
-      "text": "Two unauthenticated flaws hit widely deployed servers with working exploit code already in hand—wp2shell runs code on any WordPress core install from a single anonymous request, and HollowByte freezes an OpenSSL server with an 11-byte packet.",
-      "topic_title": "wp2shell WordPress Core Flaw Gains CVEs and Public Exploit",
+      "text": "Attackers now hold ready-to-run wp2shell exploits within days of disclosure, turning every unpatched WordPress 6.9 and 7.0 site into a one-request code-execution target.",
+      "topic_title": "wp2shell WordPress Exploits Go Public",
       "link_phrase": "wp2shell",
       "_anchor": "trend-1"
     },
     {
-      "text": "Attackers now treat self-hosted AI infrastructure as a soft target, with the NadMesh botnet scanning for exposed ComfyUI, Ollama, and Gradio instances to loot thousands of cloud keys.",
-      "topic_title": "NadMesh Botnet Hunts Exposed AI Services",
-      "link_phrase": "NadMesh",
+      "text": "Ubiquitous desktop software keeps yielding code execution, as 7-Zip's latest archive-parsing flaw joins WordPress in demanding urgent patches from teams that rarely auto-update.",
+      "topic_title": "7-Zip Archive Remote Code Execution",
+      "link_phrase": "7-Zip",
       "_anchor": "trend-2"
     },
     {
-      "text": "Adversaries keep poisoning the trust layer of software, as the ViteVenom npm packages smuggle a blockchain-backed remote access trojan and a Chinese crew steals code-signing certificates through DigiCert.",
-      "topic_title": "ViteVenom Poisons npm With Blockchain C2",
-      "link_phrase": "ViteVenom",
+      "text": "The AI security contest turns reflexive as defenders weaponize context bombing—prompt injection aimed at attackers' own hacking agents—to make malicious automation shut itself down.",
+      "topic_title": "Defenders Turn Prompt Injection on AI Hacking Agents",
+      "link_phrase": "context bombing",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "wp2shell WordPress Core Flaw Gains CVEs and Public Exploit",
+      "title": "wp2shell WordPress Exploits Go Public",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "The flaws now carry CVE identifiers including CVE-2026-60137, WordPress shipped the 7.0.2 release, and today the full exploit mechanism plus a working proof-of-concept went public.",
-      "summary": "wp2shell lets an anonymous HTTP request run code on a bare WordPress core install with zero plugins, putting every 6.9 and 7.0 site in range; Adam Kues of Assetnote and Searchlight Cyber traced it to a REST API batch-route confusion and SQL injection chain. Update to 6.9.5 or 7.0.2 at once.",
+      "latest_developments": "BleepingComputer, Help Net Security, and The Hacker News report that ready-to-run public exploits for both flaws now circulate: SQL injection CVE-2026-60137 and REST API batch-route confusion CVE-2026-63030, which chains to remote code execution and which WordPress 7.0.2 fixes.",
+      "summary": "WordPress core versions 6.9 through 7.0.1 let an unauthenticated attacker run code from a single HTTP request. Adam Kues of Assetnote and Searchlight Cyber plus researchers TF1T, dtro, and haongo reported the bugs; WordPress shipped 7.0.2 and 6.9.5 and pushed auto-updates, so administrators should confirm the patch landed.",
       "tags": [
         "zero-day",
         "patch",
-        "rce"
+        "exploit"
       ],
       "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "WordPress Core \"wp2shell\" RCE flaws get public exploits, patch now",
+          "url": "https://www.bleepingcomputer.com/news/security/wordpress-core-wp2shell-rce-flaws-get-public-exploits-patch-now/"
+        },
         {
           "source": "Help Net Security",
           "title": "Two new high severity WordPress vulnerabilities, patch immediately!",
@@ -44,106 +49,43 @@
           "url": "https://thehackernews.com/2026/07/new-wp2shell-wordpress-core-flaw-lets.html"
         }
       ],
-      "_anchor": "i-b192d111f6"
+      "_anchor": "i-5c3b60e219"
     },
     {
-      "title": "ACR Stealer Surge Hits Enterprises",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Microsoft warned of a surge in ACR Stealer attacks against its enterprise customers, pulling browser-stored passwords, authentication tokens, and sensitive documents.",
-      "summary": "ACR Stealer, spread largely through ClickFix copy-paste lures, grabs credentials and session tokens that fuel follow-on intrusion. Reset exposed credentials and block the delivery lures.",
-      "tags": [
-        "infostealer",
-        "credential-theft"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Microsoft warns of surge in ACR Stealer attacks on customers",
-          "url": "https://www.bleepingcomputer.com/news/security/microsoft-warns-of-surge-in-acr-stealer-attacks-on-customers/"
-        }
-      ],
-      "_anchor": "i-99efddde52"
-    },
-    {
-      "title": "OpenSSL HollowByte Denial-of-Service Flaw",
+      "title": "7-Zip Archive Remote Code Execution",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Okta's Red Team disclosed HollowByte, showing an 11-byte TLS request forces an unpatched OpenSSL server to reserve up to 131 KB of memory for a message that never arrives, memory that stays gone on glibc systems until the process restarts.",
-      "summary": "Unauthenticated attackers can exhaust OpenSSL server memory and crash the service; OpenSSL quietly shipped the fix in June with no CVE, advisory, or changelog entry pointing at it. Move to the fixed OpenSSL build.",
+      "latest_developments": "7-Zip released version 26.02 on July 18, 2026 to fix a remote code execution flaw that runs attacker code when a victim opens a specially crafted compressed archive.",
+      "summary": "7-Zip, the free archiver installed across most Windows enterprises, carried a flaw that executes code from a booby-trapped archive file. 7-Zip lacks an auto-updater, so users and IT teams must install version 26.02 manually.",
       "tags": [
-        "dos",
         "patch",
-        "vulnerability"
+        "rce"
       ],
       "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "OpenSSL HollowByte Flaw Could Freeze Server Memory with 11-Byte TLS Requests",
-          "url": "https://thehackernews.com/2026/07/openssl-hollowbyte-flaw-could-freeze.html"
-        },
         {
           "source": "BleepingComputer",
-          "title": "HollowByte DDoS flaw bloats OpenSSL server memory with 11-byte payload",
-          "url": "https://www.bleepingcomputer.com/news/security/hollowbyte-ddos-flaw-bloats-openssl-server-memory-with-11-byte-payload/"
+          "title": "Update now: 7-Zip fixes RCE flaw exploitable with malicious archives",
+          "url": "https://www.bleepingcomputer.com/news/security/update-now-7-zip-fixes-rce-flaw-exploitable-with-malicious-archives/"
         }
       ],
-      "_anchor": "i-c77a96e5b9"
+      "_anchor": "i-fcea53af66"
     },
     {
-      "title": "ViteVenom Poisons npm With Blockchain C2",
-      "area": "Software Supply Chain",
-      "latest_developments": "Checkmarx uncovered seven malicious npm packages targeting the Vite frontend ecosystem, codenamed ViteVenom, expanding the ChainVeil campaign's four-tier blockchain command-and-control spanning Tron and other chains to deliver a remote access trojan.",
-      "summary": "The packages impersonate Vite tooling to drop a RAT on developers, using blockchain infrastructure that resists takedown. Audit dependencies and pull the malicious versions.",
-      "tags": [
-        "supply-chain",
-        "npm",
-        "rat"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Seven Malicious Vite npm Packages Use Blockchain C2 to Deliver a RAT",
-          "url": "https://thehackernews.com/2026/07/seven-malicious-vite-npm-packages-use.html"
-        }
-      ],
-      "_anchor": "i-81c3ccc6cb"
-    },
-    {
-      "title": "NadMesh Botnet Hunts Exposed AI Services",
+      "title": "Defenders Turn Prompt Injection on AI Hacking Agents",
       "area": "AI Security",
-      "latest_developments": "A Go botnet named NadMesh surfaced in early July scanning for exposed ComfyUI, Ollama, n8n, Open WebUI, Langflow, and Gradio instances, and the operator's own dashboard claims 3,811 stolen AWS keys alongside Kubernetes tokens.",
-      "summary": "NadMesh runs a Shodan-fed scan queue to find self-hosted AI tools that teams stand up fast and firewall late, then harvests cloud credentials for further intrusion. Firewall and authenticate every AI service endpoint.",
+      "latest_developments": "Wired on July 18, 2026 detailed context bombing, a technique that floods a malicious AI hacking agent's context window until the agent aborts, extending the defensive prompt-injection tactic Ars Technica first reported on July 13.",
+      "summary": "Context bombing turns prompt injection—the flaw that plagues AI assistants—against attackers, feeding their autonomous hacking agents enough instructions to make the agents shut down before striking. Security teams see it as an early countermeasure to offensive AI automation.",
       "tags": [
-        "botnet",
-        "cloud",
-        "credential-theft"
+        "ai",
+        "prompt-injection"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "New NadMesh Botnet Hunts Exposed AI Services for Cloud Keys and Kubernetes Tokens",
-          "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+          "source": "Wired Security",
+          "title": "Prompt Injection Attacks Are Thwarting AI Hacking Agents",
+          "url": "https://www.wired.com/story/prompt-injection-attacks-are-thwarting-ai-hacking-agents/"
         }
       ],
-      "_anchor": "i-0ecfc57888"
-    },
-    {
-      "title": "GoldenEyeDog Subgroup Tied to DigiCert Breach",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Expel attributed the April 2026 DigiCert incident to CylindricalCanine, a subgroup of the Chinese group GoldenEyeDog, also tracked as APT-Q-27, Dragon Breath, and Miuuti Group, and laid out the code-signing certificate theft behind it.",
-      "summary": "GoldenEyeDog, known for hitting the gambling and gaming sectors, stole code-signing certificates through the DigiCert breach, letting it sign malware as trusted software. Watch for and block binaries signed with the abused certificates.",
-      "tags": [
-        "apt",
-        "breach",
-        "code-signing"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "GoldenEyeDog Subgroup Linked to DigiCert Breach and Code-Signing Certificate Theft",
-          "url": "https://thehackernews.com/2026/07/goldeneyedog-subgroup-linked-to.html"
-        }
-      ],
-      "_anchor": "i-c63d54de55"
+      "_anchor": "i-b4a1dee594"
     }
   ],
   "markets": [
@@ -179,7 +121,7 @@
     },
     {
       "label": "GBP/USD",
-      "value": "1.3444",
+      "value": "1.3430",
       "pct": "+0.4%",
       "arrow": "▲"
     },
@@ -191,25 +133,31 @@
     }
   ],
   "weather": [
-    "This Afternoon: Showers And Thunderstorms, high 87F.",
+    "This Afternoon: Showers And Thunderstorms Likely, high 87F.",
     "Tonight: Showers And Thunderstorms then Chance Showers And Thunderstorms, low 66F.",
     "Sunday: Mostly Sunny, high 82F."
   ],
   "sports": [
     {
       "team": "Pirates",
-      "record": "50-47",
+      "record": "51-47",
       "games": [
         {
           "date": "Fri Jul 17",
           "url": "https://plaintextsports.com/mlb/2026-07-17/pit-cle",
           "recap": "",
           "result": "Pirates @ Guardians · Postponed"
+        },
+        {
+          "date": "Sat Jul 18",
+          "url": "https://plaintextsports.com/mlb/2026-07-18/pit-cle",
+          "recap": "",
+          "result": "Pirates 7 · Guardians 1 · Final"
         }
       ],
       "next": {
         "matchup": "Pirates @ Guardians",
-        "when": "Sat Jul 18, 1:10 PM",
+        "when": "Sat Jul 18, 7:10 PM",
         "url": "https://plaintextsports.com/mlb/2026-07-18/pit-cle"
       },
       "headlines": []
@@ -218,198 +166,124 @@
   "local": {
     "business_politics": [
       {
-        "title": "Gulf War Escalates as Tehran Fields Deadlier Missiles",
-        "latest_developments": "Beyond Saturday's Saudi strike already reported, the Wall Street Journal reported Iran has switched to more-lethal missiles that made the past week the deadliest yet for commercial sailors in the Persian Gulf, while the U.S. Strategic Petroleum Reserve has drained to its lowest level since 1983.",
-        "summary": "The United States and Iran keep trading strikes on infrastructure and military targets across the Persian Gulf around the Strait of Hormuz, the chokepoint that once carried a fifth of the world's crude, raising the risk of a wider war and tightening global oil supply.",
+        "title": "U.S. Troops Killed as Iran War Escalates",
+        "latest_developments": "An Iranian missile strike on a U.S. base in Jordan killed two American servicemembers and left one missing Saturday, July 18, the first U.S. combat deaths of the war, and Tehran hit Saudi Arabia for the first time in months.",
+        "summary": "The United States and Iran have traded escalating strikes across the Persian Gulf in a widening war over control of the Strait of Hormuz, a waterway that once carried a fifth of the world's crude oil; the deaths in Jordan and the strike on Saudi Arabia sharply raise the risk of a broader regional spiral.",
         "sources": [
           {
             "source": "WSJ World News",
-            "title": "The U.S. and Iran Creep Toward a Wider War With Escalating Attacks",
-            "url": "https://www.wsj.com/world/middle-east/the-u-s-and-iran-creep-toward-a-wider-war-with-escalating-attacks-7323c060"
+            "title": "Two U.S. Troops Killed in Iran Missile Attack on Jordan",
+            "url": "https://www.wsj.com/world/middle-east/two-u-s-servicemembers-killed-one-missing-in-iran-missile-attack-on-jordan-a59f9699"
           },
           {
-            "source": "WSJ World News",
-            "title": "Conflict in the Gulf Has Become Much More Deadly for Commercial Sailors",
-            "url": "https://www.wsj.com/world/middle-east/gulf-sailing-risk-iran-war-fb61d65a"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "U.S. Emergency Oil Reserve Hits Lowest Levels Since 1983: Why It Matters",
-            "url": "https://www.wsj.com/business/energy-oil/u-s-emergency-oil-reserve-hits-lowest-levels-since-1983-why-it-matters-a4ed79aa?mod=rss_markets_main"
+            "source": "FT World",
+            "title": "Two US servicemen killed in Iranian strikes on Jordan",
+            "url": "https://www.ft.com/content/e8e8adc5-7c56-45a8-99fc-bb5acfda263e?syn-25a6b1a6=1"
           }
         ],
-        "_anchor": "i-5d449c0a43"
+        "_anchor": "i-ed5ff4d944"
       }
     ],
     "business": [
       {
-        "title": "Fire Damages Fujiya Ramen",
-        "latest_developments": "Firefighters answered a call to South Aiken Avenue around 7:45 a.m. Saturday, July 18, and found flames at Fujiya Ramen.",
-        "summary": "A morning fire damaged the dining room and second floor of Fujiya Ramen on South Aiken Avenue in Pittsburgh, and Allegheny County 911 officials said no one was hurt; the cause is unknown, and whether the flames reached adjoining businesses is unclear.",
+        "title": "Health Department Flags The Yard Gastropub",
+        "latest_developments": "The Allegheny County Health Department posted a consumer alert Thursday, July 16, for The Yard Gastropub on Fifth Avenue in Downtown Pittsburgh after finding food held at unsafe temperatures.",
+        "summary": "The Yard Gastropub, a bar and restaurant on Fifth Avenue in Downtown Pittsburgh, drew the consumer alert for holding food at the wrong temperatures, a violation the county health department treats as a hazard to diners.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Fire damages Pittsburgh ramen restaurant",
-            "url": "https://www.wpxi.com/news/local/fire-damages-pittsburgh-ramen-restaurant/6AG2747IFRDDHNA7KERFMTDCTA/"
+            "title": "Downtown Pittsburgh restaurant issued consumer alert over food held at wrong temperatures",
+            "url": "https://www.wpxi.com/news/local/downtown-pittsburgh-restaurant-issued-consumer-alert-over-food-held-wrong-temperatures/W33XSDHGXREVTDZV3X4NLURHKI/"
           }
         ],
-        "_anchor": "i-e1fcadecda"
+        "_anchor": "i-bc67eac1d5"
       },
       {
-        "title": "Duquesne Light Staffs Up for Storms",
-        "latest_developments": "Duquesne Light Company added crews Saturday, July 18, ahead of the forecast line of severe storms.",
-        "summary": "Duquesne Light Company increased staffing across its service territory as forecasters warned of widespread damaging winds and isolated tornadoes moving through the Pittsburgh region Saturday evening, conditions that threaten power outages.",
+        "title": "Taylor Farms Recalls Iceberg Lettuce",
+        "latest_developments": "Taylor Farms recalled iceberg lettuce shipped to 27 states Friday, July 17, formalizing the pullback tied to the multistate cyclospora outbreak.",
+        "summary": "Taylor Farms, a major California-based salad supplier to restaurants and retailers, recalled Mexican-grown iceberg lettuce distributed to 27 states after U.S. authorities linked it to a cyclospora parasite outbreak that has sickened thousands across more than 30 states, including confirmed cases in Allegheny County.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Duquesne Light Company increases staffing ahead of potentially severe weather",
-            "url": "https://www.wpxi.com/news/local/duquesne-light-company-increases-staffing-ahead-potentially-severe-weather/7TKYGWXHNNBNBAIXM6SUXWDOBM/"
+            "title": "Taylor Farms recalls iceberg lettuce in 27 states over possible Cyclospora contamination",
+            "url": "https://www.wpxi.com/news/local/taylor-farms-recalls-iceberg-lettuce-27-states-over-possible-cyclospora-contamination/XFZPHXAWGNCMRK32R2PKOUUDAQ/"
           }
         ],
-        "_anchor": "i-09a06c4e0f"
+        "_anchor": "i-c3a0f0bff1"
       }
     ],
     "around_town": [
       {
-        "title": "Storms and Flash Flooding Follow the Smoke",
-        "latest_developments": "Air-quality alerts across the Pittsburgh region ended before 10 a.m. Saturday, July 18, and forecasters posted a flash flood warning and watch as a line of thunderstorms carrying damaging winds, hail, and possible tornadoes drops south after 4 p.m.",
-        "summary": "A wind shift cleared the Canadian wildfire smoke that fouled the week's air across Western Pennsylvania, but strong to severe storms and flooding now threaten to delay games and events into Saturday evening.",
+        "title": "Severe Storms and Flash Flooding Hit the Region",
+        "latest_developments": "Forecasters placed all of Western Pennsylvania under a Severe Thunderstorm Watch for Saturday, July 18, and air-quality alerts lifted before 10 a.m. as a line of storms carrying damaging winds, hail, and possible tornadoes pushed through after midday.",
+        "summary": "The National Weather Service warned of widespread damaging winds and isolated tornadoes across the Pittsburgh region Saturday, prompting Duquesne Light Company to add crews; the same storms cleared the Canadian wildfire smoke that had fouled the region's air all week.",
         "sources": [
           {
             "source": "WTAE",
-            "title": "Flash Flood Warning, Watch in place for parts of Western Pa. Saturday",
+            "title": "Severe Thunderstorm Watch issued for all Western Pa. | Other warnings in place",
             "url": "https://www.wtae.com/article/severe-weather-alerts-saturday-july-18-2026/73176132"
-          },
-          {
-            "source": "KDKA",
-            "title": "Air quality improves on Saturday in Pittsburgh, but strong storms possible throughout the day",
-            "url": "https://www.cbsnews.com/pittsburgh/news/air-quality-improves-on-saturday-in-pittsburgh-but-strong-storms-possible-throughout-the-day/"
           }
         ],
         "_anchor": "i-e337311a1e"
       },
       {
-        "title": "Water Main Break Closes Baldwin Road",
-        "latest_developments": "A large water main break in the 3300 block of Churchview Avenue shut the congested road for hours in Baldwin Borough on Saturday, July 18.",
-        "summary": "The Baldwin Borough Police Department urged drivers to find alternate routes after the break disrupted water service and closed Churchview Avenue in the borough south of Pittsburgh.",
+        "title": "Gun Found in Carry-On at Pittsburgh International",
+        "latest_developments": "A Monroeville man faces charges after screeners found an unlicensed gun in his carry-on bag at Pittsburgh International Airport, police said Saturday, July 18.",
+        "summary": "Transportation Security Administration officers stopped the firearm at the checkpoint at Pittsburgh International Airport in Findlay Township; anyone caught bringing a gun to an airport checkpoint can face federal civil fines up to $10,000.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Major water main break closes road, impacts service in Baldwin",
-            "url": "https://www.wpxi.com/news/local/major-water-main-break-closes-road-impacts-service-baldwin/OVHEWTTN25G5ZOQCN2SPUXRKNY/"
-          },
-          {
-            "source": "WTAE",
-            "title": "Massive water main break shuts down road for hours in Allegheny County",
-            "url": "https://www.wtae.com/article/large-water-main-break-shuts-down-baldwin-borough-road-hours/73175866"
+            "title": "Monroeville man charged after gun found in carry-on at Pittsburgh International Airport, police say",
+            "url": "https://www.wpxi.com/news/local/monroeville-man-charged-after-gun-found-carry-on-pittsburgh-international-airport-police-say/KMAF3ZA5U5G6NBEUPNSUSIUOEQ/"
           }
         ],
-        "_anchor": "i-29372a158c"
-      },
-      {
-        "title": "Duquesne-McKeesport School Merger Weighed",
-        "latest_developments": "The Post-Gazette laid out July 18 how consolidating the Duquesne City and McKeesport Area districts across the Monongahela River could help or hurt both cities and their students.",
-        "summary": "The Pennsylvania Department of Education is studying a merger that would give the long-troubled Duquesne City school district a partner in the McKeesport Area district, a step with financial and community stakes for both Mon Valley cities.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "How a Duquesne-McKeesport school merger could help — or hurt — the cities and schools",
-            "url": "https://www.post-gazette.com/news/education/2026/07/18/duquesne-mckeesport-school-merge/stories/202607180016"
-          }
-        ],
-        "_anchor": "i-0ce7209b48"
+        "_anchor": "i-b26e53edf2"
       }
     ],
     "events": [
       {
-        "title": "Picklesburgh Extends Sunday Hours",
-        "latest_developments": "The Pittsburgh Downtown Partnership moved Picklesburgh's Sunday opening earlier, to 11 a.m. through 7 p.m. on July 19, to help vendors recover after wildfire smoke thinned Friday and Saturday crowds.",
-        "summary": "Picklesburgh, the annual pickle-themed food festival in Downtown Pittsburgh, runs its final day Sunday, July 19; chief executive Jeremy Waldrup said the extended hours put the festival's small-business vendors first after an unprecedented weekend.",
+        "title": "Tim McGraw at The Pavilion at Star Lake",
+        "latest_developments": "Tim McGraw's concert at The Pavilion at Star Lake will go on as planned Saturday night, July 18, with the amphitheater adding air-quality safety measures as wildfire smoke lingers.",
+        "summary": "Country singer Tim McGraw plays The Pavilion at Star Lake in Burgettstown on Saturday, July 18; the venue said it is taking proactive steps to keep concertgoers safe through the week's poor air quality.",
         "sources": [
-          {
-            "source": "KDKA",
-            "title": "Picklesburgh announces extended hours on Sunday after \"unprecedented weekend\"",
-            "url": "https://www.cbsnews.com/pittsburgh/news/picklesburgh-2026-sunday-extended-hours/"
-          },
           {
             "source": "WTAE",
-            "title": "The Pittsburgh Downtown Partnership announces extended Picklesburgh hours",
-            "url": "https://www.wtae.com/article/the-pittsburgh-downtown-partnership-announces-extended-picklesburgh-hours/73175812"
+            "title": "Star Lake adds air quality safety measures for Tim McGraw concert Saturday",
+            "url": "https://www.wtae.com/article/star-lake-air-quality-safety-measures-tim-mcgraw-concert/73176528"
           }
         ],
-        "_anchor": "i-51675cc227"
+        "_anchor": "i-aff47fdd82"
       }
     ],
-    "around_teams": [
-      {
-        "title": "Steelers Bank on Cornerback Jamel Dean",
-        "latest_developments": "The Post-Gazette's training-camp countdown July 18 cast free-agent signing Jamel Dean as the Steelers' bid to finally land an impact cornerback in free agency.",
-        "summary": "As the Steelers open camp at Saint Vincent College in Latrobe, the Post-Gazette framed newly signed cornerback Jamel Dean as the answer to a long drought at the position, working alongside Jalen Ramsey in Patrick Graham's secondary.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "Steelers training camp countdown: Jamel Dean looks to end the free agent drought at cornerback",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/18/training-camp-countdown-jamel-dean-cornerback/stories/202607180002"
-          }
-        ],
-        "_anchor": "i-a7d3cb56de"
-      },
-      {
-        "title": "Pirates' Second-Half Storylines",
-        "latest_developments": "The Post-Gazette laid out five storylines to watch as the Pirates open the second half chasing a wild-card spot.",
-        "summary": "With ace Paul Skenes anchoring the rotation and a revamped offense, the Post-Gazette weighed the questions that will decide whether the Pirates stay in the National League playoff race.",
-        "sources": [
-          {
-            "source": "Post-Gazette Pirates",
-            "title": "5 second-half storylines to watch as the Pirates vie for a playoff spot",
-            "url": "https://www.post-gazette.com/sports/pirates/2026/07/16/storylines-analysis-mlb-second-half-skenes/stories/202607150032"
-          }
-        ],
-        "_anchor": "i-a077c4b73f"
-      }
-    ],
-    "team_usa": [
-      {
-        "title": "USWNT's Lindsey Heaps Returns to Colorado",
-        "latest_developments": "Lindsey Heaps and her family told ESPN about her transfer to NWSL expansion side Denver Summit FC, a homecoming after globetrotting with the U.S. women's national team and Paris Saint-Germain.",
-        "summary": "U.S. women's national team midfielder Lindsey Heaps signed with Denver Summit FC, bringing her career back to Colorado after stops in France and beyond.",
-        "sources": [
-          {
-            "source": "ESPN Soccer",
-            "title": "After globetrotting with USWNT, PSG and more, Lindsey Heaps transfer to Denver Summit marks welcome return home",
-            "url": "https://www.espn.com/soccer/story/_/id/49363167/for-uswnt-star-lindsey-heaps-transfer-denver-summit-marks-welcome-return-home"
-          }
-        ],
-        "_anchor": "i-c4dc82e5a7"
-      }
-    ],
+    "around_teams": [],
+    "team_usa": [],
     "reading": [
       {
         "author": "Stratechery",
         "title": "IBM Misses, IBM's Mainframe Moat, IBM's Many AI Problems",
         "url": "https://stratechery.com/2026/ibm-misses-ibms-mainframe-moat-ibms-many-ai-problems/",
-        "summary": "Argues that IBM's weak preliminary results spooked the software market, but the deeper story is the durability of its mainframe franchise set against its many exposures to the AI shift.",
+        "summary": "Ben Thompson argues that IBM's preliminary earnings miss spooked the broader software market, then unpacks how the company's mainframe franchise remains a durable moat even as AI creates deep problems for the rest of its business.",
         "_anchor": "i-3fbdc1bddb"
       },
       {
         "author": "Ed Zitron",
         "title": "The OpenAI Bubble",
         "url": "https://www.wheresyoured.at/the-openai-bubble/",
-        "summary": "Contends that OpenAI sits at the center of an AI investment bubble whose economics do not add up.",
+        "summary": "Ed Zitron argues that OpenAI's soaring valuation, spending, and revenue promises add up to an unsustainable bubble he expects to burst.",
         "_anchor": "i-fd12c7c4fe"
       },
       {
         "author": "Cal Newport",
         "title": "Why Reading Matters",
         "url": "https://calnewport.com/why-reading-matters/",
-        "summary": "Responds to Rose Horowitch's Atlantic article 'The End of Reading Is Here,' making the case for why sustained deep reading still matters.",
+        "summary": "Responding to Rose Horowitch's Atlantic piece declaring 'the end of reading,' Cal Newport makes the case for why sustained, deep reading still matters.",
         "_anchor": "i-d6a4747e23"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-18 12:06 EDT",
-    "items_considered": 19,
+    "generated_at": "2026-07-18 16:06 EDT",
+    "items_considered": 13,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
