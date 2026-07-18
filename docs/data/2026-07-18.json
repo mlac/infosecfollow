@@ -1,0 +1,496 @@
+{
+  "date": "2026-07-18",
+  "headline": "Working exploit code went public for critical WordPress and Windows flaws as OpenSSL patched a one-packet denial-of-service bug and a Chinese group made off with DigiCert's code-signing certificates.",
+  "emerging_trends": [
+    {
+      "text": "Working exploit code went public within days of disclosure for both the wp2shell WordPress core flaw and the LegacyHive Windows privilege-escalation bug, collapsing the window defenders have before mass exploitation begins.",
+      "topic_title": "Public Exploit Code Lands for WordPress and Windows Flaws",
+      "link_phrase": "wp2shell",
+      "_anchor": "trend-1"
+    },
+    {
+      "text": "Attackers increasingly chase cloud and developer credentials through novel plumbing, from ViteVenom npm packages routing command-and-control across blockchain to the NadMesh botnet scraping thousands of AWS keys off exposed AI services.",
+      "topic_title": "npm Packages and NadMesh Botnet Harvest Cloud Keys",
+      "link_phrase": "ViteVenom",
+      "_anchor": "trend-2"
+    },
+    {
+      "text": "The theft of code-signing certificates from DigiCert by the Chinese GoldenEyeDog cluster shows adversaries striking the trust anchors of software itself, letting stolen signatures pass malware off as legitimate.",
+      "topic_title": "GoldenEyeDog Steals DigiCert Code-Signing Certificates",
+      "link_phrase": "GoldenEyeDog",
+      "_anchor": "trend-3"
+    }
+  ],
+  "topics": [
+    {
+      "title": "Public Exploit Code Lands for WordPress and Windows Flaws",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "wp2shell picked up CVE IDs today, and researchers published its full mechanism, a persistent-object-cache condition, and a working proof-of-concept, while a researcher using the handle Nightmare Eclipse released a complete LegacyHive exploit that hands attackers administrator rights on fully patched Windows.",
+      "summary": "wp2shell, a WordPress core flaw Adam Kues of Assetnote found, runs code from a single anonymous HTTP request against any 6.9 or 7.0 site until admins install 6.9.5 or 7.0.2; LegacyHive escalates a local user to administrator on up-to-date Windows through the User Profile Service. Patch WordPress now and prepare for Microsoft's fix.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "New wp2shell WordPress Core Flaw Lets Unauthenticated Attackers Run Code",
+          "url": "https://thehackernews.com/2026/07/new-wp2shell-wordpress-core-flaw-lets.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "New Windows LegacyHive zero-day gives hackers admin privileges",
+          "url": "https://www.bleepingcomputer.com/news/security/new-windows-legacyhive-zero-day-exploit-grants-hackers-admin-access/"
+        }
+      ],
+      "_anchor": "i-7ac4399d9b"
+    },
+    {
+      "title": "OpenSSL HollowByte Freezes Server Memory",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Okta's Red Team disclosed HollowByte, a denial-of-service flaw that makes an unpatched OpenSSL server reserve up to 131 KB of memory for an 11-byte TLS request that never arrives, memory that stays gone on glibc systems until the process restarts.",
+      "summary": "OpenSSL shipped the HollowByte fix in June with no CVE, advisory, or changelog note, so many administrators never learned to update, and unauthenticated attackers can exhaust server memory with tiny payloads. Rebuild against the patched OpenSSL.",
+      "tags": [
+        "dos",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "OpenSSL HollowByte Flaw Could Freeze Server Memory with 11-Byte TLS Requests",
+          "url": "https://thehackernews.com/2026/07/openssl-hollowbyte-flaw-could-freeze.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "HollowByte DDoS flaw bloats OpenSSL server memory with 11-byte payload",
+          "url": "https://www.bleepingcomputer.com/news/security/hollowbyte-ddos-flaw-bloats-openssl-server-memory-with-11-byte-payload/"
+        }
+      ],
+      "_anchor": "i-c77a96e5b9"
+    },
+    {
+      "title": "Spirals Ransomware Encrypts in Under a Day",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Symantec's Threat Hunter Team documented Spirals, a Rust ransomware that hit an IT services company in South Asia last month and moved from initial access to data theft and full encryption in under 24 hours, as a separate crew struck German naval-defense builder TKMS.",
+      "summary": "Spirals encrypts each file with its own AES-128 key wrapped by attacker-controlled ECDH, leaving defenders little time to react, and the TKMS hit shows ransomware reaching into defense manufacturing. Tighten initial-access controls and rehearse rapid containment.",
+      "tags": [
+        "ransomware"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Spirals ransomware locks down victim systems in under 24 hours",
+          "url": "https://www.helpnetsecurity.com/2026/07/17/spirals-ransomware-south-asia/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "In Other News: Iran Tracks US Military Phones, CrashStealer macOS Malware, CVD Blueprint",
+          "url": "https://www.securityweek.com/in-other-news-iran-tracks-us-military-phones-crashstealer-macos-malware-cvd-blueprint/"
+        }
+      ],
+      "_anchor": "i-bc11c89ae1"
+    },
+    {
+      "title": "npm Packages and NadMesh Botnet Harvest Cloud Keys",
+      "area": "Software Supply Chain",
+      "latest_developments": "Checkmarx flagged seven malicious npm packages, codenamed ViteVenom, that target the Vite tooling ecosystem and route command-and-control through a four-tier blockchain infrastructure spanning Tron to deliver a remote access trojan, while the new Go botnet NadMesh scanned exposed AI services and claims 3,811 stolen AWS keys.",
+      "summary": "NadMesh harvests cloud keys and Kubernetes tokens from fast-deployed, slow-firewalled AI tools such as ComfyUI, Ollama, and Open WebUI, and ViteVenom extends the ChainVeil campaign's blockchain-based command-and-control. Lock down exposed AI services and vet npm dependencies.",
+      "tags": [
+        "supply-chain",
+        "botnet",
+        "cloud"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Seven Malicious Vite npm Packages Use Blockchain C2 to Deliver a RAT",
+          "url": "https://thehackernews.com/2026/07/seven-malicious-vite-npm-packages-use.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "New NadMesh Botnet Hunts Exposed AI Services for Cloud Keys and Kubernetes Tokens",
+          "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+        }
+      ],
+      "_anchor": "i-81c3ccc6cb"
+    },
+    {
+      "title": "Regulators Reshape AI Access and Defense Compliance",
+      "area": "Policy and Regulation",
+      "latest_developments": "The European Commission ordered Google to open Android's camera, microphone, on-screen content, and wake word to rival AI assistants in Android 18 by August 1, 2027, and the Pentagon suspended CMMC Phase 2, pausing third-party audits of defense contractors.",
+      "summary": "The EU order forces Google to grant competitors the same device reach Gemini already enjoys, raising fresh privacy and security questions, while the CMMC pause halts audits yet leaves contractors' legal duty to protect controlled unclassified information intact. Track both as they reshape platform and compliance obligations.",
+      "tags": [
+        "policy"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "E.U. Orders Google to Open Android Mic, Camera and Screen to Rival AI Assistants",
+          "url": "https://thehackernews.com/2026/07/eu-orders-google-to-open-android-mic.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Industry Reactions to Pentagon Suspending CMMC Phase 2: Feedback Friday",
+          "url": "https://www.securityweek.com/industry-reactions-to-pentagon-suspending-cmmc-phase-2-feedback-friday/"
+        }
+      ],
+      "_anchor": "i-8863a3e147"
+    },
+    {
+      "title": "GoldenEyeDog Steals DigiCert Code-Signing Certificates",
+      "area": "Nation-State Activity",
+      "latest_developments": "Expel attributed the April 2026 DigiCert breach to CylindricalCanine, a subgroup of the Chinese cybercrime group GoldenEyeDog, and tied the intrusion to the theft of code-signing certificates.",
+      "summary": "GoldenEyeDog, also tracked as APT-Q-27, Dragon Breath, and Miuuti Group, has long targeted gambling and gaming operators, and stolen code-signing certificates let its malware masquerade as trusted software. Audit certificate trust and hunt for signed but unexpected binaries.",
+      "tags": [
+        "apt",
+        "breach",
+        "supply-chain"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "GoldenEyeDog Subgroup Linked to DigiCert Breach and Code-Signing Certificate Theft",
+          "url": "https://thehackernews.com/2026/07/goldeneyedog-subgroup-linked-to.html"
+        }
+      ],
+      "_anchor": "i-c63d54de55"
+    }
+  ],
+  "markets": [
+    {
+      "label": "S&P 500",
+      "value": "7,524.56",
+      "pct": "-0.1%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Dow",
+      "value": "52,472.99",
+      "pct": "-0.4%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "25,930.32",
+      "pct": "-0.5%",
+      "arrow": "▼"
+    },
+    {
+      "label": "WTI crude",
+      "value": "79.70",
+      "pct": "+11.9%",
+      "arrow": "▲"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1434",
+      "pct": "+0.1%",
+      "arrow": "▲"
+    },
+    {
+      "label": "GBP/USD",
+      "value": "1.3444",
+      "pct": "+0.4%",
+      "arrow": "▲"
+    },
+    {
+      "label": "USD/JPY",
+      "value": "162.28",
+      "pct": "+0.0%",
+      "arrow": "="
+    }
+  ],
+  "weather": [
+    "Today: Showers And Thunderstorms Likely then Chance Showers And Thunderstorms, high 87F.",
+    "Tonight: Showers And Thunderstorms, low 67F.",
+    "Sunday: Mostly Sunny, high 82F."
+  ],
+  "sports": [
+    {
+      "team": "Pirates",
+      "record": "50-47",
+      "games": [
+        {
+          "date": "Fri Jul 17",
+          "url": "https://plaintextsports.com/mlb/2026-07-17/pit-cle",
+          "recap": "",
+          "result": "Pirates @ Guardians · Postponed"
+        }
+      ],
+      "next": {
+        "matchup": "Pirates @ Guardians",
+        "when": "Sat Jul 18, 1:10 PM",
+        "url": "https://plaintextsports.com/mlb/2026-07-18/pit-cle"
+      },
+      "headlines": []
+    }
+  ],
+  "local": {
+    "business_politics": [
+      {
+        "title": "Iran Turns to Deadlier Missiles in Gulf War",
+        "latest_developments": "Iran switched to more-lethal missiles over the past week, making it one of the deadliest stretches for commercial sailors since the war began, and on Saturday, July 18, struck neighboring Gulf states—hitting a Kuwaiti desalination plant—while U.S. bombs took out bridges.",
+        "summary": "The United States and Iran traded strikes on infrastructure across the Persian Gulf, with neither side backing down and Iran firing on the waters around the Strait of Hormuz, sending oil futures to double-digit weekly gains and pushing the conflict toward a wider regional war.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "The U.S. and Iran Creep Toward a Wider War With Escalating Attacks",
+            "url": "https://www.wsj.com/world/middle-east/the-u-s-and-iran-creep-toward-a-wider-war-with-escalating-attacks-7323c060"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Conflict in the Gulf Has Become Much More Deadly for Commercial Sailors",
+            "url": "https://www.wsj.com/world/middle-east/gulf-sailing-risk-iran-war-fb61d65a"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Oil Futures Rise on Middle East Escalation Fears",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-escalating-supply-disruption-concerns-c3dcf86d?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-5d449c0a43"
+      }
+    ],
+    "business": [
+      {
+        "title": "Parkway East Detour Lifts Homestead Shops",
+        "latest_developments": "WTAE reported July 17 that merchants along the Parkway East detour route through Homestead are gaining new customers as roughly 100,000 daily drivers reroute around the closed highway.",
+        "summary": "PennDOT's closure of the Parkway East (I-376) for the Commercial Street Bridge replacement funnels detour traffic through the borough of Homestead, and shops and restaurants along the route say the passing drivers have lifted sales.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Homestead businesses gain new customers from Parkway East detour",
+            "url": "https://www.wtae.com/article/parkway-east-detour-homestead-businesses/73172981"
+          }
+        ],
+        "_anchor": "i-93e6e516ed"
+      },
+      {
+        "title": "Ford Tops J.D. Power Brand Ranking",
+        "latest_developments": "Ford Motor ranked first among mass-market car brands in J.D. Power and Associates' 2026 survey, and KDKA talked July 17 with a Pittsburgh-area dealer about what the result means for buyers.",
+        "summary": "Ford placed atop J.D. Power's 2026 mass-market brand list, a ranking that shapes how area dealerships pitch the brand's reliability to shoppers.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Ford tops 2026 JD Power and Associates list for mass market car brands",
+            "url": "https://www.cbsnews.com/pittsburgh/video/ford-tops-2026-jd-power-and-associates-list-for-mass-market-car-brands/"
+          }
+        ],
+        "_anchor": "i-ecb04f4e59"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "Storms to Wash Out Wildfire Smoke",
+        "latest_developments": "The EPA expects Pittsburgh's air to improve sharply this weekend as strong to severe storms forecast for Saturday afternoon, July 18, clear the wildfire smoke, after Thursday hit the hazardous maroon range and Friday held at Code Purple 'very unhealthy.'",
+        "summary": "Smoke from wildfires in Canada and Minnesota drove Western Pennsylvania's air to 'very unhealthy' levels, closing Kennywood and Sandcastle, postponing the Pirates' game in Cleveland, and canceling the America's Mile race, before storms forecast for Saturday afternoon clear it out.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Pittsburgh air quality expected to improve this weekend, officials say",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-air-quality-improving-wildfire-smoke/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Severe Weather Alert Day: Stronger late-day storms for western PA",
+            "url": "https://www.wtae.com/article/severe-weather-alert-day-stronger-late-day-storms-for-western-pa/73175144"
+          },
+          {
+            "source": "WPXI",
+            "title": "America's Mile race canceled because of poor air quality in Pittsburgh",
+            "url": "https://www.wpxi.com/news/local/americas-mile-race-canceled-because-poor-air-quality-pittsburgh/BD423Y7LQBBRZFRD6QC2JMF66Q/"
+          }
+        ],
+        "_anchor": "i-31530a1370"
+      },
+      {
+        "title": "Duquesne-McKeesport School Merger Weighed",
+        "latest_developments": "The Post-Gazette examined July 18 how consolidating the Duquesne City and McKeesport Area school districts could help or hurt both cities, days after the Pennsylvania Department of Education agreed to study the merger.",
+        "summary": "Pennsylvania's education department is analyzing a consolidation of the financially troubled Duquesne City School District with the McKeesport Area School District across the Monongahela River, a step that would give the struggling Duquesne district a full-district partner.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "How a Duquesne-McKeesport school merger could help — or hurt — the cities and schools",
+            "url": "https://www.post-gazette.com/news/education/2026/07/18/duquesne-mckeesport-school-merge/stories/202607180016"
+          }
+        ],
+        "_anchor": "i-0ce7209b48"
+      },
+      {
+        "title": "Pa. AG Defends Medicaid Abortion Ban",
+        "latest_developments": "The Post-Gazette reported July 18 that Attorney General Dave Sunday is defending Pennsylvania's ban on Medicaid funding for abortion in a court challenge, and examined whether his office is legally required to mount that defense.",
+        "summary": "Pennsylvania Attorney General Dave Sunday is defending the state's prohibition on Medicaid coverage of abortion against a court challenge, raising the question of whether the office must defend a law it may not favor.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pa.'s attorney general is defending the state's Medicaid abortion ban in court. Is he required to?",
+            "url": "https://www.post-gazette.com/news/health/2026/07/18/dave-sunday-pennsylvania-medicaid-abortion/stories/202607180006"
+          }
+        ],
+        "_anchor": "i-ad0e96eb28"
+      }
+    ],
+    "events": [
+      {
+        "title": "Picklesburgh Winds Down Downtown",
+        "latest_developments": "Picklesburgh drew thinner Friday crowds under the wildfire smoke, and the Pittsburgh Downtown Partnership kept all Saturday and Sunday activities on schedule through the festival's close Sunday, July 19.",
+        "summary": "Picklesburgh, the Pittsburgh Downtown Partnership's pickle-themed street festival, runs through Sunday, July 19, in Downtown Pittsburgh, with hours of noon to 6 p.m. on the final day.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Picklesburgh draws crowd despite \"very unhealthy\" air quality from wildfire smoke",
+            "url": "https://www.cbsnews.com/pittsburgh/news/picklesburgh-not-canceled-air-quality-wildfire-smoke/"
+          }
+        ],
+        "_anchor": "i-f020daf4a8"
+      },
+      {
+        "title": "Vintage Grand Prix Races Sunday",
+        "latest_developments": "The 44th Pittsburgh Vintage Grand Prix holds its race Sunday, July 19, as air quality improves following the week's wildfire smoke.",
+        "summary": "The Pittsburgh Vintage Grand Prix, a vintage-car racing weekend, culminates in its 44th running Sunday, July 19.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "14+ things to do this weekend, from Picklesburgh to the Pittsburgh Vintage Grand Prix",
+            "url": "https://nextpittsburgh.com/events/14-things-to-do-this-weekend-from-picklesburgh-to-the-pittsburgh-vintage-grand-prix/"
+          }
+        ],
+        "_anchor": "i-76dd9e74e6"
+      }
+    ],
+    "around_teams": [
+      {
+        "title": "Steelers Bank on Jamel Dean at Corner",
+        "latest_developments": "A Post-Gazette training-camp countdown July 18 cast free-agent signing Jamel Dean as the Steelers' bid to stabilize a cornerback spot that has churned through open-market additions.",
+        "summary": "The Post-Gazette's camp countdown argues cornerback Jamel Dean, whom the Steelers signed in free agency, must end the team's long run of misses on veteran corners as camp opens in Latrobe.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers training camp countdown: Jamel Dean looks to end the free agent drought at cornerback",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/07/18/training-camp-countdown-jamel-dean-cornerback/stories/202607180002"
+          }
+        ],
+        "_anchor": "i-a7d3cb56de"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "Lindsey Heaps Returns Home to Denver",
+        "latest_developments": "ESPN reported July 17 that United States women's national team star Lindsey Heaps is transferring to NWSL expansion side Denver Summit FC, a homecoming to Colorado after years with PSG and other European clubs.",
+        "summary": "Lindsey Heaps, a veteran United States women's national team midfielder, is joining the new NWSL club Denver Summit FC, ending a globetrotting run through European soccer to return to her home state of Colorado.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "After globetrotting with USWNT, PSG and more, Lindsey Heaps' transfer to Denver Summit marks welcome return home",
+            "url": "https://www.espn.com/soccer/story/_/id/49363167/for-uswnt-star-lindsey-heaps-transfer-denver-summit-marks-welcome-return-home"
+          }
+        ],
+        "_anchor": "i-c4dc82e5a7"
+      }
+    ],
+    "reading": [
+      {
+        "author": "Stratechery",
+        "title": "IBM Misses, IBM's Mainframe Moat, IBM's Many AI Problems",
+        "url": "https://stratechery.com/2026/ibm-misses-ibms-mainframe-moat-ibms-many-ai-problems/",
+        "summary": "Ben Thompson examines how IBM's weak preliminary results rattled software stocks, tracing the mainframe franchise that still forms IBM's moat and the AI-era problems now testing it.",
+        "_anchor": "i-3fbdc1bddb"
+      },
+      {
+        "author": "Ed Zitron",
+        "title": "The OpenAI Bubble",
+        "url": "https://www.wheresyoured.at/the-openai-bubble/",
+        "summary": "Zitron argues that OpenAI's soaring valuation rests on unsustainable economics and hype, laying out why he sees the company as the center of an AI financial bubble.",
+        "_anchor": "i-fd12c7c4fe"
+      },
+      {
+        "author": "Cal Newport",
+        "title": "Why Reading Matters",
+        "url": "https://calnewport.com/why-reading-matters/",
+        "summary": "Responding to Rose Horowitch's Atlantic piece 'The End of Reading Is Here,' Newport argues that sustained deep reading remains essential to serious thinking even as the habit erodes.",
+        "_anchor": "i-d6a4747e23"
+      }
+    ]
+  },
+  "meta": {
+    "generated_at": "2026-07-18 06:07 EDT",
+    "items_considered": 35,
+    "window_hours": 24,
+    "model": "claude-opus-4-8",
+    "feeds": {
+      "security": [
+        "The Hacker News",
+        "BleepingComputer",
+        "Krebs on Security",
+        "Schneier on Security",
+        "Dark Reading",
+        "SecurityWeek",
+        "SANS Internet Storm Center",
+        "CISA Advisories",
+        "The Record",
+        "Ars Technica Security",
+        "Help Net Security",
+        "Securelist (Kaspersky)",
+        "Sophos News",
+        "Unit 42 (Palo Alto)",
+        "Google Online Security Blog",
+        "Cisco Talos",
+        "Graham Cluley",
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media",
+        "Frank on Fraud",
+        "Wired Security"
+      ],
+      "pittsburgh": [
+        "TribLive",
+        "Pittsburgh Post-Gazette",
+        "PublicSource",
+        "Pittsburgh City Paper",
+        "NEXTpittsburgh",
+        "Pittsburgh Magazine",
+        "KDKA",
+        "WPXI",
+        "WTAE"
+      ],
+      "bizpol": [
+        "WSJ World News",
+        "WSJ Markets",
+        "WSJ US Business",
+        "WSJ Politics",
+        "The Economist",
+        "FT Home",
+        "FT World",
+        "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
+      ],
+      "team_usa": [
+        "ESPN Soccer",
+        "ESPN Olympics",
+        "Guardian World Cup 2026",
+        "Guardian Olympics"
+      ],
+      "reading": [
+        "Ed Zitron",
+        "Stratechery",
+        "Cal Newport"
+      ]
+    }
+  }
+}
