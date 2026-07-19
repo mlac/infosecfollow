@@ -1,106 +1,92 @@
 {
   "date": "2026-07-19",
-  "headline": "A previously unknown actor ran SonicWall SMA VPN appliances as root-granting zero-days for nearly a month before disclosure, as Russia's Sandworm aimed fake CAPTCHAs at Ukraine.",
+  "headline": "Public exploit code and a working proof-of-concept now chase the wp2shell flaws in WordPress core, letting a single anonymous request run code on any unpatched 6.9 or 7.0 site.",
   "emerging_trends": [
     {
-      "text": "Enterprise VPN gateways remain the softest way in: a previously unknown crew ran SonicWall SMA appliances as root-granting zero-days for nearly a month before anyone disclosed the bugs, and the Inc ransomware gang piled on.",
-      "topic_title": "SonicWall SMA Zero-Days Exploited as Root",
-      "link_phrase": "SonicWall SMA",
+      "text": "The gap between a patch and mass exploitation keeps shrinking, and wp2shell shows it—public exploit code and a working proof-of-concept began chasing unpatched WordPress sites within days of the fix.",
+      "topic_title": "wp2shell WordPress Core RCE Gets Public Exploits",
+      "link_phrase": "wp2shell",
       "_anchor": "trend-1"
     },
     {
-      "text": "State hackers keep leaning on the victim's own hands as Russia's Sandworm dresses malware installs up as human-verification checks, pushing ClickFix lures onto Ukrainian machines.",
-      "topic_title": "Sandworm Turns ClickFix on Ukraine",
-      "link_phrase": "ClickFix",
+      "text": "Infostealers riding ClickFix lures keep draining enterprise credentials, and the ACR Stealer surge now pulling passwords and tokens from Microsoft's customers marks the latest run.",
+      "topic_title": "ACR Stealer Surge Hits Microsoft Customers",
+      "link_phrase": "ACR Stealer",
       "_anchor": "trend-2"
     },
     {
-      "text": "Trusted update channels are becoming attack surface, as an advanced actor hijacks ViPNet's software-update mechanism to slip malware into Russian government agencies.",
-      "topic_title": "ViPNet Update Channel Subverted",
-      "link_phrase": "ViPNet",
+      "text": "Internet-connected cameras stay soft targets, and fresh scans probing the Hikvision Intelligent Security API show attackers mapping exposed devices at scale.",
+      "topic_title": "Hikvision Camera API Draws Internet-Wide Scans",
+      "link_phrase": "Hikvision",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
-      "title": "SonicWall SMA Zero-Days Exploited as Root",
+      "title": "Hikvision Camera API Draws Internet-Wide Scans",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Volexity tied the pre-disclosure exploitation to a previously undocumented actor it tracks as UTA0533, which has hit SonicWall Secure Mobile Access 1000 appliances as zero-days since June 22, 2026, weeks before the flaws went public.",
-      "summary": "Two chained SMA 1000 flaws hand attackers root-level control of the VPN gateways, and the Inc ransomware crew already weaponized the chain. Administrators running SonicWall Secure Mobile Access should patch and hunt for compromise now.",
+      "latest_developments": "The SANS Internet Storm Center reported July 19, 2026 that its honeypot network is picking up internet-wide scans probing the Hikvision Intelligent Security API.",
+      "summary": "Hikvision, the Chinese maker of internet-connected security cameras, carries a long history of vulnerabilities that draw mass scanning. The current scans hunt exposed Intelligent Security API endpoints, so operators should pull these cameras off the public internet and update firmware.",
       "tags": [
-        "zero-day",
-        "ransomware",
+        "iot",
+        "scanning"
+      ],
+      "sources": [
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "Scans for Hikvision Intelligent Security API, (Sun, Jul 19th)",
+          "url": "https://isc.sans.edu/diary/rss/33164"
+        }
+      ],
+      "_anchor": "i-76731cef70"
+    },
+    {
+      "title": "wp2shell WordPress Core RCE Gets Public Exploits",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Attackers now hold public exploits and a working proof-of-concept for the two wp2shell bugs, which carry CVE IDs CVE-2026-60137 and CVE-2026-63030, and researchers surfaced a persistent-object-cache variant that widens the reach.",
+      "summary": "wp2shell pairs two WordPress core flaws—a facilitated SQL injection and a REST API batch-route confusion that chains to remote code execution—so a single anonymous HTTP request runs code on a bare install with zero plugins. Adam Kues of Assetnote and Searchlight Cyber, along with the trio TF1T, dtro, and haongo, reported the bugs; WordPress fixed them in 6.9.5 and 7.0.2, so administrators of every 6.9 and 7.0 site must patch now.",
+      "tags": [
+        "rce",
+        "patch",
         "exploit"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "SonicWall SMA Zero-Days Exploited Before Disclosure to Gain Root Access",
-          "url": "https://thehackernews.com/2026/07/sonicwall-sma-zero-days-exploited.html"
+          "source": "BleepingComputer",
+          "title": "WordPress Core \"wp2shell\" RCE flaws get public exploits, patch now",
+          "url": "https://www.bleepingcomputer.com/news/security/wordpress-core-wp2shell-rce-flaws-get-public-exploits-patch-now/"
         },
         {
-          "source": "Dark Reading",
-          "title": "Inc Ransomware Exploits SonicWall SMA Zero-Days",
-          "url": "https://www.darkreading.com/vulnerabilities-threats/inc-ransomware-exploits-sonicwall-sma-zero-days"
-        }
-      ],
-      "_anchor": "i-7fc08de83e"
-    },
-    {
-      "title": "Sandworm Turns ClickFix on Ukraine",
-      "area": "Nation-State Activity",
-      "latest_developments": "Ukraine's CERT-UA attributed a fresh ClickFix campaign to UAC-0145, a sub-cluster of GRU-linked Sandworm, which tricks Ukrainian users through fake CAPTCHA prompts into running data-stealing malware on their own machines.",
-      "summary": "ClickFix lures instruct victims to paste and run a command disguised as a human-verification check. Sandworm, the hacking unit of Russia's GRU military intelligence, now points the technique at Ukrainian devices.",
-      "tags": [
-        "apt",
-        "nation-state",
-        "malware"
-      ],
-      "sources": [
+          "source": "Help Net Security",
+          "title": "Two new high severity WordPress vulnerabilities, patch immediately!",
+          "url": "https://www.helpnetsecurity.com/2026/07/18/wordpress-vulnerabilities-wp2shell-cve-2026-60137-cve-2026-60137/"
+        },
         {
           "source": "The Hacker News",
-          "title": "UAC-0145 Uses ClickFix CAPTCHAs to Infect Ukrainian Devices with Malware",
-          "url": "https://thehackernews.com/2026/07/uac-0145-uses-clickfix-captchas-to.html"
+          "title": "New wp2shell WordPress Core Flaw Lets Unauthenticated Attackers Run Code",
+          "url": "https://thehackernews.com/2026/07/new-wp2shell-wordpress-core-flaw-lets.html"
         }
       ],
-      "_anchor": "i-b446b9d245"
+      "_anchor": "i-5c3b60e219"
     },
     {
-      "title": "ViPNet Update Channel Subverted",
-      "area": "Nation-State Activity",
-      "latest_developments": "BleepingComputer reported July 19, 2026 that an advanced threat actor is subverting the update mechanism of the ViPNet secure-networking suite to plant malware on Russian organizations, including government agencies.",
-      "summary": "ViPNet secures private networks across Russian government and enterprise. The actor hijacks its trusted software-update channel to reach agency systems that the product is meant to protect.",
+      "title": "ACR Stealer Surge Hits Microsoft Customers",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Microsoft warned its enterprise customers on July 18, 2026 of a fresh surge in ACR Stealer infections that lift browser-stored passwords, authentication tokens, and sensitive documents.",
+      "summary": "ACR Stealer is an information stealer that operators spread largely through ClickFix lures, which trick users into pasting a malicious command. It targets Microsoft's enterprise customers, so defenders should block clipboard-run PowerShell and reset harvested credentials and tokens.",
       "tags": [
-        "apt",
-        "supply chain",
-        "nation-state"
+        "infostealer",
+        "clickfix",
+        "cybercrime"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "Hackers abuse ViPNet software to target Russian govt agencies",
-          "url": "https://www.bleepingcomputer.com/news/security/hackers-abuse-vipnet-software-to-target-russian-govt-agencies/"
+          "title": "Microsoft warns of surge in ACR Stealer attacks on customers",
+          "url": "https://www.bleepingcomputer.com/news/security/microsoft-warns-of-surge-in-acr-stealer-attacks-on-customers/"
         }
       ],
-      "_anchor": "i-42d2707e3f"
-    },
-    {
-      "title": "7-Zip Patches Archive RCE",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "7-Zip shipped version 26.02 on July 18, 2026 to fix a remote code execution flaw that fires when a user opens a specially crafted compressed archive.",
-      "summary": "The bug lets attackers run code by persuading a victim to open a malicious archive in the widely used 7-Zip utility. Users should update to 26.02.",
-      "tags": [
-        "patch",
-        "rce"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Update now: 7-Zip fixes RCE flaw exploitable with malicious archives",
-          "url": "https://www.bleepingcomputer.com/news/security/update-now-7-zip-fixes-rce-flaw-exploitable-with-malicious-archives/"
-        }
-      ],
-      "_anchor": "i-fcea53af66"
+      "_anchor": "i-99efddde52"
     }
   ],
   "markets": [
@@ -130,9 +116,9 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1434",
-      "pct": "+0.1%",
-      "arrow": "▲"
+      "value": "1.1426",
+      "pct": "-0.0%",
+      "arrow": "="
     },
     {
       "label": "GBP/USD",
@@ -142,13 +128,13 @@
     },
     {
       "label": "USD/JPY",
-      "value": "162.28",
+      "value": "162.19",
       "pct": "+0.0%",
       "arrow": "="
     }
   ],
   "weather": [
-    "This Afternoon: Mostly Sunny, high 82F.",
+    "This Afternoon: Sunny, high 82F.",
     "Tonight: Mostly Clear, low 58F.",
     "Monday: Sunny, high 84F."
   ],
@@ -168,12 +154,18 @@
           "url": "https://plaintextsports.com/mlb/2026-07-18/pit-cle",
           "recap": "Bazzana hits 2-run homer in 9th to rally Guardians to 5-3 victory over Pirates",
           "result": "Pirates 3 · Guardians 5 · Final"
+        },
+        {
+          "date": "Sun Jul 19",
+          "url": "https://plaintextsports.com/mlb/2026-07-19/pit-cle",
+          "recap": "",
+          "result": "Pirates 5 · Guardians 1 · Bot 8th (in progress at last update)"
         }
       ],
       "next": {
-        "matchup": "Pirates @ Guardians",
-        "when": "Sun Jul 19, 1:40 PM",
-        "url": "https://plaintextsports.com/mlb/2026-07-19/pit-cle"
+        "matchup": "Pirates @ Yankees",
+        "when": "Mon Jul 20, 7:05 PM",
+        "url": "https://plaintextsports.com/mlb/2026-07-20/pit-nyy"
       },
       "headlines": []
     }
@@ -181,15 +173,10 @@
   "local": {
     "business_politics": [
       {
-        "title": "U.S. Strikes Iran After Troops Die in Jordan",
-        "latest_developments": "An Iranian ballistic-missile attack in Jordan killed two U.S. service members and left one missing, and U.S. Central Command answered with fresh strikes to \"swiftly punish\" Iran as Israel warned that Tehran's fire is landing close.",
-        "summary": "The month-old interim deal meant to end the U.S.-Iran war has crumbled, and American and Iranian forces trade strikes across the region while Iran begins hitting U.S. Gulf allies, keeping oil markets on edge.",
+        "title": "U.S.-Iran War Widens Toward Israel",
+        "latest_developments": "A third U.S. service member died Saturday, July 18, in Iraq during a controlled detonation of an Iranian drone, and Iran fired missiles toward Jordan that Israel warned are landing close to its own territory, threatening to pull Israel into the fight.",
+        "summary": "Iranian ballistic missiles killed two U.S. troops and left one missing in Jordan, prompting U.S. Central Command to launch fresh strikes to \"swiftly punish\" Tehran; Iran had used a brief earlier truce to rush out about $6 billion of oil on roughly 20 tankers bound for Asia before Washington reimposed pressure, keeping crude and the Strait of Hormuz at the center of market risk.",
         "sources": [
-          {
-            "source": "WSJ World News",
-            "title": "Two U.S. Troops Were Killed, One Is Missing After Iran Missile Attack in Jordan",
-            "url": "https://www.wsj.com/world/middle-east/two-u-s-servicemembers-killed-one-missing-in-iran-missile-attack-on-jordan-a59f9699"
-          },
           {
             "source": "FT World",
             "title": "US strikes Iran after American troops killed in Jordan",
@@ -199,140 +186,113 @@
             "source": "WSJ World News",
             "title": "U.S.-Iran Fighting Escalates",
             "url": "https://www.wsj.com/articles/u-s-iran-fighting-escalates-8d744da2"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Iran Rushed Out $6 Billion of Oil During Brief Truce With U.S.",
+            "url": "https://www.wsj.com/world/middle-east/iran-rushed-out-6-billion-of-oil-during-brief-truce-with-u-s-5a3d0818"
           }
         ],
-        "_anchor": "i-ed5ff4d944"
+        "_anchor": "i-849e4928e9"
       }
     ],
     "business": [
       {
-        "title": "Pennsylvania American Water Wins Rate Increase",
-        "latest_developments": "The Pennsylvania Public Utility Commission voted 4-1 Thursday, July 16, to grant Pennsylvania American Water a $74.9 million overall annual revenue increase, trimming the utility's original request and ordering new customer-service and consumer-protection measures.",
-        "summary": "Pennsylvania American Water, the state's largest investor-owned water and wastewater utility, sought higher rates; the commission approved the added $74.9 million in yearly revenue and attached service and consumer-protection conditions, raising bills across its Pennsylvania service territory.",
+        "title": "Panasonic Toaster Ovens Recalled",
+        "latest_developments": "Panasonic recalled 11,480 electric toaster ovens nationwide, telling owners to stop using them and check the model number.",
+        "summary": "The recall covers Panasonic electric toaster ovens sold online through Amazon and Costco for about $170, which the company says pose a shock or fire hazard.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "PUC approves modified rate change for Pennsylvania American Water",
-            "url": "https://www.wpxi.com/news/local/puc-approves-modified-rate-change-pennsylvania-american-water/ANH5NLW5UREWBCYEANIMYYLPK4/"
+            "source": "WTAE",
+            "title": "Panasonic toaster ovens sold on Amazon, Costco recalled nationwide",
+            "url": "https://www.wtae.com/article/panasonic-electric-toaster-oven-recall-amazon-costco/73179645"
           }
         ],
-        "_anchor": "i-136ef7081a"
+        "_anchor": "i-1341d95194"
       }
     ],
     "around_town": [
       {
-        "title": "New Commercial Street Bridge Slides Into Place",
-        "latest_developments": "PennDOT's contractor began the lateral slide of the new I-376 Commercial Street Bridge around 10 a.m. Sunday, July 19, pushing the prebuilt span 102 feet into position on 42 hydraulic skids between the Squirrel Hill Tunnel and the Edgewood-Swissvale exit.",
-        "summary": "The Parkway East stays closed through August 3 while crews replace the Commercial Street Bridge; PennDOT imploded the old span earlier in the week and now skids the new 22-million-pound structure into place, forcing detours for thousands of drivers.",
+        "title": "Two Tornadoes Confirmed After Saturday Storms",
+        "latest_developments": "The National Weather Service confirmed Sunday, July 19, that two tornadoes touched down in Pennsylvania during Saturday's storms, one of them in Western Pennsylvania, and it is examining a possible third in Derry Township, Westmoreland County.",
+        "summary": "Severe storms swept Western Pennsylvania on Saturday, July 18, downing trees and flooding roads across Westmoreland and Jefferson counties, damage crews are still clearing.",
         "sources": [
           {
             "source": "WTAE",
-            "title": "New Parkway East bridge being slid into place, PennDOT says",
-            "url": "https://www.wtae.com/article/penndot-new-parkway-east-bridge-being-slid/73179332"
+            "title": "Two tornadoes confirmed in Pennsylvania after Saturday storms, NWS says",
+            "url": "https://www.wtae.com/article/westmoreland-jefferson-counties-tornadoes-saturday-storms/73179582"
           },
           {
-            "source": "KDKA",
-            "title": "New Commercial Street Bridge on the Parkway East begins sliding into place on Sunday",
-            "url": "https://www.cbsnews.com/pittsburgh/news/parkway-east-commercial-street-bridge-replacement-begins/"
+            "source": "TribLive",
+            "title": "Possible tornado Saturday in Derry Township",
+            "url": "https://triblive.com/local/westmoreland/possible-tornado-saturday-in-derry-township/"
           },
+          {
+            "source": "WTAE",
+            "title": "Severe storms, flooding caused damage in parts of Western Pa. Saturday",
+            "url": "https://www.wtae.com/article/severe-storms-flooding-damage-western-pa-saturday-july-18-2026/73179491"
+          }
+        ],
+        "_anchor": "i-706ef7e15d"
+      },
+      {
+        "title": "'Guns Down Minds Up' Youth Program Launches",
+        "latest_developments": "A new youth mentorship program, Guns Down Minds Up, launched Friday, July 17, at the Kingsley Center in Pittsburgh.",
+        "summary": "The Kingsley Center hosted the launch of Guns Down Minds Up, a program that pairs young people with mentors to steer them away from violence.",
+        "sources": [
           {
             "source": "WPXI",
-            "title": "Crews start sliding new Commercial Street Bridge into place",
-            "url": "https://www.wpxi.com/news/local/crews-start-sliding-new-commercial-street-bridge-into-place/IQQZS75WUJCKNIACXYA3GE4HY4/"
+            "title": "New mentorship program looks to curb violence among young people in Pittsburgh",
+            "url": "https://www.wpxi.com/news/local/new-mentorship-program-looks-curb-violence-among-young-people-pittsburgh/ZHG4KANRWBHYXH7NSN7CAJSKDY/"
           }
         ],
-        "_anchor": "i-2b1784393c"
-      },
-      {
-        "title": "Fetterman's Small-Dollar Donors Dry Up",
-        "latest_developments": "A Post-Gazette review of fundraising found the once-formidable small-dollar donor base of Senator John Fetterman has collapsed, the latest sign of his strained standing with Democrats over his support for Israel.",
-        "summary": "Fetterman, the Pennsylvania Democrat elected to the Senate in 2022, has drawn party backlash for backing Israel and breaking with the left, and his grassroots online fundraising has thinned sharply as he heads into a difficult stretch with the base.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Sen. John Fetterman's small-dollar donor base dries up in another sign of his struggles with Democrats",
-            "url": "https://www.post-gazette.com/news/politics-state/2026/07/19/fetterman-campaign-fundraising-israel-congress/stories/202607160077"
-          }
-        ],
-        "_anchor": "i-59ba01eb75"
-      },
-      {
-        "title": "Smoke Returns, Code Orange for Southwestern Pa.",
-        "latest_developments": "A thinner plume of Canadian wildfire smoke pushed the region back to a Code Orange air-quality alert Sunday, July 19, days after storms scrubbed out last week's hazardous Code Purple haze.",
-        "summary": "The Pennsylvania Department of Environmental Protection rated air quality Code Orange, unhealthy for sensitive groups, across southwestern Pennsylvania as smoke drifted over Pittsburgh, though skies continued clearing through the afternoon into the upper 70s.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "Code Orange Air Quality Alert issued for Southwestern Pa.",
-            "url": "https://www.wtae.com/article/code-orange-air-quality-alert-issued-for-southwestern-pa/73179244"
-          },
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Code Orange air alert issued, but skies continue to clear",
-            "url": "https://www.post-gazette.com/news/weather-news/2026/07/19/pittsburgh-weather-tornadoes/stories/202607190070"
-          }
-        ],
-        "_anchor": "i-f5477a437c"
+        "_anchor": "i-2b10eab20a"
       }
     ],
     "events": [],
     "around_teams": [
       {
-        "title": "Harmon's Pass-Rush Upside at Steelers Camp",
-        "latest_developments": "A Post-Gazette training-camp countdown, July 19, argued defensive lineman Derrick Harmon's untapped pass-rush ability could drive a sharp jump in his sack production this season.",
-        "summary": "The Steelers count on Harmon to strengthen their defensive front; the Post-Gazette's camp preview casts him as a disruptive interior rusher poised to break out as Pittsburgh opens training camp at Saint Vincent College in Latrobe.",
+        "title": "Five Storylines for the Pirates' Second Half",
+        "latest_developments": "A Post-Gazette breakdown, July 16, laid out five storylines to watch as the Pirates chase a wild-card spot after the All-Star break, led by ace Paul Skenes.",
+        "summary": "The Pittsburgh Pirates enter the second half positioned for a wild-card run, and the Post-Gazette outlined five questions—centered on Skenes—that will decide whether they reach the playoffs.",
         "sources": [
           {
-            "source": "Post-Gazette Steelers",
-            "title": "Steelers training camp countdown: Derrick Harmon's untapped potential as a pass rusher could mean a big increase in his sack production",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/19/training-camp-countdown-derrick-harmon-defensive-lineman/stories/202607190035"
+            "source": "Post-Gazette Pirates",
+            "title": "5 second-half storylines to watch as the Pirates vie for a playoff spot",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/07/16/storylines-analysis-mlb-second-half-skenes/stories/202607150032"
           }
         ],
-        "_anchor": "i-34553c61a4"
+        "_anchor": "i-a077c4b73f"
       }
     ],
-    "team_usa": [
-      {
-        "title": "USMNT's World Cup Run, in Images",
-        "latest_developments": "As the 2026 World Cup closes with Sunday's Spain-Argentina final, ESPN published a photo time capsule of the U.S. men's national team's home-tournament run, which ended in the round of 16.",
-        "summary": "The USMNT held the country's attention for a month as co-host of the 2026 World Cup before bowing out to Belgium in the round of 16; ESPN's retrospective gathers the images U.S. Soccer will remember from the campaign.",
-        "sources": [
-          {
-            "source": "ESPN Soccer",
-            "title": "World Cup time capsule: Images the USMNT will remember forever",
-            "url": "https://www.espn.com/soccer/story/_/id/49352246/2026-world-cup-capsule-images-usmnt-remember-forever"
-          }
-        ],
-        "_anchor": "i-73c5c68651"
-      }
-    ],
+    "team_usa": [],
     "reading": [
-      {
-        "author": "Stratechery",
-        "title": "IBM Misses, IBM's Mainframe Moat, IBM's Many AI Problems",
-        "url": "https://stratechery.com/2026/ibm-misses-ibms-mainframe-moat-ibms-many-ai-problems/",
-        "summary": "Ben Thompson dissects IBM's disappointing preliminary results that rattled the broader software market, the enduring strength of its mainframe franchise, and the several ways AI threatens that moat.",
-        "_anchor": "i-3fbdc1bddb"
-      },
       {
         "author": "Ed Zitron",
         "title": "The OpenAI Bubble",
         "url": "https://www.wheresyoured.at/the-openai-bubble/",
-        "summary": "Ed Zitron argues OpenAI amounts to a financial bubble, laying out why he believes its economics and valuation cannot hold.",
+        "summary": "Ed Zitron argues that OpenAI's spending, financing, and hype add up to an unsustainable bubble headed for a reckoning.",
         "_anchor": "i-fd12c7c4fe"
+      },
+      {
+        "author": "Stratechery",
+        "title": "IBM Misses, IBM's Mainframe Moat, IBM's Many AI Problems",
+        "url": "https://stratechery.com/2026/ibm-misses-ibms-mainframe-moat-ibms-many-ai-problems/",
+        "summary": "Ben Thompson dissects IBM's disappointing preliminary results, arguing its mainframe franchise remains a durable moat even as the company struggles to find its footing in AI.",
+        "_anchor": "i-3fbdc1bddb"
       },
       {
         "author": "Cal Newport",
         "title": "Why Reading Matters",
         "url": "https://calnewport.com/why-reading-matters/",
-        "summary": "Cal Newport responds to Rose Horowitch's Atlantic piece \"The End of Reading Is Here,\" arguing that sustained reading of hard books remains cognitively essential even as the habit erodes.",
+        "summary": "Cal Newport responds to an Atlantic essay on the decline of reading, making the case for why sustained, deep reading still matters.",
         "_anchor": "i-d6a4747e23"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-19 12:05 EDT",
-    "items_considered": 25,
+    "generated_at": "2026-07-19 16:07 EDT",
+    "items_considered": 18,
     "window_hours": 48,
     "model": "claude-opus-4-8",
     "feeds": {
