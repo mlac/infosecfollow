@@ -1,0 +1,507 @@
+{
+  "date": "2026-07-25",
+  "headline": "Attackers handed whole post-exploitation phases to an autonomous AI agent inside Thailand's treasury while Microsoft's own Bing image tier and self-managed GitLab yielded fresh remote-code-execution holes.",
+  "emerging_trends": [
+    {
+      "text": "Attackers now delegate entire post-exploitation phases to autonomous AI agents, running the open-source Hermes agent in unattended YOLO mode against Thailand's Ministry of Finance to hunt for root on its own.",
+      "topic_title": "Hermes AI Agent Automates Breach of Thai Finance Ministry",
+      "link_phrase": "Hermes",
+      "_anchor": "trend-1"
+    },
+    {
+      "text": "Microsoft's own production infrastructure keeps yielding server-side flaws, as a single crafted SVG fed to Bing image search ran commands as SYSTEM and root across its worker fleet.",
+      "topic_title": "Bing Image Search SVG Flaws Run Code as SYSTEM",
+      "link_phrase": "Bing",
+      "_anchor": "trend-2"
+    },
+    {
+      "text": "Fresh data breaches piled up across parcel carrier OnTrac, a Vatican prayer app, and Chick-fil-A, exposing hundreds of thousands of records to anyone armed with a browser or a stolen password.",
+      "topic_title": "OnTrac, Vatican App, and Chick-fil-A Breaches Surface",
+      "link_phrase": "Vatican",
+      "_anchor": "trend-3"
+    }
+  ],
+  "topics": [
+    {
+      "title": "GitLab PoC Lets Authenticated Users Run Code as Git",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Security researcher Yuhang Wu at depthfirst published a working proof-of-concept on July 25 that executes commands as git on an unpatched self-managed GitLab 18.11.3 server, triggered when an ordinary authenticated user commits two crafted Jupyter notebooks and requests their diff.",
+      "summary": "The chain needs no administrator rights, no continuous-integration runner access, and no victim interaction, so any registered user can reach remote code execution on a vulnerable self-managed instance. Administrators running self-managed GitLab should patch immediately.",
+      "tags": [
+        "rce",
+        "patch",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Researcher Publishes GitLab RCE PoC Letting Authenticated Users Run Commands as Git",
+          "url": "https://thehackernews.com/2026/07/researcher-publishes-gitlab-rce-poc.html"
+        }
+      ],
+      "_anchor": "i-ecd8e77873"
+    },
+    {
+      "title": "OnTrac, Vatican App, and Chick-fil-A Breaches Surface",
+      "area": "Data Breaches",
+      "latest_developments": "OnTrac told customers hackers breached its corporate network and may have reached their personal details, Dark Reading found a porous API endpoint in the Vatican's official prayer app exposing names, email addresses, country, and status for more than 700,000 users, and Chick-fil-A confirmed credential-stuffing attacks between June 17 and June 19 compromised more than 13,000 customer accounts.",
+      "summary": "The three incidents span a parcel carrier, a religious app, and a fast-food chain, hitting victims through a network intrusion, an exposed API anyone with a browser could read, and reused passwords. Affected users should reset credentials and watch for fraud.",
+      "tags": [
+        "breach",
+        "credential-stuffing",
+        "data-leak"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "OnTrac notifies customers of data breach after network hack",
+          "url": "https://www.bleepingcomputer.com/news/security/ontrac-notifies-customers-of-data-breach-after-network-hack/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Vatican's Official Prayer App Leaks 700K+ Global Users' PII",
+          "url": "https://www.darkreading.com/vulnerabilities-threats/vatican-official-prayer-app-leaks-700k-pii"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Chick-fil-A data breach affects more than 13,000 customers",
+          "url": "https://www.bleepingcomputer.com/news/security/chick-fil-a-data-breach-affects-more-than-13-000-customers/"
+        }
+      ],
+      "_anchor": "i-3fccf010f6"
+    },
+    {
+      "title": "Hermes AI Agent Automates Breach of Thai Finance Ministry",
+      "area": "AI Security",
+      "latest_developments": "A threat actor installed the open-source Hermes AI agent on a rented server, switched off its permission prompts to run it in unattended YOLO mode, and pointed it at Thailand's Ministry of Finance, where it worked through the network on its own checking hosts for root access and hunting file systems.",
+      "summary": "The Ministry of Finance runs Thailand's treasury and tax collection, and the incident shows attackers delegating live post-exploitation to a commodity AI agent rather than driving each step by hand. Organizations should treat AI agents as privileged actors and restrict what they can execute.",
+      "tags": [
+        "ai",
+        "apt",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Hermes AI agent used to automate attack on Thai Finance Ministry",
+          "url": "https://www.bleepingcomputer.com/news/security/hermes-ai-agent-used-to-automate-attack-on-thai-finance-ministry/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Hacker Runs Hermes AI Agent Unattended for Post-Exploitation at Thai Finance Ministry",
+          "url": "https://thehackernews.com/2026/07/hacker-runs-hermes-ai-agent-unattended.html"
+        }
+      ],
+      "_anchor": "i-48f93ebbef"
+    },
+    {
+      "title": "Bing Image Search SVG Flaws Run Code as SYSTEM",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "XBOW showed that a crafted SVG submitted to Bing's image search ran commands as NT AUTHORITY\\SYSTEM on Microsoft's production image-processing workers and as root on the Linux machines in the same fleet, reproducing across different hosts and network ranges, and Microsoft issued two critical fixes including CVE-2026-32194.",
+      "summary": "The bug sat in Bing's image tier rather than one bad machine, so a single malicious file gave full control of Microsoft's image-processing infrastructure. Microsoft has patched the affected workers.",
+      "tags": [
+        "zero-day",
+        "rce",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Bing Images Flaws Let Crafted SVGs Run Commands as SYSTEM on Microsoft's Servers",
+          "url": "https://thehackernews.com/2026/07/bing-images-flaws-let-crafted-svgs-run.html"
+        }
+      ],
+      "_anchor": "i-c6f845a840"
+    },
+    {
+      "title": "BlueNoroff Zoom Kit Profiles Crypto Wallets Before Malware",
+      "area": "Nation-State Activity",
+      "latest_developments": "Researchers found the North Korean group BlueNoroff operating an active phishing kit that impersonates Zoom and Microsoft Teams through typosquatted domains, combining compromised industry contacts with social engineering to profile a target's cryptocurrency wallet before it delivers malware.",
+      "summary": "BlueNoroff runs ClickFix-style campaigns against crypto holders and finance staff, tailoring the payload to victims whose wallets it identifies first. Staff should verify videoconferencing links out of band and treat unexpected Zoom or Teams prompts as suspect.",
+      "tags": [
+        "apt",
+        "phishing",
+        "cryptocurrency"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "BlueNoroff Zoom Phishing Kit Profiles Crypto Wallets Before Malware Delivery",
+          "url": "https://thehackernews.com/2026/07/bluenoroff-zoom-phishing-kit-profiles.html"
+        }
+      ],
+      "_anchor": "i-68327402f2"
+    },
+    {
+      "title": "Golden Chickens Returns With Four New Malware Families",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "The operators behind the Golden Chickens malware-as-a-service ecosystem resurfaced with four new families—TinyEgg, ChonkyChicken, a modularized ChonkyChicken variant, and a modified web-browser credential stealer—showing no signs of stopping despite extensive public disclosure of their inner workings.",
+      "summary": "Golden Chickens rents modular implants to other criminals, and the refreshed toolkit keeps the operation viable after researchers exposed its earlier components. Defenders should update detection for the new implant names and browser-credential theft.",
+      "tags": [
+        "malware",
+        "maas",
+        "cybercrime"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Golden Chickens Resurfaces With Four New Malware Families and Modular Implants",
+          "url": "https://thehackernews.com/2026/07/golden-chickens-resurfaces-with-four.html"
+        }
+      ],
+      "_anchor": "i-97652cd4ce"
+    }
+  ],
+  "markets": [
+    {
+      "label": "S&P 500",
+      "value": "7,454.34",
+      "pct": "-0.9%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Dow",
+      "value": "51,988.28",
+      "pct": "-0.9%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "25,429.94",
+      "pct": "-1.9%",
+      "arrow": "▼"
+    },
+    {
+      "label": "WTI crude",
+      "value": "87.29",
+      "pct": "+9.5%",
+      "arrow": "▲"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1397",
+      "pct": "-0.3%",
+      "arrow": "▼"
+    },
+    {
+      "label": "GBP/USD",
+      "value": "1.3363",
+      "pct": "-0.6%",
+      "arrow": "▼"
+    },
+    {
+      "label": "USD/JPY",
+      "value": "163.28",
+      "pct": "+0.6%",
+      "arrow": "▲"
+    }
+  ],
+  "weather": [
+    "Today: Isolated Rain Showers then Isolated Showers And Thunderstorms, high 83F.",
+    "Tonight: Isolated Showers And Thunderstorms then Patchy Fog, low 63F.",
+    "Sunday: Patchy Fog then Isolated Showers And Thunderstorms, high 86F."
+  ],
+  "sports": [
+    {
+      "team": "Pirates",
+      "record": "53-51",
+      "games": [
+        {
+          "date": "Fri Jul 24",
+          "url": "https://plaintextsports.com/mlb/2026-07-24/chc-pit",
+          "recap": "Dansby Swanson's two-out single in the 10th inning, Boyd's strong outing lift Cubs over Pirates 3-2",
+          "result": "Cubs 3 · Pirates 2 · Final (10)"
+        }
+      ],
+      "next": {
+        "matchup": "Cubs @ Pirates",
+        "when": "Sat Jul 25, 6:40 PM",
+        "url": "https://plaintextsports.com/mlb/2026-07-25/chc-pit"
+      },
+      "headlines": []
+    }
+  ],
+  "local": {
+    "business_politics": [
+      {
+        "title": "Gulf States Strike Iran as U.S. Blockades Its Ports",
+        "latest_developments": "Warplanes from Bahrain and Kuwait struck Iran in a rare Gulf retaliation, and the U.S. military said Friday it fired on another merchant vessel trying to breach its blockade of Iran's ports as Tehran targeted American strongholds around the Persian Gulf.",
+        "summary": "The United States and Iran remain locked in an escalating war that has killed U.S. service members and now draws in Arab states; President Trump threatens to intensify bombing while Iran's militia allies widen the fighting, keeping oil prices and Persian Gulf shipping at risk.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "Bahrain, Kuwait Warplanes Struck Iran in Rare Gulf Retaliation",
+            "url": "https://www.wsj.com/world/middle-east/iran-gulf-states-bahrain-kuwait-strikes-009637db"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "The U.S. and Iran Are Stuck in a Cycle of Military Escalation",
+            "url": "https://www.wsj.com/world/middle-east/iran-war-us-escalation-cycle-8d90061e"
+          }
+        ],
+        "_anchor": "i-d3c0b42b5b"
+      }
+    ],
+    "business": [
+      {
+        "title": "Pennsylvania American Water Canvasses Pittsburgh Service Lines",
+        "latest_developments": "Pennsylvania American Water began knocking on doors July 15 across parts of its City of Pittsburgh territory to help 5,700 customers identify the material of their home water service lines.",
+        "summary": "The utility's outreach supports a program to locate and eventually replace lead and other aging service lines that feed homes in its Pittsburgh service area.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pennsylvania American Water begins door-to-door canvassing in Pittsburgh for service line program",
+            "url": "https://www.wpxi.com/news/local/pennsylvania-american-water-begins-door-to-door-canvassing-pittsburgh-service-line-program/FYBGHGUI5NGDLKH5AYCUQQYLSY/"
+          }
+        ],
+        "_anchor": "i-eb806b85a3"
+      },
+      {
+        "title": "Pittsburgh Mills Potholes Near Repair",
+        "latest_developments": "WTAE reported Friday that the pothole-choked lots and access roads at the Galleria at Pittsburgh Mills in Frazer Township are close to being repaved.",
+        "summary": "Namdar Realty Group, the mall's owner, committed to fixing the crater-filled roads that drivers and tenants have complained about for years at the Frazer Township shopping center.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Pothole problem at Pittsburgh Mills may be at the end of the road",
+            "url": "https://www.wtae.com/article/pittsburgh-mills-roads-paved-pothole-problems/73261294"
+          }
+        ],
+        "_anchor": "i-cff45d9e55"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "I-279 Overnight Closures Through Aug. 3",
+        "latest_developments": "The Allegheny County Department of Public Works announced Friday a schedule of overnight closures on I-279 and the I-279/I-579 HOV lanes running July 25 through Aug. 3 in Pittsburgh, Ross Township, and Ohio Township.",
+        "summary": "Crews will shut lane segments overnight through the North Hills corridor; commuters should plan detours during the work window.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Schedule for I-279 closures set from July 25 to Aug. 3",
+            "url": "https://www.wpxi.com/news/local/schedule-i-279-closures-set-july-25-aug-3/7AHEZ5AQE5BHZLJKEDGAUFQBLA/"
+          }
+        ],
+        "_anchor": "i-0bb2ab26f7"
+      },
+      {
+        "title": "Cyclospora Outbreak Reaches Pennsylvania",
+        "latest_developments": "The CDC added Pennsylvania and three other states to a cyclospora outbreak Friday, bringing the total to nine states, and the Pennsylvania Department of Health confirmed several cases tied to shredded iceberg lettuce from central Mexico.",
+        "summary": "Cyclosporiasis, caused by the cyclospora parasite, brings long bouts of severe diarrhea; the FDA's investigation has centered on Taylor Farms shredded iceberg lettuce grown in central Mexico.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Cyclospora outbreak linked to 4 more states, including Pennsylvania",
+            "url": "https://www.wtae.com/article/cyclospora-outbreak-pennsylvania/73259940"
+          },
+          {
+            "source": "KDKA",
+            "title": "Pennsylvania linked to cyclospora outbreak traced to iceberg lettuce",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pennsylvania-cyclospora-outbreak-iceberg-lettuce/"
+          }
+        ],
+        "_anchor": "i-9addcb648e"
+      },
+      {
+        "title": "Mapping Dormont's Little Free Libraries",
+        "latest_developments": "KDKA profiled Amy Constantine of Dormont, who has set out to map every little free library in her community.",
+        "summary": "Constantine and her husband built one of the sidewalk boxes two years ago for their growing collection of vinyl records, CDs, and cassettes, part of a neighbor-built network that lets people swap books and media.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Non-traditional little free libraries popping up across Pittsburgh area",
+            "url": "https://www.cbsnews.com/pittsburgh/news/non-traditional-little-free-libraries-dormont/"
+          }
+        ],
+        "_anchor": "i-1491a143d9"
+      }
+    ],
+    "events": [
+      {
+        "title": "Original Pittsburgh Winery to Close Aug. 15",
+        "latest_developments": "The Post-Gazette detailed Friday how the Original Pittsburgh Winery's Aug. 15 closing will silence one of the Strip District's intimate live-music rooms.",
+        "summary": "The Original Pittsburgh Winery, a Strip District spot that doubled as a small listening room for touring and local acts, will pour and play its final shows through mid-August before shutting down.",
+        "sources": [
+          {
+            "source": "Post-Gazette Music",
+            "title": "Original Pittsburgh Winery is closing, dealing a double blow to lovers of fine wine and live music",
+            "url": "https://www.post-gazette.com/life/drinks/2026/07/24/original-pittsburgh-winery-closing-strip-district/stories/202607240058"
+          }
+        ],
+        "_anchor": "i-2fb62b296e"
+      }
+    ],
+    "around_teams": [
+      {
+        "title": "Fautanu's Position Switch Key to Steelers Offense",
+        "latest_developments": "The Post-Gazette's training-camp countdown Friday argued that Troy Fautanu's move to a new spot on the offensive line will be critical to protecting quarterback Aaron Rodgers.",
+        "summary": "Fautanu, the 2024 first-round tackle out of Washington, is shifting positions alongside guard Mason McCormick as Pittsburgh reworks its front for Mike McCarthy's first camp in Latrobe.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers training camp countdown: Troy Fautanu's position switch will be critical to the offense",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/07/25/nfl-trainingcamp-fautanu-mason-mccormick-aaron-rodgers/stories/202607250004"
+          }
+        ],
+        "_anchor": "i-468c611d55"
+      },
+      {
+        "title": "Porter Eyes Big Payday and Elite Corner Status",
+        "latest_developments": "A Post-Gazette countdown Friday framed cornerback Joey Porter Jr. as chasing both a lucrative contract and elite status as camp opens with his deal unresolved.",
+        "summary": "Porter, the Steelers' 2023 second-round pick and son of the former linebacker Joey Porter, enters a pivotal season with his stalled contract among the top storylines at Saint Vincent College.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers training camp countdown: Joey Porter Jr. eyes a big payday — and elite corner status",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/07/24/nfl-trainingcamp-joey-porter-contract-cornerback-market/stories/202607230004"
+          }
+        ],
+        "_anchor": "i-42272343b6"
+      },
+      {
+        "title": "Roethlisberger Previews Camp on 'Footbahlin'",
+        "latest_developments": "On 'Footbahlin' episode 133, Ben Roethlisberger broke down what to watch when the Steelers hit the practice fields and what makes a franchise quarterback.",
+        "summary": "Roethlisberger said training camp finally replaces the offseason rumor mill with real competition, previewing the first hints of what Pittsburgh's new era under Mike McCarthy is trying to be.",
+        "sources": [
+          {
+            "source": "Ben Roethlisberger / Channel Seven (YouTube)",
+            "title": "Big Ben talks What To Watch In Steelers Training Camp, What Makes A Franchise QB and More! Ep 133",
+            "url": "https://www.youtube.com/watch?v=Z1YJqSjWA74"
+          }
+        ],
+        "_anchor": "i-1a167efbb4"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "Richardson and Lyles Win 100 Meters at U.S. Championships",
+        "latest_developments": "Sha'Carri Richardson and Noah Lyles surged to 100-meter victories Friday night at the U.S. track and field championships, days after cruising through their opening heats.",
+        "summary": "Richardson took the women's 100 and Lyles the men's, reasserting both sprinters atop American sprinting as the outdoor season builds.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "Richardson, Lyles win 100m at U.S. championships",
+            "url": "https://www.espn.com/olympics/trackandfield/story/_/id/49443171/shacarri-richardson-noah-lyles-surge-100-meter-wins-us-track-field-championships"
+          }
+        ],
+        "_anchor": "i-ad8fbd4249"
+      },
+      {
+        "title": "USWNT's Sonnett Stretchered Off With Knee Injury",
+        "latest_developments": "Gotham FC and U.S. women's national team defender Emily Sonnett left on a stretcher in the opening minutes of Friday's 2-2 draw with the Portland Thorns after a non-contact knee injury.",
+        "summary": "Sonnett, a veteran of the USWNT back line, went down early with the severity unclear, a worry for the national team a year out from the 2027 Women's World Cup.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "USWNT's Sonnett stretchered off in Gotham FC draw",
+            "url": "https://www.espn.com/soccer/story/_/id/49444838/uswnt-gotham-fc-portland-thorns-emily-sonnett"
+          }
+        ],
+        "_anchor": "i-8e79581874"
+      }
+    ],
+    "reading": [
+      {
+        "author": "Ed Zitron",
+        "title": "The Subprime Data Center Crisis",
+        "url": "https://www.wheresyoured.at/the-subprime-data-center-crisis/",
+        "summary": "Zitron argues the AI boom's data-center buildout rests on shaky, debt-fueled financing he likens to subprime lending, warning the underlying economics do not hold.",
+        "_anchor": "i-bb15d0abf7"
+      },
+      {
+        "author": "Stratechery",
+        "title": "OpenAI Hacks Hugging Face, What Happened, Alignment and Paper Clips",
+        "url": "https://stratechery.com/2026/openai-hacks-hugging-face-what-happened-alignment-and-paper-clips/",
+        "summary": "Ben Thompson unpacks how OpenAI accidentally 'hacked' Hugging Face and uses the episode to draw more encouraging conclusions about AI alignment than the alarm suggests.",
+        "_anchor": "i-0066ab9912"
+      },
+      {
+        "author": "Cal Newport",
+        "title": "Why Reading Matters",
+        "url": "https://calnewport.com/why-reading-matters/",
+        "summary": "Newport responds to Rose Horowitch's Atlantic article 'The End of Reading is Here,' making the case for why deep reading still matters as attention spans erode.",
+        "_anchor": "i-d6a4747e23"
+      }
+    ]
+  },
+  "meta": {
+    "generated_at": "2026-07-25 06:06 EDT",
+    "items_considered": 33,
+    "window_hours": 24,
+    "model": "claude-opus-4-8",
+    "feeds": {
+      "security": [
+        "The Hacker News",
+        "BleepingComputer",
+        "Krebs on Security",
+        "Schneier on Security",
+        "Dark Reading",
+        "SecurityWeek",
+        "SANS Internet Storm Center",
+        "CISA Advisories",
+        "The Record",
+        "Ars Technica Security",
+        "Help Net Security",
+        "Securelist (Kaspersky)",
+        "Sophos News",
+        "Unit 42 (Palo Alto)",
+        "Google Online Security Blog",
+        "Cisco Talos",
+        "Graham Cluley",
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media",
+        "Frank on Fraud",
+        "Wired Security"
+      ],
+      "pittsburgh": [
+        "TribLive",
+        "Pittsburgh Post-Gazette",
+        "PublicSource",
+        "Pittsburgh City Paper",
+        "NEXTpittsburgh",
+        "Pittsburgh Magazine",
+        "KDKA",
+        "WPXI",
+        "WTAE"
+      ],
+      "bizpol": [
+        "WSJ World News",
+        "WSJ Markets",
+        "WSJ US Business",
+        "WSJ Politics",
+        "The Economist",
+        "FT Home",
+        "FT World",
+        "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
+      ],
+      "team_usa": [
+        "ESPN Soccer",
+        "ESPN Olympics",
+        "Guardian World Cup 2026",
+        "Guardian Olympics"
+      ],
+      "reading": [
+        "Ed Zitron",
+        "Stratechery",
+        "Cal Newport"
+      ]
+    }
+  }
+}
