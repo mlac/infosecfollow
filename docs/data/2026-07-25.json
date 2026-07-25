@@ -1,36 +1,58 @@
 {
   "date": "2026-07-25",
-  "headline": "Attackers race to exploit an unpatched Fastjson flaw in Java applications while a threat actor turns the open-source Hermes agent loose on Thailand's finance ministry.",
+  "headline": "Attackers exploit an unpatched Fastjson RCE and chain fresh PTC product-lifecycle flaws for Cl0p extortion, while cybercrime tooling from SourTrade malvertising to DevMan's ransomware portal grows steadily more industrialized.",
   "emerging_trends": [
     {
-      "text": "A threat actor drove the open-source Hermes agent in unattended mode to automate the post-exploitation of Thailand's Ministry of Finance, showing attackers now hand routine intrusion work to autonomous AI.",
-      "topic_title": "Hermes AI Agent Automates Thai Finance Ministry Breach",
-      "link_phrase": "Hermes",
+      "text": "Cybercriminals keep industrializing their operations, from DevMan's self-service ransomware portal that hands affiliates payload builders and payout dashboards to SourTrade's malvertising that turns victims' own browsers into malware compilers.",
+      "topic_title": "DevMan RaaS Portal Centralizes Affiliate Operations",
+      "link_phrase": "DevMan",
       "_anchor": "trend-1"
     },
     {
-      "text": "Attackers are moving on server-side flaws faster than defenders can close them, chasing an unpatched Fastjson bug in Spring Boot apps and a fresh GitLab exploit weeks after the fix shipped.",
+      "text": "Attackers are racing to weaponize enterprise-software flaws, exploiting the unpatched Fastjson library inside Spring Boot applications and chaining fresh PTC Windchill and FlexPLM bugs to feed Cl0p's data-extortion campaign.",
       "topic_title": "Unpatched Fastjson RCE CVE-2026-16723 Under Attack",
       "link_phrase": "Fastjson",
       "_anchor": "trend-2"
     },
     {
-      "text": "Leaked records keep powering downstream crime, with ShinyHunters breach data now feeding a wave of $2,000 sextortion emails as fresh network intrusions like OnTrac's widen the pool of exposed victims.",
-      "topic_title": "ShinyHunters Breach Data Fuels $2,000 Sextortion",
-      "link_phrase": "ShinyHunters",
+      "text": "Phishing crews are compressing the kill chain, with insurance-focused operations now hijacking accounts in real time as victims type their credentials rather than banking them for later use.",
+      "topic_title": "Insurance Phishing Shifts to Real-Time Account Hijacking",
+      "link_phrase": "insurance-focused",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
+      "title": "SourTrade Malvertising Builds Malware in the Browser",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Confiant named the campaign SourTrade on July 23 and traced it to late 2024, finding it uses the legitimate Bun runtime as its base while victims' browsers assemble the final Windows executable in memory from pieces instead of downloading one complete file.",
+      "summary": "SourTrade serves counterfeit TradingView, Solana, and Luno pages to retail cryptocurrency traders, and malicious JavaScript directs the browser to compile the malware itself, evading URL-based detection. Traders should reach these platforms through bookmarks and treat sponsored search results with suspicion.",
+      "tags": [
+        "malvertising",
+        "cryptocurrency"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Malvertising Sends Malware in Pieces, Then Makes the Browser Build the Executable",
+          "url": "https://thehackernews.com/2026/07/malvertising-sends-malware-in-pieces.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Malicious sites use JavaScript to build malware in browser memory",
+          "url": "https://www.bleepingcomputer.com/news/security/malicious-sites-use-javascript-to-build-malware-in-browser-memory/"
+        }
+      ],
+      "_anchor": "i-e4420d62b7"
+    },
+    {
       "title": "Unpatched Fastjson RCE CVE-2026-16723 Under Attack",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "ThreatBook and Imperva reported on July 25 that attackers are exploiting CVE-2026-16723 in the wild, and Alibaba has shipped no patch.",
-      "summary": "Fastjson, Alibaba's JSON library for Java, carries a critical flaw that lets a malicious JSON request run code without authentication in affected Spring Boot applications, executing with the Java process's privileges; Alibaba rates it CVSS 9.0. Organizations running Fastjson 1.x should restrict exposure and monitor for exploitation until a fix arrives.",
+      "latest_developments": "The Hacker News detailed on July 25 that the confirmed chain hits affected Spring Boot applications, where a single malicious JSON request runs code unauthenticated at the Java process's privileges, and that Alibaba rates the flaw 9.0 while shipping no fix.",
+      "summary": "CVE-2026-16723 sits in Fastjson 1.x, Alibaba's widely used JSON library for Java. Attackers who reach a vulnerable endpoint run code without authentication; with no patch available, defenders must restrict exposure and filter untrusted JSON input.",
       "tags": [
-        "zero-day",
         "rce",
-        "patch"
+        "zero-day"
       ],
       "sources": [
         {
@@ -42,93 +64,76 @@
       "_anchor": "i-41ac194d5f"
     },
     {
-      "title": "GitLab RCE PoC Runs Commands as Git User",
+      "title": "Rockwell Patches Arena Simulation Code-Execution Flaws",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researchers at depthfirst published working exploit code on July 24 for a GitLab flaw that GitLab patched on June 10, letting any authenticated user who can push to a project run commands as git on self-managed 18.11.3 servers that skipped the update.",
-      "summary": "The attacker commits a crafted Jupyter notebook and opens its commit diff, leaking heap memory to reach code execution as the git user. Administrators of self-managed GitLab should apply the June 10 update immediately.",
+      "latest_developments": "Rockwell Automation patched code-execution vulnerabilities in its Arena simulation software on July 25 after a researcher showed how an attacker could exploit them against industrial organizations.",
+      "summary": "The flaws let an attacker run code on machines running Arena, Rockwell's discrete-event simulation tool used across industrial engineering. Operators should apply the fixes and keep engineering workstations off untrusted networks.",
       "tags": [
-        "rce",
-        "patch"
+        "patch",
+        "ics"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Rockwell Patches Code Execution Flaws in Arena Simulation Software",
+          "url": "https://www.securityweek.com/rockwell-patches-code-execution-flaws-in-arena-simulation-software/"
+        }
+      ],
+      "_anchor": "i-2854d2b0f4"
+    },
+    {
+      "title": "Clop Extortion Campaign Hits PTC Windchill and FlexPLM",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "The Hacker News laid out the exploit chain on July 25: Cl0p affiliates pair a pre-authentication information-disclosure flaw in the FlexPLM WSDL endpoint with a server-side bug in the Windchill login servlet to run code without authentication.",
+      "summary": "Cl0p, also tracked as Chubby Scorpius, FIN11, Graceful Spider, and Lace Tempest, is stealing data from internet-exposed PTC Windchill and FlexPLM product-lifecycle-management servers for extortion. Organizations running these systems should pull them off the public internet and hunt for the chain.",
+      "tags": [
+        "ransomware",
+        "extortion",
+        "rce"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "Researcher Publishes GitLab RCE PoC Letting Authenticated Users Run Commands as Git",
-          "url": "https://thehackernews.com/2026/07/researcher-publishes-gitlab-rce-poc.html"
+          "title": "Cl0p Affiliates Target Internet-Exposed PTC Windchill and FlexPLM with Unauthenticated RCE",
+          "url": "https://thehackernews.com/2026/07/cl0p-affiliates-target-internet-exposed.html"
         }
       ],
-      "_anchor": "i-ecd8e77873"
+      "_anchor": "i-74666cf275"
     },
     {
-      "title": "Malvertising Builds Malware in Browser Memory",
+      "title": "DevMan RaaS Portal Centralizes Affiliate Operations",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "BleepingComputer detailed a massive malvertising campaign on July 25 that serves counterfeit Solana, Luno, and TradingView pages whose JavaScript instructs the browser to assemble malware directly in memory.",
-      "summary": "The operation lures victims to fake cryptocurrency and trading sites, where in-browser JavaScript builds the payload in memory to dodge disk-based detection. Users should avoid ads promising crypto tools and verify domains before entering anything.",
+      "latest_developments": "Swiss firm PRODAFT disclosed on July 25 that the DevMan ransomware-as-a-service operation, which it tracks as Funky Mantis, runs a dedicated web portal that lets affiliates build payloads, manage victims, and track earnings from a single console.",
+      "summary": "DevMan's centrally administered platform bundles payload generation, finances, and victim management into one interface, lowering the skill floor for affiliates. Defenders should watch for payloads bearing its build signatures.",
       "tags": [
-        "malware",
-        "malvertising"
+        "ransomware",
+        "raas"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "Malicious sites use JavaScript to build malware in browser memory",
-          "url": "https://www.bleepingcomputer.com/news/security/malicious-sites-use-javascript-to-build-malware-in-browser-memory/"
+          "source": "The Hacker News",
+          "title": "DevMan RaaS Portal Centralizes Payload Builds, Victim Management, and Affiliate Payouts",
+          "url": "https://thehackernews.com/2026/07/devman-raas-portal-centralizes-payload.html"
         }
       ],
-      "_anchor": "i-08a5f21780"
+      "_anchor": "i-35dcfac959"
     },
     {
-      "title": "ShinyHunters Breach Data Fuels $2,000 Sextortion",
+      "title": "Insurance Phishing Shifts to Real-Time Account Hijacking",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "BleepingComputer reported on July 25 that scammers are mining email addresses from breaches ShinyHunters leaked to send sextortion emails demanding $2,000 in Bitcoin.",
-      "summary": "The campaign pairs victims' real email addresses from ShinyHunters-leaked breaches with threats to expose fabricated compromising material, extorting $2,000 in Bitcoin per target. Recipients should ignore and report the messages and rotate any exposed passwords.",
+      "latest_developments": "CTM360 reported on July 25 that insurance-focused phishing has dropped the old harvest-now, exploit-later model and now hijacks accounts in real time, capturing credentials and taking over accounts as victims enter them.",
+      "summary": "The insurance-sector campaigns seize accounts the moment a victim submits credentials, defeating defenses timed to catch later logins. Institutions should enforce phishing-resistant authentication and monitor for live session hijacking.",
       "tags": [
-        "breach",
-        "scam"
+        "phishing"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "ShinyHunters data leaks fuel $2,000 sextortion email scam",
-          "url": "https://www.bleepingcomputer.com/news/security/shinyhunters-data-leaks-fuel-2-000-sextortion-email-scam/"
+          "source": "The Hacker News",
+          "title": "CTM360 Research Reveals How Insurance Phishing Has Evolved Into Real-Time Account Hijacking",
+          "url": "https://thehackernews.com/2026/07/ctm360-research-reveals-how-insurance.html"
         }
       ],
-      "_anchor": "i-cf18834b85"
-    },
-    {
-      "title": "Hermes AI Agent Automates Thai Finance Ministry Breach",
-      "area": "AI Security",
-      "latest_developments": "BleepingComputer reported on July 24 that a threat actor drove the open-source Hermes AI agent in unattended 'YOLO' mode to automate post-exploitation during an alleged breach of Thailand's Ministry of Finance.",
-      "summary": "Hermes, an open-source autonomous agent, ran attacker commands after an intrusion into the Thai Ministry of Finance, marking offensive use of agentic AI against a government target. Defenders should watch for agent-driven, high-speed post-exploitation on sensitive networks.",
-      "tags": [
-        "apt",
-        "malware"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Hermes AI agent used to automate attack on Thai Finance Ministry",
-          "url": "https://www.bleepingcomputer.com/news/security/hermes-ai-agent-used-to-automate-attack-on-thai-finance-ministry/"
-        }
-      ],
-      "_anchor": "i-48f93ebbef"
-    },
-    {
-      "title": "OnTrac Parcel Carrier Discloses Network Breach",
-      "area": "Data Breaches",
-      "latest_developments": "OnTrac began notifying customers on July 24 that hackers breached its corporate network and may have accessed their personal details.",
-      "summary": "OnTrac, a regional parcel-delivery carrier, says intruders reached its corporate network and possibly took customer personal information. Affected customers should watch for fraud and phishing tied to their delivery accounts.",
-      "tags": [
-        "breach"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "OnTrac notifies customers of data breach after network hack",
-          "url": "https://www.bleepingcomputer.com/news/security/ontrac-notifies-customers-of-data-breach-after-network-hack/"
-        }
-      ],
-      "_anchor": "i-3fccf010f6"
+      "_anchor": "i-5b9586162d"
     }
   ],
   "markets": [
@@ -164,8 +169,8 @@
     },
     {
       "label": "GBP/USD",
-      "value": "1.3363",
-      "pct": "-0.6%",
+      "value": "1.3389",
+      "pct": "-0.3%",
       "arrow": "▼"
     },
     {
@@ -176,7 +181,7 @@
     }
   ],
   "weather": [
-    "This Afternoon: Mostly Sunny, high 83F.",
+    "This Afternoon: Partly Sunny, high 83F.",
     "Tonight: Mostly Clear then Patchy Fog, low 63F.",
     "Sunday: Patchy Fog then Mostly Sunny, high 86F."
   ],
@@ -203,95 +208,122 @@
   "local": {
     "business_politics": [
       {
-        "title": "U.S.-Iran War Pushes Deeper Into Iran",
-        "latest_developments": "American forces struck deeper inside Iran—hitting bridges and infrastructure in the south and near Tehran's outskirts—as President Trump signaled faster strikes and Yemen's Houthis fired missiles and drones at Saudi Arabia in retaliation for strikes on Hodeidah.",
-        "summary": "The United States and Iran remain locked in a widening cycle of retaliation that has spread across the Gulf, with Saudi Arabia now trading blows with the Iran-backed Houthis and oil prices climbing high enough that investors call next week's Federal Reserve meeting live for a rate increase.",
+        "title": "Oil Surge Puts a Fed Rate Rise in Play",
+        "latest_developments": "Traders piled into bets on a Federal Reserve rate increase after the oil-price jump, making next week's central-bank meeting 'live,' investors told the Financial Times.",
+        "summary": "The Iran war's run-up in oil prices has pushed markets to price a Federal Reserve rate rise at next week's meeting, as tit-for-tat strikes between Saudi Arabia and Yemen's Houthis over Hodeida threaten Red Sea shipping and the Strait of Hormuz, and Washington and London weigh an international maritime coalition to guard the route.",
         "sources": [
+          {
+            "source": "FT World",
+            "title": "Investors increase bets on Federal Reserve rate rise after oil price surge",
+            "url": "https://www.ft.com/content/5019e030-796d-47e8-9f13-bee34de1d374?syn-25a6b1a6=1"
+          },
           {
             "source": "WSJ World News",
             "title": "The U.S. and Iran Are Stuck in a Cycle of Military Escalation",
             "url": "https://www.wsj.com/world/middle-east/iran-war-us-escalation-cycle-8d90061e"
-          },
-          {
-            "source": "FT World",
-            "title": "Saudi Arabia strikes Houthis after Iran-backed rebels target energy sites",
-            "url": "https://www.ft.com/content/14ee6049-87bf-4aac-b684-c9937374fdcc?syn-25a6b1a6=1"
           }
         ],
-        "_anchor": "i-5601575b8b"
+        "_anchor": "i-d902978767"
       }
     ],
     "business": [
       {
-        "title": "Pirates Fan Fights Ticket-Resale Rules",
-        "latest_developments": "Jim Crockard, a longtime Pirates fan from Sewickley, received an abrupt July 6 email from the Pittsburgh Pirates and is now crying foul over the team's stance on reselling tickets, TribLive reported.",
-        "summary": "The Pittsburgh Pirates' policy restricting how season-ticket holders resell their seats has drawn a public complaint from a longtime Sewickley fan, spotlighting friction between the club and its ticket base at PNC Park.",
+        "title": "Arnold Palmer Airport Shutdown Reshuffles Regional Air Travel",
+        "latest_developments": "The shutdown of Arnold Palmer Regional Airport in Unity Township is sending Westmoreland County travelers to other runways and opening a window for competing regional airfields, TribLive reported.",
+        "summary": "With Arnold Palmer Regional Airport in Unity Township closed, fliers such as Michelle Kish now route trips through Atlanta and other regional airports rather than Pittsburgh International, creating a sudden opening for nearby runways to pick up traffic.",
         "sources": [
           {
             "source": "TribLive",
-            "title": "Longtime Pirates fan from Sewickley cries foul over team's stance on ticket resales",
-            "url": "https://triblive.com/sports/pirates/longtime-pirates-fan-from-sewickley-cries-foul-over-teams-stance-on-ticket-resales/"
+            "title": "Arnold Palmer airport shutdown in Unity creates sudden opportunity for regional runways",
+            "url": "https://triblive.com/local/westmoreland/arnold-palmer-airport-shutdown-in-unity-creates-sudden-opportunity-for-regional-runways/"
           }
         ],
-        "_anchor": "i-97b2e60e0a"
+        "_anchor": "i-1dc61b45d3"
       },
       {
-        "title": "County Commits $6 Million to Housing",
-        "latest_developments": "Allegheny County Executive Sara Innamorato announced Friday a $6 million investment in two housing initiatives under her 'Housing for All' executive order.",
-        "summary": "Allegheny County Executive Sara Innamorato is directing $6 million toward two housing programs as part of the Housing for All order she signed, steering county money into affordable-housing efforts across the region.",
+        "title": "Little Debbie Driver Charged in $17,000 Fraud",
+        "latest_developments": "The City of Washington Police Department charged a Little Debbie delivery driver with running a $17,000 scheme, selling snacks for cash at flea markets while filing fake invoices to make it look like stores had bought the product.",
+        "summary": "James Powell, 39, of Valley Grove, West Virginia, sold his Little Debbie route inventory for cash at flea markets across Washington County and submitted thousands of dollars of bogus invoices to cover the sales, police said; the City of Washington police opened the case in May after the Jefferson County Sheriff's Office flagged it.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Little Debbie snack delivery driver charged in $17,000 fraud scheme",
+            "url": "https://www.cbsnews.com/pittsburgh/news/little-debbie-snack-delivery-driver-fraud-scheme/"
+          }
+        ],
+        "_anchor": "i-59774821c1"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "State Police Traffic Stops Show No Racial Disparities",
+        "latest_developments": "An analysis released Friday found no substantive racial or ethnic disparities in Pennsylvania State Police traffic stops for a third straight year, officials said.",
+        "summary": "The Pennsylvania State Police's third annual independent review of trooper traffic-stop data found no substantive racial or ethnic disparities in who officers pull over, officials announced Friday.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Allegheny County executive announces $6M investment in housing initiatives",
-            "url": "https://www.wpxi.com/news/local/allegheny-county-executive-announces-6m-investment-housing-initiatives/D57TUNKR5RFQZH2JKVLMI36IPE/"
+            "title": "Analysis finds no substantive disparities in Pennsylvania State Police traffic stops, officials say",
+            "url": "https://www.wpxi.com/news/local/analysis-finds-no-substantive-disparities-pennsylvania-state-police-traffic-stops-officials-say/4EOYZSAHJVHKLA2TZBHO52DEKI/"
           }
         ],
-        "_anchor": "i-a4e5f43772"
+        "_anchor": "i-8f8684dce3"
+      },
+      {
+        "title": "Wildfire Smoke Returns, Storms Possible Monday",
+        "latest_developments": "Wildfire smoke drifts back into the Pittsburgh area overnight Saturday, and forecasters flag a lower-end severe-weather risk for Monday and possibly Tuesday, KDKA reported.",
+        "summary": "After a dry Saturday with highs in the low 80s, wildfire smoke returns to the Pittsburgh region overnight, and forecasters see a modest chance of severe storms early next week on Monday and into Tuesday.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Saturday mostly dry, with wildfire smoke returning to Pittsburgh area overnight",
+            "url": "https://www.cbsnews.com/pittsburgh/news/saturday-dry-wildfire-smoke-returns/"
+          }
+        ],
+        "_anchor": "i-b2c19f9c0a"
       }
     ],
-    "around_town": [],
     "events": [],
     "around_teams": [
       {
-        "title": "Fautanu's Position Switch in Focus",
-        "latest_developments": "The Post-Gazette's camp countdown argued Troy Fautanu's move to a new spot on the offensive line will prove critical to the Steelers' 2026 offense and to protecting quarterback Aaron Rodgers.",
-        "summary": "The Post-Gazette cast Steelers lineman Troy Fautanu's switch, part of a reshuffled front alongside guard Mason McCormick, as a make-or-break factor in keeping Aaron Rodgers upright and the offense functioning.",
+        "title": "Roethlisberger Previews Steelers Camp on 'Footbahlin'",
+        "latest_developments": "On 'Footbahlin' Episode 133, Ben Roethlisberger broke down what to watch once Steelers training camp opens next week and what makes a franchise quarterback.",
+        "summary": "Former Steelers quarterback Ben Roethlisberger, on his 'Footbahlin' podcast, previewed the real competition and roster questions that surface the moment Pittsburgh hits the practice field at Saint Vincent College, and weighed what defines a franchise quarterback in the new McCarthy era.",
         "sources": [
           {
-            "source": "Post-Gazette Steelers",
-            "title": "Steelers training camp countdown: Troy Fautanu's position switch will be critical to the offense",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/07/25/nfl-trainingcamp-fautanu-mason-mccormick-aaron-rodgers/stories/202607250004"
+            "source": "Ben Roethlisberger / Channel Seven (YouTube)",
+            "title": "Big Ben talks What To Watch In Steelers Training Camp, What Makes A Franchise QB and More! Ep 133",
+            "url": "https://www.youtube.com/watch?v=Z1YJqSjWA74"
           }
         ],
-        "_anchor": "i-468c611d55"
+        "_anchor": "i-1a167efbb4"
       }
     ],
     "team_usa": [
       {
-        "title": "Richardson, Lyles Win 100 Titles",
-        "latest_developments": "Sha'Carri Richardson and Noah Lyles surged to victory in the 100-meter finals at the U.S. track and field championships, converting their first-round heats into national titles.",
-        "summary": "American sprinters Sha'Carri Richardson and Noah Lyles both won the 100 meters at the U.S. championships, cementing their standing as the country's fastest and setting the stage for the summer's global meets.",
-        "sources": [
-          {
-            "source": "ESPN Olympics",
-            "title": "Richardson, Lyles win 100m at U.S. championships",
-            "url": "https://www.espn.com/olympics/trackandfield/story/_/id/49443171/shacarri-richardson-noah-lyles-surge-100-meter-wins-us-track-field-championships"
-          }
-        ],
-        "_anchor": "i-ad8fbd4249"
-      },
-      {
-        "title": "Sonnett Stretchered Off for Gotham",
-        "latest_developments": "United States women's national team defender Emily Sonnett was stretchered off in the opening minutes of Gotham FC's 2-2 draw with the Portland Thorns on Friday after a non-contact knee injury.",
-        "summary": "Emily Sonnett, a USWNT defender, went down with an apparent non-contact knee injury early in Gotham FC's National Women's Soccer League draw against the Portland Thorns, raising concern about her availability with one year until the 2027 Women's World Cup.",
+        "title": "Barcelona Sign U.S. Goalkeeper Tyler McCamey",
+        "latest_developments": "Barcelona signed American goalkeeper Tyler McCamey for its women's team, the Spanish club announced Saturday.",
+        "summary": "Barcelona, the reigning women's Champions League winner, added United States goalkeeper Tyler McCamey to its squad, the club said July 25.",
         "sources": [
           {
             "source": "ESPN Soccer",
-            "title": "USWNT's Sonnett stretchered off for Gotham FC",
-            "url": "https://www.espn.com/soccer/story/_/id/49444838/uswnt-gotham-fc-portland-thorns-emily-sonnett"
+            "title": "Barcelona sign U.S. goalkeeper Tyler McCamey",
+            "url": "https://www.espn.com/soccer/story/_/id/49447813/barcelona-sign-us-goalkeeper-tyler-mccamey"
           }
         ],
-        "_anchor": "i-8e79581874"
+        "_anchor": "i-edc0648941"
+      },
+      {
+        "title": "USWNT's Path to the 2027 World Cup Final",
+        "latest_developments": "With one year to the 2027 Women's World Cup final, ESPN laid out five reasons the United States women's national team will or will not reach it.",
+        "summary": "ESPN marked the one-year countdown to the 2027 Women's World Cup final with an assessment of the U.S. women's national team, weighing five factors that could carry it to the title match or keep it out.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "5 reasons the USWNT will (or won't) be in the Women's World Cup final",
+            "url": "https://www.espn.com/soccer/story/_/id/49435317/5-reasons-uswnt-in-women-world-cup-final-one-year"
+          }
+        ],
+        "_anchor": "i-c7176a3d31"
       }
     ],
     "reading": [
@@ -299,28 +331,28 @@
         "author": "Stratechery",
         "title": "OpenAI Hacks Hugging Face, What Happened, Alignment and Paper Clips",
         "url": "https://stratechery.com/2026/openai-hacks-hugging-face-what-happened-alignment-and-paper-clips/",
-        "summary": "Ben Thompson unpacks how OpenAI accidentally 'hacked' Hugging Face and argues the episode's lessons about AI alignment and runaway optimization are more reassuring than the alarmed reaction suggests.",
+        "summary": "Ben Thompson argues that OpenAI's accidental 'hack' of Hugging Face carries more encouraging lessons about AI alignment than the initial alarm suggested.",
         "_anchor": "i-0066ab9912"
       },
       {
         "author": "Ed Zitron",
         "title": "The Subprime Data Center Crisis",
         "url": "https://www.wheresyoured.at/the-subprime-data-center-crisis/",
-        "summary": "Zitron argues the debt-fueled rush to build AI data centers resembles subprime lending, with fragile financing propping up an infrastructure boom he expects to unravel.",
+        "summary": "Ed Zitron contends the AI build-out rests on shaky, debt-fueled data-center financing he likens to subprime lending, warning it sets up a reckoning.",
         "_anchor": "i-bb15d0abf7"
       },
       {
         "author": "Cal Newport",
         "title": "Why Reading Matters",
         "url": "https://calnewport.com/why-reading-matters/",
-        "summary": "Responding to Rose Horowitch's Atlantic piece 'The End of Reading Is Here,' Newport defends sustained deep reading as an irreplaceable cognitive discipline worth protecting.",
+        "summary": "Cal Newport answers Rose Horowitch's Atlantic piece declaring the end of reading, making the case for why sustained deep reading still matters.",
         "_anchor": "i-d6a4747e23"
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-07-25 12:08 EDT",
-    "items_considered": 20,
+    "generated_at": "2026-07-25 16:06 EDT",
+    "items_considered": 14,
     "window_hours": 24,
     "model": "claude-opus-4-8",
     "feeds": {
