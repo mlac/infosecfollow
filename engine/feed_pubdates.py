@@ -29,7 +29,8 @@ LOGS_DIR = PROJECT_DIR / "logs"
 PUBDATES_PATH = LOGS_DIR / "feed_pubdates.jsonl"
 RUNS_PATH = LOGS_DIR / "feed_pubdates_runs.jsonl"
 ET = ZoneInfo("America/New_York")
-GROUPS = ("security", "pittsburgh", "bizpol", "events", "sports_media", "reading")
+GROUPS = ("security", "pittsburgh", "bizpol", "events", "sports_media", "team_usa",
+          "reading")
 
 
 # --------------------------------------------------------------------------- fetch
