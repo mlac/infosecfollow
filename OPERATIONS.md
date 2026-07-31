@@ -22,8 +22,10 @@ with no AI assistant in the loop. Written 2026-07-29.
 ```
 
 - **The container is the publisher.** `deploy/scheduler.sh` (baked into the
-  image) fires `/app/run-briefing.sh` at **6:02, 9:02, 12:02, 16:02, 21:02 ET**,
-  plus **once immediately whenever the container (re)starts**. Each run:
+  image) fires `/app/run-briefing.sh` at **7:02, 10:02, 13:32, 19:32 ET on
+  weekdays** and **8:02, 19:32 ET on weekends**, plus **once immediately
+  whenever the container (re)starts**. Slots sit just after the feeds' four
+  daily publish waves (per the 2026-07 publish-time analysis). Each run:
   `git reset --hard origin/main` → `python3 engine/generate.py` (fetches ~58
   feeds, calls the Claude CLI to cluster) → commit `docs/` → push to `main`.
 - **The site is served by GitHub Pages via Actions**, not directly from the
@@ -47,7 +49,8 @@ compose folder — the four build files sit flat in it; never in the repo):
 ## 2. The 60-second health check (from any machine)
 
 1. **Is the site current?** Open https://infosecfollow.com — the header shows
-   the generation timestamp. Current = within one slot (≤ ~5h daytime).
+   the generation timestamp. Current = no older than the previous slot
+   (≤ ~6h during a weekday; the overnight and weekend-midday gaps run ~11h).
 2. **Did commits land?** https://github.com/mlac/infosecfollow/commits/main —
    expect a `briefing YYYY-MM-DD HH:MM EDT/EST` commit ~3–5 min after each slot.
 3. **Did the deploy succeed?** https://github.com/mlac/infosecfollow/actions —
@@ -192,9 +195,10 @@ the NAS lost internet or DNS; check general connectivity, then §4.3.
   Dockerfile): these are **baked into the image**. After changing them:
   copy the four files to the NAS compose folder (per `deploy/README.md`) and
   `docker compose up -d --build`.
-- **Changing the update schedule**: edit the slot list in `deploy/scheduler.sh`
-  (two places: the `echo` line and the `case` pattern), then rebuild as above.
-  Keep the LaunchAgent plist retired regardless.
+- **Changing the update schedule**: edit the slot lists in `deploy/scheduler.sh`
+  (three places: the `echo` line, the weekday `case` pattern, and the weekend
+  `case` pattern), then rebuild as above. Keep the LaunchAgent plist retired
+  regardless.
 - **Disk hygiene**: container logs are capped (3×10 MB) by compose; the repo
   grows ~25 KB/day in `docs/`. Nothing needs pruning routinely.
 
@@ -245,8 +249,10 @@ DOCKER=/usr/local/bin/docker; [ -x "$DOCKER" ] || DOCKER=docker
   briefing commits only reach back to Jul 19. If this squash wasn't deliberate,
   treat it as an incident worth understanding before it happens again; the
   container never force-pushes `main`, so it didn't do it.
-- **Schedule provenance**: the live schedule is `deploy/scheduler.sh` (5 slots
-  + on-start). The 4-slot `com.infosecfollow.refresh.plist` at the repo root is
-  the retired Mac LaunchAgent, kept for reference.
+- **Schedule provenance**: the live schedule is `deploy/scheduler.sh`
+  (4 weekday slots, 2 weekend slots, + on-start; wave-aligned as of 2026-07 —
+  before that it was 6:02/9:02/12:02/16:02/21:02 daily). The 4-slot
+  `com.infosecfollow.refresh.plist` at the repo root is the retired Mac
+  LaunchAgent, kept for reference.
 - **Branch layout**: `main` = generated site + engine; `feed-pubdates-data` =
   sampler output only (never merge it); `claude/*` = assistant work branches.
