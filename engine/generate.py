@@ -1685,7 +1685,7 @@ def _local_items_html(items, level=4):
 
 def _clean_sports(blocks):
     """Strip control chars, cap lengths, and normalize the fields the renderers
-    dereference on third-party ESPN sports strings."""
+    dereference on third-party (ESPN, plaintextsports) sports strings."""
     cleaned = []
     for b in blocks or []:
         if not isinstance(b, dict):
@@ -1706,8 +1706,9 @@ def _clean_sports(blocks):
                    "when": sanitize(nxt.get("when") or "")[:60],
                    "url": str(nxt.get("url") or "")}
         cleaned.append({"team": sanitize(b.get("team") or "")[:80],
-                        "record": sanitize(b.get("record") or "")[:20],
-                        "games": games, "next": nxt})
+                        "record": sanitize(b.get("record") or "")[:40],
+                        "games": games, "next": nxt,
+                        "source": sanitize(b.get("source") or "")[:20]})
     return cleaned
 
 
@@ -1817,12 +1818,13 @@ SCOREBOARD_NOTE = "Scoreboard unavailable at last update."
 
 
 def _sports_section(sports, local):
-    """ESPN scoreboard plus the model-summarized 'Around the Teams' items."""
+    """Scoreboard (ESPN, or plaintextsports when ESPN fails) plus the
+    model-summarized 'Around the Teams' items."""
     out = _sports_inner(sports)
     around = local.get("around_teams") if local else None
     team_usa = local.get("team_usa") if local else None
     if not out and (around or team_usa):
-        # An empty scoreboard mid-season means the ESPN fetch failed (some
+        # An empty scoreboard mid-season means both score sources failed (some
         # league is always inside the next-game horizon); say so rather than
         # letting the scores vanish silently. The Feed health section carries
         # the error text.
@@ -1979,7 +1981,7 @@ def render_html(digest, local, markets, weather, sports, feeds,
         f"<p>Generated {esc(generated_at)}. {esc(SCHEDULE_NOTE)} "
         f"Sources: {esc(_sources_sentence(feeds))}. Market data from Yahoo "
         "Finance (weekly averages), weather from the National Weather Service, scores "
-        "from ESPN.</p>",
+        "from ESPN or plaintextsports.com.</p>",
         "<p>Summaries are AI-generated from the linked reporting; verify details at the sources.</p>",
         "</footer>",
         "</body></html>",
@@ -2156,8 +2158,8 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
         bar,
         _fill(f"Generated {generated_at}. {SCHEDULE_NOTE} Sources: "
               f"{_sources_sentence(feeds)}. Markets from Yahoo Finance, weather from "
-              "the NWS, scores from ESPN. Summaries are AI-generated from the linked "
-              "reporting; verify at the sources."),
+              "the NWS, scores from ESPN or plaintextsports.com. Summaries are "
+              "AI-generated from the linked reporting; verify at the sources."),
         bar,
         "",
     ]
@@ -2440,18 +2442,25 @@ def main():
                     "detail": f"{len(markets)} of {_n(len(market_data.SYMBOLS), 'row')}"
                     + (f"; failed: {'; '.join(sanitize(e) for e in market_errors)}"
                        if market_errors else "")})
-    # NWS/ESPN strings are third-party text: strip control chars, cap length
+    # NWS/ESPN/plaintextsports strings are third-party text: strip control
+    # chars, cap length
     weather_raw = attempt("Weather (NWS)", pgh_data.weather_lines)
     weather = [sanitize(w)[:200] for w in (weather_raw or [])]
     if weather_raw is not None:
         aux.append({"label": "Weather (NWS)", "ok": bool(weather),
                     "detail": _n(len(weather), "forecast period") if weather
                     else "no forecast periods returned"})
-    sports_errors = []
-    sports = _clean_sports(attempt("Scores (ESPN)",
-                                   lambda: pgh_data.sports_blocks(errors=sports_errors)) or [])
-    aux.append({"label": "Scores (ESPN)", "ok": bool(sports) and not sports_errors,
-                "detail": (_n(len(sports), "team") if sports else "no scoreboard")
+    sports_errors, sports_notes = [], []
+    sports = _clean_sports(attempt("Scores (ESPN, plaintextsports)",
+                                   lambda: pgh_data.sports_blocks(errors=sports_errors,
+                                                                  notes=sports_notes)) or [])
+    sources = sorted({b["source"] for b in sports if b.get("source")})
+    aux.append({"label": "Scores (ESPN, plaintextsports)",
+                "ok": bool(sports) and not sports_errors,
+                "detail": ((_n(len(sports), "team")
+                            + (f" via {', '.join(sources)}" if sources else ""))
+                           if sports else "no scoreboard")
+                + (f"; {'; '.join(sanitize(n) for n in sports_notes)}" if sports_notes else "")
                 + (f"; errors: {'; '.join(sanitize(e) for e in sports_errors)}"
                    if sports_errors else "")})
 

@@ -1,6 +1,7 @@
-"""Pittsburgh weather (National Weather Service) and pro sports (ESPN),
-formatted as plain-text blocks in the spirit of plaintextsports.com, with
-game links into plaintextsports.com. Stdlib only, no API keys.
+"""Pittsburgh weather (National Weather Service) and pro sports (ESPN, with
+plaintextsports.com team pages as the fallback when ESPN fails), formatted as
+plain-text blocks in the spirit of plaintextsports.com, with game links into
+plaintextsports.com. Stdlib only, no API keys.
 """
 
 import json
@@ -9,6 +10,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
+import plaintextsports as pts
 import safefetch
 
 TIMEOUT = 20            # per socket operation
@@ -36,33 +38,45 @@ TEAM_ABBR = "PIT"
 NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-season
 
 
-def _get_json(url, headers=None):
+def _get_raw(url, headers=None):
     req = urllib.request.Request(url, headers=headers or {
         "User-Agent": USER_AGENT, "Accept": "application/json"})
     with safefetch.safe_open(req, timeout=TIMEOUT) as resp:
-        raw = safefetch.read_bounded(resp, MAX_BYTES, DEADLINE)
-    return json.loads(raw.decode("utf-8", "replace"))
+        return safefetch.read_bounded(resp, MAX_BYTES, DEADLINE)
+
+
+def _get_json(url, headers=None):
+    return json.loads(_get_raw(url, headers).decode("utf-8", "replace"))
+
+
+def _get_text(url, headers=None):
+    return _get_raw(url, headers).decode("utf-8", "replace")
+
+
+def _http_error(label, exc):
+    """Log an HTTPError with its server header and a body excerpt, so a block
+    page (Akamai, Cloudflare) is identifiable in the run log, and return the
+    RuntimeError to raise. The raised message carries only the status code
+    and server name, because error strings are published in the site's Feed
+    Health section and must not relay attacker-chosen prose."""
+    try:
+        body = exc.read(600).decode("utf-8", "replace")
+    except Exception:
+        body = ""
+    body = " ".join(body.split())[:200]
+    server = exc.headers.get("Server", "") if exc.headers else ""
+    print(f"  sports: {label} -> HTTP {exc.code} {exc.reason}"
+          + (f" (server: {server})" if server else "")
+          + (f": {body}" if body else ""))
+    return RuntimeError(f"HTTP {exc.code}" + (f" (server: {server})" if server else ""))
 
 
 def _espn_json(path):
-    """ESPN's public site API with browser-shaped headers. On an HTTP error the
-    run log gets the server header and a body excerpt, so a block page
-    (Akamai, Cloudflare) is identifiable; the raised message carries only the
-    status code and server name, because error strings are published in the
-    site's Feed Health section and must not relay attacker-chosen prose."""
+    """ESPN's public site API with browser-shaped headers; see _http_error."""
     try:
         return _get_json(f"{ESPN}{path}", headers=ESPN_HEADERS)
     except urllib.error.HTTPError as exc:
-        try:
-            body = exc.read(600).decode("utf-8", "replace")
-        except Exception:
-            body = ""
-        body = " ".join(body.split())[:200]
-        server = exc.headers.get("Server", "") if exc.headers else ""
-        print(f"  sports: ESPN {path} -> HTTP {exc.code} {exc.reason}"
-              + (f" (server: {server})" if server else "")
-              + (f": {body}" if body else ""))
-        raise RuntimeError(f"HTTP {exc.code}" + (f" (server: {server})" if server else "")) from None
+        raise _http_error(f"ESPN {path}", exc) from None
 
 
 def weather_lines():
@@ -273,37 +287,89 @@ def _team_block(sport, league, now_local, now_utc, errors):
     if not games and not next_entry:
         return None  # off-season: skip the team entirely
 
-    return {"team": name, "record": record, "games": games, "next": next_entry}
+    return {"team": name, "record": record, "games": games, "next": next_entry,
+            "source": "ESPN"}
 
 
-def sports_blocks(errors=None):
+# ------------------------------------------------ plaintextsports fallback
+
+PTS_HEADERS = {"User-Agent": USER_AGENT, "Accept": "text/html"}
+
+
+def _pts_page(league, now_local):
+    """(html, url) of the team's current-season page on plaintextsports.com.
+
+    A new season's page appears some weeks before it starts, so a 404 on the
+    first candidate path falls through to the previous season's (which then
+    parses as off-season). Any other HTTP error is raised as "HTTP <code>".
+    """
+    url = None
+    for season in pts.season_paths(league, now_local):
+        url = pts.team_page_url(league, season)
+        try:
+            return _get_text(url, headers=PTS_HEADERS), url
+        except urllib.error.HTTPError as exc:
+            err = _http_error(f"plaintextsports {url}", exc)
+            if exc.code != 404:
+                raise err from None
+    raise RuntimeError("HTTP 404 (no season page)")
+
+
+def _pts_block(league, now_local):
+    page, url = _pts_page(league, now_local)
+    return pts.parse_team_page(page, league, now_local, page_url=url)
+
+
+def sports_blocks(errors=None, notes=None):
     """Per-team structured blocks for the Pirates, Steelers, and Penguins.
 
-    Never raises. Every ESPN failure is printed and, when `errors` is a list,
-    appended to it as a "league: reason" string, so an outage is visible in the
-    published feed-health report rather than only in the container log.
+    ESPN is asked first; when it fails for a league, in whole or in part, that
+    league's plaintextsports.com team page is parsed instead. Never raises.
+    Unrecovered failures go to `errors` as "league: reason" strings and
+    recoveries to `notes`, so both the outage and the source actually used are
+    visible in the published feed-health report rather than only in the
+    container log. Each block carries "source": "ESPN" or "plaintextsports".
     """
     errors = [] if errors is None else errors
+    notes = [] if notes is None else notes
     now_local = datetime.now(TZ)
     now_utc = datetime.now(timezone.utc)
     blocks = []
     for sport, league in LEAGUES:
+        espn_errors, block = [], None
         try:
-            block = _team_block(sport, league, now_local, now_utc, errors)
+            block = _team_block(sport, league, now_local, now_utc, espn_errors)
         except Exception as exc:
             reason = str(exc)[:160]
-            print(f"  sports: {league} unavailable: {reason}")
-            errors.append(f"{league}: {reason}")
+            print(f"  sports: {league} ESPN unavailable: {reason}")
+            espn_errors.append(f"{league}: {reason}")
+        if not espn_errors:
+            if block:
+                blocks.append(block)
             continue
-        if block:
-            blocks.append(block)
+        try:
+            fallback = _pts_block(league, now_local)
+        except Exception as exc:
+            reason = str(exc)[:160]
+            print(f"  sports: {league} plaintextsports unavailable: {reason}")
+            errors.extend(espn_errors)
+            errors.append(f"{league} plaintextsports: {reason}")
+            if block:
+                blocks.append(block)  # whatever ESPN did return beats nothing
+            continue
+        notes.append(f"{league}: ESPN failed ({'; '.join(espn_errors)}); "
+                     f"used plaintextsports")
+        if fallback:
+            blocks.append(fallback)
     return blocks
 
 
 if __name__ == "__main__":
     print("\n".join(weather_lines()))
     print()
-    _errors = []
-    print(json.dumps(sports_blocks(_errors), indent=2, ensure_ascii=False))
+    _errors, _notes = [], []
+    print(json.dumps(sports_blocks(_errors, _notes), indent=2, ensure_ascii=False))
+    if _notes:
+        print("\nnotes:\n  " + "\n  ".join(_notes))
     if _errors:
         print("\nerrors:\n  " + "\n  ".join(_errors))

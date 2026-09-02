@@ -12,7 +12,8 @@ Pittsburgh business, around-town, and events — violent-crime stories excluded;
 business/politics, team, and Team USA items), pulls weekly-average market data
 (S&P 500, Dow, Nasdaq, WTI crude, EUR/GBP/JPY — Yahoo Finance) with
 week-over-week trend arrows, Pittsburgh weather (NWS), and Pirates/Steelers/
-Penguins scores (ESPN, plaintextsports-style), and renders a static site.
+Penguins scores (ESPN, falling back to plaintextsports.com team pages when
+ESPN fails), and renders a static site.
 
 ## Layout
 
@@ -20,7 +21,10 @@ Penguins scores (ESPN, plaintextsports-style), and renders a static site.
 engine/generate.py       pipeline orchestrator + renderers (Python 3, stdlib only)
 engine/safefetch.py      SSRF guard, bounded reads, DTD-free XML parsing
 engine/market_data.py    weekly-average indexes/oil/FX via Yahoo Finance
-engine/pittsburgh.py     NWS weather + ESPN scores for Pittsburgh teams
+engine/pittsburgh.py     NWS weather + ESPN scores for Pittsburgh teams, with the
+                         plaintextsports fallback wiring
+engine/plaintextsports.py parser for plaintextsports.com team pages (fixtures in
+                         engine/testdata/pts/)
 engine/feed_pubdates.py  feed publish-time sampler (schedule tuning; OPERATIONS.md §7)
 engine/feeds.json        curated feed groups: security, pittsburgh, bizpol, events,
                          sports_media, team_usa, reading
@@ -79,7 +83,8 @@ Every page (and `digest.txt`) carries, in order, whichever of these have content
 - **Markets**
 - **Feed Health** — per group: feeds loaded vs total, items in window, failed
   feeds with the error text, loaded feeds with no recent items; markets /
-  weather / scores status with error text (e.g. an ESPN 403); the model ids,
+  weather / scores status with error text (e.g. an ESPN 403) and which score
+  source each run used; the model ids,
   call count, model time and list-price cost of the run. The same data is
   stored as `feed_health` in the day's JSON, and `meta.feed_failures` lists the
   failed feed names.

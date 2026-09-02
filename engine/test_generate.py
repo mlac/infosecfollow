@@ -830,7 +830,7 @@ class Rendering(unittest.TestCase):
         blocks = generate._clean_sports([{"team": None, "record": None,
                                           "games": [{"date": None, "result": None, "url": None}],
                                           "next": None, "headlines": ["x"]}, "junk"])
-        self.assertEqual(blocks, [{"team": "", "record": "", "next": None,
+        self.assertEqual(blocks, [{"team": "", "record": "", "next": None, "source": "",
                                    "games": [{"date": "", "result": "", "url": "", "recap": ""}]}])
         html = generate._sports_section(blocks, {"around_teams": [local_item("https://p.example/1")]})
         self.assertNotIn("None", "".join(html))
@@ -870,11 +870,14 @@ class MarketData(unittest.TestCase):
 class Pittsburgh(unittest.TestCase):
     def test_sports_blocks_reports_errors_instead_of_hiding_them(self):
         errors = []
-        with mock.patch.object(pittsburgh, "_espn_json", side_effect=RuntimeError("HTTP 403")):
+        with mock.patch.object(pittsburgh, "_espn_json", side_effect=RuntimeError("HTTP 403")), \
+                mock.patch.object(pittsburgh, "_get_text", side_effect=RuntimeError("HTTP 503")):
             blocks = pittsburgh.sports_blocks(errors=errors)
         self.assertEqual(blocks, [])
-        self.assertEqual(len(errors), len(pittsburgh.LEAGUES))
+        # one ESPN and one plaintextsports failure per league, in that order
+        self.assertEqual(len(errors), 2 * len(pittsburgh.LEAGUES))
         self.assertIn("HTTP 403", errors[0])
+        self.assertIn("plaintextsports: HTTP 503", errors[1])
 
     def test_espn_http_error_message_carries_status_not_body(self):
         import urllib.error
@@ -985,7 +988,8 @@ class EndToEnd(TempSite):
                               lambda errors=None: [{"label": "Dow", "value": "1.00", "pct": "+0.0%", "arrow": "="}]),
             mock.patch.object(generate.pgh_data, "weather_lines", lambda: ["Today: Sunny, high 80F."]),
             mock.patch.object(generate.pgh_data, "sports_blocks",
-                              lambda errors=None: errors.append("mlb: HTTP 403 (server: AkamaiGHost)") or []),
+                              lambda errors=None, notes=None:
+                              errors.append("mlb: HTTP 403 (server: AkamaiGHost)") or []),
             mock.patch.object(generate.time, "sleep", lambda s: None),
         ]
         for p in self.patches:
