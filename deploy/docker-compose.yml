@@ -1,14 +1,19 @@
 # Synology Container Manager project for the infosecfollow runner.
 # Builds from a LOCAL context (this folder), so the Docker daemon needs no git.
-# Fetch the build files (Dockerfile, run-briefing.sh, crontab) into this folder
-# with curl first — see README — then `docker compose up -d --build`. The
-# container clones the app into a named volume itself (its own bundled git).
+# Fetch the build files (Dockerfile, run-briefing.sh, scheduler.sh, this file)
+# into this folder with curl first — see README — then `docker compose up -d
+# --build`. The container clones the app into a named volume itself (its own
+# bundled git).
 services:
   infosecfollow:
     build: .
     image: infosecfollow-runner
     container_name: infosecfollow
     restart: unless-stopped
+    # Run the scheduler under a minimal init so SIGTERM reaches it promptly,
+    # and give an in-flight briefing time to finish before a stop kills it.
+    init: true
+    stop_grace_period: 10m
     env_file:
       - .env
     environment:

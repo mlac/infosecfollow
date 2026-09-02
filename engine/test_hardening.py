@@ -1,10 +1,14 @@
-"""Tests for the SSRF and XML-entity hardening in safefetch.
+"""Tests for the SSRF, bounded-read, and XML-entity hardening in safefetch.
 
-Run: python3 -m unittest engine/test_hardening.py   (no network needed)
+Run from the repository root (no network needed):
+
+    python3 -m unittest discover -s engine -p 'test_*.py'
 """
 
+import io
 import socket
 import unittest
+import urllib.request
 from unittest import mock
 
 import safefetch
@@ -52,6 +56,19 @@ class XMLHardening(unittest.TestCase):
         with self.assertRaises(safefetch.ForbiddenXMLError):
             safefetch.safe_fromstring(self.EXTERNAL_DTD)
 
+    def test_transport_charset_applies_only_without_declaration(self):
+        latin = "<feed><title>Caf\xe9</title></feed>".encode("latin-1")
+        self.assertEqual(safefetch.safe_fromstring(latin, encoding="iso-8859-1")[0].text, "Café")
+        declared = ('<?xml version="1.0" encoding="UTF-8"?><feed><title>Caf\xe9</title></feed>'
+                    .encode("utf-8"))
+        # a wrong transport charset must not override the document's own declaration
+        self.assertEqual(safefetch.safe_fromstring(declared, encoding="iso-8859-1")[0].text, "Café")
+        # an unknown transport charset is ignored (no LookupError); the undecodable
+        # byte then fails as ordinary malformed XML, which the fetcher tolerates
+        from xml.parsers import expat
+        with self.assertRaises(expat.ExpatError):
+            safefetch.safe_fromstring(latin, encoding="no-such-charset")
+
 
 class URLHardening(unittest.TestCase):
     def test_non_http_scheme_rejected(self):
@@ -59,22 +76,26 @@ class URLHardening(unittest.TestCase):
             with self.assertRaises(safefetch.BlockedURLError):
                 safefetch.validate_url(url)
 
-    def test_missing_host_rejected(self):
-        with self.assertRaises(safefetch.BlockedURLError):
-            safefetch.validate_url("https://")
+    def test_missing_host_or_bad_port_rejected(self):
+        for url in ("https://", "https://example.com:99999/x"):
+            with self.assertRaises(safefetch.BlockedURLError):
+                safefetch.validate_url(url)
 
-    def test_private_and_local_addresses_rejected(self):
+    def test_private_local_and_special_addresses_rejected(self):
         for ip in ("127.0.0.1", "169.254.169.254", "10.0.0.5", "192.168.1.1",
-                   "172.16.0.1", "0.0.0.0", "::1"):
+                   "172.16.0.1", "0.0.0.0", "::1",
+                   "100.64.0.1", "100.127.255.254",   # carrier-grade NAT / Tailscale
+                   "fc00::1", "::ffff:10.0.0.1", "2002:7f00:1::1", "64:ff9b::7f00:1",
+                   "198.18.0.1", "240.0.0.1"):
             with mock.patch.object(safefetch.socket, "getaddrinfo", _fake_getaddrinfo(ip)):
-                with self.assertRaises(safefetch.BlockedURLError):
+                with self.assertRaises(safefetch.BlockedURLError, msg=ip):
                     safefetch.validate_url("https://feed.example.com/rss")
 
-    def test_public_address_allowed(self):
-        with mock.patch.object(safefetch.socket, "getaddrinfo",
-                               _fake_getaddrinfo("93.184.216.34")):
-            self.assertEqual(safefetch.validate_url("https://feed.example.com/rss"),
-                             "https://feed.example.com/rss")
+    def test_public_addresses_allowed(self):
+        for ip in ("93.184.216.34", "2606:4700::1111"):
+            with mock.patch.object(safefetch.socket, "getaddrinfo", _fake_getaddrinfo(ip)):
+                self.assertEqual(safefetch.validate_url("https://feed.example.com/rss"),
+                                 "https://feed.example.com/rss")
 
     def test_unresolvable_host_rejected(self):
         def boom(*a, **k):
@@ -89,6 +110,41 @@ class URLHardening(unittest.TestCase):
             with self.assertRaises(safefetch.BlockedURLError):
                 handler.redirect_request(None, None, 302, "Found", {},
                                          "http://127.0.0.1/admin")
+
+    def test_safe_open_validates_before_connecting(self):
+        opened = []
+        with mock.patch.object(safefetch._opener, "open",
+                               lambda req, timeout=None: opened.append(req) or "resp"), \
+                mock.patch.object(safefetch.socket, "getaddrinfo", _fake_getaddrinfo("10.1.1.1")):
+            with self.assertRaises(safefetch.BlockedURLError):
+                safefetch.safe_open(urllib.request.Request("https://feed.example.com/rss"), 5)
+        self.assertEqual(opened, [])  # never reached the network
+        with mock.patch.object(safefetch._opener, "open",
+                               lambda req, timeout=None: opened.append(req) or "resp"), \
+                mock.patch.object(safefetch.socket, "getaddrinfo", _fake_getaddrinfo("93.184.216.34")):
+            self.assertEqual(safefetch.safe_open("https://feed.example.com/rss", 5), "resp")
+        self.assertEqual(opened, ["https://feed.example.com/rss"])
+
+
+class BoundedRead(unittest.TestCase):
+    def test_size_cap(self):
+        resp = io.BytesIO(b"x" * 1000)
+        with self.assertRaises(safefetch.ResponseTooLargeError):
+            safefetch.read_bounded(resp, 999, 10)
+        self.assertEqual(safefetch.read_bounded(io.BytesIO(b"x" * 1000), 1000, 10), b"x" * 1000)
+
+    def test_wall_clock_deadline_beats_slow_drip(self):
+        clock = [0.0]
+
+        class Drip:
+            def read(self, n):
+                clock[0] += 5.0  # every chunk "takes" five seconds
+                return b"y"       # and never ends
+
+        with mock.patch.object(safefetch.time, "monotonic", lambda: clock[0]):
+            with self.assertRaises(safefetch.ResponseTooSlowError):
+                safefetch.read_bounded(Drip(), 10**9, 12)
+        self.assertLessEqual(clock[0], 20)  # gave up after ~3 chunks, not 10**9
 
 
 if __name__ == "__main__":

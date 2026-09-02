@@ -1,0 +1,45 @@
+name: CI
+
+# Runs the engine's unit tests and syntax checks whenever engine or deploy
+# code changes (on any branch, and on pull requests). Briefing commits touch
+# only docs/, so they never trigger this. The NAS container executes whatever
+# is on main at the next slot, so a red run here is the early warning that a
+# push would break the site.
+on:
+  push:
+    paths:
+      - "engine/**"
+      - "deploy/**"
+      - "run_daily.sh"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "engine/**"
+      - "deploy/**"
+      - "run_daily.sh"
+      - ".github/workflows/ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Compile
+        run: python -m py_compile engine/*.py
+      - name: Validate feeds.json
+        run: python -m json.tool engine/feeds.json > /dev/null
+      - name: Unit tests
+        run: python -m unittest discover -s engine -p "test_*.py" -v
+      - name: Shell syntax
+        run: for f in deploy/*.sh run_daily.sh; do sh -n "$f"; done

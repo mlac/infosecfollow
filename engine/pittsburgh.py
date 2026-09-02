@@ -4,21 +4,31 @@ game links into plaintextsports.com. Stdlib only, no API keys.
 """
 
 import json
+import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 import safefetch
 
-TIMEOUT = 20
+TIMEOUT = 20            # per socket operation
+DEADLINE = 45           # whole response, wall clock
+MAX_BYTES = 4_000_000
 TZ = ZoneInfo("America/New_York")
 USER_AGENT = "infosecfollow/1.0 (https://infosecfollow.com)"
 # site.api.espn.com answers 403 to non-browser User-Agents (since 2026-08-04);
-# NWS, by contrast, asks API clients for a contact UA — so ESPN gets a browser
-# string and everything else keeps USER_AGENT.
+# NWS, by contrast, asks API clients for a contact UA — so ESPN gets a
+# browser-shaped request and everything else keeps USER_AGENT.
 BROWSER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                  "AppleWebKit/537.36 (KHTML, like Gecko) "
                  "Chrome/128.0.0.0 Safari/537.36")
+ESPN_HEADERS = {
+    "User-Agent": BROWSER_AGENT,
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.espn.com/",
+    "Origin": "https://www.espn.com",
+}
 NWS_POINT = "https://api.weather.gov/points/40.4406,-79.9959"  # downtown Pittsburgh
 ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 LEAGUES = [("baseball", "mlb"), ("football", "nfl"), ("hockey", "nhl")]
@@ -26,15 +36,30 @@ TEAM_ABBR = "PIT"
 NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-season
 
 
-def _get_json(url, agent=USER_AGENT):
-    req = urllib.request.Request(url, headers={
-        "User-Agent": agent, "Accept": "application/json"})
+def _get_json(url, headers=None):
+    req = urllib.request.Request(url, headers=headers or {
+        "User-Agent": USER_AGENT, "Accept": "application/json"})
     with safefetch.safe_open(req, timeout=TIMEOUT) as resp:
-        return json.loads(resp.read(4_000_000).decode("utf-8", "replace"))
+        raw = safefetch.read_bounded(resp, MAX_BYTES, DEADLINE)
+    return json.loads(raw.decode("utf-8", "replace"))
 
 
 def _espn_json(path):
-    return _get_json(f"{ESPN}{path}", agent=BROWSER_AGENT)
+    """ESPN's public site API with browser-shaped headers. An HTTP error carries
+    the server header and a body excerpt so a block page (Akamai, Cloudflare)
+    is identifiable from the run log instead of a bare '403 Forbidden'."""
+    try:
+        return _get_json(f"{ESPN}{path}", headers=ESPN_HEADERS)
+    except urllib.error.HTTPError as exc:
+        try:
+            body = exc.read(600).decode("utf-8", "replace")
+        except Exception:
+            body = ""
+        body = " ".join(body.split())[:200]
+        server = exc.headers.get("Server", "") if exc.headers else ""
+        raise RuntimeError(f"HTTP {exc.code} {exc.reason}"
+                           + (f" (server: {server})" if server else "")
+                           + (f": {body}" if body else "")) from None
 
 
 def weather_lines():
@@ -202,12 +227,13 @@ def _next_entry(league, event):
     }
 
 
-def _team_block(sport, league, now_local, now_utc):
-    """Structured block {team, record, games[], next, headlines[]} or None.
+def _team_block(sport, league, now_local, now_utc, errors):
+    """Structured block {team, record, games[], next} or None (off-season).
 
-    headlines is always empty: ESPN's news endpoint returned stale, often
-    contradictory blurbs, so team news now comes from the model-summarized
-    "Around the Teams" section (beat writers and team podcasts) instead.
+    Team news is not taken from ESPN (its news endpoint returned stale, often
+    contradictory blurbs); it comes from the model-summarized "Around the Teams"
+    section instead. Partial failures (a scoreboard date, the schedule) are
+    appended to `errors` so the run can report them.
     """
     blob = _espn_json(f"/{sport}/{league}/teams/{TEAM_ABBR.lower()}")["team"]
     name = blob.get("shortDisplayName", "Pittsburgh")
@@ -220,7 +246,9 @@ def _team_block(sport, league, now_local, now_utc):
         try:
             board = _espn_json(f"/{sport}/{league}/scoreboard?dates={date}")
         except Exception as exc:
-            print(f"  sports: {league} {date} unavailable: {str(exc)[:120]}")
+            reason = str(exc)[:160]
+            print(f"  sports: {league} {date} unavailable: {reason}")
+            errors.append(f"{league} scoreboard {date}: {reason}")
             continue
         for event in board.get("events", []):
             if event.get("id") in seen:
@@ -236,25 +264,33 @@ def _team_block(sport, league, now_local, now_utc):
     try:  # the cosmetic tail must not discard already-built scores
         nxt = _schedule_next(sport, league, now_utc)
         next_entry = _next_entry(league, nxt) if nxt else None
-    except Exception:
+    except Exception as exc:
+        errors.append(f"{league} schedule: {str(exc)[:160]}")
         next_entry = None
     if not games and not next_entry:
         return None  # off-season: skip the team entirely
 
-    return {"team": name, "record": record, "games": games,
-            "next": next_entry, "headlines": []}
+    return {"team": name, "record": record, "games": games, "next": next_entry}
 
 
-def sports_blocks():
-    """Per-team structured blocks for the Pirates, Steelers, and Penguins."""
+def sports_blocks(errors=None):
+    """Per-team structured blocks for the Pirates, Steelers, and Penguins.
+
+    Never raises. Every ESPN failure is printed and, when `errors` is a list,
+    appended to it as a "league: reason" string, so an outage is visible in the
+    published feed-health report rather than only in the container log.
+    """
+    errors = [] if errors is None else errors
     now_local = datetime.now(TZ)
     now_utc = datetime.now(timezone.utc)
     blocks = []
     for sport, league in LEAGUES:
         try:
-            block = _team_block(sport, league, now_local, now_utc)
+            block = _team_block(sport, league, now_local, now_utc, errors)
         except Exception as exc:
-            print(f"  sports: {league} unavailable: {str(exc)[:120]}")
+            reason = str(exc)[:160]
+            print(f"  sports: {league} unavailable: {reason}")
+            errors.append(f"{league}: {reason}")
             continue
         if block:
             blocks.append(block)
@@ -262,7 +298,9 @@ def sports_blocks():
 
 
 if __name__ == "__main__":
-    import json
     print("\n".join(weather_lines()))
     print()
-    print(json.dumps(sports_blocks(), indent=2, ensure_ascii=False))
+    _errors = []
+    print(json.dumps(sports_blocks(_errors), indent=2, ensure_ascii=False))
+    if _errors:
+        print("\nerrors:\n  " + "\n  ".join(_errors))
