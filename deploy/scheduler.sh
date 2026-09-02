@@ -9,8 +9,9 @@
 # America/New_York in docker-compose.yml). Polls every 30s so it can't miss a
 # slot; the `last` guard prevents a double-fire within the same minute.
 #
-# Stopping: SIGTERM (docker stop / compose down / NAS reboot) sets a flag; an
-# in-flight briefing is allowed to finish (compose grants stop_grace_period)
+# Stopping: SIGTERM (docker stop / compose down) sets a flag; an in-flight
+# briefing is allowed to finish (compose grants stop_grace_period, sized to
+# the longest possible run; a NAS reboot's own service timeout may be shorter)
 # and no new one starts. Runs execute in the background and are waited on, so
 # the signal is handled promptly rather than after the current sleep.
 set -u

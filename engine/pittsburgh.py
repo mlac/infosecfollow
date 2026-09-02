@@ -45,9 +45,11 @@ def _get_json(url, headers=None):
 
 
 def _espn_json(path):
-    """ESPN's public site API with browser-shaped headers. An HTTP error carries
-    the server header and a body excerpt so a block page (Akamai, Cloudflare)
-    is identifiable from the run log instead of a bare '403 Forbidden'."""
+    """ESPN's public site API with browser-shaped headers. On an HTTP error the
+    run log gets the server header and a body excerpt, so a block page
+    (Akamai, Cloudflare) is identifiable; the raised message carries only the
+    status code and server name, because error strings are published in the
+    site's Feed Health section and must not relay attacker-chosen prose."""
     try:
         return _get_json(f"{ESPN}{path}", headers=ESPN_HEADERS)
     except urllib.error.HTTPError as exc:
@@ -57,9 +59,10 @@ def _espn_json(path):
             body = ""
         body = " ".join(body.split())[:200]
         server = exc.headers.get("Server", "") if exc.headers else ""
-        raise RuntimeError(f"HTTP {exc.code} {exc.reason}"
-                           + (f" (server: {server})" if server else "")
-                           + (f": {body}" if body else "")) from None
+        print(f"  sports: ESPN {path} -> HTTP {exc.code} {exc.reason}"
+              + (f" (server: {server})" if server else "")
+              + (f": {body}" if body else ""))
+        raise RuntimeError(f"HTTP {exc.code}" + (f" (server: {server})" if server else "")) from None
 
 
 def weather_lines():

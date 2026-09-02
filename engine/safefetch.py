@@ -63,9 +63,14 @@ def _address_blocked(ip):
     # 100.64.0.0/10 (carrier-grade NAT, also Tailscale's address pool). The
     # explicit predicates are kept because is_global alone would admit a few
     # special-purpose ranges (e.g. 64:ff9b::/96 NAT64) that must stay blocked.
+    # Deprecated IPv6 site-local (fec0::/10) and 6to4 (2002::/16, which can
+    # embed a private IPv4 address) are named explicitly so the verdict does
+    # not depend on the interpreter's ipaddress patch level.
     return (ip.is_private or ip.is_loopback or ip.is_link_local
             or ip.is_reserved or ip.is_multicast or ip.is_unspecified
-            or not ip.is_global)
+            or not ip.is_global
+            or getattr(ip, "is_site_local", False)
+            or (ip.version == 6 and ip.sixtofour is not None))
 
 
 def validate_url(url):
@@ -91,7 +96,11 @@ def validate_url(url):
     for info in infos:
         ip = ipaddress.ip_address(info[4][0])
         if _address_blocked(ip):
-            raise BlockedURLError(f"{host} resolves to blocked address {ip}")
+            # The address goes to the log only: error strings are published in
+            # the site's Feed Health section, and a hijacked feed must not be
+            # able to use them as an oracle for the LAN/tailnet address space.
+            print(f"  blocked: {host} resolves to non-public address {ip}")
+            raise BlockedURLError(f"{host} resolves to a non-public address")
     return url
 
 
@@ -99,7 +108,13 @@ class SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
     """Validate every redirect target before following it."""
 
     def redirect_request(self, req, fp, code, msg, headers, newurl):
-        validate_url(newurl)  # raises BlockedURLError, aborting the fetch
+        try:
+            validate_url(newurl)
+        except BlockedURLError as exc:
+            # Log the target; publish only the fact. The redirect target is
+            # attacker-chosen, so its name must not reach the public page.
+            print(f"  blocked redirect: {exc}")
+            raise BlockedURLError("redirect to a non-public address refused") from None
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
@@ -159,8 +174,10 @@ def safe_fromstring(raw, encoding=None):
     as "{uri}local"); raises ForbiddenXMLError on any DTD or entity declaration.
 
     `encoding` is the transport-level charset (from the HTTP Content-Type). It
-    is applied only when the document itself declares no encoding, which is
-    when expat would otherwise assume UTF-8 and mis-decode a Latin-1 feed.
+    is applied only when the document declares no encoding AND the bytes are
+    not valid UTF-8: that is the Latin-1 feed expat would otherwise reject,
+    while a UTF-8 body served with a stale charset header keeps parsing as
+    the UTF-8 it is.
     """
     if isinstance(raw, str):
         raw = raw.encode("utf-8")
@@ -168,9 +185,12 @@ def safe_fromstring(raw, encoding=None):
     if encoding and encoding.lower().replace("_", "-") not in ("utf-8", "utf8") \
             and not _XML_DECL_ENCODING.match(raw):
         try:
-            raw = raw.decode(encoding, "replace").encode("utf-8")
-        except LookupError:
-            pass  # unknown charset name: let expat try
+            raw.decode("utf-8")
+        except UnicodeDecodeError:
+            try:
+                raw = raw.decode(encoding, "replace").encode("utf-8")
+            except LookupError:
+                pass  # unknown charset name: let expat try
 
     builder = TreeBuilder()
     parser = expat.ParserCreate(namespace_separator="}")

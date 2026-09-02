@@ -191,8 +191,8 @@ only `mlac/infosecfollow`; Permissions: **Contents: Read and write**. Update
 
 **5.3 NAS rebooted / power loss.** The container has `restart: unless-stopped`
 — it comes back on its own and immediately publishes (start-run). A clean
-shutdown sends SIGTERM: the scheduler lets an in-flight run finish (compose
-grants a 10-minute grace period) and exits. Nothing to do unless someone
+shutdown sends SIGTERM: the scheduler lets an in-flight run finish (compose grants a 30-minute grace period, sized to the longest
+possible run; a NAS reboot's own service timeout may be shorter) and exits. Nothing to do unless someone
 manually *stopped* it before the reboot (then §4.1).
 
 **5.4 Half-initialised data volume (note — now automatic).** The old clone

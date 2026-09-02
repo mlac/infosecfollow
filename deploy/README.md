@@ -192,9 +192,10 @@ docker exec infosecfollow claude auth status
 docker compose up -d --build
 ```
 
-Stopping (`docker stop`, `docker compose down`, a NAS reboot) is safe mid-run:
-the scheduler finishes the in-flight briefing (compose allows 10 minutes) and
-then exits; no new run starts.
+Stopping (`docker stop`, `docker compose down`) is safe mid-run: the scheduler
+finishes the in-flight briefing (compose allows up to 30 minutes, the longest
+possible run) and then exits; no new run starts. A NAS reboot's own service
+timeout may be shorter; the next container start regenerates anyway.
 
 **Common issues**
 - *"Not logged in" / auth errors:* `CLAUDE_CODE_OAUTH_TOKEN` is wrong or expired —

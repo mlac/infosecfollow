@@ -63,6 +63,10 @@ class XMLHardening(unittest.TestCase):
                     .encode("utf-8"))
         # a wrong transport charset must not override the document's own declaration
         self.assertEqual(safefetch.safe_fromstring(declared, encoding="iso-8859-1")[0].text, "Café")
+        # nor turn a valid UTF-8 body served with a stale header into mojibake
+        undeclared_utf8 = "<feed><title>Pittsburgh’s café</title></feed>".encode("utf-8")
+        self.assertEqual(safefetch.safe_fromstring(undeclared_utf8, encoding="iso-8859-1")[0].text,
+                         "Pittsburgh’s café")
         # an unknown transport charset is ignored (no LookupError); the undecodable
         # byte then fails as ordinary malformed XML, which the fetcher tolerates
         from xml.parsers import expat
@@ -85,11 +89,23 @@ class URLHardening(unittest.TestCase):
         for ip in ("127.0.0.1", "169.254.169.254", "10.0.0.5", "192.168.1.1",
                    "172.16.0.1", "0.0.0.0", "::1",
                    "100.64.0.1", "100.127.255.254",   # carrier-grade NAT / Tailscale
-                   "fc00::1", "::ffff:10.0.0.1", "2002:7f00:1::1", "64:ff9b::7f00:1",
-                   "198.18.0.1", "240.0.0.1"):
+                   "fc00::1", "fec0::1",              # ULA, deprecated site-local
+                   "::ffff:10.0.0.1", "2002:7f00:1::1", "2002:5db8:d822::1",  # mapped, 6to4
+                   "64:ff9b::7f00:1", "198.18.0.1", "240.0.0.1"):
             with mock.patch.object(safefetch.socket, "getaddrinfo", _fake_getaddrinfo(ip)):
-                with self.assertRaises(safefetch.BlockedURLError, msg=ip):
+                with self.assertRaises(safefetch.BlockedURLError, msg=ip) as ctx:
                     safefetch.validate_url("https://feed.example.com/rss")
+                self.assertNotIn(ip, str(ctx.exception))  # the address stays in the log only
+
+    def test_blocked_redirect_message_hides_the_target(self):
+        handler = safefetch.SafeRedirectHandler()
+        with mock.patch.object(safefetch.socket, "getaddrinfo", _fake_getaddrinfo("10.9.8.7")):
+            with self.assertRaises(safefetch.BlockedURLError) as ctx:
+                handler.redirect_request(None, None, 302, "Found", {},
+                                         "http://nas.internal.example/admin")
+        message = str(ctx.exception)
+        self.assertNotIn("nas.internal", message)
+        self.assertNotIn("10.9.8.7", message)
 
     def test_public_addresses_allowed(self):
         for ip in ("93.184.216.34", "2606:4700::1111"):

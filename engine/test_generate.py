@@ -5,12 +5,18 @@ Run from the repository root:
     python3 -m unittest discover -s engine -p 'test_*.py'
 
 No network and no model: feeds are in-memory bytes, the Claude CLI is a stub,
-and the site is written to a temporary directory. The committed day records
-under docs/data/ double as renderer fixtures.
+the clock is frozen where the date matters, and the site is written to a
+temporary directory. Renderer fixtures live in engine/testdata/ (three
+committed day records plus one written by the current engine); the live
+docs/data/ records are swept as well when enough of them are present.
 """
 
+import email.message
+import gzip
+import io
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -30,7 +36,9 @@ import pittsburgh  # noqa: E402
 
 NOW = datetime(2026, 9, 2, 12, 0, tzinfo=timezone.utc)
 TODAY = "2026-09-02"
-REPO_DOCS = Path(__file__).resolve().parent.parent / "docs"
+HERE = Path(__file__).resolve().parent
+TESTDATA = HERE / "testdata"
+REPO_DOCS = HERE.parent / "docs"
 
 
 def item(url, title="Title", source="Feed", hours_ago=1.0, summary="s"):
@@ -60,6 +68,17 @@ class OutlineParser(HTMLParser):
             self.stack.pop()
         else:
             self.errors.append(tag)
+
+
+class FrozenDatetime(datetime):
+    """datetime whose now() is pinned to NOW; strptime/fromisoformat still work."""
+    fixed = NOW
+
+    @classmethod
+    def now(cls, tz=None):
+        if tz is None:
+            return cls.fixed.astimezone().replace(tzinfo=None)
+        return cls.fixed.astimezone(tz)
 
 
 # --------------------------------------------------------------------- parsing
@@ -119,11 +138,14 @@ class FeedParsing(unittest.TestCase):
         self.assertEqual(urls["Story"], "https://example.org/s")
         self.assertEqual(items[0]["summary"], "Hi & bye")
 
-    def test_latin1_body_without_declaration_uses_http_charset(self):
-        raw = ("<rss version=\"2.0\"><channel><item><title>Caf\xe9</title>"
-               "<link>https://x.example/a</link></item></channel></rss>").encode("latin-1")
-        items = list(generate.parse_feed("f", raw, charset="iso-8859-1"))
-        self.assertEqual(items[0]["title"], "Café")
+    def test_transport_charset_used_only_for_undeclared_non_utf8_bodies(self):
+        latin = ("<rss version=\"2.0\"><channel><item><title>Caf\xe9</title>"
+                 "<link>https://x.example/a</link></item></channel></rss>").encode("latin-1")
+        self.assertEqual(list(generate.parse_feed("f", latin, charset="iso-8859-1"))[0]["title"], "Café")
+        utf8 = ("<rss version=\"2.0\"><channel><item><title>Pittsburgh’s café</title>"
+                "<link>https://x.example/a</link></item></channel></rss>").encode("utf-8")
+        self.assertEqual(list(generate.parse_feed("f", utf8, charset="iso-8859-1"))[0]["title"],
+                         "Pittsburgh’s café")
 
     def test_parse_date_edge_cases(self):
         self.assertIsNone(generate.parse_date(""))
@@ -150,6 +172,46 @@ class FeedParsing(unittest.TestCase):
         self.assertEqual(generate.sanitize("line\nbreak\ttab"), "line\nbreak\ttab")
 
 
+class HttpGet(unittest.TestCase):
+    def fake_open(self, body, content_type, content_encoding=None):
+        headers = email.message.Message()
+        headers["Content-Type"] = content_type
+        if content_encoding:
+            headers["Content-Encoding"] = content_encoding
+
+        class Resp(io.BytesIO):
+            pass
+
+        resp = Resp(body)
+        resp.headers = headers
+
+        class Ctx:
+            def __enter__(self_inner):
+                return resp
+
+            def __exit__(self_inner, *a):
+                return False
+
+        return lambda req, timeout: Ctx()
+
+    def test_charset_and_gzip(self):
+        with mock.patch.object(generate.safefetch, "safe_open",
+                               self.fake_open(b"<rss/>", "application/xml; charset=iso-8859-1")):
+            self.assertEqual(generate.http_get("https://x.example/f"), (b"<rss/>", "iso-8859-1"))
+        packed = gzip.compress(b"<rss>gz</rss>")
+        with mock.patch.object(generate.safefetch, "safe_open",
+                               self.fake_open(packed, "application/xml", "gzip")):
+            self.assertEqual(generate.http_get("https://x.example/f"), (b"<rss>gz</rss>", None))
+
+    def test_post_inflate_size_cap(self):
+        bomb = gzip.compress(b"a" * (generate.MAX_FEED_BYTES + 1))
+        self.assertLess(len(bomb), generate.MAX_FEED_BYTES)  # compressed size passes read_bounded
+        with mock.patch.object(generate.safefetch, "safe_open",
+                               self.fake_open(bomb, "application/xml", "gzip")):
+            with self.assertRaises(generate.safefetch.ResponseTooLargeError):
+                generate.http_get("https://x.example/f")
+
+
 class Selection(unittest.TestCase):
     def test_recent_items_dedupes_same_headline_same_day_only(self):
         a = item("https://a.example/1", "CISA Adds Two KEVs", hours_ago=2)
@@ -167,6 +229,29 @@ class Selection(unittest.TestCase):
         many = [item(f"https://x.example/{n}", f"T{n}", hours_ago=1) for n in range(15)]
         self.assertEqual(generate.select_window(many, NOW)[1], generate.WINDOW_HOURS)
 
+    def test_in_window_counts_are_per_feed_before_dedupe(self):
+        items = [item("https://a.example/1", "Same headline", source="A", hours_ago=2),
+                 item("https://b.example/1", "Same headline", source="B", hours_ago=3),
+                 item("https://b.example/2", "Old", source="B", hours_ago=90)]
+        self.assertEqual(generate.in_window_counts(items, NOW, 24), {"A": 1, "B": 1})
+        self.assertEqual(len(generate.recent_items(items, NOW, 24, 10)), 1)  # dedupe kept one
+
+    def test_order_topics_newest_day_then_popularity_then_original_order(self):
+        pub = {"https://a.example/1": NOW - timedelta(days=2),
+               "https://b.example/1": NOW - timedelta(hours=1),
+               "https://c.example/1": NOW - timedelta(hours=2),
+               "https://c.example/2": NOW - timedelta(hours=3)}
+        digest = {"topics": [
+            {"title": "old", "sources": [{"url": "https://a.example/1"}]},
+            {"title": "today-one-source", "sources": [{"url": "https://b.example/1"}]},
+            {"title": "today-two-sources", "sources": [{"url": "https://c.example/1"},
+                                                       {"url": "https://c.example/2"}]},
+            {"title": "today-one-source-later", "sources": [{"url": "https://b.example/1"}]},
+        ]}
+        generate.order_topics(digest, generate.published_index([]) | pub)
+        self.assertEqual([t["title"] for t in digest["topics"]],
+                         ["today-two-sources", "today-one-source", "today-one-source-later", "old"])
+
 
 # ------------------------------------------------------------------ validation
 
@@ -179,7 +264,7 @@ def digest_reply(sources):
 class DigestValidation(unittest.TestCase):
     ALLOWED = {"https://ok.example/1": "Feed One", "https://ok.example/2": "Feed Two"}
 
-    def test_sources_canonical_deduped_and_capped(self):
+    def test_sources_canonical_and_deduped(self):
         reply = digest_reply([{"source": "Reworded", "url": "https://ok.example/1", "title": "t"},
                               {"source": "x", "url": "https://ok.example/1"},
                               {"source": "x", "url": "https://bad.example/1"},
@@ -187,6 +272,12 @@ class DigestValidation(unittest.TestCase):
         out = generate.validate_digest(reply, self.ALLOWED)
         self.assertEqual([s["source"] for s in out["topics"][0]["sources"]], ["Feed One", "Feed Two"])
         self.assertEqual(out["topics"][0]["tags"], ["x", "y"])
+
+    def test_sources_capped(self):
+        allowed = {f"https://ok.example/{n}": f"Feed {n}" for n in range(generate.MAX_SOURCES + 2)}
+        reply = digest_reply([{"url": u} for u in allowed])
+        out = generate.validate_digest(reply, allowed)
+        self.assertEqual(len(out["topics"][0]["sources"]), generate.MAX_SOURCES)
 
     def test_strict_rejects_dropped_topic_lenient_keeps_rest(self):
         reply = digest_reply([{"url": "https://bad.example/1"}])
@@ -220,34 +311,56 @@ def local_item(url, title="Item", latest="new", summary="sum"):
 
 class LocalValidation(unittest.TestCase):
     def setUp(self):
-        pgh = {f"https://pgh.example/{n}": "TribLive" for n in range(10)}
+        pgh = {f"https://pgh.example/{n}": "TribLive" for n in range(20)}
         self.allowed = {"business_politics": {"https://wsj.example/1": "WSJ"},
                         "business": pgh, "around_town": pgh, "events": pgh,
-                        "around_teams": {"https://pg.example/1": "PG Steelers"},
-                        "team_usa": {}, "reading": {"https://z.example/1": "Ed Zitron",
-                                                    "https://z.example/2": "Ed Zitron",
-                                                    "https://s.example/1": "Stratechery"}}
+                        "around_teams": {"https://pg.example/1": "PG Steelers",
+                                         "https://pg.example/2": "PG Penguins"},
+                        "team_usa": {"https://espn.example/1": "ESPN Olympics"},
+                        "reading": {"https://z.example/1": "Ed Zitron",
+                                    "https://z.example/2": "Ed Zitron",
+                                    "https://s.example/1": "Stratechery"}}
         self.authors = ["Ed Zitron", "Stratechery", "Cal Newport"]
 
-    def validate(self, reply, strict=True):
-        return generate.validate_local(reply, self.allowed, True, True, self.authors, strict)
+    def validate(self, reply, strict=True, have_reading=True):
+        return generate.validate_local(reply, self.allowed, True, have_reading, self.authors, strict)
 
-    def test_caps_violence_filter_and_reading_rules(self):
-        reply = {
-            "business": [local_item(f"https://pgh.example/{n}", f"B{n}") for n in range(8)],
-            "around_town": [local_item("https://pgh.example/1", "Shooting on Penn Avenue",
-                                       "Police said the man was fatally shot"),
-                            local_item("https://pgh.example/2", "Budget", "Council passed it")],
-            "reading": [{"author": "ed zitron", "title": "A", "url": "https://z.example/1", "summary": "s"},
-                        {"author": "Ed Zitron", "title": "B", "url": "https://z.example/2", "summary": "s"},
-                        {"author": "Nobody", "title": "C", "url": "https://s.example/1", "summary": "s"}],
-        }
-        out = self.validate(reply)
-        self.assertEqual(len(out["business"]), generate.SECTION_CAPS["business"])
-        self.assertEqual([i["title"] for i in out["around_town"]], ["Budget"])
-        self.assertEqual([(r["author"], r["title"]) for r in out["reading"]], [("Ed Zitron", "A")])
+    def test_caps_cover_a_full_day_of_carried_items(self):
+        cap = generate.SECTION_CAPS["business"]
+        self.assertGreaterEqual(cap, 4 * 3)  # four weekday runs of up to three new items
+        reply = {"business": [local_item(f"https://pgh.example/{n}", f"B{n}") for n in range(cap + 2)],
+                 "reading": []}
+        out = self.validate(reply, have_reading=False)
+        self.assertEqual([i["title"] for i in out["business"]], [f"B{n}" for n in range(cap)])
         self.assertEqual(out["business"][0]["sources"][0]["source"], "TribLive")
         self.assertEqual(out["events"], [])  # omitted key becomes an empty list
+
+    def test_violence_backstop_matches_incidents_not_statistics_or_sports(self):
+        reply = {
+            "around_town": [local_item("https://pgh.example/1", "Shooting on Penn Avenue",
+                                       "Police said the man was fatally shot"),
+                            local_item("https://pgh.example/2", "Budget", "Council passed it",
+                                       "Homicides fell 12 percent and the police budget grew"),
+                            local_item("https://pgh.example/3", "Court", "A jury convicted him",
+                                       "He was charged with murder in the Oakland case")],
+            "around_teams": [local_item("https://pg.example/1", "Penguins Shooting More",
+                                        "Crosby is shooting more from the slot; shooting percentage up")],
+            "team_usa": [local_item("https://espn.example/1", "USA Shooting Names Roster",
+                                    "USA Shooting announced its Olympic trials roster")],
+            "reading": [],
+        }
+        out = self.validate(reply, have_reading=False)
+        self.assertEqual([i["title"] for i in out["around_town"]], ["Budget"])
+        self.assertEqual(len(out["around_teams"]), 1)
+        self.assertEqual(len(out["team_usa"]), 1)
+
+    def test_reading_author_enum_and_one_per_author(self):
+        reply = {"business": [local_item("https://pgh.example/1")],
+                 "reading": [{"author": "ed zitron", "title": "A", "url": "https://z.example/1", "summary": "s"},
+                             {"author": "Ed Zitron", "title": "B", "url": "https://z.example/2", "summary": "s"},
+                             {"author": "Nobody", "title": "C", "url": "https://s.example/1", "summary": "s"}]}
+        out = self.validate(reply)
+        self.assertEqual([(r["author"], r["title"]) for r in out["reading"]], [("Ed Zitron", "A")])
 
     def test_empty_pittsburgh_is_error_only_when_strict(self):
         reply = {"business": [local_item("https://bad.example/1")],
@@ -276,9 +389,11 @@ class Citable(unittest.TestCase):
 class CliInvocation(unittest.TestCase):
     def setUp(self):
         generate._CLI_HELP.clear()
+        generate._RUN_DEADLINE = None
 
     def tearDown(self):
         generate._CLI_HELP.clear()
+        generate._RUN_DEADLINE = None
 
     def test_argv_uses_allowlist_fallback_and_no_persistence_when_supported(self):
         generate._CLI_HELP["/bin/claude"] = "--tools --fallback-model --no-session-persistence"
@@ -338,12 +453,46 @@ class CliInvocation(unittest.TestCase):
         self.assertEqual(text, "{}")
         self.assertNotIn("GITHUB_TOKEN", seen["env"])
         self.assertEqual(seen["input"], "prompt")
+        self.assertEqual(seen["timeout"], generate.CLI_TIMEOUT)
         self.assertFalse(os.path.exists(seen["cwd"]))  # scratch dir removed
+
+    def test_run_claude_surfaces_the_envelope_error_text(self):
+        generate._CLI_HELP["/bin/claude"] = ""
+        envelope = json.dumps({"type": "result", "subtype": "error_during_execution",
+                               "is_error": True, "duration_ms": 5, "session_id": "x" * 300,
+                               "errors": ["Invalid API key · Please run /login"]})
+
+        def fake_run(argv, **kw):
+            return subprocess.CompletedProcess(argv, 1, stdout=envelope, stderr="")
+
+        with mock.patch.object(generate.subprocess, "run", fake_run):
+            with self.assertRaises(RuntimeError) as ctx:
+                generate.run_claude("/bin/claude", "prompt")
+        self.assertIn("Invalid API key", str(ctx.exception))
+        self.assertNotIn("xxxxxxxx", str(ctx.exception))
+
+    def test_run_budget_caps_timeouts_and_refuses_hopeless_calls(self):
+        generate._CLI_HELP["/bin/claude"] = ""
+        seen = {}
+
+        def fake_run(argv, **kw):
+            seen.update(kw)
+            return subprocess.CompletedProcess(argv, 0, stdout='{"result":"{}"}', stderr="")
+
+        with mock.patch.object(generate.subprocess, "run", fake_run):
+            generate.start_run_clock(budget=400)
+            generate.run_claude("/bin/claude", "p")
+            self.assertLessEqual(seen["timeout"], 390)
+            self.assertLess(seen["timeout"], generate.CLI_TIMEOUT)
+            generate.start_run_clock(budget=60)
+            with self.assertRaises(RuntimeError):
+                generate.run_claude("/bin/claude", "p")
+        self.assertGreater(generate.run_seconds_left(), 0)
 
     def test_ask_claude_retries_process_failures_with_backoff(self):
         calls = {"n": 0}
 
-        def flaky(cli, prompt):
+        def flaky(cli, prompt, timeout=None):
             calls["n"] += 1
             if calls["n"] < 3:
                 raise RuntimeError("claude CLI exited 1: overloaded")
@@ -356,17 +505,28 @@ class CliInvocation(unittest.TestCase):
         self.assertEqual(out, {"ok": True})
         self.assertEqual(sleeps, [generate.CLI_BACKOFF[0], generate.CLI_BACKOFF[1]])
 
-    def test_ask_claude_gives_up_after_attempts(self):
+    def test_ask_claude_gives_up_after_attempts_or_budget(self):
         with mock.patch.object(generate, "run_claude",
-                               mock.Mock(side_effect=RuntimeError("down"))), \
+                               mock.Mock(side_effect=RuntimeError("down"))) as run, \
                 mock.patch.object(generate.time, "sleep", lambda s: None):
             with self.assertRaises(RuntimeError):
                 generate.ask_claude("/bin/claude", "p", lambda d, strict: d)
+            self.assertEqual(run.call_count, generate.CLI_ATTEMPTS)
+            run.reset_mock()
+            generate.start_run_clock(budget=generate.MIN_CALL_SECONDS + 20)  # room for one call only
+            with self.assertRaises(RuntimeError):
+                generate.ask_claude("/bin/claude", "p", lambda d, strict: d)
+            self.assertEqual(run.call_count, 1)
+            run.reset_mock()
+            generate._RUN_DEADLINE = None
+            with self.assertRaises(RuntimeError):
+                generate.ask_claude("/bin/claude", "p", lambda d, strict: d, attempts=1)
+            self.assertEqual(run.call_count, 1)
 
     def test_ask_claude_repairs_once_then_relaxes(self):
         prompts, strict_flags = [], []
 
-        def run(cli, prompt):
+        def run(cli, prompt, timeout=None):
             prompts.append(prompt)
             return "not json" if len(prompts) == 1 else '{"partial": 1}', {}
 
@@ -383,7 +543,7 @@ class CliInvocation(unittest.TestCase):
     def test_timeout_is_a_process_failure_not_a_repair(self):
         outputs = iter([subprocess.TimeoutExpired("claude", 1), ('{"a":1}', {})])
 
-        def run(cli, prompt):
+        def run(cli, prompt, timeout=None):
             nxt = next(outputs)
             if isinstance(nxt, Exception):
                 raise nxt
@@ -427,6 +587,17 @@ class ChangeDetection(unittest.TestCase):
         self.assertEqual([(e["kind"], e["status"]) for e in out], [("Update", "new"), ("Trend", None)])
         self.assertEqual([l["anchor"] for l in out[1]["links"]], [])  # i-1 already used
 
+    def test_build_glance_falls_back_to_legacy_synthesis(self):
+        digest = {"topics": [{"title": "Topic One", "latest_developments": "d", "summary": "s",
+                              "sources": [{"url": "https://a.example/1"}]}],
+                  "emerging_trends": [{"text": "Topic One matters", "topic_title": "Topic One",
+                                       "link_phrase": "Topic One"}]}
+        with mock.patch.object(generate, "ask_claude", side_effect=RuntimeError("no model")):
+            glance, info = generate.build_glance("/bin/claude", None, digest, None)
+        self.assertIsNone(info)
+        self.assertEqual([e["kind"] for e in glance], ["Trend"])
+        self.assertEqual(glance[0]["links"][0]["anchor"], digest["topics"][0]["_anchor"])
+
 
 # -------------------------------------------------------------------- archive
 
@@ -464,20 +635,28 @@ class ArchiveMemory(TempSite):
         carried = generate.today_so_far(TODAY)
         self.assertEqual(carried["topics"][0]["title"], f"Topic {TODAY}")
         self.assertEqual(carried["generated_at"], f"{TODAY} 07:05 EDT")
-        self.assertIn("TODAY_SO_FAR", generate.build_prompt([], 24, TODAY, prior, carried))
+        self.assertIn("TODAY_SO_FAR —", generate.build_prompt([], 24, TODAY, prior, carried))
+        self.assertNotIn("TODAY_SO_FAR —", generate.build_prompt([], 24, TODAY, prior, None))
         self.assertIsNone(generate.today_so_far("2026-09-03"))
 
-    def test_lookback_is_independent_of_retention(self):
-        self.write_record("2026-09-01")
-        with mock.patch.object(generate, "ARCHIVE_RETENTION_DAYS", 0):
-            dated = generate._archive_dates_within(TODAY, generate.PRIOR_LOOKBACK_DAYS)
-        self.assertEqual([d for _, d in dated], ["2026-09-01"])
+    def test_legacy_flat_local_shape_is_still_read(self):
+        self.write_record("2026-09-01", local={"around_town": [
+            {"title": "Old Item", "text": "legacy text field"}]})
+        prior_local = generate.recent_archive_local(TODAY)
+        self.assertEqual(prior_local[0]["around_town"], ["Old Item — legacy text field"])
 
-    def test_prune_off_by_default_and_bounded_when_on(self):
+    def test_lookback_is_independent_of_retention(self):
+        self.write_record("2026-08-28")  # five days old
+        with mock.patch.object(generate, "ARCHIVE_RETENTION_DAYS", 1):
+            dated = generate._archive_dates_within(TODAY, generate.PRIOR_LOOKBACK_DAYS)
+            self.assertEqual([d for _, d in dated], ["2026-08-28"])
+            self.assertEqual([d["date"] for d in generate.recent_archive_digests(TODAY)],
+                             ["2026-08-28"])
+
+    def test_prune_off_when_zero_and_bounded_when_on(self):
         for d in ("2026-05-01", "2026-09-01"):
             self.write_record(d)
             (self.tmp / "archive" / f"{d}-0705.html").write_text("x")
-        self.assertEqual(generate.ARCHIVE_RETENTION_DAYS, 0)
         generate.prune_old_archives(TODAY, 0)
         self.assertTrue((self.tmp / "data" / "2026-05-01.json").exists())
         generate.prune_old_archives(TODAY, 30)
@@ -485,32 +664,78 @@ class ArchiveMemory(TempSite):
         self.assertFalse((self.tmp / "archive" / "2026-05-01-0705.html").exists())
         self.assertTrue((self.tmp / "data" / "2026-09-01.json").exists())
 
+    def test_local_fallback_prefers_today_then_yesterday_only(self):
+        carried = {"date": TODAY, "generated_at": "today 07:05", "local": {"business": [local_item("u")]}}
+        prev = {"date": "2026-09-01", "meta": {"generated_at": "yday 19:35"},
+                "local": {"reading": [{"author": "A", "title": "t", "url": "u", "summary": "s"}]}}
+        self.assertEqual(generate.choose_local_fallback(carried, prev, TODAY)[1], "today 07:05")
+        self.assertEqual(generate.choose_local_fallback(None, prev, TODAY)[1], "yday 19:35")
+        stale = dict(prev, date="2026-08-30")
+        self.assertEqual(generate.choose_local_fallback(None, stale, TODAY), (None, None))
+        empty = {"date": TODAY, "local": {"business": []}}
+        self.assertEqual(generate.choose_local_fallback(empty, None, TODAY), (None, None))
+
 
 class SiteWriting(TempSite):
-    def test_write_site_is_atomic_and_records_everything(self):
+    def test_atomic_write_never_leaves_a_truncated_target(self):
+        target = self.tmp / "index.html"
+        target.write_text("old", encoding="utf-8")
+        with mock.patch.object(generate.os, "replace", side_effect=OSError("disk full")):
+            with self.assertRaises(OSError):
+                generate._atomic_write(target, "new")
+        self.assertEqual(target.read_text(encoding="utf-8"), "old")
+        self.assertEqual(sorted(p.name for p in self.tmp.iterdir()),
+                         ["archive", "data", "index.html", "index.html.tmp"])
+
+    def test_write_site_writes_every_file_atomically_and_records_everything(self):
         digest = {"date": TODAY, "headline": "Head", "emerging_trends": [],
                   "topics": [{"title": "T", "area": "A", "latest_developments": "d",
                               "summary": "s", "tags": [], "sources": [{"source": "F", "url": "https://x.example/1"}]}]}
         health = {"groups": [], "aux": [{"label": "Scores (ESPN)", "ok": False, "detail": "no scoreboard"}],
                   "cli": {"models": ["m"], "calls": 1, "cost_usd": 0.1, "duration_ms": 1000}}
         feeds = generate.load_feeds()
-        generate.write_site(digest, None, [], [], [], feeds, 5, 24, glance=[],
-                            notes=["Quiet day"], health=health, meta_extra={"served_by": ["m"]})
+        with mock.patch.object(generate.os, "replace", wraps=os.replace) as replace:
+            generate.write_site(digest, None, [], [], [], feeds, 5, 24, glance=[],
+                                notes=["Quiet day"], health=health, meta_extra={"served_by": ["m"]})
+        replaced = sorted(Path(c.args[1]).relative_to(self.tmp).as_posix() for c in replace.call_args_list)
+        self.assertEqual([r for r in replaced if not r.startswith("archive/" + TODAY)],
+                         [f"archive/index.html", f"data/{TODAY}.json", "digest.txt", "index.html"])
+        self.assertEqual(len([r for r in replaced if r.startswith("archive/" + TODAY)]), 2)
+        self.assertEqual(list(self.tmp.rglob("*.tmp")), [])
         rec = json.loads((self.tmp / "data" / f"{TODAY}.json").read_text())
         self.assertEqual(rec["feed_health"]["aux"][0]["label"], "Scores (ESPN)")
         self.assertEqual(rec["meta"]["served_by"], ["m"])
         self.assertEqual(rec["notes"], ["Quiet day"])
         self.assertIn("glance", rec)
-        self.assertEqual([p.name for p in self.tmp.glob("*.tmp")], [])
         html = (self.tmp / "index.html").read_text()
         self.assertIn("Feed Health", html)
         self.assertIn("Quiet day", html)
         self.assertIn("<main", html)
         self.assertIn('rel="canonical"', html)
-        self.assertEqual(len(list((self.tmp / "archive").glob("*.html"))), 2)  # page + index
         archive_page = next(p for p in (self.tmp / "archive").glob("*.html") if p.stem != "index")
         self.assertNotIn('rel="canonical"', archive_page.read_text())
         self.assertIn("FEED HEALTH", (self.tmp / "digest.txt").read_text())
+
+
+class FeedHealth(unittest.TestCase):
+    def test_silent_feed_detection_uses_raw_window_counts(self):
+        feeds = {g: [] for g in generate.FEED_GROUPS}
+        feeds["security"] = [{"name": "A", "url": "u"}, {"name": "B", "url": "u"},
+                             {"name": "Dead", "url": "u"}, {"name": "Down", "url": "u"}]
+        stats = {"A": {"items": 5, "dated": 5, "error": None}, "B": {"items": 5, "dated": 5, "error": None},
+                 "Dead": {"items": 3, "dated": 3, "error": None},
+                 "Down": {"items": 0, "dated": 0, "error": "OSError: refused\x07"}}
+        selected = {"security": [item("https://a.example/1", "Shared", source="A")]}  # B deduped away
+        raw = {"security": {"A": 1, "B": 1}}
+        health = generate.build_feed_health(feeds, stats, selected, {"security": 24},
+                                            [], {}, per_feed_window=raw)
+        sec = health["groups"][0]
+        self.assertEqual(sec["empty"], ["Dead"])
+        self.assertEqual(sec["per_feed"]["B"], {"items": 5, "in_window": 1, "contributed": 0})
+        self.assertEqual(sec["failed"], [{"name": "Down", "error": "OSError: refused"}])
+        lines = generate._health_lines(health)
+        self.assertIn("No recent items: Dead.", lines[0])
+        self.assertNotIn("B", lines[0].split("No recent items")[1])
 
 
 # ------------------------------------------------------------------- rendering
@@ -519,11 +744,12 @@ class Rendering(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.feeds = generate.load_feeds()
-        cls.records = []
-        for path in sorted((REPO_DOCS / "data").glob("*.json"))[-20:]:
-            rec = json.loads(path.read_text(encoding="utf-8"))
-            if rec.get("topics") and "latest_developments" in rec["topics"][0]:
-                cls.records.append(rec)
+        cls.records = [json.loads(p.read_text(encoding="utf-8"))
+                       for p in sorted(TESTDATA.glob("*.json"))]
+        live = [json.loads(p.read_text(encoding="utf-8"))
+                for p in sorted((REPO_DOCS / "data").glob("*.json"))[-20:]]
+        cls.live = [r for r in live if r.get("topics") and "latest_developments" in r["topics"][0]
+                    and all(k in r for k in ("date", "headline", "emerging_trends"))]
 
     def render(self, rec, depth=0):
         digest = {k: rec[k] for k in ("date", "headline", "emerging_trends", "topics")}
@@ -533,37 +759,51 @@ class Rendering(unittest.TestCase):
         html = generate.render_html(digest, local, rec.get("markets") or [], rec.get("weather") or [],
                                     sports, self.feeds, "2026-09-01 19:35 EDT", "7:35 PM EDT",
                                     "archive/index.html", "digest.txt", depth=depth,
-                                    glance=rec.get("glance") or [], health=rec.get("feed_health"))
+                                    glance=rec.get("glance") or [], notes=rec.get("notes"),
+                                    health=rec.get("feed_health"))
         text = generate.render_text(digest, local, rec.get("markets") or [], rec.get("weather") or [],
                                     sports, self.feeds, "2026-09-01 19:35 EDT", "7:35 PM EDT",
-                                    glance=rec.get("glance") or [], health=rec.get("feed_health"))
+                                    glance=rec.get("glance") or [], notes=rec.get("notes"),
+                                    health=rec.get("feed_health"))
         return html, text
 
-    def test_committed_records_render_valid_html_with_sound_outline(self):
-        self.assertGreater(len(self.records), 5)
-        for rec in self.records:
-            html, text = self.render(rec)
-            p = OutlineParser()
-            p.feed(html)
-            self.assertEqual((p.stack, p.errors), ([], []), rec["date"])
-            for a, b in zip(p.headings, p.headings[1:]):
-                self.assertLessEqual(b, a + 1, f"{rec['date']}: heading jumps {a} -> {b}")
-            self.assertEqual(len(p.ids), len(set(p.ids)), f"{rec['date']}: duplicate ids")
-            self.assertIn('class="skip"', html)
-            self.assertIn("Jump to:", html)
-            self.assertIn("CONTENTS:", text)
-            for topic in rec["topics"]:
-                self.assertIn(topic["title"].upper()[:20], text)
+    def check_record(self, rec):
+        html, text = self.render(rec)
+        p = OutlineParser()
+        p.feed(html)
+        self.assertEqual((p.stack, p.errors), ([], []), rec["date"])
+        for a, b in zip(p.headings, p.headings[1:]):
+            self.assertLessEqual(b, a + 1, f"{rec['date']}: heading jumps {a} -> {b}")
+        self.assertEqual(len(p.ids), len(set(p.ids)), f"{rec['date']}: duplicate ids")
+        targets = set(p.ids)
+        for m in re.finditer(r'href="#([^"]+)"', html):
+            self.assertIn(m.group(1), targets, rec["date"])
+        self.assertIn('class="skip"', html)
+        self.assertIn("Jump to:", html)
+        self.assertIn("CONTENTS:", text)
+        for topic in rec["topics"]:
+            self.assertIn(topic["title"].upper()[:20], text)
+        return html, text
 
-    def test_every_in_page_link_has_a_target(self):
+    def test_fixture_records_render_valid_html_with_sound_outline(self):
+        self.assertGreaterEqual(len(self.records), 4)
         for rec in self.records:
-            html, _ = self.render(rec)
-            p = OutlineParser()
-            p.feed(html)
-            targets = set(p.ids)
-            import re
-            for m in re.finditer(r'href="#([^"]+)"', html):
-                self.assertIn(m.group(1), targets, rec["date"])
+            self.check_record(rec)
+
+    def test_new_engine_fixture_renders_every_new_section(self):
+        rec = json.loads((TESTDATA / "new-engine-2026-09-01.json").read_text(encoding="utf-8"))
+        html, text = self.check_record(rec)
+        for needle in ("Feed Health", "Quiet day", "carried over", "Scoreboard unavailable",
+                       "AkamaiGHost", "Google Project Zero", 'class="glance trend"'):
+            self.assertIn(needle, html, needle)
+        for needle in ("FEED HEALTH", "Quiet day", "carried over", "EMERGING TRENDS"):
+            self.assertIn(needle, text, needle)
+
+    def test_live_records_render(self):
+        if len(self.live) < 6:
+            self.skipTest("fewer than six live day records in docs/data")
+        for rec in self.live:
+            self.check_record(rec)
 
     def test_source_label_fallback_matches_between_renditions(self):
         digest = {"date": TODAY, "headline": "H", "emerging_trends": [], "topics": [
@@ -573,6 +813,18 @@ class Rendering(unittest.TestCase):
         text = generate.render_text(digest, None, [], [], [], self.feeds, "g", "t")
         self.assertIn(">Article Title</a>", html)
         self.assertIn("- Article Title: https://x.example/1", text)
+
+    def test_health_lines_are_sanitized_and_escaped(self):
+        health = {"groups": [], "aux": [{"label": "Scores (ESPN)", "ok": False,
+                                        "detail": "no scoreboard; errors: mlb: HTTP 403 <b>‮\x07"}],
+                  "cli": {}}
+        digest = {"date": TODAY, "headline": "H", "emerging_trends": [], "topics": []}
+        html = generate.render_html(digest, None, [], [], [], self.feeds, "g", "t", "a", "b",
+                                    health=health)
+        self.assertIn("HTTP 403 &lt;b&gt;", html)
+        self.assertNotIn("<b>", html.split("Feed Health")[1])
+        text = generate.render_text(digest, None, [], [], [], self.feeds, "g", "t", health=health)
+        self.assertIn("HTTP 403 <b>", text)
 
     def test_clean_sports_normalizes_missing_fields(self):
         blocks = generate._clean_sports([{"team": None, "record": None,
@@ -618,11 +870,22 @@ class MarketData(unittest.TestCase):
 class Pittsburgh(unittest.TestCase):
     def test_sports_blocks_reports_errors_instead_of_hiding_them(self):
         errors = []
-        with mock.patch.object(pittsburgh, "_espn_json", side_effect=RuntimeError("HTTP 403 Forbidden")):
+        with mock.patch.object(pittsburgh, "_espn_json", side_effect=RuntimeError("HTTP 403")):
             blocks = pittsburgh.sports_blocks(errors=errors)
         self.assertEqual(blocks, [])
         self.assertEqual(len(errors), len(pittsburgh.LEAGUES))
         self.assertIn("HTTP 403", errors[0])
+
+    def test_espn_http_error_message_carries_status_not_body(self):
+        import urllib.error
+        headers = email.message.Message()
+        headers["Server"] = "AkamaiGHost"
+        err = urllib.error.HTTPError("https://site.api.espn.com/x", 403, "Forbidden", headers,
+                                     io.BytesIO(b"<html>Access Denied <script>evil()</script></html>"))
+        with mock.patch.object(pittsburgh, "_get_json", side_effect=err):
+            with self.assertRaises(RuntimeError) as ctx:
+                pittsburgh._espn_json("/baseball/mlb/teams/pit")
+        self.assertEqual(str(ctx.exception), "HTTP 403 (server: AkamaiGHost)")
 
     def test_plaintextsports_urls(self):
         when = datetime(2026, 9, 5, 19, 5, tzinfo=pittsburgh.TZ)
@@ -637,45 +900,51 @@ class Pittsburgh(unittest.TestCase):
 
 # ------------------------------------------------------------ end to end (main)
 
-SEC_FEED = (b'<?xml version="1.0"?><rss version="2.0"><channel>'
-            b'<item><title>Exchange servers exposed</title><link>https://sec.example/1</link>'
-            b'<pubDate>%s</pubDate><description>desc one</description></item>'
-            b'<item><title>Second story</title><link>https://sec.example/2</link>'
-            b'<pubDate>%s</pubDate><description>desc two</description></item>'
-            b'</channel></rss>')
+SEC_FEED_TWO = (b'<?xml version="1.0"?><rss version="2.0"><channel>'
+                b'<item><title>Exchange servers exposed</title><link>https://sec.example/1</link>'
+                b'<pubDate>%s</pubDate><description>desc one</description></item>'
+                b'<item><title>Second story</title><link>https://sec.example/2</link>'
+                b'<pubDate>%s</pubDate><description>desc two</description></item>'
+                b'</channel></rss>')
+SEC_FEED_ONE = (b'<?xml version="1.0"?><rss version="2.0"><channel>'
+                b'<item><title>Exchange servers exposed</title><link>https://sec.example/1</link>'
+                b'<pubDate>%s</pubDate><description>desc one</description></item>'
+                b'</channel></rss>')
 PGH_FEED = (b'<?xml version="1.0"?><rss version="2.0"><channel>'
             b'<item><title>Council passes budget</title><link>https://pgh.example/1</link>'
             b'<pubDate>%s</pubDate><description>local</description></item></channel></rss>')
 
 
 class EndToEnd(TempSite):
-    """Drive main() with in-memory feeds, stubbed data sources, and a canned
-    model, then run it a second time to exercise carry-forward and the
+    """Drive main() with in-memory feeds, stubbed data sources, a canned model
+    and a frozen clock, then run it a second time to exercise carry-forward
+    (including a carried source that has left the fetch window) and the
     failed-local-call fallback."""
 
     def setUp(self):
         super().setUp()
-        stamp = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT").encode()
+        stamp = (NOW - timedelta(hours=1)).strftime("%a, %d %b %Y %H:%M:%S GMT").encode()
         feeds = {"security": [{"name": "Sec A", "url": "https://sec.example/feed"},
                               {"name": "Sec B", "url": "https://secb.example/feed"},
                               {"name": "Sec Down", "url": "https://down.example/feed"}],
                  "pittsburgh": [{"name": "TribLive", "url": "https://pgh.example/feed"}],
                  "bizpol": [], "events": [], "sports_media": [], "team_usa": [],
                  "reading": [{"name": "Ed Zitron", "url": "https://z.example/feed"}]}
-        bodies = {"https://sec.example/feed": (SEC_FEED % (stamp, stamp), None),
-                  "https://secb.example/feed": (SEC_FEED % (stamp, stamp), None),
-                  "https://pgh.example/feed": (PGH_FEED % stamp, None),
-                  "https://z.example/feed": (PGH_FEED.replace(b"pgh.example", b"z.example") % stamp, None)}
+        self.bodies = {"https://sec.example/feed": (SEC_FEED_TWO % (stamp, stamp), None),
+                       "https://secb.example/feed": (SEC_FEED_TWO % (stamp, stamp), None),
+                       "https://pgh.example/feed": (PGH_FEED % stamp, None),
+                       "https://z.example/feed": (PGH_FEED.replace(b"pgh.example", b"z.example") % stamp, None)}
+        self.stamp = stamp
 
         def http_get(url):
-            if url not in bodies:
+            if url not in self.bodies:
                 raise OSError("connection refused")
-            return bodies[url]
+            return self.bodies[url]
 
         self.prompts = []
         self.fail_local = False
 
-        def run_claude(cli, prompt):
+        def run_claude(cli, prompt, timeout=None):
             self.prompts.append(prompt)
             if "BUSINESS_POLITICS_ITEMS" in prompt:
                 if self.fail_local:
@@ -685,17 +954,21 @@ class EndToEnd(TempSite):
                          "reading": [{"author": "Ed Zitron", "title": "Post", "url": "https://z.example/1",
                                       "summary": "argues"}]}
             elif "STORIES:" in prompt:
-                reply = {"entries": [{"kind": "Trend", "text": "Exchange servers everywhere",
-                                      "links": [{"anchor": "__ANCHOR__", "phrase": "Exchange"}]}]}
                 anchor = generate.item_anchor("https://sec.example/1")
-                reply = json.loads(json.dumps(reply).replace("__ANCHOR__", anchor))
+                reply = {"entries": [{"kind": "Trend", "text": "Exchange servers everywhere",
+                                      "links": [{"anchor": anchor, "phrase": "Exchange"}]}]}
             else:
                 reply = {"headline": "Exchange servers exposed", "emerging_trends": [
                     {"text": "Patch Exchange now", "topic_title": "Exchange Exposure", "link_phrase": "Exchange"}],
                     "topics": [{"title": "Exchange Exposure", "area": "Vulnerabilities",
                                 "latest_developments": "22,000 servers exposed", "summary": "Patch.",
-                                "tags": ["patch"], "sources": [{"source": "x", "url": "https://sec.example/1"}]}]}
-                if "TODAY_SO_FAR" in prompt:
+                                "tags": ["patch"],
+                                "sources": [{"source": "x", "url": "https://sec.example/1"},
+                                            {"source": "x", "url": "https://sec.example/2"}]}]}
+                if "TODAY_SO_FAR —" in prompt:
+                    # Run 2 splits the second (carried) source out as its own story;
+                    # by then https://sec.example/2 is no longer in any feed body.
+                    reply["topics"][0]["sources"] = [{"url": "https://sec.example/1"}]
                     reply["topics"].append({"title": "Second Story", "area": "Other",
                                             "latest_developments": "d", "summary": "s", "tags": [],
                                             "sources": [{"url": "https://sec.example/2"}]})
@@ -703,6 +976,7 @@ class EndToEnd(TempSite):
                                        "cost_usd": 0.01, "duration_ms": 10}
 
         self.patches = [
+            mock.patch.object(generate, "datetime", FrozenDatetime),
             mock.patch.object(generate, "load_feeds", lambda: feeds),
             mock.patch.object(generate, "http_get", http_get),
             mock.patch.object(generate, "run_claude", run_claude),
@@ -711,7 +985,7 @@ class EndToEnd(TempSite):
                               lambda errors=None: [{"label": "Dow", "value": "1.00", "pct": "+0.0%", "arrow": "="}]),
             mock.patch.object(generate.pgh_data, "weather_lines", lambda: ["Today: Sunny, high 80F."]),
             mock.patch.object(generate.pgh_data, "sports_blocks",
-                              lambda errors=None: errors.append("mlb: HTTP 403 Forbidden") or []),
+                              lambda errors=None: errors.append("mlb: HTTP 403 (server: AkamaiGHost)") or []),
             mock.patch.object(generate.time, "sleep", lambda s: None),
         ]
         for p in self.patches:
@@ -720,14 +994,15 @@ class EndToEnd(TempSite):
     def tearDown(self):
         for p in self.patches:
             p.stop()
+        generate._RUN_DEADLINE = None
         super().tearDown()
 
     def test_two_runs_carry_forward_and_survive_a_local_outage(self):
         generate.main()
-        today = datetime.now().astimezone().strftime("%Y-%m-%d")
+        today = NOW.astimezone().strftime("%Y-%m-%d")
         rec = json.loads((self.tmp / "data" / f"{today}.json").read_text())
         self.assertEqual([t["title"] for t in rec["topics"]], ["Exchange Exposure"])
-        self.assertEqual(rec["topics"][0]["sources"][0]["source"], "Sec A")  # canonical outlet
+        self.assertEqual([s["source"] for s in rec["topics"][0]["sources"]], ["Sec A", "Sec A"])
         self.assertEqual(rec["local"]["business"][0]["title"], "Budget Passes")
         self.assertEqual(rec["meta"]["served_by"], ["claude-test"])
         self.assertEqual(rec["meta"]["model_calls"], 3)
@@ -735,29 +1010,47 @@ class EndToEnd(TempSite):
         sec = next(g for g in rec["feed_health"]["groups"] if g["group"] == "security")
         self.assertEqual((sec["loaded"], sec["feeds"], sec["in_window"]), (2, 3, 2))
         self.assertEqual(sec["failed"][0]["name"], "Sec Down")
+        self.assertEqual(sec["empty"], [])  # Sec B duplicates Sec A's headlines but is not silent
         scores = next(a for a in rec["feed_health"]["aux"] if a["label"].startswith("Scores"))
         self.assertIn("HTTP 403", scores["detail"])
         self.assertTrue(any(n.startswith("Quiet day") for n in rec["notes"]))
         html = (self.tmp / "index.html").read_text()
         self.assertIn("HTTP 403", html)  # ESPN failure is visible in Feed Health
         self.assertNotIn("; ; and", html)  # empty feed groups do not leave holes in the footer
-        self.assertNotIn("TODAY_SO_FAR", self.prompts[0])
+        self.assertNotIn("TODAY_SO_FAR —", self.prompts[0])
+        local_prompt = next(p for p in self.prompts if "BUSINESS_POLITICS_ITEMS" in p)
+        self.assertNotIn("TODAY_SO_FAR_LOCAL —", local_prompt)
 
-        # Second run of the day: carry-forward block present, local call fails.
+        # Second run of the day: sec.example/2 has left every feed, so "Second
+        # Story" can only be cited through the carried record; the local call fails.
         self.prompts.clear()
         self.fail_local = True
+        self.bodies["https://sec.example/feed"] = (SEC_FEED_ONE % self.stamp, None)
+        self.bodies["https://secb.example/feed"] = (SEC_FEED_ONE % self.stamp, None)
         generate.main()
         sec_prompt = next(p for p in self.prompts if "Cluster them" in p)
-        self.assertIn("TODAY_SO_FAR", sec_prompt)
+        self.assertIn("TODAY_SO_FAR —", sec_prompt)
         self.assertIn("Exchange Exposure", sec_prompt)
+        local_prompt = next(p for p in self.prompts if "BUSINESS_POLITICS_ITEMS" in p)
+        self.assertIn("TODAY_SO_FAR_LOCAL —", local_prompt)
+        self.assertIn("Budget Passes", local_prompt)
+        self.assertIn("Carry forward EVERY item", local_prompt)
         rec2 = json.loads((self.tmp / "data" / f"{today}.json").read_text())
         self.assertEqual([t["title"] for t in rec2["topics"]], ["Exchange Exposure", "Second Story"])
+        self.assertEqual(rec2["topics"][1]["sources"],
+                         [{"source": "Sec A", "title": "", "url": "https://sec.example/2"}])
         self.assertEqual(rec2["local"]["business"][0]["title"], "Budget Passes")  # kept, not null
         self.assertTrue(rec2["meta"]["local_from"])
         self.assertTrue(any("carried over" in n for n in rec2["notes"]))
         self.assertIn("carried over", (self.tmp / "digest.txt").read_text())
         glance = rec2["glance"]
         self.assertTrue(glance and glance[0]["links"][0]["anchor"] == generate.item_anchor("https://sec.example/1"))
+
+    def test_run_aborts_without_security_feeds(self):
+        self.bodies = {k: v for k, v in self.bodies.items() if "sec" not in k}
+        with self.assertRaises(SystemExit) as ctx:
+            generate.main()
+        self.assertIn("security feeds", str(ctx.exception))
 
 
 if __name__ == "__main__":

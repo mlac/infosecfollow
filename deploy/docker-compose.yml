@@ -11,9 +11,13 @@ services:
     container_name: infosecfollow
     restart: unless-stopped
     # Run the scheduler under a minimal init so SIGTERM reaches it promptly,
-    # and give an in-flight briefing time to finish before a stop kills it.
+    # and give an in-flight briefing time to finish before a stop kills it:
+    # the longest possible run is GENERATE_TIMEOUT + 2*GIT_TIMEOUT in
+    # run-briefing.sh (1500 + 240 s), so 30 minutes covers it. A normal run
+    # takes about four minutes, and `docker stop` returns as soon as the
+    # scheduler exits, so the grace period only matters for a degraded run.
     init: true
-    stop_grace_period: 10m
+    stop_grace_period: 30m
     env_file:
       - .env
     environment:

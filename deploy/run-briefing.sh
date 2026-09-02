@@ -14,7 +14,11 @@ REMOTE="${GIT_REMOTE_URL:-https://github.com/mlac/infosecfollow.git}"
 LOCK_FILE=/tmp/infosecfollow.lock
 STAMP_FILE=/tmp/infosecfollow.last-success   # read by the Docker HEALTHCHECK
 GIT_TIMEOUT=120        # seconds for one clone/fetch/push
-GENERATE_TIMEOUT=1500  # seconds for generate.py (~60 feeds + three model calls)
+# Hard stop for generate.py. The engine sizes its own model calls and retries
+# to finish inside RUN_BUDGET (engine/generate.py, 1380 s by default), so this
+# is a backstop, not the normal bound. Keep it above RUN_BUDGET, and keep
+# docker-compose.yml's stop_grace_period above GENERATE_TIMEOUT + 2*GIT_TIMEOUT.
+GENERATE_TIMEOUT=1500
 
 echo "===== run $(date '+%Y-%m-%d %H:%M:%S %Z') ====="
 
@@ -42,6 +46,10 @@ failure() {  # tell the monitor explicitly (healthchecks.io /fail convention)
     [ -n "${HEARTBEAT_URL:-}" ] || return 0
     curl -fsS -m 10 -o /dev/null "${HEARTBEAT_URL}/fail" || true
 }
+# Any failing step (set -e: clone, fetch, reset, commit, generate, push)
+# reports to the monitor on the way out; 0 is success and 75 is the benign
+# "another run holds the lock" exit.
+trap 'st=$?; [ "$st" -eq 0 ] || [ "$st" -eq 75 ] || failure' EXIT
 
 # Supply the GitHub token for clone/fetch/push without writing it to disk, and
 # only for github.com so the credential is never offered to another host. The
@@ -77,12 +85,12 @@ rm -f .git/index.lock
 # cannot wedge the scheduler.
 timeout "$GIT_TIMEOUT" git fetch --quiet origin main
 git reset --hard origin/main
+git clean -fdq docs   # a killed run must not leave an orphan archive page for us to commit
 
 # Generate the site (stdlib-only Python; calls the Claude CLI for summaries).
 # Bounded so one stuck feed or model call can never block the next slot.
 if ! timeout "$GENERATE_TIMEOUT" python3 engine/generate.py; then
     echo "generate.py failed"
-    failure
     exit 1
 fi
 
@@ -110,6 +118,5 @@ elif printf '%s' "$push_out" | grep -qiE 'non-fast-forward|fetch first'; then
 else
     echo "push FAILED:"
     echo "$push_out"
-    failure
     exit 1
 fi
