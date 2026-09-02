@@ -13,6 +13,12 @@ import safefetch
 TIMEOUT = 20
 TZ = ZoneInfo("America/New_York")
 USER_AGENT = "infosecfollow/1.0 (https://infosecfollow.com)"
+# site.api.espn.com answers 403 to non-browser User-Agents (since 2026-08-04);
+# NWS, by contrast, asks API clients for a contact UA — so ESPN gets a browser
+# string and everything else keeps USER_AGENT.
+BROWSER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                 "AppleWebKit/537.36 (KHTML, like Gecko) "
+                 "Chrome/128.0.0.0 Safari/537.36")
 NWS_POINT = "https://api.weather.gov/points/40.4406,-79.9959"  # downtown Pittsburgh
 ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 LEAGUES = [("baseball", "mlb"), ("football", "nfl"), ("hockey", "nhl")]
@@ -20,11 +26,15 @@ TEAM_ABBR = "PIT"
 NEXT_GAME_HORIZON = timedelta(days=15)  # covers an NFL bye week; skips off-season
 
 
-def _get_json(url):
+def _get_json(url, agent=USER_AGENT):
     req = urllib.request.Request(url, headers={
-        "User-Agent": USER_AGENT, "Accept": "application/json"})
+        "User-Agent": agent, "Accept": "application/json"})
     with safefetch.safe_open(req, timeout=TIMEOUT) as resp:
         return json.loads(resp.read(4_000_000).decode("utf-8", "replace"))
+
+
+def _espn_json(path):
+    return _get_json(f"{ESPN}{path}", agent=BROWSER_AGENT)
 
 
 def weather_lines():
@@ -154,7 +164,7 @@ def _schedule_next(sport, league, now_utc):
     The teams endpoint's nextEvent field is unreliable (it returns the most
     recent completed game), so query the full schedule instead.
     """
-    sched = _get_json(f"{ESPN}/{sport}/{league}/teams/{TEAM_ABBR.lower()}/schedule")
+    sched = _espn_json(f"/{sport}/{league}/teams/{TEAM_ABBR.lower()}/schedule")
     horizon = now_utc + NEXT_GAME_HORIZON
     best = None
     for event in sched.get("events", []):
@@ -199,7 +209,7 @@ def _team_block(sport, league, now_local, now_utc):
     contradictory blurbs, so team news now comes from the model-summarized
     "Around the Teams" section (beat writers and team podcasts) instead.
     """
-    blob = _get_json(f"{ESPN}/{sport}/{league}/teams/{TEAM_ABBR.lower()}")["team"]
+    blob = _espn_json(f"/{sport}/{league}/teams/{TEAM_ABBR.lower()}")["team"]
     name = blob.get("shortDisplayName", "Pittsburgh")
     record = blob.get("record", {}).get("items", [{}])[0].get("summary", "")
 
@@ -208,7 +218,7 @@ def _team_block(sport, league, now_local, now_utc):
              now_local.strftime("%Y%m%d")]
     for date in dates:
         try:
-            board = _get_json(f"{ESPN}/{sport}/{league}/scoreboard?dates={date}")
+            board = _espn_json(f"/{sport}/{league}/scoreboard?dates={date}")
         except Exception as exc:
             print(f"  sports: {league} {date} unavailable: {str(exc)[:120]}")
             continue
