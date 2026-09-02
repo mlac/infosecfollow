@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>infosecfollow — archive</title>
+<meta name="description" content="Archive of infosecfollow briefings, one page per run.">
 <style>
   :root { color-scheme: light dark; }
   * { box-sizing: border-box; }
@@ -12,54 +13,54 @@
          font-size: 15px; line-height: 1.6; overflow-wrap: break-word;
          background: #fdfdfa; color: #1c1c1a; }
   @media (prefers-color-scheme: dark) { body { background: #161614; color: #d8d8d2; } }
+  a.skip { position: absolute; left: -999px; top: 0; }
+  a.skip:focus { position: static; display: inline-block; padding: 0.25rem 0.5rem; }
   header h1 { font-size: 1.3rem; margin: 0; letter-spacing: 0.04em; }
-  header p, footer { font-size: 0.85rem; opacity: 0.75; }
+  header p, footer { font-size: 0.85rem; opacity: 0.8; }
   hr { border: 0; border-top: 1px solid currentColor; opacity: 0.25; margin: 1.5rem 0; }
   h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em;
        margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
-  h3 { font-size: 1rem; margin: 1.75rem 0 0.25rem; }
+  h3 { font-size: 1rem; margin: 1.75rem 0 0.25rem; scroll-margin-top: 0.5rem; }
+  h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; scroll-margin-top: 0.5rem; }
   ul { padding-left: 1.25rem; margin: 0.5rem 0; }
   li { margin: 0.4rem 0; }
   p { margin: 0.5rem 0; }
   a { color: inherit; }
   .updated { font-style: italic; }
-  details.more summary { cursor: pointer; opacity: 0.7; font-size: 0.85rem; }
+  details.more summary { cursor: pointer; opacity: 0.8; font-size: 0.85rem; }
   details.more[open] summary { margin-bottom: 0.25rem; }
-  .tags { font-size: 0.8rem; opacity: 0.7; }
+  .tags { font-size: 0.85rem; opacity: 0.8; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
   .sources a { overflow-wrap: anywhere; }
   .headline { font-size: 1.05rem; font-weight: bold; margin-top: 1rem; }
+  .note { font-size: 0.85rem; font-style: italic; opacity: 0.85; }
   nav { font-size: 0.85rem; margin-top: 0.25rem; }
+  nav.jump { margin: 0.75rem 0 0; }
+  nav.jump a { margin-right: 0.25rem; }
   pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
         font-family: inherit; font-size: inherit; }
   .team { font-weight: bold; margin: 1rem 0 0.1rem; }
   .gameline { margin: 0.35rem 0 0; }
-  .lbl { opacity: 0.6; }
-  .sub { opacity: 0.65; margin: 0.1rem 0 0 1.4em; }
-  a.game { color: #9a6f00; font-weight: bold; text-underline-offset: 2px;
+  .lbl { opacity: 0.75; }
+  .sub { opacity: 0.8; margin: 0.1rem 0 0 1.4em; }
+  a.game { color: #7a5700; font-weight: bold; text-underline-offset: 2px;
            overflow-wrap: anywhere; }
-  ul.headlines { margin: 0.25rem 0 0; }
   @media (prefers-color-scheme: dark) { a.game { color: #ffd24a; } }
-  .index { font-size: 0.85rem; opacity: 0.85; margin: 0.75rem 0; }
-  .index a { margin-right: 0.25rem; }
-  .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.7; }
+  .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.8; }
   @media (prefers-color-scheme: dark) {
     .up { color: #5dd48f; } .down { color: #ff8a80; }
   }
-  h3.area { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
-            opacity: 0.75; margin: 2rem 0 0; }
-  h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; }
+  .health { font-size: 0.85rem; }
   /* per-story "back to top" */
-  a.totop { font-size: 0.78rem; opacity: 0.5; text-decoration: none; white-space: nowrap; }
-  h2 { scroll-margin-top: 0.5rem; }
+  a.totop { font-size: 0.85rem; opacity: 0.75; text-decoration: none; white-space: nowrap; }
   /* combined trends + key-updates list: clearly underline the inline jump links */
   h2#glance + ul a { text-decoration: underline; text-underline-offset: 2px; }
   li.glance { margin: 0.5rem 0; }
-  .glabel { display: inline-block; font-size: 0.72rem; text-transform: uppercase;
-            letter-spacing: 0.06em; font-weight: bold; opacity: 0.85;
+  .glabel { display: inline-block; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.06em; font-weight: bold;
             padding: 0 0.35rem; margin-right: 0.4rem; border-radius: 3px; }
   li.trend .glabel { color: #157f3b; background: rgba(21,127,59,.14); }
-  li.update .glabel { color: #9a6f00; background: rgba(154,111,0,.16); }
+  li.update .glabel { color: #7a5700; background: rgba(122,87,0,.14); }
   @media (prefers-color-scheme: dark) {
     li.trend .glabel { color: #5dd48f; background: rgba(93,212,143,.16); }
     li.update .glabel { color: #ffd24a; background: rgba(255,210,74,.16); }
@@ -67,215 +68,218 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header><h1><a href="../index.html" style="text-decoration:none">infosecfollow</a></h1><p>archive of briefings (multiple runs per day)</p></header>
-<h3>2026-09-02</h3>
+<main id="main">
+<h2>2026-09-02</h2>
 <ul>
+<li><a href="2026-09-02-1239.html">12:39</a> (<a href="2026-09-02-1239.txt">txt</a>)</li>
 <li><a href="2026-09-02-1006.html">10:06</a> (<a href="2026-09-02-1006.txt">txt</a>)</li>
 <li><a href="2026-09-02-0706.html">07:06</a> (<a href="2026-09-02-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-09-01</h3>
+<h2>2026-09-01</h2>
 <ul>
 <li><a href="2026-09-01-1935.html">19:35</a> (<a href="2026-09-01-1935.txt">txt</a>)</li>
 <li><a href="2026-09-01-1335.html">13:35</a> (<a href="2026-09-01-1335.txt">txt</a>)</li>
 <li><a href="2026-09-01-1006.html">10:06</a> (<a href="2026-09-01-1006.txt">txt</a>)</li>
 <li><a href="2026-09-01-0706.html">07:06</a> (<a href="2026-09-01-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-31</h3>
+<h2>2026-08-31</h2>
 <ul>
 <li><a href="2026-08-31-1935.html">19:35</a> (<a href="2026-08-31-1935.txt">txt</a>)</li>
 <li><a href="2026-08-31-1334.html">13:34</a> (<a href="2026-08-31-1334.txt">txt</a>)</li>
 <li><a href="2026-08-31-1005.html">10:05</a> (<a href="2026-08-31-1005.txt">txt</a>)</li>
 <li><a href="2026-08-31-0706.html">07:06</a> (<a href="2026-08-31-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-30</h3>
+<h2>2026-08-30</h2>
 <ul>
 <li><a href="2026-08-30-1935.html">19:35</a> (<a href="2026-08-30-1935.txt">txt</a>)</li>
 <li><a href="2026-08-30-0806.html">08:06</a> (<a href="2026-08-30-0806.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-29</h3>
+<h2>2026-08-29</h2>
 <ul>
 <li><a href="2026-08-29-1938.html">19:38</a> (<a href="2026-08-29-1938.txt">txt</a>)</li>
 <li><a href="2026-08-29-0806.html">08:06</a> (<a href="2026-08-29-0806.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-28</h3>
+<h2>2026-08-28</h2>
 <ul>
 <li><a href="2026-08-28-1935.html">19:35</a> (<a href="2026-08-28-1935.txt">txt</a>)</li>
 <li><a href="2026-08-28-1335.html">13:35</a> (<a href="2026-08-28-1335.txt">txt</a>)</li>
 <li><a href="2026-08-28-1007.html">10:07</a> (<a href="2026-08-28-1007.txt">txt</a>)</li>
 <li><a href="2026-08-28-0705.html">07:05</a> (<a href="2026-08-28-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-27</h3>
+<h2>2026-08-27</h2>
 <ul>
 <li><a href="2026-08-27-1934.html">19:34</a> (<a href="2026-08-27-1934.txt">txt</a>)</li>
 <li><a href="2026-08-27-1335.html">13:35</a> (<a href="2026-08-27-1335.txt">txt</a>)</li>
 <li><a href="2026-08-27-1007.html">10:07</a> (<a href="2026-08-27-1007.txt">txt</a>)</li>
 <li><a href="2026-08-27-0706.html">07:06</a> (<a href="2026-08-27-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-26</h3>
+<h2>2026-08-26</h2>
 <ul>
 <li><a href="2026-08-26-1937.html">19:37</a> (<a href="2026-08-26-1937.txt">txt</a>)</li>
 <li><a href="2026-08-26-1335.html">13:35</a> (<a href="2026-08-26-1335.txt">txt</a>)</li>
 <li><a href="2026-08-26-1007.html">10:07</a> (<a href="2026-08-26-1007.txt">txt</a>)</li>
 <li><a href="2026-08-26-0706.html">07:06</a> (<a href="2026-08-26-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-25</h3>
+<h2>2026-08-25</h2>
 <ul>
 <li><a href="2026-08-25-1935.html">19:35</a> (<a href="2026-08-25-1935.txt">txt</a>)</li>
 <li><a href="2026-08-25-1336.html">13:36</a> (<a href="2026-08-25-1336.txt">txt</a>)</li>
 <li><a href="2026-08-25-1005.html">10:05</a> (<a href="2026-08-25-1005.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-24</h3>
+<h2>2026-08-24</h2>
 <ul>
 <li><a href="2026-08-24-1935.html">19:35</a> (<a href="2026-08-24-1935.txt">txt</a>)</li>
 <li><a href="2026-08-24-1336.html">13:36</a> (<a href="2026-08-24-1336.txt">txt</a>)</li>
 <li><a href="2026-08-24-1005.html">10:05</a> (<a href="2026-08-24-1005.txt">txt</a>)</li>
 <li><a href="2026-08-24-0705.html">07:05</a> (<a href="2026-08-24-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-23</h3>
+<h2>2026-08-23</h2>
 <ul>
 <li><a href="2026-08-23-1936.html">19:36</a> (<a href="2026-08-23-1936.txt">txt</a>)</li>
 <li><a href="2026-08-23-0804.html">08:04</a> (<a href="2026-08-23-0804.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-22</h3>
+<h2>2026-08-22</h2>
 <ul>
 <li><a href="2026-08-22-1936.html">19:36</a> (<a href="2026-08-22-1936.txt">txt</a>)</li>
 <li><a href="2026-08-22-0805.html">08:05</a> (<a href="2026-08-22-0805.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-21</h3>
+<h2>2026-08-21</h2>
 <ul>
 <li><a href="2026-08-21-1936.html">19:36</a> (<a href="2026-08-21-1936.txt">txt</a>)</li>
 <li><a href="2026-08-21-1335.html">13:35</a> (<a href="2026-08-21-1335.txt">txt</a>)</li>
 <li><a href="2026-08-21-1006.html">10:06</a> (<a href="2026-08-21-1006.txt">txt</a>)</li>
 <li><a href="2026-08-21-0706.html">07:06</a> (<a href="2026-08-21-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-20</h3>
+<h2>2026-08-20</h2>
 <ul>
 <li><a href="2026-08-20-1936.html">19:36</a> (<a href="2026-08-20-1936.txt">txt</a>)</li>
 <li><a href="2026-08-20-1336.html">13:36</a> (<a href="2026-08-20-1336.txt">txt</a>)</li>
 <li><a href="2026-08-20-1006.html">10:06</a> (<a href="2026-08-20-1006.txt">txt</a>)</li>
 <li><a href="2026-08-20-0708.html">07:08</a> (<a href="2026-08-20-0708.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-19</h3>
+<h2>2026-08-19</h2>
 <ul>
 <li><a href="2026-08-19-1936.html">19:36</a> (<a href="2026-08-19-1936.txt">txt</a>)</li>
 <li><a href="2026-08-19-1335.html">13:35</a> (<a href="2026-08-19-1335.txt">txt</a>)</li>
 <li><a href="2026-08-19-1007.html">10:07</a> (<a href="2026-08-19-1007.txt">txt</a>)</li>
 <li><a href="2026-08-19-0705.html">07:05</a> (<a href="2026-08-19-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-18</h3>
+<h2>2026-08-18</h2>
 <ul>
 <li><a href="2026-08-18-1935.html">19:35</a> (<a href="2026-08-18-1935.txt">txt</a>)</li>
 <li><a href="2026-08-18-1337.html">13:37</a> (<a href="2026-08-18-1337.txt">txt</a>)</li>
 <li><a href="2026-08-18-1007.html">10:07</a> (<a href="2026-08-18-1007.txt">txt</a>)</li>
 <li><a href="2026-08-18-0705.html">07:05</a> (<a href="2026-08-18-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-17</h3>
+<h2>2026-08-17</h2>
 <ul>
 <li><a href="2026-08-17-1935.html">19:35</a> (<a href="2026-08-17-1935.txt">txt</a>)</li>
 <li><a href="2026-08-17-1335.html">13:35</a> (<a href="2026-08-17-1335.txt">txt</a>)</li>
 <li><a href="2026-08-17-1006.html">10:06</a> (<a href="2026-08-17-1006.txt">txt</a>)</li>
 <li><a href="2026-08-17-0707.html">07:07</a> (<a href="2026-08-17-0707.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-16</h3>
+<h2>2026-08-16</h2>
 <ul>
 <li><a href="2026-08-16-1936.html">19:36</a> (<a href="2026-08-16-1936.txt">txt</a>)</li>
 <li><a href="2026-08-16-0806.html">08:06</a> (<a href="2026-08-16-0806.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-15</h3>
+<h2>2026-08-15</h2>
 <ul>
 <li><a href="2026-08-15-1935.html">19:35</a> (<a href="2026-08-15-1935.txt">txt</a>)</li>
 <li><a href="2026-08-15-0806.html">08:06</a> (<a href="2026-08-15-0806.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-14</h3>
+<h2>2026-08-14</h2>
 <ul>
 <li><a href="2026-08-14-1935.html">19:35</a> (<a href="2026-08-14-1935.txt">txt</a>)</li>
 <li><a href="2026-08-14-1335.html">13:35</a> (<a href="2026-08-14-1335.txt">txt</a>)</li>
 <li><a href="2026-08-14-1005.html">10:05</a> (<a href="2026-08-14-1005.txt">txt</a>)</li>
 <li><a href="2026-08-14-0706.html">07:06</a> (<a href="2026-08-14-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-13</h3>
+<h2>2026-08-13</h2>
 <ul>
 <li><a href="2026-08-13-1935.html">19:35</a> (<a href="2026-08-13-1935.txt">txt</a>)</li>
 <li><a href="2026-08-13-1337.html">13:37</a> (<a href="2026-08-13-1337.txt">txt</a>)</li>
 <li><a href="2026-08-13-1005.html">10:05</a> (<a href="2026-08-13-1005.txt">txt</a>)</li>
 <li><a href="2026-08-13-0705.html">07:05</a> (<a href="2026-08-13-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-12</h3>
+<h2>2026-08-12</h2>
 <ul>
 <li><a href="2026-08-12-1936.html">19:36</a> (<a href="2026-08-12-1936.txt">txt</a>)</li>
 <li><a href="2026-08-12-1336.html">13:36</a> (<a href="2026-08-12-1336.txt">txt</a>)</li>
 <li><a href="2026-08-12-1006.html">10:06</a> (<a href="2026-08-12-1006.txt">txt</a>)</li>
 <li><a href="2026-08-12-0705.html">07:05</a> (<a href="2026-08-12-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-11</h3>
+<h2>2026-08-11</h2>
 <ul>
 <li><a href="2026-08-11-1936.html">19:36</a> (<a href="2026-08-11-1936.txt">txt</a>)</li>
 <li><a href="2026-08-11-1335.html">13:35</a> (<a href="2026-08-11-1335.txt">txt</a>)</li>
 <li><a href="2026-08-11-1005.html">10:05</a> (<a href="2026-08-11-1005.txt">txt</a>)</li>
 <li><a href="2026-08-11-0705.html">07:05</a> (<a href="2026-08-11-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-10</h3>
+<h2>2026-08-10</h2>
 <ul>
 <li><a href="2026-08-10-1936.html">19:36</a> (<a href="2026-08-10-1936.txt">txt</a>)</li>
 <li><a href="2026-08-10-1335.html">13:35</a> (<a href="2026-08-10-1335.txt">txt</a>)</li>
 <li><a href="2026-08-10-1006.html">10:06</a> (<a href="2026-08-10-1006.txt">txt</a>)</li>
 <li><a href="2026-08-10-0706.html">07:06</a> (<a href="2026-08-10-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-09</h3>
+<h2>2026-08-09</h2>
 <ul>
 <li><a href="2026-08-09-1936.html">19:36</a> (<a href="2026-08-09-1936.txt">txt</a>)</li>
 <li><a href="2026-08-09-0806.html">08:06</a> (<a href="2026-08-09-0806.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-08</h3>
+<h2>2026-08-08</h2>
 <ul>
 <li><a href="2026-08-08-1937.html">19:37</a> (<a href="2026-08-08-1937.txt">txt</a>)</li>
 <li><a href="2026-08-08-0806.html">08:06</a> (<a href="2026-08-08-0806.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-07</h3>
+<h2>2026-08-07</h2>
 <ul>
 <li><a href="2026-08-07-1935.html">19:35</a> (<a href="2026-08-07-1935.txt">txt</a>)</li>
 <li><a href="2026-08-07-1336.html">13:36</a> (<a href="2026-08-07-1336.txt">txt</a>)</li>
 <li><a href="2026-08-07-1008.html">10:08</a> (<a href="2026-08-07-1008.txt">txt</a>)</li>
 <li><a href="2026-08-07-0707.html">07:07</a> (<a href="2026-08-07-0707.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-06</h3>
+<h2>2026-08-06</h2>
 <ul>
 <li><a href="2026-08-06-1935.html">19:35</a> (<a href="2026-08-06-1935.txt">txt</a>)</li>
 <li><a href="2026-08-06-1335.html">13:35</a> (<a href="2026-08-06-1335.txt">txt</a>)</li>
 <li><a href="2026-08-06-1008.html">10:08</a> (<a href="2026-08-06-1008.txt">txt</a>)</li>
 <li><a href="2026-08-06-0706.html">07:06</a> (<a href="2026-08-06-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-05</h3>
+<h2>2026-08-05</h2>
 <ul>
 <li><a href="2026-08-05-1936.html">19:36</a> (<a href="2026-08-05-1936.txt">txt</a>)</li>
 <li><a href="2026-08-05-1336.html">13:36</a> (<a href="2026-08-05-1336.txt">txt</a>)</li>
 <li><a href="2026-08-05-0706.html">07:06</a> (<a href="2026-08-05-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-04</h3>
+<h2>2026-08-04</h2>
 <ul>
 <li><a href="2026-08-04-1936.html">19:36</a> (<a href="2026-08-04-1936.txt">txt</a>)</li>
 <li><a href="2026-08-04-1336.html">13:36</a> (<a href="2026-08-04-1336.txt">txt</a>)</li>
 <li><a href="2026-08-04-1005.html">10:05</a> (<a href="2026-08-04-1005.txt">txt</a>)</li>
 <li><a href="2026-08-04-0706.html">07:06</a> (<a href="2026-08-04-0706.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-03</h3>
+<h2>2026-08-03</h2>
 <ul>
 <li><a href="2026-08-03-1937.html">19:37</a> (<a href="2026-08-03-1937.txt">txt</a>)</li>
 <li><a href="2026-08-03-1336.html">13:36</a> (<a href="2026-08-03-1336.txt">txt</a>)</li>
 <li><a href="2026-08-03-1006.html">10:06</a> (<a href="2026-08-03-1006.txt">txt</a>)</li>
 <li><a href="2026-08-03-0705.html">07:05</a> (<a href="2026-08-03-0705.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-02</h3>
+<h2>2026-08-02</h2>
 <ul>
 <li><a href="2026-08-02-1936.html">19:36</a> (<a href="2026-08-02-1936.txt">txt</a>)</li>
 <li><a href="2026-08-02-0806.html">08:06</a> (<a href="2026-08-02-0806.txt">txt</a>)</li>
 </ul>
-<h3>2026-08-01</h3>
+<h2>2026-08-01</h2>
 <ul>
 <li><a href="2026-08-01-1937.html">19:37</a> (<a href="2026-08-01-1937.txt">txt</a>)</li>
 <li><a href="2026-08-01-0807.html">08:07</a> (<a href="2026-08-01-0807.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-31</h3>
+<h2>2026-07-31</h2>
 <ul>
 <li><a href="2026-07-31-1937.html">19:37</a> (<a href="2026-07-31-1937.txt">txt</a>)</li>
 <li><a href="2026-07-31-1701.html">17:01</a> (<a href="2026-07-31-1701.txt">txt</a>)</li>
@@ -285,7 +289,7 @@
 <li><a href="2026-07-31-0906.html">09:06</a> (<a href="2026-07-31-0906.txt">txt</a>)</li>
 <li><a href="2026-07-31-0606.html">06:06</a> (<a href="2026-07-31-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-30</h3>
+<h2>2026-07-30</h2>
 <ul>
 <li><a href="2026-07-30-2107.html">21:07</a> (<a href="2026-07-30-2107.txt">txt</a>)</li>
 <li><a href="2026-07-30-1607.html">16:07</a> (<a href="2026-07-30-1607.txt">txt</a>)</li>
@@ -293,14 +297,14 @@
 <li><a href="2026-07-30-0906.html">09:06</a> (<a href="2026-07-30-0906.txt">txt</a>)</li>
 <li><a href="2026-07-30-0606.html">06:06</a> (<a href="2026-07-30-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-29</h3>
+<h2>2026-07-29</h2>
 <ul>
 <li><a href="2026-07-29-2105.html">21:05</a> (<a href="2026-07-29-2105.txt">txt</a>)</li>
 <li><a href="2026-07-29-1206.html">12:06</a> (<a href="2026-07-29-1206.txt">txt</a>)</li>
 <li><a href="2026-07-29-0907.html">09:07</a> (<a href="2026-07-29-0907.txt">txt</a>)</li>
 <li><a href="2026-07-29-0606.html">06:06</a> (<a href="2026-07-29-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-28</h3>
+<h2>2026-07-28</h2>
 <ul>
 <li><a href="2026-07-28-2105.html">21:05</a> (<a href="2026-07-28-2105.txt">txt</a>)</li>
 <li><a href="2026-07-28-1607.html">16:07</a> (<a href="2026-07-28-1607.txt">txt</a>)</li>
@@ -308,7 +312,7 @@
 <li><a href="2026-07-28-0906.html">09:06</a> (<a href="2026-07-28-0906.txt">txt</a>)</li>
 <li><a href="2026-07-28-0606.html">06:06</a> (<a href="2026-07-28-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-27</h3>
+<h2>2026-07-27</h2>
 <ul>
 <li><a href="2026-07-27-2105.html">21:05</a> (<a href="2026-07-27-2105.txt">txt</a>)</li>
 <li><a href="2026-07-27-1605.html">16:05</a> (<a href="2026-07-27-1605.txt">txt</a>)</li>
@@ -316,7 +320,7 @@
 <li><a href="2026-07-27-0905.html">09:05</a> (<a href="2026-07-27-0905.txt">txt</a>)</li>
 <li><a href="2026-07-27-0605.html">06:05</a> (<a href="2026-07-27-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-26</h3>
+<h2>2026-07-26</h2>
 <ul>
 <li><a href="2026-07-26-2106.html">21:06</a> (<a href="2026-07-26-2106.txt">txt</a>)</li>
 <li><a href="2026-07-26-1606.html">16:06</a> (<a href="2026-07-26-1606.txt">txt</a>)</li>
@@ -324,7 +328,7 @@
 <li><a href="2026-07-26-0906.html">09:06</a> (<a href="2026-07-26-0906.txt">txt</a>)</li>
 <li><a href="2026-07-26-0605.html">06:05</a> (<a href="2026-07-26-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-25</h3>
+<h2>2026-07-25</h2>
 <ul>
 <li><a href="2026-07-25-2107.html">21:07</a> (<a href="2026-07-25-2107.txt">txt</a>)</li>
 <li><a href="2026-07-25-1606.html">16:06</a> (<a href="2026-07-25-1606.txt">txt</a>)</li>
@@ -332,7 +336,7 @@
 <li><a href="2026-07-25-0906.html">09:06</a> (<a href="2026-07-25-0906.txt">txt</a>)</li>
 <li><a href="2026-07-25-0606.html">06:06</a> (<a href="2026-07-25-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-24</h3>
+<h2>2026-07-24</h2>
 <ul>
 <li><a href="2026-07-24-2107.html">21:07</a> (<a href="2026-07-24-2107.txt">txt</a>)</li>
 <li><a href="2026-07-24-1605.html">16:05</a> (<a href="2026-07-24-1605.txt">txt</a>)</li>
@@ -340,7 +344,7 @@
 <li><a href="2026-07-24-0906.html">09:06</a> (<a href="2026-07-24-0906.txt">txt</a>)</li>
 <li><a href="2026-07-24-0606.html">06:06</a> (<a href="2026-07-24-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-23</h3>
+<h2>2026-07-23</h2>
 <ul>
 <li><a href="2026-07-23-2106.html">21:06</a> (<a href="2026-07-23-2106.txt">txt</a>)</li>
 <li><a href="2026-07-23-1606.html">16:06</a> (<a href="2026-07-23-1606.txt">txt</a>)</li>
@@ -348,13 +352,13 @@
 <li><a href="2026-07-23-0905.html">09:05</a> (<a href="2026-07-23-0905.txt">txt</a>)</li>
 <li><a href="2026-07-23-0606.html">06:06</a> (<a href="2026-07-23-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-22</h3>
+<h2>2026-07-22</h2>
 <ul>
 <li><a href="2026-07-22-2106.html">21:06</a> (<a href="2026-07-22-2106.txt">txt</a>)</li>
 <li><a href="2026-07-22-1605.html">16:05</a> (<a href="2026-07-22-1605.txt">txt</a>)</li>
 <li><a href="2026-07-22-1205.html">12:05</a> (<a href="2026-07-22-1205.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-21</h3>
+<h2>2026-07-21</h2>
 <ul>
 <li><a href="2026-07-21-2106.html">21:06</a> (<a href="2026-07-21-2106.txt">txt</a>)</li>
 <li><a href="2026-07-21-1605.html">16:05</a> (<a href="2026-07-21-1605.txt">txt</a>)</li>
@@ -362,14 +366,14 @@
 <li><a href="2026-07-21-0905.html">09:05</a> (<a href="2026-07-21-0905.txt">txt</a>)</li>
 <li><a href="2026-07-21-0605.html">06:05</a> (<a href="2026-07-21-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-20</h3>
+<h2>2026-07-20</h2>
 <ul>
 <li><a href="2026-07-20-2105.html">21:05</a> (<a href="2026-07-20-2105.txt">txt</a>)</li>
 <li><a href="2026-07-20-1606.html">16:06</a> (<a href="2026-07-20-1606.txt">txt</a>)</li>
 <li><a href="2026-07-20-0906.html">09:06</a> (<a href="2026-07-20-0906.txt">txt</a>)</li>
 <li><a href="2026-07-20-0605.html">06:05</a> (<a href="2026-07-20-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-19</h3>
+<h2>2026-07-19</h2>
 <ul>
 <li><a href="2026-07-19-2104.html">21:04</a> (<a href="2026-07-19-2104.txt">txt</a>)</li>
 <li><a href="2026-07-19-1607.html">16:07</a> (<a href="2026-07-19-1607.txt">txt</a>)</li>
@@ -377,7 +381,7 @@
 <li><a href="2026-07-19-0906.html">09:06</a> (<a href="2026-07-19-0906.txt">txt</a>)</li>
 <li><a href="2026-07-19-0605.html">06:05</a> (<a href="2026-07-19-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-18</h3>
+<h2>2026-07-18</h2>
 <ul>
 <li><a href="2026-07-18-2106.html">21:06</a> (<a href="2026-07-18-2106.txt">txt</a>)</li>
 <li><a href="2026-07-18-1606.html">16:06</a> (<a href="2026-07-18-1606.txt">txt</a>)</li>
@@ -385,7 +389,7 @@
 <li><a href="2026-07-18-0906.html">09:06</a> (<a href="2026-07-18-0906.txt">txt</a>)</li>
 <li><a href="2026-07-18-0607.html">06:07</a> (<a href="2026-07-18-0607.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-17</h3>
+<h2>2026-07-17</h2>
 <ul>
 <li><a href="2026-07-17-2106.html">21:06</a> (<a href="2026-07-17-2106.txt">txt</a>)</li>
 <li><a href="2026-07-17-1605.html">16:05</a> (<a href="2026-07-17-1605.txt">txt</a>)</li>
@@ -393,7 +397,7 @@
 <li><a href="2026-07-17-0906.html">09:06</a> (<a href="2026-07-17-0906.txt">txt</a>)</li>
 <li><a href="2026-07-17-0605.html">06:05</a> (<a href="2026-07-17-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-16</h3>
+<h2>2026-07-16</h2>
 <ul>
 <li><a href="2026-07-16-2105.html">21:05</a> (<a href="2026-07-16-2105.txt">txt</a>)</li>
 <li><a href="2026-07-16-1606.html">16:06</a> (<a href="2026-07-16-1606.txt">txt</a>)</li>
@@ -401,7 +405,7 @@
 <li><a href="2026-07-16-0906.html">09:06</a> (<a href="2026-07-16-0906.txt">txt</a>)</li>
 <li><a href="2026-07-16-0606.html">06:06</a> (<a href="2026-07-16-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-15</h3>
+<h2>2026-07-15</h2>
 <ul>
 <li><a href="2026-07-15-2106.html">21:06</a> (<a href="2026-07-15-2106.txt">txt</a>)</li>
 <li><a href="2026-07-15-1605.html">16:05</a> (<a href="2026-07-15-1605.txt">txt</a>)</li>
@@ -409,7 +413,7 @@
 <li><a href="2026-07-15-0906.html">09:06</a> (<a href="2026-07-15-0906.txt">txt</a>)</li>
 <li><a href="2026-07-15-0606.html">06:06</a> (<a href="2026-07-15-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-14</h3>
+<h2>2026-07-14</h2>
 <ul>
 <li><a href="2026-07-14-2106.html">21:06</a> (<a href="2026-07-14-2106.txt">txt</a>)</li>
 <li><a href="2026-07-14-1605.html">16:05</a> (<a href="2026-07-14-1605.txt">txt</a>)</li>
@@ -417,7 +421,7 @@
 <li><a href="2026-07-14-0908.html">09:08</a> (<a href="2026-07-14-0908.txt">txt</a>)</li>
 <li><a href="2026-07-14-0605.html">06:05</a> (<a href="2026-07-14-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-13</h3>
+<h2>2026-07-13</h2>
 <ul>
 <li><a href="2026-07-13-2105.html">21:05</a> (<a href="2026-07-13-2105.txt">txt</a>)</li>
 <li><a href="2026-07-13-1606.html">16:06</a> (<a href="2026-07-13-1606.txt">txt</a>)</li>
@@ -425,7 +429,7 @@
 <li><a href="2026-07-13-0906.html">09:06</a> (<a href="2026-07-13-0906.txt">txt</a>)</li>
 <li><a href="2026-07-13-0605.html">06:05</a> (<a href="2026-07-13-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-12</h3>
+<h2>2026-07-12</h2>
 <ul>
 <li><a href="2026-07-12-2106.html">21:06</a> (<a href="2026-07-12-2106.txt">txt</a>)</li>
 <li><a href="2026-07-12-1606.html">16:06</a> (<a href="2026-07-12-1606.txt">txt</a>)</li>
@@ -434,7 +438,7 @@
 <li><a href="2026-07-12-0606.html">06:06</a> (<a href="2026-07-12-0606.txt">txt</a>)</li>
 <li><a href="2026-07-12-0217.html">02:17</a> (<a href="2026-07-12-0217.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-11</h3>
+<h2>2026-07-11</h2>
 <ul>
 <li><a href="2026-07-11-2106.html">21:06</a> (<a href="2026-07-11-2106.txt">txt</a>)</li>
 <li><a href="2026-07-11-1605.html">16:05</a> (<a href="2026-07-11-1605.txt">txt</a>)</li>
@@ -442,7 +446,7 @@
 <li><a href="2026-07-11-0905.html">09:05</a> (<a href="2026-07-11-0905.txt">txt</a>)</li>
 <li><a href="2026-07-11-0606.html">06:06</a> (<a href="2026-07-11-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-10</h3>
+<h2>2026-07-10</h2>
 <ul>
 <li><a href="2026-07-10-2107.html">21:07</a> (<a href="2026-07-10-2107.txt">txt</a>)</li>
 <li><a href="2026-07-10-1607.html">16:07</a> (<a href="2026-07-10-1607.txt">txt</a>)</li>
@@ -450,7 +454,7 @@
 <li><a href="2026-07-10-0905.html">09:05</a> (<a href="2026-07-10-0905.txt">txt</a>)</li>
 <li><a href="2026-07-10-0606.html">06:06</a> (<a href="2026-07-10-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-09</h3>
+<h2>2026-07-09</h2>
 <ul>
 <li><a href="2026-07-09-2106.html">21:06</a> (<a href="2026-07-09-2106.txt">txt</a>)</li>
 <li><a href="2026-07-09-1607.html">16:07</a> (<a href="2026-07-09-1607.txt">txt</a>)</li>
@@ -458,7 +462,7 @@
 <li><a href="2026-07-09-0906.html">09:06</a> (<a href="2026-07-09-0906.txt">txt</a>)</li>
 <li><a href="2026-07-09-0606.html">06:06</a> (<a href="2026-07-09-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-08</h3>
+<h2>2026-07-08</h2>
 <ul>
 <li><a href="2026-07-08-2106.html">21:06</a> (<a href="2026-07-08-2106.txt">txt</a>)</li>
 <li><a href="2026-07-08-1606.html">16:06</a> (<a href="2026-07-08-1606.txt">txt</a>)</li>
@@ -466,7 +470,7 @@
 <li><a href="2026-07-08-0906.html">09:06</a> (<a href="2026-07-08-0906.txt">txt</a>)</li>
 <li><a href="2026-07-08-0606.html">06:06</a> (<a href="2026-07-08-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-07</h3>
+<h2>2026-07-07</h2>
 <ul>
 <li><a href="2026-07-07-2105.html">21:05</a> (<a href="2026-07-07-2105.txt">txt</a>)</li>
 <li><a href="2026-07-07-1605.html">16:05</a> (<a href="2026-07-07-1605.txt">txt</a>)</li>
@@ -474,11 +478,11 @@
 <li><a href="2026-07-07-0905.html">09:05</a> (<a href="2026-07-07-0905.txt">txt</a>)</li>
 <li><a href="2026-07-07-0606.html">06:06</a> (<a href="2026-07-07-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-06</h3>
+<h2>2026-07-06</h2>
 <ul>
 <li><a href="2026-07-06-2106.html">21:06</a> (<a href="2026-07-06-2106.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-05</h3>
+<h2>2026-07-05</h2>
 <ul>
 <li><a href="2026-07-05-2107.html">21:07</a> (<a href="2026-07-05-2107.txt">txt</a>)</li>
 <li><a href="2026-07-05-1607.html">16:07</a> (<a href="2026-07-05-1607.txt">txt</a>)</li>
@@ -486,7 +490,7 @@
 <li><a href="2026-07-05-0907.html">09:07</a> (<a href="2026-07-05-0907.txt">txt</a>)</li>
 <li><a href="2026-07-05-0605.html">06:05</a> (<a href="2026-07-05-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-04</h3>
+<h2>2026-07-04</h2>
 <ul>
 <li><a href="2026-07-04-2105.html">21:05</a> (<a href="2026-07-04-2105.txt">txt</a>)</li>
 <li><a href="2026-07-04-1607.html">16:07</a> (<a href="2026-07-04-1607.txt">txt</a>)</li>
@@ -494,7 +498,7 @@
 <li><a href="2026-07-04-0906.html">09:06</a> (<a href="2026-07-04-0906.txt">txt</a>)</li>
 <li><a href="2026-07-04-0609.html">06:09</a> (<a href="2026-07-04-0609.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-03</h3>
+<h2>2026-07-03</h2>
 <ul>
 <li><a href="2026-07-03-2107.html">21:07</a> (<a href="2026-07-03-2107.txt">txt</a>)</li>
 <li><a href="2026-07-03-1607.html">16:07</a> (<a href="2026-07-03-1607.txt">txt</a>)</li>
@@ -502,7 +506,7 @@
 <li><a href="2026-07-03-0907.html">09:07</a> (<a href="2026-07-03-0907.txt">txt</a>)</li>
 <li><a href="2026-07-03-0606.html">06:06</a> (<a href="2026-07-03-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-02</h3>
+<h2>2026-07-02</h2>
 <ul>
 <li><a href="2026-07-02-2106.html">21:06</a> (<a href="2026-07-02-2106.txt">txt</a>)</li>
 <li><a href="2026-07-02-1606.html">16:06</a> (<a href="2026-07-02-1606.txt">txt</a>)</li>
@@ -510,7 +514,7 @@
 <li><a href="2026-07-02-0905.html">09:05</a> (<a href="2026-07-02-0905.txt">txt</a>)</li>
 <li><a href="2026-07-02-0605.html">06:05</a> (<a href="2026-07-02-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-07-01</h3>
+<h2>2026-07-01</h2>
 <ul>
 <li><a href="2026-07-01-2106.html">21:06</a> (<a href="2026-07-01-2106.txt">txt</a>)</li>
 <li><a href="2026-07-01-1605.html">16:05</a> (<a href="2026-07-01-1605.txt">txt</a>)</li>
@@ -518,7 +522,7 @@
 <li><a href="2026-07-01-0905.html">09:05</a> (<a href="2026-07-01-0905.txt">txt</a>)</li>
 <li><a href="2026-07-01-0605.html">06:05</a> (<a href="2026-07-01-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-30</h3>
+<h2>2026-06-30</h2>
 <ul>
 <li><a href="2026-06-30-2104.html">21:04</a> (<a href="2026-06-30-2104.txt">txt</a>)</li>
 <li><a href="2026-06-30-1605.html">16:05</a> (<a href="2026-06-30-1605.txt">txt</a>)</li>
@@ -526,7 +530,7 @@
 <li><a href="2026-06-30-0909.html">09:09</a> (<a href="2026-06-30-0909.txt">txt</a>)</li>
 <li><a href="2026-06-30-0606.html">06:06</a> (<a href="2026-06-30-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-29</h3>
+<h2>2026-06-29</h2>
 <ul>
 <li><a href="2026-06-29-2105.html">21:05</a> (<a href="2026-06-29-2105.txt">txt</a>)</li>
 <li><a href="2026-06-29-1605.html">16:05</a> (<a href="2026-06-29-1605.txt">txt</a>)</li>
@@ -534,7 +538,7 @@
 <li><a href="2026-06-29-0906.html">09:06</a> (<a href="2026-06-29-0906.txt">txt</a>)</li>
 <li><a href="2026-06-29-0605.html">06:05</a> (<a href="2026-06-29-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-28</h3>
+<h2>2026-06-28</h2>
 <ul>
 <li><a href="2026-06-28-2106.html">21:06</a> (<a href="2026-06-28-2106.txt">txt</a>)</li>
 <li><a href="2026-06-28-1606.html">16:06</a> (<a href="2026-06-28-1606.txt">txt</a>)</li>
@@ -542,7 +546,7 @@
 <li><a href="2026-06-28-0906.html">09:06</a> (<a href="2026-06-28-0906.txt">txt</a>)</li>
 <li><a href="2026-06-28-0605.html">06:05</a> (<a href="2026-06-28-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-27</h3>
+<h2>2026-06-27</h2>
 <ul>
 <li><a href="2026-06-27-2105.html">21:05</a> (<a href="2026-06-27-2105.txt">txt</a>)</li>
 <li><a href="2026-06-27-1605.html">16:05</a> (<a href="2026-06-27-1605.txt">txt</a>)</li>
@@ -550,7 +554,7 @@
 <li><a href="2026-06-27-0906.html">09:06</a> (<a href="2026-06-27-0906.txt">txt</a>)</li>
 <li><a href="2026-06-27-0606.html">06:06</a> (<a href="2026-06-27-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-26</h3>
+<h2>2026-06-26</h2>
 <ul>
 <li><a href="2026-06-26-2105.html">21:05</a> (<a href="2026-06-26-2105.txt">txt</a>)</li>
 <li><a href="2026-06-26-1605.html">16:05</a> (<a href="2026-06-26-1605.txt">txt</a>)</li>
@@ -558,7 +562,7 @@
 <li><a href="2026-06-26-0906.html">09:06</a> (<a href="2026-06-26-0906.txt">txt</a>)</li>
 <li><a href="2026-06-26-0605.html">06:05</a> (<a href="2026-06-26-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-25</h3>
+<h2>2026-06-25</h2>
 <ul>
 <li><a href="2026-06-25-2106.html">21:06</a> (<a href="2026-06-25-2106.txt">txt</a>)</li>
 <li><a href="2026-06-25-1606.html">16:06</a> (<a href="2026-06-25-1606.txt">txt</a>)</li>
@@ -566,7 +570,7 @@
 <li><a href="2026-06-25-0906.html">09:06</a> (<a href="2026-06-25-0906.txt">txt</a>)</li>
 <li><a href="2026-06-25-0607.html">06:07</a> (<a href="2026-06-25-0607.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-24</h3>
+<h2>2026-06-24</h2>
 <ul>
 <li><a href="2026-06-24-2105.html">21:05</a> (<a href="2026-06-24-2105.txt">txt</a>)</li>
 <li><a href="2026-06-24-1606.html">16:06</a> (<a href="2026-06-24-1606.txt">txt</a>)</li>
@@ -574,7 +578,7 @@
 <li><a href="2026-06-24-0905.html">09:05</a> (<a href="2026-06-24-0905.txt">txt</a>)</li>
 <li><a href="2026-06-24-0608.html">06:08</a> (<a href="2026-06-24-0608.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-23</h3>
+<h2>2026-06-23</h2>
 <ul>
 <li><a href="2026-06-23-2105.html">21:05</a> (<a href="2026-06-23-2105.txt">txt</a>)</li>
 <li><a href="2026-06-23-1607.html">16:07</a> (<a href="2026-06-23-1607.txt">txt</a>)</li>
@@ -582,14 +586,14 @@
 <li><a href="2026-06-23-0905.html">09:05</a> (<a href="2026-06-23-0905.txt">txt</a>)</li>
 <li><a href="2026-06-23-0605.html">06:05</a> (<a href="2026-06-23-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-22</h3>
+<h2>2026-06-22</h2>
 <ul>
 <li><a href="2026-06-22-2105.html">21:05</a> (<a href="2026-06-22-2105.txt">txt</a>)</li>
 <li><a href="2026-06-22-1205.html">12:05</a> (<a href="2026-06-22-1205.txt">txt</a>)</li>
 <li><a href="2026-06-22-0906.html">09:06</a> (<a href="2026-06-22-0906.txt">txt</a>)</li>
 <li><a href="2026-06-22-0605.html">06:05</a> (<a href="2026-06-22-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-21</h3>
+<h2>2026-06-21</h2>
 <ul>
 <li><a href="2026-06-21-2109.html">21:09</a> (<a href="2026-06-21-2109.txt">txt</a>)</li>
 <li><a href="2026-06-21-1605.html">16:05</a> (<a href="2026-06-21-1605.txt">txt</a>)</li>
@@ -597,7 +601,7 @@
 <li><a href="2026-06-21-0904.html">09:04</a> (<a href="2026-06-21-0904.txt">txt</a>)</li>
 <li><a href="2026-06-21-0606.html">06:06</a> (<a href="2026-06-21-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-20</h3>
+<h2>2026-06-20</h2>
 <ul>
 <li><a href="2026-06-20-2106.html">21:06</a> (<a href="2026-06-20-2106.txt">txt</a>)</li>
 <li><a href="2026-06-20-1606.html">16:06</a> (<a href="2026-06-20-1606.txt">txt</a>)</li>
@@ -605,14 +609,14 @@
 <li><a href="2026-06-20-0906.html">09:06</a> (<a href="2026-06-20-0906.txt">txt</a>)</li>
 <li><a href="2026-06-20-0606.html">06:06</a> (<a href="2026-06-20-0606.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-19</h3>
+<h2>2026-06-19</h2>
 <ul>
 <li><a href="2026-06-19-1605.html">16:05</a> (<a href="2026-06-19-1605.txt">txt</a>)</li>
 <li><a href="2026-06-19-1206.html">12:06</a> (<a href="2026-06-19-1206.txt">txt</a>)</li>
 <li><a href="2026-06-19-0905.html">09:05</a> (<a href="2026-06-19-0905.txt">txt</a>)</li>
 <li><a href="2026-06-19-0609.html">06:09</a> (<a href="2026-06-19-0609.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-18</h3>
+<h2>2026-06-18</h2>
 <ul>
 <li><a href="2026-06-18-2105.html">21:05</a> (<a href="2026-06-18-2105.txt">txt</a>)</li>
 <li><a href="2026-06-18-1605.html">16:05</a> (<a href="2026-06-18-1605.txt">txt</a>)</li>
@@ -622,7 +626,7 @@
 <li><a href="2026-06-18-0158.html">01:58</a> (<a href="2026-06-18-0158.txt">txt</a>)</li>
 <li><a href="2026-06-18-0018.html">00:18</a> (<a href="2026-06-18-0018.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-17</h3>
+<h2>2026-06-17</h2>
 <ul>
 <li><a href="2026-06-17-2346.html">23:46</a> (<a href="2026-06-17-2346.txt">txt</a>)</li>
 <li><a href="2026-06-17-2336.html">23:36</a> (<a href="2026-06-17-2336.txt">txt</a>)</li>
@@ -633,7 +637,7 @@
 <li><a href="2026-06-17-0905.html">09:05</a> (<a href="2026-06-17-0905.txt">txt</a>)</li>
 <li><a href="2026-06-17-0605.html">06:05</a> (<a href="2026-06-17-0605.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-16</h3>
+<h2>2026-06-16</h2>
 <ul>
 <li><a href="2026-06-16-2104.html">21:04</a> (<a href="2026-06-16-2104.txt">txt</a>)</li>
 <li><a href="2026-06-16-1604.html">16:04</a> (<a href="2026-06-16-1604.txt">txt</a>)</li>
@@ -641,7 +645,7 @@
 <li><a href="2026-06-16-1049.html">10:49</a> (<a href="2026-06-16-1049.txt">txt</a>)</li>
 <li><a href="2026-06-16-0905.html">09:05</a> (<a href="2026-06-16-0905.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-15</h3>
+<h2>2026-06-15</h2>
 <ul>
 <li><a href="2026-06-15-2105.html">21:05</a> (<a href="2026-06-15-2105.txt">txt</a>)</li>
 <li><a href="2026-06-15-2014.html">20:14</a> (<a href="2026-06-15-2014.txt">txt</a>)</li>
@@ -653,7 +657,7 @@
 <li><a href="2026-06-15-1747.html">17:47</a> (<a href="2026-06-15-1747.txt">txt</a>)</li>
 <li><a href="2026-06-15-0602.html">06:02</a> (<a href="2026-06-15-0602.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-14</h3>
+<h2>2026-06-14</h2>
 <ul>
 <li><a href="2026-06-14-2102.html">21:02</a> (<a href="2026-06-14-2102.txt">txt</a>)</li>
 <li><a href="2026-06-14-1603.html">16:03</a> (<a href="2026-06-14-1603.txt">txt</a>)</li>
@@ -666,12 +670,13 @@
 <li><a href="2026-06-14-1150.html">11:50</a> (<a href="2026-06-14-1150.txt">txt</a>)</li>
 <li><a href="2026-06-14.html">briefing</a> (<a href="2026-06-14.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-13</h3>
+<h2>2026-06-13</h2>
 <ul>
 <li><a href="2026-06-13.html">briefing</a> (<a href="2026-06-13.txt">txt</a>)</li>
 </ul>
-<h3>2026-06-12</h3>
+<h2>2026-06-12</h2>
 <ul>
 <li><a href="2026-06-12.html">briefing</a> (<a href="2026-06-12.txt">txt</a>)</li>
 </ul>
+</main>
 </body></html>
