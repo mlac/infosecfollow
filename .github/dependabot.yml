@@ -1,0 +1,14 @@
+# Keeps the pinned actions in .github/workflows and the base image in
+# deploy/Dockerfile current. There is no pip manifest in this repo (the
+# engine uses only the standard library), so no pip ecosystem entry.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /deploy
+    schedule:
+      interval: weekly

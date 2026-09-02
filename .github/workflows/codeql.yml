@@ -1,0 +1,47 @@
+name: CodeQL code scanning
+
+# Static analysis of the Python engine and the Actions workflows themselves.
+# Results appear under Security -> Code scanning alerts. This is the
+# "advanced setup" flavor of code scanning: the workflow lives in the repo,
+# so don't also enable "default setup" in Settings -> Code security — the
+# two conflict and default setup would reject this workflow's uploads.
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    # Weekly sweep so new CodeQL queries run even when the code is idle.
+    - cron: "17 11 * * 2"
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        # "actions" scans the workflow files under .github/workflows for
+        # injection and permission issues; "python" covers engine/.
+        language: [actions, python]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:${{ matrix.language }}"
