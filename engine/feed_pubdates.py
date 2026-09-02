@@ -2,8 +2,8 @@
 """Profile the publish-time distribution of every infosecfollow feed.
 
 Read-only analysis. Reuses the engine's hardened fetch + parse path
-(USER_AGENT + safefetch.safe_open via generate.http_get, generate.parse_feed),
-so feeds don't 403 and stays SSRF-safe.
+(generate.fetch_feed: USER_AGENT, safefetch.safe_open, bounded reads,
+generate.parse_feed), so feeds don't 403 and stays SSRF-safe.
 
 Each run fetches every feed in feeds.json (all groups), records each dated item
 once (deduped by URL) into logs/feed_pubdates.jsonl, appends a run record to
@@ -29,8 +29,7 @@ LOGS_DIR = PROJECT_DIR / "logs"
 PUBDATES_PATH = LOGS_DIR / "feed_pubdates.jsonl"
 RUNS_PATH = LOGS_DIR / "feed_pubdates_runs.jsonl"
 ET = ZoneInfo("America/New_York")
-GROUPS = ("security", "pittsburgh", "bizpol", "events", "sports_media", "team_usa",
-          "reading")
+GROUPS = tuple(generate.FEED_GROUPS)
 
 
 # --------------------------------------------------------------------------- fetch
@@ -47,10 +46,7 @@ def fetch_group_items(groups):
     items, failed = [], []
 
     def fetch_one(group, feed):
-        # generate.http_get sets USER_AGENT and goes through safefetch.safe_open;
-        # generate.parse_feed handles RSS/RDF/Atom.
-        parsed = list(generate.parse_feed(feed["name"], generate.http_get(feed["url"])))
-        return group, feed, parsed
+        return group, feed, generate.fetch_feed(feed["name"], feed["url"])
 
     with ThreadPoolExecutor(max_workers=8) as pool:
         futures = {pool.submit(fetch_one, g, f): (g, f) for g, f in jobs}

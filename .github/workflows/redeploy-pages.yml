@@ -1,14 +1,14 @@
-name: Deploy to GitHub Pages
+name: Redeploy to GitHub Pages (manual)
 
-# Custom Pages pipeline that replaces GitHub's auto-generated
-# "pages build and deployment" flow. The deploy step is retried so a
-# transient "Deployment failed, try again later." from the Pages backend
-# no longer fails the whole run. Requires Settings -> Pages -> Source to
-# be set to "GitHub Actions".
-
+# MANUAL fallback only. The site is normally published by GitHub's built-in
+# "pages build and deployment" pipeline (Settings -> Pages -> Source: Deploy
+# from a branch, main:/docs), which runs on every push to main. This workflow
+# exists for the day that pipeline is stuck or fails: trigger it from the
+# Actions tab WITH "main" SELECTED in the "Use workflow from" dropdown (a
+# branch-source Pages site only accepts deployments from runs on main) and it
+# re-uploads docs/ from main with three deploy attempts and backoff. It has no
+# push trigger, so the two pipelines never race.
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -16,7 +16,6 @@ permissions:
   pages: write
   id-token: write
 
-# Never let deploys pile up and wedge the github-pages environment.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -24,16 +23,20 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
+      - name: Require a dispatch from main
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::Dispatch this workflow from main (Use workflow from: main); Pages only accepts deployments from main"
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Switches the Pages source to "GitHub Actions" on first run, so no
-      # manual Settings -> Pages change is needed.
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -43,6 +46,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # Each deploy-pages attempt may poll for up to 10 minutes when the Pages
+    # backend is stuck; three attempts plus the two sleeps need about 33.
+    timeout-minutes: 35
     environment:
       name: github-pages
       url: ${{ steps.final.outputs.page_url || steps.try2.outputs.page_url || steps.try1.outputs.page_url }}

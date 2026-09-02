@@ -1,16 +1,21 @@
 """Security hardening helpers for infosecfollow, stdlib only.
 
-Two defense-in-depth measures against the one untrusted input the pipeline
+Defense-in-depth measures against the one untrusted input the pipeline
 ingests — third-party feed content and the servers behind feed URLs:
 
 1. safe_open / SafeRedirectHandler: refuse outbound HTTP(S) requests (and
-   redirects) whose host resolves to a private, loopback, link-local, or
-   otherwise non-public address. Blocks the common SSRF case where a hijacked
-   feed domain redirects to an internal service or a cloud metadata endpoint
-   (169.254.169.254) whose contents would otherwise be summarized into the
-   public briefing.
+   redirects) whose host resolves to a private, loopback, link-local,
+   carrier-grade-NAT, or otherwise non-public address. Blocks the common SSRF
+   case where a hijacked feed domain redirects to an internal service, a
+   tailnet host, or a cloud metadata endpoint (169.254.169.254) whose contents
+   would otherwise be summarized into the public briefing.
 
-2. safe_fromstring: parse RSS/Atom/RDF with DTDs and entity declarations
+2. read_bounded: read a response with BOTH a byte cap and a wall-clock
+   deadline. urllib's timeout bounds each socket operation, not the whole
+   transfer, so a server that trickles one byte every few seconds could
+   otherwise hold a worker (and the whole scheduler) indefinitely.
+
+3. safe_fromstring: parse RSS/Atom/RDF with DTDs and entity declarations
    forbidden, defeating "billion laughs"/entity-expansion denial of service.
    The five predefined XML entities (&amp; &lt; &gt; &quot; &apos;) are not
    DTD-declared, so real feeds keep parsing; only the attack vector is refused.
@@ -23,13 +28,16 @@ the realistic cases.
 """
 
 import ipaddress
+import re
 import socket
+import time
 import urllib.request
 from urllib.parse import urlsplit
 from xml.etree.ElementTree import TreeBuilder
 from xml.parsers import expat
 
 ALLOWED_SCHEMES = ("http", "https")
+READ_CHUNK = 64 * 1024
 
 
 class BlockedURLError(ValueError):
@@ -40,11 +48,29 @@ class ForbiddenXMLError(ValueError):
     """Raised when a feed declares a DTD or entities (DoS/XXE vector)."""
 
 
+class ResponseTooLargeError(ValueError):
+    """Raised when a response exceeds the byte cap."""
+
+
+class ResponseTooSlowError(TimeoutError):
+    """Raised when a response is not fully read before its wall-clock deadline."""
+
+
 # --------------------------------------------------------------------------- SSRF
 
 def _address_blocked(ip):
+    # `not is_global` catches the ranges the explicit predicates miss, notably
+    # 100.64.0.0/10 (carrier-grade NAT, also Tailscale's address pool). The
+    # explicit predicates are kept because is_global alone would admit a few
+    # special-purpose ranges (e.g. 64:ff9b::/96 NAT64) that must stay blocked.
+    # Deprecated IPv6 site-local (fec0::/10) and 6to4 (2002::/16, which can
+    # embed a private IPv4 address) are named explicitly so the verdict does
+    # not depend on the interpreter's ipaddress patch level.
     return (ip.is_private or ip.is_loopback or ip.is_link_local
-            or ip.is_reserved or ip.is_multicast or ip.is_unspecified)
+            or ip.is_reserved or ip.is_multicast or ip.is_unspecified
+            or not ip.is_global
+            or getattr(ip, "is_site_local", False)
+            or (ip.version == 6 and ip.sixtofour is not None))
 
 
 def validate_url(url):
@@ -59,7 +85,10 @@ def validate_url(url):
     host = parts.hostname
     if not host:
         raise BlockedURLError(f"missing host: {url}")
-    port = parts.port or (443 if parts.scheme == "https" else 80)
+    try:
+        port = parts.port or (443 if parts.scheme == "https" else 80)
+    except ValueError as exc:
+        raise BlockedURLError(f"bad port in {url}: {exc}")
     try:
         infos = socket.getaddrinfo(host, port, proto=socket.IPPROTO_TCP)
     except socket.gaierror as exc:
@@ -67,7 +96,11 @@ def validate_url(url):
     for info in infos:
         ip = ipaddress.ip_address(info[4][0])
         if _address_blocked(ip):
-            raise BlockedURLError(f"{host} resolves to blocked address {ip}")
+            # The address goes to the log only: error strings are published in
+            # the site's Feed Health section, and a hijacked feed must not be
+            # able to use them as an oracle for the LAN/tailnet address space.
+            print(f"  blocked: {host} resolves to non-public address {ip}")
+            raise BlockedURLError(f"{host} resolves to a non-public address")
     return url
 
 
@@ -75,7 +108,13 @@ class SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
     """Validate every redirect target before following it."""
 
     def redirect_request(self, req, fp, code, msg, headers, newurl):
-        validate_url(newurl)  # raises BlockedURLError, aborting the fetch
+        try:
+            validate_url(newurl)
+        except BlockedURLError as exc:
+            # Log the target; publish only the fact. The redirect target is
+            # attacker-chosen, so its name must not reach the public page.
+            print(f"  blocked redirect: {exc}")
+            raise BlockedURLError("redirect to a non-public address refused") from None
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
@@ -86,11 +125,36 @@ def safe_open(req, timeout):
     """Drop-in for urllib.request.urlopen that vets the URL and all redirects.
 
     `req` is a urllib.request.Request (or a URL string). Returns the response,
-    usable as a context manager exactly like urlopen.
+    usable as a context manager exactly like urlopen. `timeout` bounds each
+    socket operation; use read_bounded on the response to bound the whole
+    transfer.
     """
     url = req.full_url if isinstance(req, urllib.request.Request) else req
     validate_url(url)
     return _opener.open(req, timeout=timeout)
+
+
+def read_bounded(resp, max_bytes, deadline):
+    """Read the whole response body, raising if it exceeds `max_bytes` or is not
+    complete within `deadline` seconds of wall-clock time.
+
+    Reads in chunks so a slow-drip server cannot hold the caller for longer
+    than the deadline (plus one socket timeout).
+    """
+    start = time.monotonic()
+    chunks, total = [], 0
+    while True:
+        if time.monotonic() - start > deadline:
+            raise ResponseTooSlowError(
+                f"response not complete after {deadline}s ({total} bytes read)")
+        chunk = resp.read(READ_CHUNK)
+        if not chunk:
+            break
+        total += len(chunk)
+        if total > max_bytes:
+            raise ResponseTooLargeError(f"response larger than {max_bytes} bytes")
+        chunks.append(chunk)
+    return b"".join(chunks)
 
 
 # --------------------------------------------------------------------------- XML
@@ -101,14 +165,32 @@ def _qname(name):
     return "{" + name if "}" in name else name
 
 
-def safe_fromstring(raw):
+_XML_DECL_ENCODING = re.compile(rb"^\s*<\?xml[^>]*\bencoding\s*=", re.IGNORECASE)
+
+
+def safe_fromstring(raw, encoding=None):
     """Parse RSS/Atom/RDF bytes into an ElementTree root with DTDs/entities
     forbidden. Output matches xml.etree.ElementTree.fromstring (namespaced tags
     as "{uri}local"); raises ForbiddenXMLError on any DTD or entity declaration.
+
+    `encoding` is the transport-level charset (from the HTTP Content-Type). It
+    is applied only when the document declares no encoding AND the bytes are
+    not valid UTF-8: that is the Latin-1 feed expat would otherwise reject,
+    while a UTF-8 body served with a stale charset header keeps parsing as
+    the UTF-8 it is.
     """
     if isinstance(raw, str):
         raw = raw.encode("utf-8")
     raw = raw.lstrip(b"\xef\xbb\xbf\r\n\t ")  # tolerate a BOM/blank prolog (TribLive)
+    if encoding and encoding.lower().replace("_", "-") not in ("utf-8", "utf8") \
+            and not _XML_DECL_ENCODING.match(raw):
+        try:
+            raw.decode("utf-8")
+        except UnicodeDecodeError:
+            try:
+                raw = raw.decode(encoding, "replace").encode("utf-8")
+            except LookupError:
+                pass  # unknown charset name: let expat try
 
     builder = TreeBuilder()
     parser = expat.ParserCreate(namespace_separator="}")

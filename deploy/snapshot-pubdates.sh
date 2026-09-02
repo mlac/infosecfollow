@@ -14,17 +14,23 @@
 #   never sees logs/ as tracked (they stay ignored/untracked and accumulate),
 #   and a briefing run can never sweep snapshot files into a main commit —
 #   even if the two run at the same moment.
-# - Exit status propagates, so a scheduler can detect failure.
+# - Exit status is non-zero if EITHER the sampler or the push failed (the
+#   sampler's status is captured explicitly; `tee` would otherwise mask it),
+#   so a scheduler can detect failure.
 
 cd /data/infosecfollow && [ -d .git ] || exit 1   # never touch an uncloned volume
 mkdir -p logs
 
+rc_file=$(mktemp)
 {
     echo "=== pubdate snapshot $(date -u "+%Y-%m-%dT%H:%M:%SZ") ==="
     python3 engine/feed_pubdates.py 2>&1
-    echo "sampler exit code: $?"
+    echo $? > "$rc_file"
+    echo "sampler exit code: $(cat "$rc_file")"
     wc -l logs/feed_pubdates.jsonl logs/feed_pubdates_runs.jsonl 2>&1
 } | tee logs/pubdate_report.txt
+sampler_rc=$(cat "$rc_file" 2>/dev/null || echo 1)
+rm -f "$rc_file"
 
 export GIT_INDEX_FILE=/data/infosecfollow/.git/pubdate-index
 base=$(git rev-parse origin/main)
@@ -39,7 +45,10 @@ c=$(git -c user.name=infosecfollow-bot \
 unset GIT_INDEX_FILE
 rm -f /data/infosecfollow/.git/pubdate-index
 
-[ -n "$c" ] && git push -f origin "$c":refs/heads/feed-pubdates-data
-rc=$?
-echo "push exit code: $rc"
-exit $rc
+push_rc=1
+if [ -n "$c" ]; then
+    git push -f origin "$c":refs/heads/feed-pubdates-data
+    push_rc=$?
+fi
+echo "push exit code: $push_rc"
+[ "$sampler_rc" -eq 0 ] && [ "$push_rc" -eq 0 ]

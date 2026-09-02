@@ -1,6 +1,9 @@
 #!/bin/sh
-# infosecfollow refresh + publish to GitHub Pages.
-# Scheduled by the LaunchAgent com.infosecfollow.refresh (6am/12pm/4pm/9pm ET).
+# infosecfollow refresh + publish to GitHub Pages — the RETIRED macOS path.
+# Was scheduled by the LaunchAgent com.infosecfollow.refresh (6am/12pm/4pm/9pm ET);
+# superseded by the NAS container (deploy/run-briefing.sh, see OPERATIONS.md).
+# Kept for reference and as a cron-friendly wrapper for a non-NAS machine. Keep
+# the LaunchAgent unloaded so it can never double-publish alongside the NAS.
 set -eu
 DIR="$(cd "$(dirname "$0")" && pwd)"
 

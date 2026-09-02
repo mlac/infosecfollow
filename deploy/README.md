@@ -1,12 +1,14 @@
 # Running infosecfollow on a Synology NAS
 
 This runs the briefing engine in a Docker container on your NAS (`workbench-nas`)
-on a 6am / 9am / noon / 4pm / 9pm ET schedule, so your Mac no longer has to be on. The
-container regenerates the site and pushes it to GitHub Pages, exactly like the old
-macOS LaunchAgent did.
+on a fixed ET schedule — **07:02, 10:02, 13:32 and 19:32 on weekdays, 08:02 and
+19:32 on weekends, plus one run whenever the container starts** — so your Mac no
+longer has to be on. The container regenerates the site and pushes it to `main`,
+which GitHub Pages publishes from `docs/`, exactly like the old macOS LaunchAgent
+did.
 
-**How it works:** the container holds Python + the Claude Code CLI + git + a tiny
-shell scheduler. You fetch a few build files with `curl`, build the image
+**How it works:** the container holds Python + a pinned Claude Code CLI + git + a
+tiny shell scheduler. You fetch a few build files with `curl`, build the image
 locally, and on first run the container **clones the app into a Docker volume
 itself** (using the git bundled inside the image) — so the NAS host needs no git
 at all. Authentication uses your **Claude subscription** via a long-lived token
@@ -52,12 +54,20 @@ GITHUB_TOKEN=
 GIT_REMOTE_URL=https://github.com/mlac/infosecfollow.git
 GIT_AUTHOR_NAME=infosecfollow-bot
 GIT_AUTHOR_EMAIL=infosecfollow@users.noreply.github.com
+# Optional: dead-man monitor (healthchecks.io / Uptime Kuma push URL).
+#HEARTBEAT_URL=
 EOF
 
 vi .env   # paste your two tokens after the = signs
 ```
 
-`.env` stays on the NAS and is never committed.
+`.env` stays on the NAS and is never committed. The full field reference,
+including the optional engine knobs (`INFOSECFOLLOW_MODEL`,
+`INFOSECFOLLOW_FALLBACK_MODEL`, `INFOSECFOLLOW_ARCHIVE_RETENTION_DAYS`,
+`INFOSECFOLLOW_SCHEDULE_NOTE`), is `deploy/.env.example` in the repo. If you set
+`HEARTBEAT_URL`, every successful cycle GETs it and every failed cycle GETs
+`<url>/fail`; give the monitor a grace period of about 15 hours (the longest
+scheduled gap).
 
 Then fetch the four build files into this folder with `curl` (the NAS has no git,
 so we don't clone — the container does its own clone at runtime):
@@ -87,7 +97,10 @@ docker logs -f infosecfollow
 ```
 
 You should see `cloning …`, the engine's `[1/4]…[4/4]` lines, and `published`.
-Within a minute the live site updates.
+Within a minute or two the live site updates. Once a cycle has completed,
+`docker ps` shows the container as `(healthy)`; it turns `(unhealthy)` if no
+cycle completes for 15 hours (the health check only reports — it never restarts
+anything).
 
 ---
 
@@ -112,7 +125,9 @@ cycle, so any local change in its volume is wiped on the next run.
 
 **Engine / content / feeds** (`engine/*.py`, `feeds.json`) update **automatically**
 — the container resets to `origin/main` before each run, so the next scheduled run
-uses your new code. From the Mac:
+uses your new code. CI (`.github/workflows/ci.yml`) runs the unit tests on every
+push that touches `engine/` or `deploy/`; it cannot block a push, so check for a
+red run before the next slot. From the Mac:
 
 ```sh
 git pull --rebase        # see the gotcha below
@@ -129,8 +144,9 @@ docker exec infosecfollow /app/run-briefing.sh
 ```
 
 **Container plumbing** (`deploy/Dockerfile`, `deploy/run-briefing.sh`,
-`deploy/scheduler.sh`) is baked into the image — the container runs `/app/...`, not
-the repo copies — so changing it needs a rebuild on the NAS after you push:
+`deploy/scheduler.sh`, `deploy/docker-compose.yml`) is baked into the image — the
+container runs `/app/...`, not the repo copies — so changing any of the four needs
+a rebuild on the NAS after you push:
 
 ```sh
 cd /volume1/docker/infosecfollow
@@ -139,10 +155,17 @@ for f in Dockerfile run-briefing.sh scheduler.sh docker-compose.yml; do curl -fs
 docker compose up -d --build
 ```
 
+The 2026-09 change set touched all four files (run lock, timeouts, health check,
+pinned CLI version, graceful stop), so it needs this rebuild once.
+
+**`.env`-only changes** (tokens, `HEARTBEAT_URL`, the `INFOSECFOLLOW_*` knobs)
+need no rebuild: compose reads `.env` through `env_file`, so edit it and run
+`docker compose up -d`.
+
 **Gotcha — pull before you push.** The NAS pushes a `briefing …` commit to `main`
-~5×/day, so your Mac's local `main` falls behind constantly. Start every editing
-session with `git pull --rebase`; if a push is rejected as non-fast-forward, just
-`git pull --rebase` and push again. Your `engine/` edits and the NAS's `docs/`
+up to 4×/day, so your Mac's local `main` falls behind constantly. Start every
+editing session with `git pull --rebase`; if a push is rejected as non-fast-forward,
+just `git pull --rebase` and push again. Your `engine/` edits and the NAS's `docs/`
 commits never touch the same files, so it replays cleanly.
 
 ---
@@ -152,24 +175,49 @@ commits never touch the same files, so it replays cleanly.
 ```sh
 # Trigger a briefing right now:
 docker exec infosecfollow /app/run-briefing.sh
+#   Runs take a lock, so this can never overlap a scheduled or start-up run.
+#   If one is already under way it prints "another briefing run is in
+#   progress; skipping" and exits 75 — watch `docker logs -f infosecfollow`
+#   and retry when it finishes.
 
-# Confirm the CLI authenticated (prints a version, not "Not logged in"):
-docker exec infosecfollow claude --version
+# Health at a glance: (healthy) = a cycle completed within the last 15 h.
+docker ps --filter name=infosecfollow
+
+# Confirm the CLI authenticated (`claude --version` prints a version even when
+# logged out, so ask for the auth status instead):
+docker exec infosecfollow claude auth status
 
 # Update after you push engine changes — usually unnecessary (the container
 # git-resets to origin/main each run). Only rebuild for Dockerfile/runner changes:
 docker compose up -d --build
 ```
 
+Stopping (`docker stop`, `docker compose down`) is safe mid-run: the scheduler
+finishes the in-flight briefing (compose allows up to 30 minutes, the longest
+possible run) and then exits; no new run starts. A NAS reboot's own service
+timeout may be shorter; the next container start regenerates anyway.
+
 **Common issues**
 - *"Not logged in" / auth errors:* `CLAUDE_CODE_OAUTH_TOKEN` is wrong or expired —
   regenerate with `claude setup-token`, update `.env`, then `docker compose up -d`.
-- *Clone/push rejected (403):* the `GITHUB_TOKEN` lacks Contents write or expired.
+- *Model error at the summarize step (model not found / retired / overloaded):*
+  the engine already falls back from `opus` to `sonnet`; if both fail, set
+  `INFOSECFOLLOW_MODEL` and `INFOSECFOLLOW_FALLBACK_MODEL` in `.env` to explicit
+  model ids and `docker compose up -d`.
+- *`push FAILED:` in the log, followed by a 403:* the `GITHUB_TOKEN` lacks Contents
+  write or expired. The run exits non-zero (the scheduler logs
+  `... failed with status 1 (continuing)`) and the heartbeat monitor, if any, is
+  told; the next slot retries. `push rejected (concurrent update)` is different
+  and harmless — a genuine non-fast-forward race, resolved by the next run.
 - *Wrong times:* confirm `TZ: America/New_York` in `docker-compose.yml`.
 - *Start over clean:* `docker compose down -v` removes the container **and the
-  cloned volume**; the next `up` re-clones.
+  cloned volume**; the next `up` re-clones. A half-initialised volume (a
+  directory without `.git`) is cleared automatically before cloning.
 
 ## Maintenance
 - **Claude token** expires ~1 year out — rotate with `claude setup-token`.
 - **GitHub token** — rotate per the expiry you chose.
+- **Claude CLI version** is pinned in the Dockerfile (`ARG CLAUDE_CLI_VERSION`).
+  To move to a newer CLI: change the value, re-fetch/rebuild as above, and check
+  one manual run.
 - After changing `.env`, apply with `docker compose up -d` (no rebuild needed).
