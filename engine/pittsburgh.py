@@ -5,6 +5,7 @@ plaintextsports.com. Stdlib only, no API keys.
 """
 
 import json
+import re
 import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -53,21 +54,44 @@ def _get_text(url, headers=None):
     return _get_raw(url, headers).decode("utf-8", "replace")
 
 
+_SERVER_TOKEN = re.compile(r"[A-Za-z0-9][A-Za-z0-9 ./_-]{0,31}")
+
+
+def _reason(exc):
+    """Publishable text for a failure: only messages this engine composed.
+
+    Feed Health publishes these strings on the public page, and a remote
+    server controls the text of many stdlib exceptions (a bogus status line,
+    an error body, a hostile Server header). RuntimeError and ValueError here
+    are always ours — _http_error's "HTTP <code> (server: <token>)" and
+    plaintextsports' "not a team page (...)" — so they are relayed; anything
+    else is published as its class name and logged in full by the caller.
+    """
+    if isinstance(exc, (RuntimeError, ValueError)):
+        return " ".join(str(exc).split())[:160]
+    return type(exc).__name__
+
+
 def _http_error(label, exc):
     """Log an HTTPError with its server header and a body excerpt, so a block
     page (Akamai, Cloudflare) is identifiable in the run log, and return the
     RuntimeError to raise. The raised message carries only the status code
-    and server name, because error strings are published in the site's Feed
-    Health section and must not relay attacker-chosen prose."""
+    and a product-token-shaped server name, because error strings are
+    published in the site's Feed Health section and must not relay
+    attacker-chosen prose. The excerpt comes from a single bounded read, so a
+    slow-drip error body cannot stall the run."""
     try:
-        body = exc.read(600).decode("utf-8", "replace")
+        fp = getattr(exc, "fp", None)
+        body = fp.read1(600).decode("utf-8", "replace") if fp is not None else ""
     except Exception:
         body = ""
     body = " ".join(body.split())[:200]
     server = exc.headers.get("Server", "") if exc.headers else ""
     print(f"  sports: {label} -> HTTP {exc.code} {exc.reason}"
-          + (f" (server: {server})" if server else "")
+          + (f" (server: {' '.join(server.split())[:80]})" if server else "")
           + (f": {body}" if body else ""))
+    if not _SERVER_TOKEN.fullmatch(server):
+        server = ""
     return RuntimeError(f"HTTP {exc.code}" + (f" (server: {server})" if server else ""))
 
 
@@ -263,9 +287,8 @@ def _team_block(sport, league, now_local, now_utc, errors):
         try:
             board = _espn_json(f"/{sport}/{league}/scoreboard?dates={date}")
         except Exception as exc:
-            reason = str(exc)[:160]
-            print(f"  sports: {league} {date} unavailable: {reason}")
-            errors.append(f"{league} scoreboard {date}: {reason}")
+            print(f"  sports: {league} {date} unavailable: {exc}")
+            errors.append(f"{league} scoreboard {date}: {_reason(exc)}")
             continue
         for event in board.get("events", []):
             if event.get("id") in seen:
@@ -282,7 +305,8 @@ def _team_block(sport, league, now_local, now_utc, errors):
         nxt = _schedule_next(sport, league, now_utc)
         next_entry = _next_entry(league, nxt) if nxt else None
     except Exception as exc:
-        errors.append(f"{league} schedule: {str(exc)[:160]}")
+        print(f"  sports: {league} schedule unavailable: {exc}")
+        errors.append(f"{league} schedule: {_reason(exc)}")
         next_entry = None
     if not games and not next_entry:
         return None  # off-season: skip the team entirely
@@ -324,11 +348,13 @@ def sports_blocks(errors=None, notes=None):
     """Per-team structured blocks for the Pirates, Steelers, and Penguins.
 
     ESPN is asked first; when it fails for a league, in whole or in part, that
-    league's plaintextsports.com team page is parsed instead. Never raises.
-    Unrecovered failures go to `errors` as "league: reason" strings and
-    recoveries to `notes`, so both the outage and the source actually used are
-    visible in the published feed-health report rather than only in the
-    container log. Each block carries "source": "ESPN" or "plaintextsports".
+    league's plaintextsports.com team page is parsed instead, and whatever
+    ESPN did return is kept when the fallback fails or shows nothing current.
+    Never raises. Unrecovered failures go to `errors` as "league: reason"
+    strings and recoveries (plus stale-page and markup-drift warnings) to
+    `notes`, so both the outage and the source actually used are visible in
+    the published feed-health report rather than only in the container log.
+    Each block carries "source": "ESPN" or "plaintextsports".
     """
     errors = [] if errors is None else errors
     notes = [] if notes is None else notes
@@ -340,9 +366,8 @@ def sports_blocks(errors=None, notes=None):
         try:
             block = _team_block(sport, league, now_local, now_utc, espn_errors)
         except Exception as exc:
-            reason = str(exc)[:160]
-            print(f"  sports: {league} ESPN unavailable: {reason}")
-            espn_errors.append(f"{league}: {reason}")
+            print(f"  sports: {league} ESPN unavailable: {exc}")
+            espn_errors.append(f"{league}: {_reason(exc)}")
         if not espn_errors:
             if block:
                 blocks.append(block)
@@ -350,18 +375,41 @@ def sports_blocks(errors=None, notes=None):
         try:
             fallback = _pts_block(league, now_local)
         except Exception as exc:
-            reason = str(exc)[:160]
-            print(f"  sports: {league} plaintextsports unavailable: {reason}")
+            print(f"  sports: {league} plaintextsports unavailable: {exc}")
             errors.extend(espn_errors)
-            errors.append(f"{league} plaintextsports: {reason}")
+            errors.append(f"{league} plaintextsports: {_reason(exc)}")
             if block:
                 blocks.append(block)  # whatever ESPN did return beats nothing
             continue
         notes.append(f"{league}: ESPN failed ({'; '.join(espn_errors)}); "
                      f"used plaintextsports")
-        if fallback:
+        notes.extend(_pts_health(league, fallback, now_local))
+        if fallback and (fallback.get("games") or fallback.get("next")):
             blocks.append(fallback)
+        elif block:
+            blocks.append(block)  # partial ESPN data beats an empty fallback
     return blocks
+
+
+PTS_STALE = timedelta(hours=36)  # NFL/NHL pages are republished daily
+
+
+def _pts_health(league, fallback, now_local):
+    """Notes about a parsed plaintextsports page worth publishing: rows the
+    parser did not understand (markup drift) and a page whose last publish is
+    older than a day and a half (a missed republish, or last season's page)."""
+    notes = []
+    if not fallback:
+        return notes
+    if fallback.get("unparsed"):
+        notes.append(f"{league}: {fallback['unparsed']} plaintextsports rows not understood")
+    try:
+        as_of = datetime.fromisoformat(fallback["as_of"]) if fallback.get("as_of") else None
+    except (ValueError, TypeError):
+        as_of = None
+    if as_of and now_local - as_of > PTS_STALE:
+        notes.append(f"{league}: plaintextsports page last published {as_of:%b} {as_of.day}")
+    return notes
 
 
 if __name__ == "__main__":

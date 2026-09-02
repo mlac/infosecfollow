@@ -4,7 +4,8 @@
 Pipeline, run several times a day: fetch the feed groups in feeds.json
 (security, Pittsburgh, business/politics, events, sports media, Team USA,
 reading) -> keep each group's recent window -> pull markets (Yahoo Finance),
-weather (NWS) and Pittsburgh scores (ESPN) -> ask Claude (headless `claude -p`,
+weather (NWS) and Pittsburgh scores (ESPN, or plaintextsports.com team pages
+when ESPN fails) -> ask Claude (headless `claude -p`,
 three locked-down calls: security digest, local sections, "at a glance"
 curation) -> render the static site: docs/index.html, docs/digest.txt, one
 archive page per run under docs/archive/, and one structured JSON record per
@@ -1686,25 +1687,29 @@ def _local_items_html(items, level=4):
 def _clean_sports(blocks):
     """Strip control chars, cap lengths, and normalize the fields the renderers
     dereference on third-party (ESPN, plaintextsports) sports strings."""
+    def url_of(d):
+        url = str(d.get("url") or "")
+        return url if len(url) <= 300 and url.startswith(("http://", "https://")) else ""
+
     cleaned = []
-    for b in blocks or []:
+    for b in (blocks or [])[:5]:  # three teams; anything more is not ours
         if not isinstance(b, dict):
             continue
         games = []
-        for g in b.get("games") or []:
+        for g in (b.get("games") or [])[:8]:  # two days of doubleheaders at most
             if not isinstance(g, dict):
                 continue
             games.append({
                 "date": sanitize(g.get("date") or "")[:40],
                 "result": sanitize(g.get("result") or "")[:160],
-                "url": str(g.get("url") or ""),
+                "url": url_of(g),
                 "recap": sanitize(g.get("recap") or "")[:300],
             })
         nxt = b.get("next") if isinstance(b.get("next"), dict) else None
         if nxt:
             nxt = {"matchup": sanitize(nxt.get("matchup") or "")[:80],
                    "when": sanitize(nxt.get("when") or "")[:60],
-                   "url": str(nxt.get("url") or "")}
+                   "url": url_of(nxt)}
         cleaned.append({"team": sanitize(b.get("team") or "")[:80],
                         "record": sanitize(b.get("record") or "")[:40],
                         "games": games, "next": nxt,

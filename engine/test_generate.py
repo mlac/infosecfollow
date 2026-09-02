@@ -33,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import generate  # noqa: E402
 import market_data  # noqa: E402
 import pittsburgh  # noqa: E402
+import plaintextsports  # noqa: E402
 
 NOW = datetime(2026, 9, 2, 12, 0, tzinfo=timezone.utc)
 TODAY = "2026-09-02"
@@ -698,9 +699,12 @@ class SiteWriting(TempSite):
             generate.write_site(digest, None, [], [], [], feeds, 5, 24, glance=[],
                                 notes=["Quiet day"], health=health, meta_extra={"served_by": ["m"]})
         replaced = sorted(Path(c.args[1]).relative_to(self.tmp).as_posix() for c in replace.call_args_list)
-        self.assertEqual([r for r in replaced if not r.startswith("archive/" + TODAY)],
+        # archive pages are stamped from the wall clock, so match their shape
+        # rather than TODAY (the runner's local date may differ)
+        stamped = re.compile(r"archive/\d{4}-\d{2}-\d{2}-\d{4}\.(html|txt)$")
+        self.assertEqual([r for r in replaced if not stamped.match(r)],
                          [f"archive/index.html", f"data/{TODAY}.json", "digest.txt", "index.html"])
-        self.assertEqual(len([r for r in replaced if r.startswith("archive/" + TODAY)]), 2)
+        self.assertEqual(len([r for r in replaced if stamped.match(r)]), 2)
         self.assertEqual(list(self.tmp.rglob("*.tmp")), [])
         rec = json.loads((self.tmp / "data" / f"{TODAY}.json").read_text())
         self.assertEqual(rec["feed_health"]["aux"][0]["label"], "Scores (ESPN)")
@@ -924,6 +928,15 @@ class EndToEnd(TempSite):
     (including a carried source that has left the fetch window) and the
     failed-local-call fallback."""
 
+    @staticmethod
+    def sports_blocks(errors=None, notes=None):
+        """ESPN is blocked; the Pirates recover through the plaintextsports
+        page saved on 2026-09-02, the other two leagues are off-season."""
+        page = (Path(__file__).parent / "testdata" / "pts" / "pirates.html").read_text(encoding="utf-8")
+        notes.append("mlb: ESPN failed (HTTP 403 (server: AkamaiGHost)); used plaintextsports")
+        return [plaintextsports.parse_team_page(
+            page, "mlb", datetime(2026, 9, 2, 10, 35, tzinfo=plaintextsports.TZ))]
+
     def setUp(self):
         super().setUp()
         stamp = (NOW - timedelta(hours=1)).strftime("%a, %d %b %Y %H:%M:%S GMT").encode()
@@ -987,9 +1000,7 @@ class EndToEnd(TempSite):
             mock.patch.object(generate.market_data, "weekly_rows",
                               lambda errors=None: [{"label": "Dow", "value": "1.00", "pct": "+0.0%", "arrow": "="}]),
             mock.patch.object(generate.pgh_data, "weather_lines", lambda: ["Today: Sunny, high 80F."]),
-            mock.patch.object(generate.pgh_data, "sports_blocks",
-                              lambda errors=None, notes=None:
-                              errors.append("mlb: HTTP 403 (server: AkamaiGHost)") or []),
+            mock.patch.object(generate.pgh_data, "sports_blocks", self.sports_blocks),
             mock.patch.object(generate.time, "sleep", lambda s: None),
         ]
         for p in self.patches:
@@ -1016,10 +1027,20 @@ class EndToEnd(TempSite):
         self.assertEqual(sec["failed"][0]["name"], "Sec Down")
         self.assertEqual(sec["empty"], [])  # Sec B duplicates Sec A's headlines but is not silent
         scores = next(a for a in rec["feed_health"]["aux"] if a["label"].startswith("Scores"))
-        self.assertIn("HTTP 403", scores["detail"])
+        # the Pirates came from the fallback (recovered, ok) and the NHL from nowhere
+        self.assertTrue(scores["ok"])
+        self.assertIn("1 team via plaintextsports", scores["detail"])
+        self.assertIn("mlb: ESPN failed (HTTP 403 (server: AkamaiGHost)); used plaintextsports",
+                      scores["detail"])
+        self.assertNotIn("errors:", scores["detail"])
+        self.assertEqual(rec["sports"][0]["source"], "plaintextsports")
+        self.assertEqual(rec["sports"][0]["games"][0]["result"], "Giants 12 · Pirates 13 · Final")
+        self.assertNotIn("as_of", rec["sports"][0])  # health-only keys never reach the record
         self.assertTrue(any(n.startswith("Quiet day") for n in rec["notes"]))
         html = (self.tmp / "index.html").read_text()
-        self.assertIn("HTTP 403", html)  # ESPN failure is visible in Feed Health
+        self.assertIn("HTTP 403", html)  # the ESPN failure stays visible in Feed Health
+        self.assertIn("Giants 12 · Pirates 13 · Final", html)
+        self.assertIn('href="https://plaintextsports.com/mlb/2026-09-01/sf-pit"', html)
         self.assertNotIn("; ; and", html)  # empty feed groups do not leave holes in the footer
         self.assertNotIn("TODAY_SO_FAR —", self.prompts[0])
         local_prompt = next(p for p in self.prompts if "BUSINESS_POLITICS_ITEMS" in p)

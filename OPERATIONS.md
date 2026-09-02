@@ -235,6 +235,36 @@ explicit model ids and `docker compose up -d`. Distinguish from §5.1 by the
 error text: an auth failure talks about login/tokens, a model failure names
 the model.
 
+**5.9 Scoreboard missing, or the Scores row in Feed Health is not ok.**
+Scores come from ESPN's site API first; when ESPN fails for a league (it has
+answered HTTP 403 from the container since 2026-08-04), that team's
+plaintextsports.com page is fetched and parsed instead (three or four small
+GETs per run, `engine/plaintextsports.py`). Read the
+`Scores (ESPN, plaintextsports)` row at the bottom of the page, or
+`feed_health.aux` in `docs/data/<date>.json`:
+- `N teams via plaintextsports; mlb: ESPN failed (HTTP 403 (server:
+  AkamaiGHost)); used plaintextsports` → normal while ESPN is blocked; nothing
+  to do.
+- `errors: mlb plaintextsports: HTTP 4xx/5xx` → both sources failed for that
+  league. `docker logs` has the server header and a body excerpt
+  (`sports: plaintextsports <url> -> HTTP ...`). A one-off self-heals at the
+  next slot; a persistent 403 means the site rejects our User-Agent
+  (`USER_AGENT` in `engine/pittsburgh.py`).
+- `sports: plaintextsports .../nhl/2026-2027/... -> HTTP 404` in the log during
+  July–September (likewise `/nfl/<year>/` in spring and `/mlb/<year>/` in
+  January–February) is expected: the new season's page does not exist yet, so
+  the previous season's page is used and parses as off-season. Not an error.
+- `mlb: N plaintextsports rows not understood` → the site changed its markup.
+  Save the page (`curl -A Mozilla/5.0 https://plaintextsports.com/mlb/<year>/teams/pittsburgh-pirates`)
+  over `engine/testdata/pts/pirates.html`, fix `engine/plaintextsports.py`
+  against it, and add a test.
+- `nfl: plaintextsports page last published Sep 2` → the NFL and NHL pages are
+  republished daily around 5 AM ET (the MLB page is rendered live); older than
+  36 h means a missed republish on their side. The label on a started game
+  names the publish it reflects; nothing to fix here.
+- A team missing mid-season with no note and no error means both ESPN and the
+  team page showed nothing current; open the team page by hand.
+
 ---
 
 ## 6. Routine maintenance
