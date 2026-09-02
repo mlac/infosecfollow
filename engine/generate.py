@@ -1291,6 +1291,11 @@ def _sports_section(sports, local):
     """ESPN scoreboard plus the model-summarized 'Around the Teams' items."""
     out = _sports_inner(sports)
     around = local.get("around_teams") if local else None
+    if not out and (around or (local or {}).get("team_usa")):
+        # An empty scoreboard mid-season means the ESPN fetch failed (some
+        # league is always inside the next-game horizon); say so rather than
+        # letting the scores vanish silently.
+        out.append('<p class="lbl">Scoreboard unavailable at last update.</p>')
     if around:
         out.append("<h3>Around the Teams</h3>")
         out += _local_items_html(around)
@@ -1490,6 +1495,8 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
 
     if sports or around_teams or team_usa:
         lines += ["", "SPORTS", sub]
+        if not sports:
+            lines.append(_fill("Scoreboard unavailable at last update.", "  "))
         for b in (sports or []):
             head = f"{b['team']} ({b['record']})" if b["record"] else b["team"]
             lines += ["", head]
