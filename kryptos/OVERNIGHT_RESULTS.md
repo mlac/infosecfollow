@@ -631,7 +631,17 @@ degenerate* here, since `THETHETHE…` scores −2.64 per letter against English
 reaches −4.52 on pure shuffled noise. Any attempt on short key words needs a genuinely better
 language model (5-gram, word-level, or length-normalised), not more beam.
 
-### 4. Gromark's three open corners (§F12)
+### 4. Depth-3 manufactured keys on PK8/PK9 — a genuine untouched gap
+
+§G4 exhausts single-word manufactures (3.0 × 10⁸ keys) and screens the two-word variants, but its
+depth-3 solver is validated **only at n=504**. At 144–153 letters it recovers just 1–2 of 3 words,
+and for L < lcm(b,c) the decoupling is **provably degenerate — zero informative groups, so no signal
+exists to extract**. So `q3enc(q3enc(W1×k, W2), W3)` on PK8 and PK9 is **not screened in any sense**,
+and cannot be by that method. Closing it needs a different decomposition, not more compute — the
+same conclusion the information bound (§F15) reaches for long periods. Note also that no word longer
+than 12 and no key length above 55 was searched in any two-word grid anywhere in that family.
+
+### 5. Gromark's three open corners (§F12)
 
 In the agent's own priority order: (ii) the mix-**after**-shift ACA form at PK8/PK9 lengths, which
 needs a joint primer + mixed-alphabet solve (~5 h single-core for the full grid, and it is the only
@@ -639,7 +649,7 @@ test that can see that form at n=144); (i) full 26⁷ mod-26 letter-primer enume
 26⁸ is out of reach); (iii) a transposition applied *on top of* the Gromark, outside every statistic
 used so far. Do **not** re-run mod-10 digit primers at L ≤ 8, or dictionary-word primers 5–14.
 
-### 5. Non-additive block ciphers beyond what was run
+### 6. Non-additive block ciphers beyond what was run
 
 Blind Hill k = 2, 3, 4 with additive offset periods 1–6 is done and **Tier 2 for PK10** (§F2). Open:
 a Hill stage with a longer additive period, or an additive that is itself a two-word product —
@@ -647,7 +657,7 @@ design law 2 applied to PK7's construction — and non-Hill non-additive constru
 PK10's statistical signature (IoC 0.0388, census LLR −13.03) remains closely matched by Hill 3×3
 (−15.93) and Hill 4×4 (−13.88), so the family is still a priori attractive even after the negative.
 
-### 6. Running key through an independent keyed alphabet
+### 7. Running key through an independent keyed alphabet
 
 The census argument (§A6) excludes an English key text read in the *same* tableau as the plaintext,
 which is what PK5 does. It does **not** exclude one read through an independent keyed alphabet:
@@ -656,14 +666,14 @@ PK3 proves this setter builds keys by encrypting one word under another, a key t
 keyed alphabet is squarely in style, and §6's running-key screen tested specific *texts*, not the
 *mapping*.
 
-### 7. PK9 → PK8, once PK9's own construction is known
+### 8. PK9 → PK8, once PK9's own construction is known
 
 The derivation is sound and the machinery exists (§F5): if PK8's key is PK9's plaintext then
 `d = c8 − c9` is PK8's plaintext under PK9's keystream. All 48 derived texts have had a period scan,
 a product grid and the full crib sweep — nothing. This stays live but is **blocked on PK9**, not on
 compute. Same for a Gromark whose primer derives from PK9's plaintext.
 
-### 8. Do NOT re-run
+### 9. Do NOT re-run
 
 * Any periodic substitution on PK10 with period ≤ 100, in **any** alphabet. The column-IoC statistic
   only needs the key constant within a column, so it covers Vigenère, Beaufort, variant, Gronsfeld,
@@ -679,6 +689,9 @@ compute. Same for a Gromark whose primer derives from PK9's plaintext.
 * Two-word product keys on PK9 — now excluded by census concentration as well as by search (§D).
 * Quadgram score as a standalone discriminator in any word-constrained search: it reaches −4.52 on
   shuffled noise, 0.27 from true English, and `THETHETHE…` beats English outright (§G3).
+* Single-word manufactured keys on any target — 3.0 × 10⁸ keys, Tier 2 (§G4).
+* Gromark mod-10 digit primers at L ≤ 8: dead by enumeration, and its one flag is now refuted three
+  independent ways (§G5).
 
 ## F. LATE RESULTS (jobs that finished after §A–E were drafted)
 
@@ -1228,12 +1241,16 @@ bound). The rest were still running when this document was last updated. **Their
 committed under `results/` even though no verdict is written here** — a next session should read
 those files before re-running anything in these families.
 
-| family | raw output | state at write-up |
+**ALL SIX HAVE NOW REPORTED. All negative.**
+
+| family | verdict | written up |
 |---|---|---|
-| crib battery / columnar / cross-target | `results/cb_*.json` | far along, see below |
-| word-constrained dual beam | `results/wb_*.json` | see §F13 for the objective finding |
-| PK9 anomaly deep-dive | — | queued |
-| manufactured long keys | — | queued |
+| Gromark and generated keystreams | **Tier 2** (digit primers, by enumeration) | §F12, §G5 |
+| Long periods 25–72 | **Tier 2** on PK10 + the information bound | §F15 |
+| Crib attacks | Tier 3 (corpus is the limit) | §G1 |
+| PK9 statistical anomaly | **Tier 2** — anomaly *explained* | §G2 |
+| Word-constrained dual beam | **Tier 2** within its rules | §G3 |
+| Manufactured long keys | **Tier 2** single-word, Tier 3 rest | §G4 |
 
 **What the crib family had already established at write-up** (read from its artifacts, not from a
 formal report, so treat the numbers as provisional):
