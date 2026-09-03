@@ -1454,3 +1454,60 @@ hill-climb, my independent reconstruction (§F12 — I reproduced IoC 0.063714 e
 against shuffled nulls of −5.60 to −5.72), and this verifier's rebuilt null. The agreement across
 three different statistics and three separately-written nulls is the strongest evidence in this
 document that the campaign's negatives are real rather than an artifact of any single method.
+
+### G6. Small-modulus keystreams — the census answers before the search does
+
+**192,000 forward simulations, 45 s** (`smallmod_census.py`, `results/smallmod_census.json`).
+
+`run_smallmod.py` is the direct follow-up to §G2: if PK9's keystream really uses about five
+effective alphabets, a lagged-Fibonacci recurrence taken **mod m** is exactly the right shape,
+because it yields a keystream over precisely *m* distinct values. The Gromark family covered mod 10
+and mod 26 and never small moduli, so the gap was real. Its positive control recovers the exact
+primer and multiplier with a W=9 columnar underneath.
+
+Before grading that search's silence I asked the prior question the doctrine demands: **does the
+hypothesis reproduce each target's census at all?** A search for a construction the target's own IoC
+already excludes cannot produce an informative negative, however many configurations it executes.
+
+The test is forward simulation with no key search: encrypt the setter's own seven plaintexts under a
+genuine mod-*m* keystream at each target's length and compare the resulting IoC with the observed
+one. **IoC is permutation-invariant, so this holds with or without a transposition underneath — a
+columnar literally cannot move the statistic.** The realised distinct-shift counts confirm the
+recurrence does not degenerate (2.97 for m=3, 5.00 for m=5, 7.00 for m=7).
+
+| target | observed IoC | m=3 | m=5 | m=7 | m=10 | m=26 |
+|---|---|---|---|---|---|---|
+| PK8 (n=153) | 0.03947 | −2.41 | −1.40 | −0.83 | −0.38 | **+0.50** |
+| PK9 (n=144) | 0.04448 | −0.91 | **+0.29** | +0.92 | +1.54 | +3.10 |
+| PK10 (n=504) | 0.03877 | −4.94 | −2.56 | −1.70 | −1.02 | **+0.39** |
+
+(z of the observed IoC against 4,000 simulations per cell; L=6, ACA recurrence.)
+
+**Three different answers for three targets, and they are the useful part.**
+
+**PK9 confirms §G2 independently, by a different route.** Its IoC sits comfortably inside the
+small-modulus prediction for m = 4–8 (|z| < 1.1) and **excludes a flat 26-value keystream at
+z = +3.10, empirical p = 0.0053**. §G2 reached ML k=5 from a census-concentration and word-set
+analysis; this reaches the same place from forward simulation of an actual generator. Two unrelated
+methods, one answer. **The sweep's PK9 arm is aimed at the right target.**
+
+**PK8 points the other way.** Its IoC is *lower* than every small-modulus simulation: m=3 excluded at
+z = −2.41 (99.9% of simulated small-m texts score higher than PK8 does), m=4 at −1.8, m=5 at −1.4,
+and the best fit across the whole range is **m=26**. PK8's census disfavors the very construction the
+sweep is searching for.
+
+**PK10 excludes it outright.** At n=504 the simulation sd collapses to 0.0019, and the observation
+lands at **z = −4.94 for m=3, −3.35 for m=4, −2.56 for m=5**, with *every one* of 4,000 simulated
+texts scoring higher than PK10 at m ≤ 4. Best fit is again m=26.
+
+**What this does to the sweep's verdict.** It splits it. PK9's negative, when it lands, will be a
+negative about a hypothesis PK9's census actively supports — that is worth having. PK8's and PK10's
+negatives are about a hypothesis their censuses already disfavor or exclude, so they add little; the
+exclusion above is the stronger statement and it cost 45 seconds rather than hours. This is the same
+lesson as §A0 in a new place: **at these lengths a cheap invariant beats an expensive ranking
+search**, and it is worth asking whether the census admits a hypothesis before spending cores
+searching its key space.
+
+**Scope, stated plainly.** This excludes small-modulus *additive* keystreams, which is exactly what
+the sweep assumes, so null and search are matched. It says nothing about a small-alphabet keystream
+combined non-additively, and nothing about m ≥ 10 on any target.

@@ -298,5 +298,21 @@
   "beau_minus_add_mean": 0.0419,
   "max3_minus_add_mean": 0.0587,
   "note": "the published null used the ADD arm as the ceiling for a BEAUFORT real cell"
- }
+ },
+ "what_I_executed": {
+  "real_cell_reproductions": 1,
+  "null_beam_runs": 30,
+  "null_beam_cpu_seconds": 3591,
+  "repro_cpu_seconds": 250,
+  "wall_clock_seconds_2_parallel_workers": 1980,
+  "note": "I did NOT re-execute all 763 claimed configs; I reproduced the single claimed-hit cell exactly and rebuilt its null from scratch (30 beam runs, 10 shuffles x 3 modes)."
+ },
+ "verdict": "REFUTED",
+ "secondary_defects": [
+  "The key the beam returns is 504 letters for a 504-letter plaintext (58 chained unrelated dictionary words). Zero compression: doctrine #6 (key far shorter than the plaintext it explains) is violated by construction, so no dual-beam output at n=504 can ever be a solution.",
+  "Round-trip exactness is vacuous here: the beam derives key = ct + pt pointwise, so re-encrypting reproduces the ciphertext for EVERY beam output including all 30 null outputs.",
+  "The artifact's own capacity table: with pt vocab len>=3 and key vocab len>=8 there are ~10^270 (pt,key) pairs word-decomposable and consistent with ANY random 504-letter string. The word constraint carries no identifying information at this length.",
+  "The periodic variant's null carries the same mode mismatch (null = max over 16 periods in mode 'add'; real search = 48 cells over 3 modes x 16 periods, best at L=60 BEAUFORT). It survives only because the real best -7.7495 is below even that under-burdened null max -7.7389.",
+  "The AZ cells were never given their own null; the artifact asserts 'the alphabet is only a relabelling' for shuffled ciphertext, which is not true at letter level (the trie and the mod-26 arithmetic live in alphabet-index space). Immaterial here only because all AZ cells fell below the add null max anyway."
+ ]
 }
