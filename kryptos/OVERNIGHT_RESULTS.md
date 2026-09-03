@@ -1659,3 +1659,12 @@ often** (6/6/6 classes); an 8/6/4 key escapes it, and the unbalanced space that 
 back to E = 5.4 × 10⁵. It assumes **period exactly 18** — the only period in the shape whose
 balanced space is enumerable. And it assumes the plaintext is read through the **KRYPTOS alphabet**,
 which the seven solved puzzles support but do not prove.
+
+**Dropping the balance assumption — promising, and explicitly unresolved.** The same likelihood
+statistic applied to *unbalanced* planted keys beats all 200,000 sampled null partitions at every
+length and at j=3 and j=4. That bounds P < 5 × 10⁻⁶ and therefore **E < 320** at p=18, j=3 — which
+is an unresolved upper bound, **not** a demonstration that the attack works unbalanced. Settling it
+needs the full 3¹⁸/3! = 64,616,748 enumeration (roughly 5 minutes uncontended), not a tail
+extrapolation from 200,000 samples; extrapolating a maximum over 6.5 × 10⁷ from a sample that size
+is the error this section exists to avoid. **Next session: run that enumeration.** If the truth
+ranks 1 there, the attack loses its balance assumption and the space of reachable keys widens by 23×.
