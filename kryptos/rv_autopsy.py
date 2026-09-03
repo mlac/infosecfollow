@@ -29,7 +29,7 @@ def profile_chi2(R):
     p = np.sort(cnt)[::-1]
     return float((((p - ENG_SORTED) ** 2) / ENG_SORTED).sum())
 
-def climb(R, restarts=12, seed=0):
+def climb(R, restarts=8, seed=0):
     rng = np.random.default_rng(seed)
     n = len(R); best = -99.0; bestkey = None
     pairs = [(i, j) for i in range(26) for j in range(i + 1, 26)]
