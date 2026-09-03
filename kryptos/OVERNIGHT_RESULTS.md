@@ -1538,3 +1538,48 @@ at least 8 or 9. Whatever else is true, the two puzzles are not the same constru
 parameters — which bears directly on the setter's hint that solving one gives leverage on the
 others. If leverage exists it is through the *plaintext* (frontier item 8), not through a shared
 keystream shape.
+
+### G7. The same test made generator-free — what the census can and cannot screen
+
+**1.2 million forward simulations** (`alphabet_count.py`, `results/alphabet_count.json`).
+
+§G6's exclusion was derived from one generator. But the only property of a keystream that IoC can
+see is the multiset of shifts it emits, so the interval ought to be a property of the *hypothesis
+class* — "j distinct cipher alphabets" — rather than of the recurrence. That matters because
+frontier item 0a's two surviving shapes for PK9 are stated in exactly those terms, and no residue or
+period test can see either (power 0.03–0.05).
+
+Four keystream shapes at the same j, chosen to be as unlike each other as possible: **iid** (uniform
+over a random j-subset, aperiodic, maximally unstructured), **per18** and **per36** (periodic, drawn
+from a j-subset), and **lagfib** (the §G6 recurrence). 95% consistency intervals on j:
+
+| target | iid (aperiodic) | lagfib | per36 | per18 |
+|---|---|---|---|---|
+| PK8 (n=153) | 5–26 | **5–26** | 5–26 | 6–26 |
+| PK9 (n=144) | 3–13 | **3–13** | 3–21 | 3–26 |
+| PK10 (n=504) | 11–26 | **11–26** | 13–26 | 19–26 |
+
+**The aperiodic columns agree exactly, on all three targets.** An i.i.d. draw and a lagged-Fibonacci
+recurrence share no structure beyond the size of their value set, and they produce identical
+intervals to the endpoint. So for aperiodic keystreams the §G6 result is generator-independent: it
+constrains the **effective alphabet count** and nothing else, which is the honest scope of any
+census statistic.
+
+**The periodic columns are looser, and that is a real limitation of the test, not a quirk.** A
+period-18 key realises at most 18 distinct shifts however large j is, so its j axis is compressed
+against the same underlying constraint. The consequence is stated plainly: **on PK9 a period-18 key
+is consistent at every alphabet size from 3 to 26 — the census screens it not at all.** That is
+precisely frontier item 0a's second surviving shape, and §F15's information bound says no statistic
+can reach it at n=144 either. It stays open, and it is now the best-characterised open shape in the
+campaign: *not* excluded, *not* detectable, and reachable only by construction.
+
+**What it does close.** PK10 needs **at least 11 effective alphabets** aperiodically and **at least
+19 distinct letters** in a period-18 key. Taken with §D's Tier 2 exclusion of every periodic
+keystream of period 2–100 in any alphabet, PK10's short-alphabet family is dead from both ends: too
+few alphabets is excluded by census, too short a period by the residue scan. PK8 needs at least 5,
+which kills the m ≤ 4 corner of the sweep it is currently running.
+
+**One conclusion I did not expect and am recording against my own §G6 wording.** I wrote there that
+the census test "holds with or without a transposition underneath", which is true, and implied the
+interval would generalise across constructions. It generalises across *generators* but not across
+*periodicity*. §G6's table should be read as bounding aperiodic keystreams only.
