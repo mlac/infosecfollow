@@ -744,6 +744,7 @@ crib.
 | target | cells | word-evaluations | wall | observed max z | matched ceiling | cells beating own null | verdict |
 |---|---|---|---|---|---|---|---|
 | PK9 | 2,688 | **317,784,240** | 1,617 s | 7.24 | 7.29 | 434 / 2,688 (chance ~448) | below ceiling, nothing |
+| PK8 | 2,796 | **329,959,512** | 1,716 s | 7.07 | 8.03 | 499 / 2,796 (chance ~466) | below ceiling, nothing |
 
 Top cells are the usual noise signature — orthographically unrelated words (CREUTZFELDT,
 DOMESTICATE, PLEISTOCENE; BREWMASTERS, GANGMASTERS, BANDMASTERS) rather than a true key with its

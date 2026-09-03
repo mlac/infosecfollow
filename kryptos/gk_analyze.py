@@ -69,6 +69,7 @@ def main():
         if not cand: continue
         b = max(cand, key=lambda x: x['best'])
         out['per_ct_best'][ct] = {kk: vv for kk, vv in b.items() if kk != 'key'}
+    out['expected_above_by_chance'] = round(sum(1.0/(1+r['n_null_searches']) for r in out['all_real']), 2)
     json.dump(out, open('results/gromark_running_key.json', 'w'), indent=1)
 
     print("POOLED MATCHED NULL (best-of-search over letter-shuffled copies)")
@@ -80,8 +81,7 @@ def main():
     for ct, b in out['per_ct_best'].items():
         print("  %-5s best IoC %.5f  (%s %s)  pooled null max %.5f  z=%+.2f  above=%s" %
               (ct, b['best'], b['run'], b['cell'], b['null_best_max'], b['z_vs_null_best'], b['above_ceiling']))
-    exp = sum(1.0 / (1 + r['n_null_searches']) for r in out['all_real'])
-    out['expected_above_by_chance'] = round(exp, 2)
+    exp = out['expected_above_by_chance']
     print("\nREAL CELLS ABOVE POOLED NULL MAX: %d of %d  (expected by chance if null==real: %.1f)"
           % (len(out['above_ceiling']), len(out['all_real']), exp))
     for h in sorted(out['above_ceiling'], key=lambda x: -x['z_vs_null_best'])[:20]:
