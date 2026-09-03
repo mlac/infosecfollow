@@ -16,5 +16,6 @@ for f in sorted(glob.glob('results/wb_periodic_null_*.json')):
 rows.append(('exploratory hard-constraint periodic runs (wb_ptest/2/3, superseded)',8))
 tot+=8
 rows.append(('dual-beam timing/validation run on synthetic (wb_time)',1)); tot+=1
+rows.append(('PK1 first positive-control grid, beam 20k (JSON overwritten, in logs)',12)); tot+=12
 for a,b in rows: print(f'{b:6d}  {a}')
 print(f'{tot:6d}  TOTAL beam executions')
