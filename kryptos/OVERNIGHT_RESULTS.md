@@ -463,7 +463,7 @@ here — the sweep fires only 3/6 and 2/6 at those lengths (§F2).
 **[NEW] Crib × key-structure, enriched corpus.** 48,616 cribs, **355,980,204 effective tests**,
 expected false positives 3.20, observed 0 (§F8). Plus **367,133,184 tests** across the 48 PK9→PK8
 coupling texts (§F5), **16,525,920** with cribs at every offset (§F11), and **1,000,200** for the
-permutation-free width-W multiset case (§F1). **Crib-family total: exactly **798,062,550** exact tests, zero passes**, by a pipeline shown end-to-end to recover PK1's true period from a crib its own generator
+permutation-free width-W multiset case (§F1). **Crib-family total: 798,062,550 exact tests, zero passes**, by a pipeline shown end-to-end to recover PK1's true period from a crib its own generator
 produced (§F9).
 
 **[NEW] Wrap-crib conjunction.** 3,214,350 hash-join tests over wrap periods Q (PK8 124–147 plus
