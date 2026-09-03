@@ -26,7 +26,7 @@ positive controls pass (`OMP_NUM_THREADS=1 python3 verify.py`).
 |---|---|
 | Gromark trial decryptions (all 10⁷ primers at L=7, all 10⁸ at L=8 — exhaustion, not sampling) | **1.235 × 10¹⁰** |
 | Product-key word-evaluations (two- and three-word grids, three targets) | **~1.14 × 10⁹** |
-| Exact crib tests, **zero passes** | **~797 × 10⁶** |
+| Exact crib tests, **zero passes** | **798,062,550** |
 | Blind Hill row-evaluations (k = 2, 3, 4) | **9.0 × 10⁶** |
 | Periods excluded on PK10, transposition-invariantly, any alphabet, power 1.00 | **2–100** |
 
@@ -293,7 +293,17 @@ the honest limit — see §E for the width-9 extension that was designed but not
 | Derived coupling texts, period + product | 48 texts × ~30 periods + product grids | running | +3.76 / +2.62 | §F5 | Tier 3 |
 | Shared-keystream coupling | 24 combos × every offset + 60 nulls per scan | 40 s | all below | — | Tier 3 — **weak test** (§C4) |
 
-**Crib-family total: ~797 million exact tests, zero passes.**
+**Crib-family total: 798,062,550 exact tests, zero passes.** Breakdown:
+
+| crib sweep | tests | passes |
+|---|---|---|
+| original corpus (10,685 cribs), prefix + suffix | 54,208,692 | 0 |
+| enriched corpus (48,616 cribs), prefix + suffix | 355,980,204 | 0 |
+| 48 PK9→PK8 coupling texts | 367,133,184 | 0 |
+| 47 recurring phrases at every offset | 16,525,920 | 0 |
+| permutation-free width-W multiset | 1,000,200 | 0 |
+| wrap-crib conjunction | 3,214,350 | 0 |
+| **total** | **798,062,550** | **0** |
 
 Product-grid cell definition: target × {KA, A-Z} text alphabet × {KA, A-Z} key alphabet ×
 {subtract, add, beaufort} × 91 length pairs (3 ≤ a < b ≤ 16) × up to 2 decomposition directions,
@@ -453,8 +463,7 @@ here — the sweep fires only 3/6 and 2/6 at those lengths (§F2).
 **[NEW] Crib × key-structure, enriched corpus.** 48,616 cribs, **355,980,204 effective tests**,
 expected false positives 3.20, observed 0 (§F8). Plus **367,133,184 tests** across the 48 PK9→PK8
 coupling texts (§F5), **16,525,920** with cribs at every offset (§F11), and **1,000,200** for the
-permutation-free width-W multiset case (§F1). **Crib-family total ≈ 797 million exact tests, zero
-passes**, by a pipeline shown end-to-end to recover PK1's true period from a crib its own generator
+permutation-free width-W multiset case (§F1). **Crib-family total: exactly **798,062,550** exact tests, zero passes**, by a pipeline shown end-to-end to recover PK1's true period from a crib its own generator
 produced (§F9).
 
 **[NEW] Wrap-crib conjunction.** 3,214,350 hash-join tests over wrap periods Q (PK8 124–147 plus
@@ -771,8 +780,7 @@ closing line, each padded with numerals.
 alphabets × 3 modes × {prefix, suffix}; 104,004 underpowered structure/length combinations skipped
 and counted. **Expected false positives 3.20. Observed passes: 0.**
 
-Combined with §A8, §F1, §F5 and the wrap-crib test, the crib family now stands at roughly
-**780 million exact tests with zero passes**, and every one of those tests would have fired with
+Combined with §A8, §F1, §F5 and the wrap-crib test, the crib family now stands at **798,062,550 exact tests with zero passes**, and every one of those tests would have fired with
 probability 1 on a correct crib. The remaining ways this family can still be wrong are worth stating
 plainly: the true opening is not in the corpus; the plaintext is not in English (PK2 contains
 Italian, and §6 records that Italian keys and alphabets were screened but not Italian *plaintext*
