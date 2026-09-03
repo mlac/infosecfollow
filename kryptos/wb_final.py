@@ -40,6 +40,10 @@ for tag in ('PK10','PK8','PK9'):
         p['real_best_per_target'][tag]['cells']=len(rows)
 if pn: p['matched_null']={'obj':stats([x['obj'] for x in pn]),'qg':stats([x['qg'] for x in pn]),
         'construction':'20 shuffles of PK10; each replicate takes the MAX over the same 16 periods (L in 25,27,28,30,32,35,36,40,42,45,48,50,54,56,60,63), mode add, beam 100k'}
+p['mode_note']=("For a FREE periodic key, 'add' (c=p+k) and 'sub' (c=p-k) are the same search "
+  "(substitute k'=-k), and the runs confirm this cell-for-cell; only add/sub and beau are "
+  "distinct.  For the DUAL beam all three modes are distinct because negating a key word "
+  "does not give another dictionary word.")
 out['periodic']=p
 # ---- verdict numbers
 if n10:
