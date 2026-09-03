@@ -201,3 +201,70 @@ def objective(pt, key, trie, QGM, alpha, Wpt=1.0, Wkey=1.0, trie_key=None):
     n = len(pt)
     return dict(qg_per=qg/n, pt_lp=lpt, key_lp=lky,
                 obj=(qg + Wpt*lpt + Wkey*lky)/n, seg_pt=sp, seg_key=sk)
+
+# ------------------------------------------------ variant 2: periodic free key
+def _pfromk(mode, cv, kv):
+    if mode == 'add':  return (cv - kv) % 26
+    if mode == 'sub':  return (cv + kv) % 26
+    return (kv - cv) % 26            # beau: c = k - p
+
+def periodic_beam(ct, trie, QGM, mode='add', L=27, beam=100000, Wpt=1.0,
+                  verbose=0):
+    """Plaintext must decompose into dictionary words; key is FREE but periodic
+    with period L.  Positions 0..L-1 branch (26 ways, pruned by the word trie);
+    from L onward the plaintext is fully determined by the pinned key."""
+    CONT, ISEND, ENDLP, NN = trie
+    ROOTCH = CONT[0].copy()
+    n = len(ct); t0 = time.time()
+    ptn = np.zeros(1, dtype=np.int32); ctx = np.zeros(1, dtype=np.int64)
+    sc = np.zeros(1, dtype=np.float32); PATH = np.zeros((1, n), dtype=np.uint8)
+    for i in range(min(L, n)):
+        N = ptn.shape[0]
+        ptrow = CONT[ptn]
+        ptres = np.where(ISEND[ptn][:, None], ROOTCH[None, :], np.int32(-1))
+        qg = QGM[ctx] if i >= 3 else np.zeros((N, 26), dtype=np.float32)
+        base = sc[:, None] + qg
+        cp, cs, cr, cl = [], [], [], []
+        for (pa, bon) in ((ptrow, 0.0), (ptres, (Wpt*ENDLP[ptn])[:, None])):
+            idx = np.flatnonzero((pa >= 0).ravel())
+            if idx.size == 0: continue
+            r = idx // 26; c = (idx - r*26).astype(np.int64)
+            cp.append(pa.ravel()[idx]); cs.append((base + bon).ravel()[idx])
+            cr.append(r); cl.append(c)
+        npt = np.concatenate(cp); nsc = np.concatenate(cs)
+        npar = np.concatenate(cr); nlet = np.concatenate(cl)
+        if nsc.size > beam:
+            sel = np.argpartition(-nsc, beam)[:beam]
+        else:
+            sel = np.arange(nsc.size)
+        ptn = npt[sel]; sc = nsc[sel]
+        par = npar[sel]; let = nlet[sel]
+        ctx = (ctx[par] % 676)*26 + let
+        PATH = PATH[par]; PATH[:, i] = let.astype(np.uint8)
+    # pin the key
+    cvL = np.asarray(ct[:L], dtype=np.int64)
+    KEYS = np.empty((ptn.shape[0], L), dtype=np.int64)
+    for r in range(L):
+        p = PATH[:, r].astype(np.int64)
+        KEYS[:, r] = keyperm(mode, int(cvL[r]))[p]
+    for i in range(L, n):
+        cv = int(ct[i]); kv = KEYS[:, i % L]
+        p = _pfromk(mode, cv, kv)
+        nxt = CONT[ptn, p]
+        alt = np.where(ISEND[ptn], ROOTCH[p], np.int32(-1))
+        bon = (Wpt*ENDLP[ptn])*(nxt < 0)
+        use = np.where(nxt >= 0, nxt, alt)
+        keep = np.flatnonzero(use >= 0)
+        if keep.size == 0:
+            return dict(score=None, dead_at=i, nstates=0, sec=time.time()-t0)
+        qg = QGM.ravel()[ctx*26 + p] if i >= 3 else 0.0
+        sc = sc[keep] + qg[keep] + bon[keep]
+        ptn = use[keep].astype(np.int32)
+        ctx = (ctx[keep] % 676)*26 + p[keep]
+        KEYS = KEYS[keep]; PATH = PATH[keep]; PATH[:, i] = p[keep].astype(np.uint8)
+    fin = sc + Wpt*ENDLP[ptn]*ISEND[ptn]
+    good = np.flatnonzero(ISEND[ptn])
+    if good.size == 0: good = np.arange(ptn.shape[0])
+    b = good[np.argmax(fin[good])]
+    return dict(score=float(fin[b])/n, path=PATH[b].copy(), dead_at=None,
+                nstates=int(ptn.shape[0]), sec=time.time()-t0)
