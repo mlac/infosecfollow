@@ -860,3 +860,32 @@ directions, by exhaustion rather than sampling. **Three corners stay open**: (i)
 primers were screened only over dictionary words — 26⁷ = 8×10⁹ was not enumerated (Tier 3);
 (ii) the mix-after-shift sub-form at PK8/PK9 lengths; (iii) a transposition applied *on top of* the
 Gromark, which breaks keystream alignment and lies outside every statistic used.
+
+### F13. The word-constrained dual beam mis-ranks the truth — its objective, not its width
+
+The dual-beam agent's own positive control on PK1 (key PROVENANCE, period 10) came back
+`truth_wins: false`: at beam 20,000 the search's objective scored its own output **−5.3462 against
+the true pair's −5.5624**, while recovering only 49% of the plaintext. It does find real fragments —
+`INVESTIGATION`, `WOUNDITSTHREADINSCRIBEDWITHLETTERS`, `THEACCESSIONL`, and PROVENANCE recurring in
+the key — but the scoring function prefers a wrong answer to the right one.
+
+**That reframes frontier item 5.** The old plan was "re-run at beam 100k+ instead of 45k". A wider
+beam only searches harder for something the objective mis-ranks; widening cannot fix a
+misspecification. And §6's Tier 3 dual-beam entry ("rules out prose-key-over-prose-plaintext")
+inherits the same problem, so it should not be cited as covering that family.
+
+**Diagnosis, after one wrong guess of mine.** I first hypothesised the word-sequence cost penalises
+a *repeated* key — PK1's key is one word 19 times, and a per-word cost might favour variety. Checked
+and **refuted**: 19 × PROVENANCE scores −111.2 in summed log₁₀ P(word) against −131.5 for a varied
+run of 32 common words of the same length. Fewer words means less cost, so repetition is *cheap*
+under that term.
+
+The real mechanism is in the agent's own numbers: its output's quadgram score is **−3.948**, better
+than real English at **−4.25**. The beam optimises into a region *more quadgram-typical than natural
+language*, so the objective ranks its construction above genuine plaintext. This is the same failure
+mode as §C1's letter-stacking and the §F-autopsy word-salad at period ~70 — an optimiser with more
+freedom than the data constrains will manufacture something that beats the truth on the proxy.
+
+**Consequence for the next run:** before widening any beam, calibrate the objective so that a *known*
+(plaintext, key) pair outscores anything the beam can construct at that width — i.e. make
+`truth_wins: true` on PK1 the entry condition. Until then this family is untested, not screened.
