@@ -1033,3 +1033,30 @@ key and it survives any transposition. Combined with my §A2/§A3 tables — PK9
 2–18, and periods 2–8 and 10 excluded transposition-invariantly at power 0.88–1.00 — the surviving
 window for PK9 is **periods ≈9 and 11–18, or a non-substitution mechanism**. That is a narrow,
 concrete target and it should outrank longer keys.
+
+### F16. A sharper period exclusion — likelihood instead of an arbitrary threshold
+
+§A3 graded periods by "power at z>3", which asks whether a true cipher would clear an arbitrary bar.
+The better question needs no threshold: **how far below the true-cipher distribution does the
+observation actually sit?** If a genuine period-9 cipher gives z = 3.59 ± 1.12 at n=144 and PK9
+scored 0.49, that is 2.8 σ below — a direct exclusion of period 9.
+
+Re-scoring the same simulations that way, with **no new compute**:
+
+| target | periods tested | excluded at p<0.05 | excluded at **p<0.01** (conservative) | survivors at p<0.01 |
+|---|---|---|---|---|
+| PK8 (153) | 29 | 27 | see `results/period_likelihood.json` | — |
+| PK9 (144) | 27 | 22 | ” | — |
+| **PK10 (504)** | **99** | **99** | ” | **none** |
+
+At p<0.05 PK9's survivors are only **p = 14, 17, 21, 23, 28** and PK8's are only **p = 27, 28** —
+far narrower than §A3's threshold-based lists. But the exclusion direction matters for how this is
+read: a false *rejection* here wrongly kills a real period, and at α=0.05 over ~27 periods roughly
+one such error is expected. The conservative α=0.01 lists in the JSON are the ones to trust; the
+0.05 lists are the ones to prioritise.
+
+Why the information is present here but not at long periods: the analytic z ceiling from the
+within-class pair count (§F15) stays at **3.06–4.48 across p=9–18 on PK9**, versus 1.16 at p=72. The
+window is closable — what limited §A3 was the estimator, not the data. A next run wanting to finish
+PK9 should re-simulate p ∈ {14, 17, 21, 23, 28} with far more replicates to tighten the
+true-cipher distribution, rather than inventing a new statistic.
