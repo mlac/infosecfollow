@@ -1807,3 +1807,33 @@ KA p=24 j=2 (−0.45), AZ p=18 j=2 (−0.21).
 
 **PK8 verdict: negative**, on the same terms as PK9 — its key is not a period-18 key built from
 three equally-used letters, in either alphabet.
+
+### G9. Three independent lines converge on PK9 — and §G8 removes one square from the target
+
+The six-family workflow closed after 8.2 hours (15 agents, 0 errors, 2.5M subagent tokens, 916 tool
+calls). **It contained no seventh family**: its six entries are the ones already reported as §F15,
+§F12/§G5, §G3, §G1, §G2 and §G4, and every figure in its summary matches what is already recorded.
+Nothing here is new evidence. What *is* new is that its results can now be read against §G6–§G8,
+and three analyses that share no machinery point at the same place.
+
+| line of evidence | method | says about PK9 |
+|---|---|---|
+| §F15 (long-period family) | forward simulation of period-25–72 polyalphabetics at n=144 | PK9's IoC 0.0445 sits **2.3–3.0 σ above** any of them; effect strengthens with p, survives any transposition → **short period** |
+| §G2 | census concentration + word-set analysis | **~5 effective alphabets**, 95% credible set {3…14} |
+| §G6/§G7 | forward simulation of keystreams at controlled alphabet count | **3–13 effective alphabets**; excludes a flat 26-value keystream at p=0.005 |
+
+Three routes, one conclusion: **PK9's keystream is short-period and uses few distinct letters.** The
+elevated IoC that §F3 first flagged as an isolated +3.2 anomaly — and which §D1 rightly cautioned
+against over-reading — is the same fact seen three ways, and it is no longer isolated.
+
+Combining the exclusions gives the sharpest statement the campaign can make about any of the three
+puzzles:
+
+* periods 2–8 and 10 excluded transposition-invariantly at power 0.88–1.00 (§A2/§A3);
+* periods 25–72 excluded by the wrong-direction IoC argument above;
+* **period 18 with three equally-used letters now excluded outright by §G8**, in both alphabets, by
+  a solver with 85% exact recovery at this length;
+* leaving **periods ≈9 and 11–17, plus period 18 with unequal usage or j ≥ 4**.
+
+That is a target of roughly eight periods, not an open family. It is the most constrained the
+campaign has been, and it is where the next session should start.

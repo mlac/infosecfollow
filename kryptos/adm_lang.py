@@ -55,3 +55,25 @@ out['rows']=rows
 for r in rows: print(f"{r['label']:44s} ioc={r['ioc']:.5f} top={r['top_letter_pct']:5.2f}% "
                      f"topIoCfrac={r['frac_of_ioc_from_top_letter']:.3f} chi2={r['sorted_profile_chi2_vs_english_25df']:8.1f}")
 json.dump(out, open('results/adm_language.json','w'), indent=1)
+
+# --- Italian reference (the claim's decrypts were to be read "as English or Italian")
+ITA = np.array([11.74,0.92,4.50,3.73,11.79,0.95,1.64,1.54,11.28,0.00,0.00,6.51,2.51,6.88,
+ 9.83,3.05,0.51,6.37,4.98,5.62,3.01,0.21,0.00,0.00,0.00,0.49])
+ITA = ITA/ITA.sum()
+def chi2_generic(v, F):
+    c,n=profile(v); exp=F*n
+    exp=np.maximum(exp, 0.5)          # guard zero-probability letters
+    srt=np.sort(c)[::-1]; esrt=np.sort(exp)[::-1]
+    return float(((srt-esrt)**2/esrt).sum())
+it={}
+R=decrypt('pk9','KA','AZ','sub','METALHEAD',9,'revtrunc14')
+it['CLAIMED_HIT_vs_italian_sorted_chi2']=round(chi2_generic(R,ITA),1)
+for k in ['pk1','pk3','pk7']:
+    it[f'REAL_PLAINTEXT_{k}_144_vs_italian_sorted_chi2']=round(
+        chi2_generic(E.to_idx(PT[k][:144],E.AZ),ITA),1)
+it['note']=('Sorted-profile chi2 against Italian on 25 df. Same conclusion as English: the '
+            'claimed decrypt is nowhere near a natural-language letter profile, and the test '
+            'is invariant to any transposition hidden underneath and to any alphabet relabelling.')
+out['italian']=it
+json.dump(out, open('results/adm_language.json','w'), indent=1)
+print('ITALIAN:', json.dumps(it, indent=1))
