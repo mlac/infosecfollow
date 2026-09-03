@@ -694,3 +694,25 @@ false-positive count drops from 0.67 to ≈0.45 — the observed count is 0 eith
 The general lesson for the next session: **check whether your modes are actually distinct under the
 statistic you are scoring with.** Two of the three modes collapsed in each of the two biggest sweeps
 here, in opposite directions, for reasons specific to each statistic.
+
+### F8. The enriched crib corpus — 48,616 cribs, 356 million tests, zero passes
+
+§A0 establishes that at 144–153 letters ranking searches are below their own noise floor while the
+crib × key-structure test keeps full power at any length. That makes the crib corpus, not compute,
+the binding constraint on PK8 and PK9 — so it was enlarged 4.5× with a richer generative grammar in
+the diary's voice: elapsed-time openings over 44 numerals × 25 time units × 37 continuations,
+ordinal forms, subject × verb × object sentences built from the story's own nouns (the needle, the
+whitesmith, the archive, the knot, the inner door, Pellegrin), and 25 literal continuations of PK7's
+closing line, each padded with numerals.
+
+**Executed: 355,980,204 effective tests** — 48,616 cribs × 404 key structures × 3 targets × 2
+alphabets × 3 modes × {prefix, suffix}; 104,004 underpowered structure/length combinations skipped
+and counted. **Expected false positives 3.20. Observed passes: 0.**
+
+Combined with §A8, §F1, §F5 and the wrap-crib test, the crib family now stands at roughly
+**780 million exact tests with zero passes**, and every one of those tests would have fired with
+probability 1 on a correct crib. The remaining ways this family can still be wrong are worth stating
+plainly: the true opening is not in the corpus; the plaintext is not in English (PK2 contains
+Italian, and §6 records that Italian keys and alphabets were screened but not Italian *plaintext*
+against cribs); the crib sits at neither end; or a transposition scatters it in a way §F1's
+permutation-free case does not cover and §E item 3's meet-in-the-middle has not yet been built.
