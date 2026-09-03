@@ -821,12 +821,19 @@ crib.
 |---|---|---|---|---|---|---|---|
 | PK9 | 2,688 | **317,784,240** | 1,617 s | 7.24 | 7.29 | 434 / 2,688 (chance ~448) | below ceiling, nothing |
 | PK8 | 2,796 | **329,959,512** | 1,716 s | 7.07 | 8.03 | 499 / 2,796 (chance ~466) | below ceiling, nothing |
+| **PK10** | **5,532** | **646,836,336** | 6,659 s | **6.40** | **6.59** | 893 / 5,532 (chance ~922 — *below* chance) | below ceiling, nothing |
 
-Top cells are the usual noise signature — orthographically unrelated words (CREUTZFELDT,
-DOMESTICATE, PLEISTOCENE; BREWMASTERS, GANGMASTERS, BANDMASTERS) rather than a true key with its
-near-misses stacked beneath it. Per §A0 this is a **Tier 3** screen at PK9's length regardless of
-the z, and per §F6 the grid sees 54% of three-word length-sets at n=144. PK8 and PK10 still running
-at write-up; see `logs/p3_pk8.log` and `logs/p3_pk10.log`.
+Three-word grids total **1,294,580,088 word-evaluations**; with the two-word grids the product
+family stands at **2.03 billion**. Top cells are the usual noise signature — orthographically
+unrelated words (CREUTZFELDT, DOMESTICATE, PLEISTOCENE; BREWMASTERS, GANGMASTERS, BANDMASTERS) —
+rather than a true key with its near-misses stacked beneath it. PK10's top cell is the same
+(L=9, M=14) DIMMADOME cell already autopsied and discharged in §C3.
+
+Per §A0, PK8 and PK9 are **Tier 3** at their lengths regardless of the z, and per §F6 the grid sees
+only 54–62% of three-word length-sets there. **PK10's grade waits on its own power test** —
+§F14 — because the three-word search has three times the candidate space of the two-word one and
+single-cell tests put a genuine key at z ≈ 5.4–9.5, which overlaps this ceiling. I am not grading it
+Tier 2 on the assumption that 504 letters is automatically enough.
 
 ### F11. Cribs at every offset — run, and then bounded on principle
 

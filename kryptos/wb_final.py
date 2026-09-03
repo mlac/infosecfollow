@@ -6,7 +6,7 @@ def LG(pat):
     out=[]
     for f in sorted(glob.glob(R+pat)): out+=json.load(open(f))
     return out
-real=L('wb_dual_real.json'); az=L('wb_dual_az.json')
+real=L('wb_dual_real.json')+L('wb_dual_power.json'); az=L('wb_dual_az.json')
 n10=L('wb_dual_null_k10.json'); n8=L('wb_dual_null_k8.json')
 pr=L('wb_periodic_real.json'); pn=LG('wb_periodic_null_*.json')
 cap=L('wb_capacity.json') or json.load(open(R+'wb_capacity.json'))
