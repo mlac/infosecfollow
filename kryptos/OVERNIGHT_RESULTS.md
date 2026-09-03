@@ -1043,17 +1043,26 @@ scored 0.49, that is 2.8 σ below — a direct exclusion of period 9.
 
 Re-scoring the same simulations that way, with **no new compute**:
 
-| target | periods tested | excluded at p<0.05 | excluded at **p<0.01** (conservative) | survivors at p<0.01 |
-|---|---|---|---|---|
-| PK8 (153) | 29 | 27 | see `results/period_likelihood.json` | — |
-| PK9 (144) | 27 | 22 | ” | — |
-| **PK10 (504)** | **99** | **99** | ” | **none** |
+| target | periods tested | excluded p<0.05 | survivors p<0.05 | excluded **p<0.01** | survivors p<0.01 |
+|---|---|---|---|---|---|
+| PK8 (153) | 29 | 27 | 27, 28 | 22 | 14, 16, 21, 25, 26, 27, 28 |
+| PK9 (144) | 27 | 22 | 14, 17, 21, 23, 28 | 19 | 14, 17, 18, 21, 22, 23, 27, 28 |
+| **PK10 (504)** | **99** | **99** | **none** | **97** | 63, 100 |
 
-At p<0.05 PK9's survivors are only **p = 14, 17, 21, 23, 28** and PK8's are only **p = 27, 28** —
-far narrower than §A3's threshold-based lists. But the exclusion direction matters for how this is
-read: a false *rejection* here wrongly kills a real period, and at α=0.05 over ~27 periods roughly
-one such error is expected. The conservative α=0.01 lists in the JSON are the ones to trust; the
-0.05 lists are the ones to prioritise.
+Both PK10 survivors at α=0.01 are explicable: p=63 is the one period where my original scan's power
+dipped (0.71), and p=100 is the boundary where each class holds only 5 letters. Everything between
+is excluded twice over.
+
+The exclusion direction matters for how this is read: a false *rejection* here wrongly kills a real
+period, and at α=0.05 over ~27 periods roughly one such error is expected. **Trust the α=0.01
+column; prioritise the α=0.05 one.**
+
+**One coincidence worth carrying: p=14 survives for both PK8 and PK9 at both thresholds.** It is the
+only period that does. p=7 was elevated on both targets in the first recon and is now excluded and
+separately autopsied to death (§C1), so 14 is not simply 7's echo. With ~27 periods × 3 targets the
+coincidence is unremarkable on its own — but it is the single place two targets agree, and PK6's
+solved key PORTAL has period 6 while PK2's columnar had width 7, so 14 = 2 × 7 is at least in the
+setter's numeric vocabulary. Cheap to check properly and worth the half hour.
 
 Why the information is present here but not at long periods: the analytic z ceiling from the
 within-class pair count (§F15) stays at **3.06–4.48 across p=9–18 on PK9**, versus 1.16 at p=72. The
