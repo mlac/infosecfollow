@@ -81,8 +81,10 @@ out = {
      'min':round(float(permax.min()),6),'max':round(float(permax.max()),6),
      'n_null_ge_real':int((permax>=REAL).sum()),
      'expected_max_under_null':round(float(permax.mean()),6),
-     'z_after_correction':round(float(z_search),2),'p_after_correction':round(p_search,3)},
+     'z_after_correction':round(float(z_search),2),'p_after_correction_empirical':round(p_search,3),
+     'p_after_correction_gumbel':round(1-math.exp(-math.exp(-(REAL-(permax.mean()-0.5772*permax.std(ddof=1)*math.sqrt(6)/math.pi))/(permax.std(ddof=1)*math.sqrt(6)/math.pi))),4)},
    'expected_exceedances_at_percell_p_over_2032_cells':round(ct['real_cells']*p_cell,1),
+   'omnibus_16_cell_profile':json.load(open('results/mtv_omni.json')),
    'survives_correction':False},
  'decrypt_autopsy':{
    'requirement':'a correct primer leaves MIX(P): a monoalphabetic image of the (possibly transposed) plaintext',
