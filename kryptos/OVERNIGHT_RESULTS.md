@@ -1874,3 +1874,59 @@ relabelled partitions, so a correct recovery with permuted block labels failed a
 comparison. Block labels are unidentifiable by construction, so canonical equality is the only
 meaningful test, and under it the recoveries are exact. Reported here because the wrong number was
 the more pessimistic one and would have understated the attack.
+
+### G11. The small-modulus sweep, complete — and its 87 "above ceiling" cells were the ceiling's fault
+
+**408 cells, 1,773,653,760 configurations, 16,661 s** (`run_smallmod.py`, all three targets, both
+alphabets). The sweep finished and reported **87 cells above their matched null max**. It is a
+negative, and the 87 are an artifact of how the ceiling was built.
+
+**The arithmetic, first.** The sweep used only **four** shuffle-nulls per cell, so under the null the
+observation exceeds a 4-draw maximum with probability exactly 1/5. Across 408 cells that predicts
+**81.6 crossings**; 87 were seen, **z = +0.67**. The count is what the null predicts, not evidence
+against it. This is §C1's lesson recurring in a new place: an undersized null manufactures ceilings,
+and "above ceiling" is meaningless until the ceiling is built from enough draws.
+
+**But arithmetic is not an autopsy, so the cells were re-run** (`smallmod_autopsy.py`) — the eight
+largest deltas, each against a properly sized matched null (the identical search on letter-shuffles
+of the same ciphertext, 60–500 draws budgeted by cell cost):
+
+| cell | obs | nulls | null max | z | p_emp | verdict |
+|---|---|---|---|---|---|---|
+| pk9 AZ m=8 L=3 lag1 | 0.05488 | 500 | 0.05497 | +3.82 | 0.0020 | killed |
+| pk8 AZ m=6 L=5 lag1 | 0.05366 | 500 | 0.05702 | +3.21 | 0.0120 | killed |
+| pk8 AZ m=8 L=5 lag1 | 0.05470 | 150 | 0.05891 | +2.50 | 0.0133 | killed |
+| pk8 AZ m=4 L=3 aca | 0.04868 | 500 | 0.05091 | +2.23 | 0.0240 | killed |
+| pk9 AZ m=3 L=6 lag1 | 0.05322 | 500 | 0.05526 | +2.22 | 0.0340 | killed |
+| pk8 AZ m=5 L=8 aca | 0.05710 | 60 | 0.05745 | +3.46 | 0.0167 | killed |
+| pk8 KA m=8 L=3 lag1 | 0.05143 | 500 | 0.05220 | +3.13 | 0.0040 | killed |
+| **pk8 AZ m=8 L=6 lag1** | 0.05573 | 60 | 0.05538 | +3.00 | 0.0000 | **survived 60 draws** |
+
+Seven died on contact. Note how large the surviving z values are — +2.2 to +3.8 — while every one
+sits *below* its own ceiling. That gap is exactly why this campaign grades by matched-null maxima
+rather than by z.
+
+**The one survivor, escalated four ways** (`smallmod_escalate.py`; it got 60 draws only because the
+cell costs 3,145,728 configurations per run):
+
+1. **A 400-shuffle matched null on a fresh seed: mean 0.05294, sd 0.00121, max 0.05839** against the
+   observed 0.05573 — **z = +2.31, empirical p = 0.0375, below the ceiling. Killed.**
+2. **Replication on two independent halves** of that null: below both (half-1 max 0.05685, half-2
+   max 0.05839). Not one unlucky bank.
+3. **Neighbouring cells.** m=8 L=5 lag-1 also crosses a *40*-draw ceiling (z=+3.38) — and that same
+   cell is row 3 of the table above, already dead at 150 draws. The neighbour "confirmation" is the
+   identical undersized-null effect, which is itself the point.
+4. **The decrypt, which settles it without any statistics.** Recovered primer (4,2,6,2,5,1), d=5:
+
+   `IELLFEKMTMASJQEQTKTKCNHMESLLITFANICTHKHCSUPVKCAQAFQQELSWSIDTXJMDMEEDBLMMFMKAMIGIBQCYJMMMNEMHRSRYCCMGSCUMHMCTXQOTQMMRPYTLMDUMUMUCHDQPOSLNXIMQMUJYXEQGNHMPP`
+
+   Its top letter frequency is **0.157 against English's 0.127**, with the rest of the profile far
+   too flat (0.072, 0.065, 0.059, 0.059, 0.052 vs 0.091, 0.082, 0.075, 0.070, 0.067). That is
+   **letter-stacking** — one letter piled up to inflate IoC — the same mechanism that produced the
+   PK8 p=7 flag in §C1. The text is not English and does not pretend to be.
+
+**Verdict. Zero cells survive a properly sized ceiling: the sweep is a clean negative.** On **PK9 it
+is Tier 2**, because the power test recovers a planted mod-5 keystream at rank 1 of 68 with the exact
+primer through a W=9 columnar, 5 of 5 replications above the family ceiling. On PK8 and PK10 the
+negative adds little beyond §G6's census exclusion, which disfavored the hypothesis for those two
+before any key was searched.
