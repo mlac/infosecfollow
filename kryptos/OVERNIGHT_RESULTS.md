@@ -507,3 +507,15 @@ transposition-invariant *scoring* function once a key hypothesis is peeled off, 
 used throughout this run — but a raw ciphertext IoC can never, by itself, indicate a period or any
 other positional structure. PK_CONTEXT §5 lists the two as separate calibration constants; they
 are not.
+
+### F4. Direct structural inspection — nothing hiding in the raw text
+
+Worth recording because it is cheap and rules out a whole class of "look at it differently" ideas.
+
+* **No repeated substring of length ≥ 4 within PK8, PK9 or PK10.** Across all ten ciphertexts the
+  only length-5+ repeat anywhere is `THTEO` (PK2 at 30, PK7 at 152) — a coincidence between two
+  already-solved puzzles. High-entropy keystreams, as expected.
+* Read as a 9-column grid, no row, column, diagonal or every-k-th reading produces anything
+  legible for any of the three.
+* Positional letter agreement between pairs of targets is at chance: PK8/PK9 4 matches (null
+  5.37 ± 2.23, z −0.61), PK8/PK10 9 (5.70 ± 2.31, z +1.43), PK9/PK10 8 (5.45 ± 2.27, z +1.12).
