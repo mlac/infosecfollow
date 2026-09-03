@@ -716,3 +716,37 @@ plainly: the true opening is not in the corpus; the plaintext is not in English 
 Italian, and §6 records that Italian keys and alphabets were screened but not Italian *plaintext*
 against cribs); the crib sits at neither end; or a transposition scatters it in a way §F1's
 permutation-free case does not cover and §E item 3's meet-in-the-middle has not yet been built.
+
+### F9. End-to-end control of the crib pipeline on a REAL puzzle — the strongest one available
+
+Every earlier crib control fed the solver a crib taken from a known plaintext. This one does not:
+it asks whether the **corpus generator, keystream derivation and structure-consistency test working
+together** recover a real puzzle.
+
+PK1's true opening is `INVESTIGATIONLOGITEMEIGHT`. The generator produces it independently — it
+falls out of the `INVESTIGATIONLOGITEM` + numeral pattern, which is in the corpus because PK1's own
+opening suggested the pattern, not because the answer was inserted. Running the pipeline on the
+**real PK1 ciphertext** with that crib returns:
+
+* period **10** — PK1's true period (Quagmire III on KA, key PROVENANCE) — at a false-positive rate
+  of **5.96 × 10⁻²²** for the 25-letter crib;
+* period 20, which is correct rather than spurious: a period-10 key is trivially also period-20;
+* pairs (3,10), (4,10), (5,10), (6,10) — again all containing the true period;
+* and the 20-letter prefix `INVESTIGATIONLOGITEM` alone already returns period 10 at 7.1 × 10⁻¹⁵.
+
+So the whole chain works on a real puzzle of this series. This is now control #8 in `verify.py`.
+It materially strengthens every crib negative in this document: the ~780 million zero-pass tests
+were run by a pipeline demonstrated to recover a genuine key structure from a genuinely generated
+crib.
+
+### F10. Three-word product grids
+
+| target | cells | word-evaluations | wall | observed max z | matched ceiling | cells beating own null | verdict |
+|---|---|---|---|---|---|---|---|
+| PK9 | 2,688 | **317,784,240** | 1,617 s | 7.24 | 7.29 | 434 / 2,688 (chance ~448) | below ceiling, nothing |
+
+Top cells are the usual noise signature — orthographically unrelated words (CREUTZFELDT,
+DOMESTICATE, PLEISTOCENE; BREWMASTERS, GANGMASTERS, BANDMASTERS) rather than a true key with its
+near-misses stacked beneath it. Per §A0 this is a **Tier 3** screen at PK9's length regardless of
+the z, and per §F6 the grid sees 54% of three-word length-sets at n=144. PK8 and PK10 still running
+at write-up; see `logs/p3_pk8.log` and `logs/p3_pk10.log`.

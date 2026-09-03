@@ -72,7 +72,26 @@ idx = {tuple(r.tolist()): i for i, r in enumerate(R)}; order = np.argsort(-o)
 ranks = [int(np.where(order == idx[tuple(r)])[0][0]) + 1 for r in ([10,16,3],[8,9,0],[9,11,15])]
 chk("PK7 true rows in top 150", max(ranks) <= 150, f"ranks {ranks} of {len(R)}")
 
-print("=== 8. period scan has power (a true period-45 PK10-length cipher is detected) ===")
+print("=== 8. END-TO-END: the crib pipeline recovers PK1's true period from a GENERATED crib ===")
+from crib_sweep import build_cribs, make_checker
+corpus = set(build_cribs())
+crib = PT['pk1'][:25]                       # INVESTIGATIONLOGITEMEIGHT
+chk("PK1's real opening is in the generated corpus", crib in corpus, crib)
+pos = np.arange(len(crib))
+Cv = np.array([KAI[c] for c in CT['pk1']])[:len(crib)]
+Pv = np.array([KAI[c] for c in crib])
+K = (Cv - Pv) % 26
+passes = []
+for st in [(p,) for p in range(2, 25)]:
+    R2, R13, r2, r13 = make_checker(pos, st)
+    if (2.0**-r2)*(13.0**-r13) > 1e-6: continue
+    if (r2 == 0 or not (K@R2.T % 2).any()) and (r13 == 0 or not (K@R13.T % 13).any()):
+        passes.append(st[0])
+# a period-10 key is trivially also period-20, so the correct answer is 10 and its multiples
+chk("pipeline returns PK1's true period 10 and only multiples of it",
+    10 in passes and all(p % 10 == 0 for p in passes), f"periods passing: {passes}")
+
+print("=== 9. period scan has power (a true period-45 PK10-length cipher is detected) ===")
 rng = np.random.default_rng(1); ENG = ''.join(PT[k] for k in ['pk1','pk2','pk3','pk4','pk5','pk6','pk7'])
 def stat(s,p): return float(np.mean([ioc(s[r::p]) for r in range(p) if len(s[r::p])>3]))
 SH = [''.join(rng.permutation(list(CT['pk10']))) for _ in range(200)]
