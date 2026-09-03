@@ -1082,3 +1082,27 @@ within-class pair count (§F15) stays at **3.06–4.48 across p=9–18 on PK9**,
 window is closable — what limited §A3 was the estimator, not the data. A next run wanting to finish
 PK9 should re-simulate p ∈ {14, 17, 21, 23, 28} with far more replicates to tighten the
 true-cipher distribution, rather than inventing a new statistic.
+
+### F17. The same likelihood re-scoring applied to the substitute-then-transpose scan
+
+Free — the simulations already existed. Caveat stated up front: `outer_transpo.json` stored the
+true-cipher mean but not its sd, so I used **1.35** as a conservative stand-in (the period scan's
+true-cipher sd ran 0.95–1.70 across cells). The PK10 conclusion is insensitive to that choice.
+
+| target | (W,q) cells | excluded at p<0.01 | survivors |
+|---|---|---|---|
+| **PK10** | 116 | **116 (all)** | **none** |
+| PK8 | 14 | 9 | 5 |
+| PK9 | 43 | 18 | 25 |
+
+**PK10's substitute-then-transpose exclusion is now complete under both scorings** — every cell,
+at the strict threshold. The short targets show the identical pattern as §F16: their survivors are
+all cells where a *true* cipher would only have scored z ≈ 1.8–3.9, i.e. where the test has no
+power, not where the data is suggestive. PK9's top "survivor" (W=3, q=7) has an observed z of +3.12
+against a true-cipher expectation of +2.52 — the observation *exceeds* what the real thing would
+produce, which is the signature of noise rather than a lead.
+
+Taken with §F16, the general lesson for this whole campaign: **threshold-based power understates
+what a scan has established, and survivor lists on short messages are power artifacts.** Re-scoring
+by likelihood cost nothing and converted PK10 from "nothing above ceiling" to "every alternative
+excluded", while correctly refusing to strengthen anything on PK8 and PK9.
