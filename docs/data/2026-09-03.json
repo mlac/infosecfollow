@@ -1,23 +1,23 @@
 {
   "date": "2026-09-03",
-  "headline": "A researcher published working exploit code for a privilege-escalation zero-day in CrowdStrike Falcon, and Citizen Lab confirmed an iMessage zero-click dropped NSO Group's Pegasus onto the iPhone of a Serbian student protest organizer.",
+  "headline": "A wave of breaches at Thomson Reuters' court-records platform and a 153-million-driver's-license trove, alongside a widening Shai-Hulud worm, exposed how much sensitive identity data now sits inside a handful of shared systems.",
   "emerging_trends": [
     {
-      "text": "The researcher Chaotic Eclipse followed August's Kaspersky exploit with FalconFlank, a reminder that endpoint agents run with kernel privilege on every desktop in the enterprise and pay an attacker handsomely for one local bug.",
-      "topic_title": "FalconFlank Zero-Day Hits CrowdStrike Falcon",
-      "link_phrase": "FalconFlank",
+      "text": "Two breaches show how concentrated identity infrastructure has become a single point of failure: Thomson Reuters' C-Track platform leaked sealed court files across a dozen U.S. states and Canada, while a dark-web seller is offering scans apparently sourced from IDScan.net covering 153 million driver's licenses.",
+      "topic_title": "IDScan.net Tied to 153 Million License Scans",
+      "link_phrase": "IDScan.net",
       "_anchor": "trend-1"
     },
     {
-      "text": "Unit 42 caught intruders routing stolen Latin American data through commercial AI services, matching what defenders report elsewhere as criminals compress reconnaissance and exfiltration from weeks into hours.",
-      "topic_title": "Attackers Wield AI Against Latin American Targets",
-      "link_phrase": "Unit 42",
+      "text": "Attackers keep turning an organization's own toolchain against it, from the FalconFlank privilege-escalation bug that abuses CrowdStrike Falcon's own macro-remediation feature to a Node.js-based implant Microsoft traced to fake IT-support sessions on Microsoft Teams and to a remote-monitoring phishing lure now spotted across 46 countries.",
+      "topic_title": "FalconFlank Zero-Day Hits CrowdStrike Falcon",
+      "link_phrase": "FalconFlank",
       "_anchor": "trend-2"
     },
     {
-      "text": "American police departments now run AI that watches every camera at once, and Flock ships a search tool that converts a written description of a person into a standing dragnet across a city.",
-      "topic_title": "Flock and Axon Expand AI Policing Cameras",
-      "link_phrase": "Flock",
+      "text": "Venture money keeps flowing into AI-agent defense, with HiddenLayer raising 100 million dollars and AIR Security emerging from stealth with 50 million dollars for AI agent firewalls, even as Unit 42 shows attackers in Latin America already lean on commercial AI tools to sort and exfiltrate stolen data faster than defenders can respond.",
+      "topic_title": "Attackers Wield AI Against Latin American Targets",
+      "link_phrase": "Unit 42",
       "_anchor": "trend-3"
     }
   ],
@@ -57,6 +57,34 @@
       "_anchor": "i-e37fc98376"
     },
     {
+      "title": "Microsoft Details Spring Ring Teams Impersonation, Node.js Abused as Loader",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Microsoft Threat Intelligence published its own technical writeup of a human-operated intrusion campaign, matching the Spring Ring operation Unit 42 first disclosed, that abuses Microsoft Teams external collaboration to impersonate IT support and deploy a Node.js-based implant for lateral movement, while Symantec separately documented a distinct campaign running since February 2026 that abuses the trusted node.exe runtime to deliver payloads against government departments, technology companies, and hotels.",
+      "summary": "Both campaigns exploit the fact that node.exe carries Microsoft's own code-signing trust, letting malicious JavaScript payloads slip past defenses tuned to flag unfamiliar executables. Organizations should restrict external Teams collaboration requests and treat unexpected node.exe network activity as suspicious.",
+      "tags": [
+        "social-engineering",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Microsoft Security Blog",
+          "title": "Impersonating IT support: how threat actors turn a remote session into enterprise-wide access",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/09/02/impersonating-it-support-threat-actors-turn-remote-session-into-enterprise-wide-access/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Threat Gang 'Springs' Vishing Attacks on Microsoft Teams Users",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/threat-gang-springs-vishing-attacks-microsoft-teams-users"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Attackers Turn Trusted Node.js Runtime Into Malware Delivery Tool in Targeted Attacks",
+          "url": "https://thehackernews.com/2026/09/attackers-turn-trusted-nodejs-runtime.html"
+        }
+      ],
+      "_anchor": "i-249fba19e7"
+    },
+    {
       "title": "Flock and Axon Expand AI Policing Cameras",
       "area": "AI Security",
       "latest_developments": "Wired rebuilt Flock Safety's newest search tool from the code the company sends to a police officer's browser and found AI that watches across many cameras at once for anyone matching a typed description, while 404 Media reported that police in Texas used AI to draft a report about a Flock search for a woman who had an abortion and that officers on an Axon webinar asked the company to restyle its Outpost camera so it stops resembling a Flock unit that vandals destroy.",
@@ -86,28 +114,27 @@
       "_anchor": "i-a29f5abf95"
     },
     {
-      "title": "FalconFlank Zero-Day Hits CrowdStrike Falcon",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "The researcher known as Chaotic Eclipse, also called Nightmare Eclipse, published a proof-of-concept for FalconFlank, a privilege-escalation zero-day that abuses the malicious-macro remediation routine in the CrowdStrike Falcon Sensor, the same researcher whose HardBreacher exploit forced a Kaspersky patch on August 31, 2026; Cisco separately disclosed that S/MIME flaws in Secure Email remain unpatched and shipped fixes for critical IOS XR and Nexus bugs.",
-      "summary": "FalconFlank turns a defensive feature of the Falcon endpoint agent into a path from a local account to full control of the host. The unpatched Cisco Secure Email defects can expose the contents of encrypted mail, while the new IOS XR and Nexus patches close remote code execution and authentication bypass; apply the Cisco updates now and watch for a CrowdStrike sensor release.",
+      "title": "Thomson Reuters C-Track Breach Exposes Court Records",
+      "area": "Data Breaches",
+      "latest_developments": "Thomson Reuters disclosed today that a breach of C-Track, the court case management platform run by its subsidiaries, exposed sealed and sensitive court records across at least 12 U.S. states, the U.S. Virgin Islands, and Canada, and the company posted separate notification pages for affected individuals in the United States and Canada.",
+      "summary": "C-Track handles case management for courts, and the exposed data reaches sealed proceedings and personal information beyond routine public dockets. Thomson Reuters said it discovered the breach this week and is notifying affected courts and individuals directly.",
       "tags": [
-        "zero-day",
-        "patch",
-        "endpoint"
+        "breach",
+        "government"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Researcher Releases FalconFlank PoC Showing Privilege Escalation in CrowdStrike Falcon",
-          "url": "https://thehackernews.com/2026/09/researcher-releases-falconflank-poc.html"
+          "source": "Help Net Security",
+          "title": "Thomson Reuters reveals breach that exposed U.S. and Canadian court records",
+          "url": "https://www.helpnetsecurity.com/2026/09/03/thomson-reuters-reveals-breach-that-exposed-u-s-and-canadian-court-records/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Cisco Warns of Unpatched Secure Email Flaws, Patches Critical Switch Vulnerabilities",
-          "url": "https://www.securityweek.com/cisco-warns-of-unpatched-secure-email-flaws-patches-critical-switch-vulnerabilities/"
+          "source": "The Record",
+          "title": "US and Canadian court data exposed in Thomson Reuters breach",
+          "url": "https://therecord.media/thomson-reuters-cyberattack-data"
         }
       ],
-      "_anchor": "i-aa3ea3b26e"
+      "_anchor": "i-0b24e5a81a"
     },
     {
       "title": "IDScan.net Tied to 153 Million License Scans",
@@ -133,6 +160,30 @@
       "_anchor": "i-e2c94c6401"
     },
     {
+      "title": "FalconFlank Zero-Day Hits CrowdStrike Falcon",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "The researcher known as Chaotic Eclipse, also called Nightmare Eclipse, published a proof-of-concept for FalconFlank, a privilege-escalation zero-day that abuses the malicious-macro remediation routine in the CrowdStrike Falcon Sensor, the same researcher whose HardBreacher exploit forced a Kaspersky patch on August 31, 2026; Cisco separately disclosed that S/MIME flaws in Secure Email remain unpatched and shipped fixes for critical IOS XR and Nexus bugs.",
+      "summary": "FalconFlank turns a defensive feature of the Falcon endpoint agent into a path from a local account to full control of the host. The unpatched Cisco Secure Email defects can expose the contents of encrypted mail, while the new IOS XR and Nexus patches close remote code execution and authentication bypass; apply the Cisco updates now and watch for a CrowdStrike sensor release.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "endpoint"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Researcher Releases FalconFlank PoC Showing Privilege Escalation in CrowdStrike Falcon",
+          "url": "https://thehackernews.com/2026/09/researcher-releases-falconflank-poc.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Cisco Warns of Unpatched Secure Email Flaws, Patches Critical Switch Vulnerabilities",
+          "url": "https://www.securityweek.com/cisco-warns-of-unpatched-secure-email-flaws-patches-critical-switch-vulnerabilities/"
+        }
+      ],
+      "_anchor": "i-aa3ea3b26e"
+    },
+    {
       "title": "Attackers Wield AI Against Latin American Targets",
       "area": "AI Security",
       "latest_developments": "Palo Alto Networks' Unit 42 documented an ongoing campaign against organizations in Latin America in which the operators lean on commercial AI tools to sort and exfiltrate stolen data, and left operational-security errors that let defenders map and disrupt the infrastructure.",
@@ -155,6 +206,43 @@
         }
       ],
       "_anchor": "i-62f727b9ef"
+    },
+    {
+      "title": "Shai-Hulud Worm Expands Credential-Harvesting Reach",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "GitGuardian researchers found that a recent Shai-Hulud infostealer worm variant now scans 469 separate credential locations across developer environments, CI/CD tooling, cloud configurations, and AI tool configs, up from just 189 paths in earlier versions.",
+      "summary": "Shai-Hulud is a self-propagating worm that has infected more than 1,000 organizations, harvested 500,000 credentials, and reached OpenAI's supply chain; authorities charged two alleged members of the hacking group TeamPCP over the campaign on August 29, 2026. The widened scan list means infected machines now leak secrets from AI tool configs and CI/CD systems, so teams should rotate credentials well beyond traditional password stores.",
+      "tags": [
+        "worm",
+        "supply-chain",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Shai-Hulud's Reach Just Grew to 469 Credential Locations. Here's What That Means",
+          "url": "https://thehackernews.com/2026/09/shai-huluds-reach-just-grew-to-469.html"
+        }
+      ],
+      "_anchor": "i-9fc8e83d38"
+    },
+    {
+      "title": "RMM Phishing Campaign Spans 46 Countries",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "ANY.RUN researchers linked 601 cases to a remote-monitoring-and-management phishing campaign now spread across 46 countries, with the United States the top target at 45% of observed activity, after the operation first surfaced using fake Canada Revenue Agency tax forms as lures.",
+      "summary": "The campaign tricks victims into installing legitimate remote-monitoring software, which then hands attackers persistent remote access to the compromised machine. Its spread from a Canada-focused tax lure to a worldwide operation shows how quickly RMM phishing kits get retooled for new markets.",
+      "tags": [
+        "phishing",
+        "rmm"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "US Becomes Top Target in RMM Phishing Campaign Spanning 46 Countries",
+          "url": "https://thehackernews.com/2026/09/us-becomes-top-target-in-rmm-phishing.html"
+        }
+      ],
+      "_anchor": "i-40a4e36b4a"
     },
     {
       "title": "Pegasus Zero-Click Infects Serbian Activist",
@@ -260,31 +348,36 @@
     "business_politics": [
       {
         "title": "Yen Surges as Japan Rate Bets Build",
-        "latest_developments": "The yen jumped past 157 to the dollar overnight, roughly 2% in two days and a one-month high, as traders bet the Bank of Japan raises rates and watched for another round of intervention; the DXY dollar index slid to a six-day low and expectations of a September Federal Reserve hike retreated.",
-        "summary": "Japan's currency sits at the center of the global bond rout, and Japanese data released August 28 confirmed that Tokyo and Washington spent a record $98.7 billion propping up the yen last month. Treasury yields steadied, European equities moved sideways, and oil slipped in early European trade, easing the inflation channel that had driven yields to session highs after the U.S. strikes on Iran.",
+        "latest_developments": "The yen climbed past ¥156 to the dollar Thursday as Federal Reserve Governor Christopher Waller said he is inclined to hold rates steady, cutting against Chair Kevin Warsh's rate-hike signal from Jackson Hole and pushing the dollar index to a fresh six-day low while Treasury yields eased further.",
+        "summary": "Japan's currency sits at the center of the global bond rout, and Japanese data released August 28 confirmed that Tokyo and Washington spent a record $98.7 billion propping up the yen last month. Treasury yields have eased from the highs the Iran-driven oil spike produced, even as oil itself resumed climbing on fears the war drags on.",
         "sources": [
           {
-            "source": "FT World",
-            "title": "Yen jumps as traders bet on Japan interest rate rises",
+            "source": "FT Home",
+            "title": "Yen surges as traders bet on Japan interest rate rises",
             "url": "https://www.ft.com/content/22abbb77-1344-4871-9692-97a779b1ba77?syn-25a6b1a6=1"
           },
           {
             "source": "WSJ Markets",
-            "title": "Bond Selloff Pauses, Stocks Tread Water as Traders Watch for Yen Intervention",
+            "title": "Bond Selloff Pauses, Stocks Tread Water as Yen Surge Extends",
             "url": "https://www.wsj.com/finance/stocks/bond-selloff-pauses-stocks-tread-water-as-traders-watch-for-yen-intervention-25a7e983?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
             "title": "U.S. Treasury Yields, Dollar Fall",
             "url": "https://www.wsj.com/finance/currencies/yen-consolidates-may-be-supported-by-lingering-risks-of-fx-intervention-45c3cccb?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "Fed's Chris Waller 'inclined' to keep rates on hold",
+            "url": "https://www.ft.com/content/0a332e3c-e596-4f64-976a-d7746f91a9a9?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-d39a7ef98f"
       },
       {
         "title": "Iran War Stretches U.S. Forces",
-        "latest_developments": "The Wall Street Journal reported September 3 that the Pentagon is lengthening Middle East deployments as the war with Iran drags on, and the carrier USS Abraham Lincoln put into a Thai resort port after nine months at sea.",
-        "summary": "The Lincoln's deployment has become the emblem of the strain the Iran war puts on American naval and air rotations, which now run well past normal lengths. Oil prices fell in early European trading even so, with traders discounting the risk that the conflict lasts much longer.",
+        "latest_developments": "Oil extended its rally into a fourth straight session Thursday as renewed fighting in the Middle East revived worries about tight supply for longer, even as the Pentagon keeps stretching deployments like the carrier USS Abraham Lincoln's nine months at sea.",
+        "summary": "The Lincoln's deployment has become the emblem of the strain the Iran war puts on American naval and air rotations, which now run well past normal lengths.",
         "sources": [
           {
             "source": "WSJ US Business",
@@ -298,11 +391,24 @@
           },
           {
             "source": "WSJ Markets",
-            "title": "Oil Prices Slip Despite Rising Risks From Prolonged U.S.-Iran War",
+            "title": "Oil Extends Rally With Iran Conflict Seen Dragging On",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-futures-fall-on-likely-technical-correction-cac84e35?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-ca27e1a113"
+      },
+      {
+        "title": "Pentagon Leadership Crisis Deepens",
+        "latest_developments": "Senator Thom Tillis called for Defense Secretary Pete Hegseth's firing as the aftershocks from Army Secretary Dan Driscoll's resignation continued to rattle Washington, the Wall Street Journal reported September 3, deepening turmoil atop the Pentagon while it wages the war against Iran.",
+        "summary": "Driscoll's resignation touched off a leadership fight inside the Defense Department that has drawn in Senate Armed Services Committee Republicans like Tillis, raising questions about Hegseth's own standing at a moment when U.S. forces remain engaged across the Middle East.",
+        "sources": [
+          {
+            "source": "WSJ Politics",
+            "title": "Tillis wants Hegseth fired: is the Pentagon chief in trouble?",
+            "url": "https://www.wsj.com/politics/tillis-wants-hegseth-fired-is-the-pentagon-chief-in-trouble-6a1f97ac?mod=rss_socialpoliticsfeed"
+          }
+        ],
+        "_anchor": "i-458de7fd47"
       },
       {
         "title": "Saudi Deal Opens Enrichment Path",
@@ -319,6 +425,19 @@
       }
     ],
     "business": [
+      {
+        "title": "Jetset Pilates Signs Lease on Walnut Street",
+        "latest_developments": "WPXI reported September 3 that Miami-based Jetset Pilates signed a lease on Shadyside's Walnut Street and plans to open as many as six studios around Pittsburgh.",
+        "summary": "The boutique-fitness chain's arrival on one of Pittsburgh's most upscale shopping strips shows how fitness studios have become increasingly sought-after retail tenants filling storefronts once dominated by traditional apparel shops.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Miami-based Jetset Pilates signs lease on Walnut Street, eyes up to 6 Pittsburgh locations",
+            "url": "https://www.wpxi.com/news/local/miami-based-jetset-pilates-signs-lease-walnut-street-eyes-up-6-pittsburgh-locations/A4EHIYETKRFU3DHSHI6YYV65EA/"
+          }
+        ],
+        "_anchor": "i-47e2bb68d5"
+      },
       {
         "title": "Nonprofits and Pittsburgh's Economy",
         "latest_developments": "Post-Gazette columnist Brandon McGinley asked September 3 whether Pittsburgh's nonprofit sector can carry the city's economic revival, working through the record of New Sun Rising and Riverwise.",
@@ -388,8 +507,8 @@
       },
       {
         "title": "South Franklin Township Loses Water",
-        "latest_developments": "KDKA reported late September 2 that a water main break has left residents of South Franklin Township, Washington County, without water for nearly 24 hours.",
-        "summary": "The outage hit during a stretch of dangerous heat, with the National Weather Service and county officials warning of heat indexes near 100 degrees and another round of severe storms Thursday, September 3.",
+        "latest_developments": "The outage entered its second day Thursday as the National Weather Service kept Western Pennsylvania under a severe thunderstorm watch and heat advisory, with the heat index topping 100 degrees before cooler, less humid air arrives for Labor Day weekend.",
+        "summary": "A water main break in South Franklin Township, Washington County, left residents without service for more than 24 hours, an outage that landed during a stretch of dangerous heat across the region.",
         "sources": [
           {
             "source": "KDKA",
@@ -398,14 +517,27 @@
           },
           {
             "source": "WTAE",
-            "title": "Alert Day: Another Round of Storms, Dangerous Heat & Humidity",
-            "url": "https://www.wtae.com/article/alert-day-another-round-of-storms-dangerous-heat-humidity/73601595"
+            "title": "Heat advisory tops 100 degrees as strong thunderstorms threaten Pittsburgh area",
+            "url": "https://www.wtae.com/article/pittsburgh-severe-weather-alert-day-storms-heat-humidity/73603302"
           }
         ],
         "_anchor": "i-0f245f204e"
       }
     ],
     "events": [
+      {
+        "title": "Steelers Kick Off a Weeklong Season-Opener Celebration",
+        "latest_developments": "The Pittsburgh Steelers announced Thursday, September 3, a weeklong series of citywide events leading up to their regular-season opener against the Atlanta Falcons on Sunday, September 13, at Acrisure Stadium.",
+        "summary": "The team is staging events around Pittsburgh through the week before kickoff against the Falcons on September 13 at Acrisure Stadium on the North Shore.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pittsburgh Steelers announce weeklong celebration ahead of season opener against Falcons",
+            "url": "https://www.wpxi.com/news/local/pittsburgh-steelers-announce-weeklong-celebration-ahead-season-opener-against-falcons/WX3PCPO5MZH4TE6VQORANIR32U/"
+          }
+        ],
+        "_anchor": "i-ac4fa2a2b8"
+      },
       {
         "title": "City Paper's Week Ahead",
         "latest_developments": "Pittsburgh City Paper published its top events for Thursday, September 3, through Wednesday, September 9, on September 3.",
@@ -468,6 +600,19 @@
     ],
     "team_usa": [
       {
+        "title": "Plum Ruled Out for Rest of Season",
+        "latest_developments": "The Phoenix Mercury announced that Kelsey Plum will miss the remainder of the 2026 WNBA season for health reasons, a day after USA Basketball confirmed she and A'ja Wilson will also sit out the FIBA Women's World Cup, with Kiki Iriafen and Sonia Citron taking their roster spots.",
+        "summary": "Plum's season-ending absence compounds the loss of Wilson for USA Basketball's women's national team, which now leans on Iriafen and Citron heading into the FIBA Women's World Cup.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "Plum out for season; Wilson to also miss FIBA WC",
+            "url": "https://www.espn.com/wnba/story/_/id/49782113/aja-wilson-kelsey-plum-miss-fiba-women-world-cup"
+          }
+        ],
+        "_anchor": "i-3578f2e0b9"
+      },
+      {
         "title": "Glenn and Frech Join 'Dancing With the Stars'",
         "latest_developments": "ESPN reported September 2 that the new cast of 'Dancing with the Stars' includes American figure skater Amber Glenn, Paralympic gold medalist Ezra Frech, and Savannah Bananas player Jackson Olson.",
         "summary": "Athletes have won 12 seasons of the show, and Olympic gymnast Jordan Chiles finished third in 2025. Frech, a sprinter and high jumper, won gold at the Paris Paralympics; Glenn is a U.S. national champion in singles skating.",
@@ -527,119 +672,98 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Mass identity surveillance widened as Flock and Axon cameras scan crowds by typed description, IDScan.net leaked 153 million license images, and Pegasus infected a Serbian activist's iPhone.",
+      "text": "Thomson Reuters' C-Track breach exposed sealed court records across a dozen U.S. states and Canada while a dark-web seller appears to be peddling 153 million driver's license scans sourced from IDScan.net.",
       "links": [
         {
-          "anchor": "i-a29f5abf95",
-          "phrase": "Flock and Axon",
-          "start": 38,
-          "end": 52,
-          "title": "Flock and Axon Expand AI Policing Cameras"
+          "anchor": "i-0b24e5a81a",
+          "phrase": "C-Track breach",
+          "start": 17,
+          "end": 31,
+          "title": "Thomson Reuters C-Track Breach Exposes Court Records"
         },
         {
           "anchor": "i-e2c94c6401",
           "phrase": "IDScan.net",
-          "start": 95,
-          "end": 105,
+          "start": 194,
+          "end": 204,
           "title": "IDScan.net Tied to 153 Million License Scans"
-        },
-        {
-          "anchor": "i-1f8967190e",
-          "phrase": "Pegasus",
-          "start": 145,
-          "end": 152,
-          "title": "Pegasus Zero-Click Infects Serbian Activist"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Unit 42 found intruders piping stolen Latin American data through commercial AI services, while Newport questions whether autonomous agent systems really amount to hostile civilizations.",
-      "links": [
-        {
-          "anchor": "i-62f727b9ef",
-          "phrase": "Unit 42",
-          "start": 0,
-          "end": 7,
-          "title": "Attackers Wield AI Against Latin American Targets"
-        },
-        {
-          "anchor": "i-b36a054781",
-          "phrase": "Newport",
-          "start": 96,
-          "end": 103,
-          "title": "Are We at War with AI Agent “Civilizations”?"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Chaotic Eclipse published FalconFlank, a privilege-escalation zero-day in CrowdStrike Falcon Sensor, and a California grand jury indicted Aktulaev over malware pushed to roughly 80,000 freelance-platform users.",
+      "text": "Attackers keep turning organizations' own tools against them, as the FalconFlank zero-day abuses CrowdStrike Falcon's remediation feature, a Node.js implant hides behind fake Microsoft Teams IT-support sessions, and a remote-monitoring phishing lure spreads across 46 countries.",
       "links": [
         {
           "anchor": "i-aa3ea3b26e",
           "phrase": "FalconFlank",
-          "start": 26,
-          "end": 37,
+          "start": 69,
+          "end": 80,
           "title": "FalconFlank Zero-Day Hits CrowdStrike Falcon"
         },
         {
-          "anchor": "i-e37fc98376",
-          "phrase": "Aktulaev",
-          "start": 138,
-          "end": 146,
-          "title": "Russian Malware Indictment and Pro-Ukraine Ransomware"
+          "anchor": "i-249fba19e7",
+          "phrase": "Microsoft Teams",
+          "start": 175,
+          "end": 190,
+          "title": "Microsoft Details Spring Ring Teams Impersonation, Node.js Abused as Loader"
+        },
+        {
+          "anchor": "i-40a4e36b4a",
+          "phrase": "46 countries",
+          "start": 265,
+          "end": 277,
+          "title": "RMM Phishing Campaign Spans 46 Countries"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Attackers keep scaling with automation, as Unit 42 tracks Latin American operators using commercial AI tools to sift stolen data while the Shai-Hulud worm now scans 469 credential locations including AI tool configs.",
+      "links": [
+        {
+          "anchor": "i-62f727b9ef",
+          "phrase": "Unit 42",
+          "start": 43,
+          "end": 50,
+          "title": "Attackers Wield AI Against Latin American Targets"
+        },
+        {
+          "anchor": "i-9fc8e83d38",
+          "phrase": "Shai-Hulud worm",
+          "start": 139,
+          "end": 154,
+          "title": "Shai-Hulud Worm Expands Credential-Harvesting Reach"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Pittsburgh transit and roads strain as PRT's bus refresh hinges on Harrisburg, oversized loads close Route 66, and South Franklin Township nears a second day without water.",
+      "text": "Pentagon turmoil deepened as Senator Thom Tillis called for Pete Hegseth's firing in the wake of Army Secretary Dan Driscoll's resignation.",
       "links": [
         {
-          "anchor": "i-59b14cc602",
-          "phrase": "PRT's bus refresh",
-          "start": 39,
-          "end": 56,
-          "title": "PRT Bus Refresh Hinges on Harrisburg"
-        },
-        {
-          "anchor": "i-533665ddb3",
-          "phrase": "Route 66",
-          "start": 101,
-          "end": 109,
-          "title": "Heavy Loads to Slow Routes 66 and 22"
-        },
-        {
-          "anchor": "i-0f245f204e",
-          "phrase": "South Franklin Township",
-          "start": 115,
-          "end": 138,
-          "title": "South Franklin Township Loses Water"
+          "anchor": "i-458de7fd47",
+          "phrase": "Thom Tillis",
+          "start": 37,
+          "end": 48,
+          "title": "Pentagon Leadership Crisis Deepens"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "updated",
-      "text": "Ben Thompson reads Fable 5.1 and the scrapped enterprise data-retention policy as a win for caching, while Zitron warns hyperscaler AI spending is being normalized despite thin returns.",
+      "text": "The yen surged past ¥156 to the dollar as Fed Governor Christopher Waller signaled holding rates steady, contrasting Chair Kevin Warsh's hike call from Jackson Hole.",
       "links": [
         {
-          "anchor": "i-e23816de10",
-          "phrase": "Fable 5.1",
-          "start": 19,
-          "end": 28,
-          "title": "Fable 5.1, Enterprise Frontier Safeguards"
-        },
-        {
-          "anchor": "i-a706a1a51e",
-          "phrase": "Zitron",
-          "start": 107,
-          "end": 113,
-          "title": "Hyperscale Normalization"
+          "anchor": "i-d39a7ef98f",
+          "phrase": "Christopher Waller",
+          "start": 55,
+          "end": 73,
+          "title": "Yen Surges as Japan Rate Bets Build"
         }
       ]
     }
@@ -653,10 +777,11 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 61,
+        "in_window": 56,
         "failed": [],
         "empty": [
           "Krebs on Security",
+          "CISA Advisories",
           "Securelist (Kaspersky)",
           "Sophos News",
           "Google Online Security Blog",
@@ -669,13 +794,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 7,
+            "contributed": 7
           },
           "Krebs on Security": {
             "items": 10,
@@ -684,18 +809,18 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 7,
+            "contributed": 7
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -704,13 +829,13 @@
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 0,
+            "contributed": 0
           },
           "The Record": {
             "items": 5,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 4,
+            "contributed": 4
           },
           "Ars Technica Security": {
             "items": 20,
@@ -719,8 +844,8 @@
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "Securelist (Kaspersky)": {
             "items": 10,
@@ -774,8 +899,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 5,
+            "contributed": 5
           },
           "Frank on Fraud": {
             "items": 10,
@@ -804,12 +929,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 25
+            "contributed": 18
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 15
           },
           "PublicSource": {
             "items": 10,
@@ -828,23 +953,23 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 9,
+            "in_window": 7,
             "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 7
+            "contributed": 6
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 5
+            "contributed": 4
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 14
           }
         }
       },
@@ -860,43 +985,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 73,
-            "in_window": 32,
-            "contributed": 3
+            "in_window": 28,
+            "contributed": 1
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 31,
-            "contributed": 15
+            "contributed": 13
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 58,
-            "contributed": 4
+            "in_window": 59,
+            "contributed": 11
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 8,
-            "contributed": 0
+            "in_window": 7,
+            "contributed": 2
           },
           "The Economist": {
             "items": 300,
-            "in_window": 20,
-            "contributed": 6
+            "in_window": 25,
+            "contributed": 9
           },
           "FT Home": {
-            "items": 8,
-            "in_window": 8,
-            "contributed": 7
+            "items": 9,
+            "in_window": 9,
+            "contributed": 5
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 22
+            "contributed": 18
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 3
+            "contributed": 1
           }
         }
       },
@@ -986,14 +1111,14 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 35,
+        "in_window": 34,
         "failed": [],
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 24,
-            "in_window": 24,
-            "contributed": 24
+            "items": 23,
+            "in_window": 23,
+            "contributed": 23
           },
           "ESPN Olympics": {
             "items": 25,
@@ -1054,29 +1179,29 @@
     ],
     "cli": {
       "models": [
-        "claude-opus-5"
+        "claude-sonnet-5"
       ],
       "usage": {
-        "claude-opus-5": {
+        "claude-sonnet-5": {
           "inputTokens": 6,
-          "outputTokens": 28855,
+          "outputTokens": 41611,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 88755,
+          "cacheCreationInputTokens": 99150,
           "webSearchRequests": 0,
-          "costUSD": 1.608955,
+          "costUSD": 0.812722,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 18479
+          "thinkingTokens": 27326
         }
       },
-      "cost_usd": 1.608955,
-      "duration_ms": 348796,
+      "cost_usd": 0.812722,
+      "duration_ms": 411087,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-03 07:05 EDT",
-    "items_considered": 61,
+    "generated_at": "2026-09-03 10:06 EDT",
+    "items_considered": 56,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1154,11 +1279,11 @@
       ]
     },
     "served_by": [
-      "claude-opus-5"
+      "claude-sonnet-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.609,
-    "model_duration_ms": 348796,
+    "model_cost_usd": 0.8127,
+    "model_duration_ms": 411087,
     "local_from": null,
     "feed_failures": []
   }
