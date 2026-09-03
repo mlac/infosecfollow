@@ -1389,3 +1389,51 @@ identifying information by itself; identification must come from the language mo
 power boundary matches: synthetic recovery falls 96.2% (key words ≥10) → 85.5% (≥9) → 76.0% (≥8) →
 47.6% (≥7) → 42.1% (≥6) → 34.7% (≥5). **The family stays open for short key words, and that is a
 hard limit of the method rather than a gap in effort.**
+
+### G4. Manufactured long keys (frontier item 3 of the old §7) — one sub-family exhausted, the rest honestly screened
+
+**100,881 configurations, 4,980 s.** Design law 2 says long keys are *manufactured* from short ones,
+so this is the family the setter's own grammar points at.
+
+**Controls: every manufacture type was shown recoverable by the same blind search before its negative
+was accepted.** On real puzzles it recovers PK1's PROVENANCE (rank 1 of 21,570, z=+10.0) and both of
+PK3's words — PENTIMENTO rank 1 of 21,570 *and* ORDINATE rank 1 of 38,356, joint IoC 0.0721. On
+synthetics, six distinct manufacture types were the **global argmax over a 696-construction ×
+285,616-word sweep** at every length.
+
+**Tier 2 — single-word manufactures are dead** for all three targets: `q3enc(W,W)`, `W + reverse(W)`,
+`W ‖ reverse(W)`, the KA alphabet (forward and reversed) and A-Z as a running key under a word,
+progressive/square keys `W[i%a] + W[(i//a)%a]`, and every truncation or extension of those to a
+length ≤48 that is not a multiple of |W| — exhaustively over all 285,616 dictionary words of length
+3–16, all four alphabet pairings, both additive senses, **16,704 word-list searches ≈ 3.0 × 10⁸
+keys**, against a 40-run matched shuffle null.
+
+**Tier 3 — and the coverage fractions are stated rather than implied**, which is the part to carry
+forward. The headline case (key = `q3enc(W1 repeated to L, W2)` with lcm not dividing L) got 2,472
+cells but **only 4 of 12 alphabet/mode configurations — about a third of the box**. Truncation got
+2 of 12. Concatenation/interleaving got 3,600 cells at 4 configurations. **No word longer than 12
+was searched in any two-word grid, and no key length above 55 anywhere.**
+
+**An honest failure worth more than the negative:** the depth-3 solver is validated **only at n=504**
+(all three words rank 1 for L=30,36,45,48,60). At n=144/153 it recovers just 1–2 of 3 words, and for
+L < lcm(b,c) the decoupling is **provably degenerate — zero informative groups, so no signal is
+extractable at all**. So **PK8 and PK9 are not screened for depth-3 manufactures in any sense.**
+
+It also confirms §F7 independently: "beaufort is provably identical to subtract under IoC, verified
+numerically."
+
+### G5. Adversarial verification of the one above-ceiling family hit — refuted, three ways
+
+The workflow spawned verifiers against the Gromark family's above-ceiling flag. The verifier
+**rebuilt the null from scratch** with 20 fresh letter-shuffles on independent seeds, run through the
+identical search (full 10⁷-primer enumeration, same recurrence, modulus, alphabet, sign, statistic
+and length), and recomputed the effect as **z = +3.50 against the +11.98 originally reported**:
+null best-of-search mean 0.058280, sd 0.001551, max 0.063423 against a real 0.063714 — with one of
+20 nulls landing within 0.0003 of the observation. A Gumbel fit gives single-cell p = 0.0063 and
+**family-wise p = 0.18** over the 32 comparable-scale cells. **Refuted.**
+
+That is now three independent kills of the same flag: the originating family's own monoalphabetic
+hill-climb, my independent reconstruction (§F12 — I reproduced IoC 0.063714 exactly and got −5.649
+against shuffled nulls of −5.60 to −5.72), and this verifier's rebuilt null. The agreement across
+three different statistics and three separately-written nulls is the strongest evidence in this
+document that the campaign's negatives are real rather than an artifact of any single method.
