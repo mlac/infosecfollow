@@ -498,6 +498,24 @@ key on the periodic variant at z=+41.8 (§G3).
 6–29 overlapping key letters. Zero agreements; expected false positives 0.01. This is the only
 test that can see a key *shorter than the message*, which no period scan can reach.
 
+**[NEW] Small-alphabet additive keystreams, excluded by census without any key search** (§G6, §G7).
+Forward simulation of the setter's own plaintexts under keystreams with a controlled number of
+distinct shift values, 1.99M simulations, compared against each target's observed IoC. Because IoC
+is permutation-invariant this holds with or without a transposition underneath, and because two
+unrelated aperiodic generators (i.i.d.-uniform and lagged-Fibonacci) give identical intervals to the
+endpoint, it constrains the **effective alphabet count** rather than any particular generator:
+
+| target | effective alphabets admitted (aperiodic) | excluded |
+|---|---|---|
+| PK8 (n=153) | 5–26 | ≤ 4 |
+| PK9 (n=144) | 3–13 | **≥ 15** |
+| PK10 (n=504) | 11–26 | **≤ 10** |
+
+PK9's admitted range reproduces §G2's 95% credible set {3…14} exactly, by an unrelated method.
+**PK9 and PK10 are therefore nearly disjoint** — PK9 admits at most 14 alphabets, PK10 needs at
+least 11 — so they are not the same construction with the same parameters. Scope: aperiodic
+keystreams only; a *periodic* key is looser and on PK9 is not screened at all (§G7).
+
 ### Tier 3 — screens only, family open
 
 * **[NEW] Mutual-IoC periodic solver, p 2–24**, all three targets, both alphabets, 400 shuffle-nulls

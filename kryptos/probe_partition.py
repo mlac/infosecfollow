@@ -39,18 +39,19 @@ def score(c, p, assign, j):
         tot += (cnt*(cnt-1)).sum()/(len(idx)*(len(idx)-1)); nb += 1
     return tot/nb if nb else -1
 
-print(f"{'n':>4s} {'p':>3s} {'j':>2s} {'true':>8s} {'rand mean':>10s} {'rand max':>9s} "
-      f"{'z':>7s} {'rank of true':>13s}")
-for N in (144, 504):
-    for p in (18, 24, 36):
-        for j in (3, 4, 5):
-            zs, ranks = [], []
-            for rep in range(12):
-                c, a = plant(N, p, j, 700 + 100*rep + p + j)
-                t = score(c, p, a, j)
-                r = np.random.default_rng(5000 + rep)
-                rnd = np.array([score(c, p, r.integers(0, j, p), j) for _ in range(3000)])
-                zs.append((t - rnd.mean())/rnd.std())
-                ranks.append(int((rnd >= t).sum()))
-            print(f"{N:4d} {p:3d} {j:2d} {t:8.5f} {rnd.mean():10.5f} {rnd.max():9.5f} "
-                  f"{np.mean(zs):+7.2f} {np.mean(ranks):10.1f}/3000", flush=True)
+if __name__ == "__main__":
+    print(f"{'n':>4s} {'p':>3s} {'j':>2s} {'true':>8s} {'rand mean':>10s} {'rand max':>9s} "
+          f"{'z':>7s} {'rank of true':>13s}")
+    for N in (144, 504):
+        for p in (18, 24, 36):
+            for j in (3, 4, 5):
+                zs, ranks = [], []
+                for rep in range(12):
+                    c, a = plant(N, p, j, 700 + 100*rep + p + j)
+                    t = score(c, p, a, j)
+                    r = np.random.default_rng(5000 + rep)
+                    rnd = np.array([score(c, p, r.integers(0, j, p), j) for _ in range(3000)])
+                    zs.append((t - rnd.mean())/rnd.std())
+                    ranks.append(int((rnd >= t).sum()))
+                print(f"{N:4d} {p:3d} {j:2d} {t:8.5f} {rnd.mean():10.5f} {rnd.max():9.5f} "
+                      f"{np.mean(zs):+7.2f} {np.mean(ranks):10.1f}/3000", flush=True)
