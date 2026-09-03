@@ -61,7 +61,7 @@ threshold at which dictionary-scale search works at all. **PK10 is the only one 
 brute-force search has real power, and it should be the entry point.**
 
 
-### A1. PK10 has no periodic key of period 2–72. Tier 2, transposition-invariant.
+### A1. PK10 has no periodic key of period 2–100. Tier 2, transposition-invariant.
 
 Statistic: mean IoC of the residue classes mod *p*. This is invariant to a columnar transposition
 sitting under the substitution (the architecture of PK4 and PK6), and it is alphabet-agnostic — it
@@ -81,7 +81,10 @@ English pushed through a width-8 columnar and then a random period-*p* key.
 | 63 | +1.48 | +3.84 ± 1.12 | 0.73 |
 | 72 | −0.56 | +7.00 ± 1.28 | 1.00 |
 
-Every period from 2 to 72 except 63 is excluded at power 1.00 with the observed z inside ±2.
+The scan ran to **period 100** (the limit where each residue class still holds ≥5 letters). Every
+period from 2 to 100 except 63 is excluded at power ≥0.8 with the observed z inside ±2, and the
+**maximum observed z across all 99 periods is +1.92** (at p=47). Even at p=63, where power dips to
+0.71, a true cipher would give z=+3.84 against an observed +1.47.
 **Consequence: every two-word product key whose lcm is ≤ 72 is dead for PK10** — a product key
 `k1[i%a] + k2[i%b]` *is* a periodic key of period lcm(a,b). PK4's own (5,9)→45 construction is
 therefore ruled out for PK10, as is PK3's (10,8)→40, PK1's 10, and PK6's 6.
@@ -185,7 +188,7 @@ detects the substitution without knowing perm.
   discharged; a true cipher of that shape gives z = +8.99 ± 1.76, so the observation is 2.9 σ
   *below* the true-cipher distribution and below a 3,000-shuffle ceiling.
 
-### A8. The crib attack (the requested last shot): 54 million tests, zero passes
+### A8. The crib attack (the requested last shot): 54 million tests, zero passes — and fully powered at every length
 
 The productive form of a crib here is not "does the decrypt read as English" — it is that a crib
 pins the keystream **exactly**, and a structured key must then satisfy hard linear constraints.
@@ -209,7 +212,14 @@ numbers *not* yet used in the series, and 28 literal continuations of PK7's clos
 all two-factor pairs 3–16, all three-factor triples 3–14, all four-factor quadruples 3–10) × 3
 targets × 2 alphabets × 3 modes × {prefix, suffix}. Underpowered structure/length combinations
 (false-positive rate > 10⁻⁶) were skipped and counted: 103,644.
-**Expected false positives under the null: 0.67. Observed passes: 0.**
+**Expected false positives under the null: 0.67. Observed passes: 0.** (Of those 54.2M tests, ≈36.1M
+are distinct — the `add` mode is redundant with `sub` here, see §F7 — which lowers the expected
+false-positive count to ≈0.45 and changes nothing else.)
+
+Unlike the ranking sweeps, **this test does not lose power on a short message** (§A0): its
+false-positive rate is set by exact algebra, so a correct crib passes with probability 1 whether the
+message is 144 letters or 504. Its only failure mode is the crib not being in the corpus. That is
+why the corpus was later enlarged to 48,616 (§F8).
 
 Scope: the crib sits at fixed ciphertext positions, so this assumes **no transposition**. That is
 the honest limit — see §E for the width-9 extension that was designed but not run.
@@ -238,13 +248,13 @@ Product-grid cell definition: target × {KA, A-Z} text alphabet × {KA, A-Z} key
 {subtract, add, beaufort} × 91 length pairs (3 ≤ a < b ≤ 16) × up to 2 decomposition directions,
 5 letter-shuffle nulls per cell. Word list 289,026 words, lengths 3–16.
 
-### B1. Why the product negatives are real and not just low scores
+### B1. The shape of the product results (read with §A0: this is decisive for PK10, indicative only for PK8/PK9)
 
 * **PK8**: max z 7.07, ceiling 7.87. Cells beating their own null: **361 / 2,040** vs ~340 expected.
 * **PK9**: max z 7.15, ceiling 7.83. Cells beating own null: **302 / 2,040** — *below* chance.
 * **PK10**: max z 6.40, ceiling 6.75. Cells beating own null: 386 / 2,040.
 
-All three sweeps sit on their nulls, and the top-ranked words are orthographically unrelated
+All three sweeps sit exactly on their nulls, and the top-ranked words are orthographically unrelated
 (PK8: HENNELL, HANGEUL, HANNELE, DOUBLES; PK9: BREWMASTERS, GANGMASTERS, BANDMASTERS;
 PK10: DIMMADOME, CAPITATED, OBERKAMPF, LUMINARIA). A genuine hit looks different — on the real
 PK3 the top five were PENTIMENTO, SENTIMENTO, TESTAMENTO, SENTIMENTS, PORTAMENTO: the true key
