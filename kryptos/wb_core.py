@@ -323,3 +323,72 @@ def periodic_decode(ct, key, mode, L):
     cv = np.asarray(ct, dtype=np.int64)
     kv = np.asarray(key, dtype=np.int64)[np.arange(len(cv)) % L]
     return _pfromk(mode, cv, kv)
+
+# --------------------------------------- variant 2b: soft word constraint + lookahead
+def _uni_look(ct, mode, L, UNI):
+    n = len(ct); cv = np.asarray(ct, dtype=np.int64); K = np.arange(26)
+    out = []
+    for r in range(L):
+        js = np.arange(r, n, L); js = js[js >= L]
+        if js.size == 0: out.append(np.zeros(26, dtype=np.float32)); continue
+        out.append(UNI[_pfromk(mode, cv[js][None, :], K[:, None])].sum(axis=1).astype(np.float32))
+    return out
+
+def periodic_beam2(ct, trie, QGM, mode='add', L=27, beam=100000, Wpt=1.0,
+                   PEN=-6.0, BI=None, UNI=None):
+    """Periodic free key, period L.  Plaintext word constraint is SOFT: a state
+    that cannot continue a dictionary word may abandon it for a flat penalty PEN,
+    so the beam never dies.  Phase 1 is guided by cross-period unigram+bigram
+    lookahead over the positions the pinned key already determines."""
+    CONT, ISEND, ENDLP, NN = trie
+    ROOTCH = CONT[0].copy()
+    n = len(ct); t0 = time.time()
+    LA, _ = _lookahead(ct, mode, L, BI, UNI)
+    LU = _uni_look(ct, mode, L, UNI)
+    ptn = np.zeros(1, dtype=np.int32); ctx = np.zeros(1, dtype=np.int64)
+    sc = np.zeros(1, dtype=np.float32); hs = np.zeros(1, dtype=np.float32)
+    KP = np.zeros((1, L), dtype=np.uint8)
+    for i in range(min(L, n)):
+        N = ptn.shape[0]
+        kcur = keyperm(mode, int(ct[i]))            # k for each pt letter p
+        qg = QGM[ctx] if i >= 3 else np.zeros((N, 26), dtype=np.float32)
+        look = LU[i][kcur][None, :].astype(np.float32)
+        if i >= 1:
+            look = look + LA[i][KP[:, i-1].astype(np.int64), :][:, kcur]
+        o1 = CONT[ptn]                                                  # continue
+        o2 = np.where(ISEND[ptn][:, None], ROOTCH[None, :], np.int32(-1))
+        b2 = (Wpt*ENDLP[ptn])[:, None]
+        o3 = np.broadcast_to(ROOTCH[None, :], (N, 26))                  # abandon
+        s1 = np.where(o1 >= 0, 0.0, -np.inf).astype(np.float32)
+        s2 = np.where(o2 >= 0, b2, -np.inf).astype(np.float32)
+        s3 = np.full((N, 26), PEN, dtype=np.float32)
+        stack = np.stack([s1, s2, s3]); nodes = np.stack([o1, o2, o3])
+        pick = np.argmax(stack, axis=0)
+        addsc = np.take_along_axis(stack, pick[None], 0)[0]
+        nn_ = np.take_along_axis(nodes, pick[None], 0)[0]
+        nsc = (sc[:, None] + qg + addsc).ravel()
+        nhs = (hs[:, None] + qg + addsc + look).ravel()
+        sel = np.argpartition(-nhs, beam)[:beam] if nhs.size > beam else np.arange(nhs.size)
+        par = sel // 26; let = (sel - par*26).astype(np.int64)
+        ptn = nn_.ravel()[sel].astype(np.int32); sc = nsc[sel]; hs = nhs[sel]
+        ctx = (ctx[par] % 676)*26 + let
+        KP = KP[par]; KP[:, i] = kcur[let].astype(np.uint8)
+    KEYS = KP.astype(np.int64)
+    for i in range(L, n):
+        cv = int(ct[i]); p = _pfromk(mode, cv, KEYS[:, i % L])
+        o1 = CONT[ptn, p]
+        o2 = np.where(ISEND[ptn], ROOTCH[p], np.int32(-1))
+        s1 = np.where(o1 >= 0, 0.0, -np.inf).astype(np.float32)
+        s2 = np.where(o2 >= 0, Wpt*ENDLP[ptn], -np.inf).astype(np.float32)
+        s3 = np.full(len(p), PEN, dtype=np.float32)
+        stack = np.stack([s1, s2, s3]); nodes = np.stack([o1, o2, ROOTCH[p]])
+        pick = np.argmax(stack, axis=0)
+        sc = sc + np.take_along_axis(stack, pick[None], 0)[0]
+        if i >= 3: sc = sc + QGM.ravel()[ctx*26 + p]
+        ptn = np.take_along_axis(nodes, pick[None], 0)[0].astype(np.int32)
+        ctx = (ctx % 676)*26 + p
+    fin = sc + Wpt*ENDLP[ptn]*ISEND[ptn]
+    order = np.argsort(-fin)[:5]
+    return dict(score=float(fin[order[0]])/n, key=KEYS[order[0]].copy(),
+                sec=time.time()-t0, nstates=int(len(fin)),
+                top=[(round(float(fin[j])/n, 4), ''.join(str(int(x)) for x in KEYS[j])) for j in order])
