@@ -453,3 +453,57 @@ Frontier item 4 of the old list. In progress tonight; see §F.
   inner columnar. That is a much wider net than §6's four pairings.
 * Two-word dictionary product keys on any of the three, lengths 3–16.
 * Cribs at fixed ciphertext positions with no transposition — 54 million tests, zero passes.
+
+---
+
+## F. LATE RESULTS (jobs that finished after §A–E were drafted)
+
+### F1. Permutation-free crib test for "columnar of width W, key period dividing the column length"
+
+If W divides n and the key period divides the column length L = n/W, then the key at ciphertext
+position s·L+t depends only on t, not on which column landed in slot s. So for every t the W
+ciphertext letters {ct[s·L+t]} must be a **shifted copy, as a multiset**, of the W crib letters
+{crib[c+W·t]} — and the induced column matchings must agree across all t. No W! search at all.
+
+Controls: fires on synthetic instances at (n,W) = (153,9), (144,9), (504,9), (144,8), (504,7), each
+with a unique shift per t. Matched null: **0 of 32,000** random cribs pass.
+
+**Executed: 1,000,200 tests** — 10,685 cribs × widths {3,9,17} on PK8, {2,3,4,6,8,9,12,16,18,24} on
+PK9, {2,3,4,6,7,8,9,12,14,18,21,24} on PK10 × 2 alphabets × 3 modes. **Zero passes.**
+Tier 2 within its stated shape.
+
+### F2. Blind Hill row recovery, k = 2, 3, 4, offset periods 1–6
+
+Frontier item 1, run rather than merely proposed. For a decryption row r, the sequence
+s_b = r·c_b over blocks is a shifted copy of every k-th plaintext letter when r is a true row, so
+its IoC is English and the offset never has to be guessed. **Degenerate rows are excluded**
+(gcd(r₁…r_k, 26) > 1 collapses the output alphabet and inflates IoC for free — that is exactly the
+z=+5.78 false lead recorded in §6), and the matched null applies the identical exclusion.
+
+Control on the **real PK7** (Hill 3×3, inverse spells ALCHEMIST, offsets period 2): the true rows
+[10,16,3], [8,9,0], [9,11,15] score IoC 0.0768 / 0.0681 / 0.0617 at ranks **3, 24, 100 of 15,372**,
+z = +6.2 / +4.7 / +3.5. (Ranks 1–2 are scalar multiples of the true row — u·r for u coprime to 26
+gives a bijection of the same sequence, hence identical IoC.)
+
+**PK8: 10 (alphabet, k, P) cells, k=3 only since 153 is divisible by neither 2 nor 4. Zero cells
+above their matched ceiling.** PK9 and PK10 include k=2 and k=4 (144 and 504 are divisible by both);
+see `results/hillblind_*.json`.
+
+### F3. PK9's two "anomalies" are one anomaly — an identity worth carrying forward
+
+IoC = (Σnₓ² − n)/(n(n−1)) and χ² against uniform = (26/n)·Σnₓ² − n are **affine transforms of each
+other**: both are functions of Σnₓ² alone. Verified numerically — predicting χ² from IoC alone
+reproduces 29.00 / 47.39 / 29.00 exactly for PK8 / PK9 / PK10.
+
+So PK9's "IoC z = +3.24" and its "census χ² = 47 on 25 df" are the *same observation reported
+twice*, not two independent lines of evidence. Its real weight is one-sided p ≈ 0.004 on a single
+target, ≈ 0.012 after the three-target multiplicity — and after the number of statistics computed
+tonight, that is a hint and nothing more. The individual letter extremes are unremarkable: the
+maximum count of 13 has P ≈ 0.098 under a uniform null, the minimum of 1 has P ≈ 0.48.
+
+Practical consequence for the next session: **IoC carries no positional information whatsoever**
+(it is permutation-invariant, hence a pure function of the letter census). It is superb as a
+transposition-invariant *scoring* function once a key hypothesis is peeled off, which is how it is
+used throughout this run — but a raw ciphertext IoC can never, by itself, indicate a period or any
+other positional structure. PK_CONTEXT §5 lists the two as separate calibration constants; they
+are not.
