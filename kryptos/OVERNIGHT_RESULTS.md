@@ -1684,9 +1684,17 @@ The balanced space for p=18, j=3 is exactly **C(17,5) × C(11,5) = 2,858,856** o
 symmetry is fixed — small enough to enumerate outright, so the question gets an exact answer rather
 than a tail extrapolation.
 
-Over **20 independent plants at n=144, the true partition is recovered exactly in 85% of them, with
-median rank 1 of 2,858,856**; at n=153 the first plant likewise ranks 1. That is the attack's real
-power figure, and it is what the verdict below rests on — not the single run that first showed it.
+Over 20 independent plants at each length, with the **full** enumeration scored every time:
+
+| length | exact recovery | median rank |
+|---|---|---|
+| n=144 (PK9) | **85%** | 1 of 2,858,856 |
+| n=153 (PK8) | **95%** | 1 of 2,858,856 |
+| n=504 (PK10) | **100%** | 1 of 2,858,856 |
+
+That is the attack's real power figure, and it is what every verdict below rests on — not the single
+run that first showed the effect. It is validated at all three target lengths, so a negative from it
+is informative on **all three** puzzles, not only PK9.
 
 **What that changes.** The one shape the campaign could neither exclude nor detect is now reachable
 by search. §F15's bound stands as stated — no statistic can separate 8-letter residue classes — but
