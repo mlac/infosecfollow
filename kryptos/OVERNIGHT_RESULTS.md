@@ -422,7 +422,21 @@ Frontier item 1 of the old list (the PK10 two-word product sweep) is **finished 
 all three targets. Items 2 and 4–6 were worked and are reported above or in §F. What follows is
 re-ranked by what tonight actually eliminated.
 
-### 1. Non-additive block ciphers on PK10 — the family this whole framework cannot see
+### 0. Read §A0 first. Then work PK10, not PK8 or PK9.
+
+The single most actionable result of the night is that ranking-based searches over ~30,000
+candidates are below their own noise floor at 144–153 letters, and no amount of compute changes
+that. Effort on PK8 and PK9 should go into tests whose false-positive rate is set by exact algebra
+(the crib/consistency family, false-positive rate ~10⁻¹⁶, fully powered at any length) or into
+solving PK10 first and using it as the lever the setter says exists.
+
+### 1. Non-additive block ciphers — RUN on all three, negative on PK10 (see §F2)
+
+Blind Hill k = 2, 3, 4 with additive offset periods 1–6 was executed tonight and is **Tier 2 dead
+for PK10**, Tier 3 for PK8/PK9. What is still open in the family: a Hill stage with a longer
+additive period, or an additive that is itself a two-word product (design law 2 applied to PK7's
+construction), and non-Hill non-additive constructions. Original reasoning, still worth keeping,
+because it is what makes the family a priori attractive:
 
 Every statistic used tonight assumes `c[i] = p'[i] + k[i]` on some tableau. A Hill cipher is not of
 that form, and **PK10's signature is what a Hill cipher looks like**:
@@ -546,9 +560,20 @@ one Hill cipher in the series, from its published ciphertext, blind.
 | PK9 (144) | 30 (k=2,3,4) | 4,442,760 | **0** |
 | PK10 (504) | 30 (k=2,3,4) | 4,442,760 | **0** |
 
-PK10 has 168 three-letter blocks against PK7's 93, so the test has *more* power there than on the
-puzzle it recovers. **Tier 2: none of PK8, PK9 or PK10 is a Hill cipher of dimension 2, 3 or 4 with
-an additive offset of period ≤ 6.** That closes what §E ranked as frontier item 1. What remains open
+**Power by message length** (blind Hill 3×3, P=2, fires above its own ceiling on synthetic Hill
+ciphertexts):
+
+| n | fired |
+|---|---|
+| 279 (PK7's length) | **6/6** |
+| 504 (PK10) | **6/6** |
+| 153 (PK8) | 3/6 |
+| 144 (PK9) | 2/6 |
+
+So: **PK10 — Tier 2, not a Hill cipher of dimension 2, 3 or 4 with an additive offset of period
+≤ 6.** PK8 and PK9 — **Tier 3**, same search, but the test only fires about half the time at those
+lengths (§A0 again). That closes what §E ranked as frontier item 1 for PK10 and leaves it ajar for
+the other two. What remains open
 in the family is a Hill stage with a longer additive period, or an additive that is itself a
 product of words (design law 2 applied to PK7's construction), and non-Hill non-additive
 constructions generally. Raw output in `results/hillblind_*.json`.
@@ -583,3 +608,30 @@ Worth recording because it is cheap and rules out a whole class of "look at it d
   legible for any of the three.
 * Positional letter agreement between pairs of targets is at chance: PK8/PK9 4 matches (null
   5.37 ± 2.23, z −0.61), PK8/PK10 9 (5.70 ± 2.31, z +1.43), PK9/PK10 8 (5.45 ± 2.27, z +1.12).
+
+### F5. The PK9 → PK8 coupling, attacked properly (frontier item 6)
+
+Design law 4 says PK5's key is PK4's plaintext, and the setter says PK9 unlocks PK8. If **PK8's key
+is PK9's plaintext**, then for i < 144
+
+    p8[i] = c8[i] − PT9[i]  and  PT9[i] = c9[i] − K9[i]   ⇒   p8[i] = (c8[i] − c9[i]) + K9[i]
+
+so `d = c8 − c9` is PK8's plaintext enciphered under PK9's own keystream, and PK9's plaintext never
+has to be known. Note also that a 144-letter key on a 153-letter message has **period 144, which no
+period scan can reach** — this route and the wrap-crib test in §D are the only ways to see it.
+
+**48 derived texts** were built: every ordered pair of PK8/PK9/PK10 × both alphabets × forward and
+reversed × both signs. Each got:
+
+* a transposition-invariant period scan **with a power curve** — best result anywhere was
+  pk8−pk9R_AZ at p=23, z=+3.76, in a cell where a *true* period-23 cipher gives only +3.2 and the
+  power is 0.53, i.e. the observation exceeds what the real thing would produce, which is the
+  signature of noise, not signal. Across 48 texts × ~30 periods ≈ 1,440 tests, +3.76 is at
+  expectation.
+* a two-word product grid — best (z − matched null max) anywhere was +2.62, with unrelated top words.
+* **the crib × key-structure consistency sweep: 367,133,184 effective tests, expected false
+  positives 4.12, observed passes 0.**
+
+Tier 3 overall (the period scans are weak at 144 letters, per §A0), but the crib component is
+exact and therefore fully powered: **no crib in the corpus, under any of the 404 key structures,
+describes any of the 48 coupling texts.**
