@@ -11,6 +11,53 @@ Run date 2026-09-03. Working dir `kryptos/`. Harness: all seven solved puzzles r
 
 ## A. HEADLINE FINDINGS
 
+### A0. THE MOST IMPORTANT RESULT OF THE NIGHT — most short-message negatives, mine and the prior campaign's, are underpowered
+
+Doctrine says validate a solver before trusting its silence. Applied at the *cell* level that is
+easy, and both this campaign and the prior one passed it: the two-word product solver recovers the
+true key of a 153-letter synthetic at rank 1 of 35,831. But a sweep does not report one cell — it
+reports the **maximum over 2,040 cells**, and that maximum has its own noise floor. The right
+control is therefore: run the *entire grid* on a synthetic of the same length that really does have
+the key you are searching for, and ask whether it beats the ceiling the real sweep produced.
+
+That was done tonight, and the answer changes the verdicts:
+
+| synthetic | true key's best cell | sweep-wide max on the synthetic | real-sweep ceiling | detected? |
+|---|---|---|---|---|
+| n=153, OCHRE × VERDIGRIS, columnar underneath | z = 5.92 / 5.98 | 7.17 (a **noise** cell, KA/AZ/sub 9,10) | 7.87 | **NO** |
+| n=144, ANVIL × QUENCHING, columnar underneath | z = 4.33 / 5.97 | 7.16 (a **noise** cell) | 7.83 | **NO** |
+| n=504, OCHRE × VERDIGRIS | z = 10.5 / 15.5 (single-cell) | *sweep still running at write-up* | 6.75 | expected YES |
+
+At 144–153 letters a *genuine* two-word product key produces z ≈ 6, while the noise maximum over
+2,040 correlated cells sits at 7.8–7.9. The signal is below the noise floor of the search that is
+looking for it. **No amount of re-running helps.** The same holds for the blind Hill sweep: run on
+synthetic Hill ciphertexts it fires above its own ceiling 6/6 at n=279 and 6/6 at n=504, but only
+**3/6 at n=153 and 2/6 at n=144**.
+
+**Consequences, applied honestly to my own results:**
+
+* PK8 and PK9 two-word product keys: **Tier 3, not Tier 2.** Those specific keys are not indicated,
+  but the family is not exhausted. §6's existing Tier 2 entry for the same family rests on a
+  cell-level control and should be downgraded for the same reason.
+* PK8 and PK9 blind Hill: **Tier 3.**
+* PK8 and PK9 progressive keys: **partial**. Synthetic progressive keys at n=144 scored z = +3.7 to
+  +8.7 depending on the progression law, while the PK9 sweep's ceiling was +4.32 — so the stronger
+  progressions would have been caught and the weakest (block p=9, d=3) would not.
+* **PK10 keeps its Tier 2 verdicts.** 504 letters is 3.5× the signal, and every PK10 sweep that was
+  power-checked fired on its synthetic.
+
+**What stays fully powered at 144–153 letters** — and is therefore where short-message effort
+belongs: tests whose false-positive rate is set by *exact algebra* rather than by ranking a large
+candidate list. The crib × key-structure consistency test has a per-structure false-positive rate
+of 2.7 × 10⁻¹⁶ and detects a true crib with probability 1 regardless of message length; likewise
+the wrap-crib join and the multiset test. Those negatives hold at full strength. Ranking searches
+over ~30,000 candidates do not, and at these lengths they never will.
+
+This also reframes the setter's "PK9 is harder": whatever the algorithm, 144 letters is below the
+threshold at which dictionary-scale search works at all. **PK10 is the only one of the three where
+brute-force search has real power, and it should be the entry point.**
+
+
 ### A1. PK10 has no periodic key of period 2–72. Tier 2, transposition-invariant.
 
 Statistic: mean IoC of the residue classes mod *p*. This is invariant to a columnar transposition
@@ -170,8 +217,8 @@ the honest limit — see §E for the width-9 extension that was designed but not
 
 | sweep | configurations actually executed | wall | observed best | matched-null ceiling | verdict |
 |---|---|---|---|---|---|
-| PK8 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 542 s | z = 7.07 | 7.87 | **Tier 2 dead** |
-| PK9 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 521 s | z = 7.15 | 7.83 | **Tier 2 dead** |
+| PK8 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 542 s | z = 7.07 | 7.87 | Tier **3** — underpowered, see §A0 |
+| PK9 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 521 s | z = 7.15 | 7.83 | Tier **3** — underpowered, see §A0 |
 | PK10 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 1,728 s | z = 6.40 | 6.75 | **Tier 2 dead** |
 | PK10 period scan 2–100 | 99 periods × (500 nulls + 120 power sims) | 320 s | z = +1.92 | ±2, power 1.00 | **Tier 2 dead** |
 | PK8 period scan 2–30 | 29 periods × 620 | 90 s | z = +3.25 (p=7) | — | p=7, p≥18 open |
@@ -304,7 +351,9 @@ running-key hypothesis and 0.2 σ from the flat-keystream hypothesis. *Tier 3, n
 text may be read through an independent keyed alphabet* — that variant separates by only 1.0 σ and
 stays open (§A6).
 
-**[NEW] PK8, PK9, PK10 — two-word additive product keys from dictionary words, full grid.**
+**[NEW] PK10 — two-word additive product keys from dictionary words, full grid.** (PK8 and PK9
+ran the identical grid but are **Tier 3**, not Tier 2 — see §A0; the search is underpowered at those
+lengths.)
 2,040 cells and **245,423,952 word-evaluations per target** (736M total): {KA, A-Z} text alphabet ×
 {KA, A-Z} key alphabet × {sub, add, beaufort} × 91 length pairs 3–16 × up to 2 decomposition
 directions × 5 letter-shuffle nulls. Observed maxima 7.07 / 7.15 / 6.40 against matched ceilings
@@ -485,9 +534,24 @@ Control on the **real PK7** (Hill 3×3, inverse spells ALCHEMIST, offsets period
 z = +6.2 / +4.7 / +3.5. (Ranks 1–2 are scalar multiples of the true row — u·r for u coprime to 26
 gives a bijection of the same sequence, hence identical IoC.)
 
-**PK8: 10 (alphabet, k, P) cells, k=3 only since 153 is divisible by neither 2 nor 4. Zero cells
-above their matched ceiling.** PK9 and PK10 include k=2 and k=4 (144 and 504 are divisible by both);
-see `results/hillblind_*.json`.
+**END-TO-END POWER CONTROL — the sweep was run unchanged on PK7 itself.** It fires **above
+ceiling in 7 of 10 cells**, including the correct P=2 at z = +6.21, and the winning row [2,24,11] is
+exactly 21 x [10,16,3] mod 26 — the true row's scalar-equivalence class. So this sweep detects the
+one Hill cipher in the series, from its published ciphertext, blind.
+
+| target | cells | row-evaluations (+ nulls) | above matched ceiling |
+|---|---|---|---|
+| **PK7 (control, n=279)** | 10 | 153,720 | **7** |
+| PK8 (153) | 10 (k=3 only; 153 is divisible by neither 2 nor 4) | 153,720 | **0** |
+| PK9 (144) | 30 (k=2,3,4) | 4,442,760 | **0** |
+| PK10 (504) | 30 (k=2,3,4) | 4,442,760 | **0** |
+
+PK10 has 168 three-letter blocks against PK7's 93, so the test has *more* power there than on the
+puzzle it recovers. **Tier 2: none of PK8, PK9 or PK10 is a Hill cipher of dimension 2, 3 or 4 with
+an additive offset of period ≤ 6.** That closes what §E ranked as frontier item 1. What remains open
+in the family is a Hill stage with a longer additive period, or an additive that is itself a
+product of words (design law 2 applied to PK7's construction), and non-Hill non-additive
+constructions generally. Raw output in `results/hillblind_*.json`.
 
 ### F3. PK9's two "anomalies" are one anomaly — an identity worth carrying forward
 
