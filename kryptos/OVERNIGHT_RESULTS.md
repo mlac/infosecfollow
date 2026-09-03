@@ -1511,3 +1511,30 @@ searching its key space.
 **Scope, stated plainly.** This excludes small-modulus *additive* keystreams, which is exactly what
 the sweep assumes, so null and search are matched. It says nothing about a small-alphabet keystream
 combined non-additively, and nothing about m ≥ 10 on any target.
+
+**The consistency interval on the modulus, per target** (`smallmod_minterval.py`, 600,000 further
+simulations, m swept 2–26 on both recurrences; a modulus is "consistent" when the observed IoC falls
+inside the central 95% of 4,000 simulations):
+
+| target | ACA recurrence | lag-1 recurrence | excluded |
+|---|---|---|---|
+| PK8 (n=153) | m ∈ 5–26 | m ∈ 5–26 | m ≤ 4 |
+| PK9 (n=144) | m ∈ 3–14 (+16) | m ∈ 3–14 | **m ≥ 15** |
+| PK10 (n=504) | m ∈ 9–26 | m ∈ 8–26 | **m ≤ 7** |
+
+Both recurrences agree to within one step everywhere, so the interval is a property of the modulus
+rather than of the particular lag.
+
+**Two things fall out of that table.**
+
+First, **PK9's interval is m ∈ {3…14} — identical to §G2's 95% credible set k ∈ {3…14}**. §G2 got
+there from census concentration and a word-set analysis; this gets there by simulating an actual
+generator forward and comparing IoC. Two methods sharing no machinery agree on both endpoints, not
+merely on the point estimate. I did not expect the endpoints to match and would have reported a
+disagreement here; they match.
+
+Second, **PK9 and PK10 are nearly disjoint.** PK9 admits at most 14 effective alphabets, PK10 needs
+at least 8 or 9. Whatever else is true, the two puzzles are not the same construction with the same
+parameters — which bears directly on the setter's hint that solving one gives leverage on the
+others. If leverage exists it is through the *plaintext* (frontier item 8), not through a shared
+keystream shape.

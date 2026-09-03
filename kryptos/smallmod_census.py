@@ -14,6 +14,7 @@ DS  = [d for d in range(1,26) if np.gcd(d,26)==1]
 SRC = ''.join(PT[k] for k in ('pk2','pk3','pk5','pk6','pk7','pk4','pk1'))
 OBS = {'pk8': ioc(CT['pk8']), 'pk9': ioc(CT['pk9']), 'pk10': ioc(CT['pk10'])}
 NS  = {'pk8': 153, 'pk9': 144, 'pk10': 504}
+NS_SEED = {'pk8': 8, 'pk9': 9, 'pk10': 10}
 NSIM = 4000
 
 def sim(N, m, L, rec, r, W=9):
@@ -36,7 +37,7 @@ for tag, N in NS.items():
     for m in (3,4,5,6,7,8,10,26):
         for L in (4,6):
             for rec in ('aca',):
-                r = np.random.default_rng(hash((tag,m,L,rec)) % (2**31))
+                r = np.random.default_rng((NS_SEED[tag]*100000 + m*1000 + L*10 + (0 if rec=='aca' else 1)))
                 v = [sim(N, m, L, rec, r) for _ in range(NSIM)]
                 io = np.array([a for a,_ in v]); ns = np.mean([b for _,b in v])
                 z  = (OBS[tag] - io.mean())/io.std()

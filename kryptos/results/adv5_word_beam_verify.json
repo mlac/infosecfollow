@@ -153,7 +153,15 @@
    "max": -6.6252,
    "min": -6.6931
   },
-  "obj_z_matched": -0.85
+  "obj_z_matched": -0.85,
+  "multiple_testing": {
+   "p_one_sided_matched": 0.01,
+   "fwer_over_6_cells_kmin10_grid": 0.059,
+   "fwer_over_15_pk10_dual_cells": 0.14,
+   "fwer_over_63_pk10_cells": 0.469,
+   "fwer_over_63_cells_x2_statistics": 0.718,
+   "note": "qg was NOT the search objective; on the objective the same cell is z=-0.85 against its own mode-matched null. Does not survive correction."
+  }
  },
  "grid": {
   "real_pk10_dual_cells_at_kmin8": 6,
@@ -161,5 +169,45 @@
   "real_pk10_dual_cells_all": 15,
   "published_null_replicate_covers": 1,
   "note": "each published null replicate is ONE cell (add,KA); the real number reported is the max over the whole grid"
- }
+ },
+ "verdict": "REFUTED",
+ "headline": {
+  "claim": "PK10 dual beam, KA, key words len>=8, beaufort: obj -6.4241 sits ABOVE its matched null max (-6.4260), z=+2.0",
+  "reproduces_exactly": true,
+  "defect": "the \"matched\" null was run with mode=add while the flagged cell is mode=beau; beaufort scores systematically higher than additive under this beam even on pure noise",
+  "null_add_mean": -6.463,
+  "null_beau_mean": -6.4244,
+  "mode_offset_on_noise": 0.0386,
+  "real_add_to_beau_gap": 0.0585,
+  "recomputed_z_same_mode": 0.01,
+  "recomputed_z_mode_maximised": -0.99,
+  "empirical_p_same_mode": 0.538,
+  "empirical_p_mode_maximised": 0.889
+ },
+ "claim_text_errors": [
+  "PK1 control: claim says PROVENANCE in 18 of 19 key blocks; the artifact shows 15 of 19 (PROCTOLOGY, RESPONDING, PREVENTING, PROVIDENCE also appear).",
+  "PK1 control: every one of the 6 beam-100k runs records truth_wins=false - the objective ranks a wrong pair ABOVE the true PROVENANCE pair. The claim omits this.",
+  "Periodic control: claim says 100% of plaintext AND key at L=25,27,45,63; the artifact holds 3 runs (L=25,45,63) and records pt_recovery only, no key recovery.",
+  "null_construction says the periodic null \"carries the same multiple-comparison burden as the real run\": the null maximised over 16 periods at mode add only, the real run maximised over 48 cells (3 modes x 16 periods).",
+  "wall_sec=7343 is elapsed wall clock (family window 06:13:52-08:13, ~7,100 s) not compute; recorded per-run seconds in just 8 of the artifacts already sum to 8,619 s because jobs ran in parallel."
+ ],
+ "verified_true": [
+  "executed_configs=763 recomputes exactly from the artifacts via wb_count.py; the x3-mode and x16-period multipliers are real executed runs whose argmax was retained.",
+  "Both flagged cells reproduce to the 4th decimal on a fresh run (beau -6.4241 qg -4.1858; add -6.4826 qg -4.2845) and re-encryption of the claimed plaintext under the claimed key regenerates PK10 character for character.",
+  "The 504-letter synthetic positive controls are genuine and matched (kmin=10 add KA vs the kmin=10 add KA null): z=+24.3/+24.7.",
+  "PK8 and PK9 dual results are scored against properly mode-maximised, length-matched nulls and are clean negatives (z=-0.52, -0.06).",
+  "The periodic PK10 best (-7.7495) is below its null max (-7.7389) even before correcting the mode mismatch."
+ ],
+ "standard_of_proof": {
+  "key_letters": 504,
+  "plaintext_letters": 504,
+  "compression": "none - the key is exactly as long as the message",
+  "key_words": 58,
+  "bits_to_specify_key": 979.4,
+  "bits_of_key_material_needed": 2369.0,
+  "decrypt_reads_as_english": false,
+  "sample": "FEIMALLOSESESSIONALLSWEESELLTHEFOROGREHERWATTHEIRMSHTHEAREHOLLEY...",
+  "vocabulary_defect": "words.txt contains junk tokens - the kmin>=10 sub 'key' segments through a literal XXXXXXXXXX"
+ },
+ "tier": "Tier 3 screen (FAMILY OPEN). Specific configurations dead; the family is not exhausted: no AZ-alphabet null, no beau/sub null in the original work, key words of length 3-7 unscreened (synthetic recovery falls to 34.7-47.6% there), and any transposition under the substitution is outside the search."
 }
