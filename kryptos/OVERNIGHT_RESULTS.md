@@ -638,3 +638,24 @@ reversed × both signs. Each got:
 Tier 3 overall (the period scans are weak at 144 letters, per §A0), but the crib component is
 exact and therefore fully powered: **no crib in the corpus, under any of the 404 key structures,
 describes any of the 48 coupling texts.**
+
+### F6. What the (length, modulus) grid actually covers — products of any number of words
+
+The decomposition generalises past three factors. For a key `k[i] = Σ_f u_f[i mod p_f]`, peeling the
+length-a factor makes every residue class mod **lcm(all the other periods)** monoalphabetic. The
+score for a length-a word therefore depends on the other factors *only through their lcm* — so one
+(length, modulus) grid tests two-word, three-word, four-word and deeper products at once. The
+limit is that the modulus M must satisfy n/M ≥ ~5–6 for the class IoC to be measurable at all.
+
+Coverage, counting distinct length-sets drawn from lengths 3–16 for which *some* factor has the
+others' lcm inside the cap (and does not divide it, which would leave no signal):
+
+| | PK10 (cap M ≤ 84) | PK8 (cap M ≤ 30) | PK9 (cap M ≤ 28) |
+|---|---|---|---|
+| two-word (91 sets) | **91 (100%)** | 91 (100%) | 91 (100%) |
+| three-word (364 sets) | **334 (92%)** | 225 (62%) | 198 (54%) |
+| four-word (1,001 sets) | 576 (58%) | 209 (21%) | 143 (14%) |
+
+This is a coverage statement about which *length-sets* the method can see at all, and is separate
+from the §A0 power question — on PK8 and PK9 the ranking power is the binding constraint regardless.
+For PK10 the grid sees essentially the whole two- and three-word space.
