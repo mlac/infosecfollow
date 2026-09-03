@@ -543,13 +543,30 @@ what work at short lengths.
 40,320 permutations**, from a 24-letter crib, at a false-positive rate of 2.7 × 10⁻¹⁶. The attack
 works. What blocked it was cost: W=9 means 362,880 permutations × 48,616 cribs.
 
-**The engineering that unblocks it, specified.** The consistency condition `R·K = 0` is linear and K
-decomposes by column, `R·K = Σ_c R_c · K_{c,slot(c)}`, so the permutation search is a **meet in the
-middle** — enumerate ordered 4-subsets (3,024) and ordered 5-subsets (15,120), hash the partial
-sums, match on (complementary slot set, negated sum). 362,880 collapses to ~18k per crib-structure,
-about 20 ms, so the whole corpus × a dozen structures is a couple of minutes. One wrinkle: R depends
-on the permutation unless every key period divides the column length, so either restrict to those
-structures or cache R by residue signature. The permutation-free special case is already run (§F1).
+**Correction to an earlier version of this item.** I first specified a meet-in-the-middle: `R·K = 0`
+is linear and K decomposes by column, so enumerate ordered 4- and 5-subsets and hash the partial
+sums, collapsing 362,880 permutations to ~18k. **That only works when R is fixed across
+permutations, which requires every key period to divide the column length L.** I checked whether
+caching R by residue signature rescues the general case and it does not: at W=9 a slot's rotation is
+`(slot·L) mod p`, so two slots share a checker only when their values agree mod `p/gcd(L,p)`, and for
+the design-plausible periods (9, 25, 45 on all three targets) that quotient exceeds 9 — **all
+362,880 checkers are distinct and caching gives zero gain.** At ~1.5 ms per nullspace build that is
+~9 minutes per crib-structure, so the corpus-scale version as originally specified is not feasible.
+The fast case where R *is* fixed reduces to the permutation-free multiset test, which is already run
+(§F1, 1,000,200 tests, zero passes).
+
+**The corrected specification, and why it is the right tool.** Use **branch-and-bound over the
+permutation with incremental consistency propagation** — assign columns one at a time and prune the
+moment the accumulated equations conflict — rather than building R per permutation. The binding
+requirement is crib length: for a single period p the degrees of freedom are about `m − p`, so a
+27-letter crib (3 per column at W=9) discriminates for **p up to ~20**, while p=45 would need
+m ≳ 54, which is a far stronger assumption than any crib in the corpus.
+
+That length constraint is not a limitation here — it is the point. §F16 and §F15 show PK8 and PK9
+are excluded for periods up to ~13 and **undecidable above that for information reasons no statistic
+can overcome**. A 27-letter crib covers p ≈ 14–20 exactly. So this attack is the natural instrument
+for precisely the window statistics cannot reach, and it should be aimed there rather than at the
+long periods.
 
 ### 2. Three-word and deeper products on PK10 only
 
