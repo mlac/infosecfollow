@@ -443,106 +443,94 @@ All §6 Tier 3 entries stand. Added tonight:
 
 ## E. RANKED FRONTIER FOR THE NEXT RUN (replaces §7 of PK_CONTEXT.md)
 
-Frontier item 1 of the old list (the PK10 two-word product sweep) is **finished and negative** for
-all three targets. Items 2 and 4–6 were worked and are reported above or in §F. What follows is
-re-ranked by what tonight actually eliminated.
+Of the old §7 list: item 1 (PK10 two-word products) is **finished**; item 2 (periods 25–72) was
+worked and superseded by the period scan to 100; item 3 (three-word products) is **run** on all
+three targets; item 4 (Gromark) is **Tier 2 for digit primers** (§F12); item 5 (dual beam) was in
+flight at write-up; item 6 (PK9→PK8 coupling) is **run** (§F5). What follows is re-ranked by what
+is actually left.
 
 ### 0. Read §A0 first. Then work PK10, not PK8 or PK9.
 
-The single most actionable result of the night is that ranking-based searches over ~30,000
-candidates are below their own noise floor at 144–153 letters, and no amount of compute changes
-that. Effort on PK8 and PK9 should go into tests whose false-positive rate is set by exact algebra
-(the crib/consistency family, false-positive rate ~10⁻¹⁶, fully powered at any length) or into
-solving PK10 first and using it as the lever the setter says exists.
+The single most actionable result of the night: ranking searches over ~30,000 candidates are below
+their own noise floor at 144–153 letters, and **no amount of compute changes that**. A genuine
+two-word product key scores z ≈ 6 at those lengths against a noise ceiling of 7.8–7.9; the same key
+at 504 letters scores 15.57 against a ceiling of 6.75 and wins the grid outright. Blind Hill fires
+6/6 at n=504 and 2/6 at n=144. Gromark's own control makes the point most sharply: at n=144 the
+null best-of-search over 10⁷ primers already reaches IoC 0.0628 on *shuffled* text, so the search
+size alone manufactures apparent-English IoC.
 
-### 1. Non-additive block ciphers — RUN on all three, negative on PK10 (see §F2)
+So effort on PK8 and PK9 belongs in tests whose false-positive rate is set by **exact algebra**, not
+by ranking a candidate list — the crib/consistency family, which detects a correct hypothesis with
+probability 1 at any length. Or solve PK10 first and use it as the lever the setter says exists.
 
-Blind Hill k = 2, 3, 4 with additive offset periods 1–6 was executed tonight and is **Tier 2 dead
-for PK10**, Tier 3 for PK8/PK9. What is still open in the family: a Hill stage with a longer
-additive period, or an additive that is itself a two-word product (design law 2 applied to PK7's
-construction), and non-Hill non-additive constructions. Original reasoning, still worth keeping,
-because it is what makes the family a priori attractive:
+### 1. Crib with a columnar underneath — validated on the real PK4, the engineering is specified
 
-Every statistic used tonight assumes `c[i] = p'[i] + k[i]` on some tableau. A Hill cipher is not of
-that form, and **PK10's signature is what a Hill cipher looks like**:
+This is now the top item because it is the one *exact* test with a known gap, and exact tests are
+what work at short lengths.
 
-| construction (n=504) | IoC | census LLR | best period z, p 2–40 |
-|---|---|---|---|
-| Hill 3×3, no additive | 0.0398 | −15.93 | +3.43 |
-| **Hill 4×4, no additive** | **0.0386** | **−13.88** | +2.95 |
-| periodic key P=45 | 0.0385 | −13.58 | +3.73 |
-| running key (English/English) | 0.0395 | **+7.52** | +2.24 |
-| random long key | 0.0378 | −7.63 | +1.78 |
-| **observed PK10** | **0.0388** | **−13.03** | **+1.48** |
+`crib_transpo.py` recovers PK4's true column order **[6,4,1,2,5,3,0,7] as the unique pass out of all
+40,320 permutations**, from a 24-letter crib, at a false-positive rate of 2.7 × 10⁻¹⁶. The attack
+works. What blocked it was cost: W=9 means 362,880 permutations × 48,616 cribs.
 
-PK7 is a Hill 3×3 whose inverse spells ALCHEMIST, so the family is in the setter's vocabulary, and
-504 = 3 × 168 = 4 × 126 admits both block sizes. §6 records Hill 2×2 and 3×3 with additive periods
-1–3 as exhausted; what is open is **Hill 3×3 with a longer additive, or an additive that is itself
-a two-word product** (design law 2 applied to PK7's construction), and **Hill 4×4** which was never
-tried. 504 letters gives 1.8× the blocks PK7's 279 gave, so blind row recovery has more signal
-here than it did on the puzzle it was built for. Start here.
+**The engineering that unblocks it, specified.** The consistency condition `R·K = 0` is linear and K
+decomposes by column, `R·K = Σ_c R_c · K_{c,slot(c)}`, so the permutation search is a **meet in the
+middle** — enumerate ordered 4-subsets (3,024) and ordered 5-subsets (15,120), hash the partial
+sums, match on (complementary slot set, negated sum). 362,880 collapses to ~18k per crib-structure,
+about 20 ms, so the whole corpus × a dozen structures is a couple of minutes. One wrinkle: R depends
+on the permutation unless every key period divides the column length, so either restrict to those
+structures or cache R by residue signature. The permutation-free special case is already run (§F1).
 
-### 2. Three-word and deeper product keys, dictionary-wide
+### 2. Three-word and deeper products on PK10 only
 
-The decomposition that made the two-word sweep tractable generalises: peel a length-a key and every
-residue class mod **lcm(b,c)** is monoalphabetic, so the score for a length-a word depends on b and
-c *only through their lcm*. That collapses the triple search to a (length, modulus) grid.
-Validated: recovers all three of OCHRE × VERDIGRIS × ANNEAL at rank 1 on a 504-letter synthetic
-(z +5.4 to +9.5), including with a columnar underneath. See §F for the state of the run.
-This is the family the period argument does *not* kill, since lcm(a,b,c) easily exceeds 100.
-Extend to four factors and to key alphabets beyond KA/A-Z.
+The (length, modulus) grid covers products of **any** arity — the score for one factor depends on the
+others only through their lcm (§F6) — and at n=504 it sees 92% of three-word and 58% of four-word
+length-sets. PK8/PK9 versions are run but Tier 3 by §A0 and not worth repeating. Extend PK10's grid
+to more key alphabets and to moduli above 84 by accepting smaller classes with more nulls.
 
-### 3. Crib with a columnar underneath — validated on the real PK4, only partly run
+### 3. Gromark's three open corners (§F12)
 
-`crib_transpo.py` recovers PK4's true column order **[6,4,1,2,5,3,0,7] as the unique pass out of
-all 40,320 permutations**, from a 24-letter crib, at a false-positive rate of 2.7 × 10⁻¹⁶. The
-attack works. What blocked it tonight is cost: W=9 means 362,880 permutations × 10,685 cribs, and
-the constraint matrix has to be rebuilt per permutation.
+In the agent's own priority order: (ii) the mix-**after**-shift ACA form at PK8/PK9 lengths, which
+needs a joint primer + mixed-alphabet solve (~5 h single-core for the full grid, and it is the only
+test that can see that form at n=144); (i) full 26⁷ mod-26 letter-primer enumeration (~12–20 h,
+26⁸ is out of reach); (iii) a transposition applied *on top of* the Gromark, outside every statistic
+used so far. Do **not** re-run mod-10 digit primers at L ≤ 8, or dictionary-word primers 5–14.
 
-**The engineering that unblocks it** (designed, not run): the consistency condition `R·K = 0` is
-linear and K decomposes by column, `R·K = Σ_c R_c · K_{c,slot(c)}`, so the permutation search is a
-**meet in the middle** — enumerate ordered 4-subsets (3,024) and ordered 5-subsets (15,120), hash
-the partial sums, match on (complementary slot set, negated sum). 362,880 collapses to ~18k per
-crib-structure, roughly 20 ms, so the whole corpus × a dozen structures is a couple of minutes.
-The one wrinkle: R depends on the permutation unless every key period divides the column length,
-so either restrict to those structures or cache R by residue signature.
+### 4. Non-additive block ciphers beyond what was run
 
-A permutation-free special case was run tonight instead — see §F, `crib_multiset.py`.
-
-### 4. PK9 → PK8 through the derived text, taken further
-
-The setter's hint plus design law 4 (PK5's key is PK4's plaintext) points at **PK8's key being
-PK9's plaintext**. Then `d = c8 − c9` is PK8's plaintext enciphered under PK9's own keystream, and
-PK9's plaintext never has to be known. Note also that a 144-letter key on a 153-letter message has
-**period 144, which no period scan can reach** — only the derived text or the wrap-crib test can.
-Tonight ran, on all 48 derived texts (every ordered pair × 2 alphabets × forward/reversed × both
-signs): a transposition-invariant period scan with power, and a two-word product grid. §F has the
-outcome. Not yet run on the derived texts: the crib × key-structure sweep, the three-word grid,
-and the mutual-IoC solver. All three are cheap and should go next.
+Blind Hill k = 2, 3, 4 with additive offset periods 1–6 is done and **Tier 2 for PK10** (§F2). Open:
+a Hill stage with a longer additive period, or an additive that is itself a two-word product —
+design law 2 applied to PK7's construction — and non-Hill non-additive constructions generally.
+PK10's statistical signature (IoC 0.0388, census LLR −13.03) remains closely matched by Hill 3×3
+(−15.93) and Hill 4×4 (−13.88), so the family is still a priori attractive even after the negative.
 
 ### 5. Running key through an independent keyed alphabet
 
-The census argument (§A6) excludes an English key text read in the *same* tableau as the plaintext.
-It does **not** exclude one read through an independent keyed alphabet — averaged over 400 random
-alphabet permutations the two hypotheses separate by only 1.0 σ on PK10. Since PK3 already proves
-this setter builds keys by encrypting one word under another, a key text pushed through a keyed
-alphabet is squarely in style. §6's running-key screen used specific texts; this is about the
-*mapping*, and it is untouched.
+The census argument (§A6) excludes an English key text read in the *same* tableau as the plaintext,
+which is what PK5 does. It does **not** exclude one read through an independent keyed alphabet:
+averaged over 400 random alphabet permutations the hypotheses separate by only 1.0 σ on PK10. Since
+PK3 proves this setter builds keys by encrypting one word under another, a key text pushed through a
+keyed alphabet is squarely in style, and §6's running-key screen tested specific *texts*, not the
+*mapping*.
 
-### 6. Gromark and generated keystreams, longer primers
+### 6. PK9 → PK8, once PK9's own construction is known
 
-Frontier item 4 of the old list. In progress tonight; see §F.
+The derivation is sound and the machinery exists (§F5): if PK8's key is PK9's plaintext then
+`d = c8 − c9` is PK8's plaintext under PK9's keystream. All 48 derived texts have had a period scan,
+a product grid and the full crib sweep — nothing. This stays live but is **blocked on PK9**, not on
+compute. Same for a Gromark whose primer derives from PK9's plaintext.
 
-### 7. Things that are now clearly NOT worth re-running
+### 7. Do NOT re-run
 
-* Any periodic substitution on PK10 with period ≤ 100 — in **any** alphabet. The column-IoC
-  statistic only requires the key to be constant within a column, so it covers Vigenère, Beaufort,
-  variant, Gronsfeld, Porta, and **all four Quagmires with any keyed alphabet**, with or without an
-  inner columnar. That is a much wider net than §6's four pairings.
+* Any periodic substitution on PK10 with period ≤ 100, in **any** alphabet. The column-IoC statistic
+  only needs the key constant within a column, so it covers Vigenère, Beaufort, variant, Gronsfeld,
+  Porta, and **all four Quagmires with any keyed alphabet**, with or without an inner columnar —
+  a much wider net than §6's four pairings.
 * Two-word dictionary product keys on any of the three, lengths 3–16.
-* Cribs at fixed ciphertext positions with no transposition — 54 million tests, zero passes.
-
----
+* Cribs at fixed positions with no transposition — ~797 million exact tests, zero passes.
+* **Mid-text cribs.** Bounded on principle (§F11): the longest verbatim substring shared between any
+  two of the seven known plaintexts is 14 letters, too short to constrain the relevant structures.
+* Gromark mod-10 digit primers at L ≤ 8 under the four recurrences tested.
+* Beaufort mode when scoring by class IoC — it is arithmetically identical to subtract (§F7).
 
 ## F. LATE RESULTS (jobs that finished after §A–E were drafted)
 
