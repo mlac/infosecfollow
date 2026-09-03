@@ -47,7 +47,8 @@ positive controls pass (`OMP_NUM_THREADS=1 python3 verify.py`).
 | Periods excluded on PK10, transposition-invariantly, any alphabet, power 1.00 | **2–100** |
 | Small-modulus keystream configurations (PK8 and PK9, both alphabets; PK10 still running) | **1,182,435,840** |
 | Forward simulations fixing each target's admissible alphabet count, no key search | **1,992,000** |
-| Partition scorings across the three versions of the §G8 class-partition attack | **~5 × 10⁷** |
+| §G8 partition scorings, power studies only (43,200,000 + 10,800,000 + 171,531,360 + 648,000) | **226,179,360** |
+| §G8 partition scorings per target on the real ciphertexts, 3 cells × 2 alphabets × 31 enumerations | **262,585,128** |
 
 ## What is genuinely new about PK10
 
