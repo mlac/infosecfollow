@@ -25,9 +25,10 @@ positive controls pass (`OMP_NUM_THREADS=1 python3 verify.py`).
 | | executed |
 |---|---|
 | Gromark trial decryptions (all 10⁷ primers at L=7, all 10⁸ at L=8 — exhaustion, not sampling) | **1.235 × 10¹⁰** |
-| Product-key word-evaluations (two- and three-word grids, three targets) | **~1.14 × 10⁹** |
+| Product-key word-evaluations — two-word grids 736,271,856 + three-word grids 1,294,580,088 | **2,030,851,944** |
 | Exact crib tests, **zero passes** | **798,062,550** |
-| Blind Hill row-evaluations (k = 2, 3, 4) | **9.0 × 10⁶** |
+| Blind Hill row-evaluations (k = 2, 3, 4), degenerate rows excluded | **9,039,240** |
+| Period cells scanned with matched nulls and power curves (2–100 on PK10) | **155 periods × 3 targets** |
 | Periods excluded on PK10, transposition-invariantly, any alphabet, power 1.00 | **2–100** |
 
 ## What is genuinely new about PK10
