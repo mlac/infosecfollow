@@ -211,13 +211,17 @@ def _pfromk(mode, cv, kv):
 def periodic_beam(ct, trie, QGM, mode='add', L=27, beam=100000, Wpt=1.0,
                   verbose=0):
     """Plaintext must decompose into dictionary words; key is FREE but periodic
-    with period L.  Positions 0..L-1 branch (26 ways, pruned by the word trie);
-    from L onward the plaintext is fully determined by the pinned key."""
+    with period L.  Phase 1 (i<L) branches 26 ways pruned by the word trie and
+    keeps `beam` candidate key-prefixes; phase 2 (i>=L) is deterministic -- the
+    pinned key fixes every remaining plaintext letter, and states die when the
+    plaintext stops being word-decomposable.  Only the L-letter key is stored;
+    the plaintext is reconstructed from it."""
     CONT, ISEND, ENDLP, NN = trie
     ROOTCH = CONT[0].copy()
     n = len(ct); t0 = time.time()
     ptn = np.zeros(1, dtype=np.int32); ctx = np.zeros(1, dtype=np.int64)
-    sc = np.zeros(1, dtype=np.float32); PATH = np.zeros((1, n), dtype=np.uint8)
+    sc = np.zeros(1, dtype=np.float32)
+    P1 = np.zeros((1, L), dtype=np.uint8)
     for i in range(min(L, n)):
         N = ptn.shape[0]
         ptrow = CONT[ptn]
@@ -233,38 +237,40 @@ def periodic_beam(ct, trie, QGM, mode='add', L=27, beam=100000, Wpt=1.0,
             cr.append(r); cl.append(c)
         npt = np.concatenate(cp); nsc = np.concatenate(cs)
         npar = np.concatenate(cr); nlet = np.concatenate(cl)
-        if nsc.size > beam:
-            sel = np.argpartition(-nsc, beam)[:beam]
-        else:
-            sel = np.arange(nsc.size)
+        sel = np.argpartition(-nsc, beam)[:beam] if nsc.size > beam else np.arange(nsc.size)
         ptn = npt[sel]; sc = nsc[sel]
         par = npar[sel]; let = nlet[sel]
         ctx = (ctx[par] % 676)*26 + let
-        PATH = PATH[par]; PATH[:, i] = let.astype(np.uint8)
-    # pin the key
-    cvL = np.asarray(ct[:L], dtype=np.int64)
+        P1 = P1[par]; P1[:, i] = let.astype(np.uint8)
     KEYS = np.empty((ptn.shape[0], L), dtype=np.int64)
     for r in range(L):
-        p = PATH[:, r].astype(np.int64)
-        KEYS[:, r] = keyperm(mode, int(cvL[r]))[p]
+        KEYS[:, r] = keyperm(mode, int(ct[r]))[P1[:, r].astype(np.int64)]
+    alive = np.arange(ptn.shape[0])
     for i in range(L, n):
-        cv = int(ct[i]); kv = KEYS[:, i % L]
-        p = _pfromk(mode, cv, kv)
+        cv = int(ct[i]); p = _pfromk(mode, cv, KEYS[:, i % L])
         nxt = CONT[ptn, p]
         alt = np.where(ISEND[ptn], ROOTCH[p], np.int32(-1))
         bon = (Wpt*ENDLP[ptn])*(nxt < 0)
         use = np.where(nxt >= 0, nxt, alt)
         keep = np.flatnonzero(use >= 0)
         if keep.size == 0:
-            return dict(score=None, dead_at=i, nstates=0, sec=time.time()-t0)
-        qg = QGM.ravel()[ctx*26 + p] if i >= 3 else 0.0
+            return dict(score=None, dead_at=i, nstates=0, sec=time.time()-t0, key=None)
+        qg = QGM.ravel()[ctx*26 + p] if i >= 3 else np.zeros(len(p), dtype=np.float32)
         sc = sc[keep] + qg[keep] + bon[keep]
         ptn = use[keep].astype(np.int32)
         ctx = (ctx[keep] % 676)*26 + p[keep]
-        KEYS = KEYS[keep]; PATH = PATH[keep]; PATH[:, i] = p[keep].astype(np.uint8)
+        KEYS = KEYS[keep]; alive = alive[keep]
     fin = sc + Wpt*ENDLP[ptn]*ISEND[ptn]
     good = np.flatnonzero(ISEND[ptn])
     if good.size == 0: good = np.arange(ptn.shape[0])
-    b = good[np.argmax(fin[good])]
-    return dict(score=float(fin[b])/n, path=PATH[b].copy(), dead_at=None,
-                nstates=int(ptn.shape[0]), sec=time.time()-t0)
+    order = good[np.argsort(-fin[good])]
+    b = order[0]
+    return dict(score=float(fin[b])/n, key=KEYS[b].copy(), dead_at=None,
+                nstates=int(ptn.shape[0]), survivors=int(ptn.shape[0]),
+                sec=time.time()-t0,
+                top=[(float(fin[j])/n, KEYS[j].copy()) for j in order[:5]])
+
+def periodic_decode(ct, key, mode, L):
+    cv = np.asarray(ct, dtype=np.int64)
+    kv = np.asarray(key, dtype=np.int64)[np.arange(len(cv)) % L]
+    return _pfromk(mode, cv, kv)

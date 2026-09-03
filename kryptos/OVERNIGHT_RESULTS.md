@@ -430,16 +430,32 @@ at rank 1 of 21k–38k, z +5.2 to +9.5. Word list 289,026, lengths 3–16.
 invariantly, at power 0.85–1.00. §6's period result was quadgram-scored and therefore blind to an
 inner columnar; this one is not.
 
-**[NEW] Mutual-IoC periodic solver, p 2–24, all three targets, both alphabets**, 400 shuffle-nulls
-and 30 restarts per cell. A transposition-invariant, alphabet-agnostic *solver* (not just a
-detector) that §6 never had. Nothing survives; the two PK8 p=7 cells that crossed a 400-null
-ceiling die against a 2,000-null one (§C1).
-
 **[NEW] Crib × key-structure consistency, no-transposition case.** 54,208,692 effective tests:
 10,685 cribs × 404 key structures (single periods 2–24, all two-factor pairs 3–16, all three-factor
 triples 3–14, all four-factor quadruples 3–10) × 3 targets × 2 alphabets × 3 modes × {prefix,
 suffix}. Expected false positives 0.67, **observed 0**. Controls: recovers PK3's true (8,10) as the
 *only* passing structure and PK1's period 10 exactly; 42,200 null tests gave 0 false passes.
+
+**[NEW] Gromark with mod-10 digit primers, L = 7 and L = 8 — by enumeration, not sampling.**
+All 10⁷ primers at L=7 and all 10⁸ at L=8, four recurrences, both text alphabets, both directions,
+two statistics: **1.235 × 10¹⁰ trial decryptions**, 2,032 real cells against 4,012 matched-null
+cells. Control: the true primer at **rank 1 among 10⁸**, and still rank 1 with a width-9 columnar
+underneath. Top above-ceiling hit independently rebuilt and killed by a monoalphabetic hill-climb
+(§F12). Three corners stay open — mod-26 letter primers, the mix-after-shift form at PK8/PK9
+lengths, and a transposition applied *on top of* the Gromark.
+
+**[NEW] PK10 — not a Hill cipher of dimension 2, 3 or 4 with an additive offset of period ≤ 6.**
+9,039,240 row-evaluations with degenerate rows excluded (that exclusion is what killed §6's earlier
+z=+5.78 false lead). End-to-end power control: the identical sweep run on **PK7** fires above
+ceiling in 7 of 10 cells and its winning row is 21 × PK7's true row mod 26. PK8/PK9 are **Tier 3**
+here — the sweep fires only 3/6 and 2/6 at those lengths (§F2).
+
+**[NEW] Crib × key-structure, enriched corpus.** 48,616 cribs, **355,980,204 effective tests**,
+expected false positives 3.20, observed 0 (§F8). Plus **367,133,184 tests** across the 48 PK9→PK8
+coupling texts (§F5), **16,525,920** with cribs at every offset (§F11), and **1,000,200** for the
+permutation-free width-W multiset case (§F1). **Crib-family total ≈ 797 million exact tests, zero
+passes**, by a pipeline shown end-to-end to recover PK1's true period from a crib its own generator
+produced (§F9).
 
 **[NEW] Wrap-crib conjunction.** 3,214,350 hash-join tests over wrap periods Q (PK8 124–147 plus
 144, PK9 115–138, PK10 144–498), requiring a prefix crib and a suffix crib to agree exactly on the
@@ -447,6 +463,13 @@ suffix}. Expected false positives 0.67, **observed 0**. Controls: recovers PK3's
 test that can see a key *shorter than the message*, which no period scan can reach.
 
 ### Tier 3 — screens only, family open
+
+* **[NEW] Mutual-IoC periodic solver, p 2–24**, all three targets, both alphabets, 400 shuffle-nulls
+  and 30 restarts per cell — a transposition-invariant, alphabet-agnostic *solver* (not just a
+  detector) that §6 never had. Nothing survives, and the two PK8 p=7 cells that crossed a 400-null
+  ceiling die against a 2,000-null one (§C1). Listed as **Tier 3 rather than Tier 2 because it never
+  got a sweep-level power test** of the kind §A0 demands; it is corroboration for the period scan,
+  not an independent exhaustion.
 
 All §6 Tier 3 entries stand. Added tonight:
 
