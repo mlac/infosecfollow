@@ -104,7 +104,52 @@ if H:
     out['scorer_b'] = sb
 
 if os.path.exists('results/lp_hill_power.json'):
-    out['scorer_b_power'] = json.load(open('results/lp_hill_power.json'))
+    out['scorer_b_power'] = dict(
+        note='synthetic period-p Vigenere over a real English window at the target length, '
+             'R=40 restarts, 6-shuffle matched null; recov = fraction with >90% letters correct',
+        data=json.load(open('results/lp_hill_power.json')))
+if os.path.exists('results/lp_hill_raw_beau.json'):
+    B = json.load(open('results/lp_hill_raw_beau.json'))
+    out['scorer_b_beaufort'] = dict(
+        note='identical hill climb with d=(k-c) instead of d=(c-k); validated to recover a '
+             'synthetic Beaufort at n=153,p=25 with 100% letter accuracy. pk3 (a genuine ADDITIVE '
+             'cipher) is included as a SPECIFICITY control: the Beaufort climb does NOT find it.',
+        cells={k: dict(best_period=v['family']['obs_argmax'],
+                       best_z=round(v['family']['obs_maxz'], 2),
+                       familywise_p=v['family']['fam_p'],
+                       null_maxz_max=round(v['family']['null_maxz_max'], 2)) for k, v in B.items()})
+for tag, path in [('restart_robustness_R240', 'results/lp_hill_deep.json'),
+                  ('autopsy_120null', 'results/lp_autopsy.json'),
+                  ('autopsy_60null_R240', 'results/lp_autopsy2.json'),
+                  ('autopsy_replication_and_negative_controls', 'results/lp_autopsy3.json')]:
+    if os.path.exists(path):
+        out[tag] = json.load(open(path))
+out['verdict'] = {
+ 'pk10': 'TIER 2. Scorer (a) detects a synthetic period-p polyalphabetic at n=504 with rate 1.00 '
+         'at EVERY p in 25-72, with and without a random full transposition underneath, against '
+         'the family-wise 95% ceiling; observed family max-z 1.92 (p=0.77). Scorer (b) recovers '
+         '>90% of the plaintext of a synthetic at every p tested (z +31..+61); observed fam_p '
+         '0.25/0.83. No period-25..72 polyalphabetic of any kind on PK10.',
+ 'pk8_pk9': 'SPLIT. TIER 2 for p in 25..~40 with an additive or Beaufort key on KA or A-Z and NO '
+            'transposition underneath: the R=240 hill climb recovers synthetics at 82-100% letter '
+            'accuracy there (z +7.6..+17.9) and the real texts are flat. TIER 3 for p above ~40, '
+            'and TIER 3 across the whole 25-72 range if a columnar sits underneath, because both '
+            'transposition-invariant scorers are provably out of information at these lengths.',
+ 'why_a_is_powerless_on_pk8_pk9': 'With an unknown transposition the ONLY invariant left is the '
+            'within-class letter profile, so the within-class pair count is the entire evidence '
+            'budget. At n=153 it is 393 pairs at p=25 (z ceiling 2.65) falling to 90 pairs at '
+            'p=72 (z ceiling 1.27); at n=144, 345 down to 72 pairs (2.48 -> 1.13). Measured '
+            'detection rates track this: 0.30 at p=25, under 0.10 by p=45. At n=504 the same '
+            'budget is 4830 down to 1512 pairs (ceiling 9.28 -> 5.19), hence detection 1.00.',
+ 'flagged_and_killed': 'Seven cells beat a small (10-12 shuffle) per-period null max. All died: '
+            'four at a 120-shuffle null (p=0.775/0.142/0.200/0.108); the two that survived a '
+            '60-shuffle null at R=240 (pk8/KA p=72 z=+2.47, pk9/AZ p=42 z=+3.38) failed to '
+            'replicate on an independent re-run (z=+0.36 p=0.35 and z=+1.71 p=0.05) and their '
+            'neighbouring periods and six SOLVED-ciphertext negative controls (PK1/PK2/PK5/PK6/PK7 '
+            'truncated to the same length, all with provably no period 25-72 key) span the same '
+            'z range (-2.30..+1.88). The decrypts are quadgram-overfit garble at 2.1-3.4 letters '
+            'per key slot. Nothing exceeded the family-wise matched null max from its own search.'}
+json.dump(out, open('results/long_periods.json', 'w'), indent=1)
 
 if os.path.exists('results/lp_globalioc.json'):
     out['cross_check_whole_text_ioc'] = dict(
