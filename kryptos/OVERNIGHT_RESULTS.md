@@ -712,7 +712,13 @@ reversed × both signs. Each got:
   power is 0.53, i.e. the observation exceeds what the real thing would produce, which is the
   signature of noise, not signal. Across 48 texts × ~30 periods ≈ 1,440 tests, +3.76 is at
   expectation.
-* a two-word product grid — best (z − matched null max) anywhere was +2.62, with unrelated top words.
+* a two-word product grid over all 96 (text, alphabet) combinations — **final result: best
+  (z − null max) anywhere = +2.66**, at pk9+pk10_KA in the A-Z alphabet, cell (5,12) direction B,
+  z = 7.38 against that cell's null max of 4.71, top word SMOKESCREENS. That null used only **3**
+  shuffles per cell, so it underestimates the ceiling badly; the honest comparison is the main PK9
+  product grid, which ran a comparable search with 5 nulls over 2,040 cells and produced a ceiling
+  of **7.83**. The observed 7.38 sits below it, the top word is not thematic, and there is no
+  orthographic clustering beneath it.
 * **the crib × key-structure consistency sweep: 367,133,184 effective tests, expected false
   positives 4.12, observed passes 0.**
 

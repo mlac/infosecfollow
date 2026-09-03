@@ -39,8 +39,8 @@ if what=='real':
                 print(f"{tgt} {mode} L={Lp:2d} obj={r['score']:8.4f} qg={qscore(pt):7.4f} {r['sec']:.0f}s",flush=True)
     print('DONE',flush=True)
 else:
-    NSH=int(sys.argv[2]); base=idx(CT['pk10']); out=[]
-    for s in range(NSH):
+    S0=int(sys.argv[2]); S1=int(sys.argv[3]); base=idx(CT['pk10']); out=[]
+    for s in range(S0,S1):
         rng=np.random.default_rng(2000+s); c=base.copy(); rng.shuffle(c)
         best=None
         for Lp in LS:
@@ -49,7 +49,7 @@ else:
             rec=dict(L=Lp,obj=round(r['score'],4),qg=round(qscore(pt),4))
             if best is None or rec['obj']>best['obj']: best=rec
         best['shuffle']=s; out.append(best)
-        json.dump(out,open('results/wb_periodic_null.json','w'),indent=1)
+        json.dump(out,open(f'results/wb_periodic_null_{S0}.json','w'),indent=1)
         print(f"null {s:2d} bestL={best['L']} obj={best['obj']:.4f} qg={best['qg']:.4f}",flush=True)
     o=np.array([x['obj'] for x in out]); q=np.array([x['qg'] for x in out])
     print(f"NULL periodic n={len(o)} obj mean={o.mean():.4f} sd={o.std():.4f} max={o.max():.4f}"
