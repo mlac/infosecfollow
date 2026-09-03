@@ -16,9 +16,24 @@ positive controls pass (`OMP_NUM_THREADS=1 python3 verify.py`).
    **15.57** against a ceiling of 6.75 and wins the grid outright. This **downgrades my own PK8/PK9
    product and Hill verdicts from Tier 2 to Tier 3**, and §6's existing Tier 2 entry rests on the
    same cell-level control and should be downgraded too.
-2. **§E** — the rebuilt frontier. Five of the old §7's six items are finished or superseded.
-3. **§B** — the complete what-ran table, with real counts and matched ceilings.
-4. **§D** — the updated elimination map replacing §6.
+   **Read §G6's power addendum with it.** §A0 as first written was drawn too broadly. A small-modulus
+   keystream search at the *same* n=144 recovers a planted key at rank 1 of 68 with the exact primer,
+   5 of 5 replications above its family ceiling. §A0 bounds statistics computed on **short residue
+   classes**, not short messages as such — where a correct guess makes the whole text monoalphabetic
+   at once, the length is not the obstacle.
+2. **§G8** — the night's other headline, and the more useful one. The single shape the campaign could
+   neither exclude nor detect on PK9 — a key of period 18 built from few distinct letters — is now
+   **reachable by search**. Enumerating all 2,858,856 balanced partitions of the 18 residue classes
+   and scoring each by best-shift English likelihood recovers a planted key **exactly in 85% of 20
+   plants at n=144, median rank 1**. Two weaker versions of the same attack are dead by 4 to 21
+   orders of magnitude; the section shows what closed the gap and why.
+3. **§G6/§G7** — what each target's own IoC admits, before any key search. PK9 admits 3–13 effective
+   cipher alphabets, reproducing §G2's credible set exactly from unrelated machinery; PK10 needs at
+   least 11. **PK9 and PK10 are therefore not the same construction.**
+4. **§E** — the rebuilt frontier. Five of the old §7's six items are finished or superseded, and
+   item 0a is amended by §G8.
+5. **§B** — the complete what-ran table, with real counts and matched ceilings.
+6. **§D** — the updated elimination map replacing §6.
 
 ## The night in numbers
 
@@ -30,6 +45,9 @@ positive controls pass (`OMP_NUM_THREADS=1 python3 verify.py`).
 | Blind Hill row-evaluations (k = 2, 3, 4), degenerate rows excluded | **9,039,240** |
 | Period cells scanned with matched nulls and power curves (2–100 on PK10) | **155 periods × 3 targets** |
 | Periods excluded on PK10, transposition-invariantly, any alphabet, power 1.00 | **2–100** |
+| Small-modulus keystream configurations (PK8 and PK9, both alphabets; PK10 still running) | **1,182,435,840** |
+| Forward simulations fixing each target's admissible alphabet count, no key search | **1,992,000** |
+| Partition scorings across the three versions of the §G8 class-partition attack | **~5 × 10⁷** |
 
 ## What is genuinely new about PK10
 
