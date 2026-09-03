@@ -22,6 +22,8 @@ CELLS  = [(18, 2), (18, 3), (24, 2)]
 NNULL  = 30
 rng    = np.random.default_rng(4242)
 TARGETS = sys.argv[1:] or ['pk9', 'pk8', 'pk10']
+OUT = 'results/partition_attack_' + '_'.join(TARGETS) + '.json'   # per-run file: two concurrent
+# runs both writing results/partition_attack.json would clobber each other's cells
 
 ENUM = {}
 for p, j in CELLS:
@@ -56,7 +58,7 @@ for tag in TARGETS:
                   flush=True)
             json.dump({'cells': out, 'n_scorings': tot, 'nnull': NNULL,
                        'wall': round(time.time()-t0, 1)},
-                      open('results/partition_attack.json', 'w'), indent=1)
+                      open(OUT, 'w'), indent=1)
 
 ab = [c for c in out if c['above']]
 print(f"\n=== {len(out)} cells, {tot:,} partition scorings, {time.time()-t0:.0f}s ===", flush=True)

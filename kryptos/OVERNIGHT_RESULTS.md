@@ -1765,3 +1765,36 @@ from 3 equally-used letters read through the KRYPTOS alphabet. It says nothing a
 usage (an 8/6/4 key), nothing about periods other than 18, and nothing about j ≥ 4, whose balanced
 spaces are not enumerable by this method. Those are the gaps, and §G8's addendum names which of them
 is cheap to close next.
+
+**PK9 complete: 6 cells, 262,585,128 partition scorings, 1,978 s, zero cells above their matched
+null max.** Ranked by z: KA p=18 j=2 (+0.98), KA p=24 j=2 (+0.85), AZ p=24 j=2 (+0.54),
+KA p=18 j=3 (+0.35), AZ p=18 j=3 (+0.22), AZ p=18 j=2 (−0.67).
+
+**Autopsy — PK8's p=18 j=3 cell, which landed 0.16 nats under its ceiling** (`autopsy_pk8.py`).
+obs −495.54 against a null max of −495.38 is *below* the ceiling, but on a scale where the true
+partition beats its runner-up by 14 nats, 0.16 is a tie, and the doctrine's autopsy rule applies to
+ties as much as to crossings.
+
+The winning partition is `[0,1,1,2,2,0,0,2,2,0,0,0,2,2,1,1,1,1]`, blocks of 51, 50 and 52 letters
+at shifts 16, 8 and 18. Its group profiles are the tell:
+
+| | 1st | 2nd | 3rd | 4th | 5th |
+|---|---|---|---|---|---|
+| block 0 | 0.157 | 0.098 | 0.078 | 0.078 | 0.078 |
+| block 1 | 0.140 | 0.080 | 0.080 | 0.080 | 0.080 |
+| block 2 | 0.154 | 0.077 | 0.077 | 0.058 | 0.058 |
+| **English** | **0.137** | **0.103** | **0.085** | **0.076** | **0.071** |
+
+Every block is **one spiked letter followed by a flat plateau**, where English decays smoothly. That
+is letter-stacking — the search finding a partition that piles one letter up — and it is the same
+signature that killed the PK8 p=7 flag in §C1. The decrypt confirms it: **IoC 0.04816** against
+English's 0.0667, and the text is not English:
+
+    NWUTNKKTHSOEFTAUQWHUCVUMHKIONNENXAIAWLKOHKGBFEGONBFTATNCSKSHXWKXAIDWOGNKIDUICNSSTDMQMTKHSYESOLTPAOTRMYDODISANTASAAMTAFNTURWOBOODCREOHVYNBPOEFLWAEBLUHASED
+
+(A genuine hit need not read as English here, since a columnar may sit underneath — which is exactly
+why the profile, not the text, is the diagnostic.)
+
+And the multiplicity is unremarkable: at rank ~2 of 31 the single-cell empirical p is ≈ 0.065, so
+across the 18 cells run the **expected number of ties this extreme is 1.16**. Seeing one is what 18
+cells predict. **Refuted.**
