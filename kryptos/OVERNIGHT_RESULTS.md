@@ -659,3 +659,17 @@ others' lcm inside the cap (and does not divide it, which would leave no signal)
 This is a coverage statement about which *length-sets* the method can see at all, and is separate
 from the §A0 power question — on PK8 and PK9 the ranking power is the binding constraint regardless.
 For PK10 the grid sees essentially the whole two- and three-word space.
+
+### F7. Two corrections to my own product grid, found by controlling the modes
+
+* **All three modes work.** `sub`, `add` and `beaufort` were each validated by encrypting a
+  synthetic in that mode and confirming recovery: at n=504 the true keys come back at rank 1 with
+  z = +10.3 to +15.6 in all three; at n=153 at ranks 1–3. A mismatched mode fails as it should
+  (scoring a `sub` ciphertext with `add` puts OCHRE at rank 3,462 of 38,208).
+* **But `beaufort` is redundant with `sub` under this statistic**, and exactly so: within a residue
+  class the beaufort residual is `const − c` where the subtract residual is `c − const`, and IoC is
+  invariant under negation as well as shift. Checked against the stored results: **680 of 680
+  sub/beau cell pairs agree to 1e-9 on all three targets.** So the "2,040 cells" figure quoted
+  throughout is **1,360 distinct searches**. No verdict changes — the matched null was computed from
+  the same cells, so the ceiling absorbs the duplication — but the next session should not spend a
+  third of its compute on beaufort while scoring by class IoC.
