@@ -751,3 +751,34 @@ DOMESTICATE, PLEISTOCENE; BREWMASTERS, GANGMASTERS, BANDMASTERS) rather than a t
 near-misses stacked beneath it. Per §A0 this is a **Tier 3** screen at PK9's length regardless of
 the z, and per §F6 the grid sees 54% of three-word length-sets at n=144. PK8 and PK10 still running
 at write-up; see `logs/p3_pk8.log` and `logs/p3_pk10.log`.
+
+### F11. Cribs at every offset — run, and then bounded on principle
+
+§A8 and §F8 tested cribs only at the two ends. The series repeats phrases across entries, so a
+recurring phrase could sit anywhere, and the consistency test does not care where a crib sits — only
+that its positions are known.
+
+**A simplification found while building this, worth keeping:** the constraint matrix R depends only
+on **(crib length, structure)**, not on the offset. Shifting a contiguous crib permutes which
+unknown `u_f[j]` each row uses, but the pattern of *which rows share an unknown* is shift-invariant,
+so the left null space is unchanged. Verified over 240 (structure, length, offset) comparisons with
+zero mismatches. One checker therefore serves every offset and the whole offset scan collapses to a
+single matrix product per (crib, structure) — the sweep went from hours to 15 seconds.
+
+Control: planting `THEGUTTERALONGTHEWALL` in PK6's plaintext enciphered under PK6's real key PORTAL,
+the sweep locates it at **exactly offset 71** with PK6's true period 6 and its multiple 12. (This
+omits PK6's double columnar, which no crib method can cross — that is the family's known limit, not
+a flaw in this control.)
+
+**Executed: 16,525,920 tests** — 47 curated recurring phrases from the series (including the Italian
+quotation from PK2) × every position × 3 targets × 2 alphabets × 2 modes × 334 structures.
+Expected false positives 0.19. **Observed passes: 0.**
+
+**Then the family was bounded rather than scaled.** Before extending this to ~12,000 substrings of
+the known plaintexts, I checked whether this author repeats long phrases at all. He does not: the
+**longest verbatim substring shared between any two of the seven known plaintexts is 14 letters**
+(`STHEWHITESMITH`), and all nine cross-entry repeats of length ≥12 are variants of THEWHITESMITH.
+A 14-letter crib is too short to constrain the structures that matter — against a (5,9) product it
+has 14 unknowns for 14 equations, so zero degrees of freedom. **Mid-text cribs are therefore a dead
+avenue on principle, not merely unproductive**, and the ~3 CPU-hours that scan would have cost were
+not spent. The productive crib position is the opening, which is what §A8 and §F8 target.
