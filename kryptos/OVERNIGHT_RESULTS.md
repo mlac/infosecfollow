@@ -1,11 +1,50 @@
 # OVERNIGHT RUN — PK8 / PK9 / PK10 — RESULTS
 
 **Status: no puzzle solved.** That is the likeliest outcome and it is what happened. What follows
-is a set of eliminations, several of them substantially stronger than anything in the prior
-elimination map, plus a rebuilt frontier. Read §A first — it changes what is worth running next.
+is a set of eliminations, several of them substantially stronger than anything in the prior map,
+plus a rebuilt frontier and one finding that changes how to read *all* short-message negatives —
+including some of the prior campaign's and some of my own.
 
-Run date 2026-09-03. Working dir `kryptos/`. Harness: all seven solved puzzles round-trip exactly
-(`python3 controls.py`).
+Run date 2026-09-03. Working dir `kryptos/`. All seven solved puzzles round-trip exactly; nine
+positive controls pass (`OMP_NUM_THREADS=1 python3 verify.py`).
+
+## What to read, in order
+
+1. **§A0** — the one result that changes what is worth running next. At 144–153 letters, ranking
+   searches over ~30,000 candidates sit *below their own noise floor*. A genuine two-word product
+   key scores z ≈ 6 there against a noise ceiling of 7.8–7.9; the same key at 504 letters scores
+   **15.57** against a ceiling of 6.75 and wins the grid outright. This **downgrades my own PK8/PK9
+   product and Hill verdicts from Tier 2 to Tier 3**, and §6's existing Tier 2 entry rests on the
+   same cell-level control and should be downgraded too.
+2. **§E** — the rebuilt frontier. Five of the old §7's six items are finished or superseded.
+3. **§B** — the complete what-ran table, with real counts and matched ceilings.
+4. **§D** — the updated elimination map replacing §6.
+
+## The night in numbers
+
+| | executed |
+|---|---|
+| Gromark trial decryptions (all 10⁷ primers at L=7, all 10⁸ at L=8 — exhaustion, not sampling) | **1.235 × 10¹⁰** |
+| Product-key word-evaluations (two- and three-word grids, three targets) | **~1.14 × 10⁹** |
+| Exact crib tests, **zero passes** | **~797 × 10⁶** |
+| Blind Hill row-evaluations (k = 2, 3, 4) | **9.0 × 10⁶** |
+| Periods excluded on PK10, transposition-invariantly, any alphabet, power 1.00 | **2–100** |
+
+## What is genuinely new about PK10
+
+Aperiodic over 504 letters (no periodic key of period ≤ 100 in *any* alphabet, covering all four
+Quagmires with any keyed alphabet, with or without an inner columnar); near-uniform keystream
+marginal, so **not a running key** in the same tableau; **not** substitute-then-transpose; **not** a
+Hill cipher of dimension 2, 3 or 4 with a short additive; and **no** two-word dictionary product.
+It is also the only one of the three where these searches demonstrably have the power to have found
+something — which is the argument for making it the entry point.
+
+## Two corrections to the prior campaign
+
+* `wordfreq.top_n_list('en', 200000)` yields 183,150 words and **does not contain PENTIMENTO** — a
+  sweep on that list could not have found PK3's own key. All work here uses 289,026 words.
+* PK9's "IoC anomaly" and its "census χ²" are **algebraically the same statistic** (both functions
+  of Σnₓ²), not two independent observations. §5 lists them as separate calibration constants.
 
 ---
 
