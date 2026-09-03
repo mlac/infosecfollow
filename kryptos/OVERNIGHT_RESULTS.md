@@ -364,3 +364,92 @@ All §6 Tier 3 entries stand. Added tonight:
   short periods that would explain the IoC are excluded at power 0.88–1.00. After the number of
   statistics computed tonight, an isolated +3.2 is not strong evidence of anything. Treat it as a
   hint, not a handle.
+
+---
+
+## E. RANKED FRONTIER FOR THE NEXT RUN (replaces §7 of PK_CONTEXT.md)
+
+Frontier item 1 of the old list (the PK10 two-word product sweep) is **finished and negative** for
+all three targets. Items 2 and 4–6 were worked and are reported above or in §F. What follows is
+re-ranked by what tonight actually eliminated.
+
+### 1. Non-additive block ciphers on PK10 — the family this whole framework cannot see
+
+Every statistic used tonight assumes `c[i] = p'[i] + k[i]` on some tableau. A Hill cipher is not of
+that form, and **PK10's signature is what a Hill cipher looks like**:
+
+| construction (n=504) | IoC | census LLR | best period z, p 2–40 |
+|---|---|---|---|
+| Hill 3×3, no additive | 0.0398 | −15.93 | +3.43 |
+| **Hill 4×4, no additive** | **0.0386** | **−13.88** | +2.95 |
+| periodic key P=45 | 0.0385 | −13.58 | +3.73 |
+| running key (English/English) | 0.0395 | **+7.52** | +2.24 |
+| random long key | 0.0378 | −7.63 | +1.78 |
+| **observed PK10** | **0.0388** | **−13.03** | **+1.48** |
+
+PK7 is a Hill 3×3 whose inverse spells ALCHEMIST, so the family is in the setter's vocabulary, and
+504 = 3 × 168 = 4 × 126 admits both block sizes. §6 records Hill 2×2 and 3×3 with additive periods
+1–3 as exhausted; what is open is **Hill 3×3 with a longer additive, or an additive that is itself
+a two-word product** (design law 2 applied to PK7's construction), and **Hill 4×4** which was never
+tried. 504 letters gives 1.8× the blocks PK7's 279 gave, so blind row recovery has more signal
+here than it did on the puzzle it was built for. Start here.
+
+### 2. Three-word and deeper product keys, dictionary-wide
+
+The decomposition that made the two-word sweep tractable generalises: peel a length-a key and every
+residue class mod **lcm(b,c)** is monoalphabetic, so the score for a length-a word depends on b and
+c *only through their lcm*. That collapses the triple search to a (length, modulus) grid.
+Validated: recovers all three of OCHRE × VERDIGRIS × ANNEAL at rank 1 on a 504-letter synthetic
+(z +5.4 to +9.5), including with a columnar underneath. See §F for the state of the run.
+This is the family the period argument does *not* kill, since lcm(a,b,c) easily exceeds 100.
+Extend to four factors and to key alphabets beyond KA/A-Z.
+
+### 3. Crib with a columnar underneath — validated on the real PK4, only partly run
+
+`crib_transpo.py` recovers PK4's true column order **[6,4,1,2,5,3,0,7] as the unique pass out of
+all 40,320 permutations**, from a 24-letter crib, at a false-positive rate of 2.7 × 10⁻¹⁶. The
+attack works. What blocked it tonight is cost: W=9 means 362,880 permutations × 10,685 cribs, and
+the constraint matrix has to be rebuilt per permutation.
+
+**The engineering that unblocks it** (designed, not run): the consistency condition `R·K = 0` is
+linear and K decomposes by column, `R·K = Σ_c R_c · K_{c,slot(c)}`, so the permutation search is a
+**meet in the middle** — enumerate ordered 4-subsets (3,024) and ordered 5-subsets (15,120), hash
+the partial sums, match on (complementary slot set, negated sum). 362,880 collapses to ~18k per
+crib-structure, roughly 20 ms, so the whole corpus × a dozen structures is a couple of minutes.
+The one wrinkle: R depends on the permutation unless every key period divides the column length,
+so either restrict to those structures or cache R by residue signature.
+
+A permutation-free special case was run tonight instead — see §F, `crib_multiset.py`.
+
+### 4. PK9 → PK8 through the derived text, taken further
+
+The setter's hint plus design law 4 (PK5's key is PK4's plaintext) points at **PK8's key being
+PK9's plaintext**. Then `d = c8 − c9` is PK8's plaintext enciphered under PK9's own keystream, and
+PK9's plaintext never has to be known. Note also that a 144-letter key on a 153-letter message has
+**period 144, which no period scan can reach** — only the derived text or the wrap-crib test can.
+Tonight ran, on all 48 derived texts (every ordered pair × 2 alphabets × forward/reversed × both
+signs): a transposition-invariant period scan with power, and a two-word product grid. §F has the
+outcome. Not yet run on the derived texts: the crib × key-structure sweep, the three-word grid,
+and the mutual-IoC solver. All three are cheap and should go next.
+
+### 5. Running key through an independent keyed alphabet
+
+The census argument (§A6) excludes an English key text read in the *same* tableau as the plaintext.
+It does **not** exclude one read through an independent keyed alphabet — averaged over 400 random
+alphabet permutations the two hypotheses separate by only 1.0 σ on PK10. Since PK3 already proves
+this setter builds keys by encrypting one word under another, a key text pushed through a keyed
+alphabet is squarely in style. §6's running-key screen used specific texts; this is about the
+*mapping*, and it is untouched.
+
+### 6. Gromark and generated keystreams, longer primers
+
+Frontier item 4 of the old list. In progress tonight; see §F.
+
+### 7. Things that are now clearly NOT worth re-running
+
+* Any periodic substitution on PK10 with period ≤ 100 — in **any** alphabet. The column-IoC
+  statistic only requires the key to be constant within a column, so it covers Vigenère, Beaufort,
+  variant, Gronsfeld, Porta, and **all four Quagmires with any keyed alphabet**, with or without an
+  inner columnar. That is a much wider net than §6's four pairings.
+* Two-word dictionary product keys on any of the three, lengths 3–16.
+* Cribs at fixed ciphertext positions with no transposition — 54 million tests, zero passes.
