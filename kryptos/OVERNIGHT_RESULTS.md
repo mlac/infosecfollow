@@ -1837,3 +1837,40 @@ puzzles:
 
 That is a target of roughly eight periods, not an open family. It is the most constrained the
 campaign has been, and it is where the next session should start.
+
+### G10. PK10 and the unbalanced enumeration — the partition family closed on all three targets
+
+**PK8 and PK10: 12 cells, 525,170,256 partition scorings, 4,868 s, zero cells above their matched
+null max.** PK10's two powered cells (p=18, j=3, where the attack recovers a planted key **100% of
+the time** at n=504) land at **z = +1.30** (KRYPTOS) and **z = −1.77** (plain A–Z). Its other cells:
+KA p=18 j=2 (+0.42), KA p=24 j=2 (−0.14), AZ p=18 j=2 (−1.92), AZ p=24 j=2 (−2.13).
+
+So the family is negative on **all three targets**, in both alphabets, with a power figure behind
+every p=18 j=3 cell (85% at n=144, 95% at n=153, 100% at n=504).
+
+**The equal-usage assumption is now gone too — and this is the part I flagged as the next session's
+first move.** `partition_unbal.py` enumerated all **64,570,082** canonical assignments of 18 classes
+to 3 blocks — 23× the balanced space, the full set, no sampling — on PK9, with **ten
+full-enumeration nulls per alphabet**:
+
+| alphabet | observed | null mean ± sd | null max | z | verdict |
+|---|---|---|---|---|---|
+| KRYPTOS | −456.80 | −459.31 ± 3.90 | −452.56 | **+0.64** | below ceiling |
+| plain A–Z | −465.22 | −465.14 ± 3.65 | −457.64 | **−0.02** | below ceiling |
+
+**And it is powered.** Four planted *deliberately lopsided* keys (class splits 8/4/6, 5/5/8, 8/5/5,
+7/3/8) were pushed through the identical full enumeration and scored **−403.23, −411.68, −412.13,
+−409.63 — clearing the real run's own measured ceiling of −452.56 by 40 nats or more, 4 of 4.** In
+two of the four the winning partition **is** the planted one; in the other two the search found a
+partition scoring 0.5–2.2 nats better than the truth, which is what n=144 predicts.
+
+**PK9's key is therefore not a period-18 key built from three distinct letters — balanced or
+unbalanced, in either alphabet. Tier 2.** The remaining scope is period ≠ 18 and j ≥ 4, and the
+frontier entry above should be read with the unbalanced caveat struck.
+
+**A correction to my own instrumentation, for the record.** The power run first reported "0 of 4
+recovered exactly". That was a bug in the *check*, not the attack: the enumerator emits canonically
+relabelled partitions, so a correct recovery with permuted block labels failed a raw-label
+comparison. Block labels are unidentifiable by construction, so canonical equality is the only
+meaningful test, and under it the recoveries are exact. Reported here because the wrong number was
+the more pessimistic one and would have understated the attack.
