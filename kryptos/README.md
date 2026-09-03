@@ -42,7 +42,11 @@ python3 controls.py        # all seven solved puzzles must round-trip
 | `derived.py` | PK9→PK8 coupling texts (d = c8 − c9 is PK8's plaintext under PK9's keystream) | — |
 | `keytype.py` | which key type the ciphertext IoC is consistent with, simulated per length | — |
 
-`results/*.json` holds every sweep's raw output. `logs/*.log` holds the run logs.
+`results/*.json` holds each sweep's output. The bulky raw dumps (`product2_*`, `progressive_*`,
+`gromark_words_*`, `lp_*_raw*` — about 19 MB) and the regenerable inputs (`words.txt`,
+`quadgrams.npy`, `cribs_big.txt`, `logs/`) are gitignored: every conclusion drawn from them is in
+`OVERNIGHT_RESULTS.md` and each is reproducible by re-running the script named beside it there.
+The summaries and autopsies that carry the evidence *are* tracked.
 
 ## Two traps this directory exists to stop you re-entering
 1. **`wordfreq.top_n_list('en', 200000)` is too small.** It yields 183,150 words and does not

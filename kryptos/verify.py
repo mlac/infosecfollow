@@ -2,8 +2,16 @@
 Run:  OMP_NUM_THREADS=1 python3 verify.py
 Every check below is a POSITIVE CONTROL: a claim that a solver recovers a known answer. If any of
 these fail, treat every negative in OVERNIGHT_RESULTS.md as void."""
-import numpy as np, subprocess, sys, itertools
+import numpy as np, subprocess, sys, itertools, os
 from lib import *
+
+MISSING = [f for f in ('words.txt', 'quadgrams.npy') if not os.path.exists(f)]
+if MISSING:
+    print(f"Missing regenerable inputs: {', '.join(MISSING)} (they are gitignored -- ~6 MB of "
+          f"derived data).\nRebuild them first:\n  pip install numpy wordfreq\n"
+          f"  python3 rebuild_dict.py     # words.txt, 289,026 words\n"
+          f"  python3 build_model.py      # quadgrams.npy, ~2 min")
+    sys.exit(2)
 ok = True
 def chk(name, cond, detail=''):
     global ok; ok &= bool(cond)
