@@ -30,14 +30,16 @@ def qrows(A):
     k = A[:, :-3]*17576 + A[:, 1:-2]*676 + A[:, 2:-1]*26 + A[:, 3:]
     return QG[k].mean(axis=1)
 
-def climb(C, P, perm, rng, restarts, sweeps=8):
+def climb(C, P, perm, rng, restarts, sweeps=8, sign=1):
+    # sign=+1: additive/Vigenere  d=(c-k).  sign=-1: Beaufort  d=(k-c),
+    # reached as (-c-k) over the full k range (k -> -k is a bijection).
     n = len(C); idxmod = np.arange(n) % P
     cand = np.arange(26, dtype=np.int64)
     slots = [np.arange(j, n, P) for j in range(P)]
     best_all = -99.0; bestK = None
     for _ in range(restarts):
         K = rng.integers(0, 26, size=P)
-        D = (C - K[idxmod]) % 26
+        D = (sign*C - K[idxmod]) % 26
         cur = float(qrows(perm[D][None, :])[0])
         for _s in range(sweeps):
             improved = False
@@ -45,21 +47,21 @@ def climb(C, P, perm, rng, restarts, sweeps=8):
                 Pj = slots[j]
                 if len(Pj) == 0: continue
                 M = np.repeat(perm[D][None, :], 26, axis=0)
-                M[:, Pj] = perm[(C[Pj][None, :] - cand[:, None]) % 26]
+                M[:, Pj] = perm[(sign*C[Pj][None, :] - cand[:, None]) % 26]
                 sc = qrows(M)
                 b = int(np.argmax(sc))
                 if sc[b] > cur + 1e-12:
                     cur = float(sc[b]); K[j] = b
-                    D[Pj] = (C[Pj] - b) % 26
+                    D[Pj] = (sign*C[Pj] - b) % 26
                     improved = True
             if not improved: break
         if cur > best_all:
             best_all = cur; bestK = K.copy()
     return best_all, bestK
 
-def decrypt(C, K, alpha):
+def decrypt(C, K, alpha, sign=1):
     P = len(K); n = len(C)
-    D = (C - K[np.arange(n) % P]) % 26
+    D = (sign*C - K[np.arange(n) % P]) % 26
     return ''.join(alpha[int(v)] for v in D)
 
 if __name__ == '__main__':

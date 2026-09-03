@@ -5,6 +5,7 @@ sys.path.insert(0,'.')
 A = json.load(open('results/lp_ioc_raw.json'))
 P = json.load(open('results/lp_power_raw.json'))
 H = json.load(open('results/lp_hill_raw.json')) if os.path.exists('results/lp_hill_raw.json') else {}
+G = json.load(open('results/lp_prof_raw.json'))
 
 out = {'family': 'long periods 25-72 on PK8/PK9/PK10', 'periods': [25, 72]}
 
@@ -55,6 +56,33 @@ for k, v in P.items():
                           class_size_at_p25=v['n'] // 25, class_size_at_p72=v['n'] // 72)
 out['scorer_a'] = sa
 
+# ---- scorer (a2): sorted-profile max-likelihood, same invariances, strictly sharper than IoC
+sa2 = {'statistic': 'per-letter sorted-class-profile log-likelihood = EXACT max over all 26! '
+                    'per-class relabellings of the multinomial loglik; IoC is a quadratic proxy for it',
+       'null': 'identical statistic on 2000 letter-shuffled copies, per period',
+       'invariance': 'same as scorer (a): survives an unknown columnar and any keyed/mixed alphabet',
+       'controls': {}, 'targets': {}}
+for k in G:
+    f = G[k]['family']
+    rows = sorted(G[k]['rows'], key=lambda r: -r['z'])[:3]
+    rec = dict(best_period=f['obs_argmax'], best_z=round(f['obs_maxz'], 2),
+               familywise_p=f['fam_p'], null_maxz_mean=round(f['null_maxz_mean'], 2),
+               null_maxz_p95=round(f['null_maxz_p95'], 2), null_maxz_max=round(f['null_maxz_max'], 2),
+               top3=[(r['p'], round(r['z'], 2), r['npairs'], r['z_analytic_bound']) for r in rows])
+    (sa2['controls'] if k in ('pk3', 'pk4') else sa2['targets'])[k] = rec
+# information budget: with an unknown transposition the ONLY invariant is the class letter
+# profile, so within-class pair count is the entire evidence budget for ANY such test.
+sa2['information_budget'] = {
+  'formula': 'z_max ~= (IoC_eng - IoC_rand)/sqrt(IoC_rand) * sqrt(Npairs(p)) = 0.1335*sqrt(Npairs)',
+  'note': 'upper bound on what ANY transposition-invariant, substitution-invariant period-p '
+          'test can achieve, because a period-p polyalphabetic under an unknown permutation '
+          'leaves no other usable structure',
+  'bounds': {k: {'p25': [r['z_analytic_bound'] for r in G[k]['rows'] if r['p'] == 25][0],
+                 'p40': [r['z_analytic_bound'] for r in G[k]['rows'] if r['p'] == 40][0],
+                 'p72': [r['z_analytic_bound'] for r in G[k]['rows'] if r['p'] == 72][0]}
+             for k in G}}
+out['scorer_a2'] = sa2
+
 # ---- scorer (b)
 if H:
     sb = {'statistic': 'best quadgram/letter from coordinate-descent hill climb on the period-p additive key',
@@ -78,5 +106,14 @@ if H:
 if os.path.exists('results/lp_hill_power.json'):
     out['scorer_b_power'] = json.load(open('results/lp_hill_power.json'))
 
+if os.path.exists('results/lp_globalioc.json'):
+    out['cross_check_whole_text_ioc'] = dict(
+        note='whole-text IoC is invariant to transposition AND to the per-class substitutions; '
+             'a period-p polyalphabetic drives it to ~0.0385+0.026/p. Simulated 3000 synthetic '
+             'period-p ciphertexts (English window, random full permutation, random key) per cell.',
+        data=json.load(open('results/lp_globalioc.json')),
+        verdict='PK9 sits 2.3-3.0 sigma ABOVE what any period 25-72 polyalphabetic produces '
+                '(two-sided p 0.015-0.05) -- the wrong direction, an independent strike against '
+                'a long period on PK9. PK8 and PK10 are consistent with either.')
 json.dump(out, open('results/long_periods.json', 'w'), indent=1)
 print(json.dumps(out, indent=1)[:6000])
