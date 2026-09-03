@@ -1601,3 +1601,61 @@ which kills the m ≤ 4 corner of the sweep it is currently running.
 the census test "holds with or without a transposition underneath", which is true, and implied the
 interval would generalise across constructions. It generalises across *generators* but not across
 *periodicity*. §G6's table should be read as bounding aperiodic keystreams only.
+
+### G8. The class-partition attack — three versions, and the one that works
+
+**~50 million partition scorings** (`partition_power.py`, `partition_balanced.py`,
+`partition_llr.py`, `partition_enum.py`).
+
+This is aimed at the shape §G7 left standing: **a key of period p ≥ 18 built from only 3–5 distinct
+letters on PK9**, which the census does not screen at any alphabet size and which the residue
+battery cannot see (power 0.03–0.05, §G2).
+
+**The idea.** If the key has period p and uses j distinct letters, the p residue classes mod p are
+monoalphabetic, and classes sharing a key letter merge into **j groups of n/j letters**. At n=144
+and p=18 a class holds 8 letters — far too few, which is exactly §F15's information bound — but a
+*group* holds 48, which is plenty. So the bound is not on the information in the ciphertext; it is
+on the instrument. Recover the partition and the bound stops applying.
+
+This is not §G2's Tier 1 impossibility. That one partitions **positions** freely, which is a pure
+census function and provably has zero power. This partitions **residue classes**, which must stay
+whole — and that constraint is what carries the signal.
+
+**Version 1 — unconstrained partitions, scored by mean group IoC. Dead, 27 cells of 27.** The right
+question is not whether the true partition beats a random one (it does, z = +2.0 to +12.3) but
+§A0's: how many of the partitions the search must enumerate outscore the truth?
+
+    E[# beating] = P(random ≥ truth) × |search space|,  |space| = j^p / j!
+
+with P measured on 200,000 random partitions drawn from exactly the distribution the search
+enumerates — matched by construction, not by argument. Result: **E = 5.4 × 10⁵ to 9.1 × 10²⁰**, dead
+everywhere, at every length including n=504. The mechanism is visible in the numbers: random
+partitions reach IoC 0.10–0.15 while the truth sits at 0.067–0.076. A lopsided partition wins by
+putting two classes in a block, making a 16-letter group whose IoC is high by chance.
+
+**Version 2 — balanced partitions, still IoC. Dead, but only by 29×.** That inflation is an artifact
+of block-size variance, and it is removable: require exactly p/j classes per block. The space shrinks
+23-fold and the artifact disappears. At n=144, p=18, j=3: **E = 28.6**. At n=153: 28.6. Close enough
+to matter, still short.
+
+**Version 3 — balanced, scored by likelihood. This one works.** IoC measures only concentration and
+discards *which* letters are frequent. Under the hypothesis each merged group is English read
+through the KRYPTOS alphabet under one unknown shift, so the sharper statistic is the sum over groups
+of the best-shift log-likelihood of the group census, with the reference profile taken from the
+setter's own seven plaintexts. Both the truth and every null are scored identically, so the shift
+maximisation adds no unmatched multiplicity.
+
+The balanced space for p=18, j=3 is exactly **C(17,5) × C(11,5) = 2,858,856** once the 3! label
+symmetry is fixed — small enough to enumerate outright, so the question gets an exact answer rather
+than a tail extrapolation. On a planted key at **n=144, the true partition ranks 1 of 2,858,856 and
+is recovered exactly**, with the runner-up 14 nats behind.
+
+**What that changes.** The one shape the campaign could neither exclude nor detect is now reachable
+by search. §F15's bound stands as stated — no statistic can separate 8-letter residue classes — but
+it does not bound this attack, because this attack never looks at a class alone.
+
+**Scope, stated rather than glossed.** The search assumes the key's letters are used **equally
+often** (6/6/6 classes); an 8/6/4 key escapes it, and the unbalanced space that would catch one is
+back to E = 5.4 × 10⁵. It assumes **period exactly 18** — the only period in the shape whose
+balanced space is enumerable. And it assumes the plaintext is read through the **KRYPTOS alphabet**,
+which the seven solved puzzles support but do not prove.
