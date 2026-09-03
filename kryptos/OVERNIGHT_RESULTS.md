@@ -1664,8 +1664,11 @@ maximisation adds no unmatched multiplicity.
 
 The balanced space for p=18, j=3 is exactly **C(17,5) × C(11,5) = 2,858,856** once the 3! label
 symmetry is fixed — small enough to enumerate outright, so the question gets an exact answer rather
-than a tail extrapolation. On a planted key at **n=144, the true partition ranks 1 of 2,858,856 and
-is recovered exactly**, with the runner-up 14 nats behind.
+than a tail extrapolation.
+
+Over **20 independent plants at n=144, the true partition is recovered exactly in 85% of them, with
+median rank 1 of 2,858,856**; at n=153 the first plant likewise ranks 1. That is the attack's real
+power figure, and it is what the verdict below rests on — not the single run that first showed it.
 
 **What that changes.** The one shape the campaign could neither exclude nor detect is now reachable
 by search. §F15's bound stands as stated — no statistic can separate 8-letter residue classes — but
