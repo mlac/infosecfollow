@@ -583,6 +583,23 @@ has few distinct letters. **This is the sharpest target the campaign has produce
 two-word product hypothesis for PK9 outright** (§D), which is why PK9 is no longer just "the short
 one where nothing works".
 
+**[AMENDED after §G6–§G8.]** Three things changed for this item tonight.
+
+1. **The first shape is now bounded, and confirmed.** §G6/§G7 put PK9's effective alphabet count at
+   **3–13** by forward simulation, reproducing §G2's credible set {3…14} exactly from unrelated
+   machinery. An aperiodic keystream over 3–7 letters remains the live hypothesis, and it is now
+   supported by two independent methods rather than one.
+2. **The second shape is no longer "detection-proof".** I wrote above that both shapes "must be
+   attacked by *construction*, not detection". That is now wrong for the period-18 case. §G8's
+   balanced-partition likelihood attack **recovers a planted period-18, 3-letter key at n=144 as
+   rank 1 of 2,858,856, exactly** — because it never scores a residue class alone, so §F15's
+   information bound does not apply to it. The instrument existed; the campaign had not built it.
+3. **A specific next move, not a research direction.** Run the unbalanced enumeration
+   (3¹⁸/3! = 64,616,748, about 5 minutes uncontended) to find out whether the attack keeps working
+   without its equal-usage assumption. If it does, extend to j=4 and j=5 by meet-in-the-middle on
+   the group censuses, which are additive and therefore decomposable. Periods above 18 stay out of
+   reach by enumeration and need a different decomposition.
+
 ### 0b. Then read §A0. For PK8 and PK10, work PK10.
 
 The single most actionable result of the night: ranking searches over ~30,000 candidates are below
