@@ -1913,9 +1913,21 @@ cell costs 3,145,728 configurations per run):
    observed 0.05573 — **z = +2.31, empirical p = 0.0375, below the ceiling. Killed.**
 2. **Replication on two independent halves** of that null: below both (half-1 max 0.05685, half-2
    max 0.05839). Not one unlucky bank.
-3. **Neighbouring cells.** m=8 L=5 lag-1 also crosses a *40*-draw ceiling (z=+3.38) — and that same
-   cell is row 3 of the table above, already dead at 150 draws. The neighbour "confirmation" is the
-   identical undersized-null effect, which is itself the point.
+3. **Neighbouring cells — the isolated-spike test.** A real recurrence at (m=8, L=6) elevates its
+   neighbours: the same modulus at adjacent lags, the same lag at adjacent moduli, and the other
+   recurrence at the same cell. It does not.
+
+   | neighbour | obs | 40-null max | z | |
+   |---|---|---|---|---|
+   | m=8 L=5 lag-1 | 0.05470 | 0.05366 | +3.38 | above — but this is row 3 above, **already dead at 150 draws** |
+   | m=8 L=7 lag-1 | 0.05581 | 0.05805 | +1.07 | below |
+   | m=7 L=6 lag-1 | 0.05160 | 0.05607 | −0.66 | below |
+   | m=9 L=6 lag-1 | 0.05186 | 0.05633 | −1.70 | below |
+   | m=8 L=6 ACA | 0.05470 | 0.05487 | +1.71 | below |
+
+   Four of five are below their ceilings, and the fifth is the undersized-null effect again in a
+   cell independently killed at 150 draws. **The flag propagates to nothing.** An isolated spike
+   with no structure around it is noise, not a recurrence.
 4. **The decrypt, which settles it without any statistics.** Recovered primer (4,2,6,2,5,1), d=5:
 
    `IELLFEKMTMASJQEQTKTKCNHMESLLITFANICTHKHCSUPVKCAQAFQQELSWSIDTXJMDMEEDBLMMFMKAMIGIBQCYJMMMNEMHRSRYCCMGSCUMHMCTXQOTQMMRPYTLMDUMUMUCHDQPOSLNXIMQMUJYXEQGNHMPP`
