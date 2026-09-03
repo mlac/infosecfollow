@@ -821,7 +821,7 @@ crib.
 |---|---|---|---|---|---|---|---|
 | PK9 | 2,688 | **317,784,240** | 1,617 s | 7.24 | 7.29 | 434 / 2,688 (chance ~448) | below ceiling, nothing |
 | PK8 | 2,796 | **329,959,512** | 1,716 s | 7.07 | 8.03 | 499 / 2,796 (chance ~466) | below ceiling, nothing |
-| **PK10** | **5,532** | **646,836,336** | 6,659 s | **6.40** | **6.59** | 893 / 5,532 (chance ~922 — *below* chance) | below ceiling, nothing |
+| **PK10** | **5,532** | **646,836,336** | 6,659 s | **6.40** | **6.59** | 893 / 5,532 (chance ~922 — *below* chance) | **Tier 2** (power test §F14) |
 
 Three-word grids total **1,294,580,088 word-evaluations**; with the two-word grids the product
 family stands at **2.03 billion**. Top cells are the usual noise signature — orthographically
@@ -830,10 +830,9 @@ rather than a true key with its near-misses stacked beneath it. PK10's top cell 
 (L=9, M=14) DIMMADOME cell already autopsied and discharged in §C3.
 
 Per §A0, PK8 and PK9 are **Tier 3** at their lengths regardless of the z, and per §F6 the grid sees
-only 54–62% of three-word length-sets there. **PK10's grade waits on its own power test** —
-§F14 — because the three-word search has three times the candidate space of the two-word one and
-single-cell tests put a genuine key at z ≈ 5.4–9.5, which overlaps this ceiling. I am not grading it
-Tier 2 on the assumption that 504 letters is automatically enough.
+only 54–62% of three-word length-sets there. **PK10 is Tier 2**, established by its own power test (§F14): a genuine three-word key on a
+504-letter synthetic scores **9.48 at the true cell** against this sweep's 6.59 ceiling. That grade
+carries a stated scope — see §F14 for the ~18% of the length-set space where it weakens to a screen.
 
 ### F11. Cribs at every offset — run, and then bounded on principle
 
@@ -946,3 +945,36 @@ model (5-gram or word-level, or a length-normalised prior that stops rewarding h
 rather than more search. The entry condition should be `truth_wins: true` on PK1, which is
 measurable in seconds. Until that holds, this family is **untested, not screened** — and 87.5%
 recovery says it is worth testing properly.
+
+### F14. Power test for the three-word grid — PK10 earns Tier 2, with a stated scope
+
+§A0's lesson applied to my own next result before grading it. The identical grid was run on a
+504-letter synthetic carrying a genuine three-word product key (OCHRE × VERDIGRIS × ANNEAL) with a
+width-8 columnar underneath:
+
+* **sweep-wide max z = 9.48, at the TRUE cell** (KA/KA/sub, length 5, modulus 18) with the **true
+  word OCHRE ranked first**;
+* PK10's real three-word sweep ceiling is **6.59**.
+
+9.48 > 6.59, so the sweep would have found this key. **PK10's three-word negative is Tier 2.**
+
+**But the scope needs stating, because only one of the three factors cleared.** OCHRE reached 9.48;
+VERDIGRIS 6.4 and ANNEAL 3.4 did not. That is still a detection — recovering one factor at the top
+of the whole grid is enough, since the residual is then a two-word product at a known modulus — but
+it means detection is driven by **the factor with the smallest complementary lcm**, i.e. the one
+whose residue classes hold the most letters. OCHRE's modulus was 18 (28 letters per class); ANNEAL's
+was 45 (11 letters per class) and it failed.
+
+So the strength of this Tier 2 varies across the space it covers:
+
+| min complementary lcm | length-sets | letters per class | comparable to the tested case? |
+|---|---|---|---|
+| ≤ 18 | 155 (46%) | ~28 | **yes** — this is where z=9.48 came from |
+| 19–30 | 70 (21%) | ~16 | probably |
+| 31–45 | 50 (15%) | ~11 | marginal — ANNEAL failed at 45 |
+| 46–84 | 59 (18%) | ~6 | **no** — treat as Tier 3 |
+
+Of the 334 detectable three-word length-sets on PK10, **about two thirds sit in the range where the
+test demonstrably works**, and the remaining ~18% with a minimum complementary lcm above 45 should
+be read as a screen, not an exhaustion. A next run wanting to close that corner should raise the
+null count and accept smaller classes rather than widen the word list.
