@@ -782,3 +782,42 @@ A 14-letter crib is too short to constrain the structures that matter — agains
 has 14 unknowns for 14 equations, so zero degrees of freedom. **Mid-text cribs are therefore a dead
 avenue on principle, not merely unproductive**, and the ~3 CPU-hours that scan would have cost were
 not spent. The productive crib position is the opening, which is what §A8 and §F8 target.
+
+### F12. Gromark and generated keystreams (frontier item 4) — Tier 2 for digit primers, verified independently
+
+Run as a parallel work stream, with a purpose-built C kernel. **Executed: 2,032 real search cells
+plus 4,012 matched-null cells, 5,700 s, 1.235 × 10¹⁰ trial decryptions** — *all* 10⁷ primers at
+L=7 and *all* 10⁸ primers at L=8, enumerated rather than sampled, crossed with four recurrences
+(k[i]=k[i−L]+k[i−L+1] the ACA standard, k[i]=k[i−L]+k[i−1], k[i]=k[i−1]+k[i−2],
+k[i]=k[i−L]−k[i−L+1]), both text alphabets, both addition directions, two statistics.
+
+Controls: the true primer comes back at **rank 1 among 10⁸ candidates** at all three message
+lengths (z = +18.8 / +19.7 / +44.2), and still rank 1 with a width-9 columnar underneath
+(z = +57.2), which is what establishes transposition-invariance rather than assuming it.
+
+Two limits the agent stated against its own interest, both worth carrying:
+* the `k[i]=k[i−1]+k[i−2]` recurrence is structurally degenerate — past position L the keystream
+  depends only on the last two primer digits — so the exact primer is *not* recoverable. It verified
+  the search still recovers the **keystream** (matching the truth 137/137 and 497/497 positions past
+  the primer window), so that recurrence is covered only up to an equivalence class.
+* the true ACA form `C = MIX[(P+k)]`, with the mixed alphabet applied *after* the shift and unknown,
+  is invisible to the shift-IoC statistic. The within-key-class statistic recovers it at n=504 but
+  has **no power at n=144/153** — the same length problem as §A0.
+
+**Above-ceiling autopsy, verified independently by me.** 39 of 2,032 cells exceeded their pooled
+matched-null max, against 35.6 expected by chance. The top hit was pk9, L=7, primer 2546754,
+IoC 0.063714 vs a pooled null max of 0.06284 — an English-looking IoC at n=144. I rebuilt it from
+scratch with my own code rather than the agent's kernel, **reproduced IoC 0.063714 exactly**, and
+ran my own monoalphabetic hill-climb on the residual: **−5.649, against shuffled-copy nulls of
+−5.602 to −5.718**. Indistinguishable from noise, and nowhere near English's −4.25. If a primer were
+right the residual would be a monoalphabetic image of the plaintext and would climb to English; it
+does not. Chance, confirmed independently. The decisive scale check: the positive control's *true*
+primer scored 0.0757 at this length with z = +18.8, while the null best-of-search at 10⁷ primers
+already reaches 0.0628 on shuffled text — at n=144 the search size alone manufactures apparent
+English IoC.
+
+**Verdict: Tier 2** for mod-10 digit primers at L=7 and L=8 under those recurrences, alphabets and
+directions, by exhaustion rather than sampling. **Three corners stay open**: (i) mod-26 letter
+primers were screened only over dictionary words — 26⁷ = 8×10⁹ was not enumerated (Tier 3);
+(ii) the mix-after-shift sub-form at PK8/PK9 lengths; (iii) a transposition applied *on top of* the
+Gromark, which breaks keystream alignment and lies outside every statistic used.

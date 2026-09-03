@@ -159,3 +159,34 @@ def decode_path(path, ct, mode, alpha):
     else:              kv = (cv + pv) % 26
     s = lambda a: ''.join(alpha[int(x)] for x in a)
     return s(pv), s(kv)
+
+def best_seg_lp(s, trie, alpha):
+    """Viterbi best word-segmentation log-prob of string s (sum of word logps).
+    Returns (-inf, None) if s cannot be segmented into dictionary words."""
+    CONT, ISEND, ENDLP, NN = trie
+    ai = {c: i for i, c in enumerate(alpha)}
+    n = len(s); NEG = -1e18
+    dp = np.full(n + 1, NEG); dp[0] = 0.0; bp = [-1]*(n+1)
+    for i in range(n):
+        if dp[i] <= NEG/2: continue
+        cur = 0
+        for j in range(i, n):
+            cur = CONT[cur, ai[s[j]]]
+            if cur < 0: break
+            if ISEND[cur] and dp[i] + ENDLP[cur] > dp[j+1]:
+                dp[j+1] = dp[i] + ENDLP[cur]; bp[j+1] = i
+    if dp[n] <= NEG/2: return float('-inf'), None
+    out = []; i = n
+    while i > 0: out.append(s[bp[i]:i]); i = bp[i]
+    return float(dp[n]), list(reversed(out))
+
+def objective(pt, key, trie, QGM, alpha, Wpt=1.0, Wkey=1.0):
+    ai = {c: i for i, c in enumerate(alpha)}
+    a = np.array([ai[c] for c in pt], dtype=np.int64)
+    ctx = a[:-3]*17576 + a[1:-2]*676 + a[2:-1]*26 + a[3:]
+    qg = float(QGM.ravel()[ctx].sum())
+    lpt, sp = best_seg_lp(pt, trie, alpha)
+    lky, sk = best_seg_lp(key, trie, alpha)
+    n = len(pt)
+    return dict(qg_per=qg/n, pt_lp=lpt, key_lp=lky,
+                obj=(qg + Wpt*lpt + Wkey*lky)/n, seg_pt=sp, seg_key=sk)
