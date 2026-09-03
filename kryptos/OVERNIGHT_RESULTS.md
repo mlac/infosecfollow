@@ -26,13 +26,16 @@ That was done tonight, and the answer changes the verdicts:
 |---|---|---|---|---|
 | n=153, OCHRE × VERDIGRIS, columnar underneath | z = 5.92 / 5.98 | 7.17 (a **noise** cell, KA/AZ/sub 9,10) | 7.87 | **NO** |
 | n=144, ANVIL × QUENCHING, columnar underneath | z = 4.33 / 5.97 | 7.16 (a **noise** cell) | 7.83 | **NO** |
-| n=504, OCHRE × VERDIGRIS | z = 10.5 / 15.5 (single-cell) | *sweep still running at write-up* | 6.75 | expected YES |
+| n=504, OCHRE × VERDIGRIS, columnar underneath | z = 10.44 / **15.57** | **15.57 — the TRUE cell (KA/KA/sub, a=5, b=9), top word VERDIGRIS** | 6.75 | **YES, overwhelmingly** |
 
 At 144–153 letters a *genuine* two-word product key produces z ≈ 6, while the noise maximum over
 2,040 correlated cells sits at 7.8–7.9. The signal is below the noise floor of the search that is
-looking for it. **No amount of re-running helps.** The same holds for the blind Hill sweep: run on
-synthetic Hill ciphertexts it fires above its own ceiling 6/6 at n=279 and 6/6 at n=504, but only
-**3/6 at n=153 and 2/6 at n=144**.
+looking for it. **No amount of re-running helps.** At 504 letters the same key produces z = 15.57
+against a 6.75 ceiling and the true cell wins the whole grid outright — a factor of 3.5 in message
+length is the difference between a search that cannot see its target and one that cannot miss it.
+
+The same holds for the blind Hill sweep: run on synthetic Hill ciphertexts it fires above its own
+ceiling **6/6 at n=279 and 6/6 at n=504, but only 3/6 at n=153 and 2/6 at n=144**.
 
 **Consequences, applied honestly to my own results:**
 
