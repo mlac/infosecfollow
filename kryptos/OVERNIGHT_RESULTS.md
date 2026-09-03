@@ -547,7 +547,25 @@ three targets; item 4 (Gromark) is **Tier 2 for digit primers** (§F12); item 5 
 flight at write-up; item 6 (PK9→PK8 coupling) is **run** (§F5). What follows is re-ranked by what
 is actually left.
 
-### 0. Read §A0 first. Then work PK10, not PK8 or PK9.
+### 0a. PK9 now has a specific, named target — work it first.
+
+§G2 explains PK9's anomaly: its keystream uses **about five effective cipher alphabets** (ML k=5,
+95% credible set 3–14, ≈100:1 against a flat key). Everything with few alphabets *and* a short
+period is excluded at power 0.85–1.00, including under a columnar. What is left is precisely:
+
+* an **aperiodic keystream drawn from 3–7 distinct letters**, or
+* a key of **period ≥ 18 built from only 3–5 distinct letters**.
+
+Both are structurally invisible to the residue battery (power 0.03–0.05, collapsing 0.67 → 0.05 as
+the period runs 9 → 144), so they must be attacked by *construction*, not detection. Two concrete
+shapes fit the setter's own grammar: a key that is a short word whose letters repeat heavily
+(design law 1), or a key manufactured so that its alphabet is deliberately small — e.g. a
+digit-derived or Gronsfeld-like keystream, or one word encrypted under another where the outer word
+has few distinct letters. **This is the sharpest target the campaign has produced. It also kills the
+two-word product hypothesis for PK9 outright** (§D), which is why PK9 is no longer just "the short
+one where nothing works".
+
+### 0b. Then read §A0. For PK8 and PK10, work PK10.
 
 The single most actionable result of the night: ranking searches over ~30,000 candidates are below
 their own noise floor at 144–153 letters, and **no amount of compute changes that**. A genuine
@@ -602,7 +620,18 @@ others only through their lcm (§F6) — and at n=504 it sees 92% of three-word 
 length-sets. PK8/PK9 versions are run but Tier 3 by §A0 and not worth repeating. Extend PK10's grid
 to more key alphabets and to moduli above 84 by accepting smaller classes with more nulls.
 
-### 3. Gromark's three open corners (§F12)
+### 3. Short key words in the dual beam — a hard limit, not a gap (§G3)
+
+The family is negative for key words of length ≥ 8 and open below it, and §G3 proves the boundary is
+structural rather than an effort gap: the number of dual-consistent (plaintext, key) pairs for a
+random 504-letter ciphertext is 10²⁰⁰–10⁶⁶⁷ once the plaintext vocabulary reaches the 3-letter words
+real English needs, so **the dual word constraint carries no identifying information by itself**.
+Identification has to come from the language model — and quadgram maximisation is *provably
+degenerate* here, since `THETHETHE…` scores −2.64 per letter against English's −4.25, and the search
+reaches −4.52 on pure shuffled noise. Any attempt on short key words needs a genuinely better
+language model (5-gram, word-level, or length-normalised), not more beam.
+
+### 4. Gromark's three open corners (§F12)
 
 In the agent's own priority order: (ii) the mix-**after**-shift ACA form at PK8/PK9 lengths, which
 needs a joint primer + mixed-alphabet solve (~5 h single-core for the full grid, and it is the only
@@ -610,7 +639,7 @@ test that can see that form at n=144); (i) full 26⁷ mod-26 letter-primer enume
 26⁸ is out of reach); (iii) a transposition applied *on top of* the Gromark, outside every statistic
 used so far. Do **not** re-run mod-10 digit primers at L ≤ 8, or dictionary-word primers 5–14.
 
-### 4. Non-additive block ciphers beyond what was run
+### 5. Non-additive block ciphers beyond what was run
 
 Blind Hill k = 2, 3, 4 with additive offset periods 1–6 is done and **Tier 2 for PK10** (§F2). Open:
 a Hill stage with a longer additive period, or an additive that is itself a two-word product —
@@ -618,7 +647,7 @@ design law 2 applied to PK7's construction — and non-Hill non-additive constru
 PK10's statistical signature (IoC 0.0388, census LLR −13.03) remains closely matched by Hill 3×3
 (−15.93) and Hill 4×4 (−13.88), so the family is still a priori attractive even after the negative.
 
-### 5. Running key through an independent keyed alphabet
+### 6. Running key through an independent keyed alphabet
 
 The census argument (§A6) excludes an English key text read in the *same* tableau as the plaintext,
 which is what PK5 does. It does **not** exclude one read through an independent keyed alphabet:
@@ -627,14 +656,14 @@ PK3 proves this setter builds keys by encrypting one word under another, a key t
 keyed alphabet is squarely in style, and §6's running-key screen tested specific *texts*, not the
 *mapping*.
 
-### 6. PK9 → PK8, once PK9's own construction is known
+### 7. PK9 → PK8, once PK9's own construction is known
 
 The derivation is sound and the machinery exists (§F5): if PK8's key is PK9's plaintext then
 `d = c8 − c9` is PK8's plaintext under PK9's keystream. All 48 derived texts have had a period scan,
 a product grid and the full crib sweep — nothing. This stays live but is **blocked on PK9**, not on
 compute. Same for a Gromark whose primer derives from PK9's plaintext.
 
-### 7. Do NOT re-run
+### 8. Do NOT re-run
 
 * Any periodic substitution on PK10 with period ≤ 100, in **any** alphabet. The column-IoC statistic
   only needs the key constant within a column, so it covers Vigenère, Beaufort, variant, Gronsfeld,
@@ -646,6 +675,10 @@ compute. Same for a Gromark whose primer derives from PK9's plaintext.
   two of the seven known plaintexts is 14 letters, too short to constrain the relevant structures.
 * Gromark mod-10 digit primers at L ≤ 8 under the four recurrences tested.
 * Beaufort mode when scoring by class IoC — it is arithmetically identical to subtract (§F7).
+* **The k-partition IoC-maximising attack on any target — provably zero power (§D, Tier 1).**
+* Two-word product keys on PK9 — now excluded by census concentration as well as by search (§D).
+* Quadgram score as a standalone discriminator in any word-constrained search: it reaches −4.52 on
+  shuffled noise, 0.27 from true English, and `THETHETHE…` beats English outright (§G3).
 
 ## F. LATE RESULTS (jobs that finished after §A–E were drafted)
 

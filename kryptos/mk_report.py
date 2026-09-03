@@ -122,6 +122,17 @@ if real:
             d['above_matched_ceiling_joint'] = real['max_joint'] > null['max_joint']
     out['parts']['ME_depth3'] = d
 
+# ---------- derived (real-sibling-ciphertext) null + degenerate-decrypt autopsy ----------
+dn = L('results/mk_cat_derived_null.json')
+if dn: out['derived_null_real_sibling_ciphertexts'] = dn
+out['degeneracy_note'] = (
+ 'Every search maximum reported here is a DEGENERATE decrypt: one letter takes 19-21% of the '
+ 'text (English maximum is ~13% for E) and the quadgram score is -7.9..-8.8 per letter '
+ '(random = -8.23, English = -4.25).  Peel-and-IoC maxima on a REAL ciphertext beat maxima on a '
+ 'letter-SHUFFLED one because a real periodic cipher leaves positional letter clustering that a '
+ 'shuffle destroys; the shuffle null therefore under-estimates this statistic ceiling.  The '
+ 'decisive benchmark is the positive control: a genuine instance of each manufacture scores '
+ 'IoC 0.0755-0.0757 at n=144/153 and 0.0686 at n=504, far above every observed real maximum.')
 out['positive_controls'] = {'suite1': L('results/mk_positive_controls.json'),
                             'concat_interleave_depth3': L('results/mk_positive_controls_2.json'),
                             'depth3_valid': L('results/mk_d3_positive_control.json')}
