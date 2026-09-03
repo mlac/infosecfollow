@@ -978,3 +978,58 @@ Of the 334 detectable three-word length-sets on PK10, **about two thirds sit in 
 test demonstrably works**, and the remaining ~18% with a minimum complementary lcm above 45 should
 be read as a screen, not an exhaustion. A next run wanting to close that corner should raise the
 null count and accept smaller classes rather than widen the word list.
+
+### F15. Long periods 25–72 (frontier item 2) — Tier 2 on PK10, and an information-theoretic bound on why PK8/PK9 cannot be closed
+
+Run as a parallel work stream. **1,089 configurations, 7,100 s**, two independent scorers: a
+transposition-invariant residue-class IoC (plus a sorted-profile variant) and a quadgram hill-climb
+on the period-p key, additive and Beaufort, KA and A-Z.
+
+**Controls on real puzzles, both recovered at rank 1 of 48 periods.** PK3 (true period 40):
+class-IoC z = +4.67, family-wise p = 0.0015; the hill-climb scores z = **+49.49** and returns the
+**verbatim PK3 plaintext**. PK4 (period 45 **with a columnar underneath**): class-IoC z = +4.17 —
+the direct proof of transposition-invariance rather than an assumption of it. The hill-climb fails
+on PK4, which the agent correctly reports as the *demonstration* of that scorer's transposition
+blindness, not a defect.
+
+**Null:** 2,000 letter-shuffles per target pushed through the identical statistic at all 48 periods,
+with the ceiling taken as the **family-wise max over periods**, not per-period. Power calibration
+used per-instance 200-shuffle nulls over 17,280 synthetic ciphertexts.
+
+**Result: nothing above ceiling.** Best target scan z = +4.24 (PK9/A-Z/Beaufort, p=63) against a
+family-wise null max of 4.92; for contrast the PK3 control scored +49.49. Seven cells beat small
+per-period nulls and all seven died on escalation — by replication at higher restart budgets, by a
+**neighbour-period check** (a real period-p key elevates p *and its multiples*, not one isolated
+period), and by a control I had not thought of: running the identical protocol on **six solved
+ciphertexts truncated to the same length**, which provably have no period 25–72 key, and which
+scored the same z range (−1.60 to +1.88).
+
+**Verdict, which splits by target:**
+* **PK10 — Tier 2.** No period-25–72 polyalphabetic of any kind (Vigenère/Beaufort/variant/
+  Quagmire I–IV, any keyed or mixed alphabet, with or without a columnar), because the
+  transposition-invariant scorer detects a synthetic at n=504 with rate **1.00 at every period in
+  the range**, transposed or not, while the real text scored family-wise p = 0.77.
+* **PK8/PK9 — Tier 2 only for periods 25 to ~40 with no transposition underneath**, and **Tier 3**
+  above p≈40 or anywhere if a columnar is present.
+
+**And the reason that gap cannot be closed by a better statistic — verified independently.** Under
+an unknown transposition the only surviving invariant is the within-class letter profile, so the
+test's information is capped by the number of within-class pairs:
+
+| | p=25 | p=72 |
+|---|---|---|
+| PK8 (153) | 393 pairs → analytic z ceiling **2.65** | 90 pairs → **1.27** |
+| PK9 (144) | 345 pairs → **2.49** | 72 pairs → **1.13** |
+
+I recomputed these from scratch and they match the agent's figures exactly. A ceiling of z≈1.3 is
+below any usable detection threshold, so **no cleverer transposition-invariant statistic exists at
+those lengths — the gap must be closed by assumptions, not by statistics.** This is §A0 made
+rigorous: an information bound rather than an empirical power measurement.
+
+**Its best forward pointer, which agrees with §F3 and sharpens it:** PK9's whole-text IoC of 0.0445
+sits **2.3–3.0 σ *above*** what any period-25–72 polyalphabetic produces at n=144 (simulated 3,000×
+per period), and the effect strengthens monotonically with p. That is the wrong direction for a long
+key and it survives any transposition. Combined with my §A2/§A3 tables — PK9 consistent with periods
+2–18, and periods 2–8 and 10 excluded transposition-invariantly at power 0.88–1.00 — the surviving
+window for PK9 is **periods ≈9 and 11–18, or a non-substitution mechanism**. That is a narrow,
+concrete target and it should outrank longer keys.
