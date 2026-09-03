@@ -285,12 +285,12 @@ the honest limit — see §E for the width-9 extension that was designed but not
 | Substitute-then-transpose scan | pk10 116 (W,q) cells at power 1.00, pk8 14, pk9 43 | 200 s | z = +3.87 (pk9) | §C2 | **Tier 2 dead (PK10)** |
 | Progressive-key scan | pk10 15,600 cells, pk8 4,680, pk9 4,368; 150 nulls each | 300 s | z = +4.70 (pk10) | ≈ +4.4 expected | Tier 3, at expectation |
 | Running-key census LLR | 3 targets × 2 alphabets × 8,000 sims | 30 s | z = −5.16 (pk10) | — | **Tier 2 (PK10)**, same-tableau only (§A6) |
-| **Crib × key-structure, original corpus** | **54,208,692 tests** (≈36.1M distinct) | 200 s | 0 passes | 0.67 expected FP | **Tier 2** (no transposition) |
-| **Crib × key-structure, enriched corpus** | **355,980,204 tests** (48,616 cribs) | 620 s | 0 passes | 3.20 expected FP | **Tier 2** (no transposition) |
-| **Crib sweep on 48 coupling texts** | **367,133,184 tests** | 480 s | 0 passes | 4.12 expected FP | **Tier 2** (§F5) |
-| Crib at every offset | 16,525,920 tests, 47 recurring phrases | 15 s | 0 passes | 0.19 expected FP | **Tier 2**, and bounded on principle (§F11) |
-| Wrap-crib conjunction | 3,214,350 hash-join tests | 30 s | 0 agreements | 0.01 expected FP | **Tier 2** (§D) |
-| Multiset crib (width W, key period \| L) | 1,000,200 tests | 300 s | 0 passes | 0 of 32,000 null cribs | **Tier 2** within its shape (§F1) |
+| **Crib × key-structure, original corpus** | **54,208,692 tests** (≈36.1M distinct) | 200 s | 0 passes | 0.67 expected FP | Tier **3** — corpus is a screen (§G1) |
+| **Crib × key-structure, enriched corpus** | **355,980,204 tests** (48,616 cribs) | 620 s | 0 passes | 3.20 expected FP | Tier **3** — corpus is a screen (§G1) |
+| **Crib sweep on 48 coupling texts** | **367,133,184 tests** | 480 s | 0 passes | 4.12 expected FP | Tier **3** (§F5, §G1) |
+| Crib at every offset | 16,525,920 tests, 47 recurring phrases | 15 s | 0 passes | 0.19 expected FP | Tier **3**, bounded on principle (§F11) |
+| Wrap-crib conjunction | 3,214,350 hash-join tests | 30 s | 0 agreements | 0.01 expected FP | Tier **3** (§D, §G1) |
+| Multiset crib (width W, key period \| L) | 1,000,200 tests | 300 s | 0 passes | 0 of 32,000 null cribs | Tier **3** within its shape (§F1, §G1) |
 | Derived coupling texts, period + product | 48 texts × ~30 periods + product grids | running | +3.76 / +2.62 | §F5 | Tier 3 |
 | Shared-keystream coupling | 24 combos × every offset + 60 nulls per scan | 40 s | all below | — | Tier 3 — **weak test** (§C4) |
 
@@ -1192,3 +1192,46 @@ formal report, so treat the numbers as provisional):
   tests**, giving 1.95 expected false positives against **1 observed**, while the matched null
   itself yields up to **5** such passes per shuffled run. A one-in-twelve-million hit is still noise
   when you run 234 million tests.
+
+### G1. Crib attacks, the full family report — and a downgrade of my own grade
+
+**Executed: 47,750,850 configurations, 3,840 s.** This supersedes §A8, §F8, §F11 and §F18; where it
+disagrees with my numbers, take its.
+
+**Six positive controls, all on REAL ciphertexts at real lengths, all passing** — it recovers every
+crib-visible construction the setter has actually used:
+
+1. **PK1** — the period test returns 10 and the derived keystream *reads* `PROVENANCEPROVENANCE…`
+2. **PK3** — returns 40; the (8,10) product test passes with 44 GF(2) + 44 GF(13) independent
+   checks; two-word recovery returns exactly **('ORDINATE','PENTIMENTO')**, the true manufactured key
+3. **PK4** (columnar W8 under a period-45 product) — the map-agreement DFS returns **exactly one
+   slot order out of 40,320**, the true `[6,4,1,2,5,3,0,7]`, in **16 nodes**
+4. **PK6** — period 6, keystream reads `PORTALPORTAL`
+5. **PK5** (columnar under a *running key*) — the per-column × per-slot decomposition returns exactly
+   the 8 true (column, slot) pairs and nothing else; English −4.34 on true pairs vs −8.11 on the
+   other 56
+6. **Cross-target join** — a planted shared keystream is recovered at the exact offsets, 2 hits out
+   of 6,275,320 tests, zero collateral
+
+**Null:** the identical battery on uniform random letter-permutations — 18 matched null runs,
+11,796,948 null keystream derivations, **1,405,010,880 null linear-structure tests**, plus
+**2.02 × 10¹³ slot orders** covered in the columnar null and 56,477,880 cross-target null tests.
+
+**Result: nothing above ceiling.** Every exact test returns zero on every target (periodic, affine,
+Fibonacci, sibling-window, columnar, cross-target), the single linear pass on PK8 was autopsied as
+chance, and **the best English-looking keystream any real target produces (−4.585) is beaten by a
+shuffled ciphertext (−4.229)**. It also covers, *exactly and over all W! column orders with nothing
+truncated* (max 75,973 DFS nodes against a 200,000 cap, 0 capped), single-period keys under columnar
+widths 3, 4, 6, 8, 9, 12 with p ∈ 2–20, 24, 30, 36, 40, 45.
+
+**One methodological point I had missed.** For the two-adjacent-words statistic it de-duplicated
+*events* rather than raw hits, because corpus redundancy inflates counts — a single null shuffle
+produced **144 raw hits from 1 event**. Any future crib work must do this or it will manufacture
+signal out of near-duplicate cribs.
+
+**It graded itself Tier 3, and it is right, so I am downgrading mine to match.** A crib attack is
+only as good as its crib list; exhaustive coverage of key *structures* given a correct crib is not
+exhaustion of the family, because the corpus is a screen over one voice-matched guess at the
+plaintext. My §A8/§F8 entries were labelled "Tier 2 (no-transposition)" in §B — **read them as
+Tier 3.** The 798,062,550 zero-pass tests stand exactly as executed; it is the *inference* from them
+that must be weaker than I first wrote.
