@@ -1,21 +1,20 @@
-import json,glob,os
-tot=0; rows=[]
-def n(f,label):
-    global tot
-    if not os.path.exists(f): return
-    k=len(json.load(open(f))); rows.append((label,k)); tot+=k
-n('results/wb_pc1_beam20000.json','PK1 positive-control grid, beam 20k')
-n('results/wb_pc1_beam100000.json','PK1 positive-control grid, beam 100k')
-n('results/wb_dual_real.json','dual beam, synthetics + real PK8/9/10 (KA), beam 100k')
-n('results/wb_dual_az.json','dual beam, real PK10 (AZ), beam 100k')
-n('results/wb_dual_null_k10.json','dual matched null kmin=10, beam 100k')
-n('results/wb_dual_null_k8.json','dual matched null kmin=8, beam 100k')
-n('results/wb_periodic_real.json','periodic beam, PC + real PK8/9/10, beam 100k')
-for f in sorted(glob.glob('results/wb_periodic_null_*.json')):
-    k=len(json.load(open(f)))*16; rows.append((f'periodic matched null ({os.path.basename(f)}), 16 periods each',k)); tot+=k
-rows.append(('exploratory hard-constraint periodic runs (wb_ptest/2/3, superseded)',8))
-tot+=8
-rows.append(('dual-beam timing/validation run on synthetic (wb_time)',1)); tot+=1
-rows.append(('PK1 first positive-control grid, beam 20k (JSON overwritten, in logs)',12)); tot+=12
-for a,b in rows: print(f'{b:6d}  {a}')
-print(f'{tot:6d}  TOTAL beam executions')
+import json,os
+rows=[('PK1 positive-control grid, beam 20k (two grids, 12 + 10)',22),
+      ('PK1 positive-control grid, beam 100k',6),
+      ('dual-beam timing/validation on 504 synthetic',1),
+      ('exploratory hard-constraint periodic runs (superseded by periodic_beam2)',8)]
+def J(f): return json.load(open('results/'+f))
+rows.append(('dual beam: 504 synthetics + real PK8/PK9/PK10, KA, beam 100k',len(J('wb_dual_real.json'))))
+rows.append(('dual beam: real PK10, A-Z alphabet, beam 100k',len(J('wb_dual_az.json'))))
+rows.append(('dual beam: power-boundary synthetics + PK10 at kmin 5,6,7',len(J('wb_dual_power.json'))))
+rows.append(('dual MATCHED NULL, PK10 shuffles, kmin>=10',len(J('wb_dual_null_k10.json'))))
+rows.append(('dual MATCHED NULL, PK10 shuffles, kmin>=8',len(J('wb_dual_null_k8.json'))))
+d=J('wb_dual_null_p89.json'); rows.append(('dual LENGTH-MATCHED NULL, PK8+PK9 shuffles x 3 modes',sum(len(v['rows'])*3 for v in d.values())))
+rows.append(('periodic beam: positive controls + real PK8/PK9/PK10 over 16 periods x 3 modes',len(J('wb_periodic_real.json'))))
+n=0
+for f in ('wb_periodic_null_0.json','wb_periodic_null_10.json'): n+=len(J(f))*16
+rows.append(('periodic MATCHED NULL, 20 PK10 shuffles x 16 periods',n))
+d=J('wb_periodic_null_p89.json'); rows.append(('periodic MATCHED NULL at L=63, PK8+PK9 shuffles x 2 modes',sum(len(v['rows'])*2 for v in d.values())))
+tot=0
+for a,b in rows: print(f'{b:6d}  {a}'); tot+=b
+print(f'{tot:6d}  TOTAL beam executions (every one at beam 100,000 except the two PK1 grids at 20k)')

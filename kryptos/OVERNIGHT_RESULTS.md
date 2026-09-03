@@ -1235,3 +1235,98 @@ exhaustion of the family, because the corpus is a screen over one voice-matched 
 plaintext. My §A8/§F8 entries were labelled "Tier 2 (no-transposition)" in §B — **read them as
 Tier 3.** The 798,062,550 zero-pass tests stand exactly as executed; it is the *inference* from them
 that must be weaker than I first wrote.
+
+### G2. PK9's anomaly is EXPLAINED — about five effective cipher alphabets
+
+**374 configurations, 1,105 s, ~3.18M simulated texts and ~2.9 × 10⁹ word-hypothesis evaluations.**
+This is the most valuable analytical result of the run.
+
+**The answer is a single number: PK9's keystream uses about five effective cipher alphabets, not a
+flat one.** Maximum likelihood k=5, 95% credible set k ∈ {3…14}, likelihood ratio ≈100:1 against a
+flat/long key (≈34:1 after the three-target selection).
+
+**Controls, on real puzzles and including negative ones** — the design I should have used myself.
+Run blind on all ten ciphertexts the residue battery recovers PK1's true period 10 (z=+8.18) and
+PK6's true period 6 (z=+10.82) — PK6 **with a double columnar underneath**, which proves
+transposition-invariance on real data rather than assuming it — while **correctly staying silent on
+PK2** (pure transposition, p=0.896) and **PK5** (running key, p=0.765). The word-set census attack
+recovers PK6's PORTAL at rank 17 of 278,136 and PK1's PROVENANCE at 2,239, and correctly fails on
+PK3/PK4 whose keys are two-word products, i.e. outside its model.
+
+**Newly excluded by IoC** (6,000 forward simulations each, plaintext drawn from the setter's own
+seven plaintexts rather than generic English): pure transposition and monoalphabetic (z=−6.84),
+flat/random long key (+3.18), ciphertext autokey (+2.58), invertible Hill 3×3 (+2.30), and — the one
+that matters — **every two-word product key at lcm 36/40/42/45/84 (+2.33 to +2.78)**. The product
+key is this series' signature construction, and **PK9's census is 2.3–2.8 σ too concentrated for
+it.**
+
+**Newly excluded by the residue test:** all short-period polyalphabetics p=3–12 with a full-diversity
+key at power 0.85–1.00, and Quagmire-III period 6 at power 0.993 — and the same test detects a
+period-6 cipher *under a transposition* at power 0.993, so a hidden columnar does not rescue them.
+
+**What survives, and why the family stays open:** constructions with few effective alphabets but no
+short period — an aperiodic keystream over 3–7 distinct letters (residue power 0.03–0.05, i.e.
+*structurally undetectable*), or a key of period ≥18 built from only 3–5 distinct letters (power
+collapses 0.67 → 0.29 → 0.11 → 0.05 as the period goes 9 → 18 → 36 → 144). Also alive: Hill 2×2,
+running key, plaintext autokey, split-message constructions.
+
+**A Tier 1 impossibility, and a trap worth naming.** Searching for the partition of the 144 positions
+into k IoC-maximising classes is *a function of the census alone*, hence a permutation invariant:
+PK9's optimum equals its own shuffle-null **maximum** to four decimals at k=2,3,4. That attack has
+provably zero power and must not be attempted.
+
+**The one flag, autopsied exactly.** The word-set search scored 14.496 against a flat-key null max of
+11.21 (z=+4.87) — but that null is mis-matched, because the statistic is a pure census statistic and
+the flat-key null generates censuses systematically flatter than PK9's. Rebuilt against non-word
+keystreams at PK9's own census concentration, the observation lands at z=+0.59 to +2.40 and **below
+the null max in all 8 cells**. The mechanism is exact: an exhaustive scan of all 14,950 four-letter
+shift subsets shows the unrestricted maximum-likelihood 4-subset is {Y,A,C,D} at 14.50 — *identical
+to the winning word's letter set*. With 278,136 words the dictionary covers essentially every
+plausible 4-set, so hitting the ML subset is automatic, not evidence. Winners were also non-thematic
+(CADDY, CYCAD, CLYDESDALE) against a needle-and-archive story.
+
+**It also corrects §6 on a point I had not questioned.** χ²-vs-English-in-raw-order (the 1071 figure)
+is **not substitution-invariant and carries no construction information** — PK2, a pure
+transposition, scores 33.8 on it. That statistic only says "a substitution is present". And it
+independently confirms my §F3 identity, in exact form: χ²-vs-uniform = 26(n−1)·IoC + 26 − n,
+verified to two decimals on all ten ciphertexts.
+
+**Scope, stated honestly by the agent:** the underlying anomaly is p ≈ 0.004 single-target, ≈0.012
+after multiplicity — a real handle, but one that constrains the alphabet *count* and nothing else.
+
+### G3. Word-constrained dual beam (frontier item 5) — fixed, then negative, with a counting proof
+
+**763 configurations, 7,343 s.** The objective failure I reported in §F13 was diagnosed and repaired,
+and the family then returned a real negative.
+
+**Controls at beam 100,000:** on the real PK1 it recovers **87.5% of the plaintext and 87.5% of the
+key**, reading out `INVESTIGATION…EIGHTKNOTTIGHTLYWOUNDITSTHREADINSCRIBEDWITHLETTERS…` with
+**PROVENANCE in 18 of 19 key blocks** (one slips to PROCTOLOGY). Two 504-letter synthetics recover
+at 96.2% and 97.2% (z=+24.3, +24.7), and the periodic variant recovers **100% of both plaintext and
+key** at L=25, 27, 45 and 63 (z=+41.8).
+
+**Result:** PK10 is **not** a Vigenère-family stream whose key is a concatenation of English words of
+length ≥8 (best real cell z=+1.47 against a 20-shuffle matched null, while the same machinery hits
+z=+24 on a synthetic of exactly that form), and **not** a periodic free-key polyalphabetic of period
+25–63 with a word-decomposable plaintext (best of 48 cells z=+1.73; control recovers 100% at z=+41.8).
+Tier 2 within those rules.
+
+**Two findings that generalise beyond this family.**
+
+*The quadgram ceiling in the briefing is wrong for this search.* It reaches quadgram **−4.52 per
+letter on pure letter-shuffled noise** — not the −5.3 to −6.9 that §5 cites for optimised garbage —
+because a word constraint plus a 100k beam can assemble near-English-looking text out of anything,
+only 0.27 below true English at −4.25. **Quadgram alone separates nothing here.** That is the
+rigorous version of my §F13 observation, and it explains why the objective preferred its own output:
+quadgram maximisation is *provably degenerate*, since `THETHETHE…` scores **−2.64 per letter, far
+above English**.
+
+*And a counting proof that the dual word constraint is not identifying.* Computing the number of
+length-n strings that concatenate dictionary words (a₅₀₄ = 10⁶⁹⁰ for length ≥3, λ=23.4) and the
+expected number of dual-consistent (plaintext, key) pairs for a random 504-letter ciphertext as
+a_pt · a_key / 26⁵⁰⁴: with the plaintext vocabulary real English actually needs — down to 3-letter
+words — **every** key vocabulary leaves 10²⁰⁰ to 10⁶⁶⁷ consistent pairs. The constraint carries no
+identifying information by itself; identification must come from the language model. The empirical
+power boundary matches: synthetic recovery falls 96.2% (key words ≥10) → 85.5% (≥9) → 76.0% (≥8) →
+47.6% (≥7) → 42.1% (≥6) → 34.7% (≥5). **The family stays open for short key words, and that is a
+hard limit of the method rather than a gap in effort.**

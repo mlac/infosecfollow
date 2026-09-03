@@ -8,7 +8,12 @@ def LG(pat):
     return out
 real=L('wb_dual_real.json')+L('wb_dual_power.json'); az=L('wb_dual_az.json')
 n10=L('wb_dual_null_k10.json'); n8=L('wb_dual_null_k8.json')
-pr=L('wb_periodic_real.json'); pn=LG('wb_periodic_null_*.json')
+pr=L('wb_periodic_real.json')
+pn=[]
+import glob as _g
+for _f in sorted(_g.glob(R+'wb_periodic_null_*.json')):
+    if 'p89' in _f: continue
+    pn+=json.load(open(_f))
 cap=L('wb_capacity.json') or json.load(open(R+'wb_capacity.json'))
 def stats(a):
     a=np.array(a,dtype=float)
@@ -53,6 +58,15 @@ if n10:
         out['headline']={'pk10_kmin10_add_obj':pk10[0]['obj'],'null_mean':round(o.mean(),4),
             'null_max':round(o.max(),4),'z':round((pk10[0]['obj']-o.mean())/o.std(ddof=1),2),
             'above_null_max':bool(pk10[0]['obj']>o.max())}
+# extra nulls
+out['dual']['length_matched_null_pk8_pk9']=L('wb_dual_null_p89.json')
+out['periodic']['matched_null_pk8_pk9_L63']=L('wb_periodic_null_p89.json')
+out['dual']['power_boundary']={'note':
+  'synthetic 504-letter recovery vs the minimum key-word length in the key vocabulary',
+  'recovery':{ }}
+for r in real:
+    if r['tag'].startswith('SYNTH504_k') and 'pt_recovery' in r:
+        out['dual']['power_boundary']['recovery'][r['tag']]=r['pt_recovery']
 json.dump(out,open(R+'word_beam_pk10.json','w'),indent=1)
 print(json.dumps({k:v for k,v in out.items() if k in('headline',)},indent=1))
 print('wrote results/word_beam_pk10.json')
