@@ -111,8 +111,16 @@ log-likelihood ratio between those two hypotheses, simulated 4,000× at the exac
 | PK10 (504) | −13.03 | z = **−5.16** (AZ: −6.30) | z = −0.17 (AZ: −1.16) | long/random key |
 
 PK10 is 5–6 σ from the running-key hypothesis and sits exactly on the flat-keystream hypothesis.
-Combined with A1 this is tight: PK10's keystream is **aperiodic over 504 letters and near-uniform
-in its marginal distribution** — it behaves like a long generated key, not like a text.
+Combined with A1: PK10's keystream is **aperiodic over 504 letters and near-uniform in its marginal
+distribution** — it behaves like a long generated key, not like a text. The same argument excludes
+*plaintext autokey* for PK10, since there the keystream is also English text.
+
+**Scope, checked and narrowed.** The result holds when the key text is read in the same tableau as
+the plaintext — which is exactly what PK5 does (running key = PK4's plaintext, same alphabet). It
+does **not** hold if the key text is read through an independent keyed alphabet: averaging the
+convolution over 400 random alphabet permutations flattens it, and the two hypotheses then separate
+by only z = −1.01 on PK10 rather than −5.16. That case remains open, and is worth stating because
+the first version of this analysis overclaimed it.
 
 ### A7. Substitute-then-transpose is excluded for PK10. Tier 2.
 
@@ -192,3 +200,167 @@ PK10: DIMMADOME, CAPITATED, OBERKAMPF, LUMINARIA). A genuine hit looks different
 PK3 the top five were PENTIMENTO, SENTIMENTO, TESTAMENTO, SENTIMENTS, PORTAMENTO: the true key
 with its orthographic neighbours stacked underneath, because a near-miss still cancels most of
 the keystream. That clustering is the signature to look for, and it is absent everywhere here.
+
+---
+
+## C. AUTOPSIES — everything that reached or passed a ceiling
+
+Four things crossed a ceiling at some point tonight. All four died. Each is written up because the
+*pattern* of how they died is reusable.
+
+### C1. PK8, period 7, mutual-IoC solver — killed by enlarging the null
+
+A new transposition-invariant solver was built for this run: align the p column histograms by
+shift to maximise pooled IoC. It needs no plaintext alphabet, no quadgram model, and it survives an
+inner columnar — none of which is true of §6's quadgram-optimised period sweep.
+
+* With **25** shuffle-nulls: observed 0.0618, null max 0.0572 → *above ceiling*.
+* With **200**: observed 0.0618, null max 0.0574 → still above, z = +4.80.
+* With **2,000**: null max = **0.06183** — *exactly the observed value*. Empirical p = 0.0005.
+
+The lesson is the doctrine's: an undersized null manufactures hits. The statistic maximises over
+26⁶ shift vectors on 22 letters per column, so it overfits hard and its null has a long tail.
+
+The autopsy also shows *how* it overfits. Sorted letter profile of the aligned residual against
+English:
+
+```
+observed  0.163  0.078  0.078  0.072  0.065  0.065  0.052  0.046
+English   0.138  0.104  0.085  0.076  0.072  0.071  0.069  0.063
+```
+
+One spiked letter and then a flat tail — the optimiser stacked the commonest ciphertext letter of
+each column onto a single output letter. English decays smoothly. χ² of the sorted profile against
+English = 85.6. Independently, the quadgram solve at p=7 reached −6.742 against a null max of
+−6.579 (English is −4.25), i.e. below its own ceiling. **PK8 p=7 is dead on both solvers.**
+The same treatment discharged PK8 p=14, PK9 p=7 and PK9 p=14.
+
+Across the full mutual-IoC grid (3 targets × 2 alphabets × 23 periods, 400 shuffle-nulls and 30
+restarts per cell) the only cells above their own null max were PK8 at p=7 in both alphabets, and
+both are explained above. PK9 max z +3.18, PK10 max z +2.19, zero cells above ceiling.
+
+### C2. PK9, substitute-then-transpose at W=3 — killed by the true-cipher comparison
+
+Observed z = +3.80, empirical p = 0.0017 against 3,000 shuffles, but *below* the 3,000-shuffle
+ceiling. Decisive check: **a genuine period-3-then-width-3 cipher gives z = +8.99 ± 1.76** at this
+length, so the observation sits 2.9 σ *below* the distribution it would have to be drawn from.
+Block IoCs are 0.0514 / 0.0638 / 0.0505 where three 48-letter English blocks would be ≈0.065 each.
+Over 43 cells for PK9 the family-wise rate is ≈0.29. Dead.
+
+### C3. PK10, two-word product at (a=9, b=14) — killed by multiplicity and by the decrypt
+
+The only cells the period argument in A1 does not already kill are those with lcm > 100. Filtering
+the PK10 sweep to those 504 cells, the observed max z 6.40 exceeds that subset's 5-replay ceiling
+of 6.01. Rebuilt with **200 replays**: null mean 4.536, sd 0.338, max 5.516, so the single-cell
+empirical p < 0.005. But the cell was one of **2,040** in the sweep, which predicts ~10 cells this
+extreme by chance, and the full-sweep ceiling (6.75) exceeds it. Cells beating their own null in
+the lcm>100 subset: 88 of 504, against 84 expected.
+
+The decrypt settles it. Peeling the top word (DIMMADOME) at period 9 and solving the period-14
+residual transposition-invariantly gives pooled IoC 0.0518 (English 0.065) and a quadgram score of
+**−7.96** where English is −4.25 and random is −8.23. The plaintext head reads
+`BVGRBGTPXNHKBZTHHVCJHOHHWSPGIFCMWPAMALHTSCPHHAJCERKSHHYQHAHIHOTVDHHYDTHYEGAHHHBAJGIHWVDVHW` —
+H-stacking, the same overfit signature as C1. The ranked words (DIMMADOME, CAPITATED, OBERKAMPF,
+LUMINARIA, CAPITAINE) share no orthography, unlike a real hit. Dead.
+
+### C4. The shared-keystream coupling test is honestly under-powered
+
+No pair of PK8/PK9/PK10 shows a shared keystream at any offset, in either alphabet, forward or
+reversed — every scan below its matched ceiling. But the test's separation is only **0.9 σ**: a
+genuine shared-key pair gives IoC 0.0402 ± 0.0028 against 0.0384 ± 0.0019 for independent keys at
+n=144. So this is a **Tier 3 screen, not an exhaustion**, and it should not be cited as ruling out
+a shared key. It is recorded here mainly so the next session does not mistake it for one.
+
+---
+
+## D. UPDATED ELIMINATION MAP (replaces §6 of PK_CONTEXT.md)
+
+Everything from §6 still stands except where noted. New entries from tonight are marked **[NEW]**.
+Tier 1 = proven impossible · Tier 2 = exhausted within stated rules · Tier 3 = screen, family open.
+
+### Tier 1 — unchanged
+* All 26 letters present in all three → no 24/25-cell cipher can be the final layer.
+* Census χ² against English 646 / 1071 / 3941 on 25 df → no pure transposition anywhere.
+* Length preserved → no length-changing construction at the outer layer.
+
+### Tier 2 — exhausted (each with a positive control that passes)
+
+Carried over from §6: periodic polyalphabetic p 2–24 (quadgram-scored, four Quagmire pairings);
+sorted-profile period test p 2–12; 325 thematic keyed alphabets × p 3–14; single dictionary key;
+Hill 2×2 and 3×3 with additive periods 1–3; affine decimation; antipodal coupling; joint width-9
+multiple anagramming; joint single-key screen.
+
+**[NEW] PK10 — no periodic keystream of period 2–100, in any alphabet, any mode, with or without an
+inner columnar.** 99 periods, 500 shuffle-nulls and 120 power sims each; max observed z **+1.92**;
+power 1.00 at every period except 63 (0.71). Control: the statistic is key-value-agnostic, so its
+power is unaffected by what the key letters are. *This subsumes the whole two-word product family
+at lcm ≤ 100 for PK10, including PK4's own (5,9)→45 and PK3's (10,8)→40.*
+
+**[NEW] PK10 — not substitute-then-transpose.** 116 of 116 (W,q) cells at power 1.00, max z +2.83.
+
+**[NEW] PK10 — not a running key (nor plaintext autokey) whose key text is read in the same
+tableau as the plaintext.** Census log-likelihood ratio is 5.2 σ (KA) and 6.3 σ (AZ) from the
+running-key hypothesis and 0.2 σ from the flat-keystream hypothesis. *Tier 3, not Tier 2, if the key
+text may be read through an independent keyed alphabet* — that variant separates by only 1.0 σ and
+stays open (§A6).
+
+**[NEW] PK8, PK9, PK10 — two-word additive product keys from dictionary words, full grid.**
+2,040 cells and **245,423,952 word-evaluations per target** (736M total): {KA, A-Z} text alphabet ×
+{KA, A-Z} key alphabet × {sub, add, beaufort} × 91 length pairs 3–16 × up to 2 decomposition
+directions × 5 letter-shuffle nulls. Observed maxima 7.07 / 7.15 / 6.40 against matched ceilings
+7.87 / 7.83 / 6.75. Controls: recovers **PENTIMENTO** and **ORDINATE** from the real PK3 ciphertext
+and **OCHRE** and **VERDIGRIS** from the real PK4 ciphertext (which has a columnar underneath), all
+at rank 1 of 21k–38k, z +5.2 to +9.5. Word list 289,026, lengths 3–16.
+*This closes frontier item 1 — all 58 PK10 length pairs, and 91 in fact.*
+
+**[NEW] PK8, PK9 — periods 2–8 (PK9 also 10) and PK8 periods 2–6, 8–13, 15–17**, transposition-
+invariantly, at power 0.85–1.00. §6's period result was quadgram-scored and therefore blind to an
+inner columnar; this one is not.
+
+**[NEW] Mutual-IoC periodic solver, p 2–24, all three targets, both alphabets**, 400 shuffle-nulls
+and 30 restarts per cell. A transposition-invariant, alphabet-agnostic *solver* (not just a
+detector) that §6 never had. Nothing survives; the two PK8 p=7 cells that crossed a 400-null
+ceiling die against a 2,000-null one (§C1).
+
+**[NEW] Crib × key-structure consistency, no-transposition case.** 54,208,692 effective tests:
+10,685 cribs × 404 key structures (single periods 2–24, all two-factor pairs 3–16, all three-factor
+triples 3–14, all four-factor quadruples 3–10) × 3 targets × 2 alphabets × 3 modes × {prefix,
+suffix}. Expected false positives 0.67, **observed 0**. Controls: recovers PK3's true (8,10) as the
+*only* passing structure and PK1's period 10 exactly; 42,200 null tests gave 0 false passes.
+
+**[NEW] Wrap-crib conjunction.** 3,214,350 hash-join tests over wrap periods Q (PK8 124–147 plus
+144, PK9 115–138, PK10 144–498), requiring a prefix crib and a suffix crib to agree exactly on the
+6–29 overlapping key letters. Zero agreements; expected false positives 0.01. This is the only
+test that can see a key *shorter than the message*, which no period scan can reach.
+
+### Tier 3 — screens only, family open
+
+All §6 Tier 3 entries stand. Added tonight:
+
+* **[NEW] Progressive / sliding keys** — k[i] = key[i%p] + (i//p)·d, + i·d, and + (i(i+1)/2)·d, over
+  every (p, d) with both alphabets: 15,600 cells on PK10, 4,680 on PK8, 4,368 on PK9, 150 nulls per
+  cell. Max z +4.70 on PK10 against ≈+4.4 expected for 15,600 correlated cells. Controls recover
+  synthetic progressive keys at rank 1 with z +3.7 to +28.7 at all three lengths. Nothing, but only
+  three progression laws were tried.
+* **[NEW] Shared keystream between the three targets** — every ordered pair × 2 alphabets × forward
+  and reversed × every offset. All below their matched ceilings, **but the test separates the
+  hypotheses by only 0.9 σ** (§C4). Weak; do not cite as an exhaustion.
+* **[NEW] Derived coupling texts** (frontier item 6): d = c_x ± c_y for every ordered pair, both
+  alphabets, forward and reversed — 48 derived texts, each given a transposition-invariant period
+  scan with power and a two-word product grid. See §D1 for the state at write-up time.
+
+### D1. Corrections to the prior campaign
+
+* **The dictionary was too small.** `wordfreq.top_n_list('en', 200000)` gives 183,150 words and
+  **does not contain PENTIMENTO or WHITESMITH** — a sweep on that list could not have found PK3's
+  own key. The full list gives 289,026 and contains every known key. Any prior sweep run at ~180k
+  words should be re-run, not trusted.
+* **PK3's key is a two-word product.** `q3enc(PT3, ['PENTIMENTO','ORDINATE']) == CT['pk3']`,
+  verified, because lcm(10,8)=40 equals the key length. So the product family is the series'
+  signature construction, and its exhaustion on PK8/9/10 is more meaningful than it looks.
+* **PK9's IoC anomaly is real but should not be over-read.** IoC 0.0445 at n=144 is z=+3.24
+  (p=0.0039, ≈0.012 after the three-target multiplicity) and χ² vs uniform is 47 on 25 df. But its
+  census log-likelihood favours a *flat* keystream over a running key (z=+0.65 vs −1.99), and the
+  short periods that would explain the IoC are excluded at power 0.88–1.00. After the number of
+  statistics computed tonight, an isolated +3.2 is not strong evidence of anything. Treat it as a
+  hint, not a handle.
