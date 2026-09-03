@@ -400,10 +400,18 @@ a shared key. It is recorded here mainly so the next session does not mistake it
 Everything from §6 still stands except where noted. New entries from tonight are marked **[NEW]**.
 Tier 1 = proven impossible · Tier 2 = exhausted within stated rules · Tier 3 = screen, family open.
 
-### Tier 1 — unchanged
+### Tier 1
+
 * All 26 letters present in all three → no 24/25-cell cipher can be the final layer.
-* Census χ² against English 646 / 1071 / 3941 on 25 df → no pure transposition anywhere.
 * Length preserved → no length-changing construction at the outer layer.
+* **[CORRECTED]** §6 cites census χ² against English (646 / 1071 / 3941) as proving no pure
+  transposition. That statistic is **not substitution-invariant and carries no construction
+  information** — PK2, which *is* a pure transposition, scores 33.8 on it (§G2). It says only
+  "a substitution is present", which is still true but far weaker than stated.
+* **[NEW, Tier 1 impossibility]** Searching for the partition of a ciphertext's positions into k
+  IoC-maximising classes is **a function of the census alone**, hence a permutation invariant.
+  PK9's optimum equals its own shuffle-null *maximum* to four decimals at k=2,3,4. **That attack has
+  provably zero power. Do not attempt it** (§G2).
 
 ### Tier 2 — exhausted (each with a positive control that passes)
 
@@ -466,6 +474,24 @@ expected false positives 3.20, observed 0 (§F8). Plus **367,133,184 tests** acr
 coupling texts (§F5), **16,525,920** with cribs at every offset (§F11), and **1,000,200** for the
 permutation-free width-W multiset case (§F1). **Crib-family total: 798,062,550 exact tests, zero passes**, by a pipeline shown end-to-end to recover PK1's true period from a crib its own generator
 produced (§F9).
+
+**[NEW] PK9 — two-word product keys, excluded by census concentration.** Independent of every
+sweep in §B: PK9's census is **2.3–2.8 σ too concentrated** for a two-word product at lcm 36, 40,
+42, 45 or 84 (6,000 forward simulations each, plaintext drawn from the setter's own plaintexts).
+The product key is this series' signature construction, and this route rules it out on PK9 without
+searching key space at all (§G2).
+
+**[NEW] PK9 — short-period polyalphabetics p = 3–12** with a full-diversity key, at power 0.85–1.00,
+and **Quagmire-III period 6 at power 0.993 — including with a columnar underneath** (same power),
+so a hidden transposition does not rescue them. Also excluded by IoC: pure transposition and
+monoalphabetic (z=−6.84), flat/random long key (+3.18), ciphertext autokey (+2.58), invertible
+Hill 3×3 (+2.30). Controls: the same battery recovers PK1's period 10 and PK6's period 6 (the
+latter under a double columnar) and **correctly stays silent on PK2 and PK5** (§G2).
+
+**[NEW] PK10 — not a Vigenère-family stream with a word-concatenation key** (words of length ≥ 8),
+and **not a periodic free-key polyalphabetic of period 25–63** with a word-decomposable plaintext.
+Controls recover 96–97% of matched 504-letter synthetics at z=+24, and 100% of both plaintext and
+key on the periodic variant at z=+41.8 (§G3).
 
 **[NEW] Wrap-crib conjunction.** 3,214,350 hash-join tests over wrap periods Q (PK8 124–147 plus
 144, PK9 115–138, PK10 144–498), requiring a prefix crib and a suffix crib to agree exactly on the
