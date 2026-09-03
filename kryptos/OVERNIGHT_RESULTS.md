@@ -1685,3 +1685,26 @@ needs the full 3¹⁸/3! = 64,616,748 enumeration (roughly 5 minutes uncontended
 extrapolation from 200,000 samples; extrapolating a maximum over 6.5 × 10⁷ from a sample that size
 is the error this section exists to avoid. **Next session: run that enumeration.** If the truth
 ranks 1 there, the attack loses its balance assumption and the space of reachable keys widens by 23×.
+
+**Power test for the sweep itself — it passes, which is not what §A0 would have predicted.**
+(`power_smallmod.py`, 296,546,460 configurations, 1,546 s, `results/power_smallmod_144.json`.)
+
+Doctrine says a negative from a ranking search is worthless unless the identical search, run on text
+that genuinely contains the target, clears the same family-wise ceiling. So: plant a real
+mod-5 lagged-Fibonacci keystream (L=6, ACA, multiplier 21) over the setter's own plaintexts at
+**n=144, with a W=9 columnar applied to the plaintext first**, and run the whole 68-cell grid on it.
+
+* true cell **ranks 1 of 68**, obs **0.06857** against a family-wise ceiling of **0.05925** — the
+  ceiling being the largest cell-best IoC over all 68 cells × 4 letter-shuffles of the planted text;
+* the **exact primer (2,1,0,2,1,1) and the exact multiplier are recovered**, through the columnar;
+* **5 of 5 further plant realisations** beat the ceiling, obs 0.0657–0.0764.
+
+So the sweep has full power at PK9's length, and **its silence on PK9 is informative — Tier 2, not
+Tier 3.**
+
+**Why this passes where §A0's searches fail, since the contrast matters more than the verdict.** The
+product-key and Hill grids score by the *mean IoC of residue classes*, so at n=144 each class holds
+a handful of letters and the statistic is built from small samples. Peeling a correct small-modulus
+keystream instead leaves the **entire 144-letter text monoalphabetic at once**. Same length, same
+ceiling arithmetic, vastly stronger signal. §A0's conclusion is about statistics computed on short
+residue classes, not about short messages as such — a distinction I had been drawing too broadly.
