@@ -886,6 +886,19 @@ language*, so the objective ranks its construction above genuine plaintext. This
 mode as §C1's letter-stacking and the §F-autopsy word-salad at period ~70 — an optimiser with more
 freedom than the data constrains will manufacture something that beats the truth on the proxy.
 
-**Consequence for the next run:** before widening any beam, calibrate the objective so that a *known*
-(plaintext, key) pair outscores anything the beam can construct at that width — i.e. make
-`truth_wins: true` on PK1 the entry condition. Until then this family is untested, not screened.
+**The width really is irrelevant, measured.** Twelve weighting configurations were run at beam
+20,000 *and* beam 100,000 (minimum word length 7–10, key weight 1–3). `truth_wins` is **False in
+every one**, and the gap `beam_obj − true_obj` stays at **+0.06 to +0.22** log units regardless of
+beam width. Quintupling the beam does not close it, which is what distinguishes a misspecified
+objective from an underpowered search.
+
+**But the family is not hopeless — quite the opposite.** At beam 100,000 with minimum word length
+10, plaintext recovery on PK1 reaches **87.5%**. The beam very nearly reconstructs a real solved
+puzzle; what stops it is a ~0.1 log-unit preference for its own slightly-wrong answer. That is a
+*language-model* gap, not a search gap.
+
+**Consequence for the next run:** before widening any beam, fix the objective — a stronger language
+model (5-gram or word-level, or a length-normalised prior that stops rewarding hyper-typical text)
+rather than more search. The entry condition should be `truth_wins: true` on PK1, which is
+measurable in seconds. Until that holds, this family is **untested, not screened** — and 87.5%
+recovery says it is worth testing properly.
