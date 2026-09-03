@@ -597,7 +597,7 @@ compute. Same for a Gromark whose primer derives from PK9's plaintext.
   Porta, and **all four Quagmires with any keyed alphabet**, with or without an inner columnar —
   a much wider net than §6's four pairings.
 * Two-word dictionary product keys on any of the three, lengths 3–16.
-* Cribs at fixed positions with no transposition — ~797 million exact tests, zero passes.
+* Cribs at fixed positions with no transposition — 798,062,550 exact tests, zero passes.
 * **Mid-text cribs.** Bounded on principle (§F11): the longest verbatim substring shared between any
   two of the seven known plaintexts is 14 letters, too short to constrain the relevant structures.
 * Gromark mod-10 digit primers at L ≤ 8 under the four recurrences tested.
@@ -805,7 +805,7 @@ opening suggested the pattern, not because the answer was inserted. Running the 
 * and the 20-letter prefix `INVESTIGATIONLOGITEM` alone already returns period 10 at 7.1 × 10⁻¹⁵.
 
 So the whole chain works on a real puzzle of this series. This is now control #8 in `verify.py`.
-It materially strengthens every crib negative in this document: the ~780 million zero-pass tests
+It materially strengthens every crib negative in this document: the 798,062,550 zero-pass tests
 were run by a pipeline demonstrated to recover a genuine key structure from a genuinely generated
 crib.
 

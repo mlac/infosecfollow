@@ -208,8 +208,43 @@ def _pfromk(mode, cv, kv):
     if mode == 'sub':  return (cv + kv) % 26
     return (kv - cv) % 26            # beau: c = k - p
 
+def bigram_tables(alpha):
+    """Marginalise the quadgram model down to bigram / unigram log10-probs,
+    in ALPHA-position space."""
+    qg = load_quadgrams().reshape(26, 26, 26, 26)
+    pa = np.array([AZI[c] for c in alpha])
+    q = np.power(10.0, qg[np.ix_(pa, pa, pa, pa)])
+    bi = q.sum(axis=(0, 3)); bi /= bi.sum()
+    uni = bi.sum(axis=0); uni /= uni.sum()
+    return np.log10(bi + 1e-12).astype(np.float32), np.log10(uni + 1e-12).astype(np.float32)
+
+def _lookahead(ct, mode, L, BI, UNI):
+    """For residue r, LA[r] is a 26x26 table indexed [k_{r-1}, k_r] giving the
+    bigram log-prob of every already-determined pair (p_{j-1}, p_j) with
+    j%L==r and j>=L; LA0 is the 26-vector unigram term for residue 0."""
+    n = len(ct); cv = np.asarray(ct, dtype=np.int64)
+    K = np.arange(26)
+    LA = []
+    for r in range(L):
+        js = np.arange(r, n, L)
+        js = js[js >= L]                       # pairs whose left member exists
+        if r == 0:
+            js = js[js >= 1]
+        if js.size == 0:
+            LA.append(np.zeros((26, 26), dtype=np.float32)); continue
+        rprev = (r - 1) % L
+        pcur = _pfromk(mode, cv[js][None, :], K[:, None])          # [26, m]
+        pprv = _pfromk(mode, cv[js-1][None, :], K[:, None])        # [26, m]
+        t = BI[pprv[:, None, :], pcur[None, :, :]].sum(axis=2)     # [kprev, kcur]
+        LA.append(t.astype(np.float32))
+    # unigram term for the very first residue's own column
+    js0 = np.arange(0, n, L); js0 = js0[js0 >= L]
+    LA0 = UNI[_pfromk(mode, cv[js0][None, :], K[:, None])].sum(axis=1).astype(np.float32) \
+          if js0.size else np.zeros(26, dtype=np.float32)
+    return LA, LA0
+
 def periodic_beam(ct, trie, QGM, mode='add', L=27, beam=100000, Wpt=1.0,
-                  verbose=0):
+                  verbose=0, BI=None, UNI=None):
     """Plaintext must decompose into dictionary words; key is FREE but periodic
     with period L.  Phase 1 (i<L) branches 26 ways pruned by the word trie and
     keeps `beam` candidate key-prefixes; phase 2 (i>=L) is deterministic -- the
@@ -220,28 +255,42 @@ def periodic_beam(ct, trie, QGM, mode='add', L=27, beam=100000, Wpt=1.0,
     ROOTCH = CONT[0].copy()
     n = len(ct); t0 = time.time()
     ptn = np.zeros(1, dtype=np.int32); ctx = np.zeros(1, dtype=np.int64)
-    sc = np.zeros(1, dtype=np.float32)
+    sc = np.zeros(1, dtype=np.float32); hs = np.zeros(1, dtype=np.float32)
     P1 = np.zeros((1, L), dtype=np.uint8)
+    KP = np.zeros((1, L), dtype=np.int64)          # pinned key letters
+    LA, LA0 = (None, None)
+    if BI is not None:
+        LA, LA0 = _lookahead(ct, mode, L, BI, UNI)
     for i in range(min(L, n)):
         N = ptn.shape[0]
         ptrow = CONT[ptn]
         ptres = np.where(ISEND[ptn][:, None], ROOTCH[None, :], np.int32(-1))
         qg = QGM[ctx] if i >= 3 else np.zeros((N, 26), dtype=np.float32)
         base = sc[:, None] + qg
-        cp, cs, cr, cl = [], [], [], []
+        kcur = keyperm(mode, int(ct[i]))[np.arange(26)]        # k for each pt letter
+        if LA is not None:
+            if i == 0:
+                look = LA0[kcur][None, :] + LA[0][KP[:, (L-1)] , :][:, kcur] * 0.0
+            else:
+                look = LA[i][KP[:, i-1], :][:, kcur]
+        else:
+            look = 0.0
+        heur = hs[:, None] + (base - sc[:, None]) + look
+        cp, cs, ch, cr, cl = [], [], [], [], []
         for (pa, bon) in ((ptrow, 0.0), (ptres, (Wpt*ENDLP[ptn])[:, None])):
             idx = np.flatnonzero((pa >= 0).ravel())
             if idx.size == 0: continue
             r = idx // 26; c = (idx - r*26).astype(np.int64)
             cp.append(pa.ravel()[idx]); cs.append((base + bon).ravel()[idx])
-            cr.append(r); cl.append(c)
-        npt = np.concatenate(cp); nsc = np.concatenate(cs)
+            ch.append((heur + bon).ravel()[idx]); cr.append(r); cl.append(c)
+        npt = np.concatenate(cp); nsc = np.concatenate(cs); nhs = np.concatenate(ch)
         npar = np.concatenate(cr); nlet = np.concatenate(cl)
-        sel = np.argpartition(-nsc, beam)[:beam] if nsc.size > beam else np.arange(nsc.size)
-        ptn = npt[sel]; sc = nsc[sel]
+        sel = np.argpartition(-nhs, beam)[:beam] if nhs.size > beam else np.arange(nhs.size)
+        ptn = npt[sel]; sc = nsc[sel]; hs = nhs[sel]
         par = npar[sel]; let = nlet[sel]
         ctx = (ctx[par] % 676)*26 + let
         P1 = P1[par]; P1[:, i] = let.astype(np.uint8)
+        KP = KP[par]; KP[:, i] = kcur[let]
     KEYS = np.empty((ptn.shape[0], L), dtype=np.int64)
     for r in range(L):
         KEYS[:, r] = keyperm(mode, int(ct[r]))[P1[:, r].astype(np.int64)]
