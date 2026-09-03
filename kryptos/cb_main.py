@@ -23,6 +23,8 @@ WHICH = sys.argv[1]                      # 'real' | 'null'
 NSHUF = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 TAGS  = sys.argv[3].split(',') if len(sys.argv) > 3 else ['pk8', 'pk9', 'pk10']
 SEED  = int(sys.argv[4]) if len(sys.argv) > 4 else 12345
+DO_LIN = '--nolin' not in sys.argv
+DERIVED = '--derived' in sys.argv
 
 CORP = corpus(max_open=99999, max_close=99999, max_phrase=99999)
 LS   = [4,5,6,7,8,9,10,11,12]
@@ -50,7 +52,7 @@ def battery(K, mode, tag, alpha_name, m, meta, acc):
         h = fn(K)
         for i in np.nonzero(h)[0]: acc[name].append(meta(int(i)))
     # --- linear multi-period structure (product keys, PK3/PK4 shape)
-    for st in STRUCTS:
+    for st in (STRUCTS if DO_LIN else ()):
         R2, R13, r2, r13 = checker(m, st)
         fp = (2.0**-r2)*(13.0**-r13)
         if fp > MAXFP: acc['skipped'] += 1; continue
@@ -118,6 +120,23 @@ def new_acc():
 
 t0 = time.time(); OUT = {}
 rng = np.random.default_rng(SEED)
+if DERIVED:
+    # PK8's key may be PK9's PLAINTEXT (design law 4: PK5's key is PK4's plaintext).  Then
+    # d = c8 - c9 is PK8's plaintext under PK9's own keystream, so a crib on d interrogates PK9's
+    # key directly.  Prior work ran only the LINEAR structure test on these; here they get the
+    # word / segmentation / running-key / English tests as well.
+    from derived import derived_texts
+    for tagd, (s_, an_) in derived_texts().items():
+        if 'R' in tagd.split('_')[0]: continue          # skip the reversed variants
+        acc = new_acc(); run_one(tagd, s_, acc, tagd)
+        acc['wall'] = round(time.time()-t0, 1); acc['eng_mean'] = acc['eng_sum']/max(acc['eng_n'],1)
+        acc.pop('eng_sum'); OUT[tagd] = acc
+        print(f"[{tagd}] rows={acc['rows']:,} w1={acc['n_w1']} w2={acc['n_w2']} "
+              f"seg={acc['n_seg']} sib={len(acc['sibling'])} per={len(acc['periodic'])} "
+              f"engmax={acc['eng_best'][0]:.3f} ({time.time()-t0:.0f}s)", flush=True)
+    json.dump({'which': 'derived', 'n_cribs': len(CORP), 'wall_sec': round(time.time()-t0, 1),
+               'per_text': OUT}, open('results/cb_main_derived.json', 'w'), indent=1, default=str)
+    print('wrote results/cb_main_derived.json'); raise SystemExit
 for tag in TAGS:
     if WHICH == 'real':
         acc = new_acc(); run_one(tag, CT[tag], acc, tag)
