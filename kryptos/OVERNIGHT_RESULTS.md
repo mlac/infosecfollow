@@ -1798,3 +1798,12 @@ why the profile, not the text, is the diagnostic.)
 And the multiplicity is unremarkable: at rank ~2 of 31 the single-cell empirical p is ≈ 0.065, so
 across the 18 cells run the **expected number of ties this extreme is 1.16**. Seeing one is what 18
 cells predict. **Refuted.**
+
+**PK8's own second powered cell settles it.** The plain-A–Z p=18 j=3 cell — same target, same
+period, same j, different alphabet — lands at **obs −509.29 against a null max of −492.59, z = −0.50**,
+nowhere near its ceiling. A real period-18 three-letter key would not show as a tie in one alphabet
+and 17 nats below the ceiling in the other. PK8's other cells agree: KA p=18 j=2 (+1.18),
+KA p=24 j=2 (−0.45), AZ p=18 j=2 (−0.21).
+
+**PK8 verdict: negative**, on the same terms as PK9 — its key is not a period-18 key built from
+three equally-used letters, in either alphabet.
