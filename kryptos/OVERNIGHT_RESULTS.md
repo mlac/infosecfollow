@@ -1057,12 +1057,25 @@ The exclusion direction matters for how this is read: a false *rejection* here w
 period, and at α=0.05 over ~27 periods roughly one such error is expected. **Trust the α=0.01
 column; prioritise the α=0.05 one.**
 
-**One coincidence worth carrying: p=14 survives for both PK8 and PK9 at both thresholds.** It is the
-only period that does. p=7 was elevated on both targets in the first recon and is now excluded and
-separately autopsied to death (§C1), so 14 is not simply 7's echo. With ~27 periods × 3 targets the
-coincidence is unremarkable on its own — but it is the single place two targets agree, and PK6's
-solved key PORTAL has period 6 while PK2's columnar had width 7, so 14 = 2 × 7 is at least in the
-setter's numeric vocabulary. Cheap to check properly and worth the half hour.
+**I flagged p=14 as a cross-target coincidence, then chased it down and it is not one.** Re-run with
+**4,000 nulls and 2,000 power simulations** per period — roughly 10× the original budget:
+
+| | observed z | a true cipher gives | sd below | p | verdict |
+|---|---|---|---|---|---|
+| PK8 p=7 | +3.09 | +6.86 ± 1.49 | 2.52 | 0.0058 | excluded |
+| PK8 p=14 | +2.21 | +4.61 ± 1.38 | 1.75 | 0.0403 | excluded at 0.05 only |
+| PK8 p=28 | +2.30 | +3.11 ± 1.23 | 0.66 | 0.254 | undecidable |
+| PK9 p=7 | +2.46 | +5.53 ± 1.45 | 2.12 | 0.0170 | excluded at 0.05 |
+| PK9 p=14 | +1.92 | +3.71 ± 1.38 | 1.30 | 0.098 | undecidable |
+| PK9 p=28 | +1.62 | +2.43 ± 1.44 | 0.56 | 0.286 | undecidable |
+
+**The real pattern is not a coincidence at p=14 — it is that every survivor on both targets is
+p ≥ 14.** PK8's α=0.01 survivors are 14, 16, 21, 25, 26, 27, 28; PK9's are 14, 17, 18, 21, 22, 23,
+27, 28. The test decides cleanly below 14 and progressively cannot decide above it, exactly as the
+within-class pair count predicts (§F15). So those survivor lists are **not candidate periods — they
+are the periods where the test runs out of power**, and reading them as leads would be a mistake.
+The honest statement is: PK8 and PK9 are excluded for periods up to ~13, and undetermined above,
+with the boundary set by information rather than by evidence.
 
 Why the information is present here but not at long periods: the analytic z ceiling from the
 within-class pair count (§F15) stays at **3.06–4.48 across p=9–18 on PK9**, versus 1.16 at p=72. The
