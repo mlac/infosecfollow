@@ -1750,11 +1750,15 @@ matched to the search by construction rather than by argument.
 |---|---|---|---|---|---|---|---|
 | PK9 | KRYPTOS | 18 | 2 | −472.99 | −477.93 ± 5.03 | −468.21 | +0.98 |
 | **PK9** | **KRYPTOS** | **18** | **3** | **−459.53** | **−461.52 ± 5.75** | **−450.83** | **+0.35** |
+| PK9 | KRYPTOS | 24 | 2 | −468.19 | −471.83 ± 4.30 | −457.74 | +0.85 |
+| PK9 | plain A–Z | 18 | 2 | −485.00 | −481.56 ± 5.10 | −471.57 | −0.67 |
+| **PK9** | **plain A–Z** | **18** | **3** | **−465.23** | **−466.18 ± 4.31** | **−457.10** | **+0.22** |
 
-The **p=18, j=3 cell is the one with a power figure behind it** — 85% exact recovery on planted keys
-at this exact length — and PK9 lands at **z = +0.35, comfortably below its own null maximum**. That
-is a real exclusion, not a silence: a solver that finds a planted key 17 times in 20 finds nothing
-here.
+The **two p=18, j=3 cells are the ones with a power figure behind them** — 85% exact recovery on
+planted keys at this exact length — and PK9 lands at **z = +0.35 (KRYPTOS) and +0.22 (plain A–Z),
+both comfortably below their own null maxima**. That is a real exclusion, not a silence: a solver
+that finds a planted key 17 times in 20 finds nothing here, in either alphabet. Every unpowered cell
+agrees, which is corroboration rather than evidence.
 
 **Verdict: Tier 2, within a scope worth stating twice.** PK9's key is **not** a period-18 key built
 from 3 equally-used letters read through the KRYPTOS alphabet. It says nothing about unequal letter
