@@ -673,3 +673,14 @@ For PK10 the grid sees essentially the whole two- and three-word space.
   throughout is **1,360 distinct searches**. No verdict changes — the matched null was computed from
   the same cells, so the ceiling absorbs the duplication — but the next session should not spend a
   third of its compute on beaufort while scoring by class IoC.
+
+The crib sweep has the mirror-image redundancy, in the other mode: there `add` gives K = −K_sub, and
+a product structure is **closed under negation** (if k[i] = Σ u_f[i mod p_f] then −k[i] = Σ (−u_f)[i
+mod p_f]), so the consistency verdict is identical. Verified: K_add = −K_sub on all 400 test cribs,
+and the verdict matched in **2,000 of 2,000** structure tests. `beau` (K = C + P) *is* a distinct
+search there. So the crib sweep's 54,208,692 tests are ≈ 36.1 million distinct ones and its expected
+false-positive count drops from 0.67 to ≈0.45 — the observed count is 0 either way.
+
+The general lesson for the next session: **check whether your modes are actually distinct under the
+statistic you are scoring with.** Two of the three modes collapsed in each of the two biggest sweeps
+here, in opposite directions, for reasons specific to each statistic.
