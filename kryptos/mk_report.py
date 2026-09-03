@@ -124,7 +124,17 @@ if real:
 
 # ---------- derived (real-sibling-ciphertext) null + degenerate-decrypt autopsy ----------
 dn = L('results/mk_cat_derived_null.json')
-if dn: out['derived_null_real_sibling_ciphertexts'] = dn
+if dn:
+    out['derived_null_real_sibling_ciphertexts'] = {
+      'what': 'the IDENTICAL concat/interleave search run on real Kryptos-family ciphertexts '
+              '(PK3 = period-40 two-word product key, PK7 = Hill 3x3, PK6 = period-6 PORTAL) '
+              'truncated to n=144/153, and on a 504-letter real-ciphertext surrogate. These keep '
+              'the positional letter clustering that a letter-shuffle destroys.',
+      'caveat': 'PK6 is CONTAMINATED: its true key PORTAL has period 6, which the concat family '
+                'can represent as a=3,b=3, so its high maxima are a partial true fit, not a null. '
+                'PK3 and PK7 are clean. The n=504 surrogate is a single concatenated string, so '
+                'its 8 runs are 8 alphabet/mode configs of ONE surrogate, not 8 surrogates.',
+      'per_surrogate_and_pooled_maxima': dn}
 out['degeneracy_note'] = (
  'Every search maximum reported here is a DEGENERATE decrypt: one letter takes 19-21% of the '
  'text (English maximum is ~13% for E) and the quadgram score is -7.9..-8.8 per letter '
