@@ -1158,3 +1158,37 @@ key model at all*, so the whole corpus × corpus cross-product becomes a hash jo
 difference profile at 26⁻¹² ≈ 1.5 × 10⁻¹⁷ per test. That is a far sharper instrument than my §C4
 shared-keystream test, which separated its hypotheses by only 0.9 σ. I stood my own sweep down
 rather than contend for CPU; its results supersede mine and are reported when that family lands.
+
+---
+
+## G. FAN-OUT FAMILIES NOT YET FORMALLY REPORTED
+
+Six attack families ran as parallel work streams. **Two reported and are written up above**: Gromark
+(§F12, Tier 2 for digit primers) and long periods 25–72 (§F15, Tier 2 on PK10 plus the information
+bound). The rest were still running when this document was last updated. **Their raw output is
+committed under `results/` even though no verdict is written here** — a next session should read
+those files before re-running anything in these families.
+
+| family | raw output | state at write-up |
+|---|---|---|
+| crib battery / columnar / cross-target | `results/cb_*.json` | far along, see below |
+| word-constrained dual beam | `results/wb_*.json` | see §F13 for the objective finding |
+| PK9 anomaly deep-dive | — | queued |
+| manufactured long keys | — | queued |
+
+**What the crib family had already established at write-up** (read from its artifacts, not from a
+formal report, so treat the numbers as provisional):
+
+* `cb_col_real.json` — crib with a columnar underneath, 250 cribs × 24 periods (2–45) × widths
+  dividing n, minimum 5 degrees of freedom: **84,304 solve calls covering 15,296,370,672 slot
+  orders exactly** by depth-first pruning. **Zero hits.** That is three orders of magnitude more
+  permutation coverage than my own stood-down sweep would have reached.
+* `cb_pair_*.json` — the key-free cross-target test (§F18). Positive control **recovers a planted
+  shared keystream** between two synthetic ciphertexts; the matched null runs 18,825,960 tests per
+  shuffle with zero hits.
+* `cb_autopsy_linear.json` — one linear-battery pass was autopsied and killed, and the reasoning is
+  worth repeating: the hit (`FIFTEENDAYSINTHEARCHIVE`, offset 15, structure (3,16), KA, beaufort)
+  has a false-positive rate of 8.4 × 10⁻⁸ **per test**, but the same search ran **234,168,480
+  tests**, giving 1.95 expected false positives against **1 observed**, while the matched null
+  itself yields up to **5** such passes per shuffled run. A one-in-twelve-million hit is still noise
+  when you run 234 million tests.
