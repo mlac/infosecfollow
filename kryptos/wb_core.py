@@ -66,12 +66,13 @@ def keyperm(mode, cv):
     raise ValueError(mode)
 
 def dual_beam(ct, trie, QGM, mode='add', beam=100000, Wpt=1.0, Wkey=1.0,
-              free_key=False, verbose=0, keep_paths=True):
-    """ct: array of ALPHA-position ints.  trie: (CONT, ISEND, ENDLP, nn).
-    free_key=True disables the key-side word constraint entirely (key = any
-    letters) -- used only as a sanity/ablation, not the periodic variant."""
+              free_key=False, verbose=0, keep_paths=True, trie_key=None):
+    """ct: array of ALPHA-position ints.  trie: (CONT, ISEND, ENDLP, nn) for the
+    PLAINTEXT side; trie_key (default = trie) for the KEY side.
+    free_key=True disables the key-side word constraint entirely."""
     CONT, ISEND, ENDLP, NN = trie
-    ROOTCH = CONT[0].copy()                       # [26]
+    KCONT, KISEND, KENDLP, KNN = trie_key if trie_key is not None else trie
+    ROOTCH = CONT[0].copy(); KROOTCH = KCONT[0].copy()
     n = len(ct)
     L26 = np.arange(26, dtype=np.int64)
 
@@ -94,13 +95,13 @@ def dual_beam(ct, trie, QGM, mode='add', beam=100000, Wpt=1.0, Wkey=1.0,
             kyr = np.full((N, 26), -1, dtype=np.int32)
             kye = np.zeros(N, dtype=bool)
         else:
-            kyc = CONT[kyn][:, perm]
-            kye = ISEND[kyn]
-            kyr = np.where(kye[:, None], ROOTCH[perm][None, :], np.int32(-1))
+            kyc = KCONT[kyn][:, perm]
+            kye = KISEND[kyn]
+            kyr = np.where(kye[:, None], KROOTCH[perm][None, :], np.int32(-1))
         qgadd = QGM[ctx] if i >= 3 else np.zeros((N, 26), dtype=np.float32)
         base = sc[:, None] + qgadd
         ptbon = (Wpt * ENDLP[ptn])[:, None]
-        kybon = (Wkey * ENDLP[kyn])[:, None] if not free_key else 0.0
+        kybon = (Wkey * KENDLP[kyn])[:, None] if not free_key else 0.0
 
         cand_pt, cand_ky, cand_sc, cand_par, cand_let = [], [], [], [], []
         for (pa, pb, pbon) in ((ptrow, 0, 0.0), (ptres, 1, ptbon)):
@@ -123,7 +124,7 @@ def dual_beam(ct, trie, QGM, mode='add', beam=100000, Wpt=1.0, Wkey=1.0,
         nctx = (ctx[npar] % 676) * 26 + nlet
 
         # dedup on (ptnode, keynode, ctx) keeping best score
-        key = (npt.astype(np.int64) * NN + nky) * 17576 + nctx
+        key = (npt.astype(np.int64) * KNN + nky) * 17576 + nctx
         order = np.argsort(-nsc, kind='stable')
         _, first = np.unique(key[order], return_index=True)
         sel = order[first]
@@ -142,7 +143,7 @@ def dual_beam(ct, trie, QGM, mode='add', beam=100000, Wpt=1.0, Wkey=1.0,
     # final: require plaintext ends on a word boundary
     fin = sc + Wpt * ENDLP[ptn] * ISEND[ptn]
     if not free_key:
-        fin = fin + Wkey * ENDLP[kyn] * ISEND[kyn]
+        fin = fin + Wkey * KENDLP[kyn] * KISEND[kyn]
     good = np.flatnonzero(ISEND[ptn])
     if good.size == 0: good = np.arange(ptn.shape[0])
     b = good[np.argmax(fin[good])]
@@ -180,13 +181,13 @@ def best_seg_lp(s, trie, alpha):
     while i > 0: out.append(s[bp[i]:i]); i = bp[i]
     return float(dp[n]), list(reversed(out))
 
-def objective(pt, key, trie, QGM, alpha, Wpt=1.0, Wkey=1.0):
+def objective(pt, key, trie, QGM, alpha, Wpt=1.0, Wkey=1.0, trie_key=None):
     ai = {c: i for i, c in enumerate(alpha)}
     a = np.array([ai[c] for c in pt], dtype=np.int64)
     ctx = a[:-3]*17576 + a[1:-2]*676 + a[2:-1]*26 + a[3:]
     qg = float(QGM.ravel()[ctx].sum())
     lpt, sp = best_seg_lp(pt, trie, alpha)
-    lky, sk = best_seg_lp(key, trie, alpha)
+    lky, sk = best_seg_lp(key, trie_key if trie_key is not None else trie, alpha)
     n = len(pt)
     return dict(qg_per=qg/n, pt_lp=lpt, key_lp=lky,
                 obj=(qg + Wpt*lpt + Wkey*lky)/n, seg_pt=sp, seg_key=sk)

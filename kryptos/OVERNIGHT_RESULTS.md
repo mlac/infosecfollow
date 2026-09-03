@@ -230,19 +230,31 @@ the honest limit — see §E for the width-9 extension that was designed but not
 
 | sweep | configurations actually executed | wall | observed best | matched-null ceiling | verdict |
 |---|---|---|---|---|---|
-| PK8 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 542 s | z = 7.07 | 7.87 | Tier **3** — underpowered, see §A0 |
-| PK9 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 521 s | z = 7.15 | 7.83 | Tier **3** — underpowered, see §A0 |
-| PK10 two-word product, full grid | 2,040 cells / **245,423,952 word-evaluations** | 1,728 s | z = 6.40 | 6.75 | **Tier 2 dead** |
-| PK10 period scan 2–100 | 99 periods × (500 nulls + 120 power sims) | 320 s | z = +1.92 | ±2, power 1.00 | **Tier 2 dead** |
-| PK8 period scan 2–30 | 29 periods × 620 | 90 s | z = +3.25 (p=7) | — | p=7, p≥18 open |
-| PK9 period scan 2–28 | 27 periods × 620 | 85 s | z = +2.41 (p=7) | — | dead p≤8, p=10 |
-| Mutual-IoC periodic solver, p 2–24 | 3 targets × 2 alphabets × 23 periods × 400 shuffle-nulls × 30 restarts | 400 s | see §C1 | per-period | **Tier 2 dead** |
-| Progressive-key scan | pk10 15,600 cells, pk8 4,680, pk9 4,368; 150 nulls each | 300 s | z = +4.70 (pk10) | ≈ +4.4 expected | Tier 3, at expectation |
+| **Gromark, digit primers** | **1.235 × 10¹⁰ trial decryptions** (all 10⁷ primers at L=7, all 10⁸ at L=8) | 5,700 s | IoC .0637 | .0628 pooled | **Tier 2** (§F12) |
+| PK10 two-word product, full grid | 2,040 cells / 245,423,952 word-evaluations | 1,728 s | z = 6.40 | 6.75 | **Tier 2 dead** |
+| PK8 two-word product, full grid | 2,040 cells / 245,423,952 word-evaluations | 542 s | z = 7.07 | 7.87 | Tier **3** — underpowered, §A0 |
+| PK9 two-word product, full grid | 2,040 cells / 245,423,952 word-evaluations | 521 s | z = 7.15 | 7.83 | Tier **3** — underpowered, §A0 |
+| PK8 three-word product grid | 2,796 cells / **329,959,512 word-evals** | 1,716 s | z = 7.07 | 8.03 | Tier 3, §A0 (§F10) |
+| PK9 three-word product grid | 2,688 cells / **317,784,240 word-evals** | 1,617 s | z = 7.24 | 7.29 | Tier 3, §A0 (§F10) |
+| PK10 three-word product grid | ~5,500 cells | running | §F10 | — | — |
+| PK10 period scan 2–100 | 99 periods × (500 nulls + 120 power sims) | 320 s | z = **+1.92** | ±2, power 1.00 | **Tier 2 dead** |
+| PK8 period scan 2–30 | 29 periods × 620 | 90 s | z = +3.25 (p=7) | §C1 | dead p 2–6, 8–13, 15–17 |
+| PK9 period scan 2–28 | 27 periods × 620 | 85 s | z = +2.41 (p=7) | §C1 | dead p ≤ 8, p=10 |
+| Mutual-IoC periodic solver, p 2–24 | 3 targets × 2 alphabets × 23 periods × 400 nulls × 30 restarts | 400 s | §C1 | per-period | supplementary to the period scan; no sweep-level power test, so **Tier 3** on its own |
+| Blind Hill, k = 2, 3, 4, offsets P 1–6 | PK7 control + 3 targets, **9,039,240 row-evaluations** | 900 s | 0 above ceiling | per-cell | **Tier 2 (PK10)**, Tier 3 PK8/PK9 (§F2) |
 | Substitute-then-transpose scan | pk10 116 (W,q) cells at power 1.00, pk8 14, pk9 43 | 200 s | z = +3.87 (pk9) | §C2 | **Tier 2 dead (PK10)** |
-| Shared-keystream coupling | 24 pair/alphabet/direction combos × every offset + 60 nulls per scan | 40 s | all below | — | Tier 3 (weak test) |
-| Running-key census LLR | 3 targets × 2 alphabets × 8,000 sims | 30 s | z = −5.16 (pk10) | — | **Tier 2 dead (PK10)** |
-| **Crib × key-structure consistency** | **54,208,692 effective tests** | 200 s | 0 passes | 0.67 expected FP | **Tier 2 dead (no-transposition)** |
-| PK10 three-word product grid | 42 moduli × 14 lengths × 12 pairings, 5 nulls/cell | running | §D | — | — |
+| Progressive-key scan | pk10 15,600 cells, pk8 4,680, pk9 4,368; 150 nulls each | 300 s | z = +4.70 (pk10) | ≈ +4.4 expected | Tier 3, at expectation |
+| Running-key census LLR | 3 targets × 2 alphabets × 8,000 sims | 30 s | z = −5.16 (pk10) | — | **Tier 2 (PK10)**, same-tableau only (§A6) |
+| **Crib × key-structure, original corpus** | **54,208,692 tests** (≈36.1M distinct) | 200 s | 0 passes | 0.67 expected FP | **Tier 2** (no transposition) |
+| **Crib × key-structure, enriched corpus** | **355,980,204 tests** (48,616 cribs) | 620 s | 0 passes | 3.20 expected FP | **Tier 2** (no transposition) |
+| **Crib sweep on 48 coupling texts** | **367,133,184 tests** | 480 s | 0 passes | 4.12 expected FP | **Tier 2** (§F5) |
+| Crib at every offset | 16,525,920 tests, 47 recurring phrases | 15 s | 0 passes | 0.19 expected FP | **Tier 2**, and bounded on principle (§F11) |
+| Wrap-crib conjunction | 3,214,350 hash-join tests | 30 s | 0 agreements | 0.01 expected FP | **Tier 2** (§D) |
+| Multiset crib (width W, key period \| L) | 1,000,200 tests | 300 s | 0 passes | 0 of 32,000 null cribs | **Tier 2** within its shape (§F1) |
+| Derived coupling texts, period + product | 48 texts × ~30 periods + product grids | running | +3.76 / +2.62 | §F5 | Tier 3 |
+| Shared-keystream coupling | 24 combos × every offset + 60 nulls per scan | 40 s | all below | — | Tier 3 — **weak test** (§C4) |
+
+**Crib-family total: ~797 million exact tests, zero passes.**
 
 Product-grid cell definition: target × {KA, A-Z} text alphabet × {KA, A-Z} key alphabet ×
 {subtract, add, beaufort} × 91 length pairs (3 ≤ a < b ≤ 16) × up to 2 decomposition directions,
