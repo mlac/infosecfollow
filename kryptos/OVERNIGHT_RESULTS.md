@@ -1729,3 +1729,26 @@ a handful of letters and the statistic is built from small samples. Peeling a co
 keystream instead leaves the **entire 144-letter text monoalphabetic at once**. Same length, same
 ceiling arithmetic, vastly stronger signal. §A0's conclusion is about statistics computed on short
 residue classes, not about short messages as such — a distinction I had been drawing too broadly.
+
+**The attack run on PK9 — negative, and this one counts.** (`partition_attack.py`, 30 matched nulls
+per cell, `results/partition_attack.json`.)
+
+The null is the identical 2,858,856-partition enumeration run on 30 letter-shuffles of PK9's own
+ciphertext: shuffling preserves the census exactly and destroys any key structure, so the null is
+matched to the search by construction rather than by argument.
+
+| target | alphabet | p | j | observed | null mean ± sd | null max | z |
+|---|---|---|---|---|---|---|---|
+| PK9 | KRYPTOS | 18 | 2 | −472.99 | −477.93 ± 5.03 | −468.21 | +0.98 |
+| **PK9** | **KRYPTOS** | **18** | **3** | **−459.53** | **−461.52 ± 5.75** | **−450.83** | **+0.35** |
+
+The **p=18, j=3 cell is the one with a power figure behind it** — 85% exact recovery on planted keys
+at this exact length — and PK9 lands at **z = +0.35, comfortably below its own null maximum**. That
+is a real exclusion, not a silence: a solver that finds a planted key 17 times in 20 finds nothing
+here.
+
+**Verdict: Tier 2, within a scope worth stating twice.** PK9's key is **not** a period-18 key built
+from 3 equally-used letters read through the KRYPTOS alphabet. It says nothing about unequal letter
+usage (an 8/6/4 key), nothing about periods other than 18, and nothing about j ≥ 4, whose balanced
+spaces are not enumerable by this method. Those are the gaps, and §G8's addendum names which of them
+is cheap to close next.
