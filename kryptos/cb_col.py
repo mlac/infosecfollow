@@ -37,7 +37,7 @@ CR = sorted({s for s, r, k in C_ALL if k == 'open'}, key=lambda s: -len(s))[:500
 CR += sorted({s for s, r, k in C_ALL if k in ('close', 'phrase')}, key=lambda s: -len(s))
 if LIMIT: CR = CR[:LIMIT]
 
-def widths(n): return [W for W in range(2, 13) if n % W == 0 and n // W >= 3]
+def widths(n): return [W for W in (3,4,6,8,9,12) if n % W == 0 and n // W >= 3]
 
 def prep(C, P, n, W, d, mode):
     """Precompute, ONCE per (crib,W,offset,mode,alphabet), the derived keystream value D and the
@@ -79,26 +79,39 @@ def solve_p(pre, W, p, nodecap=NODECAP):
         ok &= ~clash
         ci, si = np.nonzero(valid)
         MAPS[ci, si, ph[ci, si]] = dv[ci, si]
+    # pure-Python DFS: the per-node work is a walk over <=Tmax (phase,value) pairs, which is
+    # ~30x cheaper than the equivalent numpy masking at these array sizes.
+    ML = {}
+    for c in range(W):
+        for s in range(W):
+            if not ok[c, s]: continue
+            ph = PH[c, s]; dv = D[c, s]
+            ML[(c, s)] = [(int(a), int(b)) for a, b in zip(ph.tolist(), dv.tolist()) if a >= 0]
     sols = []; nodes = [0]
     order = sorted(range(W), key=lambda c: -int(M[c].sum()))
-    def dfs(k, used, acc):
+    acc = [-1]*p
+    def dfs(k, used, usedmask, ndist):
         nodes[0] += 1
         if nodes[0] > nodecap: return
+        if m - ndist < MINDOF: return          # admissible bound: dof can only fall from here
         if k == W:
-            dof = m - int((acc >= 0).sum())
-            if dof >= MINDOF:
-                slot = [0]*W
-                for cc, ss in used: slot[cc] = ss
-                sols.append((slot, dof))
-            return
+            slot = [0]*W
+            for cc, ss in used: slot[cc] = ss
+            sols.append((slot, m - ndist)); return
         c = order[k]
         for s in range(W):
-            if any(s == ss for _, ss in used) or not ok[c, s]: continue
-            mp = MAPS[c, s]
-            both = (acc >= 0) & (mp >= 0)
-            if np.any(acc[both] != mp[both]): continue
-            dfs(k+1, used + [(c, s)], np.where(mp >= 0, mp, acc))
-    dfs(0, [], np.full(p, -1, dtype=np.int16))
+            if usedmask >> s & 1: continue
+            mp = ML.get((c, s))
+            if mp is None: continue
+            undo = []; bad = False
+            for a, b in mp:
+                v = acc[a]
+                if v < 0: acc[a] = b; undo.append(a)
+                elif v != b: bad = True; break
+            if not bad:
+                dfs(k+1, used + [(c, s)], usedmask | (1 << s), ndist + len(undo))
+            for a in undo: acc[a] = -1
+    dfs(0, [], 0, 0)
     return sols, nodes[0]
 
 def percolumn_running(C, P, n, W, d, mode, kan):

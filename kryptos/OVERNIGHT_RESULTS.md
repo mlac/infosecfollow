@@ -1123,3 +1123,37 @@ Taken with §F16, the general lesson for this whole campaign: **threshold-based 
 what a scan has established, and survivor lists on short messages are power artifacts.** Re-scoring
 by likelihood cost nothing and converted PK10 from "nothing above ceiling" to "every alternative
 excluded", while correctly refusing to strengthen anything on PK8 and PK9.
+
+### F18. Crib + columnar by branch-and-bound — built twice, independently, with the same result
+
+I built this myself (`crib_bnb.py`) after establishing in §E that the meet-in-the-middle was
+infeasible. It assigns columns one at a time and prunes the instant two equations demand different
+values for the same key residue, so no constraint matrix is ever built.
+
+**Controls:** it recovers the true column order as the **unique** consistent permutation out of
+362,880 at n=153, 144 and 504 for p=14, 17 and 20 (109–34,444 nodes), and **0 of 300 random
+27-letter cribs** yield any consistent permutation at any period tested.
+
+**A cost lesson worth recording.** I first estimated the sweep at 79 minutes from a timing run at
+p=17 — which turned out to be by far the *cheapest* period (109 nodes). Measured across p=14–22 the
+true cost is **123 ms per crib, i.e. 6.2 hours**, because degrees of freedom are `27 − p`: as p
+rises the constraints thin out, conflicts stop appearing, and the tree stops pruning. p=19 alone
+costs 59.7 ms and 28,425 nodes against p=17's 1.6 ms. **Never extrapolate a search's cost from its
+easiest parameter.** The fix is to match crib length to period — a 36-letter crib restores dof to
+17 at p=19 — at the price of a much smaller corpus (780 distinct 36-letter prefixes against 13,473
+at 27).
+
+**Then the crib fan-out family arrived at the same design independently**, which is the more
+interesting outcome. Its `cb_col.py` uses the identical depth-first assignment with map-agreement
+pruning, validated on the identical control — the real PK4 at W=8, p=45, returning exactly one
+solution, the true order (6,2,3,5,1,4,0,7). Its `cb_main.py` states the same offset-invariance
+result I proved in §F11 ("a column permutation leaves the left null space unchanged, so R is exactly
+offset-invariant — proof, not sampling"). Two independent implementations converging on the same
+algorithm, the same control and the same lemma is stronger corroboration than either alone.
+
+It also went somewhere I had not: `cb_pair.py` is a **key-free cross-target crib test**. If two
+targets share a keystream then cribs A on X and B on Y must satisfy `A ∓ B == c_X ∓ c_Y` with *no
+key model at all*, so the whole corpus × corpus cross-product becomes a hash join on the 12-letter
+difference profile at 26⁻¹² ≈ 1.5 × 10⁻¹⁷ per test. That is a far sharper instrument than my §C4
+shared-keystream test, which separated its hypotheses by only 0.9 σ. I stood my own sweep down
+rather than contend for CPU; its results supersede mine and are reported when that family lands.
