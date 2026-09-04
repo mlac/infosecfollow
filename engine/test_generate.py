@@ -830,6 +830,26 @@ class Rendering(unittest.TestCase):
         for heading in ("READING", "MARKETS", "FEED HEALTH"):
             self.assertIn(heading, text)
 
+    def test_around_the_teams_and_team_usa_fold_inside_the_sports_section(self):
+        rec = json.loads((TESTDATA / "new-engine-2026-09-01.json").read_text(encoding="utf-8"))
+        html, text = self.check_record(rec)
+        subs = re.findall(r'<details class="fold sub"><summary><h3>([^<]+)</h3></summary>', html)
+        self.assertEqual(subs, ["Around the Teams", "Team USA"])
+        for title in ("Around the Teams", "Team USA"):  # the only <h3> is the folded one
+            self.assertEqual(html.count(f"<h3>{title}</h3>"),
+                             html.count(f"<summary><h3>{title}</h3></summary>"), title)
+        self.assertNotIn('class="fold sub" open', html)      # collapsed by default
+        # they stay inside Sports, whose own heading is not folded
+        sports = html.split('<h2 id="sports">')[1].split("<details class=\"fold\" id=")[0]
+        self.assertIn('<details class="fold sub">', sports)
+        # the scoreboard above them is still shown outright (this fixture's
+        # ESPN call failed, so it is the outage note rather than team lines)
+        self.assertIn(generate.SCOREBOARD_NOTE, sports)
+        self.assertLess(sports.index(generate.SCOREBOARD_NOTE),
+                        sports.index('<details class="fold sub">'))
+        for heading in ("Around the Teams:", "Team USA:"):  # the digest keeps them inline
+            self.assertIn(heading, text)
+
     def test_a_jump_link_into_a_folded_section_is_opened_by_the_page_script(self):
         rec = json.loads((TESTDATA / "new-engine-2026-09-01.json").read_text(encoding="utf-8"))
         html, _ = self.render(rec)

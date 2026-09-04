@@ -1590,10 +1590,14 @@ PAGE_CSS = """
      stays a real heading for the outline and for screen readers; the summary
      row is the click target and carries the section's scroll anchor. */
   details.fold { margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
+  details.fold.sub { margin: 1.75rem 0 0.25rem; }
   details.fold > summary { cursor: pointer; }
-  details.fold > summary > h2 { display: inline; margin: 0; }
+  details.fold > summary > h2,
+  details.fold > summary > h3 { display: inline; margin: 0; }
   details.fold[open] > summary { margin-bottom: 0.75rem; }
-  details.fold > summary:hover > h2 { text-decoration: underline;
+  details.fold.sub[open] > summary { margin-bottom: 0.25rem; }
+  details.fold > summary:hover > h2,
+  details.fold > summary:hover > h3 { text-decoration: underline;
                                       text-underline-offset: 3px; }
   .tags { font-size: 0.85rem; opacity: 0.8; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
@@ -1822,6 +1826,14 @@ def _sports_inner(blocks):
 SCOREBOARD_NOTE = "Scoreboard unavailable at last update."
 
 
+def _folded_subsection(title, body):
+    """A subsection that starts collapsed, for the same reason the sections in
+    COLLAPSED_SECTIONS do. The <h3> sits inside the <summary>, so the heading
+    outline is what it was before the fold."""
+    return [f'<details class="fold sub"><summary><h3>{esc(title)}</h3></summary>',
+            *body, "</details>"]
+
+
 def _sports_section(sports, local):
     """Scoreboard (ESPN, or plaintextsports when ESPN fails) plus the
     model-summarized 'Around the Teams' items."""
@@ -1835,11 +1847,9 @@ def _sports_section(sports, local):
         # the error text.
         out.append(f'<p class="lbl">{esc(SCOREBOARD_NOTE)}</p>')
     if around:
-        out.append("<h3>Around the Teams</h3>")
-        out += _local_items_html(around, level=4)
+        out += _folded_subsection("Around the Teams", _local_items_html(around, level=4))
     if team_usa:
-        out.append("<h3>Team USA</h3>")
-        out += _local_items_html(team_usa, level=4)
+        out += _folded_subsection("Team USA", _local_items_html(team_usa, level=4))
     return out
 
 

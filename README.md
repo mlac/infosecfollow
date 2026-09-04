@@ -77,7 +77,8 @@ Every page (and `digest.txt`) carries, in order, whichever of these have content
 - **Security** — up to 10 topics, carried forward through the day.
 - **Business and Politics**
 - **Pittsburgh** — weather, business, around town, events.
-- **Sports** — scores, Around the Teams, Team USA.
+- **Sports** — scores, then Around the Teams and Team USA, both collapsed by
+  default on the page.
 - **Reading** — collapsed by default on the page.
 - **Markets** — collapsed by default on the page.
 - **Feed Health** — per group: feeds loaded vs total, items in window, failed
@@ -88,9 +89,11 @@ Every page (and `digest.txt`) carries, in order, whichever of these have content
   and `meta.feed_failures` lists the failed feed names. Collapsed by default on
   the page.
 
-Reading, Markets and Feed Health render as closed `<details>` blocks: standing
-reference rather than what changed today, one click from the summary row. The
-plain-text digest keeps every section inline. The page's only script opens a
+Reading, Markets and Feed Health render as closed `<details>` blocks, as do
+the Around the Teams and Team USA subsections inside Sports: standing
+reference, or a step below the day's headlines, one click from the summary
+row. The scoreboard above them is always shown. The plain-text digest keeps
+every section inline. The page's only script opens a
 folded section when a link targets something inside it (a "Jump to" entry, or
 an at-a-glance link to a reading item); without JavaScript the folds still open
 on click.
