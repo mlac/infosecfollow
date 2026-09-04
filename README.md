@@ -76,7 +76,9 @@ Every page (and `digest.txt`) carries, in order, whichever of these have content
 - **Emerging Trends and Key Updates** — a curated glance at the day; entries are
   labelled new/updated against the previous run, keyed on any shared source
   URL (an entry linking several stories takes the strongest change).
-- **Security** — up to 10 topics, carried forward through the day.
+- **Security** — the day's 5 most important topics (`MAX_TOPICS`), ordered most
+  to least important and carried forward through the day; the cap is shared
+  across the day, so a new story displaces the weakest carried one.
 - **Business and Politics**
 - **Pittsburgh** — weather, business, around town, events.
 - **Sports** — scores, then Around the Teams and Team USA, both collapsed by
@@ -91,18 +93,33 @@ Every page (and `digest.txt`) carries, in order, whichever of these have content
   and `meta.feed_failures` lists the failed feed names. Collapsed by default on
   the page.
 
-Reading, Markets and Feed Health render as closed `<details>` blocks, as do
-the Around the Teams and Team USA subsections inside Sports: standing
-reference, or a step below the day's headlines, one click from the summary
-row. The scoreboard above them is always shown. The plain-text digest keeps
-every section inline. The page's only script opens a
-folded section when a link targets something inside it (a "Jump to" entry, or
-an at-a-glance link to a reading item); without JavaScript the folds still open
-on click.
+## How the page reads
 
-The page also has a skip link, a "Jump to" section index, meta description /
-Open Graph tags, a canonical link on the index page, archive titles that
-include the run time, and a footer stating the update schedule.
+Every story is one row: its headline, its area, and the opening of what is new,
+in a closed `<details>`. Opening it shows that sentence in full, the background
+paragraph, and the sources — two plain paragraphs in the same voice, no label
+between them. Emerging Trends and Key Updates stays open at full width above
+everything, and is the front page.
+
+Whole sections fold too. Reading, Markets and Feed Health are standing
+reference; Around the Teams and Team USA sit a step below the day's headlines,
+under a scoreboard that is always shown.
+
+Below the trends, sections flow into columns that follow the window: one on a
+phone, two from 60rem, three from 90rem. Each section is its own grid item, so
+opening a story only grows its own column.
+
+`digest.txt` is unaffected by all of this: it prints every section inline, in
+order, and keeps the "Latest developments:" label that the page drops.
+
+The page's one script opens a folded section when a link targets something
+inside it, since a closed `<details>` is invisible to fragment navigation.
+Without JavaScript the folds still open on click. There is no jump index: with
+the sections folded and columned there is no page left for it to save.
+
+The page also has a skip link, meta description / Open Graph tags, a canonical
+link on the index page, archive titles that include the run time, and a footer
+stating the update schedule.
 
 ## Scheduling
 
@@ -141,8 +158,10 @@ within about a minute.
 - Carry-forward: each run reads today's earlier record and passes its topics
   and local items to the model as `TODAY_SO_FAR` / `TODAY_SO_FAR_LOCAL`, with
   instructions to keep them (same titles, text unchanged unless something new
-  happened, sources re-cited) and add new stories on top, up to 10 security
-  topics — so an evening reader still sees the morning's stories. Only prior
+  happened, sources re-cited) and add new stories on top, up to `MAX_TOPICS`
+  security topics — so an evening reader still sees the morning's stories,
+  and a new one displaces the weakest carried story rather than lengthening
+  the list. Only prior
   days feed the "age out stagnated stories" rule, and the sources of carried
   items stay citable after they age out of the fetch window.
 - If the local-sections model call fails, the previous good local block (from
