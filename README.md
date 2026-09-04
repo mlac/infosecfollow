@@ -31,6 +31,8 @@ engine/feeds.json        curated feed groups: security, pittsburgh, bizpol, even
 engine/test_*.py         unit tests (generate, plaintextsports, hardening)
 docs/index.html          today's briefing (generated)
 docs/digest.txt          plain-text rendition of today's briefing
+docs/CNAME               custom domain for Pages (infosecfollow.com); not generated
+docs/.nojekyll           tells Pages to serve docs/ as-is; not generated
 docs/archive/            one .html + .txt per run (YYYY-MM-DD-HHMM), plus an index
 docs/data/               one .json record per day (structured archive; rewritten by each run)
 deploy/                  the NAS container: Dockerfile, run-briefing.sh, scheduler.sh,

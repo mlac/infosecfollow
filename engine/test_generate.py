@@ -865,6 +865,17 @@ class Rendering(unittest.TestCase):
         self.assertEqual(html.count("<script>"), 1)
         self.assertNotIn("<script", html.split("</footer>")[0])  # after the content, once
 
+    def test_carry_forward_caps_reach_the_model_as_numbers(self):
+        carried = {"local": {"business": [
+            {"title": "Budget Passes", "latest_developments": "d", "summary": "s",
+             "sources": [{"source": "F", "url": "https://x.example/1"}]}]}}
+        prompt = generate.build_local_prompt([], [], [], [], [], [], TODAY, None,
+                                             carried, self.feeds)
+        self.assertIn("Carry forward EVERY item", prompt)
+        self.assertIn(f"at most {generate.SECTION_CAPS['business']} items in total "
+                      f"(business_politics {generate.SECTION_CAPS['business_politics']})", prompt)
+        self.assertNotIn("SECTION_CAPS[", prompt)  # the caps were once shipped as literals
+
     def test_source_label_fallback_matches_between_renditions(self):
         digest = {"date": TODAY, "headline": "H", "emerging_trends": [], "topics": [
             {"title": "T", "area": "A", "latest_developments": "d", "summary": "s", "tags": [],

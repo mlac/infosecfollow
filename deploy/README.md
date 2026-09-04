@@ -4,8 +4,7 @@ This runs the briefing engine in a Docker container on your NAS (`workbench-nas`
 on a fixed ET schedule — **07:02, 10:02, 13:32 and 19:32 on weekdays, 08:02 and
 19:32 on weekends, plus one run whenever the container starts** — so your Mac no
 longer has to be on. The container regenerates the site and pushes it to `main`,
-which GitHub Pages publishes from `docs/`, exactly like the old macOS LaunchAgent
-did.
+which GitHub Pages publishes from `docs/`.
 
 **How it works:** the container holds Python + a pinned Claude Code CLI + git + a
 tiny shell scheduler. You fetch a few build files with `curl`, build the image
@@ -67,7 +66,8 @@ including the optional engine knobs (`INFOSECFOLLOW_MODEL`,
 `INFOSECFOLLOW_SCHEDULE_NOTE`), is `deploy/.env.example` in the repo. If you set
 `HEARTBEAT_URL`, every successful cycle GETs it and every failed cycle GETs
 `<url>/fail`; give the monitor a grace period of about 15 hours (the longest
-scheduled gap).
+scheduled gap is 12.5 h, Saturday evening to Sunday morning; 15 h matches the
+container health check).
 
 Then fetch the four build files into this folder with `curl` (the NAS has no git,
 so we don't clone — the container does its own clone at runtime):
@@ -101,19 +101,6 @@ Within a minute or two the live site updates. Once a cycle has completed,
 `docker ps` shows the container as `(healthy)`; it turns `(unhealthy)` if no
 cycle completes for 15 hours (the health check only reports — it never restarts
 anything).
-
----
-
-## 4. Turn off the Mac LaunchAgent
-
-So the two don't double-publish, disable the old schedule on your Mac:
-
-```sh
-launchctl bootout gui/$(id -u)/com.infosecfollow.refresh 2>/dev/null || \
-  launchctl unload ~/Library/LaunchAgents/com.infosecfollow.refresh.plist
-```
-
-The Mac can stay off from here on.
 
 ---
 

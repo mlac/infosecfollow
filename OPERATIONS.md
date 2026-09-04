@@ -214,8 +214,9 @@ old Mac LaunchAgent loaded again? §1).
 **5.6 Commit landed but the site didn't update.** GitHub Actions tab → open
 the newest red **"pages build and deployment"** run → **Re-run all jobs**. If
 that pipeline is stuck or keeps failing, trigger **"Redeploy to GitHub Pages
-(manual)"** (Actions → that workflow → *Run workflow*): it re-uploads `docs/`
-from `main` with three deploy attempts and backoff. A red built-in run
+(manual)"** (Actions → that workflow → *Run workflow*, with **main** selected
+in *Use workflow from* — the workflow refuses any other branch): it re-uploads
+`docs/` from `main` with three deploy attempts and backoff. A red built-in run
 usually means a real Pages outage; re-run when GitHub recovers. Settings →
 Pages → Source should read *Deploy from a branch*, `main` `/docs`.
 
@@ -295,9 +296,9 @@ GETs per run, `engine/plaintextsports.py`). Read the
   (or its default in `engine/generate.py`) so the page footer matches.
 - **Disk hygiene**: container logs are capped (3×10 MB) by compose. Each run
   adds an archive `.html` + `.txt` pair to `docs/archive/` and rewrites the
-  day's `docs/data/<date>.json` (~25 KB), so `docs/` grows roughly 0.2–0.4 MB
-  per day, with about the same again in `.git` objects inside the container
-  volume. Nothing needs pruning routinely; if it ever does, set
+  day's `docs/data/<date>.json` (~75 KB on a full day, since the feed-health
+  block was added), so `docs/` grows roughly 0.4 MB per day, with about the
+  same again in `.git` objects inside the container volume. Nothing needs pruning routinely; if it ever does, set
   `INFOSECFOLLOW_ARCHIVE_RETENTION_DAYS=N` in `.env` (keep N ≥ 7 — the
   engine's memory and diff look back 7 days) and archive/data files older
   than N days are deleted at the next run.

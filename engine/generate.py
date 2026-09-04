@@ -532,7 +532,7 @@ PREVIOUSLY_REPORTED_LOCAL — items this briefing covered on PRIOR days over the
 """
     carry_rule = ""
     if _today_so_far_local_block(today_so_far):
-        carry_rule = """- Carry forward EVERY item in TODAY_SO_FAR_LOCAL in its section: keep its exact "title" (or "author"); keep "latest_developments" and "summary" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them; and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR_LOCAL. The only carried-forward items to drop are events whose date has passed and stories that today's items show to be superseded. New items go on top of the carried-forward ones; the per-section limits below are for NEW items, and a section may hold at most {SECTION_CAPS['business']} items in total (business_politics {SECTION_CAPS['business_politics']}) — only when a section would exceed that, drop its least important carried-forward items.
+        carry_rule = f"""- Carry forward EVERY item in TODAY_SO_FAR_LOCAL in its section: keep its exact "title" (or "author"); keep "latest_developments" and "summary" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them; and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR_LOCAL. The only carried-forward items to drop are events whose date has passed and stories that today's items show to be superseded. New items go on top of the carried-forward ones; the per-section limits below are for NEW items, and a section may hold at most {SECTION_CAPS['business']} items in total (business_politics {SECTION_CAPS['business_politics']}) — only when a section would exceed that, drop its least important carried-forward items.
 """
     reading_authors = _names(feeds, "reading") or "Ed Zitron, Stratechery, Cal Newport"
     reading_enum = "|".join(f["name"] for f in feeds.get("reading", [])) or "Ed Zitron|Stratechery|Cal Newport"
@@ -1078,7 +1078,7 @@ def recent_archive_digests(today_iso, days=PRIOR_LOOKBACK_DAYS):
         topics = [
             {"title": t.get("title", ""),
              "area": t.get("area", ""),
-             "development": (t.get("latest_developments") or t.get("last_24h")
+             "development": (t.get("latest_developments")
                              or t.get("summary", ""))}
             for t in data.get("topics", []) if isinstance(t, dict)
         ]
@@ -1252,7 +1252,7 @@ def order_topics(digest, pub_index):
 
 
 def _topic_text(t):
-    return t.get("latest_developments") or t.get("last_24h") or t.get("summary") or ""
+    return t.get("latest_developments") or t.get("summary") or ""
 
 
 def _local_text(it):
@@ -1351,24 +1351,6 @@ def build_candidates(prev, digest, local):
                 consider("Reading", item.get("title", ""), item.get("_anchor"),
                          _item_urls(item), item.get("summary", ""))
     return candidates
-
-
-def _allowed_anchors(digest, local):
-    """The set of every real story _anchor (topics + local items + reading).
-    Trend positional anchors are excluded so a stray 'trend-N' can never link."""
-    allowed = set()
-    for topic in (digest.get("topics") or []):
-        if isinstance(topic, dict) and topic.get("_anchor"):
-            allowed.add(topic["_anchor"])
-    if isinstance(local, dict):
-        for key in _LOCAL_SECTIONS:
-            for item in (local.get(key) or []):
-                if isinstance(item, dict) and item.get("_anchor"):
-                    allowed.add(item["_anchor"])
-        for item in (local.get("reading") or []):
-            if isinstance(item, dict) and item.get("_anchor"):
-                allowed.add(item["_anchor"])
-    return allowed
 
 
 def build_catalog(digest, local, status_by_anchor):
@@ -1521,11 +1503,13 @@ def build_glance(cli, prev, digest, local):
     stories into labeled, grouped, multi-linked entries. Never raises — falls back
     to a deterministic legacy synthesis, so a run is never broken."""
     assign_anchors(digest, local)
-    allowed = _allowed_anchors(digest, local)
     candidates = build_candidates(prev, digest, local) if isinstance(prev, dict) else []
     status_by_anchor = {c["anchor"]: c["status"] for c in candidates if c.get("anchor")}
     catalog = build_catalog(digest, local, status_by_anchor)
     catalog_by_anchor = {c["anchor"]: c for c in catalog}
+    # every real story anchor; trend positional anchors are absent from the
+    # catalog, so a stray "trend-N" can never be linked
+    allowed = set(catalog_by_anchor)
     themes = [{"text": t.get("text", ""), "topic_title": t.get("topic_title", "")}
               for t in (digest.get("emerging_trends") or []) if isinstance(t, dict)]
     if not catalog:
