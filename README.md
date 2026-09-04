@@ -79,15 +79,22 @@ Every page (and `digest.txt`) carries, in order, whichever of these have content
 - **Business and Politics**
 - **Pittsburgh** — weather, business, around town, events.
 - **Sports** — scores, Around the Teams, Team USA.
-- **Reading**
-- **Markets**
+- **Reading** — collapsed by default on the page.
+- **Markets** — collapsed by default on the page.
 - **Feed Health** — per group: feeds loaded vs total, items in window, failed
   feeds with the error text, loaded feeds with no recent items; markets /
   weather / scores status with error text (e.g. an ESPN 403) and which score
-  source each run used; the model ids,
-  call count, model time and list-price cost of the run. The same data is
-  stored as `feed_health` in the day's JSON, and `meta.feed_failures` lists the
-  failed feed names.
+  source each run used; the model ids, call count, model time and list-price
+  cost of the run. The same data is stored as `feed_health` in the day's JSON,
+  and `meta.feed_failures` lists the failed feed names. Collapsed by default on
+  the page.
+
+Reading, Markets and Feed Health render as closed `<details>` blocks: standing
+reference rather than what changed today, one click from the summary row. The
+plain-text digest keeps every section inline. The page's only script opens a
+folded section when a link targets something inside it (a "Jump to" entry, or
+an at-a-glance link to a reading item); without JavaScript the folds still open
+on click.
 
 The page also has a skip link, a "Jump to" section index, meta description /
 Open Graph tags, a canonical link on the index page, archive titles that

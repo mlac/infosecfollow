@@ -1595,6 +1595,15 @@ PAGE_CSS = """
   .updated { font-style: italic; }
   details.more summary { cursor: pointer; opacity: 0.8; font-size: 0.85rem; }
   details.more[open] summary { margin-bottom: 0.25rem; }
+  /* Sections folded away by default (reading, markets, feed health). The h2
+     stays a real heading for the outline and for screen readers; the summary
+     row is the click target and carries the section's scroll anchor. */
+  details.fold { margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
+  details.fold > summary { cursor: pointer; }
+  details.fold > summary > h2 { display: inline; margin: 0; }
+  details.fold[open] > summary { margin-bottom: 0.75rem; }
+  details.fold > summary:hover > h2 { text-decoration: underline;
+                                      text-underline-offset: 3px; }
   .tags { font-size: 0.85rem; opacity: 0.8; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
   .sources a { overflow-wrap: anywhere; }
@@ -1917,6 +1926,31 @@ def _health_inner(health):
     return [f'<p class="health">{esc(line)}</p>' for line in lines]
 
 
+# Sections rendered as a closed <details> instead of a plain heading: standing
+# reference (the week's market averages, the reading list, the run's own
+# diagnostics) rather than what changed today. The text digest keeps them
+# inline; only the page folds them.
+COLLAPSED_SECTIONS = ("reading", "markets", "health")
+
+# The only script on the page, and the page works without it. A closed
+# <details> hides its contents from fragment navigation, so a jump link into a
+# folded section (the "at a glance" list links to individual reading items,
+# and the jump index links to the sections themselves) would otherwise scroll
+# nowhere. Opening the target's ancestors restores that. Not every browser
+# auto-expands on navigation, so this is done explicitly.
+PAGE_JS = """
+function openTarget() {
+  var id = location.hash ? decodeURIComponent(location.hash.slice(1)) : "";
+  var el = id ? document.getElementById(id) : null;
+  if (!el) return;
+  for (var p = el; p; p = p.parentElement) if (p.tagName === "DETAILS") p.open = true;
+  el.scrollIntoView();
+}
+addEventListener("hashchange", openTarget);
+openTarget();
+"""
+
+
 def render_html(digest, local, markets, weather, sports, feeds,
                 generated_at, generated_time, archive_href, text_href, depth=0,
                 glance=None, notes=None, health=None):
@@ -1977,8 +2011,18 @@ def render_html(digest, local, markets, weather, sports, feeds,
         parts.append(f'<p class="note">{esc(note)}</p>')
     parts.append("<hr>")
     for anchor, title, body in present:
-        parts.append(f'<h2 id="{anchor}">{esc(title)}</h2>')
-        parts += body
+        if anchor in COLLAPSED_SECTIONS:
+            # Reference material rather than the day's news: rendered as a
+            # closed <details> so it stays one click away without pushing the
+            # footer down. The id sits on the <details>, so a jump link still
+            # lands on the (always visible) summary.
+            parts.append(f'<details class="fold" id="{anchor}">')
+            parts.append(f"<summary><h2>{esc(title)}</h2></summary>")
+            parts += body
+            parts.append("</details>")
+        else:
+            parts.append(f'<h2 id="{anchor}">{esc(title)}</h2>')
+            parts += body
     parts += [
         "</main>",
         "<hr>",
@@ -1989,6 +2033,7 @@ def render_html(digest, local, markets, weather, sports, feeds,
         "from ESPN or plaintextsports.com.</p>",
         "<p>Summaries are AI-generated from the linked reporting; verify details at the sources.</p>",
         "</footer>",
+        f"<script>{PAGE_JS}</script>",
         "</body></html>",
     ]
     return "\n".join(parts)

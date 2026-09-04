@@ -809,6 +809,42 @@ class Rendering(unittest.TestCase):
         for rec in self.live:
             self.check_record(rec)
 
+    def test_reading_markets_and_health_are_folded_shut_and_nothing_else_is(self):
+        rec = json.loads((TESTDATA / "new-engine-2026-09-01.json").read_text(encoding="utf-8"))
+        html, text = self.check_record(rec)
+        folds = re.findall(r'<details class="fold"([^>]*)>\n<summary><h2>([^<]+)</h2></summary>', html)
+        self.assertEqual([(attrs.strip(), title) for attrs, title in folds],
+                         [('id="reading"', "Reading"), ('id="markets"', "Markets"),
+                          ('id="health"', "Feed Health")])
+        self.assertNotIn("open", "".join(a for a, _ in folds))  # collapsed by default
+        # the sections that carry the day's news keep their plain headings
+        self.assertEqual(re.findall(r'<h2 id="([^"]+)">', html),
+                         ["glance", "security", "business", "pittsburgh", "sports"])
+        for anchor in generate.COLLAPSED_SECTIONS:
+            self.assertNotIn(f'<h2 id="{anchor}"', html)
+        # the jump index still offers all eight, and the text digest is untouched
+        jump = re.search(r'<nav class="jump".*?</nav>', html, re.S).group(0)
+        for label in ("Reading", "Markets", "Feed Health"):
+            self.assertIn(f">{label}</a>", jump)
+        self.assertNotIn("<details", text)
+        for heading in ("READING", "MARKETS", "FEED HEALTH"):
+            self.assertIn(heading, text)
+
+    def test_a_jump_link_into_a_folded_section_is_opened_by_the_page_script(self):
+        rec = json.loads((TESTDATA / "new-engine-2026-09-01.json").read_text(encoding="utf-8"))
+        html, _ = self.render(rec)
+        # the glance list links to individual reading items, which now sit
+        # inside a closed <details>; without the opener those jumps go nowhere
+        reading_block = html.split('<details class="fold" id="reading">')[1].split("</details>")[0]
+        item_ids = set(re.findall(r'<li id="([^"]+)"', reading_block))
+        self.assertTrue(item_ids)
+        script = html.split("<script>")[1].split("</script>")[0]
+        for needle in ("location.hash", 'p.tagName === "DETAILS"', "p.open = true",
+                       "hashchange", "scrollIntoView"):
+            self.assertIn(needle, script)
+        self.assertEqual(html.count("<script>"), 1)
+        self.assertNotIn("<script", html.split("</footer>")[0])  # after the content, once
+
     def test_source_label_fallback_matches_between_renditions(self):
         digest = {"date": TODAY, "headline": "H", "emerging_trends": [], "topics": [
             {"title": "T", "area": "A", "latest_developments": "d", "summary": "s", "tags": [],
