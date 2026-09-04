@@ -1,7 +1,7 @@
 # infosecfollow — Operations Runbook
 
 Everything needed to check, fix, and maintain the site from any machine,
-with no AI assistant in the loop. Written 2026-07-29, revised 2026-09-02.
+with no AI assistant in the loop. Written 2026-07-29, revised 2026-09-04.
 
 ---
 
@@ -45,10 +45,11 @@ with no AI assistant in the loop. Written 2026-07-29, revised 2026-09-02.
   deploy attempts and backoff — nothing custom runs on push any more. A stale
   site can therefore be EITHER a missing commit (container problem) OR a
   failed Pages build (GitHub problem).
-- **The Mac is not in the loop.** `run_daily.sh` + `com.infosecfollow.refresh.plist`
-  are the legacy macOS path, replaced by the NAS. Keep the LaunchAgent
-  unloaded (`launchctl bootout gui/$UID/com.infosecfollow.refresh`) so the two
-  can never double-publish.
+- **The Mac is not in the loop.** The legacy macOS path (`run_daily.sh` + a
+  LaunchAgent plist) was replaced by the NAS and deleted from the repo in
+  2026-09; `git log -- run_daily.sh` still has it. If that LaunchAgent is
+  still installed on any Mac, keep it unloaded (`launchctl bootout
+  gui/$UID/com.infosecfollow.refresh`) so the two can never double-publish.
 
 Secrets live in **`/volume1/docker/infosecfollow/.env` on the NAS** (the
 compose folder — the four build files sit flat in it; never in the repo):
@@ -291,8 +292,7 @@ GETs per run, `engine/plaintextsports.py`). Read the
 - **Changing the update schedule**: edit `WEEKDAY_SLOTS` / `WEEKEND_SLOTS` at
   the top of `deploy/scheduler.sh` (two variables, HH:MM in the container's
   `TZ`), then rebuild as above. Update `INFOSECFOLLOW_SCHEDULE_NOTE` in `.env`
-  (or its default in `engine/generate.py`) so the page footer matches. Keep
-  the LaunchAgent plist retired regardless.
+  (or its default in `engine/generate.py`) so the page footer matches.
 - **Disk hygiene**: container logs are capped (3×10 MB) by compose. Each run
   adds an archive `.html` + `.txt` pair to `docs/archive/` and rewrites the
   day's `docs/data/<date>.json` (~25 KB), so `docs/` grows roughly 0.2–0.4 MB
@@ -356,8 +356,7 @@ DOCKER=/usr/local/bin/docker; [ -x "$DOCKER" ] || DOCKER=docker
 - **Schedule provenance**: the live schedule is `deploy/scheduler.sh`
   (`WEEKDAY_SLOTS` / `WEEKEND_SLOTS`: 4 weekday slots, 2 weekend slots, + on-start;
   wave-aligned as of 2026-07 — before that it was 6:02/9:02/12:02/16:02/21:02
-  daily). The 4-slot `com.infosecfollow.refresh.plist` at the repo root is the
-  retired Mac LaunchAgent, kept for reference.
+  daily, under the Mac LaunchAgent that the NAS replaced).
 - **Branch layout**: `main` = generated site + engine (no branch protection);
   `feed-pubdates-data` = sampler output only, created by the first snapshot
   (never merge it); `claude/*` = assistant work branches.

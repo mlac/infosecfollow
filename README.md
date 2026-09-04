@@ -28,7 +28,7 @@ engine/plaintextsports.py parser for plaintextsports.com team pages (fixtures in
 engine/feed_pubdates.py  feed publish-time sampler (schedule tuning; OPERATIONS.md §7)
 engine/feeds.json        curated feed groups: security, pittsburgh, bizpol, events,
                          sports_media, team_usa, reading
-engine/test_hardening.py, engine/test_generate.py   unit tests
+engine/test_*.py         unit tests (generate, plaintextsports, hardening)
 docs/index.html          today's briefing (generated)
 docs/digest.txt          plain-text rendition of today's briefing
 docs/archive/            one .html + .txt per run (YYYY-MM-DD-HHMM), plus an index
@@ -36,7 +36,6 @@ docs/data/               one .json record per day (structured archive; rewritten
 deploy/                  the NAS container: Dockerfile, run-briefing.sh, scheduler.sh,
                          docker-compose.yml, .env.example, README
 .github/workflows/       ci.yml (tests on push/PR); redeploy-pages.yml (manual Pages fallback)
-run_daily.sh, com.infosecfollow.refresh.plist   retired macOS scheduler, kept for reference
 OPERATIONS.md            runbook: health check, failure catalog, maintenance
 ```
 
@@ -104,13 +103,9 @@ include the run time, and a footer stating the update schedule.
 
 Production runs in the NAS container under `deploy/`: **07:02, 10:02, 13:32
 and 19:32 ET on weekdays, 08:02 and 19:32 ET on weekends, plus once on
-container start** — see `deploy/README.md` and `OPERATIONS.md`. The retired
-macOS path (`run_daily.sh` + the LaunchAgent plist) is kept for reference; on
-some other machine it still works as a cron wrapper:
-
-```cron
-30 7 * * * /path/to/infosecfollow/run_daily.sh
-```
+container start** — see `deploy/README.md` and `OPERATIONS.md`. The macOS
+LaunchAgent that preceded it was removed in 2026-09; `git log -- run_daily.sh`
+still has it if it is ever wanted.
 
 ## Tests
 
@@ -123,8 +118,8 @@ python3 -m unittest discover -s engine -p 'test_*.py'
 (`python3 -m unittest engine/test_hardening.py` does not work from the root.)
 CI (`.github/workflows/ci.yml`) runs `py_compile`, `feeds.json` validation,
 the unit tests on Python 3.11 and 3.12, and `sh -n` on the shell scripts, on
-any push or pull request that touches `engine/`, `deploy/`, `run_daily.sh` or
-the workflow itself; briefing commits touch only `docs/` and never trigger it.
+any push or pull request that touches `engine/`, `deploy/` or the workflow
+itself; briefing commits touch only `docs/` and never trigger it.
 It cannot block a bad push (no branch protection), but GitHub emails a red run
 within about a minute.
 

@@ -339,15 +339,6 @@ def parse_feed(source_name, raw, charset=None, base=""):
             }
 
 
-def fetch_all(feeds, stats=None):
-    """Fetch one list of feeds concurrently. Returns (items, failures) where
-    failures is a list of {name, error}, both in feed order. When `stats` is a
-    dict, records per-feed {"items", "dated", "error"} (see fetch_groups)."""
-    stats = {} if stats is None else stats
-    grouped, failed = fetch_groups({"all": feeds}, stats, groups=("all",))
-    return grouped["all"], failed["all"]
-
-
 def recent_items(items, now, hours, cap):
     """Items from the last `hours`, future-dated dropped, deduped, newest first.
 
