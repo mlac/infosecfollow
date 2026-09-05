@@ -76,7 +76,9 @@ ARCHIVE_RETENTION_DAYS = int(  # 0 keeps everything; N prunes files older than N
     os.environ.get("INFOSECFOLLOW_ARCHIVE_RETENTION_DAYS", "0"))
 PRIOR_LOOKBACK_DAYS = 7     # how far back the model's memory and the diff look
 MAX_GLANCE = 7              # cap on "Emerging Trends and Key Updates" entries
-MAX_TOPICS = 10             # cap on security topics (carry-forward grows the list)
+MAX_TOPICS = 5              # the day's security headlines, most important first
+                            # (the cap the whole day shares: carry-forward drops
+                            # the weakest carried topic to make room for a new one)
 MAX_SOURCES = 6             # citations kept per topic/item
 MAX_TAGS = 4                # tags kept per topic
 SCHEDULE_NOTE = os.environ.get(
@@ -339,15 +341,6 @@ def parse_feed(source_name, raw, charset=None, base=""):
             }
 
 
-def fetch_all(feeds, stats=None):
-    """Fetch one list of feeds concurrently. Returns (items, failures) where
-    failures is a list of {name, error}, both in feed order. When `stats` is a
-    dict, records per-feed {"items", "dated", "error"} (see fetch_groups)."""
-    stats = {} if stats is None else stats
-    grouped, failed = fetch_groups({"all": feeds}, stats, groups=("all",))
-    return grouped["all"], failed["all"]
-
-
 def recent_items(items, now, hours, cap):
     """Items from the last `hours`, future-dated dropped, deduped, newest first.
 
@@ -486,8 +479,8 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 }}
 
 Rules:
-- Aim for 5 to 6 topics on the first run of a day, ordered most to least important, and never more than {MAX_TOPICS} in total. Merge near-duplicate coverage of the same story into one topic.
-{carry_rule}- Continuity with PREVIOUSLY_REPORTED (when present): it lists PRIOR days only. "latest_developments" must describe only what is new today versus what was already reported. Add a prior-day topic again ONLY if it has a genuinely new development; let a story that has stagnated with nothing new age out by leaving it out, even if that leaves fewer than 5 topics. Brand-new topics not in PREVIOUSLY_REPORTED are always welcome. If there is no prior coverage of a topic, "latest_developments" states the key current update.
+- Give exactly the {MAX_TOPICS} most important topics of the day, ordered most to least important — fewer only when the day genuinely holds fewer. Merge near-duplicate coverage of the same story into one topic.
+{carry_rule}- Continuity with PREVIOUSLY_REPORTED (when present): it lists PRIOR days only. "latest_developments" must describe only what is new today versus what was already reported. Add a prior-day topic again ONLY if it has a genuinely new development; let a story that has stagnated with nothing new age out by leaving it out, even if that leaves fewer than {MAX_TOPICS} topics. Brand-new topics not in PREVIOUSLY_REPORTED are always welcome. If there is no prior coverage of a topic, "latest_developments" states the key current update.
 - emerging_trends: exactly 3 entries, each a flowing sentence in "text" (no "Label:" prefix). Set "topic_title" to the exact title of the related topic from `topics`, and "link_phrase" to a 1-2 word phrase that appears verbatim inside "text" — a distinctive entity or term, never a generic word like "the" or "security" — which becomes a link jumping to that topic.
 - Assign every topic an "area" naming its part of cybersecurity — e.g. Vulnerabilities and Exploits, Ransomware and Cybercrime, Nation-State Activity, AI Security, Data Breaches, Policy and Regulation. Use 2 to 5 distinct areas across the digest and repeat the exact same area string for topics that share it.
 - Each topic cites 1 to 4 sources whose "url" values are copied EXACTLY from the items below. Never invent or modify a URL.
@@ -541,7 +534,7 @@ PREVIOUSLY_REPORTED_LOCAL — items this briefing covered on PRIOR days over the
 """
     carry_rule = ""
     if _today_so_far_local_block(today_so_far):
-        carry_rule = """- Carry forward EVERY item in TODAY_SO_FAR_LOCAL in its section: keep its exact "title" (or "author"); keep "latest_developments" and "summary" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them; and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR_LOCAL. The only carried-forward items to drop are events whose date has passed and stories that today's items show to be superseded. New items go on top of the carried-forward ones; the per-section limits below are for NEW items, and a section may hold at most {SECTION_CAPS['business']} items in total (business_politics {SECTION_CAPS['business_politics']}) — only when a section would exceed that, drop its least important carried-forward items.
+        carry_rule = f"""- Carry forward EVERY item in TODAY_SO_FAR_LOCAL in its section: keep its exact "title" (or "author"); keep "latest_developments" and "summary" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them; and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR_LOCAL. The only carried-forward items to drop are events whose date has passed and stories that today's items show to be superseded. New items go on top of the carried-forward ones; the per-section limits below are for NEW items, and a section may hold at most {SECTION_CAPS['business']} items in total (business_politics {SECTION_CAPS['business_politics']}) — only when a section would exceed that, drop its least important carried-forward items.
 """
     reading_authors = _names(feeds, "reading") or "Ed Zitron, Stratechery, Cal Newport"
     reading_enum = "|".join(f["name"] for f in feeds.get("reading", [])) or "Ed Zitron|Stratechery|Cal Newport"
@@ -1087,7 +1080,7 @@ def recent_archive_digests(today_iso, days=PRIOR_LOOKBACK_DAYS):
         topics = [
             {"title": t.get("title", ""),
              "area": t.get("area", ""),
-             "development": (t.get("latest_developments") or t.get("last_24h")
+             "development": (t.get("latest_developments")
                              or t.get("summary", ""))}
             for t in data.get("topics", []) if isinstance(t, dict)
         ]
@@ -1261,7 +1254,7 @@ def order_topics(digest, pub_index):
 
 
 def _topic_text(t):
-    return t.get("latest_developments") or t.get("last_24h") or t.get("summary") or ""
+    return t.get("latest_developments") or t.get("summary") or ""
 
 
 def _local_text(it):
@@ -1360,24 +1353,6 @@ def build_candidates(prev, digest, local):
                 consider("Reading", item.get("title", ""), item.get("_anchor"),
                          _item_urls(item), item.get("summary", ""))
     return candidates
-
-
-def _allowed_anchors(digest, local):
-    """The set of every real story _anchor (topics + local items + reading).
-    Trend positional anchors are excluded so a stray 'trend-N' can never link."""
-    allowed = set()
-    for topic in (digest.get("topics") or []):
-        if isinstance(topic, dict) and topic.get("_anchor"):
-            allowed.add(topic["_anchor"])
-    if isinstance(local, dict):
-        for key in _LOCAL_SECTIONS:
-            for item in (local.get(key) or []):
-                if isinstance(item, dict) and item.get("_anchor"):
-                    allowed.add(item["_anchor"])
-        for item in (local.get("reading") or []):
-            if isinstance(item, dict) and item.get("_anchor"):
-                allowed.add(item["_anchor"])
-    return allowed
 
 
 def build_catalog(digest, local, status_by_anchor):
@@ -1530,11 +1505,13 @@ def build_glance(cli, prev, digest, local):
     stories into labeled, grouped, multi-linked entries. Never raises — falls back
     to a deterministic legacy synthesis, so a run is never broken."""
     assign_anchors(digest, local)
-    allowed = _allowed_anchors(digest, local)
     candidates = build_candidates(prev, digest, local) if isinstance(prev, dict) else []
     status_by_anchor = {c["anchor"]: c["status"] for c in candidates if c.get("anchor")}
     catalog = build_catalog(digest, local, status_by_anchor)
     catalog_by_anchor = {c["anchor"]: c for c in catalog}
+    # every real story anchor; trend positional anchors are absent from the
+    # catalog, so a stray "trend-N" can never be linked
+    allowed = set(catalog_by_anchor)
     themes = [{"text": t.get("text", ""), "topic_title": t.get("topic_title", "")}
               for t in (digest.get("emerging_trends") or []) if isinstance(t, dict)]
     if not catalog:
@@ -1592,17 +1569,36 @@ PAGE_CSS = """
   li { margin: 0.4rem 0; }
   p { margin: 0.5rem 0; }
   a { color: inherit; }
-  .updated { font-style: italic; }
-  details.more summary { cursor: pointer; opacity: 0.8; font-size: 0.85rem; }
-  details.more[open] summary { margin-bottom: 0.25rem; }
+  /* One story per row, shut. No rules between them: the spacing separates
+     them, and a border on every row turns a page of headlines into a ledger. */
+  details.topic { margin: 0; padding: 0.3rem 0 0.35rem; }
+  details.topic[open] { padding-bottom: 0.9rem; }
+  details.topic > summary { cursor: pointer; }
+  details.topic > summary > h3,
+  details.topic > summary > h4 { display: inline; margin: 0; }
+  details.topic > summary:hover > h3,
+  details.topic > summary:hover > h4 { text-decoration: underline;
+                                       text-underline-offset: 3px; }
+  details.topic[open] > summary { margin-bottom: 0.5rem; }
+  details.topic .teaser { display: block; margin: 0.15rem 0 0 1.2em;
+                          font-size: 0.9rem; opacity: 0.72; }
+  details.topic[open] .teaser { display: none; }
+  .chip { display: inline-block; font-size: 0.7rem; text-transform: uppercase;
+          letter-spacing: 0.06em; opacity: 0.6; margin-left: 0.4rem;
+          white-space: nowrap; }
+  .chip::before { content: "\\00b7\\00a0"; }   /* middot + nbsp */
   /* Sections folded away by default (reading, markets, feed health). The h2
      stays a real heading for the outline and for screen readers; the summary
      row is the click target and carries the section's scroll anchor. */
   details.fold { margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
+  details.fold.sub { margin: 1.75rem 0 0.25rem; }
   details.fold > summary { cursor: pointer; }
-  details.fold > summary > h2 { display: inline; margin: 0; }
+  details.fold > summary > h2,
+  details.fold > summary > h3 { display: inline; margin: 0; }
   details.fold[open] > summary { margin-bottom: 0.75rem; }
-  details.fold > summary:hover > h2 { text-decoration: underline;
+  details.fold.sub[open] > summary { margin-bottom: 0.25rem; }
+  details.fold > summary:hover > h2,
+  details.fold > summary:hover > h3 { text-decoration: underline;
                                       text-underline-offset: 3px; }
   .tags { font-size: 0.85rem; opacity: 0.8; }
   .sources { font-size: 0.85rem; margin-top: 0.4rem; }
@@ -1610,8 +1606,12 @@ PAGE_CSS = """
   .headline { font-size: 1.05rem; font-weight: bold; margin-top: 1rem; }
   .note { font-size: 0.85rem; font-style: italic; opacity: 0.85; }
   nav { font-size: 0.85rem; margin-top: 0.25rem; }
-  nav.jump { margin: 0.75rem 0 0; }
-  nav.jump a { margin-right: 0.25rem; }
+  /* the title and the day's line share a row until the window is too narrow */
+  header .masthead { display: flex; flex-wrap: wrap; align-items: baseline;
+                     gap: 0.1rem 0.9rem; }
+  header .masthead h1 { flex: 0 0 auto; }
+  header .masthead nav { margin-top: 0; }
+  header > p { margin: 0.15rem 0 0; }
   pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
         font-family: inherit; font-size: inherit; }
   .team { font-weight: bold; margin: 1rem 0 0.1rem; }
@@ -1626,6 +1626,18 @@ PAGE_CSS = """
     .up { color: #5dd48f; } .down { color: #ff8a80; }
   }
   .health { font-size: 0.85rem; }
+  /* Sections flow into columns once there is width for them: one on a phone,
+     two on a tablet, three on a wide screen. Each section is its own grid item,
+     so opening a story only grows its own column. */
+  @media (min-width: 60rem) { body { max-width: 74rem; } }
+  @media (min-width: 90rem) { body { max-width: 104rem; } }
+  .headline, p.note, main > ul, main > p { max-width: 58rem; }
+  .cols { display: grid; gap: 0 2.5rem; align-items: start;
+          grid-template-columns: 1fr; }
+  @media (min-width: 60rem) { .cols { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 90rem) { .cols { grid-template-columns: repeat(3, 1fr); } }
+  .cols > section > h2:first-child,
+  .cols > section > details.fold:first-child { margin-top: 1.5rem; }
   /* per-story "back to top" */
   a.totop { font-size: 0.85rem; opacity: 0.75; text-decoration: none; white-space: nowrap; }
   /* combined trends + key-updates list: clearly underline the inline jump links */
@@ -1674,22 +1686,45 @@ def _sources_html(sources):
             '<a class="totop" href="#top">↑ top</a></p>')
 
 
+TEASER_CHARS = 110   # of the "what is new" sentence, shown on the closed row
+
+
+def _teaser(text):
+    """The opening of `text`, cut at a word boundary. The row shows this shut
+    and the same sentence in full when opened, so the two read as one."""
+    text = " ".join(str(text or "").split())
+    if len(text) <= TEASER_CHARS:
+        return text
+    return text[:TEASER_CHARS].rsplit(" ", 1)[0] + "\u2026"
+
+
+def _story_row(item, tag, chip=""):
+    """One story as a closed <details>: the headline (a real heading, inside the
+    summary so the outline is unchanged), an optional area chip, and a one-line
+    teaser. Opening it reveals what is new and the background as two plain
+    paragraphs in the same voice, then the sources."""
+    anchor = item.get("_anchor")
+    idattr = f' id="{esc(anchor)}"' if anchor else ""
+    development = str(item.get("latest_developments") or "")
+    out = [f'<details class="topic"{idattr}>',
+           f'<summary><{tag}>{esc(item.get("title", ""))}</{tag}>'
+           + (f'<span class="chip">{esc(chip)}</span>' if chip else "")
+           + f'<span class="teaser">{esc(_teaser(development))}</span></summary>',
+           f"<p>{esc(development)}</p>"]
+    if item.get("summary"):
+        out.append(f'<p>{esc(item["summary"])}</p>')
+    if item.get("sources"):
+        out.append(_sources_html(item["sources"]))
+    out.append("</details>")
+    return out
+
+
 def _local_items_html(items, level=4):
-    """Render local items like security topics: title, latest-developments line,
-    a collapsible summary, and sources. `level` is the heading level, chosen by
-    the caller so the outline never skips a level."""
-    tag = f"h{level}"
+    """Local items as story rows. `level` is the heading level, chosen by the
+    caller so the outline never skips a level."""
     out = []
     for item in items:
-        anchor = item.get("_anchor")
-        idattr = f' id="{esc(anchor)}"' if anchor else ""
-        out.append(f'<{tag}{idattr}>{esc(item.get("title", ""))}</{tag}>')
-        out.append('<p class="updated">Latest developments: '
-                   f'{esc(item.get("latest_developments", ""))}</p>')
-        if item.get("summary"):
-            out.append(f'<details class="more"><summary>read more</summary>'
-                       f'<p>{esc(item["summary"])}</p></details>')
-        out.append(_sources_html(item.get("sources")))
+        out += _story_row(item, f"h{level}")
     return out
 
 
@@ -1765,25 +1800,12 @@ def _glance_inner(glance):
 
 
 def _security_inner(digest):
+    """The day's topics as story rows, in the order the model ranked them
+    (most to least important). Unnumbered: the order is the ranking, and a
+    number on a list this short only adds furniture."""
     out = []
-    for n, topic in enumerate(digest.get("topics") or [], 1):
-        anchor = topic.get("_anchor")
-        idattr = f' id="{esc(anchor)}"' if anchor else ""
-        out.append(f"<h3{idattr}>{n}. {esc(topic.get('title', ''))}</h3>")
-        meta = []
-        if topic.get("area"):
-            meta.append(esc(topic["area"]))
-        if topic.get("tags"):
-            meta.append("[" + esc(", ".join(topic["tags"])) + "]")
-        if meta:
-            out.append(f'<p class="tags">{" &middot; ".join(meta)}</p>')
-        out.append('<p class="updated">Latest developments: '
-                   f'{esc(topic.get("latest_developments", ""))}</p>')
-        if topic.get("summary"):
-            out.append(f'<details class="more"><summary>read more</summary>'
-                       f'<p>{esc(topic["summary"])}</p></details>')
-        if topic.get("sources"):
-            out.append(_sources_html(topic["sources"]))
+    for topic in (digest.get("topics") or []):
+        out += _story_row(topic, "h3", chip=str(topic.get("area") or ""))
     return out
 
 
@@ -1831,6 +1853,14 @@ def _sports_inner(blocks):
 SCOREBOARD_NOTE = "Scoreboard unavailable at last update."
 
 
+def _folded_subsection(title, body):
+    """A subsection that starts collapsed, for the same reason the sections in
+    COLLAPSED_SECTIONS do. The <h3> sits inside the <summary>, so the heading
+    outline is what it was before the fold."""
+    return [f'<details class="fold sub"><summary><h3>{esc(title)}</h3></summary>',
+            *body, "</details>"]
+
+
 def _sports_section(sports, local):
     """Scoreboard (ESPN, or plaintextsports when ESPN fails) plus the
     model-summarized 'Around the Teams' items."""
@@ -1844,11 +1874,9 @@ def _sports_section(sports, local):
         # the error text.
         out.append(f'<p class="lbl">{esc(SCOREBOARD_NOTE)}</p>')
     if around:
-        out.append("<h3>Around the Teams</h3>")
-        out += _local_items_html(around, level=4)
+        out += _folded_subsection("Around the Teams", _local_items_html(around, level=4))
     if team_usa:
-        out.append("<h3>Team USA</h3>")
-        out += _local_items_html(team_usa, level=4)
+        out += _folded_subsection("Team USA", _local_items_html(team_usa, level=4))
     return out
 
 
@@ -1932,6 +1960,9 @@ def _health_inner(health):
 # inline; only the page folds them.
 COLLAPSED_SECTIONS = ("reading", "markets", "health")
 
+# The one section that stays full width above the columns.
+GLANCE_ANCHOR = "glance"
+
 # The only script on the page, and the page works without it. A closed
 # <details> hides its contents from fragment navigation, so a jump link into a
 # folded section (the "at a glance" list links to individual reading items,
@@ -1994,15 +2025,15 @@ def render_html(digest, local, markets, weather, sports, feeds,
         "<body>",
         '<a class="skip" href="#main">Skip to content</a>',
         "<header>",
+        # the day's line sits beside the title; with the sections folded and
+        # columned there is no page left for a jump index to save
+        '<div class="masthead">',
         f'<h1><a href="{prefix}index.html" style="text-decoration:none">infosecfollow</a></h1>',
-        "<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>",
         f"<nav>{esc(_display_date(digest['date']))} &middot; {esc(generated_time)} &middot; "
         f'<a href="{archive_href}">archive</a> &middot; '
         f'<a href="{text_href}">plain text</a></nav>',
-        '<nav class="jump" aria-label="Sections">Jump to: '
-        + " &middot; ".join(f'<a href="#{anchor}">{esc(title)}</a>'
-                            for anchor, title, _ in present)
-        + "</nav>",
+        "</div>",
+        "<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>",
         "</header>",
         '<main id="main">',
         f'<p id="top" class="headline">{esc(headline)}</p>',
@@ -2010,19 +2041,30 @@ def render_html(digest, local, markets, weather, sports, feeds,
     for note in (notes or []):
         parts.append(f'<p class="note">{esc(note)}</p>')
     parts.append("<hr>")
-    for anchor, title, body in present:
+
+    def section_html(anchor, title, body):
         if anchor in COLLAPSED_SECTIONS:
             # Reference material rather than the day's news: rendered as a
-            # closed <details> so it stays one click away without pushing the
-            # footer down. The id sits on the <details>, so a jump link still
-            # lands on the (always visible) summary.
-            parts.append(f'<details class="fold" id="{anchor}">')
-            parts.append(f"<summary><h2>{esc(title)}</h2></summary>")
-            parts += body
-            parts.append("</details>")
-        else:
-            parts.append(f'<h2 id="{anchor}">{esc(title)}</h2>')
-            parts += body
+            # closed <details> so it stays one click away. The id sits on the
+            # <details>, so a link still lands on the (always visible) summary.
+            return ([f'<details class="fold" id="{anchor}">',
+                     f"<summary><h2>{esc(title)}</h2></summary>"] + body
+                    + ["</details>"])
+        return [f'<h2 id="{anchor}">{esc(title)}</h2>'] + body
+
+    # The glance is the front page and stays full width; everything under it
+    # flows into columns, each section whole inside its own grid item.
+    lead = [s for s in present if s[0] == GLANCE_ANCHOR]
+    rest = [s for s in present if s[0] != GLANCE_ANCHOR]
+    for anchor, title, body in lead:
+        parts += section_html(anchor, title, body)
+    if rest:
+        parts.append('<div class="cols">')
+        for anchor, title, body in rest:
+            parts.append("<section>")
+            parts += section_html(anchor, title, body)
+            parts.append("</section>")
+        parts.append("</div>")
     parts += [
         "</main>",
         "<hr>",
