@@ -1,23 +1,23 @@
 {
   "date": "2026-09-06",
-  "headline": "CERT Polska warns that attackers are seizing full administrative control of internet-exposed MikroTik routers over SSH without supplying any credentials, in a campaign running since September 2, 2026.",
+  "headline": "MikroTik has shipped a patch for the SSH authentication bypass attackers have exploited since at least September 2, 2026, and the SANS Internet Storm Center now tells router owners to assume compromise, because patched devices still carry the accounts attackers added.",
   "emerging_trends": [
     {
-      "text": "Two unauthenticated routes into network edge gear opened inside a week, as CERT Polska's MikroTik SSH warning followed the Citrix NetScaler bypass CVE-2026-19490 that Previdian caught under attack, putting the routers and gateways that terminate corporate traffic at the top of the exposure list.",
+      "text": "Attackers took full administrative control of MikroTik routers with no credentials at all, a reminder that an internet-facing management service on edge hardware hands over every network behind the device.",
       "topic_title": "MikroTik Routers Fall to Unauthenticated SSH Attacks",
       "link_phrase": "MikroTik",
       "_anchor": "trend-1"
     },
     {
-      "text": "The REVSTEALER modules Elastic Security Labs documented switch off Windows Update and Microsoft Defender before running a cryptocurrency miner, the same disable-the-defenses playbook Microsoft traced this week to fake software-download sites, and it converts a one-shot stealer infection into a foothold that outlives the stealer.",
+      "text": "REVSTEALER's four companion modules outlive the stealer that drops them, and patched MikroTik routers still carry attacker-created accounts, so cleanup now demands an eviction hunt that runs well past the initial fix.",
       "topic_title": "REVSTEALER Modules Kill Defender and Mine Crypto",
       "link_phrase": "REVSTEALER",
       "_anchor": "trend-2"
     },
     {
-      "text": "Token's catalog of 39 passkey compromise methods lands on enrollment, account recovery, synced credentials, and authentication prompts, the soft trust boundaries around FIDO2 cryptography that every enterprise rolling out passwordless login now has to defend on its own.",
+      "text": "Token counted 39 ways to defeat passkey logins through enrollment, credential syncing, prompts, and account recovery while FIDO2 cryptography holds, evidence that attackers aim at the machinery surrounding a strong boundary.",
       "topic_title": "Researchers Catalog 39 Passkey Attacks",
-      "link_phrase": "passkey",
+      "link_phrase": "FIDO2",
       "_anchor": "trend-3"
     }
   ],
@@ -25,8 +25,8 @@
     {
       "title": "MikroTik Routers Fall to Unauthenticated SSH Attacks",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "CERT Polska published an attack warning on September 5, 2026, reporting that attackers take full administrative control of MikroTik routers whose SSH service answers from the internet, with no authentication required and successful compromises dating to at least September 2, 2026.",
-      "summary": "MikroTik routers sit at the edge of small-business, hosting, and branch-office networks, so administrative control hands an attacker traffic interception and a pivot into everything behind the device. CERT Polska has released no victim count; pull SSH off the public internet, limit management access to known addresses, and audit routers for added accounts, scripts, and scheduled tasks.",
+      "latest_developments": "MikroTik released a patch late last week for the SSH authentication bypass, and the SANS Internet Storm Center reported on September 6, 2026 that administrators should assume compromise, because attackers add new accounts to the devices to keep access after the patch goes on.",
+      "summary": "MikroTik routers sit at the edge of small-business, hosting, and branch-office networks, so administrative control hands an attacker traffic interception and a pivot into everything behind the device. CERT Polska, which published the attack warning on September 5, 2026 and dated successful compromises to at least September 2, 2026, has released no victim count; install the patch, pull SSH off the public internet, limit management access to known addresses, and audit routers for added accounts, scripts, and scheduled tasks.",
       "tags": [
         "exploit",
         "network",
@@ -37,6 +37,11 @@
           "source": "The Hacker News",
           "title": "Attackers Hijack MikroTik Routers Through Internet-Exposed SSH Without Authentication",
           "url": "https://thehackernews.com/2026/09/attackers-hijack-mikrotik-routers.html"
+        },
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "Critical MikroTik Vulnerability - Patch Now, (Sun, Sep 6th)",
+          "url": "https://isc.sans.edu/diary/rss/33314"
         }
       ],
       "_anchor": "i-d49a120f44"
@@ -58,24 +63,6 @@
         }
       ],
       "_anchor": "i-acd0dfe219"
-    },
-    {
-      "title": "Critical VMware Workstation and Fusion Overflow",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Broadcom assigned the critical desktop hypervisor bug CVE-2026-59346 at CVSS 9.3, an integer overflow that a local attacker holding elevated privileges inside a guest exploits to run arbitrary code, and shipped fixes for it alongside a second Workstation and Fusion flaw.",
-      "summary": "VMware Workstation and Fusion run on developer, researcher, and analyst desktops, where malware analysts rely on the guest boundary to hold. Apply the Broadcom updates, and stop treating an off-the-shelf virtual machine as containment for hostile code.",
-      "tags": [
-        "patch",
-        "virtualization"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Critical VMware Workstation and Fusion Flaw Lets VM Admins Execute Host Code",
-          "url": "https://thehackernews.com/2026/09/critical-vmware-workstation-and-fusion.html"
-        }
-      ],
-      "_anchor": "i-ca7ece09a1"
     },
     {
       "title": "Researchers Catalog 39 Passkey Attacks",
@@ -112,6 +99,24 @@
         }
       ],
       "_anchor": "i-e9b79671f0"
+    },
+    {
+      "title": "Critical VMware Workstation and Fusion Overflow",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Broadcom assigned the critical desktop hypervisor bug CVE-2026-59346 at CVSS 9.3, an integer overflow that a local attacker holding elevated privileges inside a guest exploits to run arbitrary code, and shipped fixes for it alongside a second Workstation and Fusion flaw.",
+      "summary": "VMware Workstation and Fusion run on developer, researcher, and analyst desktops, where malware analysts rely on the guest boundary to hold. Apply the Broadcom updates, and stop treating an off-the-shelf virtual machine as containment for hostile code.",
+      "tags": [
+        "patch",
+        "virtualization"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Critical VMware Workstation and Fusion Flaw Lets VM Admins Execute Host Code",
+          "url": "https://thehackernews.com/2026/09/critical-vmware-workstation-and-fusion.html"
+        }
+      ],
+      "_anchor": "i-ca7ece09a1"
     }
   ],
   "markets": [
@@ -141,44 +146,50 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1610",
-      "pct": "-0.3%",
+      "value": "1.1603",
+      "pct": "-0.5%",
       "arrow": "▼"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3520",
-      "pct": "-0.6%",
+      "value": "1.3524",
+      "pct": "-0.8%",
       "arrow": "▼"
     },
     {
       "label": "USD/JPY",
-      "value": "158.15",
-      "pct": "-0.8%",
+      "value": "158.93",
+      "pct": "-0.2%",
       "arrow": "▼"
     }
   ],
   "weather": [
-    "Today: Sunny, high 80F.",
     "Tonight: Mostly Clear, low 58F.",
-    "Labor Day: Sunny, high 81F."
+    "Labor Day: Sunny, high 81F.",
+    "Monday Night: Mostly Clear, low 58F."
   ],
   "sports": [
     {
       "team": "Pirates",
-      "record": "70-73",
+      "record": "71-73",
       "games": [
         {
           "date": "Sat Sep 5",
           "result": "Angels 6 · Pirates 1 · Final",
           "url": "https://plaintextsports.com/mlb/2026-09-05/laa-pit",
           "recap": ""
+        },
+        {
+          "date": "Sun Sep 6",
+          "result": "Angels 0 · Pirates 1 · Final",
+          "url": "https://plaintextsports.com/mlb/2026-09-06/laa-pit",
+          "recap": ""
         }
       ],
       "next": {
-        "matchup": "Angels @ Pirates",
-        "when": "Sun Sep 6, 1:35 PM",
-        "url": "https://plaintextsports.com/mlb/2026-09-06/laa-pit"
+        "matchup": "Pirates @ White Sox",
+        "when": "Tue Sep 8, 7:40 PM",
+        "url": "https://plaintextsports.com/mlb/2026/teams/pittsburgh-pirates"
       },
       "source": "plaintextsports"
     },
@@ -197,8 +208,31 @@
   "local": {
     "business_politics": [
       {
+        "title": "AfD Wins Saxony-Anhalt",
+        "latest_developments": "The Alternative for Germany took first place in Sunday's Saxony-Anhalt state election on September 6, the best result the party has ever recorded, and finished short of a parliamentary majority.",
+        "summary": "Exit polls put the AfD near a 44% plurality in the eastern German state, leaving the mainstream parties to decide whether to let a hard-right party form a state government for the first time since World War II; the outcome weakens Chancellor Friedrich Merz and marks the crumbling of Germany's political center.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Far-right AfD surges to first place in German state elections",
+            "url": "https://www.ft.com/content/a0229455-1822-4de8-ad2f-7453577d95cd?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "After Far-Right Election Breakthrough, Germany's Merz Faces Painful Dilemma",
+            "url": "https://www.wsj.com/world/europe/germanys-right-wing-populists-on-course-for-historic-victory-56662408?mod=rss_worldnews"
+          },
+          {
+            "source": "The Economist",
+            "title": "The Alternative for Germany has won its best-ever election result",
+            "url": "https://www.economist.com/europe/2026/09/06/the-alternative-for-germany-has-won-its-best-ever-election-result"
+          }
+        ],
+        "_anchor": "i-9eada26247"
+      },
+      {
         "title": "Trump Envoys Carry Peace Proposal Into Kyiv",
-        "latest_developments": "Steve Witkoff and Jared Kushner landed in Kyiv on Sunday, September 6, their first official visit to Ukraine, a day after Vladimir Putin received them at the Kremlin.",
+        "latest_developments": "Steve Witkoff and Jared Kushner met Volodymyr Zelenskyy in Kyiv on Sunday, September 6, a day after Vladimir Putin received them at the Kremlin.",
         "summary": "The two envoys brought a U.S. peace proposal to Moscow on September 5, and Russia and Ukraine paused air strikes on each other's capitals for the duration of the trip; Ukrainian officials rate the odds of a breakthrough as low, and John Sawers, the former MI6 chief, told the FT Weekend Festival that substantive talks may not open until next year and that lasting peace stays out of reach while Putin holds office.",
         "sources": [
           {
@@ -230,12 +264,12 @@
             "url": "https://www.wsj.com/business/energy-oil/opec-allies-agree-to-keep-oil-output-steady-in-october-c7fceb83?mod=pls_whats_news_us_business_f"
           },
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "The risky mission to de-mine the Strait of Hormuz",
             "url": "https://www.ft.com/content/04031dbe-7412-441e-8aaa-89a9ee6c7439?syn-25a6b1a6=1"
           },
           {
-            "source": "FT World",
+            "source": "FT Markets",
             "title": "US strikes three Iranian oil tankers in response to attacks on warships",
             "url": "https://www.ft.com/content/7c7c07db-cde5-474d-9a20-8e2c2f273d4e?syn-25a6b1a6=1"
           }
@@ -296,6 +330,32 @@
     ],
     "around_town": [
       {
+        "title": "Fetterman Apologizes for CHOP Text",
+        "latest_developments": "U.S. Senator John Fetterman told CNN this weekend that a curt text message he sent rejecting Children's Hospital of Philadelphia leaders' concerns about Medicaid cuts was a \"dumb joke,\" and he called the Wall Street Journal story that reported it \"a hit piece,\" TribLive reported Sunday, September 6.",
+        "summary": "Fetterman, the Braddock Democrat, has drawn fire from anonymous staff and Senate leaks over his positions, and the apology to the Philadelphia children's hospital lands as Medicaid cuts work their way through Pennsylvania health systems.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Report: John Fetterman called Wall Street Journal story 'a hit piece' and apologized for text message dismissing CHOP leaders",
+            "url": "https://triblive.com/news/pennsylvania/report-john-fetterman-called-wall-street-journal-story-a-hit-piece-and-apologized-for-text-message-dismissing-chop-leaders/"
+          }
+        ],
+        "_anchor": "i-982d6986c0"
+      },
+      {
+        "title": "McKeesport Health Office Reopens Renovated",
+        "latest_developments": "Allegheny County officials marked the completion of renovations Sunday, September 6, at the county Health Department office at 339 Fifth Avenue in McKeesport.",
+        "summary": "The rebuilt office consolidates the department's services in the Mon Valley under one roof, giving McKeesport-area residents a single county public health location.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Renovated McKeesport public health office to consolidate various services",
+            "url": "https://www.wpxi.com/news/local/renovated-mckeesport-public-health-office-consolidate-various-services/ADUGU2ZFEVHAVB4NDKWRRHWOZA/"
+          }
+        ],
+        "_anchor": "i-c2faa8f36b"
+      },
+      {
         "title": "ICE Detention Goes Mobile in Pennsylvania",
         "latest_developments": "The Post-Gazette reported Sunday, September 6, how Immigration and Customs Enforcement vans could function as mobile detention centers in Pennsylvania.",
         "summary": "ICE is turning vehicles into holding space, a shift that would let the agency detain people in Pennsylvania without a fixed facility and that changes where and how long detention happens in the state.",
@@ -324,6 +384,19 @@
     ],
     "events": [
       {
+        "title": "Panda Fest Comes to Station Square",
+        "latest_developments": "WPXI reported Sunday, September 6, that Panda Fest will make its Pittsburgh debut September 18 through September 20.",
+        "summary": "Panda Fest, an Asian street food festival, runs Friday, September 18, through Sunday, September 20, 2026, in the Station Square parking lot on Pittsburgh's South Shore.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "'Panda Fest' to bring Asian street food experience to Station Square in Pittsburgh",
+            "url": "https://www.wpxi.com/news/local/panda-fest-bring-asian-street-food-experience-station-square-pittsburgh/6KTV6DACANGBXNMUS646EQA7HE/"
+          }
+        ],
+        "_anchor": "i-107ede36f2"
+      },
+      {
         "title": "Pittsburgh Soul Food Festival Downtown",
         "latest_developments": "WPXI reported Saturday evening, September 5, that the seventh annual Pittsburgh Soul Food Festival is running downtown through the Labor Day weekend after Thursday's storms threatened it.",
         "summary": "The Pittsburgh Soul Food Festival, in its seventh year, takes over downtown Pittsburgh across the Labor Day holiday weekend of September 5 through 7, 2026, with food vendors and music.",
@@ -339,6 +412,19 @@
     ],
     "around_teams": [
       {
+        "title": "Skenes Ends a Seven-Start Winless Run",
+        "latest_developments": "The Post-Gazette reported Sunday, September 6, that Paul Skenes collected his first win since July 19, throwing 5 1/3 scoreless innings against the Los Angeles Angels at PNC Park and ending a seven-start stretch without one.",
+        "summary": "Skenes, the Pirates' ace, had gone more than six weeks without a decision in his favor despite the run prevention behind him; catcher Henry Davis supplied the offense with a solo home run, and the club heads to the Chicago White Sox on Tuesday to open a six-game road trip.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "Henry Davis' homer was all the Pirates needed in a Paul Skenes-led shutout against the Angels",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/09/06/pirates-henry-davis-paul-skenes-angels-mlb-score/stories/202609060066"
+          }
+        ],
+        "_anchor": "i-419de473bb"
+      },
+      {
         "title": "Left-Handers Keep Silencing the Pirates",
         "latest_developments": "The Post-Gazette wrote Saturday night, September 5, that the Pirates' season-long trouble with left-handed starting pitching surfaced again against the Los Angeles Angels at PNC Park.",
         "summary": "Angels left-hander Yusei Kikuchi held Pittsburgh to almost nothing while rookie right-hander Braxton Ashcraft started for the Pirates, and the lineup, Bryan Reynolds included, extended a pattern that has followed the club all year against left-handed starters.",
@@ -353,6 +439,45 @@
       }
     ],
     "team_usa": [
+      {
+        "title": "U.S. Women Survive Italy in Berlin",
+        "latest_developments": "The United States beat Italy 55-52 on Sunday, September 6, in Berlin, its closest FIBA Women's World Cup game in two decades, pushing the American winning streak in World Cup play to 32 games.",
+        "summary": "Kara Lawson's team, playing without A'ja Wilson and Kelsey Plum, followed its 33-point opening win over China with a three-point escape against Italy, a result that keeps intact a streak stretching back more than 20 years.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "U.S. tops Italy, pushes World Cup win streak to 32",
+            "url": "https://www.espn.com/olympics/story/_/id/49852465/team-usa-escapes-win-italy-women-world-cup"
+          }
+        ],
+        "_anchor": "i-b324f73a89"
+      },
+      {
+        "title": "Italy Beats the U.S. U20 Women",
+        "latest_developments": "The United States lost its opening match at the U20 Women's World Cup on Sunday, September 6, falling 2-1 to Italy in Lodz, Poland.",
+        "summary": "The defeat leaves the young Americans in an early hole in a difficult group at the tournament in Poland, with the rest of their group stage ahead.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Italy stuns U.S. women in U20 World Cup opener",
+            "url": "https://www.espn.com/soccer/story/_/id/49851299/italy-stuns-united-states-u20-women-world-cup-opener"
+          }
+        ],
+        "_anchor": "i-205f1b2264"
+      },
+      {
+        "title": "Reyna Scores His First for Strasbourg",
+        "latest_developments": "Giovanni Reyna scored his first goal since joining Strasbourg on Sunday, September 6, as the club beat Troyes 6-2 in Ligue 1.",
+        "summary": "Reyna, the U.S. men's national team midfielder, moved to Strasbourg in the summer window after his time at Borussia Dortmund ran down, a transfer ESPN framed as a last chance to revive his career.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Reyna scores first goal since move to Strasbourg",
+            "url": "https://www.espn.com/soccer/story/_/id/49853186/giovanni-reyna-scores-first-goal-move-strasbourg"
+          }
+        ],
+        "_anchor": "i-784f130644"
+      },
       {
         "title": "Cavan Sullivan Passes Freddy Adu",
         "latest_developments": "Cavan Sullivan, the 16-year-old Philadelphia Union midfielder, scored in a third straight Major League Soccer match, breaking a record Freddy Adu set, ESPN reported early Sunday, September 6.",
@@ -395,34 +520,20 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Unauthenticated takeover of internet-facing MikroTik routers, following the Citrix NetScaler bypass CVE-2026-19490, puts edge gear atop the exposure list alongside Broadcom's critical VMware Workstation overflow.",
+      "text": "Attackers who own MikroTik routers through unauthenticated SSH leave rogue accounts behind, much as REVSTEALER's four modules keep killing Defender and mining crypto after the stealer deletes itself.",
       "links": [
         {
           "anchor": "i-d49a120f44",
           "phrase": "MikroTik routers",
-          "start": 44,
-          "end": 60,
+          "start": 18,
+          "end": 34,
           "title": "MikroTik Routers Fall to Unauthenticated SSH Attacks"
         },
         {
-          "anchor": "i-ca7ece09a1",
-          "phrase": "VMware Workstation",
-          "start": 184,
-          "end": 202,
-          "title": "Critical VMware Workstation and Fusion Overflow"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "REVSTEALER modules that Elastic Security Labs found switch off Windows Update and Microsoft Defender to run a cryptocurrency miner, outliving the stealer that dropped them.",
-      "links": [
-        {
           "anchor": "i-acd0dfe219",
-          "phrase": "REVSTEALER modules",
-          "start": 0,
-          "end": 18,
+          "phrase": "REVSTEALER's four modules",
+          "start": 100,
+          "end": 125,
           "title": "REVSTEALER Modules Kill Defender and Mine Crypto"
         }
       ]
@@ -430,104 +541,118 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Token's catalog of 39 passkey compromise methods targets enrollment, recovery, synced credentials, and prompts, leaving FIDO2 cryptography intact but shifting the burden onto enterprises rolling out passwordless login.",
+      "text": "Token's catalog of 39 passkey attacks leaves FIDO2 cryptography intact while abusing enrollment and recovery, and Broadcom patched CVE-2026-59346, an overflow a privileged guest user exploits.",
       "links": [
         {
           "anchor": "i-984e94689c",
-          "phrase": "39 passkey",
+          "phrase": "39 passkey attacks",
           "start": 19,
-          "end": 29,
+          "end": 37,
           "title": "Researchers Catalog 39 Passkey Attacks"
+        },
+        {
+          "anchor": "i-ca7ece09a1",
+          "phrase": "CVE-2026-59346",
+          "start": 131,
+          "end": 145,
+          "title": "Critical VMware Workstation and Fusion Overflow"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Witkoff and Jared Kushner carried a peace proposal into Kyiv a day after Putin hosted them, as OPEC froze October output and Trump's approval hit a low.",
+      "text": "Steve Witkoff and Jared Kushner carried a peace proposal to Zelenskyy in Kyiv a day after Putin hosted them, and the AfD took first place in Saxony-Anhalt.",
       "links": [
         {
           "anchor": "i-aa0dabbffe",
-          "phrase": "Jared Kushner",
-          "start": 12,
-          "end": 25,
+          "phrase": "Kyiv",
+          "start": 73,
+          "end": 77,
           "title": "Trump Envoys Carry Peace Proposal Into Kyiv"
         },
         {
-          "anchor": "i-23ce9cacae",
-          "phrase": "OPEC",
-          "start": 95,
-          "end": 99,
-          "title": "OPEC and Allies Freeze October Output"
-        },
-        {
-          "anchor": "i-5455994a8f",
-          "phrase": "Trump's approval",
-          "start": 125,
-          "end": 141,
-          "title": "Trump Approval Hits an All-Time Low"
+          "anchor": "i-9eada26247",
+          "phrase": "Saxony-Anhalt",
+          "start": 141,
+          "end": 154,
+          "title": "AfD Wins Saxony-Anhalt"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Locally, ICE vans could serve as mobile detention centers, a judge and TribLive pressed Allegheny County on pensions, and the Pittsburgh Soul Food Festival ran downtown.",
+      "text": "Fetterman apologized for his text to Children's Hospital of Philadelphia, Allegheny County reopened its renovated McKeesport health office, and Panda Fest debuts at Station Square on September 18.",
       "links": [
         {
-          "anchor": "i-bfe116ffc7",
-          "phrase": "ICE vans",
-          "start": 9,
-          "end": 17,
-          "title": "ICE Detention Goes Mobile in Pennsylvania"
+          "anchor": "i-982d6986c0",
+          "phrase": "Fetterman",
+          "start": 0,
+          "end": 9,
+          "title": "Fetterman Apologizes for CHOP Text"
         },
         {
-          "anchor": "i-4996585e6a",
-          "phrase": "Allegheny County",
-          "start": 88,
-          "end": 104,
-          "title": "Allegheny County Pension Deficit"
+          "anchor": "i-c2faa8f36b",
+          "phrase": "McKeesport",
+          "start": 114,
+          "end": 124,
+          "title": "McKeesport Health Office Reopens Renovated"
         },
         {
-          "anchor": "i-18bb2fa801",
-          "phrase": "Soul Food Festival",
-          "start": 137,
-          "end": 155,
-          "title": "Pittsburgh Soul Food Festival Downtown"
+          "anchor": "i-107ede36f2",
+          "phrase": "Panda Fest",
+          "start": 144,
+          "end": 154,
+          "title": "Panda Fest Comes to Station Square"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "AI's self-dealing economics drew fresh scrutiny as Zitron traced circular financing between Nvidia and OpenAI, Ben Thompson interviewed Greg Brockman, and Newport disputed agent civilization framing.",
+      "kind": "Update",
+      "status": "new",
+      "text": "The U.S. women edged Italy 55-52 in Berlin for a 32nd straight World Cup win, the U20 team lost in Lodz, and Reyna scored for Strasbourg.",
       "links": [
         {
-          "anchor": "i-345c7de0e9",
-          "phrase": "circular financing",
-          "start": 65,
-          "end": 83,
-          "title": "Premium: The Hater's Guide To Circular Financing (Part Two)"
+          "anchor": "i-b324f73a89",
+          "phrase": "Berlin",
+          "start": 36,
+          "end": 42,
+          "title": "U.S. Women Survive Italy in Berlin"
         },
         {
-          "anchor": "i-17f1523692",
-          "phrase": "Greg Brockman",
-          "start": 136,
-          "end": 149,
-          "title": "An Interview with OpenAI President Greg Brockman About Astra and Alignment"
+          "anchor": "i-205f1b2264",
+          "phrase": "Lodz",
+          "start": 99,
+          "end": 103,
+          "title": "Italy Beats the U.S. U20 Women"
         },
         {
-          "anchor": "i-b36a054781",
-          "phrase": "agent civilization",
-          "start": 172,
-          "end": 190,
-          "title": "Are We at War with AI Agent \"Civilizations\"?"
+          "anchor": "i-784f130644",
+          "phrase": "Reyna",
+          "start": 109,
+          "end": 114,
+          "title": "Reyna Scores His First for Strasbourg"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Paul Skenes threw 5 1/3 scoreless innings against the Angels at PNC Park for his first win since July 19, ending a seven-start drought.",
+      "links": [
+        {
+          "anchor": "i-419de473bb",
+          "phrase": "Paul Skenes",
+          "start": 0,
+          "end": 11,
+          "title": "Skenes Ends a Seven-Start Winless Run"
         }
       ]
     }
   ],
   "notes": [
-    "Quiet day: only 43 security items in the last 48 hours."
+    "Quiet day: only 17 security items in the last 48 hours."
   ],
   "feed_health": {
     "groups": [
@@ -537,17 +662,22 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 48,
-        "in_window": 43,
+        "in_window": 17,
         "failed": [],
         "empty": [
           "Krebs on Security",
+          "Schneier on Security",
+          "Dark Reading",
           "CISA Advisories",
+          "The Record",
+          "Ars Technica Security",
           "Securelist (Kaspersky)",
           "Sophos News",
           "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
           "Cisco Talos",
           "Graham Cluley",
+          "Microsoft Security Blog",
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
@@ -556,13 +686,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 11,
-            "contributed": 11
+            "in_window": 8,
+            "contributed": 8
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 3,
+            "contributed": 3
           },
           "Krebs on Security": {
             "items": 10,
@@ -571,23 +701,23 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 0,
+            "contributed": 0
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 0,
+            "contributed": 0
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 1,
+            "contributed": 1
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "CISA Advisories": {
             "items": 30,
@@ -596,18 +726,18 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 0,
+            "contributed": 0
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 0,
+            "contributed": 0
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 1,
+            "contributed": 1
           },
           "Securelist (Kaspersky)": {
             "items": 10,
@@ -641,8 +771,8 @@
           },
           "Microsoft Security Blog": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Google Project Zero": {
             "items": 7,
@@ -685,27 +815,30 @@
         "in_window": 60,
         "failed": [],
         "empty": [
-          "NEXTpittsburgh"
+          "PublicSource",
+          "Pittsburgh City Paper",
+          "NEXTpittsburgh",
+          "Pittsburgh Magazine"
         ],
         "per_feed": {
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 23
+            "contributed": 24
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 12
+            "contributed": 6
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 1,
+            "in_window": 0,
             "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
-            "in_window": 3,
+            "in_window": 0,
             "contributed": 0
           },
           "NEXTpittsburgh": {
@@ -715,23 +848,23 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 3,
+            "in_window": 0,
             "contributed": 0
           },
           "KDKA": {
             "items": 30,
-            "in_window": 30,
-            "contributed": 5
+            "in_window": 29,
+            "contributed": 9
           },
           "WPXI": {
             "items": 15,
-            "in_window": 13,
-            "contributed": 8
+            "in_window": 15,
+            "contributed": 10
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 12
+            "contributed": 11
           }
         }
       },
@@ -741,49 +874,49 @@
         "feeds": 8,
         "loaded": 8,
         "window_hours": 36,
-        "in_window": 56,
+        "in_window": 58,
         "failed": [],
         "empty": [],
         "per_feed": {
           "WSJ World News": {
             "items": 71,
-            "in_window": 9,
-            "contributed": 8
+            "in_window": 11,
+            "contributed": 10
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 3,
+            "contributed": 3
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 9,
+            "in_window": 8,
             "contributed": 6
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 4
           },
           "The Economist": {
             "items": 300,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 5,
+            "contributed": 5
           },
           "FT Home": {
-            "items": 9,
-            "in_window": 9,
-            "contributed": 9
+            "items": 10,
+            "in_window": 10,
+            "contributed": 10
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 18
+            "contributed": 17
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 8,
-            "contributed": 4
+            "in_window": 4,
+            "contributed": 3
           }
         }
       },
@@ -793,7 +926,7 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 10,
+        "in_window": 8,
         "failed": [],
         "empty": [
           "NEXTpittsburgh Events",
@@ -802,8 +935,8 @@
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 8,
+            "contributed": 8
           },
           "Post-Gazette Music": {
             "items": 20,
@@ -828,7 +961,7 @@
         "feeds": 6,
         "loaded": 6,
         "window_hours": 96,
-        "in_window": 30,
+        "in_window": 26,
         "failed": [],
         "empty": [
           "Footbahlin with Ben Roethlisberger",
@@ -842,13 +975,13 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 3,
+            "contributed": 3
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
-            "in_window": 15,
-            "contributed": 15
+            "in_window": 12,
+            "contributed": 12
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -862,7 +995,7 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 3,
+            "in_window": 2,
             "contributed": 2
           }
         }
@@ -873,7 +1006,7 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 25,
+        "in_window": 23,
         "failed": [],
         "empty": [
           "Guardian Olympics"
@@ -886,8 +1019,8 @@
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 6,
+            "contributed": 6
           },
           "Guardian Olympics": {
             "items": 20,
@@ -948,24 +1081,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 23491,
+          "outputTokens": 18038,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 89547,
+          "cacheCreationInputTokens": 90390,
           "webSearchRequests": 0,
-          "costUSD": 1.4827750000000002,
+          "costUSD": 1.35488,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 15242
+          "thinkingTokens": 7398
         }
       },
-      "cost_usd": 1.4827750000000002,
-      "duration_ms": 289659,
+      "cost_usd": 1.35488,
+      "duration_ms": 200172,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-06 08:05 EDT",
-    "items_considered": 43,
+    "generated_at": "2026-09-06 19:34 EDT",
+    "items_considered": 17,
     "window_hours": 48,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1046,8 +1179,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.4828,
-    "model_duration_ms": 289659,
+    "model_cost_usd": 1.3549,
+    "model_duration_ms": 200172,
     "local_from": null,
     "feed_failures": []
   }
