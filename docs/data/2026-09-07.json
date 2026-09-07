@@ -1,27 +1,118 @@
 {
   "date": "2026-09-07",
-  "headline": "Attackers turned on the remote management software that managed service providers run, forcing N-able to ship a fourth emergency N-central hotfix in five weeks while ConnectWise left a ScreenConnect file-transfer flaw unpatched.",
+  "headline": "Attackers spent the day turning remote management software against the networks it administers, as N-able shipped a fourth emergency N-central hotfix for an exploited pre-authentication flaw, ConnectWise fought an unpatched ScreenConnect bug that now spreads malware worm-style, and MikroTik routers fell to a two-vulnerability chain.",
   "emerging_trends": [
     {
-      "text": "N-able's fourth N-central hotfix in five weeks and ConnectWise's still-unpatched ScreenConnect file-transfer bug arrived within days of each other, handing attackers the two platforms managed service providers use to reach thousands of downstream customer networks at once.",
-      "topic_title": "ScreenConnect File Transfers Carry Malware",
-      "link_phrase": "ScreenConnect",
+      "text": "The software that managed service providers use to reach inside customer networks has become the fastest route to mass compromise, with N-central and ScreenConnect both under attack in the same week and one server exposing every network beneath it.",
+      "topic_title": "N-able Ships Fourth N-central Hotfix in Five Weeks",
+      "link_phrase": "N-central",
       "_anchor": "trend-1"
     },
     {
-      "text": "Attackers who reach MikroTik routers now chain two RouterOS flaws and create their own accounts on the device, so administrators who install the patch and stop there keep the intruder.",
-      "topic_title": "MikroTik RouterOS Flaws Chained to Hijack Routers",
-      "link_phrase": "MikroTik",
+      "text": "Security products themselves keep landing on the target list, as Nightmare Eclipse follows its Kaspersky and CrowdStrike work with fresh proof-of-concept exploits that turn Nvidia and Avast software into a SYSTEM shell.",
+      "topic_title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, and Avast Zero-Days",
+      "link_phrase": "Nightmare Eclipse",
       "_anchor": "trend-2"
     },
     {
-      "text": "OpenAI moved Astra, the first model it rates critical for cyber capability, into the $20-a-month Plus tier and said its automated research intern now runs multiday research tasks, putting offensive-grade capability in front of millions of ordinary subscribers.",
-      "topic_title": "Astra Reaches $20 Subscribers as OpenAI Automates Research",
-      "link_phrase": "Astra",
+      "text": "Criminals increasingly walk past logins instead of cracking them, and JSCeal shows the pattern by replaying stolen browser session cookies straight into Google accounts without ever facing an authentication prompt.",
+      "topic_title": "JSCeal Steals Session Cookies to Walk Past Google Logins",
+      "link_phrase": "JSCeal",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "ScreenConnect File Transfers Carry Malware",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Huntress documented three unrelated intrusions in which backdoored ScreenConnect instances pushed a four-stage Visual Basic Script payload to every newly connected host, a worm-like spread that began with a Quick Assist tech-support scam, a phishing-delivered MSI installer, and a fake update; ConnectWise separately published temporary mitigations for the underlying file transfer flaw, confirmed it hits both its cloud service and on-premises installations, and promised a CVE identifier and a fix within the week.",
+      "summary": "ScreenConnect is the remote support and access tool that corporate IT departments and managed service providers use to take over user desktops, and the flaw abuses the file transfer built into live sessions. ConnectWise dated its advisory September 3, 2026; administrators should apply the interim mitigations now, audit connected clients, and update as soon as the patch ships.",
+      "tags": [
+        "vulnerability",
+        "malware",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "ConnectWise warns of new ScreenConnect flaw without patch",
+          "url": "https://www.bleepingcomputer.com/news/security/connectwise-warns-of-new-screenconnect-flaw-without-patch/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Attackers spread malware through ScreenConnect file transfers",
+          "url": "https://www.helpnetsecurity.com/2026/09/07/connectwise-screenconnect-file-transfer-flaw/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Rogue ScreenConnect Clients Spread Four-Stage VBScript Chain to Newly Connected Hosts",
+          "url": "https://thehackernews.com/2026/09/rogue-screenconnect-clients-spread-four.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Modified ScreenConnect Clients Used in Worm-Like Campaign",
+          "url": "https://www.securityweek.com/modified-screenconnect-clients-used-in-worm-like-campaign/"
+        }
+      ],
+      "_anchor": "i-58fad11958"
+    },
+    {
+      "title": "N-able Ships Fourth N-central Hotfix in Five Weeks",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "N-able assigned the maximum-severity pre-authentication remote code execution flaw CVE-2026-86218 and released Hotfix 4 for N-central 2026.3 on September 5, 2026, its fourth hotfix for the platform in five weeks, and told every on-premises operator running a build below 2026.3.1.14 to install it, including anyone who applied Hotfix 3 a day earlier.",
+      "summary": "N-central is the remote monitoring and management platform managed service providers use to administer customer machines, so one compromised server exposes every network beneath it. N-able's incident notice says attackers have exploited the flaw in the wild while its release notes call that unconfirmed; operators should patch immediately and hunt for intrusion.",
+      "tags": [
+        "patch",
+        "zero-day",
+        "supply chain"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "N-able Issues Fourth N-central Hotfix in Five Weeks for Unauthenticated RCE Flaw",
+          "url": "https://thehackernews.com/2026/09/n-able-issues-fourth-n-central-hotfix.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "N-able patches max severity N-central flaw amid ongoing attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/n-able-patches-max-severity-n-central-flaw-amid-ongoing-attacks/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "N-able patches critical N-central zero-day exploited in the wild (CVE-2026-86218)",
+          "url": "https://www.helpnetsecurity.com/2026/09/07/n-able-n-central-hotfix-cve-2026-86218/"
+        }
+      ],
+      "_anchor": "i-caffc3f256"
+    },
+    {
+      "title": "Mathspace, Berlin, and Trezor Report Fresh Data Theft",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Mathspace, the online maths learning platform, disclosed over the weekend that attackers breached its Metabase internal reporting system and stole data on more than 1 million students, staff, and parents; Berlin's government said a second trove of stolen city data appeared online, with hackers publishing login credentials, while Germany's Federal Office for Information Security warned separately about the Rhysida cybercrime group; and Trezor put the total from the August breach at its fulfillment provider ShipMonk at 81,000 customers after adding 67,000 in the United States.",
+      "summary": "All three disclosures grew from intrusions at systems that sit behind the primary product—an internal analytics tool, city agency accounts, and a third-party shipping vendor. Customers and residents should treat exposed names, addresses, and credentials as material for targeted phishing, and reset any password reused elsewhere.",
+      "tags": [
+        "breach",
+        "ransomware"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Mathspace discloses data breach affecting over 1 million people",
+          "url": "https://www.bleepingcomputer.com/news/security/mathspace-discloses-data-breach-affecting-over-1-million-people/"
+        },
+        {
+          "source": "The Record",
+          "title": "Berlin investigates new data leak after hackers publish stolen login credentials",
+          "url": "https://therecord.media/germany-berlin-second-data-breach-city-agencies"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Trezor data breach impact now reaches 81,000 customers",
+          "url": "https://www.bleepingcomputer.com/news/security/trezor-data-breach-impact-now-reaches-81-000-customers/"
+        }
+      ],
+      "_anchor": "i-3dd0677c1b"
+    },
     {
       "title": "Astra Reaches $20 Subscribers as OpenAI Automates Research",
       "area": "AI Security",
@@ -52,54 +143,6 @@
       "_anchor": "i-9a8c26006c"
     },
     {
-      "title": "N-able Ships Fourth N-central Hotfix in Five Weeks",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "N-able released an emergency Hotfix 4 for a maximum-severity unauthenticated remote code execution flaw in N-central, its fourth hotfix for the platform in five weeks, and told every on-premises operator running a build below 2026.3.1.14 to install it, including anyone who applied Hotfix 3 a day earlier.",
-      "summary": "N-central is the remote monitoring and management platform managed service providers use to administer customer machines, so one compromised server exposes every network beneath it. N-able's incident notice says attackers have exploited the flaw in the wild while its release notes call that unconfirmed; operators should patch immediately and hunt for intrusion.",
-      "tags": [
-        "patch",
-        "zero-day",
-        "supply chain"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "N-able Issues Fourth N-central Hotfix in Five Weeks for Unauthenticated RCE Flaw",
-          "url": "https://thehackernews.com/2026/09/n-able-issues-fourth-n-central-hotfix.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "N-able patches max severity N-central flaw amid ongoing attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/n-able-patches-max-severity-n-central-flaw-amid-ongoing-attacks/"
-        }
-      ],
-      "_anchor": "i-caffc3f256"
-    },
-    {
-      "title": "ScreenConnect File Transfers Carry Malware",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "ConnectWise published temporary mitigations for a file transfer flaw in ScreenConnect Remote Access Support and Access sessions that attackers already use to spread malware, confirmed the bug affects both its cloud service and on-premises installations, and promised a CVE identifier and a fix within the week.",
-      "summary": "ScreenConnect is the remote support and access tool that corporate IT departments and managed service providers use to take over user desktops, and the flaw abuses the file transfer built into live sessions. ConnectWise dated its advisory September 3, 2026; administrators should apply the interim mitigations now and update as soon as the patch ships.",
-      "tags": [
-        "vulnerability",
-        "malware",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "ConnectWise warns of new ScreenConnect flaw without patch",
-          "url": "https://www.bleepingcomputer.com/news/security/connectwise-warns-of-new-screenconnect-flaw-without-patch/"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Attackers spread malware through ScreenConnect file transfers",
-          "url": "https://www.helpnetsecurity.com/2026/09/07/connectwise-screenconnect-file-transfer-flaw/"
-        }
-      ],
-      "_anchor": "i-58fad11958"
-    },
-    {
       "title": "MikroTik RouterOS Flaws Chained to Hijack Routers",
       "area": "Vulnerabilities and Exploits",
       "latest_developments": "BleepingComputer reported that attackers now chain two recently disclosed RouterOS vulnerabilities, rather than firing the SSH authentication bypass alone, to seize full control of MikroTik routers whose SSH service faces the internet.",
@@ -122,6 +165,44 @@
         }
       ],
       "_anchor": "i-2760a5535a"
+    },
+    {
+      "title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, and Avast Zero-Days",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "SecurityWeek reported that the researcher known as Nightmare Eclipse widened the release beyond the CrowdStrike Falcon Sensor bug published last week, dropping proof-of-concept exploits for unpatched privilege-escalation flaws in Nvidia and Avast software that each spawn a shell with SYSTEM privileges.",
+      "summary": "Nightmare Eclipse, also called Chaotic Eclipse, has now hit four security and driver vendors in eight days, following the HardBreacher exploit that forced a Kaspersky patch on August 31, 2026, and the FalconFlank exploit against CrowdStrike's macro-remediation routine. Endpoint software runs with the highest privileges on a machine, so defenders should watch vendor advisories for fixes and monitor for local escalation attempts.",
+      "tags": [
+        "zero-day",
+        "privilege escalation",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, Avast Zero-Day Exploits",
+          "url": "https://www.securityweek.com/nightmare-eclipse-drops-crowdstrike-nvidia-avast-zero-day-exploits/"
+        }
+      ],
+      "_anchor": "i-14579c1ad7"
+    },
+    {
+      "title": "North Korean Crews Backdoor HAProxy in South Korea",
+      "area": "Nation-State Activity",
+      "latest_developments": "SecurityWeek tied the previously undocumented Linux toolkit that hides inside trojanized HAProxy load balancers to North Korean hackers, and named automotive and media organizations in South Korea as the targets of the long-term surveillance operation.",
+      "summary": "The toolkit, whose own debug strings call it ted, compiles a backdoor directly into the HAProxy binary, so the load balancer that fronts a web application also intercepts its traffic and serves altered pages to chosen visitors. Anyone running HAProxy in the region should verify binary integrity against vendor builds and review outbound connections from load balancers.",
+      "tags": [
+        "apt",
+        "espionage",
+        "linux"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "North Korean Hackers Deploy New Linux Espionage Toolkit",
+          "url": "https://www.securityweek.com/north-korean-hackers-deploy-new-linux-espionage-toolkit/"
+        }
+      ],
+      "_anchor": "i-ba7865d262"
     },
     {
       "title": "JSCeal Steals Session Cookies to Walk Past Google Logins",
@@ -243,14 +324,47 @@
   "local": {
     "business_politics": [
       {
+        "title": "Yen Hits a Six-Month High",
+        "latest_developments": "The yen touched 154.04 per dollar Monday, September 7, its strongest intraday level since late February, with the steepest part of the climb landing in the London morning as traders watched for signs of Japanese intervention.",
+        "summary": "The currency has recovered for a week as rate expectations shift, with markets pricing a Bank of Japan increase and, after last week's U.S. payrolls surprise, a Federal Reserve increase at the September 16 meeting; the same rate bets pushed German Bund yields higher and left copper and gold trading against a stronger tightening outlook.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Yen surges to 6-month high as traders stay alert for signs of intervention",
+            "url": "https://www.ft.com/content/d86643d2-c98c-4e19-b066-c97b50819b7e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Yen Climbs to Six-Month High as Rate Outlooks Shift",
+            "url": "https://www.wsj.com/finance/currencies/japanese-yen-climbs-to-six-month-high-as-rate-outlooks-shift-df3980be?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Rise in German Bund Yields Almost Entirely Due to ECB Rate-Hike Prospects",
+            "url": "https://www.wsj.com/finance/jgbs-edge-lower-amid-rising-oil-prices-b7e71276?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Copper Rises on Supply Concerns Despite Rate-Hike Bets",
+            "url": "https://www.wsj.com/finance/commodities-futures/gold-falls-on-rising-fed-rate-hike-expectations-6e77bf70?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-be1e85e711"
+      },
+      {
         "title": "Brent Tops $97 as the U.S. and Iran Trade Strikes",
-        "latest_developments": "The United States and Iran exchanged a fresh series of strikes over the weekend, pushing Brent crude above $97 a barrel in early European trading Monday, September 7, while U.S. Treasurys sat closed for Labor Day and stock futures ran mixed.",
+        "latest_developments": "New strikes hit Saudi Aramco oil facilities at Jizan near the Yemeni border, a site Houthi rebels have targeted repeatedly, and Brent crude held above $97 a barrel through European afternoon trading Monday, September 7, after the United States and Iran exchanged a fresh series of strikes over the weekend.",
         "summary": "The war continues to choke traffic through the Strait of Hormuz: European natural gas climbed more than 2% to just under 74 euros a megawatt-hour with Qatari supply flows severely disrupted, eurozone government bond yields opened higher ahead of the European Central Bank's rate decision Thursday, September 10, and Tehran announced it will raise petrol prices because war-driven shortages have made its fuel subsidies, among the cheapest in the world, unsustainable.",
         "sources": [
           {
             "source": "WSJ Markets",
             "title": "Brent Tops $97 as U.S.-Iran Exchange Attacks",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-escalation-in-u-s-iran-conflict-aab0d7fb?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "Saudi Aramco oil facilities hit in new strikes",
+            "url": "https://www.ft.com/content/9ffb0fb3-51f6-4aa8-9270-a949196bf441?syn-25a6b1a6=1"
           },
           {
             "source": "FT Home",
@@ -261,11 +375,6 @@
             "source": "WSJ Markets",
             "title": "European Gas Climbs on LNG Supply Concerns Ahead of Winter",
             "url": "https://www.wsj.com/finance/commodities-futures/european-gas-climbs-on-lng-supply-concerns-ahead-of-winter-95ffd976?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Eurozone Bond Yields Open Higher, Thursday's ECB Decision in Focus",
-            "url": "https://www.wsj.com/finance/jgbs-edge-lower-amid-rising-oil-prices-b7e71276?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
@@ -304,7 +413,7 @@
         "summary": "The infusion is China's second recapitalization of its financial system in less than two years and lands as growth momentum sputters; separately, China's foreign-exchange reserves edged higher in August on a weaker dollar and a surging trade surplus, renewing concern about the yuan's appreciation.",
         "sources": [
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "China pumps $54bn into banks and insurers",
             "url": "https://www.ft.com/content/8012b60e-c74e-49bc-9200-d37f13b4a135?syn-25a6b1a6=1"
           },
@@ -325,7 +434,7 @@
     "business": [
       {
         "title": "Gasoline Sets a Labor Day Record",
-        "latest_developments": "The national average price of regular gasoline reached an all-time Labor Day high for the holiday Monday, September 7, three days after retail diesel set its own record at $5.85 a gallon.",
+        "latest_developments": "Iran announced a plan to create an exclusion zone around the Strait of Hormuz, WTAE reported Monday, September 7, as the national average price of regular gasoline reached an all-time Labor Day high for the holiday, three days after retail diesel set its own record at $5.85 a gallon.",
         "summary": "The war with Iran and refinery problems drive the increase, which lands on the last big driving weekend of the summer; WPXI and WTAE note the average for regular gasoline still sits below the all-time record of $5.02 a gallon set in June 2022.",
         "sources": [
           {
@@ -337,6 +446,11 @@
             "source": "WTAE",
             "title": "Gas prices reach a new Labor Day high",
             "url": "https://www.wtae.com/article/national-average-price-gas-set-break-labor-day-record/73627071"
+          },
+          {
+            "source": "WTAE",
+            "title": "Gas prices increase as Iran announces plan to create an 'exclusion zone' around Strait of Hormuz",
+            "url": "https://www.wtae.com/article/iran-announces-plan-strait-of-hormuz-exclusion-zone/73628966"
           }
         ],
         "_anchor": "i-efd9b162b2"
@@ -356,6 +470,19 @@
       }
     ],
     "around_town": [
+      {
+        "title": "Fetterman Texts Show Refusals of Constituent Work",
+        "latest_developments": "KDKA reported Monday, September 7, that newly released text messages show U.S. Senator John Fetterman dismissing and at times refusing core constituent-service duties, a day after Fetterman told CNN that his curt text to Children's Hospital of Philadelphia leaders was a dumb joke.",
+        "summary": "A former staffer confirmed the pattern to KDKA. The Pennsylvania Democrat's messages surfaced through Wall Street Journal reporting on his rejection of Children's Hospital of Philadelphia leaders' concerns about Medicaid cuts, coverage Fetterman has called a hit piece.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Newly released Fetterman texts show a reluctance to perform constituent duties",
+            "url": "https://www.cbsnews.com/pittsburgh/news/john-fetterman-texts-reluctance-performing-basic-constituent-service-duties/"
+          }
+        ],
+        "_anchor": "i-88b08aa8f5"
+      },
       {
         "title": "Street Cameras Start Talking to AI",
         "latest_developments": "The Post-Gazette reported Monday, September 7, that the automatic license plate readers posted along Pennsylvania streets increasingly feed artificial-intelligence systems, five days after Governor Josh Shapiro and state Treasurer Stacy Garrity called for a statewide ban on Flock cameras.",
@@ -413,6 +540,19 @@
     ],
     "around_teams": [
       {
+        "title": "The Numbers Behind the Pirates' Fading Push",
+        "latest_developments": "The Post-Gazette's Off The Bat column laid out Monday, September 7, the statistics that explain why a late-season Pirates surge remains unlikely.",
+        "summary": "The column builds its case around starting pitcher Paul Skenes, Marcell Ozuna, and Oneil Cruz as the Pirates play out September at PNC Park with their postseason odds shrinking.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "Off The Bat: If the Pirates don’t pull off a late-season stunner, they can blame these numbers",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/09/07/pirates-paul-skenes-marcell-ozuna-oneil-cruz/stories/202609070017"
+          }
+        ],
+        "_anchor": "i-3bfc2dda1f"
+      },
+      {
         "title": "Steelers and the Tight End Arms Race",
         "latest_developments": "The Post-Gazette wrote Monday, September 7, that head coach Mike McCarthy can put the Steelers one step ahead of the NFL's rush to stockpile tight ends by building the offense around two-tight-end personnel.",
         "summary": "Pittsburgh opens the season against the Atlanta Falcons on Sunday, September 13, at Acrisure Stadium with Pat Freiermuth heading the tight end room; the Post-Gazette argues McCarthy's 12 personnel packages give quarterback Aaron Rodgers a way to dictate matchups as the rest of the league chases the same idea.",
@@ -469,55 +609,41 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "N-able's fourth N-central hotfix in five weeks landed days after ConnectWise's unpatched ScreenConnect file-transfer bug, exposing the two remote-management platforms MSPs use to reach thousands of customer networks.",
+      "text": "N-able shipped a fourth N-central hotfix in five weeks for maximum-severity CVE-2026-86218 while backdoored ScreenConnect servers pushed a scripted payload to every host that connected.",
       "links": [
         {
           "anchor": "i-caffc3f256",
           "phrase": "N-central",
-          "start": 16,
-          "end": 25,
+          "start": 24,
+          "end": 33,
           "title": "N-able Ships Fourth N-central Hotfix in Five Weeks"
         },
         {
           "anchor": "i-58fad11958",
           "phrase": "ScreenConnect",
-          "start": 89,
-          "end": 102,
+          "start": 108,
+          "end": 121,
           "title": "ScreenConnect File Transfers Carry Malware"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "updated",
-      "text": "Attackers now chain two RouterOS flaws to hijack internet-exposed MikroTik routers and create their own accounts, so administrators who install the patch and stop there keep the intruder.",
-      "links": [
-        {
-          "anchor": "i-2760a5535a",
-          "phrase": "MikroTik routers",
-          "start": 66,
-          "end": 82,
-          "title": "MikroTik RouterOS Flaws Chained to Hijack Routers"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Credential theft is moving past passwords as JSCeal replays stolen session cookies into Google accounts and a Lenovo ID flaw opened roughly 5,000 linked Dropbox accounts.",
+      "text": "Criminals keep sidestepping logins entirely, with JSCeal replaying stolen session cookies into Google accounts and a Lenovo ID flaw opening roughly 5,000 linked Dropbox accounts.",
       "links": [
         {
           "anchor": "i-de26b1393e",
           "phrase": "JSCeal",
-          "start": 45,
-          "end": 51,
+          "start": 50,
+          "end": 56,
           "title": "JSCeal Steals Session Cookies to Walk Past Google Logins"
         },
         {
           "anchor": "i-99e5ad4709",
           "phrase": "Lenovo ID",
-          "start": 110,
-          "end": 119,
+          "start": 117,
+          "end": 126,
           "title": "Lenovo ID Hole Opened 5,000 Dropbox Accounts"
         }
       ]
@@ -525,84 +651,77 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "OpenAI put Astra and an automated research intern in front of $20 subscribers, while Greg Brockman defends alignment and Zitron dissects the circular financing propping up the boom.",
+      "text": "Attackers are chaining MikroTik RouterOS bugs to hijack internet-facing routers as North Korean crews hide a Linux toolkit inside trojanized HAProxy load balancers in South Korea.",
       "links": [
         {
-          "anchor": "i-9a8c26006c",
-          "phrase": "Astra",
-          "start": 11,
-          "end": 16,
-          "title": "Astra Reaches $20 Subscribers as OpenAI Automates Research"
+          "anchor": "i-2760a5535a",
+          "phrase": "MikroTik RouterOS",
+          "start": 23,
+          "end": 40,
+          "title": "MikroTik RouterOS Flaws Chained to Hijack Routers"
         },
         {
-          "anchor": "i-17f1523692",
-          "phrase": "Greg Brockman",
-          "start": 85,
-          "end": 98,
-          "title": "An Interview with OpenAI President Greg Brockman About Astra and Alignment"
-        },
-        {
-          "anchor": "i-345c7de0e9",
-          "phrase": "circular financing",
+          "anchor": "i-ba7865d262",
+          "phrase": "HAProxy",
           "start": 141,
-          "end": 159,
-          "title": "Premium: The Hater's Guide To Circular Financing (Part Two)"
+          "end": 148,
+          "title": "North Korean Crews Backdoor HAProxy in South Korea"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Fresh U.S. and Iran strikes pushed Brent above $97, gasoline hit an all-time Labor Day record, and Beijing widened a $54 billion recapitalization of state banks and insurers.",
+      "text": "Nightmare Eclipse widened its release with proof-of-concept exploits turning unpatched Nvidia and Avast privilege-escalation flaws into SYSTEM shells, days after its CrowdStrike Falcon Sensor bug.",
+      "links": [
+        {
+          "anchor": "i-14579c1ad7",
+          "phrase": "Nightmare Eclipse",
+          "start": 0,
+          "end": 17,
+          "title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, and Avast Zero-Days"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Mathspace lost data on more than a million students, staff, and parents through its Metabase reporting system, with Berlin and Trezor disclosing fresh thefts the same weekend.",
+      "links": [
+        {
+          "anchor": "i-3dd0677c1b",
+          "phrase": "Mathspace",
+          "start": 0,
+          "end": 9,
+          "title": "Mathspace, Berlin, and Trezor Report Fresh Data Theft"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "updated",
+      "text": "Brent held above $97 after U.S.-Iran strikes, gasoline set a Labor Day record amid Iran's Hormuz exclusion-zone plan, and the yen hit a six-month high.",
       "links": [
         {
           "anchor": "i-214f29eefa",
           "phrase": "Brent",
-          "start": 35,
-          "end": 40,
+          "start": 0,
+          "end": 5,
           "title": "Brent Tops $97 as the U.S. and Iran Trade Strikes"
         },
         {
           "anchor": "i-efd9b162b2",
           "phrase": "Labor Day record",
-          "start": 77,
-          "end": 93,
+          "start": 61,
+          "end": 77,
           "title": "Gasoline Sets a Labor Day Record"
         },
         {
-          "anchor": "i-e46a769868",
-          "phrase": "Beijing",
-          "start": 99,
-          "end": 106,
-          "title": "Beijing Recapitalizes Banks and Insurers"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Pennsylvania's license plate readers increasingly feed AI systems, even as Deutschtown's East Ohio Street draws new investment and Blawnox moves ahead with beautifying its business district.",
-      "links": [
-        {
-          "anchor": "i-227a0996aa",
-          "phrase": "license plate readers",
-          "start": 15,
-          "end": 36,
-          "title": "Street Cameras Start Talking to AI"
-        },
-        {
-          "anchor": "i-7f50a5cddb",
-          "phrase": "East Ohio Street",
-          "start": 89,
-          "end": 105,
-          "title": "East Ohio Street Booms in Deutschtown"
-        },
-        {
-          "anchor": "i-6ddc7f4192",
-          "phrase": "Blawnox",
-          "start": 131,
-          "end": 138,
-          "title": "Blawnox Dresses Up Freeport Road"
+          "anchor": "i-be1e85e711",
+          "phrase": "yen",
+          "start": 126,
+          "end": 129,
+          "title": "Yen Hits a Six-Month High"
         }
       ]
     }
@@ -616,15 +735,12 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 16,
+        "in_window": 29,
         "failed": [],
         "empty": [
           "Krebs on Security",
-          "Schneier on Security",
           "Dark Reading",
-          "SecurityWeek",
           "CISA Advisories",
-          "The Record",
           "Ars Technica Security",
           "Securelist (Kaspersky)",
           "Unit 42 (Palo Alto)",
@@ -641,13 +757,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 5,
+            "contributed": 5
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 8,
+            "contributed": 8
           },
           "Krebs on Security": {
             "items": 10,
@@ -656,8 +772,8 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Dark Reading": {
             "items": 50,
@@ -666,8 +782,8 @@
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 5,
+            "contributed": 5
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -681,8 +797,8 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Ars Technica Security": {
             "items": 20,
@@ -691,8 +807,8 @@
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 6,
+            "contributed": 6
           },
           "Securelist (Kaspersky)": {
             "items": 10,
@@ -779,7 +895,7 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 22
+            "contributed": 14
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
@@ -814,12 +930,12 @@
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 8
+            "contributed": 11
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 15
           }
         }
       },
@@ -835,17 +951,17 @@
         "per_feed": {
           "WSJ World News": {
             "items": 70,
-            "in_window": 14,
-            "contributed": 8
+            "in_window": 13,
+            "contributed": 7
           },
           "WSJ Markets": {
             "items": 60,
-            "in_window": 14,
-            "contributed": 10
+            "in_window": 15,
+            "contributed": 14
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 12,
+            "in_window": 15,
             "contributed": 4
           },
           "WSJ Politics": {
@@ -856,7 +972,7 @@
           "The Economist": {
             "items": 300,
             "in_window": 6,
-            "contributed": 3
+            "contributed": 2
           },
           "FT Home": {
             "items": 10,
@@ -866,12 +982,12 @@
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 20
+            "contributed": 19
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 14,
-            "contributed": 5
+            "in_window": 18,
+            "contributed": 4
           }
         }
       },
@@ -916,7 +1032,7 @@
         "feeds": 6,
         "loaded": 6,
         "window_hours": 96,
-        "in_window": 26,
+        "in_window": 27,
         "failed": [],
         "empty": [
           "Footbahlin with Ben Roethlisberger",
@@ -945,8 +1061,8 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 9,
+            "contributed": 9
           },
           "Post-Gazette Steelers": {
             "items": 20,
@@ -961,19 +1077,19 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 26,
+        "in_window": 29,
         "failed": [],
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 19,
-            "in_window": 19,
-            "contributed": 19
+            "items": 21,
+            "in_window": 21,
+            "contributed": 21
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 7,
+            "contributed": 7
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1004,7 +1120,7 @@
           },
           "Cal Newport": {
             "items": 8,
-            "in_window": 3,
+            "in_window": 2,
             "contributed": 2
           }
         }
@@ -1034,24 +1150,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 21073,
+          "outputTokens": 25519,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 84146,
+          "cacheCreationInputTokens": 98009,
           "webSearchRequests": 0,
-          "costUSD": 1.368315,
+          "costUSD": 1.6180949999999998,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 11430
+          "thinkingTokens": 12352
         }
       },
-      "cost_usd": 1.368315,
-      "duration_ms": 242604,
+      "cost_usd": 1.6180949999999998,
+      "duration_ms": 284111,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-07 07:05 EDT",
-    "items_considered": 16,
+    "generated_at": "2026-09-07 10:05 EDT",
+    "items_considered": 29,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1132,8 +1248,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.3683,
-    "model_duration_ms": 242604,
+    "model_cost_usd": 1.6181,
+    "model_duration_ms": 284111,
     "local_from": null,
     "feed_failures": []
   }
