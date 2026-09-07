@@ -1,23 +1,23 @@
 {
   "date": "2026-09-07",
-  "headline": "Attackers spent the day turning remote management software against the networks it administers, as N-able shipped a fourth emergency N-central hotfix for an exploited pre-authentication flaw, ConnectWise fought an unpatched ScreenConnect bug that now spreads malware worm-style, and MikroTik routers fell to a two-vulnerability chain.",
+  "headline": "Attackers hammered the software that runs other people's machines and stores, chaining an unpatched Magento zero-day, a maximum-severity N-able hole, and backdoored ScreenConnect clients.",
   "emerging_trends": [
     {
-      "text": "The software that managed service providers use to reach inside customer networks has become the fastest route to mass compromise, with N-central and ScreenConnect both under attack in the same week and one server exposing every network beneath it.",
+      "text": "Managed service provider tooling has become the day's richest target, with N-central taking its fourth hotfix in five weeks and rogue ScreenConnect clients pushing scripts to every desktop that dials in, so one compromised console reaches hundreds of customer networks.",
       "topic_title": "N-able Ships Fourth N-central Hotfix in Five Weeks",
       "link_phrase": "N-central",
       "_anchor": "trend-1"
     },
     {
-      "text": "Security products themselves keep landing on the target list, as Nightmare Eclipse follows its Kaspersky and CrowdStrike work with fresh proof-of-concept exploits that turn Nvidia and Avast software into a SYSTEM shell.",
-      "topic_title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, and Avast Zero-Days",
-      "link_phrase": "Nightmare Eclipse",
+      "text": "Unauthenticated pre-authentication flaws in internet-facing software keep landing in attacker hands before vendors ship fixes, from StyleSmuggler in Adobe Commerce to the MikroTrick chain in MikroTik RouterOS.",
+      "topic_title": "StyleSmuggler Zero-Day Plants Linux Backdoor on Magento Stores",
+      "link_phrase": "StyleSmuggler",
       "_anchor": "trend-2"
     },
     {
-      "text": "Criminals increasingly walk past logins instead of cracking them, and JSCeal shows the pattern by replaying stolen browser session cookies straight into Google accounts without ever facing an authentication prompt.",
-      "topic_title": "JSCeal Steals Session Cookies to Walk Past Google Logins",
-      "link_phrase": "JSCeal",
+      "text": "Multi-factor authentication now falls to phone calls and stolen cookies, as the BigBear 2.0 phishing service relayed logins past MFA at 258 organizations and JSCeal replayed session cookies straight into Google accounts.",
+      "topic_title": "Help Desk Vishing and BigBear Phish Microsoft 365 Executives",
+      "link_phrase": "BigBear",
       "_anchor": "trend-3"
     }
   ],
@@ -86,6 +86,35 @@
       "_anchor": "i-caffc3f256"
     },
     {
+      "title": "MikroTik RouterOS Flaws Chained to Hijack Routers",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CERT Polska, Poland's national computer security incident response team, disclosed six RouterOS vulnerabilities it coordinated with MikroTik and named the exploit chain MikroTrick, two bugs that together hand an attacker full control of any device with SSH reachable from the internet, and BleepingComputer confirmed attackers now fire the pair together.",
+      "summary": "MikroTik patched the SSH authentication bypass late last week after exploitation had already started, and the SANS Internet Storm Center told administrators to assume compromise because attackers add new accounts to the devices to survive the update. Anyone running RouterOS with SSH exposed should patch, audit the user list, and rotate credentials.",
+      "tags": [
+        "exploitation",
+        "patch",
+        "network devices"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Hackers exploit new MikroTik RouterOS flaws to hijack routers",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-new-mikrotik-routeros-flaws-to-hijack-routers/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Hackers exploit RouterOS flaws to hijack MikroTik devices without authentication",
+          "url": "https://www.helpnetsecurity.com/2026/09/07/mikrotik-routeros-ssh-vulnerabilities-exploited/"
+        },
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "Critical MikroTik Vulnerability - Patch Now",
+          "url": "https://isc.sans.edu/diary/rss/33314"
+        }
+      ],
+      "_anchor": "i-2760a5535a"
+    },
+    {
       "title": "Mathspace, Berlin, and Trezor Report Fresh Data Theft",
       "area": "Ransomware and Cybercrime",
       "latest_developments": "Mathspace, the online maths learning platform, disclosed over the weekend that attackers breached its Metabase internal reporting system and stole data on more than 1 million students, staff, and parents; Berlin's government said a second trove of stolen city data appeared online, with hackers publishing login credentials, while Germany's Federal Office for Information Security warned separately about the Rhysida cybercrime group; and Trezor put the total from the August breach at its fulfillment provider ShipMonk at 81,000 customers after adding 67,000 in the United States.",
@@ -143,28 +172,52 @@
       "_anchor": "i-9a8c26006c"
     },
     {
-      "title": "MikroTik RouterOS Flaws Chained to Hijack Routers",
+      "title": "StyleSmuggler Zero-Day Plants Linux Backdoor on Magento Stores",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "BleepingComputer reported that attackers now chain two recently disclosed RouterOS vulnerabilities, rather than firing the SSH authentication bypass alone, to seize full control of MikroTik routers whose SSH service faces the internet.",
-      "summary": "MikroTik patched the SSH authentication bypass late last week after exploitation had already started, and the SANS Internet Storm Center told administrators to assume compromise because attackers add new accounts to the devices to survive the update. Anyone running RouterOS with SSH exposed should patch, audit the user list, and rotate credentials.",
+      "latest_developments": "Attackers exploiting StyleSmuggler now drop a stealthy Linux backdoor on the servers they reach, and researchers put the exposure at every version of Magento Open Source and Adobe Commerce.",
+      "summary": "StyleSmuggler lets an attacker run code on an online store's server without logging in; Sansec, the Dutch e-commerce security firm, dated the first attacks to September 4, 2026, and no patch exists. Store operators should apply Sansec's mitigations, hunt for unfamiliar processes and files on the web server, and rotate admin and payment credentials.",
       "tags": [
+        "zero-day",
         "exploitation",
-        "patch",
-        "network devices"
+        "backdoor"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "Hackers exploit new MikroTik RouterOS flaws to hijack routers",
-          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-new-mikrotik-routeros-flaws-to-hijack-routers/"
+          "title": "Magento StyleSmuggler zero-day exploited to deploy Linux backdoor",
+          "url": "https://www.bleepingcomputer.com/news/security/magento-stylesmuggler-zero-day-exploited-to-deploy-linux-backdoor/"
         },
         {
-          "source": "SANS Internet Storm Center",
-          "title": "Critical MikroTik Vulnerability - Patch Now",
-          "url": "https://isc.sans.edu/diary/rss/33314"
+          "source": "SecurityWeek",
+          "title": "Adobe Commerce Zero-Day Exploited to Backdoor Online Stores",
+          "url": "https://www.securityweek.com/adobe-commerce-zero-day-exploited-to-backdoor-online-stores/"
         }
       ],
-      "_anchor": "i-2760a5535a"
+      "_anchor": "i-b3511a5b62"
+    },
+    {
+      "title": "Help Desk Vishing and BigBear Phish Microsoft 365 Executives",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Threat hunters detailed a data theft and extortion cluster that calls corporate IT help desks, steals authentication tokens through adversary-in-the-middle pages, and signs in through residential proxies, singling out directors, vice presidents, and other executives on Microsoft 365 and other software-as-a-service platforms; BleepingComputer separately reported that the phishing-as-a-service framework BigBear 2.0 walked past multi-factor authentication at 258 organizations and collected more than 5,000 Microsoft 365 credentials.",
+      "summary": "Both operations defeat multi-factor authentication by relaying the victim's own login session, so a stolen token works even when the password holds. Companies should require phishing-resistant FIDO2 keys for executives, tighten help desk identity verification before any password or MFA reset, and alert on sign-ins from residential proxy ranges.",
+      "tags": [
+        "phishing",
+        "credential theft",
+        "extortion"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Fake IT Calls Target Executives in Microsoft 365 Data Theft and Extortion Attacks",
+          "url": "https://thehackernews.com/2026/09/microsoft-365-attackers-use-help-desk.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "BigBear Microsoft 365 phishing service bypassed MFA at 258 organizations",
+          "url": "https://www.bleepingcomputer.com/news/security/bigbear-microsoft-365-phishing-service-bypassed-mfa-at-258-organizations/"
+        }
+      ],
+      "_anchor": "i-a48cf88b7e"
     },
     {
       "title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, and Avast Zero-Days",
@@ -221,24 +274,6 @@
         }
       ],
       "_anchor": "i-de26b1393e"
-    },
-    {
-      "title": "Lenovo ID Hole Opened 5,000 Dropbox Accounts",
-      "area": "Identity and Access Management",
-      "latest_developments": "Graham Cluley, writing on Bitdefender's Hot for Security blog, detailed a flaw in Lenovo's login system that let hackers into roughly 5,000 Dropbox accounts that owners had linked to a Lenovo ID.",
-      "summary": "Lenovo laptop owners who connected Dropbox to their Lenovo ID for single-sign-on convenience inherited the weakness in Lenovo's authentication. Anyone who made that link should unlink the accounts, change the Dropbox password, and review recent file access.",
-      "tags": [
-        "breach",
-        "authentication"
-      ],
-      "sources": [
-        {
-          "source": "Graham Cluley",
-          "title": "How a hole in Lenovo's login system let hackers walk into 5,000 Dropbox accounts",
-          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/lenovo-login-system-hackers-dropbox"
-        }
-      ],
-      "_anchor": "i-99e5ad4709"
     }
   ],
   "markets": [
@@ -286,9 +321,9 @@
     }
   ],
   "weather": [
-    "Labor Day: Sunny, high 81F.",
-    "Tonight: Mostly Clear, low 58F.",
-    "Tuesday: Mostly Sunny, high 85F."
+    "Labor Day: Sunny, high 80F.",
+    "Tonight: Partly Cloudy, low 59F.",
+    "Tuesday: Mostly Sunny, high 86F."
   ],
   "sports": [
     {
@@ -324,9 +359,80 @@
   "local": {
     "business_politics": [
       {
+        "title": "Brent Tops $97 as the U.S. and Iran Trade Strikes",
+        "latest_developments": "Brent marched toward $100 a barrel through Monday, September 7, with traders warning that \"something has to break\" as attacks on shipping drain inventories, the U.S. national average pump price set a Labor Day record, and the Wall Street Journal reported that the American blockade has choked off Tehran's oil earnings and deepened its economic crisis.",
+        "summary": "The war continues to choke traffic through the Strait of Hormuz: new strikes hit Saudi Aramco facilities at Jizan near the Yemeni border, European natural gas climbed more than 2% to just under 74 euros a megawatt-hour with Qatari supply flows severely disrupted, eurozone government bond yields opened higher ahead of the European Central Bank's rate decision Thursday, September 10, and Tehran announced it will raise petrol prices because war-driven shortages have made its fuel subsidies, among the cheapest in the world, unsustainable.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Oil closes in on $100 as renewed supply crunch looms",
+            "url": "https://www.ft.com/content/c8167dc7-f472-4846-8005-ee18b23736a8?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Oil Extends Gains on Middle East Attacks; U.S. Gas Prices at Record High for Labor Day",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-escalation-in-u-s-iran-conflict-aab0d7fb?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Iran's Oil Dollars Are Drying Up—and Plunging It Deeper Into Crisis",
+            "url": "https://www.wsj.com/world/middle-east/irans-oil-dollars-are-drying-upand-plunging-it-deeper-into-crisis-21bae4bd?mod=rss_worldnews"
+          },
+          {
+            "source": "FT Home",
+            "title": "Saudi Aramco oil facilities hit in new strikes",
+            "url": "https://www.ft.com/content/9ffb0fb3-51f6-4aa8-9270-a949196bf441?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Iran to raise petrol prices as US war triggers shortages",
+            "url": "https://www.ft.com/content/15d59180-ea46-4441-9c45-d6be584ae911?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "U.S. Gasoline Prices Hit Labor Day Record",
+            "url": "https://www.wsj.com/business/energy-oil/u-s-gasoline-prices-hit-labor-day-record-1a789682?mod=pls_whats_news_us_business_f"
+          }
+        ],
+        "_anchor": "i-7918d8056e"
+      },
+      {
+        "title": "Germany Weighs Letting the AfD Govern",
+        "latest_developments": "Chancellor Friedrich Merz described himself as shocked Monday, September 7, and now walks a narrow path to hold his federal government together, with Alternative for Germany three seats short of the majority it needs to lead Saxony-Anhalt and its co-leader Alice Weidel calling the result a dream and setting a target of 40% in the next federal election.",
+        "summary": "The AfD finished well ahead of every rival in the September 6 Saxony-Anhalt election, the best showing in the party's history, and landed short of a majority in the state parliament, leaving Merz and the mainstream parties to choose between an awkward coalition of opponents and the first far-right state government in Germany since World War II; the result reopens the argument over the firewall that has kept the party out of power.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Merz in 'shock' as far-right AfD celebrates 'dream result'",
+            "url": "https://www.ft.com/content/ec1396b9-185e-4a55-86d6-36a560b549fb?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "After Far-Right Triumph, Merz Faces Narrow Path to Save His Government",
+            "url": "https://www.wsj.com/world/europe/after-far-right-triumph-merz-faces-narrow-path-to-save-his-government-670f62c7?mod=rss_worldnews"
+          },
+          {
+            "source": "FT Home",
+            "title": "What next for Alternative for Germany after its victory in Saxony-Anhalt?",
+            "url": "https://www.ft.com/content/4275e189-997c-43f0-b702-d3447c9e81ec?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "After Far-Right Election Breakthrough, Germany's Merz Faces Painful Dilemma",
+            "url": "https://www.wsj.com/world/europe/germanys-right-wing-populists-on-course-for-historic-victory-56662408?mod=rss_worldnews"
+          },
+          {
+            "source": "The Economist",
+            "title": "The Alternative for Germany has won its best-ever election result",
+            "url": "https://www.economist.com/europe/2026/09/06/the-alternative-for-germany-has-won-its-best-ever-election-result"
+          }
+        ],
+        "_anchor": "i-8fb0125b23"
+      },
+      {
         "title": "Yen Hits a Six-Month High",
         "latest_developments": "The yen touched 154.04 per dollar Monday, September 7, its strongest intraday level since late February, with the steepest part of the climb landing in the London morning as traders watched for signs of Japanese intervention.",
-        "summary": "The currency has recovered for a week as rate expectations shift, with markets pricing a Bank of Japan increase and, after last week's U.S. payrolls surprise, a Federal Reserve increase at the September 16 meeting; the same rate bets pushed German Bund yields higher and left copper and gold trading against a stronger tightening outlook.",
+        "summary": "The currency has recovered for a week as rate expectations shift, with markets pricing a Bank of Japan increase and, after last week's U.S. payrolls surprise, a Federal Reserve increase at the September 16 meeting; the same rate bets pushed German Bund yields higher and left gold under pressure before Thursday's producer price report and Friday's consumer price data, while copper hit a record on the London Metal Exchange on mine supply worries and the prospect of U.S. tariffs.",
         "sources": [
           {
             "source": "FT World",
@@ -345,67 +451,16 @@
           },
           {
             "source": "WSJ Markets",
+            "title": "LME Copper Prices Hit Record on Supply Issues, U.S. Tariff Concerns",
+            "url": "https://www.wsj.com/finance/commodities-futures/lme-copper-prices-hit-record-on-supply-issues-u-s-tariff-concerns-89e6bbc6?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
             "title": "Copper Rises on Supply Concerns Despite Rate-Hike Bets",
             "url": "https://www.wsj.com/finance/commodities-futures/gold-falls-on-rising-fed-rate-hike-expectations-6e77bf70?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-be1e85e711"
-      },
-      {
-        "title": "Brent Tops $97 as the U.S. and Iran Trade Strikes",
-        "latest_developments": "New strikes hit Saudi Aramco oil facilities at Jizan near the Yemeni border, a site Houthi rebels have targeted repeatedly, and Brent crude held above $97 a barrel through European afternoon trading Monday, September 7, after the United States and Iran exchanged a fresh series of strikes over the weekend.",
-        "summary": "The war continues to choke traffic through the Strait of Hormuz: European natural gas climbed more than 2% to just under 74 euros a megawatt-hour with Qatari supply flows severely disrupted, eurozone government bond yields opened higher ahead of the European Central Bank's rate decision Thursday, September 10, and Tehran announced it will raise petrol prices because war-driven shortages have made its fuel subsidies, among the cheapest in the world, unsustainable.",
-        "sources": [
-          {
-            "source": "WSJ Markets",
-            "title": "Brent Tops $97 as U.S.-Iran Exchange Attacks",
-            "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-escalation-in-u-s-iran-conflict-aab0d7fb?mod=rss_markets_main"
-          },
-          {
-            "source": "FT Home",
-            "title": "Saudi Aramco oil facilities hit in new strikes",
-            "url": "https://www.ft.com/content/9ffb0fb3-51f6-4aa8-9270-a949196bf441?syn-25a6b1a6=1"
-          },
-          {
-            "source": "FT Home",
-            "title": "Iran to raise petrol prices as US war triggers shortages",
-            "url": "https://www.ft.com/content/15d59180-ea46-4441-9c45-d6be584ae911?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "European Gas Climbs on LNG Supply Concerns Ahead of Winter",
-            "url": "https://www.wsj.com/finance/commodities-futures/european-gas-climbs-on-lng-supply-concerns-ahead-of-winter-95ffd976?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Oil Higher on Hormuz Escalation Amid Quiet Markets Due to Labor Day",
-            "url": "https://www.wsj.com/finance/stocks/oil-higher-on-hormuz-escalation-amid-quiet-markets-due-to-labor-day-6b5cc530?mod=rss_markets_main"
-          }
-        ],
-        "_anchor": "i-214f29eefa"
-      },
-      {
-        "title": "Germany Weighs Letting the AfD Govern",
-        "latest_developments": "Alternative for Germany co-leader Alice Weidel called Sunday's Saxony-Anhalt result a dream and set a target of 40% of the vote in Germany's next federal election, and the rival parties now must decide whether to hand the AfD the state government or lock it out.",
-        "summary": "The AfD finished well ahead of every rival in the September 6 Saxony-Anhalt election, the best showing in the party's history, and landed short of a majority in the state parliament, leaving Chancellor Friedrich Merz and the mainstream parties to choose between an awkward coalition of opponents and the first far-right state government in Germany since World War II.",
-        "sources": [
-          {
-            "source": "FT Home",
-            "title": "AfD co-leader vows to build on ‘dream result’ after victory in Saxony-Anhalt",
-            "url": "https://www.ft.com/content/ec1396b9-185e-4a55-86d6-36a560b549fb?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ World News",
-            "title": "After Far-Right Election Breakthrough, Germany’s Merz Faces Painful Dilemma",
-            "url": "https://www.wsj.com/world/europe/germanys-right-wing-populists-on-course-for-historic-victory-56662408?mod=rss_worldnews"
-          },
-          {
-            "source": "The Economist",
-            "title": "The Alternative for Germany has won its best-ever election result",
-            "url": "https://www.economist.com/europe/2026/09/06/the-alternative-for-germany-has-won-its-best-ever-election-result"
-          }
-        ],
-        "_anchor": "i-8fb0125b23"
       },
       {
         "title": "Beijing Recapitalizes Banks and Insurers",
@@ -424,7 +479,7 @@
           },
           {
             "source": "WSJ World News",
-            "title": "China’s Foreign Exchange Reserves Continue to Climb",
+            "title": "China's Foreign Exchange Reserves Continue to Climb",
             "url": "https://www.wsj.com/economy/chinas-foreign-exchange-reserves-continue-to-climb-def2bb7d?mod=rss_worldnews"
           }
         ],
@@ -432,6 +487,19 @@
       }
     ],
     "business": [
+      {
+        "title": "North Huntingdon Walmart Stays Closed",
+        "latest_developments": "The Walmart in North Huntingdon remained closed Monday morning, September 7, TribLive reported, as crews assessed and cleared damage from a smoldering fire that broke out after last week's severe storms.",
+        "summary": "The store sits in North Huntingdon, Westmoreland County, one of the communities the storms of late last week battered across Western Pennsylvania, and the fire that followed has kept one of the township's largest retailers shut through the holiday weekend.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "North Huntingdon Walmart damaged by post-storm fire, remains closed",
+            "url": "https://triblive.com/local/westmoreland/north-huntingdon-walmart-damaged-by-post-storm-fire-remains-closed/"
+          }
+        ],
+        "_anchor": "i-7cc3ce7da1"
+      },
       {
         "title": "Gasoline Sets a Labor Day Record",
         "latest_developments": "Iran announced a plan to create an exclusion zone around the Strait of Hormuz, WTAE reported Monday, September 7, as the national average price of regular gasoline reached an all-time Labor Day high for the holiday, three days after retail diesel set its own record at $5.85 a gallon.",
@@ -470,6 +538,24 @@
       }
     ],
     "around_town": [
+      {
+        "title": "Labor Day Parade Pushes Paid Parental Leave",
+        "latest_developments": "Steelworkers, firefighters, police officers, and carpenters marched through downtown Pittsburgh on Monday, September 7, for the annual Labor Day parade, where the group Worker Speak Out pressed Allegheny County Council to pass a proposed paid parental leave measure for county employees.",
+        "summary": "Thousands lined the downtown route for the region's largest annual show of union strength, and the parental leave bill now before Allegheny County Council gave this year's march a specific legislative ask.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Steelworkers, firefighters and police march in downtown Pittsburgh Labor Day celebration",
+            "url": "https://www.wtae.com/article/pittsburgh-union-workers-labor-day-parade/73633505"
+          },
+          {
+            "source": "WPXI",
+            "title": "Advocates speak out about proposed parental leave bill during annual Pittsburgh Labor Day Parade",
+            "url": "https://www.wpxi.com/news/local/advocates-speak-out-about-proposed-parental-leave-bill-during-annual-pittsburgh-labor-day-parade/KYXHGWGGIBF65OQ43AVP5YWUTY/"
+          }
+        ],
+        "_anchor": "i-a87e561644"
+      },
       {
         "title": "Fetterman Texts Show Refusals of Constituent Work",
         "latest_developments": "KDKA reported Monday, September 7, that newly released text messages show U.S. Senator John Fetterman dismissing and at times refusing core constituent-service duties, a day after Fetterman told CNN that his curt text to Children's Hospital of Philadelphia leaders was a dumb joke.",
@@ -525,13 +611,39 @@
     ],
     "events": [
       {
+        "title": "Public Image Ltd Returns to Pittsburgh",
+        "latest_developments": "TribLive reported Monday, September 7, that Public Image Ltd will play Pittsburgh this fall.",
+        "summary": "Public Image Ltd, the band John Lydon formed after the Sex Pistols, has booked a Pittsburgh stop on its first extensive North American tour in eight years.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Public Image Ltd featuring John Lydon makes Pittsburgh return",
+            "url": "https://triblive.com/aande/music/public-image-ltd-featuring-john-lydon-makes-pittsburgh-return/"
+          }
+        ],
+        "_anchor": "i-d26402eb4d"
+      },
+      {
+        "title": "'Dear Evan Hansen' Comes to the Lamp Theatre",
+        "latest_developments": "TribLive reported Monday, September 7, that Split Stage Productions will stage the musical this month in Irwin.",
+        "summary": "Split Stage Productions brings the Tony Award-winning show to the Lamp Theatre on Main Street in Irwin, Westmoreland County, a year after Music Theatre International released 'Dear Evan Hansen' for licensing to regional and community companies.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Split Stage Productions to bring 'Dear Evan Hansen' to Irwin's Lamp Theatre",
+            "url": "https://triblive.com/local/westmoreland/split-stage-productions-to-bring-dear-evan-hansen-to-irwins-lamp-theatre/"
+          }
+        ],
+        "_anchor": "i-ee8390a7de"
+      },
+      {
         "title": "Rib Fest Runs Through Labor Day",
         "latest_developments": "Judges crowned new barbecue champions over the weekend, with one fan favorite extending its winning streak, and the festival keeps serving through Labor Day, Monday, September 7, TribLive reported.",
         "summary": "The Acrisure Stadium Kickoff and Rib Festival sets up at Acrisure Stadium on Pittsburgh's North Shore, where competing rib vendors cook for prizes and for the crowd ahead of the Steelers' home opener against the Atlanta Falcons on Sunday, September 13.",
         "sources": [
           {
             "source": "TribLive",
-            "title": "‘Sauce is boss’: Rib Fest at Acrisure Stadium continues on Labor Day",
+            "title": "'Sauce is boss': Rib Fest at Acrisure Stadium continues on Labor Day",
             "url": "https://triblive.com/lifestyles/food-drink/sauce-is-boss-rib-fest-at-acrisure-stadium-continues-on-labor-day/"
           }
         ],
@@ -540,13 +652,26 @@
     ],
     "around_teams": [
       {
+        "title": "Fedko Signs With His Hometown Pirates",
+        "latest_developments": "The Post-Gazette's MiLB Monday column on September 7 quoted outfielder Kyler Fedko describing himself as on cloud nine after signing his minor league deal with the Pirates, four days after the club agreed to terms.",
+        "summary": "Fedko, the son of former Pittsburgh sportscaster John Fedko, grew up in the region and joins the Pirates' farm system; the same column tracked pitching prospects Murf Sanford and Antwone Kelly.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "MiLB Monday: Kyler Fedko is 'on cloud nine' after signing with his hometown Pirates",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/09/07/pirates-prospects-kyler-fedko-murf-sanford-kelly/stories/202609070022"
+          }
+        ],
+        "_anchor": "i-86a966927f"
+      },
+      {
         "title": "The Numbers Behind the Pirates' Fading Push",
         "latest_developments": "The Post-Gazette's Off The Bat column laid out Monday, September 7, the statistics that explain why a late-season Pirates surge remains unlikely.",
         "summary": "The column builds its case around starting pitcher Paul Skenes, Marcell Ozuna, and Oneil Cruz as the Pirates play out September at PNC Park with their postseason odds shrinking.",
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "Off The Bat: If the Pirates don’t pull off a late-season stunner, they can blame these numbers",
+            "title": "Off The Bat: If the Pirates don't pull off a late-season stunner, they can blame these numbers",
             "url": "https://www.post-gazette.com/sports/pirates/2026/09/07/pirates-paul-skenes-marcell-ozuna-oneil-cruz/stories/202609070017"
           }
         ],
@@ -567,6 +692,24 @@
       }
     ],
     "team_usa": [
+      {
+        "title": "Pochettino on Balogun and the Teenagers",
+        "latest_developments": "United States men's coach Mauricio Pochettino said Monday, September 7, that he has yet to speak with striker Folarin Balogun about the collapsed transfer to Everton and plans to call in the coming days to offer support, and he urged caution about the buzz around Philadelphia Union midfielder Cavan Sullivan and New York Red Bulls forward Julian Hall.",
+        "summary": "Balogun stayed at AS Monaco after his deadline-day move to Everton fell apart, and Pochettino wants him in a place where he can perform; Sullivan, 16, has scored in three straight Major League Soccer matches, and Pochettino says the U.S. pool's young talent needs careful handling ahead of national team camp.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Poch: Balogun must find 'best place to perform'",
+            "url": "https://www.espn.com/soccer/story/_/id/49859671/usmnt-pochettino-hopes-folarin-balogun-find-best-place-perform"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Poch 'careful' with young stars for USMNT camp",
+            "url": "https://www.espn.com/soccer/story/_/id/49860427/pochettino-cautious-young-stars-usmnt-camp-buzz-cavan-sullivan-julian-hall"
+          }
+        ],
+        "_anchor": "i-f784f4412a"
+      },
       {
         "title": "Belgium Balks at Infantino Over the Balogun Ruling",
         "latest_developments": "The Belgian football federation said Monday, September 7, that it cannot support Gianni Infantino's bid for another term as FIFA president.",
@@ -609,20 +752,20 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "N-able shipped a fourth N-central hotfix in five weeks for maximum-severity CVE-2026-86218 while backdoored ScreenConnect servers pushed a scripted payload to every host that connected.",
+      "text": "N-able shipped a fourth N-central hotfix in five weeks for CVE-2026-86218 while backdoored ScreenConnect consoles pushed scripted malware to every desktop that dialed in.",
       "links": [
         {
           "anchor": "i-caffc3f256",
-          "phrase": "N-central",
+          "phrase": "N-central hotfix",
           "start": 24,
-          "end": 33,
+          "end": 40,
           "title": "N-able Ships Fourth N-central Hotfix in Five Weeks"
         },
         {
           "anchor": "i-58fad11958",
           "phrase": "ScreenConnect",
-          "start": 108,
-          "end": 121,
+          "start": 91,
+          "end": 104,
           "title": "ScreenConnect File Transfers Carry Malware"
         }
       ]
@@ -630,80 +773,59 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Criminals keep sidestepping logins entirely, with JSCeal replaying stolen session cookies into Google accounts and a Lenovo ID flaw opening roughly 5,000 linked Dropbox accounts.",
+      "text": "Pre-authentication holes keep landing with attackers, as StyleSmuggler plants Linux backdoors on Magento stores, CERT Polska's MikroTrick chain hijacks MikroTik routers, and Nightmare Eclipse drops unpatched Nvidia exploits.",
       "links": [
         {
-          "anchor": "i-de26b1393e",
-          "phrase": "JSCeal",
-          "start": 50,
-          "end": 56,
-          "title": "JSCeal Steals Session Cookies to Walk Past Google Logins"
+          "anchor": "i-b3511a5b62",
+          "phrase": "StyleSmuggler",
+          "start": 57,
+          "end": 70,
+          "title": "StyleSmuggler Zero-Day Plants Linux Backdoor on Magento Stores"
         },
         {
-          "anchor": "i-99e5ad4709",
-          "phrase": "Lenovo ID",
-          "start": 117,
-          "end": 126,
-          "title": "Lenovo ID Hole Opened 5,000 Dropbox Accounts"
+          "anchor": "i-2760a5535a",
+          "phrase": "MikroTrick chain",
+          "start": 127,
+          "end": 143,
+          "title": "MikroTik RouterOS Flaws Chained to Hijack Routers"
+        },
+        {
+          "anchor": "i-14579c1ad7",
+          "phrase": "Nightmare Eclipse",
+          "start": 174,
+          "end": 191,
+          "title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, and Avast Zero-Days"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Attackers are chaining MikroTik RouterOS bugs to hijack internet-facing routers as North Korean crews hide a Linux toolkit inside trojanized HAProxy load balancers in South Korea.",
+      "text": "Attackers now walk around multi-factor authentication, with BigBear vishing help desks to steal Microsoft 365 executive tokens and JSCeal replaying session cookies into Google accounts.",
       "links": [
         {
-          "anchor": "i-2760a5535a",
-          "phrase": "MikroTik RouterOS",
-          "start": 23,
-          "end": 40,
-          "title": "MikroTik RouterOS Flaws Chained to Hijack Routers"
+          "anchor": "i-a48cf88b7e",
+          "phrase": "BigBear",
+          "start": 60,
+          "end": 67,
+          "title": "Help Desk Vishing and BigBear Phish Microsoft 365 Executives"
         },
         {
-          "anchor": "i-ba7865d262",
-          "phrase": "HAProxy",
-          "start": 141,
-          "end": 148,
-          "title": "North Korean Crews Backdoor HAProxy in South Korea"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Nightmare Eclipse widened its release with proof-of-concept exploits turning unpatched Nvidia and Avast privilege-escalation flaws into SYSTEM shells, days after its CrowdStrike Falcon Sensor bug.",
-      "links": [
-        {
-          "anchor": "i-14579c1ad7",
-          "phrase": "Nightmare Eclipse",
-          "start": 0,
-          "end": 17,
-          "title": "Nightmare Eclipse Drops CrowdStrike, Nvidia, and Avast Zero-Days"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Mathspace lost data on more than a million students, staff, and parents through its Metabase reporting system, with Berlin and Trezor disclosing fresh thefts the same weekend.",
-      "links": [
-        {
-          "anchor": "i-3dd0677c1b",
-          "phrase": "Mathspace",
-          "start": 0,
-          "end": 9,
-          "title": "Mathspace, Berlin, and Trezor Report Fresh Data Theft"
+          "anchor": "i-de26b1393e",
+          "phrase": "JSCeal",
+          "start": 131,
+          "end": 137,
+          "title": "JSCeal Steals Session Cookies to Walk Past Google Logins"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "updated",
-      "text": "Brent held above $97 after U.S.-Iran strikes, gasoline set a Labor Day record amid Iran's Hormuz exclusion-zone plan, and the yen hit a six-month high.",
+      "text": "Brent pushed toward $100 as U.S.-Iran strikes and an Iranian exclusion zone near Hormuz drove the national gasoline average to a Labor Day record.",
       "links": [
         {
-          "anchor": "i-214f29eefa",
+          "anchor": "i-7918d8056e",
           "phrase": "Brent",
           "start": 0,
           "end": 5,
@@ -711,17 +833,52 @@
         },
         {
           "anchor": "i-efd9b162b2",
-          "phrase": "Labor Day record",
-          "start": 61,
-          "end": 77,
+          "phrase": "gasoline average",
+          "start": 107,
+          "end": 123,
           "title": "Gasoline Sets a Labor Day Record"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "updated",
+      "text": "Friedrich Merz called himself shocked as Alternative for Germany finished three seats short of the majority it needs to lead Saxony-Anhalt.",
+      "links": [
+        {
+          "anchor": "i-8fb0125b23",
+          "phrase": "Saxony-Anhalt",
+          "start": 125,
+          "end": 138,
+          "title": "Germany Weighs Letting the AfD Govern"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Pittsburgh's Labor Day parade pushed county paid parental leave, the North Huntingdon Walmart stayed shut after storm fire damage, and outfielder Kyler Fedko signed with the Pirates.",
+      "links": [
+        {
+          "anchor": "i-a87e561644",
+          "phrase": "Labor Day parade",
+          "start": 13,
+          "end": 29,
+          "title": "Labor Day Parade Pushes Paid Parental Leave"
         },
         {
-          "anchor": "i-be1e85e711",
-          "phrase": "yen",
-          "start": 126,
-          "end": 129,
-          "title": "Yen Hits a Six-Month High"
+          "anchor": "i-7cc3ce7da1",
+          "phrase": "North Huntingdon",
+          "start": 69,
+          "end": 85,
+          "title": "North Huntingdon Walmart Stays Closed"
+        },
+        {
+          "anchor": "i-86a966927f",
+          "phrase": "Kyler Fedko",
+          "start": 146,
+          "end": 157,
+          "title": "Fedko Signs With His Hometown Pirates"
         }
       ]
     }
@@ -735,7 +892,7 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 29,
+        "in_window": 34,
         "failed": [],
         "empty": [
           "Krebs on Security",
@@ -750,20 +907,19 @@
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
-          "404 Media",
           "Frank on Fraud",
           "Wired Security"
         ],
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 7,
+            "contributed": 7
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 9,
+            "contributed": 9
           },
           "Krebs on Security": {
             "items": 10,
@@ -807,8 +963,8 @@
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 7,
+            "contributed": 7
           },
           "Securelist (Kaspersky)": {
             "items": 10,
@@ -862,8 +1018,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Frank on Fraud": {
             "items": 10,
@@ -895,12 +1051,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 14
+            "contributed": 19
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 12
+            "contributed": 7
           },
           "PublicSource": {
             "items": 10,
@@ -924,18 +1080,18 @@
           },
           "KDKA": {
             "items": 30,
-            "in_window": 27,
-            "contributed": 8
+            "in_window": 28,
+            "contributed": 5
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 11
+            "contributed": 10
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 15
+            "contributed": 19
           }
         }
       },
@@ -950,44 +1106,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 70,
-            "in_window": 13,
-            "contributed": 7
+            "items": 71,
+            "in_window": 16,
+            "contributed": 6
           },
           "WSJ Markets": {
             "items": 60,
-            "in_window": 15,
+            "in_window": 20,
             "contributed": 14
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 15,
-            "contributed": 4
+            "in_window": 20,
+            "contributed": 8
           },
           "WSJ Politics": {
             "items": 21,
             "in_window": 4,
-            "contributed": 1
+            "contributed": 0
           },
           "The Economist": {
             "items": 300,
-            "in_window": 6,
-            "contributed": 2
+            "in_window": 11,
+            "contributed": 6
           },
           "FT Home": {
-            "items": 10,
-            "in_window": 10,
+            "items": 11,
+            "in_window": 11,
             "contributed": 9
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 19
+            "contributed": 16
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 18,
-            "contributed": 4
+            "in_window": 17,
+            "contributed": 1
           }
         }
       },
@@ -1046,8 +1202,8 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1061,8 +1217,8 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 10,
+            "contributed": 10
           },
           "Post-Gazette Steelers": {
             "items": 20,
@@ -1082,14 +1238,14 @@
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 21,
-            "in_window": 21,
-            "contributed": 21
+            "items": 22,
+            "in_window": 22,
+            "contributed": 22
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 6,
+            "contributed": 6
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1150,24 +1306,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 25519,
+          "outputTokens": 25734,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 98009,
+          "cacheCreationInputTokens": 104099,
           "webSearchRequests": 0,
-          "costUSD": 1.6180949999999998,
+          "costUSD": 1.68437,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 12352
+          "thinkingTokens": 8339
         }
       },
-      "cost_usd": 1.6180949999999998,
-      "duration_ms": 284111,
+      "cost_usd": 1.68437,
+      "duration_ms": 272426,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-07 10:05 EDT",
-    "items_considered": 29,
+    "generated_at": "2026-09-07 13:35 EDT",
+    "items_considered": 34,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1248,8 +1404,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.6181,
-    "model_duration_ms": 284111,
+    "model_cost_usd": 1.6844,
+    "model_duration_ms": 272426,
     "local_from": null,
     "feed_failures": []
   }
