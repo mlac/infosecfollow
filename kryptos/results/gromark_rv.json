@@ -1,0 +1,191 @@
+{
+ "family": "Gromark / lagged-recurrence keystreams (frontier item 4) -- INDEPENDENT ADVERSARIAL VERIFICATION #2, reproduction lens",
+ "claim_under_test": {
+  "cell": "pk9.real.KA.m",
+  "L": 7,
+  "mod": 10,
+  "rec": "aca",
+  "alphabet": "KA",
+  "sign": -1,
+  "primer": [
+   2,
+   5,
+   4,
+   6,
+   7,
+   5,
+   4
+  ],
+  "claimed_ioc": 0.063714,
+  "claimed_z": 11.98,
+  "claimed_pooled_null_max": 0.06284
+ },
+ "verdict": "REFUTED (the hit is noise). The family's own Tier-2 negative for mod-10 digit primers at L=7/8 is UPHELD.",
+ "executed_by_verifier": {
+  "full_10^7_enumerations": 43,
+  "primer_trial_decryptions": 430000000,
+  "wall_sec_background_null_job": 2115,
+  "wall_sec_foreground_enumerations": 174,
+  "cells_recounted_from_artifacts": {
+   "real": 2032,
+   "null": 4012,
+   "trials": 12345492920
+  },
+  "kernel_cross_checks": 240,
+  "hill_climbs": 47
+ },
+ "reproduction": {
+  "independent_kernel": "rv_kern.py (numpy, written from the model description; verified against 240 stored C-kernel cells, max |diff| 4.8e-7 = stored 6-dp precision)",
+  "claimed_score_reproduced": 0.06371406371406371,
+  "exact": true,
+  "rank_in_full_10^7_enumeration": 1,
+  "runner_up_in_same_search": 0.059732,
+  "keystream_degeneracy_check": "none - digit histogram flat (7..18 per digit over 144), no state repeat within 600 positions; unlike the earlier Hill gcd false lead this hit is not a degenerate vector, it is a genuine argmax",
+  "roundtrip": "VACUOUS, not passed. The model C=MIX(P)+k leaves MIX unconstrained (26! = 88 bits), so EVERY one of the 10^7 primers round-trips perfectly by construction. Round-trip exactness has zero discriminating power in this family; the only content is whether the residual is English, and it is not.",
+  "positive_control_reproduced_independently": {
+   "plain": {
+    "n": 144,
+    "true_primer": [
+     4,
+     1,
+     9,
+     0,
+     3,
+     7,
+     2
+    ],
+    "true_rank": 1,
+    "top1_score": 0.07012432012432013,
+    "top1_primer": [
+     4,
+     1,
+     9,
+     0,
+     3,
+     7,
+     2
+    ],
+    "top2_score": 0.059537684537684536,
+    "per_primer_mean": 0.040618686868686874,
+    "per_primer_sd": 0.0021385082756541335,
+    "sec": 61.8
+   },
+   "col9": {
+    "n": 144,
+    "true_primer": [
+     4,
+     1,
+     9,
+     0,
+     3,
+     7,
+     2
+    ],
+    "true_rank": 1,
+    "top1_score": 0.07012432012432013,
+    "top1_primer": [
+     4,
+     1,
+     9,
+     0,
+     3,
+     7,
+     2
+    ],
+    "top2_score": 0.06216006216006216,
+    "per_primer_mean": 0.039288073038073044,
+    "per_primer_sd": 0.0019660204570022917,
+    "sec": 54.5
+   }
+  }
+ },
+ "statistical": {
+  "defect_in_the_claimed_z": "gk_sweep.py computes z = (max over 10^7 primers - PER-PRIMER mean) / PER-PRIMER sd, taken from the kernel's mean/sd fields. Numerator is a maximum over 10 million draws, denominator the sd of a single draw. Verified arithmetically from the stored artifact: (0.063714-0.0396115)/0.0020115 = 11.98. Same failure mode as the Hill z=+5.78 and affine z=+4.91 false leads.",
+  "second_defect_in_the_pooled_ceiling": "gk_analyze.py's pooled ceiling keys on (n, statistic, #primers) and so pools four recurrences and two text alphabets into one null. The 'fib' recurrence is structurally degenerate (null best-of-search 0.0495 vs 0.0575 for aca) and the A-Z reading of pk9 has a lower baseline IoC (per-primer mean 0.03855 vs 0.03961 for KA), so the pooled ceiling of 0.06284 is depressed relative to the aca/KA search that produced the hit. The ceiling the hit 'cleared' is not matched on either axis.",
+  "rebuilt_matched_null": {
+   "draws": 40,
+   "seeds": "900000-900039 (verifier's own; independent of the claim's 1001/2002 and of the earlier verification's 770000-770019)",
+   "identical_search": "same full 10^7 primer enumeration, rec=aca, L=7, mod 10, KA text alphabet, sign -1, shift-IoC statistic, n=144, letter-shuffled pk9 (length and letter multiset preserved, so pk9's anomalous ct IoC .0445 is preserved)",
+   "best_of_search_mean": 0.05804924242424242,
+   "best_of_search_sd": 0.001788923645866087,
+   "best_of_search_min": 0.05574980574980575,
+   "best_of_search_max": 0.06682206682206682,
+   "n_null_ge_real": 1,
+   "decisive": "null draw seed 900039, a letter-shuffled pk9, scored 0.066822 under the identical search - BETTER than the real ciphertext's 0.063714"
+  },
+  "recomputed_z": 3.17,
+  "nonparametric_p_one_cell": 0.049,
+  "gumbel_fit": {
+   "loc": 0.057244131599368184,
+   "scale": 0.0013948180443330736,
+   "p_one_cell": 0.0096
+  },
+  "family_level_max_vs_max": "at n=144, shift-IoC, full enumerations: real family of 32 cells max = 0.063714; the identical 32-cell family on shuffled copy 1001 max = 0.062840; on copy 2002 (16 cells) max = 0.060412"
+ },
+ "multiple_testing": {
+  "cells_evaluated": 2032,
+  "comparable_scale_cells": 32,
+  "expected_max_of_32_such_searches_under_null": 0.062883,
+  "observed_max_over_the_32_real_cells": 0.063714,
+  "familywise_p_over_32": 0.266,
+  "family_level_check": "39 of 2032 real cells above their pooled matched-null max vs 35.62 expected (binomial sd 5.9 -> +0.57 sd). Both numbers recounted independently from the raw artifacts and reproduce exactly.",
+  "survives_correction": false
+ },
+ "decrypt_autopsy": {
+  "requirement": "a correct primer leaves MIX(P), a monoalphabetic image of the (possibly transposed) plaintext",
+  "monoalphabetic_hillclimb_quadgram_per_letter": {
+   "real": -5.573288018960276,
+   "matched_null_mean": -5.817823778633285,
+   "matched_null_sd": 0.13927663460232556,
+   "matched_null_best": -5.421689266366103,
+   "z": 1.76,
+   "n_nulls_beating_real": 1,
+   "genuine_monoalphabetic_english_n144": [
+    -5.110475405682944,
+    -4.114954353343509
+   ]
+  },
+  "sorted_unigram_profile_chi2_transposition_invariant": {
+   "real": 0.09842851600879618,
+   "matched_null_mean": 0.3139384055228627,
+   "matched_null_sd": 0.16523987998620054,
+   "english_refs": [
+    0.041562243290071466,
+    0.0913285351253825
+   ],
+   "IoC_conditioned_null": "against 3000 structureless random 26-letter count vectors of length 144 with IoC matched to 0.0637, the hit's profile chi2 of 0.0984 sits at the 73rd percentile - i.e. WORSE than the median structureless multiset at the same IoC. The English-looking profile is entirely bought by the maximised IoC and carries no extra evidence."
+  },
+  "reads_as_english_or_italian": false,
+  "decrypt_head": "FIFICTTAJSEOCESERKCHUPSTHISSDYCABDICEPERCEILSILYWYHEESFLPERWAXFVTDALMETETVSMYJOR"
+ },
+ "power_scale_check": {
+  "true_primer_score_at_n144_my_own_synthetic": 0.07012432012432013,
+  "same_with_width9_columnar_underneath": 0.07012432012432013,
+  "true_primer_rank": 1,
+  "matched_null_mean": 0.05804924242424242,
+  "matched_null_sd": 0.001788923645866087,
+  "true_primer_in_matched_null_sd_units": 6.7,
+  "claimed_hit_in_matched_null_sd_units": 3.2,
+  "note": "the model admits no partial credit: a correct primer lands ~6x further out than this hit does"
+ },
+ "tier": {
+  "claimed_hit": "Tier 3 - noise, not a hit",
+  "family_negative": "Tier 2 UPHELD for mod-10 digit primers at L=7 and L=8 under the four tested recurrences, both text alphabets, both directions, by exhaustion; the three corners the claim itself leaves open (26^7/26^8 letter primers unenumerated, mix-after-shift at n=144/153, transposition ON TOP of the Gromark) remain Tier 3"
+ },
+ "artifacts": [
+  "/home/user/infosecfollow/kryptos/rv_kern.py",
+  "/home/user/infosecfollow/kryptos/rv_null.py",
+  "/home/user/infosecfollow/kryptos/rv_pc.py",
+  "/home/user/infosecfollow/kryptos/rv_count.py",
+  "/home/user/infosecfollow/kryptos/rv_xcheck.py",
+  "/home/user/infosecfollow/kryptos/rv_autopsy.py",
+  "/home/user/infosecfollow/kryptos/rv_profcond.py",
+  "/home/user/infosecfollow/kryptos/rv_final.py",
+  "/home/user/infosecfollow/kryptos/results/rv_gromark_null.json",
+  "/home/user/infosecfollow/kryptos/results/rv_gromark_pc.json",
+  "/home/user/infosecfollow/kryptos/results/rv_gromark_autopsy.json",
+  "/home/user/infosecfollow/kryptos/results/rv_gromark_final.json",
+  "/home/user/infosecfollow/kryptos/results/rv_counts.json",
+  "/home/user/infosecfollow/kryptos/logs/rv_null.log"
+ ]
+}

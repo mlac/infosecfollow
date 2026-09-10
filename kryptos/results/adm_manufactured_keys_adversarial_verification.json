@@ -1,0 +1,783 @@
+{
+ "reproduction": {
+  "claimed_ioc": 0.06313,
+  "recomputed_ioc": 0.06313,
+  "reproduces_exactly": true,
+  "reproduced_by_independently_written_code": true,
+  "in_cell_z_recomputed": 8.1,
+  "round_trip_reencrypts_to_published_ct": true,
+  "round_trip_is_vacuous": true,
+  "round_trip_note": "VACUOUS: decrypt is DEFINED as C-S, so C=(C-S)+S holds for every key whatsoever.",
+  "key_letters": 9,
+  "plaintext_letters": 144,
+  "key_shorter_than_plaintext": true,
+  "but": "the 9-letter key collapses to only 5 distinct keystream shifts (see degeneracy), and it explains nothing, because the output is not language.",
+  "independent_full_8_config_rerun_of_the_REAL_pk9_search": {
+   "per_config_maxima": {
+    "KA/KA/sub": 0.05594,
+    "KA/KA/add": 0.05643,
+    "KA/AZ/sub": 0.06313,
+    "KA/AZ/add": 0.0573,
+    "AZ/KA/sub": 0.05895,
+    "AZ/KA/add": 0.05944,
+    "AZ/AZ/sub": 0.06167,
+    "AZ/AZ/add": 0.05983
+   },
+   "overall_max": 0.06313,
+   "claim_asserts": 0.06313,
+   "matches": true,
+   "note": "My own engine reproduces the claim s entire per-config vector, not just the headline cell. The reproduction is complete and exact."
+  },
+  "cross_check_against_the_claims_own_mk_lib": {
+   "n_cells": 76,
+   "worst_abs_difference": 0.0,
+   "all_argmaxes_agree": true,
+   "note": "My independently written engine and the claim s mk_lib return bit-identical per-word IoC vectors, so my nulls run the same search the claim ran."
+  }
+ },
+ "is_it_language": {
+  "test": "sorted letter-frequency profile chi2 vs English on 25 df (invariant to ANY transposition AND to any alphabet relabelling; critical value 37.7 at p=0.05, 52.6 at p=0.001)",
+  "claimed_hit": {
+   "ioc": 0.06313,
+   "top_letter_pct": 19.44,
+   "frac_of_ioc_from_top_letter": 0.5815,
+   "sorted_profile_chi2_vs_english_25df": 78.5
+  },
+  "real_sibling_plaintexts_n144": {
+   "pk1": 8.3,
+   "pk3": 6.0,
+   "pk4": 13.2,
+   "pk6": 11.9,
+   "pk7": 8.3
+  },
+  "raw_pk9_ciphertext_for_reference": 52.8,
+  "italian": {
+   "CLAIMED_HIT_vs_italian_sorted_chi2": 75.1,
+   "REAL_PLAINTEXT_pk1_144_vs_italian_sorted_chi2": 6.4,
+   "REAL_PLAINTEXT_pk3_144_vs_italian_sorted_chi2": 8.7,
+   "REAL_PLAINTEXT_pk7_144_vs_italian_sorted_chi2": 13.9,
+   "note": "Sorted-profile chi2 against Italian on 25 df. Same conclusion as English: the claimed decrypt is nowhere near a natural-language letter profile, and the test is invariant to any transposition hidden underneath and to any alphabet relabelling."
+  },
+  "quadgram_per_letter": -8.068,
+  "decrypt": "LCFABFOYNQLJSRWRPBVVKASAEFFLFEXVGPNTBLNTRWNLOWTFZKOFPRSRRRROZDBNWZXROWSNRERKRURBOYRRERSPMRQRBZVESRGCZHWKJFPRRXRSRRVNYIPRFYWRJRGQQKSDDHIRWKLSAMBD",
+  "verdict": "NO. Sorted-profile chi2 vs English = 78.5 on 25 df (p < 1e-6); every real sibling plaintext at n=144 scores 6.0-13.2. Against Italian, 75.1 vs 6.4-13.9. This test is invariant to ANY transposition sitting underneath and to ANY alphabet relabelling, so doctrine 3 does not rescue it. The claimed decrypt is FURTHER from English than the untouched pk9 ciphertext (52.8). 58% of its IoC comes from one letter at 19.4%. Quadgram -8.07/letter vs random -8.23, English -4.25."
+ },
+ "degeneracy_of_the_winning_cell": {
+  "keystream": {
+   "construction": "revtrunc14, a=9  ->  S[i] = W[(i%14)%9] + W[8-((i%14)%9)]",
+   "nominal_key_entropy_letters": 9,
+   "distinct_keystream_symbols": 5,
+   "reason": "S is symmetric in mm <-> 8-mm, so the 9 word letters collapse into 5 sums (W0+W8, W1+W7, W2+W6, W3+W5, 2*W4).",
+   "group_sizes_per_period14": [
+    3,
+    3,
+    3,
+    3,
+    2
+   ],
+   "effective_period": 14,
+   "effective_distinct_shifts": 5,
+   "comment": "A period-14 stream that takes only FIVE distinct shift values flattens the decrypt letter distribution far less than a 9- or 14-valued stream would, so this cell has a structurally inflated IoC ceiling independent of any key being right."
+  },
+  "is_the_word_identified": {
+   "n_words_with_exactly_the_top_score": 1,
+   "n_words_sharing_the_winners_5tuple": 1,
+   "finding": "METALHEAD is UNIQUELY identified inside its cell. This is NOT the degenerate gcd-vector pathology of the earlier Hill false lead -- I checked and it does not apply. The degeneracy that DOES bite is different: revtrunc14/a=9 emits a period-14 keystream taking only FIVE distinct shift values, which structurally raises the achievable IoC of that cell for ANY ciphertext."
+  },
+  "cell_ceiling_by_construction": {
+   "prog": {
+    "n_cells": 1,
+    "mean_cell_max": 0.05138,
+    "max_cell_max": 0.05138
+   },
+   "plain": {
+    "n_cells": 1,
+    "mean_cell_max": 0.05109,
+    "max_cell_max": 0.05109
+   },
+   "revtrunc": {
+    "n_cells": 14,
+    "mean_cell_max": 0.05058,
+    "max_cell_max": 0.06313
+   },
+   "progrev": {
+    "n_cells": 1,
+    "mean_cell_max": 0.04973,
+    "max_cell_max": 0.04973
+   },
+   "self2W": {
+    "n_cells": 1,
+    "mean_cell_max": 0.04944,
+    "max_cell_max": 0.04944
+   },
+   "KArun": {
+    "n_cells": 1,
+    "mean_cell_max": 0.04944,
+    "max_cell_max": 0.04944
+   },
+   "selftrunc": {
+    "n_cells": 14,
+    "mean_cell_max": 0.04931,
+    "max_cell_max": 0.05352
+   },
+   "trunc": {
+    "n_cells": 14,
+    "mean_cell_max": 0.04924,
+    "max_cell_max": 0.0539
+   },
+   "catrev": {
+    "n_cells": 1,
+    "mean_cell_max": 0.04847,
+    "max_cell_max": 0.04847
+   },
+   "revsum": {
+    "n_cells": 1,
+    "mean_cell_max": 0.04817,
+    "max_cell_max": 0.04817
+   },
+   "AZrun": {
+    "n_cells": 1,
+    "mean_cell_max": 0.0472,
+    "max_cell_max": 0.0472
+   },
+   "KArunrev": {
+    "n_cells": 1,
+    "mean_cell_max": 0.04701,
+    "max_cell_max": 0.04701
+   }
+  },
+  "consequence": "The construction families do NOT share a common null. revtrunc/selftrunc cells sit systematically above plain cells because their keystreams take fewer distinct values. An \"in-cell z\" computed against the words inside ONE cell therefore cannot be compared across the grid, and cannot be a search-level z."
+ },
+ "the_claims_own_ceiling_was_not_a_ceiling": {
+  "claim_reported": {
+   "real_max_over_8_configs": 0.06313,
+   "real_mean": 0.05909,
+   "null_max_over_16_configs": 0.0607,
+   "null_mean": 0.05774,
+   "null_shuffles": 2
+  },
+  "exact_rank_test": {
+   "statement": "Under H0 (pk9 exchangeable with its own shuffles) the 24 per-config grid maxima are exchangeable; the event \"real max > null max\" is exactly the event \"the global maximum falls in the real block\".",
+   "P_real_block_holds_the_max": 0.3333,
+   "interpretation": "The claim's headline \"above the matched null ceiling\" is an event with null probability 1/3. It is not evidence of anything."
+  },
+  "why_the_ceiling_is_underpowered": {
+   "null_draws": 16,
+   "max_of_16_estimates_percentile": 0.9412,
+   "note": "A max over 16 draws is a noisy estimate of the ~94th percentile of the per-config distribution. Calling it a \"ceiling\" and then testing a max over 8 fresh draws against it inflates the false-positive rate to ~1/3, not 0.05."
+  },
+  "the_reported_z_is_a_within_cell_z": {
+   "reported": 8.1,
+   "what_it_measures": "(max - mean)/sd over the ~30k nine-letter words inside ONE cell (pk9, KA/AZ/sub, revtrunc14, a=9).",
+   "what_the_search_actually_was": "8 alphabet/mode configs x 696 constructions per config = 5568 cells per target, 3 targets = 16704 cells; 100,169,664 word-hypotheses per target.",
+   "why_it_cannot_be_a_search_z": "A within-cell z conditions on the winning cell having been chosen, which is exactly the selection being tested. It also assumes the ~30k word scores inside a cell are the reference set for a statistic that was maximised over 16704 cells."
+  }
+ },
+ "what_a_real_solve_would_have_scored": {
+  "logic": "If pk9 really had a single-word manufactured key, the blind search would peel it and the decrypt would BE the plaintext, so the reported IoC would equal the plaintext IoC. The positive control confirms the search has that power at n=144: PK1 truncated to 144 returns PROVENANCE at rank 1 of the whole grid.",
+  "solved_sibling_plaintext_iocs": {
+   "pk1": {
+    "full_n": 192,
+    "ioc_full": 0.07052,
+    "ioc_first144": 0.07012,
+    "ioc_first153": 0.07043
+   },
+   "pk2": {
+    "full_n": 350,
+    "ioc_full": 0.07095,
+    "ioc_first144": 0.07343,
+    "ioc_first153": 0.07078
+   },
+   "pk3": {
+    "full_n": 280,
+    "ioc_full": 0.07209,
+    "ioc_first144": 0.07119,
+    "ioc_first153": 0.07009
+   },
+   "pk4": {
+    "full_n": 224,
+    "ioc_full": 0.07387,
+    "ioc_first144": 0.07683,
+    "ioc_first153": 0.07663
+   },
+   "pk5": {
+    "full_n": 272,
+    "ioc_full": 0.0687,
+    "ioc_first144": 0.06284,
+    "ioc_first153": 0.06287
+   },
+   "pk6": {
+    "full_n": 315,
+    "ioc_full": 0.06942,
+    "ioc_first144": 0.07566,
+    "ioc_first153": 0.07551
+   },
+   "pk7": {
+    "full_n": 279,
+    "ioc_full": 0.06885,
+    "ioc_first144": 0.07721,
+    "ioc_first153": 0.07783
+   }
+  },
+  "sibling_plaintext_ioc_at_n144": {
+   "min": 0.06284,
+   "max": 0.07721,
+   "mean": 0.07247,
+   "sorted": [
+    {
+     "pt": "pk5",
+     "ioc": 0.06284
+    },
+    {
+     "pt": "pk1",
+     "ioc": 0.07012
+    },
+    {
+     "pt": "pk3",
+     "ioc": 0.07119
+    },
+    {
+     "pt": "pk2",
+     "ioc": 0.07343
+    },
+    {
+     "pt": "pk6",
+     "ioc": 0.07566
+    },
+    {
+     "pt": "pk4",
+     "ioc": 0.07683
+    },
+    {
+     "pt": "pk7",
+     "ioc": 0.07721
+    }
+   ],
+   "median": 0.07343
+  },
+  "observed_pk9_claim": 0.06313,
+  "positive_control_pk1_trunc144_grid_max": 0.07012,
+  "finding": "The seven solved sibling plaintexts have IoC 0.06284-0.07721 over their first 144 letters, median 0.07343. The claimed pk9 value 0.06313 sits at the very bottom of that range: six of the seven are higher, and only pk5 (0.06284) is lower, by 0.0003. So even granting the claim everything, the score it reports is the score you would expect from the LEAST letter-typical sibling, not from a solve. The in-family positive control at the same length, PK1 truncated to 144, returned 0.07012 -- and returned the true key PROVENANCE as the rank-1 argmax of the entire grid, which the pk9 argmax METALHEAD conspicuously is not (it yields no language at all).",
+  "correction_note": "An earlier draft of this file said 0.06313 was below all seven. That was wrong: pk5[:144] is 0.06284. Corrected above."
+ },
+ "the_other_above_ceiling_candidate_MB1_pk8": {
+  "autopsy_best_pk8": {
+   "n": 153,
+   "claimed_ioc": 0.06656,
+   "recomputed_ioc": 0.06656,
+   "reproduces": true,
+   "top_letter_pct": 16.34,
+   "frac_of_ioc_from_top_letter": 0.3876,
+   "frac_of_ioc_from_top_TWO_letters": 0.6589,
+   "sorted_profile_chi2_vs_english_25df": 18.3,
+   "quadgram_per_letter_claimed": -7.939
+  },
+  "autopsy_best_pk9": {
+   "n": 144,
+   "claimed_ioc": 0.06614,
+   "recomputed_ioc": 0.06614,
+   "reproduces": true,
+   "top_letter_pct": 18.75,
+   "frac_of_ioc_from_top_letter": 0.5154,
+   "frac_of_ioc_from_top_TWO_letters": 0.7151,
+   "sorted_profile_chi2_vs_english_25df": 33.0,
+   "quadgram_per_letter_claimed": -8.301
+  },
+  "real_sibling_plaintexts_n153": {
+   "pk1": {
+    "ioc": 0.07043,
+    "chi2": 9.1
+   },
+   "pk3": {
+    "ioc": 0.07009,
+    "chi2": 6.8
+   },
+   "pk4": {
+    "ioc": 0.07663,
+    "chi2": 13.7
+   },
+   "pk6": {
+    "ioc": 0.07551,
+    "chi2": 12.1
+   },
+   "pk7": {
+    "ioc": 0.07783,
+    "chi2": 9.6
+   }
+  },
+  "rank_test_on_the_claims_own_numbers": {
+   "MB1_pk8_real_max_over_config_runs": 4,
+   "MB1_pk8_real_max": 0.06656,
+   "MB1_pk8_focused_shuffle_null_runs": 24,
+   "MB1_pk8_focused_null_max": 0.06545,
+   "P_real_block_holds_the_max_under_exchangeability": 0.1429,
+   "note": "0.143. And this is one of several such comparisons made across the family, so even this is optimistic before any family-wise correction."
+  },
+  "verdict": "The MB1 pk8 candidate fails statistically and is unsupported substantively. (a) Rank test: its max-of-4 config-runs beating a max-of-24 shuffle-null has null probability 0.143 under exchangeability -- no correction applied yet. (b) Its IoC 0.06656 is BELOW every real sibling plaintext at n=153 (0.0701-0.0778). (c) 66% of that IoC comes from just two letters (A 16.3%, B ~13.7%); quadgram -7.94/letter vs random -8.23. (d) HONESTLY: its sorted-profile chi2 of 18.3 is only mildly elevated (all five siblings score 6.8-13.7) and is NOT by itself decisive -- the pk8 case is killed by the rank test and the sub-plaintext IoC, not by the profile test. The pk9 MB1 decrypt at chi2 33.0 is much worse."
+ },
+ "rebuilt_matched_nulls": {
+  "A_shuffle_null_ONE_config_KA_AZ_sub": {
+   "design": "max decrypt-IoC over one complete 696-construction x full-dictionary grid, config KA/AZ/sub (the config that contains the claimed hit), on a uniform random permutation of the pk9 ciphertext (letter multiset preserved exactly, so raw IoC 0.04448 is preserved exactly). Byte-identical search code.",
+   "BIAS": "BIASED IN THE CLAIM S FAVOUR: real 0.06313 is a max over EIGHT such grids; each null replicate here is a max over ONE.",
+   "n_replicates": 12,
+   "mean": 0.05733,
+   "sd": 0.00143,
+   "min": 0.05546,
+   "p95": 0.05958,
+   "max": 0.05963,
+   "real": 0.06313,
+   "n_ge_real": 0,
+   "exact_permutation_p": 0.0769,
+   "z_of_real": 4.06,
+   "multiple_testing_correction": {
+    "p_one_config_point_est": 0.0769,
+    "p_one_config_95pct_upper_bound_rule_of_three": 0.25,
+    "configs_actually_searched_per_target": 8,
+    "familywise_p_over_8_configs_point_est": 0.4729,
+    "familywise_p_over_8_configs_upper_bound": 0.8999,
+    "config_grids_searched_over_all_3_targets": 24,
+    "familywise_p_over_24_grids_point_est": 0.8535
+   },
+   "the_claims_own_z_under_a_matched_null": {
+    "claimed_in_cell_z": 8.1,
+    "null_in_cell_z_of_the_grid_winner": {
+     "n": 12,
+     "mean": 6.43,
+     "sd": 0.88,
+     "min": 4.8,
+     "max": 7.99,
+     "values": [
+      4.8,
+      5.56,
+      5.75,
+      5.97,
+      6.03,
+      6.38,
+      6.44,
+      6.67,
+      7.09,
+      7.19,
+      7.35,
+      7.99
+     ]
+    },
+    "n_ge_claimed": 0,
+    "exact_p_one_config": 0.0769,
+    "familywise_p_over_the_8_configs_searched": 0.4729,
+    "finding": "A uniformly SHUFFLED pk9 ciphertext -- pure noise, no key at all -- yields a grid winner whose in-cell z averages about 6.4 and reaches 8.0. The claim s headline +8.1 is an ordinary draw from that distribution, and it was selected as the best of eight configs. The +8.1 is not evidence."
+   },
+   "gumbel_fit": {
+    "loc": 0.05669,
+    "scale": 0.001112,
+    "p_one_config_smooth": 0.0031,
+    "familywise_p_over_8_configs_smooth": 0.0242,
+    "familywise_p_over_24_grids_smooth": 0.0707,
+    "note": "Extreme-value smoothing of the SAME 12 draws (an earlier draft of this note said 40; wrong). This is the \"expected maximum under the null for that many correlated tests\" calculation done parametrically. It is the ONE analysis here that looks marginal (familywise p 0.024 over the 8 configs). I do not rely on it: it extrapolates a Gumbel fitted to 12 body draws far into the tail, which is exactly the untrustworthy step. Null B below measures the same quantity DIRECTLY, with no extrapolation, and returns p=0.083 with the null maximum within 0.6% of the real value."
+   }
+  },
+  "B_shuffle_null_FULL_8_config_search": {
+   "design": "THE PROPERLY MATCHED NULL. max decrypt-IoC over the COMPLETE M-A search on a shuffled pk9: all 8 alphabet/mode configs x 696 constructions x every dictionary word, i.e. exactly the statistic that produced 0.06313.",
+   "n_replicates": 11,
+   "mean": 0.05936,
+   "sd": 0.00155,
+   "min": 0.0574,
+   "max": 0.06274,
+   "real": 0.06313,
+   "n_ge_real": 0,
+   "exact_permutation_p": 0.0833,
+   "z_of_real": 2.43,
+   "per_replicate": [
+    {
+     "grid_max": 0.05857,
+     "cfg": "AZ/KA/sub",
+     "construction": "prog",
+     "a": 5,
+     "w": "OOMPA",
+     "in_cell_z": 7.72
+    },
+    {
+     "grid_max": 0.06274,
+     "cfg": "AZ/AZ/add",
+     "construction": "revtrunc48",
+     "a": 10,
+     "w": "MALIGNAGGI",
+     "in_cell_z": 7.32
+    },
+    {
+     "grid_max": 0.05769,
+     "cfg": "KA/AZ/sub",
+     "construction": "selftrunc40",
+     "a": 9,
+     "w": "TWEEDDALE",
+     "in_cell_z": 7.74
+    },
+    {
+     "grid_max": 0.0608,
+     "cfg": "AZ/KA/add",
+     "construction": "trunc11",
+     "a": 9,
+     "w": "MASCULINA",
+     "in_cell_z": 6.88
+    },
+    {
+     "grid_max": 0.0574,
+     "cfg": "KA/AZ/add",
+     "construction": "progrev",
+     "a": 8,
+     "w": "TAKAYAMA",
+     "in_cell_z": 8.14
+    },
+    {
+     "grid_max": 0.05915,
+     "cfg": "AZ/KA/add",
+     "construction": "trunc15",
+     "a": 8,
+     "w": "MOROCCAN",
+     "in_cell_z": 8.59
+    },
+    {
+     "grid_max": 0.05895,
+     "cfg": "KA/KA/add",
+     "construction": "selftrunc23",
+     "a": 12,
+     "w": "DISSIPATIONS",
+     "in_cell_z": 8.05
+    },
+    {
+     "grid_max": 0.05895,
+     "cfg": "KA/KA/sub",
+     "construction": "selftrunc45",
+     "a": 14,
+     "w": "INCONVENIENCES",
+     "in_cell_z": 10.32
+    },
+    {
+     "grid_max": 0.06031,
+     "cfg": "AZ/KA/add",
+     "construction": "trunc40",
+     "a": 12,
+     "w": "AUSTRONESIAN",
+     "in_cell_z": 7.79
+    },
+    {
+     "grid_max": 0.05818,
+     "cfg": "AZ/KA/add",
+     "construction": "revtrunc30",
+     "a": 11,
+     "w": "DISCREDITED",
+     "in_cell_z": 6.39
+    },
+    {
+     "grid_max": 0.06022,
+     "cfg": "AZ/KA/add",
+     "construction": "trunc26",
+     "a": 11,
+     "w": "CONCUSSIONS",
+     "in_cell_z": 7.62
+    }
+   ],
+   "in_cell_z_of_null_winners": {
+    "values": [
+     7.72,
+     7.32,
+     7.74,
+     6.88,
+     8.14,
+     8.59,
+     8.05,
+     10.32,
+     7.79,
+     6.39,
+     7.62
+    ],
+    "mean": 7.87,
+    "max": 10.32,
+    "finding": "THE HEADLINE KILLER. Running the identical full 8-config search on a uniformly SHUFFLED pk9 ciphertext -- pure noise, no key of any kind -- the winning cell s in-cell z averages +7.87 and reaches +10.32. 3 of 11 pure-noise replicates equal or exceed the claimed +8.1 (exact p = 0.333). The claim s +8.1 is an ordinary draw from noise.",
+    "claimed": 8.1,
+    "n_ge_claimed": 3,
+    "exact_p": 0.3333
+   }
+  },
+  "C_derived_null_real_ciphertexts_keys_outside_the_family": {
+   "design": "the identical full 8-config M-A search on REAL Kryptos-family ciphertexts cut to n=144 whose true keys lie OUTSIDE the single-word family. These keep the positional letter clustering a shuffle destroys. PK6 EXCLUDED as contaminated (key PORTAL, period 6 = the plain construction); PK2 EXCLUDED (pure transposition, English IoC by construction).",
+   "n_replicates": 8,
+   "mean": 0.05673,
+   "sd": 0.00143,
+   "min": 0.05439,
+   "max": 0.05876,
+   "real": 0.06313,
+   "n_ge_real": 0,
+   "exact_permutation_p": 0.1111,
+   "rows": [
+    {
+     "label": "DERIVED_pk3_trunc144",
+     "ct_ioc": 0.03982,
+     "grid_max": 0.05594,
+     "argmax": "AZ/KA/sub selftrunc11 a=7 LARDONS"
+    },
+    {
+     "label": "DERIVED_pk3_tail144",
+     "ct_ioc": 0.03788,
+     "grid_max": 0.05546,
+     "argmax": "KA/AZ/sub revtrunc12 a=8 MARVELED"
+    },
+    {
+     "label": "DERIVED_pk4_trunc144",
+     "ct_ioc": 0.03662,
+     "grid_max": 0.05692,
+     "argmax": "AZ/AZ/sub progrev a=7 TENDING"
+    },
+    {
+     "label": "DERIVED_pk5_trunc144",
+     "ct_ioc": 0.04652,
+     "grid_max": 0.05876,
+     "argmax": "KA/KA/sub trunc36 a=7 PATENTS"
+    },
+    {
+     "label": "DERIVED_pk7_trunc144",
+     "ct_ioc": 0.03934,
+     "grid_max": 0.05818,
+     "argmax": "KA/KA/sub selftrunc11 a=9 KLEINFELD"
+    },
+    {
+     "label": "DERIVED_pk10_head144",
+     "ct_ioc": 0.04186,
+     "grid_max": 0.05711,
+     "argmax": "KA/AZ/sub self2W a=7 ENCANTA"
+    },
+    {
+     "label": "DERIVED_pk10_tail144",
+     "ct_ioc": 0.03963,
+     "grid_max": 0.05439,
+     "argmax": "KA/KA/add progrev a=7 CITYLAB"
+    },
+    {
+     "label": "DERIVED_pk8_head144",
+     "ct_ioc": 0.03914,
+     "grid_max": 0.05711,
+     "argmax": "AZ/AZ/sub selftrunc14 a=10 PUBLISHERS"
+    }
+   ]
+  },
+  "POSITIVE_CONTROL": {
+   "design": "PK1 truncated to n=144. Its TRUE key PROVENANCE (period 10) IS a member of this family (the plain construction), so the identical blind search must find it if the solver has power at this length.",
+   "rows": [
+    {
+     "label": "POSCTRL_pk1_trunc144",
+     "grid_max": 0.07012,
+     "argmax": "KA/KA/sub plain a=10 PROVENANCE",
+     "recovered_true_key": true
+    }
+   ],
+   "finding": "The solver DOES have power at n=144: it recovers PROVENANCE at rank 1 of the whole grid with IoC 0.07012. A genuine family member scores ~0.070; pk9 scores 0.06313, inside the null band. The silence is real silence."
+  },
+  "D_out_of_family_null_real_plaintext_under_a_non_family_key": {
+   "design": "The null I think is the right one. A REAL sibling plaintext window (n=144) encrypted with a key that is definitely NOT one manufactured dictionary word: PK3-style period-40 two-word product, PK4-style period-45 two-word product, PK5-style running key from another sibling plaintext, and a uniform random period-37 keystream. Then the byte-identical search. Unlike a shuffle this keeps a real plaintext underneath; unlike the derived null it is not tied to one ciphertext s letter multiset.",
+   "config": "KA/AZ/sub only (the config the claimed hit lives in)",
+   "n_replicates": 24,
+   "mean": 0.05587,
+   "sd": 0.00259,
+   "min": 0.05274,
+   "max": 0.06226,
+   "real_same_one_config": 0.06313,
+   "n_ge_real": 0,
+   "exact_p_one_config": 0.04,
+   "matched_to_the_max_over_8_configs": {
+    "method": "group the one-config draws into blocks of 8 so the null statistic has the same shape as the real one (a maximum over 8 grids)",
+    "block_maxima": [
+     0.06206,
+     0.05701,
+     0.06226
+    ],
+    "n_blocks": 3,
+    "n_blocks_ge_real": 0,
+    "exact_p": 0.25
+   },
+   "in_cell_z_of_null_winners": {
+    "values": [
+     5.35,
+     5.44,
+     5.53,
+     5.63,
+     5.86,
+     5.88,
+     5.89,
+     5.93,
+     6.08,
+     6.09,
+     6.11,
+     6.29,
+     6.32,
+     6.32,
+     6.64,
+     6.66,
+     6.71,
+     6.71,
+     6.8,
+     7.23,
+     7.46,
+     7.52,
+     7.64,
+     8.19
+    ],
+    "max": 8.19
+   }
+  }
+ },
+ "multiple_testing_ledger": {
+  "word_hypotheses_per_config_per_target_n144": 12521208,
+  "cells_per_config": 696,
+  "configs": 8,
+  "word_hypotheses_per_target": 100169664,
+  "cells_searched_per_target": 5568,
+  "cells_searched_over_3_targets": 16704,
+  "the_headline_is_the_maximum_over": "all 3 targets x 8 configs x 696 constructions x every dictionary word of the matching length",
+  "top20_cell_maxima_of_the_real_pk9_grid": [
+   {
+    "ioc": 0.063131,
+    "cfg": "KA/AZ/sub",
+    "name": "revtrunc14",
+    "a": 9
+   },
+   {
+    "ioc": 0.057789,
+    "cfg": "KA/AZ/sub",
+    "name": "trunc30",
+    "a": 7
+   },
+   {
+    "ioc": 0.057207,
+    "cfg": "KA/AZ/sub",
+    "name": "plain",
+    "a": 7
+   },
+   {
+    "ioc": 0.055264,
+    "cfg": "KA/AZ/sub",
+    "name": "revtrunc14",
+    "a": 10
+   },
+   {
+    "ioc": 0.055264,
+    "cfg": "KA/AZ/sub",
+    "name": "selftrunc14",
+    "a": 11
+   },
+   {
+    "ioc": 0.054779,
+    "cfg": "KA/AZ/sub",
+    "name": "selftrunc36",
+    "a": 7
+   },
+   {
+    "ioc": 0.054584,
+    "cfg": "KA/AZ/sub",
+    "name": "trunc24",
+    "a": 7
+   },
+   {
+    "ioc": 0.05439,
+    "cfg": "KA/AZ/sub",
+    "name": "selftrunc7",
+    "a": 6
+   }
+  ],
+  "gap_to_second_best_cell": 0.00534,
+  "real_cell_max_quantiles": {
+   "0.5": 0.04817,
+   "0.9": 0.05138,
+   "0.99": 0.0544,
+   "0.999": 0.05942,
+   "1.0": 0.06313
+  }
+ },
+ "VERDICT": {
+  "refuted": true,
+  "headline_verified": "pk9, KA/AZ/sub, construction revtrunc14, a=9, key METALHEAD, decrypt IoC 0.06313, reported with z=+8.1 and flagged above a shuffle-null ceiling of 0.06070.",
+  "reproduction": "EXACT, twice over. My independently written engine returns 0.06313 and the claim s whole per-config vector (0.05594/0.05643/0.06313/0.05730/0.05895/0.05944/0.06167/0.05983); a 76-cell cross-check against the claim s own mk_lib differs by 0.0. The finding is real code doing what it says. It is the inference that fails.",
+  "recomputed_z": "+2.43 (was +8.1). The +8.1 is a WITHIN-CELL z: max minus mean over the ~30k nine-letter words inside one cell, while the search maximised over 5,568 cells x 8 configs and 100,169,664 word-hypotheses per target. Rebuilding the null from scratch as the maximum over the COMPLETE identical search on 11 shuffled pk9 ciphertexts gives mean 0.05936, sd 0.00155, max 0.06274, hence z=+2.43 and exact permutation p=0.083.",
+  "why_the_claims_null_was_not_matched": "Two independent mismatches. (1) SHAPE: the real 0.06313 is a maximum over EIGHT config-grids; the claim s null draws were maxima over ONE config-grid each. Its \"ceiling\" was the max of 16 such draws. Under exchangeability P(the max of the 8 real draws beats the max of the 16 null draws) = 8/24 = 0.333 exactly -- a pure rank computation, no modelling. The \"above the ceiling\" event was a 1-in-3 coin flip. (2) STATISTIC: the reported z was computed against the words inside the winning cell, i.e. against a reference set chosen by the selection being tested. This is the same failure mode as the earlier affine z=+4.91 whose null ran over permutations while the search ran over rotations.",
+  "the_claims_own_statistic_under_a_correct_null": "3 of 11 pure-noise replicates of the identical search produce a winning cell with in-cell z >= 8.1 (values up to +10.32; mean +7.87). Exact p = 0.33.",
+  "multiple_testing": "The search evaluated 12,521,208 word-hypotheses per config, 100,169,664 per target, 300M+ over the three targets, across 16,704 cells. Every null I built is a maximum over that same space, so the correction is already inside the p-values: matched full-grid shuffle null p=0.083; out-of-family null (real plaintext under a non-family key), matched to the max-over-8 shape, p=0.25; derived null on real out-of-family ciphertexts p=0.111. Nothing survives at any conventional level, and the largest null draw (0.06274) sits 0.6% below the claimed value.",
+  "does_it_read_as_language": "NO. Sorted letter-profile chi2 vs English = 78.5 on 25 df; the seven solved sibling plaintexts score 6.0-13.2 at the same length. Vs Italian 75.1 against 6.4-13.9. That test is invariant to ANY transposition hidden underneath and to ANY alphabet relabelling, so doctrine 3 does not rescue it. The claimed decrypt is FURTHER from English than the untouched pk9 ciphertext (52.8). 58% of its IoC comes from a single letter at 19.4%. Quadgram -8.07/letter against random -8.23 and English -4.25.",
+  "round_trip": "Reproduces the published ciphertext character for character -- and is VACUOUS. The decrypt is DEFINED as C-S, so re-encrypting returns C for every candidate key in the family. The test carries zero evidential weight here and must not be cited as corroboration.",
+  "key_economy": "9 letters nominally explaining 144. But revtrunc14 at a=9 is symmetric in mm <-> 8-mm, so the key collapses to only FIVE distinct keystream shifts on a period of 14 -- and it explains nothing, because the output is not language. (I checked the earlier gcd-vector pathology specifically: it does NOT apply, METALHEAD is uniquely identified inside its cell. The degeneracy here is a structurally raised IoC ceiling, not a tied argmax.)",
+  "magnitude": "Even granting everything, 0.06313 is too small. The seven solved sibling plaintexts have IoC 0.06284-0.07721 over their first 144 letters (median 0.07343); six of seven exceed the claimed value. The in-family positive control at the same length, PK1 truncated to 144, returns 0.07012 AND returns its true key PROVENANCE as the rank-1 argmax of the entire grid. The solver plainly has power at n=144; pk9 simply has no signal for it to find.",
+  "second_candidate_MB1_pk8": "Also refuted. Its max-of-4 beating a max-of-24 shuffle null has null probability 0.143 by the same rank argument, and its IoC 0.06656 is below every sibling plaintext at n=153 (0.0701-0.0778), with 66% of it coming from just two letters.",
+  "prior_conflict": "Secondary, but noted: the setter states the PK8 key is NOT a plain dictionary word, and METALHEAD is a plain dictionary word from words.txt with no thematic connection to the art-conservation vocabulary (PROVENANCE, PENTIMENTO, ORDINATE, OCHRE, VERDIGRIS, PORTAL, ALCHEMIST, ANNEAL) that every solved sibling uses.",
+  "TIER": "Tier 3 screen (FAMILY OPEN). This verification refutes the CLAIMED HIT. It does not close the family: the claim s own honest failure stands -- the depth-3 solver is validated only at n=504 and is provably degenerate for L < lcm(b,c), so depth-3 manufactured keys remain unscreened at n=144/153. The correct reading of this family is a negative, not a discovery."
+ },
+ "WHAT_I_EXECUTED": {
+  "note": "Every count below is a real executed run on this box, timed by the script that ran it. OMP_NUM_THREADS=1 throughout; the box was under heavy contention (load ~14 on 4 cores) so wall-clock per grid varies 42s-90s.",
+  "unit": "one \"config-grid\" = 696 manufactured-key constructions x every dictionary word of the matching length = 12,521,208 word-hypotheses at n=144",
+  "runs": [
+   {
+    "script": "adm_real8.py  real pk9, all 8 configs",
+    "config_grids": 8,
+    "wall_sec": 600.5
+   },
+   {
+    "script": "adm_mt.py  real + 12 shuffle nulls, 1 config each",
+    "config_grids": 13,
+    "wall_sec": null
+   },
+   {
+    "script": "adm_null_shuffle.py  11 shuffle nulls x 8 configs",
+    "config_grids": 88,
+    "wall_sec": 4202.6
+   },
+   {
+    "script": "adm_null_derived.py  9 real ciphertexts x 8 configs",
+    "config_grids": 72,
+    "wall_sec": 3751.4
+   },
+   {
+    "script": "adm_null_synth.py  24 out-of-family synthetics, 1 config",
+    "config_grids": 24,
+    "wall_sec": null
+   }
+  ],
+  "total_config_grids_executed": 205,
+  "total_cells_executed": 142680,
+  "total_word_hypotheses_executed": 2566847640,
+  "total_wall_sec_of_the_timed_background_jobs": 8554.5,
+  "breakdown_of_null_replicates": {
+   "full_8_config_shuffle_null_on_pk9": 11,
+   "one_config_shuffle_null_on_pk9": 12,
+   "one_config_out_of_family_synthetic_null": 24,
+   "full_8_config_derived_null_real_out_of_family_ciphertexts": 8,
+   "full_8_config_positive_control": 1
+  },
+  "scripts": [
+   "adm_engine.py",
+   "adm_repro.py",
+   "adm_degen.py",
+   "adm_lang.py",
+   "adm_ceiling.py",
+   "adm_power.py",
+   "adm_mb1.py",
+   "adm_xcheck.py",
+   "adm_real8.py",
+   "adm_mt.py",
+   "adm_null_shuffle.py",
+   "adm_null_derived.py",
+   "adm_null_synth.py",
+   "adm_final.py"
+  ],
+  "results_files": [
+   "results/adm_manufactured_keys_adversarial_verification.json (this file)",
+   "results/adm_repro.json",
+   "results/adm_language.json",
+   "results/adm_degeneracy.json",
+   "results/adm_ceiling.json",
+   "results/adm_power.json",
+   "results/adm_mb1.json",
+   "results/adm_xcheck.json",
+   "results/adm_real8.json",
+   "results/adm_multipletesting.json",
+   "results/adm_null_shuffle_A.json",
+   "results/adm_null_derived.json",
+   "results/adm_null_synth.json"
+  ]
+ }
+}
