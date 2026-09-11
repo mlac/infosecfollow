@@ -1,31 +1,65 @@
 {
   "date": "2026-09-11",
-  "headline": "Anthropic caught a Russia-linked espionage crew steering Claude against more than 20 government, intelligence, and defense organizations in the same week a Russian-speaking operator's AI agents finished breaking into 395 PaperCut customers.",
+  "headline": "Anthropic's threat report and the PaperCut swarm show attackers handing whole intrusion workflows to commercial AI models, while maximum-severity flaws in GitLab, Cisco, and JFrog Artifactory draw exploitation within hours of disclosure.",
   "emerging_trends": [
     {
-      "text": "A suspected Russian-speaking operator handed hundreds of AI agents the job of breaking into PaperCut print servers, reaching 395 organizations across 48 countries and turning exploit development plus mass compromise into an overnight errand.",
+      "text": "A Russian-speaking operator built a working PaperCut exploit in a private lab, then turned AI agents loose to break into 395 organizations across 48 countries, collapsing the gap between disclosure and mass compromise.",
       "topic_title": "PaperCut Ships Maintenance Releases After AI-Agent Campaign",
       "link_phrase": "PaperCut",
       "_anchor": "trend-1"
     },
     {
-      "text": "Attackers keep aiming at the management plane—Cisco's Secure Firewall Management Center, where three clusters now drop Qilin ransomware, plus JFrog Artifactory and GitLab—because one bypass there yields the whole perimeter, the build pipeline, or the source code.",
-      "topic_title": "Cisco Firewall Flaws Deliver Qilin Ransomware",
-      "link_phrase": "Qilin",
+      "text": "Attackers spent the week inside the software factory itself, chaining JFrog Artifactory flaws to plant a Rust backdoor and probing GitLab's maximum-severity file-read bug a day after GitLab published it.",
+      "topic_title": "Intruders Backdoor Unpatched JFrog Artifactory Servers",
+      "link_phrase": "Artifactory",
       "_anchor": "trend-2"
     },
     {
-      "text": "One compromised marketing platform, Brevo, put phishing in front of 347,000 Trezor addresses and reached BitBox and CoinTracking customers as well, proof that a vendor's contact list carries the same blast radius as its product.",
-      "topic_title": "Surfshark Test Server and Trezor Phishing Fallout",
-      "link_phrase": "Brevo",
+      "text": "Huntress found criminals hosting malware lures inside weaponized Claude Artifacts and shared AI conversations while Anthropic reported seven Chinese labs draining its models through illicit distillation, which makes the AI platform both the weapon and the prize.",
+      "topic_title": "Attackers Turn AI Platforms Into Delivery Infrastructure",
+      "link_phrase": "Claude Artifacts",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
+      "title": "Criminals Point Claude at Malware Evasion",
+      "area": "AI Security",
+      "latest_developments": "Anthropic published the full threat report behind yesterday's disclosure, naming the clusters Generative Threat Groups and covering December 2025 through August 2026: GTG-20006, which aligns with the Russian state-sponsored group Midnight Blizzard, used Claude to rebuild malware each time defenders detected it and ran the campaign against more than 20 government, intelligence, diplomatic, and defense organizations; other groups used the models for weapons design, propaganda, and mass surveillance; criminals breached AI vendor infrastructure and stole a pre-release Claude model; and Anthropic separately disrupted industrial-scale distillation attacks from seven China-based labs, among them Alibaba, Moonshot, DeepSeek, Z.ai, and MiniMax, that pumped its models to extract capabilities into their own.",
+      "summary": "Attackers now fold commercial models into ordinary espionage and criminal work, using them to mutate malware past detection engines and to write convincing executive impersonations, and they treat the model vendors themselves as targets worth breaching. Finance teams should confirm every payment-detail change through a channel separate from email.",
+      "tags": [
+        "ai",
+        "malware",
+        "fraud"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Anthropic Says Seven China-Based AI Labs Ran Industrial-Scale Claude Distillation Attacks",
+          "url": "https://thehackernews.com/2026/09/anthropic-says-seven-china-based-ai.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Russian State-Sponsored Hackers Use Claude to Rebuild Malware After Detection",
+          "url": "https://thehackernews.com/2026/09/russian-state-sponsored-hackers-use.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Anthropic Says Russian Hackers Used Claude AI to Automate Malware Evasion",
+          "url": "https://www.securityweek.com/anthropic-says-russian-hackers-used-claude-ai-to-automate-malware-evasion/"
+        },
+        {
+          "source": "Microsoft Security Blog",
+          "title": "Protecting organizations from AI-assisted executive impersonation and invoice fraud",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/09/10/protecting-organizations-ai-assisted-executive-impersonation-invoice-fraud/"
+        }
+      ],
+      "_anchor": "i-394b762a6a"
+    },
+    {
       "title": "PaperCut Ships Maintenance Releases After AI-Agent Campaign",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "PaperCut released maintenance releases 26.0.5, 25.0.13, and 24.1.10 that replace every emergency patch the company had pushed for the two actively exploited flaws, and GreyNoise detailed the attacker's method: a private lab holding a vulnerable copy of PaperCut NG/MF and an Active Directory domain, where the suspected Russian-speaking operator built and tested the exploit before handing the break-ins to AI agents that reached at least 440 instances at 395 organizations in 48 countries.",
+      "latest_developments": "PaperCut released maintenance releases 26.0.5, 25.0.13, and 24.1.10 that replace every emergency patch the company had pushed for the two actively exploited flaws, and GreyNoise detailed the attacker's method: a private lab holding a vulnerable copy of PaperCut NG/MF and an Active Directory domain, where the suspected Russian-speaking operator built and tested the exploit before handing the break-ins to AI agents that reached at least 440 instances at 395 organizations in 48 countries; Dark Reading traced the agents through the whole kill chain, from staging the lab to reconnaissance, lateral movement, and exfiltration.",
       "summary": "PaperCut NG/MF runs print management for schools, universities, and enterprises worldwide, and the exploited pair chains an authentication bypass with remote code execution. Administrators should move straight to 26.0.5, 25.0.13, or 24.1.10 and hunt for unfamiliar accounts and outbound connections to 45.142.193.132.",
       "tags": [
         "patch",
@@ -44,17 +78,50 @@
           "url": "https://www.helpnetsecurity.com/2026/09/11/ai-agents-papercut-ng-mf-attack-campaign/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "PaperCut Flaws Exploited in AI-Powered Attacks",
-          "url": "https://www.securityweek.com/papercut-flaws-exploited-in-ai-powered-attacks/"
-        },
-        {
           "source": "BleepingComputer",
           "title": "AI-powered attack exploited PaperCut flaws to hack 395 organizations",
           "url": "https://www.bleepingcomputer.com/news/security/ai-powered-attack-exploited-papercut-flaws-to-hack-395-organizations/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Papercut AI Swarm Attack Heralds Changes for Cyber Kill Chain",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/papercut-ai-swarm-attack-cyber-kill-chain"
         }
       ],
       "_anchor": "i-f804c4cab4"
+    },
+    {
+      "title": "GitLab and Check Point Ship Critical Patches",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Attackers began probing GitLab's CVE-2026-85706 in the wild within hours of the September 10, 2026 disclosure, a 10.0-rated path traversal bug in the repository commits API that lets an unauthenticated user read any file on the GitLab server; Check Point assigned CVE-2026-85102 and CVE-2026-85103 to the two critical VPN certificate handling flaws in its Security Gateways and Security Management products that yield remote code execution.",
+      "summary": "GitLab holds the source code and continuous integration pipelines of the companies that run it, and Check Point gateways terminate corporate VPN traffic, so both sit where one flaw opens everything behind it. Administrators should apply each vendor's fix immediately.",
+      "tags": [
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "GitLab CVSS 10 File-Read Flaw Draws In-the-Wild Probes After Disclosure",
+          "url": "https://thehackernews.com/2026/09/gitlab-cvss-10-file-read-flaw-draws-in.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "GitLab Vulnerability Exploited One Day After Disclosure",
+          "url": "https://www.securityweek.com/gitlab-vulnerability-exploited-one-day-after-disclosure/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "GitLab urges users to patch max severity path traversal flaw",
+          "url": "https://www.bleepingcomputer.com/news/security/gitlab-urges-users-to-patch-max-severity-path-traversal-flaw/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Check Point Patches Critical VPN Vulnerabilities",
+          "url": "https://www.securityweek.com/check-point-patches-critical-vpn-vulnerabilities/"
+        }
+      ],
+      "_anchor": "i-2a6fb06b18"
     },
     {
       "title": "Surfshark Test Server and Trezor Phishing Fallout",
@@ -125,38 +192,9 @@
       "_anchor": "i-5e0d3b8da8"
     },
     {
-      "title": "Criminals Point Claude at Malware Evasion",
-      "area": "AI Security",
-      "latest_developments": "Anthropic detected and disrupted a Russia-linked cyber-espionage group that ran Claude through a hacking campaign against more than 20 government, intelligence, diplomatic, and defense organizations, part of the same disclosure in which the company described Russian criminals automating malware evasion and intruders stealing a pre-release Claude model from AI vendor infrastructure; Microsoft's security researchers separately documented an AI-assisted business email compromise campaign that impersonates executives and sends fabricated invoices to push finance teams into ACH payment fraud.",
-      "summary": "Attackers now fold commercial models into ordinary espionage and criminal work, using them to mutate malware past detection engines and to write convincing executive impersonations, and they treat the model vendors themselves as targets worth breaching. Finance teams should confirm every payment-detail change through a channel separate from email.",
-      "tags": [
-        "ai",
-        "malware",
-        "fraud"
-      ],
-      "sources": [
-        {
-          "source": "The Record",
-          "title": "Anthropic caught Russia-linked spies using Claude in hacking operations",
-          "url": "https://therecord.media/anthropic-russia-hackers-claude"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Anthropic Says Russian Hackers Used Claude AI to Automate Malware Evasion",
-          "url": "https://www.securityweek.com/anthropic-says-russian-hackers-used-claude-ai-to-automate-malware-evasion/"
-        },
-        {
-          "source": "Microsoft Security Blog",
-          "title": "Protecting organizations from AI-assisted executive impersonation and invoice fraud",
-          "url": "https://www.microsoft.com/en-us/security/blog/2026/09/10/protecting-organizations-ai-assisted-executive-impersonation-invoice-fraud/"
-        }
-      ],
-      "_anchor": "i-5645451120"
-    },
-    {
       "title": "Cisco Firewall Flaws Deliver Qilin Ransomware",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Cisco Talos named the payoff behind the three threat clusters exploiting CVE-2026-20079, the 10.0-rated authentication bypass in the Secure Firewall Management Center web interface, and CVE-2026-20316: the intruders steal credentials and then deploy Qilin ransomware, and the clusters span ransomware crews and state-sponsored operators.",
+      "latest_developments": "Sophos identified the malware riding one of the intrusion clusters as Cyclops Blink, the modular implant Russia's Sandworm group deployed against network devices years ago, now rebuilt with new capabilities and aimed at Cisco Secure Firewall Management Center appliances; Cisco Talos had already named the payoff behind the three clusters exploiting CVE-2026-20079, the 10.0-rated authentication bypass in the Secure Firewall Management Center web interface, and CVE-2026-20316, which steal credentials and then deploy Qilin ransomware.",
       "summary": "Secure Firewall Management Center sets policy for Cisco firewalls, so an unauthenticated bypass there hands an attacker the perimeter and the credentials the appliance holds. CISA gave federal civilian agencies until September 12, 2026 to patch; every other operator should install Cisco's fixes and rotate stored credentials now.",
       "tags": [
         "ransomware",
@@ -173,37 +211,19 @@
           "source": "BleepingComputer",
           "title": "Cisco FMC flaws exploited by ransomware gang, state-sponsored hackers",
           "url": "https://www.bleepingcomputer.com/news/security/cisco-fmc-flaws-exploited-by-ransomware-gang-state-sponsored-hackers/"
+        },
+        {
+          "source": "Sophos News",
+          "title": "\"Eye\" spy: Cyclops Blink returns with extended capabilities",
+          "url": "https://www.sophos.com/en-us/blog/-eye-spy-cyclops-blink-returns-with-extended-capabilities"
         }
       ],
       "_anchor": "i-2c47337c32"
     },
     {
-      "title": "GitLab and Check Point Ship Critical Patches",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "GitLab told customers on September 10, 2026 to patch their servers immediately against CVE-2026-85706, a maximum-severity path traversal flaw, and Check Point assigned CVE-2026-85102 and CVE-2026-85103 to the two critical VPN certificate handling flaws in its Security Gateways and Security Management products that yield remote code execution.",
-      "summary": "GitLab holds the source code and continuous integration pipelines of the companies that run it, and Check Point gateways terminate corporate VPN traffic, so both sit where one flaw opens everything behind it. Administrators should apply each vendor's fix immediately.",
-      "tags": [
-        "patch",
-        "rce"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "GitLab urges users to patch max severity path traversal flaw",
-          "url": "https://www.bleepingcomputer.com/news/security/gitlab-urges-users-to-patch-max-severity-path-traversal-flaw/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Check Point Patches Critical VPN Vulnerabilities",
-          "url": "https://www.securityweek.com/check-point-patches-critical-vpn-vulnerabilities/"
-        }
-      ],
-      "_anchor": "i-4e654ce0e0"
-    },
-    {
       "title": "Intruders Backdoor Unpatched JFrog Artifactory Servers",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Wiz reported attacks running from August 15 through September 8, 2026 in which intruders chained two JFrog Artifactory flaws to take administrator control of self-hosted servers and plant backdoors, reaching only the servers whose operators had skipped JFrog's earlier fixes; CISA on September 10, 2026 added two MikroTik RouterOS bugs already under exploitation, CVE-2026-67277 and CVE-2026-86060, to its Known Exploited Vulnerabilities catalog.",
+      "latest_developments": "BleepingComputer identified the payload the intruders plant on self-hosted Artifactory servers as a Rust backdoor, reached by chaining a critical authentication bypass with a high-severity flaw to gain administrative privileges; Wiz dated the attacks from August 15 through September 8, 2026 and found they reached only the servers whose operators had skipped JFrog's earlier fixes, and CISA on September 10, 2026 added two MikroTik RouterOS bugs already under exploitation, CVE-2026-67277 and CVE-2026-86060, to its Known Exploited Vulnerabilities catalog.",
       "summary": "Artifactory holds the packages that software build pipelines pull from, so a backdoor there reaches every application a company ships. Operators of self-hosted Artifactory should apply JFrog's fixes, audit administrator accounts, and inspect stored artifacts for tampering.",
       "tags": [
         "supply-chain",
@@ -217,12 +237,46 @@
           "url": "https://thehackernews.com/2026/09/attackers-chain-jfrog-artifactory-flaws.html"
         },
         {
+          "source": "BleepingComputer",
+          "title": "Artifactory flaws chained in attacks deploying backdoor malware",
+          "url": "https://www.bleepingcomputer.com/news/security/artifactory-flaws-chained-in-attacks-deploying-backdoor-malware/"
+        },
+        {
           "source": "CISA Advisories",
           "title": "CISA Adds Two Known Exploited Vulnerabilities to Catalog",
           "url": "https://www.cisa.gov/news-events/alerts/2026/09/10/cisa-adds-two-known-exploited-vulnerabilities-catalog"
         }
       ],
       "_anchor": "i-e86c593f85"
+    },
+    {
+      "title": "Attackers Turn AI Platforms Into Delivery Infrastructure",
+      "area": "AI Security",
+      "latest_developments": "Huntress documented criminals hosting malware lures inside weaponized Claude Artifacts, shared AI chat transcripts, and sponsored search results, poisoning search results for people looking for AI tools and pushing ClickFix-style prompts; the SANS Internet Storm Center traced an attacker running a semi-autonomous coding agent that hunts poorly secured large language model resale gateways, farms accounts and exploits ordinary web flaws to take API access, validates the capacity, and aggregates the stolen inference behind a gateway of their own; and Ars Technica reported ClickFix infections spreading on both Windows and macOS.",
+      "summary": "ClickFix tells a victim to paste a command into a terminal or Run dialog to fix a fake error, and the lure now arrives dressed as legitimate AI content on platforms users already trust. Tell staff to treat any web page that asks them to paste a command as an attack, and check whether your own LLM gateways demand authentication.",
+      "tags": [
+        "ai",
+        "phishing",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "How Threat Actors Are Turning Trusted AI Platforms Into an Attack Surface",
+          "url": "https://www.bleepingcomputer.com/news/security/how-threat-actors-are-turning-trusted-ai-platforms-into-an-attack-surface/"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "ClickFix attacks infecting PCs and Macs are going viral",
+          "url": "https://arstechnica.com/security/2026/09/clickfix-attacks-infecting-pcs-and-macs-are-going-viral/"
+        },
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "The Self-Expanding Stolen Inference Supply Chain: An AI Agent Harvesting and Re-Serving LLM Access",
+          "url": "https://isc.sans.edu/diary/rss/33332"
+        }
+      ],
+      "_anchor": "i-297d870d94"
     },
     {
       "title": "UNC3569 Rides Sogou Input Method to GRAYRABBIT",
@@ -307,9 +361,9 @@
     }
   ],
   "weather": [
-    "Today: Mostly Sunny, high 82F.",
+    "This Afternoon: Sunny, high 82F.",
     "Tonight: Mostly Cloudy, low 64F.",
-    "Saturday: Chance Showers And Thunderstorms then Slight Chance Showers And Thunderstorms, high 81F."
+    "Saturday: Slight Chance Showers And Thunderstorms, high 81F."
   ],
   "sports": [
     {
@@ -449,14 +503,55 @@
     ],
     "business": [
       {
+        "title": "A New Operator for the Convention Center",
+        "latest_developments": "The Sports and Exhibition Authority voted unanimously Friday, September 11, to approve a new contract for managing and operating the David L. Lawrence Convention Center.",
+        "summary": "The authority owns the convention center in downtown Pittsburgh, the building that anchors the city's trade show and convention business, and the board's vote hands day-to-day management and operations to a new contractor.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "SEA taps new operator for David L. Lawrence Convention Center",
+            "url": "https://www.wpxi.com/news/local/sea-taps-new-operator-david-l-lawrence-convention-center/CGZQAYFIKFAFLAAOFVCBQOWPJM/"
+          }
+        ],
+        "_anchor": "i-a15d7ba2f0"
+      },
+      {
+        "title": "New Kensington Zoners Push Out a Boxing Club",
+        "latest_developments": "TribLive reported Friday, September 11, that the New Kensington zoning hearing board denied Sanctuary Boxing Club's request for a special exception for business use, leaving the club less than three months to find a new location.",
+        "summary": "Sanctuary Boxing Club trains in New Kensington, Westmoreland County, and the zoning board's refusal to permit business use at its current address forces the gym to move or close.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Sanctuary Boxing Club to move after New Kensington zoning board denies business use at current location",
+            "url": "https://triblive.com/local/valley-news-dispatch/sanctuary-boxing-club-to-move-after-new-kensington-zoning-board-denies-business-use-at-current-location/"
+          }
+        ],
+        "_anchor": "i-f83764fbb8"
+      },
+      {
         "title": "Diesel Tops $6 a Gallon",
-        "latest_developments": "WTAE reported Friday, September 11, that the price of diesel passed $6 a gallon for the first time.",
+        "latest_developments": "WTAE and the Post-Gazette reported Friday, September 11, that diesel passed $6 a gallon for the first time, and the August inflation report put gasoline up 3.9% and fuel oil up 10.1% for the month.",
         "summary": "Trucks, trains, and farm equipment burn diesel, so the record price works into the delivered cost of nearly everything Western Pennsylvania households buy, and it follows the disruption of crude supply from the Iran conflict that has also pushed regional gasoline well above last year's levels.",
         "sources": [
           {
             "source": "WTAE",
             "title": "Diesel costs more than $6 a gallon for the first time. Here’s how that affects you",
             "url": "https://www.wtae.com/article/diesel-costs-6-gallon-first-time-how-affects-you-consumer/73684536"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "U.S. diesel prices soar past $6 a gallon, deepening strain for hauling everyday goods",
+            "url": "https://www.post-gazette.com/business/money/2026/09/11/us-diesel-prices-soar/stories/202609120005"
+          },
+          {
+            "source": "WTAE",
+            "title": "Gasoline prices jump again as inflation rises 3.4%",
+            "url": "https://www.wtae.com/article/gasoline-prices-rise-again-inflation-hits-34-percent/73685116"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "No relief from inflation as Middle East clash lifts prices to painful levels",
+            "url": "https://www.post-gazette.com/business/money/2026/09/11/inflation-middle-east-clash-fuel-prices/stories/202609120006"
           }
         ],
         "_anchor": "i-e2a1c7f9a3"
@@ -489,6 +584,37 @@
       }
     ],
     "around_town": [
+      {
+        "title": "Cyclospora Outbreak Declared Over",
+        "latest_developments": "The Centers for Disease Control and Prevention and the Food and Drug Administration declared the record-setting cyclosporiasis outbreak over Friday, September 11, saying all iceberg lettuce tied to it has left the market.",
+        "summary": "Contaminated iceberg lettuce carried the parasite that causes cyclosporiasis through multiple states this summer, and federal health officials now say no further illness risk remains from that supply.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Record-setting cyclospora outbreak is over, U.S. health officials declare",
+            "url": "https://www.cbsnews.com/pittsburgh/news/cyclospora-outbreak-over-us-fda-cdc/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Massive cyclospora outbreak linked to lettuce declared over, FDA says",
+            "url": "https://www.wtae.com/article/lettuce-cyclospora-outbreak-over/73686617"
+          }
+        ],
+        "_anchor": "i-a720d1aaaf"
+      },
+      {
+        "title": "Wildwood Road Floods Again in Hampton",
+        "latest_developments": "KDKA's Jessica Riley reported Friday, September 11, that residents along Wildwood Road in Hampton Township have grown frustrated with flooding that keeps returning after a week of heavy storms and an exceptionally wet summer.",
+        "summary": "Water is reaching parts of Allegheny County that rarely see it, and the Wildwood Road corridor in Hampton Township, north of Pittsburgh, has taken repeated hits as the storms continue.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Repeated flooding frustrates Hampton Township residents along Wildwood Road",
+            "url": "https://www.cbsnews.com/pittsburgh/video/repeated-flooding-frustrates-hampton-township-residents-along-wildwood-road/"
+          }
+        ],
+        "_anchor": "i-2c4ae5adfc"
+      },
       {
         "title": "Rain Returns for the Weekend",
         "latest_developments": "Forecasters gave the region sunshine Friday, September 11, then flagged Saturday, September 12, as an Impact Day for afternoon showers, with scattered rain lingering into Sunday and the Steelers' home opener.",
@@ -527,8 +653,8 @@
       },
       {
         "title": "Flight 93 Marks 25 Years",
-        "latest_developments": "The observance itself runs Friday, September 11, at the Flight 93 National Memorial near Shanksville, with President Trump attending a separate ceremony at the Pentagon.",
-        "summary": "United Airlines Flight 93 came down in a field in Somerset County on September 11, 2001, after the 40 passengers and crew fought back, and families, first responders, and visitors gather at the memorial to read the names. WPXI spoke with Jack Grandcolas, who lost his wife and their unborn child on the flight and described how her actions guided his own recovery, and PublicSource collected readers' memories from across the region.",
+        "latest_developments": "Families, first responders, and visitors gathered at the Flight 93 National Memorial near Shanksville on Friday morning, September 11, to read the names, while President Trump marked the anniversary at a Pentagon ceremony.",
+        "summary": "United Airlines Flight 93 came down in a field in Somerset County on September 11, 2001, after the 40 passengers and crew fought back. WPXI spoke with Jack Grandcolas, who lost his wife and their unborn child on the flight and described how her actions guided his own recovery, and PublicSource collected readers' memories from across the region.",
         "sources": [
           {
             "source": "KDKA",
@@ -581,6 +707,45 @@
       }
     ],
     "events": [
+      {
+        "title": "Taco Festival Fills the Stacks Saturday",
+        "latest_developments": "KDKA's Pittsburgh Today Live previewed the Original Pittsburgh Taco Festival on Friday, September 11, a day before it opens.",
+        "summary": "The Original Pittsburgh Taco Festival runs Saturday, September 12, at The Stacks at 3 Crossings in the Strip District, with more than 25 food trucks and live Latin music.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "PTL previews the Original Pittsburgh Taco Festival",
+            "url": "https://www.cbsnews.com/pittsburgh/video/ptl-previews-the-original-pittsburgh-taco-festival/"
+          }
+        ],
+        "_anchor": "i-1994218f7e"
+      },
+      {
+        "title": "Pittsburgh County Fair on the North Side",
+        "latest_developments": "KDKA previewed the Pittsburgh County Fair on Friday, September 11, ahead of Saturday's event.",
+        "summary": "The Pittsburgh County Fair takes place Saturday, September 12, at Allegheny Commons Park West on the North Side, a celebration of urban agriculture and handmade and homemade goods from around the city.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "PTL previews the Pittsburgh County Fair",
+            "url": "https://www.cbsnews.com/pittsburgh/video/ptl-previews-the-pittsburgh-county-fair/"
+          }
+        ],
+        "_anchor": "i-1bbe312287"
+      },
+      {
+        "title": "Turkey Fund Kickoff Show Sells Tickets",
+        "latest_developments": "KDKA said Friday, September 11, that tickets are on sale now for the Pittsburgh Today Live Turkey Fund Kickoff Show, one week out.",
+        "summary": "The PTL Turkey Fund Kickoff Show runs Friday, September 18, at the Pittsburgh Playhouse downtown, the annual benefit that opens KDKA's holiday food drive.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "One week away from the PTL Turkey Fund Kickoff Show",
+            "url": "https://www.cbsnews.com/pittsburgh/video/one-week-away-from-the-ptl-turkey-fund-kickoff-show/"
+          }
+        ],
+        "_anchor": "i-aee46be340"
+      },
       {
         "title": "Five Things to Do in Westmoreland County",
         "latest_developments": "TribLive published its Westmoreland County weekend list Friday, September 11, covering Friday, September 11, through Sunday, September 13.",
@@ -635,6 +800,50 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "O'Hearn Comes Off the Injured List",
+        "latest_developments": "The Pirates activated Ryan O'Hearn from the injured list Friday, September 11, restoring the lineup to full strength.",
+        "summary": "The Post-Gazette reported the move as the Pirates play out the season's final weeks with their regular batting order intact for the first time in weeks, days after the club put All-Star right-hander Braxton Ashcraft on the 15-day injured list with right arm discomfort.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "The Pirates activate Ryan O'Hearn from the injured list, bringing their lineup to full strength",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/09/11/ryan-ohearn-injury-news/stories/202609110046"
+          }
+        ],
+        "_anchor": "i-e7e67ba69b"
+      },
+      {
+        "title": "Murf Gray, Third Baseman of the Future",
+        "latest_developments": "The Post-Gazette profiled Murf Gray on Friday, September 11, a top-100 prospect the Pirates see as their third baseman of the future.",
+        "summary": "Gray ranks among baseball's top 100 prospects and plays a position the Pirates have struggled to settle, and the piece traces his path through the organization toward Pittsburgh.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "Meet Murf Gray, the top-100 prospect who could be the Pirates' third baseman of the future",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/09/11/murf-gray-mlb-prospects-pirates/stories/202609110030"
+          }
+        ],
+        "_anchor": "i-4d12104489"
+      },
+      {
+        "title": "Steelers Live Sizes Up the Falcons",
+        "latest_developments": "Rob King, Missi Matthews, and Matt Williamson broke down the Steelers-Falcons matchups on Steelers Live The Match Up, posted Friday, September 11.",
+        "summary": "The Steelers-produced show walked through the individual matchups two days before Pittsburgh hosts the Atlanta Falcons at 1 p.m. Sunday, September 13, on FOX, and the team also hosted a 9/11 National Day of Service meal packing event at Acrisure Stadium on Friday.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Matchups to Watch in Steelers-Falcons (Week 1) | Steelers Live The Match Up | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=yRAl5WDrupo"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Today, we joined with 9/11 National Day of Service to host a meal packing event at Acrisure Stadium",
+            "url": "https://www.youtube.com/shorts/e1Vtx98UpZM"
+          }
+        ],
+        "_anchor": "i-cf3da6c1c2"
+      },
       {
         "title": "Fittipaldo and McCarthy Close Out Week 1 Prep",
         "latest_developments": "Post-Gazette beat writer Ray Fittipaldo posted his Steelers chat transcript Thursday, September 10, and head coach Mike McCarthy met the media the same day before practice.",
@@ -700,6 +909,19 @@
     ],
     "team_usa": [
       {
+        "title": "Pulisic Chafes on the Milan Bench",
+        "latest_developments": "AC Milan coach Ruben Amorim said Friday, September 11, that Christian Pulisic is upset about sitting out so far this season, and hinted the American will play this weekend.",
+        "summary": "Pulisic, the United States men's national team forward, has yet to feature for Milan in the new Serie A season, and Amorim addressed the situation publicly before the club's next match.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Pulisic 'upset' about Milan bench role, coach Amorim says",
+            "url": "https://www.espn.com/soccer/story/_/id/49905122/christian-pulisic-upset-ac-milan-role-ruben-amorim"
+          }
+        ],
+        "_anchor": "i-253d3fd0e7"
+      },
+      {
         "title": "The Next Wave of U.S. Men's Players",
         "latest_developments": "ESPN surveyed Friday, September 11, the American men who missed this year's World Cup squad and now aim at the 2030 tournament.",
         "summary": "Diego Luna and Yunus Musah lead a group of five United States players in their twenties whom ESPN identifies as candidates for a larger national team role in the next World Cup cycle.",
@@ -715,6 +937,13 @@
     ],
     "reading": [
       {
+        "author": "Ed Zitron",
+        "title": "Premium: The Hater's Guide To Broadcom",
+        "url": "https://www.wheresyoured.at/premium-the-haters-guide-to-broadcom/",
+        "summary": "Zitron turns his hater's guide format on Broadcom and Chief Executive Hock Tan, opening with the coffee chat Tan held for VMware employees after the acquisition and the management style he brought to the sprawling Palo Alto campus.",
+        "_anchor": "i-3f40e5462f"
+      },
+      {
         "author": "Cal Newport",
         "title": "Superintelligence is a Fairy Tale. But Chasing It Can Still Cause Harm.",
         "url": "https://calnewport.com/superintelligence-is-a-fairy-tale-but-chasing-it-can-still-cause-harm/",
@@ -727,13 +956,6 @@
         "url": "https://stratechery.com/2026/the-iphone-duo-the-intelligent-personal-hub-apple-watch-audio-intelligence/",
         "summary": "Ben Thompson reads Apple's latest launch as another demonstration of what integrating hardware and software buys the company. He names Apple's belief in the primacy of apps as its largest blind spot in an AI era that favors an intelligent personal hub.",
         "_anchor": "i-a273c631b9"
-      },
-      {
-        "author": "Ed Zitron",
-        "title": "Concentration Risk",
-        "url": "https://www.wheresyoured.at/concentration-risk/",
-        "summary": "Zitron takes up the concentration of the market and the economy in a handful of AI companies. The piece extends his running case against the circular financing that runs among Nvidia, OpenAI, and the hyperscalers.",
-        "_anchor": "i-1c94634809"
       }
     ]
   },
@@ -741,126 +963,126 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "A Russian-speaking operator turned hundreds of AI agents loose on PaperCut servers across 48 countries, while Anthropic disrupted a Russia-linked crew running Claude against government and defense targets.",
+      "text": "Huntress found malware lures hidden inside weaponized Claude Artifacts and shared chat transcripts as Anthropic named its Generative Threat Groups, one aligned with Russia's Midnight Blizzard.",
       "links": [
         {
-          "anchor": "i-f804c4cab4",
-          "phrase": "PaperCut",
-          "start": 66,
-          "end": 74,
-          "title": "PaperCut Ships Maintenance Releases After AI-Agent Campaign"
+          "anchor": "i-297d870d94",
+          "phrase": "Claude Artifacts",
+          "start": 54,
+          "end": 70,
+          "title": "Attackers Turn AI Platforms Into Delivery Infrastructure"
         },
         {
-          "anchor": "i-5645451120",
-          "phrase": "Claude",
-          "start": 159,
-          "end": 165,
+          "anchor": "i-394b762a6a",
+          "phrase": "Generative Threat Groups",
+          "start": 122,
+          "end": 146,
           "title": "Criminals Point Claude at Malware Evasion"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "Cisco Talos tied three clusters exploiting CVE-2026-20079 to Qilin ransomware, as GitLab and Check Point shipped critical patches and intruders backdoored unpatched JFrog Artifactory servers.",
+      "status": "updated",
+      "text": "PaperCut shipped maintenance releases 26.0.5, 25.0.13, and 24.1.10 replacing every emergency patch after an operator turned AI agents loose on 395 organizations across 48 countries.",
       "links": [
         {
-          "anchor": "i-2c47337c32",
-          "phrase": "CVE-2026-20079",
-          "start": 43,
-          "end": 57,
-          "title": "Cisco Firewall Flaws Deliver Qilin Ransomware"
-        },
-        {
-          "anchor": "i-4e654ce0e0",
-          "phrase": "GitLab",
-          "start": 82,
-          "end": 88,
-          "title": "GitLab and Check Point Ship Critical Patches"
-        },
+          "anchor": "i-f804c4cab4",
+          "phrase": "PaperCut shipped",
+          "start": 0,
+          "end": 16,
+          "title": "PaperCut Ships Maintenance Releases After AI-Agent Campaign"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Attackers spent the week inside the software factory, planting a Rust backdoor on unpatched JFrog Artifactory servers and probing GitLab's 10.0-rated path traversal bug hours after disclosure.",
+      "links": [
         {
           "anchor": "i-e86c593f85",
           "phrase": "JFrog Artifactory",
-          "start": 165,
-          "end": 182,
+          "start": 92,
+          "end": 109,
           "title": "Intruders Backdoor Unpatched JFrog Artifactory Servers"
+        },
+        {
+          "anchor": "i-2a6fb06b18",
+          "phrase": "GitLab's",
+          "start": 130,
+          "end": 138,
+          "title": "GitLab and Check Point Ship Critical Patches"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "updated",
-      "text": "A compromised Brevo marketing account pushed phishing to 347,000 Trezor addresses, and Surfshark disclosed that a misconfigured internal test server sat exposed to the open internet.",
+      "text": "Sophos tied a Qilin ransomware cluster hitting Cisco firewalls to Cyclops Blink, the modular implant Russia's Sandworm group once deployed against network devices, now rebuilt with new capabilities.",
       "links": [
         {
-          "anchor": "i-cd0695560d",
-          "phrase": "Trezor",
-          "start": 65,
-          "end": 71,
-          "title": "Surfshark Test Server and Trezor Phishing Fallout"
+          "anchor": "i-2c47337c32",
+          "phrase": "Cyclops Blink",
+          "start": 66,
+          "end": 79,
+          "title": "Cisco Firewall Flaws Deliver Qilin Ransomware"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "U.S. inflation held at 3.4% while diesel set a $6 record, the IEA wrote off Hormuz, and Houthi forces seized the Bab al-Mandeb.",
+      "text": "Diesel topped $6 a gallon as August CPI held at 3.4% and the IEA said the Strait of Hormuz will not reopen this year.",
       "links": [
         {
-          "anchor": "i-d20ce8e541",
-          "phrase": "3.4%",
-          "start": 23,
-          "end": 27,
-          "title": "August CPI Holds at 3.4%"
-        },
-        {
           "anchor": "i-e2a1c7f9a3",
-          "phrase": "diesel",
-          "start": 34,
-          "end": 40,
+          "phrase": "Diesel topped",
+          "start": 0,
+          "end": 13,
           "title": "Diesel Tops $6 a Gallon"
         },
         {
-          "anchor": "i-d04003376d",
-          "phrase": "Hormuz",
-          "start": 76,
-          "end": 82,
-          "title": "Diesel Hits $6 and the IEA Writes Off Hormuz"
+          "anchor": "i-d20ce8e541",
+          "phrase": "3.4%",
+          "start": 48,
+          "end": 52,
+          "title": "August CPI Holds at 3.4%"
         },
         {
-          "anchor": "i-5733385797",
-          "phrase": "Bab al-Mandeb",
-          "start": 113,
-          "end": 126,
-          "title": "Houthis Take the Bab al-Mandeb"
+          "anchor": "i-d04003376d",
+          "phrase": "Strait of Hormuz",
+          "start": 74,
+          "end": 90,
+          "title": "Diesel Hits $6 and the IEA Writes Off Hormuz"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Rosh Hashanah begins at sundown, Flight 93 marks 25 years near Shanksville, and Saturday showers threaten the weekend around the Steelers home opener.",
+      "kind": "Update",
+      "status": "new",
+      "text": "Flight 93 marked 25 years at Shanksville, the CDC declared the record cyclosporiasis outbreak over, and Wildwood Road in Hampton flooded again after a wet summer.",
       "links": [
-        {
-          "anchor": "i-f7b4393d4c",
-          "phrase": "Rosh Hashanah",
-          "start": 0,
-          "end": 13,
-          "title": "Rosh Hashanah Begins at Sundown"
-        },
         {
           "anchor": "i-d0277fb0aa",
           "phrase": "Flight 93",
-          "start": 33,
-          "end": 42,
+          "start": 0,
+          "end": 9,
           "title": "Flight 93 Marks 25 Years"
         },
         {
-          "anchor": "i-94a848ddf8",
-          "phrase": "Saturday showers",
-          "start": 80,
-          "end": 96,
-          "title": "Rain Returns for the Weekend"
+          "anchor": "i-a720d1aaaf",
+          "phrase": "cyclosporiasis outbreak",
+          "start": 70,
+          "end": 93,
+          "title": "Cyclospora Outbreak Declared Over"
+        },
+        {
+          "anchor": "i-2c4ae5adfc",
+          "phrase": "Wildwood Road",
+          "start": 104,
+          "end": 117,
+          "title": "Wildwood Road Floods Again in Hampton"
         }
       ]
     }
@@ -874,16 +1096,16 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 55,
+        "in_window": 59,
         "failed": [],
         "empty": [
           "Krebs on Security",
           "CISA Advisories",
           "Securelist (Kaspersky)",
-          "Sophos News",
           "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
           "Graham Cluley",
+          "Microsoft Security Blog",
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
@@ -892,13 +1114,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 10,
+            "contributed": 10
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 11,
+            "contributed": 11
           },
           "Krebs on Security": {
             "items": 10,
@@ -922,8 +1144,8 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "CISA Advisories": {
             "items": 30,
@@ -952,8 +1174,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -977,8 +1199,8 @@
           },
           "Microsoft Security Blog": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 0,
+            "contributed": 0
           },
           "Google Project Zero": {
             "items": 7,
@@ -997,8 +1219,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 3
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1032,17 +1254,17 @@
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 16
+            "contributed": 5
           },
           "PublicSource": {
             "items": 10,
             "in_window": 6,
-            "contributed": 3
+            "contributed": 1
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 4,
-            "contributed": 3
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 3,
@@ -1051,18 +1273,18 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 5,
-            "contributed": 1
+            "in_window": 9,
+            "contributed": 4
           },
           "KDKA": {
             "items": 30,
-            "in_window": 24,
-            "contributed": 7
+            "in_window": 30,
+            "contributed": 12
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 0
+            "contributed": 8
           },
           "WTAE": {
             "items": 20,
@@ -1082,44 +1304,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 73,
-            "in_window": 20,
-            "contributed": 4
+            "items": 72,
+            "in_window": 21,
+            "contributed": 5
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 33,
-            "contributed": 16
+            "contributed": 13
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 50,
-            "contributed": 8
+            "in_window": 49,
+            "contributed": 5
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 12,
-            "contributed": 2
+            "in_window": 13,
+            "contributed": 6
           },
           "The Economist": {
             "items": 300,
-            "in_window": 49,
-            "contributed": 2
+            "in_window": 55,
+            "contributed": 5
           },
           "FT Home": {
-            "items": 11,
-            "in_window": 11,
-            "contributed": 4
+            "items": 12,
+            "in_window": 12,
+            "contributed": 9
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 21
+            "contributed": 16
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 3
+            "contributed": 1
           }
         }
       },
@@ -1176,7 +1398,7 @@
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 7,
-            "contributed": 3
+            "contributed": 2
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1190,13 +1412,13 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 11,
-            "contributed": 4
+            "in_window": 12,
+            "contributed": 6
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 17,
-            "contributed": 9
+            "in_window": 18,
+            "contributed": 8
           }
         }
       },
@@ -1281,24 +1503,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 31395,
+          "outputTokens": 35050,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 116355,
+          "cacheCreationInputTokens": 123507,
           "webSearchRequests": 0,
-          "costUSD": 1.9484549999999998,
+          "costUSD": 2.11135,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 15150
+          "thinkingTokens": 13765
         }
       },
-      "cost_usd": 1.9484549999999998,
-      "duration_ms": 345860,
+      "cost_usd": 2.11135,
+      "duration_ms": 373150,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-11 10:05 EDT",
-    "items_considered": 55,
+    "generated_at": "2026-09-11 13:36 EDT",
+    "items_considered": 59,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1379,8 +1601,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.9485,
-    "model_duration_ms": 345860,
+    "model_cost_usd": 2.1113,
+    "model_duration_ms": 373150,
     "local_from": null,
     "feed_failures": []
   }
