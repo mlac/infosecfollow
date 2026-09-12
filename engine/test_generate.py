@@ -783,7 +783,8 @@ class Rendering(unittest.TestCase):
         for m in re.finditer(r'href="#([^"]+)"', html):
             self.assertIn(m.group(1), targets, rec["date"])
         self.assertIn('class="skip"', html)
-        self.assertIn("Jump to:", html)
+        self.assertNotIn("Jump to:", html)          # the jump index was retired
+        self.assertIn('<div class="masthead">', html)   # date sits beside the title
         self.assertIn("CONTENTS:", text)
         for topic in rec["topics"]:
             self.assertIn(topic["title"].upper()[:20], text)
@@ -822,12 +823,32 @@ class Rendering(unittest.TestCase):
                          ["glance", "security", "business", "pittsburgh", "sports"])
         for anchor in generate.COLLAPSED_SECTIONS:
             self.assertNotIn(f'<h2 id="{anchor}"', html)
-        # the jump index still offers all eight, and the text digest is untouched
-        jump = re.search(r'<nav class="jump".*?</nav>', html, re.S).group(0)
-        for label in ("Reading", "Markets", "Feed Health"):
-            self.assertIn(f">{label}</a>", jump)
+        # each section is its own grid item, and the text digest is untouched
+        self.assertEqual(html.count("<section>"), html.count("</section>"))
+        self.assertEqual(html.count("<section>"), 7)   # everything but the glance
+        self.assertIn('<h2 id="glance">', html.split('<div class="cols">')[0])
         self.assertNotIn("<details", text)
         for heading in ("READING", "MARKETS", "FEED HEALTH"):
+            self.assertIn(heading, text)
+
+    def test_around_the_teams_and_team_usa_fold_inside_the_sports_section(self):
+        rec = json.loads((TESTDATA / "new-engine-2026-09-01.json").read_text(encoding="utf-8"))
+        html, text = self.check_record(rec)
+        subs = re.findall(r'<details class="fold sub"><summary><h3>([^<]+)</h3></summary>', html)
+        self.assertEqual(subs, ["Around the Teams", "Team USA"])
+        for title in ("Around the Teams", "Team USA"):  # the only <h3> is the folded one
+            self.assertEqual(html.count(f"<h3>{title}</h3>"),
+                             html.count(f"<summary><h3>{title}</h3></summary>"), title)
+        self.assertNotIn('class="fold sub" open', html)      # collapsed by default
+        # they stay inside Sports, whose own heading is not folded
+        sports = html.split('<h2 id="sports">')[1].split("</section>")[0]
+        self.assertIn('<details class="fold sub">', sports)
+        # the scoreboard above them is still shown outright (this fixture's
+        # ESPN call failed, so it is the outage note rather than team lines)
+        self.assertIn(generate.SCOREBOARD_NOTE, sports)
+        self.assertLess(sports.index(generate.SCOREBOARD_NOTE),
+                        sports.index('<details class="fold sub">'))
+        for heading in ("Around the Teams:", "Team USA:"):  # the digest keeps them inline
             self.assertIn(heading, text)
 
     def test_a_jump_link_into_a_folded_section_is_opened_by_the_page_script(self):
@@ -844,6 +865,48 @@ class Rendering(unittest.TestCase):
             self.assertIn(needle, script)
         self.assertEqual(html.count("<script>"), 1)
         self.assertNotIn("<script", html.split("</footer>")[0])  # after the content, once
+
+    def test_stories_render_as_closed_rows_that_open_to_plain_paragraphs(self):
+        rec = json.loads((TESTDATA / "new-engine-2026-09-01.json").read_text(encoding="utf-8"))
+        html, text = self.check_record(rec)
+        topic = rec["topics"][0]
+        row = html.split('<h2 id="security">')[1].split("</details>")[0]
+        # headline, then the area, then the opening of what is new
+        esc = generate.esc
+        self.assertIn(f'<h3>{esc(topic["title"])}</h3>', row)
+        self.assertIn(f'<span class="chip">{esc(topic["area"])}</span>', row)
+        self.assertIn(esc(generate._teaser(topic["latest_developments"])), row)
+        self.assertNotIn("open", row.split("<summary>")[0])   # shut by default
+        # opened: two plain paragraphs, no label and no italics between them
+        self.assertIn(f'<p>{esc(topic["latest_developments"])}</p>', row)
+        self.assertIn(f'<p>{esc(topic["summary"])}</p>', row)
+        for gone in ("Latest developments:", 'class="updated"', 'details class="more"'):
+            self.assertNotIn(gone, html, gone)
+        self.assertNotIn("1. ", html.split("<summary>")[1])   # the ranking is the order
+        # the digest keeps the label, where there is no typography to replace it
+        self.assertIn("Latest developments:", text)
+
+    def test_teaser_cuts_at_a_word_and_only_when_needed(self):
+        short = "Nine words is not enough to need any cutting here."
+        self.assertEqual(generate._teaser(short), short)
+        long = "word " * 60
+        cut = generate._teaser(long)
+        self.assertLessEqual(len(cut), generate.TEASER_CHARS + 1)
+        self.assertTrue(cut.endswith("…"))
+        self.assertNotIn(" …", cut)                       # no dangling space
+        self.assertEqual(generate._teaser("a\n\n  b   c"), "a b c")   # collapses space
+        self.assertEqual(generate._teaser(None), "")
+
+    def test_carry_forward_caps_reach_the_model_as_numbers(self):
+        carried = {"local": {"business": [
+            {"title": "Budget Passes", "latest_developments": "d", "summary": "s",
+             "sources": [{"source": "F", "url": "https://x.example/1"}]}]}}
+        prompt = generate.build_local_prompt([], [], [], [], [], [], TODAY, None,
+                                             carried, self.feeds)
+        self.assertIn("Carry forward EVERY item", prompt)
+        self.assertIn(f"at most {generate.SECTION_CAPS['business']} items in total "
+                      f"(business_politics {generate.SECTION_CAPS['business_politics']})", prompt)
+        self.assertNotIn("SECTION_CAPS[", prompt)  # the caps were once shipped as literals
 
     def test_source_label_fallback_matches_between_renditions(self):
         digest = {"date": TODAY, "headline": "H", "emerging_trends": [], "topics": [
