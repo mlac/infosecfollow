@@ -1,27 +1,61 @@
 {
   "date": "2026-09-14",
-  "headline": "Revolut handed customer passports and financial records to fraudsters who submitted emergency data requests from a working government email account, the sharpest example of a day in which impersonated authority and freshly disclosed developer-infrastructure flaws both paid off.",
+  "headline": "Russia's Sandworm group chained Cisco firewall flaws to spread a rebuilt Cyclops Blink botnet while Microsoft rushed emergency out-of-band updates to undo the Remote Desktop failures its record September patch caused.",
   "emerging_trends": [
     {
-      "text": "Criminals now borrow the authority of the state itself, writing to Revolut from a legitimate government email domain to pry loose customer passports while other crews stand up hundreds of counterfeit government websites across Central Asia to farm contact details for follow-up phone and email fraud.",
-      "topic_title": "Revolut and Telus Disclose Customer Data Theft",
-      "link_phrase": "Revolut",
+      "text": "Attackers keep going after the machinery that builds software: a maximum-severity GitLab path traversal bug now draws active exploitation, Red Heron scanned 1,386 Gitea servers before breaking into 13 organizations, and a third JFrog Artifactory flaw joins the chain that plants Rust backdoors on self-hosted build servers.",
+      "topic_title": "Red Heron Exploits Gitea RCE Across Six Countries",
+      "link_phrase": "Gitea",
       "_anchor": "trend-1"
     },
     {
-      "text": "Chinese operators convert newly disclosed developer-infrastructure bugs into campaigns within days, as Red Heron shows by scanning 1,386 Gitea instances and breaking into 13 organizations, a pattern that also runs through the JFrog Artifactory backdoors and the GitLab commits API flaw CISA cataloged this week.",
-      "topic_title": "Red Heron Exploits Gitea RCE Across Six Countries",
-      "link_phrase": "Red Heron",
+      "text": "Record patch volumes now carry their own cost—Microsoft closed roughly 972 flaws this month and Apple 261, and Microsoft then shipped emergency out-of-band updates after the September rollup knocked out Remote Desktop Services on Windows Server 2019, 2022, and 2025.",
+      "topic_title": "September Windows Updates Break Remote Desktop and USB Audio",
+      "link_phrase": "Remote Desktop",
       "_anchor": "trend-2"
     },
     {
-      "text": "The argument over who restrains AI reached governments today, with Dario Amodei asking the industry to slow frontier model improvement, Beijing's Ministry of Foreign Affairs answering his essay, and enterprise security leaders wrestling with agents that hold far more privilege than their tasks require.",
+      "text": "Dario Amodei asks the industry to slow frontier model improvement while China's Ministry of Foreign Affairs answers that all parties should work together, a standoff that leaves enterprises to write their own limits on over-privileged AI agents.",
       "topic_title": "Amodei Calls for Control as Beijing Answers",
-      "link_phrase": "Dario Amodei",
+      "link_phrase": "Amodei",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "September Windows Updates Break Remote Desktop and USB Audio",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Microsoft shipped emergency out-of-band Windows updates late on September 14, 2026 that repair the Remote Desktop Services failures its September security updates caused, along with Hyper-V faults and the USB audio breakage that followed the KB5124008 and KB5124012 updates.",
+      "summary": "The Remote Desktop failures block user connections on Windows Server 2019, 2022, and 2025, and some hosts recover only after a hard reset, fallout from a September rollup that fixed roughly 972 vulnerabilities. Administrators should install the out-of-band updates and retest remote access and audio hardware before they widen the September deployment.",
+      "tags": [
+        "patch",
+        "windows",
+        "outage"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft releases emergency Windows updates to fix RDS failures",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-emergency-windows-updates-to-fix-rds-failures/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft: September updates cause RDS failures on Windows Server",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-september-updates-cause-rds-failures-on-windows-server/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft: September updates break audio on some Windows PCs",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-september-updates-break-audio-on-some-windows-pcs/"
+        },
+        {
+          "source": "Schneier on Security",
+          "title": "Microsoft's Patching",
+          "url": "https://www.schneier.com/blog/archives/2026/09/microsofts-patching.html"
+        }
+      ],
+      "_anchor": "i-681dd1c55a"
+    },
     {
       "title": "Revolut and Telus Disclose Customer Data Theft",
       "area": "Data Breaches",
@@ -91,33 +125,33 @@
       "_anchor": "i-f0e2e2ddc7"
     },
     {
-      "title": "September Windows Updates Break Remote Desktop and USB Audio",
+      "title": "Third JFrog Artifactory Flaw Joins Backdoor Campaign",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Microsoft confirmed on September 14, 2026 that its September 2026 security updates knock out Remote Desktop Services on Windows Server, matching four days of administrator reports, and acknowledged a second regression in which USB audio devices fail after the KB5124008 and KB5124012 updates.",
-      "summary": "The Remote Desktop failures block user connections on Windows Server 2019, 2022, and 2025, and some hosts recover only after a hard reset. Administrators running the September rollup should test remote access and audio hardware before broad deployment and watch Microsoft's release health dashboard for the fixes.",
+      "latest_developments": "SecurityWeek reported on September 14, 2026 that attackers chain three JFrog Artifactory vulnerabilities, one more than the pair CISA cataloged on September 11, to bypass authentication and raise their privileges to administrator before planting a backdoor, and CISA warned the same day that hackers now exploit CVE-2026-85706, the 10.0-rated path traversal flaw that reaches both GitLab Community Edition and Enterprise Edition.",
+      "summary": "CISA already lists the incorrect authorization bug CVE-2026-42016 and the improper authentication bug CVE-2026-42018 as actively exploited, and Wiz dated the campaign against self-hosted Artifactory servers from August 15 through September 8, 2026, finding it reached only operators who had skipped JFrog's earlier fixes. Anyone running Artifactory or self-managed GitLab should install every available update and hunt for a Rust backdoor and unfamiliar administrator accounts.",
       "tags": [
+        "exploited",
         "patch",
-        "windows",
-        "outage"
+        "supply chain"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "Microsoft: September updates cause RDS failures on Windows Server",
-          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-september-updates-cause-rds-failures-on-windows-server/"
+          "source": "SecurityWeek",
+          "title": "Three JFrog Artifactory Flaws Exploited for Backdoor Deployment",
+          "url": "https://www.securityweek.com/three-jfrog-artifactory-flaws-exploited-for-backdoor-deployment/"
         },
         {
           "source": "BleepingComputer",
-          "title": "Microsoft: September updates break audio on some Windows PCs",
-          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-september-updates-break-audio-on-some-windows-pcs/"
+          "title": "CISA: Hackers now exploit max severity GitLab flaw in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-hackers-now-exploit-max-severity-gitlab-flaw-in-attacks/"
         },
         {
-          "source": "Schneier on Security",
-          "title": "Microsoft's Patching",
-          "url": "https://www.schneier.com/blog/archives/2026/09/microsofts-patching.html"
+          "source": "Dark Reading",
+          "title": "Maximum Severity GitLab Flaw Puts Supply Chains at Risk",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/maximum-severity-gitlab-flaw-supply-chains-risk"
         }
       ],
-      "_anchor": "i-9320ab73ea"
+      "_anchor": "i-70a6380aa2"
     },
     {
       "title": "Deepfake Sites Target More Than 100 European Politicians",
@@ -149,28 +183,28 @@
       "_anchor": "i-8e13836cf4"
     },
     {
-      "title": "Third JFrog Artifactory Flaw Joins Backdoor Campaign",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SecurityWeek reported on September 14, 2026 that attackers chain three JFrog Artifactory vulnerabilities, one more than the pair CISA cataloged on September 11, to bypass authentication and raise their privileges to administrator before planting a backdoor.",
-      "summary": "CISA already lists the incorrect authorization bug CVE-2026-42016 and the improper authentication bug CVE-2026-42018 as actively exploited, and Wiz dated the campaign against self-hosted Artifactory servers from August 15 through September 8, 2026, finding it reached only operators who had skipped JFrog's earlier fixes. Anyone running Artifactory on their own hardware should install every available update and hunt for a Rust backdoor and unfamiliar administrator accounts.",
+      "title": "Sandworm Chains Cisco Flaws to Deploy Cyclops Blink",
+      "area": "Nation-State Activity",
+      "latest_developments": "Dark Reading named the operator on September 14, 2026: Russia's Sandworm group chains Cisco Secure Firewall Management Center vulnerabilities to spread an upgraded Cyclops Blink, the botnet malware the FBI disrupted in 2022, and CISA added a separate Cisco Secure Email Gateway SQL injection flaw, CVE-2026-76461, to its Known Exploited Vulnerabilities catalog the same day.",
+      "summary": "Three intrusion clusters exploit CVE-2026-20079, the 10.0-rated authentication bypass in the Secure Firewall Management Center web interface, and CVE-2026-20316, stealing credentials and in some cases deploying Qilin ransomware. Anyone running Secure Firewall Management Center or Secure Email Gateway should patch now, rotate device credentials, and hunt for modular implants that survive reboots.",
       "tags": [
+        "apt",
         "exploited",
-        "patch",
-        "supply chain"
+        "botnet"
       ],
       "sources": [
         {
-          "source": "SecurityWeek",
-          "title": "Three JFrog Artifactory Flaws Exploited for Backdoor Deployment",
-          "url": "https://www.securityweek.com/three-jfrog-artifactory-flaws-exploited-for-backdoor-deployment/"
+          "source": "Dark Reading",
+          "title": "'Sandworm' Chains Cisco Vulnerabilities to Deploy Cyclops Blink",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/sandworm-chains-cisco-vulnerabilities-cyclops-blink"
         },
         {
-          "source": "BleepingComputer",
-          "title": "CISA: Hackers now exploit max severity GitLab flaw in attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/cisa-hackers-now-exploit-max-severity-gitlab-flaw-in-attacks/"
+          "source": "CISA Advisories",
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/09/14/cisa-adds-one-known-exploited-vulnerability-catalog"
         }
       ],
-      "_anchor": "i-70a6380aa2"
+      "_anchor": "i-2084a36d33"
     },
     {
       "title": "Chinese Hackers Ride Sogou Flaw to GrayRabbit",
@@ -257,44 +291,25 @@
         }
       ],
       "_anchor": "i-4c252b58ec"
-    },
-    {
-      "title": "ENISA Opens the Cyber Resilience Act Reporting Portal",
-      "area": "Policy and Regulation",
-      "latest_developments": "The EU Agency for Cybersecurity switched on the Cyber Resilience Act's Single Reporting Platform on September 11, 2026, the day the law's reporting duties began binding manufacturers, and now runs the portal day to day under Article 16(1) of the act.",
-      "summary": "Any company placing a product with digital elements on the European Union market reports actively exploited vulnerabilities and severe incidents through that single portal, and the act gives 24 hours from discovery to notify authorities. Product and legal teams selling into the European Union should register with the platform and rehearse the one-day clock.",
-      "tags": [
-        "policy",
-        "eu",
-        "disclosure"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "ENISA launched the CRA Single Reporting Platform for actively exploited vulnerabilities",
-          "url": "https://www.helpnetsecurity.com/2026/09/14/enisa-cra-single-reporting-platform/"
-        }
-      ],
-      "_anchor": "i-d352b0012f"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,655.43",
-      "pct": "-0.4%",
+      "value": "7,635.71",
+      "pct": "-0.7%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "52,643.67",
-      "pct": "-1.1%",
+      "value": "52,445.06",
+      "pct": "-1.5%",
       "arrow": "▼"
     },
     {
       "label": "Nasdaq",
-      "value": "26,319.30",
-      "pct": "-0.1%",
+      "value": "26,255.18",
+      "pct": "-0.4%",
       "arrow": "▼"
     },
     {
@@ -305,27 +320,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1623",
-      "pct": "+0.2%",
+      "value": "1.1619",
+      "pct": "+0.1%",
       "arrow": "▲"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3534",
+      "value": "1.3536",
       "pct": "+0.1%",
       "arrow": "▲"
     },
     {
       "label": "USD/JPY",
-      "value": "154.32",
-      "pct": "-2.9%",
+      "value": "153.76",
+      "pct": "-2.8%",
       "arrow": "▼"
     }
   ],
   "weather": [
-    "This Afternoon: Sunny, high 72F.",
     "Tonight: Partly Cloudy, low 52F.",
-    "Tuesday: Mostly Sunny, high 83F."
+    "Tuesday: Mostly Sunny, high 83F.",
+    "Tuesday Night: Mostly Clear, low 62F."
   ],
   "sports": [
     {
@@ -392,11 +407,11 @@
       },
       {
         "title": "Oil Reaches $108 as Riyadh Quits the Hormuz Talks",
-        "latest_developments": "Brent held at $109 a barrel Monday, September 14, with Saudi Arabia racing to repair the drone-damaged East-West pipeline, Houthi forces seizing two more strategic Red Sea islands, and Riyadh out of the regional talks to de-escalate the Strait of Hormuz standoff.",
-        "summary": "The East-West line carries crude from Saudi Arabia's eastern fields to the Red Sea and served as the main workaround for the blocked Strait of Hormuz. Houthi fighters now hold the Bab al-Mandeb chokepoint as well, putting both of the region's vital energy corridors under the sway of Iran and its allies, and gas traders have moved to pricing an outage that runs through the winter.",
+        "latest_developments": "Crude futures settled higher again Monday, September 14, with Brent near $109, and Chevron Chief Executive Mike Wirth and other oil executives declared the great fuel crisis already here while Trump administration officials called the disruption temporary.",
+        "summary": "Saudi Arabia's drone-damaged East-West pipeline carries crude from the kingdom's eastern fields to the Red Sea and served as the main workaround for the blocked Strait of Hormuz, and Riyadh has now walked out of the regional talks to de-escalate the standoff. Houthi fighters hold the Bab al-Mandeb chokepoint as well, putting both of the region's vital energy corridors under the sway of Iran and its allies.",
         "sources": [
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "Oil hits $109 after Saudi Arabia closes vital export pipeline",
             "url": "https://www.ft.com/content/4845a503-3ddd-4bb7-a469-c51f275bc873?syn-25a6b1a6=1"
           },
@@ -409,14 +424,24 @@
             "source": "FT World",
             "title": "The Saudi relief valve is being closed",
             "url": "https://www.ft.com/content/bdc77254-e491-4d9f-8537-6f04317d037f?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "Oil Executives Say the Great Fuel Crisis Is Here",
+            "url": "https://www.wsj.com/business/energy-oil/oil-executives-say-the-great-fuel-crisis-is-here-b6b32030?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Oil Rises on Concerns of Extended Middle East Disruptions",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-prices-rise-backing-case-for-rate-hikes-0a17cda4?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-11a141af03"
       },
       {
         "title": "Warsh Faces Trump Over Wednesday's Rate Increase",
-        "latest_developments": "The 10-year Treasury yield touched 5% Monday, September 14, the first time since 2023, and the dollar strengthened and gold fell as traders positioned for Federal Reserve Chair Kevin Warsh to raise rates Wednesday over President Trump's objections.",
-        "summary": "The Federal Reserve meets September 16 and the Bank of Japan follows September 18, with both expected to tighten, the Fed for the first time in years. Mohamed El-Erian argues that Treasury Secretary Scott Bessent has misdiagnosed the bond selloff as a passing fever, and Bank of Japan Governor Kazuo Ueda faces competing pressure from Tokyo and Washington.",
+        "latest_developments": "The 10-year Treasury yield touched 5% Monday, September 14, the first time since 2023, then eased back by the close, while Germany's 10-year Bund yield reached a 15-year high and Wall Street weighed whether borrowing costs now settle into a new era.",
+        "summary": "The Federal Reserve meets September 16 and the Bank of Japan follows September 18, with both expected to tighten, the Fed for the first time in years, and Chair Kevin Warsh raises rates over President Trump's objections. Mohamed El-Erian argues that Treasury Secretary Scott Bessent has misdiagnosed the bond selloff as a passing fever, and Bank of Japan Governor Kazuo Ueda faces competing pressure from Tokyo and Washington.",
         "sources": [
           {
             "source": "FT Home",
@@ -453,8 +478,8 @@
       },
       {
         "title": "A Call to Slow AI Knocks Down Tech Shares Worldwide",
-        "latest_developments": "Memory-chip makers and Nvidia led a global selloff Monday, September 14, after Anthropic Chief Executive Dario Amodei's weekend essay warning against a race to the bottom in model development, though the Nasdaq pared its early losses through the session as Steve Bannon and Senator Bernie Sanders joined to demand stronger regulation and Congress began weighing its own response.",
-        "summary": "Anthropic, the maker of Claude, told investors it expects a second straight profitable quarter as it prepares an initial public offering that could value it near $2 trillion. Its schism with OpenAI has driven the industry's sprint toward ever more powerful systems, and the market read Amodei's plea for restraint as a threat to the earnings the buildout promises.",
+        "latest_developments": "President Trump dismissed the AI warnings as a hoax Monday, September 14, saying the industry already carries enough regulation and needs only a smart president, hours after memory-chip makers and Nvidia led a global selloff touched off by Anthropic Chief Executive Dario Amodei's weekend essay against a race to the bottom in model development.",
+        "summary": "Steve Bannon and Senator Bernie Sanders joined to demand stronger regulation as Congress began weighing its own response, and the Nasdaq pared its early losses through the session. Anthropic, the maker of Claude, told investors it expects a second straight profitable quarter as it prepares an initial public offering that could value it near $2 trillion, and the market read Amodei's plea for restraint as a threat to the earnings the buildout promises.",
         "sources": [
           {
             "source": "FT Home",
@@ -480,12 +505,43 @@
             "source": "The Economist",
             "title": "Should Anthropic press pause on a potential $2trn IPO?",
             "url": "https://www.economist.com/business/2026/09/14/should-anthropic-press-pause-on-a-potential-2trn-ipo"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Trump Pushes Back on the Need for More AI Regulations",
+            "url": "https://www.wsj.com/business/trump-pushes-back-on-the-need-for-more-ai-regulations-87824234?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-97ebdb92af"
       }
     ],
     "business": [
+      {
+        "title": "New Owners Take Over Penn Brewery",
+        "latest_developments": "WTAE reported Monday, September 14, that a new ownership team will run Penn Brewery, the Pittsburgh brewer that filed for bankruptcy earlier this year.",
+        "summary": "Penn Brewery makes German-style beer in Pittsburgh and has operated under the bankruptcy filing since earlier in 2026. The change settles who controls the brewery and its taproom going forward.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "New ownership team for Penn Brewery revealed",
+            "url": "https://www.wtae.com/article/penn-brewery-owners-pittsburgh-beer/73728363"
+          }
+        ],
+        "_anchor": "i-473c90dbe0"
+      },
+      {
+        "title": "Homer City Superloads Start Rolling Wednesday",
+        "latest_developments": "TribLive reported Monday, September 14, that superload deliveries from the Armstrong Terminals in Gilpin to the data center project near Homer City in Indiana County will begin Wednesday, September 16, after the hauls slipped past their announced start last week.",
+        "summary": "The oversized trucks carry turbines and other equipment weighing as much as 380 tons to the Homer City Energy Campus, where more than 1,800 construction workers are building a data center on the site of a retired coal plant. The convoys will slow traffic on roads across Armstrong, Westmoreland, and Indiana counties for months.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "After multiple delays, superload delivery to Homer City data center to begin Wednesday",
+            "url": "https://triblive.com/local/valley-news-dispatch/after-multiple-delays-superload-delivery-to-homer-city-data-center-to-begin-wednesday/"
+          }
+        ],
+        "_anchor": "i-8c99c5da05"
+      },
       {
         "title": "Woda Cooper Gets $4.85 Million From the URA",
         "latest_developments": "The Urban Redevelopment Authority board voted 4-0, with one member absent, to approve two loans totaling $4.85 million for Woda Cooper Cos.' next conversion of a downtown Pittsburgh building into apartments, WPXI reported Monday, September 14.",
@@ -566,6 +622,45 @@
       }
     ],
     "around_town": [
+      {
+        "title": "PRT Closes the Downtown Light Rail This Weekend",
+        "latest_developments": "TribLive reported Monday, September 14, that Pittsburgh Regional Transit will shut its light rail line between the First Avenue and Steel Plaza stations this weekend for maintenance.",
+        "summary": "Those two stations sit on the downtown stretch that carries PRT's light rail riders between the South Hills and the North Shore. The closure takes that segment out of service for the weekend.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "PRT to close stretch of Downtown light rail this weekend",
+            "url": "https://triblive.com/local/prt-to-close-stretch-of-downtown-light-rail-this-weekend/"
+          }
+        ],
+        "_anchor": "i-defa333429"
+      },
+      {
+        "title": "Eradicate Hate Summit Puts Young People Onstage",
+        "latest_developments": "The Eradicate Hate Global Summit opened in Pittsburgh this week with young people leading much of the program, KDKA reported Monday, September 14.",
+        "summary": "The summit gathers researchers, educators, law enforcement, and advocates from around the world each year in Pittsburgh to work on reducing the influence of hate. This year's agenda hands the main stage to youth participants.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Young people take center stage at Eradicate Hate Global Summit in Pittsburgh",
+            "url": "https://www.cbsnews.com/pittsburgh/news/eradicate-hate-summit-2026/"
+          }
+        ],
+        "_anchor": "i-e516876114"
+      },
+      {
+        "title": "Oakmont Carnegie Library Reopens Its Main Level",
+        "latest_developments": "The Oakmont Carnegie Library welcomed visitors back to its main level Monday, September 14, after flood damage closed the building for nearly a week.",
+        "summary": "Storms the week of September 1 ruined walls, flooring, and electrical systems at the borough library in Oakmont, Allegheny County, and crews have worked on the cleanup since. The rest of the building stays closed.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Oakmont Carnegie Library partially reopens Monday after flooding",
+            "url": "https://triblive.com/local/valley-news-dispatch/oakmont-carnegie-library-partially-reopens-monday-after-flooding/"
+          }
+        ],
+        "_anchor": "i-239789a7ee"
+      },
       {
         "title": "EPA Scraps Power Plant Carbon Limits",
         "latest_developments": "The Environmental Protection Agency moved Monday, September 14, to repeal the rules limiting greenhouse gas emissions from power plants burning coal and natural gas.",
@@ -664,7 +759,7 @@
       },
       {
         "title": "A Cool, Clear Start to the Week",
-        "latest_developments": "WTAE forecast a comfortable, bright Monday, September 14, across Western Pennsylvania behind Sunday's storm line, with warmth and humidity building back by midweek.",
+        "latest_developments": "WTAE and WPXI forecast Monday evening, September 14, another fall-like morning Tuesday with temperatures in the upper 40s and low 50s, then warmth and humidity building back toward an Impact Day later this week.",
         "summary": "A cold front swept the region Sunday with damaging wind, hail, and heavy rain through Allegheny, Butler, and Beaver counties. The break in the heat lasts only a couple of days.",
         "sources": [
           {
@@ -676,6 +771,11 @@
             "source": "WTAE",
             "title": "Western Pennsylvania gets brief fall cool down after Sunday storms",
             "url": "https://www.wtae.com/article/severe-thunderstorm-warning-in-effect-for-parts-of-western-pennsylvania/73711106"
+          },
+          {
+            "source": "WPXI",
+            "title": "Fall-like temperatures return Tuesday",
+            "url": "https://www.wpxi.com/news/local/fall-like-temperatures-return-tuesday/RFSLSNMBFBA47HWKZOZM2JMO44/"
           }
         ],
         "_anchor": "i-710db17a6f"
@@ -697,6 +797,60 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "The Offense Leaves Plays on the Field",
+        "latest_developments": "The Post-Gazette reported Monday, September 14, that the Steelers offense, hemmed in by penalties and missed chances in the opener, believes it sits close to connecting on the big plays it drew up for Aaron Rodgers and DK Metcalf.",
+        "summary": "Head coach Mike McCarthy built this offense around Rodgers, Metcalf, and Michael Pittman, and the defense carried the Week 1 win over the Atlanta Falcons. The unit gets its next test at the New England Patriots.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Despite missed opportunities, the Steelers offense doesn't think it's far from hitting on big plays",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/14/offense-penalties-dk-metcalf-aaron-rodgers/stories/202609140021"
+          }
+        ],
+        "_anchor": "i-34a0c6f042"
+      },
+      {
+        "title": "McCarthy Turns to New England",
+        "latest_developments": "Head coach Mike McCarthy met the media Monday, September 14, on the Steelers' channel to open preparation for Week 2 at the New England Patriots, set for Sunday, September 20, at 1 p.m. ET on CBS.",
+        "summary": "McCarthy won his first game as Steelers head coach at Acrisure Stadium against the Atlanta Falcons and now takes the team on the road for the first time. The Post-Gazette's Christopher Carter also fielded reader questions on the Steelers and Pitt in his Monday chat.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Coach McCarthy Press Conference (Week 2 at New England Patriots) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=ZQ71kAuM-mE"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Christopher Carter's Steelers and Pitt chat transcript: 09.14.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/14/pittsburgh-football-analysis-panthers-steelers/stories/202609140020"
+          }
+        ],
+        "_anchor": "i-ab773465be"
+      },
+      {
+        "title": "The Bill for Porter's Standoff Comes Later",
+        "latest_developments": "Head coach Mike McCarthy declined Monday, September 14, to commit to any timeline for cornerback Joey Porter Jr. to play, a day after the Post-Gazette concluded the Steelers got through the opener without him and warned that his absence will start to hurt soon.",
+        "summary": "Porter sat out Sunday's game against the Atlanta Falcons with his contract unresolved, and sources told the Post-Gazette he is healthy enough to play. The Steelers travel to face the New England Patriots on Sunday.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers Week 1 analysis: Joey Porter Jr.'s absence wasn't felt on Sunday, but it could be soon",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/14/steelers-week1-analysis-joey-porter/stories/202609130095"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Joey Porter Jr. was ruled out for the Steelers' opener, but sources say he is healthy enough to play",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/13/joey-porter-contract-news/stories/202608300001"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Mike McCarthy won't commit to a timeline for Joey Porter Jr. to appear in a game for the Steelers",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/14/joey-porter-mike-mccarthy-contract-dispute/stories/202609140038"
+          }
+        ],
+        "_anchor": "i-26c400cd1b"
+      },
       {
         "title": "Greensboro's Prospects Carry a Playoff Run",
         "latest_developments": "The Post-Gazette's MiLB Monday column on September 14 reported that the Pirates' best young hitters, outfielder Edward Florentino among them, are driving a playoff run at the organization's Greensboro affiliate.",
@@ -722,24 +876,6 @@
           }
         ],
         "_anchor": "i-838f7c65d8"
-      },
-      {
-        "title": "The Bill for Porter's Standoff Comes Later",
-        "latest_developments": "The Post-Gazette's Week 1 analysis, published Monday, September 14, concluded that the Steelers got through the opener without cornerback Joey Porter Jr. and warned that his absence will start to hurt soon.",
-        "summary": "Porter sat out Sunday's game against the Atlanta Falcons with his contract unresolved, and sources told the Post-Gazette he is healthy enough to play. The Steelers travel to face the New England Patriots on Sunday.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "Steelers Week 1 analysis: Joey Porter Jr.'s absence wasn't felt on Sunday, but it could be soon",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/09/14/steelers-week1-analysis-joey-porter/stories/202609130095"
-          },
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "Joey Porter Jr. was ruled out for the Steelers' opener, but sources say he is healthy enough to play",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/09/13/joey-porter-contract-news/stories/202608300001"
-          }
-        ],
-        "_anchor": "i-26c400cd1b"
       },
       {
         "title": "Brisker's Hometown Debut",
@@ -855,161 +991,140 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Chinese crews weaponize fresh developer-infrastructure bugs within days, as Red Heron scans 1,386 Gitea servers, a third JFrog Artifactory flaw joins backdoor chains, and Sogou carries espionage.",
+      "text": "Attackers keep targeting developer infrastructure, with Red Heron scanning 1,386 Gitea servers, a third JFrog Artifactory flaw planting Rust backdoors, and ConnectWise patching a wormable ScreenConnect bug.",
       "links": [
         {
           "anchor": "i-8cbdb00573",
           "phrase": "Red Heron",
-          "start": 76,
-          "end": 85,
+          "start": 56,
+          "end": 65,
           "title": "Red Heron Exploits Gitea RCE Across Six Countries"
         },
         {
           "anchor": "i-70a6380aa2",
           "phrase": "JFrog Artifactory",
-          "start": 121,
-          "end": 138,
+          "start": 104,
+          "end": 121,
           "title": "Third JFrog Artifactory Flaw Joins Backdoor Campaign"
         },
         {
-          "anchor": "i-c14a0b6c9e",
-          "phrase": "Sogou",
-          "start": 171,
-          "end": 176,
-          "title": "Chinese Hackers Ride Sogou Flaw to GrayRabbit"
+          "anchor": "i-4c252b58ec",
+          "phrase": "ConnectWise",
+          "start": 156,
+          "end": 167,
+          "title": "ConnectWise Patches Wormable ScreenConnect Flaw"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Dario Amodei's call to slow frontier models drew a reply from Beijing, knocked down Nvidia and memory-chip shares worldwide, and drew Ben Thompson's charge of political control.",
+      "text": "Dario Amodei's call to slow the AI frontier drew a Beijing reply, a global selloff led by Nvidia, and Ben Thompson's rebuttal reading it as a control play.",
       "links": [
         {
           "anchor": "i-f0e2e2ddc7",
-          "phrase": "Dario Amodei",
-          "start": 0,
+          "phrase": "Amodei",
+          "start": 6,
           "end": 12,
           "title": "Amodei Calls for Control as Beijing Answers"
         },
         {
           "anchor": "i-97ebdb92af",
           "phrase": "Nvidia",
-          "start": 84,
-          "end": 90,
+          "start": 90,
+          "end": 96,
           "title": "A Call to Slow AI Knocks Down Tech Shares Worldwide"
         },
         {
           "anchor": "i-6c6638a31a",
           "phrase": "Ben Thompson",
-          "start": 134,
-          "end": 146,
+          "start": 102,
+          "end": 114,
           "title": "Pacing the Frontier, AI's Digital Limits, AI Commissars"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Fraudsters borrowed state authority to pry Revolut passports loose from a working government email account, while Alvin Bragg seized 12 deepfake sites carrying imagery of 1,200 people.",
+      "kind": "Update",
+      "status": "new",
+      "text": "Russia's Sandworm is now named as the operator chaining Cisco Secure Firewall flaws to spread an upgraded Cyclops Blink, while China-aligned crews ride a Sogou bug to GrayRabbit.",
       "links": [
         {
-          "anchor": "i-12626361ed",
-          "phrase": "Revolut",
-          "start": 43,
-          "end": 50,
-          "title": "Revolut and Telus Disclose Customer Data Theft"
+          "anchor": "i-2084a36d33",
+          "phrase": "Sandworm",
+          "start": 9,
+          "end": 17,
+          "title": "Sandworm Chains Cisco Flaws to Deploy Cyclops Blink"
         },
         {
-          "anchor": "i-8e13836cf4",
-          "phrase": "deepfake sites",
-          "start": 136,
-          "end": 150,
-          "title": "Deepfake Sites Target More Than 100 European Politicians"
+          "anchor": "i-c14a0b6c9e",
+          "phrase": "Sogou",
+          "start": 154,
+          "end": 159,
+          "title": "Chinese Hackers Ride Sogou Flaw to GrayRabbit"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "Trump said Kyiv and Moscow agreed to spare energy infrastructure as Brent held near $109 with Riyadh out of Hormuz talks and Warsh weighing Wednesday's rate increase.",
+      "status": "updated",
+      "text": "Microsoft shipped emergency out-of-band Windows updates late Monday repairing the Remote Desktop Services, Hyper-V, and USB audio failures that its September security rollup caused.",
       "links": [
         {
-          "anchor": "i-0f7ae5eea4",
-          "phrase": "Kyiv and Moscow",
-          "start": 11,
-          "end": 26,
-          "title": "Trump Says Kyiv and Moscow Agreed to an Energy Truce"
-        },
-        {
-          "anchor": "i-11a141af03",
-          "phrase": "Riyadh",
-          "start": 94,
-          "end": 100,
-          "title": "Oil Reaches $108 as Riyadh Quits the Hormuz Talks"
-        },
-        {
-          "anchor": "i-a67f0fad4e",
-          "phrase": "Warsh",
-          "start": 125,
-          "end": 130,
-          "title": "Warsh Faces Trump Over Wednesday's Rate Increase"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Pennsylvania logged its third measles death, Harrisburg cleared Penn State to sell closing campuses, the EPA moved to repeal power plant carbon limits, and Alcoa courts data centers.",
-      "links": [
-        {
-          "anchor": "i-60a0c6c3ac",
-          "phrase": "measles death",
-          "start": 30,
-          "end": 43,
-          "title": "Measles Deaths Reach Three in Pennsylvania"
-        },
-        {
-          "anchor": "i-f157a31a61",
-          "phrase": "Penn State",
-          "start": 64,
-          "end": 74,
-          "title": "Penn State Clears the Way to Sell Campuses"
-        },
-        {
-          "anchor": "i-75119fba10",
-          "phrase": "EPA",
-          "start": 105,
-          "end": 108,
-          "title": "EPA Scraps Power Plant Carbon Limits"
-        },
-        {
-          "anchor": "i-6228f7504e",
-          "phrase": "Alcoa",
-          "start": 156,
-          "end": 161,
-          "title": "Alcoa Nears a Data Center Sale"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Vendor fixes trail their own disclosures, with ConnectWise only now patching a wormable ScreenConnect file-transfer hole and Microsoft's September updates breaking Remote Desktop and USB audio.",
-      "links": [
-        {
-          "anchor": "i-4c252b58ec",
-          "phrase": "ConnectWise",
-          "start": 47,
-          "end": 58,
-          "title": "ConnectWise Patches Wormable ScreenConnect Flaw"
-        },
-        {
-          "anchor": "i-9320ab73ea",
+          "anchor": "i-681dd1c55a",
           "phrase": "Remote Desktop",
-          "start": 164,
-          "end": 178,
+          "start": 82,
+          "end": 96,
           "title": "September Windows Updates Break Remote Desktop and USB Audio"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "New owners take over Penn Brewery, superloads start rolling Wednesday toward the Homer City data center, and PRT shuts the downtown light rail this weekend.",
+      "links": [
+        {
+          "anchor": "i-473c90dbe0",
+          "phrase": "Penn Brewery",
+          "start": 21,
+          "end": 33,
+          "title": "New Owners Take Over Penn Brewery"
+        },
+        {
+          "anchor": "i-8c99c5da05",
+          "phrase": "Homer City",
+          "start": 81,
+          "end": 91,
+          "title": "Homer City Superloads Start Rolling Wednesday"
+        },
+        {
+          "anchor": "i-defa333429",
+          "phrase": "PRT",
+          "start": 109,
+          "end": 112,
+          "title": "PRT Closes the Downtown Light Rail This Weekend"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Mike McCarthy opened preparation for the Patriots without committing to any return date for cornerback Joey Porter Jr., whose absence the Post-Gazette expects to cost Pittsburgh later.",
+      "links": [
+        {
+          "anchor": "i-ab773465be",
+          "phrase": "Patriots",
+          "start": 41,
+          "end": 49,
+          "title": "McCarthy Turns to New England"
+        },
+        {
+          "anchor": "i-26c400cd1b",
+          "phrase": "Joey Porter",
+          "start": 103,
+          "end": 114,
+          "title": "The Bill for Porter's Standoff Comes Later"
         }
       ]
     }
@@ -1023,11 +1138,10 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 48,
+        "in_window": 61,
         "failed": [],
         "empty": [
           "Krebs on Security",
-          "CISA Advisories",
           "Ars Technica Security",
           "Securelist (Kaspersky)",
           "Google Online Security Blog",
@@ -1042,13 +1156,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 8,
+            "contributed": 8
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 12,
+            "contributed": 12
           },
           "Krebs on Security": {
             "items": 10,
@@ -1057,13 +1171,13 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 3,
+            "contributed": 3
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 3
           },
           "SecurityWeek": {
             "items": 10,
@@ -1072,13 +1186,13 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "The Record": {
             "items": 5,
@@ -1102,8 +1216,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -1177,12 +1291,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 13
+            "contributed": 14
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 9
+            "contributed": 7
           },
           "PublicSource": {
             "items": 10,
@@ -1202,17 +1316,17 @@
           "Pittsburgh Magazine": {
             "items": 30,
             "in_window": 3,
-            "contributed": 3
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 8
+            "contributed": 14
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 11
+            "contributed": 9
           },
           "WTAE": {
             "items": 20,
@@ -1232,34 +1346,34 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 72,
+            "items": 73,
             "in_window": 20,
             "contributed": 7
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 21,
+            "in_window": 26,
             "contributed": 12
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 28,
-            "contributed": 11
+            "in_window": 35,
+            "contributed": 10
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 8,
-            "contributed": 0
+            "in_window": 9,
+            "contributed": 2
           },
           "The Economist": {
             "items": 300,
             "in_window": 15,
-            "contributed": 5
+            "contributed": 6
           },
           "FT Home": {
-            "items": 12,
-            "in_window": 12,
-            "contributed": 8
+            "items": 10,
+            "in_window": 10,
+            "contributed": 7
           },
           "FT World": {
             "items": 25,
@@ -1269,7 +1383,7 @@
           "FT Markets": {
             "items": 25,
             "in_window": 20,
-            "contributed": 2
+            "contributed": 1
           }
         }
       },
@@ -1328,7 +1442,7 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 5,
+            "in_window": 4,
             "contributed": 2
           },
           "Pittsburgh Steelers (YouTube)": {
@@ -1343,12 +1457,12 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 10,
+            "in_window": 9,
             "contributed": 3
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 17,
+            "in_window": 18,
             "contributed": 10
           }
         }
@@ -1359,16 +1473,16 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 28,
+        "in_window": 26,
         "failed": [],
         "empty": [
           "Guardian Olympics"
         ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 18,
-            "in_window": 18,
-            "contributed": 18
+            "items": 16,
+            "in_window": 16,
+            "contributed": 16
           },
           "ESPN Olympics": {
             "items": 25,
@@ -1434,24 +1548,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 33727,
+          "outputTokens": 38029,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 117284,
+          "cacheCreationInputTokens": 126416,
           "webSearchRequests": 0,
-          "costUSD": 2.0160449999999996,
+          "costUSD": 2.214915,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14712
+          "thinkingTokens": 15511
         }
       },
-      "cost_usd": 2.0160449999999996,
-      "duration_ms": 372257,
+      "cost_usd": 2.214915,
+      "duration_ms": 409895,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-14 13:36 EDT",
-    "items_considered": 48,
+    "generated_at": "2026-09-14 19:37 EDT",
+    "items_considered": 61,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1532,8 +1646,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.016,
-    "model_duration_ms": 372257,
+    "model_cost_usd": 2.2149,
+    "model_duration_ms": 409895,
     "local_from": null,
     "feed_failures": []
   }
