@@ -1,0 +1,1234 @@
+{
+  "date": "2026-09-18",
+  "headline": "Researchers found a single zero-click remote code execution flaw sitting inside Claude Code, Codex, GitHub Copilot, and Gemini CLI, the first supply-chain break in the AI agent ecosystem, and two of the four agents still carry it.",
+  "emerging_trends": [
+    {
+      "text": "The plumbing beneath AI agents—plugin marketplaces, MCP configuration files checked into GitHub, and the credential vault in Amazon's AgentCore Harness—has become the soft target, because each one hands an attacker the same reach as the employee running the agent.",
+      "topic_title": "Plugin4Shell Opens Four AI Coding Agents",
+      "link_phrase": "plugin marketplaces",
+      "_anchor": "trend-1"
+    },
+    {
+      "text": "Large language models now write and drive the malware itself: verbose comments, placeholder code, and token statistics in the PhantomRaven stealer point to machine authorship, and the RatHat Android trojan carries an AI subsystem that navigates infected phones for its operators.",
+      "topic_title": "LLM-Written Stealers Ride npm Packages",
+      "link_phrase": "PhantomRaven",
+      "_anchor": "trend-2"
+    },
+    {
+      "text": "CISA killed its weekly vulnerability roundup for risk-based triage the same week unauthenticated root-level bugs surfaced in Check Point management servers, Orkes Conductor, and Docker Sandboxes, leaving defenders to separate ugly severity scores from real exploitation on their own.",
+      "topic_title": "Check Point Management Servers Yield Root",
+      "link_phrase": "Check Point",
+      "_anchor": "trend-3"
+    }
+  ],
+  "topics": [
+    {
+      "title": "Check Point Management Servers Yield Root",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Check Point Software shipped a fix through its LivePatch channel for a critical flaw that lets an attacker with no credentials run code as root over the network on Security Management and Log Servers, and says it sees no sign of exploitation; Kaspersky and Tanium patched product flaws the same day, and Microsoft closed 18 vulnerabilities across Azure and its AI-branded products, most of them privilege escalation.",
+      "summary": "The Security Management Server controls firewall policy and administrator access, so root on that box hands an intruder the rules governing every gateway it manages. Check Point customers should take the LivePatch update immediately.",
+      "tags": [
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "New Check Point flaw lets hackers execute code with root privileges",
+          "url": "https://www.bleepingcomputer.com/news/security/check-point-warns-critical-flaw-lets-hackers-execute-code-as-root/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Critical Check Point Management Flaw Lets Unauthenticated Attackers Run Code as Root",
+          "url": "https://thehackernews.com/2026/09/critical-check-point-management-server.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Check Point, Kaspersky, Tanium Patch Product Vulnerabilities",
+          "url": "https://www.securityweek.com/check-point-kaspersky-tanium-patch-product-vulnerabilities/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Microsoft Patches 18 Vulnerabilities in AI, Cloud Products",
+          "url": "https://www.securityweek.com/microsoft-patches-18-vulnerabilities-in-ai-cloud-products/"
+        }
+      ],
+      "_anchor": "i-46d085b9d4"
+    },
+    {
+      "title": "Plugin4Shell Opens Four AI Coding Agents",
+      "area": "AI Security",
+      "latest_developments": "AIR researchers disclosed on September 18, 2026 that Claude Code, Codex, GitHub Copilot, and Gemini CLI all share one zero-click remote code execution flaw, which they call the first supply-chain vulnerability of the AI agent ecosystem, and two of the four agents remain unpatched.",
+      "summary": "Anyone whose coding agent installs plugins from a marketplace is exposed, and a successful attacker gains the same access to company systems and data as the employee running the agent. Palo Alto Networks' Unit 42 separately showed that default settings in Amazon's AgentCore Harness let prompt injection pull credentials out, and Hush Security found hardcoded API keys and access tokens in 12 percent of credential slots across roughly 82,000 public MCP configuration files on GitHub.",
+      "tags": [
+        "ai",
+        "supply-chain",
+        "zero-day"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Zero-click RCE vulnerability hit four major AI coding agents, two remain unpatched",
+          "url": "https://www.helpnetsecurity.com/2026/09/18/plugin4shell-ai-coding-agents-vulnerability/"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "A Vault with a Heap-View: The Uncomfortable Space Between AgentCore Harness and Identity",
+          "url": "https://unit42.paloaltonetworks.com/securing-aws-agentcore-harness-credentials/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Hardcoded MCP credentials found in public GitHub files",
+          "url": "https://www.helpnetsecurity.com/2026/09/18/hush-security-mcp-credential-exposure-report/"
+        }
+      ],
+      "_anchor": "i-96f5f817f6"
+    },
+    {
+      "title": "Attackers Exploit Orkes Conductor as Docker Sandboxes Leak macOS Hosts",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "SecurityWeek reported on September 18, 2026 that attackers exploit CVE-2026-58138 in Orkes Conductor, an unauthenticated remote code execution flaw they reach through inline workflow definitions, and Docker warned in a September 15 announcement that CVE-2026-77179, rated critical, lets malicious code inside a Docker Sandboxes virtual machine on macOS escape the shared project directory and read or change any file on the host.",
+      "summary": "Orkes Conductor orchestrates microservice workflows, and the flaw gives an unauthenticated caller code execution on the orchestrator. The Docker escape runs with the rights of the host account that started the virtual machine, collapsing the isolation developers rely on when they run untrusted code.",
+      "tags": [
+        "exploit",
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Critical Orkes Conductor Vulnerability Exploited in Attacks",
+          "url": "https://www.securityweek.com/critical-orkes-conductor-vulnerability-exploited-in-attacks/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Critical Docker Sandboxes Flaw Lets Malicious Guest Code Read and Modify macOS Host Files",
+          "url": "https://thehackernews.com/2026/09/critical-docker-sandboxes-flaw-lets.html"
+        }
+      ],
+      "_anchor": "i-b9492fd270"
+    },
+    {
+      "title": "LLM-Written Stealers Ride npm Packages",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "Researchers at OpenSourceMalware identified 13 npm packages delivering WeaselBiscuit, a previously undocumented JavaScript stealer that harvests Chrome extension storage and overlaps functionally with BeaverTail and a second strain from North Korea's Contagious Interview campaign; separately, analysts tied a financially motivated actor claiming to be a bug bounty hunter to the PhantomRaven stealer on npm and judged with high confidence that a large language model wrote it, citing verbose comments, placeholder code, and token-analysis patterns.",
+      "summary": "Both families reach developers through the npm registry and take browser-held credentials and wallet data off the machines that build software. Development teams should pin dependencies, audit recently added packages, and treat Chrome extension storage as credential material.",
+      "tags": [
+        "supply-chain",
+        "malware",
+        "apt"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "WeaselBiscuit Stealer Spreads via 13 npm Packages to Harvest Chrome Extension Storage",
+          "url": "https://thehackernews.com/2026/09/weaselbiscuit-stealer-spreads-via-13.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Claimed Bug Bounty Hunter Likely Used LLM to Build PhantomRaven npm Stealer",
+          "url": "https://thehackernews.com/2026/09/claimed-bug-bounty-hunter-likely-used.html"
+        }
+      ],
+      "_anchor": "i-a4aa43a628"
+    },
+    {
+      "title": "Brevo Attack Reaches 100,000 Websites",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "SecurityWeek put the count at 100,000 websites on September 18, 2026, and detailed the method: the attackers used the stolen Cloudflare API key to deploy a Cloudflare worker that injected the malicious scripts, a day after Brevo confirmed the theft.",
+      "summary": "Brevo, the French email marketing platform, lost a Cloudflare API key that attackers turned into ClickFix scripts running on its own sites and inside the JavaScript files its customers embed on theirs, making every one of those sites a malware distribution point. Site owners who load Brevo JavaScript should audit their pages and rotate anything the injected scripts could have touched.",
+      "tags": [
+        "supply-chain",
+        "malware",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Brevo Supply Chain Attack Injects Malware Into 100,000 Websites",
+          "url": "https://www.securityweek.com/brevo-supply-chain-attack-injects-malware-into-100000-websites/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Brevo supply-chain attack injected ClickFix scripts on customer sites",
+          "url": "https://www.bleepingcomputer.com/news/security/brevo-supply-chain-attack-injected-clickfix-scripts-on-customer-sites/"
+        }
+      ],
+      "_anchor": "i-408ef5d664"
+    },
+    {
+      "title": "RatHat Android Trojan Drives Phones With AI",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Researchers flagged RatHat on September 17, 2026, Android malware that China-based operators spread through targeted smishing and malvertising to deceptive third-party download portals, which carries an AI-powered subsystem that navigates and controls a compromised handset and abuses the Android Debug Bridge to keep shell access after the victim uninstalls the app.",
+      "summary": "The AI layer lets one operator work many phones at once without hand-driving each screen, and the ADB persistence survives the obvious remedy. Android users should install only from Google Play and check developer options for enabled debugging.",
+      "tags": [
+        "malware",
+        "mobile",
+        "ai"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "RatHat Android Malware Abuses ADB to Retain Shell Access After Uninstall",
+          "url": "https://thehackernews.com/2026/09/rathat-android-malware-abuses-adb-to.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "New RatHat Android malware uses AI to automate device control",
+          "url": "https://www.bleepingcomputer.com/news/security/new-rathat-android-malware-uses-ai-to-automate-device-control/"
+        }
+      ],
+      "_anchor": "i-09d722e777"
+    },
+    {
+      "title": "CISA Retires Its Weekly Vulnerability Bulletin",
+      "area": "Policy and Regulation",
+      "latest_developments": "The Cybersecurity and Infrastructure Security Agency ended its weekly vulnerability summary, the long-running roundup of newly published flaws, following Binding Operational Directive 26-04, which orders federal agencies to rank vulnerabilities by real-world risk instead of working down a list by severity score.",
+      "summary": "Federal agencies and the many private teams that read the bulletin lose a standing catalog of new CVEs and gain a mandate to prioritize what attackers actually exploit. Security teams that built processes around the weekly summary should shift to the Known Exploited Vulnerabilities catalog and exploitation telemetry.",
+      "tags": [
+        "policy",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "CISA Retires Weekly Vulnerability Bulletin in Risk-Based Pivot",
+          "url": "https://www.securityweek.com/cisa-retires-weekly-vulnerability-bulletin-in-risk-based-pivot/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "CISA Ditches Weekly Vulnerability Roundups for Risk-Based Focus",
+          "url": "https://www.darkreading.com/cyber-risk/cisa-ditches-weekly-vuln-roundups-risk-based-focus"
+        }
+      ],
+      "_anchor": "i-2779d67f47"
+    }
+  ],
+  "markets": [
+    {
+      "label": "S&P 500",
+      "value": "7,610.45",
+      "pct": "-0.8%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Dow",
+      "value": "52,065.51",
+      "pct": "-1.5%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "26,179.55",
+      "pct": "-0.7%",
+      "arrow": "▼"
+    },
+    {
+      "label": "WTI crude",
+      "value": "102.32",
+      "pct": "+7.9%",
+      "arrow": "▲"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1552",
+      "pct": "-0.6%",
+      "arrow": "▼"
+    },
+    {
+      "label": "GBP/USD",
+      "value": "1.3478",
+      "pct": "-0.4%",
+      "arrow": "▼"
+    },
+    {
+      "label": "USD/JPY",
+      "value": "154.71",
+      "pct": "+0.1%",
+      "arrow": "▲"
+    }
+  ],
+  "weather": [
+    "Today: Mostly Cloudy, high 78F.",
+    "Tonight: Partly Cloudy, low 58F.",
+    "Saturday: Partly Sunny, high 78F."
+  ],
+  "sports": [
+    {
+      "team": "Pirates",
+      "record": "76-77",
+      "games": [
+        {
+          "date": "Thu Sep 17",
+          "result": "Brewers 4 · Pirates 7 · Final",
+          "url": "https://plaintextsports.com/mlb/2026-09-17/mil-pit",
+          "recap": ""
+        }
+      ],
+      "next": {
+        "matchup": "Royals @ Pirates",
+        "when": "Fri Sep 18, 6:40 PM",
+        "url": "https://plaintextsports.com/mlb/2026/teams/pittsburgh-pirates"
+      },
+      "source": "plaintextsports"
+    },
+    {
+      "team": "Steelers",
+      "record": "1-0, T-1st in AFC North",
+      "games": [],
+      "next": {
+        "matchup": "Steelers @ Patriots",
+        "when": "Sun Sep 20, 1:00 PM",
+        "url": "https://plaintextsports.com/nfl/2026/week2/pit-ne"
+      },
+      "source": "plaintextsports"
+    }
+  ],
+  "local": {
+    "business_politics": [
+      {
+        "title": "The Bank of Japan Lifts Rates to 1.25%",
+        "latest_developments": "The Bank of Japan raised its policy rate to 1.25% Friday, September 18, the highest since 1995, and said it will hold to a quarterly pace of tightening.",
+        "summary": "The yen fell 1.2% to a two-week low of 158.05 per dollar after two board members signaled that future increases may come more slowly than markets had priced. Higher yields at home give Tokyo investors, long among the largest buyers of U.S. Treasurys, a reason to keep money in Japan.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Yen sinks after BoJ raises rates to highest level since 1995",
+            "url": "https://www.ft.com/content/97a0bed5-0580-4ccc-bd3c-fe9a714259e2?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Bank of Japan Raises Rates, Making U.S. Less Alluring for Tokyo Investors",
+            "url": "https://www.wsj.com/economy/central-banking/bank-of-japan-raises-benchmark-interest-rate-to-1-25-highest-level-since-1995-2b28cbe9?mod=rss_worldnews"
+          },
+          {
+            "source": "FT World",
+            "title": "Bank of Japan raises rates and accelerates tightening",
+            "url": "https://www.ft.com/content/14f9df6a-5a70-42d9-86ee-37e6242aae6e"
+          }
+        ],
+        "_anchor": "i-36935f5ff3"
+      },
+      {
+        "title": "Buffett Hands the Berkshire Chair to His Son",
+        "latest_developments": "Berkshire Hathaway said Friday morning, September 18, that Warren Buffett will step down as chairman and that his son Howard Buffett will succeed him.",
+        "summary": "Warren Buffett led the $1 trillion conglomerate for more than six decades and takes the title of chair emeritus. Howard Buffett, long designated to protect the culture of the company, inherits the chairmanship of an insurer, railroad, and utility owner whose paper holdings move markets.",
+        "sources": [
+          {
+            "source": "WSJ US Business",
+            "title": "Warren Buffett Steps Down as Berkshire Hathaway Chairman",
+            "url": "https://www.wsj.com/business/warren-buffett-to-step-down-as-berkshire-hathaway-chairman-de0e003f?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT Home",
+            "title": "Howard Buffett to succeed father Warren as Berkshire Hathaway chair",
+            "url": "https://www.ft.com/content/e26d8335-426a-4405-ae4c-433bd2696994"
+          }
+        ],
+        "_anchor": "i-c42902725c"
+      },
+      {
+        "title": "Russia Seizes Nestlé's Local Operations",
+        "latest_developments": "A presidential decree reported Friday, September 18, put the Russian businesses of Nestlé and the French retailers Auchan and Leroy Merlin under temporary external administration.",
+        "summary": "Moscow stripped operational control from three Western companies that kept trading in Russia after the 2022 invasion of Ukraine, and Nestlé is weighing its options for the unit. The seizures raise the cost of remaining for every multinational still holding Russian assets.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "Russia Seizes Control of Nestlé’s Local Operations",
+            "url": "https://www.wsj.com/articles/nestle-weighs-options-for-russia-unit-after-moscow-puts-it-under-administration-221402de?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-5e03cf1e6f"
+      },
+      {
+        "title": "Oil Slides Below $100",
+        "latest_developments": "Crude fell for a third straight session Friday, September 18, with West Texas Intermediate dropping under $100 a barrel and Brent near $102.",
+        "summary": "Traders are betting Saudi Arabia will restore export capacity after drone damage shut its East-West pipeline, which eased the supply fear that drove diesel to a record $6.27 a gallon this month. Gold climbed above $4,400 an ounce, Treasury yields eased, and U.S. stock futures rose as AI shares extended Thursday's rally.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "Oil Prices Fall for Third Day as WTI Slips Below $100",
+            "url": "https://www.wsj.com/business/energy-oil/oil-prices-fall-for-third-day-as-wti-slips-below-100-e533d2fe?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Oil Extends Losses on Saudi Supply Hopes",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-falls-as-worries-over-middle-east-supply-disruptions-ease-36be861a?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Stock Futures Rise as Oil Extends Losses, Treasury Yields Rise",
+            "url": "https://www.wsj.com/finance/stocks/stock-futures-rise-as-oil-extends-losses-treasury-yields-rise-0bda0bff?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-ee159ddf7d"
+      }
+    ],
+    "business": [
+      {
+        "title": "The Canada Trade War Reaches Pennsylvania's Shop Floors",
+        "latest_developments": "TribLive reported Friday, September 18, that the escalating tariff fight with Canada is hitting Pennsylvania's largest export market and the manufacturers that sell into it.",
+        "summary": "Christian Klanica, who runs a machining company in Hempfield, Westmoreland County, said the levies flying between Washington and Ottawa change so often that he can no longer keep track of which ones apply to his work. Canada buys more Pennsylvania goods than any other country, which puts the state's machine shops and metal fabricators at the center of the dispute.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "‘So much chaos’: Escalating trade war with Canada impacts Pa.’s largest export market",
+            "url": "https://triblive.com/local/regional/so-much-chaos-escalating-trade-war-with-canada-impacts-pa-s-largest-export-market/"
+          }
+        ],
+        "_anchor": "i-17a367fa05"
+      },
+      {
+        "title": "Butterwood Sells Dessert After Dark",
+        "latest_developments": "Pittsburgh City Paper's food column made the case Friday, September 18, for Butterwood as the city's answer to a late-night sweet tooth.",
+        "summary": "Bakeries run on 4 a.m. shifts, and the column argues Butterwood inverts that schedule by keeping its counter going for customers who want cake at night. The piece lands as Pittsburgh's after-dark dining options draw fresh attention.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "Satisfying a late-night sweet tooth at Butterwood",
+            "url": "https://www.pghcitypaper.com/food-drink/satisfying-a-late-night-sweet-tooth-at-butterwood/"
+          }
+        ],
+        "_anchor": "i-ea6f210441"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "A Dry Saturday, a Wet Sunday",
+        "latest_developments": "WTAE called Sunday, September 20, an Impact Day in its Friday morning outlook, September 18, with rain arriving Saturday night after a dry start to the weekend.",
+        "summary": "The Post-Gazette reported the same morning that repeated heavy downpours have flooded Western Pennsylvania through a stretch of weeks that gives residents little time to clean up between storms. Elizabeth Township took 2 inches in under 90 minutes Thursday, and Oakmont is still working through damage from a storm three weeks ago.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Western PA this weekend: Dry start, rainy finish",
+            "url": "https://www.wtae.com/article/western-pa-this-weekend-dry-start-rainy-finish/73783487"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Repeated heavy downpours are flooding Western Pa., giving residents little time to recover",
+            "url": "https://www.post-gazette.com/news/weather-news/2026/09/18/pittsburgh-severe-weather-flooding/stories/202609170086"
+          },
+          {
+            "source": "TribLive",
+            "title": "Storm response improving, Oakmont officials say",
+            "url": "https://triblive.com/local/valley-news-dispatch/storm-response-improving-oakmont-officials-say/"
+          }
+        ],
+        "_anchor": "i-7f920d8fe9"
+      },
+      {
+        "title": "Bracken House Tenants Hear About the Garage",
+        "latest_developments": "The Bracken House apartment complex on Pittsburgh's North Shore held a town hall Thursday night, September 17, to update residents on its collapsed parking garage.",
+        "summary": "Tenants have gone without their parking structure since it gave way, and WTAE reported frustration among residents waiting for a timeline and a repair plan. The building sits within walking distance of Acrisure Stadium and PNC Park, where game-day parking already runs tight.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "North Shore apartment residents receive update on collapsed garage",
+            "url": "https://www.wtae.com/article/frustrations-north-shore-apartment-parking-garage-collapsed-bracken-house/73782372"
+          }
+        ],
+        "_anchor": "i-864a1c46f9"
+      },
+      {
+        "title": "Westmoreland Widens Its Lead Pipe Removal",
+        "latest_developments": "The Municipal Authority of Westmoreland County plans a substantial expansion of its lead service line replacement program, TribLive reported Friday, September 18.",
+        "summary": "The authority supplies water across Westmoreland County and has been pulling lead pipes out of its distribution system under federal replacement requirements. The expansion widens the number of homes whose service lines the authority will dig up and replace.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Westmoreland water authority seeks to expand program to remove lead pipes",
+            "url": "https://triblive.com/local/westmoreland/westmoreland-water-authority-seeks-to-expand-program-to-remove-lead-pipes/"
+          }
+        ],
+        "_anchor": "i-17fe5d67cf"
+      }
+    ],
+    "events": [
+      {
+        "title": "The Jazz Festival Closes Out Downtown",
+        "latest_developments": "The Pittsburgh International Jazz Festival runs its final two days downtown through Sunday, September 20, and the Post-Gazette profiled 103-year-old retired judge Warren Watson, who has kept the city's jazz tradition going.",
+        "summary": "The 16th edition of the festival fills downtown Pittsburgh from Thursday, September 17, through Sunday, September 20, with Grammy winners Samara Joy and Lalah Hathaway on the bill. NEXTpittsburgh's weekend guide pairs it with Panda Fest at Station Square among more than 15 things to do.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "15+ things to do this weekend, from Panda Fest to the Pittsburgh International Jazz Festival",
+            "url": "https://nextpittsburgh.com/events/15-things-to-do-this-weekend-sept-17-20-2026/"
+          },
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "103-year-old retired judge keeps Pittsburgh’s jazz tradition alive",
+            "url": "https://www.post-gazette.com/ae/music/2026/09/16/judge-warren-watson-103-pittsburgh-jazz/stories/202609090062"
+          }
+        ],
+        "_anchor": "i-b52507087d"
+      },
+      {
+        "title": "Soergel Orchards Opens Fall Fest Saturday",
+        "latest_developments": "Soergel Orchards opens its annual Fall Fest Saturday, September 19, the first day of a six-week run.",
+        "summary": "Fall Fest runs through Sunday, November 1, at Soergel Orchards, beside the northbound Wexford exit of Interstate 79 in Franklin Park. Tractors carry visitors into the orchards to pick pumpkins and apples, and roasted corn and apple cider draw crowds to the barn area.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "10+ farms to visit this fall, from Soergel Orchards to Braddock Farms",
+            "url": "https://nextpittsburgh.com/events/6-farms-to-visit-this-fall-from-soergels-to-triple-b/"
+          }
+        ],
+        "_anchor": "i-72712a2b46"
+      }
+    ],
+    "around_teams": [
+      {
+        "title": "Hiles Puts the Contract on Metcalf",
+        "latest_developments": "Post-Gazette columnist Noah Hiles wrote Friday, September 18, that DK Metcalf has to start playing like the receiver the Steelers pay him to be.",
+        "summary": "Metcalf's first game in a Steelers uniform, the Week 1 win over the Atlanta Falcons, brought drops and penalties, and he told reporters Thursday he is not crying over spilled milk. Hiles argues the money the club committed to him leaves no room for another quiet afternoon as the Steelers travel to the New England Patriots.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Noah Hiles: It’s time for DK Metcalf to play like the player he’s paid to be",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/18/dk-metcalf-contract-steelers/stories/202609180014"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers receiver DK Metcalf is not 'crying over spilled milk' after his shaky season debut",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/17/dk-metcalf-drops-penalties-falcons/stories/202609170040"
+          }
+        ],
+        "_anchor": "i-bc870b401e"
+      },
+      {
+        "title": "Heyward's Show Sets a Live Postgame Stream",
+        "latest_developments": "Not Just Football with Cam Heyward scheduled a live postgame show for the Steelers' trip to New England, posting the stream Thursday, September 17.",
+        "summary": "Heyward and co-host Hayden will react on the show's YouTube channel after Sunday's 1 p.m. ET kickoff at the Patriots, which CBS carries. The program spent Wednesday with T.J. Watt breaking down his pick-six against Atlanta and previewing New England.",
+        "sources": [
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Steelers/Patriots Live Post Game Show",
+            "url": "https://www.youtube.com/watch?v=vTEUk6Qr_Jo"
+          }
+        ],
+        "_anchor": "i-ce1f75a0c3"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "Madrid and Barcelona Track Cavan Sullivan",
+        "latest_developments": "ESPN's Transfer Talk reported Friday, September 18, that Real Madrid and Barcelona are following Cavan Sullivan, the Philadelphia Union attacker already committed to a future move to Manchester City.",
+        "summary": "Sullivan, 16, got his first senior United States call-up Thursday when manager Mauricio Pochettino named a 28-player roster for the coming FIFA international window. He scored twice for the Union in a 5-0 win over San Diego on September 13, his first two-goal game in Major League Soccer.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Transfer rumors, news: Real Madrid, Barcelona track Man City-bound USMNT star Sullivan",
+            "url": "https://www.espn.com/soccer/story/_/id/49970584/transfer-rumors-news-real-madrid-barcelona-track-man-city-bound-usmnt-star-sullivan"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Teen Sullivan in USMNT squad, Pulisic left out",
+            "url": "https://www.espn.com/soccer/story/_/id/49965164/usmnt-cavan-sullivan-christian-pulisic-mauricio-pochettino"
+          }
+        ],
+        "_anchor": "i-781c2ea877"
+      },
+      {
+        "title": "The Squad Without Pulisic and Balogun",
+        "latest_developments": "ESPN examined Thursday evening, September 17, why Mauricio Pochettino left Christian Pulisic and Folarin Balogun out of his first United States squad since the World Cup.",
+        "summary": "Pulisic, of AC Milan, and Balogun were the leading American attackers at this year's tournament, and both miss the 28-player roster for the September and October FIFA window. Their absence opens the front line to newcomers including 16-year-old Cavan Sullivan and New York Red Bulls forward Julian Hall.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "The USMNT's first post-World Cup squad is missing its biggest summer stars",
+            "url": "https://www.espn.com/soccer/story/_/id/49966291/the-usmnt-first-post-world-cup-squad-missing-biggest-summer-stars-christian-pulisic-folarin-balogun"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Red Bulls teen Hall undecided on USMNT future despite 1st call-up",
+            "url": "https://www.espn.com/soccer/story/_/id/49967712/julian-hall-usa-poland-new-york-red-bulls"
+          }
+        ],
+        "_anchor": "i-524de36272"
+      }
+    ],
+    "reading": [
+      {
+        "author": "Stratechery",
+        "title": "An Interview with Joanna Stern About the iPhone Duo and AI for Normal People",
+        "url": "https://stratechery.com/2026/an-interview-with-joanna-stern-about-the-iphone-duo-and-ai-for-normal-people/",
+        "summary": "Ben Thompson interviews Wall Street Journal personal technology columnist Joanna Stern about Apple's new iPhone Duo and how ordinary consumers, rather than industry insiders, actually encounter artificial intelligence in the products they buy.",
+        "_anchor": "i-0e954741e5"
+      },
+      {
+        "author": "Ed Zitron",
+        "title": "AI Is Already In Dangerous Hands",
+        "url": "https://www.wheresyoured.at/ai-is-already-in-dangerous-hands/",
+        "summary": "Zitron argues the danger from artificial intelligence sits with the people and companies who control the technology today, which makes the industry's debate about future superintelligence a distraction from harm already underway.",
+        "_anchor": "i-f806beca8b"
+      },
+      {
+        "author": "Cal Newport",
+        "title": "Superintelligence is a Fairy Tale. But Chasing It Can Still Cause Harm.",
+        "url": "https://calnewport.com/superintelligence-is-a-fairy-tale-but-chasing-it-can-still-cause-harm/",
+        "summary": "Newport responds to Anthropic employees who said publicly that the systems they build could kill billions, calling superintelligence a fantasy while arguing that the race toward it inflicts real damage along the way.",
+        "_anchor": "i-b3eeb9b766"
+      }
+    ]
+  },
+  "glance": [
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "A single zero-click flaw dubbed Plugin4Shell hits Claude Code, Codex, GitHub Copilot, and Gemini CLI, making the AI agent plugin supply chain today's softest target.",
+      "links": [
+        {
+          "anchor": "i-96f5f817f6",
+          "phrase": "Plugin4Shell",
+          "start": 32,
+          "end": 44,
+          "title": "Plugin4Shell Opens Four AI Coding Agents"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Machine authorship now shows up in the malware itself, from the WeaselBiscuit npm stealer's LLM-written code to the China-linked RatHat trojan steering infected Android phones for its operators.",
+      "links": [
+        {
+          "anchor": "i-a4aa43a628",
+          "phrase": "WeaselBiscuit",
+          "start": 64,
+          "end": 77,
+          "title": "LLM-Written Stealers Ride npm Packages"
+        },
+        {
+          "anchor": "i-09d722e777",
+          "phrase": "RatHat",
+          "start": 129,
+          "end": 135,
+          "title": "RatHat Android Trojan Drives Phones With AI"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "CISA retired its weekly vulnerability bulletin for risk-based triage just as unauthenticated root-level bugs landed in Check Point management servers, Orkes Conductor, and Docker sandboxes on macOS.",
+      "links": [
+        {
+          "anchor": "i-2779d67f47",
+          "phrase": "CISA",
+          "start": 0,
+          "end": 4,
+          "title": "CISA Retires Its Weekly Vulnerability Bulletin"
+        },
+        {
+          "anchor": "i-46d085b9d4",
+          "phrase": "Check Point",
+          "start": 119,
+          "end": 130,
+          "title": "Check Point Management Servers Yield Root"
+        },
+        {
+          "anchor": "i-b9492fd270",
+          "phrase": "Orkes Conductor",
+          "start": 151,
+          "end": 166,
+          "title": "Attackers Exploit Orkes Conductor as Docker Sandboxes Leak macOS Hosts"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "updated",
+      "text": "SecurityWeek now counts 100,000 sites hit in the Brevo compromise, with a stolen Cloudflare API key deploying a worker that injected the malicious scripts.",
+      "links": [
+        {
+          "anchor": "i-408ef5d664",
+          "phrase": "Brevo",
+          "start": 49,
+          "end": 54,
+          "title": "Brevo Attack Reaches 100,000 Websites"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "The Bank of Japan lifted rates to 1.25%, Berkshire's chair passed from Warren to Howard Buffett, Russia seized Nestlé's local operations, and crude slid under $100.",
+      "links": [
+        {
+          "anchor": "i-36935f5ff3",
+          "phrase": "Bank of Japan",
+          "start": 4,
+          "end": 17,
+          "title": "The Bank of Japan Lifts Rates to 1.25%"
+        },
+        {
+          "anchor": "i-c42902725c",
+          "phrase": "Berkshire's chair",
+          "start": 41,
+          "end": 58,
+          "title": "Buffett Hands the Berkshire Chair to His Son"
+        },
+        {
+          "anchor": "i-5e03cf1e6f",
+          "phrase": "Nestlé's local",
+          "start": 111,
+          "end": 125,
+          "title": "Russia Seizes Nestlé's Local Operations"
+        },
+        {
+          "anchor": "i-ee159ddf7d",
+          "phrase": "crude slid",
+          "start": 142,
+          "end": 152,
+          "title": "Oil Slides Below $100"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "The Jazz Festival closes downtown Sunday and Soergel Orchards opens Fall Fest Saturday, though WTAE has rain arriving Saturday night after a dry weekend start.",
+      "links": [
+        {
+          "anchor": "i-b52507087d",
+          "phrase": "Jazz Festival",
+          "start": 4,
+          "end": 17,
+          "title": "The Jazz Festival Closes Out Downtown"
+        },
+        {
+          "anchor": "i-72712a2b46",
+          "phrase": "Soergel Orchards",
+          "start": 45,
+          "end": 61,
+          "title": "Soergel Orchards Opens Fall Fest Saturday"
+        },
+        {
+          "anchor": "i-7f920d8fe9",
+          "phrase": "WTAE",
+          "start": 95,
+          "end": 99,
+          "title": "A Dry Saturday, a Wet Sunday"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "feed_health": {
+    "groups": [
+      {
+        "group": "security",
+        "label": "Security",
+        "feeds": 24,
+        "loaded": 23,
+        "window_hours": 24,
+        "in_window": 69,
+        "failed": [
+          {
+            "name": "Securelist (Kaspersky)",
+            "error": "TimeoutError: The read operation timed out"
+          }
+        ],
+        "empty": [
+          "Krebs on Security",
+          "Sophos News",
+          "Google Online Security Blog",
+          "Google Project Zero",
+          "The DFIR Report",
+          "Kim Zetter (Zero Day)",
+          "Frank on Fraud",
+          "Wired Security"
+        ],
+        "per_feed": {
+          "The Hacker News": {
+            "items": 50,
+            "in_window": 9,
+            "contributed": 9
+          },
+          "BleepingComputer": {
+            "items": 15,
+            "in_window": 8,
+            "contributed": 8
+          },
+          "Krebs on Security": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Schneier on Security": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Dark Reading": {
+            "items": 50,
+            "in_window": 3,
+            "contributed": 3
+          },
+          "SecurityWeek": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "SANS Internet Storm Center": {
+            "items": 10,
+            "in_window": 3,
+            "contributed": 3
+          },
+          "CISA Advisories": {
+            "items": 30,
+            "in_window": 8,
+            "contributed": 8
+          },
+          "The Record": {
+            "items": 5,
+            "in_window": 5,
+            "contributed": 5
+          },
+          "Ars Technica Security": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Help Net Security": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "Securelist (Kaspersky)": {
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Sophos News": {
+            "items": 9,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Unit 42 (Palo Alto)": {
+            "items": 15,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "Google Online Security Blog": {
+            "items": 25,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Cisco Talos": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Graham Cluley": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Microsoft Security Blog": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "Google Project Zero": {
+            "items": 7,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The DFIR Report": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Kim Zetter (Zero Day)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "404 Media": {
+            "items": 15,
+            "in_window": 5,
+            "contributed": 5
+          },
+          "Frank on Fraud": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Wired Security": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "pittsburgh",
+        "label": "Pittsburgh",
+        "feeds": 9,
+        "loaded": 9,
+        "window_hours": 48,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "TribLive": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 23
+          },
+          "Pittsburgh Post-Gazette": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 11
+          },
+          "PublicSource": {
+            "items": 10,
+            "in_window": 7,
+            "contributed": 1
+          },
+          "Pittsburgh City Paper": {
+            "items": 10,
+            "in_window": 6,
+            "contributed": 2
+          },
+          "NEXTpittsburgh": {
+            "items": 10,
+            "in_window": 4,
+            "contributed": 0
+          },
+          "Pittsburgh Magazine": {
+            "items": 30,
+            "in_window": 14,
+            "contributed": 0
+          },
+          "KDKA": {
+            "items": 30,
+            "in_window": 30,
+            "contributed": 7
+          },
+          "WPXI": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 4
+          },
+          "WTAE": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 12
+          }
+        }
+      },
+      {
+        "group": "bizpol",
+        "label": "Business and Politics",
+        "feeds": 8,
+        "loaded": 8,
+        "window_hours": 36,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "WSJ World News": {
+            "items": 73,
+            "in_window": 22,
+            "contributed": 6
+          },
+          "WSJ Markets": {
+            "items": 61,
+            "in_window": 39,
+            "contributed": 12
+          },
+          "WSJ US Business": {
+            "items": 85,
+            "in_window": 44,
+            "contributed": 4
+          },
+          "WSJ Politics": {
+            "items": 21,
+            "in_window": 9,
+            "contributed": 1
+          },
+          "The Economist": {
+            "items": 300,
+            "in_window": 53,
+            "contributed": 3
+          },
+          "FT Home": {
+            "items": 9,
+            "in_window": 9,
+            "contributed": 9
+          },
+          "FT World": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 22
+          },
+          "FT Markets": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 3
+          }
+        }
+      },
+      {
+        "group": "events",
+        "label": "Events",
+        "feeds": 4,
+        "loaded": 4,
+        "window_hours": 120,
+        "in_window": 13,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Post-Gazette Arts & Entertainment": {
+            "items": 20,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "Post-Gazette Music": {
+            "items": 20,
+            "in_window": 4,
+            "contributed": 0
+          },
+          "NEXTpittsburgh Events": {
+            "items": 10,
+            "in_window": 3,
+            "contributed": 3
+          },
+          "NEXTpittsburgh Arts & Entertainment": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "sports_media",
+        "label": "Sports media",
+        "feeds": 6,
+        "loaded": 6,
+        "window_hours": 96,
+        "in_window": 30,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Footbahlin with Ben Roethlisberger": {
+            "items": 140,
+            "in_window": 1,
+            "contributed": 0
+          },
+          "Not Just Football with Cam Heyward": {
+            "items": 15,
+            "in_window": 5,
+            "contributed": 3
+          },
+          "Pittsburgh Steelers (YouTube)": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 15
+          },
+          "Ben Roethlisberger / Channel Seven (YouTube)": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 0
+          },
+          "Post-Gazette Pirates": {
+            "items": 20,
+            "in_window": 9,
+            "contributed": 4
+          },
+          "Post-Gazette Steelers": {
+            "items": 20,
+            "in_window": 13,
+            "contributed": 8
+          }
+        }
+      },
+      {
+        "group": "team_usa",
+        "label": "Team USA",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 72,
+        "in_window": 33,
+        "failed": [],
+        "empty": [
+          "Guardian Olympics"
+        ],
+        "per_feed": {
+          "ESPN Soccer": {
+            "items": 26,
+            "in_window": 26,
+            "contributed": 26
+          },
+          "ESPN Olympics": {
+            "items": 25,
+            "in_window": 7,
+            "contributed": 7
+          },
+          "Guardian Olympics": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "reading",
+        "label": "Reading",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 336,
+        "in_window": 12,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Ed Zitron": {
+            "items": 15,
+            "in_window": 4,
+            "contributed": 3
+          },
+          "Stratechery": {
+            "items": 10,
+            "in_window": 9,
+            "contributed": 7
+          },
+          "Cal Newport": {
+            "items": 8,
+            "in_window": 3,
+            "contributed": 2
+          }
+        }
+      }
+    ],
+    "aux": [
+      {
+        "label": "Markets (Yahoo Finance)",
+        "ok": true,
+        "detail": "7 of 7 rows"
+      },
+      {
+        "label": "Weather (NWS)",
+        "ok": true,
+        "detail": "3 forecast periods"
+      },
+      {
+        "label": "Scores (ESPN, plaintextsports)",
+        "ok": true,
+        "detail": "2 teams via plaintextsports; mlb: ESPN failed (mlb: HTTP 403 (server: AkamaiGHost)); used plaintextsports; nfl: ESPN failed (nfl: HTTP 403 (server: AkamaiGHost)); used plaintextsports; nhl: ESPN failed (nhl: HTTP 403 (server: AkamaiGHost)); used plaintextsports"
+      }
+    ],
+    "cli": {
+      "models": [
+        "claude-opus-5"
+      ],
+      "usage": {
+        "claude-opus-5": {
+          "inputTokens": 6,
+          "outputTokens": 26860,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 113794,
+          "webSearchRequests": 0,
+          "costUSD": 1.80947,
+          "contextWindow": 3000000,
+          "maxOutputTokens": 192000,
+          "thinkingTokens": 15138
+        }
+      },
+      "cost_usd": 1.80947,
+      "duration_ms": 318667,
+      "calls": 3
+    }
+  },
+  "meta": {
+    "generated_at": "2026-09-18 07:07 EDT",
+    "items_considered": 69,
+    "window_hours": 24,
+    "model": "opus",
+    "fallback_model": "sonnet",
+    "feeds": {
+      "security": [
+        "The Hacker News",
+        "BleepingComputer",
+        "Krebs on Security",
+        "Schneier on Security",
+        "Dark Reading",
+        "SecurityWeek",
+        "SANS Internet Storm Center",
+        "CISA Advisories",
+        "The Record",
+        "Ars Technica Security",
+        "Help Net Security",
+        "Securelist (Kaspersky)",
+        "Sophos News",
+        "Unit 42 (Palo Alto)",
+        "Google Online Security Blog",
+        "Cisco Talos",
+        "Graham Cluley",
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media",
+        "Frank on Fraud",
+        "Wired Security"
+      ],
+      "pittsburgh": [
+        "TribLive",
+        "Pittsburgh Post-Gazette",
+        "PublicSource",
+        "Pittsburgh City Paper",
+        "NEXTpittsburgh",
+        "Pittsburgh Magazine",
+        "KDKA",
+        "WPXI",
+        "WTAE"
+      ],
+      "bizpol": [
+        "WSJ World News",
+        "WSJ Markets",
+        "WSJ US Business",
+        "WSJ Politics",
+        "The Economist",
+        "FT Home",
+        "FT World",
+        "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
+      ],
+      "team_usa": [
+        "ESPN Soccer",
+        "ESPN Olympics",
+        "Guardian Olympics"
+      ],
+      "reading": [
+        "Ed Zitron",
+        "Stratechery",
+        "Cal Newport"
+      ]
+    },
+    "served_by": [
+      "claude-opus-5"
+    ],
+    "model_calls": 3,
+    "model_cost_usd": 1.8095,
+    "model_duration_ms": 318667,
+    "local_from": null,
+    "feed_failures": [
+      "Securelist (Kaspersky)"
+    ]
+  }
+}
