@@ -1,31 +1,65 @@
 {
   "date": "2026-09-18",
-  "headline": "Researchers found a single zero-click remote code execution flaw sitting inside Claude Code, Codex, GitHub Copilot, and Gemini CLI, the first supply-chain break in the AI agent ecosystem, and two of the four agents still carry it.",
+  "headline": "Hacktron researchers pointed Claude at OpenAI's sign-in flow and reached internal code, on the same day one plugin flaw surfaced in all four major AI coding agents.",
   "emerging_trends": [
     {
-      "text": "The plumbing beneath AI agents—plugin marketplaces, MCP configuration files checked into GitHub, and the credential vault in Amazon's AgentCore Harness—has become the soft target, because each one hands an attacker the same reach as the employee running the agent.",
+      "text": "Plugin4Shell, hardcoded credentials sitting in 12 percent of public MCP configuration files, and prompt injection that drains AWS AgentCore Harness credentials all point at one soft spot, the plumbing developers bolt onto AI agents.",
       "topic_title": "Plugin4Shell Opens Four AI Coding Agents",
-      "link_phrase": "plugin marketplaces",
+      "link_phrase": "Plugin4Shell",
       "_anchor": "trend-1"
     },
     {
-      "text": "Large language models now write and drive the malware itself: verbose comments, placeholder code, and token statistics in the PhantomRaven stealer point to machine authorship, and the RatHat Android trojan carries an AI subsystem that navigates infected phones for its operators.",
-      "topic_title": "LLM-Written Stealers Ride npm Packages",
-      "link_phrase": "PhantomRaven",
+      "text": "One stolen API key now reaches everything downstream, as the Brevo intruders showed when they turned a single Cloudflare credential into ClickFix scripts running on 100,000 websites.",
+      "topic_title": "Brevo Attack Reaches 100,000 Websites",
+      "link_phrase": "Brevo",
       "_anchor": "trend-2"
     },
     {
-      "text": "CISA killed its weekly vulnerability roundup for risk-based triage the same week unauthenticated root-level bugs surfaced in Check Point management servers, Orkes Conductor, and Docker Sandboxes, leaving defenders to separate ugly severity scores from real exploitation on their own.",
-      "topic_title": "Check Point Management Servers Yield Root",
-      "link_phrase": "Check Point",
+      "text": "Malware authors increasingly hand the keyboard to a model, with PhantomRaven's verbose comments and placeholder blocks betraying a large language model and RatHat shipping an AI subsystem that drives stolen Android phones.",
+      "topic_title": "LLM-Written Stealers Ride npm Packages",
+      "link_phrase": "PhantomRaven",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
+      "title": "Plugin4Shell Opens Four AI Coding Agents",
+      "area": "AI Security",
+      "latest_developments": "Air Security disclosed on September 18, 2026 that Claude Code, Codex, GitHub Copilot, and Gemini CLI share one zero-click remote code execution flaw it calls Plugin4Shell, the first supply-chain vulnerability of the AI agent ecosystem: whoever controls a plugin's source repository swaps the code an agent installs even when the agent pins that plugin to a specific reviewed version. Anthropic fixed it in Claude Code 2.1.179 and OpenAI in Codex 0.146.0, and GitHub Copilot and Gemini CLI still carry it.",
+      "summary": "Anyone whose coding agent installs plugins from a marketplace is exposed, and a successful attacker gains the same access to company systems and data as the employee running the agent. Palo Alto Networks' Unit 42 separately showed that default settings in Amazon's AgentCore Harness let prompt injection pull credentials out, and Hush Security found hardcoded API keys and access tokens in 12 percent of credential slots across roughly 82,000 public MCP configuration files on GitHub.",
+      "tags": [
+        "ai",
+        "supply-chain",
+        "zero-day"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Zero-click RCE vulnerability hit four major AI coding agents, two remain unpatched",
+          "url": "https://www.helpnetsecurity.com/2026/09/18/plugin4shell-ai-coding-agents-vulnerability/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Plugin4Shell Lets Repository Owners Swap Pinned Plugin Code Across Four AI Coding Agents",
+          "url": "https://thehackernews.com/2026/09/plugin4shell-lets-repository-owners.html"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "A Vault with a Heap-View: The Uncomfortable Space Between AgentCore Harness and Identity",
+          "url": "https://unit42.paloaltonetworks.com/securing-aws-agentcore-harness-credentials/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Hardcoded MCP credentials found in public GitHub files",
+          "url": "https://www.helpnetsecurity.com/2026/09/18/hush-security-mcp-credential-exposure-report/"
+        }
+      ],
+      "_anchor": "i-96f5f817f6"
+    },
+    {
       "title": "Check Point Management Servers Yield Root",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Check Point Software shipped a fix through its LivePatch channel for a critical flaw that lets an attacker with no credentials run code as root over the network on Security Management and Log Servers, and says it sees no sign of exploitation; Kaspersky and Tanium patched product flaws the same day, and Microsoft closed 18 vulnerabilities across Azure and its AI-branded products, most of them privilege escalation.",
+      "latest_developments": "Check Point Software shipped a fix through its LivePatch channel for a critical flaw that lets an attacker with no credentials run code as root over the network on Security Management and Log Servers, and says it sees no sign of exploitation; Kaspersky and Tanium patched product flaws the same day, and Microsoft closed 18 vulnerabilities across Azure and its AI-branded products, among them CVE-2026-85889, a 10.0-rated missing authentication for a critical function in Azure AI Foundry that hands an unauthorized attacker elevated privileges over a network and that Microsoft fixed with no customer action required.",
       "summary": "The Security Management Server controls firewall policy and administrator access, so root on that box hands an intruder the rules governing every gateway it manages. Check Point customers should take the LivePatch update immediately.",
       "tags": [
         "patch",
@@ -48,41 +82,60 @@
           "url": "https://www.securityweek.com/check-point-kaspersky-tanium-patch-product-vulnerabilities/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Microsoft Patches 18 Vulnerabilities in AI, Cloud Products",
-          "url": "https://www.securityweek.com/microsoft-patches-18-vulnerabilities-in-ai-cloud-products/"
+          "source": "The Hacker News",
+          "title": "Microsoft Patches CVSS 10.0 Azure AI Foundry Flaw Enabling Unauthorized Privilege Escalation",
+          "url": "https://thehackernews.com/2026/09/microsoft-patches-cvss-100-azure-ai.html"
         }
       ],
       "_anchor": "i-46d085b9d4"
     },
     {
-      "title": "Plugin4Shell Opens Four AI Coding Agents",
+      "title": "Hacktron Uses Claude to Reach OpenAI Employee Accounts",
       "area": "AI Security",
-      "latest_developments": "AIR researchers disclosed on September 18, 2026 that Claude Code, Codex, GitHub Copilot, and Gemini CLI all share one zero-click remote code execution flaw, which they call the first supply-chain vulnerability of the AI agent ecosystem, and two of the four agents remain unpatched.",
-      "summary": "Anyone whose coding agent installs plugins from a marketplace is exposed, and a successful attacker gains the same access to company systems and data as the employee running the agent. Palo Alto Networks' Unit 42 separately showed that default settings in Amazon's AgentCore Harness let prompt injection pull credentials out, and Hush Security found hardcoded API keys and access tokens in 12 percent of credential slots across roughly 82,000 public MCP configuration files on GitHub.",
+      "latest_developments": "Researchers at Hacktron used Claude to build a working exploit, chained it with a flaw in OpenAI's sign-in flow, and reached OpenAI employee accounts and sensitive internal GitHub data, and OpenAI paid them a bug bounty for the demonstration.",
+      "summary": "The work shows a frontier model carrying the offensive engineering, from finding the weakness to writing the exploit, against the company that builds a competing frontier model. Every organization that relies on a single sign-on path into its source code should assume attackers now run the same loop.",
       "tags": [
         "ai",
-        "supply-chain",
-        "zero-day"
+        "exploit",
+        "vulnerability"
       ],
       "sources": [
         {
-          "source": "Help Net Security",
-          "title": "Zero-click RCE vulnerability hit four major AI coding agents, two remain unpatched",
-          "url": "https://www.helpnetsecurity.com/2026/09/18/plugin4shell-ai-coding-agents-vulnerability/"
+          "source": "Ars Technica Security",
+          "title": "Researchers used Claude to hack OpenAI",
+          "url": "https://arstechnica.com/ai/2026/09/researchers-used-claude-to-hack-openai/"
         },
         {
-          "source": "Unit 42 (Palo Alto)",
-          "title": "A Vault with a Heap-View: The Uncomfortable Space Between AgentCore Harness and Identity",
-          "url": "https://unit42.paloaltonetworks.com/securing-aws-agentcore-harness-credentials/"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Hardcoded MCP credentials found in public GitHub files",
-          "url": "https://www.helpnetsecurity.com/2026/09/18/hush-security-mcp-credential-exposure-report/"
+          "source": "SecurityWeek",
+          "title": "AI-Built Exploit and Sign-In Flaw Opened Path to Internal OpenAI Code",
+          "url": "https://www.securityweek.com/ai-built-exploit-and-sign-in-flaw-opened-path-to-internal-openai-code/"
         }
       ],
-      "_anchor": "i-96f5f817f6"
+      "_anchor": "i-a8365cfa26"
+    },
+    {
+      "title": "Brevo Attack Reaches 100,000 Websites",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "SecurityWeek put the count at 100,000 websites on September 18, 2026, and detailed the method: the attackers used the stolen Cloudflare API key to deploy a Cloudflare worker that injected the malicious scripts, a day after Brevo confirmed the theft.",
+      "summary": "Brevo, the French email marketing platform, lost a Cloudflare API key that attackers turned into ClickFix scripts running on its own sites and inside the JavaScript files its customers embed on theirs, making every one of those sites a malware distribution point. Site owners who load Brevo JavaScript should audit their pages and rotate anything the injected scripts could have touched.",
+      "tags": [
+        "supply-chain",
+        "malware",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Brevo Supply Chain Attack Injects Malware Into 100,000 Websites",
+          "url": "https://www.securityweek.com/brevo-supply-chain-attack-injects-malware-into-100000-websites/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Brevo supply-chain attack injected ClickFix scripts on customer sites",
+          "url": "https://www.bleepingcomputer.com/news/security/brevo-supply-chain-attack-injected-clickfix-scripts-on-customer-sites/"
+        }
+      ],
+      "_anchor": "i-408ef5d664"
     },
     {
       "title": "Attackers Exploit Orkes Conductor as Docker Sandboxes Leak macOS Hosts",
@@ -133,30 +186,6 @@
       "_anchor": "i-a4aa43a628"
     },
     {
-      "title": "Brevo Attack Reaches 100,000 Websites",
-      "area": "Software Supply Chain Security",
-      "latest_developments": "SecurityWeek put the count at 100,000 websites on September 18, 2026, and detailed the method: the attackers used the stolen Cloudflare API key to deploy a Cloudflare worker that injected the malicious scripts, a day after Brevo confirmed the theft.",
-      "summary": "Brevo, the French email marketing platform, lost a Cloudflare API key that attackers turned into ClickFix scripts running on its own sites and inside the JavaScript files its customers embed on theirs, making every one of those sites a malware distribution point. Site owners who load Brevo JavaScript should audit their pages and rotate anything the injected scripts could have touched.",
-      "tags": [
-        "supply-chain",
-        "malware",
-        "breach"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Brevo Supply Chain Attack Injects Malware Into 100,000 Websites",
-          "url": "https://www.securityweek.com/brevo-supply-chain-attack-injects-malware-into-100000-websites/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Brevo supply-chain attack injected ClickFix scripts on customer sites",
-          "url": "https://www.bleepingcomputer.com/news/security/brevo-supply-chain-attack-injected-clickfix-scripts-on-customer-sites/"
-        }
-      ],
-      "_anchor": "i-408ef5d664"
-    },
-    {
       "title": "RatHat Android Trojan Drives Phones With AI",
       "area": "Ransomware and Cybercrime",
       "latest_developments": "Researchers flagged RatHat on September 17, 2026, Android malware that China-based operators spread through targeted smishing and malvertising to deceptive third-party download portals, which carries an AI-powered subsystem that navigates and controls a compromised handset and abuses the Android Debug Bridge to keep shell access after the victim uninstalls the app.",
@@ -179,6 +208,53 @@
         }
       ],
       "_anchor": "i-09d722e777"
+    },
+    {
+      "title": "Abandoned Apps and a Resurrected CDN Domain",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "Researchers at the University of Massachusetts Amherst analyzed 61,500 abandoned Android smart home and internet-of-things companion apps drawn from the AndroZoo archive and found nearly three in four carrying software dependencies with documented vulnerabilities, while The Hacker News traced a domain that once served a wound-down content delivery network: the owner let it expire, someone re-registered it in July 2025, and thousands of websites, code repositories, and documentation pages still hard-code hostnames beneath it.",
+      "summary": "Millions of people still run companion apps for smart plugs, cameras, and thermostats that stopped receiving updates years ago, and those apps keep sending data to servers nobody maintains. Whoever controls a re-registered CDN domain can answer every one of those stale requests with code of their own choosing, so teams should grep their repositories and pages for third-party hostnames and verify who owns each one today.",
+      "tags": [
+        "supply-chain",
+        "iot",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Abandoned IoT apps keep sending sensitive data to broken servers",
+          "url": "https://www.helpnetsecurity.com/2026/09/18/abandoned-iot-apps-data-security-risks/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "An Abandoned CDN Domain Was Re-Registered. Thousands of Sites Still Call It.",
+          "url": "https://thehackernews.com/2026/09/an-abandoned-cdn-domain-was-re.html"
+        }
+      ],
+      "_anchor": "i-6051b2450d"
+    },
+    {
+      "title": "SynthID Watermarking Erodes Model Refusals",
+      "area": "AI Security",
+      "latest_developments": "Researchers found that turning on SynthID text watermarking changes how large language models answer harmful prompts, and the watermarking can push a model to follow instructions it would otherwise refuse.",
+      "summary": "Watermarking exists to mark machine-generated text for provenance, and this work shows the same mechanism shifting the token choices that safety training depends on. Anyone deploying watermarked models should re-run refusal testing with the watermark enabled.",
+      "tags": [
+        "ai",
+        "research"
+      ],
+      "sources": [
+        {
+          "source": "Ars Technica Security",
+          "title": "LLMs respond differently to harmful prompts when AI watermarking is used",
+          "url": "https://arstechnica.com/security/2026/09/ai-text-watermarking-can-make-models-more-vulnerable-to-adversarial-prompts/"
+        },
+        {
+          "source": "Schneier on Security",
+          "title": "Are AIs Still Struggling with CAPTCHAs?",
+          "url": "https://www.schneier.com/blog/archives/2026/09/are-ais-still-struggling-with-captchas.html"
+        }
+      ],
+      "_anchor": "i-168e3a7edc"
     },
     {
       "title": "CISA Retires Its Weekly Vulnerability Bulletin",
@@ -287,6 +363,24 @@
   "local": {
     "business_politics": [
       {
+        "title": "Turkey Moves to Liquidate Funds in a Ponzi Inquiry",
+        "latest_developments": "The Financial Times reported Friday, September 18, that Turkish authorities have moved to liquidate the investment funds at the center of what regulators describe as a Ponzi-like scheme, forcing big Turkish banks to sell the assets held inside them.",
+        "summary": "Roughly 300,000 investors hold positions in the funds, and the unwinding comes amid fears that the assets carried inflated valuations. A Financial Times column the same day told U.S. Treasury Secretary Scott Bessent to watch the affair, arguing that stretched markets break without any fraud at all.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Turkey moves to liquidate funds at centre of ‘Ponzi-like scheme’",
+            "url": "https://www.ft.com/content/3943277e-eaf8-4faf-9f9c-1c05cb2ba992?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "Why Scott Bessent should pay attention to Turkey’s market scandal",
+            "url": "https://www.ft.com/content/d6adb7bb-72b4-47d1-b3bd-11e908d06b60?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-45cf2dc136"
+      },
+      {
         "title": "The Bank of Japan Lifts Rates to 1.25%",
         "latest_developments": "The Bank of Japan raised its policy rate to 1.25% Friday, September 18, the highest since 1995, and said it will hold to a quarterly pace of tightening.",
         "summary": "The yen fell 1.2% to a two-week low of 158.05 per dollar after two board members signaled that future increases may come more slowly than markets had priced. Higher yields at home give Tokyo investors, long among the largest buyers of U.S. Treasurys, a reason to keep money in Japan.",
@@ -366,6 +460,19 @@
     ],
     "business": [
       {
+        "title": "A Second Superload Rolls Next Week",
+        "latest_developments": "WPXI reported Friday, September 18, that a second slow-moving superload will cross Armstrong, Indiana, and Westmoreland counties next week, following the 380-ton first haul that crawled through Delmont on Wednesday, September 16.",
+        "summary": "Escort vehicles, the Pennsylvania State Police, and bucket trucks that lift wires out of the way will run ahead of and behind the truck, which carries equipment to data center construction near Homer City in Indiana County. The Pennsylvania Department of Transportation warns drivers that the haul will occupy two lanes at times and move as a rolling slowdown, with roughly 50 more superloads scheduled over the next four months.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "2nd slow-moving superload to move through Western Pennsylvania next week",
+            "url": "https://www.wpxi.com/news/local/2nd-slow-moving-superload-move-through-western-pennsylvania-next-week/ZSZWS5I3CZGZ5CGLTSMMO6HQ5M/"
+          }
+        ],
+        "_anchor": "i-9cb7a30338"
+      },
+      {
         "title": "The Canada Trade War Reaches Pennsylvania's Shop Floors",
         "latest_developments": "TribLive reported Friday, September 18, that the escalating tariff fight with Canada is hitting Pennsylvania's largest export market and the manufacturers that sell into it.",
         "summary": "Christian Klanica, who runs a machining company in Hempfield, Westmoreland County, said the levies flying between Washington and Ottawa change so often that he can no longer keep track of which ones apply to his work. Canada buys more Pennsylvania goods than any other country, which puts the state's machine shops and metal fabricators at the center of the dispute.",
@@ -393,6 +500,19 @@
       }
     ],
     "around_town": [
+      {
+        "title": "County Rules Raise North Allegheny's Pool Costs",
+        "latest_developments": "TribLive reported Friday, September 18, that Allegheny County requirements have pushed up the cost of the North Allegheny School District's natatorium renovation, according to a presentation the district gave at its September 9 school board meeting.",
+        "summary": "The district, which serves McCandless, Marshall, Bradford Woods, and Franklin Park, is weighing alternative versions of the project as the price climbs. The board must decide how much of the swimming facility work to keep before it commits the money.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "North Allegheny renovation update includes cost increases, project alternatives",
+            "url": "https://triblive.com/local/north-allegheny-renovation-update-includes-cost-increases-project-alternatives/"
+          }
+        ],
+        "_anchor": "i-c75dfce2c3"
+      },
       {
         "title": "A Dry Saturday, a Wet Sunday",
         "latest_developments": "WTAE called Sunday, September 20, an Impact Day in its Friday morning outlook, September 18, with rain arriving Saturday night after a dry start to the weekend.",
@@ -477,6 +597,24 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "Heyward's Show Takes Up Rodgers",
+        "latest_developments": "Not Just Football with Cam Heyward posted a segment Friday morning, September 18, titled \"Aaron Rodgers Reveals the Best Version of Himself,\" two days before the Steelers play at New England.",
+        "summary": "Heyward, the Steelers defensive captain, hosts the show with Hayden and turned it this week to the quarterback who started the Week 1 win over the Atlanta Falcons. The same program had T.J. Watt on Wednesday to walk through his pick-six and the defense's zone-heavy plan against Atlanta.",
+        "sources": [
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Aaron Rodgers Reveals the Best Version of Himself",
+            "url": "https://www.youtube.com/watch?v=R7t-Ng-2wmc"
+          },
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "T.J. Watt Breaks Down His HUGE Game, New Fatherhood & the Patriots Ahead | Not Just Football",
+            "url": "https://www.youtube.com/watch?v=yX1h_us6qMo"
+          }
+        ],
+        "_anchor": "i-6349454a3b"
+      },
       {
         "title": "Hiles Puts the Contract on Metcalf",
         "latest_developments": "Post-Gazette columnist Noah Hiles wrote Friday, September 18, that DK Metcalf has to start playing like the receiver the Steelers pay him to be.",
@@ -575,34 +713,41 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "A single zero-click flaw dubbed Plugin4Shell hits Claude Code, Codex, GitHub Copilot, and Gemini CLI, making the AI agent plugin supply chain today's softest target.",
+      "text": "A zero-click Plugin4Shell flaw hits Claude Code, Codex, Copilot and Gemini CLI, while Hacktron chained Claude-built exploits into OpenAI employee accounts, making AI agent plumbing a soft spot.",
       "links": [
         {
           "anchor": "i-96f5f817f6",
           "phrase": "Plugin4Shell",
-          "start": 32,
-          "end": 44,
+          "start": 13,
+          "end": 25,
           "title": "Plugin4Shell Opens Four AI Coding Agents"
+        },
+        {
+          "anchor": "i-a8365cfa26",
+          "phrase": "Hacktron",
+          "start": 86,
+          "end": 94,
+          "title": "Hacktron Uses Claude to Reach OpenAI Employee Accounts"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Machine authorship now shows up in the malware itself, from the WeaselBiscuit npm stealer's LLM-written code to the China-linked RatHat trojan steering infected Android phones for its operators.",
+      "text": "Malware authors are handing the keyboard to models, from LLM-written npm stealers like WeaselBiscuit to RatHat, whose AI subsystem navigates stolen Android phones for China-based operators.",
       "links": [
         {
           "anchor": "i-a4aa43a628",
-          "phrase": "WeaselBiscuit",
-          "start": 64,
-          "end": 77,
+          "phrase": "npm stealers",
+          "start": 69,
+          "end": 81,
           "title": "LLM-Written Stealers Ride npm Packages"
         },
         {
           "anchor": "i-09d722e777",
           "phrase": "RatHat",
-          "start": 129,
-          "end": 135,
+          "start": 104,
+          "end": 110,
           "title": "RatHat Android Trojan Drives Phones With AI"
         }
       ]
@@ -610,105 +755,70 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "CISA retired its weekly vulnerability bulletin for risk-based triage just as unauthenticated root-level bugs landed in Check Point management servers, Orkes Conductor, and Docker sandboxes on macOS.",
+      "text": "A single stolen Cloudflare key let Brevo intruders inject ClickFix scripts into 100,000 websites, while attackers hit CVE-2026-58138 in Orkes Conductor and Docker sandboxes leaked macOS hosts.",
       "links": [
         {
-          "anchor": "i-2779d67f47",
-          "phrase": "CISA",
-          "start": 0,
-          "end": 4,
-          "title": "CISA Retires Its Weekly Vulnerability Bulletin"
-        },
-        {
-          "anchor": "i-46d085b9d4",
-          "phrase": "Check Point",
-          "start": 119,
-          "end": 130,
-          "title": "Check Point Management Servers Yield Root"
+          "anchor": "i-408ef5d664",
+          "phrase": "Brevo",
+          "start": 35,
+          "end": 40,
+          "title": "Brevo Attack Reaches 100,000 Websites"
         },
         {
           "anchor": "i-b9492fd270",
           "phrase": "Orkes Conductor",
-          "start": 151,
-          "end": 166,
+          "start": 136,
+          "end": 151,
           "title": "Attackers Exploit Orkes Conductor as Docker Sandboxes Leak macOS Hosts"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "updated",
-      "text": "SecurityWeek now counts 100,000 sites hit in the Brevo compromise, with a stolen Cloudflare API key deploying a worker that injected the malicious scripts.",
+      "status": "new",
+      "text": "Check Point patched an unauthenticated root flaw in its management servers, abandoned IoT apps were found carrying vulnerable dependencies, and SynthID watermarking was shown to weaken model refusals.",
       "links": [
         {
-          "anchor": "i-408ef5d664",
-          "phrase": "Brevo",
-          "start": 49,
-          "end": 54,
-          "title": "Brevo Attack Reaches 100,000 Websites"
+          "anchor": "i-46d085b9d4",
+          "phrase": "Check Point",
+          "start": 0,
+          "end": 11,
+          "title": "Check Point Management Servers Yield Root"
+        },
+        {
+          "anchor": "i-6051b2450d",
+          "phrase": "abandoned IoT apps",
+          "start": 76,
+          "end": 94,
+          "title": "Abandoned Apps and a Resurrected CDN Domain"
+        },
+        {
+          "anchor": "i-168e3a7edc",
+          "phrase": "SynthID",
+          "start": 144,
+          "end": 151,
+          "title": "SynthID Watermarking Erodes Model Refusals"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "The Bank of Japan lifted rates to 1.25%, Berkshire's chair passed from Warren to Howard Buffett, Russia seized Nestlé's local operations, and crude slid under $100.",
+      "text": "A second slow-moving superload crosses Armstrong, Indiana and Westmoreland counties next week, and county requirements pushed up the cost of North Allegheny's natatorium renovation.",
       "links": [
         {
-          "anchor": "i-36935f5ff3",
-          "phrase": "Bank of Japan",
-          "start": 4,
-          "end": 17,
-          "title": "The Bank of Japan Lifts Rates to 1.25%"
+          "anchor": "i-9cb7a30338",
+          "phrase": "superload",
+          "start": 21,
+          "end": 30,
+          "title": "A Second Superload Rolls Next Week"
         },
         {
-          "anchor": "i-c42902725c",
-          "phrase": "Berkshire's chair",
-          "start": 41,
-          "end": 58,
-          "title": "Buffett Hands the Berkshire Chair to His Son"
-        },
-        {
-          "anchor": "i-5e03cf1e6f",
-          "phrase": "Nestlé's local",
-          "start": 111,
-          "end": 125,
-          "title": "Russia Seizes Nestlé's Local Operations"
-        },
-        {
-          "anchor": "i-ee159ddf7d",
-          "phrase": "crude slid",
-          "start": 142,
-          "end": 152,
-          "title": "Oil Slides Below $100"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "The Jazz Festival closes downtown Sunday and Soergel Orchards opens Fall Fest Saturday, though WTAE has rain arriving Saturday night after a dry weekend start.",
-      "links": [
-        {
-          "anchor": "i-b52507087d",
-          "phrase": "Jazz Festival",
-          "start": 4,
-          "end": 17,
-          "title": "The Jazz Festival Closes Out Downtown"
-        },
-        {
-          "anchor": "i-72712a2b46",
-          "phrase": "Soergel Orchards",
-          "start": 45,
-          "end": 61,
-          "title": "Soergel Orchards Opens Fall Fest Saturday"
-        },
-        {
-          "anchor": "i-7f920d8fe9",
-          "phrase": "WTAE",
-          "start": 95,
-          "end": 99,
-          "title": "A Dry Saturday, a Wet Sunday"
+          "anchor": "i-c75dfce2c3",
+          "phrase": "North Allegheny's",
+          "start": 141,
+          "end": 158,
+          "title": "County Rules Raise North Allegheny's Pool Costs"
         }
       ]
     }
@@ -720,35 +830,31 @@
         "group": "security",
         "label": "Security",
         "feeds": 24,
-        "loaded": 23,
+        "loaded": 24,
         "window_hours": 24,
-        "in_window": 69,
-        "failed": [
-          {
-            "name": "Securelist (Kaspersky)",
-            "error": "TimeoutError: The read operation timed out"
-          }
-        ],
+        "in_window": 59,
+        "failed": [],
         "empty": [
           "Krebs on Security",
+          "CISA Advisories",
+          "Securelist (Kaspersky)",
           "Sophos News",
           "Google Online Security Blog",
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
-          "Frank on Fraud",
-          "Wired Security"
+          "Frank on Fraud"
         ],
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 10,
+            "contributed": 10
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 7,
+            "contributed": 7
           },
           "Krebs on Security": {
             "items": 10,
@@ -777,26 +883,26 @@
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 0,
+            "contributed": 0
           },
           "The Record": {
             "items": 5,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 3,
+            "contributed": 3
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "Securelist (Kaspersky)": {
-            "items": 0,
+            "items": 10,
             "in_window": 0,
             "contributed": 0
           },
@@ -847,8 +953,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 4,
+            "contributed": 4
           },
           "Frank on Fraud": {
             "items": 10,
@@ -857,8 +963,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -875,12 +981,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 23
+            "contributed": 16
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 11
+            "contributed": 13
           },
           "PublicSource": {
             "items": 10,
@@ -890,7 +996,7 @@
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 6,
-            "contributed": 2
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
@@ -900,22 +1006,22 @@
           "Pittsburgh Magazine": {
             "items": 30,
             "in_window": 14,
-            "contributed": 0
+            "contributed": 1
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 7
+            "contributed": 4
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 4
+            "contributed": 5
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 12
+            "contributed": 20
           }
         }
       },
@@ -931,43 +1037,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 73,
-            "in_window": 22,
-            "contributed": 6
+            "in_window": 20,
+            "contributed": 4
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 39,
-            "contributed": 12
+            "in_window": 40,
+            "contributed": 17
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 44,
-            "contributed": 4
+            "in_window": 47,
+            "contributed": 12
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 9,
+            "in_window": 8,
             "contributed": 1
           },
           "The Economist": {
             "items": 300,
             "in_window": 53,
-            "contributed": 3
+            "contributed": 2
           },
           "FT Home": {
-            "items": 9,
-            "in_window": 9,
-            "contributed": 9
+            "items": 8,
+            "in_window": 8,
+            "contributed": 5
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 22
+            "contributed": 18
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 3
+            "contributed": 1
           }
         }
       },
@@ -1020,8 +1126,8 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 5,
-            "contributed": 3
+            "in_window": 6,
+            "contributed": 4
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1035,13 +1141,13 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 9,
+            "in_window": 8,
             "contributed": 4
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 13,
-            "contributed": 8
+            "in_window": 12,
+            "contributed": 7
           }
         }
       },
@@ -1051,21 +1157,21 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 33,
+        "in_window": 26,
         "failed": [],
         "empty": [
           "Guardian Olympics"
         ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 26,
-            "in_window": 26,
-            "contributed": 26
+            "items": 20,
+            "in_window": 20,
+            "contributed": 20
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 6,
+            "contributed": 6
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1126,24 +1232,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 26860,
+          "outputTokens": 27312,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 113794,
+          "cacheCreationInputTokens": 122022,
           "webSearchRequests": 0,
-          "costUSD": 1.80947,
+          "costUSD": 1.90305,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 15138
+          "thinkingTokens": 11933
         }
       },
-      "cost_usd": 1.80947,
-      "duration_ms": 318667,
+      "cost_usd": 1.90305,
+      "duration_ms": 296477,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-18 07:07 EDT",
-    "items_considered": 69,
+    "generated_at": "2026-09-18 10:05 EDT",
+    "items_considered": 59,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1224,11 +1330,9 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.8095,
-    "model_duration_ms": 318667,
+    "model_cost_usd": 1.903,
+    "model_duration_ms": 296477,
     "local_from": null,
-    "feed_failures": [
-      "Securelist (Kaspersky)"
-    ]
+    "feed_failures": []
   }
 }
