@@ -1,0 +1,65 @@
+{
+ "dual_beam": {
+  "beam_width": 100000,
+  "text_alphabets": [
+   "KRYPTOS(KA)",
+   "A-Z"
+  ],
+  "key_alphabet": "same as text alphabet",
+  "modes": [
+   "add c=p+k",
+   "sub c=p-k",
+   "beau c=k-p"
+  ],
+  "plaintext_vocabulary": "words.txt len 3-16 = 287,617 words, Zipf 1/rank prior",
+  "key_vocabularies": [
+   "len>=8 (121,199)",
+   "len>=9 (82,843)",
+   "len>=10 (52,870)"
+  ],
+  "weights": {
+   "Wpt": 1.0,
+   "Wkey": 2.0
+  },
+  "state": "(position, plaintext-trie node, key-trie node, quadgram context), deduped",
+  "not_covered": [
+   "key words shorter than 8 letters (search provably vacuous there)",
+   "any columnar transposition sitting under the substitution",
+   "keyed / Quagmire plaintext alphabets other than KA and A-Z",
+   "key streams that are not concatenations of English dictionary words"
+  ]
+ },
+ "periodic_beam": {
+  "beam_width": 100000,
+  "periods": [
+   25,
+   27,
+   28,
+   30,
+   32,
+   35,
+   36,
+   40,
+   42,
+   45,
+   48,
+   50,
+   54,
+   56,
+   60,
+   63
+  ],
+  "modes": [
+   "add/sub (identical search)",
+   "beau"
+  ],
+  "plaintext_constraint": "soft dictionary-word constraint, penalty -6.0 per abandoned word",
+  "guidance": "cross-period unigram + adjacent-residue bigram lookahead",
+  "not_covered": [
+   "periods 1-24 (already Tier-2 dead by other work)",
+   "periods > 63",
+   "transposition underneath",
+   "non-periodic key streams"
+  ]
+ }
+}

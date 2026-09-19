@@ -1,0 +1,156 @@
+{
+ "family": "Word-constrained dual beam search on PK10 (frontier item 5): plaintext-words x key-words at beam 100,000, plus the plaintext-word-constrained / free-periodic-key variant L=25..63",
+ "role": "ADVERSARIAL VERIFICATION of the claimed hit (best_score obj=-6.4241, KA alphabet, key vocab len>=8, beaufort, said to beat the matched null max)",
+ "verdict": "REFUTED",
+ "tier": "Tier 3 screen (FAMILY OPEN) -- the family is a clean, powered NEGATIVE on PK10; the specific claimed hit is a null-mismatch artifact, not a signal",
+ "executed_configs_this_verification": {
+  "controls_py": 1,
+  "reproduction_beam_runs_real_PK10": 1,
+  "published_null_replicate_reproduced": 1,
+  "fresh_matched_null_beam_runs": 24,
+  "trivial_roundtrip_demonstrations": 3,
+  "total_beam_runs": 26
+ },
+ "wall_sec_this_verification": 3420,
+ "reproduction": {
+  "claimed": {
+   "obj": -6.4241,
+   "qg": -4.1858,
+   "alphabet": "KA",
+   "kmin": 8,
+   "mode": "beau",
+   "beam": 100000
+  },
+  "reproduced": {
+   "obj": -6.4241,
+   "qg": -4.1858,
+   "sec": 125.0
+  },
+  "exact_match": true,
+  "published_null_replicate_seed1000_add_k8": {
+   "published": -6.426,
+   "rerun": -6.426,
+   "match": true
+  },
+  "artifacts_are_genuine": true,
+  "note": "Nothing was fabricated. Every published number reproduces bit-for-bit. The defect is statistical."
+ },
+ "roundtrip_audit": {
+  "roundtrip_exact": true,
+  "evidential_weight": "ZERO",
+  "why": "the key is DEFINED as the residual k = c (-) p, so re-encrypting the recovered plaintext under the recovered key reproduces the ciphertext for ANY plaintext whatsoever; verified explicitly for 'AAAA...', 'KRYPTOS' repeated and a pangram -- all round-trip exactly",
+  "key_len": 504,
+  "pt_len": 504,
+  "key_words": 58,
+  "doctrine_6": "FAILS: the key is 504 letters for a 504-letter plaintext, i.e. exactly as long as the message it explains"
+ },
+ "decrypt_readability": {
+  "first_words": "FEI MAL LOSE SESSION ALL SWEE SELL THE FOR OGRE HER WAT THEIR MSH THE ARE HOLLEY OTHE INS CODE SIMULATE SCHEMA RINCE NEAT TERA TIENE SEE THE HEYER ALETHA",
+  "reads_as_english_or_italian": false,
+  "mean_pt_word_len": 4.06,
+  "pt_words": 124,
+  "quadgram_real_best": -4.1858,
+  "quadgram_real_english_504": -4.2558,
+  "quadgram_best_of_30_shuffle_nulls": -4.1328,
+  "interpretation": "the beam manufactures decrypts that beat REAL ENGLISH on quadgrams out of pure letter-shuffled noise, so the quadgram figure quoted for the hit is anti-informative"
+ },
+ "null_construction_rebuilt_from_scratch": {
+  "defect_found": "wb_run_null.py runs the dual beam in mode='add' ONLY, on one alphabet (KA) and one key vocabulary, while the real search maximised over 15 executed PK10 cells (3 modes x {KA,AZ} x kmin in {8,9,10}). The claimed best cell is mode='beau'. A beaufort real cell was scored against an add-mode null.",
+  "same_failure_as": "the earlier affine z=+4.91 whose null was over permutations while the search ran over rotations",
+  "my_null": "xv5_null.py -- IDENTICAL beam (width 100000, pt vocab len 3-16, key vocab len>=8, Wpt=1.0/Wkey=2.0, same dedup, same final word-boundary rule), FRESH seeds 55000..55007 disjoint from every published seed family, and each replicate is the MAX over the same 3 modes the real search maximised over",
+  "replicates": {
+   "mine_seeds_55000plus": 8,
+   "independent_seeds_1000plus": 10,
+   "pooled": 18,
+   "beam_runs_in_null": 54
+  },
+  "pooled_max3_null": {
+   "mean": -6.4149,
+   "sd": 0.024,
+   "max": -6.3691,
+   "min": -6.4465
+  },
+  "mode_effect_on_NULL_data_paired_beau_minus_add": {
+   "mean": 0.0345,
+   "sem": 0.0068,
+   "n": 18,
+   "meaning": "beaufort is worth ~+0.035/letter to this beam on pure noise; the entire published +0.039 'excess' is this artifact"
+  }
+ },
+ "z_recomputed": {
+  "as_published_beau_real_vs_ADD_null": 2.0,
+  "matched_max3_null_pooled": -0.38,
+  "nulls_beating_real": "11/18",
+  "empirical_p": 0.611,
+  "same_mode_z": {
+   "add": -0.85,
+   "sub": -0.61,
+   "beau": 0.27
+  },
+  "above_ceiling": false,
+  "margin_over_published_add_only_null_max": 0.0019
+ },
+ "multiple_testing": {
+  "outer_grid_real_PK10_dual_cells_executed": 15,
+  "outer_grid_real_PK10_periodic_cells_executed": 48,
+  "per_beam_run_candidate_expansions": 2600000000.0,
+  "log10_consistent_(pt,key)_pairs_at_n=504_key_len>=8": 270.8,
+  "expected_max_of_N_iid_normals": {
+   "N=3": 0.85,
+   "N=12": 1.63,
+   "N=15": 1.74,
+   "N=48": 2.24
+  },
+  "conclusion": "even taking the published z=+2.00 at face value, it is at/below E[max] for the 12-15 correlated cells the search maximised over. With the null correctly matched to that maximisation the z is NEGATIVE, so no correction is needed -- there is nothing to correct."
+ },
+ "periodic_variant": {
+  "best_real": {
+   "L": 60,
+   "mode": "beau",
+   "obj": -7.7495,
+   "qg": -6.1316
+  },
+  "null": "20 shuffles (seeds 2000+), each replicate = max over the same 16-period grid, but mode='add' ONLY while the real maximised over 3 modes",
+  "null_stats": {
+   "mean": -7.849,
+   "sd": 0.0574,
+   "max": -7.7389
+  },
+  "z": 1.73,
+  "nulls_beating_real": "1/20",
+  "above_ceiling": false,
+  "note": "already below its own under-matched null MAX; adding the mode-max would push it further down. Positive control (real English under a random free period-L key) recovers 100% at obj -5.4491 -- a 2.3/letter gap, so this is a powered negative."
+ },
+ "power_check": {
+  "synthetic_504_controls": {
+   "kmin10_seed7": {
+    "obj": -5.9828,
+    "recovery": 0.9623
+   },
+   "kmin10_seed99": {
+    "obj": -5.9952,
+    "recovery": 0.9722
+   }
+  },
+  "kmin10_null_ceiling": -6.6438,
+  "real_PK10_kmin10_best": -6.6715,
+  "verdict": "the solver IS powered at n=504: a true solution lands at -5.98 while the null ceiling is -6.64. Real PK10 sits inside the null band. The negative is real.",
+  "caveat_found": "results/wb_pc1_beam100000.json records truth_wins=false in all 6 PK1 control cells -- the TRUE (PROVENANCE) solution scores WORSE under this objective than the beam's own found solution. The objective does not rank ground truth first, so 'best objective' is not evidence of correctness even in principle."
+ },
+ "scripts": [
+  "xv5_repro.py",
+  "xv5_null.py",
+  "xv5_checkpub.py",
+  "xv5_mt.py",
+  "xv5_verdict.py",
+  "xv5_write.py"
+ ],
+ "result_files": [
+  "results/xv5_repro.json",
+  "results/xv5_null_k8.json",
+  "results/xv5_checkpub.json",
+  "results/xv5_frontier5_verdict.json",
+  "results/xv5_pooled.json",
+  "results/xv5_frontier5.json"
+ ]
+}
