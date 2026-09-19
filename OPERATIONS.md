@@ -1,7 +1,7 @@
 # infosecfollow — Operations Runbook
 
 Everything needed to check, fix, and maintain the site from any machine,
-with no AI assistant in the loop. Written 2026-07-29, revised 2026-09-02.
+with no AI assistant in the loop. Written 2026-07-29, revised 2026-09-04.
 
 ---
 
@@ -45,10 +45,11 @@ with no AI assistant in the loop. Written 2026-07-29, revised 2026-09-02.
   deploy attempts and backoff — nothing custom runs on push any more. A stale
   site can therefore be EITHER a missing commit (container problem) OR a
   failed Pages build (GitHub problem).
-- **The Mac is not in the loop.** `run_daily.sh` + `com.infosecfollow.refresh.plist`
-  are the legacy macOS path, replaced by the NAS. Keep the LaunchAgent
-  unloaded (`launchctl bootout gui/$UID/com.infosecfollow.refresh`) so the two
-  can never double-publish.
+- **The Mac is not in the loop.** The legacy macOS path (`run_daily.sh` + a
+  LaunchAgent plist) was replaced by the NAS and deleted from the repo in
+  2026-09; `git log -- run_daily.sh` still has it. If that LaunchAgent is
+  still installed on any Mac, keep it unloaded (`launchctl bootout
+  gui/$UID/com.infosecfollow.refresh`) so the two can never double-publish.
 
 Secrets live in **`/volume1/docker/infosecfollow/.env` on the NAS** (the
 compose folder — the four build files sit flat in it; never in the repo):
@@ -213,8 +214,9 @@ old Mac LaunchAgent loaded again? §1).
 **5.6 Commit landed but the site didn't update.** GitHub Actions tab → open
 the newest red **"pages build and deployment"** run → **Re-run all jobs**. If
 that pipeline is stuck or keeps failing, trigger **"Redeploy to GitHub Pages
-(manual)"** (Actions → that workflow → *Run workflow*): it re-uploads `docs/`
-from `main` with three deploy attempts and backoff. A red built-in run
+(manual)"** (Actions → that workflow → *Run workflow*, with **main** selected
+in *Use workflow from* — the workflow refuses any other branch): it re-uploads
+`docs/` from `main` with three deploy attempts and backoff. A red built-in run
 usually means a real Pages outage; re-run when GitHub recovers. Settings →
 Pages → Source should read *Deploy from a branch*, `main` `/docs`.
 
@@ -291,13 +293,12 @@ GETs per run, `engine/plaintextsports.py`). Read the
 - **Changing the update schedule**: edit `WEEKDAY_SLOTS` / `WEEKEND_SLOTS` at
   the top of `deploy/scheduler.sh` (two variables, HH:MM in the container's
   `TZ`), then rebuild as above. Update `INFOSECFOLLOW_SCHEDULE_NOTE` in `.env`
-  (or its default in `engine/generate.py`) so the page footer matches. Keep
-  the LaunchAgent plist retired regardless.
+  (or its default in `engine/generate.py`) so the page footer matches.
 - **Disk hygiene**: container logs are capped (3×10 MB) by compose. Each run
   adds an archive `.html` + `.txt` pair to `docs/archive/` and rewrites the
-  day's `docs/data/<date>.json` (~25 KB), so `docs/` grows roughly 0.2–0.4 MB
-  per day, with about the same again in `.git` objects inside the container
-  volume. Nothing needs pruning routinely; if it ever does, set
+  day's `docs/data/<date>.json` (~75 KB on a full day, since the feed-health
+  block was added), so `docs/` grows roughly 0.4 MB per day, with about the
+  same again in `.git` objects inside the container volume. Nothing needs pruning routinely; if it ever does, set
   `INFOSECFOLLOW_ARCHIVE_RETENTION_DAYS=N` in `.env` (keep N ≥ 7 — the
   engine's memory and diff look back 7 days) and archive/data files older
   than N days are deleted at the next run.
@@ -356,8 +357,7 @@ DOCKER=/usr/local/bin/docker; [ -x "$DOCKER" ] || DOCKER=docker
 - **Schedule provenance**: the live schedule is `deploy/scheduler.sh`
   (`WEEKDAY_SLOTS` / `WEEKEND_SLOTS`: 4 weekday slots, 2 weekend slots, + on-start;
   wave-aligned as of 2026-07 — before that it was 6:02/9:02/12:02/16:02/21:02
-  daily). The 4-slot `com.infosecfollow.refresh.plist` at the repo root is the
-  retired Mac LaunchAgent, kept for reference.
+  daily, under the Mac LaunchAgent that the NAS replaced).
 - **Branch layout**: `main` = generated site + engine (no branch protection);
   `feed-pubdates-data` = sampler output only, created by the first snapshot
   (never merge it); `claude/*` = assistant work branches.
