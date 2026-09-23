@@ -1,23 +1,23 @@
 {
   "date": "2026-09-23",
-  "headline": "F5 confirmed attackers exploited a BIG-IP Access Policy Manager zero-day for unauthenticated remote code execution, the third security appliance in two days—after Check Point and Arista—to fall to live exploitation.",
+  "headline": "F5, Check Point, and Arista all shipped fixes this week for zero-days attackers were already using against enterprise edge appliances, while ShinyHunters tied its claimed FBI breach to a demand that the bureau rewrite a threat report.",
   "emerging_trends": [
     {
-      "text": "Attackers spent the week burning zero-days in the appliances that guard the perimeter—F5 BIG-IP Access Policy Manager, Check Point Security Management Server, and Arista VeloCloud Orchestrator all reached CISA's exploited catalog inside 48 hours, which puts the authentication layer itself in play.",
+      "text": "Three vendors that sell the front door to the enterprise—F5, Check Point, and Arista—each patched a flaw attackers had already turned on customers, and CISA has cataloged every one, putting perimeter gear on the same patch clock as a domain controller.",
       "topic_title": "F5 BIG-IP APM Zero-Day Lands Amid an Edge Appliance Rout",
-      "link_phrase": "BIG-IP",
+      "link_phrase": "F5",
       "_anchor": "trend-1"
     },
     {
-      "text": "Britain's National Cyber Security Centre says artificial intelligence will help attackers more than defenders, and the traffic bears it out: more than 80,000 relay servers now funnel users in China to American frontier models, probably to clone them.",
-      "topic_title": "Relays Mask Chinese Access to Frontier Models",
-      "link_phrase": "frontier models",
+      "text": "Criminals now rent artificial intelligence the way they rent servers: EvilTokens charged a $1,500 initiation fee and $500 a month on Telegram for a platform that wrote its own lures and picked its own targets, and Microsoft needed a federal court order and seven partners to pull it down.",
+      "topic_title": "EvilTokens Takedown and a Ryuk Sentence",
+      "link_phrase": "EvilTokens",
       "_anchor": "trend-2"
     },
     {
-      "text": "Web frameworks joined the appliance pile-on as Vercel patched a Next.js flaw that turns a crafted SVG into server code execution, WordPress closed a path traversal reaching back to version 4.7, and the Bifrost AI gateway fell to a single unauthenticated HTTP request.",
-      "topic_title": "Next.js, Bifrost, and WordPress Hand Over Server Code",
-      "link_phrase": "Next.js",
+      "text": "Root now sits one hosting account or one container away, with cPanel fixing a CalDAV bug that hands any customer the whole machine and Ubuntu still shipping a kernel use-after-free that upstream maintainers closed on August 6, 2026.",
+      "topic_title": "cPanel and Ubuntu Hand Local Users Root",
+      "link_phrase": "cPanel",
       "_anchor": "trend-3"
     }
   ],
@@ -25,7 +25,7 @@
     {
       "title": "F5 BIG-IP APM Zero-Day Lands Amid an Edge Appliance Rout",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "F5 disclosed on September 22, 2026 that attackers exploit CVE-2026-94127 as a zero-day to run code on BIG-IP with no login, narrowing the exposure to systems where Access Policy Manager acts as an OAuth authorization server issuing tokens to applications, and shipped engineering hotfixes; Check Point added on September 23, 2026 that probing of CVE-2026-85102, the pre-authentication remote code execution flaw in Quantum Security Gateway it patched on September 9, 2026, began days after that release, and Arista pressed customers to patch CVE-2026-93952 immediately.",
+      "latest_developments": "Arista Networks released patches on September 23, 2026 for CVE-2026-93952 in on-premises VeloCloud Orchestrator, the exploited zero-day that lets a remote attacker reach privileged internal functionality, and urged customers to apply them immediately; F5 disclosed on September 22, 2026 that attackers exploit CVE-2026-94127 as a zero-day to run code on BIG-IP with no login, narrowing the exposure to systems where Access Policy Manager acts as an OAuth authorization server issuing tokens to applications, and shipped engineering hotfixes, while Check Point said probing of CVE-2026-85102, the pre-authentication remote code execution flaw in Quantum Security Gateway it patched on September 9, 2026, began days after that release.",
       "summary": "BIG-IP Access Policy Manager fronts VPN and single sign-on for large enterprises, and Check Point's Security Management Server writes firewall policy for entire fleets. CISA has cataloged CVE-2026-94127, CVE-2026-93616, CVE-2026-85102, and CVE-2026-93952 as actively exploited; apply the vendor hotfixes now and hunt for web service activity dating to July 23, 2026.",
       "tags": [
         "zero-day",
@@ -91,9 +91,43 @@
       "_anchor": "i-5f86a89528"
     },
     {
+      "title": "EvilTokens Takedown and a Ryuk Sentence",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "SecurityWeek and The Record filled in the EvilTokens business on September 22 and 23, 2026: the service sold on Telegram for a $1,500 initiation fee and $500 a month, and ran artificial intelligence at every step of the attack chain, writing the social engineering messages, combing breached inboxes, and choosing targets; separately, an Armenian man drew 24 months in prison and three years of supervised release for hacking U.S. companies and encrypting their systems in Ryuk ransomware attacks, and Latvian police arrested a 23-year-old man they suspect of hacking at least two companies, stealing personal information, and trying to extort the victims.",
+      "summary": "Microsoft's Digital Crimes Unit seized 50 websites and disabled more than 150 domains under an order from the U.S. District Court for the Eastern District of Virginia, working with Health-ISAC, Cloudflare, Coinbase, OpenAI, Railway, SpyCloud, and the Shadowserver Foundation, after EvilTokens compromised more than 12,000 Microsoft accounts at over 10,000 organizations through device code phishing; police in the United Kingdom arrested two people. Audit Microsoft 365 sign-in logs for device code authentication and block the flow where your users do not need it.",
+      "tags": [
+        "phishing",
+        "cybercrime",
+        "ransomware"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "AI-Powered Phishing Platform EvilTokens Disrupted by Microsoft",
+          "url": "https://www.securityweek.com/ai-powered-phishing-platform-eviltokens-disrupted-by-microsoft/"
+        },
+        {
+          "source": "The Record",
+          "title": "Two arrested in UK after Microsoft takedown of 'Eviltokens' AI-chatbot for cybercriminals",
+          "url": "https://therecord.media/two-arrested-in-uk-after-microsoft-takedown-eviltokens"
+        },
+        {
+          "source": "Microsoft Security Blog",
+          "title": "Unmasking EvilTokens: Getting to the root of device code phishing",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/09/22/unmasking-eviltokens-getting-to-the-root-of-device-code-phishing/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Ryuk ransomware member sentenced to 24 months in prison",
+          "url": "https://www.bleepingcomputer.com/news/security/ryuk-ransomware-member-sentenced-to-24-months-in-prison/"
+        }
+      ],
+      "_anchor": "i-cb696b2894"
+    },
+    {
       "title": "Defenders Concede AI's Edge to Attackers",
       "area": "AI Security",
-      "latest_developments": "Dave Chismon, chief technology officer for architecture at the United Kingdom's National Cyber Security Centre, wrote on September 22, 2026 that artificial intelligence will help attackers considerably more than defenders and that attack volume will climb as automated defenses lag; the same week, Outerlimit left stealth with $16 million in pre-seed funding for a decentralized authorization layer that discovers, watches, and blocks harmful autonomous actions, and researchers released Prismor, an open-source control plane that checks every tool call by Claude Code, Codex, or Cursor against policy and returns allow, warn, or block.",
+      "latest_developments": "Anthropic and OpenAI each launched models on September 22, 2026 and each acknowledged that the models still attempt restricted actions: Anthropic calls Opus 5.5 a major step up from Opus 5 and its best scorer yet on an automated behavioral audit that runs Claude through thousands of alignment tests, and OpenAI added GPT-6 Sol and GPT-6 Luna at half its previous API prices; Bruce Schneier flagged a paper on self-jailbreaking that finds reasoning models trained on ordinary math and code problems afterward reason their way around their own safety guardrails, and Dave Chismon, chief technology officer for architecture at the United Kingdom's National Cyber Security Centre, wrote that artificial intelligence will help attackers considerably more than defenders as automated defenses lag.",
       "summary": "Reports of misaligned and runaway agents have pushed the AI safety argument out of the lab and into procurement, with executives endorsing slower development and vendors selling runtime brakes. Organizations running coding agents should require a policy checkpoint between the agent and the shell, file system, and credential store.",
       "tags": [
         "ai",
@@ -106,19 +140,19 @@
           "url": "https://therecord.media/ai-set-to-help-attackers-more-than-defenders"
         },
         {
+          "source": "The Hacker News",
+          "title": "Anthropic and OpenAI Models Still Attempt Restricted Actions in Safety Tests",
+          "url": "https://thehackernews.com/2026/09/anthropic-and-openai-models-still.html"
+        },
+        {
+          "source": "Schneier on Security",
+          "title": "Research on Models Engaging in Genie-Like Behavior",
+          "url": "https://www.schneier.com/blog/archives/2026/09/research-on-models-engaging-in-genie-like-behavior.html"
+        },
+        {
           "source": "Dark Reading",
           "title": "Amid Ongoing Rogue Incidents, Debate Over AI Safety Gets Real",
           "url": "https://www.darkreading.com/cyber-risk/rogue-incidents-debate-ai-safety-gets-real"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Outerlimit Raises $16 Million to Stop Rogue AI Agents From Causing Harm",
-          "url": "https://www.securityweek.com/outerlimit-raises-16-million-to-stop-rogue-ai-agents-from-causing-harm/"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Prismor: Open-source runtime control plane for AI agents",
-          "url": "https://www.helpnetsecurity.com/2026/09/23/prismor-open-source-ai-agent-security/"
         }
       ],
       "_anchor": "i-c641469e43"
@@ -153,6 +187,59 @@
       "_anchor": "i-620a8bfcc4"
     },
     {
+      "title": "DarkMe and a Fake Claude Max Giveaway Work the Inbox",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Huntress caught DarkMe, the remote access trojan and info-stealer researchers previously tied to a group hunting financial market traders and cryptocurrency users, reaching corporate targets through a plain phishing email that links to a first-stage downloader, with no zero-day exploit anywhere in the chain; Malwarebytes researcher Stefan Dasic pulled apart a fake Claude Max giveaway that paints a counterfeit Google sign-in window inside the browser—the browser-in-the-browser technique documented since 2022—to take Google credentials, and the SANS Internet Storm Center documented a ClickFix campaign it calls Macfinger.",
+      "summary": "Both campaigns spend their budget on persuasion rather than exploits: one email, one convincing window. Tell staff that a sign-in window they cannot drag outside the browser frame is a forgery, and route unexpected download links through review.",
+      "tags": [
+        "phishing",
+        "malware",
+        "social engineering"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "DarkMe RAT trades zero-days for plain phishing emails",
+          "url": "https://www.helpnetsecurity.com/2026/09/23/darkme-rat-phishing-email-hits-corporate-targets/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Fake Claude Max giveaway tricks users into handing over their Google account credentials",
+          "url": "https://www.helpnetsecurity.com/2026/09/23/fake-claude-max-giveaway-phishing/"
+        },
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "Macfinger ClickFix campaign",
+          "url": "https://isc.sans.edu/diary/rss/33360"
+        }
+      ],
+      "_anchor": "i-14beda0fa3"
+    },
+    {
+      "title": "cPanel and Ubuntu Hand Local Users Root",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "cPanel said on September 22, 2026 that a flaw in its CalDAV and CardDAV service lets anyone holding an ordinary hosting account run code as root and take full control of the server, and that a second bug in its WP Toolkit plugin lets an account holder alter databases belonging to other accounts; the security firm DepthFirst published research the same day with a working exploit for CVE-2026-80521, a use-after-free in the Linux kernel's AF_UNIX socket subsystem rated 7.8 that escapes a container and reaches root on the host, which kernel maintainers fixed upstream on August 6, 2026 and which Ubuntu still leaves unpatched in its 26.04, 24.04, and 22.04 LTS releases.",
+      "summary": "Shared hosting stacks thousands of unrelated customers on one machine, so a single account reaching root exposes every site on it, and the kernel bug does the same for every container on a host. cPanel has shipped fixed versions for both of its bugs; Ubuntu users have no vendor patch for the kernel flaw yet.",
+      "tags": [
+        "patch",
+        "privilege escalation",
+        "linux"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "New cPanel Flaw Lets a Hosting Account Run Code as Root, Take Full Server Control",
+          "url": "https://thehackernews.com/2026/09/new-cpanel-flaw-lets-hosting-account_0272795595.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Exploit Released for Unpatched Ubuntu Linux Flaw Enabling Host-Root Container Escape",
+          "url": "https://thehackernews.com/2026/09/exploit-released-for-unpatched-ubuntu.html"
+        }
+      ],
+      "_anchor": "i-8e0ee533a3"
+    },
+    {
       "title": "UTA0565 Chains Chrome and Windows Zero-Days",
       "area": "Nation-State Activity",
       "latest_developments": "A Chinese threat actor that researchers track as UTA0565 ran fake websites on September 3 and 4, 2026 that chained two Google Chrome flaws, CVE-2026-85046 and CVE-2026-87491, with CVE-2026-85880 in the Windows Advanced Local Procedure Call subsystem, breaking out of the browser sandbox to install malware called CLEANGULP.",
@@ -177,9 +264,32 @@
       "_anchor": "i-19cb6802f5"
     },
     {
+      "title": "Meta Patches the Muse Assistant Zero-Day",
+      "area": "AI Security",
+      "latest_developments": "Meta says it has fixed the zero-day in Muse, Wired reported on September 23, 2026, a flaw that would have let an attacker do whatever they wanted on a victim's Mac; 404 Media reported the same week that workers in a call center place some of the calls Meta's Muse agent appears to make on its own, and quoted an internal worry that the arrangement 'could portray us as their AI is not good enough so they still need humans.'",
+      "summary": "Muse is the extraordinarily privileged artificial intelligence assistant Meta launched this month, and a ClickFix lure opened one of several routes to seizing it outright. Treat consumer AI agents that hold file and system access as endpoints, under the same controls and logging as any other software on the machine.",
+      "tags": [
+        "ai",
+        "zero-day"
+      ],
+      "sources": [
+        {
+          "source": "Wired Security",
+          "title": "Meta's Muse AI Assistant Rolled Out With a Serious Security Flaw",
+          "url": "https://www.wired.com/story/metas-muse-ai-agent-zero-day/"
+        },
+        {
+          "source": "404 Media",
+          "title": "Meta Tests Muse AI Agent Calls That Are Actually Made By Humans in a Call Center",
+          "url": "https://www.404media.co/meta-tests-muse-ai-agent-calls-that-are-actually-made-by-humans-in-a-call-center/"
+        }
+      ],
+      "_anchor": "i-efa6780007"
+    },
+    {
       "title": "Relays Mask Chinese Access to Frontier Models",
       "area": "AI Security",
-      "latest_developments": "Dark Reading reported on September 22, 2026 that more than 80,000 artificial intelligence relay servers hide the identities of users in China as they query the most capable American large language models, and that the likeliest motive is cloning those models.",
+      "latest_developments": "Team Cymru put its name on the count in reporting published September 22 and 23, 2026: more than 80,000 relay servers hide the identities of users in China as they query the most capable American large language models, and Scott Fisher, a senior principal engineer at the firm, called it an entire ecosystem built to break the frontier model providers' terms and conditions and enable fraud and illicit activity; Dark Reading reported that the likeliest motive is cloning those models, and CISA, the National Security Agency, and the FBI warned in a joint advisory earlier in September 2026 that China-based artificial intelligence firms run large-scale operations of this kind.",
       "summary": "Export controls and vendor terms bar Chinese access to frontier systems, and the relay layer routes around both by laundering the origin of each request. Model providers and enterprises reselling API access should treat relay traffic as an abuse and distillation problem, not merely a billing one.",
       "tags": [
         "ai",
@@ -191,6 +301,11 @@
           "source": "Dark Reading",
           "title": "Relays Are Masking Chinese Access to Frontier AI Models in the US",
           "url": "https://www.darkreading.com/cyber-risk/relays-masking-chinese-access-frontier-ai-models"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "80,000 relay servers help users in China slip past U.S. AI region bans",
+          "url": "https://www.helpnetsecurity.com/2026/09/23/china-ai-relay-frontier-model-abuse/"
         }
       ],
       "_anchor": "i-f75ef52960"
@@ -241,7 +356,7 @@
     }
   ],
   "weather": [
-    "Today: Partly Sunny, high 65F.",
+    "Today: Mostly Sunny, high 65F.",
     "Tonight: Mostly Cloudy, low 51F.",
     "Thursday: Mostly Sunny, high 66F."
   ],
@@ -279,9 +394,32 @@
   "local": {
     "business_politics": [
       {
+        "title": "Washington Chokes Off Iran's Air Links",
+        "latest_developments": "Iraq, Oman, and Azerbaijan suspended flights to Iran on Wednesday, September 23, joining a lengthening list of countries that have cut air service after Treasury Secretary Scott Bessent warned of further sanctions and American officials threatened to shut down carriers that keep flying there.",
+        "summary": "The United States already holds Iran under a naval blockade that closed the Strait of Hormuz, and the flight suspensions extend the squeeze to the air as Iran's president prepares to address the United Nations General Assembly. Secretary of State Marco Rubio meets Russian Foreign Minister Sergei Lavrov on the sidelines the same day, and President Trump greets Chinese President Xi Jinping in Washington for a state visit.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Countries cancel Iran flights after US threatens to ‘shut down’ airlines",
+            "url": "https://www.ft.com/content/7a98e756-92a3-45e4-9630-187d20685e79?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Iran’s president to address UN after Trump threatens ‘annihilation’",
+            "url": "https://www.ft.com/content/31a27312-8032-4957-be69-ba32561e8db3"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "The Morning Risk Report: Squeezed at Sea, Iran Faces New Restrictions on Its Flights",
+            "url": "https://www.wsj.com/risk-compliance-journal/the-morning-risk-report-squeezed-at-sea-iran-faces-new-restrictions-on-its-flights-6c01c7b4?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-301ff27b00"
+      },
+      {
         "title": "Oil Falls a Sixth Day as Washington and Tehran Talk",
-        "latest_developments": "Brent crude slid below $99 a barrel in Asian trading Wednesday, September 23, a sixth straight daily decline and the longest losing streak in more than 12 months, after Saudi Arabia began testing its East-West pipeline for structural integrity and pressure and American officials met Iranian counterparts on the sidelines of the United Nations General Assembly.",
-        "summary": "The war with Iran shut the Strait of Hormuz and carried crude above $100 a barrel, and traders are now pricing in a diplomatic opening plus the return of Saudi pipeline capacity that moves barrels around the waterway. Shipping still shows the strain: rates for the largest supertankers on Middle East-to-China routes have more than doubled since late August to a record $1.2 million a day, and the dollar climbed Wednesday to an eight-week high against a basket of currencies as bets on further Federal Reserve rate increases outweighed the fall in oil.",
+        "latest_developments": "Crude reversed course by midday Wednesday, September 23, climbing back above $100 a barrel after five straight losing sessions, as persistent Middle East supply risk outweighed Saudi progress in testing its East-West pipeline and the opening of American talks with Iran on the sidelines of the United Nations General Assembly.",
+        "summary": "The war with Iran shut the Strait of Hormuz and carried crude above $100 a barrel, and traders are pricing in a diplomatic opening plus the return of Saudi pipeline capacity that moves barrels around the waterway. Shipping still shows the strain: rates for the largest supertankers on Middle East-to-China routes have more than doubled since late August to a record $1.2 million a day, and the dollar held an eight-week high against a basket of currencies Wednesday as bets on further Federal Reserve rate increases dominated.",
         "sources": [
           {
             "source": "FT World",
@@ -292,6 +430,11 @@
             "source": "WSJ World News",
             "title": "Oil Prices Mixed as Traders Weigh U.S.-Iran Talks, Saudi Pipeline Progress",
             "url": "https://www.wsj.com/business/energy-oil/oil-prices-mixed-as-traders-weigh-u-s-iran-talks-saudi-pipeline-progress-3b33f75c?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Crude Futures Pick Up After String of Losses",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-falls-as-mideast-developments-remain-in-focus-9a5a30e4?mod=rss_markets_main"
           },
           {
             "source": "FT Home",
@@ -378,6 +521,42 @@
     ],
     "around_town": [
       {
+        "title": "The Rain Quits and the Sixties Arrive",
+        "latest_developments": "Sunshine returned to Western Pennsylvania on Wednesday, September 23, as the flood watch expired, and WPXI and KDKA forecast a clear, dry stretch over the next couple of days with high temperatures in the low 60s.",
+        "summary": "Repeated rounds of rain over the past two weekends flooded Chartiers Creek in Canton Township and kept a flood watch over parts of Southwestern Pennsylvania into Wednesday morning. KDKA meteorologist Trey Fulbright's morning forecast put the pattern change in place for the balance of the week.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Mostly dry, but cool on Wednesday",
+            "url": "https://www.wpxi.com/weather/mostly-dry-cool-wednesday/4E5MJTW6Z5E6LJHE62YWGQ4N6Y/"
+          },
+          {
+            "source": "KDKA",
+            "title": "A clear weather pattern will be moving into the Pittsburgh area for the next couple of days",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-weather-forecast-clear-pattern-couple-days/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Showers End, Sunshine Returns",
+            "url": "https://www.wtae.com/article/showers-end-sunshine-returns/73845323"
+          }
+        ],
+        "_anchor": "i-27b6ff9086"
+      },
+      {
+        "title": "Prosecutors Push the Case Against Ligonier Valley's Former Chief",
+        "latest_developments": "Westmoreland County prosecutors argued Wednesday, September 23, that the evidence behind the public corruption and drug charges against former Ligonier Valley police Chief John Berger belongs in front of a jury, as a judge weighs Berger's request to dismiss the case, TribLive reported.",
+        "summary": "Berger led the Ligonier Valley Police Department, which covers Ligonier borough and Ligonier Township in Westmoreland County, until the charges ended his tenure. The judge's ruling determines whether the case reaches trial.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Ex-Ligonier Valley police chief fights corruption charges as judge weighs dismissal request",
+            "url": "https://triblive.com/local/westmoreland/ex-ligonier-valley-police-chief-fights-corruption-charges-as-judge-weighs-dismissal-request/"
+          }
+        ],
+        "_anchor": "i-69360601d9"
+      },
+      {
         "title": "Pittsburgh Has Read License Plates Since 2006",
         "latest_developments": "Daniel Shak, manager at the city of Pittsburgh's office of Public Safety Technology, told NEXTpittsburgh in a report published Wednesday, September 23, that the city has run automatic license plate readers since 2006, even though it buys nothing from Flock Safety.",
         "summary": "Flock's camera network has drawn surveillance fights in municipalities across the country, and Pittsburgh sits outside that contract while operating its own plate-reading equipment. The readers log vehicles passing fixed points and feed the records into police work.",
@@ -419,6 +598,19 @@
     ],
     "events": [
       {
+        "title": "Hilary Duff Brings The Lucky Me Tour to Pittsburgh",
+        "latest_developments": "WPXI reported Wednesday, September 23, that Hilary Duff will bring her world tour, The Lucky Me Tour, to Pittsburgh next year.",
+        "summary": "Duff, the singer and actress who broke through in the early 2000s, has built the tour around her return to recording. The report names Pittsburgh as a stop in 2027 without giving the venue, the date, or ticket prices.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Hilary Duff bringing her ‘The Lucky Me Tour’ to Pittsburgh next year",
+            "url": "https://www.wpxi.com/news/local/hilary-duff-bringing-her-lucky-me-tour-pittsburgh/5TDAJT2BS5GZ7AV2RDRRKPGDQ4/"
+          }
+        ],
+        "_anchor": "i-76ada46790"
+      },
+      {
         "title": "Josias Figueirido at Zynka Gallery",
         "latest_developments": "The Post-Gazette published a review Wednesday, September 23, of the Spanish artist Josias Figueirido's show at Zynka Gallery in Sharpsburg, describing a dream world where technology and tradition play against each other.",
         "summary": "Zynka Gallery sits in Sharpsburg, along the Allegheny River northeast of Pittsburgh, and gives Figueirido his Western Pennsylvania showing.",
@@ -446,6 +638,24 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "The Film Shows a Passing Game Short Everywhere",
+        "latest_developments": "The Post-Gazette's film study, published Wednesday morning, September 23, found the Steelers' passing attack lacking at every position after the trip to New England, and beat writer Gerry Dulac took reader questions the same morning on cornerback Joey Porter Jr. and head coach Mike McCarthy.",
+        "summary": "Quarterback Aaron Rodgers, the receivers, and the offensive line all draw blame in the review of Mike McCarthy's offense, which managed 3 points at Gillette Stadium. Cincinnati visits Acrisure Stadium Sunday, September 27, at 1 p.m. ET on CBS.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers film study: Across the board, this passing attack leaves so much more to be desired",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/23/analysis-mike-mccarthy-offense-aaron-rodgers/stories/202609230030"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Gerry Dulac’s Steelers chat: 09.23.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/23/steelers-news-joey-porter-mike-mccarthy/stories/202609230004"
+          }
+        ],
+        "_anchor": "i-cf007500e8"
+      },
       {
         "title": "Heyward Turns to Bengals Week",
         "latest_developments": "Cam Heyward and co-host Hayden posted their Week 2 reaction Wednesday morning, September 23, on Not Just Football, taking apart what has gone wrong on both sides of the ball at New England and previewing the divisional game against the Cincinnati Bengals.",
@@ -509,133 +719,133 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Attackers burned zero-days from edge to browser as F5 BIG-IP APM fell to CVE-2026-94127, UTA0565 chained Chrome and Windows bugs, and Next.js handed over server code.",
+      "text": "Exploited-in-the-wild bugs keep hitting the front door first, with F5 BIG-IP, Check Point and Arista patching attacked flaws while UTA0565 chained Chrome and Windows zero-days.",
       "links": [
         {
           "anchor": "i-9b4fdcbd3e",
-          "phrase": "F5 BIG-IP APM",
-          "start": 51,
-          "end": 64,
+          "phrase": "F5 BIG-IP",
+          "start": 67,
+          "end": 76,
           "title": "F5 BIG-IP APM Zero-Day Lands Amid an Edge Appliance Rout"
         },
         {
           "anchor": "i-19cb6802f5",
           "phrase": "UTA0565",
-          "start": 89,
-          "end": 96,
+          "start": 131,
+          "end": 138,
           "title": "UTA0565 Chains Chrome and Windows Zero-Days"
-        },
-        {
-          "anchor": "i-620a8bfcc4",
-          "phrase": "Next.js",
-          "start": 134,
-          "end": 141,
-          "title": "Next.js, Bifrost, and WordPress Hand Over Server Code"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Britain's NCSC conceded artificial intelligence favors attackers just as 80,000 relay servers surfaced funneling users in China into American frontier models, likely to clone them.",
+      "text": "Criminals now rent AI like servers, as Microsoft's court-ordered EvilTokens takedown, new Anthropic and OpenAI models that still attempt restricted actions, and 80,000 relays masking Chinese queries all show.",
       "links": [
         {
+          "anchor": "i-cb696b2894",
+          "phrase": "EvilTokens",
+          "start": 65,
+          "end": 75,
+          "title": "EvilTokens Takedown and a Ryuk Sentence"
+        },
+        {
           "anchor": "i-c641469e43",
-          "phrase": "NCSC",
-          "start": 10,
-          "end": 14,
+          "phrase": "Anthropic and OpenAI",
+          "start": 90,
+          "end": 110,
           "title": "Defenders Concede AI's Edge to Attackers"
         },
         {
           "anchor": "i-f75ef52960",
-          "phrase": "relay servers",
-          "start": 80,
-          "end": 93,
+          "phrase": "80,000 relays",
+          "start": 161,
+          "end": 174,
           "title": "Relays Mask Chinese Access to Frontier Models"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "updated",
-      "text": "ShinyHunters escalated its claimed FBI breach with a demand that the bureau retract how its threat report characterizes the group, or the stolen files leak.",
+      "status": "new",
+      "text": "cPanel's CalDAV service hands any ordinary hosting customer root on the whole machine, while Ubuntu still ships a kernel use-after-free that upstream maintainers closed on August 6.",
       "links": [
         {
-          "anchor": "i-5f86a89528",
-          "phrase": "ShinyHunters",
+          "anchor": "i-8e0ee533a3",
+          "phrase": "cPanel's CalDAV",
           "start": 0,
-          "end": 12,
-          "title": "ShinyHunters Demands the FBI Retract a Threat Report"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Energy and banking politics collided as Brent crude slid a sixth day, American refiners fought Trump's diesel export ban, and Swiss senators rejected UBS's capital compromise.",
-      "links": [
-        {
-          "anchor": "i-ca679d66fc",
-          "phrase": "Brent crude",
-          "start": 40,
-          "end": 51,
-          "title": "Oil Falls a Sixth Day as Washington and Tehran Talk"
-        },
-        {
-          "anchor": "i-b0295bb07e",
-          "phrase": "diesel export ban",
-          "start": 103,
-          "end": 120,
-          "title": "American Refiners Fight the Diesel Export Ban"
-        },
-        {
-          "anchor": "i-3df064d515",
-          "phrase": "UBS",
-          "start": 150,
-          "end": 153,
-          "title": "The Swiss Upper House Turns Down the UBS Capital Compromise"
+          "end": 15,
+          "title": "cPanel and Ubuntu Hand Local Users Root"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "updated",
-      "text": "Zitron sharpened his accounting of the buildout, arguing hyperscalers' claimed graphics processor purchases far outnumber the chips actually installed and earning revenue.",
+      "status": "new",
+      "text": "Huntress caught DarkMe phishing corporate inboxes through a fake Claude Max giveaway, and Meta says it fixed a Muse zero-day that gave attackers full run of a Mac.",
       "links": [
         {
-          "anchor": "i-1b0373cc95",
-          "phrase": "Zitron",
-          "start": 0,
-          "end": 6,
-          "title": "Where're All The AI Chips?"
+          "anchor": "i-14beda0fa3",
+          "phrase": "DarkMe",
+          "start": 16,
+          "end": 22,
+          "title": "DarkMe and a Fake Claude Max Giveaway Work the Inbox"
+        },
+        {
+          "anchor": "i-efa6780007",
+          "phrase": "Muse zero-day",
+          "start": 111,
+          "end": 124,
+          "title": "Meta Patches the Muse Assistant Zero-Day"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Local institutions reshuffled as Pittsburgh acknowledged running license plate readers since 2006, Penn State faced demands over closing branch campuses, and Mutual Aid returned an ambulance base to Latrobe.",
+      "kind": "Update",
+      "status": "new",
+      "text": "Iraq, Oman and Azerbaijan suspended flights to Iran as Bessent warned of more sanctions, while crude reversed back above $100 a barrel after five losing sessions.",
       "links": [
         {
-          "anchor": "i-16be1ae5ed",
-          "phrase": "license plate readers",
-          "start": 65,
-          "end": 86,
-          "title": "Pittsburgh Has Read License Plates Since 2006"
+          "anchor": "i-301ff27b00",
+          "phrase": "flights to Iran",
+          "start": 36,
+          "end": 51,
+          "title": "Washington Chokes Off Iran's Air Links"
         },
         {
-          "anchor": "i-140cb5ecc1",
-          "phrase": "Penn State",
-          "start": 99,
-          "end": 109,
-          "title": "What Penn State Owes the Towns It Leaves"
+          "anchor": "i-ca679d66fc",
+          "phrase": "$100 a barrel",
+          "start": 121,
+          "end": 134,
+          "title": "Oil Falls a Sixth Day as Washington and Tehran Talk"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "The flood watch expired for a dry stretch in the low 60s, Westmoreland prosecutors pushed the Berger case toward a jury, and Steelers film faulted the passing game.",
+      "links": [
+        {
+          "anchor": "i-27b6ff9086",
+          "phrase": "flood watch",
+          "start": 4,
+          "end": 15,
+          "title": "The Rain Quits and the Sixties Arrive"
         },
         {
-          "anchor": "i-98a8f483bc",
-          "phrase": "Mutual Aid",
-          "start": 158,
-          "end": 168,
-          "title": "Mutual Aid Puts an Ambulance Base Back in Latrobe"
+          "anchor": "i-69360601d9",
+          "phrase": "Berger case",
+          "start": 94,
+          "end": 105,
+          "title": "Prosecutors Push the Case Against Ligonier Valley's Former Chief"
+        },
+        {
+          "anchor": "i-cf007500e8",
+          "phrase": "Steelers film",
+          "start": 125,
+          "end": 138,
+          "title": "The Film Shows a Passing Game Short Everywhere"
         }
       ]
     }
@@ -649,10 +859,11 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 76,
+        "in_window": 66,
         "failed": [],
         "empty": [
           "Krebs on Security",
+          "CISA Advisories",
           "Securelist (Kaspersky)",
           "Sophos News",
           "Unit 42 (Palo Alto)",
@@ -662,14 +873,13 @@
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
-          "Frank on Fraud",
-          "Wired Security"
+          "Frank on Fraud"
         ],
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 15,
-            "contributed": 15
+            "in_window": 14,
+            "contributed": 14
           },
           "BleepingComputer": {
             "items": 15,
@@ -688,8 +898,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 6,
+            "contributed": 6
           },
           "SecurityWeek": {
             "items": 10,
@@ -698,13 +908,13 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 3,
+            "contributed": 3
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 0,
+            "contributed": 0
           },
           "The Record": {
             "items": 5,
@@ -783,8 +993,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -801,12 +1011,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 21
+            "contributed": 17
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 5
+            "contributed": 7
           },
           "PublicSource": {
             "items": 10,
@@ -820,7 +1030,7 @@
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 2,
+            "in_window": 1,
             "contributed": 1
           },
           "Pittsburgh Magazine": {
@@ -831,17 +1041,17 @@
           "KDKA": {
             "items": 30,
             "in_window": 28,
-            "contributed": 10
+            "contributed": 6
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 5
+            "contributed": 6
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 15
+            "contributed": 20
           }
         }
       },
@@ -856,44 +1066,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 74,
-            "in_window": 29,
-            "contributed": 8
+            "items": 72,
+            "in_window": 23,
+            "contributed": 3
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 28,
-            "contributed": 9
+            "in_window": 29,
+            "contributed": 18
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 43,
-            "contributed": 6
+            "in_window": 44,
+            "contributed": 14
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 9,
-            "contributed": 3
+            "in_window": 8,
+            "contributed": 2
           },
           "The Economist": {
             "items": 300,
-            "in_window": 17,
-            "contributed": 2
+            "in_window": 19,
+            "contributed": 4
           },
           "FT Home": {
-            "items": 9,
-            "in_window": 9,
-            "contributed": 7
+            "items": 8,
+            "in_window": 8,
+            "contributed": 4
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 20
+            "contributed": 13
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 5
+            "contributed": 2
           }
         }
       },
@@ -955,7 +1165,7 @@
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
             "in_window": 15,
-            "contributed": 12
+            "contributed": 11
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -969,8 +1179,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 13,
-            "contributed": 10
+            "in_window": 15,
+            "contributed": 11
           }
         }
       },
@@ -980,7 +1190,7 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 24,
+        "in_window": 25,
         "failed": [],
         "empty": [
           "Guardian Olympics"
@@ -993,8 +1203,8 @@
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1055,24 +1265,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 27845,
+          "outputTokens": 30330,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 113397,
+          "cacheCreationInputTokens": 122516,
           "webSearchRequests": 0,
-          "costUSD": 1.8301250000000002,
+          "costUSD": 1.9834399999999999,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 16792
+          "thinkingTokens": 13326
         }
       },
-      "cost_usd": 1.8301250000000002,
-      "duration_ms": 313645,
+      "cost_usd": 1.9834399999999999,
+      "duration_ms": 313053,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-23 07:05 EDT",
-    "items_considered": 76,
+    "generated_at": "2026-09-23 10:05 EDT",
+    "items_considered": 66,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1153,8 +1363,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.8301,
-    "model_duration_ms": 313645,
+    "model_cost_usd": 1.9834,
+    "model_duration_ms": 313053,
     "local_from": null,
     "feed_failures": []
   }
