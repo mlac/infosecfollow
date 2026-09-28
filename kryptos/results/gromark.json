@@ -1,0 +1,127 @@
+{
+ "family": "Gromark / lagged-recurrence keystreams (frontier item 4) -- ADVERSARIAL VERIFICATION of the top above-ceiling cell",
+ "claim_under_test": {
+  "cell": "pk9.real.KA.m",
+  "L": 7,
+  "mod": 10,
+  "rec": "aca",
+  "alphabet": "KA",
+  "sign": -1,
+  "primer": [
+   2,
+   5,
+   4,
+   6,
+   7,
+   5,
+   4
+  ],
+  "claimed_ioc": 0.063714,
+  "claimed_z_vs_null": 11.98,
+  "claimed_pooled_null_max": 0.06284
+ },
+ "verdict": "REFUTED (the hit). Family negative itself SUPPORTED at Tier 2 for the digit-primer sub-form.",
+ "executed_by_verifier": {
+  "full_10^7_enumerations": 21,
+  "primers_enumerated": 210000000,
+  "wall_sec_background_null_job": 2482,
+  "cells_recounted_from_artifacts": {
+   "real": 2032,
+   "null": 4012
+  },
+  "hill_climbs": 32
+ },
+ "reproduction": {
+  "independent_kernel": "av_gk_lib.py (numpy, written from the model description, not from gk_kernel.c)",
+  "claimed_score_reproduced": 0.063714,
+  "exact": true,
+  "rank_in_full_10^7_enumeration": 1,
+  "other_cells_reproduced_exactly": {
+   "pk9.real.KA.p": 0.060995,
+   "pk9.real.AZ.m": 0.056624,
+   "pk8.real.AZ.m": 0.05504
+  },
+  "positive_control_reproduced_independently": {
+   "synA144": 0.07566,
+   "synA153": 0.075507,
+   "synA504": 0.069519,
+   "synAcol144": 0.07566,
+   "note": "columnar-underneath value identical -> transposition invariance is exact, not merely empirical"
+  },
+  "roundtrip": "IMPOSSIBLE - the hit yields no plaintext to re-encrypt"
+ },
+ "statistical": {
+  "defect": "the reported z is NOT matched to the search: numerator is a MAXIMUM over 10^7 enumerated primers, denominator is the sd of a SINGLE per-primer draw (kernel fields mean/sd). Same failure mode as the prior Hill z=+5.78 and affine z=+4.91 false leads.",
+  "claimed_z": 11.98,
+  "rebuilt_matched_null": {
+   "draws": 20,
+   "seeds": "770000-770019 (verifier's own, independent of the claim's 1001/2002)",
+   "identical_search": "same 10^7 primer enumeration, same recurrence aca, same alphabet KA, same sign -1, same statistic, same n=144, letter-shuffled pk9 (multiset preserved)",
+   "best_of_search_mean": 0.058279914529914524,
+   "best_of_search_sd": 0.0015512755068748136,
+   "best_of_search_min": 0.05642968142968143,
+   "best_of_search_max": 0.06342268842268842,
+   "n_null_ge_real": 0,
+   "n_null_within_0.0005": 1
+  },
+  "recomputed_z": 3.5,
+  "gumbel_fit": {
+   "loc": 0.05758177695934143,
+   "scale": 0.0012095245505424415,
+   "p_one_cell": 0.00626
+  },
+  "z_against_claims_own_32_pooled_nulls": 2.17
+ },
+ "multiple_testing": {
+  "cells_evaluated": 2032,
+  "comparable_scale_cells (n=144, shift-IoC, >=10^7 primers)": 32,
+  "familywise_p_over_those_32": 0.182,
+  "expected_exceedances_over_all_2032_cells_at_this_p": 12.7,
+  "family_level_check": "39 of 2032 real cells above their pooled matched-null max vs 35.6 expected; binomial sd 5.9 -> +0.58 sd. Recounted independently: 39 and 35.6 both reproduce exactly.",
+  "survives_correction": false
+ },
+ "decrypt_autopsy": {
+  "model_requirement": "a correct primer must leave MIX(P), a monoalphabetic image of the (possibly transposed) plaintext",
+  "residual_hillclimb_quadgram_per_letter": -5.7827,
+  "matched_null_residual_hillclimb": {
+   "mean": -5.8875,
+   "sd": 0.147,
+   "min": -6.1551,
+   "max": -5.4881,
+   "z": 0.71
+  },
+  "genuine_monoalphabetic_english_n144": "-4.24 to -4.88",
+  "sorted_unigram_profile_chi2 (transposition-invariant)": {
+   "real": 0.0984,
+   "null_mean": 0.366,
+   "null_sd": 0.1601,
+   "null_min": 0.0843,
+   "english": 0.0578,
+   "z": -1.67
+  },
+  "reads_as_english_or_italian": false,
+  "decrypt_head": "YOYORDDTCLEBRELEAJRFWPLDFOLLMIRTHMOREPEAREOSLOSINIFEELYSPEANT..."
+ },
+ "power_scale_check": {
+  "true_primer_score_at_n144": 0.07566,
+  "matched_null_mean": 0.058279914529914524,
+  "matched_null_sd": 0.0015512755068748136,
+  "true_primer_in_null_sd_units": 11.2,
+  "claimed_hit_in_null_sd_units": 3.5,
+  "note": "the model admits no partial credit; a real key lands ~11 null-sd above where this hit sits"
+ },
+ "tier": {
+  "claimed_hit": "Tier 3 - noise, not a hit",
+  "family_negative": "Tier 2 UPHELD for mod-10 digit primers at L=7 and L=8 under the four tested recurrences, both alphabets, both directions; open corners (mod-26 26^7 unenumerated, mix-after-shift at n=144/153, transposition ON TOP of the Gromark) remain Tier 3 as the claim itself states"
+ },
+ "artifacts": [
+  "/home/user/infosecfollow/kryptos/av_gk_lib.py",
+  "/home/user/infosecfollow/kryptos/av_null.py",
+  "/home/user/infosecfollow/kryptos/av_pool.py",
+  "/home/user/infosecfollow/kryptos/av_autopsy.py",
+  "/home/user/infosecfollow/kryptos/av_resid.py",
+  "/home/user/infosecfollow/kryptos/results/av_gromark_null.json",
+  "/home/user/infosecfollow/kryptos/results/av_gromark_resid.json",
+  "/home/user/infosecfollow/kryptos/logs/av_null.log"
+ ]
+}

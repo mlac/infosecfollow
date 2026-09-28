@@ -1,0 +1,99 @@
+{
+ "keystream_structure": {
+  "construction": "revtrunc14, a=9  ->  S[i] = W[(i%14)%9] + W[8-((i%14)%9)]",
+  "nominal_key_entropy_letters": 9,
+  "distinct_keystream_symbols": 5,
+  "reason": "S is symmetric in mm <-> 8-mm, so the 9 word letters collapse into 5 sums (W0+W8, W1+W7, W2+W6, W3+W5, 2*W4).",
+  "group_sizes_per_period14": [
+   3,
+   3,
+   3,
+   3,
+   2
+  ],
+  "effective_period": 14,
+  "effective_distinct_shifts": 5,
+  "comment": "A period-14 stream that takes only FIVE distinct shift values flattens the decrypt letter distribution far less than a 9- or 14-valued stream would, so this cell has a structurally inflated IoC ceiling independent of any key being right."
+ },
+ "identifiability": {
+  "cell": "pk9 KA/AZ/sub revtrunc14 a=9",
+  "n_words_searched": 29973,
+  "best_ioc": 0.06313,
+  "argmax_word": "METALHEAD",
+  "n_words_with_EXACTLY_the_top_score": 1,
+  "example_tied_words": [
+   "METALHEAD"
+  ],
+  "n_words_within_0.0005_of_top": 1,
+  "example_near_words": [
+   "METALHEAD"
+  ],
+  "n_words_sharing_the_winners_5tuple": 1,
+  "words_sharing_the_5tuple": [
+   "METALHEAD"
+  ]
+ },
+ "cell_ceiling_by_construction_family_a9_pk9": {
+  "prog": {
+   "n_cells": 1,
+   "mean_cell_max": 0.05138,
+   "max_cell_max": 0.05138
+  },
+  "plain": {
+   "n_cells": 1,
+   "mean_cell_max": 0.05109,
+   "max_cell_max": 0.05109
+  },
+  "revtrunc": {
+   "n_cells": 14,
+   "mean_cell_max": 0.05058,
+   "max_cell_max": 0.06313
+  },
+  "progrev": {
+   "n_cells": 1,
+   "mean_cell_max": 0.04973,
+   "max_cell_max": 0.04973
+  },
+  "self2W": {
+   "n_cells": 1,
+   "mean_cell_max": 0.04944,
+   "max_cell_max": 0.04944
+  },
+  "KArun": {
+   "n_cells": 1,
+   "mean_cell_max": 0.04944,
+   "max_cell_max": 0.04944
+  },
+  "selftrunc": {
+   "n_cells": 14,
+   "mean_cell_max": 0.04931,
+   "max_cell_max": 0.05352
+  },
+  "trunc": {
+   "n_cells": 14,
+   "mean_cell_max": 0.04924,
+   "max_cell_max": 0.0539
+  },
+  "catrev": {
+   "n_cells": 1,
+   "mean_cell_max": 0.04847,
+   "max_cell_max": 0.04847
+  },
+  "revsum": {
+   "n_cells": 1,
+   "mean_cell_max": 0.04817,
+   "max_cell_max": 0.04817
+  },
+  "AZrun": {
+   "n_cells": 1,
+   "mean_cell_max": 0.0472,
+   "max_cell_max": 0.0472
+  },
+  "KArunrev": {
+   "n_cells": 1,
+   "mean_cell_max": 0.04701,
+   "max_cell_max": 0.04701
+  }
+ },
+ "heterogeneity_note": "The construction families do NOT share a common null. revtrunc/selftrunc cells sit systematically above plain cells because their keystreams take fewer distinct values. An \"in-cell z\" computed against the words inside ONE cell therefore cannot be compared across the grid, and cannot be a search-level z."
+}

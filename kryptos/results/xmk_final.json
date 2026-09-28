@@ -1,0 +1,71 @@
+{
+ "shuffle_null_put_on_the_same_max_over_8_footing": {
+  "per_grid_maxima_n": 40,
+  "per_grid_mean": 0.0574,
+  "per_grid_sd": 0.00154,
+  "max_of_8_pseudo_replicates": [
+   0.05925,
+   0.05876,
+   0.0608,
+   0.06284,
+   0.05866
+  ],
+  "mean_of_max_of_8": 0.06006,
+  "real_max_over_8_configs": 0.06313,
+  "real_per_config_maxima": [
+   0.05594,
+   0.05643,
+   0.06313,
+   0.0573,
+   0.05895,
+   0.05944,
+   0.06167,
+   0.05983
+  ],
+  "real_per_config_mean": 0.05909,
+  "comment": "Grouping the 40 one-config shuffle grids into 5 blocks of 8 makes the null statistic the same shape as the real one. The real 0.06313 then sits at roughly the top of a 5-draw null, i.e. an exact p of order 1/6 = 0.17, not a discovery."
+ },
+ "grid_max_is_driven_by_the_ciphertexts_own_ioc": {
+  "n_null_replicates": 68,
+  "slope_gridmax_per_unit_ct_ioc": 0.1743,
+  "intercept": 0.05035,
+  "pearson_r": 0.164,
+  "residual_sd": 0.00282,
+  "pk9_ct_ioc": 0.04448,
+  "predicted_grid_max_for_pk9": 0.05811,
+  "observed_grid_max_for_pk9": 0.06313,
+  "residual_z_of_pk9": 1.78,
+  "comment": "pk9 has the highest raw ciphertext IoC of the three targets (0.04448, z=+3.2 on this build). Once that is controlled for, its M-A search maximum is ordinary."
+ },
+ "what_a_true_family_member_looks_like": {
+  "PK1_full_n192": {
+   "grid_max": 0.07052,
+   "argmax": {
+    "cfg": "KA/KA/sub",
+    "ioc": 0.07052,
+    "w": "PROVENANCE",
+    "a": 10,
+    "name": "plain"
+   }
+  },
+  "PK1_truncated_to_n144": {
+   "grid_max": 0.07012,
+   "argmax": {
+    "cfg": "KA/KA/sub",
+    "ioc": 0.07012,
+    "w": "PROVENANCE",
+    "a": 10,
+    "name": "plain"
+   }
+  },
+  "claims_own_synthetic_positive_controls_n144": 0.0757,
+  "observed_pk9_maximum": 0.06313,
+  "gap": "a genuine single-word manufactured key yields 0.0701-0.0757 at n=144 AND is the global argmax of the whole grid; pk9 yields 0.06313, inside the outside-family null band (mean 0.05986, max 0.06692 over 20 replicates)."
+ },
+ "bottom_line": {
+  "exact_permutation_p_vs_shuffle_null_40_reps_one_config_each": 0.0244,
+  "exact_permutation_p_vs_outside_family_null_20_reps": 0.1905,
+  "exact_permutation_p_vs_shuffle_null_on_matched_max_over_8_footing": 0.1667,
+  "verdict": "REFUTED"
+ }
+}

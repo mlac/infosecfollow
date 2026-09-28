@@ -1,0 +1,87 @@
+{
+ "logic": "If pk9 really had a single-word manufactured key, the blind search would peel it and the decrypt would BE the plaintext, so the reported IoC would equal the plaintext IoC. The positive control confirms the search has that power at n=144: PK1 truncated to 144 returns PROVENANCE at rank 1 of the whole grid.",
+ "solved_sibling_plaintext_iocs": {
+  "pk1": {
+   "full_n": 192,
+   "ioc_full": 0.07052,
+   "ioc_first144": 0.07012,
+   "ioc_first153": 0.07043
+  },
+  "pk2": {
+   "full_n": 350,
+   "ioc_full": 0.07095,
+   "ioc_first144": 0.07343,
+   "ioc_first153": 0.07078
+  },
+  "pk3": {
+   "full_n": 280,
+   "ioc_full": 0.07209,
+   "ioc_first144": 0.07119,
+   "ioc_first153": 0.07009
+  },
+  "pk4": {
+   "full_n": 224,
+   "ioc_full": 0.07387,
+   "ioc_first144": 0.07683,
+   "ioc_first153": 0.07663
+  },
+  "pk5": {
+   "full_n": 272,
+   "ioc_full": 0.0687,
+   "ioc_first144": 0.06284,
+   "ioc_first153": 0.06287
+  },
+  "pk6": {
+   "full_n": 315,
+   "ioc_full": 0.06942,
+   "ioc_first144": 0.07566,
+   "ioc_first153": 0.07551
+  },
+  "pk7": {
+   "full_n": 279,
+   "ioc_full": 0.06885,
+   "ioc_first144": 0.07721,
+   "ioc_first153": 0.07783
+  }
+ },
+ "sibling_plaintext_ioc_at_n144": {
+  "min": 0.06284,
+  "max": 0.07721,
+  "mean": 0.07247,
+  "sorted": [
+   {
+    "pt": "pk5",
+    "ioc": 0.06284
+   },
+   {
+    "pt": "pk1",
+    "ioc": 0.07012
+   },
+   {
+    "pt": "pk3",
+    "ioc": 0.07119
+   },
+   {
+    "pt": "pk2",
+    "ioc": 0.07343
+   },
+   {
+    "pt": "pk6",
+    "ioc": 0.07566
+   },
+   {
+    "pt": "pk4",
+    "ioc": 0.07683
+   },
+   {
+    "pt": "pk7",
+    "ioc": 0.07721
+   }
+  ],
+  "median": 0.07343
+ },
+ "observed_pk9_claim": 0.06313,
+ "positive_control_pk1_trunc144_grid_max": 0.07012,
+ "finding": "The seven solved sibling plaintexts have IoC 0.06284-0.07721 over their first 144 letters, median 0.07343. The claimed pk9 value 0.06313 sits at the very bottom of that range: six of the seven are higher, and only pk5 (0.06284) is lower, by 0.0003. So even granting the claim everything, the score it reports is the score you would expect from the LEAST letter-typical sibling, not from a solve. The in-family positive control at the same length, PK1 truncated to 144, returned 0.07012 -- and returned the true key PROVENANCE as the rank-1 argmax of the entire grid, which the pk9 argmax METALHEAD conspicuously is not (it yields no language at all).",
+ "correction_note": "An earlier draft of this file said 0.06313 was below all seven. That was wrong: pk5[:144] is 0.06284. Corrected above."
+}

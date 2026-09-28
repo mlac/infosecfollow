@@ -1,0 +1,742 @@
+{
+ "family": "Manufactured long keys beyond the plain two-word product (PK8/PK9/PK10): outer-repeat length != lcm, truncation/extension, concatenation, interleaving, self-encryption, alphabet-as-running-key, depth-3 recursion",
+ "role": "ADVERSARIAL VERIFICATION of the claimed above-ceiling hits (lens: statistical)",
+ "verdict": "REFUTED",
+ "headline_claim_under_test": {
+  "statistic": "IoC of the full decrypt (transposition-invariant)",
+  "value": 0.06313,
+  "target": "pk9",
+  "config": "KA text / AZ key / sub",
+  "construction": "revtrunc14  S[i] = W[(i%14)%9] + W[8-((i%14)%9)]",
+  "key": "METALHEAD",
+  "claimed_z": "+8.1 (in-cell)",
+  "claimed_ceiling": "shuffle-null max 0.06070 from 2 shuffles -> flagged above_ceiling"
+ },
+ "executed_by_this_verification": {
+  "xmk_null2 grid searches": 71,
+  "cells per grid": 696,
+  "xmk_null2 cell searches": 49416,
+  "xmk_null2 wall_sec": 2971.5,
+  "xmk_cell cell searches": 603,
+  "xmk_cell wall_sec": 54.7,
+  "xmk_null aborted after 1 replicate (cell searches)": 5568,
+  "wall_sec": 275.9,
+  "total_cell_searches": 55587,
+  "total_measured_solver_wall_sec": 3302.1
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "title": "The score reproduces exactly, through independently written code",
+   "detail": "0.06313 / METALHEAD / revtrunc14 recomputed to 5 dp by xmk_core.search_one_ct, which rediscovers it as the argmax of the whole 696-cell grid. So do the M-B1 headlines 0.06656 (pk8) and 0.06614 (pk9). Reproduction is not the problem."
+  },
+  {
+   "id": "F2",
+   "title": "The decrypt is not language",
+   "detail": "quadgram -8.068/letter (random -8.23, English -4.25); one letter takes 19.4% of the 144 characters and supplies 58% of the IoC. Real sibling plaintext at n=144: IoC 0.0702, top letter 14.2%, 28% of IoC, quadgram -4.30. Round-trip re-encryption is exact but VACUOUS -- the decrypt is defined as C-S, so every candidate key round-trips."
+  },
+  {
+   "id": "F3",
+   "title": "The +8.1 is a within-cell z, not a search z",
+   "detail": "It is (max-mean)/sd over the ~30k nine-letter words inside ONE cell. Rebuilding the matched null for that same single cell: 150 shuffles give z=+6.67 (p=0.0066); 50 outside-family real periodic ciphers give z=+4.62 (p=0.0196). The same cell-level test on the runner-up rows falls from +9.46 to +4.15 and from +7.77 to +1.33."
+  },
+  {
+   "id": "F4",
+   "title": "Rebuilt search-level null: the value is inside the null band",
+   "detail": "71 complete 696-cell grids. Real 0.06313. Outside-family periodic-cipher null (real sibling plaintext, n=144, random period-L key on KA): mean 0.05986, sd 0.00366, max 0.06692, 3/20 replicates >= real, exact p = 0.19, z = +0.89. Shuffle null on the matched max-over-8-configs footing: exact p = 0.17. Every null replicate here searched ONE config where the real searched EIGHT, so the comparison is biased in the claim's favour and it still fails."
+  },
+  {
+   "id": "F5",
+   "title": "The claim's own null cannot reach significance by construction",
+   "detail": "R null replicates give a minimum achievable exact p of 1/(1+R). M-A used R=2 (p_min = 0.33) and its null run was KILLED after pk10 r0 (logs/chainA.log \"Killed\"); results/mk_single_null.json does not exist. M-C/M-D used R=1 (p_min = 0.50), not the \"2 shuffles per target for every family\" the claim states. M-E and M-B1 used R=2. Across the 10 above-ceiling comparisons, 6 fired; 4.0 are expected under H0 (sd 1.53, z = +1.31)."
+  },
+  {
+   "id": "F6",
+   "title": "The claim's own derived null already kills the concat/interleave flags",
+   "detail": "results/mk_cat_derived_null.json: pk7 truncated to n=153 reaches CR 0.06803, above the real CR maximum 0.0675; pk3/pk7 at n=144 reach 0.0646-0.0657 against real maxima 0.0677-0.0680. With 4 clean derived surrogates the real values are mid-pack, not above a ceiling."
+  },
+  {
+   "id": "F7",
+   "title": "Multiple testing: the burden is 1e8, not 1e5",
+   "detail": "The claim counts 100,881 CELL searches. The M-A statistic is a maximum over 12,521,208 word-level decrypt hypotheses per config-run, 100,169,664 per target, 300,508,992 across the three targets -- for M-A alone. No analytic correction is needed because the rebuilt permutation null absorbs it directly, and it puts the real value at p ~ 0.17-0.19."
+  },
+  {
+   "id": "F8",
+   "title": "What a true hit looks like in this exact search",
+   "detail": "PK1 (true key PROVENANCE, a plain single dictionary word, i.e. a genuine M-A instance) run through the identical grid: 0.07052 at n=192 and 0.07012 truncated to n=144, with PROVENANCE/plain the GLOBAL argmax both times. The claim's own synthetics score 0.0755-0.0757 at n=144/153. The separation is clean and pk9's 0.06313 is on the wrong side of it."
+  },
+  {
+   "id": "F9",
+   "title": "Confound: the statistic tracks the ciphertext's own IoC",
+   "detail": "Across 68 null replicates the grid maximum regresses on the ciphertext IoC with slope +0.174 (r = 0.16, residual sd 0.00282). pk9 has the highest raw IoC of the three targets (0.04448, z=+3.2). Its residual is +1.78 sd -- ordinary."
+  }
+ ],
+ "grading": {
+  "claimed_hit": "REFUTED (Tier 3 evidence at best: a screen maximum, not a detection)",
+  "family_negative": "Tier 3 SCREEN -- FAMILY OPEN. The specific constructions and word lists are screened, but with R=1..2 null replicates no exhaustion claim is supported, and by the claim's own honest admission the depth-3 solver is unvalidated at n=144/153 and provably degenerate for L < lcm(b,c), so the depth-3 negative does not cover pk8/pk9 at all."
+ },
+ "artifacts": [
+  "results/xmk_repro.json",
+  "results/xmk_cell.json",
+  "results/xmk_degeneracy.json",
+  "results/xmk_multipletesting.json",
+  "results/xmk_null2.json",
+  "results/xmk_verdict.json",
+  "results/xmk_final.json"
+ ],
+ "scripts": [
+  "xmk_core.py",
+  "xmk_repro.py",
+  "xmk_cell.py",
+  "xmk_degen.py",
+  "xmk_mt.py",
+  "xmk_null.py",
+  "xmk_null2.py",
+  "xmk_verdict.py",
+  "xmk_final.py"
+ ],
+ "detail": {
+  "reproduction": {
+   "MA_headline": {
+    "claimed_ioc": 0.06313,
+    "recomputed_ioc": 0.06313,
+    "plaintext": "EYOKROHXGJECMLVLIRUUDKMKTOOEOTWUSIGNREGNLVGEHVNOZDHOILMLLLLHZPRGVZWLHVMGLTLDLQLRHXLLTLMIFLJLRZUTMLSYZAVDCOILLWLMLLUGXBILOXVLCLSJJDMPPABLVDEMKFRP",
+    "quadgram_per_letter": -8.068,
+    "top4_letters": [
+     [
+      "L",
+      28
+     ],
+     [
+      "O",
+      9
+     ],
+     [
+      "M",
+      9
+     ],
+     [
+      "V",
+      8
+     ]
+    ],
+    "n": 144,
+    "distinct_keystream_symbols": 5,
+    "keystream_period": 14,
+    "keystream_first28": [
+     15,
+     4,
+     23,
+     7,
+     22,
+     7,
+     23,
+     4,
+     15,
+     15,
+     4,
+     23,
+     7,
+     22,
+     15,
+     4,
+     23,
+     7,
+     22,
+     7,
+     23,
+     4,
+     15,
+     15,
+     4,
+     23,
+     7,
+     22
+    ],
+    "key_len_chars": 9,
+    "words_len9": 29973,
+    "distinct_effective_keys_in_cell": 29746,
+    "note_symmetry": "S[i]=W[j]+W[a-1-j] is palindromic in j, so a 9-letter word contributes only 5 free symbols",
+    "in_cell_recomputed": {
+     "max": 0.06313,
+     "mean": 0.04215,
+     "sd": 0.00259,
+     "z": 8.1,
+     "argmax_word": "METALHEAD",
+     "n_words_in_cell": 29973
+    }
+   },
+   "MB1_headline_pk8": {
+    "ioc": 0.06656,
+    "quadgram_per_letter": -7.939,
+    "top4": [
+     [
+      "A",
+      25
+     ],
+     [
+      "B",
+      21
+     ],
+     [
+      "R",
+      10
+     ],
+     [
+      "P",
+      10
+     ]
+    ],
+    "plaintext": "AJYBKBVIRXAORARNHQBIAOVIPZNKAQYWUAPBBRQRPRIJJJAARLPNHNUVFPWJPAXAMAHNDSGXLAANLKOOUAQIBAABPYAABEBWQBBAQASCBHWVBNRPWBABHQIGBULLGXABPBAAQOPJWKCBMDTRJBOSRZBAZ",
+    "claimed_ioc": 0.06656
+   },
+   "MB1_headline_pk9": {
+    "ioc": 0.06614,
+    "quadgram_per_letter": -8.301,
+    "top4": [
+     [
+      "O",
+      27
+     ],
+     [
+      "Q",
+      17
+     ],
+     [
+      "F",
+      7
+     ],
+     [
+      "W",
+      7
+     ]
+    ],
+    "plaintext": "GOFYEQOSWVBZQOAQMZTJKNYPUFWIMXXWGGNQHREQOUUELNQQFBNXGOQOOQOSCOHFCOKOLUWHOCOWRRQQFBOOJQPTJIQOHOSYQOQOCFUWCWRZNXOPOQTOYTPOONDOAOQMNJPOUYUZDHDPEFEB",
+    "claimed_ioc": 0.06614
+   },
+   "english_n144": {
+    "mean": 0.07046,
+    "p5": 0.06342,
+    "p50": 0.0709,
+    "p95": 0.07595,
+    "frac_below_0.06313": 0.043
+   }
+  },
+  "cell_level_nulls": {
+   "n_shuffles": 150,
+   "cells": [
+    {
+     "target": "pk9",
+     "cfg": "KA/AZ/sub",
+     "a": 9,
+     "construction": "revtrunc14",
+     "claimed_ioc": 0.06313,
+     "claimed_in_cell_z": 8.1,
+     "recomputed_real_cell_max": 0.06313,
+     "in_cell_mean": 0.04215,
+     "in_cell_sd": 0.00259,
+     "in_cell_z_recomputed": 8.1,
+     "SHUFFLE_null_cellmax": {
+      "n": 150,
+      "mean": 0.04974,
+      "sd": 0.00201,
+      "max": 0.05497,
+      "p95": 0.05328,
+      "z_of_real": 6.67,
+      "exact_p": 0.0066
+     },
+     "SYNTH_outside_family_null_cellmax": {
+      "n": 50,
+      "mean": 0.04812,
+      "sd": 0.00325,
+      "max": 0.0575,
+      "p95": 0.05262,
+      "z_of_real": 4.62,
+      "exact_p": 0.0196
+     }
+    },
+    {
+     "target": "pk9",
+     "cfg": "AZ/AZ/sub",
+     "a": 10,
+     "construction": "trunc14",
+     "claimed_ioc": 0.06167,
+     "claimed_in_cell_z": 9.46,
+     "recomputed_real_cell_max": 0.06167,
+     "in_cell_mean": 0.04037,
+     "in_cell_sd": 0.00225,
+     "in_cell_z_recomputed": 9.46,
+     "SHUFFLE_null_cellmax": {
+      "n": 150,
+      "mean": 0.05022,
+      "sd": 0.00215,
+      "max": 0.05711,
+      "p95": 0.05369,
+      "z_of_real": 5.32,
+      "exact_p": 0.0066
+     },
+     "SYNTH_outside_family_null_cellmax": {
+      "n": 50,
+      "mean": 0.04974,
+      "sd": 0.00288,
+      "max": 0.05692,
+      "p95": 0.05515,
+      "z_of_real": 4.15,
+      "exact_p": 0.0196
+     }
+    },
+    {
+     "target": "pk9",
+     "cfg": "AZ/KA/add",
+     "a": 7,
+     "construction": "plain",
+     "claimed_ioc": 0.05876,
+     "claimed_in_cell_z": 7.77,
+     "recomputed_real_cell_max": 0.05876,
+     "in_cell_mean": 0.04063,
+     "in_cell_sd": 0.00233,
+     "in_cell_z_recomputed": 7.77,
+     "SHUFFLE_null_cellmax": {
+      "n": 150,
+      "mean": 0.05014,
+      "sd": 0.00216,
+      "max": 0.05692,
+      "p95": 0.05427,
+      "z_of_real": 3.98,
+      "exact_p": 0.0066
+     },
+     "SYNTH_outside_family_null_cellmax": {
+      "n": 50,
+      "mean": 0.05144,
+      "sd": 0.00551,
+      "max": 0.06352,
+      "p95": 0.06261,
+      "z_of_real": 1.33,
+      "exact_p": 0.1961
+     }
+    }
+   ],
+   "wall": 54.7
+  },
+  "degeneracy": {
+   "headline_decrypt_pk9_METALHEAD_revtrunc14": {
+    "name": "pk9 M-A headline",
+    "n": 144,
+    "ioc": 0.06313,
+    "top_letter": 28,
+    "top_letter_pct": 19.4,
+    "ioc_from_top_letter": 0.03671,
+    "frac_of_ioc_from_top_letter": 0.582,
+    "ioc_excluding_top_letter_pair_term": 0.02642,
+    "quadgram_per_letter": -8.068,
+    "distinct_letters": 26
+   },
+   "MB1_pk8_decrypt": {
+    "name": "pk8 M-B1 headline",
+    "n": 153,
+    "ioc": 0.06656,
+    "top_letter": 25,
+    "top_letter_pct": 16.3,
+    "ioc_from_top_letter": 0.0258,
+    "frac_of_ioc_from_top_letter": 0.388,
+    "ioc_excluding_top_letter_pair_term": 0.04076,
+    "quadgram_per_letter": -7.939,
+    "distinct_letters": 26
+   },
+   "MB1_pk9_decrypt": {
+    "name": "pk9 M-B1 headline",
+    "n": 144,
+    "ioc": 0.06614,
+    "top_letter": 27,
+    "top_letter_pct": 18.8,
+    "ioc_from_top_letter": 0.03409,
+    "frac_of_ioc_from_top_letter": 0.515,
+    "ioc_excluding_top_letter_pair_term": 0.03205,
+    "quadgram_per_letter": -8.301,
+    "distinct_letters": 26
+   },
+   "real_sibling_plaintext_n144": {
+    "ioc": 0.0702,
+    "top_letter_pct": 14.2265,
+    "frac_of_ioc_from_top_letter": 0.2812,
+    "quadgram_per_letter": -4.301
+   },
+   "calibration": {
+    "random_quadgram": -8.23,
+    "english_quadgram": -4.25,
+    "interpretation": "quadgram score of the headline decrypt sits 0.16 of 3.98 nats from RANDOM, i.e. ~4% of the way from random text to English."
+   },
+   "round_trip": {
+    "reencrypt_matches_published_pk8_ciphertext": true,
+    "note": "round-trip exactness is VACUOUS here: the decrypt is defined as C-S, so re-encrypting returns C for EVERY candidate key. It carries no evidential weight."
+   }
+  },
+  "multiple_testing": {
+   "per_family": {
+    "MA_single_pk8": {
+     "statistic": "max decrypt-IoC over one full 696-cell x 8-config search",
+     "real_max": 0.05667,
+     "null_replicate_maxima": [
+      0.05478,
+      0.05581
+     ],
+     "n_null_replicates_R": 2,
+     "above_null_max": true,
+     "exact_permutation_p": 0.3333,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.3333
+    },
+    "MA_single_pk9": {
+     "statistic": "max decrypt-IoC over one full 696-cell x 8-config search",
+     "real_max": 0.06313,
+     "null_replicate_maxima": [
+      0.0607,
+      0.05876
+     ],
+     "n_null_replicates_R": 2,
+     "above_null_max": true,
+     "exact_permutation_p": 0.3333,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.3333
+    },
+    "MA_single_pk10": {
+     "statistic": "max decrypt-IoC over one full 696-cell x 8-config search",
+     "real_max": 0.04324,
+     "null_replicate_maxima": [
+      0.0433
+     ],
+     "n_null_replicates_R": 1,
+     "above_null_max": false,
+     "exact_permutation_p": 1.0,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.5
+    },
+    "MB1_pk8": {
+     "statistic": "max joint IoC over the 300-cell two-word grid",
+     "real_max": 0.06656,
+     "null_pooled_max": 0.06493,
+     "null_pooled_mean": 0.06301,
+     "n_null_replicates_R": 2,
+     "above_null_max": true,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.3333,
+     "focused_6shuffle_null_max": 0.06545,
+     "above_focused_null_max": true,
+     "MIN_p_focused_R6": 0.1429
+    },
+    "MB1_pk9": {
+     "statistic": "max joint IoC over the 300-cell two-word grid",
+     "real_max": 0.06614,
+     "null_pooled_max": 0.06818,
+     "null_pooled_mean": 0.06583,
+     "n_null_replicates_R": 2,
+     "above_null_max": false,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.3333
+    },
+    "MB1_pk10": {
+     "statistic": "max joint IoC over the 300-cell two-word grid",
+     "real_max": 0.04504,
+     "null_pooled_max": 0.04522,
+     "null_pooled_mean": 0.0446,
+     "n_null_replicates_R": 2,
+     "above_null_max": false,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.3333
+    },
+    "MCD_C": {
+     "statistic": "max joint IoC over the 3600-cell concat/interleave grid",
+     "real_max": 0.0677,
+     "null_replicate_maxima": [
+      0.06643
+     ],
+     "n_null_replicates_R": 1,
+     "above_null_max": true,
+     "exact_permutation_p": 0.5,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.5
+    },
+    "MCD_CR": {
+     "statistic": "max joint IoC over the 3600-cell concat/interleave grid",
+     "real_max": 0.0675,
+     "null_replicate_maxima": [
+      0.06896
+     ],
+     "n_null_replicates_R": 1,
+     "above_null_max": false,
+     "exact_permutation_p": 1.0,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.5
+    },
+    "MCD_D": {
+     "statistic": "max joint IoC over the 3600-cell concat/interleave grid",
+     "real_max": 0.06799,
+     "null_replicate_maxima": [
+      0.06391
+     ],
+     "n_null_replicates_R": 1,
+     "above_null_max": true,
+     "exact_permutation_p": 0.5,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.5
+    },
+    "ME_depth3_joint": {
+     "statistic": "max joint IoC, depth-3 grid",
+     "real_max": 0.06595,
+     "null_pooled_max": 0.06546,
+     "n_null_replicates_R": 2,
+     "above_null_max": true,
+     "MINIMUM_ACHIEVABLE_p_with_this_R": 0.3333
+    },
+    "ME_depth3_z": {
+     "statistic": "max decoupled z, depth-3 grid",
+     "real_max": 6.312,
+     "null_pooled_max": 6.389,
+     "above_null_max": false
+    }
+   },
+   "notes": [
+    "MA null run was KILLED after pk10 r0 (logs/chainA.log: \"Killed\"); results/mk_single_null.json does not exist. pk8/pk9 got 2 shuffles, pk10 got 1."
+   ],
+   "above_ceiling_flag_audit": {
+    "flags": {
+     "MA_pk8": true,
+     "MA_pk9": true,
+     "MA_pk10": false,
+     "MB1_pk8": true,
+     "MB1_pk9": false,
+     "MB1_pk10": false,
+     "MCD_C": true,
+     "MCD_CR": false,
+     "MCD_D": true,
+     "ME_joint": true
+    },
+    "observed_flags": 6,
+    "expected_flags_under_H0": 4.0,
+    "comment": "Under H0 each flag fires with probability 1/(1+R). The observed count is what the null design produces by construction; no flag can reach p<1/(1+R)."
+   },
+   "hypothesis_counts": {
+    "MA_word_level_decrypt_hypotheses_per_target": 100169664,
+    "MA_cells_per_target": 5568,
+    "MA_word_level_hypotheses_all_3_targets": 300508992,
+    "claim_executed_configs_field": 100881,
+    "comment": "The claim counts CELL-searches (100,881). The multiple-testing burden of the M-A statistic is the number of distinct decrypt-IoC values maximised over: 1.0e8 per target for M-A alone."
+   }
+  },
+  "search_level_null": {
+   "design": "one 696-cell M-A grid per replicate, config KA/AZ/sub",
+   "statistic": "max decrypt-IoC over one complete 696-cell M-A grid",
+   "conservative_bias_note": "The real value 0.06313 is the maximum over EIGHT alphabet/mode configs; each null replicate here is a maximum over ONE. The comparison is therefore biased IN THE CLAIM S FAVOUR.",
+   "real_pk9": 0.06313,
+   "SHUFFLE_null_the_claims_own_construction": {
+    "n_replicates": 40,
+    "mean": 0.0574,
+    "sd": 0.00154,
+    "min": 0.05449,
+    "p95": 0.05933,
+    "max": 0.06284,
+    "z_of_real": 3.73,
+    "n_ge_real": 0,
+    "exact_permutation_p": 0.0244
+   },
+   "SYNTHETIC_outside_family_periodic_ciphers": {
+    "n_replicates": 20,
+    "mean": 0.05986,
+    "sd": 0.00366,
+    "min": 0.05352,
+    "p95": 0.0659,
+    "max": 0.06692,
+    "z_of_real": 0.89,
+    "n_ge_real": 3,
+    "exact_permutation_p": 0.1905
+   },
+   "DERIVED_null_real_sibling_ciphertexts_keys_outside_family": {
+    "n_replicates": 8,
+    "mean": 0.05454,
+    "sd": 0.00152,
+    "min": 0.05303,
+    "p95": 0.05665,
+    "max": 0.05692,
+    "z_of_real": 5.67,
+    "n_ge_real": 0,
+    "exact_permutation_p": 0.1111
+   },
+   "positive_control_PK1_true_plain_word_key": [
+    {
+     "label": "pk1_full_n192",
+     "grid_max": 0.07052,
+     "argmax": {
+      "cfg": "KA/KA/sub",
+      "ioc": 0.07052,
+      "w": "PROVENANCE",
+      "a": 10,
+      "name": "plain"
+     }
+    },
+    {
+     "label": "pk1_trunc_n144",
+     "grid_max": 0.07012,
+     "argmax": {
+      "cfg": "KA/KA/sub",
+      "ioc": 0.07012,
+      "w": "PROVENANCE",
+      "a": 10,
+      "name": "plain"
+     }
+    }
+   ],
+   "null_argmax_examples": [
+    {
+     "label": "synth_L11_12",
+     "grid_max": 0.06692,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06692,
+      "w": "REVESZ",
+      "a": 6,
+      "name": "trunc11"
+     }
+    },
+    {
+     "label": "synth_L7_5",
+     "grid_max": 0.06585,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06585,
+      "w": "CABINE",
+      "a": 6,
+      "name": "trunc7"
+     }
+    },
+    {
+     "label": "synth_L10_15",
+     "grid_max": 0.06469,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06469,
+      "w": "REGULARIZATION",
+      "a": 14,
+      "name": "trunc30"
+     }
+    },
+    {
+     "label": "pk9_shuffle29",
+     "grid_max": 0.06284,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06284,
+      "w": "EXEMPLARY",
+      "a": 9,
+      "name": "trunc12"
+     }
+    },
+    {
+     "label": "synth_L9_6",
+     "grid_max": 0.06216,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06216,
+      "w": "ALGEBRA",
+      "a": 7,
+      "name": "trunc9"
+     }
+    },
+    {
+     "label": "synth_L13_13",
+     "grid_max": 0.06216,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06216,
+      "w": "NIKIFOROV",
+      "a": 9,
+      "name": "selftrunc13"
+     }
+    },
+    {
+     "label": "synth_L14_0",
+     "grid_max": 0.06206,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06206,
+      "w": "LESOTHO",
+      "a": 7,
+      "name": "plain"
+     }
+    },
+    {
+     "label": "synth_L7_16",
+     "grid_max": 0.06148,
+     "argmax": {
+      "cfg": "KA/AZ/sub",
+      "ioc": 0.06148,
+      "w": "HAWAIKI",
+      "a": 7,
+      "name": "self2W"
+     }
+    }
+   ]
+  },
+  "final": {
+   "shuffle_null_put_on_the_same_max_over_8_footing": {
+    "per_grid_maxima_n": 40,
+    "per_grid_mean": 0.0574,
+    "per_grid_sd": 0.00154,
+    "max_of_8_pseudo_replicates": [
+     0.05925,
+     0.05876,
+     0.0608,
+     0.06284,
+     0.05866
+    ],
+    "mean_of_max_of_8": 0.06006,
+    "real_max_over_8_configs": 0.06313,
+    "real_per_config_maxima": [
+     0.05594,
+     0.05643,
+     0.06313,
+     0.0573,
+     0.05895,
+     0.05944,
+     0.06167,
+     0.05983
+    ],
+    "real_per_config_mean": 0.05909,
+    "comment": "Grouping the 40 one-config shuffle grids into 5 blocks of 8 makes the null statistic the same shape as the real one. The real 0.06313 then sits at roughly the top of a 5-draw null, i.e. an exact p of order 1/6 = 0.17, not a discovery."
+   },
+   "grid_max_is_driven_by_the_ciphertexts_own_ioc": {
+    "n_null_replicates": 68,
+    "slope_gridmax_per_unit_ct_ioc": 0.1743,
+    "intercept": 0.05035,
+    "pearson_r": 0.164,
+    "residual_sd": 0.00282,
+    "pk9_ct_ioc": 0.04448,
+    "predicted_grid_max_for_pk9": 0.05811,
+    "observed_grid_max_for_pk9": 0.06313,
+    "residual_z_of_pk9": 1.78,
+    "comment": "pk9 has the highest raw ciphertext IoC of the three targets (0.04448, z=+3.2 on this build). Once that is controlled for, its M-A search maximum is ordinary."
+   },
+   "what_a_true_family_member_looks_like": {
+    "PK1_full_n192": {
+     "grid_max": 0.07052,
+     "argmax": {
+      "cfg": "KA/KA/sub",
+      "ioc": 0.07052,
+      "w": "PROVENANCE",
+      "a": 10,
+      "name": "plain"
+     }
+    },
+    "PK1_truncated_to_n144": {
+     "grid_max": 0.07012,
+     "argmax": {
+      "cfg": "KA/KA/sub",
+      "ioc": 0.07012,
+      "w": "PROVENANCE",
+      "a": 10,
+      "name": "plain"
+     }
+    },
+    "claims_own_synthetic_positive_controls_n144": 0.0757,
+    "observed_pk9_maximum": 0.06313,
+    "gap": "a genuine single-word manufactured key yields 0.0701-0.0757 at n=144 AND is the global argmax of the whole grid; pk9 yields 0.06313, inside the outside-family null band (mean 0.05986, max 0.06692 over 20 replicates)."
+   },
+   "bottom_line": {
+    "exact_permutation_p_vs_shuffle_null_40_reps_one_config_each": 0.0244,
+    "exact_permutation_p_vs_outside_family_null_20_reps": 0.1905,
+    "exact_permutation_p_vs_shuffle_null_on_matched_max_over_8_footing": 0.1667,
+    "verdict": "REFUTED"
+   }
+  }
+ }
+}
