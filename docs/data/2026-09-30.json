@@ -1,0 +1,1205 @@
+{
+  "date": "2026-09-30",
+  "headline": "Mandiant put names on the malware coming through Citrix NetScaler—WHIPSHOT and SLAPSHOT—as researchers published the pre-authentication path to shellcode on the day CISA's federal patch deadline expires.",
+  "emerging_trends": [
+    {
+      "text": "Datagram Transport Layer Security, the UDP flavor of TLS that almost nobody audits, produced two of the day's worst bugs—a 9.5-rated memory overflow in NetScaler's DTLS handler and a heap-memory leak in OpenSSL's handshake retransmission—while Detectify found 86 to 97 percent of critical and high-severity flaws on internet-facing systems in the United States, the United Kingdom, and the Nordics sitting open past 90 days.",
+      "topic_title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT",
+      "link_phrase": "DTLS handler",
+      "_anchor": "trend-1"
+    },
+    {
+      "text": "Attackers keep moving upstream into the places developers fetch code without looking, compromising the Artifactory instance OpenInfra Europe runs for the Nordix project and planting 101 packages in npm, which turns every build pipeline that trusted those registries into a delivery route.",
+      "topic_title": "Attackers Poison OpenInfra's Artifactory and 101 npm Packages",
+      "link_phrase": "Artifactory instance",
+      "_anchor": "trend-2"
+    },
+    {
+      "text": "Autonomous agents now sit on both sides of the ledger, since an AI-driven intrusion hit DIVD, the Dutch volunteer group that reports vulnerabilities for a living, and a patched Unsloth Studio flaw let a hostile model run Python on the machine of whoever inspected it.",
+      "topic_title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure",
+      "link_phrase": "DIVD",
+      "_anchor": "trend-3"
+    }
+  ],
+  "topics": [
+    {
+      "title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Mandiant Consulting and Google Threat Intelligence Group named the tooling on September 30, 2026—web shells they call WHIPSHOT and tunneling malware they call SLAPSHOT—and placed the victims in government, financial services, technology, education, and legal and professional services across North America and Europe, while researchers published the mechanics of CVE-2026-88772, a 9.5-rated memory overflow in the way NetScaler handles Datagram Transport Layer Security that carries an attacker from zero credentials to shellcode, on the day CISA's deadline for federal agencies to patch arrives.",
+      "summary": "Citrix fixed CVE-2026-88771 and CVE-2026-88772 in NetScaler ADC and NetScaler Gateway after weeks of zero-day attacks that reach appliances running the default configuration. Attackers take root, harvest credentials, and pivot into internal networks, so patch the appliances, rotate secrets, and hunt for web shells and new accounts.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Attackers Exploit NetScaler Flaw for Root Access, Deploy WHIPSHOT and SLAPSHOT",
+          "url": "https://thehackernews.com/2026/09/attackers-exploit-netscaler-flaw-for.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Citrix NetScaler CVE-2026-88772 Exploit Details Show Pre-Auth Path to Shellcode Execution",
+          "url": "https://thehackernews.com/2026/09/citrix-netscaler-cve-2026-88772-exploit.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Hackers exploit Citrix NetScaler zero-day to deploy web shells",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-citrix-netscaler-zero-day-to-deploy-web-shells/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Dual NetScaler Zero-Days Trigger Chaos for Citrix Customers",
+          "url": "https://www.darkreading.com/vulnerabilities-threats/netscaler-zero-days-chaos-citrix"
+        }
+      ],
+      "_anchor": "i-662a4b09eb"
+    },
+    {
+      "title": "Attackers Poison OpenInfra's Artifactory and 101 npm Packages",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "OpenInfra Europe, the regional hub of the OpenInfra Foundation, posted a notice on its homepage on September 30, 2026 saying an attacker compromised the self-hosted JFrog Artifactory instance it runs at artifactory.nordix.org, and told anyone who downloaded or installed artifacts from that server between August 28 and September 15, 2026 to stop using them, pull them out of their pipelines, and treat the packages as compromised; OX Security researchers Nir Zadok, Moshe Siman Tov Bustan, and Vitalii Chepurko separately counted 101 malicious npm packages that abuse the open-source Baileys WhatsApp project to add developers to WhatsApp groups without consent, a campaign they call PhantomSub.",
+      "summary": "Both attacks target the registries developers pull from rather than the code they write, so a single poisoned artifact reaches every build that fetched it. Audit dependency caches and continuous integration logs for the Nordix window and remove the flagged npm packages.",
+      "tags": [
+        "supply chain",
+        "npm",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "OpenInfra Europe’s JFrog Artifactory instance breached, packages potentially compromised",
+          "url": "https://www.helpnetsecurity.com/2026/09/30/openinfra-jfrog-artifactory-instance-compromised/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "101 Malicious npm Packages Add Developers' WhatsApp Accounts to Groups Without Consent",
+          "url": "https://thehackernews.com/2026/09/101-malicious-npm-packages-add.html"
+        }
+      ],
+      "_anchor": "i-6485f53baf"
+    },
+    {
+      "title": "UAT-11587 Delivers the Antino Backdoor Across Asia",
+      "area": "Nation-State Activity",
+      "latest_developments": "Cisco Talos disclosed a China-nexus cluster it tracks as UAT-11587 on September 30, 2026 that hits government and policy organizations in Taiwan, India, the Philippines, and Cambodia with a previously undocumented backdoor that developer artifacts in the code call Antino, and SecurityWeek reported the same day that the larger phishing campaigns Russia's Star Blizzard runs through its RedFlick delivery chain install a backdoor named CosmicPulse.",
+      "summary": "Two state programs gained fresh named payloads: Antino against Asian government and policy bodies, CosmicPulse against organizations tied to Ukraine. Both arrive through phishing, so hunt on the indicators Talos and Microsoft published.",
+      "tags": [
+        "apt",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Cisco Talos",
+          "title": "China-nexus UAT-11587 targets government and policy organizations across Asia with Antino backdoor",
+          "url": "https://blog.talosintelligence.com/china-nexus-uat-11587-targets-government-and-policy-organizations-across-asia-with-antino-backdoor/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Russian APT Star Blizzard Uses ‘RedFlick’ Infection Chain in Recent Attacks",
+          "url": "https://www.securityweek.com/russian-apt-star-blizzard-uses-redflick-infection-chain-in-recent-attacks/"
+        }
+      ],
+      "_anchor": "i-b4bc5adc38"
+    },
+    {
+      "title": "OpenSSL and wolfSSL Close High-Severity Holes",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "OpenSSL shipped fixes on September 29, 2026 for a high-severity bug in its Datagram Transport Layer Security code that hands unencrypted heap memory to the far side of a connection or crashes the program when a handshake retransmission begins while a larger handshake message sits half-sent, and SecurityWeek counted roughly a dozen patched vulnerabilities in each of OpenSSL and wolfSSL.",
+      "summary": "The two libraries sit underneath VPNs, embedded devices, and anything speaking TLS over UDP, so the flaw reaches far past the projects themselves. Rebuild and redeploy every product that statically links either library.",
+      "tags": [
+        "patch",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "OpenSSL Fixes High-Severity DTLS Flaw That Can Leak Heap Memory Unencrypted",
+          "url": "https://thehackernews.com/2026/09/openssl-fixes-high-severity-dtls-flaw.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "High-Severity Vulnerabilities Patched in OpenSSL, WolfSSL",
+          "url": "https://www.securityweek.com/high-severity-vulnerabilities-patched-in-openssl-wolfssl/"
+        }
+      ],
+      "_anchor": "i-870a14dd20"
+    },
+    {
+      "title": "A Ransomware Toolkit Reaches South African Air Traffic Control",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "South Africa asked for outside help after a cyberattack on its air traffic control systems, and investigators found a ransomware toolkit installed on at least one operational network, Dark Reading reported on September 30, 2026.",
+      "summary": "Aviation infrastructure keeps drawing attackers, and this time the intrusion reached a network that controls live air traffic rather than a back office. Operators should segment operational networks from corporate ones and verify that flight-critical systems carry current patches.",
+      "tags": [
+        "ransomware",
+        "critical infrastructure"
+      ],
+      "sources": [
+        {
+          "source": "Dark Reading",
+          "title": "South Africa Seeks Help After Cyberattack Targets Air Traffic Control",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/south-africa-help-cyberattack-air-traffic-control"
+        }
+      ],
+      "_anchor": "i-c099910d27"
+    },
+    {
+      "title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure",
+      "area": "AI Security",
+      "latest_developments": "The Dutch Institute for Vulnerability Disclosure, the volunteer nonprofit that finds and reports flaws to their owners, disclosed an AI-driven attack on its own systems that it described as \"loud and very, very messy,\" and Dark Reading detailed a patched Unsloth Studio vulnerability that lets a malicious AI model execute arbitrary Python code during routine inspection by way of the trust_remote_code setting.",
+      "summary": "Automated agents now run intrusions noisily enough to leave heavy forensic trails, and the tooling researchers use to open unknown models doubles as an execution path. Treat downloaded models as untrusted code and keep trust_remote_code off.",
+      "tags": [
+        "ai",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Automated AI agent used to breach cybersecurity nonprofit DIVD",
+          "url": "https://www.bleepingcomputer.com/news/security/automated-ai-agent-used-to-breach-cybersecurity-nonprofit-divd/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Unsloth Studio Flaw Turns Routine Model Inspection Into Code Execution",
+          "url": "https://www.darkreading.com/application-security/unsloth-studio-flaw-model-inspection-code-execution"
+        }
+      ],
+      "_anchor": "i-af77574c55"
+    }
+  ],
+  "markets": [
+    {
+      "label": "S&P 500",
+      "value": "7,701.62",
+      "pct": "+0.4%",
+      "arrow": "▲"
+    },
+    {
+      "label": "Dow",
+      "value": "51,504.32",
+      "pct": "-0.5%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "26,912.41",
+      "pct": "+1.0%",
+      "arrow": "▲"
+    },
+    {
+      "label": "WTI crude",
+      "value": "92.23",
+      "pct": "-6.8%",
+      "arrow": "▼"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1391",
+      "pct": "-0.8%",
+      "arrow": "▼"
+    },
+    {
+      "label": "GBP/USD",
+      "value": "1.3256",
+      "pct": "-1.0%",
+      "arrow": "▼"
+    },
+    {
+      "label": "USD/JPY",
+      "value": "157.87",
+      "pct": "+1.0%",
+      "arrow": "▲"
+    }
+  ],
+  "weather": [
+    "Today: Patchy Fog then Partly Sunny, high 78F.",
+    "Tonight: Mostly Cloudy, low 62F.",
+    "Thursday: Partly Sunny, high 82F."
+  ],
+  "sports": [
+    {
+      "team": "Steelers",
+      "record": "2-1, T-1st in AFC North",
+      "games": [],
+      "next": {
+        "matchup": "Steelers @ Browns",
+        "when": "Thu Oct 1, 8:15 PM",
+        "url": "https://plaintextsports.com/nfl/2026/week4/pit-cle"
+      },
+      "source": "plaintextsports"
+    },
+    {
+      "team": "Penguins",
+      "record": "0-0-0, 0 pts",
+      "games": [],
+      "next": {
+        "matchup": "Penguins @ Flyers",
+        "when": "Wed Sep 30, 7:30 PM",
+        "url": "https://plaintextsports.com/nhl/2026-2027/teams/pittsburgh-penguins"
+      },
+      "source": "plaintextsports"
+    }
+  ],
+  "local": {
+    "business_politics": [
+      {
+        "title": "Treasury Yields Retreat From a 25-Year Peak",
+        "latest_developments": "Bond markets rebounded Wednesday morning, September 30, a day after long-term United States borrowing costs reached their highest level in almost 25 years, as traders trimmed bets on another Federal Reserve increase.",
+        "summary": "Gold futures rose, European and Asian indexes opened higher, and United States stock futures climbed as yields eased and oil slipped, with Goldman Sachs estimating Gulf crude exports recovered to 23.3 million barrels a day in the week through September 28, roughly the 2025 average. New York Fed President John Williams signaled the next rate increase can wait, which cooled the selloff that had run through the prior week.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Bond markets rebound after sell-off",
+            "url": "https://www.ft.com/content/cd22d20a-3b65-4534-ac04-f5008810e10a?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Stock Market Today: Treasury Yields Slip, Giving Investors Some Reprieve",
+            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-09-30-2026?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Oil Prices Slip Further as Gulf Exports Recover",
+            "url": "https://www.wsj.com/business/energy-oil/oil-prices-slip-further-as-gulf-exports-recover-0cf48ca2?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-39d59e4e73"
+      },
+      {
+        "title": "French and Italian Inflation Reach Multiyear Highs",
+        "latest_developments": "Inflation readings published Wednesday, September 30, put France and Italy at multiyear highs on energy costs, strengthening the case for another European Central Bank increase next month.",
+        "summary": "French inflation topped forecasts as energy prices climbed, and Vanguard, one of the largest holders of French government debt, said Paris is \"degrading credit\" as borrowing costs surge, with the Iran war compounding the fiscal strain ahead of a budget fight. The euro sits near a 16-month low against the dollar after Tuesday's slide.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "French, Italian Inflation Reach Multiyear Highs",
+            "url": "https://www.wsj.com/economy/french-inflation-tops-expectations-as-energy-prices-climb-13819bb3?mod=rss_worldnews"
+          },
+          {
+            "source": "FT World",
+            "title": "Vanguard warns France is ‘degrading credit’ as borrowing costs surge",
+            "url": "https://www.ft.com/content/7820a84f-338e-4b91-a9b6-241a9bf81539?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-318ac14851"
+      },
+      {
+        "title": "Trump Holds Crunch Talks on a Diesel Export Ban",
+        "latest_developments": "The White House convened decisive talks on restricting diesel exports Wednesday, September 30, with President Trump personally refereeing a lobbying fight between the oil industry and senior Republicans who warn of voter anger over fuel prices five weeks before the November 3 midterms.",
+        "summary": "Energy Secretary Chris Wright has pointed toward a voluntary cap rather than an outright ban; refiners say a hard ban would throttle supply, and European diesel futures move on the prospect that American cargoes stop crossing the Atlantic. Chinese refineries, running at 75% of capacity, hold the spare capacity that could relieve the global diesel squeeze.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "White House holds crunch talks on diesel export ban as midterms near",
+            "url": "https://www.ft.com/content/562f2988-0c04-4669-b0b7-2c16d3821926?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "China Has the Power to Bail Out the Diesel Market. Will It Use It?",
+            "url": "https://www.wsj.com/business/energy-oil/china-has-the-power-to-bail-out-the-diesel-market-will-it-use-it-5950c34a?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-bfc5fb612e"
+      },
+      {
+        "title": "The American Military Finishes Its Iraq Withdrawal",
+        "latest_developments": "The United States military said Wednesday, September 30, that it has pulled the last American troops out of Iraq, closing a 12-year mission against the Islamic State.",
+        "summary": "Baghdad's demand that tens of thousands of militants surrender their weapons has fallen short, and the Wall Street Journal describes a country left exposed as Washington's war with Iran feeds the armed factions inside it. The exit removes the American ground presence from the country that sits between Iran and the Gulf oil corridor.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "The U.S. Military Exits Iraq, Leaving Behind a Nation in Peril",
+            "url": "https://www.wsj.com/world/middle-east/iran-american-military-iraq-militants-e5e20c75?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-f844dc106b"
+      }
+    ],
+    "business": [
+      {
+        "title": "Ken Griffin Gives Carnegie Mellon $3 Billion",
+        "latest_developments": "Carnegie Mellon University announced Wednesday, September 30, a $3 billion gift from Citadel founder Ken Griffin, described as the largest contribution any individual has made in the history of higher education.",
+        "summary": "The money opens a new Carnegie Mellon campus in Miami and expands the Oakland campus in Pittsburgh. Griffin, who moved Citadel's headquarters to Miami, has spent years working to build the Florida city into a rival of New York and London.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Carnegie Mellon to open Miami campus after multibillion-dollar gift from hedge fund CEO Ken Griffin",
+            "url": "https://www.post-gazette.com/news/education/2026/09/30/carnegie-mellon-miami-ken-griffin-billionaire-new-campus/stories/202609290061"
+          },
+          {
+            "source": "KDKA",
+            "title": "Carnegie Mellon University gets $3 billion gift to build new Miami campus",
+            "url": "https://www.cbsnews.com/pittsburgh/news/carnegie-mellon-university-3-billion-gift-new-miami-campus/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Carnegie Mellon University receives $3B gift to launch new Miami campus, enhance Pittsburgh location",
+            "url": "https://www.wpxi.com/news/local/carnegie-mellon-university-receives-3b-gift-launch-new-miami-campus-enhance-pittsburgh-location/3BVVR5MVOZCCNATMLPWAUN35CM/"
+          }
+        ],
+        "_anchor": "i-20e681ce67"
+      },
+      {
+        "title": "Pittsburgh Mills Goes Under Contract",
+        "latest_developments": "The owner of The Galleria at Pittsburgh Mills confirmed to WTAE on Tuesday evening, September 29, that the Frazer Township mall sits under contract for sale, a step beyond Tuesday's reporting that the buyer's identity remained unknown.",
+        "summary": "The mall has spent years in foreclosure, litigation, and municipal fines, and crews finished repaving its roads only last week. The owner has yet to name the buyer or the intended use of the property.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Pittsburgh Mills mall reportedly under contract for sale",
+            "url": "https://www.wtae.com/article/pittsburgh-mills-sale/73951231"
+          }
+        ],
+        "_anchor": "i-3bcbeec1fc"
+      },
+      {
+        "title": "A Pittsburgh Plumber Builds a YouTube Business",
+        "latest_developments": "Pittsburgh City Paper profiled Nick Hotujec on Wednesday, September 30, tracing how the master plumber turned Cheddar's Plumbing Co. into a large YouTube and TikTok following.",
+        "summary": "Hotujec toured with local hardcore bands and studied jiu-jitsu before building the plumbing company, and he now films the trade for an audience far beyond his service area.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "Pittsburgh plumber Nick Hotujec has turned Cheddar’s Plumbing Co. into a YouTube juggernaut",
+            "url": "https://www.pghcitypaper.com/news-2/infrastructure/cheddars-plumbing-co-founder-nick-hotujec-has-built-massive-youtube-tiktok-following/"
+          }
+        ],
+        "_anchor": "i-a8b47359d9"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "Mt. Lebanon Station Waits a Year for Its Elevator",
+        "latest_developments": "PublicSource published an account Wednesday, September 30, of why the elevator at the Mt. Lebanon light rail station has stayed out of service for more than a year.",
+        "summary": "Laura Szafranski, a regular rider who depends on the elevator, told PublicSource that older and disabled passengers bear the cost of the delay, asking, \"Why did it take so long?\" The station sits on the light rail line that carries South Hills riders into downtown Pittsburgh.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "Here’s why Mt. Lebanon is taking over a year to fix an elevator",
+            "url": "https://www.publicsource.org/mt-lebanon-station-elevator-out-of-service/"
+          }
+        ],
+        "_anchor": "i-6c530db3f2"
+      },
+      {
+        "title": "Carnegie Mellon Cancels the DSA Convention",
+        "latest_developments": "Pittsburgh City Paper reported Wednesday, September 30, that Carnegie Mellon University canceled a Democratic Socialists of America convention that CMU Progressives had arranged to host on campus.",
+        "summary": "The university says hosting the organization would run afoul of the law; DSA figures including Ashik Siddique call the cancellation a possible return of Red Scare tactics. The group has grown into a force in Pittsburgh politics while facing threats and venue cancellations.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "The Democratic Socialists of America are a rising force in Pittsburgh — but threats and venue cancellations show ongoing resistance",
+            "url": "https://www.pghcitypaper.com/news-2/politics/cmu-canceled-pittsburgh-dsa-convention-with-cmu-progressives-ashik-siddique-the-fence-controversy/"
+          }
+        ],
+        "_anchor": "i-8f86b28d2f"
+      },
+      {
+        "title": "Penn Hills Weighs Lincoln Park's Future",
+        "latest_developments": "Pittsburgh City Paper reported Wednesday, September 30, that Penn Hills faces a choice on its Lincoln Park neighborhood between new development and letting the emptied blocks revert to urban prairie.",
+        "summary": "Many structures in Lincoln Park have deteriorated past repair, and demolition has thinned the neighborhood, though residents and investors point to scattered signs of life on the remaining blocks.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "Penn Hills’ Lincoln Park could see development — or become “prairie”",
+            "url": "https://www.pghcitypaper.com/news-2/community-profile/penn-hills-lincoln-park-neighborhood-could-see-development-or-become-urban-prairie/"
+          }
+        ],
+        "_anchor": "i-d9ae2eb835"
+      }
+    ],
+    "events": [
+      {
+        "title": "Reel Q Opens Friday",
+        "latest_developments": "The Post-Gazette previewed Reel Q on Wednesday, September 30, two days before the festival opens.",
+        "summary": "Reel Q, Pittsburgh's LGBTQ+ film festival, opens Friday, October 2, 2026, with a program of features, short films, and international selections, among them the entries \"House\" and a documentary on medical malpractice.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "Reel Q film festival opens Friday with LGBTQ+ features, shorts and international films",
+            "url": "https://www.post-gazette.com/ae/movies/2026/09/30/reel-q-film-festival-pittsburgh-lgbtq-house-medical-malpractice/stories/202609290048"
+          }
+        ],
+        "_anchor": "i-3d8cf03686"
+      },
+      {
+        "title": "Oktoberfest Pittsburgh Opens Downtown",
+        "latest_developments": "Pittsburgh City Paper published its October event guide Wednesday, September 30, listing the month's openings beginning Thursday, October 1.",
+        "summary": "Oktoberfest Pittsburgh runs noon to 8 p.m. Thursday, October 1, through Sunday, October 11, at multiple downtown locations, free and open to all ages, with details at oktpgh.com. The same day the Pittsburgh Society of Artists opens its 60th Annual Exhibition at 2525 Rochester Road in Cranberry Township, 10 a.m. to 8 p.m. through Friday, October 30, free, and the Sound Series brings guitarist Eli Winter to the North Side.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "The Big Pittsburgh October Event Guide",
+            "url": "https://www.pghcitypaper.com/arts-entertainment-2/the-big-pittsburgh-october-event-guide/"
+          }
+        ],
+        "_anchor": "i-5d1bf3fb04"
+      },
+      {
+        "title": "Halloween Hangout Comes to the North Shore",
+        "latest_developments": "Pittsburgh City Paper profiled ScareHouse founder Scott Simmons on Wednesday, September 30, and published its roundup of the region's Halloween season events the same morning.",
+        "summary": "Simmons, who built the ScareHouse haunted attraction, now runs the company Needs More Fog and has opened Halloween Hangout on Pittsburgh's North Shore. City Paper's companion guide lists Halloween parties, scary movie screenings, and family events across the city through October.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "ScareHouse founder Scott Simmons decided Pittsburgh Needs More Fog",
+            "url": "https://www.pghcitypaper.com/arts-entertainment-2/scarehouse-founded-scott-simmons-needs-more-fog-pittsburgh-horror-haunted-houses/"
+          },
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "Spooky October events in Pittsburgh",
+            "url": "https://www.pghcitypaper.com/arts-entertainment-2/spooky-october-events-in-pittsburgh/"
+          }
+        ],
+        "_anchor": "i-ef55c0fb00"
+      },
+      {
+        "title": "Public Image Ltd Returns After a Decade",
+        "latest_developments": "TribLive reported Wednesday, September 30, that Public Image Ltd will play Pittsburgh for the first time in more than 10 years.",
+        "summary": "John Lydon, who fronted the Sex Pistols as Johnny Rotten before founding Public Image Ltd, leads the band on the return visit.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Public Image Ltd returns to Pittsburgh for 1st time in 10+ years",
+            "url": "https://triblive.com/aande/music/public-image-ltd-returns-to-pittsburgh-for-1st-time-in-10-years/"
+          }
+        ],
+        "_anchor": "i-46b5d97498"
+      }
+    ],
+    "around_teams": [
+      {
+        "title": "Harmon Talks Through the Strip-Sack",
+        "latest_developments": "Derrick Harmon joined Not Just Football on Wednesday morning, September 30, to break down the forced fumble that ended the Cincinnati game and to describe a short week before Thursday's kickoff at Cleveland.",
+        "summary": "Cam Heyward and co-host Hayden worked through the win over the Bengals with the second-year defensive lineman, handed out their weekly Unsung Hero awards, and continued their \"Roll the Tape\" series by roasting the football scenes in Little Giants. The Steelers play the Browns Thursday, October 1, at 8:15 p.m. ET on Prime Video.",
+        "sources": [
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Derrick Harmon On His Game-Winning Fumble vs. the Bengals & Previewing Browns | Not Just Football",
+            "url": "https://www.youtube.com/watch?v=pZUgXzifYSQ"
+          }
+        ],
+        "_anchor": "i-e9143ab1f6"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "Teenagers Carry the United States Past Chile",
+        "latest_developments": "Mathis Albert, 17, scored in the United States men's 4-2 win over Chile in St. Louis on Tuesday night, September 29, passing Christian Pulisic as the youngest goal scorer in program history.",
+        "summary": "Albert, who plays for Borussia Dortmund, put the game away with the fourth American goal, and fellow teenager Julian Hall also scored in Mauricio Pochettino's second friendly of the window. Center back Chris Richards scored and steadied an inexperienced defense after the Americans fell behind, drawing an 8 out of 10 in ESPN's ratings.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "New-look USMNT beats Chile as teens make history",
+            "url": "https://www.espn.com/soccer/report/_/gameId/401905189"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Albert, 17, breaks Pulisic mark as youngest USMNT scorer",
+            "url": "https://www.espn.com/soccer/story/_/id/50063775/albert-breaks-pulisic-mark-youngest-usmnt-scorer"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "USMNT player ratings: Richards scores, steadies backline to get 8/10 in win over Chile",
+            "url": "https://www.espn.com/soccer/story/_/id/50063781/usmnt-player-ratings-chris-richards-scores-steadies-backline-get-8-win-chile"
+          }
+        ],
+        "_anchor": "i-d3990bea2a"
+      },
+      {
+        "title": "Berhalter Scores and Assists Again",
+        "latest_developments": "Sebastian Berhalter registered a goal and an assist against Chile on Tuesday, September 29, the second straight match he has done both.",
+        "summary": "The Vancouver Whitecaps midfielder, son of former United States coach Gregg Berhalter, has taken over the creative work in Mauricio Pochettino's young squad while the teenagers draw the headlines.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Overshadowed by USMNT's talented teens, Berhalter is stealing the spotlight",
+            "url": "https://www.espn.com/soccer/story/_/id/50064271/overshadowed-usmnt-talented-teens-cavan-sullivan-sebastian-berhalter-stealing-spotlight"
+          }
+        ],
+        "_anchor": "i-b6b2e092c5"
+      },
+      {
+        "title": "Tim Ream Retires From the National Team",
+        "latest_developments": "Tim Ream announced his retirement from the United States men's national team, ESPN reported Tuesday, September 29.",
+        "summary": "The Charlotte FC center back anchored the American defense across a decade and two World Cups, and he leaves the squad as Mauricio Pochettino turns the backline over to Chris Richards and a group of teenagers.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "U.S. legend Tim Ream retires from national team",
+            "url": "https://www.espn.com/soccer/story/_/id/50062568/united-states-legend-tim-ream-retires-national-team"
+          }
+        ],
+        "_anchor": "i-ce21c1e98c"
+      }
+    ],
+    "reading": [
+      {
+        "author": "Stratechery",
+        "title": "OpenAI Dev Day, Dot and OpenAI’s Product Transition, Sign In With ChatGPT",
+        "url": "https://stratechery.com/2026/openai-dev-day-dot-and-openais-product-transition-sign-in-with-chatgpt/",
+        "summary": "Ben Thompson calls OpenAI's Dev Day announcements confusing on their face, then argues they add up to a coherent transition from model provider to consumer platform, with Sign In With ChatGPT as the identity layer that would make it stick.",
+        "_anchor": "i-92cd0f6531"
+      },
+      {
+        "author": "Ed Zitron",
+        "title": "Dead Money",
+        "url": "https://www.wheresyoured.at/dead-money/",
+        "summary": "Zitron continues his accounting of the artificial intelligence build-out, arguing that the capital pouring into Nvidia, Anthropic, and OpenAI will never earn a return.",
+        "_anchor": "i-7c56949924"
+      },
+      {
+        "author": "Cal Newport",
+        "title": "It’s Time to Investigate the AI Labs",
+        "url": "https://calnewport.com/its-time-to-investigate-the-ai-labs/",
+        "summary": "Newport points to months of brazen behavior by the two leading frontier labs, starting with a run of carefully staged announcements, and argues the conduct now warrants formal investigation.",
+        "_anchor": "i-2cef15b9c2"
+      }
+    ]
+  },
+  "glance": [
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Two of the day's worst bugs sit in rarely audited DTLS code, with a 9.5-rated NetScaler overflow now tied to WHIPSHOT and SLAPSHOT alongside an OpenSSL heap leak.",
+      "links": [
+        {
+          "anchor": "i-662a4b09eb",
+          "phrase": "NetScaler",
+          "start": 78,
+          "end": 87,
+          "title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT"
+        },
+        {
+          "anchor": "i-870a14dd20",
+          "phrase": "OpenSSL",
+          "start": 144,
+          "end": 151,
+          "title": "OpenSSL and wolfSSL Close High-Severity Holes"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Autonomous agents now work both sides, as an AI-driven intrusion hit DIVD, the Dutch volunteer disclosure group, while commentators press for formal investigation of the frontier AI labs.",
+      "links": [
+        {
+          "anchor": "i-af77574c55",
+          "phrase": "DIVD",
+          "start": 69,
+          "end": 73,
+          "title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure"
+        },
+        {
+          "anchor": "i-2cef15b9c2",
+          "phrase": "formal investigation",
+          "start": 142,
+          "end": 162,
+          "title": "It’s Time to Investigate the AI Labs"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Cisco Talos tied UAT-11587's Antino backdoor to government targets in Taiwan and Cambodia, while investigators found a ransomware toolkit on South African air traffic control networks.",
+      "links": [
+        {
+          "anchor": "i-b4bc5adc38",
+          "phrase": "UAT-11587",
+          "start": 17,
+          "end": 26,
+          "title": "UAT-11587 Delivers the Antino Backdoor Across Asia"
+        },
+        {
+          "anchor": "i-c099910d27",
+          "phrase": "South African",
+          "start": 141,
+          "end": 154,
+          "title": "A Ransomware Toolkit Reaches South African Air Traffic Control"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "An attacker compromised OpenInfra Europe's self-hosted Artifactory at artifactory.nordix.org and planted 101 malicious npm packages, turning registries that build pipelines trusted into delivery routes.",
+      "links": [
+        {
+          "anchor": "i-6485f53baf",
+          "phrase": "Artifactory",
+          "start": 55,
+          "end": 66,
+          "title": "Attackers Poison OpenInfra's Artifactory and 101 npm Packages"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Long-term Treasury yields retreated from a 25-year peak as France and Italy printed multiyear inflation highs and Trump refereed a lobbying fight over diesel exports.",
+      "links": [
+        {
+          "anchor": "i-39d59e4e73",
+          "phrase": "Treasury yields",
+          "start": 10,
+          "end": 25,
+          "title": "Treasury Yields Retreat From a 25-Year Peak"
+        },
+        {
+          "anchor": "i-318ac14851",
+          "phrase": "France and Italy",
+          "start": 59,
+          "end": 75,
+          "title": "French and Italian Inflation Reach Multiyear Highs"
+        },
+        {
+          "anchor": "i-bfc5fb612e",
+          "phrase": "diesel exports",
+          "start": 151,
+          "end": 165,
+          "title": "Trump Holds Crunch Talks on a Diesel Export Ban"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Carnegie Mellon drew notice twice, accepting a $3 billion gift from Ken Griffin and canceling the Democratic Socialists of America convention that CMU Progressives arranged on campus.",
+      "links": [
+        {
+          "anchor": "i-20e681ce67",
+          "phrase": "Ken Griffin",
+          "start": 68,
+          "end": 79,
+          "title": "Ken Griffin Gives Carnegie Mellon $3 Billion"
+        },
+        {
+          "anchor": "i-8f86b28d2f",
+          "phrase": "CMU Progressives",
+          "start": 147,
+          "end": 163,
+          "title": "Carnegie Mellon Cancels the DSA Convention"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "feed_health": {
+    "groups": [
+      {
+        "group": "security",
+        "label": "Security",
+        "feeds": 24,
+        "loaded": 24,
+        "window_hours": 24,
+        "in_window": 71,
+        "failed": [],
+        "empty": [
+          "Krebs on Security",
+          "Schneier on Security",
+          "Ars Technica Security",
+          "Securelist (Kaspersky)",
+          "Sophos News",
+          "Unit 42 (Palo Alto)",
+          "Google Online Security Blog",
+          "Google Project Zero",
+          "The DFIR Report",
+          "Kim Zetter (Zero Day)",
+          "Frank on Fraud"
+        ],
+        "per_feed": {
+          "The Hacker News": {
+            "items": 50,
+            "in_window": 8,
+            "contributed": 8
+          },
+          "BleepingComputer": {
+            "items": 15,
+            "in_window": 11,
+            "contributed": 11
+          },
+          "Krebs on Security": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Schneier on Security": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Dark Reading": {
+            "items": 50,
+            "in_window": 6,
+            "contributed": 6
+          },
+          "SecurityWeek": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "SANS Internet Storm Center": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "CISA Advisories": {
+            "items": 30,
+            "in_window": 8,
+            "contributed": 8
+          },
+          "The Record": {
+            "items": 5,
+            "in_window": 5,
+            "contributed": 5
+          },
+          "Ars Technica Security": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Help Net Security": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "Securelist (Kaspersky)": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Sophos News": {
+            "items": 9,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Unit 42 (Palo Alto)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Google Online Security Blog": {
+            "items": 25,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Cisco Talos": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Graham Cluley": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Microsoft Security Blog": {
+            "items": 10,
+            "in_window": 3,
+            "contributed": 3
+          },
+          "Google Project Zero": {
+            "items": 7,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The DFIR Report": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Kim Zetter (Zero Day)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "404 Media": {
+            "items": 15,
+            "in_window": 4,
+            "contributed": 4
+          },
+          "Frank on Fraud": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Wired Security": {
+            "items": 20,
+            "in_window": 2,
+            "contributed": 2
+          }
+        }
+      },
+      {
+        "group": "pittsburgh",
+        "label": "Pittsburgh",
+        "feeds": 9,
+        "loaded": 9,
+        "window_hours": 48,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "TribLive": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 13
+          },
+          "Pittsburgh Post-Gazette": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 9
+          },
+          "PublicSource": {
+            "items": 10,
+            "in_window": 6,
+            "contributed": 1
+          },
+          "Pittsburgh City Paper": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 7
+          },
+          "NEXTpittsburgh": {
+            "items": 10,
+            "in_window": 3,
+            "contributed": 0
+          },
+          "Pittsburgh Magazine": {
+            "items": 30,
+            "in_window": 6,
+            "contributed": 0
+          },
+          "KDKA": {
+            "items": 30,
+            "in_window": 27,
+            "contributed": 10
+          },
+          "WPXI": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 5
+          },
+          "WTAE": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 15
+          }
+        }
+      },
+      {
+        "group": "bizpol",
+        "label": "Business and Politics",
+        "feeds": 8,
+        "loaded": 8,
+        "window_hours": 36,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "WSJ World News": {
+            "items": 74,
+            "in_window": 26,
+            "contributed": 8
+          },
+          "WSJ Markets": {
+            "items": 61,
+            "in_window": 36,
+            "contributed": 12
+          },
+          "WSJ US Business": {
+            "items": 85,
+            "in_window": 44,
+            "contributed": 4
+          },
+          "WSJ Politics": {
+            "items": 21,
+            "in_window": 12,
+            "contributed": 2
+          },
+          "The Economist": {
+            "items": 300,
+            "in_window": 17,
+            "contributed": 2
+          },
+          "FT Home": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 8
+          },
+          "FT World": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 19
+          },
+          "FT Markets": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 5
+          }
+        }
+      },
+      {
+        "group": "events",
+        "label": "Events",
+        "feeds": 4,
+        "loaded": 4,
+        "window_hours": 120,
+        "in_window": 8,
+        "failed": [],
+        "empty": [
+          "NEXTpittsburgh Events",
+          "NEXTpittsburgh Arts & Entertainment"
+        ],
+        "per_feed": {
+          "Post-Gazette Arts & Entertainment": {
+            "items": 20,
+            "in_window": 8,
+            "contributed": 8
+          },
+          "Post-Gazette Music": {
+            "items": 20,
+            "in_window": 3,
+            "contributed": 0
+          },
+          "NEXTpittsburgh Events": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "NEXTpittsburgh Arts & Entertainment": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "sports_media",
+        "label": "Sports media",
+        "feeds": 6,
+        "loaded": 6,
+        "window_hours": 96,
+        "in_window": 30,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Footbahlin with Ben Roethlisberger": {
+            "items": 142,
+            "in_window": 1,
+            "contributed": 0
+          },
+          "Not Just Football with Cam Heyward": {
+            "items": 15,
+            "in_window": 2,
+            "contributed": 1
+          },
+          "Pittsburgh Steelers (YouTube)": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 15
+          },
+          "Ben Roethlisberger / Channel Seven (YouTube)": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Post-Gazette Pirates": {
+            "items": 20,
+            "in_window": 6,
+            "contributed": 3
+          },
+          "Post-Gazette Steelers": {
+            "items": 20,
+            "in_window": 17,
+            "contributed": 10
+          }
+        }
+      },
+      {
+        "group": "team_usa",
+        "label": "Team USA",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 72,
+        "in_window": 28,
+        "failed": [],
+        "empty": [
+          "Guardian Olympics"
+        ],
+        "per_feed": {
+          "ESPN Soccer": {
+            "items": 22,
+            "in_window": 22,
+            "contributed": 22
+          },
+          "ESPN Olympics": {
+            "items": 25,
+            "in_window": 6,
+            "contributed": 6
+          },
+          "Guardian Olympics": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "reading",
+        "label": "Reading",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 336,
+        "in_window": 12,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Ed Zitron": {
+            "items": 15,
+            "in_window": 4,
+            "contributed": 3
+          },
+          "Stratechery": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 8
+          },
+          "Cal Newport": {
+            "items": 8,
+            "in_window": 1,
+            "contributed": 1
+          }
+        }
+      }
+    ],
+    "aux": [
+      {
+        "label": "Markets (Yahoo Finance)",
+        "ok": true,
+        "detail": "7 of 7 rows"
+      },
+      {
+        "label": "Weather (NWS)",
+        "ok": true,
+        "detail": "3 forecast periods"
+      },
+      {
+        "label": "Scores (ESPN, plaintextsports)",
+        "ok": true,
+        "detail": "2 teams via plaintextsports; mlb: ESPN failed (mlb: HTTP 403 (server: AkamaiGHost)); used plaintextsports; nfl: ESPN failed (nfl: HTTP 403 (server: AkamaiGHost)); used plaintextsports; nhl: ESPN failed (nhl: HTTP 403 (server: AkamaiGHost)); used plaintextsports"
+      }
+    ],
+    "cli": {
+      "models": [
+        "claude-opus-5"
+      ],
+      "usage": {
+        "claude-opus-5": {
+          "inputTokens": 6,
+          "outputTokens": 25813,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 114793,
+          "webSearchRequests": 0,
+          "costUSD": 1.793285,
+          "contextWindow": 3000000,
+          "maxOutputTokens": 192000,
+          "thinkingTokens": 13704
+        }
+      },
+      "cost_usd": 1.793285,
+      "duration_ms": 287877,
+      "calls": 3
+    }
+  },
+  "meta": {
+    "generated_at": "2026-09-30 07:05 EDT",
+    "items_considered": 71,
+    "window_hours": 24,
+    "model": "opus",
+    "fallback_model": "sonnet",
+    "feeds": {
+      "security": [
+        "The Hacker News",
+        "BleepingComputer",
+        "Krebs on Security",
+        "Schneier on Security",
+        "Dark Reading",
+        "SecurityWeek",
+        "SANS Internet Storm Center",
+        "CISA Advisories",
+        "The Record",
+        "Ars Technica Security",
+        "Help Net Security",
+        "Securelist (Kaspersky)",
+        "Sophos News",
+        "Unit 42 (Palo Alto)",
+        "Google Online Security Blog",
+        "Cisco Talos",
+        "Graham Cluley",
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media",
+        "Frank on Fraud",
+        "Wired Security"
+      ],
+      "pittsburgh": [
+        "TribLive",
+        "Pittsburgh Post-Gazette",
+        "PublicSource",
+        "Pittsburgh City Paper",
+        "NEXTpittsburgh",
+        "Pittsburgh Magazine",
+        "KDKA",
+        "WPXI",
+        "WTAE"
+      ],
+      "bizpol": [
+        "WSJ World News",
+        "WSJ Markets",
+        "WSJ US Business",
+        "WSJ Politics",
+        "The Economist",
+        "FT Home",
+        "FT World",
+        "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
+      ],
+      "team_usa": [
+        "ESPN Soccer",
+        "ESPN Olympics",
+        "Guardian Olympics"
+      ],
+      "reading": [
+        "Ed Zitron",
+        "Stratechery",
+        "Cal Newport"
+      ]
+    },
+    "served_by": [
+      "claude-opus-5"
+    ],
+    "model_calls": 3,
+    "model_cost_usd": 1.7933,
+    "model_duration_ms": 287877,
+    "local_from": null,
+    "feed_failures": []
+  }
+}
