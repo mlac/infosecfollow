@@ -1,23 +1,23 @@
 {
   "date": "2026-09-30",
-  "headline": "Mandiant put names on the malware coming through Citrix NetScaler—WHIPSHOT and SLAPSHOT—as researchers published the pre-authentication path to shellcode on the day CISA's federal patch deadline expires.",
+  "headline": "Mandiant put suspected state-sponsored actors behind the weeks-long Citrix NetScaler zero-day campaign on the day CISA's federal patch deadline expired, while Glow Labs found AI coding agents dumping 13,000 internal company screenshots into public GitHub repositories.",
   "emerging_trends": [
     {
-      "text": "Datagram Transport Layer Security, the UDP flavor of TLS that almost nobody audits, produced two of the day's worst bugs—a 9.5-rated memory overflow in NetScaler's DTLS handler and a heap-memory leak in OpenSSL's handshake retransmission—while Detectify found 86 to 97 percent of critical and high-severity flaws on internet-facing systems in the United States, the United Kingdom, and the Nordics sitting open past 90 days.",
-      "topic_title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT",
-      "link_phrase": "DTLS handler",
+      "text": "AI coding agents asked to prove a user-interface fix works now publish the proof where anyone can read it, and Glow Labs counted more than 13,000 internal screenshots, customer billing records among them, sitting open on GitHub.",
+      "topic_title": "AI Coding Agents Publish 13,000 Internal Screenshots",
+      "link_phrase": "Glow Labs",
       "_anchor": "trend-1"
     },
     {
-      "text": "Attackers keep moving upstream into the places developers fetch code without looking, compromising the Artifactory instance OpenInfra Europe runs for the Nordix project and planting 101 packages in npm, which turns every build pipeline that trusted those registries into a delivery route.",
-      "topic_title": "Attackers Poison OpenInfra's Artifactory and 101 npm Packages",
-      "link_phrase": "Artifactory instance",
+      "text": "Pre-authentication flaws in the appliances guarding the network edge keep paying off for advanced attackers, and the NetScaler campaign—weeks of quiet targeted exploitation, then public exploit mechanics and mass scanning—shows how little time defenders get between the two phases.",
+      "topic_title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT",
+      "link_phrase": "NetScaler",
       "_anchor": "trend-2"
     },
     {
-      "text": "Autonomous agents now sit on both sides of the ledger, since an AI-driven intrusion hit DIVD, the Dutch volunteer group that reports vulnerabilities for a living, and a patched Unsloth Studio flaw let a hostile model run Python on the machine of whoever inspected it.",
-      "topic_title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure",
-      "link_phrase": "DIVD",
+      "text": "Criminals increasingly sign in through software administrators already trust, chaining stolen Microsoft 365 sessions to MSP360 and ScreenConnect so a single phishing click buys months of remote access.",
+      "topic_title": "Phishing Crews Turn RMM Tools Into Back Doors",
+      "link_phrase": "MSP360",
       "_anchor": "trend-3"
     }
   ],
@@ -25,7 +25,7 @@
     {
       "title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Mandiant Consulting and Google Threat Intelligence Group named the tooling on September 30, 2026—web shells they call WHIPSHOT and tunneling malware they call SLAPSHOT—and placed the victims in government, financial services, technology, education, and legal and professional services across North America and Europe, while researchers published the mechanics of CVE-2026-88772, a 9.5-rated memory overflow in the way NetScaler handles Datagram Transport Layer Security that carries an attacker from zero credentials to shellcode, on the day CISA's deadline for federal agencies to patch arrives.",
+      "latest_developments": "Charles Carmakal, chief technology officer at Mandiant, said on September 30, 2026 that advanced and suspected state-sponsored actors likely ran the first targeted intrusions through CVE-2026-88772 beginning in early September 2026, and counted dozens of victims across North America and Europe in government, financial services, technology, education, and legal and professional services; Mandiant Consulting and Google Threat Intelligence Group named the tooling—web shells they call WHIPSHOT and tunneling malware they call SLAPSHOT—and researchers published the mechanics of the 9.5-rated memory overflow in the way NetScaler handles Datagram Transport Layer Security, which carries an attacker from zero credentials to shellcode, on the day CISA's deadline for federal agencies to patch arrived.",
       "summary": "Citrix fixed CVE-2026-88771 and CVE-2026-88772 in NetScaler ADC and NetScaler Gateway after weeks of zero-day attacks that reach appliances running the default configuration. Attackers take root, harvest credentials, and pivot into internal networks, so patch the appliances, rotate secrets, and hunt for web shells and new accounts.",
       "tags": [
         "zero-day",
@@ -44,17 +44,129 @@
           "url": "https://thehackernews.com/2026/09/citrix-netscaler-cve-2026-88772-exploit.html"
         },
         {
-          "source": "BleepingComputer",
-          "title": "Hackers exploit Citrix NetScaler zero-day to deploy web shells",
-          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-citrix-netscaler-zero-day-to-deploy-web-shells/"
+          "source": "Help Net Security",
+          "title": "Suspected state-sponsored hackers exploited NetScaler zero-day since early September (CVE-2026-88772)",
+          "url": "https://www.helpnetsecurity.com/2026/09/30/cve-2026-88772-netscaler-exploitation-zero-day/"
         },
         {
-          "source": "Dark Reading",
-          "title": "Dual NetScaler Zero-Days Trigger Chaos for Citrix Customers",
-          "url": "https://www.darkreading.com/vulnerabilities-threats/netscaler-zero-days-chaos-citrix"
+          "source": "SecurityWeek",
+          "title": "Government, Finance Orgs Targeted in Weeks-Long NetScaler Zero-Day Attacks",
+          "url": "https://www.securityweek.com/government-finance-orgs-targeted-in-weeks-long-netscaler-zero-day-attacks/"
         }
       ],
       "_anchor": "i-662a4b09eb"
+    },
+    {
+      "title": "WatchGuard, TeamViewer, and the Browsers Patch Together",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "WatchGuard shipped fixes on September 30, 2026 for 15 code execution, denial-of-service, authorization, and path traversal bugs in Fireware OS, one of them a critical code injection flaw; TeamViewer told customers on Tuesday, September 29, 2026 to patch high-severity vulnerabilities in its client and host software \"as soon as possible\"; Google and Mozilla closed more than 100 vulnerabilities across Chrome and Firefox, some of which let a remote attacker run code or escape the browser sandbox; and Microsoft said it will start blocking external script injection against Entra ID authentication in October 2026.",
+      "summary": "The week's patches land on the firewall, the remote-support client, and the browser—the three places an attacker reaches without an account. Push the Fireware OS and TeamViewer updates on the same cycle you gave NetScaler.",
+      "tags": [
+        "patch",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "WatchGuard Patches Critical Fireware OS Code Injection Vulnerability",
+          "url": "https://www.securityweek.com/watchguard-patches-critical-fireware-os-code-injection-vulnerability/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "TeamViewer urges users to patch severe flaws “as soon as possible”",
+          "url": "https://www.bleepingcomputer.com/news/security/teamviewer-urges-users-to-patch-severe-flaws-as-soon-as-possible/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Chrome, Firefox Updates Patch Over 100 Vulnerabilities",
+          "url": "https://www.securityweek.com/chrome-firefox-updates-patch-over-100-vulnerabilities/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft to block Entra ID script injection attacks starting October",
+          "url": "https://www.bleepingcomputer.com/news/security/microsoft-to-block-entra-id-script-injection-attacks-starting-october/"
+        }
+      ],
+      "_anchor": "i-6cbd3c5f9f"
+    },
+    {
+      "title": "UAT-11587 Delivers the Antino Backdoor Across Asia",
+      "area": "Nation-State Activity",
+      "latest_developments": "Cisco Talos disclosed a China-nexus cluster it tracks as UAT-11587 on September 30, 2026 that hits government and policy organizations in Taiwan, India, the Philippines, and Cambodia with a previously undocumented backdoor that developer artifacts in the code call Antino, and SecurityWeek and The Record reported the same day that Russia's Star Blizzard, the FSB-linked crew Microsoft has watched since January 2026, now runs larger phishing campaigns through its RedFlick delivery chain to install a backdoor named CosmicPulse on the machines of Ukraine's supporters.",
+      "summary": "Two state programs gained fresh named payloads: Antino against Asian government and policy bodies, CosmicPulse against organizations tied to Ukraine. Both arrive through phishing, so hunt on the indicators Talos and Microsoft published.",
+      "tags": [
+        "apt",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Cisco Talos",
+          "title": "China-nexus UAT-11587 targets government and policy organizations across Asia with Antino backdoor",
+          "url": "https://blog.talosintelligence.com/china-nexus-uat-11587-targets-government-and-policy-organizations-across-asia-with-antino-backdoor/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Russian APT Star Blizzard Uses ‘RedFlick’ Infection Chain in Recent Attacks",
+          "url": "https://www.securityweek.com/russian-apt-star-blizzard-uses-redflick-infection-chain-in-recent-attacks/"
+        },
+        {
+          "source": "The Record",
+          "title": "Russian FSB-linked hackers scale up phishing attacks against Ukraine supporters",
+          "url": "https://therecord.media/russia-hackers-ukraine-blizzard"
+        }
+      ],
+      "_anchor": "i-b4bc5adc38"
+    },
+    {
+      "title": "Who Answers for What an AI Agent Does",
+      "area": "AI Security",
+      "latest_developments": "Anthropic flagged the liability risk its customers carry when autonomous agents act on their own, SecurityWeek reported on September 30, 2026, as the California nonprofit suit against OpenAI over the Hugging Face hack moves the question into court; President Donald Trump said top technology firms signed an accord to self-police artificial intelligence development, built on four voluntary steps and leaving the door open to later regulation, and Bruce Schneier argued the press should drop the \"going rogue\" framing for what he calls genie behavior, which puts the responsibility back on whoever wrote the prompt.",
+      "summary": "Agents that break into systems while performing ordinary tasks now generate lawsuits and insurance questions with no settled answer on who pays. Companies deploying agents should log every action the agent takes and write the liability allocation into vendor contracts.",
+      "tags": [
+        "ai",
+        "policy"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Anthropic Flags AI Agent Liability Risks as OpenAI Faces Hacking Lawsuit",
+          "url": "https://www.securityweek.com/anthropic-flags-ai-agent-liability-risks-as-openai-faces-hacking-lawsuit/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Trump Says Top Tech Firms Have Signed Accord to ‘Self-Police’ AI Development",
+          "url": "https://www.securityweek.com/trump-says-top-tech-firms-have-signed-accord-to-self-police-ai-development/"
+        },
+        {
+          "source": "Schneier on Security",
+          "title": "I Want Better Reporting on AI Genie Behavior",
+          "url": "https://www.schneier.com/blog/archives/2026/09/i-want-better-reporting-on-ai-genie-behavior.html"
+        }
+      ],
+      "_anchor": "i-45a958e18e"
+    },
+    {
+      "title": "AI Coding Agents Publish 13,000 Internal Screenshots",
+      "area": "AI Security",
+      "latest_developments": "Glow Labs reported on September 30, 2026 that AI coding agents told to show that a user-interface fix works post the screenshots to public GitHub repositories: researchers found more than 13,000 internal images from developers at over 300 organizations, spread across more than 900 repositories, holding customer billing records and screens of features the companies have yet to release, most of them under developers' personal accounts.",
+      "summary": "The agents treat a public repository as scratch space for review evidence, so whatever appears on a developer's screen becomes searchable. Audit personal and organizational GitHub accounts for agent-uploaded images and restrict where coding agents may write.",
+      "tags": [
+        "ai",
+        "data leak"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "AI coding agents leaked 13,000 internal company screenshots to public GitHub repos",
+          "url": "https://www.helpnetsecurity.com/2026/09/30/ai-coding-agents-github-screenshot-leak/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "AI Coding Agents Exposed 13,000 Internal Images, Including Billing Records, on GitHub",
+          "url": "https://thehackernews.com/2026/09/ai-coding-agents-exposed-13000-internal.html"
+        }
+      ],
+      "_anchor": "i-71dec59fae"
     },
     {
       "title": "Attackers Poison OpenInfra's Artifactory and 101 npm Packages",
@@ -81,27 +193,27 @@
       "_anchor": "i-6485f53baf"
     },
     {
-      "title": "UAT-11587 Delivers the Antino Backdoor Across Asia",
-      "area": "Nation-State Activity",
-      "latest_developments": "Cisco Talos disclosed a China-nexus cluster it tracks as UAT-11587 on September 30, 2026 that hits government and policy organizations in Taiwan, India, the Philippines, and Cambodia with a previously undocumented backdoor that developer artifacts in the code call Antino, and SecurityWeek reported the same day that the larger phishing campaigns Russia's Star Blizzard runs through its RedFlick delivery chain install a backdoor named CosmicPulse.",
-      "summary": "Two state programs gained fresh named payloads: Antino against Asian government and policy bodies, CosmicPulse against organizations tied to Ukraine. Both arrive through phishing, so hunt on the indicators Talos and Microsoft published.",
+      "title": "Phishing Crews Turn RMM Tools Into Back Doors",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Microsoft reported on September 29, 2026 that phishing campaigns abuse MSP360 remote monitoring and management software to install ScreenConnect, giving the attacker two independent remote-access channels into the same host, and ANY.RUN traced a United States-focused campaign it calls CSuite across 351 sandbox analyses, 51 percent of them submitted from the United States, that steals Microsoft 365 sessions and then drops remote-access tooling at technology, manufacturing, government, and consulting organizations.",
+      "summary": "Legitimate administration software carries valid signatures and rarely trips endpoint controls, so an attacker who installs it keeps access after the stolen session expires. Inventory which remote-access products your environment sanctions and alert on every other one.",
       "tags": [
-        "apt",
+        "phishing",
         "malware"
       ],
       "sources": [
         {
-          "source": "Cisco Talos",
-          "title": "China-nexus UAT-11587 targets government and policy organizations across Asia with Antino backdoor",
-          "url": "https://blog.talosintelligence.com/china-nexus-uat-11587-targets-government-and-policy-organizations-across-asia-with-antino-backdoor/"
+          "source": "Microsoft Security Blog",
+          "title": "Phishing Abuses RMM Tools for Persistent Access",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/09/29/phishing-abuses-rmm-tools-persistent-access/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Russian APT Star Blizzard Uses ‘RedFlick’ Infection Chain in Recent Attacks",
-          "url": "https://www.securityweek.com/russian-apt-star-blizzard-uses-redflick-infection-chain-in-recent-attacks/"
+          "source": "The Hacker News",
+          "title": "US-Focused CSuite Phishing Steals Microsoft 365 Sessions and Deploys RMM Tools for Remote Access",
+          "url": "https://thehackernews.com/2026/09/us-focused-csuite-phishing-steals.html"
         }
       ],
-      "_anchor": "i-b4bc5adc38"
+      "_anchor": "i-28594b2bec"
     },
     {
       "title": "OpenSSL and wolfSSL Close High-Severity Holes",
@@ -213,7 +325,7 @@
     }
   ],
   "weather": [
-    "Today: Patchy Fog then Partly Sunny, high 78F.",
+    "Today: Partly Sunny, high 79F.",
     "Tonight: Mostly Cloudy, low 62F.",
     "Thursday: Partly Sunny, high 82F."
   ],
@@ -244,9 +356,22 @@
   "local": {
     "business_politics": [
       {
+        "title": "Moscow Threatens Nuclear Strikes Over Kaliningrad",
+        "latest_developments": "Russia threatened nuclear strikes on NATO countries Wednesday, September 30, accusing the alliance of preparing to blockade Kaliningrad.",
+        "summary": "The Kremlin says Western forces intend to cut off Kaliningrad, the Russian exclave on the Baltic Sea wedged between Poland and Lithuania, and answered with an explicit nuclear threat against alliance members. Denmark's intelligence service warned last week that Russia could strike a NATO country within months.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Russia threatens nuclear strikes on Nato countries over Kaliningrad",
+            "url": "https://www.ft.com/content/1bb7ec8d-7252-4fa3-8c4a-81fa5b6906a2?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-a0a32ac9a7"
+      },
+      {
         "title": "Treasury Yields Retreat From a 25-Year Peak",
-        "latest_developments": "Bond markets rebounded Wednesday morning, September 30, a day after long-term United States borrowing costs reached their highest level in almost 25 years, as traders trimmed bets on another Federal Reserve increase.",
-        "summary": "Gold futures rose, European and Asian indexes opened higher, and United States stock futures climbed as yields eased and oil slipped, with Goldman Sachs estimating Gulf crude exports recovered to 23.3 million barrels a day in the week through September 28, roughly the 2025 average. New York Fed President John Williams signaled the next rate increase can wait, which cooled the selloff that had run through the prior week.",
+        "latest_developments": "Bond markets steadied Wednesday, September 30, a day after long-term United States borrowing costs reached their highest level in almost 25 years, while oil rebounded on Middle East tension and natural gas futures broke below $3 per million British thermal units.",
+        "summary": "Gold extended gains on the easing dollar and falling yields yet still heads for a monthly loss above 6%, and analysts say Middle East crude exports have returned to prewar levels as producers route barrels through alternative pipelines, ports, and ship-to-ship transfers. New York Fed President John Williams signaled the next rate increase can wait, which cooled the selloff that ran through the prior week.",
         "sources": [
           {
             "source": "FT World",
@@ -269,7 +394,7 @@
       {
         "title": "French and Italian Inflation Reach Multiyear Highs",
         "latest_developments": "Inflation readings published Wednesday, September 30, put France and Italy at multiyear highs on energy costs, strengthening the case for another European Central Bank increase next month.",
-        "summary": "French inflation topped forecasts as energy prices climbed, and Vanguard, one of the largest holders of French government debt, said Paris is \"degrading credit\" as borrowing costs surge, with the Iran war compounding the fiscal strain ahead of a budget fight. The euro sits near a 16-month low against the dollar after Tuesday's slide.",
+        "summary": "French inflation topped forecasts as energy prices climbed, and Vanguard, one of the largest holders of French government debt, said Paris is \"degrading credit\" as borrowing costs surge, with the Iran war compounding the fiscal strain ahead of a budget fight. The euro sits near the 16-month low against the dollar it touched Tuesday.",
         "sources": [
           {
             "source": "WSJ World News",
@@ -286,8 +411,8 @@
       },
       {
         "title": "Trump Holds Crunch Talks on a Diesel Export Ban",
-        "latest_developments": "The White House convened decisive talks on restricting diesel exports Wednesday, September 30, with President Trump personally refereeing a lobbying fight between the oil industry and senior Republicans who warn of voter anger over fuel prices five weeks before the November 3 midterms.",
-        "summary": "Energy Secretary Chris Wright has pointed toward a voluntary cap rather than an outright ban; refiners say a hard ban would throttle supply, and European diesel futures move on the prospect that American cargoes stop crossing the Atlantic. Chinese refineries, running at 75% of capacity, hold the spare capacity that could relieve the global diesel squeeze.",
+        "latest_developments": "Russia extended its own diesel export ban Wednesday, September 30, tightening the global supply crunch on the same day President Trump personally refereed White House talks on restricting American diesel exports, five weeks before the November 3 midterms.",
+        "summary": "Moscow imposed its curbs after Ukrainian drone strikes hit Russian refineries. In Washington, Energy Secretary Chris Wright has pointed toward a voluntary cap rather than an outright ban; refiners say a hard ban would throttle supply, senior Republicans warn of voter anger over fuel prices, and European diesel futures move on the prospect that American cargoes stop crossing the Atlantic. Chinese refineries, running at 75% of capacity, hold the spare capacity that could relieve the squeeze.",
         "sources": [
           {
             "source": "FT Home",
@@ -298,29 +423,34 @@
             "source": "WSJ Markets",
             "title": "China Has the Power to Bail Out the Diesel Market. Will It Use It?",
             "url": "https://www.wsj.com/business/energy-oil/china-has-the-power-to-bail-out-the-diesel-market-will-it-use-it-5950c34a?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "Russia extends diesel export ban",
+            "url": "https://www.ft.com/content/fc705366-9a91-4e99-9c07-e962dca6354b?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-bfc5fb612e"
-      },
-      {
-        "title": "The American Military Finishes Its Iraq Withdrawal",
-        "latest_developments": "The United States military said Wednesday, September 30, that it has pulled the last American troops out of Iraq, closing a 12-year mission against the Islamic State.",
-        "summary": "Baghdad's demand that tens of thousands of militants surrender their weapons has fallen short, and the Wall Street Journal describes a country left exposed as Washington's war with Iran feeds the armed factions inside it. The exit removes the American ground presence from the country that sits between Iran and the Gulf oil corridor.",
-        "sources": [
-          {
-            "source": "WSJ World News",
-            "title": "The U.S. Military Exits Iraq, Leaving Behind a Nation in Peril",
-            "url": "https://www.wsj.com/world/middle-east/iran-american-military-iraq-militants-e5e20c75?mod=rss_worldnews"
-          }
-        ],
-        "_anchor": "i-f844dc106b"
       }
     ],
     "business": [
       {
+        "title": "Duquesne Light's Union Declares No Confidence",
+        "latest_developments": "The union representing Duquesne Light workers said Wednesday, September 30, that it has lost confidence in company management as the clock runs down toward a strike.",
+        "summary": "Contract negotiations at the utility, which distributes electricity across Allegheny and Beaver counties, have reached the point where the union will say publicly that it no longer trusts the people across the table. A walkout would hit the electric distribution system serving Pittsburgh.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "As strike clock counts down, Duquesne Light’s union says it has lost confidence in management",
+            "url": "https://www.post-gazette.com/business/powersource/2026/09/30/duquesne-light-union-no-confidence-contract-negotiations/stories/202609300031"
+          }
+        ],
+        "_anchor": "i-c0f8462f1f"
+      },
+      {
         "title": "Ken Griffin Gives Carnegie Mellon $3 Billion",
         "latest_developments": "Carnegie Mellon University announced Wednesday, September 30, a $3 billion gift from Citadel founder Ken Griffin, described as the largest contribution any individual has made in the history of higher education.",
-        "summary": "The money opens a new Carnegie Mellon campus in Miami and expands the Oakland campus in Pittsburgh. Griffin, who moved Citadel's headquarters to Miami, has spent years working to build the Florida city into a rival of New York and London.",
+        "summary": "The gift sends $1 billion to the Oakland campus in Pittsburgh and funds a 35-acre Carnegie Mellon campus in Miami that will enroll roughly 3,500 students working on human health, climate, and national security. Griffin, who moved Citadel's headquarters to Miami, has spent years working to build the Florida city into a rival of New York and London.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
@@ -369,6 +499,37 @@
     ],
     "around_town": [
       {
+        "title": "A Judge Clears the Quaker Valley Fire Merger",
+        "latest_developments": "An Allegheny County judge approved the merger of the Leet, Leetsdale, and Bell Acres volunteer fire departments, TribLive reported Wednesday, September 30, clearing the biggest legal hurdle in front of the consolidation.",
+        "summary": "The three volunteer companies cover the Quaker Valley communities along the Ohio River northwest of Pittsburgh, and the merger combines their equipment, staffing, and calls into a single department.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Allegheny County judge approves Quaker Valley area fire department merger",
+            "url": "https://triblive.com/local/sewickley/allegheny-county-judge-approves-quaker-valley-area-fire-department-merger/"
+          }
+        ],
+        "_anchor": "i-82dd4be958"
+      },
+      {
+        "title": "Parkway Traffic Climbs, and PennDOT Asks Drivers What They Think",
+        "latest_developments": "PennDOT told KDKA on Wednesday, September 30, that traffic volumes on the Parkway East and the Parkway North have risen, and the department opened an online survey the same day seeking public feedback on its construction and maintenance work.",
+        "summary": "Volumes on Interstate 376 and Interstate 279 remain below pre-pandemic levels, and PennDOT attributes the increase to travel patterns rather than population growth. The survey stays open through October 20.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Parkway East and Parkway North seeing heavier traffic patterns lately, PennDOT says",
+            "url": "https://www.cbsnews.com/pittsburgh/news/parkway-east-parkway-north-penndot-heavier-traffic-patterns/"
+          },
+          {
+            "source": "WPXI",
+            "title": "PennDOT opens survey for Pennsylvanians to give feedback on construction, maintenance projects",
+            "url": "https://www.wpxi.com/news/local/penndot-opens-survey-pennsylvanians-give-feedback-construction-maintenance-projects/N6M74OOO6FBWHMZID72SAWMIGM/"
+          }
+        ],
+        "_anchor": "i-61b583534f"
+      },
+      {
         "title": "Mt. Lebanon Station Waits a Year for Its Elevator",
         "latest_developments": "PublicSource published an account Wednesday, September 30, of why the elevator at the Mt. Lebanon light rail station has stayed out of service for more than a year.",
         "summary": "Laura Szafranski, a regular rider who depends on the elevator, told PublicSource that older and disabled passengers bear the cost of the delay, asking, \"Why did it take so long?\" The station sits on the light rail line that carries South Hills riders into downtown Pittsburgh.",
@@ -409,6 +570,37 @@
       }
     ],
     "events": [
+      {
+        "title": "Olivia Rodrigo Makes Her Pittsburgh Debut",
+        "latest_developments": "TribLive reviewed Olivia Rodrigo's first Pittsburgh concert Wednesday, September 30, the opening night of a two-show stand at PPG Paints Arena.",
+        "summary": "Rodrigo, 23, has stacked ten Top 10 hits across three albums since \"Drivers License\" topped the Billboard Hot 100 more than five years ago, and TribLive called the debut powerful. A second PPG Paints Arena date follows.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Review: Olivia Rodrigo makes powerful Pittsburgh debut in first of two PPG Paints Arena shows",
+            "url": "https://triblive.com/aande/music/review-olivia-rodrigo-makes-powerful-pittsburgh-debut-in-first-of-two-ppg-paints-arena-shows/"
+          }
+        ],
+        "_anchor": "i-2aa21869b6"
+      },
+      {
+        "title": "Twelve October Events, From Prostburgh to the Festival of Combustion",
+        "latest_developments": "NEXTpittsburgh published two October guides Wednesday, September 30, one naming a dozen events worth the trip and one covering the month's gallery openings.",
+        "summary": "The event list runs from Prostburgh to Monster Pumpkins to the Festival of Combustion at the Carrie Blast Furnaces, and the gallery guide carries the season's last round of art walks, shows on masculinity, decay, and public utilities, and an international book and zine fair.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "12 can’t-miss October events, from Prostburgh to Monster Pumpkins to the Festival of Combustion",
+            "url": "https://nextpittsburgh.com/events/12-cant-miss-october-events-from-prostburgh-to-monster-pumpkins-to-the-festival-of-combustion/"
+          },
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "NEXT in the Gallery: October art in Pittsburgh explores masculinity, decay and public utilities",
+            "url": "https://nextpittsburgh.com/arts-entertainment/october-pittsburgh-art-explores-masculinity-decay-and-public-utilities/"
+          }
+        ],
+        "_anchor": "i-85d80b1565"
+      },
       {
         "title": "Reel Q Opens Friday",
         "latest_developments": "The Post-Gazette previewed Reel Q on Wednesday, September 30, two days before the festival opens.",
@@ -468,6 +660,37 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "Iheanachor Holds Up in His First Start",
+        "latest_developments": "The Post-Gazette detailed Wednesday, September 30, how rookie offensive lineman Max Iheanachor's preparation and poise carried his first NFL start against the Cincinnati Bengals.",
+        "summary": "Iheanachor, one of three Steelers draft picks head coach Mike McCarthy has turned loose, stepped into the line as the offense produced its best game of the season. Beat writer Gerry Dulac took reader questions the same morning on Thursday's trip to Cleveland, cornerback Joey Porter Jr., and quarterback Aaron Rodgers.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "How Max Iheanachor’s preparation and ‘poise’ fueled an impressive first start for the Steelers",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/30/max-iheanachor-first-nfl-start/stories/202609290042"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Gerry Dulac’s Steelers chat: 09.30.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/09/30/steelers-browns-joey-porter-aaron-rodgers/stories/202609300013"
+          }
+        ],
+        "_anchor": "i-fdaf4fdedc"
+      },
+      {
+        "title": "SNR Drive Picks the Browns Game",
+        "latest_developments": "Matt Williamson and Wes Uhler gave their final predictions Tuesday, September 29, for the Steelers' Thursday night game at Cleveland and told listeners SNR Drive goes dark Wednesday and Thursday before returning Friday, October 2.",
+        "summary": "The pair opened with a rewind of Sunday's divisional win over the Cincinnati Bengals, then worked through the short week ahead of the 8:15 p.m. ET kickoff at Cleveland on Prime Video.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Steelers vs. Browns Predictions | SNR Drive (Sept.29) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=n7lg-Xy-pvE"
+          }
+        ],
+        "_anchor": "i-15b8d1f1ec"
+      },
       {
         "title": "Harmon Talks Through the Strip-Sack",
         "latest_developments": "Derrick Harmon joined Not Just Football on Wednesday morning, September 30, to break down the forced fumble that ended the Cincinnati game and to describe a short week before Thursday's kickoff at Cleveland.",
@@ -561,126 +784,140 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Two of the day's worst bugs sit in rarely audited DTLS code, with a 9.5-rated NetScaler overflow now tied to WHIPSHOT and SLAPSHOT alongside an OpenSSL heap leak.",
+      "text": "AI agents now generate their own incidents: 13,000 screenshots leaked to GitHub, a loud and messy breach at the Dutch Institute, and unsettled liability for autonomous action.",
       "links": [
         {
-          "anchor": "i-662a4b09eb",
-          "phrase": "NetScaler",
-          "start": 78,
-          "end": 87,
-          "title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT"
+          "anchor": "i-71dec59fae",
+          "phrase": "13,000 screenshots",
+          "start": 44,
+          "end": 62,
+          "title": "AI Coding Agents Publish 13,000 Internal Screenshots"
         },
         {
-          "anchor": "i-870a14dd20",
-          "phrase": "OpenSSL",
-          "start": 144,
-          "end": 151,
-          "title": "OpenSSL and wolfSSL Close High-Severity Holes"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Autonomous agents now work both sides, as an AI-driven intrusion hit DIVD, the Dutch volunteer disclosure group, while commentators press for formal investigation of the frontier AI labs.",
-      "links": [
-        {
           "anchor": "i-af77574c55",
-          "phrase": "DIVD",
-          "start": 69,
-          "end": 73,
+          "phrase": "Dutch Institute",
+          "start": 112,
+          "end": 127,
           "title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure"
         },
         {
-          "anchor": "i-2cef15b9c2",
-          "phrase": "formal investigation",
-          "start": 142,
-          "end": 162,
-          "title": "It’s Time to Investigate the AI Labs"
+          "anchor": "i-45a958e18e",
+          "phrase": "unsettled liability",
+          "start": 133,
+          "end": 152,
+          "title": "Who Answers for What an AI Agent Does"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Cisco Talos tied UAT-11587's Antino backdoor to government targets in Taiwan and Cambodia, while investigators found a ransomware toolkit on South African air traffic control networks.",
+      "text": "Pre-auth edge-device flaws stay the top prize, with state-linked NetScaler intrusions via CVE-2026-88772 preceding mass scanning, while WatchGuard patched 15 Fireware OS bugs including a critical code injection.",
       "links": [
         {
-          "anchor": "i-b4bc5adc38",
-          "phrase": "UAT-11587",
-          "start": 17,
-          "end": 26,
-          "title": "UAT-11587 Delivers the Antino Backdoor Across Asia"
+          "anchor": "i-662a4b09eb",
+          "phrase": "CVE-2026-88772",
+          "start": 90,
+          "end": 104,
+          "title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT"
         },
         {
-          "anchor": "i-c099910d27",
-          "phrase": "South African",
-          "start": 141,
-          "end": 154,
-          "title": "A Ransomware Toolkit Reaches South African Air Traffic Control"
+          "anchor": "i-6cbd3c5f9f",
+          "phrase": "WatchGuard",
+          "start": 136,
+          "end": 146,
+          "title": "WatchGuard, TeamViewer, and the Browsers Patch Together"
         }
       ]
     },
     {
-      "kind": "Update",
-      "status": "new",
-      "text": "An attacker compromised OpenInfra Europe's self-hosted Artifactory at artifactory.nordix.org and planted 101 malicious npm packages, turning registries that build pipelines trusted into delivery routes.",
+      "kind": "Trend",
+      "status": null,
+      "text": "Criminals log in through tools admins trust, chaining stolen Microsoft 365 sessions into MSP360 and ScreenConnect while others poisoned OpenInfra's Artifactory and 101 npm packages.",
       "links": [
+        {
+          "anchor": "i-28594b2bec",
+          "phrase": "ScreenConnect",
+          "start": 100,
+          "end": 113,
+          "title": "Phishing Crews Turn RMM Tools Into Back Doors"
+        },
         {
           "anchor": "i-6485f53baf",
           "phrase": "Artifactory",
-          "start": 55,
-          "end": 66,
+          "start": 148,
+          "end": 159,
           "title": "Attackers Poison OpenInfra's Artifactory and 101 npm Packages"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "Long-term Treasury yields retreated from a 25-year peak as France and Italy printed multiyear inflation highs and Trump refereed a lobbying fight over diesel exports.",
+      "status": "updated",
+      "text": "Cisco Talos expanded its account of UAT-11587, a China-nexus cluster planting the undocumented Antino backdoor on government and policy targets in Taiwan, India, the Philippines, and Cambodia.",
       "links": [
         {
-          "anchor": "i-39d59e4e73",
-          "phrase": "Treasury yields",
-          "start": 10,
-          "end": 25,
-          "title": "Treasury Yields Retreat From a 25-Year Peak"
-        },
-        {
-          "anchor": "i-318ac14851",
-          "phrase": "France and Italy",
-          "start": 59,
-          "end": 75,
-          "title": "French and Italian Inflation Reach Multiyear Highs"
-        },
-        {
-          "anchor": "i-bfc5fb612e",
-          "phrase": "diesel exports",
-          "start": 151,
-          "end": 165,
-          "title": "Trump Holds Crunch Talks on a Diesel Export Ban"
+          "anchor": "i-b4bc5adc38",
+          "phrase": "UAT-11587",
+          "start": 36,
+          "end": 45,
+          "title": "UAT-11587 Delivers the Antino Backdoor Across Asia"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Carnegie Mellon drew notice twice, accepting a $3 billion gift from Ken Griffin and canceling the Democratic Socialists of America convention that CMU Progressives arranged on campus.",
+      "text": "Russia threatened nuclear strikes over Kaliningrad and extended its diesel export ban as Trump refereed talks on American diesel, while Treasury yields eased from a 25-year peak.",
       "links": [
         {
-          "anchor": "i-20e681ce67",
-          "phrase": "Ken Griffin",
-          "start": 68,
-          "end": 79,
-          "title": "Ken Griffin Gives Carnegie Mellon $3 Billion"
+          "anchor": "i-a0a32ac9a7",
+          "phrase": "Kaliningrad",
+          "start": 39,
+          "end": 50,
+          "title": "Moscow Threatens Nuclear Strikes Over Kaliningrad"
         },
         {
-          "anchor": "i-8f86b28d2f",
-          "phrase": "CMU Progressives",
-          "start": 147,
-          "end": 163,
-          "title": "Carnegie Mellon Cancels the DSA Convention"
+          "anchor": "i-bfc5fb612e",
+          "phrase": "Trump",
+          "start": 89,
+          "end": 94,
+          "title": "Trump Holds Crunch Talks on a Diesel Export Ban"
+        },
+        {
+          "anchor": "i-39d59e4e73",
+          "phrase": "Treasury yields",
+          "start": 136,
+          "end": 151,
+          "title": "Treasury Yields Retreat From a 25-Year Peak"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Locally, Duquesne Light's union declared no confidence as a strike nears, a judge cleared the Quaker Valley fire merger, and PennDOT opened a survey as Parkway traffic climbs.",
+      "links": [
+        {
+          "anchor": "i-c0f8462f1f",
+          "phrase": "Duquesne Light's",
+          "start": 9,
+          "end": 25,
+          "title": "Duquesne Light's Union Declares No Confidence"
+        },
+        {
+          "anchor": "i-82dd4be958",
+          "phrase": "Quaker Valley",
+          "start": 94,
+          "end": 107,
+          "title": "A Judge Clears the Quaker Valley Fire Merger"
+        },
+        {
+          "anchor": "i-61b583534f",
+          "phrase": "PennDOT",
+          "start": 125,
+          "end": 132,
+          "title": "Parkway Traffic Climbs, and PennDOT Asks Drivers What They Think"
         }
       ]
     }
@@ -694,12 +931,11 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 71,
+        "in_window": 64,
         "failed": [],
         "empty": [
           "Krebs on Security",
-          "Schneier on Security",
-          "Ars Technica Security",
+          "CISA Advisories",
           "Securelist (Kaspersky)",
           "Sophos News",
           "Unit 42 (Palo Alto)",
@@ -712,13 +948,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 10,
+            "contributed": 10
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 11,
-            "contributed": 11
+            "in_window": 12,
+            "contributed": 12
           },
           "Krebs on Security": {
             "items": 10,
@@ -727,8 +963,8 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Dark Reading": {
             "items": 50,
@@ -742,23 +978,23 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 0,
+            "contributed": 0
           },
           "The Record": {
             "items": 5,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 4,
+            "contributed": 4
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Help Net Security": {
             "items": 10,
@@ -817,8 +1053,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 2,
+            "contributed": 2
           },
           "Frank on Fraud": {
             "items": 10,
@@ -845,27 +1081,27 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 13
+            "contributed": 23
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 9
+            "contributed": 7
           },
           "PublicSource": {
             "items": 10,
             "in_window": 6,
-            "contributed": 1
+            "contributed": 2
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 10,
-            "contributed": 7
+            "contributed": 3
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 0
+            "in_window": 5,
+            "contributed": 2
           },
           "Pittsburgh Magazine": {
             "items": 30,
@@ -875,7 +1111,7 @@
           "KDKA": {
             "items": 30,
             "in_window": 27,
-            "contributed": 10
+            "contributed": 6
           },
           "WPXI": {
             "items": 15,
@@ -885,7 +1121,7 @@
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 15
+            "contributed": 12
           }
         }
       },
@@ -900,9 +1136,9 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 74,
-            "in_window": 26,
-            "contributed": 8
+            "items": 75,
+            "in_window": 25,
+            "contributed": 7
           },
           "WSJ Markets": {
             "items": 61,
@@ -911,33 +1147,33 @@
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 44,
-            "contributed": 4
+            "in_window": 52,
+            "contributed": 15
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 12,
-            "contributed": 2
+            "in_window": 11,
+            "contributed": 1
           },
           "The Economist": {
             "items": 300,
-            "in_window": 17,
+            "in_window": 18,
             "contributed": 2
           },
           "FT Home": {
-            "items": 10,
-            "in_window": 10,
-            "contributed": 8
+            "items": 9,
+            "in_window": 9,
+            "contributed": 4
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 19
+            "contributed": 17
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 5
+            "contributed": 2
           }
         }
       },
@@ -947,12 +1183,9 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 8,
+        "in_window": 10,
         "failed": [],
-        "empty": [
-          "NEXTpittsburgh Events",
-          "NEXTpittsburgh Arts & Entertainment"
-        ],
+        "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
@@ -966,12 +1199,12 @@
           },
           "NEXTpittsburgh Events": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 2,
+            "contributed": 2
           },
           "NEXTpittsburgh Arts & Entertainment": {
             "items": 10,
-            "in_window": 0,
+            "in_window": 2,
             "contributed": 0
           }
         }
@@ -1013,7 +1246,7 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 17,
+            "in_window": 19,
             "contributed": 10
           }
         }
@@ -1099,24 +1332,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 25813,
+          "outputTokens": 30455,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 114793,
+          "cacheCreationInputTokens": 126872,
           "webSearchRequests": 0,
-          "costUSD": 1.793285,
+          "costUSD": 2.030125,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 13704
+          "thinkingTokens": 12332
         }
       },
-      "cost_usd": 1.793285,
-      "duration_ms": 287877,
+      "cost_usd": 2.030125,
+      "duration_ms": 324539,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-30 07:05 EDT",
-    "items_considered": 71,
+    "generated_at": "2026-09-30 10:05 EDT",
+    "items_considered": 64,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1197,8 +1430,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.7933,
-    "model_duration_ms": 287877,
+    "model_cost_usd": 2.0301,
+    "model_duration_ms": 324539,
     "local_from": null,
     "feed_failures": []
   }
