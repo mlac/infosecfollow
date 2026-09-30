@@ -1,23 +1,23 @@
 {
   "date": "2026-09-30",
-  "headline": "Mandiant put suspected state-sponsored actors behind the weeks-long Citrix NetScaler zero-day campaign on the day CISA's federal patch deadline expired, while Glow Labs found AI coding agents dumping 13,000 internal company screenshots into public GitHub repositories.",
+  "headline": "Two edge-device zero-days ran at once: suspected state actors worked Citrix NetScaler against dozens of government and financial targets since early September while Cisco shipped emergency fixes for an actively exploited authentication bypass in Catalyst SD-WAN Manager.",
   "emerging_trends": [
     {
-      "text": "AI coding agents asked to prove a user-interface fix works now publish the proof where anyone can read it, and Glow Labs counted more than 13,000 internal screenshots, customer billing records among them, sitting open on GitHub.",
-      "topic_title": "AI Coding Agents Publish 13,000 Internal Screenshots",
-      "link_phrase": "Glow Labs",
+      "text": "Attackers keep landing on the boxes at the network edge—Citrix NetScaler, Catalyst SD-WAN Manager, MikroTik RouterOS, WatchGuard Fireware, and Zimbra all carry flaws this week that need no password—and each one hands over the management plane for an entire network.",
+      "topic_title": "Cisco SD-WAN Manager Zero-Day Draws Attacks",
+      "link_phrase": "Catalyst SD-WAN",
       "_anchor": "trend-1"
     },
     {
-      "text": "Pre-authentication flaws in the appliances guarding the network edge keep paying off for advanced attackers, and the NetScaler campaign—weeks of quiet targeted exploitation, then public exploit mechanics and mass scanning—shows how little time defenders get between the two phases.",
-      "topic_title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT",
-      "link_phrase": "NetScaler",
+      "text": "Coding agents now leak what they see, publishing 13,000 internal screenshots from more than 300 companies to public GitHub repositories and turning a convenience feature into a standing data-loss channel.",
+      "topic_title": "AI Coding Agents Publish 13,000 Internal Screenshots",
+      "link_phrase": "Coding agents",
       "_anchor": "trend-2"
     },
     {
-      "text": "Criminals increasingly sign in through software administrators already trust, chaining stolen Microsoft 365 sessions to MSP360 and ScreenConnect so a single phishing click buys months of remote access.",
-      "topic_title": "Phishing Crews Turn RMM Tools Into Back Doors",
-      "link_phrase": "MSP360",
+      "text": "Russia's Star Blizzard and China's UAT-11587 both moved to freshly named backdoors—CosmicPulse and Antino—reaching nongovernmental organizations, think tanks, journalists, and Asian policy bodies through ordinary phishing.",
+      "topic_title": "UAT-11587 Delivers the Antino Backdoor Across Asia",
+      "link_phrase": "Star Blizzard",
       "_anchor": "trend-3"
     }
   ],
@@ -57,6 +57,73 @@
       "_anchor": "i-662a4b09eb"
     },
     {
+      "title": "Cisco SD-WAN Manager Zero-Day Draws Attacks",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Cisco warned in an advisory on September 30, 2026 that attackers already exploit CVE-2026-76504, an authentication bypass that lets a remote attacker with no login drive the Catalyst SD-WAN Manager API as the administrator, and shipped fixed releases with no workaround; CISA warned the same day of a critical pre-authentication remote code execution flaw in MikroTik RouterOS that also yields denial of service, and Microsoft Threat Intelligence published observed attack paths, detections, and mitigations for CVE-2026-73570, the unauthenticated command injection attackers run against internet-facing Zimbra mail servers.",
+      "summary": "Three internet-facing systems—Cisco Catalyst SD-WAN Manager, MikroTik RouterOS, and Zimbra—now carry flaws an attacker triggers with no credentials, and two of the three sit in the management path for an entire network. Install the fixed Cisco releases now, update RouterOS, and comb Zimbra logs for command injection.",
+      "tags": [
+        "zero-day",
+        "exploit",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Cisco Warns of Attackers Exploiting Critical Authentication Bypass in SD-WAN Manager",
+          "url": "https://thehackernews.com/2026/09/cisco-warns-of-attackers-exploiting.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Cisco warns of new SD-WAN zero-day exploited in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/cisco-warns-of-new-sd-wan-authentication-bypass-zero-day-exploited-in-attacks/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "CISA warns of critical pre-auth RCE flaw in MikroTik RouterOS",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-critical-pre-auth-rce-flaw-in-mikrotik-routeros/"
+        },
+        {
+          "source": "Microsoft Security Blog",
+          "title": "Unauthenticated command injection on internet-facing mail servers: tracking CVE-2026-73570",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/09/30/unauthenticated-command-injection-on-internet-facing-mail-servers-tracking-cve-2026-73570/"
+        }
+      ],
+      "_anchor": "i-31db54260b"
+    },
+    {
+      "title": "UAT-11587 Delivers the Antino Backdoor Across Asia",
+      "area": "Nation-State Activity",
+      "latest_developments": "Cisco Talos disclosed a China-nexus cluster it tracks as UAT-11587 on September 30, 2026 that hits government and policy organizations in Taiwan, India, the Philippines, and Cambodia with a previously undocumented backdoor that developer artifacts in the code call Antino; SecurityWeek, The Record, and Dark Reading reported the same day that Russia's Star Blizzard, the FSB-linked crew Microsoft has watched since January 2026, dropped ClickFix in favor of its RedFlick delivery chain and now runs larger phishing campaigns to install the CosmicPulse backdoor at nongovernmental organizations, think tanks, and journalists tied to Ukraine.",
+      "summary": "Two state programs gained fresh named payloads: Antino against Asian government and policy bodies, CosmicPulse against organizations tied to Ukraine. Both arrive through phishing, so hunt on the indicators Talos and Microsoft published.",
+      "tags": [
+        "apt",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Cisco Talos",
+          "title": "China-nexus UAT-11587 targets government and policy organizations across Asia with Antino backdoor",
+          "url": "https://blog.talosintelligence.com/china-nexus-uat-11587-targets-government-and-policy-organizations-across-asia-with-antino-backdoor/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Russian APT Star Blizzard Uses ‘RedFlick’ Infection Chain in Recent Attacks",
+          "url": "https://www.securityweek.com/russian-apt-star-blizzard-uses-redflick-infection-chain-in-recent-attacks/"
+        },
+        {
+          "source": "The Record",
+          "title": "Russian FSB-linked hackers scale up phishing attacks against Ukraine supporters",
+          "url": "https://therecord.media/russia-hackers-ukraine-blizzard"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Russia's Star Blizzard Ditches ClickFix to Widen Phishing Net",
+          "url": "https://www.darkreading.com/threat-intelligence/russia-star-blizzard-apt-ditches-clickfix-widen-phishing-net"
+        }
+      ],
+      "_anchor": "i-b4bc5adc38"
+    },
+    {
       "title": "WatchGuard, TeamViewer, and the Browsers Patch Together",
       "area": "Vulnerabilities and Exploits",
       "latest_developments": "WatchGuard shipped fixes on September 30, 2026 for 15 code execution, denial-of-service, authorization, and path traversal bugs in Fireware OS, one of them a critical code injection flaw; TeamViewer told customers on Tuesday, September 29, 2026 to patch high-severity vulnerabilities in its client and host software \"as soon as possible\"; Google and Mozilla closed more than 100 vulnerabilities across Chrome and Firefox, some of which let a remote attacker run code or escape the browser sandbox; and Microsoft said it will start blocking external script injection against Entra ID authentication in October 2026.",
@@ -88,34 +155,6 @@
         }
       ],
       "_anchor": "i-6cbd3c5f9f"
-    },
-    {
-      "title": "UAT-11587 Delivers the Antino Backdoor Across Asia",
-      "area": "Nation-State Activity",
-      "latest_developments": "Cisco Talos disclosed a China-nexus cluster it tracks as UAT-11587 on September 30, 2026 that hits government and policy organizations in Taiwan, India, the Philippines, and Cambodia with a previously undocumented backdoor that developer artifacts in the code call Antino, and SecurityWeek and The Record reported the same day that Russia's Star Blizzard, the FSB-linked crew Microsoft has watched since January 2026, now runs larger phishing campaigns through its RedFlick delivery chain to install a backdoor named CosmicPulse on the machines of Ukraine's supporters.",
-      "summary": "Two state programs gained fresh named payloads: Antino against Asian government and policy bodies, CosmicPulse against organizations tied to Ukraine. Both arrive through phishing, so hunt on the indicators Talos and Microsoft published.",
-      "tags": [
-        "apt",
-        "malware"
-      ],
-      "sources": [
-        {
-          "source": "Cisco Talos",
-          "title": "China-nexus UAT-11587 targets government and policy organizations across Asia with Antino backdoor",
-          "url": "https://blog.talosintelligence.com/china-nexus-uat-11587-targets-government-and-policy-organizations-across-asia-with-antino-backdoor/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Russian APT Star Blizzard Uses ‘RedFlick’ Infection Chain in Recent Attacks",
-          "url": "https://www.securityweek.com/russian-apt-star-blizzard-uses-redflick-infection-chain-in-recent-attacks/"
-        },
-        {
-          "source": "The Record",
-          "title": "Russian FSB-linked hackers scale up phishing attacks against Ukraine supporters",
-          "url": "https://therecord.media/russia-hackers-ukraine-blizzard"
-        }
-      ],
-      "_anchor": "i-b4bc5adc38"
     },
     {
       "title": "Who Answers for What an AI Agent Does",
@@ -216,47 +255,6 @@
       "_anchor": "i-28594b2bec"
     },
     {
-      "title": "OpenSSL and wolfSSL Close High-Severity Holes",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "OpenSSL shipped fixes on September 29, 2026 for a high-severity bug in its Datagram Transport Layer Security code that hands unencrypted heap memory to the far side of a connection or crashes the program when a handshake retransmission begins while a larger handshake message sits half-sent, and SecurityWeek counted roughly a dozen patched vulnerabilities in each of OpenSSL and wolfSSL.",
-      "summary": "The two libraries sit underneath VPNs, embedded devices, and anything speaking TLS over UDP, so the flaw reaches far past the projects themselves. Rebuild and redeploy every product that statically links either library.",
-      "tags": [
-        "patch",
-        "vulnerability"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "OpenSSL Fixes High-Severity DTLS Flaw That Can Leak Heap Memory Unencrypted",
-          "url": "https://thehackernews.com/2026/09/openssl-fixes-high-severity-dtls-flaw.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "High-Severity Vulnerabilities Patched in OpenSSL, WolfSSL",
-          "url": "https://www.securityweek.com/high-severity-vulnerabilities-patched-in-openssl-wolfssl/"
-        }
-      ],
-      "_anchor": "i-870a14dd20"
-    },
-    {
-      "title": "A Ransomware Toolkit Reaches South African Air Traffic Control",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "South Africa asked for outside help after a cyberattack on its air traffic control systems, and investigators found a ransomware toolkit installed on at least one operational network, Dark Reading reported on September 30, 2026.",
-      "summary": "Aviation infrastructure keeps drawing attackers, and this time the intrusion reached a network that controls live air traffic rather than a back office. Operators should segment operational networks from corporate ones and verify that flight-critical systems carry current patches.",
-      "tags": [
-        "ransomware",
-        "critical infrastructure"
-      ],
-      "sources": [
-        {
-          "source": "Dark Reading",
-          "title": "South Africa Seeks Help After Cyberattack Targets Air Traffic Control",
-          "url": "https://www.darkreading.com/cyberattacks-data-breaches/south-africa-help-cyberattack-air-traffic-control"
-        }
-      ],
-      "_anchor": "i-c099910d27"
-    },
-    {
       "title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure",
       "area": "AI Security",
       "latest_developments": "The Dutch Institute for Vulnerability Disclosure, the volunteer nonprofit that finds and reports flaws to their owners, disclosed an AI-driven attack on its own systems that it described as \"loud and very, very messy,\" and Dark Reading detailed a patched Unsloth Studio vulnerability that lets a malicious AI model execute arbitrary Python code during routine inspection by way of the trust_remote_code setting.",
@@ -278,6 +276,24 @@
         }
       ],
       "_anchor": "i-af77574c55"
+    },
+    {
+      "title": "A Ransomware Toolkit Reaches South African Air Traffic Control",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "South Africa asked for outside help after a cyberattack on its air traffic control systems, and investigators found a ransomware toolkit installed on at least one operational network, Dark Reading reported on September 30, 2026.",
+      "summary": "Aviation infrastructure keeps drawing attackers, and this time the intrusion reached a network that controls live air traffic rather than a back office. Operators should segment operational networks from corporate ones and verify that flight-critical systems carry current patches.",
+      "tags": [
+        "ransomware",
+        "critical infrastructure"
+      ],
+      "sources": [
+        {
+          "source": "Dark Reading",
+          "title": "South Africa Seeks Help After Cyberattack Targets Air Traffic Control",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/south-africa-help-cyberattack-air-traffic-control"
+        }
+      ],
+      "_anchor": "i-c099910d27"
     }
   ],
   "markets": [
@@ -325,7 +341,7 @@
     }
   ],
   "weather": [
-    "Today: Partly Sunny, high 79F.",
+    "Today: Partly Sunny, high 78F.",
     "Tonight: Mostly Cloudy, low 62F.",
     "Thursday: Partly Sunny, high 82F."
   ],
@@ -356,6 +372,70 @@
   "local": {
     "business_politics": [
       {
+        "title": "The Bond Selloff Resumes on Strong Growth Data",
+        "latest_developments": "Treasury yields climbed again Wednesday afternoon, September 30, after revised figures showed the United States economy grew faster than earlier estimates, erasing the morning's reprieve, while August personal consumption expenditures inflation came in below forecasts on both the core and headline readings.",
+        "summary": "Long-term United States borrowing costs reached their highest level in almost 25 years on Tuesday, and the softer inflation print eases pressure on the Federal Reserve to raise rates again at its October meeting. Oil rebounded on persistent Middle East supply risk, natural gas futures broke below $3 per million British thermal units, and gold extended gains yet still heads for a monthly loss above 6%.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Bond markets resume sell-off after strong US data",
+            "url": "https://www.ft.com/content/cd22d20a-3b65-4534-ac04-f5008810e10a?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "Weak PCE inflation eases pressure for Fed rate increases",
+            "url": "https://www.ft.com/content/97043be8-28f7-40c8-936f-617ebeec5d2b"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Oil Prices Rebound as Middle East Risks Persist",
+            "url": "https://www.wsj.com/business/energy-oil/oil-prices-slip-further-as-gulf-exports-recover-0cf48ca2?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-39d59e4e73"
+      },
+      {
+        "title": "Regulators Close In on the AI Build-Out",
+        "latest_developments": "The Bank of England warned Wednesday, September 30, that the surge in debt financing artificial intelligence raises the risk of a sharp market correction, and the Federal Trade Commission expanded its investigation of Anthropic and OpenAI the same day.",
+        "summary": "The Bank of England's governor said supervisors \"cannot stand aside\" and assume the artificial intelligence industry will resolve the stability risks it creates for the financial system. The Federal Trade Commission will demand information from the leading artificial intelligence companies and seek testimony from their executives, two days after President Trump announced a voluntary self-regulation accord with those same chief executives at a White House lunch.",
+        "sources": [
+          {
+            "source": "FT Markets",
+            "title": "AI debt surge raises risk of sharp market correction, warns Bank of England",
+            "url": "https://www.ft.com/content/5c1ccafc-c3e6-49c1-8cdc-b9ed73627749?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "US competition watchdog expands investigation of Anthropic and OpenAI",
+            "url": "https://www.ft.com/content/a3075bf9-5b6c-40c8-bb6b-aca4422d1cbb?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "How will Trump ‘accord’ for AI to ‘self-regulate’ work?",
+            "url": "https://www.ft.com/content/f52f7b0e-be7d-414c-b19d-d78a3a5f4882?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-5d8f1890a2"
+      },
+      {
+        "title": "Britain Ties Iran to the RAF Fairford Plot",
+        "latest_developments": "Prime Minister Andy Burnham said Wednesday, September 30, that \"strong indications\" point to Iranian involvement in the foiled plot at RAF Fairford, and that his government works closely with the Trump administration on the case.",
+        "summary": "British counter-terrorism officers arrested five men, all British nationals in their twenties living in London, beside the Gloucestershire air base on September 27 on suspicion of preparing a terrorist act, then released them on bail. The base has flown missions in the campaign against Iran, and Iran's embassy in London denies any involvement.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "U.K. Cites ‘Strong Indications’ Iran Is Linked to Foiled Attack on Air Base",
+            "url": "https://www.wsj.com/world/europe/u-k-says-strong-indications-iran-is-linked-to-foiled-attack-on-air-base-efb98199?mod=rss_worldnews"
+          },
+          {
+            "source": "FT Home",
+            "title": "‘Strong indications’ Iran was involved in RAF Fairford incident, says Burnham",
+            "url": "https://www.ft.com/content/bb557b06-6880-4bae-a719-fbd733c63787?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-ac6f3d6029"
+      },
+      {
         "title": "Moscow Threatens Nuclear Strikes Over Kaliningrad",
         "latest_developments": "Russia threatened nuclear strikes on NATO countries Wednesday, September 30, accusing the alliance of preparing to blockade Kaliningrad.",
         "summary": "The Kremlin says Western forces intend to cut off Kaliningrad, the Russian exclave on the Baltic Sea wedged between Poland and Lithuania, and answered with an explicit nuclear threat against alliance members. Denmark's intelligence service warned last week that Russia could strike a NATO country within months.",
@@ -369,31 +449,8 @@
         "_anchor": "i-a0a32ac9a7"
       },
       {
-        "title": "Treasury Yields Retreat From a 25-Year Peak",
-        "latest_developments": "Bond markets steadied Wednesday, September 30, a day after long-term United States borrowing costs reached their highest level in almost 25 years, while oil rebounded on Middle East tension and natural gas futures broke below $3 per million British thermal units.",
-        "summary": "Gold extended gains on the easing dollar and falling yields yet still heads for a monthly loss above 6%, and analysts say Middle East crude exports have returned to prewar levels as producers route barrels through alternative pipelines, ports, and ship-to-ship transfers. New York Fed President John Williams signaled the next rate increase can wait, which cooled the selloff that ran through the prior week.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "Bond markets rebound after sell-off",
-            "url": "https://www.ft.com/content/cd22d20a-3b65-4534-ac04-f5008810e10a?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Stock Market Today: Treasury Yields Slip, Giving Investors Some Reprieve",
-            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-09-30-2026?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ World News",
-            "title": "Oil Prices Slip Further as Gulf Exports Recover",
-            "url": "https://www.wsj.com/business/energy-oil/oil-prices-slip-further-as-gulf-exports-recover-0cf48ca2?mod=rss_worldnews"
-          }
-        ],
-        "_anchor": "i-39d59e4e73"
-      },
-      {
         "title": "French and Italian Inflation Reach Multiyear Highs",
-        "latest_developments": "Inflation readings published Wednesday, September 30, put France and Italy at multiyear highs on energy costs, strengthening the case for another European Central Bank increase next month.",
+        "latest_developments": "European Central Bank executive board member Isabel Schnabel said Wednesday, September 30, that the bank \"cannot wait\" for high energy prices to feed wider inflation and called for pre-emptive action, hours after readings put France and Italy at multiyear highs.",
         "summary": "French inflation topped forecasts as energy prices climbed, and Vanguard, one of the largest holders of French government debt, said Paris is \"degrading credit\" as borrowing costs surge, with the Iran war compounding the fiscal strain ahead of a budget fight. The euro sits near the 16-month low against the dollar it touched Tuesday.",
         "sources": [
           {
@@ -405,13 +462,18 @@
             "source": "FT World",
             "title": "Vanguard warns France is ‘degrading credit’ as borrowing costs surge",
             "url": "https://www.ft.com/content/7820a84f-338e-4b91-a9b6-241a9bf81539?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "ECB ‘cannot wait’ for high energy prices to fuel wider inflation, top policymaker warns",
+            "url": "https://www.ft.com/content/ec98b9b5-6677-4b26-b892-82aaac034143?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-318ac14851"
       },
       {
         "title": "Trump Holds Crunch Talks on a Diesel Export Ban",
-        "latest_developments": "Russia extended its own diesel export ban Wednesday, September 30, tightening the global supply crunch on the same day President Trump personally refereed White House talks on restricting American diesel exports, five weeks before the November 3 midterms.",
+        "latest_developments": "The Dallas Fed's energy survey, published Wednesday, September 30, found industry executives expect diesel prices to stay elevated for a year, and Russia extended its own diesel export ban the same day, tightening the squeeze as President Trump personally refereed White House talks on restricting American exports five weeks before the November 3 midterms.",
         "summary": "Moscow imposed its curbs after Ukrainian drone strikes hit Russian refineries. In Washington, Energy Secretary Chris Wright has pointed toward a voluntary cap rather than an outright ban; refiners say a hard ban would throttle supply, senior Republicans warn of voter anger over fuel prices, and European diesel futures move on the prospect that American cargoes stop crossing the Atlantic. Chinese refineries, running at 75% of capacity, hold the spare capacity that could relieve the squeeze.",
         "sources": [
           {
@@ -428,6 +490,11 @@
             "source": "FT Home",
             "title": "Russia extends diesel export ban",
             "url": "https://www.ft.com/content/fc705366-9a91-4e99-9c07-e962dca6354b?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "US oil industry warns diesel prices will not return to normal for a year",
+            "url": "https://www.ft.com/content/0d74d66a-a9ee-4c22-83ab-9df6452117de?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-bfc5fb612e"
@@ -435,14 +502,45 @@
     ],
     "business": [
       {
+        "title": "A Data Center Coalition Targets Pennsylvania",
+        "latest_developments": "Data center developers and organized labor representatives launched a new organization Wednesday, September 30, to smooth approvals for their projects in Pennsylvania and six other states.",
+        "summary": "The coalition enters a fight already running through Western Pennsylvania, where townships weigh million-square-foot proposals, planners work to write ordinances before applications land, and developers ask municipalities to sign nondisclosure agreements. Pennsylvania's Marcellus gas supply and transmission capacity make it a leading target for the build-out.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "New group targets Pennsylvania, 6 other states as data center battle heats up",
+            "url": "https://www.wpxi.com/news/local/new-group-targets-pennsylvania-6-other-states-data-center-battle-heats-up/MT4HEEYVINHUJHQGLDXWTRAZOQ/"
+          }
+        ],
+        "_anchor": "i-e73d335bcb"
+      },
+      {
+        "title": "Fierro Bikes 412 Bets on Downtown E-Bikes",
+        "latest_developments": "WPXI profiled Tyler H. Church on Wednesday, September 30, in its Personalities of Pittsburgh series.",
+        "summary": "Church runs Fierro Bikes 412, an electric bicycle shop in downtown Pittsburgh, and he is working to sell Golden Triangle residents and visitors on e-bikes as the machines spread through the city.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Entrepreneur betting big on e-bikes with Fierro Bikes 412 downtown (Personalities of Pittsburgh)",
+            "url": "https://www.wpxi.com/news/local/entrepreneur-betting-big-e-bikes-with-fierro-bikes-412-downtown-personalities-pittsburgh/NI6CW4EBRVHSDGM5KN5WSWEXDI/"
+          }
+        ],
+        "_anchor": "i-33b1a10b82"
+      },
+      {
         "title": "Duquesne Light's Union Declares No Confidence",
-        "latest_developments": "The union representing Duquesne Light workers said Wednesday, September 30, that it has lost confidence in company management as the clock runs down toward a strike.",
+        "latest_developments": "IBEW Local 29 told WTAE on Wednesday, September 30, that Duquesne Light workers will stop work at midnight \"unless something changes drastically on the company's end,\" the same day the union said it has lost confidence in company management.",
         "summary": "Contract negotiations at the utility, which distributes electricity across Allegheny and Beaver counties, have reached the point where the union will say publicly that it no longer trusts the people across the table. A walkout would hit the electric distribution system serving Pittsburgh.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
             "title": "As strike clock counts down, Duquesne Light’s union says it has lost confidence in management",
             "url": "https://www.post-gazette.com/business/powersource/2026/09/30/duquesne-light-union-no-confidence-contract-negotiations/stories/202609300031"
+          },
+          {
+            "source": "WTAE",
+            "title": "Union says Duquesne Light workers could go on strike at midnight Wednesday",
+            "url": "https://www.wtae.com/article/duquesne-light-strike-ibew/73950038"
           }
         ],
         "_anchor": "i-c0f8462f1f"
@@ -498,6 +596,45 @@
       }
     ],
     "around_town": [
+      {
+        "title": "O'Connor Delivers His First City Budget",
+        "latest_developments": "Mayor Corey O'Connor releases his first budget proposal Wednesday, September 30, with Pittsburgh's finances tightening.",
+        "summary": "The plan goes to Pittsburgh City Council for hearings and carries deep cuts as the city works through a fiscal crisis, with a shrinking fund balance and rising costs squeezing departments.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Mayor O’Connor’s first budget proposal is due today as the city faces mounting financial challenges",
+            "url": "https://www.post-gazette.com/news/politics-local/2026/09/30/oconnor-city-budget/stories/202609300044"
+          }
+        ],
+        "_anchor": "i-ffc593f79c"
+      },
+      {
+        "title": "SNAP Payments Rise $18 in Pennsylvania",
+        "latest_developments": "Most Pennsylvania recipients of the Supplemental Nutrition Assistance Program see their monthly benefit climb $18 starting Thursday, October 1.",
+        "summary": "The increase comes out of Pennsylvania's annual re-evaluation of the food assistance program, and it lands as Allegheny County residents work through the new Medicaid work requirements and a sharp rise in hunger across the state.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Most Pennsylvania SNAP recipients to see benefit increase of $18 starting Thursday",
+            "url": "https://www.wpxi.com/news/local/most-pennsylvania-snap-recipients-see-benefit-increase-18-starting-thursday/EBC7FJ4DCVHK7BPVCYUQNCQH44/"
+          }
+        ],
+        "_anchor": "i-096f846cd7"
+      },
+      {
+        "title": "Washington County Opens Its Flood Recovery Center",
+        "latest_developments": "The Washington County Multi-Agency Response Center opens Thursday and Friday, October 1 and 2, at the American Legion in Washington, KDKA reported Wednesday, September 30.",
+        "summary": "Local and state agencies and volunteer organizations staff the center together to walk residents and business owners through insurance claims and recovery programs after the storm damage and flooding of the past two weekends.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Flooding support resources will be available in Washington County this week",
+            "url": "https://www.cbsnews.com/pittsburgh/news/flooding-support-services-resources-washington-county-this-week/"
+          }
+        ],
+        "_anchor": "i-cac3227e78"
+      },
       {
         "title": "A Judge Clears the Quaker Valley Fire Merger",
         "latest_developments": "An Allegheny County judge approved the merger of the Leet, Leetsdale, and Bell Acres volunteer fire departments, TribLive reported Wednesday, September 30, clearing the biggest legal hurdle in front of the consolidation.",
@@ -570,6 +707,32 @@
       }
     ],
     "events": [
+      {
+        "title": "Confluence Theater Sets Its 2027 Season",
+        "latest_developments": "The Post-Gazette analyzed Confluence Theater's 2027 programming announcement Wednesday, September 30, reading the schedule and ticket-sales plan for what they say about the company.",
+        "summary": "Confluence Theater, the newest professional theater company working in downtown Pittsburgh, has published its 2027 lineup and put tickets on sale.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "Analysis: Confluence Theater’s 2027 programming announcement tells us three things about Downtown’s newest theater company",
+            "url": "https://www.post-gazette.com/ae/theater-dance/2026/09/30/confluence-theater-schedule-ticket-sales-downtown-pittsburgh-newest-company/stories/202609290060"
+          }
+        ],
+        "_anchor": "i-e2f7abef4d"
+      },
+      {
+        "title": "Carnegie Stage Reopens Under a New Owner",
+        "latest_developments": "The Post-Gazette reported Wednesday, September 30, that Carnegie Stage has a new owner who, working with the venue's longtime manager, has put the theater back in business.",
+        "summary": "The pair intend to keep the small performance space in the borough of Carnegie, west of Pittsburgh, a home for local artists and their productions.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "New owner of Carnegie Stage and its longtime manager aim to give artists a home",
+            "url": "https://www.post-gazette.com/life/goodness/2026/09/30/carnegie-stage-back-in-business/stories/202609300007"
+          }
+        ],
+        "_anchor": "i-397978e8cc"
+      },
       {
         "title": "Olivia Rodrigo Makes Her Pittsburgh Debut",
         "latest_developments": "TribLive reviewed Olivia Rodrigo's first Pittsburgh concert Wednesday, September 30, the opening night of a two-show stand at PPG Paints Arena.",
@@ -707,6 +870,19 @@
     ],
     "team_usa": [
       {
+        "title": "Savy King Returns to a United States Camp",
+        "latest_developments": "Angel City FC defender Savy King will join the United States women's under-23 team next week, ESPN reported Wednesday, September 30, her first call-up at any level since she recovered from a cardiac event in May 2025.",
+        "summary": "King collapsed during a National Women's Soccer League match in May 2025 and worked her way back into the Angel City lineup in Los Angeles. The under-23 camp puts the defender back inside the national team program.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Savy King gets USWNT U23s call-up, first since cardiac event",
+            "url": "https://www.espn.com/soccer/story/_/id/50068366/savy-king-uwsnt-cardiac-event-u23s-international-call-angel-city"
+          }
+        ],
+        "_anchor": "i-76361e5449"
+      },
+      {
         "title": "Teenagers Carry the United States Past Chile",
         "latest_developments": "Mathis Albert, 17, scored in the United States men's 4-2 win over Chile in St. Louis on Tuesday night, September 29, passing Christian Pulisic as the youngest goal scorer in program history.",
         "summary": "Albert, who plays for Borussia Dortmund, put the game away with the fourth American goal, and fellow teenager Julian Hall also scored in Mauricio Pochettino's second friendly of the window. Center back Chris Richards scored and steadied an inexperienced defense after the Americans fell behind, drawing an 8 out of 10 in ESPN's ratings.",
@@ -784,48 +960,27 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "AI agents now generate their own incidents: 13,000 screenshots leaked to GitHub, a loud and messy breach at the Dutch Institute, and unsettled liability for autonomous action.",
-      "links": [
-        {
-          "anchor": "i-71dec59fae",
-          "phrase": "13,000 screenshots",
-          "start": 44,
-          "end": 62,
-          "title": "AI Coding Agents Publish 13,000 Internal Screenshots"
-        },
-        {
-          "anchor": "i-af77574c55",
-          "phrase": "Dutch Institute",
-          "start": 112,
-          "end": 127,
-          "title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure"
-        },
-        {
-          "anchor": "i-45a958e18e",
-          "phrase": "unsettled liability",
-          "start": 133,
-          "end": 152,
-          "title": "Who Answers for What an AI Agent Does"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Pre-auth edge-device flaws stay the top prize, with state-linked NetScaler intrusions via CVE-2026-88772 preceding mass scanning, while WatchGuard patched 15 Fireware OS bugs including a critical code injection.",
+      "text": "Unauthenticated flaws in edge gear keep handing over entire management planes, with Citrix NetScaler, Cisco's Catalyst SD-WAN Manager, and WatchGuard Fireware all under attack or newly patched.",
       "links": [
         {
           "anchor": "i-662a4b09eb",
-          "phrase": "CVE-2026-88772",
-          "start": 90,
-          "end": 104,
+          "phrase": "NetScaler",
+          "start": 91,
+          "end": 100,
           "title": "NetScaler Exploitation Yields WHIPSHOT and SLAPSHOT"
         },
         {
+          "anchor": "i-31db54260b",
+          "phrase": "Catalyst SD-WAN Manager",
+          "start": 110,
+          "end": 133,
+          "title": "Cisco SD-WAN Manager Zero-Day Draws Attacks"
+        },
+        {
           "anchor": "i-6cbd3c5f9f",
-          "phrase": "WatchGuard",
-          "start": 136,
-          "end": 146,
+          "phrase": "WatchGuard Fireware",
+          "start": 139,
+          "end": 158,
           "title": "WatchGuard, TeamViewer, and the Browsers Patch Together"
         }
       ]
@@ -833,91 +988,126 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Criminals log in through tools admins trust, chaining stolen Microsoft 365 sessions into MSP360 and ScreenConnect while others poisoned OpenInfra's Artifactory and 101 npm packages.",
+      "text": "AI coding agents dumped 13,000 internal screenshots to public GitHub, an agent-driven intrusion hit the Dutch Institute for Vulnerability Disclosure, and Anthropic warned customers carry the liability.",
       "links": [
         {
-          "anchor": "i-28594b2bec",
-          "phrase": "ScreenConnect",
-          "start": 100,
-          "end": 113,
-          "title": "Phishing Crews Turn RMM Tools Into Back Doors"
+          "anchor": "i-71dec59fae",
+          "phrase": "coding agents",
+          "start": 3,
+          "end": 16,
+          "title": "AI Coding Agents Publish 13,000 Internal Screenshots"
         },
         {
-          "anchor": "i-6485f53baf",
-          "phrase": "Artifactory",
-          "start": 148,
-          "end": 159,
-          "title": "Attackers Poison OpenInfra's Artifactory and 101 npm Packages"
+          "anchor": "i-af77574c55",
+          "phrase": "Dutch Institute",
+          "start": 104,
+          "end": 119,
+          "title": "An AI Agent Breaches the Dutch Institute for Vulnerability Disclosure"
+        },
+        {
+          "anchor": "i-45a958e18e",
+          "phrase": "Anthropic",
+          "start": 154,
+          "end": 163,
+          "title": "Who Answers for What an AI Agent Does"
         }
       ]
     },
     {
-      "kind": "Update",
-      "status": "updated",
-      "text": "Cisco Talos expanded its account of UAT-11587, a China-nexus cluster planting the undocumented Antino backdoor on government and policy targets in Taiwan, India, the Philippines, and Cambodia.",
+      "kind": "Trend",
+      "status": null,
+      "text": "China-nexus UAT-11587 pushed its new Antino backdoor at Taiwan, India, and Philippine policy bodies, while other crews abused MSP360 and ScreenConnect for redundant remote access.",
       "links": [
         {
           "anchor": "i-b4bc5adc38",
           "phrase": "UAT-11587",
-          "start": 36,
-          "end": 45,
+          "start": 12,
+          "end": 21,
           "title": "UAT-11587 Delivers the Antino Backdoor Across Asia"
+        },
+        {
+          "anchor": "i-28594b2bec",
+          "phrase": "MSP360",
+          "start": 126,
+          "end": 132,
+          "title": "Phishing Crews Turn RMM Tools Into Back Doors"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Russia threatened nuclear strikes over Kaliningrad and extended its diesel export ban as Trump refereed talks on American diesel, while Treasury yields eased from a 25-year peak.",
+      "text": "The Federal Trade Commission widened its probe of Anthropic and OpenAI as the Bank of England warned on AI debt, and developers launched a Pennsylvania data center coalition.",
       "links": [
         {
-          "anchor": "i-a0a32ac9a7",
-          "phrase": "Kaliningrad",
-          "start": 39,
-          "end": 50,
-          "title": "Moscow Threatens Nuclear Strikes Over Kaliningrad"
+          "anchor": "i-5d8f1890a2",
+          "phrase": "Federal Trade Commission",
+          "start": 4,
+          "end": 28,
+          "title": "Regulators Close In on the AI Build-Out"
+        },
+        {
+          "anchor": "i-e73d335bcb",
+          "phrase": "Pennsylvania data center",
+          "start": 139,
+          "end": 163,
+          "title": "A Data Center Coalition Targets Pennsylvania"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Mayor Corey O'Connor delivered his first city budget, IBEW Local 29 threatened a midnight walkout at Duquesne Light, and Washington County opens a flood recovery center Thursday.",
+      "links": [
+        {
+          "anchor": "i-ffc593f79c",
+          "phrase": "first city budget",
+          "start": 35,
+          "end": 52,
+          "title": "O'Connor Delivers His First City Budget"
+        },
+        {
+          "anchor": "i-c0f8462f1f",
+          "phrase": "Duquesne Light",
+          "start": 101,
+          "end": 115,
+          "title": "Duquesne Light's Union Declares No Confidence"
+        },
+        {
+          "anchor": "i-cac3227e78",
+          "phrase": "Washington County",
+          "start": 121,
+          "end": 138,
+          "title": "Washington County Opens Its Flood Recovery Center"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Britain tied Iran to the foiled RAF Fairford plot, Trump weighed a diesel export ban as Russia extended its own, and Treasury yields resumed climbing on revised growth.",
+      "links": [
+        {
+          "anchor": "i-ac6f3d6029",
+          "phrase": "RAF Fairford",
+          "start": 32,
+          "end": 44,
+          "title": "Britain Ties Iran to the RAF Fairford Plot"
         },
         {
           "anchor": "i-bfc5fb612e",
-          "phrase": "Trump",
-          "start": 89,
-          "end": 94,
+          "phrase": "diesel export ban",
+          "start": 67,
+          "end": 84,
           "title": "Trump Holds Crunch Talks on a Diesel Export Ban"
         },
         {
           "anchor": "i-39d59e4e73",
           "phrase": "Treasury yields",
-          "start": 136,
-          "end": 151,
-          "title": "Treasury Yields Retreat From a 25-Year Peak"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Locally, Duquesne Light's union declared no confidence as a strike nears, a judge cleared the Quaker Valley fire merger, and PennDOT opened a survey as Parkway traffic climbs.",
-      "links": [
-        {
-          "anchor": "i-c0f8462f1f",
-          "phrase": "Duquesne Light's",
-          "start": 9,
-          "end": 25,
-          "title": "Duquesne Light's Union Declares No Confidence"
-        },
-        {
-          "anchor": "i-82dd4be958",
-          "phrase": "Quaker Valley",
-          "start": 94,
-          "end": 107,
-          "title": "A Judge Clears the Quaker Valley Fire Merger"
-        },
-        {
-          "anchor": "i-61b583534f",
-          "phrase": "PennDOT",
-          "start": 125,
+          "start": 117,
           "end": 132,
-          "title": "Parkway Traffic Climbs, and PennDOT Asks Drivers What They Think"
+          "title": "The Bond Selloff Resumes on Strong Growth Data"
         }
       ]
     }
@@ -931,13 +1121,12 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 64,
+        "in_window": 66,
         "failed": [],
         "empty": [
           "Krebs on Security",
           "CISA Advisories",
           "Securelist (Kaspersky)",
-          "Sophos News",
           "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
           "Google Project Zero",
@@ -948,13 +1137,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 13,
+            "contributed": 13
           },
           "Krebs on Security": {
             "items": 10,
@@ -968,8 +1157,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 4,
+            "contributed": 4
           },
           "SecurityWeek": {
             "items": 10,
@@ -988,8 +1177,8 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "Ars Technica Security": {
             "items": 20,
@@ -1008,8 +1197,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 2,
+            "contributed": 2
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -1033,8 +1222,8 @@
           },
           "Microsoft Security Blog": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "Google Project Zero": {
             "items": 7,
@@ -1053,8 +1242,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 4,
+            "contributed": 4
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1081,47 +1270,47 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 23
+            "contributed": 3
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 7
+            "contributed": 15
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 6,
-            "contributed": 2
+            "in_window": 5,
+            "contributed": 1
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 10,
-            "contributed": 3
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 5,
+            "in_window": 2,
             "contributed": 2
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 6,
-            "contributed": 0
+            "in_window": 7,
+            "contributed": 1
           },
           "KDKA": {
             "items": 30,
             "in_window": 27,
-            "contributed": 6
+            "contributed": 7
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 5
+            "contributed": 14
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 12
+            "contributed": 17
           }
         }
       },
@@ -1137,38 +1326,38 @@
         "per_feed": {
           "WSJ World News": {
             "items": 75,
-            "in_window": 25,
+            "in_window": 29,
             "contributed": 7
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 36,
-            "contributed": 12
+            "in_window": 37,
+            "contributed": 13
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 52,
-            "contributed": 15
+            "in_window": 55,
+            "contributed": 10
           },
           "WSJ Politics": {
             "items": 21,
             "in_window": 11,
-            "contributed": 1
+            "contributed": 0
           },
           "The Economist": {
             "items": 300,
-            "in_window": 18,
-            "contributed": 2
+            "in_window": 23,
+            "contributed": 6
           },
           "FT Home": {
-            "items": 9,
-            "in_window": 9,
-            "contributed": 4
+            "items": 12,
+            "in_window": 12,
+            "contributed": 8
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 17
+            "contributed": 14
           },
           "FT Markets": {
             "items": 25,
@@ -1183,14 +1372,14 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 10,
+        "in_window": 11,
         "failed": [],
         "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 9,
+            "contributed": 9
           },
           "Post-Gazette Music": {
             "items": 20,
@@ -1226,8 +1415,8 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 2
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1246,8 +1435,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 19,
-            "contributed": 10
+            "in_window": 18,
+            "contributed": 9
           }
         }
       },
@@ -1332,24 +1521,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 30455,
+          "outputTokens": 38613,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 126872,
+          "cacheCreationInputTokens": 133642,
           "webSearchRequests": 0,
-          "costUSD": 2.030125,
+          "costUSD": 2.3017749999999997,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 12332
+          "thinkingTokens": 16109
         }
       },
-      "cost_usd": 2.030125,
-      "duration_ms": 324539,
+      "cost_usd": 2.3017749999999997,
+      "duration_ms": 403053,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-09-30 10:05 EDT",
-    "items_considered": 64,
+    "generated_at": "2026-09-30 13:37 EDT",
+    "items_considered": 66,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1430,8 +1619,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.0301,
-    "model_duration_ms": 324539,
+    "model_cost_usd": 2.3018,
+    "model_duration_ms": 403053,
     "local_from": null,
     "feed_failures": []
   }
