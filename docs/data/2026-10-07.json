@@ -1,27 +1,61 @@
 {
   "date": "2026-10-07",
-  "headline": "Researchers burned 32 zero-days on the opening day of Pwn2Own Ireland while Anthropic's Project Glasswing counted 129,000 verified software flaws and Google shipped 247 Chrome fixes, a day that showed vulnerability discovery outrunning the patch cycle.",
+  "headline": "The FBI and the Secret Service say the FortiBleed campaign still runs, with 86,644 Fortinet firewalls compromised across 194 countries and some owners locked out of their own appliances.",
   "emerging_trends": [
     {
-      "text": "Vendors now point large language models at their own code and get flaw counts no human team could match: Anthropic's Project Glasswing verified 129,000 software vulnerabilities in four months, Google's PageBreak agent turned up 500 in Google web applications, and the OpenSSH maintainers say AI-assisted reports arrive faster than they can cut releases.",
-      "topic_title": "AI Agents Industrialize Vulnerability Discovery",
-      "link_phrase": "Project Glasswing",
+      "text": "Attackers keep treating the network edge as the front door—FortiBleed has harvested credentials from 86,644 Fortinet firewalls and SSL VPN gateways while SonicWall rushes hotfixes for a maximum-severity flaw in its SMA 1000 remote-access appliances—so every edge box earns a credential rotation and a configuration audit this week.",
+      "topic_title": "FortiBleed Locks Admins Out of Fortinet Firewalls",
+      "link_phrase": "FortiBleed",
       "_anchor": "trend-1"
     },
     {
-      "text": "The patch queue keeps lengthening—Chrome 155 alone carries 247 fixes, Android's October bundle closed 25 holes, X.Org 12, and SonicWall four in its remote-access appliances—so defenders have to triage by what sits exposed to the internet.",
-      "topic_title": "Chrome, Android, and SonicWall Ship Fixes",
-      "link_phrase": "Chrome 155",
+      "text": "Public proof-of-concept code now sets the clock on patching: exploitation of Atlassian's CVE-2026-21589 started within two hours of the technical details appearing, and researchers at Pwn2Own Ireland burned 32 fresh zero-days in a single day.",
+      "topic_title": "Atlassian Flaw Exploited Two Hours After PoC",
+      "link_phrase": "CVE-2026-21589",
       "_anchor": "trend-2"
     },
     {
-      "text": "Ransomware crews keep taking Japanese institutions offline: Advantest told individuals their personal data went out the door, and Osaka Metropolitan University canceled classes with its internal network, email, and academic systems down.",
-      "topic_title": "Ransomware Hits Advantest and Osaka Metropolitan University",
-      "link_phrase": "Advantest",
+      "text": "Anthropic, Google, and the OpenSSH maintainers all now describe vulnerability discovery as a volume problem—Project Glasswing alone verified 129,000 flaws between April and July 2026—and the bottleneck has moved to triage, ownership, and patching inside the projects that receive the reports.",
+      "topic_title": "AI Agents Industrialize Vulnerability Discovery",
+      "link_phrase": "Project Glasswing",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "Atlassian Flaw Exploited Two Hours After PoC",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Attackers began exploiting CVE-2026-21589, the 9.3-rated arbitrary file access flaw Atlassian disclosed on October 5, 2026, within two hours of the first public technical details and proof-of-concept code, and the attacks need no authentication.",
+      "summary": "The bug lets an attacker with no login read specific files in the web application root directory of eight self-hosted Data Center products, among them Bitbucket, Confluence, Jira Software, and Jira Service Management. Anyone running those products should install Atlassian's fixed versions now and treat any internet-facing instance as probed.",
+      "tags": [
+        "exploit",
+        "patch",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Hackers exploit critical Atlassian flaw after public PoC release",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-critical-atlassian-flaw-after-public-poc-release/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Atlassian Data Center Flaw Draws Exploitation Attempts Within Two Hours of Public Details",
+          "url": "https://thehackernews.com/2026/10/atlassian-data-center-flaw-draws.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Atlassian Patches Critical Vulnerability Affecting 8 Products",
+          "url": "https://www.securityweek.com/atlassian-patches-critical-vulnerability-affecting-8-products/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Atlassian warns of critical file-access flaw in Jira, Confluence",
+          "url": "https://www.bleepingcomputer.com/news/security/atlassian-warns-of-critical-file-access-flaw-in-jira-confluence/"
+        }
+      ],
+      "_anchor": "i-49b14ed2d5"
+    },
     {
       "title": "AI Agents Industrialize Vulnerability Discovery",
       "area": "AI Security",
@@ -89,10 +123,38 @@
       "_anchor": "i-2322918b8a"
     },
     {
+      "title": "FortiBleed Locks Admins Out of Fortinet Firewalls",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "The FBI and the United States Secret Service issued a joint advisory on Tuesday, October 6, 2026 saying the FortiBleed credential-harvesting campaign against internet-facing Fortinet FortiGate firewalls and SSL VPN gateways remains active, cited SOCRadar's verified count of 86,644 compromised devices in 194 countries, and warned that victims lose access to their own Fortinet devices when the attacker deletes or alters administrator credentials.",
+      "summary": "FortiBleed works through reused and leaked credentials plus Fortinet's legacy SHA-256 password storage, which hands attackers working logins on gateways that terminate remote access for whole organizations. Administrators should rotate every account on the appliance, pull credentials that predate the current password scheme, restrict management interfaces, and check administrator lists for deletions and additions.",
+      "tags": [
+        "exploit",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "FortiBleed is still active, with attackers locking admins out of Fortinet firewalls",
+          "url": "https://www.helpnetsecurity.com/2026/10/07/fortinet-fortibleed-campaign-fbi-advisory/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "FBI Warns FortiBleed Remains Active After Amassing 86,644 Fortinet Device Credentials",
+          "url": "https://thehackernews.com/2026/10/fbi-warns-fortibleed-remains-active.html"
+        },
+        {
+          "source": "The Record",
+          "title": "FBI, Secret Service add to warnings of FortiBleed credential stealing campaign",
+          "url": "https://therecord.media/fortibleed-warning-fbi-secret-service"
+        }
+      ],
+      "_anchor": "i-515c2192e0"
+    },
+    {
       "title": "Ransomware Hits Advantest and Osaka Metropolitan University",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "Advantest Corporation, the Japanese maker of semiconductor test equipment, began notifying individuals on October 7, 2026 that a ransomware attack earlier in the year exposed their personally identifiable information, and Osaka Metropolitan University said on October 6, 2026 that a suspected ransomware attack had canceled classes and left its internal network, email, and a range of administrative and academic systems unavailable.",
-      "summary": "Two Japanese institutions in the same week show both halves of the damage: Advantest faces breach notification duties for people whose records attackers took, and Osaka Metropolitan University lost the systems that run teaching. People who hear from Advantest should treat their data as public and monitor accounts.",
+      "latest_developments": "Advantest Corporation, the Japanese maker of semiconductor test equipment, began notifying individuals on October 7, 2026 that the ransomware attack it suffered in February 2026 took personal information off its servers, and Osaka Metropolitan University said on October 6, 2026 that a suspected ransomware attack had canceled classes and left its internal network, email, and a range of administrative and academic systems unavailable.",
+      "summary": "Two Japanese institutions in the same week show both halves of the damage: Advantest faces breach notification duties eight months after the intrusion, and Osaka Metropolitan University lost the systems that run teaching. People who hear from Advantest should treat their data as public and monitor accounts.",
       "tags": [
         "ransomware",
         "breach"
@@ -104,12 +166,64 @@
           "url": "https://www.bleepingcomputer.com/news/security/advantest-confirms-personal-information-stolen-in-ransomware-attack/"
         },
         {
+          "source": "SecurityWeek",
+          "title": "Advantest Discloses Data Breach Months After Ransomware Attack",
+          "url": "https://www.securityweek.com/advantest-discloses-data-breach-months-after-ransomware-attack/"
+        },
+        {
           "source": "The Record",
           "title": "Osaka Metropolitan University cancels classes after suspected ransomware attack",
           "url": "https://therecord.media/osaka-university-cancels-classes-ransomware"
         }
       ],
       "_anchor": "i-e8af94180f"
+    },
+    {
+      "title": "Counterfeit TLS Certificates Out of Three Registries",
+      "area": "Identity and Trust Infrastructure",
+      "latest_developments": "Google named the three country-code domain registries on Tuesday, October 6, 2026: attackers compromised the third-party operators of .gh for Ghana, .sl for Sierra Leone, and .as for American Samoa, changed the authoritative DNS records, and used that control to obtain HTTPS certificates for several Google domains and for domains belonging to other large organizations.",
+      "summary": "Control of a registry's DNS puts every domain under that ending at risk, because certificate authorities validate ownership through DNS and will issue to whoever answers. Organizations holding domains under .gh, .sl, or .as should check Certificate Transparency logs for certificates they never requested and revoke them.",
+      "tags": [
+        "dns",
+        "certificates"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Hackers hijack three country-code domain registries, obtain HTTPS certificates for Google domains",
+          "url": "https://www.helpnetsecurity.com/2026/10/07/google-unauthorized-https-certificates-cctld-hijacks/"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "Hackers obtain counterfeit TLS certificates for Google and other large services",
+          "url": "https://arstechnica.com/security/2026/10/hackers-obtain-counterfeit-tls-certificates-for-google-and-other-large-services/"
+        }
+      ],
+      "_anchor": "i-637cde09ce"
+    },
+    {
+      "title": "ShinyHunters Extorted a Boeing Spin-Off",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Brian Krebs reported on October 7, 2026 that police detained Rey, the teenager from Amman, Jordan whom investigators suspect of leading ShinyHunters, while the group was extorting a business unit Boeing recently divested, and SecurityWeek reported the same day that Japan detained a Qilin ransomware suspect in May 2026 and has now extradited him to Germany to face hacking charges.",
+      "summary": "Rey cooperates with the FBI to identify other ShinyHunters members, the data theft and extortion crew behind a long run of corporate breaches. Organizations with Salesforce, Snowflake, and similar cloud tenancies should keep hunting for the group's access even as arrests mount.",
+      "tags": [
+        "arrest",
+        "ransomware",
+        "extortion"
+      ],
+      "sources": [
+        {
+          "source": "Krebs on Security",
+          "title": "ShinyHunters Extorted Boeing Spin-off Prior to Arrests",
+          "url": "https://krebsonsecurity.com/2026/10/shinyhunters-extorted-boeing-spin-off-prior-to-arrests/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Qilin Ransomware Suspect Arrested in Japan, Extradited to Germany",
+          "url": "https://www.securityweek.com/qilin-ransomware-suspect-arrested-in-japan-extradited-to-germany/"
+        }
+      ],
+      "_anchor": "i-4d0ab1e7dd"
     },
     {
       "title": "Arizona's Court System Loses a Million Records",
@@ -241,14 +355,42 @@
   "local": {
     "business_politics": [
       {
+        "title": "Court of Appeal Quashes Barclays Traders' Rate-Rigging Convictions",
+        "latest_developments": "London's Court of Appeal threw out the rate-rigging convictions of former Barclays traders Wednesday, October 7, extending the collapse of the Libor prosecutions that began when Tom Hayes's guilty verdict fell last year.",
+        "summary": "The Serious Fraud Office built a decade of criminal cases against bank traders over manipulation of benchmark interest rates after the financial crisis, and the appeal judges have now unwound them. The ruling resets how British courts treat trader conduct that banks' own submission practices encouraged.",
+        "sources": [
+          {
+            "source": "FT Markets",
+            "title": "Ex-Barclays traders’ rate-rigging convictions quashed",
+            "url": "https://www.ft.com/content/9c61d1a4-c982-41d5-a96e-f06df406c7e9?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-107524ba42"
+      },
+      {
         "title": "The Bond Rout Resumes and the IMF Tells Governments to Cut",
-        "latest_developments": "The selloff restarted Wednesday, October 7, after a single day of relief: the 30-year Treasury yield set a fresh 24-year high, French bonds underperformed again, sterling reached a 16-month high against the euro on bets the Bank of England raises rates, and International Monetary Fund Managing Director Kristalina Georgieva told governments to rein in spending and face \"very tough political choices\" to calm yields.",
+        "latest_developments": "The selloff restarted Wednesday, October 7, after a single day of relief: the 30-year Treasury yield reached its highest level since 2002, French, Italian, and British paper came under pressure in volatile trading, the Dow industrials, Nasdaq composite, and S&P 500 all fell back a day after two of them set records, French central bank head Emmanuel Moulin said the European Central Bank need not intervene to calm the rout and denounced \"Trump-style\" threats against him from the far left, and International Monetary Fund Managing Director Kristalina Georgieva told governments to rein in spending and face \"very tough political choices.\"",
         "summary": "Long-dated government debt has repriced worldwide for two weeks, with French paper carrying the widest risk premium in the euro area as the government of Finance Minister Roland Lescure fights for billions of euros in cuts. The Wall Street Journal describes France's economy as trapped in a negative feedback loop of weak growth and rising debt, and the Financial Times traces how United States mortgage bond hedging amplifies each move in Treasury yields.",
         "sources": [
           {
             "source": "WSJ Markets",
             "title": "U.S. 30-Year Yield Hits New 24-Year High; French Bonds Underperform on Budget Worries",
             "url": "https://www.wsj.com/finance/investing/u-s-european-government-bond-yields-rise-french-bonds-underperform-on-budget-worries-c068d9ae?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "Global bond sell-off resumes as 30-year Treasury yield hits highest since 2002",
+            "url": "https://www.ft.com/content/33c67aa0-bfdb-457b-84bb-960b4fed94b6?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "French central bank chief says ECB intervention not needed to ease bond rout",
+            "url": "https://www.ft.com/content/d9ba8e1f-54f9-4739-9ce3-94e62d585e26?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Dow Lower, Treasury Yields Hit Fresh 24-Year Highs",
+            "url": "https://www.wsj.com/finance/stocks/stocks-futures-steady-as-bond-selloff-extends-oil-prices-rise-ddd8a40e?mod=rss_markets_main"
           },
           {
             "source": "FT World",
@@ -259,19 +401,42 @@
             "source": "WSJ Markets",
             "title": "Sterling Rises Vs Euro on BOE Rate-Rise Bets, French Debt Worries",
             "url": "https://www.wsj.com/finance/currencies/asian-currencies-consolidate-but-may-be-aided-by-appetite-for-risk-assets-ee0a9ce8?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ World News",
-            "title": "France’s Economy Is Trapped in a Negative Feedback Loop",
-            "url": "https://www.wsj.com/economy/global/frances-economy-is-trapped-in-a-negative-feedback-loop-509598a9?mod=rss_worldnews"
-          },
-          {
-            "source": "FT Markets",
-            "title": "How US mortgage bonds can trigger a ‘vicious loop’ for Treasury yields",
-            "url": "https://www.ft.com/content/a04ef3b4-2fcf-48f9-ab34-2c40c39d9a0c"
           }
         ],
         "_anchor": "i-4925439e3a"
+      },
+      {
+        "title": "Houthi Missiles Reach Riyadh as Brent Tops $100",
+        "latest_developments": "Houthi rebels fired a new missile barrage at Riyadh and at Aden on Wednesday, October 7, widening Tuesday's strikes on two Saudi airports, Brent crude climbed back above $100 a barrel, and Tropical Storm Isaias formed in the southwestern Gulf of Mexico the same morning, curtailing some United States Gulf oil output and lifting natural gas futures.",
+        "summary": "The barrage follows the Saudi-backed Yemeni government offensive launched October 5 to retake the Bab el-Mandab strait, which the Houthis have used to disrupt tanker traffic, and it now reaches the Saudi capital itself. Shell said the Middle East conflict and the global fuel squeeze will push its third-quarter refining margin to a record high.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Houthi rebels target Riyadh and Aden in new missile barrage",
+            "url": "https://www.ft.com/content/6a2dc960-c9fd-4795-b5ea-78f9bb77309d?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "Oil Prices Rise as Houthi Attacks, U.S. Gulf Storm Raise Supply Risks",
+            "url": "https://www.wsj.com/business/energy-oil/oil-prices-rise-as-houthi-attacks-u-s-gulf-storm-raise-supply-risks-9a0aacf8?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Oil Rises After Yemen’s Houthis Strike Saudi Airports",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-ongoing-mideast-tensions-2c446a1e?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "U.S. Natural Gas Extends Gains With Eyes on Storm",
+            "url": "https://www.wsj.com/finance/commodities-futures/u-s-natural-gas-extends-gains-with-eyes-on-storm-a8a32ad9?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "Shell’s Refining Margin Soars to Record High After Middle East Conflict Upends Fuel Markets",
+            "url": "https://www.wsj.com/business/energy-oil/shells-refining-margin-surges-to-record-high-after-middle-east-conflict-upends-fuel-markets-39e45d67?mod=pls_whats_news_us_business_f"
+          }
+        ],
+        "_anchor": "i-31943ad84d"
       },
       {
         "title": "India Raises Rates for the First Time in Three Years",
@@ -290,37 +455,35 @@
           }
         ],
         "_anchor": "i-694d3be516"
-      },
-      {
-        "title": "Houthi Missiles Reach Riyadh as Brent Tops $100",
-        "latest_developments": "Houthi rebels fired a new missile barrage at Riyadh and at Aden on Wednesday, October 7, widening Tuesday's strikes on two Saudi airports, and Brent crude climbed back above $100 a barrel as traders added storm shut-ins in the United States Gulf of Mexico to the supply risk.",
-        "summary": "The barrage follows the Saudi-backed Yemeni government offensive launched October 5 to retake the Bab el-Mandab strait, which the Houthis have used to disrupt tanker traffic, and it now reaches the Saudi capital itself. Shell said the Middle East conflict and the global fuel squeeze will push its third-quarter refining margin to a record high.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "Houthi rebels target Riyadh and Aden in new missile barrage",
-            "url": "https://www.ft.com/content/6a2dc960-c9fd-4795-b5ea-78f9bb77309d?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ US Business",
-            "title": "Oil Prices Rise as Houthi Attacks, U.S. Gulf Storm Raise Supply Risks",
-            "url": "https://www.wsj.com/business/energy-oil/oil-prices-rise-as-houthi-attacks-u-s-gulf-storm-raise-supply-risks-9a0aacf8?mod=pls_whats_news_us_business_f"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Oil Rises After Yemen’s Houthis Strike Saudi Airports",
-            "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-ongoing-mideast-tensions-2c446a1e?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ US Business",
-            "title": "Shell’s Refining Margin Soars to Record High After Middle East Conflict Upends Fuel Markets",
-            "url": "https://www.wsj.com/business/energy-oil/shells-refining-margin-surges-to-record-high-after-middle-east-conflict-upends-fuel-markets-39e45d67?mod=pls_whats_news_us_business_f"
-          }
-        ],
-        "_anchor": "i-31943ad84d"
       }
     ],
     "business": [
+      {
+        "title": "Arnold Palmer Regional Airport Hunts a Carrier",
+        "latest_developments": "TribLive's editorial board asked Wednesday, October 7, whether Westmoreland County's Arnold Palmer Regional Airport turns into a relic or buys its way to a new airline.",
+        "summary": "The airport, outside Latrobe, has courted Allegiant Air, Breeze Airways, and Frontier Airlines to fly from the gate it built, and the editorial frames the county's choice as paying to land a carrier or watching scheduled service fade. The piece opens on New York City's City Hall subway station, which took its first train in 1904 and now sits abandoned.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Editorial: Will Arnold Palmer Regional Airport become a relic, or can it buy a new carrier?",
+            "url": "https://triblive.com/opinion/editorial-will-arnold-palmer-regional-airport-become-a-relic-or-can-it-buy-a-new-carrier/"
+          }
+        ],
+        "_anchor": "i-adb01d76a6"
+      },
+      {
+        "title": "Ming-Na Wen Writes the Chinatown Inn Into a Cookbook",
+        "latest_developments": "Pittsburgh City Paper reported Wednesday, October 7, on the first cookbook from the actress Ming-Na Wen, \"Have You Eaten Yet? Family Recipes from a Restaurant Daughter.\"",
+        "summary": "Wen, who played Mulan and appears in the Star Wars series, grew up in the apartment above the Chinatown Inn, her family's restaurant in downtown Pittsburgh, and the book turns those family recipes into an adult's account of a restaurant childhood.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "Mulan and Star Wars actress Ming-Na Wen’s first cookbook time-warps back to her Pittsburgh childhood above Chinatown Inn",
+            "url": "https://www.pghcitypaper.com/food-drink/mulan-and-star-wars-actress-ming-na-wens-first-cookbook-time-warps-back-to-her-pittsburgh-childhood-above-chinatown-inn/"
+          }
+        ],
+        "_anchor": "i-1f4c7ff664"
+      },
       {
         "title": "Butler Works Lands $75 Million From the Energy Department",
         "latest_developments": "The United States Department of Energy awarded Cleveland-Cliffs' Butler Works $75 million, and Energy Secretary Chris Wright toured the Butler County mill Tuesday, October 6, talking through steel tariffs and the industry's future with KDKA.",
@@ -373,6 +536,65 @@
     ],
     "around_town": [
       {
+        "title": "Isaias Points Sunday Rain at Western Pennsylvania",
+        "latest_developments": "Tropical Storm Isaias formed in the southwestern Gulf of Mexico on Wednesday morning, October 7, and forecasters expect it to strengthen rapidly into a dangerous hurricane before landfall on the northern Gulf Coast later this week, sending its rain toward Pittsburgh by Sunday, October 11.",
+        "summary": "Western Pennsylvania stays dry and sunny through Saturday, October 10, with mornings in the upper 30s and low 40s and afternoons near the low 70s. WTAE has tagged Sunday an Impact Day, and KDKA attributes the weekend rain to the storm's remnants.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Tropical Storm Isaias forms, forecast to become a hurricane and hit the U.S. Gulf Coast this week",
+            "url": "https://www.post-gazette.com/news/weather-news/2026/10/07/isaias-storm-path-hurricane/stories/202610070032"
+          },
+          {
+            "source": "WTAE",
+            "title": "Tropical Storm Isaias to threaten Gulf Coast as a dangerous hurricane",
+            "url": "https://www.wtae.com/article/tropical-storm-isaias-gulf-coast-dangerous-hurricane/74063031"
+          },
+          {
+            "source": "WTAE",
+            "title": "Dry through Saturday; Impact Day Sunday",
+            "url": "https://www.wtae.com/article/dry-through-saturday-impact-day-sunday/74062853"
+          },
+          {
+            "source": "KDKA",
+            "title": "The sunshine in Pittsburgh continues through the week, but some rain looms this weekend",
+            "url": "https://www.cbsnews.com/pittsburgh/news/the-sunshine-in-pittsburgh-continues-through-the-week-but-some-rain-looms-this-weekend/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Another chilly morning with much warmer afternoon in the low 70s",
+            "url": "https://www.wpxi.com/weather/another-chilly-morning-with-much-warmer-afternoon-low-70s/IPJYNLNH4RHJHDIQAJGGOPD3AA/"
+          }
+        ],
+        "_anchor": "i-9287896c06"
+      },
+      {
+        "title": "Davanzo and Rogers Meet Again in the 58th District",
+        "latest_developments": "TribLive laid out the November 3 rematch Wednesday, October 7, in Pennsylvania's 58th state House District, where the Republican incumbent Davanzo seeks a fourth term against the Democrat Rogers, who lost to him in 2024.",
+        "summary": "The district runs from the Mon Valley into western Westmoreland County. The race is one of several Western Pennsylvania rematches on the ballot as the General Assembly breaks to campaign.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Davanzo, Rogers square off again in 58th House District",
+            "url": "https://triblive.com/local/westmoreland/davanzo-rogers-square-off-again-in-58th-house-district/"
+          }
+        ],
+        "_anchor": "i-3a479f83b1"
+      },
+      {
+        "title": "Abers Creek Road Closes in Monroeville",
+        "latest_developments": "WPXI reported Wednesday, October 7, that a stretch of Abers Creek Road near Cavitt Road in Monroeville closes at 9 a.m. Thursday, October 8, for repairs to Abers Creek Bridge No. 3.",
+        "summary": "The closure adds to a crowded Allegheny County construction calendar that already includes the Parkway East bathtub work downtown and ramp reconstruction at Lebanon Church and Curry Hollow roads.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Portion of road in Monroeville will close for bridge repair",
+            "url": "https://www.wpxi.com/news/local/portion-road-monroeville-will-close-bridge-repair/EGCD2MOQKRAAVJQ56BOEZZ6C4I/"
+          }
+        ],
+        "_anchor": "i-42338ee9d5"
+      },
+      {
         "title": "Innamorato's 2027 Budget Holds Taxes Flat",
         "latest_developments": "Allegheny County Executive Sara Innamorato presented the numbers to County Council on Tuesday, October 6: a $1.25 billion operating budget inside a roughly $3 billion plan for 2027, with no property tax increase and no layoffs.",
         "summary": "Innamorato wrote the plan around millions of dollars in cuts forced by federal policy changes that hit county programs. County Council now reviews the proposal, and a separate bill creating county-wide paid parental leave sits in committee ahead of a final vote expected later this month.",
@@ -424,6 +646,32 @@
     ],
     "events": [
       {
+        "title": "Allentown Night Market Heads a Full Weekend",
+        "latest_developments": "NEXTpittsburgh published its guide Wednesday, October 7, to October 8 through 11, naming more than a dozen things to do.",
+        "summary": "The list leads with the Allentown Night Market, a fall flower show, and a performance billed as The Last Splash, and runs through fall festivals, outdoor recreation, and arts events across the city.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "12+ things to do this weekend, from the Allentown Night Market and Fall Flower Show to The Last Splash",
+            "url": "https://nextpittsburgh.com/events/12-things-to-do-in-pittsburgh-this-weekend-oct-8-11-2026/"
+          }
+        ],
+        "_anchor": "i-d2cc68b06d"
+      },
+      {
+        "title": "Dancing With the Stars Returns to PPG Paints Arena",
+        "latest_developments": "WTAE reported Wednesday, October 7, that the Dancing with the Stars live tour plays PPG Paints Arena in 2027, its fifth consecutive year on a Pittsburgh stage.",
+        "summary": "The touring version of the ABC competition brings the show's professional dancers and celebrity contestants to the Uptown arena that hosts the Penguins.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "'Dancing with the Stars' coming to PPG Paints Arena in 2027",
+            "url": "https://www.wtae.com/article/dancing-with-the-stars-pittsburgh-2027/74064778"
+          }
+        ],
+        "_anchor": "i-a1d8f195e2"
+      },
+      {
         "title": "Chelsea Wolfe Brings The Dark to Homestead",
         "latest_developments": "Pittsburgh City Paper previewed the show Wednesday, October 7, built around The Dark, Chelsea Wolfe's tenth album.",
         "summary": "Wolfe, the doom-pop songwriter whose new record works through sleep paralysis and self-doubt, plays the Carnegie of Homestead Music Hall, the 1898 hall at 510 East 10th Avenue in Munhall, during the city's Halloween season.",
@@ -451,6 +699,19 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "The Pirates Face Their Non-Tender Calls",
+        "latest_developments": "The Post-Gazette worked through the Pirates' arbitration decisions Wednesday, October 7, weighing whether the club keeps or non-tenders catcher Henry Davis.",
+        "summary": "Davis, the first pick of the 2021 draft, has yet to hold a major league job, and the paper runs the same keep-or-cut math on Oneil Cruz, Jared Triolo, Carmen Mlodzinski, and Paul Skenes as general manager Ben Cherington sets the winter roster.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "Keep or non-tender? What the Pirates should do with Henry Davis and other arbitration-eligible players",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/10/07/mlb-arbitration-skenes-triolo-davis-cruz-mlodzinski/stories/202610060027"
+          }
+        ],
+        "_anchor": "i-bacb19e5d7"
+      },
       {
         "title": "Bruce Arians Sits Down With Not Just Football",
         "latest_developments": "Cam Heyward's Not Just Football posted its Wednesday episode, October 7, with Bruce Arians going through his Steelers years, the game-winning drive in Super Bowl XLIII, and his dealings with Antonio Brown, Tom Brady, Andrew Luck, and Larry Fitzgerald.",
@@ -518,6 +779,13 @@
     ],
     "reading": [
       {
+        "author": "Stratechery",
+        "title": "Apple and LG, The House For Everyone Else, Agent Standards and Amazon",
+        "url": "https://stratechery.com/2026/apple-and-lg-the-house-for-everyone-else-agent-standards-and-amazon/",
+        "summary": "Ben Thompson reads Apple's partnership with LG as a smarter, more integrated run at the smart home than he expected, and then argues Amazon needs its own answer on agent standards.",
+        "_anchor": "i-a8542659e5"
+      },
+      {
         "author": "Ed Zitron",
         "title": "Credit Crunch",
         "url": "https://www.wheresyoured.at/credit-crunch/",
@@ -537,20 +805,41 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Anthropic folded Project Glasswing into a tiered verification program on the back of machine-verified flaw counts no human team could match, while researchers at Pwn2Own Ireland burned 32 zero-days for $388,500.",
+      "text": "FortiBleed has drained credentials from 86,644 Fortinet firewalls while SonicWall rushes hotfixes for its SMA 1000 appliances, making edge gear this week's rotation and audit priority.",
       "links": [
         {
-          "anchor": "i-c6065c2470",
-          "phrase": "Project Glasswing",
-          "start": 17,
-          "end": 34,
-          "title": "AI Agents Industrialize Vulnerability Discovery"
+          "anchor": "i-515c2192e0",
+          "phrase": "FortiBleed",
+          "start": 0,
+          "end": 10,
+          "title": "FortiBleed Locks Admins Out of Fortinet Firewalls"
+        },
+        {
+          "anchor": "i-2322918b8a",
+          "phrase": "SonicWall",
+          "start": 72,
+          "end": 81,
+          "title": "Chrome, Android, and SonicWall Ship Fixes"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Public proof-of-concept code now sets the patch clock: Atlassian's CVE-2026-21589 drew unauthenticated attacks within two hours, and Pwn2Own Ireland burned 32 zero-days on day one.",
+      "links": [
+        {
+          "anchor": "i-49b14ed2d5",
+          "phrase": "CVE-2026-21589",
+          "start": 67,
+          "end": 81,
+          "title": "Atlassian Flaw Exploited Two Hours After PoC"
         },
         {
           "anchor": "i-20fd106726",
           "phrase": "Pwn2Own Ireland",
-          "start": 162,
-          "end": 177,
+          "start": 133,
+          "end": 148,
           "title": "Pwn2Own Ireland Opens With 32 Zero-Days"
         }
       ]
@@ -558,69 +847,62 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Chrome 155 ships 247 fixes alongside Android's 25 and four SonicWall appliance flaws, while attackers already backdoor WordPress sites through stored cross-site scripting in Ninja Forms.",
+      "text": "Anthropic's merged Glasswing program, which verified 129,000 flaws since April, pushes the bottleneck toward triage and ownership, while Newport argues the frontier labs now warrant outside investigation.",
       "links": [
         {
-          "anchor": "i-2322918b8a",
-          "phrase": "Chrome 155",
-          "start": 0,
-          "end": 10,
-          "title": "Chrome, Android, and SonicWall Ship Fixes"
+          "anchor": "i-c6065c2470",
+          "phrase": "Glasswing",
+          "start": 19,
+          "end": 28,
+          "title": "AI Agents Industrialize Vulnerability Discovery"
         },
         {
-          "anchor": "i-20db35582f",
-          "phrase": "Ninja Forms",
-          "start": 174,
-          "end": 185,
-          "title": "Ninja Forms Flaw Backdoors WordPress Sites"
+          "anchor": "i-2cef15b9c2",
+          "phrase": "Newport",
+          "start": 137,
+          "end": 144,
+          "title": "It’s Time to Investigate the AI Labs"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Ransomware notifications from Advantest and canceled classes at Osaka Metropolitan University land as Arizona's Supreme Court reports a million court records copied, some reaching back 30 years.",
+      "text": "Google traced counterfeit TLS certificates to compromised .gh, .sl, and .as registry operators, while police detained the teenager suspected of leading ShinyHunters mid-extortion of a Boeing spin-off.",
       "links": [
         {
-          "anchor": "i-e8af94180f",
-          "phrase": "Advantest",
-          "start": 30,
-          "end": 39,
-          "title": "Ransomware Hits Advantest and Osaka Metropolitan University"
+          "anchor": "i-637cde09ce",
+          "phrase": "counterfeit TLS",
+          "start": 14,
+          "end": 29,
+          "title": "Counterfeit TLS Certificates Out of Three Registries"
         },
         {
-          "anchor": "i-4e888681b7",
-          "phrase": "Arizona's Supreme Court",
-          "start": 102,
-          "end": 125,
-          "title": "Arizona's Court System Loses a Million Records"
+          "anchor": "i-4d0ab1e7dd",
+          "phrase": "ShinyHunters",
+          "start": 152,
+          "end": 164,
+          "title": "ShinyHunters Extorted a Boeing Spin-Off"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "A fresh 24-year high in the 30-year Treasury yield met IMF calls for spending cuts, India's first rate rise in three years, and Houthi missiles lifting Brent above $100.",
+      "kind": "Update",
+      "status": "updated",
+      "text": "The 30-year Treasury yield reached its highest level since 2002 as the bond selloff resumed, and Houthi missiles aimed at Riyadh pushed Brent back above $100.",
       "links": [
         {
           "anchor": "i-4925439e3a",
-          "phrase": "IMF",
-          "start": 55,
-          "end": 58,
+          "phrase": "Treasury yield",
+          "start": 12,
+          "end": 26,
           "title": "The Bond Rout Resumes and the IMF Tells Governments to Cut"
-        },
-        {
-          "anchor": "i-694d3be516",
-          "phrase": "India's first rate rise",
-          "start": 84,
-          "end": 107,
-          "title": "India Raises Rates for the First Time in Three Years"
         },
         {
           "anchor": "i-31943ad84d",
           "phrase": "Houthi missiles",
-          "start": 128,
-          "end": 143,
+          "start": 97,
+          "end": 112,
           "title": "Houthi Missiles Reach Riyadh as Brent Tops $100"
         }
       ]
@@ -628,49 +910,28 @@
     {
       "kind": "Update",
       "status": "new",
-      "text": "Allegheny County's 2027 budget holds taxes flat, Pennsylvania books $516 million from Meta ahead of a Harrisburg spending fight, and Amtrak's second New York trip starts November 18.",
+      "text": "Tropical Storm Isaias aims Sunday rain at Western Pennsylvania, Monroeville closes Abers Creek Road on Thursday, and Davanzo faces Rogers again in the 58th District November 3.",
       "links": [
         {
-          "anchor": "i-5b0255b1fb",
-          "phrase": "2027 budget",
-          "start": 19,
-          "end": 30,
-          "title": "Innamorato's 2027 Budget Holds Taxes Flat"
+          "anchor": "i-9287896c06",
+          "phrase": "Isaias",
+          "start": 15,
+          "end": 21,
+          "title": "Isaias Points Sunday Rain at Western Pennsylvania"
         },
         {
-          "anchor": "i-a6cd847973",
-          "phrase": "$516 million",
-          "start": 68,
-          "end": 80,
-          "title": "Pennsylvania Collects at Least $516 Million From Meta"
+          "anchor": "i-42338ee9d5",
+          "phrase": "Abers Creek Road",
+          "start": 83,
+          "end": 99,
+          "title": "Abers Creek Road Closes in Monroeville"
         },
         {
-          "anchor": "i-6c03f31ff5",
-          "phrase": "Amtrak's second",
-          "start": 133,
-          "end": 148,
-          "title": "Amtrak Sets November 18 for the Second New York Train"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Zitron's Credit Crunch digs into the debt financing the AI build-out while Newport calls for outside investigation of the frontier labs' carefully staged announcements.",
-      "links": [
-        {
-          "anchor": "i-4634c75711",
-          "phrase": "Credit Crunch",
-          "start": 9,
-          "end": 22,
-          "title": "Credit Crunch"
-        },
-        {
-          "anchor": "i-2cef15b9c2",
-          "phrase": "Newport",
-          "start": 75,
-          "end": 82,
-          "title": "It’s Time to Investigate the AI Labs"
+          "anchor": "i-3a479f83b1",
+          "phrase": "Davanzo",
+          "start": 117,
+          "end": 124,
+          "title": "Davanzo and Rogers Meet Again in the 58th District"
         }
       ]
     }
@@ -684,10 +945,10 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 62,
+        "in_window": 55,
         "failed": [],
         "empty": [
-          "Krebs on Security",
+          "CISA Advisories",
           "Securelist (Kaspersky)",
           "Sophos News",
           "Unit 42 (Palo Alto)",
@@ -702,8 +963,8 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 8,
+            "contributed": 8
           },
           "BleepingComputer": {
             "items": 15,
@@ -712,8 +973,8 @@
           },
           "Krebs on Security": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Schneier on Security": {
             "items": 10,
@@ -732,23 +993,23 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 1,
+            "contributed": 1
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 0,
+            "contributed": 0
           },
           "The Record": {
             "items": 5,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Help Net Security": {
             "items": 10,
@@ -807,8 +1068,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "Frank on Fraud": {
             "items": 10,
@@ -835,12 +1096,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 13
+            "contributed": 17
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 7
+            "contributed": 12
           },
           "PublicSource": {
             "items": 10,
@@ -850,12 +1111,12 @@
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 10,
-            "contributed": 3
+            "contributed": 1
           },
           "NEXTpittsburgh": {
             "items": 10,
             "in_window": 2,
-            "contributed": 1
+            "contributed": 2
           },
           "Pittsburgh Magazine": {
             "items": 30,
@@ -865,17 +1126,17 @@
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 9
+            "contributed": 4
           },
           "WPXI": {
             "items": 15,
-            "in_window": 14,
-            "contributed": 6
+            "in_window": 15,
+            "contributed": 5
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 20
+            "contributed": 18
           }
         }
       },
@@ -891,43 +1152,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 73,
-            "in_window": 32,
-            "contributed": 5
+            "in_window": 33,
+            "contributed": 8
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 30,
-            "contributed": 12
+            "in_window": 28,
+            "contributed": 11
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 49,
-            "contributed": 10
+            "in_window": 53,
+            "contributed": 11
           },
           "WSJ Politics": {
             "items": 21,
             "in_window": 8,
-            "contributed": 1
+            "contributed": 2
           },
           "The Economist": {
             "items": 300,
-            "in_window": 12,
-            "contributed": 0
+            "in_window": 15,
+            "contributed": 3
           },
           "FT Home": {
-            "items": 10,
-            "in_window": 10,
-            "contributed": 6
+            "items": 11,
+            "in_window": 11,
+            "contributed": 5
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 21
+            "contributed": 17
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 5
+            "contributed": 3
           }
         }
       },
@@ -937,11 +1198,9 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 12,
+        "in_window": 13,
         "failed": [],
-        "empty": [
-          "NEXTpittsburgh Arts & Entertainment"
-        ],
+        "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
@@ -955,12 +1214,12 @@
           },
           "NEXTpittsburgh Events": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "NEXTpittsburgh Arts & Entertainment": {
             "items": 10,
-            "in_window": 0,
+            "in_window": 1,
             "contributed": 0
           }
         }
@@ -971,7 +1230,7 @@
         "feeds": 6,
         "loaded": 6,
         "window_hours": 96,
-        "in_window": 19,
+        "in_window": 22,
         "failed": [],
         "empty": [],
         "per_feed": {
@@ -987,8 +1246,8 @@
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -997,13 +1256,13 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 4
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 11,
+            "contributed": 11
           }
         }
       },
@@ -1013,14 +1272,14 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 29,
+        "in_window": 28,
         "failed": [],
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
             "items": 24,
-            "in_window": 24,
-            "contributed": 24
+            "in_window": 23,
+            "contributed": 23
           },
           "ESPN Olympics": {
             "items": 25,
@@ -1086,24 +1345,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 27668,
+          "outputTokens": 33441,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 107232,
+          "cacheCreationInputTokens": 119817,
           "webSearchRequests": 0,
-          "costUSD": 1.7640500000000001,
+          "costUSD": 2.034225,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 15631
+          "thinkingTokens": 14457
         }
       },
-      "cost_usd": 1.7640500000000001,
-      "duration_ms": 337528,
+      "cost_usd": 2.034225,
+      "duration_ms": 378669,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-07 07:06 EDT",
-    "items_considered": 62,
+    "generated_at": "2026-10-07 10:06 EDT",
+    "items_considered": 55,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1184,8 +1443,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.7641,
-    "model_duration_ms": 337528,
+    "model_cost_usd": 2.0342,
+    "model_duration_ms": 378669,
     "local_from": null,
     "feed_failures": []
   }
