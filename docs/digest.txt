@@ -1,12 +1,12 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Monday, October 12, 2026 - 7:06 AM EDT
+Monday, October 12, 2026 - 10:05 AM EDT
 ================================================================
 
-A hardware implant hidden inside Ledger wallets sold by one
-Southeast Asian reseller drained more than $93 million,
-anchoring a day of attacks that reach the owner before the
-device ever powers on.
+Attackers turned maximum-severity flaws in GitLab, SonicWall,
+and the Bricksforge WordPress plugin into live exploitation
+within days of disclosure, while the food retailer Ahold
+Delhaize pulled systems offline after a cyberattack.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -14,41 +14,38 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] CyberXero paired Cobalt Strike with a Claude Code
-  orchestration layer against Ukrainian infrastructure, while
-  Northwestern found Claude Opus 4.7 patches that stop crashes
-  still fail maintainers' tests.
+* [TREND] Maximum-severity pre-auth flaws in GitLab's CI/CD
+  regex compiler, SonicWall SMA 1000 appliances, and the
+  Bricksforge WordPress plugin all drew emergency patches or
+  live exploitation within a day.
+  see: GitLab Regex Compiler Opens Remote Code Execution;
+  SonicWall Flaw Draws 135 Exploit Attempts; Bricksforge Flaw
+  Hands Attackers WordPress Sites
+* [TREND] CyberXero drove a Ukraine access campaign through
+  Anthropic's Claude Code while Northwestern found a third of
+  Claude Opus 4.7's crash-fixing patches failed maintainers' own
+  tests.
   see: CyberXero Runs Claude Code Against Ukraine; AI Patches
   Pass Crashes and Fail Tests
-* [TREND] A hardware implant in Ledger wallets and the Midnight
-  Mimosa firmware malware both reached buyers before first
-  power-on, moving the attack surface into factories and
-  resellers.
+* [TREND] Hardware arrives compromised: a Ledger wallet sold by
+  reseller CryptoBilis hid an implant tied to $93 million in
+  drained funds, and Midnight Mimosa ships inside MediaTek
+  Android firmware.
   see: Ledger Implant Drains $93 Million; Midnight Mimosa Ships
   Inside Android Firmware
-* [UPDATE (new)] Let's Encrypt will default to 64-day
-  certificates from February 10, 2027, putting hand-renewed
-  trust on a hard clock alongside the expiring Windows Update
-  server certificates.
-  see: Certificate Clocks Tighten for Web and Windows
-* [UPDATE (new)] Patchstack reported active exploitation of
-  CVE-2026-85097, a 10.0-rated Bricksforge flaw letting
-  unauthenticated attackers upload PHP and gain full remote code
-  execution on WordPress sites.
-  see: Bricksforge Flaw Hands Attackers WordPress Sites
-* [TREND] Zelenskyy says Russia hit power plants after Trump's
-  truce, while fresh Houthi missiles on Saudi Arabia lifted
-  tanker freight rates and Brussels capped Chinese hybrid
-  imports.
-  see: Zelenskyy Says Putin Is Breaking the Energy Ceasefire;
-  Houthi Missiles Keep Falling on Saudi Arabia; Brussels Caps
-  Chinese Hybrid Imports at 350,000 a Year
-* [UPDATE (new)] Pittsburgh began mailing $100 red-light camera
-  citations at three intersections as IBEW Local 29 crews
-  returned to Duquesne Light after ratifying their contract
-  Sunday evening.
-  see: Pittsburgh's Red-Light Cameras Start Charging $100;
-  Duquesne Light Crews Head Back to Work
+* [UPDATE (new)] Ahold Delhaize, owner of Food Lion, Stop & Shop
+  and Albert Heijn, took systems offline Monday to answer a
+  cybersecurity incident.
+  see: Ahold Delhaize Pulls Systems Offline
+* [UPDATE (new)] Raven, the AI geolocation company formerly
+  called GeoSpy, now sells police a tool that matches a single
+  interior photo to the exact Airbnb or Zillow listing.
+  see: Raven Pinpoints Houses From One Photo
+* [UPDATE (new)] IBEW Local 29's five-year contract sent nearly
+  1,000 Duquesne Light workers back to the job, and Pittsburgh
+  Police reopened the Zone 5 station in East Liberty.
+  see: Duquesne Light Crews Head Back to Work; Zone 5 Police
+  Station Reopens in East Liberty
 
 SECURITY
 ----------------------------------------------------------------
@@ -75,23 +72,21 @@ SECURITY
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/lets-encrypt-64-day-certificate-lifetime/
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/microsoft-windows-update-certificate-rotation/
 
-2. LEDGER IMPLANT DRAINS $93 MILLION
-   Ransomware and Cybercrime · [supply chain, cryptocurrency,
-   hardware]
-   Latest developments: Ledger, the Paris-based hardware wallet
-   maker, said in a 72-hour update on X on October 11, 2026 that
-   every confirmed case in the draining incident it disclosed on
-   October 9, 2026 involves a device bought from the Southeast
-   Asia reseller CryptoBilis, and on-chain researchers put
-   suspected losses above $93 million.
-   Attackers planted a hidden hardware implant in Ledger
-   cryptocurrency wallets that passed through one regional
-   reseller, then emptied the wallets of customers across
-   Southeast Asia. Ledger says its own systems and direct sales
-   channels stayed clean; owners who bought through CryptoBilis
-   should treat their seed phrases as compromised and move funds
-   to a device sourced directly.
-   - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/ledger-wallets-compromised-via-hardware-implant/
+2. SONICWALL FLAW DRAWS 135 EXPLOIT ATTEMPTS
+   Vulnerabilities and Exploits · [exploit, vpn, patch]
+   Latest developments: Researchers counted 135 exploitation
+   attempts against CVE-2026-102255, the 10.0-rated
+   pre-authentication server-side request forgery in SonicWall
+   Secure Mobile Access 1000 appliances, within days of the
+   October 6, 2026 hotfix that SonicWall shipped while saying it
+   saw no evidence anyone exploited the bug.
+   The flaw lets an unauthenticated attacker direct an SMA 1000
+   gateway to issue requests on the attacker's behalf and reach
+   internal functionality behind it. Anyone running SMA 1000
+   appliances should install the hotfix and hunt for outbound
+   requests the appliance made to internal hosts.
+   - The Hacker News: https://thehackernews.com/2026/10/critical-sonicwall-sma-1000-flaw.html
+   - SecurityWeek: https://www.securityweek.com/critical-sonicwall-vulnerability-exploited-days-after-disclosure/
 
 3. BRICKSFORGE FLAW HANDS ATTACKERS WORDPRESS SITES
    Vulnerabilities and Exploits · [patch, wordpress, exploit]
@@ -106,8 +101,76 @@ SECURITY
    immediately and audit for unfamiliar PHP files and
    administrator accounts.
    - The Hacker News: https://thehackernews.com/2026/10/attackers-exploit-cvss-100-bricksforge.html
+   - SecurityWeek: https://www.securityweek.com/bricksforge-wordpress-plugin-vulnerability-exploited-in-the-wild/
 
-4. CYBERXERO RUNS CLAUDE CODE AGAINST UKRAINE
+4. LEDGER IMPLANT DRAINS $93 MILLION
+   Ransomware and Cybercrime · [supply chain, cryptocurrency,
+   hardware]
+   Latest developments: Ledger, the Paris-based hardware wallet
+   maker, confirmed an unauthorized hardware implant inside a
+   wallet that the Southeast Asia reseller CryptoBilis sold,
+   paused sales through that reseller, and said in a 72-hour
+   update on X on October 11, 2026 that every confirmed case in
+   the draining incident it disclosed on October 9, 2026
+   involves a CryptoBilis device; on-chain researchers put
+   suspected losses above $93 million.
+   Attackers planted a hidden hardware implant in Ledger
+   cryptocurrency wallets that passed through one regional
+   reseller, then emptied the wallets of customers across
+   Southeast Asia. Ledger says its own systems and direct sales
+   channels stayed clean; owners who bought through CryptoBilis
+   should treat their seed phrases as compromised and move funds
+   to a device sourced directly.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/ledger-wallets-compromised-via-hardware-implant/
+   - The Hacker News: https://thehackernews.com/2026/10/ledger-finds-unauthorized-hardware.html
+
+5. RAVEN PINPOINTS HOUSES FROM ONE PHOTO
+   Surveillance and Privacy · [surveillance, ai, privacy]
+   Latest developments: 404 Media reported on October 12, 2026
+   that Raven, the AI geolocation company formerly called
+   GeoSpy, now sells police a tool that matches a single
+   interior photograph to the specific Airbnb or Zillow listing
+   where someone shot it, down to details as mundane as a
+   washer-dryer combination.
+   Raven reads furniture, appliances, and fixtures in one frame
+   and searches short-term rental and real estate listing
+   imagery for the match, turning any posted interior photo into
+   an address. Anyone who publishes interior photos of a home or
+   rental—hosts, renters, and the people they photograph—loses
+   location privacy without any metadata in the image.
+   - 404 Media: https://www.404media.co/ai-company-lets-cops-pinpoint-specific-houses-based-on-a-single-interior-photo/
+   - 404 Media: https://www.404media.co/cops-can-creep-on-airbnb/
+
+6. GITLAB REGEX COMPILER OPENS REMOTE CODE EXECUTION
+   Vulnerabilities and Exploits · [patch, devops, exploit]
+   Latest developments: GitLab told customers on October 12,
+   2026 to patch immediately a maximum-severity vulnerability in
+   its CI/CD Regular Expression Compiler that lets a remote
+   attacker run arbitrary code on a targeted instance.
+   The compiler parses regular expressions inside GitLab
+   pipeline configuration, so the flaw sits in the path every
+   CI/CD job travels and reaches the source code, build secrets,
+   and deployment credentials a GitLab instance holds.
+   Administrators of self-managed GitLab should apply the fix
+   now and review pipeline logs and runner hosts for unexpected
+   job execution.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/gitlab-warns-of-max-severity-rce-flaw-in-regex-compiler-engine/
+
+7. AHOLD DELHAIZE PULLS SYSTEMS OFFLINE
+   Ransomware and Cybercrime · [breach, retail, incident]
+   Latest developments: Ahold Delhaize, the Dutch-Belgian owner
+   of Food Lion, Stop & Shop, Giant, and Albert Heijn and one of
+   the largest food retailers in the world, confirmed on October
+   12, 2026 that it took some systems offline to answer a
+   cybersecurity incident on its network.
+   The company has not said what hit the network or which brands
+   and stores feel the outage. Suppliers and partners that
+   connect to Ahold Delhaize systems should expect order and
+   logistics interruptions and watch their own integrations for
+   unusual activity.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/retail-giant-ahold-delhaize-takes-systems-offline-after-cyberattack/
+
+8. CYBERXERO RUNS CLAUDE CODE AGAINST UKRAINE
    AI Security · [apt, ai, breach]
    Latest developments: Researchers attributed to CyberXero a
    two-pronged initial access campaign that pairs Cobalt Strike
@@ -122,7 +185,7 @@ SECURITY
    internet-facing web applications and e-commerce stacks.
    - The Hacker News: https://thehackernews.com/2026/10/cyberxero-uses-claude-code-in-campaign.html
 
-5. MIDNIGHT MIMOSA SHIPS INSIDE ANDROID FIRMWARE
+9. MIDNIGHT MIMOSA SHIPS INSIDE ANDROID FIRMWARE
    Ransomware and Cybercrime · [malware, supply chain, mobile]
    Latest developments: Bitdefender claimed the research behind
    Midnight Mimosa and narrowed the affected hardware to budget
@@ -138,7 +201,7 @@ SECURITY
    by removing an app and should replace the device.
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/midnight-mimosa-malware-cheap-android-phones/
 
-6. AI PATCHES PASS CRASHES AND FAIL TESTS
+10. AI PATCHES PASS CRASHES AND FAIL TESTS
    AI Security · [ai, patch, research]
    Latest developments: Researchers at Northwestern University
    ran AI coding agents against 112 real security bugs and found
@@ -156,9 +219,10 @@ BUSINESS AND POLITICS
 ----------------------------------------------------------------
 * Zelenskyy Says Putin Is Breaking the Energy Ceasefire
   Latest developments: Volodymyr Zelenskyy said Monday, October
-  12, that Russia hit Ukrainian power plants after President
-  Trump announced the truce Sunday, and diesel futures slipped
-  anyway on the prospect of Russian supply.
+  12, that Russia hit Ukrainian power plants, a gas facility,
+  and a substation after President Trump announced the truce
+  Sunday, and crude reversed an early decline on doubts the
+  ceasefire holds.
   Trump said Sunday, October 11, that Moscow and Kyiv had agreed
   to stop striking each other's energy infrastructure, pairing
   the claim with his deal for Vladimir Putin to ship hundreds of
@@ -169,7 +233,7 @@ BUSINESS AND POLITICS
   prices and the war's trajectory to an agreement Moscow has
   never confirmed.
   - FT Home: https://www.ft.com/content/863619b6-c4a7-4b1a-8a53-6950d47d1833?syn-25a6b1a6=1
-  - FT World: https://www.ft.com/content/a663781e-2709-41f2-99df-4fb5a6162e6b?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/a663781e-2709-41f2-99df-4fb5a6162e6b?syn-25a6b1a6=1
   - FT World: https://www.ft.com/content/68fd8c4f-6f34-4f6e-a52c-76f635164031?syn-25a6b1a6=1
   - WSJ World News: https://www.wsj.com/logistics-report/trumps-russian-diesel-move-draws-pushback-skepticism-89a5e65e?mod=rss_worldnews
 * Brussels Caps Chinese Hybrid Imports at 350,000 a Year
@@ -178,7 +242,9 @@ BUSINESS AND POLITICS
   commissioner Maros Sefcovic reached in Beijing: a cap of
   350,000 Chinese hybrid and plug-in hybrid vehicles a year for
   the next four years, with the aim of halving China's share of
-  the bloc's market.
+  the bloc's market, and Emmanuel Macron said a Franco-German
+  deal to push back Europe's combustion-engine phaseout is
+  imminent.
   Beijing rejected Brussels's request for voluntary export curbs
   on October 7, pushing the European Commission toward import
   limits that officials warned could set off a serious trade
@@ -189,6 +255,7 @@ BUSINESS AND POLITICS
   without further action.
   - WSJ World News: https://www.wsj.com/economy/trade/eu-to-cap-chinese-hybrid-vehicle-imports-at-350-000-units-annually-official-says-2198522f?mod=rss_worldnews
   - FT World: https://www.ft.com/content/7e48dd50-957c-4f45-ad24-ce628ca7e06a?syn-25a6b1a6=1
+  - FT World: https://www.ft.com/content/af0a5da6-abc7-41ab-85cf-da806fc7a6e5?syn-25a6b1a6=1
 * Houthi Missiles Keep Falling on Saudi Arabia
   Latest developments: Houthi forces fired a fresh round of
   missiles at Saudi Arabia on Monday, October 12, Riyadh
@@ -206,7 +273,7 @@ BUSINESS AND POLITICS
   Crown Prince Mohammed bin Salman, whose diversification drive
   rests on an economy weakened by heavy spending and a
   miscalculation of the Houthi threat.
-  - FT World: https://www.ft.com/content/ad0b6e93-708c-46c6-a1f2-e6248c934faf?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/ad0b6e93-708c-46c6-a1f2-e6248c934faf?syn-25a6b1a6=1
   - WSJ World News: https://www.wsj.com/world/middle-east/iran-backed-militants-are-tightening-the-screws-on-saudi-arabias-crown-prince-e7b9e789?mod=rss_worldnews
   - WSJ Markets: https://www.wsj.com/finance/commodities-futures/oil-falls-on-hopes-that-russian-diesel-can-ease-global-fuel-shortages-db1651af?mod=rss_markets_main
 * The Reserve Bank of India Mounts a Rupee Defense
@@ -233,11 +300,21 @@ Weather:
   Tuesday: Sunny, high 82F.
 
 Business:
+* Covestro and Team Fishel Post Pittsburgh Openings
+  Latest developments: NEXTpittsburgh's Monday, October 12, job
+  board leads with openings at Covestro, Life'sWork of Western
+  PA, and the utility contractor Team Fishel.
+  NEXTpittsburgh publishes a fresh list of regional job openings
+  every Monday, spanning several industries across the
+  Pittsburgh area. This week's board pairs the chemical maker
+  Covestro with a Pittsburgh disability-employment nonprofit and
+  a utility construction firm.
+  - NEXTpittsburgh: https://nextpittsburgh.com/jobs/pittsburgh-jobs-for-10-12-26/
 * Duquesne Light Crews Head Back to Work
-  Latest developments: International Brotherhood of Electrical
-  Workers Local 29 said its members return to work after
-  ratifying the contract Sunday evening, October 11, closing out
-  the walkout.
+  Latest developments: WTAE reported Monday, October 12, that
+  the contract International Brotherhood of Electrical Workers
+  Local 29 members ratified Sunday evening runs five years,
+  sending nearly 1,000 Duquesne Light workers back on the job.
   Roughly 1,000 line and service workers struck Duquesne Light
   Co. starting October 1, the utility's first walkout in half a
   century, and the company covered the gap with 80 line workers
@@ -247,6 +324,7 @@ Business:
   ratification vote ends it.
   - TribLive: https://triblive.com/local/duquesne-light-union-will-return-to-work-after-ratifying-new-contract/
   - WPXI: https://www.wpxi.com/news/local/ibew-members-ratify-contract-with-duquesne-light-co-following-strike/KVLZ32LL35B4HICDKZLXKXFY6A/
+  - WTAE: https://www.wtae.com/article/ibew-duquesne-strike-over/74107315
 * Harvest Moon Coffee & Chocolates Closes Both Shops
   Latest developments: Owner Desiree Singleton announced on
   Facebook Sunday, October 11, that both Harvest Moon Coffee &
@@ -269,6 +347,15 @@ Business:
   - Pittsburgh City Paper: https://www.pghcitypaper.com/columns/now-hiring/now-hiring-in-pittsburgh-greater-pittsburgh-arts-council-sisters-pgh-the-vandal-and-more/
 
 Around town:
+* Zone 5 Police Station Reopens in East Liberty
+  Latest developments: Pittsburgh Police held a public open
+  house Monday, October 12, at the reopened Zone 5 station on
+  North Euclid Avenue in East Liberty.
+  Zone 5 officers had worked out of a facility along Washington
+  Boulevard while the North Euclid Avenue building sat idle, and
+  the department has now moved back. Zone 5 covers East Liberty
+  and the city's eastern neighborhoods.
+  - WPXI: https://www.wpxi.com/news/local/pittsburgh-police-hold-public-open-house-newly-reopened-zone-5-station/7X7SJDDA5BH2NCUE53QTEH5BNM/
 * Pittsburgh's Red-Light Cameras Start Charging $100
   Latest developments: The city began mailing $100 citations for
   red-light violations caught by automated cameras at three
@@ -295,17 +382,29 @@ Around town:
   - WPXI: https://www.wpxi.com/news/local/pennsylvania-turnpike-posts-review-allegheny-tunnel-vehicle-fire-where-some-150-people-evacuated/UMVHTG6GXVEEJFC6XVEPNDCDAI/
 * Drizzle Monday, Two Cold Fronts to Come
   Latest developments: Patchy fog and mist greeted the Monday
-  morning commute, October 12, and KDKA meteorologist Mary Ours
-  has a seasonable day of cloudy skies and drizzle over Western
-  Pennsylvania.
+  morning commute, October 12, and WPXI has highs rebounding
+  into the upper 60s under clouds with some afternoon sun and
+  dry conditions to start the week.
   The week starts warmer and drier than the weekend, when the
   remnants of Isaias soaked the region. WTAE has two more cold
   fronts bringing rain before next weekend arrives.
   - KDKA: https://www.cbsnews.com/pittsburgh/news/cloudy-skies-are-in-todays-pittsburgh-area-weather-forecast/
   - WTAE: https://www.wtae.com/article/patchy-am-fogmist-for-the-am-commute/74105299
   - WTAE: https://www.wtae.com/article/impact-day-rain-and-wind-for-western-pa-isaias/74100985
+  - WPXI: https://www.wpxi.com/weather/temperatures-rebound-monday-with-dry-conditions-start-week/ZIWP5TNCOZFV7AQXPWVIJNUJJI/
 
 Events:
+* Garfield Music Dot Com Puts the Cat on Stage
+  Latest developments: Pittsburgh City Paper previewed Garfield
+  Music Dot Com on Monday, October 12, the show a group of
+  Pittsburgh musicians built around the internet's mutations of
+  the comic strip cat.
+  The production mixes original songs with dark humor about how
+  the internet perverted Garfield, and the musicians behind it
+  told City Paper the staging may include a lasagna splash zone.
+  City Paper's piece names the collaborators and how the show
+  came together.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/arts-entertainment-2/garfield-music-dot-com-has-original-songs-dark-humor-and-a-potential-lasagna-splash-zone/
 * John Cameron Mitchell Brings Hedwig to the Roxian
   Latest developments: Pittsburgh City Paper interviewed John
   Cameron Mitchell on Monday, October 12, ahead of his Roxian
@@ -345,6 +444,15 @@ Penguins (3-2-1)
     https://plaintextsports.com/nhl/2026-10-13/pit-chi
 
 Around the Teams:
+* Freiermuth Owns the Red Zone
+  Latest developments: The Post-Gazette broke down Monday,
+  October 12, how tight end Pat Freiermuth got open for both of
+  his red-zone touchdown catches against the Indianapolis Colts.
+  Freiermuth has turned into the Steelers' primary target inside
+  the 20-yard line, and Aaron Rodgers found him twice there
+  Sunday. The paper's film study walks through the design of the
+  two scoring plays.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/12/freiermuth-steelers-red-zone-offense/stories/202610110099
 * Germie Bernard Grows Into the Offense
   Latest developments: The Post-Gazette's Week 5 analysis,
   published Monday, October 12, argues that receiver Germie
@@ -412,33 +520,32 @@ USD/JPY       158.02  ▲ +0.3%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 15 items in the 24-hour window.
-  No recent items: Krebs on Security, Schneier on Security, Dark
-  Reading, CISA Advisories, The Record, Ars Technica Security,
-  Securelist (Kaspersky), Sophos News, Unit 42 (Palo Alto),
-  Google Online Security Blog, Cisco Talos, Graham Cluley,
-  Microsoft Security Blog, Google Project Zero, The DFIR Report,
-  Kim Zetter (Zero Day), 404 Media, Frank on Fraud, Wired
-  Security.
+Security: 24 of 24 feeds loaded, 33 items in the 24-hour window.
+  No recent items: Krebs on Security, Schneier on Security, CISA
+  Advisories, Ars Technica Security, Securelist (Kaspersky),
+  Sophos News, Unit 42 (Palo Alto), Google Online Security Blog,
+  Cisco Talos, Graham Cluley, Microsoft Security Blog, Google
+  Project Zero, The DFIR Report, Kim Zetter (Zero Day).
 Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
-  No recent items: NEXTpittsburgh, Pittsburgh Magazine.
+  No recent items: Pittsburgh Magazine.
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
-Events: 4 of 4 feeds loaded, 12 items in the 120-hour window.
+Events: 4 of 4 feeds loaded, 11 items in the 120-hour window. No
+  recent items: NEXTpittsburgh Events.
 Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
   window. No recent items: Footbahlin with Ben Roethlisberger,
   Ben Roethlisberger / Channel Seven (YouTube).
-Team USA: 3 of 3 feeds loaded, 23 items in the 72-hour window.
+Team USA: 3 of 3 feeds loaded, 21 items in the 72-hour window.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
   No recent items: Cal Newport.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (311s of
-  model time; $1.61 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (279s of
+  model time; $1.75 at API list price).
 
 ================================================================
-Generated 2026-10-12 07:06 EDT. Updated weekdays at about 7:05
+Generated 2026-10-12 10:05 EDT. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
