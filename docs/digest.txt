@@ -1,14 +1,12 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Sunday, October 11, 2026 - 7:35 PM EDT
+Monday, October 12, 2026 - 7:06 AM EDT
 ================================================================
 
-A malware infection at Nippon Columbia, a Daiichi Kosho
-contractor, spilled more than 8.7 million customer and employee
-records on the same day CISA's deadline to patch the five flaws
-Flax Typhoon exploits ran out for federal civilian agencies.
-
-Quiet day: only 13 security items in the last 48 hours.
+A hardware implant hidden inside Ledger wallets sold by one
+Southeast Asian reseller drained more than $93 million,
+anchoring a day of attacks that reach the owner before the
+device ever powers on.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -16,335 +14,320 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] A contractor malware infection at Nippon Columbia
-  spilled 8.7 million customer records while one stolen ASOS
-  employee identity carried thieves from a mobile app into
-  corporate systems.
-  see: Nippon Columbia Malware Spills 8.7 Million Records; One
-  ASOS Identity Opened the Network
-* [TREND] Decade-old defects do much of the work: CISA's Flax
-  Typhoon deadline for CVE-2015-3306 in ProFTPD lands today
-  while hundreds of GPU servers still expose NVIDIA's DCGM
-  Exporter.
-  see: Flax Typhoon Patch Deadline Lands Today; Exposed NVIDIA
-  GPU Monitors Crash on Command
-* [TREND] Money inside the security industry now chases AI, with
-  Dark Reading counting 117 acquisitions in one quarter and many
-  buyers arriving from outside security entirely.
-  see: AI Buyers Push Security Deals to 117 in a Quarter
-* [UPDATE (new)] Trump declared a Russia-Ukraine energy
-  ceasefire that Moscow never confirmed and Kyiv disputes, while
-  a projectile struck Riyadh's airport terminal a second day
-  running.
-  see: Trump Declares an Energy Ceasefire Kyiv Does Not See;
-  Riyadh's Airport Takes a Second Strike
-* [UPDATE (new)] IBEW Local 29 members ratified a contract with
-  Duquesne Light, ending its first strike in fifty years, as
-  Isaias remnants soaked Pittsburgh and cancelled Ligonier's
-  festival finale.
-  see: Duquesne Light Workers Ratify a Contract and End the
-  Strike; Isaias Soaks Pittsburgh
-* [UPDATE (new)] Jaylen Warren locked down the Steelers'
-  starting running back job as Aaron Rodgers hit Pat Freiermuth
-  for two touchdowns in the offense's best day yet.
-  see: Warren Wins the Running Back Job; Rodgers Finds
-  Freiermuth Twice
+* [TREND] CyberXero paired Cobalt Strike with a Claude Code
+  orchestration layer against Ukrainian infrastructure, while
+  Northwestern found Claude Opus 4.7 patches that stop crashes
+  still fail maintainers' tests.
+  see: CyberXero Runs Claude Code Against Ukraine; AI Patches
+  Pass Crashes and Fail Tests
+* [TREND] A hardware implant in Ledger wallets and the Midnight
+  Mimosa firmware malware both reached buyers before first
+  power-on, moving the attack surface into factories and
+  resellers.
+  see: Ledger Implant Drains $93 Million; Midnight Mimosa Ships
+  Inside Android Firmware
+* [UPDATE (new)] Let's Encrypt will default to 64-day
+  certificates from February 10, 2027, putting hand-renewed
+  trust on a hard clock alongside the expiring Windows Update
+  server certificates.
+  see: Certificate Clocks Tighten for Web and Windows
+* [UPDATE (new)] Patchstack reported active exploitation of
+  CVE-2026-85097, a 10.0-rated Bricksforge flaw letting
+  unauthenticated attackers upload PHP and gain full remote code
+  execution on WordPress sites.
+  see: Bricksforge Flaw Hands Attackers WordPress Sites
+* [TREND] Zelenskyy says Russia hit power plants after Trump's
+  truce, while fresh Houthi missiles on Saudi Arabia lifted
+  tanker freight rates and Brussels capped Chinese hybrid
+  imports.
+  see: Zelenskyy Says Putin Is Breaking the Energy Ceasefire;
+  Houthi Missiles Keep Falling on Saudi Arabia; Brussels Caps
+  Chinese Hybrid Imports at 350,000 a Year
+* [UPDATE (new)] Pittsburgh began mailing $100 red-light camera
+  citations at three intersections as IBEW Local 29 crews
+  returned to Duquesne Light after ratifying their contract
+  Sunday evening.
+  see: Pittsburgh's Red-Light Cameras Start Charging $100;
+  Duquesne Light Crews Head Back to Work
 
 SECURITY
 ----------------------------------------------------------------
 
-1. EXPOSED NVIDIA GPU MONITORS CRASH ON COMMAND
-   Vulnerabilities and Exploits · [patch, ai, exposure]
-   Latest developments: Lava reported that hundreds of
-   internet-exposed GPU servers run NVIDIA's DCGM Exporter open
-   to CVE-2026-47483, an 8.2-rated flaw that lets an
-   unauthenticated attacker crash the monitoring service and
-   disrupt the AI work the machines carry, and SecurityWeek
-   noted the same exposed monitors leak telemetry about the
-   hardware behind them.
-   DCGM Exporter reports the health of NVIDIA graphics
-   processors on servers built for AI and machine learning.
-   NVIDIA published its bulletin and fix on July 28, 2026;
-   operators should install it and take the exporter's port off
-   the public internet.
-   - Help Net Security: https://www.helpnetsecurity.com/2026/10/09/nvidia-dcgm-exporter-vulnerability-cve-2026-47483/
-   - SecurityWeek: https://www.securityweek.com/in-other-news-ai-used-in-korean-bank-breaches-poem-guided-botnet-empire-admin-gets-40-years/
+1. CERTIFICATE CLOCKS TIGHTEN FOR WEB AND WINDOWS
+   Identity and Trust Infrastructure · [pki, patch, policy]
+   Latest developments: Let's Encrypt said it will issue
+   certificates valid for 64 days by default starting February
+   10, 2027, down from 90 days and ahead of a later move to 45
+   days, with the last 90-day certificate expiring May 11, 2027
+   and no revocations during the transition; Microsoft
+   separately told customers to patch Windows before the
+   certificates that authenticate Windows Update servers expire
+   on May 17 or June 19, 2027, depending on the Windows version.
+   Shorter web certificate lifetimes make manual renewal
+   untenable and force teams onto automated ACME issuance, while
+   Windows devices that miss Microsoft's certificate rotation
+   updates will lose access to Windows Update and the security
+   fixes it delivers. Subscribers already on Let's Encrypt's
+   45-day or 6-day certificates see no change; Windows
+   administrators should confirm machines take the rotation
+   updates well before May 2027.
+   - SecurityWeek: https://www.securityweek.com/lets-encrypt-cuts-default-certificate-validity-to-64-days-ahead-of-45-day-switch/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/lets-encrypt-64-day-certificate-lifetime/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/microsoft-windows-update-certificate-rotation/
 
-2. NIPPON COLUMBIA MALWARE SPILLS 8.7 MILLION RECORDS
-   Data Breaches · [breach, third-party, malware]
-   Latest developments: Daiichi Kosho, the Japanese maker of
-   commercial karaoke and entertainment systems, disclosed on
-   October 11, 2026 that a malware infection at its contractor
-   Nippon Columbia exposed more than 8.7 million customer and
-   employee records, among them records on 8.6 million karaoke
-   fans.
-   The exposed data covers both Daiichi Kosho's karaoke customer
-   base and company employees, and the infection sat at the
-   contractor rather than at Daiichi Kosho itself. Any company
-   that hands a customer database to a processor should ask that
-   processor what endpoint controls it runs and how quickly it
-   reports an infection.
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/nippon-columbia-malware-incident-exposes-86-million-karaoke-fan-records/
+2. LEDGER IMPLANT DRAINS $93 MILLION
+   Ransomware and Cybercrime · [supply chain, cryptocurrency,
+   hardware]
+   Latest developments: Ledger, the Paris-based hardware wallet
+   maker, said in a 72-hour update on X on October 11, 2026 that
+   every confirmed case in the draining incident it disclosed on
+   October 9, 2026 involves a device bought from the Southeast
+   Asia reseller CryptoBilis, and on-chain researchers put
+   suspected losses above $93 million.
+   Attackers planted a hidden hardware implant in Ledger
+   cryptocurrency wallets that passed through one regional
+   reseller, then emptied the wallets of customers across
+   Southeast Asia. Ledger says its own systems and direct sales
+   channels stayed clean; owners who bought through CryptoBilis
+   should treat their seed phrases as compromised and move funds
+   to a device sourced directly.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/ledger-wallets-compromised-via-hardware-implant/
 
-3. FLAX TYPHOON PATCH DEADLINE LANDS TODAY
-   Nation-State Activity · [apt, patch, zero-day]
-   Latest developments: The remediation deadline CISA set for
-   the five vulnerabilities the China-linked group Flax Typhoon
-   exploits falls today, October 11, 2026, for federal civilian
-   agencies, among them CVE-2015-3306, a 10.0-rated improper
-   access control flaw in the ProFTPD file transfer server that
-   dates to 2015.
-   CISA added the five flaws to its Known Exploited
-   Vulnerabilities catalog on October 8, 2026 after Flax Typhoon
-   abused them against government, law enforcement, healthcare,
-   and religious targets across Southeast Asia. Anyone still
-   running ProFTPD and the other affected software should patch
-   today or disconnect the systems.
-   - The Hacker News: https://thehackernews.com/2026/10/flax-typhoon-exploits-five-flaws-as.html
+3. BRICKSFORGE FLAW HANDS ATTACKERS WORDPRESS SITES
+   Vulnerabilities and Exploits · [patch, wordpress, exploit]
+   Latest developments: Patchstack reported active exploitation
+   of CVE-2026-85097, a 10.0-rated flaw in the Bricksforge
+   WordPress plugin that lets an attacker with no login upload
+   and run arbitrary PHP code, which carries full remote code
+   execution on the site.
+   Bricksforge extends the Bricks page builder and runs on
+   commercial WordPress sites; the bug needs no authentication
+   and no user interaction. Site owners should update the plugin
+   immediately and audit for unfamiliar PHP files and
+   administrator accounts.
+   - The Hacker News: https://thehackernews.com/2026/10/attackers-exploit-cvss-100-bricksforge.html
 
-4. ONE ASOS IDENTITY OPENED THE NETWORK
-   Data Breaches · [breach, identity, saas]
-   Latest developments: Dark Reading reported on October 9, 2026
-   that the one employee identity attackers took at ASOS carried
-   them past the customer-facing mobile app and deep into the
-   retailer's corporate network, the path behind the "HACKED"
-   notifications customers received and the data theft out of
-   its Snowflake environment.
-   ASOS, the London online clothing retailer, lost customer
-   names and contact details after attackers tricked an employee
-   into surrendering account access. Companies running
-   customer-facing software as a service should put
-   phishing-resistant authentication on every identity that
-   administers it.
-   - Dark Reading: https://www.darkreading.com/cyberattacks-data-breaches/asos-breach-risks-customer-facing-saas
+4. CYBERXERO RUNS CLAUDE CODE AGAINST UKRAINE
+   AI Security · [apt, ai, breach]
+   Latest developments: Researchers attributed to CyberXero a
+   two-pronged initial access campaign that pairs Cobalt Strike
+   with an orchestration layer built on Anthropic's Claude Code,
+   hits WordPress sites, e-commerce platforms, and critical
+   infrastructure operators in Ukraine, and has taken more than
+   628,000 Ukrainian records.
+   CyberXero uses the AI layer to pick targets, generate access
+   attempts, and hand successful footholds to standard
+   post-exploitation tooling. Organizations operating in Ukraine
+   should hunt for Cobalt Strike beacons and harden
+   internet-facing web applications and e-commerce stacks.
+   - The Hacker News: https://thehackernews.com/2026/10/cyberxero-uses-claude-code-in-campaign.html
 
-5. CYBER PARTISANS CLAIM MOSCOW'S HEALTH NETWORK
-   Nation-State Activity · [hacktivism, breach]
-   Latest developments: The Belarusian Cyber Partisans confirmed
-   on October 9, 2026 that they spent months inside the network
-   of the Moscow Department of Health in 2023, agreeing with
-   Russian researchers who had traced the intrusion to them.
-   The Cyber Partisans, a Belarusian hacktivist group that
-   attacks Belarusian and Russian state systems, now own a
-   breach of a Russian state healthcare network that went
-   unclaimed for three years. The admission shows how long an
-   undetected foothold in public health infrastructure can last.
-   - The Record: https://therecord.media/belarusian-cyber-partisans-claim-2023-russia-healthcare-hack
+5. MIDNIGHT MIMOSA SHIPS INSIDE ANDROID FIRMWARE
+   Ransomware and Cybercrime · [malware, supply chain, mobile]
+   Latest developments: Bitdefender claimed the research behind
+   Midnight Mimosa and narrowed the affected hardware to budget
+   Android phones from several brands built on MediaTek
+   platforms, saying the malware sits in the device firmware,
+   runs before the owner first switches the phone on, and
+   resists uninstallation.
+   Midnight Mimosa arrives preinstalled on cheap Android
+   handsets sold through online marketplaces, installs further
+   applications, commits advertising fraud, and enlists each
+   phone as a residential proxy node. Buyers of low-cost
+   MediaTek-based phones from unfamiliar brands cannot remediate
+   by removing an app and should replace the device.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/midnight-mimosa-malware-cheap-android-phones/
 
-6. WYDEN PRESSES THE WHITE HOUSE ON LICENSE PLATE READS
-   Policy and Regulation · [policy, surveillance, privacy]
-   Latest developments: Senator Ron Wyden demanded the privacy
-   review report covering the license plate surveillance program
-   the White House runs through the High Intensity Drug
-   Trafficking Areas program, 404 Media reported on October 9,
-   2026, after its own investigation surfaced the collection.
-   HIDTA task forces pool federal, state, and local drug
-   enforcement, and the program reads and stores license plates
-   through them. Wyden's request asks what privacy review the
-   White House completed before the program began logging
-   drivers.
-   - 404 Media: https://www.404media.co/following-404-media-investigation-senator-demands-info-about-white-houses-license-plate-surveillance-program/
-
-7. AI BUYERS PUSH SECURITY DEALS TO 117 IN A QUARTER
-   Security Industry and Markets · [industry, ai]
-   Latest developments: Dark Reading counted 117 strategic
-   cybersecurity acquisitions announced in the latest quarter
-   and reported on October 9, 2026 that many of the buyers come
-   from outside the security industry, chasing AI capability.
-   Consolidation at this rate moves the vendors and products
-   enterprises already run into new ownership, often under
-   acquirers with no security track record. Security leaders
-   should identify which of their suppliers sit in play and
-   press each one on support and roadmap commitments after a
-   sale.
-   - Dark Reading: https://www.darkreading.com/cybersecurity-analytics/ai-scramble-cybersecurity-ma-boom
+6. AI PATCHES PASS CRASHES AND FAIL TESTS
+   AI Security · [ai, patch, research]
+   Latest developments: Researchers at Northwestern University
+   ran AI coding agents against 112 real security bugs and found
+   that with Claude Opus 4.7 a third of the patches that stopped
+   the crash still failed the tests the projects' own
+   maintainers wrote for the fix.
+   Most AI patching benchmarks grade a fix by whether the crash
+   disappears, a bar well below what maintainers accept.
+   Security teams piloting automated remediation should score
+   candidate patches against upstream maintainer test suites
+   before merging anything.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/ai-vulnerability-patching-grading-problem/
 
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
-* Trump Declares an Energy Ceasefire Kyiv Does Not See
-  Latest developments: President Trump said Sunday, October 11,
-  that Russia and Ukraine have agreed to an "energy ceasefire,"
-  Moscow never confirmed it and Kyiv reported that attacks
-  continued, his officials pressed European capitals and
-  threatened to block arms for Ukraine over Ukrainian strikes on
-  Russian refineries, and six senators from both parties
-  demanded the administration reverse its plan to buy Russian
-  diesel, citing a 2022 law.
-  Trump announced Friday, October 9, that Vladimir Putin would
-  ship hundreds of thousands of tons of diesel to United States
-  and global markets to pull down fuel prices, and he has since
-  told Ukraine to stop hitting Russian refineries and suggested
-  Volodymyr Zelenskyy should be replaced, remarks that shocked
-  Kyiv and European governments. Ukrainian strikes have given
-  Russia its worst gasoline shortages since the Soviet Union
-  collapsed, and the senators argue that buying Russian fuel
-  finances the war; the dispute puts American intelligence
-  sharing and weapons deliveries to Ukraine in play three weeks
-  before the November 3 midterm elections.
-  - WSJ World News: https://www.wsj.com/world/trump-declares-a-russia-ukraine-energy-ceasefire-but-moscow-hasnt-confirmed-f57414e9?mod=rss_worldnews
-  - FT Home: https://www.ft.com/content/debf0be6-d5aa-4ba7-bb66-7daf770d99ff?syn-25a6b1a6=1
-  - FT Home: https://www.ft.com/content/68fd8c4f-6f34-4f6e-a52c-76f635164031?syn-25a6b1a6=1
-  - FT World: https://www.ft.com/content/724ef0e2-4d50-49fd-aef8-abc0534f2f84?syn-25a6b1a6=1
-  - FT Home: https://www.ft.com/content/445b2856-a276-4d4c-bdea-44799d771c21?syn-25a6b1a6=1
-* Riyadh's Airport Takes a Second Strike
-  Latest developments: A projectile hit the same passenger
-  terminal at Riyadh's international airport on Sunday, October
-  11, a day after a Houthi missile killed 12 people and injured
-  hundreds there, BP and other oil company chiefs skipped the
-  World Petroleum Council congress in the Saudi capital, and
-  airlines abandoned the Saudi airspace corridor that links
-  Europe to Asia.
-  Iran-backed Houthi rebels in Yemen have widened their missile
-  and drone campaign from Saudi ports and southern airports to
-  Riyadh itself, and The Economist judges that Saudi Arabia,
-  which has committed 100 fighter jets to a Yemeni ground push
-  on Sana'a and Bab el-Mandab, holds no good options against the
-  strikes. The attacks cut flight paths between two of the
-  world's largest economic engines, keep a risk premium in crude
-  and tanker freight, and threaten the kingdom's standing as a
-  safe place to site capital and hold meetings.
-  - FT World: https://www.ft.com/content/391ddf3f-b233-41fd-819b-fcdbfb0ed010?syn-25a6b1a6=1
-  - FT Home: https://www.ft.com/content/a01776ea-4a12-4195-8820-e43a885ba5fe?syn-25a6b1a6=1
-  - FT Home: https://www.ft.com/content/bd2c7385-184e-425e-997f-0f5a8c54184e?syn-25a6b1a6=1
-  - WSJ World News: https://www.wsj.com/business/airlines/air-travel-emerges-as-dangerous-front-line-in-global-conflicts-20e972c5?mod=rss_worldnews
-  - The Economist: https://www.economist.com/middle-east-and-africa/2026/10/11/saudi-arabia-is-increasingly-under-siege
-* U.S. Strikes a Tanker Off Iran
-  Latest developments: United States Central Command said
-  Sunday, October 11, that American forces hit a commercial
-  tanker in the Gulf of Oman after the ship tried to break
-  through the naval blockade of Iranian ports, the command's
-  first such attack in a month.
-  Washington has blockaded Iran's ports during the United
-  States-Israel war on Iran, and the strike puts military force
-  behind the cordon on the tanker lanes running out of the
-  Strait of Hormuz, where Iranian attacks on shipping have
-  already lifted crude and freight rates. Owners, insurers, and
-  charterers now price the risk that a cargo lifted anywhere
-  near Iran draws fire.
-  - FT Home: https://www.ft.com/content/f9b9f937-97b0-4a03-90f6-05d7c7344ab9?syn-25a6b1a6=1
-* New Delhi Locks Down Against the Voter-Rolls Movement
-  Latest developments: Police sealed the heart of New Delhi on
-  Sunday, October 11, to thwart a voter-rights march, and a
-  court ordered the release of Abhijeet Dipke, the Cockroach
-  Janta Party leader whom officers escorted off a flight in the
-  capital a day earlier.
-  The youth-led Cockroach Janta Party has turned anger over
-  India's voter lists into a national protest movement that
-  carries the grievances of young Indians who cannot find work,
-  and its leaders have called for more demonstrations. The
-  confrontation strains the politics of the world's
-  fastest-growing major economy while the Reserve Bank of India
-  spends reserves to hold the rupee off record lows.
-  - WSJ World News: https://www.wsj.com/world/india/india-locks-down-heart-of-capital-to-thwart-voter-rights-protest-c7aad7a4?mod=rss_worldnews
-  - FT Home: https://www.ft.com/content/9b30ee59-b542-48b8-85f6-d60dce897342?syn-25a6b1a6=1
-  - FT World: https://www.ft.com/content/407fa757-cc77-49c0-871a-5140dd3a9a80?syn-25a6b1a6=1
-  - FT Markets: https://www.ft.com/content/b373cf00-9a94-4dc7-bdda-bc7006da1148?syn-25a6b1a6=1
+* Zelenskyy Says Putin Is Breaking the Energy Ceasefire
+  Latest developments: Volodymyr Zelenskyy said Monday, October
+  12, that Russia hit Ukrainian power plants after President
+  Trump announced the truce Sunday, and diesel futures slipped
+  anyway on the prospect of Russian supply.
+  Trump said Sunday, October 11, that Moscow and Kyiv had agreed
+  to stop striking each other's energy infrastructure, pairing
+  the claim with his deal for Vladimir Putin to ship hundreds of
+  thousands of tons of diesel into world markets before the
+  November 3 midterms. Washington has since lobbied European
+  capitals and threatened to block arms for Ukraine over
+  Ukrainian strikes on Russian refineries, tying global fuel
+  prices and the war's trajectory to an agreement Moscow has
+  never confirmed.
+  - FT Home: https://www.ft.com/content/863619b6-c4a7-4b1a-8a53-6950d47d1833?syn-25a6b1a6=1
+  - FT World: https://www.ft.com/content/a663781e-2709-41f2-99df-4fb5a6162e6b?syn-25a6b1a6=1
+  - FT World: https://www.ft.com/content/68fd8c4f-6f34-4f6e-a52c-76f635164031?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/logistics-report/trumps-russian-diesel-move-draws-pushback-skepticism-89a5e65e?mod=rss_worldnews
+* Brussels Caps Chinese Hybrid Imports at 350,000 a Year
+  Latest developments: An European Union official attached
+  numbers Monday, October 12, to the understanding trade
+  commissioner Maros Sefcovic reached in Beijing: a cap of
+  350,000 Chinese hybrid and plug-in hybrid vehicles a year for
+  the next four years, with the aim of halving China's share of
+  the bloc's market.
+  Beijing rejected Brussels's request for voluntary export curbs
+  on October 7, pushing the European Commission toward import
+  limits that officials warned could set off a serious trade
+  conflict; two days of talks produced a safeguard arrangement
+  both sides frame as compliant with World Trade Organization
+  rules. European carmakers welcome the ceiling, and other
+  European industries warn that China's trade surplus persists
+  without further action.
+  - WSJ World News: https://www.wsj.com/economy/trade/eu-to-cap-chinese-hybrid-vehicle-imports-at-350-000-units-annually-official-says-2198522f?mod=rss_worldnews
+  - FT World: https://www.ft.com/content/7e48dd50-957c-4f45-ad24-ce628ca7e06a?syn-25a6b1a6=1
+* Houthi Missiles Keep Falling on Saudi Arabia
+  Latest developments: Houthi forces fired a fresh round of
+  missiles at Saudi Arabia on Monday, October 12, Riyadh
+  answered defiantly, and oil tanker freight rates surged as
+  attacks and longer routes squeezed vessel availability in the
+  Middle East, ANZ said.
+  Houthi strikes on Riyadh's international airport killed 12
+  people and injured hundreds Saturday, October 10, the
+  deadliest attack inside the kingdom in more than a decade, and
+  a projectile hit the same terminal a day later. Chief
+  executives of the international oil companies skipped the
+  World Petroleum Council congress in the capital, Brent crude
+  traded above $105 a barrel Monday morning before easing, and
+  the Wall Street Journal reports the campaign now squeezes
+  Crown Prince Mohammed bin Salman, whose diversification drive
+  rests on an economy weakened by heavy spending and a
+  miscalculation of the Houthi threat.
+  - FT World: https://www.ft.com/content/ad0b6e93-708c-46c6-a1f2-e6248c934faf?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/middle-east/iran-backed-militants-are-tightening-the-screws-on-saudi-arabias-crown-prince-e7b9e789?mod=rss_worldnews
+  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/oil-falls-on-hopes-that-russian-diesel-can-ease-global-fuel-shortages-db1651af?mod=rss_markets_main
+* The Reserve Bank of India Mounts a Rupee Defense
+  Latest developments: The rupee jumped Monday, October 12,
+  after the Reserve Bank of India unveiled a package of
+  currency-defense measures over the weekend.
+  India's central bank raised its policy rate October 7 for the
+  first time in three years and has intervened repeatedly as the
+  rupee sank toward record lows against a dollar that has gained
+  for four straight weeks. ING expects the dollar to stay firm
+  on decent United States growth and above-target inflation,
+  which keeps expectations of further Federal Reserve increases
+  alive and the strain on emerging-market currencies and debt in
+  place.
+  - WSJ Markets: https://www.wsj.com/finance/currencies/rupee-jumps-after-india-central-bank-unveils-currency-defense-measures-26b7caa0?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/currencies/asian-currencies-consolidate-but-mideast-tensions-could-weigh-9ec0bb96?mod=rss_markets_main
 
 PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  Tonight: Slight Chance Rain Showers then Cloudy, low 58F.
   Columbus Day: Mostly Cloudy, high 72F.
-  Monday Night: Partly Cloudy, low 59F.
+  Tonight: Partly Cloudy, low 59F.
+  Tuesday: Sunny, high 82F.
 
 Business:
-* Duquesne Light Workers Ratify a Contract and End the Strike
-  Latest developments: The Post-Gazette reported Sunday evening,
-  October 11, that members of International Brotherhood of
-  Electrical Workers Local 29 approved a new contract with
-  Duquesne Light Co., ending the utility's first strike in half
-  a century.
-  Roughly 1,000 line workers walked off the job in early
-  October, and Duquesne Light covered the gap with 80 line
-  workers brought in from outside the region plus contracted
-  crews, including through the rain and wind the remnants of
-  Isaias delivered Sunday. The two sides reached a tentative
-  agreement Thursday, October 8, and Sunday's ratification vote
-  sends the crews back to the lines across Allegheny and Beaver
-  counties.
-  - Pittsburgh Post-Gazette: https://www.post-gazette.com/business/powersource/2026/10/11/duquesne-light-union-contract/stories/202610110104
-* Pennsylvania's Skill Games Go Dark
-  Latest developments: With the removal deadline in force after
-  the Supreme Court of Pennsylvania refused to extend it, the
-  Post-Gazette laid out the fallout Sunday, October 11, and
-  TribLive's editorial board asked why the General Assembly
-  never fixed the law.
-  The slots-like skill game terminals that sit in Pennsylvania
-  bars, social clubs, VFW posts, and convenience stores must
-  come out, ending a revenue stream small operators and
-  veterans' organizations count on. The General Assembly
-  adjourned to campaign without passing a bill to regulate and
-  tax the machines, and the industry's court options ran out.
-  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-state/2026/10/11/pennsylvania-skill-games-deadline-1/stories/202610080069
-  - TribLive: https://triblive.com/opinion/editorial-why-havent-lawmakers-fixed-skill-games-misstep/
-* Pennsylvania Water Bills Rank Among the Nation's Highest
-  Latest developments: The Post-Gazette reported Sunday, October
-  11, on a study placing four of the ten most expensive water
-  companies in the United States inside Pennsylvania.
-  Pennsylvania households pay water rates near the top of the
-  national range, a line item that compounds across the state's
-  industrial and commercial users as well. The ranking lands
-  while Pittsburgh Water finishes replacing residential lead
-  service lines and the Allegheny County Sanitary Authority
-  starts its $4.5 billion Clean Water tunnel project, both of
-  which ratepayers fund.
-  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/state/2026/10/11/expensive-water-companies-pennsylvania/stories/202610080031
-* Enjoy Wrestling Closes After Five Years
-  Latest developments: TribLive reported Sunday, October 11,
-  that Enjoy Wrestling, the independent promotion Kurt Hackimer
-  built in Pittsburgh, has shut down after a five-year run.
-  Hackimer founded Enjoy Wrestling on the premise that
-  Pittsburgh wrestling should be, in his phrase, "for everyone,"
-  and ran independent shows in the city for five years before
-  folding the operation.
-  - TribLive: https://triblive.com/local/enjoy-wrestling-closes-after-5-years-of-making-pittsburgh-wrestling-for-everyone/
+* Duquesne Light Crews Head Back to Work
+  Latest developments: International Brotherhood of Electrical
+  Workers Local 29 said its members return to work after
+  ratifying the contract Sunday evening, October 11, closing out
+  the walkout.
+  Roughly 1,000 line and service workers struck Duquesne Light
+  Co. starting October 1, the utility's first walkout in half a
+  century, and the company covered the gap with 80 line workers
+  imported from outside the region plus contractors through the
+  remnants of Hurricane Isaias. The two sides reached a
+  tentative deal on the eighth day of the strike, and the
+  ratification vote ends it.
+  - TribLive: https://triblive.com/local/duquesne-light-union-will-return-to-work-after-ratifying-new-contract/
+  - WPXI: https://www.wpxi.com/news/local/ibew-members-ratify-contract-with-duquesne-light-co-following-strike/KVLZ32LL35B4HICDKZLXKXFY6A/
+* Harvest Moon Coffee & Chocolates Closes Both Shops
+  Latest developments: Owner Desiree Singleton announced on
+  Facebook Sunday, October 11, that both Harvest Moon Coffee &
+  Chocolates locations have closed.
+  Harvest Moon sold coffee and house-made chocolates at two
+  storefronts in the Alle-Kiski Valley, and TribLive's Valley
+  News Dispatch reported the shutdown of both. Singleton
+  delivered the news to customers herself through the business's
+  Facebook page.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/harvest-moon-coffee-chocolates-announces-closure-of-its-2-locations/
+* Arts Council and SisTers PGH Post Openings
+  Latest developments: Pittsburgh City Paper's hiring column,
+  published Monday, October 12, lists verified openings at the
+  Greater Pittsburgh Arts Council, SisTers PGH, and the
+  restaurant The Vandal.
+  City Paper combs social media and local job boards each week
+  and publishes only the postings it verifies. This edition
+  draws from the region's arts administration, nonprofit, and
+  restaurant employers.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/columns/now-hiring/now-hiring-in-pittsburgh-greater-pittsburgh-arts-council-sisters-pgh-the-vandal-and-more/
 
 Around town:
-* Isaias Soaks Pittsburgh
-  Latest developments: Isaias's remnants carried heavy rain and
-  wind northeast into the central Appalachians through Sunday,
-  October 11, forcing organizers in Ligonier to cancel the
-  festival's final day, and WTAE's evening update turns Monday
-  warmer and drier before two more cold fronts bring rain ahead
-  of next weekend.
-  Isaias came ashore on the Florida Panhandle as the Atlantic
-  season's first hurricane, killed at least four people, and cut
-  power to more than 800,000 customers across Florida, Alabama,
-  and Georgia before its moisture tracked northeast. Steady rain
-  fell over Western Pennsylvania through Sunday morning,
-  scattered showers lingered into the evening, and overnight
-  lows settle into the 50s.
-  - KDKA: https://www.cbsnews.com/pittsburgh/news/pittsburgh-in-for-a-rainy-day-as-run-off-from-hurricane-isaias-moves-through-the-region/
-  - WPXI: https://www.wpxi.com/news/local/steady-rain-isaias-continues-sunday-morning-scattered-showers-expected-later/PCR6S5WOJFBGDMVXIKJD6B33HQ/
+* Pittsburgh's Red-Light Cameras Start Charging $100
+  Latest developments: The city began mailing $100 citations for
+  red-light violations caught by automated cameras at three
+  Pittsburgh intersections, the first time such camera tickets
+  carry a fine here.
+  The cameras ran in warning mode until now, and drivers who run
+  the light at those three intersections get a citation in the
+  mail. The step extends a camera-enforcement network that
+  already covers most of the city and has produced a record
+  number of tickets and tens of millions of dollars in fines.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/pittsburgh-red-light-enforcement-fines-citations/
+  - WPXI: https://www.wpxi.com/news/local/pittsburgh-begins-issuing-100-red-light-camera-citations-3-intersections/ZWESEXMXIRGAVI4HVIDPAEKTPY/
+  - WTAE: https://www.wtae.com/article/red-light-cameras-in-pittsburgh-will-start-issuing-tickets/74104044
+* The Turnpike Grades Its Allegheny Mountain Tunnel Response
+  Latest developments: The Pennsylvania Turnpike Commission
+  released a 19-page report detailing its response and the
+  corrective actions it will take after the June 4 vehicle fire
+  inside the Allegheny Mountain Tunnel.
+  The fire forced the evacuation of roughly 150 people from the
+  tunnel, which carries the turnpike under the Allegheny Front
+  between Somerset and Bedford counties. The commission's review
+  covers how crews handled the evacuation and what it changes
+  next.
+  - WPXI: https://www.wpxi.com/news/local/pennsylvania-turnpike-posts-review-allegheny-tunnel-vehicle-fire-where-some-150-people-evacuated/UMVHTG6GXVEEJFC6XVEPNDCDAI/
+* Drizzle Monday, Two Cold Fronts to Come
+  Latest developments: Patchy fog and mist greeted the Monday
+  morning commute, October 12, and KDKA meteorologist Mary Ours
+  has a seasonable day of cloudy skies and drizzle over Western
+  Pennsylvania.
+  The week starts warmer and drier than the weekend, when the
+  remnants of Isaias soaked the region. WTAE has two more cold
+  fronts bringing rain before next weekend arrives.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/cloudy-skies-are-in-todays-pittsburgh-area-weather-forecast/
+  - WTAE: https://www.wtae.com/article/patchy-am-fogmist-for-the-am-commute/74105299
   - WTAE: https://www.wtae.com/article/impact-day-rain-and-wind-for-western-pa-isaias/74100985
-  - WTAE: https://www.wtae.com/article/tracking-isaias-atlantic-hurricane-season-2026/74072808
-  - WPXI: https://www.wpxi.com/weather/showers-linger-some-spots-monday-warms-up/WYIY7C2YQZDSBIMXFANDWC5KBA/
-  - WPXI: https://www.wpxi.com/news/local/heavy-rain-strong-winds-force-an-early-end-fort-ligonier-days/NRF7VBHPDVGL3OWF4MK4TSQBAY/
-* Trump Asks Fetterman to Switch Parties
-  Latest developments: President Trump publicly urged Senator
-  John Fetterman on Saturday, October 10, to leave the
-  Democratic Party and register as a Republican.
-  Fetterman, the former Braddock mayor and Pennsylvania
-  lieutenant governor now in his first Senate term, has split
-  with his party on Israel and immigration, and Trump's
-  invitation lands on Pennsylvania Democrats three weeks before
-  the November 3 election. Fetterman's seat stays off the ballot
-  until 2028.
-  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-nation/2026/10/10/trump-fetterman-republican/stories/202610100053
-  - WTAE: https://www.wtae.com/article/trump-urges-sen-john-fetterman-to-switch-parties/74100481
-* Shapiro and Garrity on Taxes and Skill Games
-  Latest developments: The Post-Gazette published a side-by-side
-  Sunday, October 11, of where Governor Josh Shapiro and
-  Republican challenger Stacy Garrity stand on taxes, state
-  spending, and skill games.
-  Shapiro seeks a second term against Garrity, the state
-  treasurer, in the November 3 election, and a poll last week
-  gave him a 25-point lead. Skill games anchor the fiscal
-  argument: the machines come out of Pennsylvania businesses
-  this month, and whoever wins inherits the choice of whether to
-  legalize, regulate, and tax them.
-  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-state/2026/10/11/where-pa-governor-candidates-garrity-and-shapiro-stand-on-taxes-spending-skill-g/stories/202610110068
+
+Events:
+* John Cameron Mitchell Brings Hedwig to the Roxian
+  Latest developments: Pittsburgh City Paper interviewed John
+  Cameron Mitchell on Monday, October 12, ahead of his Roxian
+  Theatre stop on the 25th anniversary tour of "Hedwig and the
+  Angry Inch."
+  Mitchell wrote and starred in "Hedwig and the Angry Inch," the
+  story of an East German genderqueer rock singer, and he
+  promises the Roxian Theatre in McKees Rocks "a wonderful orgy
+  of Hedwig." He talked with City Paper about essential oils,
+  playing Mary Todd Lincoln, and the film's lasting queer
+  legacy.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/arts-entertainment-2/john-cameron-mitchell-on-essential-oils-playing-mary-todd-lincoln-and-the-lasting-queer-legacy-of-hedwig/
+* The Pittsburgh Tattoo Art Museum Opens Its Archive
+  Latest developments: The Post-Gazette's Off the Beaten Path
+  column visited the Pittsburgh Tattoo Art Museum on Monday,
+  October 12, where Nick Ackman pairs fresh ink with a history
+  lesson in vintage American tattooing.
+  Ackman runs the museum as a working shop and an archive,
+  displaying the designs, machines, and imagery of early
+  American tattoo artists alongside the chairs where customers
+  get tattooed. Walk-in visitors can tour the collection.
+  - Post-Gazette Arts & Entertainment: https://www.post-gazette.com/local/city/2026/10/12/pittsburgh-tattoo-art-museum-nick-ackman-vintage-american/stories/202610110103
 
 SPORTS
 ----------------------------------------------------------------
@@ -358,78 +341,63 @@ Steelers (3-2)
     https://plaintextsports.com/nfl/2026/week6/pit-tb
 
 Penguins (3-2-1)
-  Sat Oct 10 · Stars 1 · Penguins 2 · Final (SO)
-    Rickard Rakell scores in shootout to lift Penguins over
-    Stars, 2-1
-    https://plaintextsports.com/nhl/2026-10-10/dal-pit
   Up Next · Penguins @ Blackhawks · Tue Oct 13, 8:00 PM
     https://plaintextsports.com/nhl/2026-10-13/pit-chi
 
 Around the Teams:
-* Warren Wins the Running Back Job
-  Latest developments: Post-Gazette columnist Noah Hiles wrote
-  Sunday evening, October 11, that Jaylen Warren has finally run
-  away with the Steelers' starting running back job, and the
-  paper's Week 5 report card handed Warren an A-plus.
-  Warren piled up 188 total yards and two long touchdowns
-  against the Indianapolis Colts at Acrisure Stadium, a week
-  after the Post-Gazette had already called him Pittsburgh's
-  workhorse and its best offensive player. The report card
-  graded the rest of the roster against the Colts, whose running
-  back Jonathan Taylor the Steelers had spent the week calling
-  their first priority.
-  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/11/jaylen-warren-steelers-colts/stories/202610110097
-  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/11/steelers-report-card-colts-week5/stories/202610110096
-* Rodgers Finds Freiermuth Twice
-  Latest developments: Aaron Rodgers threw two touchdown passes
-  to tight end Pat Freiermuth on Sunday, October 11, and the
-  Post-Gazette's game story credited the quarterback and Jaylen
-  Warren for the Steelers' best offensive showing of the season
-  against the Indianapolis Colts.
-  Pittsburgh played the Colts at Acrisure Stadium without
-  cornerback Jamel Dean and safety DeShon Elliott and with
-  receiver Michael Pittman Jr. on injured reserve, 10 days after
-  head coach Mike McCarthy said the team needed to clean up its
-  house following the trip to Cleveland. Christopher Carter ran
-  the Post-Gazette's live chat and analysis through the
-  afternoon.
-  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/11/steelers-colts-aaron-rodgers-jaylen-warren/stories/202610110094
-  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/11/steelers-colts-live-chat/stories/202610100036
-
-Team USA:
-* Hayes Finds Progress in the Spain Loss
-  Latest developments: Speaking after Spain's 2-0 win Saturday,
-  October 10, United States coach Emma Hayes said her team's
-  inability to score frustrated her and pointed to signs of
-  progress with next summer's World Cup ahead, while ESPN's
-  analysis credited Spain's finishing for the gap.
-  The second-ranked United States women opened a two-match set
-  against Spain, the reigning World Cup champion, and conceded
-  to Patri Guijarro and Eva Navarro inside the first 14 minutes.
-  Hayes, Trinity Rodman, and their teammates treated the night
-  as a measuring stick for a squad still being assembled for the
-  2027 World Cup.
-  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50151351/uswnt-vs-spain-women-soccer-emma-hayes-trinity-rodman
-  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50151578/clinical-spain-show-uswnt-takes-world-champions
+* Germie Bernard Grows Into the Offense
+  Latest developments: The Post-Gazette's Week 5 analysis,
+  published Monday, October 12, argues that receiver Germie
+  Bernard's continued development can raise the Steelers'
+  offensive ceiling.
+  Bernard has taken on a larger share of the work with Michael
+  Pittman Jr. on injured reserve, which leaves the Steelers
+  leaning on DK Metcalf and a young receiver room. The paper
+  treats Bernard's progress as the variable that decides how far
+  the passing game goes.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/12/germie-bernard-steelers-role-offense/stories/202610110098
+* A Thinned Secondary Holds Up
+  Latest developments: The Post-Gazette wrote Sunday night,
+  October 11, that the Steelers' depleted secondary made the key
+  plays against the Indianapolis Colts, with Asante Samuel Jr.
+  and rookie cornerback Daylen Everette in the middle of them.
+  Cornerback Jamel Dean and safety DeShon Elliott both sat out
+  the game, pushing Everette deeper into defensive coordinator
+  Patrick Graham's plans in a group already short on bodies
+  after the Joey Porter Jr. trade to the Dallas Cowboys. Samuel
+  and Everette answered.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/11/steelers-cornerbacks-asante-samuel-daylen-everette/stories/202610110095
+* The Postgame Podium and Press Pass
+  Latest developments: The Steelers posted their Week 5 postgame
+  news conference Sunday, October 11, with head coach Mike
+  McCarthy, running back Jaylen Warren, defensive lineman
+  Cameron Heyward, and quarterback Aaron Rodgers, plus a Press
+  Pass session with Alex Highsmith, Troy Fautanu, Asante Samuel
+  Jr., Pat Freiermuth, and Payton Wilson.
+  The team's YouTube channel carries both sessions in full, and
+  Cam Heyward's Not Just Football ran a live postgame show the
+  same evening. Together they cover the locker room's read on
+  the Colts game before the Steelers travel to Tampa Bay.
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=aGl8ma20Qaw
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=JHZAtfCKpz0
+  - Not Just Football with Cam Heyward: https://www.youtube.com/watch?v=ztoPoxF9Dt0
 
 READING
 ----------------------------------------------------------------
 
 * Ed Zitron -- Premium: The Hater's Guide To Junk
-  Zitron walks through the junk bond market, arguing that the
-  once-sleepy world of below-investment-grade debt has swollen
-  into an era of garbage credit dressed up as high yield. He
-  treats the appetite for that paper as a measure of how much
-  risk investors have talked themselves into carrying.
+  Zitron walks through the junk bond market, the
+  below-investment-grade debt that lenders prefer to call
+  high-yield or speculative-grade, and argues that a once-sleepy
+  corner of finance now bankrolls an era of corporate garbage.
   https://www.wheresyoured.at/premium-the-haters-guide-to-junk/
 
 * Stratechery -- An Interview with Katie Harbath About
   Disrupting Politics at Facebook
   Ben Thompson interviews Katie Harbath, Facebook's former head
-  of global elections, about her book Disrupting Politics.
-  Harbath traces how campaigns learned to use the platform
-  through the 2010s and how that pressure changed the company
-  from inside.
+  of global elections, about her book "Disrupting Politics" and
+  how the company's relationship with campaigns and governments
+  changed over the 2010s.
   https://stratechery.com/2026/an-interview-with-katie-harbath-about-disrupting-politics-at-facebook/
 
 MARKETS (weekly average, change vs prior week)
@@ -444,35 +412,33 @@ USD/JPY       158.02  ▲ +0.3%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 13 items in the 48-hour window.
-  No recent items: Schneier on Security, Dark Reading, CISA
-  Advisories, The Record, Ars Technica Security, Securelist
-  (Kaspersky), Sophos News, Unit 42 (Palo Alto), Google Online
-  Security Blog, Cisco Talos, Graham Cluley, Microsoft Security
-  Blog, Google Project Zero, The DFIR Report, Kim Zetter (Zero
-  Day), Frank on Fraud.
+Security: 24 of 24 feeds loaded, 15 items in the 24-hour window.
+  No recent items: Krebs on Security, Schneier on Security, Dark
+  Reading, CISA Advisories, The Record, Ars Technica Security,
+  Securelist (Kaspersky), Sophos News, Unit 42 (Palo Alto),
+  Google Online Security Blog, Cisco Talos, Graham Cluley,
+  Microsoft Security Blog, Google Project Zero, The DFIR Report,
+  Kim Zetter (Zero Day), 404 Media, Frank on Fraud, Wired
+  Security.
 Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
-  No recent items: Pittsburgh City Paper, NEXTpittsburgh,
-  Pittsburgh Magazine.
+  No recent items: NEXTpittsburgh, Pittsburgh Magazine.
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
-Events: 4 of 4 feeds loaded, 13 items in the 120-hour window.
-Sports media: 3 of 6 feeds loaded, 17 items in the 96-hour
-  window. Failed: Not Just Football with Cam Heyward (HTTPError:
-  HTTP Error 404: Not Found); Pittsburgh Steelers (YouTube)
-  (HTTPError: HTTP Error 404: Not Found); Ben Roethlisberger /
-  Channel Seven (YouTube) (HTTPError: HTTP Error 404: Not
-  Found). No recent items: Footbahlin with Ben Roethlisberger.
+Events: 4 of 4 feeds loaded, 12 items in the 120-hour window.
+Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
+  window. No recent items: Footbahlin with Ben Roethlisberger,
+  Ben Roethlisberger / Channel Seven (YouTube).
 Team USA: 3 of 3 feeds loaded, 23 items in the 72-hour window.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
+  No recent items: Cal Newport.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (317s of
-  model time; $1.72 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (311s of
+  model time; $1.61 at API list price).
 
 ================================================================
-Generated 2026-10-11 19:35 EDT. Updated weekdays at about 7:05
+Generated 2026-10-12 07:06 EDT. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
