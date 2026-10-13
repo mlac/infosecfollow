@@ -1,11 +1,12 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Tuesday, October 13, 2026 - 1:37 PM EDT
+Tuesday, October 13, 2026 - 7:37 PM EDT
 ================================================================
 
-Ivanti is racing an actively exploited Connect Secure zero-day
-while npm and Docker Hub patch flaws that let a stranger publish
-code as someone else.
+An attacker chained three Ivanti Connect Secure zero-days to
+root on fully patched VPNs while Microsoft shipped a record
+1,411 fixes, one of them for a Windows flaw already under
+attack.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -13,70 +14,119 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] Package registries keep failing at ownership: npm's
-  Trusted Publishing handed publish rights to anyone claiming an
-  abandoned GitHub repository name, and a Docker Hub token flaw
-  let one user impersonate another, CVE-2026-105445.
-  see: npm Trusted Publishing Opened 1,500 Packages; Docker Hub
-  Token Flaw Let Attackers Pose as Owners
-* [TREND] Attacks reached physical systems and state targets at
-  once, with freezers warmed to 50 degrees at French
-  supermarkets, drones shutting Yandex data centers in Sasovo,
-  and MI5 flagging Iranian interest in British bases.
-  see: French Supermarket Freezers Driven to 50 Degrees; Drones
-  and DDoS Hit Russian Internet Infrastructure; Hybrid War
-  Reaches NATO's Waters and Britain's Bases
-* [TREND] Enterprise gateways and build systems all need
-  patching today: Ivanti Connect Secure has an exploited
-  zero-day, GitLab fixed CVE-2026-97229, and SAP rated an OAuth2
-  SSRF maximum severity.
-  see: Ivanti Connect Secure Zero-Day Under Attack; GitLab
-  Patches a 10.0 Regex Compiler Flaw; SAP Patches a
-  Maximum-Severity OAuth2 SSRF
-* [UPDATE (updated)] Booz Allen's frontier AI models cleared all
-  eight attack objectives set against an isolated control-system
-  testbed at its Chantilly, Virginia lab, finishing with a
-  commandeered robotic arm.
-  see: Frontier AI Clears Every Goal in Booz Allen's OT Lab
-* [UPDATE (updated)] Ahold Delhaize disconnected systems to
-  contain an intrusion, with disruption now reported at Food
-  Lion, Stop & Shop, Giant, and Albert Heijn stores on both
-  sides of the Atlantic.
-  see: Ahold Delhaize and Foschini Disconnect Systems
-* [UPDATE (new)] Locally, Loews signed a letter of intent for a
-  convention center hotel, Sierra is opening two Allegheny
-  County stores, and Breeze Airways takes the gates at Latrobe.
-  see: Loews Signs On for a Convention Center Hotel; Sierra
-  Opens Two Allegheny County Stores; Breeze Airways Takes the
-  Latrobe Gates
+* [TREND] Exploited zero-days dominate the patch cycle, from
+  Volexity's chained Ivanti Connect Secure root exploit to
+  Microsoft's record 1,411-flaw Patch Tuesday and GitLab's
+  unauthenticated CVE-2026-97229 overflow.
+  see: Ivanti Connect Secure Zero-Day Under Attack; Record
+  Microsoft Patch Tuesday Carries Three Zero-Days; GitLab
+  Patches a 10.0 Regex Compiler Flaw
+* [TREND] Supply chain risk keeps shifting, from hardware
+  implants soldered under Trezor and Ledger wallet screens to
+  abandoned repository names that hand over npm trusted
+  publishing rights.
+  see: Circuit Board Under the Ledger Screen; npm Trusted
+  Publishing Opened 1,500 Packages
+* [TREND] Frontier models met all eight attack objectives in
+  Booz Allen's Chantilly industrial testbed even as Broadcom's
+  chief called the AI spending race a casino and chip stocks
+  slid.
+  see: Frontier AI Clears Every Goal in Booz Allen's OT Lab; The
+  AI Trade Cracks Again
+* [TREND] Attacks keep landing on physical operations, with
+  French supermarket freezers driven to 50 degrees, Ahold
+  Delhaize disconnecting systems, and drones shutting Yandex
+  data centers in Sasovo and Vladimir.
+  see: French Supermarket Freezers Driven to 50 Degrees; Ahold
+  Delhaize and Foschini Disconnect Systems; Drones and DDoS Hit
+  Russian Internet Infrastructure
+* [UPDATE (new)] The FBI arrested OpenAI engineer Abdulrahman
+  Alfozan over a recording device in a San Francisco conference
+  room, and Bank of America settled money-laundering failures
+  for $1.21 billion.
+  see: OpenAI Engineer Charged Over Conference Room Bug; Bank of
+  America Pays $1.2 Billion Over Money-Laundering Failures
+* [UPDATE (new)] Locally, Penn State moved to cut 47 degree
+  programs, Pennsylvania's skill games went dark at Tuesday's
+  removal deadline, and a $170 million Hill District apartment
+  plan got a price tag.
+  see: Penn State Moves to Cut 47 Degree Programs; Skill Games
+  Go Dark Across Pennsylvania; A $170 Million Apartment Plan for
+  the Hill District
 
 SECURITY
 ----------------------------------------------------------------
 
-1. CIRCUIT BOARD UNDER THE LEDGER SCREEN
+1. IVANTI CONNECT SECURE ZERO-DAY UNDER ATTACK
+   Vulnerabilities and Exploits · [zero-day, patch, vpn]
+   Latest developments: Volexity said on October 13, 2026 that
+   an attacker chained three Ivanti Connect Secure zero-days to
+   run commands as root on a fully patched appliance without
+   logging in, Ivanti patched two of the three and told
+   customers on 25.1.1.1, 25.1.2.2, and 22.8R2.4 and earlier to
+   act immediately, a fix for the third remains pending, and
+   CISA added the authentication bypass CVE-2026-104935 to its
+   Known Exploited Vulnerabilities catalog, citing credential
+   theft and data exfiltration.
+   Connect Secure terminates employee VPN and remote access
+   sessions for enterprises and government agencies, which keeps
+   it in attackers' sights. Administrators should apply the two
+   available fixes today and hunt for intrusion, since a patch
+   leaves any existing foothold in place and one flaw in the
+   chain still has no remedy.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/ivanti-warns-of-connect-secure-zero-day-exploited-in-attacks/
+   - The Hacker News: https://thehackernews.com/2026/10/attacker-chains-three-ivanti-connect.html
+   - SecurityWeek: https://www.securityweek.com/ivanti-zero-day-chain-gave-attackers-root-access-to-fully-patched-vpn/
+   - CISA Advisories: https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure
+
+2. RECORD MICROSOFT PATCH TUESDAY CARRIES THREE ZERO-DAYS
+   Vulnerabilities and Exploits · [patch, zero-day]
+   Latest developments: Microsoft released its largest security
+   update ever on October 13, 2026, fixing 1,411 flaws, among
+   them three zero-days: attackers already exploit the Windows
+   command injection bug CVE-2026-96951, which CISA added to its
+   Known Exploited Vulnerabilities catalog the same day, and two
+   more carried public disclosure before the patches shipped;
+   the SANS Internet Storm Center counted 1,417 patches with 76
+   rated critical, and Dark Reading flagged security bypasses
+   and unauthenticated remote code execution among them.
+   A single month's Windows update now spans more than a
+   thousand defects, which forces patch teams to triage rather
+   than deploy everything at once. Prioritize CVE-2026-96951 and
+   the critical unauthenticated remote code execution items, and
+   note that Windows 11 24H2 Home and Pro left support today
+   while Windows 10 holdouts need the KB5126657 extended
+   security update.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/microsoft/microsoft-october-2026-patch-tuesday-fixes-1-411-flaws-3-zero-days/
+   - SANS Internet Storm Center: https://isc.sans.edu/diary/rss/33422
+   - Dark Reading: https://www.darkreading.com/vulnerabilities-threats/zero-days-microsoft-october-patch-tuesday
+   - CISA Advisories: https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-adds-two-known-exploited-vulnerabilities-catalog
+
+3. CIRCUIT BOARD UNDER THE LEDGER SCREEN
    Ransomware and Cybercrime · [crypto, hardware, supply chain]
-   Latest developments: SecurityWeek described the implant's
-   construction on October 13, 2026: a small circuit board sat
-   hidden under the screens of the Ledger signers, read user
-   data, and transmitted it to the attackers, who drained
-   roughly $86 million from wallets created on devices the
-   Southeast Asian reseller CryptoBilis sold; Ledger says the
-   implant captured recovery phrases, and Kim Zetter reported
-   the same day that the scheme reached legitimate resellers in
-   both Asia and Europe and put the total theft near $100
-   million.
+   Latest developments: The implant campaign reaches a second
+   brand: hardware hacker Joe Grand said he found implants
+   inside two Trezor devices and reported them to Trezor in
+   August 2026, contradicting the company's statement on October
+   13, 2026 that none of its devices carry implants, while
+   SecurityWeek described the Ledger implant as a small circuit
+   board hidden under the signer's screen that read user data
+   and transmitted it to attackers who drained roughly $86
+   million, and Kim Zetter put the total theft near $100 million
+   across legitimate resellers in Asia and Europe.
    Ledger, the Paris-based hardware wallet maker, has paused
-   sales through CryptoBilis and ties every confirmed theft to a
-   device from that reseller. Anyone holding a Ledger signer
-   bought through a third-party reseller should verify the
-   device and move funds to a seed generated on hardware bought
-   direct.
+   sales through the Southeast Asian reseller CryptoBilis, ties
+   every confirmed theft to a device from that reseller, and
+   says the implant captured recovery phrases. Anyone holding a
+   Ledger or Trezor signer bought through a third-party reseller
+   should verify the device and move funds to a seed generated
+   on hardware bought direct.
+   - Kim Zetter (Zero Day): https://www.zetter-zeroday.com/trezor-wallets-also-compromised-with-implants/
    - SecurityWeek: https://www.securityweek.com/86-million-crypto-heist-linked-to-ledger-signer-hardware-implant/
-   - Kim Zetter (Zero Day): https://www.zetter-zeroday.com/who-is-planting-backdoors-in-ledger-crypto-wallets/
    - The Record: https://therecord.media/ledger-cryptocurrency-wallet-implant-theft
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/ledger-confirms-hardware-wallet-spy-implant-behind-crypto-thefts/
 
-2. AHOLD DELHAIZE AND FOSCHINI DISCONNECT SYSTEMS
+4. AHOLD DELHAIZE AND FOSCHINI DISCONNECT SYSTEMS
    Ransomware and Cybercrime · [breach, retail]
    Latest developments: The Ahold Delhaize incident spans the
    Atlantic: the Dutch-Belgian owner of Food Lion, Stop & Shop,
@@ -96,7 +146,68 @@ SECURITY
    - The Record: https://therecord.media/foschini-group-south-africa-cyber
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/tfg-london-cyberattack-disrupts-systems-at-hobbs-and-whistles-retailers/
 
-3. FRENCH SUPERMARKET FREEZERS DRIVEN TO 50 DEGREES
+5. FRONTIER AI CLEARS EVERY GOAL IN BOOZ ALLEN'S OT LAB
+   AI Security · [ai, ics]
+   Latest developments: Booz Allen reported on October 13, 2026
+   that frontier AI models it set against an isolated industrial
+   control testbed in its Chantilly, Virginia lab met all eight
+   attack objectives the firm had defined, ending with a robotic
+   arm the models found, controlled, and moved; Anthropic
+   published experiments the same day showing that cheap Android
+   TV boxes already run capable small models and warning that
+   such models may soon self-replicate across consumer devices
+   from TV boxes to smart ovens, forming worm botnets with no
+   central point to shut off.
+   Together the two studies put a measured floor under claims
+   that general-purpose models can run intrusions end to end,
+   against the equipment that moves physical things and across
+   hardware nobody patches. Plant operators should assume
+   exploit development against known-vulnerable gear now costs
+   an attacker hours instead of weeks and prioritize
+   segmentation between business networks and production
+   control.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/13/frontier-ai-ot-security-threat/
+   - SecurityWeek: https://www.securityweek.com/small-ai-models-may-soon-be-able-to-self-replicate-on-iot-devices-anthropic-warns/
+   - Dark Reading: https://www.darkreading.com/perimeter/anthropic-ingredients-future-ai-worms
+   - The Hacker News: https://thehackernews.com/2026/10/anthropic-warns-small-ai-models-could.html
+
+6. GITLAB PATCHES A 10.0 REGEX COMPILER FLAW
+   Vulnerabilities and Exploits · [patch, zero-day, devops]
+   Latest developments: GitLab's maximum-severity bug now
+   carries an identifier and a mechanism: CVE-2026-97229 is an
+   integer overflow in the CI/CD Regular Expression Compiler, it
+   affects both Community Edition and Enterprise Edition, and an
+   unauthenticated attacker reaches arbitrary code execution on
+   the server through a specially crafted regular expression in
+   a CI/CD configuration.
+   Self-managed GitLab instances carry the risk; GitLab.com
+   customers do not. Administrators should apply the patched
+   releases immediately, since the flaw needs no account on the
+   target.
+   - The Hacker News: https://thehackernews.com/2026/10/gitlab-patches-cvss-100-flaw-that-could.html
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/13/gitlab-ci-cd-regular-expression-compiler-vulnerability-cve-2026-97229/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/gitlab-warns-of-max-severity-rce-flaw-in-regex-compiler-engine/
+
+7. OPENAI ENGINEER CHARGED OVER CONFERENCE ROOM BUG
+   Ransomware and Cybercrime · [insider, espionage]
+   Latest developments: The FBI arrested Abdulrahman Alfozan, a
+   Saudi national who worked as an OpenAI engineer, on Friday,
+   October 9, 2026, over a hidden recording device found in an
+   executive conference room at the company's San Francisco
+   offices, and Wired reported on October 13, 2026 that his
+   chatbot prompts lay out his alleged preparations in the days
+   before colleagues discovered the device; OpenAI fired him.
+   An insider placed surveillance hardware inside the meeting
+   room where OpenAI's senior executives talk, and the
+   investigators' evidence includes the queries he typed into a
+   chatbot. Companies guarding high-value strategy should treat
+   conference rooms as physical attack surface and log the AI
+   tools employees use on company accounts.
+   - Wired Security: https://www.wired.com/story/an-openai-employee-allegedly-used-a-chatbot-to-help-plant-a-recording-device-at-the-office/
+   - SecurityWeek: https://www.securityweek.com/employee-arrested-after-listening-device-found-in-openai-conference-room-fbi-and-the-company-say/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/artificial-intelligence/openai-engineer-arrested-for-allegedly-planting-spy-device-in-office/
+
+8. FRENCH SUPERMARKET FREEZERS DRIVEN TO 50 DEGREES
    Critical Infrastructure Security · [ics, breach]
    Latest developments: The attack ran hotter than first
    reported: on the night of October 11, 2026 the attackers
@@ -115,7 +226,7 @@ SECURITY
    - SecurityWeek: https://www.securityweek.com/refrigeration-controller-hack-spoils-food-across-european-supermarkets/
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/12/france-cyberattack-supermarket-freezers/
 
-4. DRONES AND DDOS HIT RUSSIAN INTERNET INFRASTRUCTURE
+9. DRONES AND DDOS HIT RUSSIAN INTERNET INFRASTRUCTURE
    Nation-State Activity · [hacktivism, ddos, critical
    infrastructure]
    Latest developments: Yandex named the damaged sites on
@@ -138,24 +249,7 @@ SECURITY
    - The Record: https://therecord.media/russian-internet-provider-skynet-reports-outages-ddos
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/yandex-confirms-service-outage-as-users-lose-access-to-cloud-files/
 
-5. GITLAB PATCHES A 10.0 REGEX COMPILER FLAW
-   Vulnerabilities and Exploits · [patch, zero-day, devops]
-   Latest developments: GitLab's maximum-severity bug now
-   carries an identifier and a mechanism: CVE-2026-97229 is an
-   integer overflow in the CI/CD Regular Expression Compiler, it
-   affects both Community Edition and Enterprise Edition, and an
-   unauthenticated attacker reaches arbitrary code execution on
-   the server through a specially crafted regular expression in
-   a CI/CD configuration.
-   Self-managed GitLab instances carry the risk; GitLab.com
-   customers do not. Administrators should apply the patched
-   releases immediately, since the flaw needs no account on the
-   target.
-   - The Hacker News: https://thehackernews.com/2026/10/gitlab-patches-cvss-100-flaw-that-could.html
-   - Help Net Security: https://www.helpnetsecurity.com/2026/10/13/gitlab-ci-cd-regular-expression-compiler-vulnerability-cve-2026-97229/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/gitlab-warns-of-max-severity-rce-flaw-in-regex-compiler-engine/
-
-6. NPM TRUSTED PUBLISHING OPENED 1,500 PACKAGES
+10. NPM TRUSTED PUBLISHING OPENED 1,500 PACKAGES
    Vulnerabilities and Exploits · [supply chain, patch]
    Latest developments: GitHub tightened the feature on October
    13, 2026, expiring any unvalidated npm trusted publishing
@@ -175,71 +269,38 @@ SECURITY
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/13/slugfest-npm-trusted-publishing-flaw/
    - The Hacker News: https://thehackernews.com/2026/10/github-tightens-npm-publishing-after.html
 
-7. FRONTIER AI CLEARS EVERY GOAL IN BOOZ ALLEN'S OT LAB
-   AI Security · [ai, ics]
-   Latest developments: Booz Allen reported on October 13, 2026
-   that frontier AI models it set against an isolated industrial
-   control testbed in its Chantilly, Virginia lab met all eight
-   attack objectives the firm had defined, ending with a robotic
-   arm the models found, controlled, and moved; Anthropic warned
-   the same day that cheap television boxes already run capable
-   AI models and that small models may soon spread across such
-   devices on their own.
-   The test puts a measured floor under claims that
-   general-purpose models can run operational technology
-   intrusions end to end, against the very equipment that moves
-   physical things. Plant operators should assume exploit
-   development against their known-vulnerable gear now costs an
-   attacker hours instead of weeks and prioritize segmentation
-   between business networks and production control.
-   - Help Net Security: https://www.helpnetsecurity.com/2026/10/13/frontier-ai-ot-security-threat/
-   - SecurityWeek: https://www.securityweek.com/small-ai-models-may-soon-be-able-to-self-replicate-on-iot-devices-anthropic-warns/
-
-8. IVANTI CONNECT SECURE ZERO-DAY UNDER ATTACK
-   Vulnerabilities and Exploits · [zero-day, patch, vpn]
-   Latest developments: Ivanti told customers on October 13,
-   2026 to patch a zero-day in its Connect Secure remote access
-   gateway immediately, saying attackers are exploiting the flaw
-   now.
-   Connect Secure terminates employee VPN and remote access
-   sessions for enterprises and government agencies, which keeps
-   it in attackers' sights. Administrators should apply the fix
-   today and hunt for intrusion, since a patch leaves any
-   existing foothold in place.
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/ivanti-warns-of-connect-secure-zero-day-exploited-in-attacks/
-
-9. DOCKER HUB TOKEN FLAW LET ATTACKERS POSE AS OWNERS
-   Vulnerabilities and Exploits · [supply chain, patch,
-   containers]
-   Latest developments: Docker disclosed CVE-2026-105445 on
-   October 13, 2026, a critical Docker Hub flaw that let an
-   attacker hold a personal access token, reach another user's
-   container repositories, impersonate that user, and tamper
-   with images.
-   Docker Hub distributes the base images most container builds
-   pull, so a hijacked identity there carries altered layers
-   straight into production deployments. Teams should rotate
-   personal access tokens, pin image digests, and review recent
-   pushes to their own repositories.
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/docker-hub-flaw-let-attackers-impersonate-users-tamper-with-images/
-
-10. SAP PATCHES A MAXIMUM-SEVERITY OAUTH2 SSRF
-   Vulnerabilities and Exploits · [patch, ssrf]
-   Latest developments: SAP shipped its October 2026 security
-   updates on October 13, 2026, fixing 20 flaws across its
-   product line, and rated one of them maximum severity: a
-   server-side request forgery in the OAuth2 handling of SAP
-   Cloud SDK for Python.
-   The Cloud SDK for Python underpins custom applications and
-   integrations that talk to SAP cloud services, and a
-   server-side request forgery turns such an application into a
-   relay for an attacker's requests into internal systems. SAP
-   customers should work the October patch day notes and update
-   affected SDK dependencies in their own builds.
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/sap-warns-of-maximum-severity-oauth2-ssrf-security-flaw/
-
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
+* Bank of America Pays $1.2 Billion Over Money-Laundering
+  Failures
+  Latest developments: The Treasury Department and bank
+  regulators announced Tuesday, October 13, that Bank of America
+  will pay $1.21 billion to settle money-laundering and
+  sanctions violations, finding the bank missed $5 billion of
+  suspicious transactions tied to suspected illicit finance from
+  China and the southern United States border.
+  Bank of America, the second-largest United States bank by
+  assets, now carries the heaviest anti-money-laundering penalty
+  of a widening enforcement push that fined American Express
+  $350 million on October 8 over $13 billion of unreported
+  suspicious activity. The size of the settlement and the
+  specific control gaps regulators named set a compliance
+  benchmark for every large bank.
+  - WSJ Markets: https://www.wsj.com/finance/regulation/bank-of-america-to-pay-1-21-billion-to-settle-violations-of-money-laundering-sanctions-laws-203b5fdf?mod=rss_markets_main
+  - FT Home: https://www.ft.com/content/c08dd4a1-74a4-49f2-90f7-0857c6e87868?syn-25a6b1a6=1
+* Houthis Strike Saudi Aramco's Headquarters
+  Latest developments: A suspected Houthi strike hit Saudi
+  Aramco's headquarters Tuesday, October 13, the Financial Times
+  reported, retaliation by the Iran-backed militants after the
+  Riyadh-led coalition attacked sites in Sanaa, Yemen's capital.
+  The attack carries the Houthi campaign from Riyadh's
+  international airport, where a missile killed 12 people on
+  October 10, to the corporate center of the world's largest oil
+  producer. Each strike inside the kingdom raises war-risk
+  premiums on Saudi assets and shipping and widens the
+  Riyadh-Sanaa exchange that Pakistan and Turkey have already
+  joined through their mutual defense pact with Saudi Arabia.
+  - FT Home: https://www.ft.com/content/a25417b3-d4e4-4b89-b14d-6370a85ce3c4?syn-25a6b1a6=1
 * Hybrid War Reaches NATO's Waters and Britain's Bases
   Latest developments: MI5 director general Ken McCallum said
   Tuesday, October 13, that Iran has made a "major shift" toward
@@ -271,7 +332,8 @@ BUSINESS AND POLITICS
   Saudi Arabia says its September crude output reached the
   highest level since the conflict started, and the renewed
   attacks on shipping this month put that recovery at risk. Oil
-  prices fell Tuesday after three sessions of gains as traders
+  ended Tuesday mixed, with Brent lower and West Texas
+  Intermediate edging up on strength in diesel, as traders
   weighed Persian Gulf supply risk against the Russian diesel
   President Trump has promised to bring to market, leaving
   insurers, charterers, and refiners exposed to a sudden halt in
@@ -282,9 +344,11 @@ BUSINESS AND POLITICS
   - WSJ US Business: https://www.wsj.com/business/energy-oil/opec-cuts-demand-growth-forecast-again-as-gulf-supply-risks-mount-848d73a3?mod=pls_whats_news_us_business_f
 * The AI Trade Cracks Again
   Latest developments: Broadcom's chief executive called the
-  artificial intelligence spending race a "casino," and chip
-  stocks slid worldwide Tuesday, October 13, with Nasdaq futures
-  falling sharply.
+  artificial intelligence spending race a "casino," chip stocks
+  slid worldwide Tuesday, October 13, and United States stocks
+  ticked down through a sluggish session as early bank earnings
+  failed to quiet worries about inflation and Federal Reserve
+  rate increases.
   Samsung Electronics and SK Hynix dropped hard enough to drag
   South Korea's Kospi sharply lower, and Asian and European
   technology shares followed as investors questioned the scale
@@ -295,6 +359,7 @@ BUSINESS AND POLITICS
   - FT Home: https://www.ft.com/content/e16f0422-cf75-4cc9-962d-4605e421dc63?syn-25a6b1a6=1
   - WSJ Markets: https://www.wsj.com/finance/stocks/nasdaq-futures-fall-as-global-ai-selloff-intensifies-fe149717?mod=rss_markets_main
   - WSJ Markets: https://www.wsj.com/finance/stocks/asian-stocks-battered-as-geopolitical-tensions-sap-risk-appetite-5b3ebd81?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/stocks/u-s-stocks-tick-down-as-bank-earnings-dont-excite-40b1934e?mod=rss_markets_main
 * European Gas Reaches a Four-Year High
   Latest developments: European natural gas prices climbed
   Tuesday, October 13, to their highest level since December
@@ -317,11 +382,12 @@ BUSINESS AND POLITICS
   and the International Monetary Fund sounded an alarm over
   governments' public finances.
   Lower oil prices and the pullback in AI shares pulled Treasury
-  and eurozone yields down ahead of United States inflation
-  data, and record inflows into government bond funds show
-  investors locking in the highest borrowing costs in decades.
-  Strain migrating from the long end to money markets
-  complicates the Federal Reserve's control of short-term rates.
+  and eurozone yields down ahead of United States inflation data
+  due Wednesday, October 14, and record inflows into government
+  bond funds show investors locking in the highest borrowing
+  costs in decades. Strain migrating from the long end to money
+  markets complicates the Federal Reserve's control of
+  short-term rates.
   - WSJ Markets: https://www.wsj.com/economy/central-banking/treasury-eurozone-yields-fall-as-markets-look-to-u-s-inflation-data-412d95a4?mod=rss_markets_main
   - FT World: https://www.ft.com/content/f5ca22c7-8340-4189-8c40-224a1e16c5ef
   - FT Home: https://www.ft.com/content/6fa735a2-a590-4461-b092-920ba489e7a8?syn-25a6b1a6=1
@@ -333,8 +399,8 @@ BUSINESS AND POLITICS
   earlier yet landed below expectations on weaker bond trading
   and its shares fell, Wells Fargo's revenue disappointed,
   Goldman's equities desks carried net income 30% higher, and
-  executives across Wall Street played down investor fears that
-  the trading boom has peaked.
+  the market shrugged as the Wall Street Journal flagged rising
+  interest rates as the threat to the banks' run.
   The results open a mixed Wall Street earnings season in which
   fixed-income desks, the engine of a record second quarter
   built on volatility, gave way while stock trading held up.
@@ -344,17 +410,46 @@ BUSINESS AND POLITICS
   - FT Home: https://www.ft.com/content/56f4a46e-3ae5-4aea-8cf3-71506b286091
   - WSJ Markets: https://www.wsj.com/livecoverage/stock-market-today-bank-earnings-10-13-2026?mod=rss_markets_main
   - WSJ Markets: https://www.wsj.com/finance/banking/jpmorgan-goldman-profit-jumps-as-banks-kick-off-earnings-3e78b37d?mod=rss_markets_main
-  - FT Home: https://www.ft.com/content/bd1f3385-1985-4a8a-a781-22cbe1292d2d?syn-25a6b1a6=1
+  - FT World: https://www.ft.com/content/bd1f3385-1985-4a8a-a781-22cbe1292d2d?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/banking/rising-interest-rates-threaten-to-spoil-the-party-for-big-banks-0ef3e7c0?mod=rss_markets_main
 
 PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  This Afternoon: Sunny, high 82F.
   Tonight: Mostly Clear, low 65F.
   Wednesday: Showers And Thunderstorms Likely, high 78F.
+  Wednesday Night: Chance Rain Showers then Mostly Cloudy, low
+    55F.
 
 Business:
+* Skill Games Go Dark Across Pennsylvania
+  Latest developments: Pennsylvania's removal deadline took
+  effect Tuesday, October 13, and KDKA found the terminals
+  disappearing from businesses and private clubs, while a state
+  lawmaker told the Post-Gazette that plenty of people in
+  Harrisburg share the blame for the failure to pass a
+  regulating bill.
+  The machines ran for years in Pennsylvania bars, convenience
+  stores, and veterans clubs outside the state's gambling rules,
+  and the Supreme Court of Pennsylvania refused to push the
+  removal date back after the General Assembly adjourned October
+  7 without a law. Operators lose the revenue, and Veterans of
+  Foreign Wars posts around the state say the money decided
+  whether they kept their doors open.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/pennsylvania-skill-game-deadline/
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-state/2026/10/13/skill-games-pa-deadline/stories/202610140013
+* The UPMC Presbyterian Tower Nears Completion
+  Latest developments: TribLive published a first look inside
+  UPMC Presbyterian's new tower Tuesday, October 13, the day
+  leaders of several faiths blessed the building's faith-based
+  spaces.
+  The glass tower at UPMC Presbyterian in Oakland stands close
+  to finished and already reads as a new landmark on that
+  skyline, with patients due to receive care there soon. UPMC
+  employs more people than any other private employer in Western
+  Pennsylvania.
+  - TribLive: https://triblive.com/news/health-now/get-a-first-look-at-the-new-upmc-presbyterian-tower/
 * Loews Signs On for a Convention Center Hotel
   Latest developments: State officials announced that Loews
   Hotels has signed a letter of intent to build a hotel at the
@@ -438,6 +533,41 @@ Business:
   - Pittsburgh City Paper: https://www.pghcitypaper.com/food-drink/sheetz-meatz-north-side-sandwiches-fall-cocktails-and-more-pittsburgh-food-news/
 
 Around town:
+* Penn State Moves to Cut 47 Degree Programs
+  Latest developments: Penn State administrators recommended
+  eliminating 47 degree programs, the Post-Gazette and TribLive
+  reported Tuesday, October 13, citing low student enrollment,
+  weak employment demand, and program realignment.
+  The recommendation covers degrees across Penn State's branch
+  campuses and would phase the programs out over the coming
+  years. Penn State's Commonwealth campuses include several in
+  Western Pennsylvania, and the list shapes what students in the
+  region can study close to home.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/education/2026/10/13/penn-state-program-cuts-branch-47-programs/stories/202610130052
+  - TribLive: https://triblive.com/local/regional/penn-state-plans-to-cut-47-degree-programs/
+* A $170 Million Apartment Plan for the Hill District
+  Latest developments: TribLive put a $170 million price tag on
+  the Hill District apartment proposal Tuesday, October 13,
+  reporting it would add hundreds of apartments and supply
+  college students with housing in a long-undeveloped stretch of
+  the neighborhood.
+  The New York developer JK Equities and its partner Manor Park
+  Ventures are pursuing the four-phase project in the Middle
+  Hill District with the Pittsburgh design firm TKA Architects,
+  the largest multifamily plan that neighborhood has seen. The
+  site sits within walking distance of downtown Pittsburgh and
+  the Oakland universities.
+  - TribLive: https://triblive.com/business/170m-development-would-bring-hundreds-of-apartments-to-hill-district/
+* Chief Lando Reverses His Predecessor's Changes
+  Latest developments: Pittsburgh Police Chief Jason Lando told
+  WPXI's 11 Investigates in an exclusive interview published
+  Tuesday, October 13, that he will roll back changes the former
+  chief made as he works to raise the bureau's officer count.
+  The Pittsburgh Bureau of Police is short of officers, and
+  Lando frames the reversals as recruiting and retention moves.
+  The staffing gap drives how the city covers its six police
+  zones.
+  - WPXI: https://www.wpxi.com/news/local/11-investigates-exclusive-new-pittsburgh-police-chief-looks-roll-back-changes-by-former-chief/UCADRJWTEZFZHMNONRIWG6WGSM/
 * PennDOT Closes Commercial Street and Forward Avenue
   Latest developments: WPXI reported Tuesday, October 13, that
   the Pennsylvania Department of Transportation will close
@@ -513,22 +643,30 @@ Around town:
   proposals.
   - TribLive: https://triblive.com/local/after-lengthy-delay-signs-of-progress-appear-at-rachel-carson-ecovillage-site-in-mccandless/
 * Warm Tuesday, Then Two Impact Days
-  Latest developments: WTAE's Tuesday update, October 13, keeps
-  the day warm and breezy and tags Wednesday, October 14, an
-  Impact Day for rain, with a second Impact Day behind it; WPXI
-  has southwest wind gusting 20 to 25 mph pushing highs near 80
-  degrees, and KDKA calls Tuesday's warmth likely the year's
-  last run at that mark.
-  Pittsburgh starts Tuesday under patchy fog and mist before
-  afternoon sun, with lows in the 60s overnight, and rain
-  arrives with the next front Wednesday. Temperatures drop
-  sharply through the week behind the system.
+  Latest developments: WPXI's Tuesday evening update, October
+  13, has rain arriving early Wednesday, October 14, with cooler
+  air behind it, and WTAE tags Wednesday an Impact Day for rain
+  with a second Impact Day following; KDKA calls Tuesday's push
+  to near 80 degrees likely the year's last.
+  Southwest wind gusting 20 to 25 mph carried Pittsburgh's
+  Tuesday highs to around 80 degrees, and the next front brings
+  the umbrellas out Wednesday morning. Temperatures drop sharply
+  through the rest of the week behind the system.
   - WTAE: https://www.wtae.com/article/warm-breezy-today-impact-day-with-rain-wednesday/74116549
   - WTAE: https://www.wtae.com/article/patchy-am-fogmist-for-the-am-commute/74105299
   - KDKA: https://www.cbsnews.com/pittsburgh/news/high-temperatures-in-the-pittsburgh-area-will-be-near-80-degrees-today/
   - WPXI: https://www.wpxi.com/weather/sunny-breezy-with-wind-that-will-push-highs-around-80-degrees/ACR43LCZABAABCGVCQTLGRMPDI/
 
 Events:
+* Monster Pumpkins Festival Shows Off a Record Gourd
+  Latest developments: WTAE reported Tuesday, October 13, that
+  the Pittsburgh Monster Pumpkins festival will display the
+  largest pumpkin ever grown this weekend, the only chance to
+  see it before growers carve it.
+  The festival gathers giant pumpkins for public viewing and
+  ends the record holder's run with a carving. WTAE named no
+  venue, ticket price, or start time.
+  - WTAE: https://www.wtae.com/article/pittsburgh-monster-pumpkins-festival-2026/74124784
 * The Pittsburgh Walk of Fame Inducts Its Second Class
   Latest developments: The Pittsburgh Walk of Fame added 10
   inductees at a ceremony in the Strip District on Tuesday,
@@ -585,6 +723,26 @@ Penguins (3-2)
     https://plaintextsports.com/nhl/2026-10-13/pit-chi
 
 Around the Teams:
+* Footbahlin Reads the Red Zone
+  Latest developments: Ben Roethlisberger's Footbahlin posted
+  episode 143 Tuesday, October 13, arguing the Steelers' trip to
+  the Indianapolis Colts taught more inside the red zone than
+  the scoreboard showed.
+  Roethlisberger and his co-host open with his backyard poison
+  ivy ordeal, then work through what the win at Indianapolis
+  says about the offense as a long season grinds on. The show
+  takes the win at face value and keeps its enthusiasm measured.
+  - Footbahlin with Ben Roethlisberger: https://www.buzzsprout.com/2062616/episodes/19956453-we-learned-more-from-the-red-zone-than-the-scoreboard-ep-143.mp3
+* The WPIAL Sends Fewer Players to the NFL
+  Latest developments: The Post-Gazette examined Tuesday,
+  October 13, why the WPIAL and the Pittsburgh City League put
+  far fewer players into the NFL than they did a decade ago.
+  Western Pennsylvania high school football long fed the
+  professional ranks, and the paper traces the drop in
+  Pittsburgh-area players reaching the league. The story runs
+  through participation, recruiting, and the pipeline that
+  produced names like Mike Ditka out of Aliquippa.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/high-school-football/2026/10/13/nfl-players-from-pittsburgh-wpial-city-league/stories/202609210035
 * Rodgers Grades Out Elite at Indianapolis
   Latest developments: The Post-Gazette published its Week 5
   Steelers player grades Tuesday, October 13, rating quarterback
@@ -629,6 +787,19 @@ Around the Teams:
   to them rather than the franchise.
   - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=XQa_pkGnb6I
 
+Team USA:
+* The United States Women Meet Spain Again
+  Latest developments: The United States women took the field
+  against Spain on Tuesday evening, October 13, in the second of
+  two friendlies, with ESPN carrying the match live.
+  Spain, the reigning World Cup champion and the top-ranked team
+  in the world, beat the United States 2-0 on Saturday, October
+  10, scoring through Patri Guijarro and Eva Navarro inside 14
+  minutes. Coach Emma Hayes said she wants a faster start this
+  time and treats the pair of matches as a measuring stick
+  before next summer's World Cup.
+  - ESPN Soccer: https://www.espn.com/soccer/match/_/gameId/401890784
+
 READING
 ----------------------------------------------------------------
 
@@ -651,41 +822,43 @@ MARKETS (weekly average, change vs prior week)
 ----------------------------------------------------------------
 S&P 500     7,800.97  ▲ +1.3%
 Dow        51,487.66  ▲ +0.7%
-Nasdaq     27,388.78  ▲ +1.3%
+Nasdaq     27,309.70  ▲ +0.4%
 WTI crude      90.96  ▲ +0.4%
-EUR/USD       1.1228  ▼ -0.9%
-GBP/USD       1.3234  = -0.0%
-USD/JPY       158.02  ▲ +0.3%
+EUR/USD       1.1207  ▼ -0.6%
+GBP/USD       1.3232  = +0.0%
+USD/JPY       158.23  ▲ +0.3%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 55 items in the 24-hour window.
+Security: 24 of 24 feeds loaded, 73 items in the 24-hour window.
   No recent items: Krebs on Security, Schneier on Security, Ars
-  Technica Security, Securelist (Kaspersky), Unit 42 (Palo
-  Alto), Google Online Security Blog, Cisco Talos, Microsoft
-  Security Blog, Google Project Zero, The DFIR Report, Frank on
-  Fraud, Wired Security.
+  Technica Security, Securelist (Kaspersky), Google Online
+  Security Blog, Microsoft Security Blog, Google Project Zero,
+  The DFIR Report, Frank on Fraud.
 Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
-Events: 4 of 4 feeds loaded, 9 items in the 120-hour window. No
+Events: 4 of 4 feeds loaded, 11 items in the 120-hour window. No
   recent items: NEXTpittsburgh Events, NEXTpittsburgh Arts &
   Entertainment.
-Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
-  window. No recent items: Footbahlin with Ben Roethlisberger,
-  Ben Roethlisberger / Channel Seven (YouTube).
-Team USA: 3 of 3 feeds loaded, 20 items in the 72-hour window.
+Sports media: 3 of 6 feeds loaded, 16 items in the 96-hour
+  window. Failed: Not Just Football with Cam Heyward (HTTPError:
+  HTTP Error 404: Not Found); Pittsburgh Steelers (YouTube)
+  (HTTPError: HTTP Error 404: Not Found); Ben Roethlisberger /
+  Channel Seven (YouTube) (HTTPError: HTTP Error 404: Not
+  Found).
+Team USA: 3 of 3 feeds loaded, 22 items in the 72-hour window.
   No recent items: Guardian Olympics.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
   No recent items: Cal Newport.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (399s of
-  model time; $2.12 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (433s of
+  model time; $2.33 at API list price).
 
 ================================================================
-Generated 2026-10-13 13:37 EDT. Updated weekdays at about 7:05
+Generated 2026-10-13 19:37 EDT. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
