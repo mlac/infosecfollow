@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>infosecfollow — 2026-10-14 7:06 AM EDT</title>
+<meta name="description" content="The exploited flaw in Microsoft&#x27;s record 1,413-fix Patch Tuesday turns out to be a Mark of the Web bypass that travels as an email or Teams attachment, and SAP, Docker Hub, Ghostscript, and the Linux kernel followed with critical flaws of their own.">
+<meta property="og:title" content="infosecfollow — 2026-10-14 7:06 AM EDT">
+<meta property="og:description" content="The exploited flaw in Microsoft&#x27;s record 1,413-fix Patch Tuesday turns out to be a Mark of the Web bypass that travels as an email or Teams attachment, and SAP, Docker Hub, Ghostscript, and the Linux kernel followed with critical flaws of their own.">
+<meta property="og:type" content="article">
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0 auto; padding: 1.25rem 1rem 3rem; max-width: 44rem;
+         font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+         font-size: 15px; line-height: 1.6; overflow-wrap: break-word;
+         background: #fdfdfa; color: #1c1c1a; }
+  @media (prefers-color-scheme: dark) { body { background: #161614; color: #d8d8d2; } }
+  a.skip { position: absolute; left: -999px; top: 0; }
+  a.skip:focus { position: static; display: inline-block; padding: 0.25rem 0.5rem; }
+  header h1 { font-size: 1.3rem; margin: 0; letter-spacing: 0.04em; }
+  header p, footer { font-size: 0.85rem; opacity: 0.8; }
+  hr { border: 0; border-top: 1px solid currentColor; opacity: 0.25; margin: 1.5rem 0; }
+  h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em;
+       margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
+  h3 { font-size: 1rem; margin: 1.75rem 0 0.25rem; scroll-margin-top: 0.5rem; }
+  h4 { font-size: 1rem; margin: 1.5rem 0 0.25rem; scroll-margin-top: 0.5rem; }
+  ul { padding-left: 1.25rem; margin: 0.5rem 0; }
+  li { margin: 0.4rem 0; }
+  p { margin: 0.5rem 0; }
+  a { color: inherit; }
+  .updated { font-style: italic; }
+  details.more summary { cursor: pointer; opacity: 0.8; font-size: 0.85rem; }
+  details.more[open] summary { margin-bottom: 0.25rem; }
+  /* Sections folded away by default (reading, markets, feed health). The h2
+     stays a real heading for the outline and for screen readers; the summary
+     row is the click target and carries the section's scroll anchor. */
+  details.fold { margin: 2rem 0 0.75rem; scroll-margin-top: 0.5rem; }
+  details.fold > summary { cursor: pointer; }
+  details.fold > summary > h2 { display: inline; margin: 0; }
+  details.fold[open] > summary { margin-bottom: 0.75rem; }
+  details.fold > summary:hover > h2 { text-decoration: underline;
+                                      text-underline-offset: 3px; }
+  .tags { font-size: 0.85rem; opacity: 0.8; }
+  .sources { font-size: 0.85rem; margin-top: 0.4rem; }
+  .sources a { overflow-wrap: anywhere; }
+  .headline { font-size: 1.05rem; font-weight: bold; margin-top: 1rem; }
+  .note { font-size: 0.85rem; font-style: italic; opacity: 0.85; }
+  nav { font-size: 0.85rem; margin-top: 0.25rem; }
+  nav.jump { margin: 0.75rem 0 0; }
+  nav.jump a { margin-right: 0.25rem; }
+  pre { margin: 0.5rem 0; overflow-x: auto; line-height: 1.5;
+        font-family: inherit; font-size: inherit; }
+  .team { font-weight: bold; margin: 1rem 0 0.1rem; }
+  .gameline { margin: 0.35rem 0 0; }
+  .lbl { opacity: 0.75; }
+  .sub { opacity: 0.8; margin: 0.1rem 0 0 1.4em; }
+  a.game { color: #7a5700; font-weight: bold; text-underline-offset: 2px;
+           overflow-wrap: anywhere; }
+  @media (prefers-color-scheme: dark) { a.game { color: #ffd24a; } }
+  .up { color: #157f3b; } .down { color: #c0392b; } .flat { opacity: 0.8; }
+  @media (prefers-color-scheme: dark) {
+    .up { color: #5dd48f; } .down { color: #ff8a80; }
+  }
+  .health { font-size: 0.85rem; }
+  /* per-story "back to top" */
+  a.totop { font-size: 0.85rem; opacity: 0.75; text-decoration: none; white-space: nowrap; }
+  /* combined trends + key-updates list: clearly underline the inline jump links */
+  h2#glance + ul a { text-decoration: underline; text-underline-offset: 2px; }
+  li.glance { margin: 0.5rem 0; }
+  .glabel { display: inline-block; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.06em; font-weight: bold;
+            padding: 0 0.35rem; margin-right: 0.4rem; border-radius: 3px; }
+  li.trend .glabel { color: #157f3b; background: rgba(21,127,59,.14); }
+  li.update .glabel { color: #7a5700; background: rgba(122,87,0,.14); }
+  @media (prefers-color-scheme: dark) {
+    li.trend .glabel { color: #5dd48f; background: rgba(93,212,143,.16); }
+    li.update .glabel { color: #ffd24a; background: rgba(255,210,74,.16); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+<h1><a href="../index.html" style="text-decoration:none">infosecfollow</a></h1>
+<p>daily plain-text briefing: security, markets, business, and pittsburgh</p>
+<nav>Wednesday, October 14, 2026 &middot; 7:06 AM EDT &middot; <a href="index.html">archive</a> &middot; <a href="2026-10-14-0706.txt">plain text</a></nav>
+<nav class="jump" aria-label="Sections">Jump to: <a href="#glance">Emerging Trends and Key Updates</a> &middot; <a href="#security">Security</a> &middot; <a href="#business">Business and Politics</a> &middot; <a href="#pittsburgh">Pittsburgh</a> &middot; <a href="#sports">Sports</a> &middot; <a href="#reading">Reading</a> &middot; <a href="#markets">Markets</a> &middot; <a href="#health">Feed Health</a></nav>
+</header>
+<main id="main">
+<p id="top" class="headline">The exploited flaw in Microsoft&#x27;s record 1,413-fix Patch Tuesday turns out to be a Mark of the Web bypass that travels as an email or Teams attachment, and SAP, Docker Hub, Ghostscript, and the Linux kernel followed with critical flaws of their own.</p>
+<hr>
+<h2 id="glance">Emerging Trends and Key Updates</h2>
+<ul>
+<li class="glance trend"><span class="glabel">Trend</span> <a href="#i-6e56ced53d">SAP</a> shipped a CVSS 10 Cloud SDK for Python flaw as attackers already exploited a Mark of the Web bypass in <a href="#i-af908dabc4">Windows Shell</a>, forcing triage by exploitability.</li>
+<li class="glance trend"><span class="glabel">Trend</span> Police pressure shifted to the people staffing fraud, as agents seized 187 laptops across <a href="#i-2cf131532c">Texas</a> in a North Korean worker case and <a href="#i-d0104b2bc6">Ghana and Nigeria</a> freed 100-plus victims.</li>
+<li class="glance update"><span class="glabel">Update &middot; new</span> Tencent Zhuque Lab&#x27;s AI-assisted hunt surfaced <a href="#i-0a34dc42ef">Vghost</a>, a decade-old vhost kernel escape, while <a href="#i-0e8c653d00">Meta</a> disclosed stolen source code and data on 1,500 staff from its GitHub.</li>
+<li class="glance update"><span class="glabel">Update &middot; new</span> Morgan Stanley lifted its Brent forecast to $105 after a Houthi strike on <a href="#i-7c7275c7ff">Aramco</a> in Dhahran, while China&#x27;s <a href="#i-2702999062">36.3% export jump</a> and <a href="#i-1a59998f5a">Bowman</a>&#x27;s inflation caution reset rate bets.</li>
+<li class="glance update"><span class="glabel">Update &middot; new</span> Data centers dominate local politics as <a href="#i-a69d09ac0b">Springdale&#x27;s proposal</a> enters Allegheny County review and <a href="#i-501c199b5c">Deluzio and Guy</a> split over them in their KDKA debate.</li>
+<li class="glance trend"><span class="glabel">Trend</span> Skepticism about AI&#x27;s economics sharpened, with <a href="#i-7b6497b9d4">Zitron</a> calling annualized revenue run rates Enron-style bookkeeping and <a href="#i-190277f965">Ben Thompson</a> questioning the market for Apple TV hardware built on weak models.</li>
+</ul>
+<h2 id="security">Security</h2>
+<h3 id="i-af908dabc4">1. Exploited Windows Shell Bug Strips Mark of the Web</h3>
+<p class="tags">Vulnerabilities and Exploits &middot; [patch, zero-day]</p>
+<p class="updated">Latest developments: Help Net Security detailed CVE-2026-96951 on October 14, 2026 as a Mark of the Web bypass in Windows Shell that a remote attacker triggers with a crafted file sent by email, instant message, Teams, or Slack; SecurityWeek and The Hacker News counted 1,413 fixes in the release, among them 1,102 in Windows, 134 in Office, and 36 in SharePoint Server; and Microsoft confirmed that the same updates stop non-admin users from connecting over Remote Desktop on devices running the Administrator protection feature.</p>
+<details class="more"><summary>read more</summary><p>The Mark of the Web flag tells Windows a file came from the internet and triggers the warning prompts that follow; CVE-2026-96951 removes that signal, leaving SmartScreen and Office protections quiet. Attackers already exploit it, CISA put it in the Known Exploited Vulnerabilities catalog, and administrators who install the October updates should plan for the Remote Desktop regression and for Windows 11 24H2 Home and Pro falling out of support.</p></details>
+<p class="sources">Sources: <a href="https://www.helpnetsecurity.com/2026/10/14/microsoft-patch-tuesday-cve-2026-96951-motw-bypass/">Help Net Security</a> &middot; <a href="https://www.securityweek.com/microsoft-patches-record-1413-vulnerabilities-including-exploited-windows-zero-day/">SecurityWeek</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/microsoft-recent-windows-updates-may-trigger-remote-desktop-failures/">BleepingComputer</a> &middot; <a href="https://krebsonsecurity.com/2026/10/microsoft-patches-more-than-1400-security-flaws/">Krebs on Security</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-6e56ced53d">2. SAP, Docker Hub, and Ghostscript Ship Critical Fixes</h3>
+<p class="tags">Vulnerabilities and Exploits &middot; [patch, supply chain]</p>
+<p class="updated">Latest developments: SAP disclosed on October 13, 2026 a CVSS 10 flaw in its Cloud SDK for Python that hands an application&#x27;s OAuth2 client credentials to a server the attacker controls once the attacker controls a tenant subdomain, one of 20 fixes that also close critical NetWeaver and S/4HANA bugs; Docker patched CVE-2026-105445, a two-year-old Docker Hub flaw in the personal-account-to-organization conversion that let one user push, pull, or delete another user&#x27;s images with a personal access token; the Ghostscript maintainers fixed CVE-2026-39919, a heap buffer overflow that reaches remote code execution through a crafted PDF; Citrix, Fortinet, and Ivanti together closed 29 flaws; and Adobe shipped 176 across 11 products including Commerce, ColdFusion, and Photoshop.</p>
+<details class="more"><summary>read more</summary><p>The flaws sit in build pipelines and document plumbing: any web service that renders uploaded PDFs through Ghostscript runs attacker code, and the Docker Hub bug let tampered images travel under a trusted publisher&#x27;s name. Docker fixed its flaw on September 30, 2026 and found no evidence anyone exploited it; patch SAP Business Technology Platform applications, Ghostscript, and the Citrix, Fortinet, and Ivanti gateways now.</p></details>
+<p class="sources">Sources: <a href="https://thehackernews.com/2026/10/sap-discloses-critical-cvss-10-flaw-in.html">The Hacker News</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/docker-hub-flaw-let-attackers-impersonate-users-tamper-with-images/">BleepingComputer</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/ghostscript-flaw-lets-hackers-hijack-servers-via-pdf-uploads/">BleepingComputer</a> &middot; <a href="https://www.securityweek.com/citrix-fortinet-ivanti-patch-29-vulnerabilities-across-their-products/">SecurityWeek</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-2cf131532c">3. Texas Laptop Farms Raided in North Korean Worker Case</h3>
+<p class="tags">Nation-State Activity &middot; [apt, fraud]</p>
+<p class="updated">Latest developments: The Justice Department disclosed on October 13, 2026 that federal investigators searched more than 40 residences across Texas in September 2026, seized 187 laptops that North Korean IT workers used to hide their location, and arrested two people, with the farms feeding roughly $3 million in revenue back to the North Korean regime.</p>
+<details class="more"><summary>read more</summary><p>North Korea places remote IT workers inside American companies under stolen or borrowed identities, and United States-based facilitators keep the employer-issued laptops running at home addresses so the traffic looks domestic. Employers should verify identity documents in person, watch corporate hardware for remote-control tooling, and check whether a hire&#x27;s shipping address matches a known farm.</p></details>
+<p class="sources">Sources: <a href="https://www.securityweek.com/us-arrests-two-in-crackdown-on-north-korean-it-worker-laptop-farms/">SecurityWeek</a> &middot; <a href="https://therecord.media/north-korea-laptop-farms-worker-scams-doj-raids-texas">The Record</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-0a34dc42ef">4. Vghost Flaw Breaks Virtual Machines Out to the Host</h3>
+<p class="tags">Vulnerabilities and Exploits &middot; [vulnerability, cloud]</p>
+<p class="updated">Latest developments: Tencent Zhuque Lab, hunting with AI, found CVE-2026-74580, named Vghost, in the Linux kernel&#x27;s vhost subsystem: a local user reads and writes kernel memory at will and becomes root across nearly a decade of kernel versions, and in one virtualization configuration an untrusted virtual machine writes to the host&#x27;s memory and hijacks the process running it.</p>
+<details class="more"><summary>read more</summary><p>vhost carries network and storage traffic for virtual machines inside the kernel, so cloud and hosting operators running multi-tenant KVM hold the exposure along with anyone who gives shell access to untrusted users. Patch kernels and start with hosts that run guests you do not control.</p></details>
+<p class="sources">Sources: <a href="https://thehackernews.com/2026/10/ai-found-linux-kernel-flaw-gives-local.html">The Hacker News</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-d0104b2bc6">5. Ghana and Nigeria Raids Free Trafficking Victims</h3>
+<p class="tags">Ransomware and Cybercrime &middot; [fraud, law enforcement]</p>
+<p class="updated">Latest developments: Police in Ghana and Nigeria arrested more than two dozen people in raids on scam compounds and brought out more than 100 suspected trafficking victims, part of an operation the United Kingdom hosted with technology companies taking part, The Record reported on October 13, 2026.</p>
+<details class="more"><summary>read more</summary><p>Scam compounds hold trafficked workers and put them to work running romance and investment fraud against victims online. The raids mark West Africa as the newest front for the compound model and put the operators, along with their recruitment pipelines, in front of prosecutors in Accra and Abuja.</p></details>
+<p class="sources">Sources: <a href="https://therecord.media/ghana-nigeria-scam-centers-raided-uk-us">The Record</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-0e8c653d00">6. Meta Loses Code and Staff Data in GitHub Breach</h3>
+<p class="tags">Data Breaches &middot; [breach, supply chain]</p>
+<p class="updated">Latest developments: Meta said hackers took source code along with the personal data of about 1,500 people, most of them Meta employees in the United States, through a breach of its GitHub presence, and the company now offers those people credit monitoring, SecurityWeek reported on October 13, 2026.</p>
+<details class="more"><summary>read more</summary><p>The theft pairs proprietary code with employee records, the combination that fuels later social engineering against the staff who hold production access. Engineering organizations should audit which repositories hold personal data and which third-party applications carry tokens into their GitHub organizations.</p></details>
+<p class="sources">Sources: <a href="https://www.securityweek.com/meta-says-hackers-took-code-personal-data-of-1500-in-github-breach/">SecurityWeek</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h2 id="business">Business and Politics</h2>
+<h3 id="i-7c7275c7ff">Houthi Strike on Aramco&#x27;s Headquarters Lifts Crude</h3>
+<p class="updated">Latest developments: Saudi Arabia&#x27;s Energy Ministry said a Saudi Aramco building in Dhahran took a hit Tuesday evening, October 13, oil prices rose Wednesday, Morgan Stanley raised its Dated Brent forecast to $105 for the fourth quarter and $100 for the first quarter of 2027 on tanker freight costs, and the International Energy Agency said the global diesel squeeze will drag into 2027.</p>
+<details class="more"><summary>read more</summary><p>Iran-backed Houthi militants struck the Dhahran headquarters of Saudi Aramco, the world&#x27;s largest oil company, in retaliation for Riyadh-led coalition attacks on sites in Sanaa, days after missiles hit Riyadh&#x27;s international airport. The IEA counts third-quarter diesel supply down 1.7 million barrels a day as the Iran war curtails flows through the Strait of Hormuz, which leaves refiners, shippers, and fuel buyers worldwide exposed to a shortage that now runs through next year.</p></details>
+<p class="sources">Sources: <a href="https://www.wsj.com/world/middle-east/houthi-strike-hits-building-at-saudi-aramco-headquarters-a436de59?mod=rss_worldnews">WSJ World News</a> &middot; <a href="https://www.ft.com/content/a25417b3-d4e4-4b89-b14d-6370a85ce3c4?syn-25a6b1a6=1">FT Home</a> &middot; <a href="https://www.wsj.com/business/energy-oil/oil-prices-rise-as-traders-weigh-saudi-aramco-attack-report-hormuz-shipping-risks-0f09ed61?mod=pls_whats_news_us_business_f">WSJ US Business</a> &middot; <a href="https://www.wsj.com/finance/commodities-futures/oil-rises-amid-ongoing-middle-east-tensions-6e2a3ee0?mod=rss_markets_main">WSJ Markets</a> &middot; <a href="https://www.wsj.com/business/energy-oil/global-diesel-squeeze-to-drag-into-2027-iea-says-c7d06769?mod=pls_whats_news_us_business_f">WSJ US Business</a> &middot; <a href="https://www.ft.com/content/c69ef2f5-0644-4ec3-accb-cbc8d633e008?syn-25a6b1a6=1">FT World</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-c2e14397f9">Starlink Speed Limits Blunt Ukraine&#x27;s Attacks</h3>
+<p class="updated">Latest developments: Ukrainian officials said Wednesday, October 14, that new speed limits on their Starlink terminals have degraded their ability to hit Russian targets and intercept drones, and the Financial Times reported that Kyiv also faces fresh gaps in United States intelligence sharing while Moscow ignores the energy ceasefire President Trump announced October 11.</p>
+<details class="more"><summary>read more</summary><p>Ukraine&#x27;s army routes drone operations and artillery targeting through Elon Musk&#x27;s satellite network, so throttled terminals reach directly into the pace of its strikes on Russian refineries and its air defense. Russia has kept bombing Ukrainian energy infrastructure since Trump declared the truce, which Moscow never confirmed.</p></details>
+<p class="sources">Sources: <a href="https://www.wsj.com/world/europe/ukraine-says-new-starlink-speed-limit-is-disrupting-its-attacks-79225e19?mod=rss_worldnews">WSJ World News</a> &middot; <a href="https://www.ft.com/content/37085602-726a-44dc-a859-51caab38eb75?syn-25a6b1a6=1">FT Home</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-2702999062">Chinese Exports Jump 36.3% in September</h3>
+<p class="updated">Latest developments: China reported Wednesday, October 14, that September exports rose 36.3% from a year earlier, far above market expectations.</p>
+<details class="more"><summary>read more</summary><p>A surge of that size pushes more Chinese goods into markets already fighting over them, and it lands days after Brussels moved to cap Chinese hybrid and plug-in hybrid imports at 350,000 vehicles a year. Exporters, European and American manufacturers, and the trade negotiators on both sides all feel it.</p></details>
+<p class="sources">Sources: <a href="https://www.wsj.com/world/china/chinese-exports-accelerated-in-september-188b0884?mod=rss_worldnews">WSJ World News</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3 id="i-1a59998f5a">The Rate Path Hinges on September CPI</h3>
+<p class="updated">Latest developments: Hours before the September consumer-price report, Federal Reserve vice chair for supervision Michelle Bowman said Wednesday, October 14, that inflation sits above the central bank&#x27;s goal and that policymakers have room to assess developments before acting again, Bank of England chief economist Huw Pill called himself skeptical that four rate rises will be needed to tame United Kingdom inflation, the euro fell to its lowest level against sterling since June 2025, and stock futures ticked higher as Treasurys strengthened.</p>
+<details class="more"><summary>read more</summary><p>The September inflation print will shape expectations for the Federal Reserve&#x27;s meeting in two weeks, after minutes showed officials tilting inflation risks upward while feeling no urgency to move in October. Bank of America missed earnings expectations the same morning and BlackRock reported record assets on $205 billion of net inflows.</p></details>
+<p class="sources">Sources: <a href="https://www.wsj.com/economy/central-banking/feds-bowman-says-inflation-above-goal-but-no-urgency-to-act-e20f9529?mod=rss_markets_main">WSJ Markets</a> &middot; <a href="https://www.wsj.com/world/uk/boes-pill-skeptical-four-rate-rises-needed-to-tame-inflation-a1b840a2?mod=rss_worldnews">WSJ World News</a> &middot; <a href="https://www.wsj.com/finance/stocks/stock-futures-tick-higher-treasurys-strengthen-ahead-of-inflation-data-3fd584f5?mod=rss_markets_main">WSJ Markets</a> &middot; <a href="https://www.wsj.com/finance/currencies/asian-currencies-consolidate-ahead-of-u-s-cpi-data-993f6e8d?mod=rss_markets_main">WSJ Markets</a> &middot; <a href="https://www.wsj.com/livecoverage/stock-market-cpi-inflation-10-14-2026?mod=rss_markets_main">WSJ Markets</a> &middot; <a href="https://www.ft.com/content/63e3c39b-357f-4a87-adf0-090c60c929a7?syn-25a6b1a6=1">FT World</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h2 id="pittsburgh">Pittsburgh</h2>
+<h3>Weather</h3>
+<p>Today: Showers And Thunderstorms, high 78F.</p>
+<p>Tonight: Chance Showers And Thunderstorms then Mostly Cloudy, low 54F.</p>
+<p>Thursday: Partly Sunny then Chance Rain Showers, high 72F.</p>
+<h3>Business</h3>
+<h4 id="i-8de06d7a3a">Skill Games Count Their Cost in the Alle-Kiski Valley</h4>
+<p class="updated">Latest developments: The removal deadline passed with no action from the General Assembly, and TribLive reported Wednesday, October 14, that Amanda Frieze got the call at 9:30 a.m. on October 6 to shut down the machines at the Keystone Klub in Penn Township, one of the retailers, private clubs, and municipalities now absorbing the lost revenue; KDKA reported the terminals became illegal statewide Wednesday.</p>
+<details class="more"><summary>read more</summary><p>The Supreme Court of Pennsylvania refused to extend the deadline for businesses to pull unregulated skill game terminals, and legislators adjourned without passing the bill that would have taxed and regulated them. Taverns, Veterans of Foreign Wars posts, and social clubs that split the proceeds lose a steady income line, and the host municipalities lose their share.</p></details>
+<p class="sources">Sources: <a href="https://triblive.com/local/valley-news-dispatch/skill-game-deadline-passes-without-legislative-action-retailers-clubs-local-government-left-with-income-loss/">TribLive</a> &middot; <a href="https://www.cbsnews.com/pittsburgh/video/pennsylvania-skill-games-become-illegal-wednesday/">KDKA</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h4 id="i-d00d3f0319">Astrobotic&#x27;s Griffin Lander Clears Inspections</h4>
+<p class="updated">Latest developments: The Post-Gazette reported Wednesday, October 14, that Griffin, the lunar lander Astrobotic Technology built in Pittsburgh, has passed its inspections and now points toward the moon.</p>
+<details class="more"><summary>read more</summary><p>Astrobotic, headquartered on Pittsburgh&#x27;s North Side, builds spacecraft for NASA&#x27;s commercial lunar delivery program and lost its first lander, Peregrine, shortly after launch in January 2024. Griffin is the company&#x27;s largest, and a successful flight would put Pittsburgh hardware on the lunar surface.</p></details>
+<p class="sources">Sources: <a href="https://www.post-gazette.com/business/tech-news/2026/10/14/griffin-lunar-lander-passes-inspections-nasa-astrobotic-voyager/stories/202610130046">Pittsburgh Post-Gazette</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h4 id="i-a69d09ac0b">Two Data Center Proposals Reach Allegheny County Residents</h4>
+<p class="updated">Latest developments: PublicSource reported Wednesday, October 14, that the Springdale data center proposal has entered Allegheny County&#x27;s subdivision and land development review, starting with a virtual meeting Wednesday evening followed by an in-person hearing and a written comment period, while WTAE reported that a separate data center proposed in Elizabeth Township remains in early stages after a contentious town hall Tuesday evening, October 13.</p>
+<details class="more"><summary>read more</summary><p>Developers have targeted both Allegheny County river towns for computing campuses that draw heavy electricity loads, and residents have pressed on power costs, noise, and who gets a say. Energy Secretary Chris Wright fielded the same questions about Western Pennsylvania data centers in a KDKA interview last week, and Governor Josh Shapiro and challenger Stacy Garrity argued over them in their only debate.</p></details>
+<p class="sources">Sources: <a href="https://www.publicsource.org/springdale-data-center-county-saldo-review/">PublicSource</a> &middot; <a href="https://www.wtae.com/article/elizabeth-township-data-center-town-hall/74126499">WTAE</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3>Around Town</h3>
+<h4 id="i-501c199b5c">Deluzio and Guy Trade Answers on Iran and Data Centers</h4>
+<p class="updated">Latest developments: The debate happened: United States Representative Chris Deluzio and Republican challenger Tony Guy met in the KDKA-TV studio Tuesday, October 13, and split over Iran, data centers, and more.</p>
+<details class="more"><summary>read more</summary><p>Deluzio, a Democrat, holds Pennsylvania&#x27;s 17th Congressional District, which covers Pittsburgh&#x27;s northern and western suburbs plus Beaver County. Voters decide the race on November 3.</p></details>
+<p class="sources">Sources: <a href="https://www.cbsnews.com/pittsburgh/news/chris-deluzio-tony-guy-televised-debate/">KDKA</a> &middot; <a href="https://www.cbsnews.com/pittsburgh/video/chris-deluzio-and-tony-guy-debate-data-centers-iran-and-more/">KDKA</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h4 id="i-21593231bf">Etna Opens Its Center for Community</h4>
+<p class="updated">Latest developments: NEXTpittsburgh reported Wednesday, October 14, that the Etna Center for Community opens this weekend.</p>
+<details class="more"><summary>read more</summary><p>The project converts one of the borough&#x27;s most historic buildings, a 1920s speakeasy, into a gathering space for Etna residents along the Allegheny River in Allegheny County.</p></details>
+<p class="sources">Sources: <a href="https://nextpittsburgh.com/city-design/etna-center-for-community-opens-this-weekend/">NEXTpittsburgh</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h4 id="i-dfe8e43b3b">A Cool Front Brings Storms Wednesday Afternoon</h4>
+<p class="updated">Latest developments: KDKA added a severe storm risk to Wednesday afternoon, October 14, as a cool front crosses parts of Western Pennsylvania, and WTAE tags the day an Impact Day for scattered rain, isolated storms, and gusty winds, with a second Impact Day behind it.</p>
+<details class="more"><summary>read more</summary><p>Tuesday&#x27;s push toward 80 degrees gives way to roughly 30 degrees of cooling behind the week&#x27;s fronts, and forecasters have flagged the chance of snow at higher elevations by the weekend.</p></details>
+<p class="sources">Sources: <a href="https://www.cbsnews.com/pittsburgh/news/storm-and-severe-weather-possible-wednesday-pittsburgh-weather/">KDKA</a> &middot; <a href="https://www.wtae.com/article/impact-day-scattered-rain-isolated-storms/74129150">WTAE</a> &middot; <a href="https://www.wtae.com/article/warm-breezy-today-impact-day-with-rain-wednesday/74116549">WTAE</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3>Events</h3>
+<h4 id="i-6762ca3e35">Othello Lines Up in the End Zone</h4>
+<p class="updated">Latest developments: The Post-Gazette previewed &quot;Othello of the End Zone&quot; on Wednesday, October 14.</p>
+<details class="more"><summary>read more</summary><p>The demaskus Theater Collective crosses Shakespeare&#x27;s &quot;Othello&quot; with Steelers football in the production, staged at the New Hazlett Theater on Pittsburgh&#x27;s North Side.</p></details>
+<p class="sources">Sources: <a href="https://www.post-gazette.com/ae/theater-dance/2026/10/14/othello-end-zone-demaskus-new-hazlett-pittsburgh/stories/202610120038">Post-Gazette Arts &amp; Entertainment</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h2 id="sports">Sports</h2>
+<p class="team">Steelers (3-2)</p>
+<p class="gameline"><span class="lbl">Up Next &middot;</span> <a class="game" href="https://plaintextsports.com/nfl/2026/week6/pit-tb">Steelers @ Buccaneers</a> <span class="lbl">&middot; Sun Oct 18, 1:00 PM</span></p>
+<p class="team">Penguins (3-3)</p>
+<p class="gameline"><span class="lbl">Tue Oct 13 &middot;</span> <a class="game" href="https://plaintextsports.com/nhl/2026-10-13/pit-chi">Penguins 3 · Blackhawks 5 · Final</a></p>
+<p class="sub">Teuvo Teravainen helps the Blackhawks beat the Penguins 5-3 in Connor Bedard&#x27;s season debut</p>
+<p class="gameline"><span class="lbl">Up Next &middot;</span> <a class="game" href="https://plaintextsports.com/nhl/2026-10-16/pit-col">Penguins @ Avalanche</a> <span class="lbl">&middot; Fri Oct 16, 9:00 PM</span></p>
+<h3>Around the Teams</h3>
+<h4 id="i-f5291f2caa">Not Just Football Turns to Tampa Bay</h4>
+<p class="updated">Latest developments: Cam Heyward and Hayden Walsh posted Wednesday&#x27;s episode of Not Just Football, October 14, breaking down the Steelers&#x27; win at the Indianapolis Colts and looking ahead to Sunday&#x27;s game at the Tampa Bay Buccaneers.</p>
+<details class="more"><summary>read more</summary><p>Heyward, the Steelers&#x27; defensive lineman, also argued over Jayden Daniels&#x27;s wild late-game finish for the Washington Commanders, swapped trash-talk stories with Walsh, explained what makes a pregame speech work, and disagreed with his co-host over whether &quot;Remember the Titans&quot; ranks as the best football movie ever made. The Steelers play at Tampa Bay on Sunday, October 18, at 1 p.m. Eastern on CBS.</p></details>
+<p class="sources">Sources: <a href="https://www.youtube.com/watch?v=CpS4d9Kp7lY">Not Just Football with Cam Heyward</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h4 id="i-62e28dd9de">SNR Drive Takes Stock of the Rookie Class</h4>
+<p class="updated">Latest developments: Matt Williamson and Wes Uhler gave most of Tuesday&#x27;s SNR Drive, October 13, to the Steelers&#x27; 2026 rookie class, then ran through the Week 6 NFL power rankings and recapped head coach Mike McCarthy&#x27;s Monday news conference.</p>
+<details class="more"><summary>read more</summary><p>The Steelers have leaned on first-year players as injuries thinned the roster, with cornerback Daylen Everette drawing snaps in a depleted secondary and receiver Germie Bernard growing into the offense. SNR Drive is the Steelers&#x27; own daily show, and Williamson and Uhler note their opinions belong to them rather than the team.</p></details>
+<p class="sources">Sources: <a href="https://www.youtube.com/watch?v=iBgisq6Z6Us">Pittsburgh Steelers (YouTube)</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<h3>Team USA</h3>
+<h4 id="i-7b48485c1a">Swanson&#x27;s Bench Goal Salvages a Draw With Spain</h4>
+<p class="updated">Latest developments: Mallory Swanson came off the bench Tuesday night, October 13, and scored her first goal since the 2024 Olympics as the United States women erased a two-goal deficit against top-ranked Spain for a 2-2 draw, closing the two-match series.</p>
+<details class="more"><summary>read more</summary><p>Emma Hayes&#x27;s second-ranked team lost 2-0 to the reigning World Cup champion on Saturday, October 10, then fell behind by two again before substitutes Ashley Sanchez and Swanson turned the rematch; ESPN rated both players 9 out of 10. The pair of friendlies served as the Americans&#x27; measuring stick ahead of the 2027 Women&#x27;s World Cup.</p></details>
+<p class="sources">Sources: <a href="https://www.espn.com/soccer/story/_/id/50179142/swanson-late-goal-salvages-draw-usa-spain">ESPN Soccer</a> &middot; <a href="https://www.espn.com/soccer/story/_/id/50178222/player-ratings-sanchez-swanson-get-9s-uswnts-comeback-draw-spain">ESPN Soccer</a> &middot; <a href="https://www.espn.com/soccer/story/_/id/50178951/uswnt-never-say-die-dna-full-display-fightback-draw-spain">ESPN Soccer</a> &middot; <a class="totop" href="#top">↑ top</a></p>
+<details class="fold" id="reading">
+<summary><h2>Reading</h2></summary>
+<ul>
+<li id="i-190277f965"><strong>Stratechery</strong> &mdash; <a href="https://stratechery.com/2026/apple-homeview-the-new-apple-tv-the-app-story/">Apple HomeView, The New Apple TV, The App Story</a>. Ben Thompson works through Apple&#x27;s official HomeView announcement and the new Apple TV, and asks how large an addressable market exists for expensive hardware built on subpar artificial intelligence.</li>
+<li id="i-7b6497b9d4"><strong>Ed Zitron</strong> &mdash; <a href="https://www.wheresyoured.at/annualized-enron-rate/">Annualized Enron Rate</a>. Zitron attacks the annualized revenue run rates that artificial intelligence companies quote to investors, arguing the figures function as Enron-style bookkeeping that inflates how much money the industry actually collects.</li>
+</ul>
+</details>
+<details class="fold" id="markets">
+<summary><h2>Markets</h2></summary>
+<p class="tags">weekly average, change vs prior week</p>
+<pre class="markets">S&amp;P 500     7,798.27  <span class="up">▲ +0.9%</span>
+Dow        51,517.42  <span class="up">▲ +0.7%</span>
+Nasdaq     27,309.70  <span class="up">▲ +0.4%</span>
+WTI crude      91.90  <span class="up">▲ +1.4%</span>
+EUR/USD       1.1207  <span class="down">▼ -0.6%</span>
+GBP/USD       1.3232  <span class="flat">= +0.0%</span>
+USD/JPY       158.23  <span class="up">▲ +0.3%</span></pre>
+</details>
+<details class="fold" id="health">
+<summary><h2>Feed Health</h2></summary>
+<p class="health">Security: 24 of 24 feeds loaded, 73 items in the 24-hour window. No recent items: Schneier on Security, Ars Technica Security, Securelist (Kaspersky), Google Online Security Blog, Graham Cluley, Microsoft Security Blog, Google Project Zero, The DFIR Report, Frank on Fraud.</p>
+<p class="health">Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.</p>
+<p class="health">Business and Politics: 8 of 8 feeds loaded, 60 items in the 36-hour window.</p>
+<p class="health">Events: 4 of 4 feeds loaded, 12 items in the 120-hour window. No recent items: NEXTpittsburgh Events, NEXTpittsburgh Arts &amp; Entertainment.</p>
+<p class="health">Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour window.</p>
+<p class="health">Team USA: 3 of 3 feeds loaded, 26 items in the 72-hour window. No recent items: Guardian Olympics.</p>
+<p class="health">Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window. No recent items: Cal Newport.</p>
+<p class="health">Markets (Yahoo Finance): 7 of 7 rows</p>
+<p class="health">Weather (NWS): 3 forecast periods</p>
+<p class="health">Scores (ESPN, plaintextsports): 2 teams via ESPN</p>
+<p class="health">Summaries: 3 model call(s) served by claude-opus-5 (380s of model time; $1.95 at API list price).</p>
+</details>
+</main>
+<hr>
+<footer>
+<p>Generated 2026-10-14 07:06 EDT. Updated weekdays at about 7:05 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports beat and podcast feeds; 3 Team USA feeds; WSJ World News, WSJ Markets, WSJ US Business, WSJ Politics, The Economist, FT Home, FT World, FT Markets; and Ed Zitron, Stratechery, Cal Newport. Market data from Yahoo Finance (weekly averages), weather from the National Weather Service, scores from ESPN or plaintextsports.com.</p>
+<p>Summaries are AI-generated from the linked reporting; verify details at the sources.</p>
+</footer>
+<script>
+function openTarget() {
+  var id = location.hash ? decodeURIComponent(location.hash.slice(1)) : "";
+  var el = id ? document.getElementById(id) : null;
+  if (!el) return;
+  for (var p = el; p; p = p.parentElement) if (p.tagName === "DETAILS") p.open = true;
+  el.scrollIntoView();
+}
+addEventListener("hashchange", openTarget);
+openTarget();
+</script>
+</body></html>
