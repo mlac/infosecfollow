@@ -1,23 +1,23 @@
 {
   "date": "2026-10-14",
-  "headline": "Attackers run root commands through a fresh Cisco Secure Email Gateway zero-day and an Ivanti Connect Secure chain while Microsoft ships a record 1,413 fixes.",
+  "headline": "Ivanti, Cisco, and Palo Alto Networks all shipped patches for zero-days attackers already exploit in internet-facing security appliances, and CISA added four of those bugs to its Known Exploited Vulnerabilities catalog.",
   "emerging_trends": [
     {
-      "text": "AI agents now do the exploit work themselves, as XBOW chained three unknown Chrome bugs into a full attack in six days using OpenAI's publicly available GPT-5.6 Sol, Tencent Zhuque Lab surfaced a decade-old Linux kernel root flaw, and Booz Allen watched models cross from a perimeter compromise into an industrial control network in just over 16 minutes.",
-      "topic_title": "AI Agents Build a Chrome Exploit Chain in Six Days",
-      "link_phrase": "XBOW",
+      "text": "Three exploited zero-days in perimeter security gear surfaced in a single day—Ivanti Connect Secure, Cisco Secure Email Gateway, and PAN-OS firewalls—and CISA added four bugs to its Known Exploited Vulnerabilities catalog, which puts the equipment guarding the network at the top of the risk list.",
+      "topic_title": "Palo Alto PAN-OS Zero-Day Exploited in Firewall Attacks",
+      "link_phrase": "PAN-OS",
       "_anchor": "trend-1"
     },
     {
-      "text": "The corporate perimeter keeps giving way at the appliance, with attackers executing commands as root through a Cisco Secure Email Gateway zero-day, a separate actor chaining three zero-days against Ivanti Connect Secure, and Citrix, Fortinet, and Ivanti closing 29 more flaws the same week.",
-      "topic_title": "Cisco Patches Exploited Secure Email Gateway Zero-Day",
-      "link_phrase": "Secure Email Gateway",
+      "text": "AI now works both sides of the vulnerability trade: XBOW directed GPT-5.6 Sol agents into a complete Chrome exploit chain in six days, while the SneakPeek flaw in Anthropic's Claude Code Desktop quietly hands a developer's SSH private keys and AWS credentials to an attacker.",
+      "topic_title": "Anthropic SneakPeek Flaw Steals Developer Credentials",
+      "link_phrase": "SneakPeek",
       "_anchor": "trend-2"
     },
     {
-      "text": "Governments and vendors are striking the plumbing of cybercrime rather than its operators alone: Microsoft seized the domains behind YAM Store, CoGUI, and Iron Man, the Justice Department charged 14 people over North Korean laptop farms, and the United Kingdom sanctioned the crypto payment platform Cryptomus.",
-      "topic_title": "U.K. Sanctions Cryptomus Over Russian Money Laundering",
-      "link_phrase": "Cryptomus",
+      "text": "Law enforcement stacked up seizures and arrests: Microsoft and Japan's National Police Agency took the YAM Store, CoGUI, and Iron Man phishing markets offline, the Justice Department charged 14 people over North Korean laptop farms, and North Macedonian police arrested the suspected administrator of the OLVX criminal market.",
+      "topic_title": "Texas Laptop Farms Raided in North Korean Worker Case",
+      "link_phrase": "laptop farms",
       "_anchor": "trend-3"
     }
   ],
@@ -25,7 +25,7 @@
     {
       "title": "Ivanti Connect Secure Zero-Day Under Attack",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "CISA told security teams on October 13, 2026 to update Ivanti Connect Secure immediately, saying attackers have exploited the authentication bypass CVE-2026-104935, rated 8.6, since at least October 1, 2026; honeypot sensors logged 105 exploit attempts, and The Record counted this as the sixth exploited Ivanti bug of 2026.",
+      "latest_developments": "Dark Reading reported on October 14, 2026 that Ivanti found and fixed only part of CVE-2026-104935 in July 2026, and that partial repair left the authentication bypass and remote code execution path attackers now ride; CISA told security teams to update immediately, saying exploitation runs back to at least October 1, 2026, and honeypot sensors logged 105 attempts.",
       "summary": "Volexity traced the intrusions to an actor it calls UTA0576, which chained three zero-days to run commands as root on a fully patched 22.8R2.4 appliance without logging in, then collected credentials, pulled configuration data, and mapped the network. Ivanti has fixed two of the three flaws and still owes a patch for the third; customers on 25.1.1.1, 25.1.2.2, and 22.8R2.4 and earlier should update and hunt for compromise now.",
       "tags": [
         "zero-day",
@@ -38,6 +38,11 @@
           "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-admins-to-immediately-fix-ivanti-flaw-exploited-as-zero-day/"
         },
         {
+          "source": "Dark Reading",
+          "title": "Ivanti ICS Zero-Day Attacks Highlight Vendor Patching Hurdles",
+          "url": "https://www.darkreading.com/vulnerabilities-threats/ivanti-ics-zero-day-attacks-vendor-patching"
+        },
+        {
           "source": "The Hacker News",
           "title": "CISA Urges Immediate Ivanti Connect Secure Updates as Honeypots Log 105 Exploit Attempts",
           "url": "https://thehackernews.com/2026/10/cisa-urges-immediate-ivanti-connect.html"
@@ -46,11 +51,6 @@
           "source": "Help Net Security",
           "title": "Attackers chained three Ivanti zero-days to gain root on fully patched VPN appliances",
           "url": "https://www.helpnetsecurity.com/2026/10/14/ivanti-zero-days-gain-root-patched-vpn-appliances/"
-        },
-        {
-          "source": "The Record",
-          "title": "CISA warns of new Ivanti bug being exploited as latest Patch Tuesday breaks records",
-          "url": "https://therecord.media/new-ivanti-microsoft-bugs-exploitation"
         }
       ],
       "_anchor": "i-835a57efab"
@@ -58,7 +58,7 @@
     {
       "title": "Exploited Windows Shell Bug Strips Mark of the Web",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Help Net Security detailed CVE-2026-96951 on October 14, 2026 as a Mark of the Web bypass in Windows Shell that a remote attacker triggers with a crafted file sent by email, instant message, Teams, or Slack; SecurityWeek and The Hacker News counted 1,413 fixes in the release, among them 1,102 in Windows, 134 in Office, and 36 in SharePoint Server; and Microsoft confirmed that the same updates stop non-admin users from connecting over Remote Desktop on devices running the Administrator protection feature.",
+      "latest_developments": "Help Net Security detailed CVE-2026-96951 on October 14, 2026 as a Mark of the Web bypass in Windows Shell that a remote attacker triggers with a crafted file sent by email, instant message, Teams, or Slack; SecurityWeek and The Hacker News counted 1,413 fixes in the release, among them 1,102 in Windows, 134 in Office, and 36 in SharePoint Server, with more than 670 privilege escalation bugs and over 300 remote code execution bugs; researchers separately chained a four-byte write and a timing bug to run their own code inside the VBS enclave that guards SmartScreen's passwords; and Microsoft confirmed the same updates stop non-admin users from connecting over Remote Desktop on devices running the Administrator protection feature.",
       "summary": "The Mark of the Web flag tells Windows a file came from the internet and triggers the warning prompts that follow; CVE-2026-96951 removes that signal, leaving SmartScreen and Office protections quiet. Attackers already exploit it, CISA put it in the Known Exploited Vulnerabilities catalog, and administrators who install the October updates should plan for the Remote Desktop regression and for Windows 11 24H2 Home and Pro falling out of support.",
       "tags": [
         "patch",
@@ -76,14 +76,14 @@
           "url": "https://www.securityweek.com/microsoft-patches-record-1413-vulnerabilities-including-exploited-windows-zero-day/"
         },
         {
+          "source": "The Hacker News",
+          "title": "Four-Byte Write and Timing Bug Let Researchers Run Code in Windows SmartScreen Enclave",
+          "url": "https://thehackernews.com/2026/10/four-byte-write-and-timing-bug-let.html"
+        },
+        {
           "source": "BleepingComputer",
           "title": "Microsoft: Recent Windows updates may trigger Remote Desktop failures",
           "url": "https://www.bleepingcomputer.com/news/security/microsoft-recent-windows-updates-may-trigger-remote-desktop-failures/"
-        },
-        {
-          "source": "Krebs on Security",
-          "title": "Microsoft Patches More Than 1,400 Security Flaws",
-          "url": "https://krebsonsecurity.com/2026/10/microsoft-patches-more-than-1400-security-flaws/"
         }
       ],
       "_anchor": "i-af908dabc4"
@@ -91,8 +91,8 @@
     {
       "title": "Microsoft Seizes Three Chinese-Language Phishing Platforms",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "Microsoft, working with Japan's National Police Agency and Health-ISAC, won a United States court order and on October 14, 2026 seized and redirected the domains that powered YAM Store, CoGUI, and Iron Man, three Chinese-language phishing-as-a-service markets whose customers sent more than a billion malicious messages at over 75,000 organizations in 150 countries; Microsoft's Digital Crimes Unit tracks the phishing kit operators as Storm-2990 and the marketplace selling them tools and infrastructure as Storm-3119.",
-      "summary": "The three platforms rented ready-made phishing kits, hosting, and message delivery to Chinese-speaking criminals, who aimed the resulting floods of texts and emails at consumers and at healthcare and financial organizations. Defenders should treat credential phishing traffic tied to these kits as recurring and expect the operators to rebuild on fresh infrastructure.",
+      "latest_developments": "Microsoft, working with Japan's National Police Agency, the Japan Cybercrime Control Center, Health-ISAC, and the companies Resecurity, Cloudflare, Oracle, Proofpoint, and TRM Labs, won a United States court order and on October 14, 2026 seized and redirected the domains behind YAM Store, CoGUI, and Iron Man, three Chinese-language phishing-as-a-service markets whose customers sent more than a billion malicious messages at over 75,000 organizations in 150 countries; Microsoft's Digital Crimes Unit tracks the kit operators as Storm-2990 and the marketplace selling them tools and infrastructure as Storm-3119.",
+      "summary": "The three platforms rented ready-made phishing kits, cloud hosting, and message delivery to Chinese-speaking criminals, who aimed the resulting floods of texts and emails at consumers and at healthcare and financial organizations. Defenders should treat credential phishing traffic tied to these kits as recurring and expect the operators to rebuild on fresh infrastructure.",
       "tags": [
         "phishing",
         "law enforcement"
@@ -104,14 +104,14 @@
           "url": "https://therecord.media/microsoft-takes-down-3-major-chinese-phishing-platforms"
         },
         {
-          "source": "BleepingComputer",
-          "title": "Global takedown hits network behind 1 billion phishing messages",
-          "url": "https://www.bleepingcomputer.com/news/security/global-takedown-hits-network-behind-1-billion-phishing-messages/"
+          "source": "Dark Reading",
+          "title": "Yam Store: The Phishing Network Behind a Billion Messages",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/yam-store-phishing-network-behind-billion-messages"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Microsoft Disrupts Chinese-Language Phishing Market Behind 1B+ Messages",
-          "url": "https://www.securityweek.com/microsoft-disrupts-chinese-language-phishing-market-behind-1b-messages/"
+          "source": "The Hacker News",
+          "title": "Microsoft Disrupts 3 Phishing Kits Linked to Over 1 Billion Scam Messages",
+          "url": "https://thehackernews.com/2026/10/microsoft-disrupts-3-phishing-kits.html"
         },
         {
           "source": "Microsoft Security Blog",
@@ -124,7 +124,7 @@
     {
       "title": "Texas Laptop Farms Raided in North Korean Worker Case",
       "area": "Nation-State Activity",
-      "latest_developments": "The Justice Department charged 14 people on Tuesday, October 13, 2026, a mix of United States citizens and Chinese nationals, and seized about 187 computers; it arrested Michael James Bostelle of Pennsylvania and Juan Cecilio Pena Carrillo of Texas under an Ohio indictment carrying wire fraud conspiracy, money laundering, and identity theft counts, said the North Korean IT workers they sheltered used stolen and fabricated identities to win remote jobs at more than 70 American companies, and put the revenue routed back to Pyongyang at roughly $3 million; investigators searched more than 40 residences across Texas in September 2026.",
+      "latest_developments": "The Justice Department charged 14 people on Tuesday, October 13, 2026, a mix of United States citizens and Chinese nationals, and seized about 187 computers; it arrested Michael James Bostelle of Pennsylvania and Juan Cecilio Pena Carrillo of Texas under an Ohio indictment carrying wire fraud conspiracy, money laundering, and identity theft counts, said the North Korean IT workers they sheltered used stolen and fabricated identities to win remote jobs at more than 70 American companies, and put the revenue routed back to Pyongyang at roughly $3 million; investigators searched more than 40 residences across Texas in September 2026, and BleepingComputer ties the scheme to the threat group Famous Chollima.",
       "summary": "North Korea places remote IT workers inside American companies under stolen or borrowed identities, and United States-based facilitators keep the employer-issued laptops running at home addresses so the traffic looks domestic. Employers should verify identity documents in person, watch corporate hardware for remote-control tooling, and check whether a hire's shipping address matches a known farm.",
       "tags": [
         "apt",
@@ -137,14 +137,14 @@
           "url": "https://thehackernews.com/2026/10/us-shuts-down-over-40-laptop-farms.html"
         },
         {
+          "source": "BleepingComputer",
+          "title": "FBI raids DPRK IT worker laptop farms in Texas, US nationals arrested",
+          "url": "https://www.bleepingcomputer.com/news/security/fbi-raids-dprk-it-worker-laptop-farms-in-texas-us-nationals-arrested/"
+        },
+        {
           "source": "SecurityWeek",
           "title": "US Arrests Two in Crackdown on North Korean IT Worker Laptop Farms",
           "url": "https://www.securityweek.com/us-arrests-two-in-crackdown-on-north-korean-it-worker-laptop-farms/"
-        },
-        {
-          "source": "The Record",
-          "title": "Two arrested as DOJ takes down laptop farms responsible for $3 million in North Korean revenue",
-          "url": "https://therecord.media/north-korea-laptop-farms-worker-scams-doj-raids-texas"
         },
         {
           "source": "Help Net Security",
@@ -180,12 +180,63 @@
           "url": "https://www.bleepingcomputer.com/news/security/ghostscript-flaw-lets-hackers-hijack-servers-via-pdf-uploads/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Citrix, Fortinet, Ivanti Patch 29 Vulnerabilities Across Their Products",
-          "url": "https://www.securityweek.com/citrix-fortinet-ivanti-patch-29-vulnerabilities-across-their-products/"
+          "source": "The Hacker News",
+          "title": "curl Patches HTTP/2 Upload Flaw After PoC Demonstrates Client-Side Code Execution",
+          "url": "https://thehackernews.com/2026/10/curl-patches-http2-upload-flaw-after.html"
         }
       ],
       "_anchor": "i-6e56ced53d"
+    },
+    {
+      "title": "Cisco Patches Exploited Secure Email Gateway Zero-Day",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Cisco's advisory on Wednesday, October 14, 2026 identifies the exploited flaw as CVE-2026-76519, a relative path traversal bug: a sender holding no credentials mails a crafted attachment through the gateway, writes files to the appliance's operating system, and then runs commands as root, and CISA added the bug to its Known Exploited Vulnerabilities catalog the same day.",
+      "summary": "Secure Email Gateway appliances filter an organization's mail for spam and malware, so root on one hands an attacker every message that passes through it along with a foothold inside the network. Administrators should install the fix immediately and inspect the appliances for web shells, new accounts, and configuration changes.",
+      "tags": [
+        "zero-day",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Cisco patches new Secure Email Gateway zero-day exploited in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/cisco-patches-actively-exploited-secure-email-gateway-zero-day/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Cisco Warns of Active Attacks Exploiting New Critical Secure Email Gateway Vulnerability",
+          "url": "https://thehackernews.com/2026/10/cisco-warns-of-active-attacks.html"
+        },
+        {
+          "source": "CISA Advisories",
+          "title": "CISA Adds Four Known Exploited Vulnerabilities to Catalog",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/10/14/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+        }
+      ],
+      "_anchor": "i-a7632caf16"
+    },
+    {
+      "title": "Palo Alto PAN-OS Zero-Day Exploited in Firewall Attacks",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Palo Alto Networks released updates on October 14, 2026 for CVE-2026-0322, a high-severity remote code execution zero-day in PAN-OS that attackers already exploit against firewalls, and CISA added it to the Known Exploited Vulnerabilities catalog the same day alongside three other exploited flaws: Cisco Secure Email Gateway's path traversal bug CVE-2026-76519 and the AhsayCBS pair CVE-2026-105133 and CVE-2026-105134.",
+      "summary": "PAN-OS runs Palo Alto Networks firewalls, so code execution on the appliance gives an attacker the device that inspects and routes a company's traffic. Install the PAN-OS updates now, and federal civilian agencies must remediate all four catalog additions on CISA's clock; Ahsay customers still wait on a vendor fix for the AhsayCBS chain.",
+      "tags": [
+        "zero-day",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Palo Alto Networks warns of PAN-OS RCE flaw exploited in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/"
+        },
+        {
+          "source": "CISA Advisories",
+          "title": "CISA Adds Four Known Exploited Vulnerabilities to Catalog",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/10/14/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+        }
+      ],
+      "_anchor": "i-c9a3f02d71"
     },
     {
       "title": "AI Agents Build a Chrome Exploit Chain in Six Days",
@@ -211,101 +262,60 @@
       "_anchor": "i-ecd984dc6b"
     },
     {
-      "title": "Hirudo Swaps Banking Apps on Android Phones",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "ThreatFabric, the Dutch mobile security company, disclosed on October 14, 2026 a new Android banking trojan it calls Hirudo that uninstalls a victim's legitimate banking app and drops in a patched copy with the app's own security checks disabled, and the firm found prepared replacements for eight Indonesian banking apps.",
-      "summary": "Hirudo makes the real app the attack surface, defeating root detection, tamper checks, and other client-side defenses from inside and lifting account credentials as the customer logs in. Banks should move integrity checks server-side and watch for sessions arriving from app builds that do not match their signed releases.",
+      "title": "Anthropic SneakPeek Flaw Steals Developer Credentials",
+      "area": "AI Security",
+      "latest_developments": "Dark Reading reported on October 14, 2026 a zero-click flaw researchers call SneakPeek in the preview pane of Anthropic's Claude Code Desktop: the bug lets an adversary quietly lift SSH private keys, Amazon Web Services credentials, and Claude OAuth tokens off a developer's machine with no click and no prompt.",
+      "summary": "Coding assistants sit on the same workstation as the keys that reach production, so one silent read of local files hands an attacker the developer's cloud accounts and source repositories. Teams running Claude Code Desktop should update it, rotate SSH keys, AWS credentials, and Claude tokens, and watch for logins from unfamiliar locations.",
       "tags": [
-        "malware",
-        "mobile"
+        "ai",
+        "vulnerability"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Hirudo Android Trojan Uses Patched Banking Apps to Bypass Their Built-In Security Checks",
-          "url": "https://thehackernews.com/2026/10/hirudo-android-trojan-uses-patched.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Hirudo Android malware replaces banking apps to evade security checks",
-          "url": "https://www.bleepingcomputer.com/news/security/hirudo-android-malware-replaces-banking-apps-to-evade-security-checks/"
+          "source": "Dark Reading",
+          "title": "Anthropic 'SneakPeek' Flaw Is a Silent Zero-Click Threat",
+          "url": "https://www.darkreading.com/threat-intelligence/new-anthropic-sneakpeek-silent-zero-click-threat"
         }
       ],
-      "_anchor": "i-065e262fb0"
+      "_anchor": "i-7f55a7a900"
     },
     {
-      "title": "Cisco Patches Exploited Secure Email Gateway Zero-Day",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Cisco shipped a patch on October 14, 2026 for another zero-day in its Secure Email Gateway that attackers already exploit, a flaw that carries a remote attacker holding no credentials to command execution with root privileges.",
-      "summary": "Secure Email Gateway appliances stand in front of corporate mail flow, so root on one hands an attacker every message that passes through it along with a foothold inside the network. Administrators should install the fix immediately and inspect the appliances for web shells, new accounts, and configuration changes.",
+      "title": "Ledger Halts Reseller Sales Across Asia",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Ledger asked resellers and distributors in Indonesia, Singapore, Thailand, the Philippines, Vietnam, Malaysia, and Hong Kong on October 14, 2026 to suspend sales of its hardware wallets and pull the devices off shelves while it investigates tampering, widening a pause that began with the Southeast Asia reseller CryptoBilis.",
+      "summary": "A small circuit board hidden under the signer's screen on tampered Ledger devices read users' seed data and sent it to attackers, who drained roughly $86 million to $100 million in cryptocurrency from buyers who bought through legitimate resellers in Asia and Europe. Anyone holding a Ledger bought through a reseller should verify the device's genuine-check and move funds to a wallet created on hardware bought direct.",
       "tags": [
-        "zero-day",
-        "patch"
+        "supply chain",
+        "cryptocurrency"
       ],
       "sources": [
         {
           "source": "BleepingComputer",
-          "title": "Cisco patches new Secure Email Gateway zero-day exploited in attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/cisco-patches-actively-exploited-secure-email-gateway-zero-day/"
+          "title": "Ledger asks sellers across Asia to halt sales after supply-chain attack",
+          "url": "https://www.bleepingcomputer.com/news/security/ledger-asks-sellers-across-asia-to-halt-sales-after-supply-chain-attack/"
         }
       ],
-      "_anchor": "i-a7632caf16"
-    },
-    {
-      "title": "Vghost Flaw Breaks Virtual Machines Out to the Host",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Tencent Zhuque Lab, hunting with AI, found CVE-2026-74580, named Vghost, in the Linux kernel's vhost subsystem: a local user reads and writes kernel memory at will and becomes root across nearly a decade of kernel versions, and in one virtualization configuration an untrusted virtual machine writes to the host's memory and hijacks the process running it.",
-      "summary": "vhost carries network and storage traffic for virtual machines inside the kernel, so cloud and hosting operators running multi-tenant KVM hold the exposure along with anyone who gives shell access to untrusted users. Patch kernels and start with hosts that run guests you do not control.",
-      "tags": [
-        "vulnerability",
-        "cloud"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "AI-Found Linux Kernel Flaw Gives Local Users Root, and Can Break a Guest Out to the Host",
-          "url": "https://thehackernews.com/2026/10/ai-found-linux-kernel-flaw-gives-local.html"
-        }
-      ],
-      "_anchor": "i-0a34dc42ef"
-    },
-    {
-      "title": "U.K. Sanctions Cryptomus Over Russian Money Laundering",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "The United Kingdom imposed economic sanctions on Cryptomus on October 14, 2026, a cryptocurrency platform that researchers describe as a major conduit for payments tied to ransomware, narcotics, darknet markets, fraud, and cybercrime services, and one that helps Russia work around existing financial restrictions.",
-      "summary": "Cryptomus takes merchant payments and moves funds for criminal services, giving extortion crews and darknet vendors a cash-out route; the sanctions bar British persons and firms from dealing with it. Payment, compliance, and fraud teams should screen for its wallets and merchant endpoints and treat transactions touching it as reportable.",
-      "tags": [
-        "ransomware",
-        "policy"
-      ],
-      "sources": [
-        {
-          "source": "Krebs on Security",
-          "title": "U.K. Sanctions Cryptomus for RU Money Laundering",
-          "url": "https://krebsonsecurity.com/2026/10/u-k-sanctions-cryptomus-for-ru-money-laundering/"
-        }
-      ],
-      "_anchor": "i-78394b2e6b"
+      "_anchor": "i-91d989b5fb"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,798.27",
-      "pct": "+0.9%",
+      "value": "7,781.71",
+      "pct": "+0.3%",
       "arrow": "▲"
     },
     {
       "label": "Dow",
-      "value": "51,517.42",
-      "pct": "+0.7%",
+      "value": "51,605.74",
+      "pct": "+0.8%",
       "arrow": "▲"
     },
     {
       "label": "Nasdaq",
-      "value": "27,309.70",
-      "pct": "+0.4%",
-      "arrow": "▲"
+      "value": "27,140.53",
+      "pct": "-0.7%",
+      "arrow": "▼"
     },
     {
       "label": "WTI crude",
@@ -315,27 +325,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1207",
+      "value": "1.1197",
       "pct": "-0.6%",
       "arrow": "▼"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3232",
-      "pct": "+0.0%",
-      "arrow": "="
+      "value": "1.3231",
+      "pct": "-0.1%",
+      "arrow": "▼"
     },
     {
       "label": "USD/JPY",
       "value": "158.23",
-      "pct": "+0.3%",
+      "pct": "+0.2%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "This Afternoon: Showers And Thunderstorms Likely, high 78F.",
     "Tonight: Chance Showers And Thunderstorms then Mostly Cloudy, low 54F.",
-    "Thursday: Mostly Cloudy then Slight Chance Rain Showers, high 72F."
+    "Thursday: Mostly Cloudy then Slight Chance Rain Showers, high 72F.",
+    "Thursday Night: Slight Chance Showers And Thunderstorms then Showers And Thunderstorms, low 65F."
   ],
   "sports": [
     {
@@ -371,6 +381,70 @@
   "local": {
     "business_politics": [
       {
+        "title": "Washington Floats Unfreezing Russian Assets",
+        "latest_developments": "The Financial Times reported Wednesday evening, October 14, that President Trump's negotiators proposed unfreezing some Russian assets at a meeting in Miami as a way to restart peace talks, and European officials balked at the idea.",
+        "summary": "Western governments immobilized Russian central bank reserves after the 2022 invasion of Ukraine, and the bulk of that money sits in Europe, where capitals have spent two years arguing over whether to spend it on Kyiv. Releasing any portion of it reopens sanctions, custody, and compliance questions for every European bank and clearing house holding the funds, and it arrives while Moscow ignores the energy ceasefire Trump announced October 11.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "US floats unfreezing some Russian assets to restart Ukraine peace talks",
+            "url": "https://www.ft.com/content/54353d3a-afed-4fec-985a-50f3dfb9be8e?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-981b3732ce"
+      },
+      {
+        "title": "Federal Prosecutors Target Ilhan Omar's Citizenship",
+        "latest_developments": "United States officials and others familiar with the matter told the Wall Street Journal on Wednesday, October 14, that the federal investigation of Representative Ilhan Omar aims to build a case to strip her citizenship and deport her, and that authorities have subpoenaed members of her family as part of a broader review of their immigration paperwork.",
+        "summary": "Omar, a Minnesota Democrat who came to the United States as a refugee from Somalia and represents Minneapolis, has drawn Trump administration attacks for years. The Justice Department's denaturalization push now reaches a sitting member of Congress, and the grand jury subpoenas extend to her relatives.",
+        "sources": [
+          {
+            "source": "WSJ Politics",
+            "title": "The federal investigation into Rep. Ilhan Omar aims to build a case to strip her of her U.S. citizenship and ultimately deport her, according to U.S. officials and others familiar with the probe",
+            "url": "https://www.wsj.com/politics/policy/ilhan-omar-investigation-aims-to-build-case-for-stripping-her-citizenship-6adf1edc?mod=rss_socialpoliticsfeed"
+          }
+        ],
+        "_anchor": "i-43b40418a2"
+      },
+      {
+        "title": "Inflation Accelerates to 3.7% in September",
+        "latest_developments": "United States stocks closed Wednesday, October 14, with their worst day since July: September consumer prices rose 3.7% from a year earlier with core prices also beating forecasts, which reset expectations toward another Federal Reserve increase this month, and confidence in the artificial intelligence trade then cracked, dragging chip stocks down and sending investors into Treasuries; gold and silver futures settled lower as the dollar rose, the Fed's October Beige Book pointed to higher inflation with growth concentrated in manufacturing tied to artificial intelligence, and Fed vice chair for supervision Michelle Bowman said inflation sits above the central bank's goal while policymakers have room to assess developments before acting again.",
+        "summary": "Fuel drove the rebound: the Iran war has lifted gasoline, air fares, and clothing, and food manufacturers now warn that United States grocery prices will climb next. A 3.7% reading raises the odds of another Federal Reserve increase at the meeting in two weeks, squeezes bond and equity valuations already strained by multidecade-high yields, and hands voters an affordability grievance three weeks before the November 3 midterm elections.",
+        "sources": [
+          {
+            "source": "WSJ US Business",
+            "title": "Broad Pickup in Prices Lifted Inflation to 3.7% in September",
+            "url": "https://www.wsj.com/economy/cpi-inflation-report-september-2026-b2037469?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT World",
+            "title": "US inflation jumps to 3.7% as Iran war drives up prices",
+            "url": "https://www.ft.com/content/c1e4c8b1-8fe0-414d-b52f-c74a6d927b3d?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "AI Jitters and Rate-Hike Fears Combine for Worst Day for Stocks Since July",
+            "url": "https://www.wsj.com/finance/stocks/ai-jitters-and-rate-hike-fears-combine-for-worst-day-for-stocks-since-july-6abd3a0f?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "US chip stocks slide as inflation and AI debt fears unsettle investors",
+            "url": "https://www.ft.com/content/fb258413-e88d-47fe-98c8-f645adaea1e1?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "Fed's October Beige Book points to higher inflation",
+            "url": "https://www.ft.com/content/17eaf860-753a-4b0c-8d3c-8c771d735083"
+          },
+          {
+            "source": "FT World",
+            "title": "Hot September CPI inflation keeps Fed on course for further tightening",
+            "url": "https://www.ft.com/content/6934f481-b61c-4ab0-8064-a79493702f2c"
+          }
+        ],
+        "_anchor": "i-822de1f0c5"
+      },
+      {
         "title": "Two Cargo Ships Sink Near the Strait of Hormuz",
         "latest_developments": "The Wall Street Journal reported Wednesday, October 14, that two cargo ships sank near the Strait of Hormuz as Iranian attacks on shipping increased, even while the United States military shepherds more oil successfully through the strait.",
         "summary": "Iran has now struck more than two dozen tankers and cargo vessels in and around Hormuz over two weeks, and sinkings push war-risk premiums, charter rates, and freight costs higher for every cargo that transits the chokepoint. Refiners, shipowners, insurers, and the naval escorts protecting them all carry the consequences.",
@@ -382,75 +456,6 @@
           }
         ],
         "_anchor": "i-0cad86558d"
-      },
-      {
-        "title": "Bank of America's Profit Drops 17% After the Fine",
-        "latest_developments": "Bank of America reported Wednesday, October 14, that third-quarter profit fell 17% after the $1.2 billion money-laundering penalty, its trading desks lagged JPMorgan Chase, Goldman Sachs, and Citigroup, and analysts spent the call pressing executives on whether more pain follows.",
-        "summary": "The Treasury Department and bank regulators announced Tuesday, October 13, that the second-largest United States bank will pay $1.21 billion to settle money-laundering and sanctions violations, finding it missed $5 billion of suspicious transactions tied to suspected illicit finance from China and the southern border. Weak trading revenue on top of the penalty leaves shareholders and supervisors questioning the durability of the bank's controls and its earnings power.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "BofA profits drop 17% after $1.2bn money laundering fine",
-            "url": "https://www.ft.com/content/a82b4275-6519-4142-b1df-e74c66ead877?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Wall Street Worries Bank of America's Problems Will Linger",
-            "url": "https://www.wsj.com/finance/banking/wall-street-worries-bank-of-americas-problems-will-linger-a564492f?mod=rss_markets_main"
-          }
-        ],
-        "_anchor": "i-78df77d8b5"
-      },
-      {
-        "title": "Inflation Accelerates to 3.7% in September",
-        "latest_developments": "September consumer prices rose 3.7% from a year earlier with core prices also beating forecasts, the government reported Wednesday, October 14; stocks turned lower, gold extended its losses as yields and the dollar climbed, and the Financial Times read the print as keeping the Federal Reserve on course for further tightening, hours after Fed vice chair for supervision Michelle Bowman said inflation sits above the central bank's goal and policymakers have room to assess developments before acting again.",
-        "summary": "Fuel drove the rebound: the Iran war has lifted gasoline, air fares, and clothing, and food manufacturers now warn that United States grocery prices will climb next. A 3.7% reading raises the odds of another Federal Reserve increase at the meeting in two weeks, squeezes bond and equity valuations already strained by multidecade-high yields, and hands voters an affordability grievance three weeks before the November 3 midterm elections.",
-        "sources": [
-          {
-            "source": "WSJ US Business",
-            "title": "Broad Pickup in Prices Lifted Inflation to 3.7% in September",
-            "url": "https://www.wsj.com/economy/cpi-inflation-report-september-2026-b2037469?mod=pls_whats_news_us_business_f"
-          },
-          {
-            "source": "FT Home",
-            "title": "US inflation jumps to 3.7% as Iran war drives up prices",
-            "url": "https://www.ft.com/content/c1e4c8b1-8fe0-414d-b52f-c74a6d927b3d?syn-25a6b1a6=1"
-          },
-          {
-            "source": "FT World",
-            "title": "Hot September CPI inflation keeps Fed on course for further tightening",
-            "url": "https://www.ft.com/content/6934f481-b61c-4ab0-8064-a79493702f2c"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Stocks Turn Lower After Hot Inflation Reading",
-            "url": "https://www.wsj.com/finance/stocks/stock-futures-tick-higher-treasurys-strengthen-ahead-of-inflation-data-3fd584f5?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Gold Adds to Losses As U.S. Core CPI Exceeds Expectations",
-            "url": "https://www.wsj.com/finance/commodities-futures/gold-steady-ahead-of-u-s-inflation-data-5b71987b?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Fed's Bowman Says Inflation Above Goal, But No Urgency to Act",
-            "url": "https://www.wsj.com/economy/central-banking/feds-bowman-says-inflation-above-goal-but-no-urgency-to-act-e20f9529?mod=rss_markets_main"
-          }
-        ],
-        "_anchor": "i-822de1f0c5"
-      },
-      {
-        "title": "A Debanking Probe Names JPMorgan",
-        "latest_developments": "The Wall Street Journal reported Wednesday, October 14, that an investigation by a Trump administration regulator documents cases in which JPMorgan Chase and other large United States banks cut off MAGA-aligned sellers and Democratic groups.",
-        "summary": "The report gives the administration a factual record as it presses the biggest banks over account closures tied to reputational risk. Compliance and risk committees at JPMorgan Chase and its peers now face political and supervisory scrutiny of the criteria they use to drop customers.",
-        "sources": [
-          {
-            "source": "WSJ Markets",
-            "title": "Debanking Probe Finds JPMorgan, Banks Cut Off MAGA Sellers and Democrat Groups",
-            "url": "https://www.wsj.com/finance/regulation/debanking-probe-finds-jpmorgan-banks-cut-off-maga-sellers-and-democrat-groups-c170d0a5?mod=rss_markets_main"
-          }
-        ],
-        "_anchor": "i-c78a90c3a4"
       },
       {
         "title": "Houthi Strike on Aramco's Headquarters Lifts Crude",
@@ -491,6 +496,24 @@
         "_anchor": "i-7c7275c7ff"
       },
       {
+        "title": "Bank of America's Profit Drops 17% After the Fine",
+        "latest_developments": "Bank of America reported Wednesday, October 14, that third-quarter profit fell 17% after the $1.2 billion money-laundering penalty, its trading desks lagged JPMorgan Chase, Goldman Sachs, and Citigroup, and analysts spent the call pressing executives on whether more pain follows.",
+        "summary": "The Treasury Department and bank regulators announced Tuesday, October 13, that the second-largest United States bank will pay $1.21 billion to settle money-laundering and sanctions violations, finding it missed $5 billion of suspicious transactions tied to suspected illicit finance from China and the southern border. Weak trading revenue on top of the penalty leaves shareholders and supervisors questioning the durability of the bank's controls and its earnings power.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "BofA profits drop 17% after $1.2bn money laundering fine",
+            "url": "https://www.ft.com/content/a82b4275-6519-4142-b1df-e74c66ead877?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Wall Street Worries Bank of America's Problems Will Linger",
+            "url": "https://www.wsj.com/finance/banking/wall-street-worries-bank-of-americas-problems-will-linger-a564492f?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-78df77d8b5"
+      },
+      {
         "title": "Starlink Speed Limits Blunt Ukraine's Attacks",
         "latest_developments": "Ukrainian officials said Wednesday, October 14, that new speed limits on their Starlink terminals have degraded their ability to hit Russian targets and intercept drones, the Financial Times reported that Kyiv also faces fresh gaps in United States intelligence sharing while Moscow ignores the energy ceasefire President Trump announced October 11, and Italian Prime Minister Giorgia Meloni said the American plan to buy Russian diesel would grant Moscow legitimacy in its campaign against Ukraine.",
         "summary": "Ukraine's army routes drone operations and artillery targeting through Elon Musk's satellite network, so throttled terminals reach directly into the pace of its strikes on Russian refineries and its air defense. Russia has kept bombing Ukrainian energy infrastructure since Trump declared the truce, which Moscow never confirmed.",
@@ -514,20 +537,79 @@
         "_anchor": "i-c2e14397f9"
       },
       {
-        "title": "Chinese Exports Jump 36.3% in September",
-        "latest_developments": "China reported Wednesday, October 14, that September exports rose 36.3% from a year earlier, far above market expectations.",
-        "summary": "A surge of that size pushes more Chinese goods into markets already fighting over them, and it lands days after Brussels moved to cap Chinese hybrid and plug-in hybrid imports at 350,000 vehicles a year. Exporters, European and American manufacturers, and the trade negotiators on both sides all feel it.",
+        "title": "A Debanking Probe Names JPMorgan",
+        "latest_developments": "The Wall Street Journal reported Wednesday, October 14, that an investigation by a Trump administration regulator documents cases in which JPMorgan Chase and other large United States banks cut off MAGA-aligned sellers and Democratic groups.",
+        "summary": "The report gives the administration a factual record as it presses the biggest banks over account closures tied to reputational risk. Compliance and risk committees at JPMorgan Chase and its peers now face political and supervisory scrutiny of the criteria they use to drop customers.",
         "sources": [
           {
-            "source": "WSJ World News",
-            "title": "Chinese Exports Soar in September",
-            "url": "https://www.wsj.com/world/china/chinese-exports-accelerated-in-september-188b0884?mod=rss_worldnews"
+            "source": "WSJ Markets",
+            "title": "Debanking Probe Finds JPMorgan, Banks Cut Off MAGA Sellers and Democrat Groups",
+            "url": "https://www.wsj.com/finance/regulation/debanking-probe-finds-jpmorgan-banks-cut-off-maga-sellers-and-democrat-groups-c170d0a5?mod=rss_markets_main"
           }
         ],
-        "_anchor": "i-2702999062"
+        "_anchor": "i-c78a90c3a4"
       }
     ],
     "business": [
+      {
+        "title": "The Allegheny Conference Becomes the Pittsburgh Regional Alliance",
+        "latest_developments": "The Post-Gazette reported Wednesday, October 14, that the Allegheny Conference on Community Development will operate under the name Pittsburgh Regional Alliance, a change of name that leaves the mission in place.",
+        "summary": "The Allegheny Conference has served as the business-led economic development organization for the 10-county Pittsburgh region since 1944, recruiting employers and pressing the region's agenda in Harrisburg, and the Pittsburgh Regional Alliance has been its affiliate for marketing the region to companies looking to expand. Employers, site selectors, and local officials deal with the group under one banner now.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pittsburgh Regional Alliance replaces Allegheny Conference in name, not mission",
+            "url": "https://www.post-gazette.com/business/development/2026/10/14/pittsburgh-regional-alliance-allegheny-conference/stories/202610140061"
+          }
+        ],
+        "_anchor": "i-53eb69e220"
+      },
+      {
+        "title": "Newport Business Institute Comes Down in Lower Burrell",
+        "latest_developments": "TribLive reported Wednesday, October 14, that crews began tearing down the former Newport Business Institute in the Kinloch section of Lower Burrell that morning.",
+        "summary": "The business school building has sat vacant in Lower Burrell, the Westmoreland County city along the Allegheny River, and the demolition clears the Kinloch parcel for reuse.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Demolition begins on former Newport Business Institute in Lower Burrell",
+            "url": "https://triblive.com/local/valley-news-dispatch/demolition-begins-on-former-newport-business-institute-in-lower-burrell/"
+          }
+        ],
+        "_anchor": "i-6b7658a390"
+      },
+      {
+        "title": "Skill Games Count Their Cost in the Alle-Kiski Valley",
+        "latest_developments": "The Post-Gazette reported Wednesday evening, October 14, that layoffs and business closures now loom as tens of thousands of skill game terminals become illegal, with the Pennsylvania State Police allowing distributors time to dismantle the machines; the statewide ban took effect at midnight Wednesday, WTAE and WPXI found venues shutting terminals down, and TribLive reported that Amanda Frieze got the call at 9:30 a.m. on October 6 to kill the machines at the Keystone Klub in Penn Township.",
+        "summary": "The Supreme Court of Pennsylvania refused to extend the deadline for businesses to pull unregulated skill game terminals, and legislators adjourned without passing the bill that would have taxed and regulated them. Taverns, Veterans of Foreign Wars posts, and social clubs that split the proceeds lose a steady income line, and the host municipalities lose their share.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Layoffs and business closures loom as tens of thousands of skill games become illegal",
+            "url": "https://www.post-gazette.com/news/state/2026/10/14/state-police-deals-skill-games-distributors-time-dismantle/stories/202610140063"
+          },
+          {
+            "source": "TribLive",
+            "title": "Skill game deadline passes without legislative action; retailers, clubs, local government left with income loss",
+            "url": "https://triblive.com/local/valley-news-dispatch/skill-game-deadline-passes-without-legislative-action-retailers-clubs-local-government-left-with-income-loss/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Pennsylvania skill games become illegal Wednesday",
+            "url": "https://www.cbsnews.com/pittsburgh/video/pennsylvania-skill-games-become-illegal-wednesday/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Pennsylvania's statewide skill game ban takes effect",
+            "url": "https://www.wtae.com/article/pennsylvania-skill-game-ban/74131747"
+          },
+          {
+            "source": "WPXI",
+            "title": "Skill games are now illegal in Pennsylvania",
+            "url": "https://www.wpxi.com/news/local/skill-games-are-now-illegal-pennsylvania/4D35BAC5GJBQ7HX2FX3P3JOTEE/"
+          }
+        ],
+        "_anchor": "i-ff9e9a1146"
+      },
       {
         "title": "Alstom Puts a Rail Innovation Center in the Strip District",
         "latest_developments": "The Post-Gazette reported Wednesday, October 14, that Alstom will open one of its five worldwide rail innovation centers in Pittsburgh's Strip District.",
@@ -555,73 +637,6 @@
         "_anchor": "i-59efb7386c"
       },
       {
-        "title": "PetVet365 Fills a Harvest Moon Vacancy in Harrison",
-        "latest_developments": "TribLive reported Wednesday, October 14, that PetVet365 will move into Heights Plaza in Harrison this fall, taking space in a shopping center with a growing number of empty storefronts after Harvest Moon Coffee & Chocolates closed.",
-        "summary": "Harvest Moon owner Desiree Singleton announced on Facebook Sunday, October 11, that both of her shops had closed, one of them at Heights Plaza. PetVet365 operates veterinary clinics, and its lease gives the Harrison Township center its first new tenant of the season.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Heights Plaza loses Harvest Moon coffee shop but welcomes PetVet365",
-            "url": "https://triblive.com/local/valley-news-dispatch/heights-plaza-loses-harvest-moon-coffee-shop-but-welcomes-petvet365/"
-          }
-        ],
-        "_anchor": "i-dee5e63e27"
-      },
-      {
-        "title": "Pennsylvania Sues Over Insulin Pricing",
-        "latest_developments": "WPXI reported Wednesday, October 14, that the Pennsylvania attorney general's office filed a lawsuit alleging collusion to manipulate insulin prices, asking the court for injunctive relief that would mandate structural changes at the companies it names.",
-        "summary": "The suit seeks court-ordered changes to how the industry sets insulin prices rather than damages alone, a remedy that would reach every Pennsylvania diabetic who pays a price tied to list. Insulin pricing litigation has run against drug manufacturers and the pharmacy benefit managers that negotiate rebates on their products.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Pennsylvania AG files lawsuit alleging collusion to manipulate insulin prices",
-            "url": "https://www.wpxi.com/news/local/pennsylvania-ag-files-lawsuit-alleging-collusion-manipulate-insulin-prices/LY5R5LPSF5HFNE4GP65R5D7N3I/"
-          }
-        ],
-        "_anchor": "i-284fab170b"
-      },
-      {
-        "title": "Skill Games Count Their Cost in the Alle-Kiski Valley",
-        "latest_developments": "The statewide ban took effect at midnight Wednesday, October 14, WTAE and WPXI found venues shutting the terminals down, and TribLive reported that Amanda Frieze got the call at 9:30 a.m. on October 6 to kill the machines at the Keystone Klub in Penn Township, one of the retailers, private clubs, and municipalities now absorbing the lost revenue.",
-        "summary": "The Supreme Court of Pennsylvania refused to extend the deadline for businesses to pull unregulated skill game terminals, and legislators adjourned without passing the bill that would have taxed and regulated them. Taverns, Veterans of Foreign Wars posts, and social clubs that split the proceeds lose a steady income line, and the host municipalities lose their share.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Skill game deadline passes without legislative action; retailers, clubs, local government left with income loss",
-            "url": "https://triblive.com/local/valley-news-dispatch/skill-game-deadline-passes-without-legislative-action-retailers-clubs-local-government-left-with-income-loss/"
-          },
-          {
-            "source": "KDKA",
-            "title": "Pennsylvania skill games become illegal Wednesday",
-            "url": "https://www.cbsnews.com/pittsburgh/video/pennsylvania-skill-games-become-illegal-wednesday/"
-          },
-          {
-            "source": "WTAE",
-            "title": "Pennsylvania's statewide skill game ban takes effect",
-            "url": "https://www.wtae.com/article/pennsylvania-skill-game-ban/74131747"
-          },
-          {
-            "source": "WPXI",
-            "title": "Skill games are now illegal in Pennsylvania",
-            "url": "https://www.wpxi.com/news/local/skill-games-are-now-illegal-pennsylvania/4D35BAC5GJBQ7HX2FX3P3JOTEE/"
-          }
-        ],
-        "_anchor": "i-8de06d7a3a"
-      },
-      {
-        "title": "Astrobotic's Griffin Lander Clears Inspections",
-        "latest_developments": "The Post-Gazette reported Wednesday, October 14, that Griffin, the lunar lander Astrobotic Technology built in Pittsburgh, has passed its inspections and now points toward the moon.",
-        "summary": "Astrobotic, headquartered on Pittsburgh's North Side, builds spacecraft for NASA's commercial lunar delivery program and lost its first lander, Peregrine, shortly after launch in January 2024. Griffin is the company's largest, and a successful flight would put Pittsburgh hardware on the lunar surface.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Pittsburgh's lunar lander passes inspections. Next stop — the moon",
-            "url": "https://www.post-gazette.com/business/tech-news/2026/10/14/griffin-lunar-lander-passes-inspections-nasa-astrobotic-voyager/stories/202610130046"
-          }
-        ],
-        "_anchor": "i-d00d3f0319"
-      },
-      {
         "title": "Two Data Center Proposals Reach Allegheny County Residents",
         "latest_developments": "PublicSource reported Wednesday, October 14, that the Springdale data center proposal has entered Allegheny County's subdivision and land development review, starting with a virtual meeting Wednesday evening followed by an in-person hearing and a written comment period, while WTAE reported that a separate data center proposed in Elizabeth Township remains in early stages after a contentious town hall Tuesday evening, October 13.",
         "summary": "Developers have targeted both Allegheny County river towns for computing campuses that draw heavy electricity loads, and residents have pressed on power costs, noise, and who gets a say. Energy Secretary Chris Wright fielded the same questions about Western Pennsylvania data centers in a KDKA interview last week, and Governor Josh Shapiro and challenger Stacy Garrity argued over them in their only debate.",
@@ -640,6 +655,45 @@
         "_anchor": "i-a69d09ac0b"
       },
       {
+        "title": "Pennsylvania Sues Over Insulin Pricing",
+        "latest_developments": "WPXI reported Wednesday, October 14, that the Pennsylvania attorney general's office filed a lawsuit alleging collusion to manipulate insulin prices, asking the court for injunctive relief that would mandate structural changes at the companies it names.",
+        "summary": "The suit seeks court-ordered changes to how the industry sets insulin prices rather than damages alone, a remedy that would reach every Pennsylvania diabetic who pays a price tied to list. Insulin pricing litigation has run against drug manufacturers and the pharmacy benefit managers that negotiate rebates on their products.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pennsylvania AG files lawsuit alleging collusion to manipulate insulin prices",
+            "url": "https://www.wpxi.com/news/local/pennsylvania-ag-files-lawsuit-alleging-collusion-manipulate-insulin-prices/LY5R5LPSF5HFNE4GP65R5D7N3I/"
+          }
+        ],
+        "_anchor": "i-284fab170b"
+      },
+      {
+        "title": "Astrobotic's Griffin Lander Clears Inspections",
+        "latest_developments": "The Post-Gazette reported Wednesday, October 14, that Griffin, the lunar lander Astrobotic Technology built in Pittsburgh, has passed its inspections and now points toward the moon.",
+        "summary": "Astrobotic, headquartered on Pittsburgh's North Side, builds spacecraft for NASA's commercial lunar delivery program and lost its first lander, Peregrine, shortly after launch in January 2024. Griffin is the company's largest, and a successful flight would put Pittsburgh hardware on the lunar surface.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pittsburgh's lunar lander passes inspections. Next stop — the moon",
+            "url": "https://www.post-gazette.com/business/tech-news/2026/10/14/griffin-lunar-lander-passes-inspections-nasa-astrobotic-voyager/stories/202610130046"
+          }
+        ],
+        "_anchor": "i-d00d3f0319"
+      },
+      {
+        "title": "PetVet365 Fills a Harvest Moon Vacancy in Harrison",
+        "latest_developments": "TribLive reported Wednesday, October 14, that PetVet365 will move into Heights Plaza in Harrison this fall, taking space in a shopping center with a growing number of empty storefronts after Harvest Moon Coffee & Chocolates closed.",
+        "summary": "Harvest Moon owner Desiree Singleton announced on Facebook Sunday, October 11, that both of her shops had closed, one of them at Heights Plaza. PetVet365 operates veterinary clinics, and its lease gives the Harrison Township center its first new tenant of the season.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Heights Plaza loses Harvest Moon coffee shop but welcomes PetVet365",
+            "url": "https://triblive.com/local/valley-news-dispatch/heights-plaza-loses-harvest-moon-coffee-shop-but-welcomes-petvet365/"
+          }
+        ],
+        "_anchor": "i-dee5e63e27"
+      },
+      {
         "title": "GOAT Gamers Lounge Hunts a Crowd",
         "latest_developments": "Pittsburgh City Paper reported Wednesday, October 14, that GOAT Gamers Lounge has reached a better financial footing and still needs more traffic to cover high operating costs.",
         "summary": "The lounge rents console and personal computer gaming time to Pittsburgh video game players, built around Xbox, PlayStation, and PC setups. Its operators describe the rent and power bills of a storefront full of screens as the central obstacle to staying open.",
@@ -655,70 +709,34 @@
     ],
     "around_town": [
       {
-        "title": "The Irish Partnership Asks Pittsburgh for $200,000",
-        "latest_developments": "KDKA's Jessica Riley reported Wednesday, October 14, that the Irish Partnership of Pittsburgh has launched a campaign to raise $200,000 after years of financial pressure that now jeopardizes its annual festival.",
-        "summary": "The Irish Partnership of Pittsburgh runs the city's yearly Irish festival and seeks public donations to keep it on the calendar. Falling short would end one of the region's established cultural festivals.",
+        "title": "Pittsburgh Police Aim for 900 Officers and 24/7 Desks",
+        "latest_developments": "WTAE reported Wednesday, October 14, that the Pittsburgh Bureau of Police wants to build back to 900 officers and would use the added staffing to restore around-the-clock desk coverage at its zone stations.",
+        "summary": "Zone stations across Pittsburgh currently go stretches without an officer at the desk, which leaves residents who walk in after hours without anyone to talk to. Chief Jason Lando told WPXI's 11 Investigates on Tuesday, October 13, that he is rolling back changes his predecessor made as he works to raise the bureau's officer count.",
         "sources": [
-          {
-            "source": "KDKA",
-            "title": "Irish Partnership of Pittsburgh asking for public's help as financial pressure jeopardizes annual festival",
-            "url": "https://www.cbsnews.com/pittsburgh/news/irish-partnership-of-pittsburgh-fundraising-campaign/"
-          },
-          {
-            "source": "KDKA",
-            "title": "Irish Partnership of Pittsburgh facing financial stressors",
-            "url": "https://www.cbsnews.com/pittsburgh/video/irish-partnership-of-pittsburgh-facing-financial-stressors/"
-          }
-        ],
-        "_anchor": "i-6b55329c71"
-      },
-      {
-        "title": "Friday Nights at Da Club Opens in Lawrenceville",
-        "latest_developments": "TribLive reported Wednesday, October 14, that the Boys & Girls Club in Lawrenceville has started Friday Nights at Da Club, giving teenagers a supervised place to gather on weekend evenings.",
-        "summary": "Club members, among them 14-year-old Mekhai Smalls, pitch the program as an answer to the teen takeover reputation that unsupervised weekend gatherings have earned in the city. The club runs the evenings out of its Lawrenceville location.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Changing the 'teen takeover' narrative: Lawrenceville Boys & Girls Club steps up with 'Friday Nights at Da Club'",
-            "url": "https://triblive.com/news/education-classroom/changing-the-teen-takeover-narrative-lawrenceville-boys-girls-club-steps-up-with-friday-nights-at-da-club/"
-          }
-        ],
-        "_anchor": "i-93516e016b"
-      },
-      {
-        "title": "Drilling Narrows Seventh Avenue in West Tarentum",
-        "latest_developments": "TribLive reported Wednesday, October 14, that single-lane restrictions will run along Seventh Avenue in West Tarentum this week for drilling work.",
-        "summary": "Crews drilling in the Allegheny County borough's West Tarentum section will hold traffic to one lane on Seventh Avenue, the main route through that stretch of Tarentum.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Drilling in West Tarentum to cause traffic restrictions",
-            "url": "https://triblive.com/local/valley-news-dispatch/drilling-in-west-tarentum-to-cause-traffic-restrictions/"
-          }
-        ],
-        "_anchor": "i-2b7a8fa872"
-      },
-      {
-        "title": "Trump Skips the Steelers Game",
-        "latest_developments": "TribLive's First Call reported Wednesday, October 14, that President Trump will not attend the Steelers' game Sunday, October 18, after all.",
-        "summary": "Trump spends Wednesday campaigning in Arizona and Montana ahead of the November 3 midterm elections, where he announced a natural gas agreement with Taiwan, rural broadband expansion in Alaska, and pardons for some truckers. The Steelers play at the Tampa Bay Buccaneers at 1 p.m. Eastern on CBS.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "First Call: President Trump's appearance at Steelers game Sunday called off; significant injury for Jordan Staal",
-            "url": "https://triblive.com/sports/first-call-president-trumps-appearance-at-steelers-game-sunday-called-off-significant-injury-for-jordan-staal/"
-          },
           {
             "source": "WTAE",
-            "title": "President Trump heading to Arizona, Montana today to speak with voters ahead of the midterms",
-            "url": "https://www.wtae.com/article/president-trump-arizona-montana-today-voters-midterms/74128849"
+            "title": "Pittsburgh police eyes return to 24/7 desk coverage with increase in staffing levels",
+            "url": "https://www.wtae.com/article/pittsburgh-police-zone-staffing-changes/74137313"
           }
         ],
-        "_anchor": "i-46975b9945"
+        "_anchor": "i-e6f183a6e5"
+      },
+      {
+        "title": "Musk's Super PAC Spends on Pennsylvania House Races",
+        "latest_developments": "TribLive reported Wednesday, October 14, that national Republican efforts to protect four vulnerable Pennsylvania Republicans escalated this week, with one key group redirecting $3.6 million to United States Representative Brian Fitzpatrick in Bucks County and Elon Musk's super PAC spending more than $1.4 million across three other Republican districts.",
+        "summary": "Fitzpatrick represents Pennsylvania's 1st Congressional District in Bucks County, the state's most contested House seat. The outside money lands three weeks before the November 3 election, when Pennsylvania's competitive districts help settle control of the United States House.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Elon Musk and national Republicans are spending millions to defend Pa. candidates",
+            "url": "https://triblive.com/news/pennsylvania/elon-musk-and-national-republicans-are-spending-millions-to-defend-pa-candidates/"
+          }
+        ],
+        "_anchor": "i-d65b1a0f0b"
       },
       {
         "title": "A Cool Front Brings Storms Wednesday Afternoon",
-        "latest_developments": "The storms have shifted south: WPXI reported Wednesday afternoon, October 14, that showers and thunderstorms will stay mostly south of Pittsburgh through the evening before the rain exits the region, leaving Thursday quiet, and forecasters still flag a second round of wet, windy weather Friday, October 16, ahead of a weekend temperature crash.",
+        "latest_developments": "The attention has moved to Friday: WTAE's Wednesday evening update, October 14, has rain, gusty winds, and a cold front arriving Friday, October 16, dropping temperatures to a mid-November feel for the weekend, after Wednesday's showers and thunderstorms stayed mostly south of Pittsburgh and exited, leaving Thursday quiet.",
         "summary": "Tuesday's push toward 80 degrees gives way to roughly 30 degrees of cooling behind the week's fronts, and forecasters have flagged the chance of snow at higher elevations by the weekend.",
         "sources": [
           {
@@ -755,17 +773,40 @@
         "_anchor": "i-dfe8e43b3b"
       },
       {
-        "title": "Beechwood Farms Makes Students Wildlife Engineers",
-        "latest_developments": "TribLive reported Wednesday, October 14, that students from across the region will build bald eagle nests and follow a raindrop's journey through programs at Beechwood Farms Nature Reserve in Fox Chapel.",
-        "summary": "The reserve runs the hands-on sessions for school groups on habitat construction and stormwater, drawing classes from across the Pittsburgh region to its Fox Chapel grounds.",
+        "title": "The Irish Partnership Asks Pittsburgh for $200,000",
+        "latest_developments": "KDKA's Jessica Riley reported Wednesday, October 14, that the Irish Partnership of Pittsburgh has launched a campaign to raise $200,000 after years of financial pressure that now jeopardizes its annual festival.",
+        "summary": "The Irish Partnership of Pittsburgh runs the city's yearly Irish festival and seeks public donations to keep it on the calendar. Falling short would end one of the region's established cultural festivals.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Irish Partnership of Pittsburgh asking for public's help as financial pressure jeopardizes annual festival",
+            "url": "https://www.cbsnews.com/pittsburgh/news/irish-partnership-of-pittsburgh-fundraising-campaign/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Irish Partnership of Pittsburgh facing financial stressors",
+            "url": "https://www.cbsnews.com/pittsburgh/video/irish-partnership-of-pittsburgh-facing-financial-stressors/"
+          }
+        ],
+        "_anchor": "i-6b55329c71"
+      },
+      {
+        "title": "Trump Skips the Steelers Game",
+        "latest_developments": "TribLive's First Call reported Wednesday, October 14, that President Trump will not attend the Steelers' game Sunday, October 18, after all.",
+        "summary": "Trump spends Wednesday campaigning in Arizona and Montana ahead of the November 3 midterm elections, where he announced a natural gas agreement with Taiwan, rural broadband expansion in Alaska, and pardons for some truckers. The Steelers play at the Tampa Bay Buccaneers at 1 p.m. Eastern on CBS.",
         "sources": [
           {
             "source": "TribLive",
-            "title": "Beechwood Farms offers students chance to be 'wildlife engineers'",
-            "url": "https://triblive.com/local/valley-news-dispatch/beechwood-farms-offers-students-chance-to-be-wildlife-engineers/"
+            "title": "First Call: President Trump's appearance at Steelers game Sunday called off; significant injury for Jordan Staal",
+            "url": "https://triblive.com/sports/first-call-president-trumps-appearance-at-steelers-game-sunday-called-off-significant-injury-for-jordan-staal/"
+          },
+          {
+            "source": "WTAE",
+            "title": "President Trump heading to Arizona, Montana today to speak with voters ahead of the midterms",
+            "url": "https://www.wtae.com/article/president-trump-arizona-montana-today-voters-midterms/74128849"
           }
         ],
-        "_anchor": "i-33b7a27504"
+        "_anchor": "i-46975b9945"
       },
       {
         "title": "Deluzio and Guy Trade Answers on Iran and Data Centers",
@@ -797,6 +838,45 @@
           }
         ],
         "_anchor": "i-21593231bf"
+      },
+      {
+        "title": "Friday Nights at Da Club Opens in Lawrenceville",
+        "latest_developments": "TribLive reported Wednesday, October 14, that the Boys & Girls Club in Lawrenceville has started Friday Nights at Da Club, giving teenagers a supervised place to gather on weekend evenings.",
+        "summary": "Club members, among them 14-year-old Mekhai Smalls, pitch the program as an answer to the teen takeover reputation that unsupervised weekend gatherings have earned in the city. The club runs the evenings out of its Lawrenceville location.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Changing the 'teen takeover' narrative: Lawrenceville Boys & Girls Club steps up with 'Friday Nights at Da Club'",
+            "url": "https://triblive.com/news/education-classroom/changing-the-teen-takeover-narrative-lawrenceville-boys-girls-club-steps-up-with-friday-nights-at-da-club/"
+          }
+        ],
+        "_anchor": "i-93516e016b"
+      },
+      {
+        "title": "Beechwood Farms Makes Students Wildlife Engineers",
+        "latest_developments": "TribLive reported Wednesday, October 14, that students from across the region will build bald eagle nests and follow a raindrop's journey through programs at Beechwood Farms Nature Reserve in Fox Chapel.",
+        "summary": "The reserve runs the hands-on sessions for school groups on habitat construction and stormwater, drawing classes from across the Pittsburgh region to its Fox Chapel grounds.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Beechwood Farms offers students chance to be 'wildlife engineers'",
+            "url": "https://triblive.com/local/valley-news-dispatch/beechwood-farms-offers-students-chance-to-be-wildlife-engineers/"
+          }
+        ],
+        "_anchor": "i-33b7a27504"
+      },
+      {
+        "title": "Drilling Narrows Seventh Avenue in West Tarentum",
+        "latest_developments": "TribLive reported Wednesday, October 14, that single-lane restrictions will run along Seventh Avenue in West Tarentum this week for drilling work.",
+        "summary": "Crews drilling in the Allegheny County borough's West Tarentum section will hold traffic to one lane on Seventh Avenue, the main route through that stretch of Tarentum.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Drilling in West Tarentum to cause traffic restrictions",
+            "url": "https://triblive.com/local/valley-news-dispatch/drilling-in-west-tarentum-to-cause-traffic-restrictions/"
+          }
+        ],
+        "_anchor": "i-2b7a8fa872"
       }
     ],
     "events": [
@@ -855,6 +935,32 @@
     ],
     "around_teams": [
       {
+        "title": "Elandon Roberts Returns to the Steelers",
+        "latest_developments": "The Post-Gazette reported Wednesday, October 14, that the Steelers signed inside linebacker Elandon Roberts and that his role remains undetermined.",
+        "summary": "Roberts, a veteran inside linebacker who played for the Steelers in an earlier stint, rejoins a defense working through injuries across the back seven. The team plays at the Tampa Bay Buccaneers on Sunday, October 18, at 1 p.m. Eastern on CBS.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Elandon Roberts is back with the Steelers, but his role is yet to be determined",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/14/steelers-sign-elandon-roberts/stories/202610140029"
+          }
+        ],
+        "_anchor": "i-96a69c92d3"
+      },
+      {
+        "title": "The Steelers Run Short at Receiver",
+        "latest_developments": "The Post-Gazette asked Wednesday, October 14, whom the Steelers can turn to Sunday at the Tampa Bay Buccaneers with Michael Pittman Jr., Roman Wilson, and Ben Skowronek all out.",
+        "summary": "Pittman went on injured reserve October 10, which keeps him out at least four games, and the paper reported October 12 that Wilson and Skowronek would miss this week too. That leaves quarterback Aaron Rodgers building chemistry on the fly with a thinned group that includes DK Metcalf and rookie Germie Bernard.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Whom might the Steelers turn to Sunday with all their injuries at wide receiver?",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/14/steelers-wide-receiver-news/stories/202610140028"
+          }
+        ],
+        "_anchor": "i-08c35b71fb"
+      },
+      {
         "title": "Warren Takes AFC Offensive Player of the Week",
         "latest_developments": "The Steelers' channel posted a \"Congrats Jaylen\" short Wednesday, October 14, after the NFL named running back Jaylen Warren the AFC Offensive Player of the Week for his game at the Indianapolis Colts, and the team followed with a Jaylen Warren appreciation post.",
         "summary": "Warren has taken over the Steelers' starting running back job this season, and Post-Gazette columnist Noah Hiles wrote Sunday, October 11, that he has run away with it. The team's social channels have spent the week pointing the attention toward him ahead of Sunday's game at the Tampa Bay Buccaneers, 1 p.m. Eastern on CBS.",
@@ -875,7 +981,7 @@
       {
         "title": "Film Study Credits McCarthy's Third-Down Fixes",
         "latest_developments": "The Post-Gazette's film study, published Wednesday, October 14, credits the third-down changes head coach Mike McCarthy made for the Steelers' offensive showing at the Indianapolis Colts, and Gerry Dulac ran his weekly Steelers chat the same morning on quarterback Aaron Rodgers and Week 6.",
-        "summary": "McCarthy, in his first season running the Steelers, reworked the formations and calls the offense uses on third down, and the paper traces how those adjustments moved the ball in Indianapolis. TribLive's Tim Benz argues the same point more broadly, writing that McCarthy's staff is still finding its feel for the roster in Year 1.",
+        "summary": "McCarthy, in his first season running the Steelers, reworked the formations and calls the offense uses on third down, and the paper traces how those adjustments moved the ball in Indianapolis.",
         "sources": [
           {
             "source": "Post-Gazette Steelers",
@@ -1002,126 +1108,126 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "AI agents now do the exploit work themselves, as XBOW chained three unknown Chrome bugs in six days while Tencent Zhuque Lab surfaced the decade-old Vghost kernel flaw.",
+      "text": "Three actively exploited zero-days landed in perimeter gear as Ivanti Connect Secure, Cisco Secure Email Gateway, and PAN-OS firewalls all drew fixes and CISA listings.",
+      "links": [
+        {
+          "anchor": "i-835a57efab",
+          "phrase": "Ivanti Connect Secure",
+          "start": 63,
+          "end": 84,
+          "title": "Ivanti Connect Secure Zero-Day Under Attack"
+        },
+        {
+          "anchor": "i-a7632caf16",
+          "phrase": "Cisco Secure Email Gateway",
+          "start": 86,
+          "end": 112,
+          "title": "Cisco Patches Exploited Secure Email Gateway Zero-Day"
+        },
+        {
+          "anchor": "i-c9a3f02d71",
+          "phrase": "PAN-OS",
+          "start": 118,
+          "end": 124,
+          "title": "Palo Alto PAN-OS Zero-Day Exploited in Firewall Attacks"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "AI now works both sides of the exploit trade, with XBOW agents chaining three Chrome bugs in six days while SneakPeek quietly lifts developer SSH keys.",
       "links": [
         {
           "anchor": "i-ecd984dc6b",
           "phrase": "XBOW",
-          "start": 49,
-          "end": 53,
+          "start": 51,
+          "end": 55,
           "title": "AI Agents Build a Chrome Exploit Chain in Six Days"
         },
         {
-          "anchor": "i-0a34dc42ef",
-          "phrase": "Vghost",
-          "start": 149,
-          "end": 155,
-          "title": "Vghost Flaw Breaks Virtual Machines Out to the Host"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Cisco patched an already-exploited Secure Email Gateway zero-day granting root, while CISA pressed teams to fix the Ivanti Connect Secure authentication bypass attackers have used since October 1.",
-      "links": [
-        {
-          "anchor": "i-a7632caf16",
-          "phrase": "Secure Email Gateway",
-          "start": 35,
-          "end": 55,
-          "title": "Cisco Patches Exploited Secure Email Gateway Zero-Day"
-        },
-        {
-          "anchor": "i-835a57efab",
-          "phrase": "Ivanti Connect",
-          "start": 116,
-          "end": 130,
-          "title": "Ivanti Connect Secure Zero-Day Under Attack"
+          "anchor": "i-7f55a7a900",
+          "phrase": "SneakPeek",
+          "start": 108,
+          "end": 117,
+          "title": "Anthropic SneakPeek Flaw Steals Developer Credentials"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Microsoft seized the YAM Store, CoGUI, and Iron Man phishing domains, the Justice Department charged 14 in the laptop farm case, and the U.K. sanctioned Cryptomus.",
+      "text": "Enforcement stacked up as Microsoft and Japanese police seized three Chinese-language phishing platforms days after prosecutors charged 14 people over North Korean laptop farms.",
       "links": [
         {
           "anchor": "i-4ec11149b0",
-          "phrase": "YAM Store",
-          "start": 21,
-          "end": 30,
+          "phrase": "phishing platforms",
+          "start": 86,
+          "end": 104,
           "title": "Microsoft Seizes Three Chinese-Language Phishing Platforms"
         },
         {
           "anchor": "i-f47fa40182",
-          "phrase": "laptop farm",
-          "start": 111,
-          "end": 122,
+          "phrase": "laptop farms",
+          "start": 164,
+          "end": 176,
           "title": "Texas Laptop Farms Raided in North Korean Worker Case"
-        },
-        {
-          "anchor": "i-78394b2e6b",
-          "phrase": "Cryptomus",
-          "start": 153,
-          "end": 162,
-          "title": "U.K. Sanctions Cryptomus Over Russian Money Laundering"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Defenders face a Windows Shell Mark of the Web bypass exploited via emailed files alongside a CVSS 10 SAP Cloud SDK flaw and Docker Hub and Ghostscript fixes.",
+      "kind": "Update",
+      "status": "updated",
+      "text": "CVE-2026-96951, a Mark of the Web bypass in Windows Shell, is under active attack via crafted files sent through email, Teams, or Slack.",
       "links": [
         {
           "anchor": "i-af908dabc4",
           "phrase": "Windows Shell",
-          "start": 17,
-          "end": 30,
+          "start": 44,
+          "end": 57,
           "title": "Exploited Windows Shell Bug Strips Mark of the Web"
-        },
-        {
-          "anchor": "i-6e56ced53d",
-          "phrase": "SAP Cloud SDK",
-          "start": 102,
-          "end": 115,
-          "title": "SAP, Docker Hub, and Ghostscript Ship Critical Fixes"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Alstom will put one of its five global rail innovation centers in Pittsburgh's Strip District while Pennsylvania's federally backed hydrogen hubs remain stalled and unbuilt.",
+      "text": "September consumer prices rose 3.7%, driving the worst stock day since July, while Trump's negotiators floated unfreezing some Russian assets at a Miami meeting.",
       "links": [
         {
-          "anchor": "i-d02aadfc35",
-          "phrase": "Strip District",
-          "start": 79,
-          "end": 93,
-          "title": "Alstom Puts a Rail Innovation Center in the Strip District"
+          "anchor": "i-822de1f0c5",
+          "phrase": "3.7%",
+          "start": 31,
+          "end": 35,
+          "title": "Inflation Accelerates to 3.7% in September"
         },
         {
-          "anchor": "i-59efb7386c",
-          "phrase": "hydrogen hubs",
-          "start": 132,
-          "end": 145,
-          "title": "Pennsylvania's Hydrogen Hubs Sit in Limbo"
+          "anchor": "i-981b3732ce",
+          "phrase": "Russian assets",
+          "start": 127,
+          "end": 141,
+          "title": "Washington Floats Unfreezing Russian Assets"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "The NFL named Steelers running back Jaylen Warren the AFC Offensive Player of the Week for his game at the Indianapolis Colts.",
+      "text": "The Steelers signed linebacker Elandon Roberts with Michael Pittman Jr., Roman Wilson, and Ben Skowronek all out before Sunday's game at Tampa Bay.",
       "links": [
         {
-          "anchor": "i-341353a911",
-          "phrase": "Jaylen Warren",
-          "start": 36,
-          "end": 49,
-          "title": "Warren Takes AFC Offensive Player of the Week"
+          "anchor": "i-96a69c92d3",
+          "phrase": "Elandon Roberts",
+          "start": 31,
+          "end": 46,
+          "title": "Elandon Roberts Returns to the Steelers"
+        },
+        {
+          "anchor": "i-08c35b71fb",
+          "phrase": "Michael Pittman Jr.",
+          "start": 52,
+          "end": 71,
+          "title": "The Steelers Run Short at Receiver"
         }
       ]
     }
@@ -1135,16 +1241,17 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 78,
+        "in_window": 69,
         "failed": [],
         "empty": [
-          "CISA Advisories",
           "Securelist (Kaspersky)",
           "Google Online Security Blog",
           "Graham Cluley",
           "Google Project Zero",
           "The DFIR Report",
-          "Frank on Fraud"
+          "Kim Zetter (Zero Day)",
+          "Frank on Fraud",
+          "Wired Security"
         ],
         "per_feed": {
           "The Hacker News": {
@@ -1154,13 +1261,13 @@
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 15,
-            "contributed": 15
+            "in_window": 10,
+            "contributed": 10
           },
           "Krebs on Security": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Schneier on Security": {
             "items": 10,
@@ -1179,13 +1286,13 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "The Record": {
             "items": 5,
@@ -1194,8 +1301,8 @@
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Help Net Security": {
             "items": 10,
@@ -1224,8 +1331,8 @@
           },
           "Cisco Talos": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Graham Cluley": {
             "items": 20,
@@ -1249,13 +1356,13 @@
           },
           "Kim Zetter (Zero Day)": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "404 Media": {
             "items": 15,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1264,8 +1371,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           }
         }
       },
@@ -1282,22 +1389,22 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 15
+            "contributed": 13
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 8
+            "contributed": 5
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 5,
-            "contributed": 1
+            "in_window": 4,
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 8,
-            "contributed": 3
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
@@ -1306,23 +1413,23 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 6,
-            "contributed": 2
+            "in_window": 5,
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
-            "in_window": 30,
+            "in_window": 29,
             "contributed": 14
           },
           "WPXI": {
             "items": 15,
-            "in_window": 14,
-            "contributed": 7
+            "in_window": 15,
+            "contributed": 9
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 19
           }
         }
       },
@@ -1338,28 +1445,28 @@
         "per_feed": {
           "WSJ World News": {
             "items": 74,
-            "in_window": 30,
+            "in_window": 29,
             "contributed": 9
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 40,
-            "contributed": 16
+            "in_window": 41,
+            "contributed": 13
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 67,
-            "contributed": 9
+            "in_window": 60,
+            "contributed": 8
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 12,
-            "contributed": 2
+            "in_window": 11,
+            "contributed": 1
           },
           "The Economist": {
             "items": 300,
-            "in_window": 23,
-            "contributed": 4
+            "in_window": 26,
+            "contributed": 8
           },
           "FT Home": {
             "items": 11,
@@ -1369,11 +1476,11 @@
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 14
+            "contributed": 15
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 25,
+            "in_window": 21,
             "contributed": 0
           }
         }
@@ -1414,31 +1521,40 @@
         "group": "sports_media",
         "label": "Sports media",
         "feeds": 6,
-        "loaded": 6,
+        "loaded": 4,
         "window_hours": 96,
-        "in_window": 30,
-        "failed": [],
+        "in_window": 22,
+        "failed": [
+          {
+            "name": "Pittsburgh Steelers (YouTube)",
+            "error": "HTTPError: HTTP Error 404: Not Found"
+          },
+          {
+            "name": "Ben Roethlisberger / Channel Seven (YouTube)",
+            "error": "HTTPError: HTTP Error 404: Not Found"
+          }
+        ],
         "empty": [],
         "per_feed": {
           "Footbahlin with Ben Roethlisberger": {
             "items": 144,
             "in_window": 1,
-            "contributed": 0
+            "contributed": 1
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 3,
-            "contributed": 2
+            "contributed": 3
           },
           "Pittsburgh Steelers (YouTube)": {
-            "items": 15,
-            "in_window": 15,
-            "contributed": 15
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
-            "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
           },
           "Post-Gazette Pirates": {
             "items": 20,
@@ -1447,8 +1563,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 16,
-            "contributed": 11
+            "in_window": 17,
+            "contributed": 17
           }
         }
       },
@@ -1458,21 +1574,21 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 27,
+        "in_window": 26,
         "failed": [],
         "empty": [
           "Guardian Olympics"
         ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 21,
-            "in_window": 21,
-            "contributed": 21
+            "items": 19,
+            "in_window": 19,
+            "contributed": 19
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 7,
+            "contributed": 7
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1535,24 +1651,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 39205,
+          "outputTokens": 44482,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 136936,
+          "cacheCreationInputTokens": 138565,
           "webSearchRequests": 0,
-          "costUSD": 2.349515,
+          "costUSD": 2.49773,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14423
+          "thinkingTokens": 15752
         }
       },
-      "cost_usd": 2.349515,
-      "duration_ms": 412108,
+      "cost_usd": 2.49773,
+      "duration_ms": 467743,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-14 13:37 EDT",
-    "items_considered": 78,
+    "generated_at": "2026-10-14 19:37 EDT",
+    "items_considered": 69,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1633,9 +1749,12 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.3495,
-    "model_duration_ms": 412108,
+    "model_cost_usd": 2.4977,
+    "model_duration_ms": 467743,
     "local_from": null,
-    "feed_failures": []
+    "feed_failures": [
+      "Pittsburgh Steelers (YouTube)",
+      "Ben Roethlisberger / Channel Seven (YouTube)"
+    ]
   }
 }

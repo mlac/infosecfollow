@@ -1,11 +1,12 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Wednesday, October 14, 2026 - 1:37 PM EDT
+Wednesday, October 14, 2026 - 7:37 PM EDT
 ================================================================
 
-Attackers run root commands through a fresh Cisco Secure Email
-Gateway zero-day and an Ivanti Connect Secure chain while
-Microsoft ships a record 1,413 fixes.
+Ivanti, Cisco, and Palo Alto Networks all shipped patches for
+zero-days attackers already exploit in internet-facing security
+appliances, and CISA added four of those bugs to its Known
+Exploited Vulnerabilities catalog.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -13,50 +14,51 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] AI agents now do the exploit work themselves, as XBOW
-  chained three unknown Chrome bugs in six days while Tencent
-  Zhuque Lab surfaced the decade-old Vghost kernel flaw.
+* [TREND] Three actively exploited zero-days landed in perimeter
+  gear as Ivanti Connect Secure, Cisco Secure Email Gateway, and
+  PAN-OS firewalls all drew fixes and CISA listings.
+  see: Ivanti Connect Secure Zero-Day Under Attack; Cisco
+  Patches Exploited Secure Email Gateway Zero-Day; Palo Alto
+  PAN-OS Zero-Day Exploited in Firewall Attacks
+* [TREND] AI now works both sides of the exploit trade, with
+  XBOW agents chaining three Chrome bugs in six days while
+  SneakPeek quietly lifts developer SSH keys.
   see: AI Agents Build a Chrome Exploit Chain in Six Days;
-  Vghost Flaw Breaks Virtual Machines Out to the Host
-* [UPDATE (new)] Cisco patched an already-exploited Secure Email
-  Gateway zero-day granting root, while CISA pressed teams to
-  fix the Ivanti Connect Secure authentication bypass attackers
-  have used since October 1.
-  see: Cisco Patches Exploited Secure Email Gateway Zero-Day;
-  Ivanti Connect Secure Zero-Day Under Attack
-* [TREND] Microsoft seized the YAM Store, CoGUI, and Iron Man
-  phishing domains, the Justice Department charged 14 in the
-  laptop farm case, and the U.K. sanctioned Cryptomus.
+  Anthropic SneakPeek Flaw Steals Developer Credentials
+* [TREND] Enforcement stacked up as Microsoft and Japanese
+  police seized three Chinese-language phishing platforms days
+  after prosecutors charged 14 people over North Korean laptop
+  farms.
   see: Microsoft Seizes Three Chinese-Language Phishing
   Platforms; Texas Laptop Farms Raided in North Korean Worker
-  Case; U.K. Sanctions Cryptomus Over Russian Money Laundering
-* [TREND] Defenders face a Windows Shell Mark of the Web bypass
-  exploited via emailed files alongside a CVSS 10 SAP Cloud SDK
-  flaw and Docker Hub and Ghostscript fixes.
-  see: Exploited Windows Shell Bug Strips Mark of the Web; SAP,
-  Docker Hub, and Ghostscript Ship Critical Fixes
-* [UPDATE (new)] Alstom will put one of its five global rail
-  innovation centers in Pittsburgh's Strip District while
-  Pennsylvania's federally backed hydrogen hubs remain stalled
-  and unbuilt.
-  see: Alstom Puts a Rail Innovation Center in the Strip
-  District; Pennsylvania's Hydrogen Hubs Sit in Limbo
-* [UPDATE (new)] The NFL named Steelers running back Jaylen
-  Warren the AFC Offensive Player of the Week for his game at
-  the Indianapolis Colts.
-  see: Warren Takes AFC Offensive Player of the Week
+  Case
+* [UPDATE (updated)] CVE-2026-96951, a Mark of the Web bypass in
+  Windows Shell, is under active attack via crafted files sent
+  through email, Teams, or Slack.
+  see: Exploited Windows Shell Bug Strips Mark of the Web
+* [UPDATE (new)] September consumer prices rose 3.7%, driving
+  the worst stock day since July, while Trump's negotiators
+  floated unfreezing some Russian assets at a Miami meeting.
+  see: Inflation Accelerates to 3.7% in September; Washington
+  Floats Unfreezing Russian Assets
+* [UPDATE (new)] The Steelers signed linebacker Elandon Roberts
+  with Michael Pittman Jr., Roman Wilson, and Ben Skowronek all
+  out before Sunday's game at Tampa Bay.
+  see: Elandon Roberts Returns to the Steelers; The Steelers Run
+  Short at Receiver
 
 SECURITY
 ----------------------------------------------------------------
 
 1. IVANTI CONNECT SECURE ZERO-DAY UNDER ATTACK
    Vulnerabilities and Exploits · [zero-day, patch]
-   Latest developments: CISA told security teams on October 13,
-   2026 to update Ivanti Connect Secure immediately, saying
-   attackers have exploited the authentication bypass
-   CVE-2026-104935, rated 8.6, since at least October 1, 2026;
-   honeypot sensors logged 105 exploit attempts, and The Record
-   counted this as the sixth exploited Ivanti bug of 2026.
+   Latest developments: Dark Reading reported on October 14,
+   2026 that Ivanti found and fixed only part of CVE-2026-104935
+   in July 2026, and that partial repair left the authentication
+   bypass and remote code execution path attackers now ride;
+   CISA told security teams to update immediately, saying
+   exploitation runs back to at least October 1, 2026, and
+   honeypot sensors logged 105 attempts.
    Volexity traced the intrusions to an actor it calls UTA0576,
    which chained three zero-days to run commands as root on a
    fully patched 22.8R2.4 appliance without logging in, then
@@ -66,9 +68,9 @@ SECURITY
    25.1.2.2, and 22.8R2.4 and earlier should update and hunt for
    compromise now.
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/cisa-warns-admins-to-immediately-fix-ivanti-flaw-exploited-as-zero-day/
+   - Dark Reading: https://www.darkreading.com/vulnerabilities-threats/ivanti-ics-zero-day-attacks-vendor-patching
    - The Hacker News: https://thehackernews.com/2026/10/cisa-urges-immediate-ivanti-connect.html
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/14/ivanti-zero-days-gain-root-patched-vpn-appliances/
-   - The Record: https://therecord.media/new-ivanti-microsoft-bugs-exploitation
 
 2. EXPLOITED WINDOWS SHELL BUG STRIPS MARK OF THE WEB
    Vulnerabilities and Exploits · [patch, zero-day]
@@ -78,8 +80,12 @@ SECURITY
    a crafted file sent by email, instant message, Teams, or
    Slack; SecurityWeek and The Hacker News counted 1,413 fixes
    in the release, among them 1,102 in Windows, 134 in Office,
-   and 36 in SharePoint Server; and Microsoft confirmed that the
-   same updates stop non-admin users from connecting over Remote
+   and 36 in SharePoint Server, with more than 670 privilege
+   escalation bugs and over 300 remote code execution bugs;
+   researchers separately chained a four-byte write and a timing
+   bug to run their own code inside the VBS enclave that guards
+   SmartScreen's passwords; and Microsoft confirmed the same
+   updates stop non-admin users from connecting over Remote
    Desktop on devices running the Administrator protection
    feature.
    The Mark of the Web flag tells Windows a file came from the
@@ -92,31 +98,33 @@ SECURITY
    Home and Pro falling out of support.
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/14/microsoft-patch-tuesday-cve-2026-96951-motw-bypass/
    - SecurityWeek: https://www.securityweek.com/microsoft-patches-record-1413-vulnerabilities-including-exploited-windows-zero-day/
+   - The Hacker News: https://thehackernews.com/2026/10/four-byte-write-and-timing-bug-let.html
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/microsoft-recent-windows-updates-may-trigger-remote-desktop-failures/
-   - Krebs on Security: https://krebsonsecurity.com/2026/10/microsoft-patches-more-than-1400-security-flaws/
 
 3. MICROSOFT SEIZES THREE CHINESE-LANGUAGE PHISHING PLATFORMS
    Ransomware and Cybercrime · [phishing, law enforcement]
    Latest developments: Microsoft, working with Japan's National
-   Police Agency and Health-ISAC, won a United States court
+   Police Agency, the Japan Cybercrime Control Center,
+   Health-ISAC, and the companies Resecurity, Cloudflare,
+   Oracle, Proofpoint, and TRM Labs, won a United States court
    order and on October 14, 2026 seized and redirected the
-   domains that powered YAM Store, CoGUI, and Iron Man, three
+   domains behind YAM Store, CoGUI, and Iron Man, three
    Chinese-language phishing-as-a-service markets whose
    customers sent more than a billion malicious messages at over
    75,000 organizations in 150 countries; Microsoft's Digital
-   Crimes Unit tracks the phishing kit operators as Storm-2990
-   and the marketplace selling them tools and infrastructure as
+   Crimes Unit tracks the kit operators as Storm-2990 and the
+   marketplace selling them tools and infrastructure as
    Storm-3119.
-   The three platforms rented ready-made phishing kits, hosting,
-   and message delivery to Chinese-speaking criminals, who aimed
-   the resulting floods of texts and emails at consumers and at
-   healthcare and financial organizations. Defenders should
-   treat credential phishing traffic tied to these kits as
-   recurring and expect the operators to rebuild on fresh
-   infrastructure.
+   The three platforms rented ready-made phishing kits, cloud
+   hosting, and message delivery to Chinese-speaking criminals,
+   who aimed the resulting floods of texts and emails at
+   consumers and at healthcare and financial organizations.
+   Defenders should treat credential phishing traffic tied to
+   these kits as recurring and expect the operators to rebuild
+   on fresh infrastructure.
    - The Record: https://therecord.media/microsoft-takes-down-3-major-chinese-phishing-platforms
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/global-takedown-hits-network-behind-1-billion-phishing-messages/
-   - SecurityWeek: https://www.securityweek.com/microsoft-disrupts-chinese-language-phishing-market-behind-1b-messages/
+   - Dark Reading: https://www.darkreading.com/cyberattacks-data-breaches/yam-store-phishing-network-behind-billion-messages
+   - The Hacker News: https://thehackernews.com/2026/10/microsoft-disrupts-3-phishing-kits.html
    - Microsoft Security Blog: https://www.microsoft.com/en-us/security/blog/2026/10/14/the-hidden-network-inside-the-phishing-infrastructure-ecosystem-powering-global-cybercrime/
 
 4. TEXAS LAPTOP FARMS RAIDED IN NORTH KOREAN WORKER CASE
@@ -132,7 +140,8 @@ SECURITY
    jobs at more than 70 American companies, and put the revenue
    routed back to Pyongyang at roughly $3 million; investigators
    searched more than 40 residences across Texas in September
-   2026.
+   2026, and BleepingComputer ties the scheme to the threat
+   group Famous Chollima.
    North Korea places remote IT workers inside American
    companies under stolen or borrowed identities, and United
    States-based facilitators keep the employer-issued laptops
@@ -141,8 +150,8 @@ SECURITY
    corporate hardware for remote-control tooling, and check
    whether a hire's shipping address matches a known farm.
    - The Hacker News: https://thehackernews.com/2026/10/us-shuts-down-over-40-laptop-farms.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/fbi-raids-dprk-it-worker-laptop-farms-in-texas-us-nationals-arrested/
    - SecurityWeek: https://www.securityweek.com/us-arrests-two-in-crackdown-on-north-korean-it-worker-laptop-farms/
-   - The Record: https://therecord.media/north-korea-laptop-farms-worker-scams-doj-raids-texas
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/14/north-korean-it-workers-laptop-farms-arrests/
 
 5. SAP, DOCKER HUB, AND GHOSTSCRIPT SHIP CRITICAL FIXES
@@ -177,9 +186,47 @@ SECURITY
    - The Hacker News: https://thehackernews.com/2026/10/sap-discloses-critical-cvss-10-flaw-in.html
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/docker-hub-flaw-let-attackers-impersonate-users-tamper-with-images/
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/ghostscript-flaw-lets-hackers-hijack-servers-via-pdf-uploads/
-   - SecurityWeek: https://www.securityweek.com/citrix-fortinet-ivanti-patch-29-vulnerabilities-across-their-products/
+   - The Hacker News: https://thehackernews.com/2026/10/curl-patches-http2-upload-flaw-after.html
 
-6. AI AGENTS BUILD A CHROME EXPLOIT CHAIN IN SIX DAYS
+6. CISCO PATCHES EXPLOITED SECURE EMAIL GATEWAY ZERO-DAY
+   Vulnerabilities and Exploits · [zero-day, patch]
+   Latest developments: Cisco's advisory on Wednesday, October
+   14, 2026 identifies the exploited flaw as CVE-2026-76519, a
+   relative path traversal bug: a sender holding no credentials
+   mails a crafted attachment through the gateway, writes files
+   to the appliance's operating system, and then runs commands
+   as root, and CISA added the bug to its Known Exploited
+   Vulnerabilities catalog the same day.
+   Secure Email Gateway appliances filter an organization's mail
+   for spam and malware, so root on one hands an attacker every
+   message that passes through it along with a foothold inside
+   the network. Administrators should install the fix
+   immediately and inspect the appliances for web shells, new
+   accounts, and configuration changes.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/cisco-patches-actively-exploited-secure-email-gateway-zero-day/
+   - The Hacker News: https://thehackernews.com/2026/10/cisco-warns-of-active-attacks.html
+   - CISA Advisories: https://www.cisa.gov/news-events/alerts/2026/10/14/cisa-adds-four-known-exploited-vulnerabilities-catalog
+
+7. PALO ALTO PAN-OS ZERO-DAY EXPLOITED IN FIREWALL ATTACKS
+   Vulnerabilities and Exploits · [zero-day, patch]
+   Latest developments: Palo Alto Networks released updates on
+   October 14, 2026 for CVE-2026-0322, a high-severity remote
+   code execution zero-day in PAN-OS that attackers already
+   exploit against firewalls, and CISA added it to the Known
+   Exploited Vulnerabilities catalog the same day alongside
+   three other exploited flaws: Cisco Secure Email Gateway's
+   path traversal bug CVE-2026-76519 and the AhsayCBS pair
+   CVE-2026-105133 and CVE-2026-105134.
+   PAN-OS runs Palo Alto Networks firewalls, so code execution
+   on the appliance gives an attacker the device that inspects
+   and routes a company's traffic. Install the PAN-OS updates
+   now, and federal civilian agencies must remediate all four
+   catalog additions on CISA's clock; Ahsay customers still wait
+   on a vendor fix for the AhsayCBS chain.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/
+   - CISA Advisories: https://www.cisa.gov/news-events/alerts/2026/10/14/cisa-adds-four-known-exploited-vulnerabilities-catalog
+
+8. AI AGENTS BUILD A CHROME EXPLOIT CHAIN IN SIX DAYS
    AI Security · [ai, zero-day]
    Latest developments: The security firm XBOW said on October
    14, 2026 that its researchers directed AI agents running
@@ -200,72 +247,100 @@ SECURITY
    - The Hacker News: https://thehackernews.com/2026/10/researchers-used-public-openai-model-to.html
    - The Hacker News: https://thehackernews.com/2026/10/an-ai-agent-found-critical-otp-bypass.html
 
-7. HIRUDO SWAPS BANKING APPS ON ANDROID PHONES
-   Ransomware and Cybercrime · [malware, mobile]
-   Latest developments: ThreatFabric, the Dutch mobile security
-   company, disclosed on October 14, 2026 a new Android banking
-   trojan it calls Hirudo that uninstalls a victim's legitimate
-   banking app and drops in a patched copy with the app's own
-   security checks disabled, and the firm found prepared
-   replacements for eight Indonesian banking apps.
-   Hirudo makes the real app the attack surface, defeating root
-   detection, tamper checks, and other client-side defenses from
-   inside and lifting account credentials as the customer logs
-   in. Banks should move integrity checks server-side and watch
-   for sessions arriving from app builds that do not match their
-   signed releases.
-   - The Hacker News: https://thehackernews.com/2026/10/hirudo-android-trojan-uses-patched.html
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/hirudo-android-malware-replaces-banking-apps-to-evade-security-checks/
+9. ANTHROPIC SNEAKPEEK FLAW STEALS DEVELOPER CREDENTIALS
+   AI Security · [ai, vulnerability]
+   Latest developments: Dark Reading reported on October 14,
+   2026 a zero-click flaw researchers call SneakPeek in the
+   preview pane of Anthropic's Claude Code Desktop: the bug lets
+   an adversary quietly lift SSH private keys, Amazon Web
+   Services credentials, and Claude OAuth tokens off a
+   developer's machine with no click and no prompt.
+   Coding assistants sit on the same workstation as the keys
+   that reach production, so one silent read of local files
+   hands an attacker the developer's cloud accounts and source
+   repositories. Teams running Claude Code Desktop should update
+   it, rotate SSH keys, AWS credentials, and Claude tokens, and
+   watch for logins from unfamiliar locations.
+   - Dark Reading: https://www.darkreading.com/threat-intelligence/new-anthropic-sneakpeek-silent-zero-click-threat
 
-8. CISCO PATCHES EXPLOITED SECURE EMAIL GATEWAY ZERO-DAY
-   Vulnerabilities and Exploits · [zero-day, patch]
-   Latest developments: Cisco shipped a patch on October 14,
-   2026 for another zero-day in its Secure Email Gateway that
-   attackers already exploit, a flaw that carries a remote
-   attacker holding no credentials to command execution with
-   root privileges.
-   Secure Email Gateway appliances stand in front of corporate
-   mail flow, so root on one hands an attacker every message
-   that passes through it along with a foothold inside the
-   network. Administrators should install the fix immediately
-   and inspect the appliances for web shells, new accounts, and
-   configuration changes.
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/cisco-patches-actively-exploited-secure-email-gateway-zero-day/
-
-9. VGHOST FLAW BREAKS VIRTUAL MACHINES OUT TO THE HOST
-   Vulnerabilities and Exploits · [vulnerability, cloud]
-   Latest developments: Tencent Zhuque Lab, hunting with AI,
-   found CVE-2026-74580, named Vghost, in the Linux kernel's
-   vhost subsystem: a local user reads and writes kernel memory
-   at will and becomes root across nearly a decade of kernel
-   versions, and in one virtualization configuration an
-   untrusted virtual machine writes to the host's memory and
-   hijacks the process running it.
-   vhost carries network and storage traffic for virtual
-   machines inside the kernel, so cloud and hosting operators
-   running multi-tenant KVM hold the exposure along with anyone
-   who gives shell access to untrusted users. Patch kernels and
-   start with hosts that run guests you do not control.
-   - The Hacker News: https://thehackernews.com/2026/10/ai-found-linux-kernel-flaw-gives-local.html
-
-10. U.K. SANCTIONS CRYPTOMUS OVER RUSSIAN MONEY LAUNDERING
-   Ransomware and Cybercrime · [ransomware, policy]
-   Latest developments: The United Kingdom imposed economic
-   sanctions on Cryptomus on October 14, 2026, a cryptocurrency
-   platform that researchers describe as a major conduit for
-   payments tied to ransomware, narcotics, darknet markets,
-   fraud, and cybercrime services, and one that helps Russia
-   work around existing financial restrictions.
-   Cryptomus takes merchant payments and moves funds for
-   criminal services, giving extortion crews and darknet vendors
-   a cash-out route; the sanctions bar British persons and firms
-   from dealing with it. Payment, compliance, and fraud teams
-   should screen for its wallets and merchant endpoints and
-   treat transactions touching it as reportable.
-   - Krebs on Security: https://krebsonsecurity.com/2026/10/u-k-sanctions-cryptomus-for-ru-money-laundering/
+10. LEDGER HALTS RESELLER SALES ACROSS ASIA
+   Ransomware and Cybercrime · [supply chain, cryptocurrency]
+   Latest developments: Ledger asked resellers and distributors
+   in Indonesia, Singapore, Thailand, the Philippines, Vietnam,
+   Malaysia, and Hong Kong on October 14, 2026 to suspend sales
+   of its hardware wallets and pull the devices off shelves
+   while it investigates tampering, widening a pause that began
+   with the Southeast Asia reseller CryptoBilis.
+   A small circuit board hidden under the signer's screen on
+   tampered Ledger devices read users' seed data and sent it to
+   attackers, who drained roughly $86 million to $100 million in
+   cryptocurrency from buyers who bought through legitimate
+   resellers in Asia and Europe. Anyone holding a Ledger bought
+   through a reseller should verify the device's genuine-check
+   and move funds to a wallet created on hardware bought direct.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/ledger-asks-sellers-across-asia-to-halt-sales-after-supply-chain-attack/
 
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
+* Washington Floats Unfreezing Russian Assets
+  Latest developments: The Financial Times reported Wednesday
+  evening, October 14, that President Trump's negotiators
+  proposed unfreezing some Russian assets at a meeting in Miami
+  as a way to restart peace talks, and European officials balked
+  at the idea.
+  Western governments immobilized Russian central bank reserves
+  after the 2022 invasion of Ukraine, and the bulk of that money
+  sits in Europe, where capitals have spent two years arguing
+  over whether to spend it on Kyiv. Releasing any portion of it
+  reopens sanctions, custody, and compliance questions for every
+  European bank and clearing house holding the funds, and it
+  arrives while Moscow ignores the energy ceasefire Trump
+  announced October 11.
+  - FT Home: https://www.ft.com/content/54353d3a-afed-4fec-985a-50f3dfb9be8e?syn-25a6b1a6=1
+* Federal Prosecutors Target Ilhan Omar's Citizenship
+  Latest developments: United States officials and others
+  familiar with the matter told the Wall Street Journal on
+  Wednesday, October 14, that the federal investigation of
+  Representative Ilhan Omar aims to build a case to strip her
+  citizenship and deport her, and that authorities have
+  subpoenaed members of her family as part of a broader review
+  of their immigration paperwork.
+  Omar, a Minnesota Democrat who came to the United States as a
+  refugee from Somalia and represents Minneapolis, has drawn
+  Trump administration attacks for years. The Justice
+  Department's denaturalization push now reaches a sitting
+  member of Congress, and the grand jury subpoenas extend to her
+  relatives.
+  - WSJ Politics: https://www.wsj.com/politics/policy/ilhan-omar-investigation-aims-to-build-case-for-stripping-her-citizenship-6adf1edc?mod=rss_socialpoliticsfeed
+* Inflation Accelerates to 3.7% in September
+  Latest developments: United States stocks closed Wednesday,
+  October 14, with their worst day since July: September
+  consumer prices rose 3.7% from a year earlier with core prices
+  also beating forecasts, which reset expectations toward
+  another Federal Reserve increase this month, and confidence in
+  the artificial intelligence trade then cracked, dragging chip
+  stocks down and sending investors into Treasuries; gold and
+  silver futures settled lower as the dollar rose, the Fed's
+  October Beige Book pointed to higher inflation with growth
+  concentrated in manufacturing tied to artificial intelligence,
+  and Fed vice chair for supervision Michelle Bowman said
+  inflation sits above the central bank's goal while
+  policymakers have room to assess developments before acting
+  again.
+  Fuel drove the rebound: the Iran war has lifted gasoline, air
+  fares, and clothing, and food manufacturers now warn that
+  United States grocery prices will climb next. A 3.7% reading
+  raises the odds of another Federal Reserve increase at the
+  meeting in two weeks, squeezes bond and equity valuations
+  already strained by multidecade-high yields, and hands voters
+  an affordability grievance three weeks before the November 3
+  midterm elections.
+  - WSJ US Business: https://www.wsj.com/economy/cpi-inflation-report-september-2026-b2037469?mod=pls_whats_news_us_business_f
+  - FT World: https://www.ft.com/content/c1e4c8b1-8fe0-414d-b52f-c74a6d927b3d?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/stocks/ai-jitters-and-rate-hike-fears-combine-for-worst-day-for-stocks-since-july-6abd3a0f?mod=rss_markets_main
+  - FT Home: https://www.ft.com/content/fb258413-e88d-47fe-98c8-f645adaea1e1?syn-25a6b1a6=1
+  - FT World: https://www.ft.com/content/17eaf860-753a-4b0c-8d3c-8c771d735083
+  - FT World: https://www.ft.com/content/6934f481-b61c-4ab0-8064-a79493702f2c
 * Two Cargo Ships Sink Near the Strait of Hormuz
   Latest developments: The Wall Street Journal reported
   Wednesday, October 14, that two cargo ships sank near the
@@ -279,59 +354,6 @@ BUSINESS AND POLITICS
   shipowners, insurers, and the naval escorts protecting them
   all carry the consequences.
   - WSJ World News: https://www.wsj.com/world/middle-east/two-cargo-ships-sink-near-hormuz-as-iranian-attacks-spike-0591887d?mod=rss_worldnews
-* Bank of America's Profit Drops 17% After the Fine
-  Latest developments: Bank of America reported Wednesday,
-  October 14, that third-quarter profit fell 17% after the $1.2
-  billion money-laundering penalty, its trading desks lagged
-  JPMorgan Chase, Goldman Sachs, and Citigroup, and analysts
-  spent the call pressing executives on whether more pain
-  follows.
-  The Treasury Department and bank regulators announced Tuesday,
-  October 13, that the second-largest United States bank will
-  pay $1.21 billion to settle money-laundering and sanctions
-  violations, finding it missed $5 billion of suspicious
-  transactions tied to suspected illicit finance from China and
-  the southern border. Weak trading revenue on top of the
-  penalty leaves shareholders and supervisors questioning the
-  durability of the bank's controls and its earnings power.
-  - FT World: https://www.ft.com/content/a82b4275-6519-4142-b1df-e74c66ead877?syn-25a6b1a6=1
-  - WSJ Markets: https://www.wsj.com/finance/banking/wall-street-worries-bank-of-americas-problems-will-linger-a564492f?mod=rss_markets_main
-* Inflation Accelerates to 3.7% in September
-  Latest developments: September consumer prices rose 3.7% from
-  a year earlier with core prices also beating forecasts, the
-  government reported Wednesday, October 14; stocks turned
-  lower, gold extended its losses as yields and the dollar
-  climbed, and the Financial Times read the print as keeping the
-  Federal Reserve on course for further tightening, hours after
-  Fed vice chair for supervision Michelle Bowman said inflation
-  sits above the central bank's goal and policymakers have room
-  to assess developments before acting again.
-  Fuel drove the rebound: the Iran war has lifted gasoline, air
-  fares, and clothing, and food manufacturers now warn that
-  United States grocery prices will climb next. A 3.7% reading
-  raises the odds of another Federal Reserve increase at the
-  meeting in two weeks, squeezes bond and equity valuations
-  already strained by multidecade-high yields, and hands voters
-  an affordability grievance three weeks before the November 3
-  midterm elections.
-  - WSJ US Business: https://www.wsj.com/economy/cpi-inflation-report-september-2026-b2037469?mod=pls_whats_news_us_business_f
-  - FT Home: https://www.ft.com/content/c1e4c8b1-8fe0-414d-b52f-c74a6d927b3d?syn-25a6b1a6=1
-  - FT World: https://www.ft.com/content/6934f481-b61c-4ab0-8064-a79493702f2c
-  - WSJ Markets: https://www.wsj.com/finance/stocks/stock-futures-tick-higher-treasurys-strengthen-ahead-of-inflation-data-3fd584f5?mod=rss_markets_main
-  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/gold-steady-ahead-of-u-s-inflation-data-5b71987b?mod=rss_markets_main
-  - WSJ Markets: https://www.wsj.com/economy/central-banking/feds-bowman-says-inflation-above-goal-but-no-urgency-to-act-e20f9529?mod=rss_markets_main
-* A Debanking Probe Names JPMorgan
-  Latest developments: The Wall Street Journal reported
-  Wednesday, October 14, that an investigation by a Trump
-  administration regulator documents cases in which JPMorgan
-  Chase and other large United States banks cut off MAGA-aligned
-  sellers and Democratic groups.
-  The report gives the administration a factual record as it
-  presses the biggest banks over account closures tied to
-  reputational risk. Compliance and risk committees at JPMorgan
-  Chase and its peers now face political and supervisory
-  scrutiny of the criteria they use to drop customers.
-  - WSJ Markets: https://www.wsj.com/finance/regulation/debanking-probe-finds-jpmorgan-banks-cut-off-maga-sellers-and-democrat-groups-c170d0a5?mod=rss_markets_main
 * Houthi Strike on Aramco's Headquarters Lifts Crude
   Latest developments: The International Energy Agency warned
   Wednesday, October 14, that the global diesel shortage will
@@ -357,6 +379,23 @@ BUSINESS AND POLITICS
   - WSJ Markets: https://www.wsj.com/finance/commodities-futures/oil-rises-amid-ongoing-middle-east-tensions-6e2a3ee0?mod=rss_markets_main
   - WSJ US Business: https://www.wsj.com/business/energy-oil/global-diesel-squeeze-to-drag-into-2027-iea-says-c7d06769?mod=pls_whats_news_us_business_f
   - FT World: https://www.ft.com/content/b06d00da-9df7-405b-9410-b5485c267397?syn-25a6b1a6=1
+* Bank of America's Profit Drops 17% After the Fine
+  Latest developments: Bank of America reported Wednesday,
+  October 14, that third-quarter profit fell 17% after the $1.2
+  billion money-laundering penalty, its trading desks lagged
+  JPMorgan Chase, Goldman Sachs, and Citigroup, and analysts
+  spent the call pressing executives on whether more pain
+  follows.
+  The Treasury Department and bank regulators announced Tuesday,
+  October 13, that the second-largest United States bank will
+  pay $1.21 billion to settle money-laundering and sanctions
+  violations, finding it missed $5 billion of suspicious
+  transactions tied to suspected illicit finance from China and
+  the southern border. Weak trading revenue on top of the
+  penalty leaves shareholders and supervisors questioning the
+  durability of the bank's controls and its earnings power.
+  - FT World: https://www.ft.com/content/a82b4275-6519-4142-b1df-e74c66ead877?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/banking/wall-street-worries-bank-of-americas-problems-will-linger-a564492f?mod=rss_markets_main
 * Starlink Speed Limits Blunt Ukraine's Attacks
   Latest developments: Ukrainian officials said Wednesday,
   October 14, that new speed limits on their Starlink terminals
@@ -376,29 +415,76 @@ BUSINESS AND POLITICS
   - WSJ World News: https://www.wsj.com/world/europe/ukraine-says-new-starlink-speed-limit-is-disrupting-its-attacks-79225e19?mod=rss_worldnews
   - FT Home: https://www.ft.com/content/37085602-726a-44dc-a859-51caab38eb75?syn-25a6b1a6=1
   - FT World: https://www.ft.com/content/178041cc-c9e7-4bd9-8c6e-7967931dcb33?syn-25a6b1a6=1
-* Chinese Exports Jump 36.3% in September
-  Latest developments: China reported Wednesday, October 14,
-  that September exports rose 36.3% from a year earlier, far
-  above market expectations.
-  A surge of that size pushes more Chinese goods into markets
-  already fighting over them, and it lands days after Brussels
-  moved to cap Chinese hybrid and plug-in hybrid imports at
-  350,000 vehicles a year. Exporters, European and American
-  manufacturers, and the trade negotiators on both sides all
-  feel it.
-  - WSJ World News: https://www.wsj.com/world/china/chinese-exports-accelerated-in-september-188b0884?mod=rss_worldnews
+* A Debanking Probe Names JPMorgan
+  Latest developments: The Wall Street Journal reported
+  Wednesday, October 14, that an investigation by a Trump
+  administration regulator documents cases in which JPMorgan
+  Chase and other large United States banks cut off MAGA-aligned
+  sellers and Democratic groups.
+  The report gives the administration a factual record as it
+  presses the biggest banks over account closures tied to
+  reputational risk. Compliance and risk committees at JPMorgan
+  Chase and its peers now face political and supervisory
+  scrutiny of the criteria they use to drop customers.
+  - WSJ Markets: https://www.wsj.com/finance/regulation/debanking-probe-finds-jpmorgan-banks-cut-off-maga-sellers-and-democrat-groups-c170d0a5?mod=rss_markets_main
 
 PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  This Afternoon: Showers And Thunderstorms Likely, high 78F.
   Tonight: Chance Showers And Thunderstorms then Mostly Cloudy,
     low 54F.
   Thursday: Mostly Cloudy then Slight Chance Rain Showers, high
     72F.
+  Thursday Night: Slight Chance Showers And Thunderstorms then
+    Showers And Thunderstorms, low 65F.
 
 Business:
+* The Allegheny Conference Becomes the Pittsburgh Regional
+  Alliance
+  Latest developments: The Post-Gazette reported Wednesday,
+  October 14, that the Allegheny Conference on Community
+  Development will operate under the name Pittsburgh Regional
+  Alliance, a change of name that leaves the mission in place.
+  The Allegheny Conference has served as the business-led
+  economic development organization for the 10-county Pittsburgh
+  region since 1944, recruiting employers and pressing the
+  region's agenda in Harrisburg, and the Pittsburgh Regional
+  Alliance has been its affiliate for marketing the region to
+  companies looking to expand. Employers, site selectors, and
+  local officials deal with the group under one banner now.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/business/development/2026/10/14/pittsburgh-regional-alliance-allegheny-conference/stories/202610140061
+* Newport Business Institute Comes Down in Lower Burrell
+  Latest developments: TribLive reported Wednesday, October 14,
+  that crews began tearing down the former Newport Business
+  Institute in the Kinloch section of Lower Burrell that
+  morning.
+  The business school building has sat vacant in Lower Burrell,
+  the Westmoreland County city along the Allegheny River, and
+  the demolition clears the Kinloch parcel for reuse.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/demolition-begins-on-former-newport-business-institute-in-lower-burrell/
+* Skill Games Count Their Cost in the Alle-Kiski Valley
+  Latest developments: The Post-Gazette reported Wednesday
+  evening, October 14, that layoffs and business closures now
+  loom as tens of thousands of skill game terminals become
+  illegal, with the Pennsylvania State Police allowing
+  distributors time to dismantle the machines; the statewide ban
+  took effect at midnight Wednesday, WTAE and WPXI found venues
+  shutting terminals down, and TribLive reported that Amanda
+  Frieze got the call at 9:30 a.m. on October 6 to kill the
+  machines at the Keystone Klub in Penn Township.
+  The Supreme Court of Pennsylvania refused to extend the
+  deadline for businesses to pull unregulated skill game
+  terminals, and legislators adjourned without passing the bill
+  that would have taxed and regulated them. Taverns, Veterans of
+  Foreign Wars posts, and social clubs that split the proceeds
+  lose a steady income line, and the host municipalities lose
+  their share.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/state/2026/10/14/state-police-deals-skill-games-distributors-time-dismantle/stories/202610140063
+  - TribLive: https://triblive.com/local/valley-news-dispatch/skill-game-deadline-passes-without-legislative-action-retailers-clubs-local-government-left-with-income-loss/
+  - KDKA: https://www.cbsnews.com/pittsburgh/video/pennsylvania-skill-games-become-illegal-wednesday/
+  - WTAE: https://www.wtae.com/article/pennsylvania-skill-game-ban/74131747
+  - WPXI: https://www.wpxi.com/news/local/skill-games-are-now-illegal-pennsylvania/4D35BAC5GJBQ7HX2FX3P3JOTEE/
 * Alstom Puts a Rail Innovation Center in the Strip District
   Latest developments: The Post-Gazette reported Wednesday,
   October 14, that Alstom will open one of its five worldwide
@@ -423,61 +509,6 @@ Business:
   producers, and the river towns counting on the construction
   now wait without a schedule.
   - PublicSource: https://www.publicsource.org/hydrogen-hubs-fracking-jobs-pennsylvania/
-* PetVet365 Fills a Harvest Moon Vacancy in Harrison
-  Latest developments: TribLive reported Wednesday, October 14,
-  that PetVet365 will move into Heights Plaza in Harrison this
-  fall, taking space in a shopping center with a growing number
-  of empty storefronts after Harvest Moon Coffee & Chocolates
-  closed.
-  Harvest Moon owner Desiree Singleton announced on Facebook
-  Sunday, October 11, that both of her shops had closed, one of
-  them at Heights Plaza. PetVet365 operates veterinary clinics,
-  and its lease gives the Harrison Township center its first new
-  tenant of the season.
-  - TribLive: https://triblive.com/local/valley-news-dispatch/heights-plaza-loses-harvest-moon-coffee-shop-but-welcomes-petvet365/
-* Pennsylvania Sues Over Insulin Pricing
-  Latest developments: WPXI reported Wednesday, October 14, that
-  the Pennsylvania attorney general's office filed a lawsuit
-  alleging collusion to manipulate insulin prices, asking the
-  court for injunctive relief that would mandate structural
-  changes at the companies it names.
-  The suit seeks court-ordered changes to how the industry sets
-  insulin prices rather than damages alone, a remedy that would
-  reach every Pennsylvania diabetic who pays a price tied to
-  list. Insulin pricing litigation has run against drug
-  manufacturers and the pharmacy benefit managers that negotiate
-  rebates on their products.
-  - WPXI: https://www.wpxi.com/news/local/pennsylvania-ag-files-lawsuit-alleging-collusion-manipulate-insulin-prices/LY5R5LPSF5HFNE4GP65R5D7N3I/
-* Skill Games Count Their Cost in the Alle-Kiski Valley
-  Latest developments: The statewide ban took effect at midnight
-  Wednesday, October 14, WTAE and WPXI found venues shutting the
-  terminals down, and TribLive reported that Amanda Frieze got
-  the call at 9:30 a.m. on October 6 to kill the machines at the
-  Keystone Klub in Penn Township, one of the retailers, private
-  clubs, and municipalities now absorbing the lost revenue.
-  The Supreme Court of Pennsylvania refused to extend the
-  deadline for businesses to pull unregulated skill game
-  terminals, and legislators adjourned without passing the bill
-  that would have taxed and regulated them. Taverns, Veterans of
-  Foreign Wars posts, and social clubs that split the proceeds
-  lose a steady income line, and the host municipalities lose
-  their share.
-  - TribLive: https://triblive.com/local/valley-news-dispatch/skill-game-deadline-passes-without-legislative-action-retailers-clubs-local-government-left-with-income-loss/
-  - KDKA: https://www.cbsnews.com/pittsburgh/video/pennsylvania-skill-games-become-illegal-wednesday/
-  - WTAE: https://www.wtae.com/article/pennsylvania-skill-game-ban/74131747
-  - WPXI: https://www.wpxi.com/news/local/skill-games-are-now-illegal-pennsylvania/4D35BAC5GJBQ7HX2FX3P3JOTEE/
-* Astrobotic's Griffin Lander Clears Inspections
-  Latest developments: The Post-Gazette reported Wednesday,
-  October 14, that Griffin, the lunar lander Astrobotic
-  Technology built in Pittsburgh, has passed its inspections and
-  now points toward the moon.
-  Astrobotic, headquartered on Pittsburgh's North Side, builds
-  spacecraft for NASA's commercial lunar delivery program and
-  lost its first lander, Peregrine, shortly after launch in
-  January 2024. Griffin is the company's largest, and a
-  successful flight would put Pittsburgh hardware on the lunar
-  surface.
-  - Pittsburgh Post-Gazette: https://www.post-gazette.com/business/tech-news/2026/10/14/griffin-lunar-lander-passes-inspections-nasa-astrobotic-voyager/stories/202610130046
 * Two Data Center Proposals Reach Allegheny County Residents
   Latest developments: PublicSource reported Wednesday, October
   14, that the Springdale data center proposal has entered
@@ -496,6 +527,43 @@ Business:
   Garrity argued over them in their only debate.
   - PublicSource: https://www.publicsource.org/springdale-data-center-county-saldo-review/
   - WTAE: https://www.wtae.com/article/elizabeth-township-data-center-town-hall/74126499
+* Pennsylvania Sues Over Insulin Pricing
+  Latest developments: WPXI reported Wednesday, October 14, that
+  the Pennsylvania attorney general's office filed a lawsuit
+  alleging collusion to manipulate insulin prices, asking the
+  court for injunctive relief that would mandate structural
+  changes at the companies it names.
+  The suit seeks court-ordered changes to how the industry sets
+  insulin prices rather than damages alone, a remedy that would
+  reach every Pennsylvania diabetic who pays a price tied to
+  list. Insulin pricing litigation has run against drug
+  manufacturers and the pharmacy benefit managers that negotiate
+  rebates on their products.
+  - WPXI: https://www.wpxi.com/news/local/pennsylvania-ag-files-lawsuit-alleging-collusion-manipulate-insulin-prices/LY5R5LPSF5HFNE4GP65R5D7N3I/
+* Astrobotic's Griffin Lander Clears Inspections
+  Latest developments: The Post-Gazette reported Wednesday,
+  October 14, that Griffin, the lunar lander Astrobotic
+  Technology built in Pittsburgh, has passed its inspections and
+  now points toward the moon.
+  Astrobotic, headquartered on Pittsburgh's North Side, builds
+  spacecraft for NASA's commercial lunar delivery program and
+  lost its first lander, Peregrine, shortly after launch in
+  January 2024. Griffin is the company's largest, and a
+  successful flight would put Pittsburgh hardware on the lunar
+  surface.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/business/tech-news/2026/10/14/griffin-lunar-lander-passes-inspections-nasa-astrobotic-voyager/stories/202610130046
+* PetVet365 Fills a Harvest Moon Vacancy in Harrison
+  Latest developments: TribLive reported Wednesday, October 14,
+  that PetVet365 will move into Heights Plaza in Harrison this
+  fall, taking space in a shopping center with a growing number
+  of empty storefronts after Harvest Moon Coffee & Chocolates
+  closed.
+  Harvest Moon owner Desiree Singleton announced on Facebook
+  Sunday, October 11, that both of her shops had closed, one of
+  them at Heights Plaza. PetVet365 operates veterinary clinics,
+  and its lease gives the Harrison Township center its first new
+  tenant of the season.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/heights-plaza-loses-harvest-moon-coffee-shop-but-welcomes-petvet365/
 * GOAT Gamers Lounge Hunts a Crowd
   Latest developments: Pittsburgh City Paper reported Wednesday,
   October 14, that GOAT Gamers Lounge has reached a better
@@ -509,6 +577,49 @@ Business:
   - Pittsburgh City Paper: https://www.pghcitypaper.com/arts-entertainment-2/goat-gamers-lounge-pittsburgh-video-game-fans-xbox-playstation-pc/
 
 Around town:
+* Pittsburgh Police Aim for 900 Officers and 24/7 Desks
+  Latest developments: WTAE reported Wednesday, October 14, that
+  the Pittsburgh Bureau of Police wants to build back to 900
+  officers and would use the added staffing to restore
+  around-the-clock desk coverage at its zone stations.
+  Zone stations across Pittsburgh currently go stretches without
+  an officer at the desk, which leaves residents who walk in
+  after hours without anyone to talk to. Chief Jason Lando told
+  WPXI's 11 Investigates on Tuesday, October 13, that he is
+  rolling back changes his predecessor made as he works to raise
+  the bureau's officer count.
+  - WTAE: https://www.wtae.com/article/pittsburgh-police-zone-staffing-changes/74137313
+* Musk's Super PAC Spends on Pennsylvania House Races
+  Latest developments: TribLive reported Wednesday, October 14,
+  that national Republican efforts to protect four vulnerable
+  Pennsylvania Republicans escalated this week, with one key
+  group redirecting $3.6 million to United States Representative
+  Brian Fitzpatrick in Bucks County and Elon Musk's super PAC
+  spending more than $1.4 million across three other Republican
+  districts.
+  Fitzpatrick represents Pennsylvania's 1st Congressional
+  District in Bucks County, the state's most contested House
+  seat. The outside money lands three weeks before the November
+  3 election, when Pennsylvania's competitive districts help
+  settle control of the United States House.
+  - TribLive: https://triblive.com/news/pennsylvania/elon-musk-and-national-republicans-are-spending-millions-to-defend-pa-candidates/
+* A Cool Front Brings Storms Wednesday Afternoon
+  Latest developments: The attention has moved to Friday: WTAE's
+  Wednesday evening update, October 14, has rain, gusty winds,
+  and a cold front arriving Friday, October 16, dropping
+  temperatures to a mid-November feel for the weekend, after
+  Wednesday's showers and thunderstorms stayed mostly south of
+  Pittsburgh and exited, leaving Thursday quiet.
+  Tuesday's push toward 80 degrees gives way to roughly 30
+  degrees of cooling behind the week's fronts, and forecasters
+  have flagged the chance of snow at higher elevations by the
+  weekend.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/storm-and-severe-weather-possible-wednesday-pittsburgh-weather/
+  - WTAE: https://www.wtae.com/article/impact-day-scattered-rain-isolated-storms/74129150
+  - WTAE: https://www.wtae.com/article/warm-breezy-today-impact-day-with-rain-wednesday/74116549
+  - WTAE: https://www.wtae.com/article/pittsburgh-heavy-rain-wednesday-gusty-winds-friday/74131499
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/2026/10/14/pittsburgh-weather-storms-severe-weather-temperature-drop/stories/202610140030
+  - WPXI: https://www.wpxi.com/news/local/showers-move-through-wednesday-with-thunderstorms-possible-some-areas/H5PVD3OXHVB2JDPW4FTTVOLJUI/
 * The Irish Partnership Asks Pittsburgh for $200,000
   Latest developments: KDKA's Jessica Riley reported Wednesday,
   October 14, that the Irish Partnership of Pittsburgh has
@@ -520,24 +631,6 @@ Around town:
   established cultural festivals.
   - KDKA: https://www.cbsnews.com/pittsburgh/news/irish-partnership-of-pittsburgh-fundraising-campaign/
   - KDKA: https://www.cbsnews.com/pittsburgh/video/irish-partnership-of-pittsburgh-facing-financial-stressors/
-* Friday Nights at Da Club Opens in Lawrenceville
-  Latest developments: TribLive reported Wednesday, October 14,
-  that the Boys & Girls Club in Lawrenceville has started Friday
-  Nights at Da Club, giving teenagers a supervised place to
-  gather on weekend evenings.
-  Club members, among them 14-year-old Mekhai Smalls, pitch the
-  program as an answer to the teen takeover reputation that
-  unsupervised weekend gatherings have earned in the city. The
-  club runs the evenings out of its Lawrenceville location.
-  - TribLive: https://triblive.com/news/education-classroom/changing-the-teen-takeover-narrative-lawrenceville-boys-girls-club-steps-up-with-friday-nights-at-da-club/
-* Drilling Narrows Seventh Avenue in West Tarentum
-  Latest developments: TribLive reported Wednesday, October 14,
-  that single-lane restrictions will run along Seventh Avenue in
-  West Tarentum this week for drilling work.
-  Crews drilling in the Allegheny County borough's West Tarentum
-  section will hold traffic to one lane on Seventh Avenue, the
-  main route through that stretch of Tarentum.
-  - TribLive: https://triblive.com/local/valley-news-dispatch/drilling-in-west-tarentum-to-cause-traffic-restrictions/
 * Trump Skips the Steelers Game
   Latest developments: TribLive's First Call reported Wednesday,
   October 14, that President Trump will not attend the Steelers'
@@ -549,33 +642,6 @@ Around town:
   the Tampa Bay Buccaneers at 1 p.m. Eastern on CBS.
   - TribLive: https://triblive.com/sports/first-call-president-trumps-appearance-at-steelers-game-sunday-called-off-significant-injury-for-jordan-staal/
   - WTAE: https://www.wtae.com/article/president-trump-arizona-montana-today-voters-midterms/74128849
-* A Cool Front Brings Storms Wednesday Afternoon
-  Latest developments: The storms have shifted south: WPXI
-  reported Wednesday afternoon, October 14, that showers and
-  thunderstorms will stay mostly south of Pittsburgh through the
-  evening before the rain exits the region, leaving Thursday
-  quiet, and forecasters still flag a second round of wet, windy
-  weather Friday, October 16, ahead of a weekend temperature
-  crash.
-  Tuesday's push toward 80 degrees gives way to roughly 30
-  degrees of cooling behind the week's fronts, and forecasters
-  have flagged the chance of snow at higher elevations by the
-  weekend.
-  - KDKA: https://www.cbsnews.com/pittsburgh/news/storm-and-severe-weather-possible-wednesday-pittsburgh-weather/
-  - WTAE: https://www.wtae.com/article/impact-day-scattered-rain-isolated-storms/74129150
-  - WTAE: https://www.wtae.com/article/warm-breezy-today-impact-day-with-rain-wednesday/74116549
-  - WTAE: https://www.wtae.com/article/pittsburgh-heavy-rain-wednesday-gusty-winds-friday/74131499
-  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/2026/10/14/pittsburgh-weather-storms-severe-weather-temperature-drop/stories/202610140030
-  - WPXI: https://www.wpxi.com/news/local/showers-move-through-wednesday-with-thunderstorms-possible-some-areas/H5PVD3OXHVB2JDPW4FTTVOLJUI/
-* Beechwood Farms Makes Students Wildlife Engineers
-  Latest developments: TribLive reported Wednesday, October 14,
-  that students from across the region will build bald eagle
-  nests and follow a raindrop's journey through programs at
-  Beechwood Farms Nature Reserve in Fox Chapel.
-  The reserve runs the hands-on sessions for school groups on
-  habitat construction and stormwater, drawing classes from
-  across the Pittsburgh region to its Fox Chapel grounds.
-  - TribLive: https://triblive.com/local/valley-news-dispatch/beechwood-farms-offers-students-chance-to-be-wildlife-engineers/
 * Deluzio and Guy Trade Answers on Iran and Data Centers
   Latest developments: The debate happened: United States
   Representative Chris Deluzio and Republican challenger Tony
@@ -595,6 +661,33 @@ Around town:
   buildings, a 1920s speakeasy, into a gathering space for Etna
   residents along the Allegheny River in Allegheny County.
   - NEXTpittsburgh: https://nextpittsburgh.com/city-design/etna-center-for-community-opens-this-weekend/
+* Friday Nights at Da Club Opens in Lawrenceville
+  Latest developments: TribLive reported Wednesday, October 14,
+  that the Boys & Girls Club in Lawrenceville has started Friday
+  Nights at Da Club, giving teenagers a supervised place to
+  gather on weekend evenings.
+  Club members, among them 14-year-old Mekhai Smalls, pitch the
+  program as an answer to the teen takeover reputation that
+  unsupervised weekend gatherings have earned in the city. The
+  club runs the evenings out of its Lawrenceville location.
+  - TribLive: https://triblive.com/news/education-classroom/changing-the-teen-takeover-narrative-lawrenceville-boys-girls-club-steps-up-with-friday-nights-at-da-club/
+* Beechwood Farms Makes Students Wildlife Engineers
+  Latest developments: TribLive reported Wednesday, October 14,
+  that students from across the region will build bald eagle
+  nests and follow a raindrop's journey through programs at
+  Beechwood Farms Nature Reserve in Fox Chapel.
+  The reserve runs the hands-on sessions for school groups on
+  habitat construction and stormwater, drawing classes from
+  across the Pittsburgh region to its Fox Chapel grounds.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/beechwood-farms-offers-students-chance-to-be-wildlife-engineers/
+* Drilling Narrows Seventh Avenue in West Tarentum
+  Latest developments: TribLive reported Wednesday, October 14,
+  that single-lane restrictions will run along Seventh Avenue in
+  West Tarentum this week for drilling work.
+  Crews drilling in the Allegheny County borough's West Tarentum
+  section will hold traffic to one lane on Seventh Avenue, the
+  main route through that stretch of Tarentum.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/drilling-in-west-tarentum-to-cause-traffic-restrictions/
 
 Events:
 * Pumpkin Chunkin Launches Gourds at Hartwood Acres
@@ -648,6 +741,28 @@ Penguins (3-3)
     https://plaintextsports.com/nhl/2026-10-16/pit-col
 
 Around the Teams:
+* Elandon Roberts Returns to the Steelers
+  Latest developments: The Post-Gazette reported Wednesday,
+  October 14, that the Steelers signed inside linebacker Elandon
+  Roberts and that his role remains undetermined.
+  Roberts, a veteran inside linebacker who played for the
+  Steelers in an earlier stint, rejoins a defense working
+  through injuries across the back seven. The team plays at the
+  Tampa Bay Buccaneers on Sunday, October 18, at 1 p.m. Eastern
+  on CBS.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/14/steelers-sign-elandon-roberts/stories/202610140029
+* The Steelers Run Short at Receiver
+  Latest developments: The Post-Gazette asked Wednesday, October
+  14, whom the Steelers can turn to Sunday at the Tampa Bay
+  Buccaneers with Michael Pittman Jr., Roman Wilson, and Ben
+  Skowronek all out.
+  Pittman went on injured reserve October 10, which keeps him
+  out at least four games, and the paper reported October 12
+  that Wilson and Skowronek would miss this week too. That
+  leaves quarterback Aaron Rodgers building chemistry on the fly
+  with a thinned group that includes DK Metcalf and rookie
+  Germie Bernard.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/14/steelers-wide-receiver-news/stories/202610140028
 * Warren Takes AFC Offensive Player of the Week
   Latest developments: The Steelers' channel posted a "Congrats
   Jaylen" short Wednesday, October 14, after the NFL named
@@ -672,9 +787,7 @@ Around the Teams:
   McCarthy, in his first season running the Steelers, reworked
   the formations and calls the offense uses on third down, and
   the paper traces how those adjustments moved the ball in
-  Indianapolis. TribLive's Tim Benz argues the same point more
-  broadly, writing that McCarthy's staff is still finding its
-  feel for the roster in Year 1.
+  Indianapolis.
   - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/14/steelers-third-down-offense-mike-mccarthy/stories/202610140026
   - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/14/live-chat-aaron-rodgers-nfl-week-6/stories/202610140004
 * Not Just Football Turns to Tampa Bay
@@ -775,38 +888,40 @@ READING
 
 MARKETS (weekly average, change vs prior week)
 ----------------------------------------------------------------
-S&P 500     7,798.27  ▲ +0.9%
-Dow        51,517.42  ▲ +0.7%
-Nasdaq     27,309.70  ▲ +0.4%
+S&P 500     7,781.71  ▲ +0.3%
+Dow        51,605.74  ▲ +0.8%
+Nasdaq     27,140.53  ▼ -0.7%
 WTI crude      91.90  ▲ +1.4%
-EUR/USD       1.1207  ▼ -0.6%
-GBP/USD       1.3232  = +0.0%
-USD/JPY       158.23  ▲ +0.3%
+EUR/USD       1.1197  ▼ -0.6%
+GBP/USD       1.3231  ▼ -0.1%
+USD/JPY       158.23  ▲ +0.2%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 78 items in the 24-hour window.
-  No recent items: CISA Advisories, Securelist (Kaspersky),
-  Google Online Security Blog, Graham Cluley, Google Project
-  Zero, The DFIR Report, Frank on Fraud.
+Security: 24 of 24 feeds loaded, 69 items in the 24-hour window.
+  No recent items: Securelist (Kaspersky), Google Online
+  Security Blog, Graham Cluley, Google Project Zero, The DFIR
+  Report, Kim Zetter (Zero Day), Frank on Fraud, Wired Security.
 Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
 Events: 4 of 4 feeds loaded, 12 items in the 120-hour window.
-Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
-  window.
-Team USA: 3 of 3 feeds loaded, 27 items in the 72-hour window.
+Sports media: 4 of 6 feeds loaded, 22 items in the 96-hour
+  window. Failed: Pittsburgh Steelers (YouTube) (HTTPError: HTTP
+  Error 404: Not Found); Ben Roethlisberger / Channel Seven
+  (YouTube) (HTTPError: HTTP Error 404: Not Found).
+Team USA: 3 of 3 feeds loaded, 26 items in the 72-hour window.
   No recent items: Guardian Olympics.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
   No recent items: Cal Newport.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (412s of
-  model time; $2.35 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (468s of
+  model time; $2.50 at API list price).
 
 ================================================================
-Generated 2026-10-14 13:37 EDT. Updated weekdays at about 7:05
+Generated 2026-10-14 19:37 EDT. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
