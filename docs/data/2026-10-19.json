@@ -1,27 +1,94 @@
 {
   "date": "2026-10-19",
-  "headline": "Attackers rode trusted channels all day—ConnectWise's own cloud identities, Rank Math's update server, and a single stolen Educational Testing Service login—into other organizations' systems.",
+  "headline": "Attackers turned trusted vendors into delivery routes, with ConnectWise's cloud application identities opening customer Microsoft 365 tenants and Rank Math's own update servers planting backdoors on WordPress sites.",
   "emerging_trends": [
     {
-      "text": "Attackers increasingly seize the distribution point itself, poisoning Rank Math PRO update packages, 94 GitHub repositories, and npm packages that dangle free Claude and Gemini credits, so a routine update becomes the intrusion.",
+      "text": "The day's worst compromises arrived through channels customers trust by default, with Rank Math's own download servers handing WordPress sites a self-restoring backdoor and the GhostAction crew phishing open-source developers with a credential stealer dressed up as a font file.",
       "topic_title": "Poisoned Plugins and Packages Spread Backdoors",
       "link_phrase": "Rank Math",
       "_anchor": "trend-1"
     },
     {
-      "text": "One stolen credential keeps opening doors at scale—a ConnectWise application identity signed in to 173 Microsoft 365 tenants, a single Educational Testing Service login exposed millions of California students, and a server management flaw handed over FirstVDS customer passwords.",
-      "topic_title": "ConnectWise Suspends Cloud Services",
-      "link_phrase": "ConnectWise",
+      "text": "Exploitation now follows disclosure within hours: attackers weaponized the Plex2Shell chain a day after its proof of concept went public, and the Qilin and Inc ransomware crews already run PAN-OS CVE-2026-0257 against firewalls.",
+      "topic_title": "NGINX, Plex, and FortiGate Under Fire",
+      "link_phrase": "Plex2Shell",
       "_anchor": "trend-2"
     },
     {
-      "text": "Exploitation now lands within hours of disclosure: Plex2Shell hit Plex servers the same day researchers published it, F5 broke its own patch schedule for NGINX, and Broadcom's router flaw still waits on a fix.",
-      "topic_title": "NGINX, Plex, and FortiGate Under Fire",
-      "link_phrase": "Plex2Shell",
+      "text": "One stolen login keeps buying an entire estate, from the ConnectWise application credential that signed in to 173 Microsoft 365 tenants to the Educational Testing Service file transfer server that gave up millions of California student records.",
+      "topic_title": "ConnectWise Suspends Cloud Services",
+      "link_phrase": "ConnectWise",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "ConnectWise Suspends Cloud Services",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Sophos detailed on October 19, 2026 how automated sign-ins used ConnectWise's Entra application identity to request Microsoft Graph tokens across every tenant that had consented to it, a cross-tenant token sweep; ConnectWise kept Cloud Backup, the service it formerly sold as SkyKick, along with SaaS Security and Cloud Management offline through remediation and security validation, and says customer impact remains unconfirmed.",
+      "summary": "Attackers used a compromised credential belonging to the ConnectWise Cloud Backup application identity to sign in to customer Microsoft 365 tenants, 173 of them by researchers' count. Managed service providers and their customers should audit Microsoft 365 sign-in logs and application consent grants for ConnectWise identities and arrange interim backups while the services stay down.",
+      "tags": [
+        "breach",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "ConnectWise suspends Cloud Backup service after attackers abuse its Microsoft 365 access",
+          "url": "https://www.helpnetsecurity.com/2026/10/19/connectwise-cloud-backup-suspended-security-incident/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "ConnectWise Suspends Cloud Services in Response to Cyberattack",
+          "url": "https://www.securityweek.com/connectwise-suspends-cloud-services-in-response-to-cyberattack/"
+        },
+        {
+          "source": "Sophos News",
+          "title": "ConnectWise Cloud Backup application abused in cross-tenant token sweep",
+          "url": "https://www.sophos.com/en-us/blog/connectwise-cloud-backup-application-abused-in-token-sweep"
+        },
+        {
+          "source": "The Record",
+          "title": "ConnectWise suspends Cloud Backup service after supply chain attack",
+          "url": "https://therecord.media/connectwise-suspends-cloud-backup-service-supply-chain-attack"
+        }
+      ],
+      "_anchor": "i-531572f7c5"
+    },
+    {
+      "title": "NGINX, Plex, and FortiGate Under Fire",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Unit 42 updated its threat brief on October 19, 2026 to say the ransomware operators it tracks as Spikey Scorpius, known publicly as Qilin, and Tarnished Scorpius, known as Inc, now exploit PAN-OS CVE-2026-0257; F5 broke its schedule the same day and shipped out-of-band patches for several NGINX web server flaws, three of them critical bugs that run an attacker's code; a researcher using the alias boredhackerblog found attackers chaining four Plex Media Server flaws, the set called Plex2Shell, to drop cryptocurrency miners and reverse proxy software a day after the proof of concept went public; and researchers linked the already-exploited Fortinet flaw to a stealthy, persistent implant one intruder planted on a FortiGate firewall at a telecommunications company.",
+      "summary": "All four products sit at the network edge, where NGINX fronts much of the web, Plex servers face the internet by design, and PAN-OS and FortiGate firewalls terminate remote access. Patch NGINX, Plex, and PAN-OS now, and hunt FortiGate devices for the implant and for deleted logs; a clean firmware version proves nothing by itself.",
+      "tags": [
+        "patch",
+        "zero-day",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "F5 releases out-of-band patches for critical NGINX vulnerabilities",
+          "url": "https://www.bleepingcomputer.com/news/security/f5-releases-out-of-band-patches-for-critical-nginx-vulnerabilities/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Plex2Shell Exploit Chain Weaponized Against Plex Servers Hours After Disclosure",
+          "url": "https://www.securityweek.com/plex2shell-exploit-chain-weaponized-against-plex-servers-hours-after-disclosure/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Exploited Fortinet Bug Linked to Stealthy FortiGate Implant in Telecom Hack",
+          "url": "https://www.securityweek.com/exploited-fortinet-bug-linked-to-stealthy-fortigate-implant-in-telecom-hack/"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "Threat Brief: Active Exploitation of PAN-OS CVE-2026-0257 (Updated October 19)",
+          "url": "https://unit42.paloaltonetworks.com/active-exploitation-of-pan-os-cve-2026-0257/"
+        }
+      ],
+      "_anchor": "i-59b0e474cf"
+    },
     {
       "title": "Poisoned Plugins and Packages Spread Backdoors",
       "area": "Ransomware and Cybercrime",
@@ -57,79 +124,55 @@
       "_anchor": "i-4ad529ab62"
     },
     {
-      "title": "NGINX, Plex, and FortiGate Under Fire",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "F5 broke its schedule on October 19, 2026 and shipped out-of-band patches for several NGINX web server flaws, three of them critical bugs that run an attacker's code; attackers weaponized the Plex2Shell exploit chain against Plex media servers within hours of its disclosure, dropping cryptocurrency miners and proxy software; and researchers linked the already-exploited Fortinet flaw to a stealthy, persistent implant that one intruder planted on a FortiGate firewall at a telecommunications company.",
-      "summary": "All three products sit at the network edge, where NGINX fronts much of the web, Plex servers face the internet by design, and FortiGate firewalls terminate remote access. Patch NGINX and Plex now, and hunt FortiGate devices for the implant and for deleted logs rather than trusting a clean firmware version alone.",
+      "title": "Ad Bidding Delivers Spyware as Pegasus Hits Serbia",
+      "area": "Nation-State Activity",
+      "latest_developments": "Dark Reading named the technique AdFection on October 19, 2026: spyware vendors buy targeted impressions in the digital ad auction to fingerprint and track individuals and organizations of interest, then infect the selected handset the moment it renders the ad; researchers found Pegasus on the phone of the rector of the University of Belgrade, the latest in a run of such discoveries among Serbian opposition figures ahead of national elections; and a federal judge denied WhatsApp's bid to hold NSO Group in contempt of a 2025 injunction barring it from using the messaging app to spread spyware, saying WhatsApp hurt its own case by withholding information.",
+      "summary": "Mercenary spyware makers now reach a target through the same real-time advertising auctions that serve ordinary apps and websites, which requires no click and leaves little trace. Journalists, politicians, and civil society staff should expect zero-click delivery through ads, and the organizations that employ them should block ads and trackers on managed phones and run periodic forensic checks.",
       "tags": [
-        "patch",
-        "zero-day",
-        "exploit"
+        "spyware",
+        "zero-click"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "F5 releases out-of-band patches for critical NGINX vulnerabilities",
-          "url": "https://www.bleepingcomputer.com/news/security/f5-releases-out-of-band-patches-for-critical-nginx-vulnerabilities/"
+          "source": "Dark Reading",
+          "title": "'AdFection' Turns Ad Impressions Into Zero-Click Spyware Delivery",
+          "url": "https://www.darkreading.com/data-privacy/adfection-online-ads-spyware-delivery"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Plex2Shell Exploit Chain Weaponized Against Plex Servers Hours After Disclosure",
-          "url": "https://www.securityweek.com/plex2shell-exploit-chain-weaponized-against-plex-servers-hours-after-disclosure/"
+          "source": "The Record",
+          "title": "Two more Serbian opposition figures targeted with spyware, researchers say",
+          "url": "https://therecord.media/serbia-spyware-pegasus-elections"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Exploited Fortinet Bug Linked to Stealthy FortiGate Implant in Telecom Hack",
-          "url": "https://www.securityweek.com/exploited-fortinet-bug-linked-to-stealthy-fortigate-implant-in-telecom-hack/"
+          "source": "The Record",
+          "title": "Judge denies WhatsApp’s bid to hold spyware maker in contempt for allegedly targeting users",
+          "url": "https://therecord.media/whatsapp-denied-appeal-alleged-nso-group-violation-injunction"
         }
       ],
-      "_anchor": "i-59b0e474cf"
+      "_anchor": "i-553c25ef77"
     },
     {
-      "title": "ConnectWise Suspends Cloud Services",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "ConnectWise widened the shutdown on October 19, 2026, keeping Cloud Backup, the service it formerly sold as SkyKick, along with SaaS Security and Cloud Management offline while it finishes remediation and security validation.",
-      "summary": "Attackers used a compromised credential belonging to the ConnectWise Cloud Backup application identity to sign in to customer Microsoft 365 tenants, 173 of them by researchers' count. Managed service providers and their customers should audit Microsoft 365 sign-in logs and application consent grants for ConnectWise identities and arrange interim backups while the services stay down.",
+      "title": "Drones and Hackers Hit Russian Internet Firms",
+      "area": "Nation-State Activity",
+      "latest_developments": "VK users reported from Sunday, October 18, 2026 that news feeds, music, and other features on the company's platforms failed after a drone strike on one of its data centers, and hackers exploited a flaw in server management software at the Russian hosting provider FirstVDS and took customer passwords, access credentials, and other sensitive data.",
+      "summary": "VK runs Russia's largest social network, and FirstVDS rents virtual servers to Russian businesses, so physical strikes and intrusions now degrade the same infrastructure in parallel, following the drone attacks that knocked out Yandex data centers in Sasovo and Vladimir. Anyone hosting data or servers with Russian providers should treat stored credentials as exposed and rotate them.",
       "tags": [
         "breach",
-        "credentials"
+        "critical infrastructure"
       ],
       "sources": [
         {
-          "source": "Help Net Security",
-          "title": "ConnectWise suspends Cloud Backup service after attackers abuse its Microsoft 365 access",
-          "url": "https://www.helpnetsecurity.com/2026/10/19/connectwise-cloud-backup-suspended-security-incident/"
+          "source": "The Record",
+          "title": "Russian social media giant VK faces disruptions after data center drone strike",
+          "url": "https://therecord.media/russian-social-media-giant-vk-faces-disruptions-drone-strike-data-center"
         },
         {
-          "source": "SecurityWeek",
-          "title": "ConnectWise Suspends Cloud Services in Response to Cyberattack",
-          "url": "https://www.securityweek.com/connectwise-suspends-cloud-services-in-response-to-cyberattack/"
+          "source": "The Record",
+          "title": "Hackers steal customer data from major Russian hosting provider FirstVDS",
+          "url": "https://therecord.media/russia-cyberattack-firstvds-cloud"
         }
       ],
-      "_anchor": "i-531572f7c5"
-    },
-    {
-      "title": "Chinese Crime Ring Mints Staples Gift Cards",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "404 Media detailed on October 19, 2026 how an organized Chinese crime ring broke into Staples, issued millions of dollars worth of gift cards, and spent them on a buying spree across the United States.",
-      "summary": "Staples, the office supply retailer, runs the gift card platform the gang drove, and the crew converted system access straight into spendable value instead of stealing merchandise. Retailers should reconcile gift card issuance against sales records daily and alert on bulk issuance from any single account or terminal.",
-      "tags": [
-        "fraud",
-        "breach"
-      ],
-      "sources": [
-        {
-          "source": "404 Media",
-          "title": "How a Massive Chinese Crime Ring Hacked Staples to Steal Millions",
-          "url": "https://www.404media.co/how-a-massive-chinese-crime-ring-hacked-staples-to-steal-millions/"
-        },
-        {
-          "source": "404 Media",
-          "title": "The Staples Gift Card Heist",
-          "url": "https://www.404media.co/the-staples-gift-card-heist/"
-        }
-      ],
-      "_anchor": "i-c4faf892a0"
+      "_anchor": "i-f650fcc751"
     },
     {
       "title": "OpenCode Console Breach Exposes AI Provider Keys",
@@ -156,27 +199,27 @@
       "_anchor": "i-1de1c48ce2"
     },
     {
-      "title": "Drones and Hackers Hit Russian Internet Firms",
-      "area": "Nation-State Activity",
-      "latest_developments": "VK users reported from Sunday, October 18, 2026 that news feeds, music, and other features on the company's platforms failed after a drone strike on one of its data centers, and hackers exploited a flaw in server management software at the Russian hosting provider FirstVDS and took customer passwords, access credentials, and other sensitive data.",
-      "summary": "VK runs Russia's largest social network, and FirstVDS rents virtual servers to Russian businesses, so physical strikes and intrusions now degrade the same infrastructure in parallel, following the drone attacks that knocked out Yandex data centers in Sasovo and Vladimir. Anyone hosting data or servers with Russian providers should treat stored credentials as exposed and rotate them.",
+      "title": "Chinese Crime Ring Mints Staples Gift Cards",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "404 Media detailed on October 19, 2026 how an organized Chinese crime ring broke into Staples, issued millions of dollars worth of gift cards, and spent them on a buying spree across the United States.",
+      "summary": "Staples, the office supply retailer, runs the gift card platform the gang drove, and the crew converted system access straight into spendable value instead of stealing merchandise. Retailers should reconcile gift card issuance against sales records daily and alert on bulk issuance from any single account or terminal.",
       "tags": [
-        "breach",
-        "critical infrastructure"
+        "fraud",
+        "breach"
       ],
       "sources": [
         {
-          "source": "The Record",
-          "title": "Russian social media giant VK faces disruptions after data center drone strike",
-          "url": "https://therecord.media/russian-social-media-giant-vk-faces-disruptions-drone-strike-data-center"
+          "source": "404 Media",
+          "title": "How a Massive Chinese Crime Ring Hacked Staples to Steal Millions",
+          "url": "https://www.404media.co/how-a-massive-chinese-crime-ring-hacked-staples-to-steal-millions/"
         },
         {
-          "source": "The Record",
-          "title": "Hackers steal customer data from major Russian hosting provider FirstVDS",
-          "url": "https://therecord.media/russia-cyberattack-firstvds-cloud"
+          "source": "404 Media",
+          "title": "The Staples Gift Card Heist",
+          "url": "https://www.404media.co/the-staples-gift-card-heist/"
         }
       ],
-      "_anchor": "i-f650fcc751"
+      "_anchor": "i-c4faf892a0"
     },
     {
       "title": "Ahold Delhaize Confirms Attack Behind Grocery Outages",
@@ -231,43 +274,25 @@
         }
       ],
       "_anchor": "i-6e3176643e"
-    },
-    {
-      "title": "Broadcom Wi-Fi Flaw Hands Over Home Routers",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Security researcher Quentin Kaiser disclosed on October 16, 2026 an unpatched flaw in Broadcom's Wi-Fi setup software that runs code as root on Broadcom-based routers from within radio range, demanding neither the network password nor any pairing step.",
-      "summary": "Kaiser ran the attack against home gateways that three Belgian internet providers supply, and in one case read the Wi-Fi password straight off the device. Broadcom has shipped no fix, so carriers and enterprises running Broadcom-based gateways need to press their hardware vendor for patched firmware and treat the wireless perimeter as reachable by anyone nearby.",
-      "tags": [
-        "zero-day",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Unpatched Broadcom Wi-Fi Flaw Lets Attackers in Range Run Code as Root on Routers",
-          "url": "https://thehackernews.com/2026/10/unpatched-broadcom-wi-fi-flaw-lets.html"
-        }
-      ],
-      "_anchor": "i-f519e0b522"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,747.03",
-      "pct": "-0.6%",
+      "value": "7,723.72",
+      "pct": "-1.0%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "51,864.45",
-      "pct": "+1.0%",
+      "value": "51,887.54",
+      "pct": "+0.8%",
       "arrow": "▲"
     },
     {
       "label": "Nasdaq",
-      "value": "26,799.24",
-      "pct": "-2.3%",
+      "value": "26,636.24",
+      "pct": "-2.7%",
       "arrow": "▼"
     },
     {
@@ -278,27 +303,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1196",
-      "pct": "-0.3%",
+      "value": "1.1200",
+      "pct": "-0.2%",
       "arrow": "▼"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3242",
-      "pct": "+0.1%",
+      "value": "1.3261",
+      "pct": "+0.2%",
       "arrow": "▲"
     },
     {
       "label": "USD/JPY",
-      "value": "158.23",
-      "pct": "+0.1%",
-      "arrow": "▲"
+      "value": "158.15",
+      "pct": "+0.0%",
+      "arrow": "="
     }
   ],
   "weather": [
-    "This Afternoon: Sunny, high 65F.",
     "Tonight: Mostly Clear, low 41F.",
-    "Tuesday: Mostly Sunny, high 69F."
+    "Tuesday: Mostly Sunny, high 69F.",
+    "Tuesday Night: Mostly Clear, low 40F."
   ],
   "sports": [
     {
@@ -335,23 +360,23 @@
     "business_politics": [
       {
         "title": "Macron Refuses His Interior Minister's Resignation",
-        "latest_developments": "Prime Minister Sebastien Lecornu instructed prefects Monday, October 19, to impose limited, localized curfews, Emmanuel Macron rejected his interior minister's offered resignation, French authorities admitted the police botched oversight of the weekend protests, and the looting jumped borders into Milan, Brussels, Liege, and Tirana.",
-        "summary": "Riots over the cost of living and the education system tore through Paris, Marseille, and other French cities over the weekend, with crowds attacking city halls, other public buildings, and hundreds of businesses. Macron's government runs in crisis mode six months before the presidential election, and investors now charge France more to borrow as it pushes a budget-deficit cut, though the Wall Street Journal judges the eurozone better insulated than it was during its last debt crisis.",
+        "latest_developments": "The French government bond sell-off intensified Monday, October 19, as Prime Minister Sebastien Lecornu instructed prefects to impose limited, localized curfews, Emmanuel Macron rejected his interior minister's offered resignation, French authorities admitted the police botched oversight of the weekend protests, and the looting jumped borders into Milan, Brussels, Liege, and Tirana.",
+        "summary": "Weeks of student-led protests over the cost of living and conditions in French schools spiraled into riots across Paris, Marseille, and other cities over the weekend, with crowds attacking city halls, other public buildings, and hundreds of businesses. Macron's government runs in crisis mode six months before the presidential election, investors now charge France more to borrow as it pushes a budget-deficit cut, and the Wall Street Journal judges the eurozone better insulated than it was during its last debt crisis.",
         "sources": [
           {
             "source": "FT Home",
-            "title": "Macron rejects interior minister’s resignation after French riots",
+            "title": "French bond sell-off intensifies after riots and looting",
             "url": "https://www.ft.com/content/cc7e577a-db7a-4e12-9a42-443696b98ec5?syn-25a6b1a6=1"
           },
           {
             "source": "FT Home",
-            "title": "Violent protests spread from France to Italy and Belgium",
-            "url": "https://www.ft.com/content/d8df36c2-7e8c-4cfb-ad9e-e6e954fea4b9?syn-25a6b1a6=1"
+            "title": "France’s riots expose the impotence of its political class",
+            "url": "https://www.ft.com/content/388569e9-3936-4359-8856-48b006587fb7?syn-25a6b1a6=1"
           },
           {
             "source": "WSJ World News",
-            "title": "French Leaders Trade Blame After Rioting Sweeps the Nation",
-            "url": "https://www.wsj.com/world/europe/french-leaders-trade-blame-after-rioting-sweeps-the-nation-ac02a5b6?mod=rss_worldnews"
+            "title": "Rioting in France: What’s Fueling the Violence and What Happens Next",
+            "url": "https://www.wsj.com/world/europe/rioting-in-france-whats-fueling-the-violence-and-what-happens-next-87f18199?mod=rss_worldnews"
           },
           {
             "source": "WSJ Markets",
@@ -387,7 +412,7 @@
             "url": "https://www.wsj.com/world/middle-east/saudi-arabia-decides-against-holding-in-person-investor-conference-d9f5e66b?mod=rss_worldnews"
           },
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "Saudi Arabia to postpone ‘Davos in the desert’ after Houthi attacks",
             "url": "https://www.ft.com/content/75a2ee4e-ead9-4d37-b1ea-6fd759c4691d?syn-25a6b1a6=1"
           }
@@ -396,9 +421,14 @@
       },
       {
         "title": "Kyiv Gets Warning on One Strike of Two",
-        "latest_developments": "Ukraine's air force said Monday, October 19, that Western allies supplied advance warning about only one of two overnight Russian ballistic missile attacks, and Volodymyr Zelenskyy said Russia again hit the power grid with missiles and jet-powered drones.",
-        "summary": "Vladimir Putin has floated a three-way summit with President Trump and Xi Jinping to settle the war on Moscow's terms, with Zelenskyy left out of the proposed talks. Oil prices fell Monday as traders weighed Trump's waiver of the Russia sanctions Congress passed against continuing supply risk in the Middle East.",
+        "latest_developments": "President Trump said Monday, October 19, that he would meet Vladimir Putin and Xi Jinping and discuss denuclearization, taking up the summit Putin floated, while Ukraine's air force said Western allies supplied advance warning about only one of two overnight Russian ballistic missile attacks and Volodymyr Zelenskyy said Russia again hit the power grid with missiles and jet-powered drones.",
+        "summary": "Putin proposed a three-way meeting with Trump and Xi to settle the war on Moscow's terms, with Zelenskyy left out of the proposed talks. Oil futures settled lower Monday as traders weighed Trump's waiver of the Russia sanctions Congress passed against continuing supply risk in the Middle East.",
         "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "Trump Says He Would Be Open to Meeting With Putin and Xi",
+            "url": "https://www.wsj.com/world/trump-putin-xi-meeting-ee489ddd?mod=rss_worldnews"
+          },
           {
             "source": "FT Home",
             "title": "Ukraine receives partial intelligence on Russian ballistic missile strikes",
@@ -415,17 +445,27 @@
             "url": "https://www.wsj.com/business/energy-oil/oil-prices-fall-as-traders-weigh-russia-sanctions-waiver-middle-east-risks-05053c4f?mod=rss_worldnews"
           }
         ],
-        "_anchor": "i-cf78be4208"
+        "_anchor": "i-4aba988766"
       },
       {
         "title": "The AI Bond Market Shows Its Seams",
-        "latest_developments": "The Nasdaq 100 rebounded Monday, October 19, as investors made a cautious return to artificial-intelligence shares, while the Wall Street Journal reported that traders have begun pricing specific pockets of artificial-intelligence debt as the weak points and the Financial Times found investors turning against data center lending.",
-        "summary": "Hyperscalers, data center developers, and neocloud companies have financed the buildout with bonds, and last week handed Big Tech its steepest weekly loss since the April 2025 tariff selloff. The credit market now sorts the borrowers it believes can service that debt from the ones it doubts, which sets the cost of the next round of chip and power spending.",
+        "latest_developments": "The Nasdaq 100 recovered Monday, October 19, as traders pared bets that CoreWeave and other artificial-intelligence borrowers had overextended themselves and turned their attention to coming earnings, and the Financial Times reported that Anthropic and the United Kingdom data center group Nscale have opened talks on a second multibillion-dollar computing deal.",
+        "summary": "Hyperscalers, data center developers, and neocloud companies have financed the buildout with bonds, and last week handed Big Tech its steepest weekly loss since the April 2025 tariff selloff. The Wall Street Journal reports traders now price specific pockets of artificial-intelligence debt as the weak points, and the Financial Times finds investors turning against data center lending, which sets the cost of the next round of chip and power spending.",
         "sources": [
+          {
+            "source": "WSJ Markets",
+            "title": "U.S. Stocks Mostly Higher as AI Credit Worries Abate",
+            "url": "https://www.wsj.com/finance/investing/u-s-stocks-mostly-higher-as-ai-credit-worries-abate-600bf008?mod=rss_markets_main"
+          },
           {
             "source": "WSJ Markets",
             "title": "The Weak Points in AI Bonds Are Becoming Clearer",
             "url": "https://www.wsj.com/finance/investing/the-weak-points-in-ai-bonds-are-becoming-clearer-12f09cc6?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "Anthropic and Nscale in talks for second multibillion-dollar deal",
+            "url": "https://www.ft.com/content/26a604d8-1a9d-4801-bd73-6ac588b63bdc?syn-25a6b1a6=1"
           },
           {
             "source": "FT World",
@@ -438,22 +478,96 @@
             "url": "https://www.ft.com/content/5970614a-b1f7-4b4e-b1e5-6038e1dde654?syn-25a6b1a6=1"
           }
         ],
-        "_anchor": "i-a0d47fdd65"
+        "_anchor": "i-761874d7c5"
       }
     ],
     "business": [
       {
+        "title": "WVU Medicine Bases a Helicopter in Greensburg",
+        "latest_developments": "WVU Medicine said Monday, October 19, that it will station a new $10.7 million medical helicopter in Greensburg in May, expanding its services in Westmoreland County.",
+        "summary": "The Morgantown-based health system now owns hospitals around the Pittsburgh region, and the aircraft gives it a Westmoreland County base to fly critically ill and injured patients. The helicopter arrives in May 2027 under the plan the system announced.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "WVU Medicine to base helicopter in Greensburg",
+            "url": "https://triblive.com/local/westmoreland/wvu-medicine-to-base-helicopter-in-greensburg/"
+          },
+          {
+            "source": "KDKA",
+            "title": "WVU Medicine plans new medical helicopter base in Greensburg",
+            "url": "https://www.cbsnews.com/pittsburgh/news/wvu-medicine-medical-helicopter-greensburg/"
+          }
+        ],
+        "_anchor": "i-c5fdc59c22"
+      },
+      {
+        "title": "Westmoreland Authority Tables the Asphalt Plant Bonds",
+        "latest_developments": "The Westmoreland County Industrial Development Authority tabled a request Monday, October 19, to help the proposed East Huntingdon asphalt plant secure up to $10 million in bond financing.",
+        "summary": "Crews began clearing land along Route 119 in East Huntingdon this month for the $10 million plant, which its backers expect to open in the spring. The authority's delay leaves the project's financing unsettled.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Westmoreland authority delays $10M financing for proposed East Huntingdon asphalt plant",
+            "url": "https://triblive.com/local/westmoreland/westmoreland-authority-delays-10m-financing-for-proposed-east-huntingdon-asphalt-plant/"
+          }
+        ],
+        "_anchor": "i-a5621fb62b"
+      },
+      {
         "title": "Businesses Weigh Leaving Over Paid Parental Leave",
-        "latest_developments": "A survey of nearly 400 Allegheny County businesses, reported Monday, October 19, found eight in 10 companies expect the county's pending paid parental leave bill to hurt them and one third say they might move out of the county over it.",
-        "summary": "Allegheny County Council has in front of it a measure requiring employers to provide paid parental leave, and the county's employers now put numbers behind their objection. The Pennsylvania Restaurant and Lodging Association had already asked who pays for the mandate, and restaurant and small-business owners carry the thinnest margins among those the ordinance would cover.",
+        "latest_developments": "Allegheny County Council votes Tuesday night, October 20, on an ordinance establishing 12 weeks of paid parental leave countywide, and home health care operators told KDKA on Monday, October 19, that the mandate would squeeze access to care, while Erica Winger, a nurse practitioner at UPMC Magee-Womens Hospital for 15 years, urged council in TribLive to pass it.",
+        "summary": "A survey of nearly 400 Allegheny County businesses found eight in 10 companies expect the bill to hurt them and one third say they might move out of the county over it. The Pennsylvania Restaurant and Lodging Association had already asked who pays for the mandate, and restaurant, home care, and small-business owners carry the thinnest margins among those the ordinance would cover.",
         "sources": [
           {
             "source": "WPXI",
             "title": "Allegheny County paid leave proposal prompts one-third of surveyed businesses to consider leaving",
             "url": "https://www.wpxi.com/news/local/allegheny-county-paid-leave-proposal-prompts-one-third-surveyed-businesses-consider-leaving/Z75XEDT7HBBFVFHGL5P2CSLQPE/"
+          },
+          {
+            "source": "TribLive",
+            "title": "5 things to know about Allegheny County’s proposed 12-week paid parental leave policy",
+            "url": "https://triblive.com/news/health-now/5-things-to-know-about-allegheny-countys-proposed-12-week-paid-parental-leave-policy/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Home healthcare industry fears impacts of Allegheny County's proposed paid parental leave policy",
+            "url": "https://www.cbsnews.com/pittsburgh/news/allegheny-county-home-healthcare-paid-parental-leave-impacts/"
+          },
+          {
+            "source": "TribLive",
+            "title": "Erica Winger: As a nurse practitioner and mom, I’m calling on Allegheny County to pass historic parental leave policy",
+            "url": "https://triblive.com/opinion/erica-winger-as-a-nurse-practitioner-and-mom-im-calling-on-allegheny-county-to-pass-historic-parental-leave-policy/"
           }
         ],
         "_anchor": "i-3c0b2ef1bb"
+      },
+      {
+        "title": "Pennsylvania's Vape Ban Takes Hold",
+        "latest_developments": "Act 57 took effect after a midnight deadline Monday, October 19, requiring every nicotine product sold in Pennsylvania to appear on a state-approved list and exposing retailers who keep unapproved stock to fines starting at $500, and WTAE found vape shops closing as a worker at Cool Vapes told WPXI that nearly all of the store's products have become illegal.",
+        "summary": "The Pennsylvania law bars the sale of most vape and e-cigarette products statewide. Shops that built their inventory around those products lose it, their customers have objected to the change, and KDKA's Jessica Riley gathered advice from health experts for people who lose access.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Pennsylvania smoke shops must remove unapproved nicotine products by today",
+            "url": "https://www.wtae.com/article/pennsylvania-smoke-shops-must-remove-unapproved-nicotine-products-by-today/74183837"
+          },
+          {
+            "source": "WPXI",
+            "title": "Most vape products will become illegal in Pennsylvania after midnight deadline",
+            "url": "https://www.wpxi.com/news/local/most-vape-products-will-become-illegal-pennsylvania-after-midnight-deadline/CLKI4IVN3VFFVMWLMVHRLYLIO4/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Pennsylvania vape shops closing as new Act 57 regulations take effect",
+            "url": "https://www.wtae.com/article/pennsylvania-vape-shops-closing-as-new-act-57-regulations-take-effect/74176728"
+          },
+          {
+            "source": "WPXI",
+            "title": "Most vapes, e-cigarettes now illegal to sell in Pennsylvania",
+            "url": "https://www.wpxi.com/news/local/most-vapes-e-cigarettes-now-illegal-sell-pennsylvania/OYCKTV67RFHATE66RJTWTFAP7Y/"
+          }
+        ],
+        "_anchor": "i-127359c4d1"
       },
       {
         "title": "Peoples Gas Hunts New Office Space",
@@ -482,19 +596,6 @@
         "_anchor": "i-3bcec29930"
       },
       {
-        "title": "Faucher Reads Stronger Household Balance Sheets",
-        "latest_developments": "Gus Faucher, chief economist at PNC Financial Services Group, wrote in the Post-Gazette on Monday, October 19, that revisions to federal data show American household finances in better shape than the earlier figures indicated.",
-        "summary": "Faucher writes the Post-Gazette's Economist's View column from PNC's downtown Pittsburgh headquarters. Household balance sheets set the pace of consumer spending, the largest piece of both the regional and the national economy, and the revised data lands as the Federal Reserve weighs another rate increase.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Economist's View: Data revisions paint a better picture of household finances",
-            "url": "https://www.post-gazette.com/business/money/2026/10/19/household-finances-pnc-gus-faucher/stories/202610180032"
-          }
-        ],
-        "_anchor": "i-0fedf36c3e"
-      },
-      {
         "title": "Transit Workers Ratify a Pittsburgh Regional Transit Contract",
         "latest_developments": "Union workers at Pittsburgh Regional Transit approved a new contract that raises wages, the Post-Gazette reported Monday morning, October 19.",
         "summary": "Pittsburgh Regional Transit runs the bus, light rail, and incline service across Allegheny County, and its union workforce drives, maintains, and dispatches that system. The ratified agreement sets pay for those workers and takes a labor fight off the agency's table as it moves toward closing the Wabash Tunnel in December.",
@@ -508,27 +609,17 @@
         "_anchor": "i-18eb39dacf"
       },
       {
-        "title": "Pennsylvania's Vape Ban Takes Hold",
-        "latest_developments": "Act 57 took effect after a midnight deadline Monday, October 19, requiring every nicotine vape product sold in Pennsylvania to appear on a state-approved list, WTAE found shops closing, a worker at Cool Vapes told WPXI that nearly all of the store's products have become illegal, and KDKA's Jessica Riley gathered advice from health experts for customers who lose access.",
-        "summary": "The Pennsylvania law bars the sale of most vape and e-cigarette products statewide and carries penalties for retailers who keep selling them. Shops that built their inventory around those products lose it, and their customers have objected to the change.",
+        "title": "Faucher Reads Stronger Household Balance Sheets",
+        "latest_developments": "Gus Faucher, chief economist at PNC Financial Services Group, wrote in the Post-Gazette on Monday, October 19, that revisions to federal data show American household finances in better shape than the earlier figures indicated.",
+        "summary": "Faucher writes the Post-Gazette's Economist's View column from PNC's downtown Pittsburgh headquarters. Household balance sheets set the pace of consumer spending, the largest piece of both the regional and the national economy, and the revised data lands as the Federal Reserve weighs another rate increase.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Most vape products will become illegal in Pennsylvania after midnight deadline",
-            "url": "https://www.wpxi.com/news/local/most-vape-products-will-become-illegal-pennsylvania-after-midnight-deadline/CLKI4IVN3VFFVMWLMVHRLYLIO4/"
-          },
-          {
-            "source": "WTAE",
-            "title": "Pennsylvania vape shops closing as new Act 57 regulations take effect",
-            "url": "https://www.wtae.com/article/pennsylvania-vape-shops-closing-as-new-act-57-regulations-take-effect/74176728"
-          },
-          {
-            "source": "WPXI",
-            "title": "Most vapes, e-cigarettes now illegal to sell in Pennsylvania",
-            "url": "https://www.wpxi.com/news/local/most-vapes-e-cigarettes-now-illegal-sell-pennsylvania/OYCKTV67RFHATE66RJTWTFAP7Y/"
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Economist's View: Data revisions paint a better picture of household finances",
+            "url": "https://www.post-gazette.com/business/money/2026/10/19/household-finances-pnc-gus-faucher/stories/202610180032"
           }
         ],
-        "_anchor": "i-2e9798455c"
+        "_anchor": "i-0fedf36c3e"
       },
       {
         "title": "Citizens General Hospital Goes to Auction",
@@ -545,6 +636,88 @@
       }
     ],
     "around_town": [
+      {
+        "title": "Subcontractors Knocked the Pole Off the Commercial Street Bridge",
+        "latest_developments": "A Pennsylvania Department of Transportation spokeswoman said Monday, October 19, that subcontractors performing a bridge inspection backed equipment into a light pole on the new Interstate 376 Commercial Street Bridge, which sent the pole onto the road below.",
+        "summary": "The pole dropped Sunday morning, October 18, from the Parkway East bridge and landed feet in front of the car Erin and Eric Milanovich were driving along Commercial Street in Swisshelm Park. The bridge opened only a few months ago.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Commercial Street Bridge light pole collapse caused by workers backing into pole, PennDOT says",
+            "url": "https://triblive.com/local/commercial-street-bridge-light-pole-collapse-caused-by-equipment-failure-penndot-says/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Pole falls off Pittsburgh's new Commercial Street Bridge, nearly hitting car below",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pole-falls-off-commercial-street-bridge/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Woman describes moment when light pole fell in front of her vehicle on Commercial Street Bridge",
+            "url": "https://www.wpxi.com/news/local/woman-describes-moment-when-light-pole-fell-front-her-vehicle-commercial-street-bridge/XTQD7FU4AJHC3MDPQTOKANCQEI/"
+          }
+        ],
+        "_anchor": "i-8b2f273e01"
+      },
+      {
+        "title": "Butler County's ICE Partnership Reaches Construction Crews",
+        "latest_developments": "Construction companies told KDKA's Andy Sheehan, in a report published Monday, October 19, that Immigration and Customs Enforcement arrests have spiked in Butler County this year under the agency's partnership with the sheriff's office and have swept up longtime workers with no criminal record.",
+        "summary": "The builders say the arrests pull experienced crews off job sites, slow home construction in Butler County, and drive up costs. The county sheriff's office works with ICE under an agreement the agency has expanded across Western Pennsylvania this fall.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Longtime workers with no criminal record caught up in Butler County's ICE deal, construction companies say",
+            "url": "https://www.cbsnews.com/pittsburgh/news/ice-arrests-butler-county-construction/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Workers with no criminal record caught up in Butler County's ICE deal, construction companies say",
+            "url": "https://www.cbsnews.com/pittsburgh/video/workers-with-no-criminal-record-caught-up-in-butler-countys-ice-deal-construction-companies-say/"
+          }
+        ],
+        "_anchor": "i-27b76c11c4"
+      },
+      {
+        "title": "Floating Wetlands Reach the Downtown Riverfront",
+        "latest_developments": "The Western Pennsylvania Conservancy unveiled floating wetlands Monday, October 19, planted on a Riverlife barge along the rivers at downtown Pittsburgh.",
+        "summary": "The Western Pennsylvania Conservancy, which plants and tends gardens across the city, paired with Riverlife, the nonprofit that develops Pittsburgh's riverfronts, to put the vegetated barge on the water downtown.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Western Pennsylvania Conservancy unveils floating \"wetlands\" to line Pittsburgh's rivers",
+            "url": "https://www.cbsnews.com/pittsburgh/video/western-pennsylvania-conservancy-unveils-floating-wetlands-to-line-pittsburghs-rivers/"
+          }
+        ],
+        "_anchor": "i-d9f8bb9a6b"
+      },
+      {
+        "title": "Frost South of the City, Then Sun All Week",
+        "latest_developments": "A frost advisory covered the region from Pittsburgh south Monday morning, October 19, forecasters called the growing season over north of the city, WPXI has Tuesday, October 20, starting cold and warming under full sun, and KDKA holds the area completely dry through at least Sunday, October 25.",
+        "summary": "Morning frost and fog give way to sunshine and mild afternoons, and WTAE, WPXI, and KDKA all hold a dry, seasonable stretch through the rest of the week after the weekend's freeze.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Beautiful fall weather continues on Tuesday, with a cool start to the day",
+            "url": "https://www.wpxi.com/weather/beautiful-fall-weather-continues-tuesday-with-cool-start-day/POFTHM32TZF6JBVLEEESDJGOC4/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Quiet stretch of weather continues with cold temps to start the day",
+            "url": "https://www.wpxi.com/weather/quiet-stretch-weather-continues-with-cold-temps-start-day/ZM2NG7D33RBMBGY7OA7GHJ7OIQ/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Pittsburgh: Fantastic week ahead",
+            "url": "https://www.wtae.com/article/pittsburgh-a-stunning-stretch-of-fall-weather/74169420"
+          },
+          {
+            "source": "KDKA",
+            "title": "It's going to be a dry week without rain throughout the Pittsburgh area",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-weather-forecast-dry-week-no-rain/"
+          }
+        ],
+        "_anchor": "i-437f038ff2"
+      },
       {
         "title": "Tarentum Electric Bills Head Up 5%",
         "latest_developments": "TribLive reported Monday, October 19, that electric customers in Tarentum will likely pay about 5% more in 2027.",
@@ -622,29 +795,6 @@
           }
         ],
         "_anchor": "i-9653f7b0ad"
-      },
-      {
-        "title": "Frost South of the City, Then Sun All Week",
-        "latest_developments": "A frost advisory covered the region from Pittsburgh south Monday morning, October 19, forecasters called the growing season over north of the city, and KDKA now holds the area completely dry through at least Sunday, October 25.",
-        "summary": "Morning frost and fog give way to full sunshine and a mild afternoon, and both WTAE and WPXI hold a dry, seasonable stretch through the rest of the week after the weekend's freeze.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Quiet stretch of weather continues with cold temps to start the day",
-            "url": "https://www.wpxi.com/weather/quiet-stretch-weather-continues-with-cold-temps-start-day/ZM2NG7D33RBMBGY7OA7GHJ7OIQ/"
-          },
-          {
-            "source": "WTAE",
-            "title": "Pittsburgh: Fantastic week ahead",
-            "url": "https://www.wtae.com/article/pittsburgh-a-stunning-stretch-of-fall-weather/74169420"
-          },
-          {
-            "source": "KDKA",
-            "title": "It's going to be a dry week without rain throughout the Pittsburgh area",
-            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-weather-forecast-dry-week-no-rain/"
-          }
-        ],
-        "_anchor": "i-ed883a7ba2"
       }
     ],
     "events": [
@@ -676,6 +826,42 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "McCarthy Turns to the Saints in Paris",
+        "latest_developments": "Head coach Mike McCarthy previewed the Steelers' Week 7 game against the New Orleans Saints at his news conference Monday, October 19, a 9:30 a.m. Eastern kickoff Sunday, October 25, on NFL Network, and Jaquan Brisker, Jack Sawyer, and Payton Wilson met reporters the same day.",
+        "summary": "Pittsburgh flies to Paris for the game directly off its overtime comeback at the Tampa Bay Buccaneers, and the early kickoff reflects the afternoon start in France. Safety Brisker and inside linebacker Wilson both play on a defense that turned loose its blitz package in Tampa.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Coach McCarthy Press Conference (Week 7 at New Orleans Saints) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=M2zs_f3U6tQ"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Jaquan Brisker, Jack Sawyer & Payton Wilson Press Conference (October 19) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=eZZ5tuTJolA"
+          }
+        ],
+        "_anchor": "i-c9ea5cad48"
+      },
+      {
+        "title": "The Paris Game Holds Through the Unrest",
+        "latest_developments": "The Post-Gazette reported Monday, October 19, that the Steelers call the protests in France a continuing conversation as they prepare to leave for the game against the New Orleans Saints on Sunday, October 25, after the NFL said Sunday that its preparations run on schedule.",
+        "summary": "The Steelers meet the Saints in Paris as one of the NFL's international games, a trip the team makes directly off its overtime win in Tampa. Protests over the cost of living and school conditions brought looting and clashes with the police to Paris, Marseille, and other French cities over the weekend.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The protests in France are a ‘continuing conversation’ for the Steelers before their game in Paris",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/19/steelers-paris-game-france-protests/stories/202610190026"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The NFL says the Steelers’ game in Paris is still on despite civil unrest",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/18/nfl-steelers-saints-game-paris-civil-unrest-france/stories/202610180091"
+          }
+        ],
+        "_anchor": "i-172a5966cd"
+      },
       {
         "title": "The Blitzes Arrive, and So Does Jalen Ramsey",
         "latest_developments": "The Post-Gazette reported Monday afternoon, October 19, that the Steelers finally turned loose their blitz package at Tampa Bay and used cornerback Jalen Ramsey as a rusher, two days after defensive coordinator Patrick Graham said Pittsburgh would send extra men more often as the season went on.",
@@ -716,19 +902,6 @@
           }
         ],
         "_anchor": "i-eb46f5ecd5"
-      },
-      {
-        "title": "The Paris Game Holds Through the Unrest",
-        "latest_developments": "The Post-Gazette reported late Sunday, October 18, that the NFL sees no change of plans for the Steelers' game against the New Orleans Saints in Paris on Sunday, October 25, as rioting continues across France.",
-        "summary": "The Steelers meet the Saints at the Stade de France as one of the NFL's international games, a trip the team makes directly off its overtime win in Tampa. Protests over the cost of living and school conditions brought looting and clashes with the police to Paris, Marseille, and other French cities over the weekend, and the league says its preparations run on schedule.",
-        "sources": [
-          {
-            "source": "Post-Gazette Steelers",
-            "title": "The NFL says the Steelers’ game in Paris is still on despite civil unrest",
-            "url": "https://www.post-gazette.com/sports/steelers/2026/10/18/nfl-steelers-saints-game-paris-civil-unrest-france/stories/202610180091"
-          }
-        ],
-        "_anchor": "i-55865748c7"
       },
       {
         "title": "Rodgers Delivers on an Off Day in Tampa",
@@ -787,17 +960,17 @@
         "_anchor": "i-4eb2a1f99b"
       },
       {
-        "title": "Sophia Wilson Begins a Two-Game Ban",
-        "latest_developments": "Sophia Wilson sat out Sunday, October 18, serving the first match of a two-game suspension for violent conduct as the Portland Thorns salvaged a 2-2 draw with Bay FC, ESPN reported.",
-        "summary": "Wilson leads the Thorns' attack and plays forward for the United States women's national team. Her ban keeps her out of one more National Women's Soccer League match while Portland fights for position in the standings.",
+        "title": "Hezly Rivera Withdraws From the Gymnastics Worlds",
+        "latest_developments": "ESPN reported that Hezly Rivera, the Olympic gold medalist, pulled out of the world gymnastics championships with an ankle injury, leaving the United States women to compete without her.",
+        "summary": "Rivera won team gold with the United States at the 2024 Paris Olympics and entered this fall as part of the American roster for the world championships. Her withdrawal reshuffles the lineup the United States will field in the team competition.",
         "sources": [
           {
-            "source": "ESPN Soccer",
-            "title": "Thorns snag crucial point vs. Bay FC as Wilson serves suspension",
-            "url": "https://www.espn.com/soccer/story/_/id/50214336/thorns-snag-late-point-bay-fc-wilson-serves-suspension"
+            "source": "ESPN Olympics",
+            "title": "U.S. loses gold medalist Rivera (ankle) for gymnastics worlds",
+            "url": "https://www.espn.com/olympics/gymnastics/story/_/id/50201774/hezly-rivera-withdraws-gymnastics-worlds"
           }
         ],
-        "_anchor": "i-1f33ec6acd"
+        "_anchor": "i-1007550df8"
       }
     ],
     "reading": [
@@ -828,126 +1001,126 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Exploitation is outrunning patching, with F5 shipping out-of-band NGINX fixes, Plex2Shell weaponized on disclosure day, and Broadcom's root-level Wi-Fi flaw still unpatched.",
-      "links": [
-        {
-          "anchor": "i-59b0e474cf",
-          "phrase": "NGINX",
-          "start": 66,
-          "end": 71,
-          "title": "NGINX, Plex, and FortiGate Under Fire"
-        },
-        {
-          "anchor": "i-f519e0b522",
-          "phrase": "Broadcom",
-          "start": 124,
-          "end": 132,
-          "title": "Broadcom Wi-Fi Flaw Hands Over Home Routers"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "One stolen credential keeps scaling, as a ConnectWise identity signed in to 173 Microsoft 365 tenants and a single Educational Testing Service login exposed millions of California students.",
-      "links": [
-        {
-          "anchor": "i-531572f7c5",
-          "phrase": "ConnectWise",
-          "start": 42,
-          "end": 53,
-          "title": "ConnectWise Suspends Cloud Services"
-        },
-        {
-          "anchor": "i-6e3176643e",
-          "phrase": "Educational Testing Service",
-          "start": 115,
-          "end": 142,
-          "title": "Stolen Login Exposes Millions of California Students"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Update and developer channels are now the intrusion path, from backdoored Rank Math PRO downloads and 94 poisoned GitHub repositories to an OpenCode Console breach exposing saved OpenAI and Anthropic keys.",
+      "text": "Trusted channels delivered the compromises, as Rank Math pushed a self-restoring backdoor to WordPress sites and OpenCode's legacy system exposed saved OpenAI and Anthropic keys.",
       "links": [
         {
           "anchor": "i-4ad529ab62",
-          "phrase": "Rank Math PRO",
-          "start": 74,
-          "end": 87,
+          "phrase": "Rank Math",
+          "start": 47,
+          "end": 56,
           "title": "Poisoned Plugins and Packages Spread Backdoors"
         },
         {
           "anchor": "i-1de1c48ce2",
-          "phrase": "OpenCode Console",
-          "start": 140,
-          "end": 156,
+          "phrase": "OpenCode's",
+          "start": 113,
+          "end": 123,
           "title": "OpenCode Console Breach Exposes AI Provider Keys"
         }
       ]
     },
     {
-      "kind": "Update",
-      "status": "new",
-      "text": "Ahold Delhaize confirmed malicious actions caused grocery outages across its US and European brands, while 404 Media detailed a Chinese ring minting millions in Staples gift cards.",
-      "links": [
-        {
-          "anchor": "i-425846ce93",
-          "phrase": "Ahold Delhaize",
-          "start": 0,
-          "end": 14,
-          "title": "Ahold Delhaize Confirms Attack Behind Grocery Outages"
-        },
-        {
-          "anchor": "i-c4faf892a0",
-          "phrase": "Staples",
-          "start": 161,
-          "end": 168,
-          "title": "Chinese Crime Ring Mints Staples Gift Cards"
-        }
-      ]
-    },
-    {
       "kind": "Trend",
       "status": null,
-      "text": "A drone strike on VK and a server-management hack at FirstVDS hit Russian internet firms, while Kyiv got advance warning for only one of two missile salvos.",
+      "text": "Unit 42 says Qilin and Inc now exploit PAN-OS CVE-2026-0257, F5 broke its patch schedule, and the Plex2Shell chain saw attacks a day after its proof of concept.",
       "links": [
         {
-          "anchor": "i-f650fcc751",
-          "phrase": "VK",
-          "start": 18,
-          "end": 20,
-          "title": "Drones and Hackers Hit Russian Internet Firms"
+          "anchor": "i-59b0e474cf",
+          "phrase": "CVE-2026-0257",
+          "start": 46,
+          "end": 59,
+          "title": "NGINX, Plex, and FortiGate Under Fire"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "updated",
+      "text": "Sophos traced automated sign-ins using ConnectWise's Entra application identity across every consenting Microsoft 365 tenant, echoing the stolen login that drained Educational Testing Service records on California students.",
+      "links": [
+        {
+          "anchor": "i-531572f7c5",
+          "phrase": "ConnectWise's",
+          "start": 39,
+          "end": 52,
+          "title": "ConnectWise Suspends Cloud Services"
         },
         {
-          "anchor": "i-cf78be4208",
-          "phrase": "Kyiv",
-          "start": 96,
-          "end": 100,
-          "title": "Kyiv Gets Warning on One Strike of Two"
+          "anchor": "i-6e3176643e",
+          "phrase": "Educational Testing Service",
+          "start": 164,
+          "end": 191,
+          "title": "Stolen Login Exposes Millions of California Students"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Pennsylvania's Act 57 vape ban took hold as shops closed, and eight in 10 Allegheny County businesses said the pending paid parental leave bill would hurt them.",
+      "text": "Dark Reading named AdFection, the technique letting spyware vendors buy targeted ad impressions to fingerprint and then infect a chosen handset, as Pegasus surfaced in Serbia.",
       "links": [
         {
-          "anchor": "i-2e9798455c",
-          "phrase": "vape ban",
-          "start": 22,
-          "end": 30,
-          "title": "Pennsylvania's Vape Ban Takes Hold"
-        },
+          "anchor": "i-553c25ef77",
+          "phrase": "AdFection",
+          "start": 19,
+          "end": 28,
+          "title": "Ad Bidding Delivers Spyware as Pegasus Hits Serbia"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Allegheny County Council votes Tuesday on 12 weeks of paid parental leave, Pennsylvania's Act 57 vape ban took hold, and Westmoreland tabled the East Huntingdon asphalt plant bonds.",
+      "links": [
         {
           "anchor": "i-3c0b2ef1bb",
           "phrase": "paid parental leave",
-          "start": 119,
-          "end": 138,
+          "start": 54,
+          "end": 73,
           "title": "Businesses Weigh Leaving Over Paid Parental Leave"
+        },
+        {
+          "anchor": "i-127359c4d1",
+          "phrase": "Act 57",
+          "start": 90,
+          "end": 96,
+          "title": "Pennsylvania's Vape Ban Takes Hold"
+        },
+        {
+          "anchor": "i-a5621fb62b",
+          "phrase": "East Huntingdon",
+          "start": 145,
+          "end": 160,
+          "title": "Westmoreland Authority Tables the Asphalt Plant Bonds"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "The Steelers hold to their Paris trip against the Saints as Mike McCarthy previews Week 7 and Macron rejects his interior minister's resignation amid localized curfews.",
+      "links": [
+        {
+          "anchor": "i-172a5966cd",
+          "phrase": "Paris trip",
+          "start": 27,
+          "end": 37,
+          "title": "The Paris Game Holds Through the Unrest"
+        },
+        {
+          "anchor": "i-c9ea5cad48",
+          "phrase": "Mike McCarthy",
+          "start": 60,
+          "end": 73,
+          "title": "McCarthy Turns to the Saints in Paris"
+        },
+        {
+          "anchor": "i-510e1ba1f3",
+          "phrase": "Macron",
+          "start": 94,
+          "end": 100,
+          "title": "Macron Refuses His Interior Minister's Resignation"
         }
       ]
     }
@@ -961,15 +1134,12 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 42,
+        "in_window": 59,
         "failed": [],
         "empty": [
           "SANS Internet Storm Center",
           "CISA Advisories",
-          "Ars Technica Security",
           "Securelist (Kaspersky)",
-          "Sophos News",
-          "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
           "Cisco Talos",
           "Graham Cluley",
@@ -981,13 +1151,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 8,
+            "contributed": 8
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 10,
+            "contributed": 10
           },
           "Krebs on Security": {
             "items": 10,
@@ -1001,13 +1171,13 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 5,
+            "contributed": 5
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 9,
+            "contributed": 9
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -1021,13 +1191,13 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 5,
+            "contributed": 5
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Help Net Security": {
             "items": 10,
@@ -1041,13 +1211,13 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 2,
+            "contributed": 2
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Google Online Security Blog": {
             "items": 25,
@@ -1086,8 +1256,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 4
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1096,8 +1266,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           }
         }
       },
@@ -1114,12 +1284,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 11
+            "contributed": 16
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 7
+            "contributed": 5
           },
           "PublicSource": {
             "items": 10,
@@ -1128,33 +1298,33 @@
           },
           "Pittsburgh City Paper": {
             "items": 10,
-            "in_window": 3,
+            "in_window": 2,
             "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
             "in_window": 3,
-            "contributed": 3
+            "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
             "in_window": 3,
-            "contributed": 3
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 7
+            "contributed": 16
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 9
+            "contributed": 4
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 20
+            "contributed": 19
           }
         }
       },
@@ -1169,44 +1339,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 73,
-            "in_window": 25,
-            "contributed": 9
+            "items": 72,
+            "in_window": 26,
+            "contributed": 11
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 22,
-            "contributed": 8
+            "in_window": 24,
+            "contributed": 11
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 32,
+            "in_window": 39,
             "contributed": 10
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 8,
-            "contributed": 2
+            "in_window": 12,
+            "contributed": 5
           },
           "The Economist": {
             "items": 300,
-            "in_window": 16,
-            "contributed": 6
+            "in_window": 19,
+            "contributed": 9
           },
           "FT Home": {
             "items": 10,
             "in_window": 10,
-            "contributed": 7
+            "contributed": 5
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 16
+            "contributed": 8
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 17,
-            "contributed": 2
+            "in_window": 19,
+            "contributed": 1
           }
         }
       },
@@ -1216,7 +1386,7 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 7,
+        "in_window": 8,
         "failed": [],
         "empty": [
           "NEXTpittsburgh Events",
@@ -1225,8 +1395,8 @@
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 8,
+            "contributed": 8
           },
           "Post-Gazette Music": {
             "items": 20,
@@ -1265,7 +1435,7 @@
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 5,
-            "contributed": 3
+            "contributed": 2
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1284,8 +1454,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 15,
-            "contributed": 11
+            "in_window": 16,
+            "contributed": 12
           }
         }
       },
@@ -1295,7 +1465,7 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 23,
+        "in_window": 22,
         "failed": [],
         "empty": [
           "Guardian Olympics"
@@ -1308,8 +1478,8 @@
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1370,24 +1540,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 32930,
+          "outputTokens": 37752,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 120209,
+          "cacheCreationInputTokens": 129062,
           "webSearchRequests": 0,
-          "costUSD": 2.02537,
+          "costUSD": 2.23445,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14203
+          "thinkingTokens": 14897
         }
       },
-      "cost_usd": 2.02537,
-      "duration_ms": 358650,
+      "cost_usd": 2.23445,
+      "duration_ms": 414055,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-19 13:36 EDT",
-    "items_considered": 42,
+    "generated_at": "2026-10-19 19:37 EDT",
+    "items_considered": 59,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1468,8 +1638,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.0254,
-    "model_duration_ms": 358650,
+    "model_cost_usd": 2.2344,
+    "model_duration_ms": 414055,
     "local_from": null,
     "feed_failures": []
   }
