@@ -1,27 +1,61 @@
 {
   "date": "2026-10-19",
-  "headline": "Federal investigators suspect executives at two ransomware negotiation firms kept unusually close ties to ShinyHunters, with one helping run the extortion site that squeezed victims, as ConnectWise keeps three cloud services dark while attackers ride its Microsoft 365 access.",
+  "headline": "Attackers rode trusted channels all day—ConnectWise's own cloud identities, Rank Math's update server, and a single stolen Educational Testing Service login—into other organizations' systems.",
   "emerging_trends": [
     {
-      "text": "Attackers now turn a public advisory into working exploitation the same day, as the Plex2Shell chain hit Plex servers hours after its disclosure and F5 broke its own patch cycle to close three critical NGINX bugs, leaving defenders a window measured in hours.",
-      "topic_title": "NGINX, Plex, and FortiGate Under Fire",
-      "link_phrase": "Plex2Shell",
+      "text": "Attackers increasingly seize the distribution point itself, poisoning Rank Math PRO update packages, 94 GitHub repositories, and npm packages that dangle free Claude and Gemini credits, so a routine update becomes the intrusion.",
+      "topic_title": "Poisoned Plugins and Packages Spread Backdoors",
+      "link_phrase": "Rank Math",
       "_anchor": "trend-1"
     },
     {
-      "text": "One stolen credential at a service provider keeps opening hundreds of downstream organizations at once, from the ConnectWise application identity that signed in to customer Microsoft 365 tenants to the Educational Testing Service login that spilled California student records back to 2006.",
+      "text": "One stolen credential keeps opening doors at scale—a ConnectWise application identity signed in to 173 Microsoft 365 tenants, a single Educational Testing Service login exposed millions of California students, and a server management flaw handed over FirstVDS customer passwords.",
       "topic_title": "ConnectWise Suspends Cloud Services",
       "link_phrase": "ConnectWise",
       "_anchor": "trend-2"
     },
     {
-      "text": "AI provider keys have become stealable currency, and the OpenCode Console breach puts corporate OpenAI, Anthropic, and Google keys in an intruder's hands weeks after MITRE began cataloging AI abuse as a formal adversary technique.",
-      "topic_title": "OpenCode Console Breach Exposes AI Provider Keys",
-      "link_phrase": "OpenCode Console",
+      "text": "Exploitation now lands within hours of disclosure: Plex2Shell hit Plex servers the same day researchers published it, F5 broke its own patch schedule for NGINX, and Broadcom's router flaw still waits on a fix.",
+      "topic_title": "NGINX, Plex, and FortiGate Under Fire",
+      "link_phrase": "Plex2Shell",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "Poisoned Plugins and Packages Spread Backdoors",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Rank Math said on October 16, 2026 that copies of Rank Math PRO version 3.0.123 downloaded from rankmath.com or delivered as updates between 20:02 UTC on October 15 and 07:12 UTC on October 16 carried a self-restoring backdoor; OpenSourceMalware found the GhostAction crew now phishing open-source developers and hiding a credential stealer inside a fake font file across 94 GitHub repositories; and Elastic traced a fake Web3 accelerator that offers free Anthropic Claude and Google Gemini credits and then ships information stealers and backdoors to Windows and macOS through malicious npm packages.",
+      "summary": "Rank Math PRO is the paid edition of a widely installed WordPress search engine optimization plugin, and its own update channel delivered the malware. Treat any site that installed or activated one of those copies as compromised, rotate its credentials, hunt the backdoor that reinstalls itself, and tell developers that npm packages promising free AI credits are bait.",
+      "tags": [
+        "supply chain",
+        "backdoor",
+        "wordpress"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Popular WordPress SEO Plugin Rank Math PRO Hijacked to Deliver Self-Restoring Backdoor",
+          "url": "https://thehackernews.com/2026/10/popular-wordpress-seo-plugin-rank-math.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Rank Math PRO WordPress Plugin Compromised in Supply Chain Attack",
+          "url": "https://www.securityweek.com/rank-math-pro-wordpress-plugin-compromised-in-supply-chain-attack/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "GhostAction Attackers Plant Credential Stealer Disguised as Font in 94 GitHub Repositories",
+          "url": "https://thehackernews.com/2026/10/ghostaction-attackers-plant-credential.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Fake Web3 Accelerator Uses npm Packages to Spread Malware and Hijack AI Agent Traffic",
+          "url": "https://thehackernews.com/2026/10/fake-web3-accelerator-uses-npm-packages.html"
+        }
+      ],
+      "_anchor": "i-4ad529ab62"
+    },
     {
       "title": "NGINX, Plex, and FortiGate Under Fire",
       "area": "Vulnerabilities and Exploits",
@@ -75,6 +109,94 @@
       "_anchor": "i-531572f7c5"
     },
     {
+      "title": "Chinese Crime Ring Mints Staples Gift Cards",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "404 Media detailed on October 19, 2026 how an organized Chinese crime ring broke into Staples, issued millions of dollars worth of gift cards, and spent them on a buying spree across the United States.",
+      "summary": "Staples, the office supply retailer, runs the gift card platform the gang drove, and the crew converted system access straight into spendable value instead of stealing merchandise. Retailers should reconcile gift card issuance against sales records daily and alert on bulk issuance from any single account or terminal.",
+      "tags": [
+        "fraud",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "404 Media",
+          "title": "How a Massive Chinese Crime Ring Hacked Staples to Steal Millions",
+          "url": "https://www.404media.co/how-a-massive-chinese-crime-ring-hacked-staples-to-steal-millions/"
+        },
+        {
+          "source": "404 Media",
+          "title": "The Staples Gift Card Heist",
+          "url": "https://www.404media.co/the-staples-gift-card-heist/"
+        }
+      ],
+      "_anchor": "i-c4faf892a0"
+    },
+    {
+      "title": "OpenCode Console Breach Exposes AI Provider Keys",
+      "area": "AI Security",
+      "latest_developments": "OpenCode said an intruder reached a legacy system on the night of October 16, 2026 and may have exposed the third-party OpenAI, Anthropic, and Google API keys its users saved in OpenCode Console, and on October 19, 2026 the open-source coding project began notifying the small number of users whose keys sat on that system.",
+      "summary": "OpenCode Console is the company's optional hosted service: a workspace stores its own provider key there, and Console uses that key to call the models so teammates share access. Anyone who saved a key should revoke and reissue it at the provider and read the provider's usage and billing records for calls nobody on the team made.",
+      "tags": [
+        "breach",
+        "ai",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "OpenCode Console Breach May Have Exposed OpenAI, Anthropic, and Google API Keys",
+          "url": "https://thehackernews.com/2026/10/opencode-console-breach-may-have.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "OpenCode hack exposes API keys amid AI distillation attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/opencode-hack-exposes-api-keys-amid-ai-distillation-attacks/"
+        }
+      ],
+      "_anchor": "i-1de1c48ce2"
+    },
+    {
+      "title": "Drones and Hackers Hit Russian Internet Firms",
+      "area": "Nation-State Activity",
+      "latest_developments": "VK users reported from Sunday, October 18, 2026 that news feeds, music, and other features on the company's platforms failed after a drone strike on one of its data centers, and hackers exploited a flaw in server management software at the Russian hosting provider FirstVDS and took customer passwords, access credentials, and other sensitive data.",
+      "summary": "VK runs Russia's largest social network, and FirstVDS rents virtual servers to Russian businesses, so physical strikes and intrusions now degrade the same infrastructure in parallel, following the drone attacks that knocked out Yandex data centers in Sasovo and Vladimir. Anyone hosting data or servers with Russian providers should treat stored credentials as exposed and rotate them.",
+      "tags": [
+        "breach",
+        "critical infrastructure"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Russian social media giant VK faces disruptions after data center drone strike",
+          "url": "https://therecord.media/russian-social-media-giant-vk-faces-disruptions-drone-strike-data-center"
+        },
+        {
+          "source": "The Record",
+          "title": "Hackers steal customer data from major Russian hosting provider FirstVDS",
+          "url": "https://therecord.media/russia-cyberattack-firstvds-cloud"
+        }
+      ],
+      "_anchor": "i-f650fcc751"
+    },
+    {
+      "title": "Ahold Delhaize Confirms Attack Behind Grocery Outages",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Ahold Delhaize said on Monday, October 19, 2026 that malicious actions caused the outages, confirming an attack that forced it to pull systems offline across most of its United States and European brands and that reached shoppers on both sides of the Atlantic.",
+      "summary": "Ahold Delhaize, the Dutch-Belgian owner of Food Lion, Stop & Shop, Giant, and Albert Heijn, first disclosed the intrusion on October 12, 2026 and has kept systems disconnected since. Shoppers and suppliers face degraded payment, loyalty, and delivery service until the company restores the affected systems.",
+      "tags": [
+        "breach",
+        "retail"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Ahold Delhaize confirms 'malicious actions' behind cyber outages affecting grocery brands",
+          "url": "https://therecord.media/ahold-delhaize-cyberattack-grocery"
+        }
+      ],
+      "_anchor": "i-425846ce93"
+    },
+    {
       "title": "Feds Tie Ransom Negotiators to ShinyHunters",
       "area": "Ransomware and Cybercrime",
       "latest_developments": "Brian Krebs reported on October 19, 2026 that federal investigators pursuing ShinyHunters, the group that recently stole highly sensitive data from the FBI, identified executives at two ransomware negotiation firms who maintained unusually close relations with the extortion crew, and sources close to the investigation say one of them, based in the United States, helped ShinyHunters run the website that pressured victims into paying.",
@@ -111,24 +233,6 @@
       "_anchor": "i-6e3176643e"
     },
     {
-      "title": "October Windows Server Updates Break Exchange",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Microsoft confirmed on October 19, 2026 that this month's Windows Server security updates break Outlook on the web sign-in and stall mail delivery on some Exchange Server systems.",
-      "summary": "The updates come out of the record October 13, 2026 Patch Tuesday release, which closed more than 1,400 flaws and has already disrupted Remote Desktop and Smart App Control. Exchange administrators should watch OWA logins and mail queues on patched servers and stage the remaining rollout against Microsoft's guidance.",
-      "tags": [
-        "patch",
-        "microsoft"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Microsoft: October Windows Server updates break Exchange sign-in, mail flow",
-          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-october-windows-server-updates-cause-exchange-issues/"
-        }
-      ],
-      "_anchor": "i-15156651e2"
-    },
-    {
       "title": "Broadcom Wi-Fi Flaw Hands Over Home Routers",
       "area": "Vulnerabilities and Exploits",
       "latest_developments": "Security researcher Quentin Kaiser disclosed on October 16, 2026 an unpatched flaw in Broadcom's Wi-Fi setup software that runs code as root on Broadcom-based routers from within radio range, demanding neither the network password nor any pairing step.",
@@ -145,79 +249,6 @@
         }
       ],
       "_anchor": "i-f519e0b522"
-    },
-    {
-      "title": "OpenCode Console Breach Exposes AI Provider Keys",
-      "area": "AI Security",
-      "latest_developments": "OpenCode said an intruder reached a legacy system on the night of October 16, 2026 and may have exposed the third-party OpenAI, Anthropic, and Google API keys its users saved in OpenCode Console.",
-      "summary": "OpenCode Console is the company's optional hosted service: a workspace stores its own provider key there, and Console uses that key to call the models so teammates share access. Anyone who saved a key should revoke and reissue it at the provider and read the provider's usage and billing records for calls nobody on the team made.",
-      "tags": [
-        "breach",
-        "ai",
-        "credentials"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "OpenCode Console Breach May Have Exposed OpenAI, Anthropic, and Google API Keys",
-          "url": "https://thehackernews.com/2026/10/opencode-console-breach-may-have.html"
-        }
-      ],
-      "_anchor": "i-1de1c48ce2"
-    },
-    {
-      "title": "Ransomware Crews Threaten Employees' Families",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Semperis published its 2026 Ransomware Risk Report on October 19, 2026, finding that attackers threatened the family members or friends of employees at 37% of the organizations surveyed.",
-      "summary": "The survey covered 1,200 information technology and security professionals whose employers each survived at least one successful ransomware attack. Mickey Bresman, the chief executive of Semperis, says the syndicates inflict physical as well as digital harm, which pushes human resources, legal counsel, and personal safety for named staff into the incident response plan.",
-      "tags": [
-        "ransomware",
-        "extortion"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Ransomware pressure now reaches employees' homes and families",
-          "url": "https://www.helpnetsecurity.com/2026/10/19/semperis-ransomware-employee-safety-report/"
-        }
-      ],
-      "_anchor": "i-b3127e730a"
-    },
-    {
-      "title": "MITRE ATT&CK v20 Adds AI Abuse and Water Utilities",
-      "area": "Threat Intelligence and Defense",
-      "latest_developments": "MITRE shipped ATT&CK version 20, cataloging AI abuse, multi-factor authentication bypass, and attacks on water utilities, and giving defenders 15 new detection strategies—six for enterprise and nine for industrial control systems—backed by 38 analytics.",
-      "summary": "ATT&CK is the shared catalog of adversary techniques that security teams map their detections against, so a new version resets the coverage scorecard. Detection engineers should re-map existing rules to the new strategies, starting with the industrial control entries at water and wastewater operators.",
-      "tags": [
-        "threat intelligence",
-        "ics"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "MITRE ATT&CK v20 Catalogs AI Abuse, MFA Bypass, Water Utility Attacks",
-          "url": "https://www.securityweek.com/mitre-attck-v20-catalogs-ai-abuse-mfa-bypass-water-utility-attacks/"
-        }
-      ],
-      "_anchor": "i-82c7537f54"
-    },
-    {
-      "title": "Microsoft Fronts a Third of Brand Phishing",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Check Point Research counted Microsoft in 33% of the brand impersonation attempts it tracked in the third quarter of 2026, up from 23% in the second quarter and roughly four times the share of any other brand, with Apple and Google next at 8% each and Dropbox and YouTube climbing fastest in the rankings.",
-      "summary": "Attackers crowd around Microsoft because one stolen Microsoft credential unlocks mail, files, and the rest of a corporate tenant. Enforce phishing-resistant multi-factor authentication across Microsoft 365 and train staff to verify the sign-in page before typing a password.",
-      "tags": [
-        "phishing",
-        "credentials"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Cybercriminals favor Microsoft over Apple and Google in brand phishing attacks",
-          "url": "https://www.helpnetsecurity.com/2026/10/19/check-point-brand-impersonation-scams-q3-2026-report/"
-        }
-      ],
-      "_anchor": "i-d92fd5adf0"
     }
   ],
   "markets": [
@@ -265,9 +296,9 @@
     }
   ],
   "weather": [
-    "Today: Areas Of Frost then Sunny, high 65F.",
-    "Tonight: Clear, low 38F.",
-    "Tuesday: Mostly Sunny, high 66F."
+    "This Afternoon: Sunny, high 65F.",
+    "Tonight: Mostly Clear, low 41F.",
+    "Tuesday: Mostly Sunny, high 69F."
   ],
   "sports": [
     {
@@ -313,7 +344,7 @@
             "url": "https://www.ft.com/content/cc7e577a-db7a-4e12-9a42-443696b98ec5?syn-25a6b1a6=1"
           },
           {
-            "source": "FT World",
+            "source": "FT Home",
             "title": "Violent protests spread from France to Italy and Belgium",
             "url": "https://www.ft.com/content/d8df36c2-7e8c-4cfb-ad9e-e6e954fea4b9?syn-25a6b1a6=1"
           },
@@ -337,7 +368,7 @@
       },
       {
         "title": "Iranian Hardliners Argue for a Bomb",
-        "latest_developments": "The Financial Times reported Monday, October 19, that hardliners in Tehran now call openly for weaponizing Iran's enrichment program.",
+        "latest_developments": "Saudi Arabia postponed the Future Investment Initiative, the Riyadh conference known as Davos in the Desert, from next week to 2027 after Houthi strikes on the kingdom's airports, and the Financial Times reported Monday, October 19, that hardliners in Tehran now call openly for weaponizing Iran's enrichment program.",
         "summary": "Supreme leader Ali Khamenei forbade atomic weapons, and his killing removed that prohibition along with the man who enforced it, leaving the weaponization camp room to press its case. The Wall Street Journal reported the same day that Houthi attacks have exposed the limits of Saudi Arabia's military despite the kingdom's advanced weaponry, a measure of how little the region's escalation has cost Iran's allies.",
         "sources": [
           {
@@ -349,6 +380,16 @@
             "source": "WSJ World News",
             "title": "Saudi Arabia’s Military Limitations Are Being Exposed by Houthi Attacks",
             "url": "https://www.wsj.com/world/middle-east/saudi-arabias-military-limitations-are-being-exposed-by-houthi-attacks-40082655?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Saudi Arabia Postpones ‘Davos in the Desert’ Event Slated for Next Week",
+            "url": "https://www.wsj.com/world/middle-east/saudi-arabia-decides-against-holding-in-person-investor-conference-d9f5e66b?mod=rss_worldnews"
+          },
+          {
+            "source": "FT Home",
+            "title": "Saudi Arabia to postpone ‘Davos in the desert’ after Houthi attacks",
+            "url": "https://www.ft.com/content/75a2ee4e-ead9-4d37-b1ea-6fd759c4691d?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-faa830db02"
@@ -387,7 +428,7 @@
             "url": "https://www.wsj.com/finance/investing/the-weak-points-in-ai-bonds-are-becoming-clearer-12f09cc6?mod=rss_markets_main"
           },
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "US stocks set for rebound after AI sell-off",
             "url": "https://www.ft.com/content/915ea7ca-1f35-4847-810a-fb29e8344496?syn-25a6b1a6=1"
           },
@@ -401,6 +442,32 @@
       }
     ],
     "business": [
+      {
+        "title": "Businesses Weigh Leaving Over Paid Parental Leave",
+        "latest_developments": "A survey of nearly 400 Allegheny County businesses, reported Monday, October 19, found eight in 10 companies expect the county's pending paid parental leave bill to hurt them and one third say they might move out of the county over it.",
+        "summary": "Allegheny County Council has in front of it a measure requiring employers to provide paid parental leave, and the county's employers now put numbers behind their objection. The Pennsylvania Restaurant and Lodging Association had already asked who pays for the mandate, and restaurant and small-business owners carry the thinnest margins among those the ordinance would cover.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Allegheny County paid leave proposal prompts one-third of surveyed businesses to consider leaving",
+            "url": "https://www.wpxi.com/news/local/allegheny-county-paid-leave-proposal-prompts-one-third-surveyed-businesses-consider-leaving/Z75XEDT7HBBFVFHGL5P2CSLQPE/"
+          }
+        ],
+        "_anchor": "i-3c0b2ef1bb"
+      },
+      {
+        "title": "Peoples Gas Hunts New Office Space",
+        "latest_developments": "WPXI reported Monday, October 19, that Peoples Gas has begun searching for a new office, weighing its options after roughly a decade as the name tenant at Peoples Center on Pittsburgh's North Shore.",
+        "summary": "Peoples Gas distributes natural gas to about 700,000 customers across Western Pennsylvania and has changed ownership since it put its regional headquarters in Peoples Center. A move would pull the building's anchor tenant and its office workers out of the North Shore.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Name tenant of Peoples Center launches search for new office",
+            "url": "https://www.wpxi.com/news/local/name-tenant-peoples-center-launches-search-new-office/6PV4CXWIFZETVACRW7LAM347SE/"
+          }
+        ],
+        "_anchor": "i-19ee1a87e6"
+      },
       {
         "title": "Library Workers Organize Across Allegheny County",
         "latest_developments": "PublicSource reported Monday, October 19, that a growing number of library workers around Pittsburgh have unionized, with low wages driving the campaigns.",
@@ -442,7 +509,7 @@
       },
       {
         "title": "Pennsylvania's Vape Ban Takes Hold",
-        "latest_developments": "Act 57 took effect after a midnight deadline Monday, October 19, requiring every nicotine vape product sold in Pennsylvania to appear on a state-approved list, and WTAE found shops closing while a worker at Cool Vapes told WPXI that nearly all of the store's products have become illegal.",
+        "latest_developments": "Act 57 took effect after a midnight deadline Monday, October 19, requiring every nicotine vape product sold in Pennsylvania to appear on a state-approved list, WTAE found shops closing, a worker at Cool Vapes told WPXI that nearly all of the store's products have become illegal, and KDKA's Jessica Riley gathered advice from health experts for customers who lose access.",
         "summary": "The Pennsylvania law bars the sale of most vape and e-cigarette products statewide and carries penalties for retailers who keep selling them. Shops that built their inventory around those products lose it, and their customers have objected to the change.",
         "sources": [
           {
@@ -478,6 +545,32 @@
       }
     ],
     "around_town": [
+      {
+        "title": "Tarentum Electric Bills Head Up 5%",
+        "latest_developments": "TribLive reported Monday, October 19, that electric customers in Tarentum will likely pay about 5% more in 2027.",
+        "summary": "Tarentum, the Allegheny County borough on the Allegheny River, bills its own electric customers, and the increase lands on households and businesses there next year. Borough budget season sets the rate.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Tarentum electric customers likely facing 5% hike in bill next year",
+            "url": "https://triblive.com/local/valley-news-dispatch/tarentum-electric-customers-likely-facing-5-hike-in-bill-next-year/"
+          }
+        ],
+        "_anchor": "i-ff56166d32"
+      },
+      {
+        "title": "IUP Wins $2 Million for Student-Parents",
+        "latest_developments": "TribLive reported Monday, October 19, that $2 million in federal funding will support students who are parents at Indiana University of Pennsylvania as they finish their degrees.",
+        "summary": "Indiana University of Pennsylvania, the state-owned university in Indiana, Indiana County, serves a region where child care costs and schedules push parents out of school before graduation. The money funds support aimed at keeping those students enrolled through a degree.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "IUP student-parents getting support from $2 million program",
+            "url": "https://triblive.com/local/regional/iup-student-parents-getting-support-from-2-million-program/"
+          }
+        ],
+        "_anchor": "i-50ecbb9e18"
+      },
       {
         "title": "AHN Opens the County's First Milk Depot",
         "latest_developments": "Allegheny Health Network and the Mid-Atlantic Mother's Milk Bank opened Allegheny County's first milk depot at AHN Jefferson Hospital, WPXI reported Monday, October 19.",
@@ -584,6 +677,47 @@
     ],
     "around_teams": [
       {
+        "title": "The Blitzes Arrive, and So Does Jalen Ramsey",
+        "latest_developments": "The Post-Gazette reported Monday afternoon, October 19, that the Steelers finally turned loose their blitz package at Tampa Bay and used cornerback Jalen Ramsey as a rusher, two days after defensive coordinator Patrick Graham said Pittsburgh would send extra men more often as the season went on.",
+        "summary": "Graham spent the first five weeks keeping Pittsburgh's pressure conservative, and Merril Hoge had argued on his Playbook show that the Steelers could get home without blitzing. Ramsey, the veteran defensive back the team moves around the formation, lined up as one of the extra rushers at Raymond James Stadium on Sunday, October 18.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The Steelers finally unleashed their blitzes — and Jalen Ramsey — at Tampa Bay",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/19/steelers-blitz-jalen-ramsey/stories/202610190025"
+          }
+        ],
+        "_anchor": "i-cb5e385ab9"
+      },
+      {
+        "title": "Footbahlin and Not Just Football Watch Along",
+        "latest_developments": "Ben Roethlisberger and Spencer Te'o streamed the Buccaneers game live on Footbahlin on Sunday, October 18, Cam Heyward and Hayden Walsh ran a live Not Just Football postgame show the same evening, and Christopher Carter took Steelers and Pitt questions in a Post-Gazette chat Monday, October 19.",
+        "summary": "Footbahlin, the show the former Steelers quarterback hosts on his Channel Seven, now runs game-day livestreams alongside its weekly episodes. Not Just Football, which the Steelers defensive lineman records with Walsh, added a new clip Monday from its shelved Elandon Roberts interview, with the inside linebacker describing a play he made on a Tom Brady pass during his New England Patriots years.",
+        "sources": [
+          {
+            "source": "Ben Roethlisberger / Channel Seven (YouTube)",
+            "title": "Footbahlin livestream | Steelers vs Buccaneers",
+            "url": "https://www.youtube.com/watch?v=7T05U37kI7I"
+          },
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Steelers vs Bucs Post Game Show LIVE | Not Just Football",
+            "url": "https://www.youtube.com/watch?v=GGODe0hKQXk"
+          },
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Not many linebackers can do what he did with a Tom Brady pass",
+            "url": "https://www.youtube.com/shorts/YKPK-rOYb1Q"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Christopher Carter's Steelers and Pitt chat: 10.19.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/19/steelers-live-chat-aaron-rodgers/stories/202610190029"
+          }
+        ],
+        "_anchor": "i-eb46f5ecd5"
+      },
+      {
         "title": "The Paris Game Holds Through the Unrest",
         "latest_developments": "The Post-Gazette reported late Sunday, October 18, that the NFL sees no change of plans for the Steelers' game against the New Orleans Saints in Paris on Sunday, October 25, as rioting continues across France.",
         "summary": "The Steelers meet the Saints at the Stade de France as one of the NFL's international games, a trip the team makes directly off its overtime win in Tampa. Protests over the cost of living and school conditions brought looting and clashes with the police to Paris, Marseille, and other French cities over the weekend, and the league says its preparations run on schedule.",
@@ -635,6 +769,24 @@
     ],
     "team_usa": [
       {
+        "title": "UEFA Presses FIFA on the Balogun Reversal",
+        "latest_developments": "UEFA sent FIFA 42 questions and demanded answers, ESPN reported Monday, October 19, among them how officials came to overturn the World Cup suspension that followed United States forward Folarin Balogun's red card and how president Gianni Infantino intends to partially sell off the World Cup.",
+        "summary": "Balogun drew a red card at the 2026 tournament, and FIFA then reversed the ban, a decision that drew enough criticism that the governing body moved last week to amend the rule that allowed it. Infantino apologized to the FIFA Council for his plan to sell a stake in the World Cup, and his reelection bid remains unsettled.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "UEFA demands FIFA explain WC sell-off plan, Balogun red reversal",
+            "url": "https://www.espn.com/soccer/story/_/id/50219087/uefa-demands-fifa-explain-world-cup-sell-plan-balogun-red-reversal"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Infantino apologized, but reelection as FIFA president remains far from certain",
+            "url": "https://www.espn.com/soccer/story/_/id/50197782/gianni-infantino-fifa-president-election-far-certain"
+          }
+        ],
+        "_anchor": "i-4eb2a1f99b"
+      },
+      {
         "title": "Sophia Wilson Begins a Two-Game Ban",
         "latest_developments": "Sophia Wilson sat out Sunday, October 18, serving the first match of a two-game suspension for violent conduct as the Portland Thorns salvaged a 2-2 draw with Bay FC, ESPN reported.",
         "summary": "Wilson leads the Thorns' attack and plays forward for the United States women's national team. Her ban keeps her out of one more National Women's Soccer League match while Portland fights for position in the standings.",
@@ -676,20 +828,20 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Attackers weaponized the Plex2Shell chain within hours of disclosure as F5 broke its cycle for out-of-band NGINX fixes, while Broadcom's Wi-Fi setup flaw stays unpatched on home routers.",
+      "text": "Exploitation is outrunning patching, with F5 shipping out-of-band NGINX fixes, Plex2Shell weaponized on disclosure day, and Broadcom's root-level Wi-Fi flaw still unpatched.",
       "links": [
         {
           "anchor": "i-59b0e474cf",
-          "phrase": "Plex2Shell chain",
-          "start": 25,
-          "end": 41,
+          "phrase": "NGINX",
+          "start": 66,
+          "end": 71,
           "title": "NGINX, Plex, and FortiGate Under Fire"
         },
         {
           "anchor": "i-f519e0b522",
-          "phrase": "Broadcom's Wi-Fi",
-          "start": 126,
-          "end": 142,
+          "phrase": "Broadcom",
+          "start": 124,
+          "end": 132,
           "title": "Broadcom Wi-Fi Flaw Hands Over Home Routers"
         }
       ]
@@ -697,20 +849,20 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "One stolen credential keeps cascading downstream, with ConnectWise holding Cloud Backup and SaaS Security offline and an Educational Testing Service SFTP login spilling millions of California student records.",
+      "text": "One stolen credential keeps scaling, as a ConnectWise identity signed in to 173 Microsoft 365 tenants and a single Educational Testing Service login exposed millions of California students.",
       "links": [
         {
           "anchor": "i-531572f7c5",
           "phrase": "ConnectWise",
-          "start": 55,
-          "end": 66,
+          "start": 42,
+          "end": 53,
           "title": "ConnectWise Suspends Cloud Services"
         },
         {
           "anchor": "i-6e3176643e",
           "phrase": "Educational Testing Service",
-          "start": 121,
-          "end": 148,
+          "start": 115,
+          "end": 142,
           "title": "Stolen Login Exposes Millions of California Students"
         }
       ]
@@ -718,91 +870,84 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Corporate OpenAI, Anthropic, and Google keys saved in OpenCode Console now sit in an intruder's hands, weeks after MITRE ATT&CK v20 began cataloging AI abuse formally.",
+      "text": "Update and developer channels are now the intrusion path, from backdoored Rank Math PRO downloads and 94 poisoned GitHub repositories to an OpenCode Console breach exposing saved OpenAI and Anthropic keys.",
       "links": [
+        {
+          "anchor": "i-4ad529ab62",
+          "phrase": "Rank Math PRO",
+          "start": 74,
+          "end": 87,
+          "title": "Poisoned Plugins and Packages Spread Backdoors"
+        },
         {
           "anchor": "i-1de1c48ce2",
           "phrase": "OpenCode Console",
-          "start": 54,
-          "end": 70,
+          "start": 140,
+          "end": 156,
           "title": "OpenCode Console Breach Exposes AI Provider Keys"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Ahold Delhaize confirmed malicious actions caused grocery outages across its US and European brands, while 404 Media detailed a Chinese ring minting millions in Staples gift cards.",
+      "links": [
+        {
+          "anchor": "i-425846ce93",
+          "phrase": "Ahold Delhaize",
+          "start": 0,
+          "end": 14,
+          "title": "Ahold Delhaize Confirms Attack Behind Grocery Outages"
         },
         {
-          "anchor": "i-82c7537f54",
-          "phrase": "MITRE ATT&CK v20",
-          "start": 115,
-          "end": 131,
-          "title": "MITRE ATT&CK v20 Adds AI Abuse and Water Utilities"
+          "anchor": "i-c4faf892a0",
+          "phrase": "Staples",
+          "start": 161,
+          "end": 168,
+          "title": "Chinese Crime Ring Mints Staples Gift Cards"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Ransomware pressure is turning personal, as Krebs ties negotiation-firm executives to ShinyHunters and Semperis found crews threatening employees' families or friends at 37% of surveyed organizations.",
+      "text": "A drone strike on VK and a server-management hack at FirstVDS hit Russian internet firms, while Kyiv got advance warning for only one of two missile salvos.",
       "links": [
         {
-          "anchor": "i-5f2037864b",
-          "phrase": "ShinyHunters",
-          "start": 86,
-          "end": 98,
-          "title": "Feds Tie Ransom Negotiators to ShinyHunters"
+          "anchor": "i-f650fcc751",
+          "phrase": "VK",
+          "start": 18,
+          "end": 20,
+          "title": "Drones and Hackers Hit Russian Internet Firms"
         },
         {
-          "anchor": "i-b3127e730a",
-          "phrase": "Semperis",
-          "start": 103,
-          "end": 111,
-          "title": "Ransomware Crews Threaten Employees' Families"
+          "anchor": "i-cf78be4208",
+          "phrase": "Kyiv",
+          "start": 96,
+          "end": 100,
+          "title": "Kyiv Gets Warning on One Strike of Two"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Lecornu ordered localized curfews as Macron refused his interior minister's resignation, while the NFL still plans the Steelers game against the Saints in Paris on October 25.",
-      "links": [
-        {
-          "anchor": "i-510e1ba1f3",
-          "phrase": "Macron",
-          "start": 37,
-          "end": 43,
-          "title": "Macron Refuses His Interior Minister's Resignation"
-        },
-        {
-          "anchor": "i-55865748c7",
-          "phrase": "NFL",
-          "start": 99,
-          "end": 102,
-          "title": "The Paris Game Holds Through the Unrest"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Pennsylvania's Act 57 vape list took hold and closed shops overnight, AHN opened Allegheny County's first milk depot, and PennDOT is adding winter driving warnings.",
+      "text": "Pennsylvania's Act 57 vape ban took hold as shops closed, and eight in 10 Allegheny County businesses said the pending paid parental leave bill would hurt them.",
       "links": [
         {
           "anchor": "i-2e9798455c",
-          "phrase": "Act 57",
-          "start": 15,
-          "end": 21,
+          "phrase": "vape ban",
+          "start": 22,
+          "end": 30,
           "title": "Pennsylvania's Vape Ban Takes Hold"
         },
         {
-          "anchor": "i-bfff351c6f",
-          "phrase": "milk depot",
-          "start": 106,
-          "end": 116,
-          "title": "AHN Opens the County's First Milk Depot"
-        },
-        {
-          "anchor": "i-3cedc6a564",
-          "phrase": "PennDOT",
-          "start": 122,
-          "end": 129,
-          "title": "PennDOT Adds Winter Driving Warnings"
+          "anchor": "i-3c0b2ef1bb",
+          "phrase": "paid parental leave",
+          "start": 119,
+          "end": 138,
+          "title": "Businesses Weigh Leaving Over Paid Parental Leave"
         }
       ]
     }
@@ -816,7 +961,7 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 29,
+        "in_window": 42,
         "failed": [],
         "empty": [
           "SANS Internet Storm Center",
@@ -828,23 +973,21 @@
           "Google Online Security Blog",
           "Cisco Talos",
           "Graham Cluley",
-          "Microsoft Security Blog",
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
-          "Frank on Fraud",
-          "Wired Security"
+          "Frank on Fraud"
         ],
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 7,
+            "contributed": 7
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 6,
+            "contributed": 6
           },
           "Krebs on Security": {
             "items": 10,
@@ -858,13 +1001,13 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 8,
+            "contributed": 8
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -878,8 +1021,8 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 3
           },
           "Ars Technica Security": {
             "items": 20,
@@ -923,8 +1066,8 @@
           },
           "Microsoft Security Blog": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Google Project Zero": {
             "items": 7,
@@ -943,8 +1086,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 3
           },
           "Frank on Fraud": {
             "items": 10,
@@ -953,8 +1096,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -966,50 +1109,47 @@
         "window_hours": 48,
         "in_window": 60,
         "failed": [],
-        "empty": [
-          "NEXTpittsburgh",
-          "Pittsburgh Magazine"
-        ],
+        "empty": [],
         "per_feed": {
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 12
+            "contributed": 11
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 13
+            "contributed": 7
           },
           "PublicSource": {
             "items": 10,
             "in_window": 1,
-            "contributed": 1
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 3,
-            "contributed": 2
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 3,
+            "contributed": 3
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 3,
+            "contributed": 3
           },
           "KDKA": {
             "items": 30,
-            "in_window": 29,
-            "contributed": 5
+            "in_window": 30,
+            "contributed": 7
           },
           "WPXI": {
             "items": 15,
-            "in_window": 14,
-            "contributed": 7
+            "in_window": 15,
+            "contributed": 9
           },
           "WTAE": {
             "items": 20,
@@ -1030,43 +1170,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 73,
-            "in_window": 20,
-            "contributed": 6
+            "in_window": 25,
+            "contributed": 9
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 21,
-            "contributed": 14
+            "in_window": 22,
+            "contributed": 8
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 31,
-            "contributed": 11
+            "in_window": 32,
+            "contributed": 10
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 7,
+            "in_window": 8,
             "contributed": 2
           },
           "The Economist": {
             "items": 300,
-            "in_window": 10,
-            "contributed": 3
+            "in_window": 16,
+            "contributed": 6
           },
           "FT Home": {
             "items": 10,
             "in_window": 10,
-            "contributed": 8
+            "contributed": 7
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 13
+            "contributed": 16
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 15,
-            "contributed": 3
+            "in_window": 17,
+            "contributed": 2
           }
         }
       },
@@ -1125,7 +1265,7 @@
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 5,
-            "contributed": 2
+            "contributed": 3
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1144,8 +1284,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 14,
-            "contributed": 12
+            "in_window": 15,
+            "contributed": 11
           }
         }
       },
@@ -1155,16 +1295,16 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 21,
+        "in_window": 23,
         "failed": [],
         "empty": [
           "Guardian Olympics"
         ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 19,
-            "in_window": 18,
-            "contributed": 18
+            "items": 21,
+            "in_window": 20,
+            "contributed": 20
           },
           "ESPN Olympics": {
             "items": 25,
@@ -1229,25 +1369,25 @@
       ],
       "usage": {
         "claude-opus-5": {
-          "inputTokens": 8,
-          "outputTokens": 29932,
-          "cacheReadInputTokens": 3008,
-          "cacheCreationInputTokens": 137739,
+          "inputTokens": 6,
+          "outputTokens": 32930,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 120209,
           "webSearchRequests": 0,
-          "costUSD": 2.127234,
+          "costUSD": 2.02537,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14729
+          "thinkingTokens": 14203
         }
       },
-      "cost_usd": 2.127234,
-      "duration_ms": 448520,
+      "cost_usd": 2.02537,
+      "duration_ms": 358650,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-19 10:06 EDT",
-    "items_considered": 29,
+    "generated_at": "2026-10-19 13:36 EDT",
+    "items_considered": 42,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1328,8 +1468,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.1272,
-    "model_duration_ms": 448520,
+    "model_cost_usd": 2.0254,
+    "model_duration_ms": 358650,
     "local_from": null,
     "feed_failures": []
   }

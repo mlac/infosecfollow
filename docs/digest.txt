@@ -1,13 +1,12 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Monday, October 19, 2026 - 10:06 AM EDT
+Monday, October 19, 2026 - 1:36 PM EDT
 ================================================================
 
-Federal investigators suspect executives at two ransomware
-negotiation firms kept unusually close ties to ShinyHunters,
-with one helping run the extortion site that squeezed victims,
-as ConnectWise keeps three cloud services dark while attackers
-ride its Microsoft 365 access.
+Attackers rode trusted channels all day—ConnectWise's own cloud
+identities, Rank Math's update server, and a single stolen
+Educational Testing Service login—into other organizations'
+systems.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -15,46 +14,71 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] Attackers weaponized the Plex2Shell chain within hours
-  of disclosure as F5 broke its cycle for out-of-band NGINX
-  fixes, while Broadcom's Wi-Fi setup flaw stays unpatched on
-  home routers.
+* [TREND] Exploitation is outrunning patching, with F5 shipping
+  out-of-band NGINX fixes, Plex2Shell weaponized on disclosure
+  day, and Broadcom's root-level Wi-Fi flaw still unpatched.
   see: NGINX, Plex, and FortiGate Under Fire; Broadcom Wi-Fi
   Flaw Hands Over Home Routers
-* [TREND] One stolen credential keeps cascading downstream, with
-  ConnectWise holding Cloud Backup and SaaS Security offline and
-  an Educational Testing Service SFTP login spilling millions of
-  California student records.
+* [TREND] One stolen credential keeps scaling, as a ConnectWise
+  identity signed in to 173 Microsoft 365 tenants and a single
+  Educational Testing Service login exposed millions of
+  California students.
   see: ConnectWise Suspends Cloud Services; Stolen Login Exposes
   Millions of California Students
-* [TREND] Corporate OpenAI, Anthropic, and Google keys saved in
-  OpenCode Console now sit in an intruder's hands, weeks after
-  MITRE ATT&CK v20 began cataloging AI abuse formally.
-  see: OpenCode Console Breach Exposes AI Provider Keys; MITRE
-  ATT&CK v20 Adds AI Abuse and Water Utilities
-* [TREND] Ransomware pressure is turning personal, as Krebs ties
-  negotiation-firm executives to ShinyHunters and Semperis found
-  crews threatening employees' families or friends at 37% of
-  surveyed organizations.
-  see: Feds Tie Ransom Negotiators to ShinyHunters; Ransomware
-  Crews Threaten Employees' Families
-* [UPDATE (new)] Lecornu ordered localized curfews as Macron
-  refused his interior minister's resignation, while the NFL
-  still plans the Steelers game against the Saints in Paris on
-  October 25.
-  see: Macron Refuses His Interior Minister's Resignation; The
-  Paris Game Holds Through the Unrest
-* [UPDATE (new)] Pennsylvania's Act 57 vape list took hold and
-  closed shops overnight, AHN opened Allegheny County's first
-  milk depot, and PennDOT is adding winter driving warnings.
-  see: Pennsylvania's Vape Ban Takes Hold; AHN Opens the
-  County's First Milk Depot; PennDOT Adds Winter Driving
-  Warnings
+* [TREND] Update and developer channels are now the intrusion
+  path, from backdoored Rank Math PRO downloads and 94 poisoned
+  GitHub repositories to an OpenCode Console breach exposing
+  saved OpenAI and Anthropic keys.
+  see: Poisoned Plugins and Packages Spread Backdoors; OpenCode
+  Console Breach Exposes AI Provider Keys
+* [UPDATE (new)] Ahold Delhaize confirmed malicious actions
+  caused grocery outages across its US and European brands,
+  while 404 Media detailed a Chinese ring minting millions in
+  Staples gift cards.
+  see: Ahold Delhaize Confirms Attack Behind Grocery Outages;
+  Chinese Crime Ring Mints Staples Gift Cards
+* [TREND] A drone strike on VK and a server-management hack at
+  FirstVDS hit Russian internet firms, while Kyiv got advance
+  warning for only one of two missile salvos.
+  see: Drones and Hackers Hit Russian Internet Firms; Kyiv Gets
+  Warning on One Strike of Two
+* [UPDATE (new)] Pennsylvania's Act 57 vape ban took hold as
+  shops closed, and eight in 10 Allegheny County businesses said
+  the pending paid parental leave bill would hurt them.
+  see: Pennsylvania's Vape Ban Takes Hold; Businesses Weigh
+  Leaving Over Paid Parental Leave
 
 SECURITY
 ----------------------------------------------------------------
 
-1. NGINX, PLEX, AND FORTIGATE UNDER FIRE
+1. POISONED PLUGINS AND PACKAGES SPREAD BACKDOORS
+   Ransomware and Cybercrime · [supply chain, backdoor,
+   wordpress]
+   Latest developments: Rank Math said on October 16, 2026 that
+   copies of Rank Math PRO version 3.0.123 downloaded from
+   rankmath.com or delivered as updates between 20:02 UTC on
+   October 15 and 07:12 UTC on October 16 carried a
+   self-restoring backdoor; OpenSourceMalware found the
+   GhostAction crew now phishing open-source developers and
+   hiding a credential stealer inside a fake font file across 94
+   GitHub repositories; and Elastic traced a fake Web3
+   accelerator that offers free Anthropic Claude and Google
+   Gemini credits and then ships information stealers and
+   backdoors to Windows and macOS through malicious npm
+   packages.
+   Rank Math PRO is the paid edition of a widely installed
+   WordPress search engine optimization plugin, and its own
+   update channel delivered the malware. Treat any site that
+   installed or activated one of those copies as compromised,
+   rotate its credentials, hunt the backdoor that reinstalls
+   itself, and tell developers that npm packages promising free
+   AI credits are bait.
+   - The Hacker News: https://thehackernews.com/2026/10/popular-wordpress-seo-plugin-rank-math.html
+   - SecurityWeek: https://www.securityweek.com/rank-math-pro-wordpress-plugin-compromised-in-supply-chain-attack/
+   - The Hacker News: https://thehackernews.com/2026/10/ghostaction-attackers-plant-credential.html
+   - The Hacker News: https://thehackernews.com/2026/10/fake-web3-accelerator-uses-npm-packages.html
+
+2. NGINX, PLEX, AND FORTIGATE UNDER FIRE
    Vulnerabilities and Exploits · [patch, zero-day, exploit]
    Latest developments: F5 broke its schedule on October 19,
    2026 and shipped out-of-band patches for several NGINX web
@@ -76,7 +100,7 @@ SECURITY
    - SecurityWeek: https://www.securityweek.com/plex2shell-exploit-chain-weaponized-against-plex-servers-hours-after-disclosure/
    - SecurityWeek: https://www.securityweek.com/exploited-fortinet-bug-linked-to-stealthy-fortigate-implant-in-telecom-hack/
 
-2. CONNECTWISE SUSPENDS CLOUD SERVICES
+3. CONNECTWISE SUSPENDS CLOUD SERVICES
    Ransomware and Cybercrime · [breach, credentials]
    Latest developments: ConnectWise widened the shutdown on
    October 19, 2026, keeping Cloud Backup, the service it
@@ -93,7 +117,73 @@ SECURITY
    - Help Net Security: https://www.helpnetsecurity.com/2026/10/19/connectwise-cloud-backup-suspended-security-incident/
    - SecurityWeek: https://www.securityweek.com/connectwise-suspends-cloud-services-in-response-to-cyberattack/
 
-3. FEDS TIE RANSOM NEGOTIATORS TO SHINYHUNTERS
+4. CHINESE CRIME RING MINTS STAPLES GIFT CARDS
+   Ransomware and Cybercrime · [fraud, breach]
+   Latest developments: 404 Media detailed on October 19, 2026
+   how an organized Chinese crime ring broke into Staples,
+   issued millions of dollars worth of gift cards, and spent
+   them on a buying spree across the United States.
+   Staples, the office supply retailer, runs the gift card
+   platform the gang drove, and the crew converted system access
+   straight into spendable value instead of stealing
+   merchandise. Retailers should reconcile gift card issuance
+   against sales records daily and alert on bulk issuance from
+   any single account or terminal.
+   - 404 Media: https://www.404media.co/how-a-massive-chinese-crime-ring-hacked-staples-to-steal-millions/
+   - 404 Media: https://www.404media.co/the-staples-gift-card-heist/
+
+5. OPENCODE CONSOLE BREACH EXPOSES AI PROVIDER KEYS
+   AI Security · [breach, ai, credentials]
+   Latest developments: OpenCode said an intruder reached a
+   legacy system on the night of October 16, 2026 and may have
+   exposed the third-party OpenAI, Anthropic, and Google API
+   keys its users saved in OpenCode Console, and on October 19,
+   2026 the open-source coding project began notifying the small
+   number of users whose keys sat on that system.
+   OpenCode Console is the company's optional hosted service: a
+   workspace stores its own provider key there, and Console uses
+   that key to call the models so teammates share access. Anyone
+   who saved a key should revoke and reissue it at the provider
+   and read the provider's usage and billing records for calls
+   nobody on the team made.
+   - The Hacker News: https://thehackernews.com/2026/10/opencode-console-breach-may-have.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/opencode-hack-exposes-api-keys-amid-ai-distillation-attacks/
+
+6. DRONES AND HACKERS HIT RUSSIAN INTERNET FIRMS
+   Nation-State Activity · [breach, critical infrastructure]
+   Latest developments: VK users reported from Sunday, October
+   18, 2026 that news feeds, music, and other features on the
+   company's platforms failed after a drone strike on one of its
+   data centers, and hackers exploited a flaw in server
+   management software at the Russian hosting provider FirstVDS
+   and took customer passwords, access credentials, and other
+   sensitive data.
+   VK runs Russia's largest social network, and FirstVDS rents
+   virtual servers to Russian businesses, so physical strikes
+   and intrusions now degrade the same infrastructure in
+   parallel, following the drone attacks that knocked out Yandex
+   data centers in Sasovo and Vladimir. Anyone hosting data or
+   servers with Russian providers should treat stored
+   credentials as exposed and rotate them.
+   - The Record: https://therecord.media/russian-social-media-giant-vk-faces-disruptions-drone-strike-data-center
+   - The Record: https://therecord.media/russia-cyberattack-firstvds-cloud
+
+7. AHOLD DELHAIZE CONFIRMS ATTACK BEHIND GROCERY OUTAGES
+   Ransomware and Cybercrime · [breach, retail]
+   Latest developments: Ahold Delhaize said on Monday, October
+   19, 2026 that malicious actions caused the outages,
+   confirming an attack that forced it to pull systems offline
+   across most of its United States and European brands and that
+   reached shoppers on both sides of the Atlantic.
+   Ahold Delhaize, the Dutch-Belgian owner of Food Lion, Stop &
+   Shop, Giant, and Albert Heijn, first disclosed the intrusion
+   on October 12, 2026 and has kept systems disconnected since.
+   Shoppers and suppliers face degraded payment, loyalty, and
+   delivery service until the company restores the affected
+   systems.
+   - The Record: https://therecord.media/ahold-delhaize-cyberattack-grocery
+
+8. FEDS TIE RANSOM NEGOTIATORS TO SHINYHUNTERS
    Ransomware and Cybercrime · [ransomware, extortion]
    Latest developments: Brian Krebs reported on October 19, 2026
    that federal investigators pursuing ShinyHunters, the group
@@ -111,7 +201,7 @@ SECURITY
    interests sit on both sides of the table.
    - Krebs on Security: https://krebsonsecurity.com/2026/10/feds-suspect-ransom-negotiator-ran-shinyhunters-extortion-site/
 
-4. STOLEN LOGIN EXPOSES MILLIONS OF CALIFORNIA STUDENTS
+9. STOLEN LOGIN EXPOSES MILLIONS OF CALIFORNIA STUDENTS
    Data Breaches · [breach, credentials]
    Latest developments: SecurityWeek reported on October 19,
    2026 that intruders signed in to an SFTP server at the
@@ -127,21 +217,7 @@ SECURITY
    authentication in front of it and expire dormant accounts.
    - SecurityWeek: https://www.securityweek.com/one-compromised-login-exposed-millions-of-california-students-records/
 
-5. OCTOBER WINDOWS SERVER UPDATES BREAK EXCHANGE
-   Vulnerabilities and Exploits · [patch, microsoft]
-   Latest developments: Microsoft confirmed on October 19, 2026
-   that this month's Windows Server security updates break
-   Outlook on the web sign-in and stall mail delivery on some
-   Exchange Server systems.
-   The updates come out of the record October 13, 2026 Patch
-   Tuesday release, which closed more than 1,400 flaws and has
-   already disrupted Remote Desktop and Smart App Control.
-   Exchange administrators should watch OWA logins and mail
-   queues on patched servers and stage the remaining rollout
-   against Microsoft's guidance.
-   - BleepingComputer: https://www.bleepingcomputer.com/news/microsoft/microsoft-october-windows-server-updates-cause-exchange-issues/
-
-6. BROADCOM WI-FI FLAW HANDS OVER HOME ROUTERS
+10. BROADCOM WI-FI FLAW HANDS OVER HOME ROUTERS
    Vulnerabilities and Exploits · [zero-day, patch]
    Latest developments: Security researcher Quentin Kaiser
    disclosed on October 16, 2026 an unpatched flaw in Broadcom's
@@ -156,65 +232,6 @@ SECURITY
    firmware and treat the wireless perimeter as reachable by
    anyone nearby.
    - The Hacker News: https://thehackernews.com/2026/10/unpatched-broadcom-wi-fi-flaw-lets.html
-
-7. OPENCODE CONSOLE BREACH EXPOSES AI PROVIDER KEYS
-   AI Security · [breach, ai, credentials]
-   Latest developments: OpenCode said an intruder reached a
-   legacy system on the night of October 16, 2026 and may have
-   exposed the third-party OpenAI, Anthropic, and Google API
-   keys its users saved in OpenCode Console.
-   OpenCode Console is the company's optional hosted service: a
-   workspace stores its own provider key there, and Console uses
-   that key to call the models so teammates share access. Anyone
-   who saved a key should revoke and reissue it at the provider
-   and read the provider's usage and billing records for calls
-   nobody on the team made.
-   - The Hacker News: https://thehackernews.com/2026/10/opencode-console-breach-may-have.html
-
-8. RANSOMWARE CREWS THREATEN EMPLOYEES' FAMILIES
-   Ransomware and Cybercrime · [ransomware, extortion]
-   Latest developments: Semperis published its 2026 Ransomware
-   Risk Report on October 19, 2026, finding that attackers
-   threatened the family members or friends of employees at 37%
-   of the organizations surveyed.
-   The survey covered 1,200 information technology and security
-   professionals whose employers each survived at least one
-   successful ransomware attack. Mickey Bresman, the chief
-   executive of Semperis, says the syndicates inflict physical
-   as well as digital harm, which pushes human resources, legal
-   counsel, and personal safety for named staff into the
-   incident response plan.
-   - Help Net Security: https://www.helpnetsecurity.com/2026/10/19/semperis-ransomware-employee-safety-report/
-
-9. MITRE ATT&CK V20 ADDS AI ABUSE AND WATER UTILITIES
-   Threat Intelligence and Defense · [threat intelligence, ics]
-   Latest developments: MITRE shipped ATT&CK version 20,
-   cataloging AI abuse, multi-factor authentication bypass, and
-   attacks on water utilities, and giving defenders 15 new
-   detection strategies—six for enterprise and nine for
-   industrial control systems—backed by 38 analytics.
-   ATT&CK is the shared catalog of adversary techniques that
-   security teams map their detections against, so a new version
-   resets the coverage scorecard. Detection engineers should
-   re-map existing rules to the new strategies, starting with
-   the industrial control entries at water and wastewater
-   operators.
-   - SecurityWeek: https://www.securityweek.com/mitre-attck-v20-catalogs-ai-abuse-mfa-bypass-water-utility-attacks/
-
-10. MICROSOFT FRONTS A THIRD OF BRAND PHISHING
-   Ransomware and Cybercrime · [phishing, credentials]
-   Latest developments: Check Point Research counted Microsoft
-   in 33% of the brand impersonation attempts it tracked in the
-   third quarter of 2026, up from 23% in the second quarter and
-   roughly four times the share of any other brand, with Apple
-   and Google next at 8% each and Dropbox and YouTube climbing
-   fastest in the rankings.
-   Attackers crowd around Microsoft because one stolen Microsoft
-   credential unlocks mail, files, and the rest of a corporate
-   tenant. Enforce phishing-resistant multi-factor
-   authentication across Microsoft 365 and train staff to verify
-   the sign-in page before typing a password.
-   - Help Net Security: https://www.helpnetsecurity.com/2026/10/19/check-point-brand-impersonation-scams-q3-2026-report/
 
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
@@ -236,12 +253,15 @@ BUSINESS AND POLITICS
   judges the eurozone better insulated than it was during its
   last debt crisis.
   - FT Home: https://www.ft.com/content/cc7e577a-db7a-4e12-9a42-443696b98ec5?syn-25a6b1a6=1
-  - FT World: https://www.ft.com/content/d8df36c2-7e8c-4cfb-ad9e-e6e954fea4b9?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/d8df36c2-7e8c-4cfb-ad9e-e6e954fea4b9?syn-25a6b1a6=1
   - WSJ World News: https://www.wsj.com/world/europe/french-leaders-trade-blame-after-rioting-sweeps-the-nation-ac02a5b6?mod=rss_worldnews
   - WSJ Markets: https://www.wsj.com/finance/investing/u-s-treasury-yields-fall-in-asian-trade-e5171539?mod=rss_markets_main
   - WSJ World News: https://www.wsj.com/world/europe/french-contagion-less-virulent-than-in-previous-eurozone-crisis-cefd8692?mod=rss_worldnews
 * Iranian Hardliners Argue for a Bomb
-  Latest developments: The Financial Times reported Monday,
+  Latest developments: Saudi Arabia postponed the Future
+  Investment Initiative, the Riyadh conference known as Davos in
+  the Desert, from next week to 2027 after Houthi strikes on the
+  kingdom's airports, and the Financial Times reported Monday,
   October 19, that hardliners in Tehran now call openly for
   weaponizing Iran's enrichment program.
   Supreme leader Ali Khamenei forbade atomic weapons, and his
@@ -253,6 +273,8 @@ BUSINESS AND POLITICS
   how little the region's escalation has cost Iran's allies.
   - FT World: https://www.ft.com/content/1f23e859-5e70-4d99-8f9b-56de3d0ae43e?syn-25a6b1a6=1
   - WSJ World News: https://www.wsj.com/world/middle-east/saudi-arabias-military-limitations-are-being-exposed-by-houthi-attacks-40082655?mod=rss_worldnews
+  - WSJ World News: https://www.wsj.com/world/middle-east/saudi-arabia-decides-against-holding-in-person-investor-conference-d9f5e66b?mod=rss_worldnews
+  - FT Home: https://www.ft.com/content/75a2ee4e-ead9-4d37-b1ea-6fd759c4691d?syn-25a6b1a6=1
 * Kyiv Gets Warning on One Strike of Two
   Latest developments: Ukraine's air force said Monday, October
   19, that Western allies supplied advance warning about only
@@ -283,18 +305,43 @@ BUSINESS AND POLITICS
   can service that debt from the ones it doubts, which sets the
   cost of the next round of chip and power spending.
   - WSJ Markets: https://www.wsj.com/finance/investing/the-weak-points-in-ai-bonds-are-becoming-clearer-12f09cc6?mod=rss_markets_main
-  - FT Home: https://www.ft.com/content/915ea7ca-1f35-4847-810a-fb29e8344496?syn-25a6b1a6=1
+  - FT World: https://www.ft.com/content/915ea7ca-1f35-4847-810a-fb29e8344496?syn-25a6b1a6=1
   - FT Markets: https://www.ft.com/content/5970614a-b1f7-4b4e-b1e5-6038e1dde654?syn-25a6b1a6=1
 
 PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  Today: Areas Of Frost then Sunny, high 65F.
-  Tonight: Clear, low 38F.
-  Tuesday: Mostly Sunny, high 66F.
+  This Afternoon: Sunny, high 65F.
+  Tonight: Mostly Clear, low 41F.
+  Tuesday: Mostly Sunny, high 69F.
 
 Business:
+* Businesses Weigh Leaving Over Paid Parental Leave
+  Latest developments: A survey of nearly 400 Allegheny County
+  businesses, reported Monday, October 19, found eight in 10
+  companies expect the county's pending paid parental leave bill
+  to hurt them and one third say they might move out of the
+  county over it.
+  Allegheny County Council has in front of it a measure
+  requiring employers to provide paid parental leave, and the
+  county's employers now put numbers behind their objection. The
+  Pennsylvania Restaurant and Lodging Association had already
+  asked who pays for the mandate, and restaurant and
+  small-business owners carry the thinnest margins among those
+  the ordinance would cover.
+  - WPXI: https://www.wpxi.com/news/local/allegheny-county-paid-leave-proposal-prompts-one-third-surveyed-businesses-consider-leaving/Z75XEDT7HBBFVFHGL5P2CSLQPE/
+* Peoples Gas Hunts New Office Space
+  Latest developments: WPXI reported Monday, October 19, that
+  Peoples Gas has begun searching for a new office, weighing its
+  options after roughly a decade as the name tenant at Peoples
+  Center on Pittsburgh's North Shore.
+  Peoples Gas distributes natural gas to about 700,000 customers
+  across Western Pennsylvania and has changed ownership since it
+  put its regional headquarters in Peoples Center. A move would
+  pull the building's anchor tenant and its office workers out
+  of the North Shore.
+  - WPXI: https://www.wpxi.com/news/local/name-tenant-peoples-center-launches-search-new-office/6PV4CXWIFZETVACRW7LAM347SE/
 * Library Workers Organize Across Allegheny County
   Latest developments: PublicSource reported Monday, October 19,
   that a growing number of library workers around Pittsburgh
@@ -334,9 +381,10 @@ Business:
   Latest developments: Act 57 took effect after a midnight
   deadline Monday, October 19, requiring every nicotine vape
   product sold in Pennsylvania to appear on a state-approved
-  list, and WTAE found shops closing while a worker at Cool
-  Vapes told WPXI that nearly all of the store's products have
-  become illegal.
+  list, WTAE found shops closing, a worker at Cool Vapes told
+  WPXI that nearly all of the store's products have become
+  illegal, and KDKA's Jessica Riley gathered advice from health
+  experts for customers who lose access.
   The Pennsylvania law bars the sale of most vape and
   e-cigarette products statewide and carries penalties for
   retailers who keep selling them. Shops that built their
@@ -356,6 +404,26 @@ Business:
   - TribLive: https://triblive.com/local/valley-news-dispatch/vacant-new-kensington-hospital-listed-for-auction/
 
 Around town:
+* Tarentum Electric Bills Head Up 5%
+  Latest developments: TribLive reported Monday, October 19,
+  that electric customers in Tarentum will likely pay about 5%
+  more in 2027.
+  Tarentum, the Allegheny County borough on the Allegheny River,
+  bills its own electric customers, and the increase lands on
+  households and businesses there next year. Borough budget
+  season sets the rate.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/tarentum-electric-customers-likely-facing-5-hike-in-bill-next-year/
+* IUP Wins $2 Million for Student-Parents
+  Latest developments: TribLive reported Monday, October 19,
+  that $2 million in federal funding will support students who
+  are parents at Indiana University of Pennsylvania as they
+  finish their degrees.
+  Indiana University of Pennsylvania, the state-owned university
+  in Indiana, Indiana County, serves a region where child care
+  costs and schedules push parents out of school before
+  graduation. The money funds support aimed at keeping those
+  students enrolled through a degree.
+  - TribLive: https://triblive.com/local/regional/iup-student-parents-getting-support-from-2-million-program/
 * AHN Opens the County's First Milk Depot
   Latest developments: Allegheny Health Network and the
   Mid-Atlantic Mother's Milk Bank opened Allegheny County's
@@ -453,6 +521,38 @@ Penguins (3-5)
     https://plaintextsports.com/nhl/2026-10-19/pit-uta
 
 Around the Teams:
+* The Blitzes Arrive, and So Does Jalen Ramsey
+  Latest developments: The Post-Gazette reported Monday
+  afternoon, October 19, that the Steelers finally turned loose
+  their blitz package at Tampa Bay and used cornerback Jalen
+  Ramsey as a rusher, two days after defensive coordinator
+  Patrick Graham said Pittsburgh would send extra men more often
+  as the season went on.
+  Graham spent the first five weeks keeping Pittsburgh's
+  pressure conservative, and Merril Hoge had argued on his
+  Playbook show that the Steelers could get home without
+  blitzing. Ramsey, the veteran defensive back the team moves
+  around the formation, lined up as one of the extra rushers at
+  Raymond James Stadium on Sunday, October 18.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/19/steelers-blitz-jalen-ramsey/stories/202610190025
+* Footbahlin and Not Just Football Watch Along
+  Latest developments: Ben Roethlisberger and Spencer Te'o
+  streamed the Buccaneers game live on Footbahlin on Sunday,
+  October 18, Cam Heyward and Hayden Walsh ran a live Not Just
+  Football postgame show the same evening, and Christopher
+  Carter took Steelers and Pitt questions in a Post-Gazette chat
+  Monday, October 19.
+  Footbahlin, the show the former Steelers quarterback hosts on
+  his Channel Seven, now runs game-day livestreams alongside its
+  weekly episodes. Not Just Football, which the Steelers
+  defensive lineman records with Walsh, added a new clip Monday
+  from its shelved Elandon Roberts interview, with the inside
+  linebacker describing a play he made on a Tom Brady pass
+  during his New England Patriots years.
+  - Ben Roethlisberger / Channel Seven (YouTube): https://www.youtube.com/watch?v=7T05U37kI7I
+  - Not Just Football with Cam Heyward: https://www.youtube.com/watch?v=GGODe0hKQXk
+  - Not Just Football with Cam Heyward: https://www.youtube.com/shorts/YKPK-rOYb1Q
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/19/steelers-live-chat-aaron-rodgers/stories/202610190029
 * The Paris Game Holds Through the Unrest
   Latest developments: The Post-Gazette reported late Sunday,
   October 18, that the NFL sees no change of plans for the
@@ -496,6 +596,21 @@ Around the Teams:
   - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=vxAoEcjl98k
 
 Team USA:
+* UEFA Presses FIFA on the Balogun Reversal
+  Latest developments: UEFA sent FIFA 42 questions and demanded
+  answers, ESPN reported Monday, October 19, among them how
+  officials came to overturn the World Cup suspension that
+  followed United States forward Folarin Balogun's red card and
+  how president Gianni Infantino intends to partially sell off
+  the World Cup.
+  Balogun drew a red card at the 2026 tournament, and FIFA then
+  reversed the ban, a decision that drew enough criticism that
+  the governing body moved last week to amend the rule that
+  allowed it. Infantino apologized to the FIFA Council for his
+  plan to sell a stake in the World Cup, and his reelection bid
+  remains unsettled.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50219087/uefa-demands-fifa-explain-world-cup-sell-plan-balogun-red-reversal
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50197782/gianni-infantino-fifa-president-election-far-certain
 * Sophia Wilson Begins a Two-Game Ban
   Latest developments: Sophia Wilson sat out Sunday, October 18,
   serving the first match of a two-game suspension for violent
@@ -545,15 +660,13 @@ USD/JPY       158.23  ▲ +0.1%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 29 items in the 24-hour window.
+Security: 24 of 24 feeds loaded, 42 items in the 24-hour window.
   No recent items: SANS Internet Storm Center, CISA Advisories,
   Ars Technica Security, Securelist (Kaspersky), Sophos News,
   Unit 42 (Palo Alto), Google Online Security Blog, Cisco Talos,
-  Graham Cluley, Microsoft Security Blog, Google Project Zero,
-  The DFIR Report, Kim Zetter (Zero Day), Frank on Fraud, Wired
-  Security.
+  Graham Cluley, Google Project Zero, The DFIR Report, Kim
+  Zetter (Zero Day), Frank on Fraud.
 Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
-  No recent items: NEXTpittsburgh, Pittsburgh Magazine.
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
 Events: 4 of 4 feeds loaded, 7 items in the 120-hour window. No
@@ -561,17 +674,17 @@ Events: 4 of 4 feeds loaded, 7 items in the 120-hour window. No
   Entertainment.
 Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
   window. No recent items: Footbahlin with Ben Roethlisberger.
-Team USA: 3 of 3 feeds loaded, 21 items in the 72-hour window.
+Team USA: 3 of 3 feeds loaded, 23 items in the 72-hour window.
   No recent items: Guardian Olympics.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (449s of
-  model time; $2.13 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (359s of
+  model time; $2.03 at API list price).
 
 ================================================================
-Generated 2026-10-19 10:06 EDT. Updated weekdays at about 7:05
+Generated 2026-10-19 13:36 EDT. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
