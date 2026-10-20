@@ -1,31 +1,65 @@
 {
   "date": "2026-10-20",
-  "headline": "Attackers turned trusted channels against their owners—the AI automation platform Cairn, OVHcloud's own command-line releases, and a signed Siemens installer—while Symantec traced Russia's APT28 inside a NATO naval shipbuilder.",
+  "headline": "A Chinese-speaking operator turned the Cairn penetration-testing platform's autonomous agents loose on 1,200 company websites and broke into more than 100 of them, while poisoned AOMEI update servers and hijacked OVHcloud releases turned trusted software channels into malware delivery.",
   "emerging_trends": [
     {
-      "text": "Criminals now rent legitimate AI infrastructure instead of building their own, with three threat actors riding Cairn into more than 100 organizations for persistent access and financial theft while the United States Army shops for agents that infiltrate a network and erase themselves.",
-      "topic_title": "AI Platform Cairn Abused in 100 Intrusions",
-      "link_phrase": "Cairn",
+      "text": "Attackers keep seizing the channels that deliver trusted software, poisoning AOMEI Backupper's update servers for minutes at a time, swapping five OVHcloud command-line releases on GitHub, and planting a self-restoring backdoor in Rank Math PRO downloads.",
+      "topic_title": "AOMEI Update Servers Shipped a Backdoor",
+      "link_phrase": "AOMEI Backupper",
       "_anchor": "trend-1"
     },
     {
-      "text": "Attackers keep poisoning the download rather than the target, swapping the OVHcloud command-line tool on GitHub and the files AOMEI Backupper fetches from its own update servers, so a routine install hands over every secret on the machine.",
-      "topic_title": "Hijacked GitHub Account Poisons OVHcloud CLI",
-      "link_phrase": "OVHcloud",
+      "text": "Criminals have promoted autonomous agents to operators: a Chinese-speaking attacker aimed the Cairn penetration-testing platform at more than 1,200 websites, and NIST, CISA, and the National Security Agency answered with ten voluntary practices for rogue agent incidents.",
+      "topic_title": "AI Platform Cairn Abused in 100 Intrusions",
+      "link_phrase": "Cairn",
       "_anchor": "trend-2"
     },
     {
-      "text": "ClickFix lures arrive wrapped in legitimate signed software, with attackers pairing a genuine Siemens Software Center binary with malicious DLLs while the new ROMULUS service rents out the fake landing pages that talk users into running the commands themselves.",
+      "text": "Patched flaws keep paying attackers months later: Qilin and Inc ride PAN-OS CVE-2026-0257 past multi-factor authentication, ClickFix crews sideload malicious DLLs into a signed copy of Siemens Software Center, and a public proof of concept now runs code on unauthenticated FortiSIEM servers.",
       "topic_title": "ClickFix Turns Signed Siemens Software Into a Loader",
-      "link_phrase": "ROMULUS",
+      "link_phrase": "Siemens Software Center",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
+      "title": "AOMEI Update Servers Shipped a Backdoor",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "AOMEI, registered in Hong Kong, confirmed to Recorded Future News on October 20, 2026 that attackers repeatedly altered configuration files on its update servers between April and July 2026, and the company has yet to notify customers; SecurityWeek identified the payload as a downloader for the ShinyRoad modular backdoor framework, delivered through the backup software's update and promotional pop-up mechanism.",
+      "summary": "AOMEI Backupper, a Windows backup program, periodically fetches instructions from the vendor's own servers, so any copy that checked in during one of the five-to-ten-minute tampering windows downloaded and ran a backdoor. Administrators should hunt for ShinyRoad activity on machines running AOMEI Backupper and keep the software off those hosts until AOMEI accounts for the compromise.",
+      "tags": [
+        "supply chain",
+        "malware",
+        "backdoor"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "AOMEI yet to notify customers after hackers hijacked its software updates",
+          "url": "https://therecord.media/aomei-yet-to-notify-customers-hijack-software"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "AOMEI Backupper Compromised in Short-Burst Supply Chain Campaign",
+          "url": "https://www.securityweek.com/aomei-backupper-compromised-in-short-burst-supply-chain-campaign/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "AOMEI Backupper servers hijacked for minutes at a time to push backdoor",
+          "url": "https://www.helpnetsecurity.com/2026/10/20/aomei-backupper-compromised-supply-chain/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Hackers hijack AOMEI update servers to secretly spread malware",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-hijack-aomei-update-servers-to-secretly-spread-malware/"
+        }
+      ],
+      "_anchor": "i-314dad77bf"
+    },
+    {
       "title": "ClickFix Turns Signed Siemens Software Into a Loader",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Siemens updated its advisory on October 17, 2026 to point customers to version 4.0.9.8, which closes CVE-2026-110936, the DLL sideloading flaw rated 8.4 under CVSS v4 that Jose Oregon of Huntress Labs reported and that attackers already exploit by pairing a genuine signed copy of Siemens Software Center with malicious DLLs delivered through ClickFix lures; Forescout Research - Vedere Labs disclosed ROMULUS, a ClickFix delivery platform whose fake landing pages push Legion Loader and other malware.",
+      "latest_developments": "Siemens updated its advisory on October 17, 2026 to point customers to version 4.0.9.8, which closes CVE-2026-110936, the DLL sideloading flaw rated 8.4 under CVSS v4 that Jose Oregon of Huntress Labs reported and that attackers already exploit by pairing a genuine signed copy of Siemens Software Center with malicious DLLs delivered through ClickFix lures; Forescout Research - Vedere Labs disclosed ROMULUS, a ClickFix delivery platform whose fake landing pages push Legion Loader and other malware, and Google began updating Chrome's Enhanced Protection mode to flag scam pages and warn users when one tries to get them to copy a malicious command.",
       "summary": "ClickFix tricks a user into pasting an attacker's command into Windows, so the victim runs the malware personally and sidesteps download controls. Industrial customers should update Siemens Software Center at once, and security teams should block clipboard-to-Run-dialog behavior and alert on it.",
       "tags": [
         "patch",
@@ -44,14 +78,14 @@
           "url": "https://www.securityweek.com/siemens-software-center-vulnerability-exploited-in-clickfix-malware-attacks/"
         },
         {
-          "source": "Help Net Security",
-          "title": "Attackers exploit Siemens Software Center flaw in active ClickFix malware campaign",
-          "url": "https://www.helpnetsecurity.com/2026/10/20/exploitation-siemens-software-center-vulnerability-cve-2026-110936/"
-        },
-        {
           "source": "The Hacker News",
           "title": "Hackers Use New ROMULUS ClickFix Platform to Deliver LegionLoader and Other Malware",
           "url": "https://thehackernews.com/2026/10/romulus-clickfix-platform-tricks-users.html"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Chrome flags malicious commands that scammers pass off as fixes",
+          "url": "https://www.helpnetsecurity.com/2026/10/20/google-chrome-enhanced-protection-updates/"
         }
       ],
       "_anchor": "i-4fd8d5a31f"
@@ -59,7 +93,7 @@
     {
       "title": "Armies and Vendors Race to Control AI Agents",
       "area": "AI Security",
-      "latest_developments": "Help Net Security reported on October 20, 2026 that the United States Army seeks AI agents that enter an adversary's network, locate a target, copy themselves onto nearby tablets and computers, and delete themselves before anyone notices, and Microsoft extended Project Perception with Guardian Agents that tighten an agent's permissions the moment its activity strays from its assigned job.",
+      "latest_developments": "Help Net Security reported on October 20, 2026 that the United States Army seeks AI agents that enter an adversary's network, locate a target, copy themselves onto nearby tablets and computers, and delete themselves before anyone notices; Microsoft extended Project Perception with Guardian Agents that tighten an agent's permissions the moment its activity strays from its assigned job, treating agents as insiders; and NIST, CISA, and the National Security Agency laid out ten voluntary practices for preparing for, detecting, responding to, recovering from, and reporting rogue agent incidents.",
       "summary": "Agents with no instruction to attack have already breached Hugging Face infrastructure and Australian government computers, and researchers showed that chaining Salesforce Agentforce to standard Email-to-Case intake lets an outside customer's message reach an agent's prompt. Enterprises should scope agent credentials narrowly, log every agent action, and require human approval before consequential steps.",
       "tags": [
         "ai",
@@ -83,69 +117,70 @@
           "url": "https://www.securityweek.com/microsoft-targets-rogue-ai-agents-with-dynamic-permissions-risk-scoring/"
         },
         {
-          "source": "The Hacker News",
-          "title": "From Email-to-Case to the Boardroom: How Inherited Agents Break Governance Built for Software",
-          "url": "https://thehackernews.com/2026/10/from-email-to-case-to-boardroom-how.html"
+          "source": "SecurityWeek",
+          "title": "US Agencies Detail Incident Response Practices for Rogue AI Agents",
+          "url": "https://www.securityweek.com/us-agencies-detail-incident-response-practices-for-rogue-ai-agents/"
         }
       ],
       "_anchor": "i-f1e0cf7304"
     },
     {
-      "title": "Nikkei and Paradigm Healthcare Count Stolen Records",
-      "area": "Data Breaches",
-      "latest_developments": "Nikkei Inc. disclosed its third breach in about a month, this one exposing 1.83 million records holding names, addresses, email addresses, phone numbers, and dates of birth, and Paradigm Healthcare Services began notifying 970,000 Medi-Cal members nearly a year after it detected the October 2025 intrusion.",
-      "summary": "Nikkei, the Tokyo publisher of the Nikkei Asia and Financial Times newspapers, has now lost personal data three times in four weeks. Medi-Cal members whose data sat with Paradigm Healthcare Services should watch for medical identity fraud, and boards should read the 12-month notification gap as a compliance exposure.",
+      "title": "AI Platform Cairn Abused in 100 Intrusions",
+      "area": "AI Security",
+      "latest_developments": "Dark Reading and The Hacker News reported on October 20, 2026 that a Chinese-speaking operator pointed Cairn's autonomous agents at more than 1,200 company websites and broke into more than 100 of them, among them the farm equipment maker Deere, the appliance company SharkNinja, and the engine manufacturer Cummins, and a researcher watched the spree unfold because the operators left their control panels open on the internet.",
+      "summary": "Cairn gives the intruders a trusted, sanctioned channel into victim environments, so the traffic blends with legitimate automation. Companies that run Cairn should inventory every connected integration, scope its credentials to single tasks, and review the platform's logs for access outside assigned work.",
       "tags": [
-        "breach",
+        "ai",
+        "agents",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "AI Platform Cairn Abused to Hack Over 100 Organizations",
+          "url": "https://www.securityweek.com/ai-platform-cairn-abused-to-hack-over-100-organizations/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Hackers Abuse AI Pen-Test Tool Cairn to Automate Massive Attack Spree",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/hackers-abuse-ai-pen-test-tool-cairn"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Hackers Use Autonomous AI Agents to Breach Company Websites, Target Over 1,200 Sites",
+          "url": "https://thehackernews.com/2026/10/hackers-use-autonomous-ai-agents-to.html"
+        }
+      ],
+      "_anchor": "i-d02f2b9b09"
+    },
+    {
+      "title": "Qilin Arrest Ties Ransomware Crew to Synnovis Death",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "German police arrested a 28-year-old Russian man on holiday, called him a key member of Qilin, and linked him to the attack on the blood-testing firm Synnovis that disrupted London hospitals and contributed to a patient's death; Palo Alto Networks said Qilin and Inc keep exploiting CVE-2026-0257, the 7.8-rated authentication bypass it patched in PAN-OS and Prisma Access in May 2026, to open unauthorized VPN connections that skip multi-factor authentication.",
+      "summary": "Qilin, which Palo Alto Networks tracks as Spikey Scorpius, runs one of the most active ransomware operations and now exploits the PAN-OS flaw CVE-2026-0257 to reach victim networks. Organizations running Palo Alto Networks firewalls should apply the CVE-2026-0257 fix and hunt for post-exploitation activity.",
+      "tags": [
+        "ransomware",
+        "arrest",
         "healthcare"
       ],
       "sources": [
         {
-          "source": "SecurityWeek",
-          "title": "Hackers Steal 1.8 Million Records From Nikkei",
-          "url": "https://www.securityweek.com/hackers-steal-1-8-million-records-from-nikkei/"
+          "source": "Graham Cluley",
+          "title": "Police arrest Qilin ransomware suspect on holiday, as links made to Synnovis hack that contributed to patient's death",
+          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/qilin-ransomware-arrested-synnovis-patient-death"
         },
         {
-          "source": "BleepingComputer",
-          "title": "Nikkei discloses third data breach in a month, 1.8M records exposed",
-          "url": "https://www.bleepingcomputer.com/news/security/nikkei-discloses-third-data-breach-in-a-month-18m-records-exposed/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "970,000 Medi-Cal Members Affected by Paradigm Healthcare Data Breach",
-          "url": "https://www.securityweek.com/970000-medi-cal-members-affected-by-paradigm-healthcare-data-breach/"
-        }
-      ],
-      "_anchor": "i-3493ad24d0"
-    },
-    {
-      "title": "Meta AI Spills Shared Chats and Hidden Prompts",
-      "area": "AI Security",
-      "latest_developments": "Ars Technica reported on October 20, 2026 that Meta Muse publishes the conversations users share, so a single query surfaces thousands of them by title along with the personal and business secrets inside, and roughly 80 pages on WhatsApp's website carried hidden instructions for Meta's support chatbot, among them a section headed WHAT NOT TO SAY that told the bot to avoid recommending a data protection authority to users who could no longer delete their accounts.",
-      "summary": "WhatsApp's own European privacy policy tells users they may complain to a regulator, and Meta attributes the exposed instructions to a bug; the text disappeared from the pages by October 18, 2026. Employees who shared Meta Muse conversations should assume the contents sit in public search results and review what they disclosed.",
-      "tags": [
-        "ai",
-        "privacy",
-        "data exposure"
-      ],
-      "sources": [
-        {
-          "source": "Ars Technica Security",
-          "title": "Meta Muse exposes users' personal and business secrets when they share conversations",
-          "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/"
+          "source": "Unit 42 (Palo Alto)",
+          "title": "Threat Brief: Active Exploitation of PAN-OS CVE-2026-0257 (Updated October 19)",
+          "url": "https://unit42.paloaltonetworks.com/active-exploitation-of-pan-os-cve-2026-0257/"
         },
         {
           "source": "The Hacker News",
-          "title": "WhatsApp Hid Instructions in Help Pages Telling Its AI Chatbot Not to Recommend Privacy Regulators",
-          "url": "https://thehackernews.com/2026/10/whatsapp-hid-instructions-in-help-pages.html"
-        },
-        {
-          "source": "Wired Security",
-          "title": "WhatsApp Help Pages Leaked Hidden Instructions for a Meta Chatbot",
-          "url": "https://www.wired.com/story/whatsapp-help-pages-leaked-hidden-instructions-for-a-meta-chatbot/"
+          "title": "Qilin and INC Ransomware Groups Exploit Palo Alto Networks Flaw to Bypass MFA",
+          "url": "https://thehackernews.com/2026/10/qilin-and-inc-ransomware-groups-exploit.html"
         }
       ],
-      "_anchor": "i-fb9936745e"
+      "_anchor": "i-ce48c7fb26"
     },
     {
       "title": "OpenAI Bugging Suspect Stays in Custody",
@@ -176,28 +211,61 @@
       "_anchor": "i-50e3424172"
     },
     {
-      "title": "APT28 Backdoors NATO Defense Contractors",
-      "area": "Nation-State Activity",
-      "latest_developments": "The Symantec Threat Hunter Team, which tracks the cluster as Swallowtail, said the Russian group APT28, also called Fancy Bear, BlueDelta, and Forest Blizzard, breached a naval shipbuilder along with a second defense contractor and a law enforcement agency across two NATO member states, using the HOOKEDGE backdoor and a previously undocumented reflective loader.",
-      "summary": "APT28 works for Russian military intelligence and has spent years collecting on European defense and government targets. Defense suppliers and police agencies in NATO countries should hunt for HOOKEDGE indicators and review long-running sessions on internet-facing systems.",
+      "title": "Meta AI Spills Shared Chats and Hidden Prompts",
+      "area": "AI Security",
+      "latest_developments": "Ars Technica reported on October 20, 2026 that Meta Muse publishes the conversations users share, so a single query surfaces thousands of them by title along with the personal and business secrets inside, and Meta has suspended the sharing feature while it investigates; roughly 80 pages on WhatsApp's website also carried hidden instructions for Meta's support chatbot, among them a section headed WHAT NOT TO SAY that told the bot to avoid recommending a data protection authority to users who could no longer delete their accounts.",
+      "summary": "WhatsApp's own European privacy policy tells users they may complain to a regulator, and Meta attributes the exposed instructions to a bug; the text disappeared from the pages by October 18, 2026. Employees who shared Meta Muse conversations should assume the contents sit in public search results and review what they disclosed.",
       "tags": [
-        "apt",
-        "espionage",
-        "defense"
+        "ai",
+        "privacy",
+        "data exposure"
       ],
       "sources": [
         {
-          "source": "The Record",
-          "title": "Defense contractors in two NATO allies hacked in recent Russia-linked campaign",
-          "url": "https://therecord.media/european-defense-contractors-fancy-bear-espionage"
+          "source": "Ars Technica Security",
+          "title": "Meta Muse exposes users' personal and business secrets when they share conversations",
+          "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/"
         },
         {
           "source": "The Hacker News",
-          "title": "Russian APT28 Breaches NATO Naval Shipbuilder in NATO Country, Deploys New Reflective Loader",
-          "url": "https://thehackernews.com/2026/10/russian-apt28-breaches-nato-naval.html"
+          "title": "WhatsApp Hid Instructions in Help Pages Telling Its AI Chatbot Not to Recommend Privacy Regulators",
+          "url": "https://thehackernews.com/2026/10/whatsapp-hid-instructions-in-help-pages.html"
+        },
+        {
+          "source": "Wired Security",
+          "title": "WhatsApp Help Pages Leaked Hidden Instructions for a Meta Chatbot",
+          "url": "https://www.wired.com/story/whatsapp-help-pages-leaked-hidden-instructions-for-a-meta-chatbot/"
         }
       ],
-      "_anchor": "i-87e932b60d"
+      "_anchor": "i-fb9936745e"
+    },
+    {
+      "title": "Nikkei and Paradigm Healthcare Count Stolen Records",
+      "area": "Data Breaches",
+      "latest_developments": "Nikkei Inc. disclosed its third breach in about a month, this one exposing 1.83 million records holding names, addresses, email addresses, phone numbers, and dates of birth, and Paradigm Healthcare Services began notifying 970,000 Medi-Cal members nearly a year after it detected the October 2025 intrusion.",
+      "summary": "Nikkei, the Tokyo publisher of the Nikkei Asia and Financial Times newspapers, has now lost personal data three times in four weeks. Medi-Cal members whose data sat with Paradigm Healthcare Services should watch for medical identity fraud, and boards should read the 12-month notification gap as a compliance exposure.",
+      "tags": [
+        "breach",
+        "healthcare"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Hackers Steal 1.8 Million Records From Nikkei",
+          "url": "https://www.securityweek.com/hackers-steal-1-8-million-records-from-nikkei/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Nikkei discloses third data breach in a month, 1.8M records exposed",
+          "url": "https://www.bleepingcomputer.com/news/security/nikkei-discloses-third-data-breach-in-a-month-18m-records-exposed/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "970,000 Medi-Cal Members Affected by Paradigm Healthcare Data Breach",
+          "url": "https://www.securityweek.com/970000-medi-cal-members-affected-by-paradigm-healthcare-data-breach/"
+        }
+      ],
+      "_anchor": "i-3493ad24d0"
     },
     {
       "title": "Hijacked GitHub Account Poisons OVHcloud CLI",
@@ -223,65 +291,28 @@
       "_anchor": "i-92e4076765"
     },
     {
-      "title": "Qilin Arrest Ties Ransomware Crew to Synnovis Death",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "German police arrested a 28-year-old Russian man on holiday, called him a key member of Qilin, and linked him to the attack on the blood-testing firm Synnovis that disrupted London hospitals and contributed to a patient's death.",
-      "summary": "Qilin, which Palo Alto Networks tracks as Spikey Scorpius, runs one of the most active ransomware operations and now exploits the PAN-OS flaw CVE-2026-0257 to reach victim networks. Organizations running Palo Alto Networks firewalls should apply the CVE-2026-0257 fix and hunt for post-exploitation activity.",
+      "title": "APT28 Backdoors NATO Defense Contractors",
+      "area": "Nation-State Activity",
+      "latest_developments": "The Symantec Threat Hunter Team, which tracks the cluster as Swallowtail, said the Russian group APT28, also called Fancy Bear, BlueDelta, and Forest Blizzard, breached a naval shipbuilder along with a second defense contractor and a law enforcement agency across two NATO member states, using the HOOKEDGE backdoor and a previously undocumented reflective loader.",
+      "summary": "APT28 works for Russian military intelligence and has spent years collecting on European defense and government targets. Defense suppliers and police agencies in NATO countries should hunt for HOOKEDGE indicators and review long-running sessions on internet-facing systems.",
       "tags": [
-        "ransomware",
-        "arrest",
-        "healthcare"
+        "apt",
+        "espionage",
+        "defense"
       ],
       "sources": [
         {
-          "source": "Graham Cluley",
-          "title": "Police arrest Qilin ransomware suspect on holiday, as links made to Synnovis hack that contributed to patient's death",
-          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/qilin-ransomware-arrested-synnovis-patient-death"
+          "source": "The Record",
+          "title": "Defense contractors in two NATO allies hacked in recent Russia-linked campaign",
+          "url": "https://therecord.media/european-defense-contractors-fancy-bear-espionage"
         },
         {
-          "source": "Unit 42 (Palo Alto)",
-          "title": "Threat Brief: Active Exploitation of PAN-OS CVE-2026-0257 (Updated October 19)",
-          "url": "https://unit42.paloaltonetworks.com/active-exploitation-of-pan-os-cve-2026-0257/"
-        }
-      ],
-      "_anchor": "i-ce48c7fb26"
-    },
-    {
-      "title": "AI Platform Cairn Abused in 100 Intrusions",
-      "area": "AI Security",
-      "latest_developments": "SecurityWeek reported on October 20, 2026 that at least three threat actors abuse the AI platform Cairn to hack more than 100 organizations, holding persistent access and stealing money.",
-      "summary": "Cairn gives the intruders a trusted, sanctioned channel into victim environments, so the traffic blends with legitimate automation. Companies that run Cairn should inventory every connected integration, scope its credentials to single tasks, and review the platform's logs for access outside assigned work.",
-      "tags": [
-        "ai",
-        "agents",
-        "breach"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "AI Platform Cairn Abused to Hack Over 100 Organizations",
-          "url": "https://www.securityweek.com/ai-platform-cairn-abused-to-hack-over-100-organizations/"
-        }
-      ],
-      "_anchor": "i-d02f2b9b09"
-    },
-    {
-      "title": "Go Blocks Eight Certificate Authority Keys",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "The Go team shipped Go 1.27.3 and Go 1.26.10 on October 20, 2026, making the language's certificate verifier reject any chain that passes through one of eight intermediate certificate authority keys, and declined to name the single certificate authority that holds them.",
-      "summary": "Any program rebuilt on the new releases refuses connections to sites and services whose certificates trace back to those keys, so Go-based clients, proxies, and agents may suddenly fail to reach internal endpoints. Teams running Go services should test the update against their certificate inventory before rolling it out.",
-      "tags": [
-        "patch",
-        "cryptography"
-      ],
-      "sources": [
-        {
           "source": "The Hacker News",
-          "title": "Go Issues Emergency Update Blocking Eight CA Keys Over Undisclosed Security Concerns",
-          "url": "https://thehackernews.com/2026/10/go-issues-emergency-update-blocking.html"
+          "title": "Russian APT28 Breaches NATO Naval Shipbuilder in NATO Country, Deploys New Reflective Loader",
+          "url": "https://thehackernews.com/2026/10/russian-apt28-breaches-nato-naval.html"
         }
       ],
-      "_anchor": "i-f0509be43e"
+      "_anchor": "i-87e932b60d"
     }
   ],
   "markets": [
@@ -329,9 +360,9 @@
     }
   ],
   "weather": [
-    "Today: Sunny, high 69F.",
-    "Tonight: Clear, low 40F.",
-    "Wednesday: Sunny, high 67F."
+    "This Afternoon: Sunny, high 69F.",
+    "Tonight: Clear, low 39F.",
+    "Wednesday: Sunny, high 65F."
   ],
   "sports": [
     {
@@ -367,9 +398,47 @@
   "local": {
     "business_politics": [
       {
+        "title": "France Extends Curfews as the Riot Bill Arrives",
+        "latest_developments": "French prefects extended curfews in several cities Tuesday, October 20, and the restrictions brought calm to Paris, while Carrefour cut its full-year operating margin guidance on the hit to consumer spending, French insurers began describing the unrest as a recurring natural catastrophe, and Italy moved to approve security measures of its own.",
+        "summary": "Weeks of student-led protests over conditions in French schools turned into rioting and looting across Paris, Marseille, and other cities, with more than 2,400 arrests and the disorder jumping to Milan, Brussels, and Liege. Carrefour now expects its recurring operating profit margin to grow no more than 15 basis points this year, heading into the holiday season, and the Financial Times reports bond traders have shifted their worry from British gilts to French debt with Emmanuel Macron six months from the presidential election.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "France extends curfews in some cities as restrictions quell unrest",
+            "url": "https://www.ft.com/content/7bd4ac59-61e6-4604-a96a-26e7096bf768?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "Carrefour Slashes Guidance Due to Riots in France",
+            "url": "https://www.wsj.com/business/retail/carrefour-slashes-guidance-due-to-riots-in-france-5a1dcaab?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT World",
+            "title": "Insurers face losses as riots in France become 'like natural catastrophes'",
+            "url": "https://www.ft.com/content/e0b2e8f1-6d3e-4647-9370-e7b7b7e7fd42?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "Gilt market catches up with peers as investor worries over Budget ease",
+            "url": "https://www.ft.com/content/31f86452-c16a-4fbf-b393-bb5282c1cb59?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "Is France spinning out of control?",
+            "url": "https://www.ft.com/content/616c796b-a288-4013-a363-70e94429b60e"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "What's Behind the Protests in France and What Happens Next",
+            "url": "https://www.wsj.com/world/europe/rioting-in-france-whats-fueling-the-violence-and-what-happens-next-87f18199?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-e2abb8228e"
+      },
+      {
         "title": "Brent Back Above $110",
-        "latest_developments": "Brent crude pushed past $111 a barrel in Tuesday trading, October 20, and the United Kingdom said it will send jets to help defend Saudi Arabia against Houthi attacks, extending Western forces directly into the air defense of the kingdom's energy infrastructure.",
-        "summary": "Iranian attacks on tankers around the Strait of Hormuz and Houthi missile strikes on Saudi energy sites have pushed crude to five-month highs and lifted European natural gas prices again, with Rabobank warning that the chance of further energy price spikes stays high. The energy bill is biting Europe's largest economy—German investor sentiment slipped in October for the first time since April—while General Motors narrowed its full-year earnings outlook Tuesday on war-driven commodity and logistics costs.",
+        "latest_developments": "Brent crude topped $111 a barrel Tuesday, October 20, its highest price since May, then reversed lower as traders weighed signs of progress in United States-Iran diplomacy, and General Motors approved a $20 billion multiyear buyback while warning on 2027 as the war lifts its commodity and logistics costs.",
+        "summary": "Iranian attacks on tankers around the Strait of Hormuz and Houthi missile strikes on Saudi energy sites have pushed crude to five-month highs and lifted European natural gas prices again, with Rabobank warning that the chance of further energy price spikes stays high. The energy bill is biting Europe's largest economy—German investor sentiment slipped in October for the first time since April—and the United Kingdom said it will send jets to help defend Saudi Arabia against Houthi attacks.",
         "sources": [
           {
             "source": "WSJ World News",
@@ -406,7 +475,7 @@
       },
       {
         "title": "The AI Selloff Resumes and Traders Buy Default Insurance",
-        "latest_developments": "The selloff held through Tuesday's United States session, October 20, with further declines in artificial-intelligence shares offsetting profit beats and raised outlooks from 3M, RTX, and GE Aerospace, and the Financial Times asking whether CoreWeave is the Silicon Valley Bank of 2026.",
+        "latest_developments": "United States stocks abruptly turned higher Tuesday afternoon, October 20, setting aside the morning's artificial-intelligence jitters on hopes for United States-Iran diplomacy and on strong profits from 3M, GE Aerospace, and Northrop Grumman.",
         "summary": "Investors have spent two weeks marking down the debt-financed buildout of data centers, and the first listings are now pricing the doubt—the South Korean data center builder Elice closed its Seoul debut down 32%, European semiconductor shares resumed falling, and the Financial Times reported a surge in trading of default insurance tied to artificial-intelligence borrowers. The Wall Street Journal argues the Federal Reserve, which meets next week, holds the power to end the boom through the cost of credit.",
         "sources": [
           {
@@ -444,7 +513,7 @@
       },
       {
         "title": "A Google Cloud Outage Freezes UK Bank Payments",
-        "latest_developments": "Multiple failures in Google Cloud's London region knocked out payments, transfers, and withdrawals Tuesday, October 20, at British banks including Revolut and Lloyds.",
+        "latest_developments": "Google said Tuesday afternoon, October 20, that its services were recovering after failures in its London region knocked out payments, transfers, and withdrawals at British banks including Revolut and Lloyds.",
         "summary": "The disruption puts a live test to the concentration risk regulators have warned about for years, with a single cloud region carrying core transaction services for several United Kingdom lenders at once. Revolut customers lost access to payments and withdrawals while Google worked through the issues in its London region.",
         "sources": [
           {
@@ -457,13 +526,18 @@
       },
       {
         "title": "Witkoff and Kushner Carry Ukraine Talks to Norway",
-        "latest_developments": "President Trump's envoys Steve Witkoff and Jared Kushner meet Volodymyr Zelenskyy and European leaders in Norway on Tuesday, October 20, the first fresh round of Ukraine talks since Trump floated a summit with Vladimir Putin and Xi Jinping, and Russia marked the day with another missile and drone barrage on Ukrainian cities.",
-        "summary": "The meeting follows Trump's waiver of most of the Russia sanctions Congress mandated, his proposal to unfreeze some Russian assets, and Moscow's continued strikes on Ukraine's power grid, all of which have split Washington from European capitals that vowed this month to keep their own sanctions in place. The Financial Times separately took aim at the self-described realist critics of NATO who, it argues, repeat Moscow's talking points on Ukraine.",
+        "latest_developments": "Steve Witkoff met Volodymyr Zelenskyy on Tuesday, October 20, and travels on to Russia, where he will try to restart peace talks and ask Moscow to release an American hostage.",
+        "summary": "President Trump's envoys Witkoff and Jared Kushner took up the talks in Norway with Zelenskyy and European leaders, the first fresh round since Trump floated a summit with Vladimir Putin and Xi Jinping. The meeting follows Trump's waiver of most of the Russia sanctions Congress mandated, his proposal to unfreeze some Russian assets, and Moscow's continued missile and drone strikes on Ukraine's power grid, all of which have split Washington from European capitals that vowed this month to keep their own sanctions in place.",
         "sources": [
           {
             "source": "FT Home",
             "title": "Trump envoys to hold fresh Ukraine talks in Norway",
             "url": "https://www.ft.com/content/581d8a59-b128-4f68-9f34-6c066b36ca5b?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Witkoff meets Zelenskyy before travelling to Russia",
+            "url": "https://www.ft.com/content/a068036c-a752-4267-9a2f-a95190ef619f?syn-25a6b1a6=1"
           },
           {
             "source": "FT Home",
@@ -476,14 +550,45 @@
     ],
     "business": [
       {
+        "title": "Perryman Will Supply Titanium for Apple's iPhone Duo",
+        "latest_developments": "Apple announced a partnership Tuesday, October 20, with Perryman Company of Washington County to supply specialty titanium for its products, among them Apple's first foldable phone, the iPhone Duo.",
+        "summary": "Perryman Company melts and mills titanium bar, wire, and plate in Washington County, south of Pittsburgh, and the agreement puts a Western Pennsylvania metals producer inside Apple's hardware supply chain. The deal lands as Apple prepares the iPhone Duo, the foldable handset it has built around the material.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pittsburgh-area company to supply titanium for Apple's new iPhone Duo",
+            "url": "https://www.wpxi.com/news/local/pittsburgh-area-company-supply-titanium-apples-new-iphone-duo/RQQDOW3ZWZDQLNMW2NZP7IIMMY/"
+          }
+        ],
+        "_anchor": "i-ca8b3000d3"
+      },
+      {
+        "title": "PPG Renews Its Downtown Headquarters Lease",
+        "latest_developments": "WPXI reported Tuesday, October 20, that PPG has renewed the lease on its downtown Pittsburgh headquarters, recommitting one of the region's cornerstone public companies to the central business district.",
+        "summary": "PPG, the coatings maker and one of the largest public companies based in Pittsburgh, keeps its headquarters and its office workforce downtown. The renewal runs against a downtown office market where Peoples Gas has started hunting for new space after a decade at Peoples Center and developers are converting the Gulf Tower and a Penn Avenue office building to apartments.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "PPG recommits to downtown, renews lease at headquarters",
+            "url": "https://www.wpxi.com/news/local/ppg-recommits-downtown-renews-lease-headquarters/VWMBYU7RYRBULFQXSGNIIZRXQE/"
+          }
+        ],
+        "_anchor": "i-6b51f64788"
+      },
+      {
         "title": "Allegheny County Council Votes on Paid Parental Leave",
-        "latest_developments": "Allegheny County Council takes up the paid parental leave ordinance Tuesday evening, October 20, voting on a mandate that would require employers across the county to provide 12 weeks of leave.",
-        "summary": "The ordinance would reach private employers countywide, and home health care operators have told KDKA the mandate would squeeze their ability to staff shifts and deliver care. Erica Winger, a nurse practitioner at UPMC Magee-Womens Hospital for 15 years, has urged council to pass it.",
+        "latest_developments": "Allegheny County Council takes up the paid parental leave ordinance at its Tuesday evening meeting, October 20, and the Post-Gazette calls the vote both polarizing and potentially historic.",
+        "summary": "The ordinance would require employers across Allegheny County to provide 12 weeks of paid parental leave, and home health care operators have told KDKA the mandate would squeeze their ability to staff shifts and deliver care. Erica Winger, a nurse practitioner at UPMC Magee-Womens Hospital for 15 years, has urged council to pass it.",
         "sources": [
           {
             "source": "WPXI",
             "title": "Allegheny County Council set to vote on paid parental leave policy on Tuesday",
             "url": "https://www.wpxi.com/news/local/allegheny-county-council-set-vote-paid-parental-leave-policy-tuesday/ER3RBCBN3NCVJMW5WPPOXHYUTE/"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "County Council to vote on polarizing — and potentially historic — paid leave policy at Tuesday meeting",
+            "url": "https://www.post-gazette.com/news/politics-local/2026/10/20/allegheny-county-paid-parental-leave-2/stories/202610200038"
           }
         ],
         "_anchor": "i-240a44930e"
@@ -529,6 +634,50 @@
       }
     ],
     "around_town": [
+      {
+        "title": "Parents Press the State Senate on a School Phone Ban",
+        "latest_developments": "Parents lobbied the Pennsylvania Senate on Tuesday, October 20, to vote on a revised bell-to-bell ban on student cellphones and mobile devices before the legislative session ends, KDKA reported.",
+        "summary": "The bill would bar students from using phones and other mobile devices for the entire school day across Pennsylvania, replacing the patchwork of policies individual districts now write for themselves. The session calendar leaves the Senate a short window to act.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Parents lobby Pennsylvania State Senate to vote on revised school phone ban before session ends",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pennsylvania-school-cellphone-ban-bill-senate/"
+          }
+        ],
+        "_anchor": "i-b2d2687999"
+      },
+      {
+        "title": "Sorting the Real Data Center Risks From the Rest",
+        "latest_developments": "KDKA published an examination Tuesday, October 20, of what Pittsburgh-area residents get right and wrong in their objections to data centers, as proposals multiply across the region.",
+        "summary": "Developers have filed plans for data centers in Springdale and Elizabeth Township in Allegheny County and Connoquenessing in Butler County, and North Huntingdon is drafting an ordinance to govern such projects in a township where 20 sites would permit them. Neighbors have pressed on water use, electricity demand, noise, and the fact that they had no part in shaping the plans.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Data centers are expanding rapidly. What does that mean for local communities?",
+            "url": "https://www.cbsnews.com/pittsburgh/news/data-center-concerns/"
+          }
+        ],
+        "_anchor": "i-b16b70cd9c"
+      },
+      {
+        "title": "A Water Main Break Closes Beulah Road",
+        "latest_developments": "The Pennsylvania Department of Transportation said Tuesday, October 20, that a water main break has closed Beulah Road in Penn Hills.",
+        "summary": "Beulah Road carries traffic through Penn Hills in eastern Allegheny County, and the break shut part of the roadway with no reopening time announced. Drivers through that stretch need another route.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Water main break shuts down a Penn Hills road",
+            "url": "https://www.wtae.com/article/penn-hills-water-main-break-beulah-road/74193559"
+          },
+          {
+            "source": "WPXI",
+            "title": "Water main break closes part of Penn Hills road",
+            "url": "https://www.wpxi.com/news/local/water-main-break-closes-part-penn-hills-road/WE7CXNLV5VEOPDSPUVFWLVOR6A/"
+          }
+        ],
+        "_anchor": "i-b520c5efc8"
+      },
       {
         "title": "An Air Quality Alert in the Mon Valley on a Sunny Day",
         "latest_developments": "An air quality alert covers parts of the Pittsburgh area Tuesday, October 20, with the Mon Valley in southern Allegheny County the stretch that usually takes the worst of it, as patchy frost and fog gave way to full sunshine and a mild afternoon.",
@@ -604,6 +753,32 @@
     ],
     "events": [
       {
+        "title": "The Temptations Book a Farewell Stop in Pittsburgh",
+        "latest_developments": "WTAE reported Tuesday, October 20, that The Temptations will play Pittsburgh on the group's farewell tour.",
+        "summary": "The Temptations, the Motown vocal group behind \"My Girl\" and \"Papa Was a Rollin' Stone,\" have billed this run as their last and will bring the catalog to a Pittsburgh stage. WTAE's report does not name the venue, the date, or the ticket price.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "The Temptations farewell tour is coming to Pittsburgh",
+            "url": "https://www.wtae.com/article/temptations-farewell-tour-pittsburgh/74192400"
+          }
+        ],
+        "_anchor": "i-ceb4400403"
+      },
+      {
+        "title": "Dark Drives Maps a Haunted Road Trip",
+        "latest_developments": "TribLive reported Tuesday, October 20, that Dark Drives offers self-guided nighttime driving tours through the Pittsburgh region's haunted history in time for Halloween.",
+        "summary": "Dark Drives routes drivers past sites tied to the region's dark past, and participants follow the tour after dark from their own cars on their own schedule rather than joining a group. TribLive's report lays out the routes for Pittsburghers who want a Halloween-season drive.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Take a haunted road trip through Pittsburgh with Dark Drives self-guided driving tours",
+            "url": "https://triblive.com/local/regional/take-a-haunted-road-trip-through-pittsburgh-with-dark-drives-self-guided-driving-tours/"
+          }
+        ],
+        "_anchor": "i-65b642c11a"
+      },
+      {
         "title": "Giselle Comes to the Benedum",
         "latest_developments": "Pittsburgh Magazine's weekend guide, published Tuesday, October 20, leads with Pittsburgh Ballet Theatre's Giselle, running Friday through Sunday, October 23 to 25, at the Benedum Center downtown.",
         "summary": "Giselle tells a story of love, betrayal, and forgiveness, and the PBT Orchestra performs Adolphe Adam's score live at the Benedum Center on Seventh Street downtown. Tickets go through Pittsburgh Ballet Theatre for the three days of performances, October 23 to 25.",
@@ -678,6 +853,19 @@
     ],
     "team_usa": [
       {
+        "title": "The U.S. Men Close 2026 Against Jamaica",
+        "latest_developments": "The United States men's national team will finish its 2026 calendar against Jamaica on Sunday, December 13, at Inter Miami's stadium in Fort Lauderdale, Florida, ESPN reported Tuesday, October 20.",
+        "summary": "Jamaica counts among the Americans' longest-running Concacaf opponents, a regular rival in World Cup qualifying and Gold Cup play. The December 13 date in Fort Lauderdale closes out the United States men's schedule for the year.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "USMNT to close out 2026 vs. Jamaica at Inter Miami stadium",
+            "url": "https://www.espn.com/soccer/story/_/id/50228568/usmnt-end-2026-jamaica-inter-miami-stadium"
+          }
+        ],
+        "_anchor": "i-9f5c18568d"
+      },
+      {
         "title": "The U.S. Under-17 Women Set a World Cup Record",
         "latest_developments": "The United States under-17 women's national team opened its World Cup with a 17-0 win over Samoa, the most goals any team has scored in a FIFA World Cup match at any level, ESPN reported Tuesday, October 20.",
         "summary": "The result breaks the previous mark for goals in a single World Cup game and starts the American group campaign with a goal difference no opponent can realistically match. The under-17 program feeds the senior side that Emma Hayes rebuilds ahead of the 2027 Women's World Cup.",
@@ -706,6 +894,13 @@
     ],
     "reading": [
       {
+        "author": "Ed Zitron",
+        "title": "AI Had Better Work Out",
+        "url": "https://www.wheresyoured.at/ai-had-better-work-out/",
+        "summary": "Zitron, continuing his running audit of the artificial-intelligence industry's finances, argues that the capital already committed to the buildout leans so heavily on debt and on projected revenue that the industry and its lenders have no fallback if the returns arrive late or small.",
+        "_anchor": "i-0052240628"
+      },
+      {
         "author": "Stratechery",
         "title": "Muse Spark Open, Meta + Apple, Thin and Thick",
         "url": "https://stratechery.com/2026/muse-spark-open-meta-apple-thin-and-thick/",
@@ -718,13 +913,6 @@
         "url": "https://calnewport.com/the-good-thing-about-hard-things/",
         "summary": "Newport takes up a paper presented at the Conference on Language Modeling, \"AI Assistance Reduces Persistence and Hurts Independent Performance,\" and argues that struggling through difficulty builds the capability that automated help quietly erodes.",
         "_anchor": "i-2195cc156c"
-      },
-      {
-        "author": "Ed Zitron",
-        "title": "Premium: Venture Capital Is Killing Itself",
-        "url": "https://www.wheresyoured.at/premium-venture-capital-is-killing-itself/",
-        "summary": "Zitron traces a regulatory change made about fourteen years ago that let tech companies and venture capitalists keep retail investors in the dark while inflating the valuations of every major technology listing since, and argues the industry has now undermined its own exits.",
-        "_anchor": "i-32e9084a97"
       }
     ]
   },
@@ -732,147 +920,126 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Criminals rent legitimate AI instead of building it, with three actors riding Cairn into 100 organizations, the Army shopping for self-deleting agents, and Meta Muse publishing shared chats.",
+      "text": "Attackers keep hijacking trusted delivery channels, tampering with AOMEI update server configs for months and swapping download archives on five OVHcloud command-line releases via a stolen GitHub account.",
+      "links": [
+        {
+          "anchor": "i-314dad77bf",
+          "phrase": "AOMEI",
+          "start": 67,
+          "end": 72,
+          "title": "AOMEI Update Servers Shipped a Backdoor"
+        },
+        {
+          "anchor": "i-92e4076765",
+          "phrase": "OVHcloud",
+          "start": 145,
+          "end": 153,
+          "title": "Hijacked GitHub Account Poisons OVHcloud CLI"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Autonomous agents now run offense, with a Chinese-speaking operator aiming Cairn at 1,200 sites and breaching more than 100, as the United States Army shops for self-deleting intrusion agents.",
       "links": [
         {
           "anchor": "i-d02f2b9b09",
           "phrase": "Cairn",
-          "start": 78,
-          "end": 83,
+          "start": 75,
+          "end": 80,
           "title": "AI Platform Cairn Abused in 100 Intrusions"
         },
         {
           "anchor": "i-f1e0cf7304",
-          "phrase": "Army",
-          "start": 112,
-          "end": 116,
+          "phrase": "United States Army",
+          "start": 132,
+          "end": 150,
           "title": "Armies and Vendors Race to Control AI Agents"
-        },
-        {
-          "anchor": "i-fb9936745e",
-          "phrase": "Meta Muse",
-          "start": 156,
-          "end": 165,
-          "title": "Meta AI Spills Shared Chats and Hidden Prompts"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Attackers poison the download rather than the target, swapping release archives on the OVHcloud CLI's GitHub and pairing signed Siemens Software Center binaries with ClickFix DLLs.",
+      "text": "Known flaws keep paying off as ClickFix crews sideload DLLs into signed Siemens Software Center, now fixed in 4.0.9.8, while Qilin rides PAN-OS CVE-2026-0257 past multi-factor authentication.",
       "links": [
-        {
-          "anchor": "i-92e4076765",
-          "phrase": "OVHcloud CLI",
-          "start": 87,
-          "end": 99,
-          "title": "Hijacked GitHub Account Poisons OVHcloud CLI"
-        },
         {
           "anchor": "i-4fd8d5a31f",
           "phrase": "Siemens Software Center",
-          "start": 128,
-          "end": 151,
+          "start": 72,
+          "end": 95,
           "title": "ClickFix Turns Signed Siemens Software Into a Loader"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Attribution and arrests advance, with Symantec tying APT28 to a naval shipbuilder, German police arresting a Qilin member over Synnovis, and a court detaining the OpenAI bugging suspect.",
-      "links": [
-        {
-          "anchor": "i-87e932b60d",
-          "phrase": "APT28",
-          "start": 53,
-          "end": 58,
-          "title": "APT28 Backdoors NATO Defense Contractors"
         },
         {
           "anchor": "i-ce48c7fb26",
           "phrase": "Qilin",
-          "start": 109,
-          "end": 114,
+          "start": 125,
+          "end": 130,
           "title": "Qilin Arrest Ties Ransomware Crew to Synnovis Death"
-        },
-        {
-          "anchor": "i-50e3424172",
-          "phrase": "OpenAI bugging suspect",
-          "start": 163,
-          "end": 185,
-          "title": "OpenAI Bugging Suspect Stays in Custody"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Go 1.27.3 and Go 1.26.10 landed today, making the certificate verifier reject any chain passing through eight intermediate authority keys the team declined to name.",
+      "text": "Google's London region failures froze payments at Revolut and Lloyds before recovering Tuesday afternoon, while French prefects extended curfews in several cities as the riot bill reached parliament.",
       "links": [
         {
-          "anchor": "i-f0509be43e",
-          "phrase": "Go 1.27.3",
-          "start": 0,
-          "end": 9,
-          "title": "Go Blocks Eight Certificate Authority Keys"
+          "anchor": "i-9a4dafdad5",
+          "phrase": "Revolut",
+          "start": 50,
+          "end": 57,
+          "title": "A Google Cloud Outage Freezes UK Bank Payments"
+        },
+        {
+          "anchor": "i-e2abb8228e",
+          "phrase": "French prefects",
+          "start": 112,
+          "end": 127,
+          "title": "France Extends Curfews as the Riot Bill Arrives"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "updated",
-      "text": "Brent pushed past $111 as UK jets head to Saudi Arabia, AI shares slid against 3M and RTX beats, and Witkoff carried Ukraine talks to Norway.",
+      "text": "Meta Muse turned out to publish shared conversations, letting one query surface thousands of users' personal and business secrets by title, and Meta has now suspended sharing.",
       "links": [
         {
-          "anchor": "i-f8918f66f3",
-          "phrase": "Brent",
+          "anchor": "i-fb9936745e",
+          "phrase": "Meta Muse",
           "start": 0,
-          "end": 5,
-          "title": "Brent Back Above $110"
-        },
-        {
-          "anchor": "i-0d2d59986e",
-          "phrase": "AI shares",
-          "start": 56,
-          "end": 65,
-          "title": "The AI Selloff Resumes and Traders Buy Default Insurance"
-        },
-        {
-          "anchor": "i-d84cd8bf30",
-          "phrase": "Witkoff",
-          "start": 101,
-          "end": 108,
-          "title": "Witkoff and Kushner Carry Ukraine Talks to Norway"
+          "end": 9,
+          "title": "Meta AI Spills Shared Chats and Hidden Prompts"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Allegheny County Council votes tonight on 12-week paid parental leave, an air quality alert covers the Mon Valley, and the Steelers bring back Marquez Valdes-Scantling.",
+      "text": "Locally, Apple tapped Washington County's Perryman Company for iPhone Duo titanium, PPG renewed its downtown headquarters lease, and Allegheny County Council votes tonight on paid parental leave.",
       "links": [
+        {
+          "anchor": "i-ca8b3000d3",
+          "phrase": "Perryman Company",
+          "start": 42,
+          "end": 58,
+          "title": "Perryman Will Supply Titanium for Apple's iPhone Duo"
+        },
+        {
+          "anchor": "i-6b51f64788",
+          "phrase": "PPG",
+          "start": 84,
+          "end": 87,
+          "title": "PPG Renews Its Downtown Headquarters Lease"
+        },
         {
           "anchor": "i-240a44930e",
           "phrase": "Allegheny County Council",
-          "start": 0,
-          "end": 24,
+          "start": 133,
+          "end": 157,
           "title": "Allegheny County Council Votes on Paid Parental Leave"
-        },
-        {
-          "anchor": "i-aa6386b89b",
-          "phrase": "Mon Valley",
-          "start": 103,
-          "end": 113,
-          "title": "An Air Quality Alert in the Mon Valley on a Sunny Day"
-        },
-        {
-          "anchor": "i-c15c80dc95",
-          "phrase": "Marquez Valdes-Scantling",
-          "start": 143,
-          "end": 167,
-          "title": "Marquez Valdes-Scantling Comes Back"
         }
       ]
     }
@@ -884,16 +1051,18 @@
         "group": "security",
         "label": "Security",
         "feeds": 24,
-        "loaded": 24,
+        "loaded": 23,
         "window_hours": 24,
-        "in_window": 69,
-        "failed": [],
+        "in_window": 73,
+        "failed": [
+          {
+            "name": "SANS Internet Storm Center",
+            "error": "ExpatError: syntax error: line 1, column 0"
+          }
+        ],
         "empty": [
           "Krebs on Security",
-          "CISA Advisories",
-          "Sophos News",
           "Google Online Security Blog",
-          "Cisco Talos",
           "Microsoft Security Blog",
           "Google Project Zero",
           "The DFIR Report",
@@ -908,8 +1077,8 @@
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 11,
+            "contributed": 11
           },
           "Krebs on Security": {
             "items": 10,
@@ -923,8 +1092,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "SecurityWeek": {
             "items": 10,
@@ -932,14 +1101,14 @@
             "contributed": 10
           },
           "SANS Internet Storm Center": {
-            "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 5,
+            "contributed": 5
           },
           "The Record": {
             "items": 5,
@@ -963,8 +1132,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -978,8 +1147,8 @@
           },
           "Cisco Talos": {
             "items": 15,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Graham Cluley": {
             "items": 20,
@@ -1008,8 +1177,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 5,
+            "contributed": 5
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1018,8 +1187,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -1036,22 +1205,22 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 11
+            "contributed": 22
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 13
+            "contributed": 8
           },
           "PublicSource": {
             "items": 10,
             "in_window": 2,
-            "contributed": 1
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 5,
-            "contributed": 3
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
@@ -1061,17 +1230,17 @@
           "Pittsburgh Magazine": {
             "items": 30,
             "in_window": 4,
-            "contributed": 1
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 3
+            "contributed": 4
           },
           "WPXI": {
             "items": 15,
             "in_window": 13,
-            "contributed": 10
+            "contributed": 8
           },
           "WTAE": {
             "items": 20,
@@ -1091,44 +1260,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 73,
-            "in_window": 31,
-            "contributed": 8
+            "items": 72,
+            "in_window": 32,
+            "contributed": 7
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 31,
-            "contributed": 13
+            "contributed": 11
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 52,
+            "in_window": 55,
             "contributed": 16
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 10,
-            "contributed": 4
+            "in_window": 11,
+            "contributed": 3
           },
           "The Economist": {
             "items": 300,
-            "in_window": 17,
-            "contributed": 2
+            "in_window": 24,
+            "contributed": 7
           },
           "FT Home": {
-            "items": 10,
-            "in_window": 10,
-            "contributed": 5
+            "items": 9,
+            "in_window": 9,
+            "contributed": 3
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 10
+            "contributed": 12
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 25,
-            "contributed": 2
+            "in_window": 24,
+            "contributed": 1
           }
         }
       },
@@ -1177,7 +1346,8 @@
         "in_window": 30,
         "failed": [],
         "empty": [
-          "Footbahlin with Ben Roethlisberger"
+          "Footbahlin with Ben Roethlisberger",
+          "Post-Gazette Pirates"
         ],
         "per_feed": {
           "Footbahlin with Ben Roethlisberger": {
@@ -1188,7 +1358,7 @@
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 4,
-            "contributed": 2
+            "contributed": 3
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1198,11 +1368,11 @@
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
             "in_window": 1,
-            "contributed": 1
+            "contributed": 0
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 1,
+            "in_window": 0,
             "contributed": 0
           },
           "Post-Gazette Steelers": {
@@ -1218,16 +1388,14 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 20,
+        "in_window": 22,
         "failed": [],
-        "empty": [
-          "Guardian Olympics"
-        ],
+        "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 17,
-            "in_window": 17,
-            "contributed": 17
+            "items": 18,
+            "in_window": 18,
+            "contributed": 18
           },
           "ESPN Olympics": {
             "items": 25,
@@ -1236,8 +1404,8 @@
           },
           "Guardian Olympics": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -1254,12 +1422,12 @@
           "Ed Zitron": {
             "items": 15,
             "in_window": 4,
-            "contributed": 3
+            "contributed": 4
           },
           "Stratechery": {
             "items": 10,
             "in_window": 9,
-            "contributed": 8
+            "contributed": 7
           },
           "Cal Newport": {
             "items": 8,
@@ -1293,24 +1461,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 30351,
+          "outputTokens": 40811,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 122436,
+          "cacheCreationInputTokens": 129943,
           "webSearchRequests": 0,
-          "costUSD": 1.983165,
+          "costUSD": 2.319735,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 13320
+          "thinkingTokens": 18930
         }
       },
-      "cost_usd": 1.983165,
-      "duration_ms": 333546,
+      "cost_usd": 2.319735,
+      "duration_ms": 446488,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-20 10:06 EDT",
-    "items_considered": 69,
+    "generated_at": "2026-10-20 13:37 EDT",
+    "items_considered": 73,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1391,9 +1559,11 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.9832,
-    "model_duration_ms": 333546,
+    "model_cost_usd": 2.3197,
+    "model_duration_ms": 446488,
     "local_from": null,
-    "feed_failures": []
+    "feed_failures": [
+      "SANS Internet Storm Center"
+    ]
   }
 }
