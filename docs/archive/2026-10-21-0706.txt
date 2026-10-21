@@ -1,0 +1,450 @@
+================================================================
+INFOSECFOLLOW -- security, markets, business, pittsburgh
+Wednesday, October 21, 2026 - 7:06 AM EDT
+================================================================
+
+PHP's security team ships emergency patches today for two
+critical remote code execution flaws whose details leaked ahead
+of disclosure, putting every PHP installation on the internet in
+line for mass exploitation.
+
+CONTENTS: Emerging Trends and Key Updates | Security | Business
+and Politics | Pittsburgh | Sports | Reading | Markets | Feed
+Health
+
+EMERGING TRENDS AND KEY UPDATES
+----------------------------------------------------------------
+* [TREND] Attackers are taking the keys vendors hold for
+  customers, from TeamUpdraft's exposed UpdraftCentral
+  connection keys to Zeabur's 3.2 million stolen environment
+  variable records.
+  see: Stolen Vendor Keys Backdoor WordPress and OVHcloud
+  Tooling; Zeabur Shuts Down as Breach Tallies Widen
+* [TREND] Disclosure is outrunning patches as leaked details
+  force an emergency PHP release for CVE-2026-109618, while
+  researchers finally explain how weak keys doomed eMudhra's
+  intermediate certificates.
+  see: PHP2Shell Forces an Out-of-Cycle PHP Release; eMudhra
+  Keys Fell to Weak Cryptography
+* [TREND] Governments are regulating AI directly: DHS orders
+  DeepSeek out of federal systems, Allegheny County mandates AI
+  disclosure in campaign ads, and Upper Burrell weighs a data
+  center ordinance.
+  see: DHS Orders DeepSeek Out of Federal Civilian Systems;
+  Allegheny County Requires AI Disclosure in Campaign Ads; Upper
+  Burrell Advances Its Data Center Ordinance
+* [UPDATE (new)] Kaspersky's Operation FlashHole report shows
+  North Korea's Lazarus group abusing CrossWeb EX, the security
+  software South Korean banking customers must install to
+  transact.
+  see: Lazarus and Cyber Partisans Ride Trusted Software
+* [UPDATE (new)] Fiscal strain spread as France's 10-year yield
+  touched 5%, U.K. inflation and £24.5 billion borrowing
+  overshot before the budget, and oil held above $110 on Iran
+  strike plans.
+  see: French Borrowing Costs Reach 5%; U.K. Inflation and
+  Borrowing Overshoot Before the Budget; Netanyahu Presses to
+  Restart Iran Strikes as Oil Holds Above $110
+
+SECURITY
+----------------------------------------------------------------
+
+1. PHP2SHELL FORCES AN OUT-OF-CYCLE PHP RELEASE
+   Vulnerabilities and Exploits · [zero-day, patch]
+   Latest developments: The PHP security team scheduled an
+   emergency release for 14:00 UTC on October 21, 2026 to close
+   CVE-2026-109618 and CVE-2026-109619, each rated 9.2 under
+   CVSS v4.0, after details of both flaws leaked ahead of the
+   planned disclosure and an unconfirmed report described a
+   working exploit, nicknamed PHP2Shell, that runs code on a PHP
+   site without credentials.
+   PHP's maintainers have withheld any description of the two
+   bugs and the affected version numbers until the release
+   lands, so administrators should treat every installation they
+   run as vulnerable and stand ready to patch the moment the
+   advisory publishes. PHP underpins the majority of the public
+   web, including WordPress, Drupal, and Magento deployments.
+   - SecurityWeek: https://www.securityweek.com/php2shell-mass-exploitation-looms-for-leaked-critical-php-flaws/
+   - The Hacker News: https://thehackernews.com/2026/10/php2shell-two-unpatched-critical-php.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/php-warns-admins-of-two-critical-flaws-emergency-patches-coming-tomorrow/
+   - Ars Technica Security: https://arstechnica.com/security/2026/10/php-maintainers-tell-web-devs-to-prepare-themselves-for-critical-security-patches/
+
+2. STOLEN VENDOR KEYS BACKDOOR WORDPRESS AND OVHCLOUD TOOLING
+   Ransomware and Cybercrime · [supply chain, backdoor,
+   credential theft]
+   Latest developments: TeamUpdraft, the British developer of
+   the WordPress backup plugin UpdraftPlus and its four million
+   active installations, disclosed that intruders breached its
+   website and may hold customers' connection keys for
+   UpdraftCentral, UpdraftVault, and UpdraftClone, keys that
+   send commands to every connected site, and attackers have
+   already used them to plant backdoors; SecurityWeek reported
+   that the OVHcloud contributor whose GitHub account seeded
+   five releases of the company's command-line tool with a
+   stealer lost that account back in March 2026 to a loader tied
+   to the GlassWorm campaign.
+   UpdraftCentral is a remote management dashboard for WordPress
+   sites, so a stolen connection key amounts to administrative
+   control. OVHcloud, the French hosting company, says versions
+   v0.11.0 through v0.15.0 of its CLI carried the stealer and
+   v0.10.0 did not; anyone who ran an affected build should
+   rotate every secret stored on that machine, and WordPress
+   administrators should revoke and reissue Updraft keys.
+   - The Hacker News: https://thehackernews.com/2026/10/attackers-abuse-updraftcentral-keys-to.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/stolen-updraftcentral-keys-used-to-backdoor-wordpress-sites/
+   - SecurityWeek: https://www.securityweek.com/hijacked-developer-account-used-to-plant-stealer-in-ovhcloud-cli/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/21/ovhcloud-cli-github-malware/
+
+3. ZEABUR SHUTS DOWN AS BREACH TALLIES WIDEN
+   Data Breaches · [breach, credential theft]
+   Latest developments: The development platform Zeabur said it
+   will shut down after its second breach in two months, one in
+   which an attacker used internal credentials the company
+   stored in plaintext to take 3.2 million environment variable
+   records and data on 321,810 accounts; State Bank of India
+   told the stock exchange on October 21, 2026 that it found
+   3,897 of its customers' records inside a set of roughly
+   375,000 circulating on the dark web and cannot yet say where
+   the data came from; and the California Department of
+   Education widened its warning over the Educational Testing
+   Service breach to every public school student in the state.
+   Zeabur's environment variables hold the API keys, database
+   passwords, and tokens its customers' applications run on, so
+   every Zeabur user needs to rotate all of them and migrate off
+   the platform. California Attorney General Rob Bonta
+   separately settled with 23andMe's successor company for $6
+   million over the security failures behind its 2023 breach.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/zeabur-shutting-down-after-second-security-breach-in-two-months/
+   - The Hacker News: https://thehackernews.com/2026/10/state-bank-of-india-confirms-data-leak.html
+   - The Record: https://therecord.media/california-warns-all-public-school-students-of-data-breach
+   - The Record: https://therecord.media/23andme-california-data-breach-settlement
+
+4. EMUDHRA KEYS FELL TO WEAK CRYPTOGRAPHY
+   Vulnerabilities and Exploits · [certificates, patch]
+   Latest developments: The explanation arrived: researchers
+   found the private keys behind eight eMudhra intermediate
+   certificates weak enough to recover almost instantly, which
+   would let anyone mint a trusted certificate for any website,
+   and the Indian certificate authority revoked all eight.
+   Google, Mozilla, Apple, and the Go project blocked the eight
+   keys on October 20, 2026, and Go releases 1.27.3 and 1.26.10
+   reject any chain that passes through them. Organizations
+   running their own trust stores, pinning, or older Go binaries
+   should push the blocks and the updated releases themselves.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/mozilla-google-apple-block-compromised-emudhra-ca-certificates/
+   - Ars Technica Security: https://arstechnica.com/security/2026/10/the-internet-goes-on-high-alert-after-discovery-of-8-compromised-tls-certs/
+   - Dark Reading: https://www.darkreading.com/cyber-risk/tech-giants-emudhra-certificates-compromised-keys
+
+5. DHS ORDERS DEEPSEEK OUT OF FEDERAL CIVILIAN SYSTEMS
+   Policy and Regulation · [policy, ai]
+   Latest developments: The Department of Homeland Security
+   directed United States federal civilian agencies to remove
+   DeepSeek products from their information technology systems,
+   along with any third-party product or service built on
+   DeepSeek implementations, and barred further purchases from
+   the Chinese developer or its affiliates; China publicly
+   defended the company within hours.
+   DeepSeek builds open-weight large language models that
+   developers embed widely in commercial software, so the order
+   reaches far past the company's own apps and obliges agencies
+   to inventory which vendors ship DeepSeek-derived models.
+   Enterprises with federal contracts face the same inventory
+   problem.
+   - The Hacker News: https://thehackernews.com/2026/10/us-orders-deepseek-removed-from-federal.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/dhs-bans-deepseek-products-across-us-federal-civilian-agencies/
+   - SecurityWeek: https://www.securityweek.com/china-defends-deepseek-after-us-ban-of-its-ai-from-government-systems/
+
+6. LAZARUS AND CYBER PARTISANS RIDE TRUSTED SOFTWARE
+   Nation-State Activity · [apt, backdoor]
+   Latest developments: Kaspersky detailed Operation FlashHole
+   on October 21, 2026, a North Korean Lazarus campaign that
+   pairs watering-hole compromises with abuse of CrossWeb EX,
+   the financial security software South Korean banking
+   customers install to transact; separately, the Russian firm
+   Solar reported that the Belarus-aligned hacktivist group
+   Partisan Zmiy, also called Cyber Partisans, spent nearly two
+   years inside a Russian healthcare organization's network
+   hiding a backdoor named Vasilek inside VMware Tools.
+   Both crews hid their malware in software that security teams
+   whitelist by default, a pattern Cisco Talos quantified the
+   same week in counting abuse of more than 25 legitimate
+   collaboration, file-sharing, and payment platforms as malware
+   delivery channels over the past year. Defenders should watch
+   signed and sanctioned software for unexpected child processes
+   and outbound connections.
+   - Securelist (Kaspersky): https://securelist.com/lazarus-operation-flashhole/121541/
+   - The Hacker News: https://thehackernews.com/2026/10/hackers-hid-vasilek-backdoor-in-vmware.html
+   - Cisco Talos: https://blog.talosintelligence.com/parasitizing-trust-how-legitimate-infrastructure-becomes-a-delivery-pipeline-for-attackers/
+
+BUSINESS AND POLITICS
+----------------------------------------------------------------
+* French Borrowing Costs Reach 5%
+  Latest developments: France's 10-year bond yield hit 5%
+  Wednesday, October 21, for the first time since 2002, and
+  Carrefour shares fell more than 13% after the grocer cut its
+  full-year profitability targets over the riots.
+  French 10-year yields have climbed from 3.2% in late February
+  as looting across French cities, localized curfews, and doubts
+  about the public finances converge six months before the
+  presidential election. Eurozone government bond yields rose
+  broadly Wednesday on inflation, budget, and debt risk while
+  United States Treasury yields held steady.
+  - FT Home: https://www.ft.com/content/76f076e4-9db2-4971-8ac9-73d9f39e4876?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/investing/u-s-treasury-yields-edge-higher-in-asian-trade-0c544484?mod=rss_markets_main
+  - WSJ US Business: https://www.wsj.com/business/retail/carrefour-shares-slump-after-group-trims-guidance-citing-french-riots-6f5c146d?mod=pls_whats_news_us_business_f
+* U.K. Inflation and Borrowing Overshoot Before the Budget
+  Latest developments: September headline and core inflation
+  accelerated on energy costs and September public borrowing
+  came in at £24.5 billion, both above forecasts, the last
+  snapshot of the public finances before Chancellor of the
+  Exchequer Healey's October 28 Budget.
+  Inflation moved further above the Bank of England's target and
+  cemented expectations that the Monetary Policy Committee will
+  deliver its first rate increase since the Iran war began when
+  it meets in November. Borrowing has fallen over the first six
+  months of the fiscal year at a slower pace than the government
+  planned, squeezed by rising prices and interest payments, and
+  sterling rose to a near 17-month high against the euro.
+  - FT World: https://www.ft.com/content/443ce2f3-ba36-4dc7-aa0b-a2bc593fa563?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/economy/central-banking/u-k-inflation-jumps-again-on-energy-costs-e2bd9d85?mod=rss_worldnews
+  - FT World: https://www.ft.com/content/89322cfb-54cd-4fcd-9ba7-cd7e74382215?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/currencies/asian-currencies-consolidate-but-may-be-supported-by-mild-risk-appetite-1384b72e?mod=rss_markets_main
+* Netanyahu Presses to Restart Iran Strikes as Oil Holds Above
+  $110
+  Latest developments: The Financial Times reported Wednesday,
+  October 21, that Israeli Prime Minister Benjamin Netanyahu
+  drew up plans earlier this month to resume large-scale strikes
+  on Iran and that President Trump has ruled out an attack
+  before the November 3 midterm elections.
+  Oil rose and held near $110 a barrel as attacks on shipping in
+  the Strait of Hormuz continued to threaten flows and United
+  States industry data showed crude and product inventories
+  falling. Iran's foreign minister wrote that Tehran stands
+  ready for diplomacy and will defend itself, arguing Washington
+  has no military option, while record heating oil prices in the
+  Northeast have the region reconsidering its longstanding
+  opposition to natural gas pipelines.
+  - FT Home: https://www.ft.com/content/eb4d1101-45ed-4d03-9beb-42f7c87a58ea
+  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/oil-rises-amid-attacks-on-vessels-in-strait-of-hormuz-5456bfd8?mod=rss_markets_main
+  - FT Home: https://www.ft.com/content/61bf9676-ea46-4956-b87f-6ab096accafa
+  - FT World: https://www.ft.com/content/162c6dd8-5501-46f4-8f7c-b456a4e29539?syn-25a6b1a6=1
+* Witkoff Meets Putin as Russia Frees an American
+  Latest developments: Russia released Stephen Hubbard, the
+  retired American teacher it imprisoned in 2022 on charges of
+  fighting as a mercenary in Ukraine, as President Trump's envoy
+  Steve Witkoff arrived in St. Petersburg on Wednesday, October
+  21, to meet Vladimir Putin.
+  Hubbard had lived in Ukraine for years when Russian forces
+  detained him, and the Wall Street Journal reads his release as
+  a sign of warming ties between Washington and Moscow. Witkoff
+  carries a fresh push to end the war into the meeting a day
+  after he sat with Volodymyr Zelenskyy and European leaders in
+  Oslo.
+  - FT Home: https://www.ft.com/content/d7345d46-f000-49b1-99f6-57edfbd5f0af?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/russia/russia-releases-captured-american-in-sign-of-warming-ties-d8acccaa?mod=rss_worldnews
+
+PITTSBURGH
+----------------------------------------------------------------
+
+Weather:
+  Today: Sunny, high 64F.
+  Tonight: Mostly Clear, low 35F.
+  Thursday: Mostly Sunny, high 64F.
+
+Business:
+* Allegheny County Mandates Paid Parental Leave
+  Latest developments: Allegheny County Council voted 11-4
+  Tuesday night, October 20, to require many employers in the
+  county to give eligible workers up to 12 weeks of paid
+  parental leave.
+  The ordinance reaches private employers across Allegheny
+  County and lands after weeks of lobbying, with home health
+  care operators warning the mandate will squeeze access to care
+  and nurses at UPMC Magee-Womens Hospital urging passage.
+  PublicSource reports employers must now decide whether to buy
+  coverage or carry the cost themselves, and insurers will not
+  write a policy for a worker who already expects a child.
+  - WPXI: https://www.wpxi.com/news/local/allegheny-county-council-approves-policy-mandating-paid-parental-leave/GOBEXA4PIBAFZEJD77I2AOA444/
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/allegheny-county-paid-parental-leave-vote/
+  - PublicSource: https://www.publicsource.org/allegheny-county-paid-parental-leave-businesses-qa/
+* WVU Medicine Uniontown Delivers Maternity Care at a Loss
+  Latest developments: The Post-Gazette reported Wednesday,
+  October 21, that WVU Medicine's Uniontown hospital counts
+  early success in its maternity program even as the service
+  loses money.
+  WVU Medicine Uniontown, in the Fayette County seat, keeps
+  obstetric care available to a county with few options and
+  absorbs the shortfall as the cost of meeting a critical
+  community need. The economics explain why hospitals across
+  Western Pennsylvania have shut maternity units.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/business/healthcare-business/2026/10/21/wvu-medicine-uniontown-maternity-care/stories/202610200043
+* Curtis Stone Puts Heat-and-Serve Meals Into Giant Eagle
+  Latest developments: The Post-Gazette reported Wednesday,
+  October 21, that the chef Curtis Stone has partnered with
+  Giant Eagle and its Market District stores on a line of
+  heat-and-serve packaged meals.
+  Giant Eagle, the Pittsburgh region's dominant grocer and the
+  subject of Kroger's pending $1.65 billion acquisition, gains a
+  celebrity-chef prepared-foods line as supermarkets fight
+  restaurants for dinner. Market District is the chain's upscale
+  banner.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/life/food/2026/10/21/curtis-stone-giant-eagle-packaged-meals/stories/202610250008
+
+Around town:
+* Pittsburgh Pays for a Court Building It Does Not Control
+  Latest developments: The Post-Gazette reported Wednesday,
+  October 21, that Pittsburgh keeps spending to maintain its
+  deteriorating municipal court building even though the city
+  holds no authority over the courts inside.
+  The city carries the upkeep costs on the aging municipal court
+  building while Allegheny County and the state judiciary run
+  the court operations housed there. The arrangement leaves
+  Pittsburgh taxpayers funding repairs on a property the city
+  cannot govern, a strain as the new budget defers other capital
+  work.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-local/2026/10/21/pittsburgh-municipal-court-allegheny-county-costs/stories/202610200044
+* Upper Burrell Advances Its Data Center Ordinance
+  Latest developments: The Upper Burrell Planning Commission
+  approved a proposed data center ordinance Tuesday night,
+  October 20, over the objections of residents who packed the
+  meeting, and the township supervisors must still adopt it.
+  Upper Burrell, a Westmoreland County township in the
+  Alle-Kiski Valley, joins North Huntingdon in writing zoning
+  rules for data centers as developers scout sites across
+  Western Pennsylvania. Residents argued the ordinance opens the
+  township to projects they do not want.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/upper-burrell-planning-commission-oks-proposed-data-center-ordinance-township-supervisors-must-approve/
+* Allegheny County Requires AI Disclosure in Campaign Ads
+  Latest developments: Allegheny County Council voted
+  unanimously Tuesday, October 20, to require candidates for
+  county elected office to disclose the use of artificial
+  intelligence in certain campaign materials.
+  The law applies to candidates for county offices such as
+  executive, council, and the row offices, and it takes effect
+  as synthetic audio and video spread through political
+  advertising two weeks before the November 3 election. Council
+  passed it the same night it approved countywide paid parental
+  leave.
+  - TribLive: https://triblive.com/local/valley-news-dispatch/county-council-passes-law-to-regulate-ai-in-allegheny-political-ads/
+
+Events:
+* Live Scores for Silent Films This Fall
+  Latest developments: Pittsburgh City Paper reported Wednesday,
+  October 21, that the Pittsburgh Silent Film Society has a full
+  slate of live-scored silent movies coming to area screens this
+  fall.
+  The Pittsburgh Silent Film Society commissions and performs
+  new music alongside screenings of silent-era films, and its
+  organizers want audiences to feel the pictures to their core.
+  City Paper's story lays out the fall schedule.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/arts-entertainment-2/screen/the-pittsburgh-silent-film-society-is-scoring-old-school-movies-with-new-music/
+
+SPORTS
+----------------------------------------------------------------
+
+Steelers (4-2)
+  Up Next · Steelers @ Saints · Sun Oct 25, 9:30 AM
+    https://plaintextsports.com/nfl/2026/week7/pit-no
+
+Penguins (3-6)
+  Up Next · Panthers @ Penguins · Thu Oct 22, 7:00 PM
+    https://plaintextsports.com/nhl/2026-10-22/fla-pit
+
+Around the Teams:
+* Germie Bernard Joins Not Just Football
+  Latest developments: Steelers rookie receiver Germie Bernard
+  sat with Cam Heyward and Hayden Walsh on the Wednesday,
+  October 21, episode of Not Just Football to walk through his
+  first NFL touchdown and the mistake that came before it.
+  Bernard turned a first down into a turnover on downs early at
+  Tampa Bay, then caught the overtime winner, and he told
+  Heyward and Walsh how he earned trust from quarterback Aaron
+  Rodgers and the coaching staff. The three also took up the
+  rookie wall and previewed Sunday's game against the New
+  Orleans Saints in Paris, a 9:30 a.m. Eastern kickoff on NFL
+  Network.
+  - Not Just Football with Cam Heyward: https://www.youtube.com/watch?v=gYn6X7Mzibw
+* Troy Fautanu Learns Left Tackle
+  Latest developments: The Post-Gazette examined Wednesday,
+  October 21, how hard the move to left tackle has been for the
+  Steelers' Troy Fautanu, with Fautanu describing the adjustment
+  himself.
+  Fautanu shifted across the Steelers' offensive line to left
+  tackle, where the stance, footwork, and pass sets all reverse
+  and the job falls on his weaker side. The paper's look comes
+  as Pittsburgh, 4-2, heads to Paris to play the New Orleans
+  Saints on Sunday, October 25.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/21/troy-fautanu-move-to-left-tackle-offensive-line/stories/202610210004
+
+READING
+----------------------------------------------------------------
+
+* Stratechery -- Netflix Earnings, Business or Franchise,
+  Disney’s Deal
+  Ben Thompson reads Netflix's latest results as proof of a
+  solid business and argues that is the problem: growth now
+  looks like the arithmetic of a business rather than the
+  compounding of a franchise. He ties the point to Disney's new
+  deal.
+  https://stratechery.com/2026/netflix-earnings-business-or-franchise-disneys-deal/
+
+* Ed Zitron -- AI Had Better Work Out
+  Zitron tallies the capital, debt, and data center commitments
+  the artificial-intelligence industry has already made and
+  argues the numbers leave no room for the technology to fall
+  short of its promises.
+  https://www.wheresyoured.at/ai-had-better-work-out/
+
+* Cal Newport -- The Good Thing About Hard Things
+  Newport takes up a paper presented at the Conference on
+  Language Modeling, "AI Assistance Reduces Persistence and
+  Hurts Independent Performance," and argues that struggling
+  through difficulty is what builds the capability chatbots
+  short-circuit.
+  https://calnewport.com/the-good-thing-about-hard-things/
+
+MARKETS (weekly average, change vs prior week)
+----------------------------------------------------------------
+S&P 500     7,705.15  ▼ -1.2%
+Dow        52,052.70  ▲ +1.0%
+Nasdaq     26,480.33  ▼ -3.0%
+WTI crude      99.98  ▲ +8.8%
+EUR/USD       1.1211  = +0.0%
+GBP/USD       1.3281  ▲ +0.4%
+USD/JPY       158.15  = -0.0%
+
+FEED HEALTH
+----------------------------------------------------------------
+Security: 24 of 24 feeds loaded, 77 items in the 24-hour window.
+  No recent items: Krebs on Security, Sophos News, Google Online
+  Security Blog, Graham Cluley, Microsoft Security Blog, Google
+  Project Zero, The DFIR Report, Kim Zetter (Zero Day), Frank on
+  Fraud.
+Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
+Business and Politics: 8 of 8 feeds loaded, 60 items in the
+  36-hour window.
+Events: 4 of 4 feeds loaded, 8 items in the 120-hour window. No
+  recent items: Post-Gazette Music, NEXTpittsburgh Events,
+  NEXTpittsburgh Arts & Entertainment.
+Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
+  window. No recent items: Post-Gazette Pirates.
+Team USA: 3 of 3 feeds loaded, 22 items in the 72-hour window.
+Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
+Markets (Yahoo Finance): 7 of 7 rows
+Weather (NWS): 3 forecast periods
+Scores (ESPN, plaintextsports): 2 teams via ESPN
+Summaries: 3 model call(s) served by claude-opus-5 (353s of
+  model time; $1.89 at API list price).
+
+================================================================
+Generated 2026-10-21 07:06 EDT. Updated weekdays at about 7:05
+AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
+8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
+feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
+beat and podcast feeds; 3 Team USA feeds; WSJ World News, WSJ
+Markets, WSJ US Business, WSJ Politics, The Economist, FT Home,
+FT World, FT Markets; and Ed Zitron, Stratechery, Cal Newport.
+Markets from Yahoo Finance, weather from the NWS, scores from
+ESPN or plaintextsports.com. Summaries are AI-generated from the
+linked reporting; verify at the sources.
+================================================================
