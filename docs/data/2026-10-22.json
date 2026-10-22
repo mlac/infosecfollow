@@ -1,23 +1,23 @@
 {
   "date": "2026-10-22",
-  "headline": "Amazon's honeypots caught PHP2Shell exploit attempts four days before the PHP Foundation disclosed the two flaws, and broad exploitation now sweeps WordPress, Drupal, and Magento servers worldwide.",
+  "headline": "Amazon's honeypots caught attackers probing the PHP2Shell flaws four days before the PHP Foundation disclosed them, and mass exploitation of the world's web servers followed within hours of the patches.",
   "emerging_trends": [
     {
-      "text": "Amazon's MadPot sensors recorded a PHP2Shell exploit attempt four days before anyone outside the PHP Foundation knew the bugs existed, and Arista shipped an emergency fix the same week for a VeloCloud Orchestrator zero-day already under attack, so defenders now budget for exploitation that starts ahead of disclosure.",
+      "text": "Attackers reached PHP2Shell four days ahead of the fix, and Palo Alto Networks, Fortinet, and Cisco still cannot tell customers which of their appliances embed the vulnerable runtime, leaving defenders to guard management interfaces while they wait on vendor builds.",
       "topic_title": "PHP2Shell Exploitation Began Before Disclosure",
-      "link_phrase": "MadPot",
+      "link_phrase": "PHP2Shell",
       "_anchor": "trend-1"
     },
     {
-      "text": "A GitHub token that leaked into LiteLLM's own AI gateway logs let attackers publish a credential stealer to PyPI and Docker Hub, the package's second compromise this year, and Railway disclosed that an intruder read decrypted customer environment variables, which makes machine credentials the softest target in the AI stack.",
-      "topic_title": "LiteLLM and Railway Push Users to Rotate Secrets",
-      "link_phrase": "LiteLLM",
+      "text": "Microsoft pinned the ConnectWise supply chain compromise on the China state-aligned group Storm-0940, which drove the ARTEX agentic penetration-testing framework across more than 2,200 customer tenants, putting a state actor's automation a step ahead of the humans watching for it.",
+      "topic_title": "Storm-0940 Drove the ConnectWise Supply Chain Attack",
+      "link_phrase": "ARTEX",
       "_anchor": "trend-2"
     },
     {
-      "text": "Anthropic turned Claude loose on 25 open-source projects and counted 493 exposure problems, 70% of surveyed technology and security leaders now let agents take actions that required human sign-off a year ago, and CISA joined the Canadian Centre for Cyber Security to publish guidance on managing AI token consumption, evidence that governance trails deployment by a wide margin.",
-      "topic_title": "Claude Audits Open Source as Agent Permissions Spread",
-      "link_phrase": "Claude",
+      "text": "Developers now absorb the blast radius of other people's mistakes: a poisoned LiteLLM release, Railway's exposed environment variables, and eMudhra's guessable certificate keys each converted one supplier's failure into an emergency credential rotation for every customer downstream.",
+      "topic_title": "LiteLLM and Railway Push Users to Rotate Secrets",
+      "link_phrase": "LiteLLM",
       "_anchor": "trend-3"
     }
   ],
@@ -25,7 +25,7 @@
     {
       "title": "PHP2Shell Exploitation Began Before Disclosure",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Amazon's threat intelligence team, whose chief information security officer CJ Moses described the finding, said its MadPot honeypot service logged an exploit attempt from a commercial anonymization network on October 17, 2026, four days before the PHP Foundation disclosed CVE-2026-109618 and CVE-2026-109619, and broad scanning followed within hours of the patches; Searchlight Cyber released php2shell-scanner, an open-source tool that tests a host for both bugs, and researchers now confirm exploitation against WordPress, Drupal, Joomla, phpMyAdmin, Nextcloud, and Magento installations; Palo Alto Networks confirmed that every version of PAN-OS and Panorama carries the flaws and has shipped no fixed release, Fortinet is checking 12 products and Cisco 31 products and cloud services, and OpenAI proposed a five-stage disclosure process for critical open-source bugs after Calif found one of the two flaws with the GPT-5.6 Sol model under OpenAI's Patch the Planet initiative and Wiz reported both independently.",
+      "latest_developments": "Amazon's threat intelligence team said its MadPot honeypot service logged an exploit attempt from a commercial anonymization network on October 17, 2026, four days before the PHP Foundation disclosed CVE-2026-109618 and CVE-2026-109619, and broad scanning followed within hours of the patches; Searchlight Cyber released php2shell-scanner, an open-source tool that tests a host for both bugs, and researchers confirm exploitation against WordPress, Drupal, Joomla, phpMyAdmin, Nextcloud, and Magento installations; Palo Alto Networks confirmed that every version of PAN-OS and Panorama carries the flaws and has shipped no fixed release, Fortinet is checking 12 products and Cisco 31 products and cloud services; Bruce Schneier put the highest risk on Apache with mod_php, where researchers demonstrated a working exploit; and 404 Media reported security practitioners calling the month Black October as the PHP bugs landed atop a run of supply chain compromises.",
       "summary": "PHP2Shell is a pair of critical flaws in the PHP runtime that run an unauthenticated attacker's code on any server answering web requests, regardless of the application on top. CISA tells organizations to move to PHP 8.5.12, 8.4.27, 8.3.36, or 8.2.35 immediately; customers of appliances that embed PHP, among them PAN-OS and Panorama, must wait on vendor builds and restrict management interfaces meanwhile.",
       "tags": [
         "zero-day",
@@ -39,9 +39,9 @@
           "url": "https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/"
         },
         {
-          "source": "The Hacker News",
-          "title": "Someone Tried to Exploit PHP2Shell 4 Days Before the Vulnerabilities Were Publicly Disclosed",
-          "url": "https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html"
+          "source": "Ars Technica Security",
+          "title": "Hackers got a four-day head start on epic PHP2Shell vulnerability",
+          "url": "https://arstechnica.com/security/2026/10/hackers-got-a-four-day-head-start-on-epic-php2shell-vulnerability/"
         },
         {
           "source": "Help Net Security",
@@ -55,6 +55,40 @@
         }
       ],
       "_anchor": "i-01e27be4fe"
+    },
+    {
+      "title": "eMudhra Quits the TLS Business",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "The board of eMudhra, the Indian certificate authority that advertises more than 60 million certificates issued, voted on Thursday, October 22, 2026 to withdraw from the global SSL/TLS certificate business, five days after a researcher recovered the private keys of eight of its intermediate certificate authority certificates; Scott Helme published the detail that sank the company, reporting that one private key, which should hold a random 384-bit number, held the number four, a botched key-signing ceremony that let anyone mint trusted web credentials for any site; eMudhra says partners will issue replacement certificates to affected customers at no charge, and Unit 42 published a containment guide for organizations that maintain their own trust decisions.",
+      "summary": "A certificate authority's intermediate private keys let the holder forge TLS certificates for any domain and intercept encrypted traffic. Google, Mozilla, Apple, and the Go project already block the eight keys; administrators running their own trust stores or pinning should remove the eMudhra intermediates and plan certificate replacement.",
+      "tags": [
+        "cryptography",
+        "pki",
+        "supply chain"
+      ],
+      "sources": [
+        {
+          "source": "Ars Technica Security",
+          "title": "Disgraced eMudhra drops out of TLS business after using cert private key of 4",
+          "url": "https://arstechnica.com/security/2026/10/disgraced-emudhra-drops-out-of-tls-business-following-certificate-debacle/"
+        },
+        {
+          "source": "The Record",
+          "title": "Indian tech company eMudhra announces withdrawal from certificate business after security incident",
+          "url": "https://therecord.media/indian-tech-company-announces-withdrawal-certificate-business-incident"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "eMudhra to Exit Global SSL/TLS Business After 8 Intermediate CA Keys Found Easily Guessable",
+          "url": "https://thehackernews.com/2026/10/emudhra-to-exit-global-ssltls-business.html"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "EMudhra Intermediate CA Certificates Compromised",
+          "url": "https://unit42.paloaltonetworks.com/emudhra-certificate-compromise/"
+        }
+      ],
+      "_anchor": "i-49672d8913"
     },
     {
       "title": "LiteLLM and Railway Push Users to Rotate Secrets",
@@ -83,9 +117,9 @@
           "url": "https://thehackernews.com/2026/10/railway-says-intruder-may-have-accessed.html"
         },
         {
-          "source": "The Hacker News",
-          "title": "LiteLLM Compromised in Supply Chain Attack Delivering Credential Stealer and Backdoor",
-          "url": "https://thehackernews.com/2026/10/litellm-compromised-in-supply-chain.html"
+          "source": "BleepingComputer",
+          "title": "LiteLLM release pipeline hacked to distribute info-stealer malware",
+          "url": "https://www.bleepingcomputer.com/news/security/litellm-release-pipeline-hacked-to-distribute-info-stealer-malware/"
         }
       ],
       "_anchor": "i-7f07a05841"
@@ -93,8 +127,8 @@
     {
       "title": "Oracle, Cisco, and Node.js Ship a Patch Wave",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Oracle's October 2026 Critical Patch Update, published October 22, 2026, carries more than 1,200 fixes, nearly 100 of them critical, with Fusion Middleware taking the largest share; Cisco closed 34 flaws spanning command execution, authentication bypass, and cross-site scripting; Node.js patched 10 bugs across its 22.x, 24.x, and 26.x lines, the worst a remote code execution flaw in the Brotli decompression code it bundles; FoxIO published working proof-of-concept code for QPACK flaws that let one unauthenticated connection crash many HTTP/3 servers by expanding a small batch of compressed headers into thousands of times more memory; and Splunk, SolarWinds, and Signal shipped their own fixes, the last closing CVE-2026-113380 in RingRTC versions before 2.72.0, which kept sending a caller's audio to the other party after that caller hung up.",
-      "summary": "The quarterly releases and out-of-cycle fixes land in the same week as PHP2Shell, which stretches patch teams thin. Administrators should rank unauthenticated code execution first, starting with internet-facing Node.js services, Cisco gear, and any HTTP/3 endpoint, then work through Oracle's middleware stack.",
+      "latest_developments": "Oracle's October 2026 Critical Patch Update, published October 22, 2026, carries more than 1,200 fixes, nearly 100 of them critical, with Fusion Middleware taking the largest share; Cisco closed 34 flaws spanning command execution, authentication bypass, and cross-site scripting; Node.js patched 10 bugs across its 22.x, 24.x, and 26.x lines, the worst a remote code execution flaw in the Brotli decompression code it bundles; FoxIO published working proof-of-concept code for QPACK flaws that let one unauthenticated connection crash many HTTP/3 servers by expanding a small batch of compressed headers into thousands of times more memory; Trend Micro's Zero Day Initiative rated two remote code execution flaws in KSMBD, the Linux kernel's built-in SMB server, at 9.0, and public mailing lists carried the details, among them the pre-authentication bug ZDI-CAN-33774, before any mainline kernel fix landed; and Siemens filled 17 of the day's CISA industrial advisories, including a 10-rated set in the GNU/Linux subsystem of the SIMATIC S7-1500 TM MFP.",
+      "summary": "The quarterly releases and out-of-cycle fixes land in the same week as PHP2Shell, which stretches patch teams thin. Administrators should rank unauthenticated code execution first, starting with internet-facing Node.js services, Cisco gear, exposed KSMBD shares, and any HTTP/3 endpoint, then work through Oracle's middleware stack.",
       "tags": [
         "patch",
         "rce",
@@ -118,11 +152,45 @@
         },
         {
           "source": "The Hacker News",
-          "title": "New QPACK Flaws Can Crash HTTP/3 Servers, Trigger Up to 4,000-Fold Memory Amplification",
-          "url": "https://thehackernews.com/2026/10/new-qpack-flaws-can-crash-http3-servers.html"
+          "title": "Two CVSS 9.0 Linux KSMBD RCE Flaws Disclosed on Public Mailing Lists Before Kernel Fixes",
+          "url": "https://thehackernews.com/2026/10/two-cvss-90-linux-ksmbd-rce-flaws.html"
         }
       ],
       "_anchor": "i-a5298e0f95"
+    },
+    {
+      "title": "Arista Patches an Exploited VeloCloud Zero-Day",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Arista Networks released security updates on October 22, 2026 for a zero-day SQL injection flaw that attackers already exploit in VeloCloud Orchestrator On-Prem deployments, a bug that lifts anyone holding even a read-only customer login to operator privileges, the top level of control over the orchestrator; GitLab a day earlier closed a maximum-severity bug in its Regular Expression Compiler that runs an unauthenticated attacker's code on self-managed servers, reaching every release back to version 7.0 from 2014.",
+      "summary": "VeloCloud Orchestrator runs SD-WAN fleets, so one compromised on-premises orchestrator hands an attacker reach across an enterprise's branch network. Install Arista's updates now and keep orchestrator management interfaces off the public internet; self-managed GitLab administrators who applied the October 12 patch still need the newer builds that sit one patch above it.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Arista patches new VeloCloud Orchestrator zero-day exploited in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Arista Warns of Critical VeloCloud SQL Injection Zero-Day Exploited in Attacks",
+          "url": "https://thehackernews.com/2026/10/arista-warns-of-critical-velocloud-sql.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "GitLab warns of new max severity code execution vulnerability",
+          "url": "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Critical GitLab Flaw (CVSS 10.0) Could Allow Unauthenticated RCE Across 12 Years of Releases",
+          "url": "https://thehackernews.com/2026/10/critical-gitlab-flaw-cvss-100-could.html"
+        }
+      ],
+      "_anchor": "i-5d4f96d6ac"
     },
     {
       "title": "Claude Audits Open Source as Agent Permissions Spread",
@@ -193,33 +261,33 @@
       "_anchor": "i-df0211e45e"
     },
     {
-      "title": "Arista Patches an Exploited VeloCloud Zero-Day",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Arista Networks released security updates on October 22, 2026 for a zero-day flaw that attackers already exploit in VeloCloud Orchestrator On-Prem deployments, and GitLab a day earlier closed a maximum-severity bug in its Regular Expression Compiler that runs an unauthenticated attacker's code on self-managed servers, reaching every release back to version 7.0 from 2014.",
-      "summary": "VeloCloud Orchestrator runs SD-WAN fleets, so one compromised on-premises orchestrator hands an attacker reach across an enterprise's branch network. Install Arista's updates now and keep orchestrator management interfaces off the public internet; self-managed GitLab administrators who applied the October 12 patch still need the newer builds that sit one patch above it.",
+      "title": "Storm-0940 Drove the ConnectWise Supply Chain Attack",
+      "area": "Nation-State Activity",
+      "latest_developments": "Microsoft named the China state-aligned group Storm-0940 as the actor behind the compromise of ConnectWise Cloud Backup, said the group used ARTEX, a Go-based agentic AI penetration-testing framework whose authors closed its source after attackers turned it on South Korean financial institutions, to automate and accelerate the intrusion, and counted more than 2,200 affected customer tenants; Microsoft added that Storm-0940 runs the same playbook against organizations worldwide.",
+      "summary": "ConnectWise's application identities carried consent inside thousands of Microsoft 365 tenants, so one compromise of the vendor gave Storm-0940 token access across its customer base. Managed service provider customers should review Entra application consents, revoke tokens issued to ConnectWise identities, and hunt for Microsoft Graph activity from unfamiliar addresses.",
       "tags": [
-        "zero-day",
-        "patch",
-        "rce"
+        "apt",
+        "supply chain",
+        "ai"
       ],
       "sources": [
         {
-          "source": "BleepingComputer",
-          "title": "Arista patches new VeloCloud Orchestrator zero-day exploited in attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/"
+          "source": "Dark Reading",
+          "title": "Microsoft Links Storm-0940 to ConnectWise Supply Chain Attack",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/microsoft-storm-0940-connectwise-supply-chain-attack"
         },
         {
-          "source": "BleepingComputer",
-          "title": "GitLab warns of new max severity code execution vulnerability",
-          "url": "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability/"
+          "source": "The Record",
+          "title": "Microsoft blames ConnectWise attacks on Chinese state hacker using ARTEX AI agents",
+          "url": "https://therecord.media/china-cyber-connectwise-ai"
         },
         {
           "source": "The Hacker News",
-          "title": "Critical GitLab Flaw (CVSS 10.0) Could Allow Unauthenticated RCE Across 12 Years of Releases",
-          "url": "https://thehackernews.com/2026/10/critical-gitlab-flaw-cvss-100-could.html"
+          "title": "China-Linked Hackers Use ARTEX AI Agents in ConnectWise Supply Chain Attack",
+          "url": "https://thehackernews.com/2026/10/china-linked-hackers-use-artex-ai.html"
         }
       ],
-      "_anchor": "i-5d4f96d6ac"
+      "_anchor": "i-778da97616"
     },
     {
       "title": "New Mexico Wins $25 Billion From Meta",
@@ -273,61 +341,25 @@
         }
       ],
       "_anchor": "i-0b85f8ae4b"
-    },
-    {
-      "title": "Hijackers Held 333 Tor Exit Nodes for Three Days",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Ars Technica put numbers on the Tor compromise on October 22, 2026: attackers controlled 333 exit nodes for three days in early October 2026, redirected SSH connections leaving the network to servers that captured login passwords, and pulled plaintext email out of the traffic as well.",
-      "summary": "A Tor exit node sees traffic in whatever form the user's own application protects it, so anyone who tunneled SSH or unencrypted mail through Tor during those three days handed credentials to the operators. Rotate any SSH password or key used over Tor in early October 2026 and move to key-based authentication with host verification.",
-      "tags": [
-        "credential theft",
-        "infrastructure"
-      ],
-      "sources": [
-        {
-          "source": "Ars Technica Security",
-          "title": "333 Tor exit nodes hijacked to intercept SSH traffic and retrieve plaintext email",
-          "url": "https://arstechnica.com/information-technology/2026/10/300-tor-exit-nodes-hijacked-to-intercept-ssh-traffic-and-retrieve-plaintext-email/"
-        }
-      ],
-      "_anchor": "i-2f1ed42ebe"
-    },
-    {
-      "title": "Cyberattack Knocks Out Columbia's City Services",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "The Record reported on October 22, 2026 that a cyberattack on Columbia, the capital of South Carolina, took down MyColaSC, the platform residents use to pay utility bills, report non-emergency issues, and reach other city services, and the South Carolina state government offered the city technical assistance.",
-      "summary": "Columbia has not named the attackers or said whether ransomware caused the outage, and residents cannot pay utility bills online while MyColaSC stays down. City and county governments facing the same exposure should confirm that resident-facing payment portals sit on segmented infrastructure with offline backups.",
-      "tags": [
-        "incident",
-        "local government"
-      ],
-      "sources": [
-        {
-          "source": "The Record",
-          "title": "South Carolina officials offer assistance after state capital hit with cyberattack",
-          "url": "https://therecord.media/south-carolina-officials-offer-assistance-cyber-incident"
-        }
-      ],
-      "_anchor": "i-189c380ca7"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,712.79",
-      "pct": "-0.9%",
+      "value": "7,696.67",
+      "pct": "-1.0%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "52,299.62",
-      "pct": "+1.3%",
+      "value": "52,437.68",
+      "pct": "+1.2%",
       "arrow": "▲"
     },
     {
       "label": "Nasdaq",
-      "value": "26,482.33",
-      "pct": "-2.4%",
+      "value": "26,341.49",
+      "pct": "-2.6%",
       "arrow": "▼"
     },
     {
@@ -338,27 +370,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1215",
+      "value": "1.1223",
       "pct": "+0.2%",
       "arrow": "▲"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3304",
-      "pct": "+0.6%",
+      "value": "1.3337",
+      "pct": "+0.8%",
       "arrow": "▲"
     },
     {
       "label": "USD/JPY",
-      "value": "158.14",
-      "pct": "-0.1%",
-      "arrow": "▼"
+      "value": "158.17",
+      "pct": "-0.0%",
+      "arrow": "="
     }
   ],
   "weather": [
-    "This Afternoon: Sunny, high 66F.",
     "Tonight: Mostly Clear, low 43F.",
-    "Friday: Mostly Sunny, high 64F."
+    "Friday: Mostly Sunny, high 64F.",
+    "Friday Night: Clear, low 39F."
   ],
   "sports": [
     {
@@ -375,11 +407,18 @@
     {
       "team": "Penguins",
       "record": "3-6",
-      "games": [],
+      "games": [
+        {
+          "date": "Thu Oct 22",
+          "result": "Panthers 0 · Penguins 0 · 6:06 - 1st (in progress at last update)",
+          "url": "https://plaintextsports.com/nhl/2026-10-22/fla-pit",
+          "recap": ""
+        }
+      ],
       "next": {
-        "matchup": "Panthers @ Penguins",
-        "when": "Thu Oct 22, 7:00 PM",
-        "url": "https://plaintextsports.com/nhl/2026-10-22/fla-pit"
+        "matchup": "Predators @ Penguins",
+        "when": "Sat Oct 24, 7:00 PM",
+        "url": "https://plaintextsports.com/nhl/2026-10-24/nsh-pit"
       },
       "source": "ESPN"
     }
@@ -387,9 +426,22 @@
   "local": {
     "business_politics": [
       {
+        "title": "Treasury Proposes Curbs on U.S. Investment in Chinese Tech",
+        "latest_developments": "The Financial Times reported Thursday evening, October 22, that the United States Treasury has proposed tighter rules on American investment in sensitive Chinese technology, reaching artificial intelligence, hypersonic weapons, and biotechnology.",
+        "summary": "The proposal widens Washington's outbound investment regime, which governs what American funds, companies, and their advisers may finance inside China. Banks, private equity firms, and venture investors with China exposure would have to screen deals in the three covered fields.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "US Treasury proposes tighter rules on investing in sensitive Chinese tech",
+            "url": "https://www.ft.com/content/f57a1f1c-60ce-432d-a901-673ae7d1241e?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-6bf5aa8664"
+      },
+      {
         "title": "Oil Tops $112 and Global Equities Sell Off",
-        "latest_developments": "Brent held above $112 a barrel Thursday afternoon, October 22, after the Houthis hit Saudi energy facilities again and reports put fresh American military options against Iran on the table; a Meta-led rout deepened the Nasdaq's slide, silver futures headed for their lowest close of the year, and the 10-year Treasury yield slipped under 5% as money ran for cover.",
-        "summary": "Houthi drones have struck Saudi energy infrastructure repeatedly, killing two people at Saudi Aramco's Shaybah oilfield, and Washington has ordered some embassy and military personnel out of the kingdom as United States-Iran hostilities threaten to resume. Aramco Chief Executive Amin Nasser says the company is working to lift its East-West pipeline network to 10 million barrels a day to route crude around the Gulf, and technology shares led the global decline as artificial-intelligence earnings disappointed.",
+        "latest_developments": "Brent reached a more-than-five-month high above $112 a barrel Thursday, October 22, after fresh Houthi attacks on Saudi energy infrastructure and reports of American preparations for renewed strikes on Iran, and the Nasdaq closed down 2.6% after Meta told investors it will raise hundreds of billions of dollars for its artificial-intelligence buildout, a disclosure that cut $124 billion from the company's market value; Treasury yields posted their biggest drop since 2023, Comex gold settled 2.1% lower at $4,042.80, and silver fell 4.6% to $54.764 a troy ounce, its lowest close since November 2025.",
+        "summary": "Houthi drones have struck Saudi energy infrastructure repeatedly, killing two people at Saudi Aramco's Shaybah oilfield, and Washington has ordered some embassy and military personnel out of the kingdom as United States-Iran hostilities threaten to resume. Aramco Chief Executive Amin Nasser says the company is working to lift its East-West pipeline network to 10 million barrels a day to route crude around the Gulf, and technology shares led the global decline as artificial-intelligence spending plans unnerved investors.",
         "sources": [
           {
             "source": "WSJ Markets",
@@ -408,6 +460,11 @@
           },
           {
             "source": "WSJ Markets",
+            "title": "Meta's Hunt for AI Capital Strikes a Raw Nerve on Wall Street",
+            "url": "https://www.wsj.com/finance/stocks/metas-hunt-for-ai-capital-strikes-a-raw-nerve-on-wall-street-e2de1601?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
             "title": "Tech Selloff Deepens as Flight Into Treasurys Drives Yields Lower",
             "url": "https://www.wsj.com/finance/investing/ai-stocks-slide-after-earnings-disappoint-french-bonds-tumble-and-oil-tops-112-734e47a7?mod=rss_markets_main"
           },
@@ -415,11 +472,6 @@
             "source": "WSJ Markets",
             "title": "Treasury Yields Fall as Investors Seek Safe Haven",
             "url": "https://www.wsj.com/finance/jgb-yield-curve-flattens-amid-continued-ai-related-credit-concerns-4613a92a?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Silver Futures on Track for Lowest Close of the Year",
-            "url": "https://www.wsj.com/finance/commodities-futures/gold-falls-weighed-by-rising-energy-costs-fed-uncertainty-83d723e8?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-b8fc1425a6"
@@ -440,7 +492,7 @@
             "url": "https://www.wsj.com/finance/investing/frances-debt-crisis-deepens-as-foreign-investors-look-for-the-exit-e6ef398c?mod=rss_markets_main"
           },
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "Macron warns some protests will be banned",
             "url": "https://www.ft.com/content/43f3144f-7aa8-4821-b5c6-0da470b9af34?syn-25a6b1a6=1"
           },
@@ -451,6 +503,29 @@
           }
         ],
         "_anchor": "i-bb638706e7"
+      },
+      {
+        "title": "Russia Bombards Kyiv Hours After the Witkoff Talks",
+        "latest_developments": "The Wall Street Journal reported Thursday, October 22, that President Trump called Elon Musk and asked him to lift the Starlink restrictions over Ukraine, and the military-grade service appeared to run normally soon after the call; the Financial Times reported the same day that Russia's hourslong overnight barrage on Kyiv included cluster warheads, delivered immediately after Steve Witkoff met Vladimir Putin in St. Petersburg, and that Ukraine agreed to buy ammunition and weapons through a NATO procurement agency to speed deliveries and cut costs.",
+        "summary": "Trump's envoy met Volodymyr Zelenskyy in Oslo before traveling to St. Petersburg, where he called Putin a humanitarian and floated resuming peace talks. Moscow's military said its air defenses downed 808 Ukrainian drones over Moscow and other cities, and the strikes have cooled the hopes the diplomacy raised.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "Trump Called Musk and Asked Him to Lift Ukraine Starlink Restrictions",
+            "url": "https://www.wsj.com/world/trump-called-musk-and-asked-him-to-lift-ukraine-starlink-restrictions-5aeebc6e?mod=rss_worldnews"
+          },
+          {
+            "source": "FT World",
+            "title": "Russian missiles bombard Kyiv after Witkoff-Putin talks",
+            "url": "https://www.ft.com/content/9f0c58d3-1833-40de-b805-f5ac53f05ff0?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Ukraine to buy military supplies via Nato agency",
+            "url": "https://www.ft.com/content/991ac37c-289b-40e5-b2e6-220ee2aebe5d?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-2ae175befe"
       },
       {
         "title": "A PHP Flaw Pulls Websites Offline",
@@ -469,36 +544,46 @@
           }
         ],
         "_anchor": "i-7e675ef2b7"
-      },
-      {
-        "title": "Russia Bombards Kyiv Hours After the Witkoff Talks",
-        "latest_developments": "The Financial Times reported Thursday, October 22, that Russia's hourslong overnight barrage on Kyiv included cluster warheads, delivered immediately after Steve Witkoff met Vladimir Putin in St. Petersburg, and Ukraine agreed to buy ammunition and weapons through a NATO procurement agency to speed deliveries and cut costs.",
-        "summary": "President Trump's envoy met Volodymyr Zelenskyy in Oslo before traveling to St. Petersburg, where he called Putin a humanitarian and floated resuming peace talks. Moscow's military said its air defenses downed 808 Ukrainian drones over Moscow and other cities, and the strikes have cooled the hopes the diplomacy raised.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "Russian missiles bombard Kyiv after Witkoff-Putin talks",
-            "url": "https://www.ft.com/content/9f0c58d3-1833-40de-b805-f5ac53f05ff0?syn-25a6b1a6=1"
-          },
-          {
-            "source": "FT Home",
-            "title": "Ukraine to buy military supplies via Nato agency",
-            "url": "https://www.ft.com/content/991ac37c-289b-40e5-b2e6-220ee2aebe5d?syn-25a6b1a6=1"
-          }
-        ],
-        "_anchor": "i-26b3146bb2"
       }
     ],
     "business": [
       {
+        "title": "Regulators Reject FirstEnergy's Plan as Power Bills Climb",
+        "latest_developments": "The Post-Gazette reported Thursday, October 22, that regulators denied FirstEnergy's proposal for controlling electric bills among customers who shop for their own supplier, and WPXI reported the same day that rate increases like the one Duquesne Light just handed its customers will grow more common as power demand sets records.",
+        "summary": "FirstEnergy owns West Penn Power, which serves Westmoreland, Fayette, and other counties outside Allegheny, and Duquesne Light serves Pittsburgh and most of Allegheny County. Both utilities raised supply prices for this winter, and data centers and electrification keep pushing demand on the grid past the supply available to meet it.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Regulators deny FirstEnergy's idea for controlling electric bills among shopping customers",
+            "url": "https://www.post-gazette.com/business/powersource/2026/10/22/firstenergy-electric-bills-shopping/stories/202610220077"
+          },
+          {
+            "source": "WPXI",
+            "title": "Electricity rate hikes could become more common as US sees record demand for power",
+            "url": "https://www.wpxi.com/news/local/electricity-rate-hikes-could-become-more-common-us-sees-record-demand-power/RQMZJDCVDFERPPMQ46RBTK6XCY/"
+          }
+        ],
+        "_anchor": "i-cf3d4778e8"
+      },
+      {
         "title": "U.S. Steel Funds a $3 Billion Mill in Braddock",
-        "latest_developments": "The U.S. Steel board approved nearly $3 billion in full funding Thursday, October 22, for the new hot strip mill at the company's Mon Valley Works Edgar Thomson Plant in Braddock.",
+        "latest_developments": "The U.S. Steel board approved nearly $3 billion in full funding Thursday, October 22, for the new hot strip mill at the company's Mon Valley Works Edgar Thomson Plant in Braddock, and TribLive reported the same day that local leaders and environmental advocates say the company has left their concerns about a spike in pollution unaddressed.",
         "summary": "The mill replaces aging equipment and raises annual capacity at Edgar Thomson to roughly 3.5 million tons from 2.2 million, the largest industrial commitment in the Mon Valley since Nippon Steel bought U.S. Steel. Braddock residents left a meeting on the project frustrated on October 16, and a Post-Gazette letter writer this week pressed Allegheny County to defend air quality around the plant.",
         "sources": [
           {
             "source": "WPXI",
             "title": "U.S. Steel board approves nearly $3B for new hot strip mill at Edgar Thomson Plant in Braddock",
             "url": "https://www.wpxi.com/news/local/us-steel-board-approves-nearly-3b-new-hot-strip-mill-edgar-thomson-plant-braddock/AW45BNDYKVHBPJ4SHN4L5B755Y/"
+          },
+          {
+            "source": "TribLive",
+            "title": "U.S. Steel advances $3B Mon Valley project despite pollution concerns of residents, environmental groups",
+            "url": "https://triblive.com/news/health-now/u-s-steel-advances-3b-mon-valley-project-despite-pollution-concerns-of-residents-environmental-groups/"
+          },
+          {
+            "source": "KDKA",
+            "title": "U.S. Steel to invest more than $2 billion in new hot strip mill in Braddock",
+            "url": "https://www.cbsnews.com/pittsburgh/news/u-s-steel-hot-strip-mill-braddock/"
           },
           {
             "source": "Pittsburgh Post-Gazette",
@@ -509,75 +594,20 @@
         "_anchor": "i-2a550d24fa"
       },
       {
-        "title": "Westinghouse Builds Up Fuel Before an IPO",
-        "latest_developments": "The Post-Gazette reported Thursday, October 22, that Westinghouse is expanding its nuclear fuel business as it prepares an initial public offering.",
-        "summary": "Westinghouse Electric Co., which runs its headquarters out of Cranberry Township in Butler County and designs the AP1000 reactor, supplies the fuel that commercial nuclear plants burn. A United States Department of Energy official said on October 16 that the Pittsburgh region will play a large role in the Trump administration's drive to triple American nuclear output by 2050.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Westinghouse is adding more fuel to a nuclear revival ahead of IPO",
-            "url": "https://www.post-gazette.com/business/powersource/2026/10/22/westinghouse-nuclear-revival-ipo/stories/202610220040"
-          }
-        ],
-        "_anchor": "i-88bed9d95e"
-      },
-      {
-        "title": "CardVault Opens in the Strip District",
-        "latest_developments": "KDKA reported Thursday, October 22, that CardVault by Tom Brady will open a Pittsburgh store on November 1 in The Terminal along Smallman Street in the Strip District.",
-        "summary": "CardVault, the sports trading card retail chain the quarterback Tom Brady backs, buys and sells cards and memorabilia. The Terminal, the redeveloped produce terminal on Smallman Street, has filled its storefronts with restaurants and retailers over the past several years.",
-        "sources": [
-          {
-            "source": "KDKA",
-            "title": "CardVault by Tom Brady opening new location in Pittsburgh's Strip District",
-            "url": "https://www.cbsnews.com/pittsburgh/news/cardvault-by-tom-brady-opening-new-location-in-pittsburghs-strip-district/"
-          }
-        ],
-        "_anchor": "i-75bfb40bdb"
-      },
-      {
-        "title": "Trib Total Media Promotes Luis Fabregas",
-        "latest_developments": "Trib Total Media elevated Luis Fabregas to vice president and executive editor, TribLive reported Thursday, October 22.",
-        "summary": "Fabregas has run the Trib's newsroom as its top editor for five years and spent decades as a reporter and editor in Pittsburgh. Trib Total Media publishes TribLive and the Valley News Dispatch and competes with the Post-Gazette across Allegheny and Westmoreland counties.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Executive editor Fabregas adds VP to title",
-            "url": "https://triblive.com/local/regional/executive-editor-fabregas-adds-vp-to-title/"
-          }
-        ],
-        "_anchor": "i-b58466179c"
-      },
-      {
-        "title": "CCAC Faculty Weigh a Walkout",
-        "latest_developments": "PublicSource reported Thursday, October 22, that faculty at the Community College of Allegheny County are weighing a strike as they press for higher wages in contract negotiations.",
-        "summary": "Union leaders at CCAC say they know of no strike or strike authorization vote on the campuses since 1972, a year after the faculty organized, which makes the current push close to unprecedented. A walkout would interrupt classes across the college's four campuses in Allegheny County.",
-        "sources": [
-          {
-            "source": "PublicSource",
-            "title": "CCAC faculty weigh walkout amid push for wage hike",
-            "url": "https://www.publicsource.org/ccac-faculty-contract-negotiations-strike/"
-          }
-        ],
-        "_anchor": "i-080711ad40"
-      },
-      {
-        "title": "Security Officers Ratify a Four-Year Contract",
-        "latest_developments": "About 1,400 Pittsburgh security officers voted overwhelmingly to ratify a new four-year contract covering 12 security contractors, WPXI reported late Wednesday, October 21.",
-        "summary": "The officers staff downtown office towers and other properties for the contracting firms that employ them, and the agreement settles terms through 2030 for one of the larger service workforces in the central business district.",
+        "title": "Small Employers Talk About Leaving Allegheny County",
+        "latest_developments": "County Executive Sara Innamorato signed the paid parental leave mandate into law Thursday, October 22, before a gathering of parents, doctors, and lawmakers, putting the requirement on employers with 15 or more workers starting in one year, as KDKA found small businesses weighing layoffs or a move out of the county over the cost and TribLive's editorial board asked what comes next for the policy.",
+        "summary": "Allegheny County Council voted 11-4 on Tuesday, October 20, to require 12 weeks of paid parental leave from employers countywide, the first mandate of its kind at the county level in the United States. Owners of small firms say the cost lands hardest on payrolls too thin to cover a 12-week absence.",
         "sources": [
           {
             "source": "WPXI",
-            "title": "Pittsburgh security officers ratify new contract",
-            "url": "https://www.wpxi.com/news/local/pittsburgh-security-officers-ratify-new-contract/SPAITOLUZJECVCYTPQS5T2XMEQ/"
-          }
-        ],
-        "_anchor": "i-de11ecb016"
-      },
-      {
-        "title": "Small Employers Talk About Leaving Allegheny County",
-        "latest_developments": "County Executive Sara Innamorato will sign the paid parental leave mandate into law, WTAE reported Thursday, October 22, as KDKA found small businesses weighing layoffs or a move out of the county over the cost and TribLive's editorial board asked what comes next for the policy.",
-        "summary": "Allegheny County Council voted 11-4 on Tuesday, October 20, to require 12 weeks of paid parental leave from employers countywide, the first mandate of its kind at the county level in the United States. Owners of small firms say the cost lands hardest on payrolls too thin to cover a 12-week absence.",
-        "sources": [
+            "title": "Allegheny County's Paid Parental Leave policy signed into law",
+            "url": "https://www.wpxi.com/news/local/allegheny-countys-paid-parental-leave-policy-signed-into-law/43YOEN4HSNAADLI2ASDBFEYQ7U/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Allegheny County's paid parental leave signed into law",
+            "url": "https://www.cbsnews.com/pittsburgh/news/allegheny-county-signs-paid-parental-leave-bill/"
+          },
           {
             "source": "WTAE",
             "title": "Sara Innamorato set to sign paid parental leave mandate in Allegheny County",
@@ -594,10 +624,129 @@
             "url": "https://triblive.com/opinion/editorial-whats-next-for-paid-parental-leave/"
           }
         ],
-        "_anchor": "i-bc4ec034b1"
+        "_anchor": "i-dba986703c"
+      },
+      {
+        "title": "Westinghouse Builds Up Fuel Before an IPO",
+        "latest_developments": "The Post-Gazette reported Thursday, October 22, that Westinghouse is expanding its nuclear fuel business as it prepares an initial public offering.",
+        "summary": "Westinghouse Electric Co., which runs its headquarters out of Cranberry Township in Butler County and designs the AP1000 reactor, supplies the fuel that commercial nuclear plants burn. A United States Department of Energy official said on October 16 that the Pittsburgh region will play a large role in the Trump administration's drive to triple American nuclear output by 2050.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Westinghouse is adding more fuel to a nuclear revival ahead of IPO",
+            "url": "https://www.post-gazette.com/business/powersource/2026/10/22/westinghouse-nuclear-revival-ipo/stories/202610220040"
+          }
+        ],
+        "_anchor": "i-88bed9d95e"
+      },
+      {
+        "title": "CCAC Faculty Weigh a Walkout",
+        "latest_developments": "PublicSource reported Thursday, October 22, that faculty at the Community College of Allegheny County are weighing a strike as they press for higher wages in contract negotiations.",
+        "summary": "Union leaders at CCAC say they know of no strike or strike authorization vote on the campuses since 1972, a year after the faculty organized, which makes the current push close to unprecedented. A walkout would interrupt classes across the college's four campuses in Allegheny County.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "CCAC faculty weigh walkout amid push for wage hike",
+            "url": "https://www.publicsource.org/ccac-faculty-contract-negotiations-strike/"
+          }
+        ],
+        "_anchor": "i-080711ad40"
+      },
+      {
+        "title": "CardVault Opens in the Strip District",
+        "latest_developments": "KDKA reported Thursday, October 22, that CardVault by Tom Brady will open a Pittsburgh store on November 1 in The Terminal along Smallman Street in the Strip District.",
+        "summary": "CardVault, the sports trading card retail chain the quarterback Tom Brady backs, buys and sells cards and memorabilia. The Terminal, the redeveloped produce terminal on Smallman Street, has filled its storefronts with restaurants and retailers over the past several years.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "CardVault by Tom Brady opening new location in Pittsburgh's Strip District",
+            "url": "https://www.cbsnews.com/pittsburgh/news/cardvault-by-tom-brady-opening-new-location-in-pittsburghs-strip-district/"
+          }
+        ],
+        "_anchor": "i-75bfb40bdb"
+      },
+      {
+        "title": "Security Officers Ratify a Four-Year Contract",
+        "latest_developments": "About 1,400 Pittsburgh security officers voted overwhelmingly to ratify a new four-year contract covering 12 security contractors, WPXI reported late Wednesday, October 21.",
+        "summary": "The officers staff downtown office towers and other properties for the contracting firms that employ them, and the agreement settles terms through 2030 for one of the larger service workforces in the central business district.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pittsburgh security officers ratify new contract",
+            "url": "https://www.wpxi.com/news/local/pittsburgh-security-officers-ratify-new-contract/SPAITOLUZJECVCYTPQS5T2XMEQ/"
+          }
+        ],
+        "_anchor": "i-de11ecb016"
+      },
+      {
+        "title": "Trib Total Media Promotes Luis Fabregas",
+        "latest_developments": "Trib Total Media elevated Luis Fabregas to vice president and executive editor, TribLive reported Thursday, October 22.",
+        "summary": "Fabregas has run the Trib's newsroom as its top editor for five years and spent decades as a reporter and editor in Pittsburgh. Trib Total Media publishes TribLive and the Valley News Dispatch and competes with the Post-Gazette across Allegheny and Westmoreland counties.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Executive editor Fabregas adds VP to title",
+            "url": "https://triblive.com/local/regional/executive-editor-fabregas-adds-vp-to-title/"
+          }
+        ],
+        "_anchor": "i-b58466179c"
       }
     ],
     "around_town": [
+      {
+        "title": "ALCOSAN Raises Sewer Bills and Digs a Tunnel",
+        "latest_developments": "The board of the Allegheny County Sanitary Authority approved a 14% sewer rate increase for next year, PublicSource reported Thursday, October 22, the first of three sharp annual increases that will lift bills nearly 50% by 2029, and TribLive reported the authority broke ground on a $1 billion Ohio River sewer tunnel.",
+        "summary": "ALCOSAN treats the wastewater of Pittsburgh and most municipalities in Allegheny County, and it says the higher rates pay for a multibillion-dollar plan to keep sewage out of the rivers. The tunnel will run 4.9 miles at a depth of 150 feet and finish in 2032, the largest infrastructure project in the county's history.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "Sewer bills to surge 14% next year in most of Allegheny County",
+            "url": "https://www.publicsource.org/alcosan-sewer-bill-rate-hikes/"
+          },
+          {
+            "source": "TribLive",
+            "title": "Alcosan breaks ground on $1B Ohio River sewer tunnel",
+            "url": "https://triblive.com/local/alcosan-breaks-ground-on-1b-ohio-river-sewer-tunnel/"
+          }
+        ],
+        "_anchor": "i-3f26bfb051"
+      },
+      {
+        "title": "The Housing Authority's New Director Faces an Oregon Inquiry",
+        "latest_developments": "KDKA's Andy Sheehan reported Thursday, October 22, that Ivory Mathews, whom the Housing Authority of the City of Pittsburgh has named its new executive director, remains under investigation in Oregon over allegations she misused more than $100,000 in public money for her personal benefit, and Mathews defended her professional travel expenses.",
+        "summary": "Mathews ran the housing authority in Portland, Oregon, before Pittsburgh hired her. The Pittsburgh authority houses thousands of low-income families across the city and manages federal rental subsidies.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Pittsburgh housing authority's new executive director defends professional trip expenses",
+            "url": "https://www.cbsnews.com/pittsburgh/news/ivory-mathews-pittsburgh-portland/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Pittsburgh housing authority's new executive director under investigation in Portland",
+            "url": "https://www.cbsnews.com/pittsburgh/video/pittsburgh-housing-authoritys-new-executive-director-under-investigation-in-portland/"
+          }
+        ],
+        "_anchor": "i-068ac5ee86"
+      },
+      {
+        "title": "The East Huntingdon Asphalt Plant Draws a Crowd",
+        "latest_developments": "Dozens of residents packed a public hearing at the Westmoreland County Courthouse on Thursday, October 22, to object to the asphalt plant proposed in East Huntingdon, among them Amy Schilling, co-owner of Sand Hill Berries, who said the plant would greet every visitor who drives Route 119 to her farm.",
+        "summary": "Crews began clearing land along Route 119 in East Huntingdon for the $10 million plant last week, and the developers expect to finish by the spring of 2027. The Westmoreland County Industrial Development Authority tabled a request on October 19 to help the project secure as much as $10 million in bond financing.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Residents show concern over proposed asphalt plant in East Huntingdon",
+            "url": "https://www.wtae.com/article/pennsylvania-asphalt-plant-east-huntingdon/74222501"
+          },
+          {
+            "source": "TribLive",
+            "title": "Sand Hill Berries owner among those expressing opposition to proposed asphalt plant in East Huntingdon",
+            "url": "https://triblive.com/local/westmoreland/sand-hill-berries-owner-among-those-expressing-opposition-to-proposed-asphalt-plant-in-east-huntingdon/"
+          }
+        ],
+        "_anchor": "i-a8911397bb"
+      },
       {
         "title": "Franklin and Marshall Poll Puts Shapiro Ahead",
         "latest_developments": "A new Franklin & Marshall College Poll released Thursday, October 22, shows Governor Josh Shapiro leading the governor's race, with Pennsylvania voters opposing Flock license plate cameras and supporting measles vaccination efforts.",
@@ -797,6 +946,32 @@
     ],
     "around_teams": [
       {
+        "title": "Joseph-Day Goes to Injured Reserve",
+        "latest_developments": "The Post-Gazette reported Thursday afternoon, October 22, that the Steelers placed defensive lineman Sebastian Joseph-Day on injured reserve and will hand his snaps to two rookie defensive linemen for Sunday's game against the New Orleans Saints in Paris.",
+        "summary": "The move adds to an injury list that has already emptied the Steelers' receiver room, sent receiver Roman Wilson to injured reserve on October 17, and cost safety DeShon Elliott time. Defensive tackle Keeanu Benton turned in his best game of the season at the Tampa Bay Buccaneers on October 18.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The Steelers will turn to two rookie defensive linemen as Sebastian Joseph-Day heads to IR",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/22/steelers-injury-updates/stories/202610210074"
+          }
+        ],
+        "_anchor": "i-048dffc7c8"
+      },
+      {
+        "title": "Hernandez and Gray Take the Pirates' Farm Honors",
+        "latest_developments": "The Post-Gazette reported Thursday, October 22, that Seth Hernandez and Murf Gray won the Pirates' top minor league awards and that both have the major leagues on their minds.",
+        "summary": "The two sit near the front of a Pittsburgh farm system the club counts on to fill its roster cheaply, the same path the Tampa Bay Rays and the Milwaukee Brewers took to this year's World Series.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "Seth Hernandez and Murf Gray have the majors on their minds after winning these Pirates honors",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/10/22/pirates-prospect-awards-seth-hernandez-murf-gray/stories/202610220058"
+          }
+        ],
+        "_anchor": "i-ef7c3a4eea"
+      },
+      {
         "title": "Rooney Reads the NFL's Paris Security Plan",
         "latest_developments": "Steelers President Art Rooney II said Thursday, October 22, that the NFL will add security for Sunday's game in Paris and that league officials \"don't seem to be concerned,\" and the Post-Gazette detailed the same day how team staffers began planning the trip and working its logistical obstacles in June.",
         "summary": "Pittsburgh meets the New Orleans Saints on Sunday, October 25, at 9:30 a.m. Eastern on NFL Network at the Stade de France, the league's Paris game, a week after riots and looting swept Paris, Marseille, and other French cities and prefects imposed curfews.",
@@ -876,6 +1051,19 @@
     ],
     "team_usa": [
       {
+        "title": "The U.S. Men Host Both Legs Against Haiti",
+        "latest_developments": "ESPN reported Thursday, October 22, that the United States men's national team will play both quarterfinal legs of the Concacaf Nations League at home, meeting Haiti in Miami on November 14 and in Cincinnati, Ohio, on November 17, with Miami staging the nominal away leg.",
+        "summary": "Haiti has no secure home venue for the tie, which hands the Americans two matches on United States soil. The United States then closes its 2026 calendar against Jamaica on Sunday, December 13, at Inter Miami's stadium in Fort Lauderdale, Florida.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Miami to host USMNT's Concacaf Nations League QF away leg vs. Haiti",
+            "url": "https://www.espn.com/soccer/story/_/id/50250895/miami-host-usmnt-concacaf-nations-league-qf-away-haiti"
+          }
+        ],
+        "_anchor": "i-e7e72107b3"
+      },
+      {
         "title": "The U.S. Hosts the First Women's Club World Cup",
         "latest_developments": "FIFA said Thursday, October 22, that it will stage the inaugural Women's Club World Cup in the United States in January 2028.",
         "summary": "The new tournament gathers women's club champions from around the world, and FIFA has handed the first edition to the same country that will host the Los Angeles Olympics later in 2028. The January dates fall between the 2027 Women's World Cup and that Summer Games.",
@@ -917,27 +1105,20 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Amazon's MadPot logged a PHP2Shell exploit four days before disclosure, Arista rushed a fix for an attacked VeloCloud zero-day, and firms took websites offline to patch.",
+      "text": "Attackers hit PHP2Shell four days before CVE-2026-109618 was disclosed, and companies took websites offline to patch while vendors still cannot say which appliances embed the runtime.",
       "links": [
         {
           "anchor": "i-01e27be4fe",
           "phrase": "PHP2Shell",
-          "start": 25,
-          "end": 34,
+          "start": 14,
+          "end": 23,
           "title": "PHP2Shell Exploitation Began Before Disclosure"
         },
         {
-          "anchor": "i-5d4f96d6ac",
-          "phrase": "VeloCloud zero-day",
-          "start": 108,
-          "end": 126,
-          "title": "Arista Patches an Exploited VeloCloud Zero-Day"
-        },
-        {
           "anchor": "i-7e675ef2b7",
-          "phrase": "took websites offline",
-          "start": 138,
-          "end": 159,
+          "phrase": "websites offline",
+          "start": 91,
+          "end": 107,
           "title": "A PHP Flaw Pulls Websites Offline"
         }
       ]
@@ -945,119 +1126,112 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "A GitHub token leaked into LiteLLM's own gateway logs seeded a PyPI credential stealer, and Railway says an intruder read decrypted customer environment variables.",
+      "text": "Microsoft tied the ConnectWise breach to China's Storm-0940 running the ARTEX agentic pentest framework across 2,200 tenants, while Anthropic's Claude audited 25 open-source projects and flagged 493 issues.",
       "links": [
         {
-          "anchor": "i-7f07a05841",
-          "phrase": "LiteLLM",
-          "start": 27,
-          "end": 34,
-          "title": "LiteLLM and Railway Push Users to Rotate Secrets"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Anthropic's Claude flagged 493 exposure problems across 25 open-source projects as agent permissions widen, a buildout Zitron argues leaves no room for mediocre AI returns.",
-      "links": [
+          "anchor": "i-778da97616",
+          "phrase": "Storm-0940",
+          "start": 49,
+          "end": 59,
+          "title": "Storm-0940 Drove the ConnectWise Supply Chain Attack"
+        },
         {
           "anchor": "i-b75487748f",
           "phrase": "Claude",
-          "start": 12,
-          "end": 18,
+          "start": 144,
+          "end": 150,
           "title": "Claude Audits Open Source as Agent Permissions Spread"
-        },
-        {
-          "anchor": "i-0052240628",
-          "phrase": "Zitron",
-          "start": 119,
-          "end": 125,
-          "title": "AI Had Better Work Out"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "INTERPOL's Operation Serengeti III booked 1,462 arrests as APT41 revived a UEFI bootkit, hijackers held 333 Tor exit nodes, and a cyberattack downed Columbia's city services.",
+      "text": "Supplier failures landed on customers as eMudhra quit the TLS business over guessable certificate keys and a poisoned LiteLLM release pushed Railway users into emergency secret rotation.",
       "links": [
         {
-          "anchor": "i-df0211e45e",
-          "phrase": "Operation Serengeti III",
-          "start": 11,
-          "end": 34,
-          "title": "Operation Serengeti III Nets 1,462 Arrests"
+          "anchor": "i-49672d8913",
+          "phrase": "eMudhra",
+          "start": 41,
+          "end": 48,
+          "title": "eMudhra Quits the TLS Business"
         },
         {
-          "anchor": "i-0b85f8ae4b",
-          "phrase": "APT41",
-          "start": 59,
-          "end": 64,
-          "title": "APT41 Bootkit and Sandworm Wiper"
-        },
-        {
-          "anchor": "i-2f1ed42ebe",
-          "phrase": "333 Tor",
-          "start": 104,
-          "end": 111,
-          "title": "Hijackers Held 333 Tor Exit Nodes for Three Days"
-        },
-        {
-          "anchor": "i-189c380ca7",
-          "phrase": "Columbia's",
-          "start": 149,
-          "end": 159,
-          "title": "Cyberattack Knocks Out Columbia's City Services"
+          "anchor": "i-7f07a05841",
+          "phrase": "LiteLLM",
+          "start": 118,
+          "end": 125,
+          "title": "LiteLLM and Railway Push Users to Rotate Secrets"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "updated",
-      "text": "New Mexico won a $25 billion privacy judgment against Meta, whose selloff deepened the Nasdaq's slide while Brent crude held above $112 after fresh Houthi strikes.",
+      "text": "Oracle shipped more than 1,200 fixes with Cisco closing 34 flaws, and Arista patched an already exploited VeloCloud Orchestrator SQL injection zero-day.",
       "links": [
         {
-          "anchor": "i-dd2c177462",
-          "phrase": "New Mexico",
+          "anchor": "i-a5298e0f95",
+          "phrase": "Oracle",
           "start": 0,
-          "end": 10,
-          "title": "New Mexico Wins $25 Billion From Meta"
+          "end": 6,
+          "title": "Oracle, Cisco, and Node.js Ship a Patch Wave"
         },
         {
-          "anchor": "i-b8fc1425a6",
-          "phrase": "Brent crude",
-          "start": 108,
-          "end": 119,
-          "title": "Oil Tops $112 and Global Equities Sell Off"
+          "anchor": "i-5d4f96d6ac",
+          "phrase": "VeloCloud Orchestrator",
+          "start": 106,
+          "end": 128,
+          "title": "Arista Patches an Exploited VeloCloud Zero-Day"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Art Rooney II says the NFL is adding security for Sunday's Paris game, Cam Heyward's show packs for France, and Primanti Bros. opens at 9 a.m.",
+      "text": "Brent topped $112 after Houthi strikes on Saudi energy as the Nasdaq fell 2.6%, and Treasury proposed curbs on American investment in Chinese AI and biotech.",
       "links": [
         {
-          "anchor": "i-969bc8b849",
-          "phrase": "Art Rooney II",
+          "anchor": "i-b8fc1425a6",
+          "phrase": "Brent",
           "start": 0,
-          "end": 13,
-          "title": "Rooney Reads the NFL's Paris Security Plan"
+          "end": 5,
+          "title": "Oil Tops $112 and Global Equities Sell Off"
         },
         {
-          "anchor": "i-80c2c82e00",
-          "phrase": "Cam Heyward's",
-          "start": 71,
-          "end": 84,
-          "title": "Fittipaldo and Heyward Pack for France"
+          "anchor": "i-6bf5aa8664",
+          "phrase": "Treasury proposed curbs",
+          "start": 84,
+          "end": 107,
+          "title": "Treasury Proposes Curbs on U.S. Investment in Chinese Tech"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Local bills and bets moved as ALCOSAN approved a 14% sewer increase, regulators rejected FirstEnergy's supply plan, and U.S. Steel funded a $3 billion Braddock mill.",
+      "links": [
+        {
+          "anchor": "i-3f26bfb051",
+          "phrase": "ALCOSAN",
+          "start": 30,
+          "end": 37,
+          "title": "ALCOSAN Raises Sewer Bills and Digs a Tunnel"
         },
         {
-          "anchor": "i-dbc22c55a8",
-          "phrase": "Primanti Bros.",
-          "start": 112,
-          "end": 126,
-          "title": "Primanti Bros. Opens Early for the Paris Kickoff"
+          "anchor": "i-cf3d4778e8",
+          "phrase": "FirstEnergy's",
+          "start": 89,
+          "end": 102,
+          "title": "Regulators Reject FirstEnergy's Plan as Power Bills Climb"
+        },
+        {
+          "anchor": "i-2a550d24fa",
+          "phrase": "U.S. Steel",
+          "start": 120,
+          "end": 130,
+          "title": "U.S. Steel Funds a $3 Billion Mill in Braddock"
         }
       ]
     }
@@ -1071,12 +1245,13 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 66,
+        "in_window": 85,
         "failed": [],
         "empty": [
           "Krebs on Security",
           "Sophos News",
           "Google Online Security Blog",
+          "Graham Cluley",
           "Microsoft Security Blog",
           "Google Project Zero",
           "The DFIR Report",
@@ -1086,13 +1261,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 14,
+            "contributed": 14
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "Krebs on Security": {
             "items": 10,
@@ -1106,8 +1281,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 4,
+            "contributed": 4
           },
           "SecurityWeek": {
             "items": 10,
@@ -1116,13 +1291,13 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 20,
+            "contributed": 20
           },
           "The Record": {
             "items": 5,
@@ -1131,8 +1306,8 @@
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 3,
+            "contributed": 3
           },
           "Help Net Security": {
             "items": 10,
@@ -1166,8 +1341,8 @@
           },
           "Graham Cluley": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Microsoft Security Blog": {
             "items": 10,
@@ -1191,8 +1366,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 4
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1219,17 +1394,17 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 19
+            "contributed": 12
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 5
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 5,
-            "contributed": 0
+            "in_window": 6,
+            "contributed": 1
           },
           "Pittsburgh City Paper": {
             "items": 10,
@@ -1238,28 +1413,28 @@
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 3,
+            "in_window": 4,
             "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 2,
+            "in_window": 1,
             "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 10
+            "contributed": 25
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 7
+            "contributed": 6
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 14
+            "contributed": 11
           }
         }
       },
@@ -1274,44 +1449,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 74,
-            "in_window": 28,
-            "contributed": 3
+            "items": 73,
+            "in_window": 27,
+            "contributed": 9
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 33,
-            "contributed": 14
+            "contributed": 16
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 51,
-            "contributed": 10
+            "in_window": 52,
+            "contributed": 12
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 15,
-            "contributed": 2
+            "in_window": 14,
+            "contributed": 5
           },
           "The Economist": {
             "items": 300,
-            "in_window": 61,
-            "contributed": 15
+            "in_window": 59,
+            "contributed": 2
           },
           "FT Home": {
-            "items": 10,
-            "in_window": 10,
-            "contributed": 4
+            "items": 11,
+            "in_window": 11,
+            "contributed": 7
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 8
+            "contributed": 9
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 4
+            "contributed": 0
           }
         }
       },
@@ -1321,18 +1496,18 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 10,
+        "in_window": 12,
         "failed": [],
         "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 11,
+            "contributed": 11
           },
           "Post-Gazette Music": {
             "items": 20,
-            "in_window": 2,
+            "in_window": 3,
             "contributed": 0
           },
           "NEXTpittsburgh Events": {
@@ -1351,41 +1526,54 @@
         "group": "sports_media",
         "label": "Sports media",
         "feeds": 6,
-        "loaded": 6,
+        "loaded": 3,
         "window_hours": 96,
-        "in_window": 30,
-        "failed": [],
+        "in_window": 23,
+        "failed": [
+          {
+            "name": "Not Just Football with Cam Heyward",
+            "error": "HTTPError: HTTP Error 404: Not Found"
+          },
+          {
+            "name": "Pittsburgh Steelers (YouTube)",
+            "error": "HTTPError: HTTP Error 404: Not Found"
+          },
+          {
+            "name": "Ben Roethlisberger / Channel Seven (YouTube)",
+            "error": "HTTPError: HTTP Error 404: Not Found"
+          }
+        ],
         "empty": [],
         "per_feed": {
           "Footbahlin with Ben Roethlisberger": {
             "items": 145,
             "in_window": 1,
-            "contributed": 0
+            "contributed": 1
           },
           "Not Just Football with Cam Heyward": {
-            "items": 15,
-            "in_window": 6,
-            "contributed": 4
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
           },
           "Pittsburgh Steelers (YouTube)": {
-            "items": 15,
-            "in_window": 15,
-            "contributed": 14
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
-            "items": 15,
-            "in_window": 2,
-            "contributed": 1
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Post-Gazette Steelers": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 20
           }
         }
       },
@@ -1395,19 +1583,19 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 28,
+        "in_window": 26,
         "failed": [],
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 22,
-            "in_window": 22,
-            "contributed": 22
+            "items": 19,
+            "in_window": 19,
+            "contributed": 19
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 6,
+            "contributed": 6
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1458,7 +1646,7 @@
       {
         "label": "Scores (ESPN, plaintextsports)",
         "ok": true,
-        "detail": "2 teams via ESPN"
+        "detail": "2 teams via ESPN; mlb: ESPN failed (mlb: URLError); used plaintextsports"
       }
     ],
     "cli": {
@@ -1468,24 +1656,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 39659,
+          "outputTokens": 42701,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 129402,
+          "cacheCreationInputTokens": 140120,
           "webSearchRequests": 0,
-          "costUSD": 2.285525,
+          "costUSD": 2.4687550000000003,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 17459
+          "thinkingTokens": 16255
         }
       },
-      "cost_usd": 2.285525,
-      "duration_ms": 429732,
+      "cost_usd": 2.4687550000000003,
+      "duration_ms": 485218,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-22 13:37 EDT",
-    "items_considered": 66,
+    "generated_at": "2026-10-22 19:37 EDT",
+    "items_considered": 85,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1566,9 +1754,13 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.2855,
-    "model_duration_ms": 429732,
+    "model_cost_usd": 2.4688,
+    "model_duration_ms": 485218,
     "local_from": null,
-    "feed_failures": []
+    "feed_failures": [
+      "Not Just Football with Cam Heyward",
+      "Pittsburgh Steelers (YouTube)",
+      "Ben Roethlisberger / Channel Seven (YouTube)"
+    ]
   }
 }
