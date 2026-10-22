@@ -1,0 +1,746 @@
+================================================================
+INFOSECFOLLOW -- security, markets, business, pittsburgh
+Thursday, October 22, 2026 - 1:37 PM EDT
+================================================================
+
+Amazon's honeypots caught PHP2Shell exploit attempts four days
+before the PHP Foundation disclosed the two flaws, and broad
+exploitation now sweeps WordPress, Drupal, and Magento servers
+worldwide.
+
+CONTENTS: Emerging Trends and Key Updates | Security | Business
+and Politics | Pittsburgh | Sports | Reading | Markets | Feed
+Health
+
+EMERGING TRENDS AND KEY UPDATES
+----------------------------------------------------------------
+* [TREND] Amazon's MadPot logged a PHP2Shell exploit four days
+  before disclosure, Arista rushed a fix for an attacked
+  VeloCloud zero-day, and firms took websites offline to patch.
+  see: PHP2Shell Exploitation Began Before Disclosure; Arista
+  Patches an Exploited VeloCloud Zero-Day; A PHP Flaw Pulls
+  Websites Offline
+* [TREND] A GitHub token leaked into LiteLLM's own gateway logs
+  seeded a PyPI credential stealer, and Railway says an intruder
+  read decrypted customer environment variables.
+  see: LiteLLM and Railway Push Users to Rotate Secrets
+* [TREND] Anthropic's Claude flagged 493 exposure problems
+  across 25 open-source projects as agent permissions widen, a
+  buildout Zitron argues leaves no room for mediocre AI returns.
+  see: Claude Audits Open Source as Agent Permissions Spread; AI
+  Had Better Work Out
+* [TREND] INTERPOL's Operation Serengeti III booked 1,462
+  arrests as APT41 revived a UEFI bootkit, hijackers held 333
+  Tor exit nodes, and a cyberattack downed Columbia's city
+  services.
+  see: Operation Serengeti III Nets 1,462 Arrests; APT41 Bootkit
+  and Sandworm Wiper; Hijackers Held 333 Tor Exit Nodes for
+  Three Days; Cyberattack Knocks Out Columbia's City Services
+* [UPDATE (updated)] New Mexico won a $25 billion privacy
+  judgment against Meta, whose selloff deepened the Nasdaq's
+  slide while Brent crude held above $112 after fresh Houthi
+  strikes.
+  see: New Mexico Wins $25 Billion From Meta; Oil Tops $112 and
+  Global Equities Sell Off
+* [UPDATE (new)] Art Rooney II says the NFL is adding security
+  for Sunday's Paris game, Cam Heyward's show packs for France,
+  and Primanti Bros. opens at 9 a.m.
+  see: Rooney Reads the NFL's Paris Security Plan; Fittipaldo
+  and Heyward Pack for France; Primanti Bros. Opens Early for
+  the Paris Kickoff
+
+SECURITY
+----------------------------------------------------------------
+
+1. PHP2SHELL EXPLOITATION BEGAN BEFORE DISCLOSURE
+   Vulnerabilities and Exploits · [zero-day, patch, exploit]
+   Latest developments: Amazon's threat intelligence team, whose
+   chief information security officer CJ Moses described the
+   finding, said its MadPot honeypot service logged an exploit
+   attempt from a commercial anonymization network on October
+   17, 2026, four days before the PHP Foundation disclosed
+   CVE-2026-109618 and CVE-2026-109619, and broad scanning
+   followed within hours of the patches; Searchlight Cyber
+   released php2shell-scanner, an open-source tool that tests a
+   host for both bugs, and researchers now confirm exploitation
+   against WordPress, Drupal, Joomla, phpMyAdmin, Nextcloud, and
+   Magento installations; Palo Alto Networks confirmed that
+   every version of PAN-OS and Panorama carries the flaws and
+   has shipped no fixed release, Fortinet is checking 12
+   products and Cisco 31 products and cloud services, and OpenAI
+   proposed a five-stage disclosure process for critical
+   open-source bugs after Calif found one of the two flaws with
+   the GPT-5.6 Sol model under OpenAI's Patch the Planet
+   initiative and Wiz reported both independently.
+   PHP2Shell is a pair of critical flaws in the PHP runtime that
+   run an unauthenticated attacker's code on any server
+   answering web requests, regardless of the application on top.
+   CISA tells organizations to move to PHP 8.5.12, 8.4.27,
+   8.3.36, or 8.2.35 immediately; customers of appliances that
+   embed PHP, among them PAN-OS and Panorama, must wait on
+   vendor builds and restrict management interfaces meanwhile.
+   - SecurityWeek: https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/
+   - The Hacker News: https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/22/php2shell-vulnerability-fortinet-cisco-palo-alto-networks/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/22/php2shell-scanner-tool/
+
+2. LITELLM AND RAILWAY PUSH USERS TO ROTATE SECRETS
+   Ransomware and Cybercrime · [supply chain, breach, ai]
+   Latest developments: LiteLLM disclosed on October 22, 2026
+   that attackers defeated multiple independent security
+   controls to publish version 1.107.0 to PyPI and Docker Hub at
+   roughly 4:00 a.m. on October 21, 2026, and the project
+   suspects a GitHub token that leaked into its AI gateway logs;
+   the release carried a credential stealer and a backdoor that
+   harvest cloud logins, developer secrets, and API keys for AI
+   services, PyPI has quarantined it, and Hudson Rock earlier
+   tied a 153GB archive stolen in the March 2026 LiteLLM
+   compromise to 2,488 corporate domains including Amazon Web
+   Services, Samsung, and Cisco; the same day the
+   platform-as-a-service provider Railway said an unauthorized
+   third party reached systems holding customers' encrypted
+   environment variables and in some cases obtained the
+   decrypted contents.
+   LiteLLM routes applications to large language models and sits
+   inside many enterprise AI stacks, so anyone who installed
+   1.107.0 from PyPI or pulled the Docker image must assume
+   every secret on that host is gone. Both companies tell
+   customers to rotate credentials now; Railway limits the
+   exposure to a subset of users.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/22/litellm-compromised-supply-chain-attack-pypi-docker/
+   - The Hacker News: https://thehackernews.com/2026/10/litellm-suspects-github-token-leak-in.html
+   - The Hacker News: https://thehackernews.com/2026/10/railway-says-intruder-may-have-accessed.html
+   - The Hacker News: https://thehackernews.com/2026/10/litellm-compromised-in-supply-chain.html
+
+3. ORACLE, CISCO, AND NODE.JS SHIP A PATCH WAVE
+   Vulnerabilities and Exploits · [patch, rce, dos]
+   Latest developments: Oracle's October 2026 Critical Patch
+   Update, published October 22, 2026, carries more than 1,200
+   fixes, nearly 100 of them critical, with Fusion Middleware
+   taking the largest share; Cisco closed 34 flaws spanning
+   command execution, authentication bypass, and cross-site
+   scripting; Node.js patched 10 bugs across its 22.x, 24.x, and
+   26.x lines, the worst a remote code execution flaw in the
+   Brotli decompression code it bundles; FoxIO published working
+   proof-of-concept code for QPACK flaws that let one
+   unauthenticated connection crash many HTTP/3 servers by
+   expanding a small batch of compressed headers into thousands
+   of times more memory; and Splunk, SolarWinds, and Signal
+   shipped their own fixes, the last closing CVE-2026-113380 in
+   RingRTC versions before 2.72.0, which kept sending a caller's
+   audio to the other party after that caller hung up.
+   The quarterly releases and out-of-cycle fixes land in the
+   same week as PHP2Shell, which stretches patch teams thin.
+   Administrators should rank unauthenticated code execution
+   first, starting with internet-facing Node.js services, Cisco
+   gear, and any HTTP/3 endpoint, then work through Oracle's
+   middleware stack.
+   - SecurityWeek: https://www.securityweek.com/oracle-patches-over-1200-vulnerabilities-with-october-2026-cpu/
+   - SecurityWeek: https://www.securityweek.com/cisco-patches-34-vulnerabilities-across-multiple-products/
+   - The Hacker News: https://thehackernews.com/2026/10/nodejs-brotli-decoder-bug-could-allow.html
+   - The Hacker News: https://thehackernews.com/2026/10/new-qpack-flaws-can-crash-http3-servers.html
+
+4. CLAUDE AUDITS OPEN SOURCE AS AGENT PERMISSIONS SPREAD
+   AI Security · [ai, supply chain, research]
+   Latest developments: Anthropic's Frontier Red Team reported
+   on October 22, 2026 that it used Claude to examine 25
+   open-source projects and found 493 problems involving
+   unnecessary exposure, conflicting settings, and code that
+   runs before security checks, among them 94 cases where a
+   project drops security controls with no warning; a survey of
+   1,100 information technology and security decision-makers
+   found 70% now let AI make decisions and take actions that
+   needed a person's sign-off a year ago, with three in four
+   organizations hitting at least one AI-related security
+   problem or warning sign in the past year; CISA and the
+   Canadian Centre for Cyber Security published joint guidance
+   on managing AI token consumption, warning that unmanaged
+   usage drives unpredictable cost and can cut access to
+   critical services; and researchers at Imperial College London
+   tampered with speech-to-text models so that one chosen
+   speaker's words transcribed as text the attacker picked, in
+   one test a request to send $5,000 that AI agents reading the
+   transcript executed in a sandboxed banking environment.
+   The findings share a root: organizations hand agents
+   authority faster than they inspect the code and models
+   underneath. Teams running agents should cut exposed
+   functionality in the software agents touch, require approval
+   for financial actions, and treat fine-tuning access to a
+   speech model as a privileged pipeline.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/22/anthropic-attack-surface-reduction-open-source/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/22/ai-agent-permissions-security/
+   - CISA Advisories: https://www.cisa.gov/resources-tools/resources/managing-ai-token-consumption-operational-resilience
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/22/research-speech-model-backdoor/
+
+5. OPERATION SERENGETI III NETS 1,462 ARRESTS
+   Ransomware and Cybercrime · [law enforcement, ransomware,
+   fraud]
+   Latest developments: INTERPOL and police forces in 21 African
+   countries disclosed Operation Serengeti III on October 22,
+   2026: 1,462 arrests, 10,909 malicious networks dismantled,
+   and more than $105 million recovered during a sweep that ran
+   from June 29 to August 31, 2026, with financial investigators
+   tying the networks to losses above $385 million and
+   identifying 65,929 victims.
+   The operation targeted business email compromise, ransomware,
+   online scams, and digital extortion run out of Africa, and 20
+   of the 21 participating countries reported arrests. Companies
+   that lost money to invoice fraud or extortion in that window
+   have a live channel for restitution claims through national
+   police units.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/authorities-disrupt-nearly-11-000-cybercrime-networks-in-africa/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/22/interpol-africa-cybercrime-crackdown-operation-serengeti-iii/
+   - The Record: https://therecord.media/africa-cybercrime-interpol-arrests
+   - The Hacker News: https://thehackernews.com/2026/10/interpol-arrests-1462-suspects-disrupts.html
+
+6. ARISTA PATCHES AN EXPLOITED VELOCLOUD ZERO-DAY
+   Vulnerabilities and Exploits · [zero-day, patch, rce]
+   Latest developments: Arista Networks released security
+   updates on October 22, 2026 for a zero-day flaw that
+   attackers already exploit in VeloCloud Orchestrator On-Prem
+   deployments, and GitLab a day earlier closed a
+   maximum-severity bug in its Regular Expression Compiler that
+   runs an unauthenticated attacker's code on self-managed
+   servers, reaching every release back to version 7.0 from
+   2014.
+   VeloCloud Orchestrator runs SD-WAN fleets, so one compromised
+   on-premises orchestrator hands an attacker reach across an
+   enterprise's branch network. Install Arista's updates now and
+   keep orchestrator management interfaces off the public
+   internet; self-managed GitLab administrators who applied the
+   October 12 patch still need the newer builds that sit one
+   patch above it.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability/
+   - The Hacker News: https://thehackernews.com/2026/10/critical-gitlab-flaw-cvss-100-could.html
+
+7. NEW MEXICO WINS $25 BILLION FROM META
+   Policy and Regulation · [policy, privacy, litigation]
+   Latest developments: State District Court Judge Francis J.
+   Mathew ordered Meta to pay New Mexico $25 billion for
+   deceiving Facebook users about privacy in the Cambridge
+   Analytica affair, counting 43 million separate violations, an
+   award five times the $5 billion the Federal Trade Commission
+   levied against the company in 2019 and the largest figure yet
+   attached to that decade-old scandal.
+   New Mexico's case rests on the state's consumer protection
+   and privacy statutes rather than federal law, which shows how
+   a single state attorney general can set a penalty that dwarfs
+   federal action. Companies that share user data with
+   third-party developers should expect state-level exposure
+   sized to per-user statutory damages.
+   - SecurityWeek: https://www.securityweek.com/meta-ordered-to-pay-new-mexico-25-billion-for-deceiving-users-about-privacy-on-facebook/
+   - The Record: https://therecord.media/meta-new-mexico-penalty-cambridge-analytica-privacy-case
+   - The Hacker News: https://thehackernews.com/2026/10/meta-ordered-to-pay-25-billion-after.html
+
+8. APT41 BOOTKIT AND SANDWORM WIPER
+   Nation-State Activity · [apt, malware, wiper]
+   Latest developments: Kaspersky's Global Research and Analysis
+   Team disclosed BlackX on October 22, 2026, a UEFI bootkit
+   built along the lines of BlackLotus that the Chinese group
+   APT41 revived against diplomatic organizations in Central
+   Asia, exploiting the Baton Drop flaw CVE-2022-21894 in the
+   Windows boot manager to run before the operating system
+   loads; separately, researchers said on October 21, 2026 that
+   the Russian state-linked group Sandworm worked with a second
+   threat actor last year to destroy data at a Ukrainian grain
+   logistics company.
+   A UEFI bootkit loads ahead of Windows and survives a
+   reinstall, which puts boot-chain integrity and firmware
+   monitoring at the center of any response. Diplomatic missions
+   in Central Asia and Ukrainian agricultural logistics firms
+   face the two campaigns; both call for verified offline
+   backups and checks that Secure Boot revocations for
+   CVE-2022-21894 sit in place.
+   - Securelist (Kaspersky): https://securelist.com/uefi-bootkit-blackx/121539/
+   - The Record: https://therecord.media/ukraine-hackers-russia-grain-sandworm
+
+9. HIJACKERS HELD 333 TOR EXIT NODES FOR THREE DAYS
+   Ransomware and Cybercrime · [credential theft,
+   infrastructure]
+   Latest developments: Ars Technica put numbers on the Tor
+   compromise on October 22, 2026: attackers controlled 333 exit
+   nodes for three days in early October 2026, redirected SSH
+   connections leaving the network to servers that captured
+   login passwords, and pulled plaintext email out of the
+   traffic as well.
+   A Tor exit node sees traffic in whatever form the user's own
+   application protects it, so anyone who tunneled SSH or
+   unencrypted mail through Tor during those three days handed
+   credentials to the operators. Rotate any SSH password or key
+   used over Tor in early October 2026 and move to key-based
+   authentication with host verification.
+   - Ars Technica Security: https://arstechnica.com/information-technology/2026/10/300-tor-exit-nodes-hijacked-to-intercept-ssh-traffic-and-retrieve-plaintext-email/
+
+10. CYBERATTACK KNOCKS OUT COLUMBIA'S CITY SERVICES
+   Ransomware and Cybercrime · [incident, local government]
+   Latest developments: The Record reported on October 22, 2026
+   that a cyberattack on Columbia, the capital of South
+   Carolina, took down MyColaSC, the platform residents use to
+   pay utility bills, report non-emergency issues, and reach
+   other city services, and the South Carolina state government
+   offered the city technical assistance.
+   Columbia has not named the attackers or said whether
+   ransomware caused the outage, and residents cannot pay
+   utility bills online while MyColaSC stays down. City and
+   county governments facing the same exposure should confirm
+   that resident-facing payment portals sit on segmented
+   infrastructure with offline backups.
+   - The Record: https://therecord.media/south-carolina-officials-offer-assistance-cyber-incident
+
+BUSINESS AND POLITICS
+----------------------------------------------------------------
+* Oil Tops $112 and Global Equities Sell Off
+  Latest developments: Brent held above $112 a barrel Thursday
+  afternoon, October 22, after the Houthis hit Saudi energy
+  facilities again and reports put fresh American military
+  options against Iran on the table; a Meta-led rout deepened
+  the Nasdaq's slide, silver futures headed for their lowest
+  close of the year, and the 10-year Treasury yield slipped
+  under 5% as money ran for cover.
+  Houthi drones have struck Saudi energy infrastructure
+  repeatedly, killing two people at Saudi Aramco's Shaybah
+  oilfield, and Washington has ordered some embassy and military
+  personnel out of the kingdom as United States-Iran hostilities
+  threaten to resume. Aramco Chief Executive Amin Nasser says
+  the company is working to lift its East-West pipeline network
+  to 10 million barrels a day to route crude around the Gulf,
+  and technology shares led the global decline as
+  artificial-intelligence earnings disappointed.
+  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/oil-rises-amid-concerns-over-re-escalation-of-mideast-conflict-52f2208c?mod=rss_markets_main
+  - WSJ World News: https://www.wsj.com/business/energy-oil/oil-prices-rise-more-than-2-as-attacks-on-saudi-arabia-u-s-iran-risks-persist-5599ac83?mod=rss_worldnews
+  - FT Home: https://www.ft.com/content/6e318b81-a771-4842-9754-e265fef2852f?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/investing/ai-stocks-slide-after-earnings-disappoint-french-bonds-tumble-and-oil-tops-112-734e47a7?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/jgb-yield-curve-flattens-amid-continued-ai-related-credit-concerns-4613a92a?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/gold-falls-weighed-by-rising-energy-costs-fed-uncertainty-83d723e8?mod=rss_markets_main
+* French Spread Over Bunds Hits a 2011 High
+  Latest developments: French turmoil drove the 10-year United
+  States Treasury yield under 5% Thursday, October 22, as
+  investors fled to havens and the gap between 10-year French
+  and German debt stayed at its widest since 2011, and Emmanuel
+  Macron said labor unions may march Saturday while he bans
+  other activist protests.
+  Investors told the Wall Street Journal that the foreign
+  capital financing France may now be running in reverse,
+  deepening a selloff that accelerated after last weekend's
+  riots and looting in Paris, Marseille, and other cities. The
+  Economist argues the protests show Europe's centrist
+  governments, Macron's above all, have fallen dangerously short
+  six months before the French presidential election.
+  - WSJ Markets: https://www.wsj.com/finance/investing/french-government-bond-yields-rise-spread-widens-as-treasury-yields-fall-e67fc4cd?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/investing/frances-debt-crisis-deepens-as-foreign-investors-look-for-the-exit-e6ef398c?mod=rss_markets_main
+  - FT Home: https://www.ft.com/content/43f3144f-7aa8-4821-b5c6-0da470b9af34?syn-25a6b1a6=1
+  - The Economist: https://www.economist.com/leaders/2026/10/22/the-agony-of-liberal-europe
+* A PHP Flaw Pulls Websites Offline
+  Latest developments: Companies raced Thursday, October 22, to
+  patch a security flaw in PHP, the web programming language,
+  taking their sites offline to do it after government
+  cybersecurity agencies told them to act immediately.
+  Artificial-intelligence tools uncovered the vulnerabilities,
+  which reach across a large share of the web, and the Financial
+  Times reports firms pulled sites down rather than run exposed.
+  The Economist counts this among a string of cybersecurity
+  incidents that have darkened websites in recent weeks, raising
+  the question of how much of the internet's aging code holds
+  up.
+  - FT Home: https://www.ft.com/content/d438af1e-a48c-4aeb-8c84-00cdb5e741e3?syn-25a6b1a6=1
+  - The Economist: https://www.economist.com/science-and-technology/2026/10/22/is-the-internet-still-safe
+* Russia Bombards Kyiv Hours After the Witkoff Talks
+  Latest developments: The Financial Times reported Thursday,
+  October 22, that Russia's hourslong overnight barrage on Kyiv
+  included cluster warheads, delivered immediately after Steve
+  Witkoff met Vladimir Putin in St. Petersburg, and Ukraine
+  agreed to buy ammunition and weapons through a NATO
+  procurement agency to speed deliveries and cut costs.
+  President Trump's envoy met Volodymyr Zelenskyy in Oslo before
+  traveling to St. Petersburg, where he called Putin a
+  humanitarian and floated resuming peace talks. Moscow's
+  military said its air defenses downed 808 Ukrainian drones
+  over Moscow and other cities, and the strikes have cooled the
+  hopes the diplomacy raised.
+  - FT World: https://www.ft.com/content/9f0c58d3-1833-40de-b805-f5ac53f05ff0?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/991ac37c-289b-40e5-b2e6-220ee2aebe5d?syn-25a6b1a6=1
+
+PITTSBURGH
+----------------------------------------------------------------
+
+Weather:
+  This Afternoon: Sunny, high 66F.
+  Tonight: Mostly Clear, low 43F.
+  Friday: Mostly Sunny, high 64F.
+
+Business:
+* U.S. Steel Funds a $3 Billion Mill in Braddock
+  Latest developments: The U.S. Steel board approved nearly $3
+  billion in full funding Thursday, October 22, for the new hot
+  strip mill at the company's Mon Valley Works Edgar Thomson
+  Plant in Braddock.
+  The mill replaces aging equipment and raises annual capacity
+  at Edgar Thomson to roughly 3.5 million tons from 2.2 million,
+  the largest industrial commitment in the Mon Valley since
+  Nippon Steel bought U.S. Steel. Braddock residents left a
+  meeting on the project frustrated on October 16, and a
+  Post-Gazette letter writer this week pressed Allegheny County
+  to defend air quality around the plant.
+  - WPXI: https://www.wpxi.com/news/local/us-steel-board-approves-nearly-3b-new-hot-strip-mill-edgar-thomson-plant-braddock/AW45BNDYKVHBPJ4SHN4L5B755Y/
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/local/2026/10/22/us-steel-braddock-strip-mill-pollution/stories/202610150043
+* Westinghouse Builds Up Fuel Before an IPO
+  Latest developments: The Post-Gazette reported Thursday,
+  October 22, that Westinghouse is expanding its nuclear fuel
+  business as it prepares an initial public offering.
+  Westinghouse Electric Co., which runs its headquarters out of
+  Cranberry Township in Butler County and designs the AP1000
+  reactor, supplies the fuel that commercial nuclear plants
+  burn. A United States Department of Energy official said on
+  October 16 that the Pittsburgh region will play a large role
+  in the Trump administration's drive to triple American nuclear
+  output by 2050.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/business/powersource/2026/10/22/westinghouse-nuclear-revival-ipo/stories/202610220040
+* CardVault Opens in the Strip District
+  Latest developments: KDKA reported Thursday, October 22, that
+  CardVault by Tom Brady will open a Pittsburgh store on
+  November 1 in The Terminal along Smallman Street in the Strip
+  District.
+  CardVault, the sports trading card retail chain the
+  quarterback Tom Brady backs, buys and sells cards and
+  memorabilia. The Terminal, the redeveloped produce terminal on
+  Smallman Street, has filled its storefronts with restaurants
+  and retailers over the past several years.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/cardvault-by-tom-brady-opening-new-location-in-pittsburghs-strip-district/
+* Trib Total Media Promotes Luis Fabregas
+  Latest developments: Trib Total Media elevated Luis Fabregas
+  to vice president and executive editor, TribLive reported
+  Thursday, October 22.
+  Fabregas has run the Trib's newsroom as its top editor for
+  five years and spent decades as a reporter and editor in
+  Pittsburgh. Trib Total Media publishes TribLive and the Valley
+  News Dispatch and competes with the Post-Gazette across
+  Allegheny and Westmoreland counties.
+  - TribLive: https://triblive.com/local/regional/executive-editor-fabregas-adds-vp-to-title/
+* CCAC Faculty Weigh a Walkout
+  Latest developments: PublicSource reported Thursday, October
+  22, that faculty at the Community College of Allegheny County
+  are weighing a strike as they press for higher wages in
+  contract negotiations.
+  Union leaders at CCAC say they know of no strike or strike
+  authorization vote on the campuses since 1972, a year after
+  the faculty organized, which makes the current push close to
+  unprecedented. A walkout would interrupt classes across the
+  college's four campuses in Allegheny County.
+  - PublicSource: https://www.publicsource.org/ccac-faculty-contract-negotiations-strike/
+* Security Officers Ratify a Four-Year Contract
+  Latest developments: About 1,400 Pittsburgh security officers
+  voted overwhelmingly to ratify a new four-year contract
+  covering 12 security contractors, WPXI reported late
+  Wednesday, October 21.
+  The officers staff downtown office towers and other properties
+  for the contracting firms that employ them, and the agreement
+  settles terms through 2030 for one of the larger service
+  workforces in the central business district.
+  - WPXI: https://www.wpxi.com/news/local/pittsburgh-security-officers-ratify-new-contract/SPAITOLUZJECVCYTPQS5T2XMEQ/
+* Small Employers Talk About Leaving Allegheny County
+  Latest developments: County Executive Sara Innamorato will
+  sign the paid parental leave mandate into law, WTAE reported
+  Thursday, October 22, as KDKA found small businesses weighing
+  layoffs or a move out of the county over the cost and
+  TribLive's editorial board asked what comes next for the
+  policy.
+  Allegheny County Council voted 11-4 on Tuesday, October 20, to
+  require 12 weeks of paid parental leave from employers
+  countywide, the first mandate of its kind at the county level
+  in the United States. Owners of small firms say the cost lands
+  hardest on payrolls too thin to cover a 12-week absence.
+  - WTAE: https://www.wtae.com/article/allegheny-county-paid-parental-leave-signing/74216512
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/allegheny-county-paid-parental-leave-strong-reactions/
+  - TribLive: https://triblive.com/opinion/editorial-whats-next-for-paid-parental-leave/
+
+Around town:
+* Franklin and Marshall Poll Puts Shapiro Ahead
+  Latest developments: A new Franklin & Marshall College Poll
+  released Thursday, October 22, shows Governor Josh Shapiro
+  leading the governor's race, with Pennsylvania voters opposing
+  Flock license plate cameras and supporting measles vaccination
+  efforts.
+  Shapiro, a Democrat seeking a second term, meets Republican
+  state Treasurer Stacy Garrity on November 3. The same survey
+  registers broad support for vaccination as Pennsylvania works
+  through a measles outbreak that has infected more than 1,200
+  people and as police departments across the region install
+  Flock automated license plate readers.
+  - WTAE: https://www.wtae.com/article/pa-poll-shapiro-garrity-election-measles-flock-cameras-trump/74219745
+* Weekend Rail Closures Slow Downtown Riders
+  Latest developments: The Post-Gazette reported Thursday,
+  October 22, that light rail riders traveling between downtown
+  Pittsburgh and Mount Washington face delays this weekend
+  because of two Pittsburgh Regional Transit rail closures.
+  Pittsburgh Regional Transit announced the closures on October
+  20, and they stretch travel times for bus and light rail
+  passengers moving between the South Hills, Mount Washington,
+  and downtown Pittsburgh from Saturday, October 24, through
+  Sunday, October 25.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/transportation/2026/10/22/public-transit-delays-weekend-downtown-pittsburgh-mt-washington/stories/202610220054
+* Robert Morris Marks 50 Years of Sports Management
+  Latest developments: Robert Morris University celebrated the
+  50th year of its sports management program Thursday, October
+  22, with Mark Cuban headlining the event, TribLive reported.
+  Armand Buzzelli, who directs the program at the Moon Township
+  university, said the field moves so fast that a textbook
+  written three weeks ago already reads as out of date. Cuban,
+  the Mount Lebanon native and former Dallas Mavericks owner,
+  spoke to the anniversary gathering.
+  - TribLive: https://triblive.com/news/education-classroom/50-years-of-sports-management-program-at-robert-morris-headlined-by-mark-cuban/
+* A Funeral Director Pleads in the Pet Remains Case
+  Latest developments: Patrick Vereb pleaded guilty Thursday
+  morning, October 22, to all charges in the pet cremation
+  fraud, and the judge revoked his bond and ordered him to the
+  Allegheny County Jail for three months pending sentencing
+  after he acknowledged moving to Crawford County following his
+  2025 arrest.
+  The Pennsylvania attorney general's office says Vereb, who ran
+  a Pittsburgh-area funeral home and pet crematory, took money
+  from more than 6,000 pet owners who paid to have their animals
+  cremated and the ashes returned. Deputies led him from the
+  courtroom in handcuffs.
+  - WPXI: https://www.wpxi.com/news/local/former-funeral-home-director-accused-mishandling-pet-remains-expected-plead-guilty-thursday/UMJCUFSP5NAWNPDDC4YUTOURU4/
+  - WTAE: https://www.wtae.com/article/pittsburgh-funeral-home-owner-vereb-guilty/74218328
+  - TribLive: https://triblive.com/local/valley-news-dispatch/patrick-vereb-ordered-to-jail-in-pet-cremation-fraud-case/
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/crime-courts/2026/10/22/patrick-vereb-eternity-pet-update/stories/202610220056
+* McGinley Weighs Toll Roads Against Old Bridges
+  Latest developments: Post-Gazette columnist Brandon McGinley
+  argued Thursday, October 22, that Pennsylvania should put the
+  money going into new Pennsylvania Turnpike toll roads, the
+  Mon-Fayette Expressway above all, into repairing the bridges
+  the region already has.
+  The Mon-Fayette Expressway extension has consumed turnpike
+  dollars for decades while bridges in Pittsburgh neighborhoods
+  such as Bloomfield wait for rehabilitation. McGinley made a
+  similar case on October 15 about the California Avenue bridge
+  on the North Side.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/local/city/2026/10/22/mon-fayette-expressway-turnpike-toll-road-bridges-bloomfield/stories/202610220003
+* Early Mail Voting Data Stays Murky
+  Latest developments: The Post-Gazette reported Thursday,
+  October 22, that early Pennsylvania mail ballot data gives no
+  clear answer on whether President Trump's attacks on mail
+  voting have discouraged his own party's voters.
+  Polls this year suggested Republicans might turn away from
+  mail ballots, a method the party had been building in
+  Pennsylvania since 2020. With Election Day on November 3, the
+  mail returns so far cut in enough directions that neither
+  campaign can claim the evidence.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-state/2026/10/22/pennsylvania-early-mail-voting/stories/202610220012
+* Jeannette Hunts a $176,930 Gap
+  Latest developments: TribLive reported Thursday, October 22,
+  that Jeannette officials are working to pare a $176,930
+  deficit out of the current draft of the city's 2027 budget.
+  The Westmoreland County city of roughly 9,000 must adopt a
+  balanced budget by the end of the year, and the shortfall sets
+  up decisions on spending cuts or a tax increase in the weeks
+  ahead.
+  - TribLive: https://triblive.com/local/westmoreland/jeannette-looks-to-trim-budget-deficit/
+* Frosty Mornings, Clear Skies Through the Weekend
+  Latest developments: WPXI and WTAE both hold Western
+  Pennsylvania under sunshine Thursday, October 22, and through
+  the weekend, with frosty starts giving way to afternoon highs
+  in the 60s.
+  Very little cloud cover is expected across the region over the
+  next several days, which keeps the Steelers watch parties,
+  fall festivals, and Halloween events on the calendar dry.
+  - WPXI: https://www.wpxi.com/weather/sunshine-continues-thursday-with-mostly-clear-skies/IOCY2GIVZVCHJGKNN6RMLCGM3A/
+  - WPXI: https://www.wpxi.com/news/local/beautiful-weather-with-highs-60s-continues-through-weekend/2E4E27SII5FHNLKF5EY7JQC7GU/
+  - WTAE: https://www.wtae.com/article/pittsburgh-sunshine-a-few-clouds-for-a-change/74213288
+
+Events:
+* Primanti Bros. Opens Early for the Paris Kickoff
+  Latest developments: WPXI reported Thursday, October 22, that
+  Primanti Bros. will open its locations early for the Steelers
+  game in Paris, with a morning happy hour starting at 9 a.m.
+  and half-price prices on nearly every drink behind the bar.
+  Pittsburgh plays the New Orleans Saints on Sunday, October 25,
+  at 9:30 a.m. Eastern on NFL Network at the Stade de France.
+  Primanti Bros., the sandwich chain born in the Strip District,
+  runs restaurants across the Pittsburgh region.
+  - WPXI: https://www.wpxi.com/news/local/primanti-bros-plan-open-locations-early-steelers-game-paris/IMA3CINMZVHVLGBAQWKNDLHMBU/
+* Arcade Comedy Theater Gets a New Director
+  Latest developments: The Post-Gazette reported Thursday,
+  October 22, that Kathryn Spitz Cohan has taken over as
+  director of Arcade Comedy Theater, a job she says has her
+  laughing "so hard my cheeks hurt."
+  Arcade Comedy Theater, the nonprofit comedy venue in downtown
+  Pittsburgh, stages improv, stand-up, and sketch shows and
+  teaches classes. Spitz Cohan previously ran Film Pittsburgh,
+  the nonprofit behind the city's film festivals.
+  - Post-Gazette Arts & Entertainment: https://www.post-gazette.com/life/goodness/2026/10/22/kathryn-spitz-cohan-arcade-comedy-theater/stories/202610220002
+* Anne Martindale Williams Takes Her Last Bow
+  Latest developments: The Post-Gazette reported Thursday,
+  October 22, that Anne Martindale Williams, principal cellist
+  of the Pittsburgh Symphony Orchestra for 50 years, is retiring
+  from the chair.
+  Williams joined the Pittsburgh Symphony in the 1970s and has
+  led its cello section through five decades of music directors
+  at Heinz Hall downtown, one of the longest tenures in the
+  orchestra's history.
+  - Post-Gazette Arts & Entertainment: https://www.post-gazette.com/ae/music/2026/10/22/pittsburgh-symphony-cellist-retires-anne-martindale-williams/stories/202610220004
+* Smokey Robinson Plays Pittsburgh This Weekend
+  Latest developments: The Post-Gazette's weekend guide,
+  published Thursday, October 22, leads with a Smokey Robinson
+  concert and a big-screen showing of "The Thing" over the
+  weekend of October 23 to 25.
+  Robinson, the Motown singer and songwriter behind "The Tracks
+  of My Tears" and "Cruisin'," headlines a weekend slate that
+  also includes the horror revival screening and other
+  recreation listings around the city.
+  - Post-Gazette Arts & Entertainment: https://www.post-gazette.com/life/recreation/2026/10/22/things-to-do-this-weekend-pittsburgh-13/stories/202610210057
+* A Stephen King Roast and a Drag Pageant
+  Latest developments: Pittsburgh City Paper published its guide
+  Thursday, October 22, to the top events running Thursday,
+  October 22, through Wednesday, October 28.
+  The week's list carries a roast of the novelist Stephen King,
+  a drag pageant, a spooky book fair, and a run of fall
+  festivals across the city in the last stretch before
+  Halloween.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/listings/this-weeks-top-events/pittsburghs-top-events-thu-oct-22-wed-oct-28/
+
+SPORTS
+----------------------------------------------------------------
+
+Steelers (4-2)
+  Up Next · Steelers @ Saints · Sun Oct 25, 9:30 AM
+    https://plaintextsports.com/nfl/2026/week7/pit-no
+
+Penguins (3-6)
+  Up Next · Panthers @ Penguins · Thu Oct 22, 7:00 PM
+    https://plaintextsports.com/nhl/2026-10-22/fla-pit
+
+Around the Teams:
+* Rooney Reads the NFL's Paris Security Plan
+  Latest developments: Steelers President Art Rooney II said
+  Thursday, October 22, that the NFL will add security for
+  Sunday's game in Paris and that league officials "don't seem
+  to be concerned," and the Post-Gazette detailed the same day
+  how team staffers began planning the trip and working its
+  logistical obstacles in June.
+  Pittsburgh meets the New Orleans Saints on Sunday, October 25,
+  at 9:30 a.m. Eastern on NFL Network at the Stade de France,
+  the league's Paris game, a week after riots and looting swept
+  Paris, Marseille, and other French cities and prefects imposed
+  curfews.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/22/nfl-paris-game-protests-security-measures/stories/202610220043
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/22/steelers-paris-trip-planning/stories/202610220046
+* Fittipaldo and Heyward Pack for France
+  Latest developments: Ray Fittipaldo took reader questions on
+  the Paris game in his Post-Gazette Steelers chat Thursday,
+  October 22, and Cam Heyward's show Not Just Football posted a
+  clip the same day on what the players are carrying to France.
+  Fittipaldo covers the Steelers for the Post-Gazette, and Not
+  Just Football is the podcast defensive lineman Cam Heyward
+  hosts with Hayden Walsh. Both landed as the team prepared to
+  leave for Sunday's game against the New Orleans Saints.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/22/live-steelers-chat/stories/202610220045
+  - Not Just Football with Cam Heyward: https://www.youtube.com/shorts/ZmJFxJEy3Fw
+* Steelers Fans Find Paris Calm
+  Latest developments: The Post-Gazette reported Thursday,
+  October 22, that Steelers fans who flew to France for Sunday's
+  game have found Paris welcoming and quiet, the unrest that
+  swept French cities last weekend notwithstanding.
+  Pittsburgh meets the New Orleans Saints on Sunday, October 25,
+  at 9:30 a.m. Eastern on NFL Network in the league's Paris
+  game, a trip some fans reconsidered after riots and looting
+  hit Paris, Marseille, and other cities and prefects imposed
+  curfews.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/22/steelers-game-fans-paris-protests-riots/stories/202610220044
+* The Steelers Pack for Paris
+  Latest developments: The team's channel posted its Wednesday,
+  October 21, media sessions with tight end Pat Freiermuth,
+  running back Rico Dowdle, and newly re-signed receiver Marquez
+  Valdes-Scantling alongside head coach Mike McCarthy's news
+  conference and the Sights & Sounds film from the Week 6 win at
+  the Tampa Bay Buccaneers, the last home content before the
+  team leaves for France.
+  Pittsburgh plays the New Orleans Saints on Sunday, October 25,
+  at 9:30 a.m. Eastern on NFL Network, the league's Paris game,
+  and the Post-Gazette's food pages built a French tailgate menu
+  for fans watching from home.
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=2BEQkzVwsWQ
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=K8LljUenfns
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=Trzxzx_RfSs
+  - Post-Gazette Steelers: https://www.post-gazette.com/life/recipes/2026/10/22/parisian-tailgate-steelers-paris-french-menu/stories/202610250003
+
+Team USA:
+* The U.S. Hosts the First Women's Club World Cup
+  Latest developments: FIFA said Thursday, October 22, that it
+  will stage the inaugural Women's Club World Cup in the United
+  States in January 2028.
+  The new tournament gathers women's club champions from around
+  the world, and FIFA has handed the first edition to the same
+  country that will host the Los Angeles Olympics later in 2028.
+  The January dates fall between the 2027 Women's World Cup and
+  that Summer Games.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50249418/usa-host-2028-inaugural-womens-club-world-cup
+
+READING
+----------------------------------------------------------------
+
+* Stratechery -- An Interview with Craig Moffett About SpaceX
+  and Bubbles
+  Ben Thompson interviews the telecom analyst Craig Moffett on
+  SpaceX's path from launch into broadband and mobile service,
+  and on how the lessons of the dot-com bubble apply to today's
+  capital spending boom.
+  https://stratechery.com/2026/an-interview-with-craig-moffett-about-spacex-and-bubbles/
+
+* Ed Zitron -- AI Had Better Work Out
+  Zitron argues the money now committed to artificial
+  intelligence leaves the industry no room for a mediocre
+  outcome, and he walks through the finances that would unravel
+  if the revenue fails to arrive.
+  https://www.wheresyoured.at/ai-had-better-work-out/
+
+* Cal Newport -- The Good Thing About Hard Things
+  Newport takes up a Conference on Language Modeling paper, "AI
+  Assistance Reduces Persistence and Hurts Independent
+  Performance," and argues that struggling through difficulty is
+  the part of work that builds the ability to do it alone.
+  https://calnewport.com/the-good-thing-about-hard-things/
+
+MARKETS (weekly average, change vs prior week)
+----------------------------------------------------------------
+S&P 500     7,712.79  ▼ -0.9%
+Dow        52,299.62  ▲ +1.3%
+Nasdaq     26,482.33  ▼ -2.4%
+WTI crude     100.40  ▲ +7.6%
+EUR/USD       1.1215  ▲ +0.2%
+GBP/USD       1.3304  ▲ +0.6%
+USD/JPY       158.14  ▼ -0.1%
+
+FEED HEALTH
+----------------------------------------------------------------
+Security: 24 of 24 feeds loaded, 66 items in the 24-hour window.
+  No recent items: Krebs on Security, Sophos News, Google Online
+  Security Blog, Microsoft Security Blog, Google Project Zero,
+  The DFIR Report, Kim Zetter (Zero Day), Frank on Fraud.
+Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
+Business and Politics: 8 of 8 feeds loaded, 60 items in the
+  36-hour window.
+Events: 4 of 4 feeds loaded, 10 items in the 120-hour window.
+Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
+  window.
+Team USA: 3 of 3 feeds loaded, 28 items in the 72-hour window.
+Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
+Markets (Yahoo Finance): 7 of 7 rows
+Weather (NWS): 3 forecast periods
+Scores (ESPN, plaintextsports): 2 teams via ESPN
+Summaries: 3 model call(s) served by claude-opus-5 (430s of
+  model time; $2.29 at API list price).
+
+================================================================
+Generated 2026-10-22 13:37 EDT. Updated weekdays at about 7:05
+AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
+8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
+feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
+beat and podcast feeds; 3 Team USA feeds; WSJ World News, WSJ
+Markets, WSJ US Business, WSJ Politics, The Economist, FT Home,
+FT World, FT Markets; and Ed Zitron, Stratechery, Cal Newport.
+Markets from Yahoo Finance, weather from the NWS, scores from
+ESPN or plaintextsports.com. Summaries are AI-generated from the
+linked reporting; verify at the sources.
+================================================================

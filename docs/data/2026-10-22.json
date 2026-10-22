@@ -1,23 +1,23 @@
 {
   "date": "2026-10-22",
-  "headline": "Amazon's honeypots caught attackers exploiting the two critical PHP flaws four days before the PHP Foundation disclosed them, and mass scanning of nearly 70% of the web's servers followed within hours of the patches.",
+  "headline": "Amazon's honeypots caught PHP2Shell exploit attempts four days before the PHP Foundation disclosed the two flaws, and broad exploitation now sweeps WordPress, Drupal, and Magento servers worldwide.",
   "emerging_trends": [
     {
-      "text": "Amazon's MadPot sensors logged a PHP2Shell exploit attempt on October 17, 2026, four days ahead of disclosure, which tells defenders that leaked pre-patch details now reach attackers faster than they reach vendors.",
+      "text": "Amazon's MadPot sensors recorded a PHP2Shell exploit attempt four days before anyone outside the PHP Foundation knew the bugs existed, and Arista shipped an emergency fix the same week for a VeloCloud Orchestrator zero-day already under attack, so defenders now budget for exploitation that starts ahead of disclosure.",
       "topic_title": "PHP2Shell Exploitation Began Before Disclosure",
       "link_phrase": "MadPot",
       "_anchor": "trend-1"
     },
     {
-      "text": "LiteLLM, Railway, and 333 hijacked Tor exit relays all funneled attackers toward the same prize this week—developer credentials, cloud logins, and API keys—making secret rotation the fastest control a company can pull.",
+      "text": "A GitHub token that leaked into LiteLLM's own AI gateway logs let attackers publish a credential stealer to PyPI and Docker Hub, the package's second compromise this year, and Railway disclosed that an intruder read decrypted customer environment variables, which makes machine credentials the softest target in the AI stack.",
       "topic_title": "LiteLLM and Railway Push Users to Rotate Secrets",
       "link_phrase": "LiteLLM",
       "_anchor": "trend-2"
     },
     {
-      "text": "Anthropic turned Claude loose on 25 open-source projects and found 493 exposure problems, a sign that companies now audit code with the same agents they grant authority to run it.",
+      "text": "Anthropic turned Claude loose on 25 open-source projects and counted 493 exposure problems, 70% of surveyed technology and security leaders now let agents take actions that required human sign-off a year ago, and CISA joined the Canadian Centre for Cyber Security to publish guidance on managing AI token consumption, evidence that governance trails deployment by a wide margin.",
       "topic_title": "Claude Audits Open Source as Agent Permissions Spread",
-      "link_phrase": "Anthropic",
+      "link_phrase": "Claude",
       "_anchor": "trend-3"
     }
   ],
@@ -25,7 +25,7 @@
     {
       "title": "PHP2Shell Exploitation Began Before Disclosure",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Amazon's threat intelligence team, whose chief information security officer CJ Moses described the finding, said its MadPot honeypot service logged an exploit attempt from a commercial anonymization network on October 17, 2026, four days before the PHP Foundation disclosed CVE-2026-109618 and CVE-2026-109619, and broad scanning followed within hours of the patches; Palo Alto Networks confirmed that every version of PAN-OS and Panorama carries the flaws and has shipped no fixed release, Fortinet is checking 12 products and Cisco 31 products and cloud services, and OpenAI proposed a five-stage disclosure process for critical open-source bugs after Calif found one of the two flaws with the GPT-5.6 Sol model under OpenAI's Patch the Planet initiative and Wiz reported both independently.",
+      "latest_developments": "Amazon's threat intelligence team, whose chief information security officer CJ Moses described the finding, said its MadPot honeypot service logged an exploit attempt from a commercial anonymization network on October 17, 2026, four days before the PHP Foundation disclosed CVE-2026-109618 and CVE-2026-109619, and broad scanning followed within hours of the patches; Searchlight Cyber released php2shell-scanner, an open-source tool that tests a host for both bugs, and researchers now confirm exploitation against WordPress, Drupal, Joomla, phpMyAdmin, Nextcloud, and Magento installations; Palo Alto Networks confirmed that every version of PAN-OS and Panorama carries the flaws and has shipped no fixed release, Fortinet is checking 12 products and Cisco 31 products and cloud services, and OpenAI proposed a five-stage disclosure process for critical open-source bugs after Calif found one of the two flaws with the GPT-5.6 Sol model under OpenAI's Patch the Planet initiative and Wiz reported both independently.",
       "summary": "PHP2Shell is a pair of critical flaws in the PHP runtime that run an unauthenticated attacker's code on any server answering web requests, regardless of the application on top. CISA tells organizations to move to PHP 8.5.12, 8.4.27, 8.3.36, or 8.2.35 immediately; customers of appliances that embed PHP, among them PAN-OS and Panorama, must wait on vendor builds and restrict management interfaces meanwhile.",
       "tags": [
         "zero-day",
@@ -55,40 +55,6 @@
         }
       ],
       "_anchor": "i-01e27be4fe"
-    },
-    {
-      "title": "Oracle, Cisco, and Node.js Ship a Patch Wave",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Oracle's October 2026 Critical Patch Update, published October 22, 2026, carries more than 1,200 fixes, nearly 100 of them critical, with Fusion Middleware taking the largest share; Cisco closed 34 flaws spanning command execution, authentication bypass, and cross-site scripting; Node.js patched 10 bugs across its 22.x, 24.x, and 26.x lines, the worst a remote code execution flaw in the Brotli decompression code it bundles; FoxIO published working proof-of-concept code for QPACK flaws that let one unauthenticated connection crash many HTTP/3 servers by expanding a small batch of compressed headers into thousands of times more memory; and Splunk, SolarWinds, and Signal shipped their own fixes, the last closing CVE-2026-113380 in RingRTC versions before 2.72.0, which kept sending a caller's audio to the other party after that caller hung up.",
-      "summary": "The quarterly releases and out-of-cycle fixes land in the same week as PHP2Shell, which stretches patch teams thin. Administrators should rank unauthenticated code execution first, starting with internet-facing Node.js services, Cisco gear, and any HTTP/3 endpoint, then work through Oracle's middleware stack.",
-      "tags": [
-        "patch",
-        "rce",
-        "dos"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Oracle Patches Over 1,200 Vulnerabilities With October 2026 CPU",
-          "url": "https://www.securityweek.com/oracle-patches-over-1200-vulnerabilities-with-october-2026-cpu/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Cisco Patches 34 Vulnerabilities Across Multiple Products",
-          "url": "https://www.securityweek.com/cisco-patches-34-vulnerabilities-across-multiple-products/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Node.js Brotli Decoder Bug Could Allow Remote Code Execution in All Supported Versions",
-          "url": "https://thehackernews.com/2026/10/nodejs-brotli-decoder-bug-could-allow.html"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "New QPACK Flaws Can Crash HTTP/3 Servers, Trigger Up to 4,000-Fold Memory Amplification",
-          "url": "https://thehackernews.com/2026/10/new-qpack-flaws-can-crash-http3-servers.html"
-        }
-      ],
-      "_anchor": "i-a5298e0f95"
     },
     {
       "title": "LiteLLM and Railway Push Users to Rotate Secrets",
@@ -125,10 +91,44 @@
       "_anchor": "i-7f07a05841"
     },
     {
+      "title": "Oracle, Cisco, and Node.js Ship a Patch Wave",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Oracle's October 2026 Critical Patch Update, published October 22, 2026, carries more than 1,200 fixes, nearly 100 of them critical, with Fusion Middleware taking the largest share; Cisco closed 34 flaws spanning command execution, authentication bypass, and cross-site scripting; Node.js patched 10 bugs across its 22.x, 24.x, and 26.x lines, the worst a remote code execution flaw in the Brotli decompression code it bundles; FoxIO published working proof-of-concept code for QPACK flaws that let one unauthenticated connection crash many HTTP/3 servers by expanding a small batch of compressed headers into thousands of times more memory; and Splunk, SolarWinds, and Signal shipped their own fixes, the last closing CVE-2026-113380 in RingRTC versions before 2.72.0, which kept sending a caller's audio to the other party after that caller hung up.",
+      "summary": "The quarterly releases and out-of-cycle fixes land in the same week as PHP2Shell, which stretches patch teams thin. Administrators should rank unauthenticated code execution first, starting with internet-facing Node.js services, Cisco gear, and any HTTP/3 endpoint, then work through Oracle's middleware stack.",
+      "tags": [
+        "patch",
+        "rce",
+        "dos"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Oracle Patches Over 1,200 Vulnerabilities With October 2026 CPU",
+          "url": "https://www.securityweek.com/oracle-patches-over-1200-vulnerabilities-with-october-2026-cpu/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Cisco Patches 34 Vulnerabilities Across Multiple Products",
+          "url": "https://www.securityweek.com/cisco-patches-34-vulnerabilities-across-multiple-products/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Node.js Brotli Decoder Bug Could Allow Remote Code Execution in All Supported Versions",
+          "url": "https://thehackernews.com/2026/10/nodejs-brotli-decoder-bug-could-allow.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "New QPACK Flaws Can Crash HTTP/3 Servers, Trigger Up to 4,000-Fold Memory Amplification",
+          "url": "https://thehackernews.com/2026/10/new-qpack-flaws-can-crash-http3-servers.html"
+        }
+      ],
+      "_anchor": "i-a5298e0f95"
+    },
+    {
       "title": "Claude Audits Open Source as Agent Permissions Spread",
       "area": "AI Security",
-      "latest_developments": "Anthropic's Frontier Red Team reported on October 22, 2026 that it used Claude to examine 25 open-source projects and found 493 problems involving unnecessary exposure, conflicting settings, and code that runs before security checks, among them 94 cases where a project drops security controls with no warning; a survey of 1,100 information technology and security decision-makers found 70% now let AI make decisions and take actions that needed a person's sign-off a year ago, with three in four organizations hitting at least one AI-related security problem or warning sign in the past year; and researchers at Imperial College London tampered with speech-to-text models so that one chosen speaker's words transcribed as text the attacker picked, in one test a request to send $5,000 that AI agents reading the transcript executed in a sandboxed banking environment.",
-      "summary": "The three findings share a root: organizations hand agents authority faster than they inspect the code and models underneath. Teams running agents should cut exposed functionality in the software agents touch, require approval for financial actions, and treat fine-tuning access to a speech model as a privileged pipeline.",
+      "latest_developments": "Anthropic's Frontier Red Team reported on October 22, 2026 that it used Claude to examine 25 open-source projects and found 493 problems involving unnecessary exposure, conflicting settings, and code that runs before security checks, among them 94 cases where a project drops security controls with no warning; a survey of 1,100 information technology and security decision-makers found 70% now let AI make decisions and take actions that needed a person's sign-off a year ago, with three in four organizations hitting at least one AI-related security problem or warning sign in the past year; CISA and the Canadian Centre for Cyber Security published joint guidance on managing AI token consumption, warning that unmanaged usage drives unpredictable cost and can cut access to critical services; and researchers at Imperial College London tampered with speech-to-text models so that one chosen speaker's words transcribed as text the attacker picked, in one test a request to send $5,000 that AI agents reading the transcript executed in a sandboxed banking environment.",
+      "summary": "The findings share a root: organizations hand agents authority faster than they inspect the code and models underneath. Teams running agents should cut exposed functionality in the software agents touch, require approval for financial actions, and treat fine-tuning access to a speech model as a privileged pipeline.",
       "tags": [
         "ai",
         "supply chain",
@@ -144,6 +144,11 @@
           "source": "Help Net Security",
           "title": "AI agent permissions are outrunning security",
           "url": "https://www.helpnetsecurity.com/2026/10/22/ai-agent-permissions-security/"
+        },
+        {
+          "source": "CISA Advisories",
+          "title": "Managing AI Token Consumption for Operational Resilience",
+          "url": "https://www.cisa.gov/resources-tools/resources/managing-ai-token-consumption-operational-resilience"
         },
         {
           "source": "Help Net Security",
@@ -178,9 +183,72 @@
           "source": "The Record",
           "title": "Cybercrime crackdown across Africa leads to 1,462 arrests, $105 million seized",
           "url": "https://therecord.media/africa-cybercrime-interpol-arrests"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "INTERPOL Arrests 1,462 Suspects, Disrupts 10,909 Cybercrime Networks in Global Crackdown",
+          "url": "https://thehackernews.com/2026/10/interpol-arrests-1462-suspects-disrupts.html"
         }
       ],
       "_anchor": "i-df0211e45e"
+    },
+    {
+      "title": "Arista Patches an Exploited VeloCloud Zero-Day",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Arista Networks released security updates on October 22, 2026 for a zero-day flaw that attackers already exploit in VeloCloud Orchestrator On-Prem deployments, and GitLab a day earlier closed a maximum-severity bug in its Regular Expression Compiler that runs an unauthenticated attacker's code on self-managed servers, reaching every release back to version 7.0 from 2014.",
+      "summary": "VeloCloud Orchestrator runs SD-WAN fleets, so one compromised on-premises orchestrator hands an attacker reach across an enterprise's branch network. Install Arista's updates now and keep orchestrator management interfaces off the public internet; self-managed GitLab administrators who applied the October 12 patch still need the newer builds that sit one patch above it.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Arista patches new VeloCloud Orchestrator zero-day exploited in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "GitLab warns of new max severity code execution vulnerability",
+          "url": "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Critical GitLab Flaw (CVSS 10.0) Could Allow Unauthenticated RCE Across 12 Years of Releases",
+          "url": "https://thehackernews.com/2026/10/critical-gitlab-flaw-cvss-100-could.html"
+        }
+      ],
+      "_anchor": "i-5d4f96d6ac"
+    },
+    {
+      "title": "New Mexico Wins $25 Billion From Meta",
+      "area": "Policy and Regulation",
+      "latest_developments": "State District Court Judge Francis J. Mathew ordered Meta to pay New Mexico $25 billion for deceiving Facebook users about privacy in the Cambridge Analytica affair, counting 43 million separate violations, an award five times the $5 billion the Federal Trade Commission levied against the company in 2019 and the largest figure yet attached to that decade-old scandal.",
+      "summary": "New Mexico's case rests on the state's consumer protection and privacy statutes rather than federal law, which shows how a single state attorney general can set a penalty that dwarfs federal action. Companies that share user data with third-party developers should expect state-level exposure sized to per-user statutory damages.",
+      "tags": [
+        "policy",
+        "privacy",
+        "litigation"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Meta Ordered to Pay New Mexico $25 Billion for Deceiving Users About Privacy on Facebook",
+          "url": "https://www.securityweek.com/meta-ordered-to-pay-new-mexico-25-billion-for-deceiving-users-about-privacy-on-facebook/"
+        },
+        {
+          "source": "The Record",
+          "title": "Meta on the spot for $25 billion under New Mexico privacy ruling",
+          "url": "https://therecord.media/meta-new-mexico-penalty-cambridge-analytica-privacy-case"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Meta Ordered to Pay $25 Billion After Court Finds 43 Million Privacy Violations",
+          "url": "https://thehackernews.com/2026/10/meta-ordered-to-pay-25-billion-after.html"
+        }
+      ],
+      "_anchor": "i-dd2c177462"
     },
     {
       "title": "APT41 Bootkit and Sandworm Wiper",
@@ -205,30 +273,6 @@
         }
       ],
       "_anchor": "i-0b85f8ae4b"
-    },
-    {
-      "title": "New Mexico Wins $25 Billion From Meta",
-      "area": "Policy and Regulation",
-      "latest_developments": "A New Mexico court ordered Meta to pay the state $25 billion for deceiving Facebook users about privacy in the Cambridge Analytica affair, an award five times the $5 billion the Federal Trade Commission levied against the company in 2019 and the largest figure yet attached to that decade-old scandal.",
-      "summary": "New Mexico's case rests on the state's consumer protection and privacy statutes rather than federal law, which shows how a single state attorney general can set a penalty that dwarfs federal action. Companies that share user data with third-party developers should expect state-level exposure sized to per-user statutory damages.",
-      "tags": [
-        "policy",
-        "privacy",
-        "litigation"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Meta Ordered to Pay New Mexico $25 Billion for Deceiving Users About Privacy on Facebook",
-          "url": "https://www.securityweek.com/meta-ordered-to-pay-new-mexico-25-billion-for-deceiving-users-about-privacy-on-facebook/"
-        },
-        {
-          "source": "The Record",
-          "title": "Meta on the spot for $25 billion under New Mexico privacy ruling",
-          "url": "https://therecord.media/meta-new-mexico-penalty-cambridge-analytica-privacy-case"
-        }
-      ],
-      "_anchor": "i-dd2c177462"
     },
     {
       "title": "Hijackers Held 333 Tor Exit Nodes for Three Days",
@@ -312,9 +356,9 @@
     }
   ],
   "weather": [
-    "Today: Sunny, high 66F.",
-    "Tonight: Mostly Clear, low 41F.",
-    "Friday: Sunny, high 63F."
+    "This Afternoon: Sunny, high 66F.",
+    "Tonight: Mostly Clear, low 43F.",
+    "Friday: Mostly Sunny, high 64F."
   ],
   "sports": [
     {
@@ -344,12 +388,12 @@
     "business_politics": [
       {
         "title": "Oil Tops $112 and Global Equities Sell Off",
-        "latest_developments": "Brent crude jumped 3.3% past $112 a barrel Thursday, October 22, after a fresh attack on a Saudi airport, driving Wall Street lower at the open, knocking gold down on inflation worries, and pulling the 10-year Treasury yield to 5.040%, its lowest since September, as investors bought safety.",
+        "latest_developments": "Brent held above $112 a barrel Thursday afternoon, October 22, after the Houthis hit Saudi energy facilities again and reports put fresh American military options against Iran on the table; a Meta-led rout deepened the Nasdaq's slide, silver futures headed for their lowest close of the year, and the 10-year Treasury yield slipped under 5% as money ran for cover.",
         "summary": "Houthi drones have struck Saudi energy infrastructure repeatedly, killing two people at Saudi Aramco's Shaybah oilfield, and Washington has ordered some embassy and military personnel out of the kingdom as United States-Iran hostilities threaten to resume. Aramco Chief Executive Amin Nasser says the company is working to lift its East-West pipeline network to 10 million barrels a day to route crude around the Gulf, and technology shares led the global decline as artificial-intelligence earnings disappointed.",
         "sources": [
           {
             "source": "WSJ Markets",
-            "title": "Brent Rises More Than 3% After Deadly Attack in Saudi Arabia",
+            "title": "Fears of Middle East Escalation Keep Bid in Oil Futures",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-amid-concerns-over-re-escalation-of-mideast-conflict-52f2208c?mod=rss_markets_main"
           },
           {
@@ -359,12 +403,12 @@
           },
           {
             "source": "FT Home",
-            "title": "Global stocks tumble as oil price tops $112",
+            "title": "Meta sell-off drags US tech stocks lower as AI spending fears flare up",
             "url": "https://www.ft.com/content/6e318b81-a771-4842-9754-e265fef2852f?syn-25a6b1a6=1"
           },
           {
             "source": "WSJ Markets",
-            "title": "AI Stocks Slide After Earnings Disappoint",
+            "title": "Tech Selloff Deepens as Flight Into Treasurys Drives Yields Lower",
             "url": "https://www.wsj.com/finance/investing/ai-stocks-slide-after-earnings-disappoint-french-bonds-tumble-and-oil-tops-112-734e47a7?mod=rss_markets_main"
           },
           {
@@ -374,7 +418,7 @@
           },
           {
             "source": "WSJ Markets",
-            "title": "Gold Faces 'Difficult Cocktail'",
+            "title": "Silver Futures on Track for Lowest Close of the Year",
             "url": "https://www.wsj.com/finance/commodities-futures/gold-falls-weighed-by-rising-energy-costs-fed-uncertainty-83d723e8?mod=rss_markets_main"
           }
         ],
@@ -382,12 +426,12 @@
       },
       {
         "title": "French Spread Over Bunds Hits a 2011 High",
-        "latest_developments": "French government bond yields jumped again Thursday, October 22, while United States and German yields fell, stretching the gap between 10-year French and German debt to its widest since 2011, and Emmanuel Macron said France will let labor unions march on Saturday and ban other activist protests.",
+        "latest_developments": "French turmoil drove the 10-year United States Treasury yield under 5% Thursday, October 22, as investors fled to havens and the gap between 10-year French and German debt stayed at its widest since 2011, and Emmanuel Macron said labor unions may march Saturday while he bans other activist protests.",
         "summary": "Investors told the Wall Street Journal that the foreign capital financing France may now be running in reverse, deepening a selloff that accelerated after last weekend's riots and looting in Paris, Marseille, and other cities. The Economist argues the protests show Europe's centrist governments, Macron's above all, have fallen dangerously short six months before the French presidential election.",
         "sources": [
           {
             "source": "WSJ Markets",
-            "title": "French Government-Bond Yields Jump, Spread Widens as Treasury Yields Fall",
+            "title": "U.S. 10-Year Treasury Yield Falls Under 5% as French Turmoil Fuels Flight for Safety",
             "url": "https://www.wsj.com/finance/investing/french-government-bond-yields-rise-spread-widens-as-treasury-yields-fall-e67fc4cd?mod=rss_markets_main"
           },
           {
@@ -396,7 +440,7 @@
             "url": "https://www.wsj.com/finance/investing/frances-debt-crisis-deepens-as-foreign-investors-look-for-the-exit-e6ef398c?mod=rss_markets_main"
           },
           {
-            "source": "FT World",
+            "source": "FT Home",
             "title": "Macron warns some protests will be banned",
             "url": "https://www.ft.com/content/43f3144f-7aa8-4821-b5c6-0da470b9af34?syn-25a6b1a6=1"
           },
@@ -446,6 +490,24 @@
       }
     ],
     "business": [
+      {
+        "title": "U.S. Steel Funds a $3 Billion Mill in Braddock",
+        "latest_developments": "The U.S. Steel board approved nearly $3 billion in full funding Thursday, October 22, for the new hot strip mill at the company's Mon Valley Works Edgar Thomson Plant in Braddock.",
+        "summary": "The mill replaces aging equipment and raises annual capacity at Edgar Thomson to roughly 3.5 million tons from 2.2 million, the largest industrial commitment in the Mon Valley since Nippon Steel bought U.S. Steel. Braddock residents left a meeting on the project frustrated on October 16, and a Post-Gazette letter writer this week pressed Allegheny County to defend air quality around the plant.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "U.S. Steel board approves nearly $3B for new hot strip mill at Edgar Thomson Plant in Braddock",
+            "url": "https://www.wpxi.com/news/local/us-steel-board-approves-nearly-3b-new-hot-strip-mill-edgar-thomson-plant-braddock/AW45BNDYKVHBPJ4SHN4L5B755Y/"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Letter to the editor: County must defend air quality",
+            "url": "https://www.post-gazette.com/local/2026/10/22/us-steel-braddock-strip-mill-pollution/stories/202610150043"
+          }
+        ],
+        "_anchor": "i-2a550d24fa"
+      },
       {
         "title": "Westinghouse Builds Up Fuel Before an IPO",
         "latest_developments": "The Post-Gazette reported Thursday, October 22, that Westinghouse is expanding its nuclear fuel business as it prepares an initial public offering.",
@@ -537,6 +599,73 @@
     ],
     "around_town": [
       {
+        "title": "Franklin and Marshall Poll Puts Shapiro Ahead",
+        "latest_developments": "A new Franklin & Marshall College Poll released Thursday, October 22, shows Governor Josh Shapiro leading the governor's race, with Pennsylvania voters opposing Flock license plate cameras and supporting measles vaccination efforts.",
+        "summary": "Shapiro, a Democrat seeking a second term, meets Republican state Treasurer Stacy Garrity on November 3. The same survey registers broad support for vaccination as Pennsylvania works through a measles outbreak that has infected more than 1,200 people and as police departments across the region install Flock automated license plate readers.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Poll: Shapiro leads Garrity while voters oppose Flock cameras, support measles vaccinations",
+            "url": "https://www.wtae.com/article/pa-poll-shapiro-garrity-election-measles-flock-cameras-trump/74219745"
+          }
+        ],
+        "_anchor": "i-ea2cbaf84a"
+      },
+      {
+        "title": "Weekend Rail Closures Slow Downtown Riders",
+        "latest_developments": "The Post-Gazette reported Thursday, October 22, that light rail riders traveling between downtown Pittsburgh and Mount Washington face delays this weekend because of two Pittsburgh Regional Transit rail closures.",
+        "summary": "Pittsburgh Regional Transit announced the closures on October 20, and they stretch travel times for bus and light rail passengers moving between the South Hills, Mount Washington, and downtown Pittsburgh from Saturday, October 24, through Sunday, October 25.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Downtown and Mount Washington light rail riders should expect weekend delays in light of closures",
+            "url": "https://www.post-gazette.com/news/transportation/2026/10/22/public-transit-delays-weekend-downtown-pittsburgh-mt-washington/stories/202610220054"
+          }
+        ],
+        "_anchor": "i-45ad15c5ad"
+      },
+      {
+        "title": "Robert Morris Marks 50 Years of Sports Management",
+        "latest_developments": "Robert Morris University celebrated the 50th year of its sports management program Thursday, October 22, with Mark Cuban headlining the event, TribLive reported.",
+        "summary": "Armand Buzzelli, who directs the program at the Moon Township university, said the field moves so fast that a textbook written three weeks ago already reads as out of date. Cuban, the Mount Lebanon native and former Dallas Mavericks owner, spoke to the anniversary gathering.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "50 years of Sports Management program at Robert Morris headlined by Mark Cuban",
+            "url": "https://triblive.com/news/education-classroom/50-years-of-sports-management-program-at-robert-morris-headlined-by-mark-cuban/"
+          }
+        ],
+        "_anchor": "i-0aa80e50bc"
+      },
+      {
+        "title": "A Funeral Director Pleads in the Pet Remains Case",
+        "latest_developments": "Patrick Vereb pleaded guilty Thursday morning, October 22, to all charges in the pet cremation fraud, and the judge revoked his bond and ordered him to the Allegheny County Jail for three months pending sentencing after he acknowledged moving to Crawford County following his 2025 arrest.",
+        "summary": "The Pennsylvania attorney general's office says Vereb, who ran a Pittsburgh-area funeral home and pet crematory, took money from more than 6,000 pet owners who paid to have their animals cremated and the ashes returned. Deputies led him from the courtroom in handcuffs.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Former funeral home director accused of mishandling pet remains expected to plead guilty Thursday",
+            "url": "https://www.wpxi.com/news/local/former-funeral-home-director-accused-mishandling-pet-remains-expected-plead-guilty-thursday/UMJCUFSP5NAWNPDDC4YUTOURU4/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Pittsburgh funeral home owner pleads guilty in pet burial scam that shocked owners",
+            "url": "https://www.wtae.com/article/pittsburgh-funeral-home-owner-vereb-guilty/74218328"
+          },
+          {
+            "source": "TribLive",
+            "title": "Patrick Vereb ordered to jail in pet cremation fraud case",
+            "url": "https://triblive.com/local/valley-news-dispatch/patrick-vereb-ordered-to-jail-in-pet-cremation-fraud-case/"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Former Pittsburgh pet crematory owner pleads guilty, sent to jail pending sentencing",
+            "url": "https://www.post-gazette.com/news/crime-courts/2026/10/22/patrick-vereb-eternity-pet-update/stories/202610220056"
+          }
+        ],
+        "_anchor": "i-f22d3154f1"
+      },
+      {
         "title": "McGinley Weighs Toll Roads Against Old Bridges",
         "latest_developments": "Post-Gazette columnist Brandon McGinley argued Thursday, October 22, that Pennsylvania should put the money going into new Pennsylvania Turnpike toll roads, the Mon-Fayette Expressway above all, into repairing the bridges the region already has.",
         "summary": "The Mon-Fayette Expressway extension has consumed turnpike dollars for decades while bridges in Pittsburgh neighborhoods such as Bloomfield wait for rehabilitation. McGinley made a similar case on October 15 about the California Avenue bridge on the North Side.",
@@ -548,19 +677,6 @@
           }
         ],
         "_anchor": "i-e0baf86639"
-      },
-      {
-        "title": "A Funeral Director Pleads in the Pet Remains Case",
-        "latest_developments": "Patrick Vereb, a former Pittsburgh-area funeral home director, was scheduled to plead guilty to theft by deception at the Allegheny County Courthouse on Thursday, October 22, WPXI reported.",
-        "summary": "The Pennsylvania attorney general's office says Vereb defrauded more than 6,500 pet owners who paid his business to cremate their animals and return the remains. The plea hearing closes a case that has run through the county courts for months.",
-        "sources": [
-          {
-            "source": "WPXI",
-            "title": "Former funeral home director accused of mishandling pet remains expected to plead guilty Thursday",
-            "url": "https://www.wpxi.com/news/local/former-funeral-home-director-accused-mishandling-pet-remains-expected-plead-guilty-thursday/UMJCUFSP5NAWNPDDC4YUTOURU4/"
-          }
-        ],
-        "_anchor": "i-f22d3154f1"
       },
       {
         "title": "Early Mail Voting Data Stays Murky",
@@ -590,13 +706,18 @@
       },
       {
         "title": "Frosty Mornings, Clear Skies Through the Weekend",
-        "latest_developments": "WPXI and WTAE both hold Western Pennsylvania under mostly clear skies Thursday, October 22, and straight through the weekend, with a frosty start giving way to a comfortable afternoon.",
+        "latest_developments": "WPXI and WTAE both hold Western Pennsylvania under sunshine Thursday, October 22, and through the weekend, with frosty starts giving way to afternoon highs in the 60s.",
         "summary": "Very little cloud cover is expected across the region over the next several days, which keeps the Steelers watch parties, fall festivals, and Halloween events on the calendar dry.",
         "sources": [
           {
             "source": "WPXI",
             "title": "Sunshine continues Thursday with mostly clear skies",
             "url": "https://www.wpxi.com/weather/sunshine-continues-thursday-with-mostly-clear-skies/IOCY2GIVZVCHJGKNN6RMLCGM3A/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Beautiful weather with highs in the 60s continues through weekend",
+            "url": "https://www.wpxi.com/news/local/beautiful-weather-with-highs-60s-continues-through-weekend/2E4E27SII5FHNLKF5EY7JQC7GU/"
           },
           {
             "source": "WTAE",
@@ -608,6 +729,19 @@
       }
     ],
     "events": [
+      {
+        "title": "Primanti Bros. Opens Early for the Paris Kickoff",
+        "latest_developments": "WPXI reported Thursday, October 22, that Primanti Bros. will open its locations early for the Steelers game in Paris, with a morning happy hour starting at 9 a.m. and half-price prices on nearly every drink behind the bar.",
+        "summary": "Pittsburgh plays the New Orleans Saints on Sunday, October 25, at 9:30 a.m. Eastern on NFL Network at the Stade de France. Primanti Bros., the sandwich chain born in the Strip District, runs restaurants across the Pittsburgh region.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Primanti Bros. plasn to open locations early for Steelers game in Paris",
+            "url": "https://www.wpxi.com/news/local/primanti-bros-plan-open-locations-early-steelers-game-paris/IMA3CINMZVHVLGBAQWKNDLHMBU/"
+          }
+        ],
+        "_anchor": "i-dbc22c55a8"
+      },
       {
         "title": "Arcade Comedy Theater Gets a New Director",
         "latest_developments": "The Post-Gazette reported Thursday, October 22, that Kathryn Spitz Cohan has taken over as director of Arcade Comedy Theater, a job she says has her laughing \"so hard my cheeks hurt.\"",
@@ -659,22 +793,45 @@
           }
         ],
         "_anchor": "i-37894e0e49"
-      },
-      {
-        "title": "Aspinwall Carves a 1,906-Pound Pumpkin",
-        "latest_developments": "TribLive reported Thursday, October 22, that Joel Keefer, the man Aspinwall calls its pumpkin guy, carved a record-breaking 1,906-pound pumpkin for charity using a tool he named the Binford 5000 Pumpkin Cutter.",
-        "summary": "Keefer climbed a step stool to work the gourd, the largest he has taken on in a yearly Aspinwall tradition that raises money for charity.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Aspinwall's 'pumpkin guy' carves a record-breaking 1,906-pounder for charity",
-            "url": "https://triblive.com/local/valley-news-dispatch/aspinwalls-pumpkin-guy-carves-a-record-breaking-1906-pounder-for-charity/"
-          }
-        ],
-        "_anchor": "i-2a63da3b1b"
       }
     ],
     "around_teams": [
+      {
+        "title": "Rooney Reads the NFL's Paris Security Plan",
+        "latest_developments": "Steelers President Art Rooney II said Thursday, October 22, that the NFL will add security for Sunday's game in Paris and that league officials \"don't seem to be concerned,\" and the Post-Gazette detailed the same day how team staffers began planning the trip and working its logistical obstacles in June.",
+        "summary": "Pittsburgh meets the New Orleans Saints on Sunday, October 25, at 9:30 a.m. Eastern on NFL Network at the Stade de France, the league's Paris game, a week after riots and looting swept Paris, Marseille, and other French cities and prefects imposed curfews.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers owner Art Rooney II says the NFL will have heightened security in Paris, but 'they don't seem to be concerned'",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/22/nfl-paris-game-protests-security-measures/stories/202610220043"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers staffers began planning for their Paris trip — and its logistical obstacles — in June",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/22/steelers-paris-trip-planning/stories/202610220046"
+          }
+        ],
+        "_anchor": "i-969bc8b849"
+      },
+      {
+        "title": "Fittipaldo and Heyward Pack for France",
+        "latest_developments": "Ray Fittipaldo took reader questions on the Paris game in his Post-Gazette Steelers chat Thursday, October 22, and Cam Heyward's show Not Just Football posted a clip the same day on what the players are carrying to France.",
+        "summary": "Fittipaldo covers the Steelers for the Post-Gazette, and Not Just Football is the podcast defensive lineman Cam Heyward hosts with Hayden Walsh. Both landed as the team prepared to leave for Sunday's game against the New Orleans Saints.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Ray Fittipaldo's Steelers chat transcript: 10.22.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/22/live-steelers-chat/stories/202610220045"
+          },
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "What are these Steelers bringing with them on their trip to Paris this week?",
+            "url": "https://www.youtube.com/shorts/ZmJFxJEy3Fw"
+          }
+        ],
+        "_anchor": "i-80c2c82e00"
+      },
       {
         "title": "Steelers Fans Find Paris Calm",
         "latest_developments": "The Post-Gazette reported Thursday, October 22, that Steelers fans who flew to France for Sunday's game have found Paris welcoming and quiet, the unrest that swept French cities last weekend notwithstanding.",
@@ -717,7 +874,21 @@
         "_anchor": "i-532f751e1b"
       }
     ],
-    "team_usa": [],
+    "team_usa": [
+      {
+        "title": "The U.S. Hosts the First Women's Club World Cup",
+        "latest_developments": "FIFA said Thursday, October 22, that it will stage the inaugural Women's Club World Cup in the United States in January 2028.",
+        "summary": "The new tournament gathers women's club champions from around the world, and FIFA has handed the first edition to the same country that will host the Los Angeles Olympics later in 2028. The January dates fall between the 2027 Women's World Cup and that Summer Games.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "U.S. to host inaugural 2028 Women's Club World Cup",
+            "url": "https://www.espn.com/soccer/story/_/id/50249418/usa-host-2028-inaugural-womens-club-world-cup"
+          }
+        ],
+        "_anchor": "i-bd018c61c0"
+      }
+    ],
     "reading": [
       {
         "author": "Stratechery",
@@ -746,48 +917,27 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "LiteLLM's hijacked PyPI release and three days of attacker-held Tor exit nodes both chased developer credentials and API keys, making secret rotation the day's fastest control.",
-      "links": [
-        {
-          "anchor": "i-7f07a05841",
-          "phrase": "LiteLLM",
-          "start": 0,
-          "end": 7,
-          "title": "LiteLLM and Railway Push Users to Rotate Secrets"
-        },
-        {
-          "anchor": "i-2f1ed42ebe",
-          "phrase": "Tor exit nodes",
-          "start": 64,
-          "end": 78,
-          "title": "Hijackers Held 333 Tor Exit Nodes for Three Days"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Amazon's MadPot logged PHP2Shell exploit attempts four days before disclosure, as Oracle, Cisco and Node.js shipped a huge patch wave and companies pulled websites offline to fix PHP.",
+      "text": "Amazon's MadPot logged a PHP2Shell exploit four days before disclosure, Arista rushed a fix for an attacked VeloCloud zero-day, and firms took websites offline to patch.",
       "links": [
         {
           "anchor": "i-01e27be4fe",
           "phrase": "PHP2Shell",
-          "start": 23,
-          "end": 32,
+          "start": 25,
+          "end": 34,
           "title": "PHP2Shell Exploitation Began Before Disclosure"
         },
         {
-          "anchor": "i-a5298e0f95",
-          "phrase": "Oracle",
-          "start": 82,
-          "end": 88,
-          "title": "Oracle, Cisco, and Node.js Ship a Patch Wave"
+          "anchor": "i-5d4f96d6ac",
+          "phrase": "VeloCloud zero-day",
+          "start": 108,
+          "end": 126,
+          "title": "Arista Patches an Exploited VeloCloud Zero-Day"
         },
         {
           "anchor": "i-7e675ef2b7",
-          "phrase": "websites offline",
-          "start": 155,
-          "end": 171,
+          "phrase": "took websites offline",
+          "start": 138,
+          "end": 159,
           "title": "A PHP Flaw Pulls Websites Offline"
         }
       ]
@@ -795,27 +945,69 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Kaspersky tied the BlackX UEFI bootkit to APT41 while INTERPOL's Operation Serengeti III booked 1,462 arrests and a cyberattack took down Columbia's MyColaSC resident services.",
+      "text": "A GitHub token leaked into LiteLLM's own gateway logs seeded a PyPI credential stealer, and Railway says an intruder read decrypted customer environment variables.",
       "links": [
         {
-          "anchor": "i-0b85f8ae4b",
-          "phrase": "BlackX",
-          "start": 19,
-          "end": 25,
-          "title": "APT41 Bootkit and Sandworm Wiper"
+          "anchor": "i-7f07a05841",
+          "phrase": "LiteLLM",
+          "start": 27,
+          "end": 34,
+          "title": "LiteLLM and Railway Push Users to Rotate Secrets"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Anthropic's Claude flagged 493 exposure problems across 25 open-source projects as agent permissions widen, a buildout Zitron argues leaves no room for mediocre AI returns.",
+      "links": [
+        {
+          "anchor": "i-b75487748f",
+          "phrase": "Claude",
+          "start": 12,
+          "end": 18,
+          "title": "Claude Audits Open Source as Agent Permissions Spread"
         },
         {
+          "anchor": "i-0052240628",
+          "phrase": "Zitron",
+          "start": 119,
+          "end": 125,
+          "title": "AI Had Better Work Out"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "INTERPOL's Operation Serengeti III booked 1,462 arrests as APT41 revived a UEFI bootkit, hijackers held 333 Tor exit nodes, and a cyberattack downed Columbia's city services.",
+      "links": [
+        {
           "anchor": "i-df0211e45e",
-          "phrase": "Serengeti III",
-          "start": 75,
-          "end": 88,
+          "phrase": "Operation Serengeti III",
+          "start": 11,
+          "end": 34,
           "title": "Operation Serengeti III Nets 1,462 Arrests"
         },
         {
+          "anchor": "i-0b85f8ae4b",
+          "phrase": "APT41",
+          "start": 59,
+          "end": 64,
+          "title": "APT41 Bootkit and Sandworm Wiper"
+        },
+        {
+          "anchor": "i-2f1ed42ebe",
+          "phrase": "333 Tor",
+          "start": 104,
+          "end": 111,
+          "title": "Hijackers Held 333 Tor Exit Nodes for Three Days"
+        },
+        {
           "anchor": "i-189c380ca7",
-          "phrase": "MyColaSC",
+          "phrase": "Columbia's",
           "start": 149,
-          "end": 157,
+          "end": 159,
           "title": "Cyberattack Knocks Out Columbia's City Services"
         }
       ]
@@ -823,84 +1015,49 @@
     {
       "kind": "Update",
       "status": "updated",
-      "text": "Brent crude topped $112 after a Saudi airport attack, the French-German spread hit a 2011 high, and Russia shelled Kyiv with cluster warheads hours after Witkoff met Putin.",
+      "text": "New Mexico won a $25 billion privacy judgment against Meta, whose selloff deepened the Nasdaq's slide while Brent crude held above $112 after fresh Houthi strikes.",
       "links": [
+        {
+          "anchor": "i-dd2c177462",
+          "phrase": "New Mexico",
+          "start": 0,
+          "end": 10,
+          "title": "New Mexico Wins $25 Billion From Meta"
+        },
         {
           "anchor": "i-b8fc1425a6",
           "phrase": "Brent crude",
-          "start": 0,
-          "end": 11,
-          "title": "Oil Tops $112 and Global Equities Sell Off"
-        },
-        {
-          "anchor": "i-bb638706e7",
-          "phrase": "French-German spread",
-          "start": 58,
-          "end": 78,
-          "title": "French Spread Over Bunds Hits a 2011 High"
-        },
-        {
-          "anchor": "i-26b3146bb2",
-          "phrase": "Kyiv",
-          "start": 115,
+          "start": 108,
           "end": 119,
-          "title": "Russia Bombards Kyiv Hours After the Witkoff Talks"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Anthropic used Claude to find 493 exposure problems across 25 open-source projects, while Zitron and Newport argue over AI's financial stakes and its cost to human persistence.",
-      "links": [
-        {
-          "anchor": "i-b75487748f",
-          "phrase": "Claude",
-          "start": 15,
-          "end": 21,
-          "title": "Claude Audits Open Source as Agent Permissions Spread"
-        },
-        {
-          "anchor": "i-0052240628",
-          "phrase": "Zitron",
-          "start": 90,
-          "end": 96,
-          "title": "AI Had Better Work Out"
-        },
-        {
-          "anchor": "i-2195cc156c",
-          "phrase": "Newport",
-          "start": 101,
-          "end": 108,
-          "title": "The Good Thing About Hard Things"
+          "title": "Oil Tops $112 and Global Equities Sell Off"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Innamorato will sign Allegheny County's paid parental leave mandate as small employers eye exits, Westinghouse builds fuel before an IPO, and CardVault opens in the Strip District.",
+      "text": "Art Rooney II says the NFL is adding security for Sunday's Paris game, Cam Heyward's show packs for France, and Primanti Bros. opens at 9 a.m.",
       "links": [
         {
-          "anchor": "i-bc4ec034b1",
-          "phrase": "Innamorato",
+          "anchor": "i-969bc8b849",
+          "phrase": "Art Rooney II",
           "start": 0,
-          "end": 10,
-          "title": "Small Employers Talk About Leaving Allegheny County"
+          "end": 13,
+          "title": "Rooney Reads the NFL's Paris Security Plan"
         },
         {
-          "anchor": "i-88bed9d95e",
-          "phrase": "Westinghouse",
-          "start": 98,
-          "end": 110,
-          "title": "Westinghouse Builds Up Fuel Before an IPO"
+          "anchor": "i-80c2c82e00",
+          "phrase": "Cam Heyward's",
+          "start": 71,
+          "end": 84,
+          "title": "Fittipaldo and Heyward Pack for France"
         },
         {
-          "anchor": "i-75bfb40bdb",
-          "phrase": "CardVault",
-          "start": 142,
-          "end": 151,
-          "title": "CardVault Opens in the Strip District"
+          "anchor": "i-dbc22c55a8",
+          "phrase": "Primanti Bros.",
+          "start": 112,
+          "end": 126,
+          "title": "Primanti Bros. Opens Early for the Paris Kickoff"
         }
       ]
     }
@@ -914,10 +1071,10 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 67,
+        "in_window": 66,
         "failed": [],
         "empty": [
-          "CISA Advisories",
+          "Krebs on Security",
           "Sophos News",
           "Google Online Security Blog",
           "Microsoft Security Blog",
@@ -929,18 +1086,18 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 11,
-            "contributed": 11
+            "in_window": 12,
+            "contributed": 12
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 10,
+            "contributed": 10
           },
           "Krebs on Security": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Schneier on Security": {
             "items": 10,
@@ -949,13 +1106,13 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 5,
+            "contributed": 5
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -964,8 +1121,8 @@
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "The Record": {
             "items": 5,
@@ -974,8 +1131,8 @@
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Help Net Security": {
             "items": 10,
@@ -984,8 +1141,8 @@
           },
           "Securelist (Kaspersky)": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Sophos News": {
             "items": 9,
@@ -994,8 +1151,8 @@
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Google Online Security Blog": {
             "items": 25,
@@ -1004,8 +1161,8 @@
           },
           "Cisco Talos": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Graham Cluley": {
             "items": 20,
@@ -1034,8 +1191,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 3
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1044,8 +1201,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -1062,27 +1219,27 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 17
+            "contributed": 19
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 14
+            "contributed": 10
           },
           "PublicSource": {
             "items": 10,
             "in_window": 5,
-            "contributed": 1
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
-            "in_window": 4,
-            "contributed": 1
+            "in_window": 5,
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
             "in_window": 3,
-            "contributed": 1
+            "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
@@ -1092,17 +1249,17 @@
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 6
+            "contributed": 10
           },
           "WPXI": {
             "items": 15,
-            "in_window": 14,
-            "contributed": 4
+            "in_window": 15,
+            "contributed": 7
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 16
+            "contributed": 14
           }
         }
       },
@@ -1119,17 +1276,17 @@
           "WSJ World News": {
             "items": 74,
             "in_window": 28,
-            "contributed": 5
+            "contributed": 3
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 33,
-            "contributed": 13
+            "contributed": 14
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 48,
-            "contributed": 16
+            "in_window": 51,
+            "contributed": 10
           },
           "WSJ Politics": {
             "items": 21,
@@ -1138,23 +1295,23 @@
           },
           "The Economist": {
             "items": 300,
-            "in_window": 24,
-            "contributed": 4
+            "in_window": 61,
+            "contributed": 15
           },
           "FT Home": {
-            "items": 9,
-            "in_window": 9,
-            "contributed": 7
+            "items": 10,
+            "in_window": 10,
+            "contributed": 4
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 12
+            "contributed": 8
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 1
+            "contributed": 4
           }
         }
       },
@@ -1207,13 +1364,13 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 5,
-            "contributed": 3
+            "in_window": 6,
+            "contributed": 4
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
             "in_window": 15,
-            "contributed": 15
+            "contributed": 14
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -1311,24 +1468,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 30971,
+          "outputTokens": 39659,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 124043,
+          "cacheCreationInputTokens": 129402,
           "webSearchRequests": 0,
-          "costUSD": 2.014735,
+          "costUSD": 2.285525,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 13443
+          "thinkingTokens": 17459
         }
       },
-      "cost_usd": 2.014735,
-      "duration_ms": 340373,
+      "cost_usd": 2.285525,
+      "duration_ms": 429732,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-22 10:06 EDT",
-    "items_considered": 67,
+    "generated_at": "2026-10-22 13:37 EDT",
+    "items_considered": 66,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1409,8 +1566,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.0147,
-    "model_duration_ms": 340373,
+    "model_cost_usd": 2.2855,
+    "model_duration_ms": 429732,
     "local_from": null,
     "feed_failures": []
   }
