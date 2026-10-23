@@ -1,0 +1,573 @@
+================================================================
+INFOSECFOLLOW -- security, markets, business, pittsburgh
+Friday, October 23, 2026 - 10:06 AM EDT
+================================================================
+
+PHP warned of a third remote code execution flaw two days after
+its emergency patches, as Mirai operators fired millions of
+failed exploit attempts at the first two and Hewlett Packard
+Enterprise closed eight maximum-severity ArubaOS bugs.
+
+CONTENTS: Emerging Trends and Key Updates | Security | Business
+and Politics | Pittsburgh | Sports | Reading | Markets | Feed
+Health
+
+EMERGING TRENDS AND KEY UPDATES
+----------------------------------------------------------------
+* [TREND] One uploaded file reaches a shell: Pillow hands EPS
+  names to Ghostscript, Node.js unpacks crafted Brotli, and
+  PHP's third flaw CVE-2026-115560 now draws Mirai scanning.
+  see: Pillow and Node.js Decoders Run Attacker Code; PHP2Shell
+  Draws Mass Mirai Scanning
+* [TREND] AI plumbing is now both target and bill, with
+  attackers hijacking exposed models and x402 agent wallets
+  while the AfD leak site serves AI-written summaries of 421,179
+  stolen emails.
+  see: Attackers Hijack Exposed AI Models and Agent Wallets; 281
+  GB Leak Hits Germany's AfD
+* [UPDATE (new)] Huntress traced one attacker replaying stolen
+  Microsoft 365 sign-in sessions into 79 organizations over ten
+  weeks, logging 497 successful sign-ins and hiding inbox rules
+  from victims.
+  see: Microsoft 365 Session Replay Hits 79 Organizations
+* [TREND] Network management planes keep falling, as HPE closes
+  eight maximum-severity ArubaOS flaws among 72 fixes and Arista
+  patches a third exploited VeloCloud Orchestrator zero-day in
+  four months.
+  see: HPE Closes Eight Maximum-Severity ArubaOS Flaws; Third
+  VeloCloud Orchestrator Zero-Day in Four Months
+* [UPDATE (new)] Infrastructure turned geopolitical as Kyiv
+  accused Washington of throttling Starlink, the UK proposed
+  14-year terms for undersea cable sabotage, and Brent reached
+  $115 a barrel.
+  see: Ukraine Says Starlink Remains Throttled; UK Weighs
+  14-Year Terms for Cable Sabotage; Brent Reaches $114 and
+  European Gas Hits a 2022 High
+* [UPDATE (new)] Locally, a few Pennsylvania Senate races will
+  settle Harrisburg, Beaver County tenants went months without
+  reliable water, and DeShon Elliott may return as the Steelers
+  reach Paris.
+  see: A Few State Senate Races Decide Harrisburg; Stackhouse
+  Management Tenants Go Months Without Reliable Water; Elliott
+  Could Play a Year After His Injury
+
+SECURITY
+----------------------------------------------------------------
+
+1. PHP2SHELL DRAWS MASS MIRAI SCANNING
+   Vulnerabilities and Exploits · [zero-day, patch, botnet]
+   Latest developments: PHP disclosed a third remote code
+   execution flaw, CVE-2026-115560, on October 23, 2026, two
+   days after its emergency patches, saying it reaches only web
+   applications configured in an unusual way and declining an
+   emergency fix in favor of turning off the feature involved;
+   SecurityWeek reported exploit code that bypasses address
+   space layout randomization, researchers still confirm no
+   successful compromise out of millions of attempts to enlist
+   servers in the Mirai variant Potassium, and the SANS Internet
+   Storm Center returned its InfoCon gauge to green Friday
+   morning.
+   The pair of PHP flaws, each rated 9.2, give an
+   unauthenticated attacker remote code execution on any PHP
+   installation serving web requests, with the highest risk on
+   Apache with mod_php and on PHP-FPM. Every site on PHP 8.2
+   through 8.5 needs the October 21, 2026 releases 8.5.12,
+   8.4.27, 8.3.36, and 8.2.35.
+   - The Hacker News: https://thehackernews.com/2026/10/urgent-php-warns-of-another-unpatched.html
+   - SecurityWeek: https://www.securityweek.com/mirai-botnet-operators-join-php2shell-attacks-as-aslr-bypass-exploits-emerge/
+   - SANS Internet Storm Center: https://isc.sans.edu/diary/rss/33450
+   - The Hacker News: https://thehackernews.com/2026/10/php2shell-exploit-attempts-hit-millions.html
+
+2. CAPCOM AND QUEST DIAGNOSTICS COUNT VICTIMS
+   Data Breaches · [breach, healthcare]
+   Latest developments: Capcom, the Japanese gaming company,
+   confirmed that a third party reached CAPCOM ID, the account
+   service people use to sign in to its web services and play
+   some of its games online, exposing more than 11.7 million
+   customer email addresses and changing the login passwords on
+   196 accounts; Capcom spotted suspicious activity on October
+   19, 2026 and confirmed the intrusion the same day, and Quest
+   Diagnostics told securities regulators that an intruder
+   reached Quanum Lab Services Manager, the platform certain
+   clients use to place test orders, and touched certain patient
+   records.
+   Capcom account holders should expect phishing mail that
+   imitates the company and should rotate any password they
+   reused elsewhere. Quest Diagnostics has yet to put a number
+   on the patient records involved.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/23/capcom-id-data-breach-11-million-records-exposed/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/capcom-confirms-data-breach-affecting-117-million-accounts/
+   - SecurityWeek: https://www.securityweek.com/11-million-impacted-by-capcom-data-breach/
+   - SecurityWeek: https://www.securityweek.com/quest-diagnostics-reports-cyber-breach-affecting-certain-patient-records/
+
+3. THIRD VELOCLOUD ORCHESTRATOR ZERO-DAY IN FOUR MONTHS
+   Vulnerabilities and Exploits · [zero-day, patch]
+   Latest developments: SecurityWeek counted the actively
+   exploited SQL injection flaw Arista Networks patched on
+   October 22, 2026 as the third zero-day in VeloCloud
+   Orchestrator in four months, a run that keeps handing
+   attackers the management server for VeloCloud SD-WAN
+   networks.
+   The critical flaw lets anyone who can log in to the
+   orchestrator, even on a read-only customer account, reach
+   privileged internal functionality and take operator
+   privileges, the top level of control. Organizations running
+   VeloCloud Orchestrator On-Prem should install Arista's
+   updates and review orchestrator logins.
+   - SecurityWeek: https://www.securityweek.com/attackers-exploit-third-velocloud-orchestrator-zero-day-in-four-months/
+   - The Hacker News: https://thehackernews.com/2026/10/arista-warns-of-critical-velocloud-sql.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/
+
+4. PILLOW AND NODE.JS DECODERS RUN ATTACKER CODE
+   Vulnerabilities and Exploits · [patch, rce, supply-chain]
+   Latest developments: Researchers disclosed CVE-2026-112900 in
+   Pillow, the most widely used image library for Python, which
+   passes an EPS file's name straight to Ghostscript and so runs
+   whatever operating system command a caller buries in that
+   name; Imperva published Node2Shell, a proof of concept that
+   executed code on the official Node.js 24.22.0 image for Linux
+   arm64 by feeding crafted data to the bundled Brotli decoder,
+   CVE-2026-111497; and Atlassian's October bulletin listed 176
+   vulnerability entries, 14 of them critical, all in
+   third-party components of its Data Center and Server
+   products.
+   Pillow decodes uploaded images across Python web
+   applications, so any server that opens an attacker-named EPS
+   file hands over a shell, and the Node.js proof of concept
+   needed no debugger or custom build. Teams running Pillow,
+   Node.js, or Atlassian Data Center should install the current
+   releases.
+   - The Hacker News: https://thehackernews.com/2026/10/critical-flaw-in-pythons-popular-pillow.html
+   - The Hacker News: https://thehackernews.com/2026/10/researchers-demonstrate-node2shell-rce.html
+   - SecurityWeek: https://www.securityweek.com/atlassian-patches-75-third-party-flaws-in-data-center-and-server-products/
+
+5. ATTACKERS HIJACK EXPOSED AI MODELS AND AGENT WALLETS
+   AI Security · [ai, agent, vulnerability]
+   Latest developments: Symantec researchers Priti More and
+   Susmit Yenkar captured the instruction set of an attack tool
+   that scans for AI models anyone on the internet can reach and
+   then uses them to plan break-ins while the model's owner pays
+   for the computing power, after its operators sent their
+   entire working prompt to a honeypot posing as an unprotected
+   AI service; the security firm V12 reported on October 22,
+   2026 that the default client in the x402 SDKs set no spending
+   limit until the August 18 releases added one, so a malicious
+   API could get an agent to sign a payment for its full balance
+   of a supported token.
+   Both problems punish AI infrastructure left open by default:
+   an unauthenticated model endpoint becomes an attacker's free
+   hacking engine, and an agent that signs payments
+   automatically becomes a wallet to empty. Operators should
+   authenticate every model endpoint and set per-call spending
+   caps on agent payment SDKs.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/23/llmjacking-agent-hijacks-exposed-ai-models/
+   - The Hacker News: https://thehackernews.com/2026/10/critical-x402-sdk-flaw-could-let.html
+
+6. UK WEIGHS 14-YEAR TERMS FOR CABLE SABOTAGE
+   Policy and Regulation · [policy, critical-infrastructure]
+   Latest developments: The Department for Digital, Culture,
+   Media and Sport published a White Paper this week proposing
+   14-year prison sentences for deliberately damaging undersea
+   cables and pipelines off the British coast, plus unlimited
+   fines for ship owners whose vessels cause the damage,
+   superseding the Submarine Telegraph Act 1885 and its £1,000
+   maximum fine and five-year sentence.
+   Undersea cables carry nearly all intercontinental internet
+   traffic, and the British law covering deliberate damage to
+   them dates to 1885. Shipping companies and cable operators
+   working in UK waters face new liability and penalties if
+   Parliament adopts the plan.
+   - The Record: https://therecord.media/uk-undersea-cables-sabotage-new-sentencing-guidelines
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/23/uk-undersea-cable-sabotage-sentences/
+
+7. HPE CLOSES EIGHT MAXIMUM-SEVERITY ARUBAOS FLAWS
+   Vulnerabilities and Exploits · [patch, rce]
+   Latest developments: Hewlett Packard Enterprise shipped
+   updates on October 23, 2026 that fix 72 vulnerabilities in
+   ArubaOS, among them eight maximum-severity authentication
+   bypass and remote code execution flaws.
+   ArubaOS runs the controllers and gateways that carry
+   enterprise Wi-Fi and branch networking, and an authentication
+   bypass at that rating hands an unauthenticated attacker the
+   device. Administrators should install the current ArubaOS
+   builds and keep controller management interfaces off the
+   public internet.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/hpe-patches-eight-max-severity-rce-and-auth-bypass-aos-flaws/
+
+8. MICROSOFT 365 SESSION REPLAY HITS 79 ORGANIZATIONS
+   Data Breaches · [credential-theft, cloud, breach]
+   Latest developments: Huntress reported on October 23, 2026
+   that one attacker spent ten weeks replaying stolen Microsoft
+   365 sign-in sessions against 79 organizations between July 14
+   and September 22, 2026, logging 497 successful sign-ins and
+   more than 200,000 failed login attempts, planting hidden
+   inbox rules that kept victims from seeing parts of their own
+   mail, and running the replays from servers at the hosting
+   provider 1337 Services GmbH.
+   A replayed session needs no password and no multi-factor
+   code, so credential defenses miss it entirely. Security teams
+   should revoke active sessions whenever they suspect a
+   compromise, audit mailbox rules for hidden filters, and watch
+   sign-ins from 1337 Services GmbH address space.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/10/23/microsoft-365-accounts-stolen-sessions/
+
+9. 281 GB LEAK HITS GERMANY'S AFD
+   Data Breaches · [breach, politics]
+   Latest developments: The Alternative für Deutschland
+   confirmed that hackers breached its hosting provider, and a
+   leak site now offers 281 GB of party material, claims 421,179
+   internal party emails, and displays AI-written summaries in
+   place of the messages themselves.
+   Germany's AfD lost its email archive through a vendor it does
+   not run, the pattern that keeps turning political
+   organizations into single points of failure. Verification of
+   the trove remains open while the leak site shows only
+   machine-written summaries.
+   - Graham Cluley: https://www.bitdefender.com/en-us/blog/hotforsecurity/hacker-leaks-281-gb-data-germany-afd
+
+10. PRINCE OF PERSIA MOVES A SERVER TO US HOSTING
+   Nation-State Activity · [apt, iran]
+   Latest developments: SecurityWeek reported on October 23,
+   2026 that the Iranian group Prince of Persia, after a
+   three-month lull, hid a Tornado command-and-control server on
+   United States shared hosting, its first server inside the
+   country since 2016.
+   Prince of Persia runs the Tornado malware family and has long
+   kept its control servers offshore. Defenders who weight
+   suspicion by hosting geography will miss this infrastructure,
+   since it now sits on domestic shared hosting alongside
+   ordinary customer sites.
+   - SecurityWeek: https://www.securityweek.com/irans-prince-of-persia-apt-hosts-cc-in-us-for-first-time-since-2016/
+
+BUSINESS AND POLITICS
+----------------------------------------------------------------
+* Ukraine Says Starlink Remains Throttled
+  Latest developments: Ukraine said Friday, October 23, that
+  Starlink connections still fail when its drones fly at high
+  speed, and Kyiv now accuses Washington of intentionally
+  slowing the service, two days after President Trump telephoned
+  Elon Musk and the link briefly appeared to run normally.
+  Ukrainian soldiers and government officials say the Starshield
+  service their military runs on Starlink's standard equipment
+  keeps dropping, degrading their ability to intercept Russian
+  drones and strike targets inside Russia. Musk himself
+  authorized the original restriction, Trump denies ordering it,
+  and the outage sits at the center of the fight over how much
+  Washington will keep underwriting Kyiv's defense.
+  - FT Home: https://www.ft.com/content/e67a3d0e-5893-45a5-b098-64a68a4ef032?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/ukraine-says-starlink-isnt-working-despite-trumps-promise-to-restore-it-c3609d3d?mod=rss_worldnews
+  - WSJ World News: https://www.wsj.com/business/telecom/how-does-the-ukrainian-military-use-starlink-e1faa11b?mod=rss_worldnews
+* Brent Reaches $114 and European Gas Hits a 2022 High
+  Latest developments: Brent reached $115 a barrel Friday,
+  October 23, its highest since May, and the Dow slid as crude
+  climbed; tight global fuel markets have driven refining
+  margins to all-time highs, which makes refineries the swing
+  factor in the oil majors' quarterly results, and European
+  natural gas prices sit at their highest since late 2022.
+  Houthi attacks on Saudi energy infrastructure and the prospect
+  of American strikes on Iran have pushed West Texas
+  Intermediate above $101 and Brent to $115, and traders are
+  pricing in the risk that renewed United States-Iran fighting
+  cuts liquefied natural gas cargoes before winter. Eni opened
+  the energy majors' earnings season Friday with an
+  extraordinary dividend and a bigger buyback, while gold headed
+  for a weekly loss of more than 3.5% as elevated energy costs
+  revived inflation and rate-increase worries, and the dollar
+  and Treasury yields both rose.
+  - FT Home: https://www.ft.com/content/8948193b-438b-4d71-a0b1-31dff56fc308?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/middle-east/oil-prices-rise-as-middle-east-risks-persist-c1262364?mod=rss_worldnews
+  - WSJ Markets: https://www.wsj.com/articles/european-gas-prices-at-highest-since-2022-on-lng-supply-fears-52b80e20?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/gold-is-flat-likely-to-consolidate-in-near-term-1fb03f5c?mod=rss_markets_main
+  - WSJ US Business: https://www.wsj.com/business/energy-oil/eni-shareholders-set-for-cash-boost-after-earnings-double-7c3df34b?mod=pls_whats_news_us_business_f
+  - WSJ Markets: https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-10-23-2026?mod=rss_markets_main
+* Iran Threatens Economic and Civilian Targets
+  Latest developments: Iran warned Friday, October 23, that it
+  will widen its strikes to economic and civilian targets if the
+  United States attacks, and Mike Waltz, President Trump's
+  envoy, said Washington has prepared for a long stand-off and
+  told Tehran it must reach a meaningful agreement on its
+  nuclear program.
+  Tehran still holds large missile and drone stockpiles, and
+  Washington has begun moving servicemembers and diplomatic
+  staff out of range across the Gulf after the Houthi drone
+  strike on Saudi Aramco's Shaybah oilfield. The standoff sits
+  directly behind the five-month highs in crude and the 2022
+  highs in European gas.
+  - WSJ World News: https://www.wsj.com/world/middle-east/iran-threatens-wider-strikes-on-economic-and-civilian-targets-if-u-s-attacks-55f75e6b?mod=rss_worldnews
+  - FT Home: https://www.ft.com/content/70379a26-c20e-4501-aec9-a9a0089cdd3d?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/oil-falls-on-likely-technical-correction-after-earlier-gains-8de529db?mod=rss_markets_main
+* The AI Selloff Reaches Chip Listings and Pension Funds
+  Latest developments: SK Hynix pulled the United States initial
+  public offering of its memory-chip unit Solidigm on Friday,
+  October 23, citing investor caution on artificial-intelligence
+  valuations, and the Financial Times reported that Calpers cut
+  its Magnificent Seven holdings; Nasdaq futures steadied after
+  the index posted its worst day since June on Thursday.
+  The California Public Employees' Retirement System, the
+  largest public pension fund in the United States, reduced its
+  stakes in the seven biggest technology companies as doubts
+  spread about lofty valuations and soaring capital spending, a
+  retreat that follows Meta's disclosure that it will raise
+  hundreds of billions of dollars for its
+  artificial-intelligence buildout. Anthropic, meanwhile, struck
+  a deal with the United Kingdom buyout group Hg to launch a
+  European consultancy advising companies on deploying the
+  technology.
+  - WSJ US Business: https://www.wsj.com/tech/sk-hynix-shelves-plans-for-u-s-listing-of-memory-chip-unit-solidigm-e9670506?mod=pls_whats_news_us_business_f
+  - FT Home: https://www.ft.com/content/e842173f-6f9f-4115-9e5f-a0f06f0df18d?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/stocks/nasdaq-futures-steady-as-ai-selloff-pauses-275c6454?mod=rss_markets_main
+  - FT Home: https://www.ft.com/content/df70bf20-e809-48d0-8485-f8f514a7fbc4?syn-25a6b1a6=1
+
+PITTSBURGH
+----------------------------------------------------------------
+
+Weather:
+  Today: Sunny, high 64F.
+  Tonight: Clear, low 38F.
+  Saturday: Sunny, high 66F.
+
+Business:
+* Hellbender Records Presses Around the Vinyl Backlog
+  Latest developments: Pittsburgh City Paper reported Friday,
+  October 23, that the Pittsburgh label Hellbender Records has
+  partnered with the Irish pressing operation Anthem Vinyl.
+  A global backlog at vinyl pressing plants has stretched the
+  wait for independent labels to get records made, and
+  Hellbender's arrangement with Anthem Vinyl gets its releases
+  onto Pittsburgh turntables faster.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/arts-entertainment-2/music/hellbender-records-brings-the-luck-of-the-irish-to-pittsburgh-turntables/
+* Westmoreland Buys Ads for Breeze Airways
+  Latest developments: Westmoreland County commissioners
+  allocated $25,000 Thursday, October 22, to the county airport
+  authority for an advertising campaign ahead of the Breeze
+  Airways launch at Arnold Palmer Regional Airport.
+  The county and the Westmoreland County Airport Authority
+  committed more than $1.3 million in subsidies to bring Breeze
+  Airways to the Latrobe airport under the deal the authority
+  approved October 13, and the marketing money now goes toward
+  filling those seats.
+  - TribLive: https://triblive.com/local/westmoreland/westmoreland-county-to-fund-ad-campaign-touting-breeze-airways-launch-at-arnold-palmer-airport/
+* Cupcake PGH Comes Full Circle in Allentown
+  Latest developments: Pittsburgh Magazine reported Friday,
+  October 23, that Cupcake PGH has come full circle in the
+  Allentown neighborhood of Pittsburgh.
+  Amanda Baker, a service industry veteran and mother of four,
+  began baking after her father died unexpectedly in 2022,
+  credits the work with carrying her through major depression,
+  and built the business out of a cottage kitchen.
+  - Pittsburgh Magazine: https://www.pittsburghmagazine.com/cupcake-pgh-allentown/
+* Peter Henry Takes the Kitchen at Scratch & Co.
+  Latest developments: Pittsburgh Magazine profiled Peter Henry
+  on Friday, October 23, in his new job as executive chef of
+  Scratch & Co.
+  Henry wears his menu on his skin—asparagus over his heart,
+  thyme, dill, tarragon, and garlic on his arms, turnips, beets,
+  and corn on his legs—and now runs the kitchen at one of the
+  city's longest-running farm-driven restaurants.
+  - Pittsburgh Magazine: https://www.pittsburghmagazine.com/scratch-co-chef-peter-henry/
+
+Around town:
+* A Few State Senate Races Decide Harrisburg
+  Latest developments: The Post-Gazette laid out Friday, October
+  23, how a handful of Pennsylvania Senate races will settle
+  control of the chamber, 11 days before the November 3
+  election.
+  The Pennsylvania Senate holds the power to advance or bury
+  Governor Josh Shapiro's agenda, and a small set of districts
+  decides which party runs it. Western Pennsylvania's 46th
+  District sits among the contested seats, where Republican
+  Camera Bartolotta seeks a fourth term against Democrat Jodi
+  Borello.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-state/2026/10/23/pennsylvania-senate-control-midterms/stories/202610220051
+* North Allegheny Ranks Second Among Area Districts
+  Latest developments: TribLive reported Friday, October 23,
+  that Niche's 2027 rankings place North Allegheny School
+  District second out of 77 districts in the Pittsburgh area,
+  with North Hills communities also scoring high.
+  Niche, the online ranking and review site, grades school
+  districts and neighborhoods that home buyers and real estate
+  agents across Allegheny County consult. North Allegheny serves
+  the northern suburbs of the county.
+  - TribLive: https://triblive.com/local/sewickley/north-allegheny-north-hills-communities-score-high-in-2027-niche-rankings/
+* Stackhouse Management Tenants Go Months Without Reliable Water
+  Latest developments: WTAE reported Thursday night, October 22,
+  that residents of a Beaver County mobile home park have dealt
+  with water problems for months, and the station found similar
+  complaints at other Western Pennsylvania properties Stackhouse
+  Management runs.
+  Stackhouse Management operates manufactured-housing
+  communities around the region, and its tenants in Beaver
+  County say the water service has failed repeatedly without a
+  fix.
+  - WTAE: https://www.wtae.com/article/water-issues-several-stackhouse-management-properties-western-pa/74224721
+* Upper Burrell Adopts Its Data Center Ordinance
+  Latest developments: Upper Burrell Township supervisors voted
+  unanimously Thursday, October 22, after a public hearing, to
+  approve the zoning ordinance regulating data centers, two days
+  after the township planning commission advanced it over the
+  objections of residents who packed that meeting.
+  The Westmoreland County township now has rules on the books
+  governing where and how data centers may build, as developers
+  press similar proposals in North Huntingdon, Connoquenessing
+  in Butler County, and elsewhere across the region; residents
+  at the hearing again raised concerns about the projects the
+  ordinance would permit.
+  - WPXI: https://www.wpxi.com/news/local/upper-burrell-township-passes-new-zoning-ordinance-data-centers-residents-express-concerns/EDAEZRZI5NDKXE4OEIN4YZ54G4/
+* Pennsylvania Requires Disclosure on AI-Generated Ads
+  Latest developments: KDKA reported Thursday night, October 22,
+  that Pennsylvania has become one of the first states in the
+  country to require disclosures on advertisements generated
+  with artificial intelligence.
+  The statewide requirement lands 11 days before the November 3
+  election and follows the ordinance Allegheny County Council
+  passed unanimously October 20 covering candidates for county
+  office, after the gubernatorial campaign of Republican Stacy
+  Garrity ran an AI-generated attack ad in Pennsylvania.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/pennsylvania-disclosures-ai-generated-ads/
+  - KDKA: https://www.cbsnews.com/pittsburgh/video/pennsylvania-has-new-law-on-ai-generated-ads/
+* Hempfield Revisits a Route 30 Gas Station
+  Latest developments: The Hempfield board of supervisors has
+  taken up again the gas station proposed along Route 30, a
+  month after a majority of the board rejected it.
+  Neighbors objected that the Westmoreland County project sits
+  too close to their homes, and that complaint sank the plan in
+  September; the developer is back before the same supervisors.
+  - TribLive: https://triblive.com/local/westmoreland/proposed-gas-station-along-route-30-in-hempfield-gets-another-look-from-supervisors/
+
+Events:
+* A Pizza Musical Casts the Audience
+  Latest developments: Pittsburgh City Paper previewed "Slice
+  Something Slice" on Friday, October 23, an interactive musical
+  about Pittsburgh pizza in which audience members take the
+  starring role.
+  The show grows out of the work of Dan Tallarico, the
+  self-described pizza journalist who has reviewed
+  Pittsburgh-area pizzerias through his blog Pizza Walk With Me,
+  a Substack, and a newsletter, and who wrote a book on the
+  subject; Tallarico argues the city punches above its weight on
+  pizza.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/arts-entertainment-2/theater/bite-into-slice-something-slice-a-pizza-musical-where-youre-the-star/
+
+SPORTS
+----------------------------------------------------------------
+
+Steelers (4-2)
+  Up Next · Steelers @ Saints · Sun Oct 25, 9:30 AM
+    https://plaintextsports.com/nfl/2026/week7/pit-no
+
+Penguins (4-6)
+  Thu Oct 22 · Panthers 0 · Penguins 4 · Final
+    Silovs, Penguins blank Panthers 4-0 to spoil Florida goalie
+    Cooper Black’s record-setting NHL debut
+    https://plaintextsports.com/nhl/2026-10-22/fla-pit
+  Up Next · Predators @ Penguins · Sat Oct 24, 7:00 PM
+    https://plaintextsports.com/nhl/2026-10-24/nsh-pit
+
+Around the Teams:
+* Elliott Could Play a Year After His Injury
+  Latest developments: The Post-Gazette reported Friday morning,
+  October 23, that Steelers safety DeShon Elliott could return
+  Sunday against the New Orleans Saints in Paris, a year removed
+  from the injury the paper calls gruesome.
+  The Steelers ruled Elliott out of the October 18 game at the
+  Tampa Bay Buccaneers, and his return would hand defensive
+  coordinator Patrick Graham a starting safety back for the 9:30
+  a.m. Eastern kickoff Sunday, October 25, in a secondary
+  already missing pieces.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/23/will-deshon-elliott-play-sunday/stories/202610230028
+* Rodgers Would Back 16 Games Abroad in a Week
+  Latest developments: The Post-Gazette reported Friday, October
+  23, that quarterback Aaron Rodgers said the NFL could stage 16
+  international games in a single week and that he would support
+  the idea.
+  Rodgers made the case as the Steelers prepared to meet the New
+  Orleans Saints in Paris on Sunday, October 25, the league's
+  first regular-season game in France, one of the international
+  dates the NFL keeps adding to the schedule.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/23/aaron-rodgers-nfl-international-games/stories/202610230030
+* The Steelers Fly Out for Paris
+  Latest developments: The team's channel posted its departure
+  videos, "Next stop: Paris" and "Bon voyage," early Friday,
+  October 23, as the Steelers left for France, alongside a clip
+  of Hall of Famers Dermontti Dawson and Mel Blount checking in
+  from Paris on Thursday, October 22.
+  Pittsburgh meets the New Orleans Saints at 9:30 a.m. Eastern
+  on Sunday, October 25, on NFL Network, and the team has filled
+  the week with throwback highlights of running back Willie
+  Parker and tight end Heath Miller against the Saints;
+  defensive lineman Sebastian Joseph-Day stays home on injured
+  reserve, with two rookie defensive linemen taking his snaps.
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/ZS7mWo1x2-Y
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/GH5dW9k06g4
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/0otqWh1Uiu4
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/a3eiQLf6zSw
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/10/22/steelers-injury-updates/stories/202610210074
+
+READING
+----------------------------------------------------------------
+
+* Stratechery -- An Interview with Craig Moffett About SpaceX
+  and Bubbles
+  Ben Thompson talks with the telecom analyst Craig Moffett
+  about SpaceX across launch, broadband, and mobile, and about
+  how the lessons of the dot-com bubble apply to today's
+  artificial-intelligence spending.
+  https://stratechery.com/2026/an-interview-with-craig-moffett-about-spacex-and-bubbles/
+
+* Ed Zitron -- AI Had Better Work Out
+  Zitron argues the artificial-intelligence buildout has grown
+  so large, and so dependent on debt, that the industry has left
+  itself no path other than the technology paying off on
+  schedule.
+  https://www.wheresyoured.at/ai-had-better-work-out/
+
+* Cal Newport -- The Good Thing About Hard Things
+  Newport takes up a Conference on Language Modeling paper, "AI
+  Assistance Reduces Persistence and Hurts Independent
+  Performance," and argues that struggling through difficulty
+  builds the capability that leaning on an assistant erodes.
+  https://calnewport.com/the-good-thing-about-hard-things/
+
+MARKETS (weekly average, change vs prior week)
+----------------------------------------------------------------
+S&P 500     7,696.67  ▼ -1.0%
+Dow        52,437.68  ▲ +1.2%
+Nasdaq     26,341.49  ▼ -2.6%
+WTI crude     100.70  ▲ +6.5%
+EUR/USD       1.1223  ▲ +0.2%
+GBP/USD       1.3337  ▲ +0.8%
+USD/JPY       158.17  = -0.0%
+
+FEED HEALTH
+----------------------------------------------------------------
+Security: 24 of 24 feeds loaded, 62 items in the 24-hour window.
+  No recent items: Krebs on Security, CISA Advisories,
+  Securelist (Kaspersky), Sophos News, Google Online Security
+  Blog, Microsoft Security Blog, Google Project Zero, The DFIR
+  Report, Kim Zetter (Zero Day), Frank on Fraud, Wired Security.
+Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
+Business and Politics: 8 of 8 feeds loaded, 60 items in the
+  36-hour window.
+Events: 4 of 4 feeds loaded, 11 items in the 120-hour window.
+Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
+  window.
+Team USA: 3 of 3 feeds loaded, 26 items in the 72-hour window.
+Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
+Markets (Yahoo Finance): 7 of 7 rows
+Weather (NWS): 3 forecast periods
+Scores (ESPN, plaintextsports): 2 teams via ESPN
+Summaries: 3 model call(s) served by claude-opus-5 (396s of
+  model time; $2.08 at API list price).
+
+================================================================
+Generated 2026-10-23 10:06 EDT. Updated weekdays at about 7:05
+AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
+8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
+feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
+beat and podcast feeds; 3 Team USA feeds; WSJ World News, WSJ
+Markets, WSJ US Business, WSJ Politics, The Economist, FT Home,
+FT World, FT Markets; and Ed Zitron, Stratechery, Cal Newport.
+Markets from Yahoo Finance, weather from the NWS, scores from
+ESPN or plaintextsports.com. Summaries are AI-generated from the
+linked reporting; verify at the sources.
+================================================================

@@ -1,27 +1,61 @@
 {
   "date": "2026-10-23",
-  "headline": "Commodity botnet crews turned the PHP2Shell flaws into mass Mirai recruitment while fresh code-execution bugs surfaced in Pillow, the Brotli decoder inside official Node.js builds, and 14 third-party components Atlassian ships.",
+  "headline": "PHP warned of a third remote code execution flaw two days after its emergency patches, as Mirai operators fired millions of failed exploit attempts at the first two and Hewlett Packard Enterprise closed eight maximum-severity ArubaOS bugs.",
   "emerging_trends": [
     {
-      "text": "Criminals now treat AI capacity itself as the thing worth stealing, with Symantec catching a tool that hunts internet-exposed models and runs intrusion planning on the owner's compute bill, while a missing spending cap in the x402 SDKs let a malicious API ask an agent to sign away its entire token balance.",
-      "topic_title": "Attackers Hijack Exposed AI Models and Agent Wallets",
-      "link_phrase": "x402 SDKs",
+      "text": "Attackers increasingly skip the password entirely, replaying stolen Microsoft 365 sign-in sessions into mailboxes at 79 organizations and hiding inbox rules so victims never see parts of their own mail.",
+      "topic_title": "Microsoft 365 Session Replay Hits 79 Organizations",
+      "link_phrase": "sign-in sessions",
       "_anchor": "trend-1"
     },
     {
-      "text": "The month's worst flaws keep landing in code nobody inventories: Pillow's EPS handler, the Brotli decoder bundled into official Node.js builds, and the 176 vulnerability entries in Atlassian's October bulletin, every one of them in third-party components, so the patch list now runs through dependencies as much as through products.",
+      "text": "The week's worst bugs sit in the code that quietly decodes untrusted input, with Pillow handing an EPS filename to Ghostscript and Node.js unpacking crafted Brotli data, so one uploaded file reaches a shell.",
       "topic_title": "Pillow and Node.js Decoders Run Attacker Code",
-      "link_phrase": "Brotli decoder",
+      "link_phrase": "Pillow",
       "_anchor": "trend-2"
     },
     {
-      "text": "Mass-market botnet operators reached PHP2Shell within two days of the patches, pointing millions of attempts at CVE-2026-109618 and CVE-2026-109619 to feed a Mirai variant called Potassium, the familiar signal that a pre-authentication remote code execution flaw has graduated to indiscriminate scanning.",
-      "topic_title": "PHP2Shell Draws Mass Mirai Scanning",
-      "link_phrase": "Potassium",
+      "text": "AI plumbing now carries its own attack surface and its own bill: attackers hijack exposed models to plan intrusions on the owner's compute, a default in the x402 SDKs let a malicious API drain an agent's token balance, and the leak site holding the AfD archive serves AI-written summaries of 421,179 stolen emails.",
+      "topic_title": "Attackers Hijack Exposed AI Models and Agent Wallets",
+      "link_phrase": "x402 SDKs",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "PHP2Shell Draws Mass Mirai Scanning",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "PHP disclosed a third remote code execution flaw, CVE-2026-115560, on October 23, 2026, two days after its emergency patches, saying it reaches only web applications configured in an unusual way and declining an emergency fix in favor of turning off the feature involved; SecurityWeek reported exploit code that bypasses address space layout randomization, researchers still confirm no successful compromise out of millions of attempts to enlist servers in the Mirai variant Potassium, and the SANS Internet Storm Center returned its InfoCon gauge to green Friday morning.",
+      "summary": "The pair of PHP flaws, each rated 9.2, give an unauthenticated attacker remote code execution on any PHP installation serving web requests, with the highest risk on Apache with mod_php and on PHP-FPM. Every site on PHP 8.2 through 8.5 needs the October 21, 2026 releases 8.5.12, 8.4.27, 8.3.36, and 8.2.35.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "botnet"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "PHP Warns of Another Unpatched RCE Two Days After Emergency PHP2Shell Patches",
+          "url": "https://thehackernews.com/2026/10/urgent-php-warns-of-another-unpatched.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Mirai Botnet Operators Join PHP2Shell Attacks as ASLR Bypass Exploits Emerge",
+          "url": "https://www.securityweek.com/mirai-botnet-operators-join-php2shell-attacks-as-aslr-bypass-exploits-emerge/"
+        },
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "PHP Vulnerability Wrap-Up, (Fri, Oct 23rd)",
+          "url": "https://isc.sans.edu/diary/rss/33450"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "PHP2Shell Exploit Attempts Hit Millions as Attackers Try to Deploy Mirai Malware",
+          "url": "https://thehackernews.com/2026/10/php2shell-exploit-attempts-hit-millions.html"
+        }
+      ],
+      "_anchor": "i-3bc9a46d29"
+    },
     {
       "title": "Capcom and Quest Diagnostics Count Victims",
       "area": "Data Breaches",
@@ -56,6 +90,34 @@
       "_anchor": "i-98262a5cd9"
     },
     {
+      "title": "Third VeloCloud Orchestrator Zero-Day in Four Months",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "SecurityWeek counted the actively exploited SQL injection flaw Arista Networks patched on October 22, 2026 as the third zero-day in VeloCloud Orchestrator in four months, a run that keeps handing attackers the management server for VeloCloud SD-WAN networks.",
+      "summary": "The critical flaw lets anyone who can log in to the orchestrator, even on a read-only customer account, reach privileged internal functionality and take operator privileges, the top level of control. Organizations running VeloCloud Orchestrator On-Prem should install Arista's updates and review orchestrator logins.",
+      "tags": [
+        "zero-day",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Attackers Exploit Third VeloCloud Orchestrator Zero-Day in Four Months",
+          "url": "https://www.securityweek.com/attackers-exploit-third-velocloud-orchestrator-zero-day-in-four-months/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Arista Warns of Critical VeloCloud SQL Injection Zero-Day Exploited in Attacks",
+          "url": "https://thehackernews.com/2026/10/arista-warns-of-critical-velocloud-sql.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Arista patches new VeloCloud Orchestrator zero-day exploited in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/"
+        }
+      ],
+      "_anchor": "i-9480845765"
+    },
+    {
       "title": "Pillow and Node.js Decoders Run Attacker Code",
       "area": "Vulnerabilities and Exploits",
       "latest_developments": "Researchers disclosed CVE-2026-112900 in Pillow, the most widely used image library for Python, which passes an EPS file's name straight to Ghostscript and so runs whatever operating system command a caller buries in that name; Imperva published Node2Shell, a proof of concept that executed code on the official Node.js 24.22.0 image for Linux arm64 by feeding crafted data to the bundled Brotli decoder, CVE-2026-111497; and Atlassian's October bulletin listed 176 vulnerability entries, 14 of them critical, all in third-party components of its Data Center and Server products.",
@@ -85,58 +147,6 @@
       "_anchor": "i-3a89e69463"
     },
     {
-      "title": "Third VeloCloud Orchestrator Zero-Day in Four Months",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SecurityWeek counted the actively exploited SQL injection flaw Arista Networks patched on October 22, 2026 as the third zero-day in VeloCloud Orchestrator in four months, a run that keeps handing attackers the management server for VeloCloud SD-WAN networks.",
-      "summary": "The critical flaw lets anyone who can log in to the orchestrator, even on a read-only customer account, reach privileged internal functionality and take operator privileges, the top level of control. Organizations running VeloCloud Orchestrator On-Prem should install Arista's updates and review orchestrator logins.",
-      "tags": [
-        "zero-day",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Attackers Exploit Third VeloCloud Orchestrator Zero-Day in Four Months",
-          "url": "https://www.securityweek.com/attackers-exploit-third-velocloud-orchestrator-zero-day-in-four-months/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Arista Warns of Critical VeloCloud SQL Injection Zero-Day Exploited in Attacks",
-          "url": "https://thehackernews.com/2026/10/arista-warns-of-critical-velocloud-sql.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Arista patches new VeloCloud Orchestrator zero-day exploited in attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/"
-        }
-      ],
-      "_anchor": "i-9480845765"
-    },
-    {
-      "title": "PHP2Shell Draws Mass Mirai Scanning",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Attackers now fire millions of exploit attempts at CVE-2026-109618 and CVE-2026-109619 to enlist servers in Potassium, a variant of the Mirai botnet, and the attempts fail so far as researchers find the two bugs harder to weaponize than they first thought.",
-      "summary": "The pair of PHP flaws, each rated 9.2, give an unauthenticated attacker remote code execution on any PHP installation serving web requests, with the highest risk on Apache with mod_php and on PHP-FPM. Every site on PHP 8.2 through 8.5 needs the October 21, 2026 releases 8.5.12, 8.4.27, 8.3.36, and 8.2.35.",
-      "tags": [
-        "zero-day",
-        "patch",
-        "botnet"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "PHP2Shell Exploit Attempts Hit Millions as Attackers Try to Deploy Mirai Malware",
-          "url": "https://thehackernews.com/2026/10/php2shell-exploit-attempts-hit-millions.html"
-        },
-        {
-          "source": "Cisco Talos",
-          "title": "I had plans for that second",
-          "url": "https://blog.talosintelligence.com/i-had-plans-for-that-second/"
-        }
-      ],
-      "_anchor": "i-199bd0864f"
-    },
-    {
       "title": "Attackers Hijack Exposed AI Models and Agent Wallets",
       "area": "AI Security",
       "latest_developments": "Symantec researchers Priti More and Susmit Yenkar captured the instruction set of an attack tool that scans for AI models anyone on the internet can reach and then uses them to plan break-ins while the model's owner pays for the computing power, after its operators sent their entire working prompt to a honeypot posing as an unprotected AI service; the security firm V12 reported on October 22, 2026 that the default client in the x402 SDKs set no spending limit until the August 18 releases added one, so a malicious API could get an agent to sign a payment for its full balance of a supported token.",
@@ -159,6 +169,84 @@
         }
       ],
       "_anchor": "i-21a210d170"
+    },
+    {
+      "title": "UK Weighs 14-Year Terms for Cable Sabotage",
+      "area": "Policy and Regulation",
+      "latest_developments": "The Department for Digital, Culture, Media and Sport published a White Paper this week proposing 14-year prison sentences for deliberately damaging undersea cables and pipelines off the British coast, plus unlimited fines for ship owners whose vessels cause the damage, superseding the Submarine Telegraph Act 1885 and its £1,000 maximum fine and five-year sentence.",
+      "summary": "Undersea cables carry nearly all intercontinental internet traffic, and the British law covering deliberate damage to them dates to 1885. Shipping companies and cable operators working in UK waters face new liability and penalties if Parliament adopts the plan.",
+      "tags": [
+        "policy",
+        "critical-infrastructure"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "UK proposes 14-year prison terms for undersea cable sabotage",
+          "url": "https://therecord.media/uk-undersea-cables-sabotage-new-sentencing-guidelines"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "UK proposes 14-year jail terms for subsea cable saboteurs",
+          "url": "https://www.helpnetsecurity.com/2026/10/23/uk-undersea-cable-sabotage-sentences/"
+        }
+      ],
+      "_anchor": "i-b49db17578"
+    },
+    {
+      "title": "HPE Closes Eight Maximum-Severity ArubaOS Flaws",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Hewlett Packard Enterprise shipped updates on October 23, 2026 that fix 72 vulnerabilities in ArubaOS, among them eight maximum-severity authentication bypass and remote code execution flaws.",
+      "summary": "ArubaOS runs the controllers and gateways that carry enterprise Wi-Fi and branch networking, and an authentication bypass at that rating hands an unauthenticated attacker the device. Administrators should install the current ArubaOS builds and keep controller management interfaces off the public internet.",
+      "tags": [
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "HPE patches eight max severity RCE and auth bypass AOS flaws",
+          "url": "https://www.bleepingcomputer.com/news/security/hpe-patches-eight-max-severity-rce-and-auth-bypass-aos-flaws/"
+        }
+      ],
+      "_anchor": "i-eb477469ff"
+    },
+    {
+      "title": "Microsoft 365 Session Replay Hits 79 Organizations",
+      "area": "Data Breaches",
+      "latest_developments": "Huntress reported on October 23, 2026 that one attacker spent ten weeks replaying stolen Microsoft 365 sign-in sessions against 79 organizations between July 14 and September 22, 2026, logging 497 successful sign-ins and more than 200,000 failed login attempts, planting hidden inbox rules that kept victims from seeing parts of their own mail, and running the replays from servers at the hosting provider 1337 Services GmbH.",
+      "summary": "A replayed session needs no password and no multi-factor code, so credential defenses miss it entirely. Security teams should revoke active sessions whenever they suspect a compromise, audit mailbox rules for hidden filters, and watch sign-ins from 1337 Services GmbH address space.",
+      "tags": [
+        "credential-theft",
+        "cloud",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Microsoft 365 accounts compromised at 79 organizations, no passwords needed",
+          "url": "https://www.helpnetsecurity.com/2026/10/23/microsoft-365-accounts-stolen-sessions/"
+        }
+      ],
+      "_anchor": "i-f9213bfdc4"
+    },
+    {
+      "title": "281 GB Leak Hits Germany's AfD",
+      "area": "Data Breaches",
+      "latest_developments": "The Alternative für Deutschland confirmed that hackers breached its hosting provider, and a leak site now offers 281 GB of party material, claims 421,179 internal party emails, and displays AI-written summaries in place of the messages themselves.",
+      "summary": "Germany's AfD lost its email archive through a vendor it does not run, the pattern that keeps turning political organizations into single points of failure. Verification of the trove remains open while the leak site shows only machine-written summaries.",
+      "tags": [
+        "breach",
+        "politics"
+      ],
+      "sources": [
+        {
+          "source": "Graham Cluley",
+          "title": "Hacker leaks 281 GB of data from Germany’s far-right AfD party",
+          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/hacker-leaks-281-gb-data-germany-afd"
+        }
+      ],
+      "_anchor": "i-af157714ac"
     },
     {
       "title": "Prince of Persia Moves a Server to US Hosting",
@@ -262,12 +350,35 @@
   "local": {
     "business_politics": [
       {
-        "title": "Brent Reaches $114 and European Gas Hits a 2022 High",
-        "latest_developments": "Brent topped $114 a barrel Friday morning, October 23, its highest since May, and European natural gas prices climbed to their highest since late 2022 as traders priced in the risk that renewed United States-Iran fighting cuts liquefied natural gas cargoes before winter.",
-        "summary": "Houthi attacks on Saudi energy infrastructure and the prospect of American strikes on Iran have pushed West Texas Intermediate above $101 and Brent above $114, driving refining margins to all-time highs; Eni opened the energy majors' earnings season Friday with an extraordinary dividend and a bigger buyback, while gold headed for a weekly loss of more than 3.5% as elevated energy costs revived inflation and rate-increase worries, and the dollar and Treasury yields both rose.",
+        "title": "Ukraine Says Starlink Remains Throttled",
+        "latest_developments": "Ukraine said Friday, October 23, that Starlink connections still fail when its drones fly at high speed, and Kyiv now accuses Washington of intentionally slowing the service, two days after President Trump telephoned Elon Musk and the link briefly appeared to run normally.",
+        "summary": "Ukrainian soldiers and government officials say the Starshield service their military runs on Starlink's standard equipment keeps dropping, degrading their ability to intercept Russian drones and strike targets inside Russia. Musk himself authorized the original restriction, Trump denies ordering it, and the outage sits at the center of the fight over how much Washington will keep underwriting Kyiv's defense.",
         "sources": [
           {
-            "source": "FT World",
+            "source": "FT Home",
+            "title": "Ukraine says Starlink speeds still throttled",
+            "url": "https://www.ft.com/content/e67a3d0e-5893-45a5-b098-64a68a4ef032?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Ukraine Says Starlink Isn’t Working, Despite Trump’s Promise to Restore It",
+            "url": "https://www.wsj.com/world/ukraine-says-starlink-isnt-working-despite-trumps-promise-to-restore-it-c3609d3d?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "How Does the Ukrainian Military Use Starlink?",
+            "url": "https://www.wsj.com/business/telecom/how-does-the-ukrainian-military-use-starlink-e1faa11b?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-04f7410dc7"
+      },
+      {
+        "title": "Brent Reaches $114 and European Gas Hits a 2022 High",
+        "latest_developments": "Brent reached $115 a barrel Friday, October 23, its highest since May, and the Dow slid as crude climbed; tight global fuel markets have driven refining margins to all-time highs, which makes refineries the swing factor in the oil majors' quarterly results, and European natural gas prices sit at their highest since late 2022.",
+        "summary": "Houthi attacks on Saudi energy infrastructure and the prospect of American strikes on Iran have pushed West Texas Intermediate above $101 and Brent to $115, and traders are pricing in the risk that renewed United States-Iran fighting cuts liquefied natural gas cargoes before winter. Eni opened the energy majors' earnings season Friday with an extraordinary dividend and a bigger buyback, while gold headed for a weekly loss of more than 3.5% as elevated energy costs revived inflation and rate-increase worries, and the dollar and Treasury yields both rose.",
+        "sources": [
+          {
+            "source": "FT Home",
             "title": "Oil hits $114 for first time since May as global stocks knocked by AI fears",
             "url": "https://www.ft.com/content/8948193b-438b-4d71-a0b1-31dff56fc308?syn-25a6b1a6=1"
           },
@@ -290,6 +401,11 @@
             "source": "WSJ US Business",
             "title": "Eni Shareholders Set for Cash Boost After Earnings Double",
             "url": "https://www.wsj.com/business/energy-oil/eni-shareholders-set-for-cash-boost-after-earnings-double-7c3df34b?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Stock Market Today: Dow Slides as Oil Prices Climb to Highest in Five Months",
+            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-10-23-2026?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-be49da96e5"
@@ -348,6 +464,19 @@
     ],
     "business": [
       {
+        "title": "Hellbender Records Presses Around the Vinyl Backlog",
+        "latest_developments": "Pittsburgh City Paper reported Friday, October 23, that the Pittsburgh label Hellbender Records has partnered with the Irish pressing operation Anthem Vinyl.",
+        "summary": "A global backlog at vinyl pressing plants has stretched the wait for independent labels to get records made, and Hellbender's arrangement with Anthem Vinyl gets its releases onto Pittsburgh turntables faster.",
+        "sources": [
+          {
+            "source": "Pittsburgh City Paper",
+            "title": "Hellbender Records brings the luck of the Irish to Pittsburgh turntables",
+            "url": "https://www.pghcitypaper.com/arts-entertainment-2/music/hellbender-records-brings-the-luck-of-the-irish-to-pittsburgh-turntables/"
+          }
+        ],
+        "_anchor": "i-82250d6736"
+      },
+      {
         "title": "Westmoreland Buys Ads for Breeze Airways",
         "latest_developments": "Westmoreland County commissioners allocated $25,000 Thursday, October 22, to the county airport authority for an advertising campaign ahead of the Breeze Airways launch at Arnold Palmer Regional Airport.",
         "summary": "The county and the Westmoreland County Airport Authority committed more than $1.3 million in subsidies to bring Breeze Airways to the Latrobe airport under the deal the authority approved October 13, and the marketing money now goes toward filling those seats.",
@@ -388,6 +517,45 @@
       }
     ],
     "around_town": [
+      {
+        "title": "A Few State Senate Races Decide Harrisburg",
+        "latest_developments": "The Post-Gazette laid out Friday, October 23, how a handful of Pennsylvania Senate races will settle control of the chamber, 11 days before the November 3 election.",
+        "summary": "The Pennsylvania Senate holds the power to advance or bury Governor Josh Shapiro's agenda, and a small set of districts decides which party runs it. Western Pennsylvania's 46th District sits among the contested seats, where Republican Camera Bartolotta seeks a fourth term against Democrat Jodi Borello.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "How a handful of state Senate races could shape Pennsylvania's future",
+            "url": "https://www.post-gazette.com/news/politics-state/2026/10/23/pennsylvania-senate-control-midterms/stories/202610220051"
+          }
+        ],
+        "_anchor": "i-3ec0da405c"
+      },
+      {
+        "title": "North Allegheny Ranks Second Among Area Districts",
+        "latest_developments": "TribLive reported Friday, October 23, that Niche's 2027 rankings place North Allegheny School District second out of 77 districts in the Pittsburgh area, with North Hills communities also scoring high.",
+        "summary": "Niche, the online ranking and review site, grades school districts and neighborhoods that home buyers and real estate agents across Allegheny County consult. North Allegheny serves the northern suburbs of the county.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "North Allegheny, North Hills communities score high in 2027 Niche rankings",
+            "url": "https://triblive.com/local/sewickley/north-allegheny-north-hills-communities-score-high-in-2027-niche-rankings/"
+          }
+        ],
+        "_anchor": "i-b54d837614"
+      },
+      {
+        "title": "Stackhouse Management Tenants Go Months Without Reliable Water",
+        "latest_developments": "WTAE reported Thursday night, October 22, that residents of a Beaver County mobile home park have dealt with water problems for months, and the station found similar complaints at other Western Pennsylvania properties Stackhouse Management runs.",
+        "summary": "Stackhouse Management operates manufactured-housing communities around the region, and its tenants in Beaver County say the water service has failed repeatedly without a fix.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Residents frustrated by water issues at Beaver County mobile home park",
+            "url": "https://www.wtae.com/article/water-issues-several-stackhouse-management-properties-western-pa/74224721"
+          }
+        ],
+        "_anchor": "i-5023b4f70b"
+      },
       {
         "title": "Upper Burrell Adopts Its Data Center Ordinance",
         "latest_developments": "Upper Burrell Township supervisors voted unanimously Thursday, October 22, after a public hearing, to approve the zoning ordinance regulating data centers, two days after the township planning commission advanced it over the objections of residents who packed that meeting.",
@@ -449,6 +617,32 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "Elliott Could Play a Year After His Injury",
+        "latest_developments": "The Post-Gazette reported Friday morning, October 23, that Steelers safety DeShon Elliott could return Sunday against the New Orleans Saints in Paris, a year removed from the injury the paper calls gruesome.",
+        "summary": "The Steelers ruled Elliott out of the October 18 game at the Tampa Bay Buccaneers, and his return would hand defensive coordinator Patrick Graham a starting safety back for the 9:30 a.m. Eastern kickoff Sunday, October 25, in a secondary already missing pieces.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers safety DeShon Elliott could return Sunday, a year removed from his gruesome injury",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/23/will-deshon-elliott-play-sunday/stories/202610230028"
+          }
+        ],
+        "_anchor": "i-595924af2d"
+      },
+      {
+        "title": "Rodgers Would Back 16 Games Abroad in a Week",
+        "latest_developments": "The Post-Gazette reported Friday, October 23, that quarterback Aaron Rodgers said the NFL could stage 16 international games in a single week and that he would support the idea.",
+        "summary": "Rodgers made the case as the Steelers prepared to meet the New Orleans Saints in Paris on Sunday, October 25, the league's first regular-season game in France, one of the international dates the NFL keeps adding to the schedule.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Aaron Rodgers says the NFL could play 16 international games in one week — and he’d support it",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/23/aaron-rodgers-nfl-international-games/stories/202610230030"
+          }
+        ],
+        "_anchor": "i-5de6ba4f34"
+      },
       {
         "title": "The Steelers Fly Out for Paris",
         "latest_developments": "The team's channel posted its departure videos, \"Next stop: Paris\" and \"Bon voyage,\" early Friday, October 23, as the Steelers left for France, alongside a clip of Hall of Famers Dermontti Dawson and Mel Blount checking in from Paris on Thursday, October 22.",
@@ -512,133 +706,133 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Symantec caught a tool that scans internet-exposed AI models and bills intrusion planning to their owners, while missing x402 caps let a malicious API drain an agent's wallet.",
+      "text": "One uploaded file reaches a shell: Pillow hands EPS names to Ghostscript, Node.js unpacks crafted Brotli, and PHP's third flaw CVE-2026-115560 now draws Mirai scanning.",
       "links": [
         {
-          "anchor": "i-21a210d170",
-          "phrase": "Symantec",
-          "start": 0,
-          "end": 8,
-          "title": "Attackers Hijack Exposed AI Models and Agent Wallets"
+          "anchor": "i-3a89e69463",
+          "phrase": "Pillow",
+          "start": 35,
+          "end": 41,
+          "title": "Pillow and Node.js Decoders Run Attacker Code"
+        },
+        {
+          "anchor": "i-3bc9a46d29",
+          "phrase": "CVE-2026-115560",
+          "start": 127,
+          "end": 142,
+          "title": "PHP2Shell Draws Mass Mirai Scanning"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "Potassium botnet attempts flood PHP2Shell days after patching, Arista fixed a third VeloCloud Orchestrator zero-day in four months, and Pillow's EPS handler runs attacker commands.",
+      "text": "AI plumbing is now both target and bill, with attackers hijacking exposed models and x402 agent wallets while the AfD leak site serves AI-written summaries of 421,179 stolen emails.",
       "links": [
         {
-          "anchor": "i-199bd0864f",
-          "phrase": "Potassium",
-          "start": 0,
-          "end": 9,
-          "title": "PHP2Shell Draws Mass Mirai Scanning"
+          "anchor": "i-21a210d170",
+          "phrase": "exposed models",
+          "start": 66,
+          "end": 80,
+          "title": "Attackers Hijack Exposed AI Models and Agent Wallets"
+        },
+        {
+          "anchor": "i-af157714ac",
+          "phrase": "AfD",
+          "start": 114,
+          "end": 117,
+          "title": "281 GB Leak Hits Germany's AfD"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Huntress traced one attacker replaying stolen Microsoft 365 sign-in sessions into 79 organizations over ten weeks, logging 497 successful sign-ins and hiding inbox rules from victims.",
+      "links": [
+        {
+          "anchor": "i-f9213bfdc4",
+          "phrase": "Microsoft 365",
+          "start": 46,
+          "end": 59,
+          "title": "Microsoft 365 Session Replay Hits 79 Organizations"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Network management planes keep falling, as HPE closes eight maximum-severity ArubaOS flaws among 72 fixes and Arista patches a third exploited VeloCloud Orchestrator zero-day in four months.",
+      "links": [
+        {
+          "anchor": "i-eb477469ff",
+          "phrase": "ArubaOS",
+          "start": 77,
+          "end": 84,
+          "title": "HPE Closes Eight Maximum-Severity ArubaOS Flaws"
         },
         {
           "anchor": "i-9480845765",
           "phrase": "VeloCloud Orchestrator",
-          "start": 84,
-          "end": 106,
+          "start": 143,
+          "end": 165,
           "title": "Third VeloCloud Orchestrator Zero-Day in Four Months"
-        },
-        {
-          "anchor": "i-3a89e69463",
-          "phrase": "Pillow's EPS",
-          "start": 136,
-          "end": 148,
-          "title": "Pillow and Node.js Decoders Run Attacker Code"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Iran threatened economic and civilian targets as Brent topped $114 a barrel, and the Iranian group Prince of Persia hid a Tornado server on US shared hosting.",
+      "kind": "Update",
+      "status": "new",
+      "text": "Infrastructure turned geopolitical as Kyiv accused Washington of throttling Starlink, the UK proposed 14-year terms for undersea cable sabotage, and Brent reached $115 a barrel.",
       "links": [
         {
-          "anchor": "i-b9b19fff0f",
-          "phrase": "Iran threatened",
-          "start": 0,
-          "end": 15,
-          "title": "Iran Threatens Economic and Civilian Targets"
+          "anchor": "i-04f7410dc7",
+          "phrase": "Starlink",
+          "start": 76,
+          "end": 84,
+          "title": "Ukraine Says Starlink Remains Throttled"
+        },
+        {
+          "anchor": "i-b49db17578",
+          "phrase": "undersea cable",
+          "start": 120,
+          "end": 134,
+          "title": "UK Weighs 14-Year Terms for Cable Sabotage"
         },
         {
           "anchor": "i-be49da96e5",
           "phrase": "Brent",
-          "start": 49,
-          "end": 54,
+          "start": 149,
+          "end": 154,
           "title": "Brent Reaches $114 and European Gas Hits a 2022 High"
-        },
-        {
-          "anchor": "i-fcaeed9175",
-          "phrase": "Prince of Persia",
-          "start": 99,
-          "end": 115,
-          "title": "Prince of Persia Moves a Server to US Hosting"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "SK Hynix pulled Solidigm's IPO and Calpers trimmed its Magnificent Seven stake as Zitron warns the debt-funded buildout must pay off and Moffett revisits dot-com lessons.",
-      "links": [
-        {
-          "anchor": "i-4dacaad572",
-          "phrase": "SK Hynix",
-          "start": 0,
-          "end": 8,
-          "title": "The AI Selloff Reaches Chip Listings and Pension Funds"
-        },
-        {
-          "anchor": "i-0052240628",
-          "phrase": "Zitron",
-          "start": 82,
-          "end": 88,
-          "title": "AI Had Better Work Out"
-        },
-        {
-          "anchor": "i-271b7ab26b",
-          "phrase": "Moffett",
-          "start": 137,
-          "end": 144,
-          "title": "An Interview with Craig Moffett About SpaceX and Bubbles"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Capcom confirmed more than 11.7 million customer email addresses exposed through CAPCOM ID, with Quest Diagnostics also tallying affected people.",
+      "text": "Locally, a few Pennsylvania Senate races will settle Harrisburg, Beaver County tenants went months without reliable water, and DeShon Elliott may return as the Steelers reach Paris.",
       "links": [
         {
-          "anchor": "i-98262a5cd9",
-          "phrase": "Capcom confirmed",
-          "start": 0,
-          "end": 16,
-          "title": "Capcom and Quest Diagnostics Count Victims"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Upper Burrell supervisors unanimously adopted their data center zoning ordinance Thursday, and Pennsylvania now requires disclosures on advertisements generated with artificial intelligence.",
-      "links": [
-        {
-          "anchor": "i-f7381f234a",
-          "phrase": "Upper Burrell",
-          "start": 0,
-          "end": 13,
-          "title": "Upper Burrell Adopts Its Data Center Ordinance"
+          "anchor": "i-3ec0da405c",
+          "phrase": "Senate races",
+          "start": 28,
+          "end": 40,
+          "title": "A Few State Senate Races Decide Harrisburg"
         },
         {
-          "anchor": "i-6ca7840060",
-          "phrase": "Pennsylvania",
-          "start": 95,
-          "end": 107,
-          "title": "Pennsylvania Requires Disclosure on AI-Generated Ads"
+          "anchor": "i-5023b4f70b",
+          "phrase": "Beaver County",
+          "start": 65,
+          "end": 78,
+          "title": "Stackhouse Management Tenants Go Months Without Reliable Water"
+        },
+        {
+          "anchor": "i-595924af2d",
+          "phrase": "DeShon Elliott",
+          "start": 127,
+          "end": 141,
+          "title": "Elliott Could Play a Year After His Injury"
         }
       ]
     }
@@ -652,14 +846,14 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 81,
+        "in_window": 62,
         "failed": [],
         "empty": [
           "Krebs on Security",
+          "CISA Advisories",
           "Securelist (Kaspersky)",
           "Sophos News",
           "Google Online Security Blog",
-          "Graham Cluley",
           "Microsoft Security Blog",
           "Google Project Zero",
           "The DFIR Report",
@@ -675,8 +869,8 @@
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 7,
+            "contributed": 7
           },
           "Krebs on Security": {
             "items": 10,
@@ -690,23 +884,23 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 8,
+            "contributed": 8
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 20,
-            "contributed": 20
+            "in_window": 0,
+            "contributed": 0
           },
           "The Record": {
             "items": 5,
@@ -715,13 +909,13 @@
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 8,
+            "contributed": 8
           },
           "Securelist (Kaspersky)": {
             "items": 10,
@@ -750,8 +944,8 @@
           },
           "Graham Cluley": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Microsoft Security Blog": {
             "items": 10,
@@ -803,16 +997,16 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 22
+            "contributed": 17
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 7
+            "contributed": 10
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 4,
+            "in_window": 3,
             "contributed": 1
           },
           "Pittsburgh City Paper": {
@@ -822,28 +1016,28 @@
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 4,
+            "in_window": 3,
             "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 3,
-            "contributed": 2
+            "in_window": 4,
+            "contributed": 3
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 6
+            "contributed": 3
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 6
+            "contributed": 7
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 13
+            "contributed": 16
           }
         }
       },
@@ -858,9 +1052,9 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 75,
-            "in_window": 26,
-            "contributed": 5
+            "items": 74,
+            "in_window": 25,
+            "contributed": 7
           },
           "WSJ Markets": {
             "items": 61,
@@ -869,12 +1063,12 @@
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 49,
-            "contributed": 9
+            "in_window": 50,
+            "contributed": 16
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 9,
+            "in_window": 6,
             "contributed": 1
           },
           "The Economist": {
@@ -883,14 +1077,14 @@
             "contributed": 1
           },
           "FT Home": {
-            "items": 11,
-            "in_window": 11,
-            "contributed": 9
+            "items": 12,
+            "in_window": 12,
+            "contributed": 5
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 20
+            "contributed": 15
           },
           "FT Markets": {
             "items": 25,
@@ -954,7 +1148,7 @@
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
             "in_window": 15,
-            "contributed": 15
+            "contributed": 13
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -968,8 +1162,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 17,
-            "contributed": 10
+            "in_window": 19,
+            "contributed": 12
           }
         }
       },
@@ -979,19 +1173,19 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 28,
+        "in_window": 26,
         "failed": [],
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 21,
-            "in_window": 21,
-            "contributed": 21
+            "items": 18,
+            "in_window": 18,
+            "contributed": 18
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 7,
+            "contributed": 7
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1052,24 +1246,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 25835,
+          "outputTokens": 35379,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 113983,
+          "cacheCreationInputTokens": 119935,
           "webSearchRequests": 0,
-          "costUSD": 1.7857349999999999,
+          "costUSD": 2.083855,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14900
+          "thinkingTokens": 19846
         }
       },
-      "cost_usd": 1.7857349999999999,
-      "duration_ms": 296592,
+      "cost_usd": 2.083855,
+      "duration_ms": 396418,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-23 07:05 EDT",
-    "items_considered": 81,
+    "generated_at": "2026-10-23 10:06 EDT",
+    "items_considered": 62,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1150,8 +1344,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.7857,
-    "model_duration_ms": 296592,
+    "model_cost_usd": 2.0839,
+    "model_duration_ms": 396418,
     "local_from": null,
     "feed_failures": []
   }
