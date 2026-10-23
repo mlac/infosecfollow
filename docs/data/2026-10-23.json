@@ -1,23 +1,23 @@
 {
   "date": "2026-10-23",
-  "headline": "PHP warned of a third remote code execution flaw two days after its emergency patches, as Mirai operators fired millions of failed exploit attempts at the first two and Hewlett Packard Enterprise closed eight maximum-severity ArubaOS bugs.",
+  "headline": "PHP disclosed a third remote code execution flaw with no patch as Mirai operators hammered this week's PHP2Shell bugs, and researchers counted more than 70,000 credentials harvested off exposed FortiGate and GlobalProtect firewalls.",
   "emerging_trends": [
     {
-      "text": "Attackers increasingly skip the password entirely, replaying stolen Microsoft 365 sign-in sessions into mailboxes at 79 organizations and hiding inbox rules so victims never see parts of their own mail.",
-      "topic_title": "Microsoft 365 Session Replay Hits 79 Organizations",
-      "link_phrase": "sign-in sessions",
+      "text": "Attackers spent the day working the plumbing rather than the application: the Brotli decoder bundled into Node.js, Ghostscript behind Python's Pillow, and the compression layer under PHP all turned ordinary input into a shell, which means a patch inventory built around products misses the libraries those products carry.",
+      "topic_title": "Pillow and Node.js Decoders Run Attacker Code",
+      "link_phrase": "Brotli",
       "_anchor": "trend-1"
     },
     {
-      "text": "The week's worst bugs sit in the code that quietly decodes untrusted input, with Pillow handing an EPS filename to Ghostscript and Node.js unpacking crafted Brotli data, so one uploaded file reaches a shell.",
-      "topic_title": "Pillow and Node.js Decoders Run Attacker Code",
-      "link_phrase": "Pillow",
+      "text": "Two campaigns disclosed today show intruders walking in with valid access instead of exploits, one replaying stolen Microsoft 365 sessions at 79 organizations and one collecting more than 70,000 logins from Fortinet FortiGate and Palo Alto Networks GlobalProtect appliances, so credential hygiene and session revocation now carry the weight passwords once did.",
+      "topic_title": "Campaign Harvests 70,000 Credentials From Edge Firewalls",
+      "link_phrase": "GlobalProtect",
       "_anchor": "trend-2"
     },
     {
-      "text": "AI plumbing now carries its own attack surface and its own bill: attackers hijack exposed models to plan intrusions on the owner's compute, a default in the x402 SDKs let a malicious API drain an agent's token balance, and the leak site holding the AfD archive serves AI-written summaries of 421,179 stolen emails.",
+      "text": "AI infrastructure keeps shipping with permissive defaults, and criminals have found the money in them: unauthenticated model endpoints become free hacking engines billed to their owners, and the x402 payment SDKs let an agent sign away its whole token balance until an August release added a cap.",
       "topic_title": "Attackers Hijack Exposed AI Models and Agent Wallets",
-      "link_phrase": "x402 SDKs",
+      "link_phrase": "x402",
       "_anchor": "trend-3"
     }
   ],
@@ -25,7 +25,7 @@
     {
       "title": "PHP2Shell Draws Mass Mirai Scanning",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "PHP disclosed a third remote code execution flaw, CVE-2026-115560, on October 23, 2026, two days after its emergency patches, saying it reaches only web applications configured in an unusual way and declining an emergency fix in favor of turning off the feature involved; SecurityWeek reported exploit code that bypasses address space layout randomization, researchers still confirm no successful compromise out of millions of attempts to enlist servers in the Mirai variant Potassium, and the SANS Internet Storm Center returned its InfoCon gauge to green Friday morning.",
+      "latest_developments": "PHP disclosed a third remote code execution flaw, CVE-2026-115560, on October 23, 2026, two days after its emergency patches, and shipped no fix for it, telling administrators to turn off the feature involved because the bug reaches only web applications running an unusual configuration; SecurityWeek reported exploit code that bypasses address space layout randomization, researchers still confirm no successful compromise out of millions of attempts to enlist servers in the Mirai variant Potassium, and the SANS Internet Storm Center returned its InfoCon gauge to green Friday morning.",
       "summary": "The pair of PHP flaws, each rated 9.2, give an unauthenticated attacker remote code execution on any PHP installation serving web requests, with the highest risk on Apache with mod_php and on PHP-FPM. Every site on PHP 8.2 through 8.5 needs the October 21, 2026 releases 8.5.12, 8.4.27, 8.3.36, and 8.2.35.",
       "tags": [
         "zero-day",
@@ -39,6 +39,11 @@
           "url": "https://thehackernews.com/2026/10/urgent-php-warns-of-another-unpatched.html"
         },
         {
+          "source": "BleepingComputer",
+          "title": "PHP shares mitigation for new RCE vulnerability with no patch",
+          "url": "https://www.bleepingcomputer.com/news/security/php-shares-mitigation-for-new-and-unpatched-rce-vulnerability/"
+        },
+        {
           "source": "SecurityWeek",
           "title": "Mirai Botnet Operators Join PHP2Shell Attacks as ASLR Bypass Exploits Emerge",
           "url": "https://www.securityweek.com/mirai-botnet-operators-join-php2shell-attacks-as-aslr-bypass-exploits-emerge/"
@@ -47,11 +52,6 @@
           "source": "SANS Internet Storm Center",
           "title": "PHP Vulnerability Wrap-Up, (Fri, Oct 23rd)",
           "url": "https://isc.sans.edu/diary/rss/33450"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "PHP2Shell Exploit Attempts Hit Millions as Attackers Try to Deploy Mirai Malware",
-          "url": "https://thehackernews.com/2026/10/php2shell-exploit-attempts-hit-millions.html"
         }
       ],
       "_anchor": "i-3bc9a46d29"
@@ -82,9 +82,9 @@
           "url": "https://www.securityweek.com/11-million-impacted-by-capcom-data-breach/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Quest Diagnostics Reports Cyber Breach Affecting ‘Certain Patient Records’",
-          "url": "https://www.securityweek.com/quest-diagnostics-reports-cyber-breach-affecting-certain-patient-records/"
+          "source": "BleepingComputer",
+          "title": "Quest Diagnostics confirms data breach exposed patient records",
+          "url": "https://www.bleepingcomputer.com/news/security/quest-diagnostics-confirms-data-breach-exposed-patient-records/"
         }
       ],
       "_anchor": "i-98262a5cd9"
@@ -194,6 +194,25 @@
       "_anchor": "i-b49db17578"
     },
     {
+      "title": "Campaign Harvests 70,000 Credentials From Edge Firewalls",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Researchers disclosed on October 23, 2026 a large-scale campaign against internet-exposed network edge devices, among them Fortinet FortiGate and Palo Alto Networks GlobalProtect firewalls, that has exposed more than 70,000 credentials, and artifacts from the investigation show the operators already hold access at organizations worldwide and have pushed deeper into some of them.",
+      "summary": "The operators collect logins from the appliances that sit at the network perimeter, which hands them remote access that looks legitimate to everything behind it. Administrators should rotate firewall and VPN credentials, enforce multi-factor authentication on remote access, and hunt for unfamiliar sessions on edge devices.",
+      "tags": [
+        "credential-theft",
+        "vpn",
+        "initial-access"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Hackers Breach Enterprise Firewalls and VPNs, Exposing Over 70,000 Credentials",
+          "url": "https://thehackernews.com/2026/10/hackers-breach-enterprise-firewalls-and.html"
+        }
+      ],
+      "_anchor": "i-f059789b24"
+    },
+    {
       "title": "HPE Closes Eight Maximum-Severity ArubaOS Flaws",
       "area": "Vulnerabilities and Exploits",
       "latest_developments": "Hewlett Packard Enterprise shipped updates on October 23, 2026 that fix 72 vulnerabilities in ArubaOS, among them eight maximum-severity authentication bypass and remote code execution flaws.",
@@ -247,24 +266,6 @@
         }
       ],
       "_anchor": "i-af157714ac"
-    },
-    {
-      "title": "Prince of Persia Moves a Server to US Hosting",
-      "area": "Nation-State Activity",
-      "latest_developments": "SecurityWeek reported on October 23, 2026 that the Iranian group Prince of Persia, after a three-month lull, hid a Tornado command-and-control server on United States shared hosting, its first server inside the country since 2016.",
-      "summary": "Prince of Persia runs the Tornado malware family and has long kept its control servers offshore. Defenders who weight suspicion by hosting geography will miss this infrastructure, since it now sits on domestic shared hosting alongside ordinary customer sites.",
-      "tags": [
-        "apt",
-        "iran"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Iran’s Prince of Persia APT Hosts C&C in US for First Time Since 2016",
-          "url": "https://www.securityweek.com/irans-prince-of-persia-apt-hosts-cc-in-us-for-first-time-since-2016/"
-        }
-      ],
-      "_anchor": "i-fcaeed9175"
     }
   ],
   "markets": [
@@ -350,6 +351,19 @@
   "local": {
     "business_politics": [
       {
+        "title": "Justice Department Sues to Block Alaska Senate Certification",
+        "latest_developments": "The Trump administration asked a federal court in Alaska on Friday, October 23, to prevent certification of the state's Senate results if the Republican candidate loses.",
+        "summary": "The suit lands 11 days before the November 3 midterm election in a tossup race that two candidates named Dan Sullivan have complicated, and it asks a federal judge to hold up a state canvass based on which party wins. Control of the United States Senate runs through Alaska and a handful of other close races.",
+        "sources": [
+          {
+            "source": "WSJ Politics",
+            "title": "The Trump administration has asked a federal court in Alaska to prevent the certification of the state's Senate results if the Republican candidate there loses",
+            "url": "https://www.wsj.com/politics/elections/justice-department-sues-to-block-alaska-senate-results-if-gop-candidate-loses-c2597f6c?mod=rss_socialpoliticsfeed"
+          }
+        ],
+        "_anchor": "i-0f5f5d83d8"
+      },
+      {
         "title": "Ukraine Says Starlink Remains Throttled",
         "latest_developments": "Ukraine said Friday, October 23, that Starlink connections still fail when its drones fly at high speed, and Kyiv now accuses Washington of intentionally slowing the service, two days after President Trump telephoned Elon Musk and the link briefly appeared to run normally.",
         "summary": "Ukrainian soldiers and government officials say the Starshield service their military runs on Starlink's standard equipment keeps dropping, degrading their ability to intercept Russian drones and strike targets inside Russia. Musk himself authorized the original restriction, Trump denies ordering it, and the outage sits at the center of the fight over how much Washington will keep underwriting Kyiv's defense.",
@@ -374,8 +388,8 @@
       },
       {
         "title": "Brent Reaches $114 and European Gas Hits a 2022 High",
-        "latest_developments": "Brent reached $115 a barrel Friday, October 23, its highest since May, and the Dow slid as crude climbed; tight global fuel markets have driven refining margins to all-time highs, which makes refineries the swing factor in the oil majors' quarterly results, and European natural gas prices sit at their highest since late 2022.",
-        "summary": "Houthi attacks on Saudi energy infrastructure and the prospect of American strikes on Iran have pushed West Texas Intermediate above $101 and Brent to $115, and traders are pricing in the risk that renewed United States-Iran fighting cuts liquefied natural gas cargoes before winter. Eni opened the energy majors' earnings season Friday with an extraordinary dividend and a bigger buyback, while gold headed for a weekly loss of more than 3.5% as elevated energy costs revived inflation and rate-increase worries, and the dollar and Treasury yields both rose.",
+        "latest_developments": "Brent touched $117 a barrel Friday, October 23, its highest price since April, pushing United States inflation expectations up and the Dow down, and gold plunged below $4,000 an ounce while silver fell for a third straight session to its lowest level in almost a year; a tanker carrying Russian diesel intermittently signaled a United States port, which would mark the first direct shipment under President Trump's deal with Vladimir Putin.",
+        "summary": "Houthi attacks on Saudi energy infrastructure and the prospect of American strikes on Iran have pushed crude to five-month highs and European natural gas to its highest level since late 2022, as traders price in the risk that renewed United States-Iran fighting cuts liquefied natural gas cargoes before winter. Tight global fuel markets have driven refining margins to records, Eni opened the energy majors' earnings season with an extraordinary dividend and a bigger buyback, and investors rushed into Treasuries even as the havens in metals sold off.",
         "sources": [
           {
             "source": "FT Home",
@@ -398,14 +412,14 @@
             "url": "https://www.wsj.com/finance/commodities-futures/gold-is-flat-likely-to-consolidate-in-near-term-1fb03f5c?mod=rss_markets_main"
           },
           {
-            "source": "WSJ US Business",
-            "title": "Eni Shareholders Set for Cash Boost After Earnings Double",
-            "url": "https://www.wsj.com/business/energy-oil/eni-shareholders-set-for-cash-boost-after-earnings-double-7c3df34b?mod=pls_whats_news_us_business_f"
+            "source": "FT Home",
+            "title": "Gold drops below $4,000 as ‘haven’ asset joins market sell-off",
+            "url": "https://www.ft.com/content/5a6e15e9-249d-4d59-a140-c51302930a9f?syn-25a6b1a6=1"
           },
           {
             "source": "WSJ Markets",
-            "title": "Stock Market Today: Dow Slides as Oil Prices Climb to Highest in Five Months",
-            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-10-23-2026?mod=rss_markets_main"
+            "title": "Tanker Carrying Russian Diesel Signals U.S. Port After Trump-Putin Deal",
+            "url": "https://www.wsj.com/finance/commodities-futures/tanker-carrying-russian-diesel-signals-u-s-port-after-trump-putin-deal-c09c15dd?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-be49da96e5"
@@ -464,6 +478,37 @@
     ],
     "business": [
       {
+        "title": "The Transit Board Signs the Local 85 Contract",
+        "latest_developments": "The Pittsburgh Regional Transit board approved a four-year collective bargaining agreement with Amalgamated Transit Union Local 85 on Friday, October 23, completing the deal union members ratified last week.",
+        "summary": "The contract covers roughly 2,100 operators, mechanics, and other Pittsburgh Regional Transit employees and raises their wages. The agency runs buses, light rail, and the inclines across Allegheny County.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pittsburgh Regional Transit approves 4-year agreement with union",
+            "url": "https://www.wpxi.com/news/local/pittsburgh-regional-transit-approves-4-year-agreement-with-union/JBGXBG7RDVHZHOGD2SNGBOVLOI/"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pittsburgh Regional Transit approves new 4-year union contract",
+            "url": "https://www.post-gazette.com/news/transportation/2026/10/23/pittsburgh-regional-transit-union-contract/stories/202610230036"
+          }
+        ],
+        "_anchor": "i-5f143bee97"
+      },
+      {
+        "title": "Carnegie Robotics Buys Its Lawrenceville Campus",
+        "latest_developments": "Carnegie Robotics closed on the purchase of its Lawrenceville headquarters campus from the Regional Industrial Development Corporation, WPXI reported Friday, October 23.",
+        "summary": "The deal gives the robotics company the 50,000-square-foot Blue Building, reconfigured out of a former Heppenstall Steel Co. mill shed, and the surrounding four acres, cementing it as an anchor on Robotics Row along the Allegheny River.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Robotics firm buys Lawrenceville headquarters property from RIDC",
+            "url": "https://www.wpxi.com/news/local/robotics-firm-buys-lawrenceville-headquarters-property-ridc/TNF4BZ2SPRBNDKBEMWEIO5ZLHM/"
+          }
+        ],
+        "_anchor": "i-e60e9c749e"
+      },
+      {
         "title": "Hellbender Records Presses Around the Vinyl Backlog",
         "latest_developments": "Pittsburgh City Paper reported Friday, October 23, that the Pittsburgh label Hellbender Records has partnered with the Irish pressing operation Anthem Vinyl.",
         "summary": "A global backlog at vinyl pressing plants has stretched the wait for independent labels to get records made, and Hellbender's arrangement with Anthem Vinyl gets its releases onto Pittsburgh turntables faster.",
@@ -517,6 +562,45 @@
       }
     ],
     "around_town": [
+      {
+        "title": "The Inbound Liberty Tunnel Closes Next Week",
+        "latest_developments": "The Post-Gazette reported Friday, October 23, that the inbound Liberty Tunnel will close for repairs next week.",
+        "summary": "The inbound tube carries commuters from the South Hills toward downtown Pittsburgh, and its closure pushes that traffic onto the Liberty Bridge approaches and the Parkway West.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Inbound Liberty Tunnel to close for repairs next week",
+            "url": "https://www.post-gazette.com/news/transportation/2026/10/23/inbound-liberty-tunnel-closure/stories/202610230031"
+          }
+        ],
+        "_anchor": "i-e4bfd1e6e4"
+      },
+      {
+        "title": "Trafford Riders Face the Bus Line Refresh",
+        "latest_developments": "WPXI reported Friday, October 23, that a standoff between Pittsburgh Regional Transit and Trafford borough has left riders in limbo over the agency's proposed Bus Line Refresh.",
+        "summary": "A Trafford man who is blind told the station the redesign could eliminate the route he rides to work and leave him walking in the dark along a road with no sidewalks. Pittsburgh Regional Transit's Bus Line Refresh rewrites routes across Allegheny County and the Westmoreland County borough's edges.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Conflict between PRT, Trafford Borough leaves residents in limbo",
+            "url": "https://www.wpxi.com/news/local/conflict-between-prt-trafford-borough-leaves-residents-limbo/ZIZYNSQ2YBGYRJVHZJ26COI42I/"
+          }
+        ],
+        "_anchor": "i-96c606df8f"
+      },
+      {
+        "title": "The Aspen Institute Brings Aspen Ideas Encore to Pittsburgh",
+        "latest_developments": "WPXI reported Friday, October 23, that the Aspen Institute will launch its inaugural Aspen Ideas Encore in Pittsburgh.",
+        "summary": "The three-day gathering of regional and national leaders spins off the Aspen Ideas Festival, which the institute has staged for decades in Aspen, Colorado.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "The Aspen Institute launching inaugural Aspen Ideas Encore in Pittsburgh",
+            "url": "https://www.wpxi.com/news/local/aspen-institute-launching-inaugural-aspen-ideas-encore-pittsburgh/XO6JUUJGJFE7VP47IADFIOHZCY/"
+          }
+        ],
+        "_anchor": "i-ff0c3fe5cc"
+      },
       {
         "title": "A Few State Senate Races Decide Harrisburg",
         "latest_developments": "The Post-Gazette laid out Friday, October 23, how a handful of Pennsylvania Senate races will settle control of the chamber, 11 days before the November 3 election.",
@@ -603,6 +687,45 @@
     ],
     "events": [
       {
+        "title": "The Breakthrough T1D Walk Fills the North Shore",
+        "latest_developments": "WPXI reported Friday, October 23, that thousands of people will gather on Pittsburgh's North Shore on Saturday, October 24, for the annual Breakthrough T1D Walk.",
+        "summary": "The walk raises money for research toward a cure for type 1 diabetes and draws people living with the disease along with their friends and families.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Breakthrough T1D hosting annual walk in Pittsburgh",
+            "url": "https://www.wpxi.com/news/local/breakthrough-t1d-hosting-annual-walk-pittsburgh/3AERKDIYGBFVVEWMM2F2RQWA3U/"
+          }
+        ],
+        "_anchor": "i-19f977dbd8"
+      },
+      {
+        "title": "Irwin Celebrates Halloween a Week Early",
+        "latest_developments": "TribLive reported Friday, October 23, that downtown Irwin holds its Halloween parade on Saturday, October 24, a week ahead of the holiday.",
+        "summary": "The Westmoreland County borough pairs the parade with a storefront decorating contest and trick-or-treating at downtown businesses.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Halloween parade, store trick-or-treat set for Irwin",
+            "url": "https://triblive.com/local/westmoreland/halloween-parade-store-trick-or-treat-set-for-irwin/"
+          }
+        ],
+        "_anchor": "i-d95179c5dc"
+      },
+      {
+        "title": "Lee Terbosic Hangs Over Arts Landing",
+        "latest_developments": "TribLive reported Friday, October 23, that the magician Lee Terbosic will attempt a Houdini-style straitjacket escape high above Arts Landing on Halloween.",
+        "summary": "Terbosic, a Pittsburgh native, once dangled upside down in a straitjacket from a wire 90 feet above downtown Pittsburgh, and he aims to top that stunt this time.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Lee Terbosic to attempt Houdini-esque straitjacket escape from high above Arts Landing",
+            "url": "https://triblive.com/aande/theater-arts/lee-terbosic-to-attempt-houdini-esque-straitjacket-escape-from-high-above-arts-landing/"
+          }
+        ],
+        "_anchor": "i-82e64b9174"
+      },
+      {
         "title": "A Pizza Musical Casts the Audience",
         "latest_developments": "Pittsburgh City Paper previewed \"Slice Something Slice\" on Friday, October 23, an interactive musical about Pittsburgh pizza in which audience members take the starring role.",
         "summary": "The show grows out of the work of Dan Tallarico, the self-described pizza journalist who has reviewed Pittsburgh-area pizzerias through his blog Pizza Walk With Me, a Substack, and a newsletter, and who wrote a book on the subject; Tallarico argues the city punches above its weight on pizza.",
@@ -617,6 +740,39 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "The Steelers Set Up Shop in Paris",
+        "latest_developments": "The Steelers held their Friday, October 23, media sessions from their Paris hotel, with head coach Mike McCarthy, quarterback Aaron Rodgers, T.J. Watt, DK Metcalf, Pat Freiermuth, Cam Heyward, Patrick Queen, and Jaylen Warren all speaking, and the Post-Gazette reported the players see the trip as a chance to showcase NFL football and themselves.",
+        "summary": "Pittsburgh meets the New Orleans Saints at 9:30 a.m. Eastern on Sunday, October 25, at the Stade de France, the league's first regular-season game in the country. Former Steelers Santonio Holmes and Ryan Shazier joined the team's channel live from Paris, where the club has sequestered itself in a hotel in the center of the city.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The Steelers are excited to ‘showcase’ NFL football — and themselves — in France",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/23/nfl-game-paris-steelers-saints/stories/202610230029"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Freiermuth, Heyward, Metcalf, Queen, Watt & Warren Pressers (October 23) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=3xkRPHfnAD0"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Coach Mike McCarthy Press Conference (October 23) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=bGqnTI4FLLQ"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Aaron Rodgers Press Conference (October 23) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=zPJEr9LZ9kE"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Santonio Holmes & Ryan Shazier live from Paris 🙌🇫🇷",
+            "url": "https://www.youtube.com/shorts/3_gyHud9pTc"
+          }
+        ],
+        "_anchor": "i-9842ca9512"
+      },
       {
         "title": "Elliott Could Play a Year After His Injury",
         "latest_developments": "The Post-Gazette reported Friday morning, October 23, that Steelers safety DeShon Elliott could return Sunday against the New Orleans Saints in Paris, a year removed from the injury the paper calls gruesome.",
@@ -677,21 +833,35 @@
         "_anchor": "i-f53d4c40bb"
       }
     ],
-    "team_usa": [],
+    "team_usa": [
+      {
+        "title": "Musah Plays His Way Back Into the USMNT Picture",
+        "latest_developments": "ESPN reported Friday, October 23, that Yunus Musah has reclaimed a midfield role at AC Milan and put himself back in contention for the United States men's national team.",
+        "summary": "Musah spent last season on loan at Atalanta, where he played little and rarely in the middle of the field. Back at Milan in his preferred position, he gives head coach Mauricio Pochettino's squad another central option before the Concacaf Nations League quarterfinals against Haiti in November.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Musah is back in Milan, back in midfield and back in contention for the USMNT",
+            "url": "https://www.espn.com/soccer/story/_/id/50249819/yunus-musah-back-ac-milan-back-midfield-back-contention-usmnt"
+          }
+        ],
+        "_anchor": "i-b1ce62a14d"
+      }
+    ],
     "reading": [
+      {
+        "author": "Ed Zitron",
+        "title": "Premium: The Hater's Guide To Blackstone",
+        "url": "https://www.wheresyoured.at/premium-the-haters-guide-to-blackstone/",
+        "summary": "Zitron opens a critical tour of Blackstone, starting with the thirty-chapter \"My Personal History\" series by founder and chief executive Stephen A. Schwarzman, which Zitron reads as financial hagiography that casts Schwarzman as a man of sensible values.",
+        "_anchor": "i-15dac7c235"
+      },
       {
         "author": "Stratechery",
         "title": "An Interview with Craig Moffett About SpaceX and Bubbles",
         "url": "https://stratechery.com/2026/an-interview-with-craig-moffett-about-spacex-and-bubbles/",
         "summary": "Ben Thompson talks with the telecom analyst Craig Moffett about SpaceX across launch, broadband, and mobile, and about how the lessons of the dot-com bubble apply to today's artificial-intelligence spending.",
         "_anchor": "i-271b7ab26b"
-      },
-      {
-        "author": "Ed Zitron",
-        "title": "AI Had Better Work Out",
-        "url": "https://www.wheresyoured.at/ai-had-better-work-out/",
-        "summary": "Zitron argues the artificial-intelligence buildout has grown so large, and so dependent on debt, that the industry has left itself no path other than the technology paying off on schedule.",
-        "_anchor": "i-0052240628"
       },
       {
         "author": "Cal Newport",
@@ -706,55 +876,41 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "One uploaded file reaches a shell: Pillow hands EPS names to Ghostscript, Node.js unpacks crafted Brotli, and PHP's third flaw CVE-2026-115560 now draws Mirai scanning.",
+      "text": "Attackers spent the day on the plumbing, as PHP's unpatched CVE-2026-115560 drew Mirai scans while Pillow hands EPS filenames to Ghostscript and Node.js carries a vulnerable Brotli decoder.",
       "links": [
+        {
+          "anchor": "i-3bc9a46d29",
+          "phrase": "PHP",
+          "start": 44,
+          "end": 47,
+          "title": "PHP2Shell Draws Mass Mirai Scanning"
+        },
         {
           "anchor": "i-3a89e69463",
           "phrase": "Pillow",
-          "start": 35,
-          "end": 41,
+          "start": 99,
+          "end": 105,
           "title": "Pillow and Node.js Decoders Run Attacker Code"
-        },
-        {
-          "anchor": "i-3bc9a46d29",
-          "phrase": "CVE-2026-115560",
-          "start": 127,
-          "end": 142,
-          "title": "PHP2Shell Draws Mass Mirai Scanning"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "AI plumbing is now both target and bill, with attackers hijacking exposed models and x402 agent wallets while the AfD leak site serves AI-written summaries of 421,179 stolen emails.",
-      "links": [
-        {
-          "anchor": "i-21a210d170",
-          "phrase": "exposed models",
-          "start": 66,
-          "end": 80,
-          "title": "Attackers Hijack Exposed AI Models and Agent Wallets"
-        },
-        {
-          "anchor": "i-af157714ac",
-          "phrase": "AfD",
-          "start": 114,
-          "end": 117,
-          "title": "281 GB Leak Hits Germany's AfD"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Huntress traced one attacker replaying stolen Microsoft 365 sign-in sessions into 79 organizations over ten weeks, logging 497 successful sign-ins and hiding inbox rules from victims.",
+      "text": "A newly disclosed campaign pulled 70,000 credentials from Fortinet FortiGate and Palo Alto Networks GlobalProtect appliances, while one intruder replayed stolen Microsoft 365 sessions across 79 organizations.",
       "links": [
+        {
+          "anchor": "i-f059789b24",
+          "phrase": "FortiGate",
+          "start": 67,
+          "end": 76,
+          "title": "Campaign Harvests 70,000 Credentials From Edge Firewalls"
+        },
         {
           "anchor": "i-f9213bfdc4",
           "phrase": "Microsoft 365",
-          "start": 46,
-          "end": 59,
+          "start": 161,
+          "end": 174,
           "title": "Microsoft 365 Session Replay Hits 79 Organizations"
         }
       ]
@@ -762,77 +918,84 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Network management planes keep falling, as HPE closes eight maximum-severity ArubaOS flaws among 72 fixes and Arista patches a third exploited VeloCloud Orchestrator zero-day in four months.",
+      "text": "Network edge gear keeps failing on its management plane, with Arista's third VeloCloud Orchestrator zero-day in four months and 72 ArubaOS fixes from HPE, eight of them maximum-severity.",
       "links": [
-        {
-          "anchor": "i-eb477469ff",
-          "phrase": "ArubaOS",
-          "start": 77,
-          "end": 84,
-          "title": "HPE Closes Eight Maximum-Severity ArubaOS Flaws"
-        },
         {
           "anchor": "i-9480845765",
           "phrase": "VeloCloud Orchestrator",
-          "start": 143,
-          "end": 165,
+          "start": 77,
+          "end": 99,
           "title": "Third VeloCloud Orchestrator Zero-Day in Four Months"
+        },
+        {
+          "anchor": "i-eb477469ff",
+          "phrase": "ArubaOS",
+          "start": 131,
+          "end": 138,
+          "title": "HPE Closes Eight Maximum-Severity ArubaOS Flaws"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Permissive AI defaults are paying criminals, who bill break-in planning to the owners of exposed model endpoints and drain agent token balances through x402 payment SDKs.",
+      "links": [
+        {
+          "anchor": "i-21a210d170",
+          "phrase": "x402",
+          "start": 152,
+          "end": 156,
+          "title": "Attackers Hijack Exposed AI Models and Agent Wallets"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Infrastructure turned geopolitical as Kyiv accused Washington of throttling Starlink, the UK proposed 14-year terms for undersea cable sabotage, and Brent reached $115 a barrel.",
+      "text": "Pittsburgh commuters got three changes as the inbound Liberty Tunnel closes next week, the transit board signed Local 85's contract, and Trafford fights the Bus Line Refresh.",
       "links": [
         {
-          "anchor": "i-04f7410dc7",
-          "phrase": "Starlink",
-          "start": 76,
-          "end": 84,
-          "title": "Ukraine Says Starlink Remains Throttled"
+          "anchor": "i-e4bfd1e6e4",
+          "phrase": "Liberty Tunnel",
+          "start": 54,
+          "end": 68,
+          "title": "The Inbound Liberty Tunnel Closes Next Week"
         },
         {
-          "anchor": "i-b49db17578",
-          "phrase": "undersea cable",
-          "start": 120,
-          "end": 134,
-          "title": "UK Weighs 14-Year Terms for Cable Sabotage"
+          "anchor": "i-5f143bee97",
+          "phrase": "Local 85",
+          "start": 112,
+          "end": 120,
+          "title": "The Transit Board Signs the Local 85 Contract"
         },
+        {
+          "anchor": "i-96c606df8f",
+          "phrase": "Trafford",
+          "start": 137,
+          "end": 145,
+          "title": "Trafford Riders Face the Bus Line Refresh"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Brent's climb to $117 a barrel and the Justice Department's suit to block certification of Alaska's Senate result reset the day's market and political picture.",
+      "links": [
         {
           "anchor": "i-be49da96e5",
           "phrase": "Brent",
-          "start": 149,
-          "end": 154,
+          "start": 0,
+          "end": 5,
           "title": "Brent Reaches $114 and European Gas Hits a 2022 High"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Locally, a few Pennsylvania Senate races will settle Harrisburg, Beaver County tenants went months without reliable water, and DeShon Elliott may return as the Steelers reach Paris.",
-      "links": [
-        {
-          "anchor": "i-3ec0da405c",
-          "phrase": "Senate races",
-          "start": 28,
-          "end": 40,
-          "title": "A Few State Senate Races Decide Harrisburg"
         },
         {
-          "anchor": "i-5023b4f70b",
-          "phrase": "Beaver County",
-          "start": 65,
-          "end": 78,
-          "title": "Stackhouse Management Tenants Go Months Without Reliable Water"
-        },
-        {
-          "anchor": "i-595924af2d",
-          "phrase": "DeShon Elliott",
-          "start": 127,
-          "end": 141,
-          "title": "Elliott Could Play a Year After His Injury"
+          "anchor": "i-0f5f5d83d8",
+          "phrase": "Justice Department",
+          "start": 39,
+          "end": 57,
+          "title": "Justice Department Sues to Block Alaska Senate Certification"
         }
       ]
     }
@@ -846,13 +1009,13 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 62,
+        "in_window": 58,
         "failed": [],
         "empty": [
           "Krebs on Security",
           "CISA Advisories",
           "Securelist (Kaspersky)",
-          "Sophos News",
+          "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
           "Microsoft Security Blog",
           "Google Project Zero",
@@ -864,13 +1027,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 11,
+            "contributed": 11
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 8,
+            "contributed": 8
           },
           "Krebs on Security": {
             "items": 10,
@@ -884,8 +1047,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 7,
+            "contributed": 7
           },
           "SecurityWeek": {
             "items": 10,
@@ -904,8 +1067,8 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 4,
+            "contributed": 4
           },
           "Ars Technica Security": {
             "items": 20,
@@ -924,13 +1087,13 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 0,
+            "contributed": 0
           },
           "Google Online Security Blog": {
             "items": 25,
@@ -969,8 +1132,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 3,
+            "contributed": 3
           },
           "Frank on Fraud": {
             "items": 10,
@@ -997,42 +1160,42 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 17
+            "contributed": 20
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 7
           },
           "PublicSource": {
             "items": 10,
             "in_window": 3,
-            "contributed": 1
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 5,
-            "contributed": 3
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 3,
+            "in_window": 2,
             "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 4,
-            "contributed": 3
+            "in_window": 3,
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
-            "in_window": 30,
-            "contributed": 3
+            "in_window": 29,
+            "contributed": 6
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 7
+            "contributed": 11
           },
           "WTAE": {
             "items": 20,
@@ -1052,29 +1215,29 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 74,
-            "in_window": 25,
-            "contributed": 7
+            "items": 73,
+            "in_window": 28,
+            "contributed": 10
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 31,
-            "contributed": 13
+            "in_window": 32,
+            "contributed": 9
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 50,
+            "in_window": 54,
             "contributed": 16
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 6,
-            "contributed": 1
+            "in_window": 9,
+            "contributed": 3
           },
           "The Economist": {
             "items": 300,
-            "in_window": 50,
-            "contributed": 1
+            "in_window": 52,
+            "contributed": 2
           },
           "FT Home": {
             "items": 12,
@@ -1084,7 +1247,7 @@
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 15
+            "contributed": 13
           },
           "FT Markets": {
             "items": 25,
@@ -1142,13 +1305,13 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 5,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 2
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
             "in_window": 15,
-            "contributed": 13
+            "contributed": 15
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -1158,11 +1321,11 @@
           "Post-Gazette Pirates": {
             "items": 20,
             "in_window": 2,
-            "contributed": 2
+            "contributed": 1
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 19,
+            "in_window": 18,
             "contributed": 12
           }
         }
@@ -1173,24 +1336,26 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 26,
+        "in_window": 25,
         "failed": [],
-        "empty": [],
+        "empty": [
+          "Guardian Olympics"
+        ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 18,
-            "in_window": 18,
-            "contributed": 18
+            "items": 19,
+            "in_window": 19,
+            "contributed": 19
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 6,
+            "contributed": 6
           },
           "Guardian Olympics": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           }
         }
       },
@@ -1207,12 +1372,12 @@
           "Ed Zitron": {
             "items": 15,
             "in_window": 4,
-            "contributed": 2
+            "contributed": 3
           },
           "Stratechery": {
             "items": 10,
             "in_window": 10,
-            "contributed": 9
+            "contributed": 8
           },
           "Cal Newport": {
             "items": 8,
@@ -1246,24 +1411,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 35379,
+          "outputTokens": 36303,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 119935,
+          "cacheCreationInputTokens": 125603,
           "webSearchRequests": 0,
-          "costUSD": 2.083855,
+          "costUSD": 2.163635,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 19846
+          "thinkingTokens": 16130
         }
       },
-      "cost_usd": 2.083855,
-      "duration_ms": 396418,
+      "cost_usd": 2.163635,
+      "duration_ms": 397169,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-23 10:06 EDT",
-    "items_considered": 62,
+    "generated_at": "2026-10-23 13:37 EDT",
+    "items_considered": 58,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1344,8 +1509,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.0839,
-    "model_duration_ms": 396418,
+    "model_cost_usd": 2.1636,
+    "model_duration_ms": 397169,
     "local_from": null,
     "feed_failures": []
   }
