@@ -1,23 +1,23 @@
 {
   "date": "2026-10-24",
-  "headline": "CISA confirmed active exploitation of critical Collabora Online and Arista VeloCloud flaws, researchers traced the Node.js remote code execution bug to a Brotli decoder defect now found in Bun, Python, and Envoy, and LiteLLM pinned its poisoned release on a master key a developer committed to a public GitHub repository in May.",
+  "headline": "Wired traced the PHP2Shell flaws to AI-assisted bug hunting and the attacks that followed to AI-assisted exploitation, while a leaked master key and a shared Brotli decoder widened the week's supply chain damage.",
   "emerging_trends": [
     {
-      "text": "AI tooling now works both ends of a disclosure, surfacing the years-old PHP2Shell bugs for researchers in August 2026 and then helping attackers assemble working exploits within days of the October patches.",
+      "text": "Wired's account of PHP2Shell closes a loop defenders watched tighten all month, because AI tools surfaced the years-old bugs and AI-assisted exploitation attempts arrived within days of the patches.",
       "topic_title": "AI Hands Attackers the PHP2Shell Bugs",
       "link_phrase": "PHP2Shell",
       "_anchor": "trend-1"
     },
     {
-      "text": "A single memory-corruption bug in Google's Brotli decoder has surfaced in Node.js, Bun, Python packages, and Envoy proxies, proof that one bundled compression library carries its flaws into every runtime that ships it.",
-      "topic_title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy",
-      "link_phrase": "Brotli decoder",
+      "text": "A master key that sat in a public GitHub repository since May 27, 2026 handed the LiteLLM attacker a release pipeline, and the month's compromises keep repeating the same lesson: one leaked secret turns a trusted package into malware for everyone downstream.",
+      "topic_title": "A Public Repository Master Key Opened LiteLLM",
+      "link_phrase": "LiteLLM",
       "_anchor": "trend-2"
     },
     {
-      "text": "Credentials left in public repositories keep becoming supply chain compromises, as LiteLLM found when it traced its backdoored 1.107.0 release to an Agent Platform master key a developer committed to GitHub five months earlier.",
-      "topic_title": "A Public Repository Master Key Opened LiteLLM",
-      "link_phrase": "LiteLLM",
+      "text": "CVE-2026-111497 shows how far one upstream component travels, since the same Brotli decoder that hands Node.js a remote code execution bug also ships inside Bun, Python's brotli packages, and Envoy proxies.",
+      "topic_title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy",
+      "link_phrase": "Brotli decoder",
       "_anchor": "trend-3"
     }
   ],
@@ -47,6 +47,11 @@
           "source": "SANS Internet Storm Center",
           "title": "PHP Vulnerability Wrap-Up, (Fri, Oct 23rd)",
           "url": "https://isc.sans.edu/diary/rss/33450"
+        },
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "(Reliable)? php2shell exploitability, (Fri, Oct 23rd)",
+          "url": "https://isc.sans.edu/diary/rss/33452"
         }
       ],
       "_anchor": "i-9865b391ed"
@@ -71,9 +76,91 @@
           "source": "Microsoft Security Blog",
           "title": "Inside the LiteLLM 1.107.0 supply chain compromise: Credential theft through Python startup hooks",
           "url": "https://www.microsoft.com/en-us/security/blog/2026/10/23/inside-the-litellm-1-107-0-supply-chain-compromise-credential-theft-through-python-startup-hooks/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "LiteLLM Compromised in Fresh Supply Chain Attack",
+          "url": "https://www.securityweek.com/litellm-compromised-in-fresh-supply-chain-attack/"
         }
       ],
       "_anchor": "i-3a1a036ef7"
+    },
+    {
+      "title": "CISA Adds Collabora and VeloCloud to KEV",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CISA added two critical flaws to its Known Exploited Vulnerabilities catalog on Friday, October 23, 2026, citing active exploitation: CVE-2026-110447, an operating system command injection bug rated 9.2 in the Collabora Online Built-in CODE Server, and the SQL injection flaw in Arista VeloCloud Orchestrator that Arista Networks patched on October 22, 2026.",
+      "summary": "Collabora Online's built-in CODE Server renders documents inside Nextcloud and similar platforms, and VeloCloud Orchestrator runs VeloCloud SD-WAN networks; the VeloCloud bug lifts a read-only customer login to operator privileges. Federal agencies face a KEV remediation deadline, and every other operator of either product should patch immediately and hunt for prior access.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "CISA Flags Two Actively Exploited Critical Flaws in Collabora Online and Arista VeloCloud",
+          "url": "https://thehackernews.com/2026/10/cisa-flags-two-actively-exploited.html"
+        },
+        {
+          "source": "CISA Advisories",
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/10/23/cisa-adds-one-known-exploited-vulnerability-catalog-0"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Attackers Exploit Third Arista VCO Zero-Day in Four Months",
+          "url": "https://www.securityweek.com/attackers-exploit-third-velocloud-orchestrator-zero-day-in-four-months/"
+        }
+      ],
+      "_anchor": "i-838b4b1ce2"
+    },
+    {
+      "title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Researchers established that CVE-2026-111497, the memory-corruption bug behind this week's Node.js remote code execution, sits in Google's Brotli decoder itself and therefore in Bun, the Python brotli and brotlicffi packages, and Envoy proxies configured to decompress Brotli.",
+      "summary": "Crafted Brotli-compressed data overwrites memory past the end of a buffer, and any service that unpacks attacker-supplied Brotli streams inherits the flaw. Inventory every runtime, package, and proxy that decodes Brotli rather than treating the Node.js 22.x, 24.x, and 26.x updates as the end of the work.",
+      "tags": [
+        "vulnerability",
+        "patch",
+        "supply chain"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Brotli Decoder Flaw Behind Node.js RCE Also Affects Bun, Python and Other Widely Used Software",
+          "url": "https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Researchers Demonstrate Node2Shell RCE Exploit on Node.js Build Using Crafted Brotli Data",
+          "url": "https://thehackernews.com/2026/10/researchers-demonstrate-node2shell-rce.html"
+        }
+      ],
+      "_anchor": "i-a0a9e49aec"
+    },
+    {
+      "title": "BlackX Bootkit Loads a Driver Against Kaspersky and Avast",
+      "area": "Nation-State Activity",
+      "latest_developments": "BleepingComputer reported on October 24, 2026 that BlackX, after defeating Secure Boot, loads a malicious driver built to interfere with Kaspersky and Avast security products, giving the espionage campaign control of the machine's defenses from the moment it boots.",
+      "summary": "BlackX is a UEFI bootkit that exploits Baton Drop, CVE-2022-21894 in the Windows boot manager, to run ahead of the operating system; Kaspersky ties the early 2026 campaign to the China-linked group APT41 and names diplomatic organizations in Tajikistan, Uzbekistan, and Turkmenistan as the targets. Fully patched Windows machines stay vulnerable until their owners apply the Secure Boot certificate revocations for CVE-2022-21894.",
+      "tags": [
+        "apt",
+        "malware",
+        "zero-day"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "BlackX UEFI bootkit exploits Baton Drop flaw to bypass Secure Boot",
+          "url": "https://www.bleepingcomputer.com/news/security/blackx-uefi-bootkit-exploits-baton-drop-flaw-to-bypass-secure-boot/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "BlackX UEFI Bootkit Bypasses Secure Boot on Patched Windows Systems Missing Revocations",
+          "url": "https://thehackernews.com/2026/10/blackx-uefi-bootkit-bypasses-secure.html"
+        }
+      ],
+      "_anchor": "i-a6ce317099"
     },
     {
       "title": "Eye Security Switched Off Two Million Popcorn Time Updaters",
@@ -99,42 +186,23 @@
       "_anchor": "i-94d51fe2d2"
     },
     {
-      "title": "CISA Adds Collabora and VeloCloud to KEV",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "CISA added two critical flaws to its Known Exploited Vulnerabilities catalog on Friday, October 23, 2026, citing active exploitation: CVE-2026-110447, an operating system command injection bug rated 9.2 in the Collabora Online Built-in CODE Server, and the SQL injection flaw in Arista VeloCloud Orchestrator that Arista Networks patched on October 22, 2026.",
-      "summary": "Collabora Online's built-in CODE Server renders documents inside Nextcloud and similar platforms, and VeloCloud Orchestrator runs VeloCloud SD-WAN networks; the VeloCloud bug lifts a read-only customer login to operator privileges. Federal agencies face a KEV remediation deadline, and every other operator of either product should patch immediately and hunt for prior access.",
+      "title": "Google Ties AI Search Data to Targeted Ads",
+      "area": "Policy and Regulation",
+      "latest_developments": "Google updated its privacy policy to spell out that turning on personalized AI features in Search or Gemini Apps lets the company reach data from connected services such as Gmail and Photos and serve targeted advertising based on it.",
+      "summary": "The change links a user's mail and photo libraries to the advertising profile that Google builds, and the connection switches on with the personalization setting. Enterprises should check what their Workspace and consumer-account policies permit before employees enable personalized AI features.",
       "tags": [
-        "zero-day",
-        "patch",
-        "exploit"
+        "privacy",
+        "policy",
+        "ai"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "CISA Flags Two Actively Exploited Critical Flaws in Collabora Online and Arista VeloCloud",
-          "url": "https://thehackernews.com/2026/10/cisa-flags-two-actively-exploited.html"
+          "title": "Google Says Gmail and Photos Data Shared With AI Search Could Be Used for Targeted Ads",
+          "url": "https://thehackernews.com/2026/10/google-says-gmail-and-photos-data.html"
         }
       ],
-      "_anchor": "i-838b4b1ce2"
-    },
-    {
-      "title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researchers established that CVE-2026-111497, the memory-corruption bug behind this week's Node.js remote code execution, sits in Google's Brotli decoder itself and therefore in Bun, the Python brotli and brotlicffi packages, and Envoy proxies configured to decompress Brotli.",
-      "summary": "Crafted Brotli-compressed data overwrites memory past the end of a buffer, and any service that unpacks attacker-supplied Brotli streams inherits the flaw. Inventory every runtime, package, and proxy that decodes Brotli rather than treating the Node.js 22.x, 24.x, and 26.x updates as the end of the work.",
-      "tags": [
-        "vulnerability",
-        "patch",
-        "supply chain"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Brotli Decoder Flaw Behind Node.js RCE Also Affects Bun, Python and Other Widely Used Software",
-          "url": "https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html"
-        }
-      ],
-      "_anchor": "i-a0a9e49aec"
+      "_anchor": "i-afec56c724"
     },
     {
       "title": "Britain Weighs 14 Years for Cable Sabotage",
@@ -158,6 +226,25 @@
         }
       ],
       "_anchor": "i-b49db17578"
+    },
+    {
+      "title": "Hacker Leaks 281 GB From Germany's AfD",
+      "area": "Data Breaches",
+      "latest_developments": "The Alternative für Deutschland confirmed that hackers breached its hosting provider, and a leak site now advertises 281 GB of party material, among it 421,179 internal emails, showing AI-written summaries in place of the messages themselves.",
+      "summary": "The German far-right party's internal correspondence now sits in public hands, and the leak site's choice to publish machine-generated summaries puts a searchable layer over hundreds of thousands of emails. Political organizations that outsource hosting carry their provider's security posture as their own.",
+      "tags": [
+        "breach",
+        "hacktivism",
+        "ai"
+      ],
+      "sources": [
+        {
+          "source": "Graham Cluley",
+          "title": "Hacker leaks 281 GB of data from Germany's far-right AfD party",
+          "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/hacker-leaks-281-gb-data-germany-afd"
+        }
+      ],
+      "_anchor": "i-af157714ac"
     }
   ],
   "markets": [
@@ -205,9 +292,9 @@
     }
   ],
   "weather": [
-    "Today: Patchy Fog then Sunny, high 66F.",
-    "Tonight: Mostly Clear then Patchy Fog, low 38F.",
-    "Sunday: Areas Of Fog then Sunny, high 67F."
+    "Tonight: Clear, low 38F.",
+    "Sunday: Sunny, high 67F.",
+    "Sunday Night: Mostly Clear, low 40F."
   ],
   "sports": [
     {
@@ -224,11 +311,18 @@
     {
       "team": "Penguins",
       "record": "4-6",
-      "games": [],
+      "games": [
+        {
+          "date": "Sat Oct 24",
+          "result": "Predators 1 · Penguins 0 · 7:53 - 1st (in progress at last update)",
+          "url": "https://plaintextsports.com/nhl/2026-10-24/nsh-pit",
+          "recap": ""
+        }
+      ],
       "next": {
-        "matchup": "Predators @ Penguins",
-        "when": "Sat Oct 24, 7:00 PM",
-        "url": "https://plaintextsports.com/nhl/2026-10-24/nsh-pit"
+        "matchup": "Mammoth @ Penguins",
+        "when": "Thu Oct 29, 7:00 PM",
+        "url": "https://plaintextsports.com/nhl/2026-10-29/uta-pit"
       },
       "source": "ESPN"
     }
@@ -236,8 +330,26 @@
   "local": {
     "business_politics": [
       {
+        "title": "Russian Money Surfaces in a $25 Billion Alaska Gas Venture",
+        "latest_developments": "The Financial Times and the Wall Street Journal reported Saturday, October 24, that senior American executives quit the Alaska liquefied natural gas venture Polar LNG and carried their concerns to the Trump administration, saying the Russian gas producer Novatek had secretly financed and controlled the $25 billion project.",
+        "summary": "The former chief executive of Polar Train LNG told the Financial Times that Novatek bankrolled the venture and held the reins without Washington's approval, which would place a Russian company inside a strategic United States energy project. Lenders, insurers, and partners attached to the Alaska development now face questions about sanctions exposure and disclosure.",
+        "sources": [
+          {
+            "source": "WSJ US Business",
+            "title": "U.S. Energy Execs Say They Quit Startup Over Undisclosed Russian Funding",
+            "url": "https://www.wsj.com/business/energy-oil/u-s-energy-execs-say-they-quit-startup-over-undisclosed-russian-funding-b5eae266?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT Home",
+            "title": "US executives quit $25bn gas venture over claims of secret Russian control",
+            "url": "https://www.ft.com/content/e9cfbfbb-e65a-4303-aebb-20d59319ef1b?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-b4c4dfa21b"
+      },
+      {
         "title": "France Puts 70,000 Officers on the Streets",
-        "latest_developments": "The French government deployed 70,000 police officers Saturday, October 24, a 20% increase over last weekend, as the Yellow Vest movement rejoined the demonstrations and the yields on some French corporate bonds fell below the yield on French government debt.",
+        "latest_developments": "Hundreds of thousands marched across France on Saturday, October 24, in a second weekend of mass demonstrations, and clashes broke out in Paris as the march wound down; the government put 70,000 police officers on the streets, a 20% increase over last weekend, the Yellow Vest movement rejoined the protests, and the yields on some French corporate bonds fell below the yield on French government debt.",
         "summary": "Mass protests over living costs turned into riots and looting across Paris, Marseille, and other French cities last weekend, and the new round of marches tests President Emmanuel Macron, whom critics on both the left and the right blame for the disorder. The Financial Times describes a country running short of money, patience, and answers six months before the presidential election, with Marine Le Pen waiting in the wings.",
         "sources": [
           {
@@ -270,13 +382,18 @@
       },
       {
         "title": "Memo Says Iranian Plots Against Americans Reach Advanced Stages",
-        "latest_developments": "The Financial Times reported early Saturday, October 24, that a United States intelligence memo puts Iranian plans to kill American citizens in the Middle East at advanced stages, and the Wall Street Journal filmed sailors aboard the USS George Washington rearming the strike group for possible strikes on Iran.",
+        "latest_developments": "The United States pulled staff out of several Middle East outposts Saturday, October 24, after intelligence pointed to an Iranian plot against Americans, a United States intelligence memo reported by the Financial Times puts those plans at advanced stages, and the Wall Street Journal filmed sailors aboard the USS George Washington rearming the strike group for possible strikes on Iran.",
         "summary": "The United States Navy blockade and air sanctions have tightened around Tehran, and Pakistan and Iraq have closed some border crossings that carried the overland trade cushioning Iran's economy. Renewed American strikes would put Gulf energy exports, shipping, and the region's remaining diplomacy at risk.",
         "sources": [
           {
             "source": "FT Home",
             "title": "Intelligence memo warns Iran plotting to kill Americans in Middle East",
             "url": "https://www.ft.com/content/e2e82393-c7ca-4bc1-b270-022b3702d9e7?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "U.S. Evacuates Mideast Outposts After Suspected Iranian Plot to Target Americans",
+            "url": "https://www.wsj.com/world/middle-east/u-s-evacuates-mideast-outposts-after-suspected-iranian-plot-to-target-americans-4b876fbc?mod=rss_worldnews"
           },
           {
             "source": "WSJ World News",
@@ -293,7 +410,7 @@
       },
       {
         "title": "Ukraine Says Starlink Runs Normally Again",
-        "latest_developments": "Ukraine's military said Saturday, October 24, that Elon Musk's SpaceX has lifted the Starlink speed restrictions that had hampered its drone forces since October 14, reversing the throttling Kyiv complained about through Friday.",
+        "latest_developments": "Ukraine's military said Saturday, October 24, that Elon Musk's SpaceX has lifted the Starlink speed restrictions that had hampered its drone forces since October 14, and the Wall Street Journal reported that Europe and Canada have sped up plans for satellite networks under their own control after the episode.",
         "summary": "The caps degraded the Starlink links Ukraine's drone units use to strike Russian targets and intercept incoming drones, and Kyiv had accused Washington of slowing the service deliberately after President Trump telephoned Musk about it. Russia has kept up missile and drone barrages on Kyiv and the Ukrainian power grid through the dispute.",
         "sources": [
           {
@@ -305,6 +422,11 @@
             "source": "WSJ World News",
             "title": "Ukraine's Military Starlink Is Working Again, Kyiv Says",
             "url": "https://www.wsj.com/world/europe/ukraines-military-starlink-is-working-again-kyiv-says-7ad2617d?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "U.S. Allies Race to Escape SpaceX's Orbit",
+            "url": "https://www.wsj.com/world/europe/u-s-allies-race-to-escape-spacexs-orbit-8fd29af8?mod=rss_worldnews"
           }
         ],
         "_anchor": "i-bea0eb181b"
@@ -324,6 +446,32 @@
       }
     ],
     "business": [
+      {
+        "title": "Robert Morris Puts a Social Media Logo on Its Jerseys",
+        "latest_developments": "WTAE reported Saturday, October 24, that Robert Morris University has partnered with the basketball content creator AllHailBall and will carry the account's logo on its jerseys.",
+        "summary": "Robert Morris, in Moon Township, sells the jersey patch space most programs give to corporate sponsors, betting that a creator's audience brings the school viral attention in college basketball. The school pitches the result as the most viral team in the sport.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "'Most viral team in all of college basketball': RMU launches partnership with content creator",
+            "url": "https://www.wtae.com/article/robert-morris-tiktok-basketball-partnership-allhailball/74234476"
+          }
+        ],
+        "_anchor": "i-cfc6d99ec8"
+      },
+      {
+        "title": "Mistick Counts a $1.5 Billion County Pension Hole",
+        "latest_developments": "TribLive columnist Joseph Sabino Mistick wrote Saturday, October 24, that last year's 36% county tax increase has barely dented Allegheny County's budget gap and pension obligations.",
+        "summary": "Mistick puts the Allegheny County pension fund $1.5 billion in the red and widening, with the county's contribution reaching 32.7% last year against an 80% target. The gap shapes every county budget decision ahead, from property tax rates to services.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Joseph Sabino Mistick: Allegheny County headed in wrong direction",
+            "url": "https://triblive.com/opinion/joseph-sabino-mistick-allegheny-county-headed-in-wrong-direction/"
+          }
+        ],
+        "_anchor": "i-d015d11148"
+      },
       {
         "title": "Oakford Park Fruit Market Comes Back",
         "latest_developments": "TribLive reported Saturday, October 24, that Greg Forejt Jr., who owns Windy Heights Farm in East Huntingdon, will revive the Oakford Park Fruit Market near Jeannette.",
@@ -352,6 +500,45 @@
       }
     ],
     "around_town": [
+      {
+        "title": "Pennsylvania Makes 911 Dispatchers First Responders",
+        "latest_developments": "KDKA reported Saturday, October 24, that a new Pennsylvania law classifies 911 dispatchers as first responders, the same standing firefighters and police officers hold.",
+        "summary": "The Pennsylvania legislature passed the measure October 21 alongside separate legislation expanding access to health benefits for 911 operators, and both went to Governor Josh Shapiro. The change covers the telecommunicators who answer emergency calls at county 911 centers, Allegheny County's among them.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "911 dispatchers classified as first responders under new Pennsylvania law",
+            "url": "https://www.cbsnews.com/pittsburgh/news/911-dispatchers-first-responders-pennsylvania/"
+          }
+        ],
+        "_anchor": "i-8b32bf6417"
+      },
+      {
+        "title": "A Charter Question on County Council Spending",
+        "latest_developments": "TribLive published an opinion piece by Jack Stonesifer on Saturday, October 24, urging a no vote on the November 3 ballot question that would lift Allegheny County Home Rule Charter limits on council spending.",
+        "summary": "The question asks Allegheny County voters to amend the Home Rule Charter and strip restrictions on county council members' use of tax dollars for personal staff, district offices, and fringe benefits. Stonesifer argues the existing limits hold council members accountable.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Jack Stonesifer: Vote 'no' on Allegheny County charter restrictions",
+            "url": "https://triblive.com/opinion/jack-stonesifer-vote-no-on-allegheny-county-charter-restrictions/"
+          }
+        ],
+        "_anchor": "i-9318bdfa2b"
+      },
+      {
+        "title": "Food and Music Double the Homewood Early Vote",
+        "latest_developments": "The Post-Gazette reported Saturday, October 24, that food, music, and voter information at the Community College of Allegheny County's Homewood campus doubled the number of votes cast at the site.",
+        "summary": "Allegheny County's on-demand mail voting locations let residents request and cast a ballot in person before the November 3 election, and organizers built an event around the Homewood site to pull neighbors in. The county runs the Homewood location alongside its downtown election office.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Food, music and voter information help double votes cast at Homewood CCAC",
+            "url": "https://www.post-gazette.com/news/politics-local/2026/10/24/pittsburgh-homewood-voting/stories/202610240067"
+          }
+        ],
+        "_anchor": "i-69c738ce6b"
+      },
       {
         "title": "Shapiro Signs the Meeting Notice Fix",
         "latest_developments": "PublicSource reported Saturday, October 24, that Governor Josh Shapiro signed legislation Thursday, October 22, closing a loophole in Pennsylvania's open meetings law.",
@@ -427,6 +614,50 @@
     ],
     "around_teams": [
       {
+        "title": "Elliott Makes His Season Debut in Paris",
+        "latest_developments": "The Post-Gazette reported Saturday, October 24, that Steelers safety DeShon Elliott will play Sunday against the New Orleans Saints in Paris, firming up Friday's word that he could return.",
+        "summary": "Elliott has missed the season to this point while recovering from the injury he suffered a year ago, and his return puts a starting safety back in Patrick Graham's defense for the 9:30 a.m. Eastern kickoff Sunday, October 25, on NFL Network.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers safety DeShon Elliott is expected to make his season debut against the Saints in Paris",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/24/deshon-elliott-injury-update-steelers/stories/202610240043"
+          }
+        ],
+        "_anchor": "i-4adf6b3c3a"
+      },
+      {
+        "title": "Hiles Says the Steelers Reached Paris Too Late",
+        "latest_developments": "Post-Gazette columnist Noah Hiles wrote Saturday, October 24, that the Steelers missed a big opportunity by traveling to Paris as late in the week as they did.",
+        "summary": "Pittsburgh landed in France two days before the NFL's first game in Paris, against the New Orleans Saints on Sunday, October 25. Hiles argues a longer stay would have let the franchise build an audience in a city seeing league football for the first time.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Noah Hiles: Why the Steelers missed a big opportunity by traveling to Paris this late",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/24/nfl-paris-game-steelers-travel/stories/202610240010"
+          }
+        ],
+        "_anchor": "i-da412f102a"
+      },
+      {
+        "title": "McCarthy Previews the Saints on Steelers Insider",
+        "latest_developments": "The Steelers' channel posted Steelers Insider on Saturday, October 24, with head coach Mike McCarthy and Bob Pompeani previewing the Week 7 game against the New Orleans Saints in Paris.",
+        "summary": "McCarthy, Pompeani, and several of the team's insiders broke down the matchup ahead of the 9:30 a.m. Eastern kickoff Sunday, October 25, on NFL Network, the league's first game in France.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Steelers Insider featuring Mike McCarthy: Week 7 at Saints in Paris | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=_vNjXJpcPiA"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Here Oui Go! 🇫🇷 📺: #PITvsNO 10/25 at 9:30 AM ET on NFLN",
+            "url": "https://www.youtube.com/shorts/pN7v-dGbPdo"
+          }
+        ],
+        "_anchor": "i-f3d0a3f586"
+      },
+      {
         "title": "The NFL's International Endgame",
         "latest_developments": "The Post-Gazette published a piece Saturday, October 24, asking where the NFL's overseas expansion leads as the Steelers prepare to play the league's first game in Paris.",
         "summary": "Pittsburgh meets the New Orleans Saints Sunday, October 25, at 9:30 a.m. Eastern on NFL Network, the league's debut in France. Quarterback Aaron Rodgers has said the NFL could stage 16 international games in a single week and that he would support it, and the Post-Gazette weighs that ambition against the travel burden on players and the league's hunt for new audiences.",
@@ -464,6 +695,37 @@
       }
     ],
     "team_usa": [
+      {
+        "title": "Blakely and Richard Add Medals at the Gymnastics Worlds",
+        "latest_developments": "Skye Blakely took bronze on vault and bronze on uneven bars Saturday, October 24, at the world gymnastics championships in the Netherlands, a day after her all-around gold, and Fred Richard won the men's floor exercise title.",
+        "summary": "Blakely has carried the United States women at the championships, where China edged the Americans in the team final on October 21 and ended their long hold on that title. Richard's floor gold gave the United States men their own result to take home from Rotterdam.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "All-around champ Blakely adds two more medals; Richard takes men's floor title",
+            "url": "https://www.espn.com/olympics/gymnastics/story/_/id/50266294/skye-blakely-adds-gymnastics-worlds-medal-haul"
+          },
+          {
+            "source": "ESPN Olympics",
+            "title": "U.S.'s Blakely captures 'dream' all-around gold at gymnastics worlds",
+            "url": "https://www.espn.com/olympics/gymnastics/story/_/id/50260411/american-skye-blakely-wins-all-final-gymnastics-worlds"
+          }
+        ],
+        "_anchor": "i-37dc096d2b"
+      },
+      {
+        "title": "Moltzan Wins the Giant Slalom Opener",
+        "latest_developments": "Paula Moltzan won the women's giant slalom that opened the Alpine ski racing season Saturday, October 24, the first World Cup victory of her career, and her United States teammate Mikaela Shiffrin finished seventh.",
+        "summary": "Moltzan had raced years on the World Cup circuit without a win before taking the season's first giant slalom. Shiffrin, the most decorated Alpine racer on the American team, settled for seventh in the opener.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "Moltzan wins giant slalom opener; Shiffrin settles for 7th",
+            "url": "https://www.espn.com/olympics/skiing/story/_/id/50265461/moltzan-wins-giant-slalom-opener-shiffrin-settles-7th"
+          }
+        ],
+        "_anchor": "i-7e6b5aa414"
+      },
       {
         "title": "NWSL Drops the Rodman Rule Restrictions",
         "latest_developments": "The National Women's Soccer League and its players association agreed to strip the qualifying restrictions out of the High Impact Player rule, ESPN reported, making every player in the league eligible.",
@@ -506,152 +768,161 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Researchers used AI to unearth the years-old PHP2Shell flaws, then attackers used it to weaponize the October patches, while a new paper warns such help erodes persistence.",
+      "text": "One leaked LiteLLM master key and a single Brotli decoder flaw show how far upstream trust travels, reaching Bun, Python, and Envoy from one bug.",
       "links": [
         {
-          "anchor": "i-9865b391ed",
-          "phrase": "PHP2Shell",
-          "start": 45,
-          "end": 54,
-          "title": "AI Hands Attackers the PHP2Shell Bugs"
+          "anchor": "i-3a1a036ef7",
+          "phrase": "LiteLLM master key",
+          "start": 11,
+          "end": 29,
+          "title": "A Public Repository Master Key Opened LiteLLM"
         },
         {
-          "anchor": "i-2195cc156c",
-          "phrase": "erodes persistence",
-          "start": 153,
-          "end": 171,
-          "title": "The Good Thing About Hard Things"
+          "anchor": "i-a0a9e49aec",
+          "phrase": "Brotli decoder",
+          "start": 43,
+          "end": 57,
+          "title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "One memory-corruption bug in Google's Brotli decoder now reaches Bun, Python, and Envoy, while a master key committed to GitHub five months ago backdoored LiteLLM 1.107.0.",
+      "text": "AI tools dug the years-old PHP2Shell bugs out and then sped exploitation, while CISA logged Collabora and VeloCloud flaws already under active attack.",
       "links": [
         {
-          "anchor": "i-a0a9e49aec",
-          "phrase": "Brotli decoder",
-          "start": 38,
-          "end": 52,
-          "title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy"
+          "anchor": "i-9865b391ed",
+          "phrase": "PHP2Shell bugs",
+          "start": 27,
+          "end": 41,
+          "title": "AI Hands Attackers the PHP2Shell Bugs"
         },
         {
-          "anchor": "i-3a1a036ef7",
-          "phrase": "LiteLLM",
-          "start": 155,
-          "end": 162,
-          "title": "A Public Repository Master Key Opened LiteLLM"
+          "anchor": "i-838b4b1ce2",
+          "phrase": "Collabora and VeloCloud",
+          "start": 92,
+          "end": 115,
+          "title": "CISA Adds Collabora and VeloCloud to KEV"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "CISA flagged actively exploited flaws in Collabora Online and VeloCloud, including the 9.2-rated CVE-2026-110447, as Eye Security admitted disabling updaters on two million Popcorn Time machines it does not own.",
+      "text": "New since the last run: BlackX loads a driver against Kaspersky and Avast, a leak site advertises 281 GB from Germany's AfD, and Google feeds Gemini data to ads.",
       "links": [
         {
-          "anchor": "i-838b4b1ce2",
-          "phrase": "Collabora Online",
-          "start": 41,
-          "end": 57,
-          "title": "CISA Adds Collabora and VeloCloud to KEV"
+          "anchor": "i-a6ce317099",
+          "phrase": "BlackX",
+          "start": 24,
+          "end": 30,
+          "title": "BlackX Bootkit Loads a Driver Against Kaspersky and Avast"
         },
         {
-          "anchor": "i-94d51fe2d2",
-          "phrase": "Eye Security",
-          "start": 117,
-          "end": 129,
-          "title": "Eye Security Switched Off Two Million Popcorn Time Updaters"
+          "anchor": "i-af157714ac",
+          "phrase": "AfD",
+          "start": 120,
+          "end": 123,
+          "title": "Hacker Leaks 281 GB From Germany's AfD"
+        },
+        {
+          "anchor": "i-afec56c724",
+          "phrase": "Gemini data",
+          "start": 142,
+          "end": 153,
+          "title": "Google Ties AI Search Data to Targeted Ads"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Washington pulled Middle East staff over advanced Iranian plots, SpaceX lifted Ukraine's Starlink limits, and executives quit Polar LNG over Russian money in Alaska.",
+      "links": [
+        {
+          "anchor": "i-b9eef2fbc4",
+          "phrase": "Iranian plots",
+          "start": 50,
+          "end": 63,
+          "title": "Memo Says Iranian Plots Against Americans Reach Advanced Stages"
+        },
+        {
+          "anchor": "i-bea0eb181b",
+          "phrase": "Starlink limits",
+          "start": 89,
+          "end": 104,
+          "title": "Ukraine Says Starlink Runs Normally Again"
+        },
+        {
+          "anchor": "i-b4c4dfa21b",
+          "phrase": "Polar LNG",
+          "start": 126,
+          "end": 135,
+          "title": "Russian Money Surfaces in a $25 Billion Alaska Gas Venture"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "France's 70,000 police deployment pushed the league to shut NFL House in Paris, even as Santonio Holmes broadcast from the city and the Steelers' trip tested overseas expansion.",
+      "text": "Paris runs through the weekend as France deploys 70,000 officers against protests, the NFL House shut early, and DeShon Elliott returns for Sunday's Steelers game.",
       "links": [
         {
           "anchor": "i-e607630582",
-          "phrase": "70,000 police",
-          "start": 9,
-          "end": 22,
+          "phrase": "70,000 officers",
+          "start": 49,
+          "end": 64,
           "title": "France Puts 70,000 Officers on the Streets"
         },
         {
           "anchor": "i-c15910b166",
           "phrase": "NFL House",
-          "start": 60,
-          "end": 69,
+          "start": 87,
+          "end": 96,
           "title": "NFL House Closes in Paris as Trump Second-Guesses the Game"
         },
         {
-          "anchor": "i-6994d5f173",
-          "phrase": "Santonio Holmes",
-          "start": 88,
-          "end": 103,
-          "title": "Holmes and Shazier Work Paris for the Team Channel"
-        },
-        {
-          "anchor": "i-da3ab46324",
-          "phrase": "overseas expansion",
-          "start": 158,
-          "end": 176,
-          "title": "The NFL's International Endgame"
+          "anchor": "i-4adf6b3c3a",
+          "phrase": "DeShon Elliott",
+          "start": 113,
+          "end": 127,
+          "title": "Elliott Makes His Season Debut in Paris"
         }
       ]
     },
     {
-      "kind": "Update",
-      "status": "new",
-      "text": "SpaceX lifted the Starlink throttling on Ukraine's drone units, Britain proposed 14-year terms for undersea cable sabotage, and a memo put Iranian plots against Americans at advanced stages.",
+      "kind": "Trend",
+      "status": null,
+      "text": "Allegheny County money is on the ballot, with a $1.5 billion pension hole, a charter spending question, and food and music doubling Homewood early voting.",
       "links": [
         {
-          "anchor": "i-bea0eb181b",
-          "phrase": "Starlink",
-          "start": 18,
-          "end": 26,
-          "title": "Ukraine Says Starlink Runs Normally Again"
+          "anchor": "i-d015d11148",
+          "phrase": "$1.5 billion pension",
+          "start": 48,
+          "end": 68,
+          "title": "Mistick Counts a $1.5 Billion County Pension Hole"
         },
         {
-          "anchor": "i-b49db17578",
-          "phrase": "undersea cable",
-          "start": 99,
-          "end": 113,
-          "title": "Britain Weighs 14 Years for Cable Sabotage"
+          "anchor": "i-9318bdfa2b",
+          "phrase": "charter spending question",
+          "start": 77,
+          "end": 102,
+          "title": "A Charter Question on County Council Spending"
         },
         {
-          "anchor": "i-b9eef2fbc4",
-          "phrase": "Iranian plots",
-          "start": 139,
-          "end": 152,
-          "title": "Memo Says Iranian Plots Against Americans Reach Advanced Stages"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Governor Josh Shapiro signed the fix to Pennsylvania's open-meetings notice loophole, and Pittsburgh Regional Transit begins University Line paving Monday in Oakland and Uptown.",
-      "links": [
-        {
-          "anchor": "i-11f4046235",
-          "phrase": "Josh Shapiro",
-          "start": 9,
-          "end": 21,
-          "title": "Shapiro Signs the Meeting Notice Fix"
-        },
-        {
-          "anchor": "i-c8d6c91026",
-          "phrase": "University Line",
-          "start": 125,
+          "anchor": "i-69c738ce6b",
+          "phrase": "Homewood",
+          "start": 132,
           "end": 140,
-          "title": "University Line Paving Starts Monday in Oakland and Uptown"
+          "title": "Food and Music Double the Homewood Early Vote"
         }
       ]
     }
   ],
-  "notes": [],
+  "notes": [
+    "Quiet day: only 66 security items in the last 48 hours."
+  ],
   "feed_health": {
     "groups": [
       {
@@ -659,14 +930,12 @@
         "label": "Security",
         "feeds": 24,
         "loaded": 24,
-        "window_hours": 24,
-        "in_window": 37,
+        "window_hours": 48,
+        "in_window": 66,
         "failed": [],
         "empty": [
           "Krebs on Security",
-          "CISA Advisories",
           "Securelist (Kaspersky)",
-          "Sophos News",
           "Google Online Security Blog",
           "Cisco Talos",
           "Google Project Zero",
@@ -677,13 +946,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 15,
+            "contributed": 15
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 8,
+            "contributed": 8
           },
           "Krebs on Security": {
             "items": 10,
@@ -692,33 +961,33 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 7,
+            "contributed": 7
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 9,
+            "contributed": 9
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 3,
+            "contributed": 3
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 2,
+            "contributed": 1
           },
           "The Record": {
             "items": 5,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 4
           },
           "Ars Technica Security": {
             "items": 20,
@@ -727,8 +996,8 @@
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 8,
+            "contributed": 8
           },
           "Securelist (Kaspersky)": {
             "items": 10,
@@ -737,8 +1006,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -782,8 +1051,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 3,
+            "contributed": 3
           },
           "Frank on Fraud": {
             "items": 10,
@@ -805,31 +1074,33 @@
         "window_hours": 48,
         "in_window": 60,
         "failed": [],
-        "empty": [],
+        "empty": [
+          "NEXTpittsburgh"
+        ],
         "per_feed": {
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 25
+            "contributed": 20
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 10
+            "contributed": 15
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
-            "in_window": 4,
+            "in_window": 3,
             "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 2,
+            "in_window": 0,
             "contributed": 0
           },
           "Pittsburgh Magazine": {
@@ -840,17 +1111,17 @@
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 3
+            "contributed": 5
           },
           "WPXI": {
             "items": 15,
-            "in_window": 15,
-            "contributed": 6
+            "in_window": 14,
+            "contributed": 10
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 15
+            "contributed": 10
           }
         }
       },
@@ -866,43 +1137,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 73,
-            "in_window": 28,
-            "contributed": 8
+            "in_window": 25,
+            "contributed": 9
           },
           "WSJ Markets": {
             "items": 60,
-            "in_window": 22,
-            "contributed": 4
+            "in_window": 18,
+            "contributed": 3
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 38,
-            "contributed": 7
+            "in_window": 31,
+            "contributed": 9
           },
           "WSJ Politics": {
             "items": 21,
             "in_window": 12,
-            "contributed": 6
+            "contributed": 7
           },
           "The Economist": {
             "items": 300,
             "in_window": 7,
-            "contributed": 3
+            "contributed": 4
           },
           "FT Home": {
-            "items": 10,
-            "in_window": 10,
-            "contributed": 9
+            "items": 9,
+            "in_window": 9,
+            "contributed": 8
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 21
+            "contributed": 19
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 21,
-            "contributed": 2
+            "in_window": 11,
+            "contributed": 1
           }
         }
       },
@@ -912,14 +1183,14 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 15,
+        "in_window": 14,
         "failed": [],
         "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 14,
-            "contributed": 14
+            "in_window": 13,
+            "contributed": 13
           },
           "Post-Gazette Music": {
             "items": 20,
@@ -946,17 +1217,20 @@
         "window_hours": 96,
         "in_window": 30,
         "failed": [],
-        "empty": [],
+        "empty": [
+          "Footbahlin with Ben Roethlisberger",
+          "Ben Roethlisberger / Channel Seven (YouTube)"
+        ],
         "per_feed": {
           "Footbahlin with Ben Roethlisberger": {
             "items": 145,
-            "in_window": 1,
+            "in_window": 0,
             "contributed": 0
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 5,
-            "contributed": 2
+            "contributed": 3
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -965,7 +1239,7 @@
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
-            "in_window": 1,
+            "in_window": 0,
             "contributed": 0
           },
           "Post-Gazette Pirates": {
@@ -975,8 +1249,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 16,
-            "contributed": 12
+            "in_window": 17,
+            "contributed": 11
           }
         }
       },
@@ -986,26 +1260,24 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 26,
+        "in_window": 29,
         "failed": [],
-        "empty": [
-          "Guardian Olympics"
-        ],
+        "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 19,
-            "in_window": 19,
-            "contributed": 19
+            "items": 20,
+            "in_window": 20,
+            "contributed": 20
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 8,
+            "contributed": 8
           },
           "Guardian Olympics": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -1061,25 +1333,25 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 27373,
+          "outputTokens": 30933,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 103653,
+          "cacheCreationInputTokens": 123408,
           "webSearchRequests": 0,
-          "costUSD": 1.720885,
+          "costUSD": 2.007435,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 16328
+          "thinkingTokens": 13945
         }
       },
-      "cost_usd": 1.720885,
-      "duration_ms": 321173,
+      "cost_usd": 2.007435,
+      "duration_ms": 342401,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-24 08:06 EDT",
-    "items_considered": 37,
-    "window_hours": 24,
+    "generated_at": "2026-10-24 19:36 EDT",
+    "items_considered": 66,
+    "window_hours": 48,
     "model": "opus",
     "fallback_model": "sonnet",
     "feeds": {
@@ -1159,8 +1431,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.7209,
-    "model_duration_ms": 321173,
+    "model_cost_usd": 2.0074,
+    "model_duration_ms": 342401,
     "local_from": null,
     "feed_failures": []
   }
