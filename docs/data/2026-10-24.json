@@ -1,0 +1,1167 @@
+{
+  "date": "2026-10-24",
+  "headline": "CISA confirmed active exploitation of critical Collabora Online and Arista VeloCloud flaws, researchers traced the Node.js remote code execution bug to a Brotli decoder defect now found in Bun, Python, and Envoy, and LiteLLM pinned its poisoned release on a master key a developer committed to a public GitHub repository in May.",
+  "emerging_trends": [
+    {
+      "text": "AI tooling now works both ends of a disclosure, surfacing the years-old PHP2Shell bugs for researchers in August 2026 and then helping attackers assemble working exploits within days of the October patches.",
+      "topic_title": "AI Hands Attackers the PHP2Shell Bugs",
+      "link_phrase": "PHP2Shell",
+      "_anchor": "trend-1"
+    },
+    {
+      "text": "A single memory-corruption bug in Google's Brotli decoder has surfaced in Node.js, Bun, Python packages, and Envoy proxies, proof that one bundled compression library carries its flaws into every runtime that ships it.",
+      "topic_title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy",
+      "link_phrase": "Brotli decoder",
+      "_anchor": "trend-2"
+    },
+    {
+      "text": "Credentials left in public repositories keep becoming supply chain compromises, as LiteLLM found when it traced its backdoored 1.107.0 release to an Agent Platform master key a developer committed to GitHub five months earlier.",
+      "topic_title": "A Public Repository Master Key Opened LiteLLM",
+      "link_phrase": "LiteLLM",
+      "_anchor": "trend-3"
+    }
+  ],
+  "topics": [
+    {
+      "title": "AI Hands Attackers the PHP2Shell Bugs",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Wired reported on October 24, 2026 that security researchers used AI tools to dig the years-old flaws out of the PHP scripting language in the first place, and that AI-assisted exploitation attempts followed the patches, while Dark Reading walked administrators through assessing exposure because the fix takes more than clicking update.",
+      "summary": "CVE-2026-109618 and CVE-2026-109619, the pair the industry calls PHP2Shell, reach web servers and content management systems worldwide, and the PHP Foundation shipped fixes in 8.5.12, 8.4.27, 8.3.36, and 8.2.35. Identify every PHP interpreter in the estate, including those embedded in vendor appliances that carry no fixed release yet, and apply the mitigation PHP published for the separate unpatched flaw CVE-2026-115560.",
+      "tags": [
+        "vulnerability",
+        "ai",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "Wired Security",
+          "title": "The PHP Meltdown Shows How AI Makes Bugs More Exploitable",
+          "url": "https://www.wired.com/story/kernel-panic-the-php-meltdown-shows-how-ai-makes-bugs-more-exploitable/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Exposed to PHP2Shell? Cyber Experts Weigh in With Advice",
+          "url": "https://www.darkreading.com/application-security/exposed-php2shell-cyber-experts-advice"
+        },
+        {
+          "source": "SANS Internet Storm Center",
+          "title": "PHP Vulnerability Wrap-Up, (Fri, Oct 23rd)",
+          "url": "https://isc.sans.edu/diary/rss/33450"
+        }
+      ],
+      "_anchor": "i-9865b391ed"
+    },
+    {
+      "title": "A Public Repository Master Key Opened LiteLLM",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "LiteLLM disclosed on Friday, October 23, 2026 that a configuration file committed to the public LiteLLM-Labs/lite-harness repository on May 27, 2026 carried the master key to an Agent Platform deployment, which the attacker used to steal GitHub tokens and seize the release pipeline, and Microsoft Threat Intelligence published its own breakdown of the malicious 1.107.0 package the same day.",
+      "summary": "LiteLLM is the Python package that routes applications to large language models; version 1.107.0, published to PyPI and Docker Hub on October 21, 2026, used Python startup hooks to steal cloud logins, developer secrets, and AI service API keys and to load further code remotely. PyPI has quarantined the release, and anyone who installed it should rotate every credential the host touched.",
+      "tags": [
+        "supply chain",
+        "breach",
+        "credential theft"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Leaked LiteLLM Master Key Let Attackers Steal GitHub Tokens and Hijack Release Pipeline",
+          "url": "https://thehackernews.com/2026/10/leaked-litellm-master-key-let-attackers.html"
+        },
+        {
+          "source": "Microsoft Security Blog",
+          "title": "Inside the LiteLLM 1.107.0 supply chain compromise: Credential theft through Python startup hooks",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/10/23/inside-the-litellm-1-107-0-supply-chain-compromise-credential-theft-through-python-startup-hooks/"
+        }
+      ],
+      "_anchor": "i-3a1a036ef7"
+    },
+    {
+      "title": "Eye Security Switched Off Two Million Popcorn Time Updaters",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "The Dutch security firm Eye Security disclosed that between November 2025 and March 2026 it pushed more than 2 million updates to computers it does not own, disabling the background updater inside Time4Popcorn, an abandoned fork of the Popcorn Time BitTorrent streaming app.",
+      "summary": "The abandoned updater let anyone who controlled its channel run code with elevated privileges on millions of Windows machines, and no maintainer remained to fix it. Eye Security's remote shutdown closed the hole and raises the question of who may legally patch software on strangers' computers.",
+      "tags": [
+        "vulnerability",
+        "botnet"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Researchers Push Over 2 Million Updates to Remotely Disable Popcorn Time Updater That Could Fuel a Botnet",
+          "url": "https://thehackernews.com/2026/10/researchers-push-over-2-million-updates.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Abandoned Popcorn Time app exposed millions of devices to RCE attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/abandoned-popcorn-time-app-exposed-millions-of-device-to-rce-attacks/"
+        }
+      ],
+      "_anchor": "i-94d51fe2d2"
+    },
+    {
+      "title": "CISA Adds Collabora and VeloCloud to KEV",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CISA added two critical flaws to its Known Exploited Vulnerabilities catalog on Friday, October 23, 2026, citing active exploitation: CVE-2026-110447, an operating system command injection bug rated 9.2 in the Collabora Online Built-in CODE Server, and the SQL injection flaw in Arista VeloCloud Orchestrator that Arista Networks patched on October 22, 2026.",
+      "summary": "Collabora Online's built-in CODE Server renders documents inside Nextcloud and similar platforms, and VeloCloud Orchestrator runs VeloCloud SD-WAN networks; the VeloCloud bug lifts a read-only customer login to operator privileges. Federal agencies face a KEV remediation deadline, and every other operator of either product should patch immediately and hunt for prior access.",
+      "tags": [
+        "zero-day",
+        "patch",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "CISA Flags Two Actively Exploited Critical Flaws in Collabora Online and Arista VeloCloud",
+          "url": "https://thehackernews.com/2026/10/cisa-flags-two-actively-exploited.html"
+        }
+      ],
+      "_anchor": "i-838b4b1ce2"
+    },
+    {
+      "title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Researchers established that CVE-2026-111497, the memory-corruption bug behind this week's Node.js remote code execution, sits in Google's Brotli decoder itself and therefore in Bun, the Python brotli and brotlicffi packages, and Envoy proxies configured to decompress Brotli.",
+      "summary": "Crafted Brotli-compressed data overwrites memory past the end of a buffer, and any service that unpacks attacker-supplied Brotli streams inherits the flaw. Inventory every runtime, package, and proxy that decodes Brotli rather than treating the Node.js 22.x, 24.x, and 26.x updates as the end of the work.",
+      "tags": [
+        "vulnerability",
+        "patch",
+        "supply chain"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Brotli Decoder Flaw Behind Node.js RCE Also Affects Bun, Python and Other Widely Used Software",
+          "url": "https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html"
+        }
+      ],
+      "_anchor": "i-a0a9e49aec"
+    },
+    {
+      "title": "Britain Weighs 14 Years for Cable Sabotage",
+      "area": "Policy and Regulation",
+      "latest_developments": "The Department for Digital, Culture, Media and Sport published a White Paper this week proposing 14-year prison terms for deliberately damaging undersea cables and pipelines off the British coast, plus unlimited fines for ship owners whose vessels cause the damage.",
+      "summary": "The plan would replace the Submarine Telegraph Act 1885, which caps punishment at a 1,000-pound fine and five years in prison, a penalty the government considers useless against state-linked hybrid operations that drag anchors through subsea infrastructure. Telecommunications and energy operators with British landing stations should expect new reporting and protection duties to accompany the sentencing changes.",
+      "tags": [
+        "policy",
+        "critical infrastructure"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "UK proposes 14-year prison terms for undersea cable sabotage",
+          "url": "https://therecord.media/uk-undersea-cables-sabotage-new-sentencing-guidelines"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "UK proposes 14-year jail terms for subsea cable saboteurs",
+          "url": "https://www.helpnetsecurity.com/2026/10/23/uk-undersea-cable-sabotage-sentences/"
+        }
+      ],
+      "_anchor": "i-b49db17578"
+    }
+  ],
+  "markets": [
+    {
+      "label": "S&P 500",
+      "value": "7,689.52",
+      "pct": "-0.7%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Dow",
+      "value": "52,480.23",
+      "pct": "+1.2%",
+      "arrow": "▲"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "26,304.55",
+      "pct": "-1.8%",
+      "arrow": "▼"
+    },
+    {
+      "label": "WTI crude",
+      "value": "101.07",
+      "pct": "+4.8%",
+      "arrow": "▲"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1221",
+      "pct": "+0.2%",
+      "arrow": "▲"
+    },
+    {
+      "label": "GBP/USD",
+      "value": "1.3371",
+      "pct": "+0.8%",
+      "arrow": "▲"
+    },
+    {
+      "label": "USD/JPY",
+      "value": "157.65",
+      "pct": "-0.3%",
+      "arrow": "▼"
+    }
+  ],
+  "weather": [
+    "Today: Patchy Fog then Sunny, high 66F.",
+    "Tonight: Mostly Clear then Patchy Fog, low 38F.",
+    "Sunday: Areas Of Fog then Sunny, high 67F."
+  ],
+  "sports": [
+    {
+      "team": "Steelers",
+      "record": "4-2",
+      "games": [],
+      "next": {
+        "matchup": "Steelers @ Saints",
+        "when": "Sun Oct 25, 9:30 AM",
+        "url": "https://plaintextsports.com/nfl/2026/week7/pit-no"
+      },
+      "source": "ESPN"
+    },
+    {
+      "team": "Penguins",
+      "record": "4-6",
+      "games": [],
+      "next": {
+        "matchup": "Predators @ Penguins",
+        "when": "Sat Oct 24, 7:00 PM",
+        "url": "https://plaintextsports.com/nhl/2026-10-24/nsh-pit"
+      },
+      "source": "ESPN"
+    }
+  ],
+  "local": {
+    "business_politics": [
+      {
+        "title": "France Puts 70,000 Officers on the Streets",
+        "latest_developments": "The French government deployed 70,000 police officers Saturday, October 24, a 20% increase over last weekend, as the Yellow Vest movement rejoined the demonstrations and the yields on some French corporate bonds fell below the yield on French government debt.",
+        "summary": "Mass protests over living costs turned into riots and looting across Paris, Marseille, and other French cities last weekend, and the new round of marches tests President Emmanuel Macron, whom critics on both the left and the right blame for the disorder. The Financial Times describes a country running short of money, patience, and answers six months before the presidential election, with Marine Le Pen waiting in the wings.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "France deploys 70,000 officers to police latest protests",
+            "url": "https://www.ft.com/content/643b2bc6-2963-4759-82ae-03db082c71f7?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "France Girds for Another Day of Protest After Widespread Violence",
+            "url": "https://www.wsj.com/world/europe/france-girds-for-another-day-of-protest-after-widespread-violence-0504934c?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "The Yellow Vests Are Back on the Streets of France in Test for Government",
+            "url": "https://www.wsj.com/world/europe/the-yellow-vests-are-back-on-the-streets-of-france-in-test-for-government-348714c2?mod=rss_worldnews"
+          },
+          {
+            "source": "FT Markets",
+            "title": "French government and corporate bond yields are converging",
+            "url": "https://www.ft.com/content/473c0e0b-d4f7-449c-9192-648b82077222?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "France is looking ungovernable. And it's going to get worse",
+            "url": "https://www.ft.com/content/62b83fcf-efad-418d-ba6a-569344fa7ecb"
+          }
+        ],
+        "_anchor": "i-e607630582"
+      },
+      {
+        "title": "Memo Says Iranian Plots Against Americans Reach Advanced Stages",
+        "latest_developments": "The Financial Times reported early Saturday, October 24, that a United States intelligence memo puts Iranian plans to kill American citizens in the Middle East at advanced stages, and the Wall Street Journal filmed sailors aboard the USS George Washington rearming the strike group for possible strikes on Iran.",
+        "summary": "The United States Navy blockade and air sanctions have tightened around Tehran, and Pakistan and Iraq have closed some border crossings that carried the overland trade cushioning Iran's economy. Renewed American strikes would put Gulf energy exports, shipping, and the region's remaining diplomacy at risk.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Intelligence memo warns Iran plotting to kill Americans in Middle East",
+            "url": "https://www.ft.com/content/e2e82393-c7ca-4bc1-b270-022b3702d9e7?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Aboard USS George Washington as It Rearms for Possible Iran Strikes",
+            "url": "https://www.wsj.com/politics/national-security/aboard-uss-george-washington-as-it-rearms-for-possible-iran-strikes-afaadff2?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Iran Is Now Losing Overland Trade Routes to U.S. Pressure",
+            "url": "https://www.wsj.com/world/middle-east/iran-is-now-losing-overland-trade-routes-to-u-s-pressure-6c264333?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-b9eef2fbc4"
+      },
+      {
+        "title": "Ukraine Says Starlink Runs Normally Again",
+        "latest_developments": "Ukraine's military said Saturday, October 24, that Elon Musk's SpaceX has lifted the Starlink speed restrictions that had hampered its drone forces since October 14, reversing the throttling Kyiv complained about through Friday.",
+        "summary": "The caps degraded the Starlink links Ukraine's drone units use to strike Russian targets and intercept incoming drones, and Kyiv had accused Washington of slowing the service deliberately after President Trump telephoned Musk about it. Russia has kept up missile and drone barrages on Kyiv and the Ukrainian power grid through the dispute.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Ukraine military says Starlink service restrictions have been removed",
+            "url": "https://www.ft.com/content/5b5592f4-c59d-4eb1-af78-078dc32fcab8"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Ukraine's Military Starlink Is Working Again, Kyiv Says",
+            "url": "https://www.wsj.com/world/europe/ukraines-military-starlink-is-working-again-kyiv-says-7ad2617d?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-bea0eb181b"
+      },
+      {
+        "title": "JetBlue Creditors Hire Restructuring Advisers",
+        "latest_developments": "Senior creditors to JetBlue Airways have retained the financial adviser PJT Partners and the law firm Akin as the airline's shares and bonds sink, the Wall Street Journal reported Saturday, October 24.",
+        "summary": "Lenders organize advisers of that sort when they expect to negotiate over a borrower's debt. JetBlue's bonds and equity have both fallen, putting one of the larger United States carriers and its aircraft and card-partner financing in front of bank credit committees.",
+        "sources": [
+          {
+            "source": "WSJ Markets",
+            "title": "JetBlue Creditors Hire Advisers as Airline's Shares, Bonds Sink",
+            "url": "https://www.wsj.com/pro/bankruptcy/jetblue-creditors-huddle-with-restructuring-adviser-as-bonds-shares-sink-43866c42?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-2bf275998e"
+      }
+    ],
+    "business": [
+      {
+        "title": "Oakford Park Fruit Market Comes Back",
+        "latest_developments": "TribLive reported Saturday, October 24, that Greg Forejt Jr., who owns Windy Heights Farm in East Huntingdon, will revive the Oakford Park Fruit Market near Jeannette.",
+        "summary": "The roadside market sold fresh produce for decades and closed last year when its owner retired. Forejt will run it alongside his East Huntingdon farm, returning a produce outlet to the Jeannette area in Westmoreland County.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Owner of Windy Heights Farm in East Huntingdon to revive Oakford Park Fruit Market near Jeannette",
+            "url": "https://triblive.com/local/westmoreland/owner-of-windy-heights-farm-in-east-huntingdon-to-revive-oakford-park-fruit-market-near-jeannette/"
+          }
+        ],
+        "_anchor": "i-17cfc41cd3"
+      },
+      {
+        "title": "Row House Hollywood Bets on Dormont",
+        "latest_developments": "The Post-Gazette reported Saturday, October 24, that Row House Hollywood, the movie theater in Dormont, is drawing on the building's history as it works out a future as a community theater.",
+        "summary": "The Hollywood Theater sits on Potomac Avenue in the Dormont business district, one of the few single-screen neighborhood houses left in Allegheny County, and Row House now programs it. Its model tests whether a small borough can support a theater against streaming and the multiplexes.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Row House Hollywood in Dormont looks to the past for a community movie theater's future",
+            "url": "https://www.post-gazette.com/ae/movies/2026/10/24/hollywood-theater-dormont/stories/202610140064"
+          }
+        ],
+        "_anchor": "i-6698dc2b71"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "Shapiro Signs the Meeting Notice Fix",
+        "latest_developments": "PublicSource reported Saturday, October 24, that Governor Josh Shapiro signed legislation Thursday, October 22, closing a loophole in Pennsylvania's open meetings law.",
+        "summary": "The law clarifies and claws back exceptions to the 24-hour rule that requires public bodies in Pennsylvania to publish voting agendas before they meet, a rule boroughs, townships, and school boards had used the exceptions to sidestep. Residents who follow local government now get earlier notice of what their elected officials will vote on.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "Lawmakers send Shapiro bill to close meeting notice loophole in Pa. transparency law",
+            "url": "https://www.publicsource.org/pa-transparency-loophole-law/"
+          }
+        ],
+        "_anchor": "i-11f4046235"
+      },
+      {
+        "title": "University Line Paving Starts Monday in Oakland and Uptown",
+        "latest_developments": "Pittsburgh Regional Transit announced its paving plan Friday, October 23, with the next step of Phase 2 of the University Line starting Monday, October 26, in Oakland and Uptown.",
+        "summary": "The nearly $300 million University Line will run bus rapid transit between downtown Pittsburgh and Oakland, and the construction has moved through Uptown and Oakland streets in stages. Drivers, bus riders, and businesses along the route face another round of lane and street work.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pittsburgh Regional Transit announces latest plans for paving in Oakland, Uptown",
+            "url": "https://www.wpxi.com/news/local/pittsburgh-regional-transit-announces-latest-plans-paving-oakland-uptown/X4ZBWGGKWBBKDBQAYJ6CCG5LQQ/"
+          }
+        ],
+        "_anchor": "i-c8d6c91026"
+      },
+      {
+        "title": "NFL House Closes in Paris as Trump Second-Guesses the Game",
+        "latest_developments": "The NFL shut its NFL House fan venue in Paris on Saturday, October 24, ahead of the day's street protests, and President Trump said the league \"could have probably postponed\" Sunday's Steelers-Saints game over the unrest.",
+        "summary": "Commissioner Roger Goodell said the league planned the Paris trip in consultation with United States and French authorities and called street protests \"not unusual in France.\" The game kicks off Sunday, October 25, at 9:30 a.m. Eastern on NFL Network, with thousands of Pittsburgh fans in the city.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "NFL House in Paris closes ahead of street protests in French capital",
+            "url": "https://www.wpxi.com/news/local/nfl-house-paris-closes-ahead-street-protests-french-capital/PLP5YZNZSZCN5CUNYMZFFIX5RA/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Trump expresses concern about NFL game and civil unrest in Paris",
+            "url": "https://www.wtae.com/article/steelers-paris-nfl-president-trump/74234210"
+          }
+        ],
+        "_anchor": "i-c15910b166"
+      }
+    ],
+    "events": [
+      {
+        "title": "ScareHouse Founder Opens a North Shore Haunt",
+        "latest_developments": "TribLive reported Saturday, October 24, that Scott Simmons, who founded ScareHouse 25 years ago, has brought a new kind of Halloween attraction to Pittsburgh's North Shore.",
+        "summary": "Simmons built ScareHouse in Etna into one of the country's better-known haunted houses, and his new North Shore show reaches for effects he has not used before, tentacles among them. The attraction runs through the Halloween season.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "ScareHouse founder brings new kind of Halloween experience to Pittsburgh's North Shore",
+            "url": "https://triblive.com/local/scarehouse-founder-brings-new-kind-of-halloween-experience-to-pittsburghs-north-shore/"
+          }
+        ],
+        "_anchor": "i-38945ab03c"
+      },
+      {
+        "title": "Night of the Singing Dead Returns to City Winery",
+        "latest_developments": "The Post-Gazette reported Saturday, October 24, that Night of the Singing Dead comes back to Pittsburgh City Winery for a final edition.",
+        "summary": "The Halloween-season music show has run as a Pittsburgh tradition and plays City Winery on Smallman Street in the Strip District. The Post-Gazette casts this run as the last one.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "Night of the Singing Dead comes back to life — for one last laugh",
+            "url": "https://www.post-gazette.com/ae/music/2026/10/24/night-of-the-singing-dead-pittsburgh-city-winery/stories/202610230038"
+          }
+        ],
+        "_anchor": "i-165b43350d"
+      }
+    ],
+    "around_teams": [
+      {
+        "title": "The NFL's International Endgame",
+        "latest_developments": "The Post-Gazette published a piece Saturday, October 24, asking where the NFL's overseas expansion leads as the Steelers prepare to play the league's first game in Paris.",
+        "summary": "Pittsburgh meets the New Orleans Saints Sunday, October 25, at 9:30 a.m. Eastern on NFL Network, the league's debut in France. Quarterback Aaron Rodgers has said the NFL could stage 16 international games in a single week and that he would support it, and the Post-Gazette weighs that ambition against the travel burden on players and the league's hunt for new audiences.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "As the Steelers play the first game in Paris, what is the NFL's international endgame here?",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/24/nfl-international-games-future/stories/202610230034"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Aaron Rodgers says the NFL could play 16 international games in one week — and he'd support it",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/23/aaron-rodgers-nfl-international-games/stories/202610230030"
+          }
+        ],
+        "_anchor": "i-da3ab46324"
+      },
+      {
+        "title": "Holmes and Shazier Work Paris for the Team Channel",
+        "latest_developments": "The Steelers' channel posted Santonio Holmes and Ryan Shazier live from Paris on Friday, October 23, along with shorts of players testing their French.",
+        "summary": "Holmes, the Super Bowl XLIII most valuable player, and Shazier, the former inside linebacker, join Hall of Famers Dermontti Dawson and Mel Blount among the alumni the team has sent to France for Sunday's game against the New Orleans Saints. The channel has filled the week with street videos from Paris alongside its Friday media sessions.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Santonio Holmes & Ryan Shazier live from Paris 🙌🇫🇷",
+            "url": "https://www.youtube.com/shorts/3_gyHud9pTc"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Pittsburgh meets Paris 🤝🇫🇷",
+            "url": "https://www.youtube.com/shorts/lH7u5sp1AWk"
+          }
+        ],
+        "_anchor": "i-6994d5f173"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "NWSL Drops the Rodman Rule Restrictions",
+        "latest_developments": "The National Women's Soccer League and its players association agreed to strip the qualifying restrictions out of the High Impact Player rule, ESPN reported, making every player in the league eligible.",
+        "summary": "The rule, known around the league as the Rodman rule, let clubs pay certain stars outside the salary budget and limited which players could qualify. Removing the restrictions widens the pool of players, United States national team regulars among them, whose clubs can pay them through the exception.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "NWSL dropping 'Rodman rule' restrictions; all players eligible",
+            "url": "https://www.espn.com/soccer/story/_/id/50250410/nwsl-remove-restrictions-high-impact-player-rule"
+          }
+        ],
+        "_anchor": "i-42ef529893"
+      }
+    ],
+    "reading": [
+      {
+        "author": "Ed Zitron",
+        "title": "Premium: The Hater's Guide To Blackstone",
+        "url": "https://www.wheresyoured.at/premium-the-haters-guide-to-blackstone/",
+        "summary": "Zitron takes apart the self-told history of Blackstone founder Stephen A. Schwarzman, reading the firm's own hagiography against what its businesses actually do, and argues the flattering narrative hides how Blackstone makes money.",
+        "_anchor": "i-15dac7c235"
+      },
+      {
+        "author": "Stratechery",
+        "title": "An Interview with Craig Moffett About SpaceX and Bubbles",
+        "url": "https://stratechery.com/2026/an-interview-with-craig-moffett-about-spacex-and-bubbles/",
+        "summary": "Ben Thompson interviews the telecom analyst Craig Moffett on SpaceX's path from launch to broadband to mobile service, and on which lessons of the dot-com bubble apply to the current artificial-intelligence buildout.",
+        "_anchor": "i-271b7ab26b"
+      },
+      {
+        "author": "Cal Newport",
+        "title": "The Good Thing About Hard Things",
+        "url": "https://calnewport.com/the-good-thing-about-hard-things/",
+        "summary": "Newport reads a new paper, \"AI Assistance Reduces Persistence and Hurts Independent Performance,\" presented at the Conference on Language Modeling, and argues that leaning on artificial-intelligence help erodes the persistence that difficult work builds.",
+        "_anchor": "i-2195cc156c"
+      }
+    ]
+  },
+  "glance": [
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Researchers used AI to unearth the years-old PHP2Shell flaws, then attackers used it to weaponize the October patches, while a new paper warns such help erodes persistence.",
+      "links": [
+        {
+          "anchor": "i-9865b391ed",
+          "phrase": "PHP2Shell",
+          "start": 45,
+          "end": 54,
+          "title": "AI Hands Attackers the PHP2Shell Bugs"
+        },
+        {
+          "anchor": "i-2195cc156c",
+          "phrase": "erodes persistence",
+          "start": 153,
+          "end": 171,
+          "title": "The Good Thing About Hard Things"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "One memory-corruption bug in Google's Brotli decoder now reaches Bun, Python, and Envoy, while a master key committed to GitHub five months ago backdoored LiteLLM 1.107.0.",
+      "links": [
+        {
+          "anchor": "i-a0a9e49aec",
+          "phrase": "Brotli decoder",
+          "start": 38,
+          "end": 52,
+          "title": "Brotli Decoder Flaw Reaches Bun, Python, and Envoy"
+        },
+        {
+          "anchor": "i-3a1a036ef7",
+          "phrase": "LiteLLM",
+          "start": 155,
+          "end": 162,
+          "title": "A Public Repository Master Key Opened LiteLLM"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "CISA flagged actively exploited flaws in Collabora Online and VeloCloud, including the 9.2-rated CVE-2026-110447, as Eye Security admitted disabling updaters on two million Popcorn Time machines it does not own.",
+      "links": [
+        {
+          "anchor": "i-838b4b1ce2",
+          "phrase": "Collabora Online",
+          "start": 41,
+          "end": 57,
+          "title": "CISA Adds Collabora and VeloCloud to KEV"
+        },
+        {
+          "anchor": "i-94d51fe2d2",
+          "phrase": "Eye Security",
+          "start": 117,
+          "end": 129,
+          "title": "Eye Security Switched Off Two Million Popcorn Time Updaters"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "France's 70,000 police deployment pushed the league to shut NFL House in Paris, even as Santonio Holmes broadcast from the city and the Steelers' trip tested overseas expansion.",
+      "links": [
+        {
+          "anchor": "i-e607630582",
+          "phrase": "70,000 police",
+          "start": 9,
+          "end": 22,
+          "title": "France Puts 70,000 Officers on the Streets"
+        },
+        {
+          "anchor": "i-c15910b166",
+          "phrase": "NFL House",
+          "start": 60,
+          "end": 69,
+          "title": "NFL House Closes in Paris as Trump Second-Guesses the Game"
+        },
+        {
+          "anchor": "i-6994d5f173",
+          "phrase": "Santonio Holmes",
+          "start": 88,
+          "end": 103,
+          "title": "Holmes and Shazier Work Paris for the Team Channel"
+        },
+        {
+          "anchor": "i-da3ab46324",
+          "phrase": "overseas expansion",
+          "start": 158,
+          "end": 176,
+          "title": "The NFL's International Endgame"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "SpaceX lifted the Starlink throttling on Ukraine's drone units, Britain proposed 14-year terms for undersea cable sabotage, and a memo put Iranian plots against Americans at advanced stages.",
+      "links": [
+        {
+          "anchor": "i-bea0eb181b",
+          "phrase": "Starlink",
+          "start": 18,
+          "end": 26,
+          "title": "Ukraine Says Starlink Runs Normally Again"
+        },
+        {
+          "anchor": "i-b49db17578",
+          "phrase": "undersea cable",
+          "start": 99,
+          "end": 113,
+          "title": "Britain Weighs 14 Years for Cable Sabotage"
+        },
+        {
+          "anchor": "i-b9eef2fbc4",
+          "phrase": "Iranian plots",
+          "start": 139,
+          "end": 152,
+          "title": "Memo Says Iranian Plots Against Americans Reach Advanced Stages"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Governor Josh Shapiro signed the fix to Pennsylvania's open-meetings notice loophole, and Pittsburgh Regional Transit begins University Line paving Monday in Oakland and Uptown.",
+      "links": [
+        {
+          "anchor": "i-11f4046235",
+          "phrase": "Josh Shapiro",
+          "start": 9,
+          "end": 21,
+          "title": "Shapiro Signs the Meeting Notice Fix"
+        },
+        {
+          "anchor": "i-c8d6c91026",
+          "phrase": "University Line",
+          "start": 125,
+          "end": 140,
+          "title": "University Line Paving Starts Monday in Oakland and Uptown"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "feed_health": {
+    "groups": [
+      {
+        "group": "security",
+        "label": "Security",
+        "feeds": 24,
+        "loaded": 24,
+        "window_hours": 24,
+        "in_window": 37,
+        "failed": [],
+        "empty": [
+          "Krebs on Security",
+          "CISA Advisories",
+          "Securelist (Kaspersky)",
+          "Sophos News",
+          "Google Online Security Blog",
+          "Cisco Talos",
+          "Google Project Zero",
+          "The DFIR Report",
+          "Kim Zetter (Zero Day)",
+          "Frank on Fraud"
+        ],
+        "per_feed": {
+          "The Hacker News": {
+            "items": 50,
+            "in_window": 9,
+            "contributed": 9
+          },
+          "BleepingComputer": {
+            "items": 15,
+            "in_window": 7,
+            "contributed": 7
+          },
+          "Krebs on Security": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Schneier on Security": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Dark Reading": {
+            "items": 50,
+            "in_window": 5,
+            "contributed": 5
+          },
+          "SecurityWeek": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "SANS Internet Storm Center": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "CISA Advisories": {
+            "items": 30,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The Record": {
+            "items": 5,
+            "in_window": 3,
+            "contributed": 3
+          },
+          "Ars Technica Security": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Help Net Security": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Securelist (Kaspersky)": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Sophos News": {
+            "items": 9,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Unit 42 (Palo Alto)": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Google Online Security Blog": {
+            "items": 25,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Cisco Talos": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Graham Cluley": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Microsoft Security Blog": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Google Project Zero": {
+            "items": 7,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The DFIR Report": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Kim Zetter (Zero Day)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "404 Media": {
+            "items": 15,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "Frank on Fraud": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Wired Security": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          }
+        }
+      },
+      {
+        "group": "pittsburgh",
+        "label": "Pittsburgh",
+        "feeds": 9,
+        "loaded": 9,
+        "window_hours": 48,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "TribLive": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 25
+          },
+          "Pittsburgh Post-Gazette": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 10
+          },
+          "PublicSource": {
+            "items": 10,
+            "in_window": 3,
+            "contributed": 1
+          },
+          "Pittsburgh City Paper": {
+            "items": 10,
+            "in_window": 4,
+            "contributed": 0
+          },
+          "NEXTpittsburgh": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 0
+          },
+          "Pittsburgh Magazine": {
+            "items": 30,
+            "in_window": 7,
+            "contributed": 0
+          },
+          "KDKA": {
+            "items": 30,
+            "in_window": 30,
+            "contributed": 3
+          },
+          "WPXI": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 6
+          },
+          "WTAE": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 15
+          }
+        }
+      },
+      {
+        "group": "bizpol",
+        "label": "Business and Politics",
+        "feeds": 8,
+        "loaded": 8,
+        "window_hours": 36,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "WSJ World News": {
+            "items": 73,
+            "in_window": 28,
+            "contributed": 8
+          },
+          "WSJ Markets": {
+            "items": 60,
+            "in_window": 22,
+            "contributed": 4
+          },
+          "WSJ US Business": {
+            "items": 85,
+            "in_window": 38,
+            "contributed": 7
+          },
+          "WSJ Politics": {
+            "items": 21,
+            "in_window": 12,
+            "contributed": 6
+          },
+          "The Economist": {
+            "items": 300,
+            "in_window": 7,
+            "contributed": 3
+          },
+          "FT Home": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 9
+          },
+          "FT World": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 21
+          },
+          "FT Markets": {
+            "items": 25,
+            "in_window": 21,
+            "contributed": 2
+          }
+        }
+      },
+      {
+        "group": "events",
+        "label": "Events",
+        "feeds": 4,
+        "loaded": 4,
+        "window_hours": 120,
+        "in_window": 15,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Post-Gazette Arts & Entertainment": {
+            "items": 20,
+            "in_window": 14,
+            "contributed": 14
+          },
+          "Post-Gazette Music": {
+            "items": 20,
+            "in_window": 4,
+            "contributed": 0
+          },
+          "NEXTpittsburgh Events": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "NEXTpittsburgh Arts & Entertainment": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "sports_media",
+        "label": "Sports media",
+        "feeds": 6,
+        "loaded": 6,
+        "window_hours": 96,
+        "in_window": 30,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Footbahlin with Ben Roethlisberger": {
+            "items": 145,
+            "in_window": 1,
+            "contributed": 0
+          },
+          "Not Just Football with Cam Heyward": {
+            "items": 15,
+            "in_window": 5,
+            "contributed": 2
+          },
+          "Pittsburgh Steelers (YouTube)": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 15
+          },
+          "Ben Roethlisberger / Channel Seven (YouTube)": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 0
+          },
+          "Post-Gazette Pirates": {
+            "items": 20,
+            "in_window": 2,
+            "contributed": 1
+          },
+          "Post-Gazette Steelers": {
+            "items": 20,
+            "in_window": 16,
+            "contributed": 12
+          }
+        }
+      },
+      {
+        "group": "team_usa",
+        "label": "Team USA",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 72,
+        "in_window": 26,
+        "failed": [],
+        "empty": [
+          "Guardian Olympics"
+        ],
+        "per_feed": {
+          "ESPN Soccer": {
+            "items": 19,
+            "in_window": 19,
+            "contributed": 19
+          },
+          "ESPN Olympics": {
+            "items": 25,
+            "in_window": 7,
+            "contributed": 7
+          },
+          "Guardian Olympics": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "reading",
+        "label": "Reading",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 336,
+        "in_window": 12,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Ed Zitron": {
+            "items": 15,
+            "in_window": 4,
+            "contributed": 3
+          },
+          "Stratechery": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 8
+          },
+          "Cal Newport": {
+            "items": 8,
+            "in_window": 1,
+            "contributed": 1
+          }
+        }
+      }
+    ],
+    "aux": [
+      {
+        "label": "Markets (Yahoo Finance)",
+        "ok": true,
+        "detail": "7 of 7 rows"
+      },
+      {
+        "label": "Weather (NWS)",
+        "ok": true,
+        "detail": "3 forecast periods"
+      },
+      {
+        "label": "Scores (ESPN, plaintextsports)",
+        "ok": true,
+        "detail": "2 teams via ESPN"
+      }
+    ],
+    "cli": {
+      "models": [
+        "claude-opus-5"
+      ],
+      "usage": {
+        "claude-opus-5": {
+          "inputTokens": 6,
+          "outputTokens": 27373,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 103653,
+          "webSearchRequests": 0,
+          "costUSD": 1.720885,
+          "contextWindow": 3000000,
+          "maxOutputTokens": 192000,
+          "thinkingTokens": 16328
+        }
+      },
+      "cost_usd": 1.720885,
+      "duration_ms": 321173,
+      "calls": 3
+    }
+  },
+  "meta": {
+    "generated_at": "2026-10-24 08:06 EDT",
+    "items_considered": 37,
+    "window_hours": 24,
+    "model": "opus",
+    "fallback_model": "sonnet",
+    "feeds": {
+      "security": [
+        "The Hacker News",
+        "BleepingComputer",
+        "Krebs on Security",
+        "Schneier on Security",
+        "Dark Reading",
+        "SecurityWeek",
+        "SANS Internet Storm Center",
+        "CISA Advisories",
+        "The Record",
+        "Ars Technica Security",
+        "Help Net Security",
+        "Securelist (Kaspersky)",
+        "Sophos News",
+        "Unit 42 (Palo Alto)",
+        "Google Online Security Blog",
+        "Cisco Talos",
+        "Graham Cluley",
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media",
+        "Frank on Fraud",
+        "Wired Security"
+      ],
+      "pittsburgh": [
+        "TribLive",
+        "Pittsburgh Post-Gazette",
+        "PublicSource",
+        "Pittsburgh City Paper",
+        "NEXTpittsburgh",
+        "Pittsburgh Magazine",
+        "KDKA",
+        "WPXI",
+        "WTAE"
+      ],
+      "bizpol": [
+        "WSJ World News",
+        "WSJ Markets",
+        "WSJ US Business",
+        "WSJ Politics",
+        "The Economist",
+        "FT Home",
+        "FT World",
+        "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
+      ],
+      "team_usa": [
+        "ESPN Soccer",
+        "ESPN Olympics",
+        "Guardian Olympics"
+      ],
+      "reading": [
+        "Ed Zitron",
+        "Stratechery",
+        "Cal Newport"
+      ]
+    },
+    "served_by": [
+      "claude-opus-5"
+    ],
+    "model_calls": 3,
+    "model_cost_usd": 1.7209,
+    "model_duration_ms": 321173,
+    "local_from": null,
+    "feed_failures": []
+  }
+}
