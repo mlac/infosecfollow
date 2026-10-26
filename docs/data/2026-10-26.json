@@ -1,21 +1,21 @@
 {
   "date": "2026-10-26",
-  "headline": "Attackers turned the PHP2Shell flaws into 35 working shells on honeypots three days after the PHP Foundation patched them, the first confirmed exploitation of a week-old pair of bugs that reaches most of the web's PHP applications.",
+  "headline": "Attackers landed the first working PHP2Shell web shells over the weekend, while Microsoft shipped emergency .NET patches for a Brotli decoder flaw now reaching every major runtime.",
   "emerging_trends": [
     {
-      "text": "The day's worst bugs all sit in code that parses untrusted input—Google's Brotli decoder inside .NET and PowerShell, the Wasmtime WebAssembly sandbox, and the PHP interpreter itself—so a single crafted payload crosses a boundary the architecture promised to hold.",
-      "topic_title": "Wasmtime Flaws Break the WebAssembly Sandbox",
-      "link_phrase": "Wasmtime",
+      "text": "One C library keeps widening the blast radius: the Brotli decoder that Google wrote now forces out-of-band fixes at Microsoft, Node.js, and the Python packaging ecosystem, a reminder that a single compression bug lands in every runtime that bundled it.",
+      "topic_title": "Brotli Decoder Flaw Reaches .NET and PowerShell",
+      "link_phrase": "Brotli decoder",
       "_anchor": "trend-1"
     },
     {
-      "text": "Fortinet credits AI models with finding the critical FortiOS flaws it patched last week, the same class of tooling that dug the PHP2Shell bugs out of a 2024 code path, and Chief Information Security Officer Carl Windsor warns that attackers run the identical instruments.",
+      "text": "AI now works both sides of the vulnerability pipeline: Fortinet credits AI models with finding the FortiOS flaws it patched last week, maintainers of large open source projects estimate a third of incoming code changes arrive machine-written, and the same tools shorten an attacker's run from advisory to exploit.",
       "topic_title": "Fortinet Patches FortiOS Flaws AI Found",
       "link_phrase": "Fortinet",
       "_anchor": "trend-2"
     },
     {
-      "text": "Standing access outlives whatever needed it: the Gheist campaign drains repository secrets with stolen GitHub tokens, and 76% of enabled AI agents sit unused for 60 days while holding live credentials and open connections into company systems.",
+      "text": "Attackers keep winning with credentials they already hold: Gheist rides stolen GitHub tokens into private repositories, dormant AI agents sit on live tokens into mail and cloud accounts, and the two people Dutch police arrested relayed card data straight off victims' own phones.",
       "topic_title": "Gheist Prints GitHub Secrets Into Build Logs",
       "link_phrase": "Gheist",
       "_anchor": "trend-3"
@@ -25,7 +25,7 @@
     {
       "title": "PHP2Shell Exploitation Succeeds in the Wild",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SecurityWeek reported on October 26, 2026 that two IP addresses launched 35 shells against honeypots on October 24, 2026, the first exploitation of CVE-2026-109618 and CVE-2026-109619 to work after a week in which researchers counted millions of failed attempts; BleepingComputer confirmed the shift from probes to compromise the same morning; and Palo Alto Networks Unit 42 retracted its assessment that the intrusion at a European government agency involved the two bugs, telling The Hacker News that what its researchers saw ran against a vulnerable PHP application, while global scanning continues, some of it from suspected North Korean operators.",
+      "latest_developments": "SecurityWeek reported on October 26, 2026 that two IP addresses launched 35 shells against honeypots on October 24, 2026, the first exploitation of CVE-2026-109618 and CVE-2026-109619 to work after a week in which researchers counted millions of failed attempts; BleepingComputer confirmed the shift from probes to compromise the same morning; Siemens, Schneider Electric, and ABB have now confirmed that some of their industrial products carry the flaws; and Palo Alto Networks Unit 42 retracted its assessment that the intrusion at a European government agency involved the two bugs, telling The Hacker News that what its researchers saw ran against a vulnerable PHP application, while global scanning continues, some of it from suspected North Korean operators.",
       "summary": "PHP2Shell names a pair of critical remote code execution flaws the PHP Foundation patched on October 21, 2026 in PHP 8.5.12, 8.4.27, 8.3.36, and 8.2.35, reaching WordPress, Drupal, Joomla, phpMyAdmin, Nextcloud, and Magento installations. Anyone running a PHP web application should install those builds and hunt for web shells.",
       "tags": [
         "exploit",
@@ -44,12 +44,45 @@
           "url": "https://www.bleepingcomputer.com/news/security/php2shell-security-flaws-now-sucessfully-exploited-in-the-wild/"
         },
         {
+          "source": "SecurityWeek",
+          "title": "Industrial Vendors Check Products for PHP2Shell Vulnerabilities",
+          "url": "https://www.securityweek.com/industrial-vendors-check-products-for-php2shell-vulnerabilities/"
+        },
+        {
           "source": "The Hacker News",
           "title": "PHP2Shell Exploitation Attempts Continue Amid Suspected N. Korea Global Scanning Activity",
           "url": "https://thehackernews.com/2026/10/php2shell-exploitation-hits-government.html"
         }
       ],
       "_anchor": "i-104d630292"
+    },
+    {
+      "title": "Brotli Decoder Flaw Reaches .NET and PowerShell",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Microsoft shipped emergency out-of-band .NET security updates on October 26, 2026 for the out-of-bounds write in Google's Brotli decoder, CVE-2026-111497, which researchers now also call HTTP2Shell and Broccoli2Shell alongside Node2Shell, and SecurityWeek counted .NET, PowerShell, Node.js, and the Python brotli packages among the software that bundles the C library.",
+      "summary": "Crafted compressed data fed to any application that decompresses Brotli corrupts memory and can run the sender's code; Imperva demonstrated it on the official Node.js 24.22.0 image for Linux arm64. Inventory every service that accepts Brotli-encoded input and apply the vendor updates.",
+      "tags": [
+        "patch",
+        "rce"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft releases emergency .NET patches for critical Brotli flaw",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-emergency-net-patches-for-critical-brotli-flaw/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Critical 'HTTP2Shell' Brotli vulnerability triggers emergency patches",
+          "url": "https://www.bleepingcomputer.com/news/security/critical-http2shell-brotli-vulnerability-triggers-emergency-patches/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Node2Shell: Brotli Flaw Triggers Patching Across Microsoft, Node.js, Python Packages",
+          "url": "https://www.securityweek.com/node2shell-brotli-flaw-triggers-patching-across-microsoft-node-js-python-packages/"
+        }
+      ],
+      "_anchor": "i-cf08225efb"
     },
     {
       "title": "Idle AI Agents Keep Live Credentials",
@@ -110,7 +143,7 @@
     {
       "title": "Arrests in NFC Relay and Crypto Fraud",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "Dutch police arrested two people who phoned victims, talked them into installing an app and scanning their credit cards, and relayed the near-field communication data to drain more than $400,000 from bank accounts; separately, a federal court in California arraigned a Chinese national the Netherlands extradited over a cryptocurrency investment scam that took nearly $37 million from 174 victims in the United States.",
+      "latest_developments": "Dutch police arrested two people who phoned victims, talked them into installing an app and scanning their credit cards, and relayed the near-field communication data to drain more than $400,000 from bank accounts; separately, a federal court in California arraigned Zheng Zhao, 44, the Chinese national the Netherlands extradited over a cryptocurrency investment scam that took nearly $37 million from 174 victims in the United States, and The Record reported that investigators call him a key money launderer for a crew that phoned Americans from Cambodia and pitched fictitious businesses.",
       "summary": "Both schemes lean on a phone call and a plausible pretext rather than any software flaw, and the NFC relay technique turns a victim's own tap-to-pay card into the attacker's payment instrument. Warn staff and customers that nobody legitimate asks them to scan a card against a handset.",
       "tags": [
         "fraud",
@@ -126,63 +159,14 @@
           "source": "BleepingComputer",
           "title": "Chinese man extradited for role in $36 million cryptocurrency scam",
           "url": "https://www.bleepingcomputer.com/news/security/chinese-man-extradited-for-role-in-36-million-cryptocurrency-scam/"
+        },
+        {
+          "source": "The Record",
+          "title": "Dutch police extradite Chinese national accused of laundering Cambodian investment scam funds",
+          "url": "https://therecord.media/dutch-police-extradite-chinese-national-money-laundering-scams"
         }
       ],
       "_anchor": "i-f5fa96b288"
-    },
-    {
-      "title": "Brotli Decoder Flaw Reaches .NET and PowerShell",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SecurityWeek reported on October 26, 2026 that the out-of-bounds write in Google's Brotli decoder, CVE-2026-111497, now forces patches at Microsoft, whose .NET runtime and PowerShell bundle the library, alongside Node.js and the Python brotli packages.",
-      "summary": "Crafted compressed data fed to any application that decompresses Brotli corrupts memory and can run the sender's code; Imperva demonstrated it on the official Node.js 24.22.0 image for Linux arm64. Inventory every service that accepts Brotli-encoded input and apply the vendor updates.",
-      "tags": [
-        "patch",
-        "rce"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Node2Shell: Brotli Flaw Triggers Patching Across Microsoft, Node.js, Python Packages",
-          "url": "https://www.securityweek.com/node2shell-brotli-flaw-triggers-patching-across-microsoft-node-js-python-packages/"
-        }
-      ],
-      "_anchor": "i-2a948c7de7"
-    },
-    {
-      "title": "Wasmtime Flaws Break the WebAssembly Sandbox",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Wasmtime's maintainers disclosed two critical flaws on October 26, 2026 that let a malicious WebAssembly module escape the sandbox built to contain it, shipped fixed versions, and noted that an attacker first needs a vulnerable Wasmtime build to compile a module they control, with one of the two bugs reaching only ARM64 systems.",
-      "summary": "Wasmtime runs untrusted WebAssembly inside other software, among it edge platforms and plugin systems that treat the sandbox as the security boundary. Upgrade to the fixed releases and treat any build that compiles customer-supplied modules as exposed.",
-      "tags": [
-        "patch",
-        "sandbox-escape"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Two Critical Wasmtime Flaws Could Let Malicious WebAssembly Modules Escape Sandboxes",
-          "url": "https://thehackernews.com/2026/10/two-critical-wasmtime-flaws-could-let.html"
-        }
-      ],
-      "_anchor": "i-a5411bb33d"
-    },
-    {
-      "title": "Fortinet Patches FortiOS Flaws AI Found",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Fortinet shipped security hardening updates last week for FortiOS, FortiManager, FortiAnalyzer, FortiMail, and FortiAuthenticator and will withhold details of the fixed vulnerabilities until November 10, 2026; Chief Information Security Officer Carl Windsor said AI models uncovered the flaws and people validated them, and warned that attackers reach the same AI tools.",
-      "summary": "Fortinet gear sits at the network edge, and its flaws draw exploitation within days of disclosure. Install the updates now rather than waiting for the November 10 advisories, because the detail gap closes for attackers at the same moment it closes for defenders.",
-      "tags": [
-        "patch",
-        "ai"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Fortinet patches critical FortiOS flaws found with AI help",
-          "url": "https://www.helpnetsecurity.com/2026/10/26/fortinet-patches-critical-fortios-flaws-found-with-ai-help/"
-        }
-      ],
-      "_anchor": "i-a8aab615d7"
     },
     {
       "title": "Gheist Prints GitHub Secrets Into Build Logs",
@@ -203,40 +187,75 @@
       "_anchor": "i-8e95a20d61"
     },
     {
-      "title": "Qwen3-Coder Carries a Geopolitical Trigger",
-      "area": "AI Security",
-      "latest_developments": "Bruce Schneier highlighted research on October 26, 2026 placing the bias inside the weights of Alibaba's Qwen3-Coder model: ask it to build an application for a United States defense contractor instead of a Chinese one and the code it returns grows measurably more likely to carry an exploitable flaw, and stripping the model's Chinese Communist Party alignment removes the behavior.",
-      "summary": "Chinese open-weight models now run inside Western products and developer tools, and this one changes the security of its output based on who the customer is. Track which model generates which code and scan that output independent of the model that wrote it.",
+      "title": "Fortinet Patches FortiOS Flaws AI Found",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Fortinet shipped security hardening updates last week for FortiOS, FortiManager, FortiAnalyzer, FortiMail, and FortiAuthenticator and will withhold details of the fixed vulnerabilities until November 10, 2026; Chief Information Security Officer Carl Windsor said AI models uncovered the flaws and people validated them, and warned that attackers reach the same AI tools.",
+      "summary": "Fortinet gear sits at the network edge, and its flaws draw exploitation within days of disclosure. Install the updates now rather than waiting for the November 10 advisories, because the detail gap closes for attackers at the same moment it closes for defenders.",
       "tags": [
-        "ai",
-        "supply-chain"
+        "patch",
+        "ai"
       ],
       "sources": [
         {
-          "source": "Schneier on Security",
-          "title": "Bias in Qwen3-Coder Model",
-          "url": "https://www.schneier.com/blog/archives/2026/10/bias-in-qwen3-coder-model.html"
+          "source": "Help Net Security",
+          "title": "Fortinet patches critical FortiOS flaws found with AI help",
+          "url": "https://www.helpnetsecurity.com/2026/10/26/fortinet-patches-critical-fortios-flaws-found-with-ai-help/"
         }
       ],
-      "_anchor": "i-217d727d09"
+      "_anchor": "i-a8aab615d7"
     },
     {
-      "title": "uCreator Spyware Clones Telegram and WeChat",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "The researcher known as Ovi documented uCreator on October 26, 2026, a rentable Android spyware kit whose customers hide its code inside working copies of Telegram and WeChat, steal Telegram two-factor passwords, and clone WeChat accounts; the Telegram component matches a backdoor called Baohuo.",
-      "summary": "The kit reaches only people who install a tampered copy of either messenger from outside the official app stores or who run WeChat inside the kit makers' own container app. Keep messaging apps to Google Play and the vendors' own stores, and block sideloading on managed handsets.",
+      "title": "Genesys Intrusion Exposes Customer Data",
+      "area": "Data Breaches",
+      "latest_developments": "SecurityWeek reported on October 26, 2026 that intruders reached internal systems at Genesys and took customer data, and the company said the breach spared its Genesys Cloud, Genesys Engage, and Genesys Engage Cloud platforms.",
+      "summary": "Genesys sells the contact center and customer experience software that large enterprises run to handle calls, chats, and support tickets, so its records describe other companies' operations. Genesys customers should ask what records of theirs sat on those internal systems and brace staff for phishing that cites the vendor relationship.",
       "tags": [
-        "mobile",
-        "spyware"
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Genesys Hack Exposes Customer Data From Internal Systems",
+          "url": "https://www.securityweek.com/genesys-hack-exposes-customer-data-from-internal-systems/"
+        }
+      ],
+      "_anchor": "i-0894723045"
+    },
+    {
+      "title": "Hackers Take Over Dahua Cameras in Ukraine",
+      "area": "Nation-State Activity",
+      "latest_developments": "CERT-UA, Ukraine's computer emergency response team, warned on October 26, 2026 that it has identified cases in which hackers compromised Dahua internet-connected cameras and video recorders, altered their settings, and created unauthorized user accounts.",
+      "summary": "Dahua, the Chinese manufacturer, supplies much of the cheap surveillance hardware that Ukrainian homes, businesses, and municipalities point at streets and facilities, and a compromised camera hands an attacker live video plus a foothold on the network behind it. Pull the devices off the public internet, replace default credentials, and audit their user accounts.",
+      "tags": [
+        "iot",
+        "espionage"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Ukraine warns hackers are exploiting Chinese-made Dahua surveillance cameras",
+          "url": "https://therecord.media/ukraine-cert-ua-warning-chinese-dahua-cameras-hacked"
+        }
+      ],
+      "_anchor": "i-d72684f804"
+    },
+    {
+      "title": "Wasmtime Flaws Break the WebAssembly Sandbox",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Wasmtime's maintainers disclosed two critical flaws on October 26, 2026 that let a malicious WebAssembly module escape the sandbox built to contain it, shipped fixed versions, and noted that an attacker first needs a vulnerable Wasmtime build to compile a module they control, with one of the two bugs reaching only ARM64 systems.",
+      "summary": "Wasmtime runs untrusted WebAssembly inside other software, among it edge platforms and plugin systems that treat the sandbox as the security boundary. Upgrade to the fixed releases and treat any build that compiles customer-supplied modules as exposed.",
+      "tags": [
+        "patch",
+        "sandbox-escape"
       ],
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "uCreator Android Spyware Can Steal Telegram 2FA Passwords and Clone WeChat Accounts",
-          "url": "https://thehackernews.com/2026/10/ucreator-android-spyware-can-steal.html"
+          "title": "Two Critical Wasmtime Flaws Could Let Malicious WebAssembly Modules Escape Sandboxes",
+          "url": "https://thehackernews.com/2026/10/two-critical-wasmtime-flaws-could-let.html"
         }
       ],
-      "_anchor": "i-275e6f3b55"
+      "_anchor": "i-a5411bb33d"
     }
   ],
   "markets": [
@@ -284,9 +303,9 @@
     }
   ],
   "weather": [
-    "Today: Sunny, high 70F.",
-    "Tonight: Partly Cloudy, low 45F.",
-    "Tuesday: Mostly Sunny, high 69F."
+    "This Afternoon: Sunny, high 70F.",
+    "Tonight: Partly Cloudy then Areas Of Fog, low 46F.",
+    "Tuesday: Areas Of Fog then Mostly Sunny, high 69F."
   ],
   "sports": [
     {
@@ -322,12 +341,35 @@
   "local": {
     "business_politics": [
       {
+        "title": "Israel Votes Tuesday on Netanyahu",
+        "latest_developments": "Tens of thousands of Israelis living abroad flew home ahead of Tuesday's parliamentary election, a surge in returns that analysts attribute to opposition to Benjamin Netanyahu's far-right coalition.",
+        "summary": "Israelis vote Tuesday, October 27, in a parliamentary election that settles whether Netanyahu keeps the premiership after a run of nearly continuous rule. The Financial Times reports that plans for a renewed assault on Iran survive an electoral defeat for either Netanyahu or President Trump, which keeps Gulf energy supply, tanker traffic, and the Strait of Hormuz exposed whichever way the vote falls.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Tens of thousands of Israelis fly home for pivotal election",
+            "url": "https://www.ft.com/content/4fb0c89f-a620-4d5f-bee5-9ff9164ca679"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "What’s on the Line as Israelis Prepare to Vote",
+            "url": "https://www.wsj.com/world/middle-east/israel-election-parliament-netanyahu-what-to-know-e9507c72?mod=rss_worldnews"
+          },
+          {
+            "source": "FT Home",
+            "title": "Trump, Netanyahu and the politics of escalation against Iran",
+            "url": "https://www.ft.com/content/7b3c17e7-c0bf-4e93-bc5d-17f86fa1b2a5?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-e6ee5212b1"
+      },
+      {
         "title": "Anthropic Files to Go Public as Meta Lines Up $95 Billion",
-        "latest_developments": "Anthropic filed its listing prospectus Monday, October 26, pointing to a November debut, and Meta Platforms disclosed a plan to raise up to $95 billion, including a $35 billion stock offering with Nvidia, Advanced Micro Devices, and Broadcom as cornerstone investors.",
+        "latest_developments": "Anthropic filed its listing prospectus Monday, October 26, pointing to a November debut, with chief executive Dario Amodei warning in the document of the risk advanced artificial intelligence poses to humanity, and Meta Platforms disclosed a plan to raise up to $95 billion, including a $35 billion stock offering with Nvidia, Advanced Micro Devices, and Broadcom as cornerstone investors.",
         "summary": "Anthropic, the maker of the Claude chatbot, laid out explosive revenue growth alongside steep losses and a long list of risk factors in a 335-page, 240,000-word filing that could produce the largest stock market debut in history. Meta, the parent of Facebook, is tapping equity and debt to pay for artificial-intelligence data centers and what the company calls personal superintelligence, and both raises land while investors question artificial-intelligence valuations and the credit financing the buildout.",
         "sources": [
           {
-            "source": "FT Markets",
+            "source": "FT Home",
             "title": "Anthropic begins countdown to IPO with prospectus filing",
             "url": "https://www.ft.com/content/f6ecfecd-d797-4d2c-b427-d333297949cb?syn-25a6b1a6=1"
           },
@@ -345,14 +387,19 @@
             "source": "FT Home",
             "title": "Meta plans $95bn stock offering to bankroll AI expansion",
             "url": "https://www.ft.com/content/94e5a0ae-874d-447a-bbfc-cd465a1a7555?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Breaking down Anthropic’s 335-page S-1",
+            "url": "https://www.ft.com/content/4b2b9c0e-adfb-4362-800f-950f5b905984?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-f816e7e9dd"
       },
       {
         "title": "Lula Wins a Fourth Term and Brazilian Assets Slide",
-        "latest_developments": "Luiz Inácio Lula da Silva beat Flávio Bolsonaro in Sunday's run-off, and Brazilian currency futures, exchange-traded funds tracking local stocks, and Banco Santander shares sold off sharply in Asian and European trading Monday, October 26.",
-        "summary": "Lula, 80, took an unprecedented fourth term as Brazil's president over Flávio Bolsonaro, son of former president Jair Bolsonaro, who is serving a 27-year sentence for plotting a coup; the Financial Times calls the result a blow to President Trump's plan for greater United States influence in Latin America. Santander, which earns a large share of its profit in Brazil, fell more than 5%, and Lula inherits high debt levels and a congress that moved to the right.",
+        "latest_developments": "Brazil's main stock index fell to a two-month low Monday, October 26, after Luiz Inácio Lula da Silva's run-off win, and Flávio Bolsonaro began contesting the result, a challenge that sets up a confrontation between the country's two dominant political camps.",
+        "summary": "Lula, 80, took an unprecedented fourth term as Brazil's president over Flávio Bolsonaro, son of former president Jair Bolsonaro, who is serving a 27-year sentence for plotting a coup; the Financial Times calls the result a blow to President Trump's plan for greater United States influence in Latin America. Investors had positioned for a Bolsonaro victory and a tighter budget, and Santander, Spain's largest bank and a heavy earner in Brazil, fell close to 4% as Lula inherits high debt and a congress that moved to the right.",
         "sources": [
           {
             "source": "WSJ World News",
@@ -373,17 +420,22 @@
             "source": "FT Home",
             "title": "After stunning victory, Lula will face a deep hangover",
             "url": "https://www.ft.com/content/5c283ba4-37cf-4b0e-81f3-6df04b29529b?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Brazil’s markets tumble as investors bet Lula will add to fiscal pain",
+            "url": "https://www.ft.com/content/bffe028e-838d-4e74-b05e-62f6db4978db?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-238be8e577"
       },
       {
         "title": "Iran Hosts Saudi, Pakistani, and Turkish Security Chiefs",
-        "latest_developments": "Senior security officials from Saudi Arabia, Pakistan, and Turkey met their Iranian counterparts in Tehran on Monday, October 26, in talks aimed at heading off renewed fighting between Iran and both Israel and the United States.",
+        "latest_developments": "Senior security officials from Saudi Arabia, Pakistan, and Turkey met their Iranian counterparts in Tehran on Monday, October 26, in talks aimed at heading off renewed fighting between Iran and both Israel and the United States, and Saudi Arabia moved to repair relations with the United Arab Emirates as Houthi attacks continue.",
         "summary": "Iran's Foreign Ministry confirmed the Tehran meetings, which follow Houthi drone and missile attacks on Saudi energy and airport infrastructure and American preparations for strikes on Iran. Oil pulled back from the $117 a barrel Brent touched late last week as traders weighed the diplomacy against the attacks, while Rystad Energy reported that tanker freight rates for Saudi crude climbed on the escalating Houthi campaign.",
         "sources": [
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "Iran hosts regional powers for talks to prevent renewed escalation",
             "url": "https://www.ft.com/content/7f6943d3-b089-49a7-a0bc-a6f677c09802?syn-25a6b1a6=1"
           },
@@ -396,6 +448,11 @@
             "source": "WSJ Markets",
             "title": "Tanker Rates for Saudi Crude Rise as Regional Tensions Escalate",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-declines-on-likely-technical-correction-ad4be59e?mod=rss_markets_main"
+          },
+          {
+            "source": "FT World",
+            "title": "Saudi Arabia seeks to mend ties with UAE in Houthi crisis",
+            "url": "https://www.ft.com/content/97a6cadc-aedb-40a1-b583-c410d3278191?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-e602605fd5"
@@ -411,7 +468,7 @@
             "url": "https://www.wsj.com/finance/commodities-futures/european-gas-at-four-year-high-on-winter-supply-fears-b7dd5145?mod=rss_markets_main"
           },
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "Oil price falls back as traders remain focused on Middle East conflict",
             "url": "https://www.ft.com/content/97a60042-f7b6-4c87-9387-8572968a7de0?syn-25a6b1a6=1"
           },
@@ -425,8 +482,8 @@
       },
       {
         "title": "The Fed Decides Wednesday, the ECB Thursday",
-        "latest_developments": "The dollar held little changed and gold futures ticked up Monday, October 26, ahead of the Federal Reserve's rate decision Wednesday, and French government bonds outperformed most eurozone peers after Moody's Ratings left France's rating unchanged.",
-        "summary": "High energy prices and the prospect of further Fed increases support the dollar, and the Financial Times's Monetary Policy Radar team expects the Fed to keep raising quarterly as it strips out the insurance cuts of 2025. The European Central Bank is expected to hold its key rate Thursday, sparing French government bonds additional pressure, while Treasury yields edged higher and United States stock futures steadied.",
+        "latest_developments": "France's 10-year yield fell more than 0.1 percentage point Monday, October 26, after Moody's Ratings spared the country a downgrade, and the dollar strengthened ahead of the Federal Reserve's rate decision Wednesday, with Commerzbank telling clients that a heavy Republican defeat in the November 3 midterms would leave the dollar's outlook intact.",
+        "summary": "High energy prices and the prospect of further Fed increases support the dollar, and the Financial Times's Monetary Policy Radar team expects the Fed to keep raising quarterly as it strips out the insurance cuts of 2025. The European Central Bank is expected to hold its key rate Thursday, sparing French government bonds additional pressure, while United States stocks rose as technology shares rallied.",
         "sources": [
           {
             "source": "WSJ Markets",
@@ -447,6 +504,11 @@
             "source": "FT World",
             "title": "Fed to stick with quarterly rate rises as it removes 2025 insurance cuts",
             "url": "https://www.ft.com/content/572bc401-9f82-4e49-9282-3e896562f339"
+          },
+          {
+            "source": "FT World",
+            "title": "French bonds rally after Moody’s rating reprieve",
+            "url": "https://www.ft.com/content/97a60042-f7b6-4c87-9387-8572968a7de0?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-0970602de8"
@@ -454,14 +516,37 @@
     ],
     "business": [
       {
+        "title": "Opafe Bakery Opens at SouthSide Works",
+        "latest_developments": "Opafe opened its bakery at 2720 Sidney Street in SouthSide Works, WPXI reported Monday, October 26, and the owners plan additional locations.",
+        "summary": "The Sidney Street shop in Pittsburgh's South Side sells scratch-made baked goods and runs a full-service coffee bar built around Vietnamese coffee and matcha tea drinks.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Opafe bakery opens at SouthSide Works with more locations planned",
+            "url": "https://www.wpxi.com/news/local/opafe-bakery-opens-southside-works-with-more-locations-planned/L4LQT5QM2NFP7I3HDIMJAT6IIE/"
+          }
+        ],
+        "_anchor": "i-b3b6a89ddc"
+      },
+      {
         "title": "EQT Buys Range Resources",
-        "latest_developments": "EQT announced Monday, October 26, an all-stock acquisition of Range Resources, a combination that creates the largest natural gas producer in the United States.",
-        "summary": "EQT, the natural gas producer headquartered in downtown Pittsburgh, and Range Resources both drill Appalachian shale, much of it in southwestern Pennsylvania, and the all-stock deal consolidates the two under one owner as European gas prices reach four-year highs and data center demand climbs.",
+        "latest_developments": "EQT put the value of its all-stock acquisition of Range Resources at more than $50 billion Monday, October 26, and said the combined company will keep its headquarters in Western Pennsylvania.",
+        "summary": "EQT, the natural gas producer headquartered in downtown Pittsburgh, and Range Resources, based in Texas, both drill Appalachian shale, much of it in southwestern Pennsylvania, and the deal creates the largest natural gas producer in the United States as European gas prices reach four-year highs and data center demand climbs.",
         "sources": [
           {
             "source": "Pittsburgh Post-Gazette",
             "title": "EQT to buy Range Resources in all-stock Appalachian blockbuster deal",
             "url": "https://www.post-gazette.com/business/powersource/2026/10/26/eqt-range-resources-acquisition/stories/202610260022"
+          },
+          {
+            "source": "TribLive",
+            "title": "EQT to buy Range Resources in $50B deal to create nation’s largest national gas producer",
+            "url": "https://triblive.com/business/eqt-to-buy-range-resources-in-50-billion-deal-to-create-nations-largest-national-gas-firm/"
+          },
+          {
+            "source": "WTAE",
+            "title": "EQT to buy Range Resources in $50 billion deal",
+            "url": "https://www.wtae.com/article/eqt-range-resources-natural-gas/74248912"
           }
         ],
         "_anchor": "i-0b16dc84d7"
@@ -521,6 +606,45 @@
     ],
     "around_town": [
       {
+        "title": "Shapiro Signs the School Phone Ban",
+        "latest_developments": "Governor Josh Shapiro signed the statewide bell-to-bell school cellphone ban into law Monday, October 26, five days after the Pennsylvania legislature passed it and sent it to his desk.",
+        "summary": "The law bars Pennsylvania students from using cellphones throughout the school day, first bell to last, and it caps a push that brought parents to the state Senate last week to press for a vote before the session ended.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pennsylvania Gov. Shapiro signs school cell phone ban into law",
+            "url": "https://www.wpxi.com/news/local/pennsylvania-gov-shapiro-signs-school-cell-phone-ban-into-law/WN4IJ6OIIRCKTABEO2SAJFKXMU/"
+          }
+        ],
+        "_anchor": "i-ba8afa255e"
+      },
+      {
+        "title": "A New Mon/Fayette Stretch Opens November 20",
+        "latest_developments": "KDKA reported Monday, October 26, that the newest section of the Mon/Fayette Expressway opens to drivers on Friday, November 20.",
+        "summary": "The Mon/Fayette Expressway is the Pennsylvania Turnpike's long-running toll highway project through the Monongahela Valley, and its spending drew a Post-Gazette column last week from Brandon McGinley, who argued the money belongs in repairs to the bridges the region already has.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "A new stretch of the Mon/Fayette Expressway will open to drivers next month",
+            "url": "https://www.cbsnews.com/pittsburgh/news/mon-fayette-expressway-new-stretch-open-drivers-next-month/"
+          }
+        ],
+        "_anchor": "i-9eac5d120b"
+      },
+      {
+        "title": "A City Tax on Capital Gains and Dividends",
+        "latest_developments": "Pittsburgh Councilwoman Barb Warwick will introduce a proposal Tuesday, October 27, to tax capital gains, dividends, and other unearned income in the city, a levy projected to raise more than $50 million a year.",
+        "summary": "Pittsburgh's preliminary 2027 budget already cuts $10 million from the city's pension contribution and trims the Housing Opportunity Fund, and Warwick aims her new tax at investment income, which the city's wage and property taxes leave untouched.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "New tax on unearned income could generate more than $50M for cash-strapped Pittsburgh",
+            "url": "https://triblive.com/local/new-tax-on-unearned-income-could-generate-more-than-50m-for-cash-strapped-pittsburgh/"
+          }
+        ],
+        "_anchor": "i-61a1025dc3"
+      },
+      {
         "title": "Allegheny County Gets Federal Election Monitors",
         "latest_developments": "The Post-Gazette reported Monday, October 26, that Allegheny County is one of the four Pennsylvania counties where the United States Department of Justice will station election monitors at the polls on Election Day, November 3.",
         "summary": "The Justice Department notified the Pennsylvania Department of State of the deployment, which sends federal observers into polling places in a presidential swing state during a midterm election that will settle control of the state House and Senate in Harrisburg.",
@@ -548,13 +672,18 @@
       },
       {
         "title": "Three State House Races to Watch",
-        "latest_developments": "PublicSource laid out Monday, October 26, the three Pittsburgh-area state House races most likely to flip on Election Day, November 3.",
-        "summary": "Democrats are playing offense across Pennsylvania and a handful of local state House seats could change hands, while Republicans count on engineering at least one comeback in the region; control of the chamber in Harrisburg turns on margins this thin.",
+        "latest_developments": "PublicSource laid out Monday, October 26, the three Pittsburgh-area state House races most likely to flip on Election Day, November 3, and the Post-Gazette reported the same day that Democratic-leaning dark money groups have flooded the deep-red 46th state Senate district in Western Pennsylvania.",
+        "summary": "Democrats are playing offense across Pennsylvania and a handful of local state House seats could change hands, while Republicans count on engineering at least one comeback in the region; control of the chamber in Harrisburg turns on margins this thin, and Republican Camera Bartolotta's 46th district seat has drawn outside spending against her bid for a fourth term.",
         "sources": [
           {
             "source": "PublicSource",
             "title": "Three local races to watch on Election Day in the Pittsburgh region",
             "url": "https://www.publicsource.org/pittsburgh-area-state-house-races-to-watch-2026/"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Democratic-leaning dark money groups flooding Western Pa. state Senate race in a deep-red district",
+            "url": "https://www.post-gazette.com/news/politics-state/2026/10/26/pennsylvania-state-senate-money-district-46/stories/202610230032"
           }
         ],
         "_anchor": "i-b7452a8493"
@@ -575,7 +704,7 @@
       {
         "title": "Mild and Dry Into Halloween, Then the Clocks Fall Back",
         "latest_developments": "WTAE's Monday, October 26, forecast holds Western Pennsylvania mild and dry through the week and into Halloween on Saturday, October 31.",
-        "summary": "Trick-or-treating looks dry across the Pittsburgh region this weekend, and clocks return to standard time overnight Saturday into Sunday, November 1, which hands most Americans an extra hour of sleep and takes away an hour of afternoon daylight; TribLive's health desk walks through how the shift disrupts sleep and what to do about it.",
+        "summary": "Trick-or-treating looks dry across the Pittsburgh region this weekend, and clocks return to standard time at 2 a.m. Sunday, November 1, which hands most Americans an extra hour of sleep and takes away an hour of afternoon daylight; TribLive's health desk walks through how the shift disrupts sleep and what to do about it.",
         "sources": [
           {
             "source": "WTAE",
@@ -633,6 +762,24 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "The Defense Stuffs the Run",
+        "latest_developments": "The Post-Gazette examined Monday, October 26, how the Steelers' defense has shut down opposing running games and now finishes games with splash plays, among them Payton Wilson's interception against the New Orleans Saints at the Stade de France.",
+        "summary": "Defensive coordinator Patrick Graham's unit has leaned on inside linebackers Wilson and Patrick Queen behind a line that holds the point of attack, and Christopher Carter took reader questions on the Steelers and Pitt in his Post-Gazette chat the same day.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The Steelers defense is stuffing the run — and closing out games with splash plays",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/26/steelers-defense-nfl-paris-game/stories/202610260024"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Christopher Carter's Steelers and Pitt chat: 10.26.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/26/steelers-pitt-live-chat-nfl-paris/stories/202610260027"
+          }
+        ],
+        "_anchor": "i-c6ef539e41"
+      },
       {
         "title": "Warren and the Run Game Make the Steelers a Threat",
         "latest_developments": "The Post-Gazette's Week 7 analysis, published Monday, October 26, argues that Jaylen Warren and the running game have turned the Steelers into a legitimate contender in the AFC North after a third straight win, over the New Orleans Saints at the Stade de France.",
@@ -695,6 +842,19 @@
     ],
     "team_usa": [
       {
+        "title": "The USWNT's Absence From the Ballon d'Or",
+        "latest_developments": "ESPN published a piece Monday, October 26, hours before the Ballon d'Or ceremony, on why United States women's national team players no longer reach the finalist stage of soccer's biggest individual awards.",
+        "summary": "Americans such as Abby Wambach, Carli Lloyd, and Megan Rapinoe collected world player of the year honors through the 2010s, and the current squad, eight months from the 2027 Women's World Cup in Brazil, sends nobody into the final voting as the roster rebuild continues.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Will an American woman ever again be the world's best player?",
+            "url": "https://www.espn.com/soccer/story/_/id/50270616/will-uswnt-player-ever-win-ballon-dor-again"
+          }
+        ],
+        "_anchor": "i-6e28ce4941"
+      },
+      {
         "title": "Pulisic Scores in Milan's Win",
         "latest_developments": "Christian Pulisic opened the scoring in AC Milan's 2-0 win over Udinese in Serie A on Sunday, October 25, capping what ESPN called a strong day for United States men's national team players in Europe.",
         "summary": "Pulisic, the captain of the United States men's national team, put Milan ahead as the club recovered from its loss at Bournemouth, and his goal came alongside productive weekends for other American players abroad with the Concacaf Nations League quarterfinals against Haiti set for November 14 in Miami and November 17 in Cincinnati, Ohio.",
@@ -749,126 +909,154 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "The day's worst bugs sit in code that parses untrusted input, with an out-of-bounds write in Google's Brotli decoder reaching .NET and PowerShell and two Wasmtime flaws escaping the WebAssembly sandbox.",
+      "text": "Google's Brotli decoder bug forced emergency .NET and PowerShell fixes, PHP2Shell honeypot hits confirmed real exploitation, and Wasmtime patched two critical sandbox escapes.",
       "links": [
         {
-          "anchor": "i-2a948c7de7",
+          "anchor": "i-cf08225efb",
           "phrase": "Brotli decoder",
-          "start": 102,
-          "end": 116,
+          "start": 9,
+          "end": 23,
           "title": "Brotli Decoder Flaw Reaches .NET and PowerShell"
         },
         {
+          "anchor": "i-104d630292",
+          "phrase": "PHP2Shell",
+          "start": 72,
+          "end": 81,
+          "title": "PHP2Shell Exploitation Succeeds in the Wild"
+        },
+        {
           "anchor": "i-a5411bb33d",
-          "phrase": "Wasmtime flaws",
-          "start": 154,
-          "end": 168,
+          "phrase": "Wasmtime",
+          "start": 129,
+          "end": 137,
           "title": "Wasmtime Flaws Break the WebAssembly Sandbox"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "AI works both sides as Fortinet credits models for finding the FortiOS bugs it patched while a Linux Foundation survey finds a third of incoming code changes machine-written.",
+      "links": [
+        {
+          "anchor": "i-a8aab615d7",
+          "phrase": "FortiOS",
+          "start": 63,
+          "end": 70,
+          "title": "Fortinet Patches FortiOS Flaws AI Found"
+        },
+        {
+          "anchor": "i-31b7e15487",
+          "phrase": "Linux Foundation",
+          "start": 95,
+          "end": 111,
+          "title": "AI Slop Buries Open Source Maintainers"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Attackers lean on credentials they already hold: Gheist prints GitHub secrets into Actions logs, dormant AI agents keep live tokens, and Dutch police arrested two NFC relay suspects.",
+      "links": [
+        {
+          "anchor": "i-8e95a20d61",
+          "phrase": "Gheist",
+          "start": 49,
+          "end": 55,
+          "title": "Gheist Prints GitHub Secrets Into Build Logs"
+        },
+        {
+          "anchor": "i-36875f2f79",
+          "phrase": "dormant AI agents",
+          "start": 97,
+          "end": 114,
+          "title": "Idle AI Agents Keep Live Credentials"
+        },
+        {
+          "anchor": "i-f5fa96b288",
+          "phrase": "Dutch police",
+          "start": 137,
+          "end": 149,
+          "title": "Arrests in NFC Relay and Crypto Fraud"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Two fresh intrusions landed: Genesys confirmed stolen customer data from internal systems, and CERT-UA warned that hackers hijacked Dahua cameras and recorders across Ukraine.",
+      "links": [
+        {
+          "anchor": "i-0894723045",
+          "phrase": "Genesys",
+          "start": 29,
+          "end": 36,
+          "title": "Genesys Intrusion Exposes Customer Data"
+        },
+        {
+          "anchor": "i-d72684f804",
+          "phrase": "Dahua cameras",
+          "start": 132,
+          "end": 145,
+          "title": "Hackers Take Over Dahua Cameras in Ukraine"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Locally, Josh Shapiro signed the bell-to-bell school phone ban, Barb Warwick introduces a city tax on capital gains Tuesday, and a new Mon/Fayette Expressway stretch opens November 20.",
+      "links": [
+        {
+          "anchor": "i-ba8afa255e",
+          "phrase": "Josh Shapiro",
+          "start": 9,
+          "end": 21,
+          "title": "Shapiro Signs the School Phone Ban"
+        },
+        {
+          "anchor": "i-61a1025dc3",
+          "phrase": "Barb Warwick",
+          "start": 64,
+          "end": 76,
+          "title": "A City Tax on Capital Gains and Dividends"
+        },
+        {
+          "anchor": "i-9eac5d120b",
+          "phrase": "Mon/Fayette Expressway",
+          "start": 135,
+          "end": 157,
+          "title": "A New Mon/Fayette Stretch Opens November 20"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "updated",
-      "text": "Two IP addresses landed 35 shells on honeypots October 24, the first PHP2Shell exploitation to actually work after a week of mass scanning for CVE-2026-109618.",
-      "links": [
-        {
-          "anchor": "i-104d630292",
-          "phrase": "PHP2Shell",
-          "start": 69,
-          "end": 78,
-          "title": "PHP2Shell Exploitation Succeeds in the Wild"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Standing access outlives its purpose as the Gheist campaign drains repository secrets using stolen GitHub tokens and 76% of idle AI agents go unrun for 60 days holding live credentials.",
-      "links": [
-        {
-          "anchor": "i-8e95a20d61",
-          "phrase": "Gheist",
-          "start": 44,
-          "end": 50,
-          "title": "Gheist Prints GitHub Secrets Into Build Logs"
-        },
-        {
-          "anchor": "i-36875f2f79",
-          "phrase": "idle AI agents",
-          "start": 124,
-          "end": 138,
-          "title": "Idle AI Agents Keep Live Credentials"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Fortinet credits AI models with finding the FortiOS flaws it just patched, researchers found a geopolitical trigger inside Qwen3-Coder's weights, and maintainers drown in AI slop patches.",
-      "links": [
-        {
-          "anchor": "i-a8aab615d7",
-          "phrase": "FortiOS",
-          "start": 44,
-          "end": 51,
-          "title": "Fortinet Patches FortiOS Flaws AI Found"
-        },
-        {
-          "anchor": "i-217d727d09",
-          "phrase": "Qwen3-Coder",
-          "start": 123,
-          "end": 134,
-          "title": "Qwen3-Coder Carries a Geopolitical Trigger"
-        },
-        {
-          "anchor": "i-31b7e15487",
-          "phrase": "AI slop",
-          "start": 171,
-          "end": 178,
-          "title": "AI Slop Buries Open Source Maintainers"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Justice Department election monitors are headed to Allegheny County and WTAE published its voter guide with eight days left until Pennsylvania's November 3 general election.",
-      "links": [
-        {
-          "anchor": "i-db90a5f73d",
-          "phrase": "Allegheny County",
-          "start": 51,
-          "end": 67,
-          "title": "Allegheny County Gets Federal Election Monitors"
-        },
-        {
-          "anchor": "i-4cda02bf8b",
-          "phrase": "voter guide",
-          "start": 91,
-          "end": 102,
-          "title": "Eight Days to the Pennsylvania General Election"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Anthropic filed its listing prospectus pointing to a November debut as Meta lined up $95 billion and EQT agreed to buy Range Resources in all stock.",
+      "text": "On the markets, Anthropic filed to go public as Meta lined up $95 billion, EQT valued its Range Resources deal above $50 billion, and the Fed decides Wednesday.",
       "links": [
         {
           "anchor": "i-f816e7e9dd",
           "phrase": "Anthropic",
-          "start": 0,
-          "end": 9,
+          "start": 16,
+          "end": 25,
           "title": "Anthropic Files to Go Public as Meta Lines Up $95 Billion"
         },
         {
           "anchor": "i-0b16dc84d7",
           "phrase": "Range Resources",
-          "start": 119,
-          "end": 134,
+          "start": 90,
+          "end": 105,
           "title": "EQT Buys Range Resources"
+        },
+        {
+          "anchor": "i-0970602de8",
+          "phrase": "Fed decides",
+          "start": 138,
+          "end": 149,
+          "title": "The Fed Decides Wednesday, the ECB Thursday"
         }
       ]
     }
@@ -882,7 +1070,7 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 35,
+        "in_window": 47,
         "failed": [],
         "empty": [
           "Krebs on Security",
@@ -896,9 +1084,7 @@
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
-          "404 Media",
-          "Frank on Fraud",
-          "Wired Security"
+          "Frank on Fraud"
         ],
         "per_feed": {
           "The Hacker News": {
@@ -908,8 +1094,8 @@
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 6,
+            "contributed": 6
           },
           "Krebs on Security": {
             "items": 10,
@@ -928,8 +1114,8 @@
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 8,
+            "contributed": 8
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -943,8 +1129,8 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 4,
+            "contributed": 4
           },
           "Ars Technica Security": {
             "items": 20,
@@ -1008,8 +1194,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 3,
+            "contributed": 3
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1018,8 +1204,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -1031,54 +1217,52 @@
         "window_hours": 48,
         "in_window": 60,
         "failed": [],
-        "empty": [
-          "Pittsburgh Magazine"
-        ],
+        "empty": [],
         "per_feed": {
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 11
+            "contributed": 12
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 13
+            "contributed": 10
           },
           "PublicSource": {
             "items": 10,
             "in_window": 1,
-            "contributed": 1
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 3,
-            "contributed": 3
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 3
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "KDKA": {
             "items": 30,
-            "in_window": 27,
-            "contributed": 6
+            "in_window": 30,
+            "contributed": 7
           },
           "WPXI": {
             "items": 15,
-            "in_window": 12,
-            "contributed": 5
+            "in_window": 15,
+            "contributed": 10
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 20
+            "contributed": 17
           }
         }
       },
@@ -1093,44 +1277,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 72,
-            "in_window": 25,
-            "contributed": 6
+            "items": 71,
+            "in_window": 27,
+            "contributed": 9
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 17,
-            "contributed": 15
+            "contributed": 10
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 28,
-            "contributed": 11
+            "in_window": 32,
+            "contributed": 8
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 7,
-            "contributed": 1
+            "in_window": 9,
+            "contributed": 3
           },
           "The Economist": {
             "items": 300,
-            "in_window": 12,
-            "contributed": 5
+            "in_window": 14,
+            "contributed": 3
           },
           "FT Home": {
-            "items": 11,
-            "in_window": 11,
-            "contributed": 6
+            "items": 12,
+            "in_window": 12,
+            "contributed": 9
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 14
+            "contributed": 17
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 16,
-            "contributed": 2
+            "in_window": 15,
+            "contributed": 1
           }
         }
       },
@@ -1142,12 +1326,15 @@
         "window_hours": 120,
         "in_window": 17,
         "failed": [],
-        "empty": [],
+        "empty": [
+          "NEXTpittsburgh Events",
+          "NEXTpittsburgh Arts & Entertainment"
+        ],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 16,
-            "contributed": 16
+            "in_window": 17,
+            "contributed": 17
           },
           "Post-Gazette Music": {
             "items": 20,
@@ -1156,12 +1343,12 @@
           },
           "NEXTpittsburgh Events": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "NEXTpittsburgh Arts & Entertainment": {
             "items": 10,
-            "in_window": 1,
+            "in_window": 0,
             "contributed": 0
           }
         }
@@ -1186,8 +1373,8 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 5,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 2
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1206,8 +1393,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 19,
-            "contributed": 12
+            "in_window": 18,
+            "contributed": 13
           }
         }
       },
@@ -1217,19 +1404,19 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 30,
+        "in_window": 31,
         "failed": [],
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 21,
-            "in_window": 21,
-            "contributed": 21
+            "items": 23,
+            "in_window": 23,
+            "contributed": 23
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 7,
+            "contributed": 7
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1290,24 +1477,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 30171,
+          "outputTokens": 37062,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 119359,
+          "cacheCreationInputTokens": 127002,
           "webSearchRequests": 0,
-          "costUSD": 1.947895,
+          "costUSD": 2.1965999999999997,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 13428
+          "thinkingTokens": 16401
         }
       },
-      "cost_usd": 1.947895,
-      "duration_ms": 339888,
+      "cost_usd": 2.1965999999999997,
+      "duration_ms": 400772,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-26 10:06 EDT",
-    "items_considered": 35,
+    "generated_at": "2026-10-26 13:36 EDT",
+    "items_considered": 47,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1388,8 +1575,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.9479,
-    "model_duration_ms": 339888,
+    "model_cost_usd": 2.1966,
+    "model_duration_ms": 400772,
     "local_from": null,
     "feed_failures": []
   }
