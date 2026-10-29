@@ -1,32 +1,66 @@
 {
   "date": "2026-10-29",
-  "headline": "China-linked crews burrowed into the network control plane, with KeyDrift malware harvesting Cisco SD-WAN encryption keys from infrastructure that overlaps Volt Typhoon's Silent Train, Warp Panda erasing its tracks on VMware ESX hosts, and PHP2Shell exploitation reaching Palo Alto Networks management interfaces.",
+  "headline": "CISA's deadline to fix the PHP2Shell flaws arrived as the agency warned that attackers now chain them with the Fragnesia Linux kernel bug and exploited Palo Alto Networks management interfaces with them.",
   "emerging_trends": [
     {
-      "text": "Chinese espionage groups keep choosing flaws that defenders rank low or consider long since fixed—Warp Panda turned a mere logging gap in VMware ESX into a zero-day against American law firms, and UAT-11473 exploited a Cisco authentication bypass patched in February to sit inside SD-WAN controllers.",
-      "topic_title": "Warp Panda Blinds VMware ESX Logs",
-      "link_phrase": "Warp Panda",
+      "text": "Three separate reports put Chinese state hackers inside the gear that runs enterprise networks—Volt Typhoon's Silent Train relay chains through compromised TP-Link and Netgear routers, KeyDrift lifting encryption keys out of Cisco SD-WAN controllers, and Warp Panda stripping its tracks from VMware ESX logs—moving the fight from endpoints to control planes.",
+      "topic_title": "KeyDrift Steals Cisco SD-WAN Encryption Keys",
+      "link_phrase": "KeyDrift",
       "_anchor": "trend-1"
     },
     {
-      "text": "The administrative plane now draws the heaviest fire: attackers hit internet-exposed Palo Alto Networks management interfaces with PHP2Shell, planted malware in Cisco Catalyst SD-WAN controllers, and suppressed audit trails on ESX hypervisors, each a single box that governs hundreds of others.",
-      "topic_title": "PHP2Shell Hits Palo Alto Management Interfaces",
-      "link_phrase": "management interfaces",
+      "text": "Attackers now build AI into the kit itself: Cisco Talos found the NIK C2 framework running in the wild, Sophos watched the GOLD OGRE group orchestrate Aur0ra ransomware with AI, and a relay service resells OpenAI Codex and Claude Code into mainland China with the sandboxes switched off.",
+      "topic_title": "AI Tools Turn Into Attacker Infrastructure",
+      "link_phrase": "NIK C2",
       "_anchor": "trend-2"
     },
     {
-      "text": "AI products have become attacker plumbing rather than only attacker targets, with Cisco Talos finding the AI-integrated NIK C2 framework in the wild, a gray-market relay reselling OpenAI Codex and Claude Code with sandboxes disabled, and credential scanners hiding behind bots that pose as OpenAI and Anthropic crawlers.",
-      "topic_title": "AI Tools Turn Into Attacker Infrastructure",
-      "link_phrase": "NIK C2",
+      "text": "Working credentials sit in the open at scale—26,400 valid cloud and AI keys in public Gitee repositories, staff logins for 808 K-12 school organizations on dark web markets—while GitHub screens npm packages at install time to close a different door.",
+      "topic_title": "Gitee Repositories Leak 26,400 Live Keys",
+      "link_phrase": "Gitee",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
     {
+      "title": "PHP2Shell Hits Palo Alto Management Interfaces",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CISA warned federal agencies on October 29, 2026 to patch Fragnesia, the high-severity Linux kernel privilege escalation attackers chain behind the PHP flaws, the same day its deadline to fix CVE-2026-109618 and CVE-2026-109619 fell; Palo Alto Networks reported active exploitation against internet-exposed management interfaces on October 28, 2026, and researchers traced an October 25, 2026 intrusion in which a suspected China-nexus actor rooted 25 servers, drove AI through the post-exploitation work, and breached a United States government-affiliated network.",
+      "summary": "The two PHP flaws researchers call PHP2Shell hand an unauthenticated attacker code execution through the web management consoles of firewalls, VPN gateways, and application delivery controllers. Take management interfaces off the public internet, install vendor updates as they ship, and patch the Linux kernel bug attackers pair with them.",
+      "tags": [
+        "exploit",
+        "patch",
+        "zero-day"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Attackers Exploit PHP2Shell Flaws in Internet-Exposed Palo Alto Networks Management Interfaces",
+          "url": "https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "CISA warns of Fragnesia Linux flaw chained in PHP2Shell attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-fragnesia-linux-flaw-chained-in-php2shell-attacks/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "PHP2Shell Attack Roots 25 Servers, Breaches U.S. Government-Affiliated Network",
+          "url": "https://thehackernews.com/2026/10/php2shell-attack-roots-25-servers.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "InfraTrust report warns of exploited flaws in critical network infrastructure",
+          "url": "https://www.bleepingcomputer.com/news/security/infratrust-report-warns-of-exploited-flaws-in-critical-network-infrastructure/"
+        }
+      ],
+      "_anchor": "i-f4eff089be"
+    },
+    {
       "title": "Cisco VPN Zero-Day Lands in a Patch Wave",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SecurityWeek reported on October 29, 2026 that attackers exploit a flaw in the Remote Access SSL VPN service of Cisco ASA and FTD firewalls, forcing the devices to reload without authenticating, the second Cisco firewall VPN zero-day since August 2026; Adobe closed eight critical Campaign Classic flaws led by CVE-2026-104351 at 9.9, Google shipped Chrome 156 with 52 fixes, Mozilla shipped Firefox 159 with 167, and FoxIO disclosed three TLS bugs in the GoAhead web server that runs on hundreds of millions of devices.",
-      "summary": "The Cisco bug gives an unauthenticated attacker a reliable way to knock ASA and FTD firewalls offline, and the GoAhead flaws let revoked certificates pass validation and expose some encrypted sessions to eavesdroppers. Prioritize the Cisco VPN fix and the Adobe Campaign Classic updates, then roll the browser releases.",
+      "latest_developments": "Cisco shipped fixes on October 29, 2026 for CVE-2026-76418, rated 8.6, a flaw in the Remote Access SSL VPN service of ASA and FTD software that lets an unauthenticated remote attacker force the firewall to reload, the second Cisco firewall VPN zero-day under exploitation since August 2026; Adobe, Veeam, and Juniper Networks closed critical code execution, authorization bypass, and privilege escalation bugs the same day, led by CVE-2026-104351 at 9.9 in Adobe Campaign Classic, and FoxIO disclosed three TLS flaws in the GoAhead web server that ships on hundreds of millions of devices.",
+      "summary": "The Cisco bug gives an unauthenticated attacker a reliable way to knock ASA and FTD firewalls offline, and the GoAhead flaws let revoked certificates pass validation and expose some encrypted sessions to eavesdroppers. Patch the Cisco VPN flaw first, then the Adobe, Veeam, and Juniper releases, then roll this week's Chrome 156 and Firefox 159 updates.",
       "tags": [
         "zero-day",
         "patch"
@@ -39,13 +73,13 @@
         },
         {
           "source": "The Hacker News",
-          "title": "Adobe Fixes 8 Critical Campaign Classic Flaws Allowing Code Execution and Security Bypass",
-          "url": "https://thehackernews.com/2026/10/adobe-fixes-8-critical-campaign-classic.html"
+          "title": "Cisco Patches Actively Exploited ASA and FTD VPN Flaw That Can Crash Firewalls",
+          "url": "https://thehackernews.com/2026/10/cisco-patches-actively-exploited-asa.html"
         },
         {
           "source": "SecurityWeek",
-          "title": "Chrome and Firefox Updates Patch Over 200 Vulnerabilities",
-          "url": "https://www.securityweek.com/chrome-and-firefox-updates-patch-over-200-vulnerabilities/"
+          "title": "Adobe, Veeam, Juniper Networks Patch Critical Vulnerabilities",
+          "url": "https://www.securityweek.com/adobe-veeam-juniper-networks-patch-critical-vulnerabilities/"
         },
         {
           "source": "SecurityWeek",
@@ -58,7 +92,7 @@
     {
       "title": "KeyDrift Steals Cisco SD-WAN Encryption Keys",
       "area": "Nation-State Activity",
-      "latest_developments": "Cisco Talos disclosed UAT-11473, an advanced group that exploited CVE-2026-20127, the authentication bypass in Cisco Catalyst SD-WAN Controller instances Cisco fixed in February 2026, to deploy custom malware called KeyDrift, and Talos tied the attack infrastructure to Volt Typhoon's Silent Train covert access network that Lumen Technologies Black Lotus Labs described this week.",
+      "latest_developments": "Cisco Talos disclosed UAT-11473, an advanced group that exploited CVE-2026-20127, the authentication bypass in Cisco Catalyst SD-WAN Controller instances Cisco fixed in February 2026, to deploy custom malware called KeyDrift, and Talos tied the attack infrastructure to Volt Typhoon's Silent Train covert access network; Help Net Security detailed those relay chains on October 29, 2026, naming compromised TP-Link and Netgear routers alongside Fortinet and Cisco enterprise systems.",
       "summary": "KeyDrift runs inside the controllers that govern an organization's SD-WAN fabric and copies the keys that encrypt traffic between sites, storing them for later decryption. Operators should apply the February fix for CVE-2026-20127, rotate SD-WAN keys, and hunt for the indicators Talos published.",
       "tags": [
         "apt",
@@ -80,9 +114,147 @@
           "source": "The Hacker News",
           "title": "Hackers Exploited Cisco SD-WAN Flaw to Plant Malware Built to Steal Encryption Keys",
           "url": "https://thehackernews.com/2026/10/hackers-exploited-cisco-sd-wan-flaw-to.html"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Volt Typhoon targeted enterprise control planes via ever-changing \"Silent Train\" relay network",
+          "url": "https://www.helpnetsecurity.com/2026/10/29/volt-typhoon-silent-train-relay-network/"
         }
       ],
       "_anchor": "i-a4a98e0e7b"
+    },
+    {
+      "title": "Icepick Leak Exposes 41,000 DHS Workers",
+      "area": "Data Breaches",
+      "latest_developments": "A hacktivist group calling itself the Department of Peace claimed the Department of Homeland Security records, handed them to the transparency collective Distributed Denial of Secrets and to the Swiss hacker and journalist maia arson crimew, and Distributed Denial of Secrets published the dataset as Icepick on October 28, 2026; SecurityWeek reported on October 29, 2026 that the group took the personal and work information out of an Okta single sign-on system earlier this year, and Bluesky told Wired it now blocks links to the archive because the files carry workers' contact information without their consent.",
+      "summary": "The 41,000 records list Department of Homeland Security employees, among them undercover Immigration and Customs Enforcement agents, with their offices, assignments, and cell phone numbers, plus the locations of ICE and Customs and Border Protection facilities and the membership of internal groups tied to wiretap programs, Palantir software, and xAI's Grok chatbot.",
+      "tags": [
+        "breach",
+        "leak",
+        "hacktivism"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Hacktivists leak 41,000 DHS staff records, revealing undercover ICE agents",
+          "url": "https://www.helpnetsecurity.com/2026/10/29/icepick-dhs-leak-ice-undercover-agents/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Over 41,000 DHS Employee Records Leaked Online",
+          "url": "https://www.securityweek.com/over-41000-dhs-employee-records-leaked-online/"
+        },
+        {
+          "source": "Wired Security",
+          "title": "Bluesky Is Blocking Links to a Major Leak of DHS Employee Records",
+          "url": "https://www.wired.com/story/bluesky-blocks-links-to-major-leak-of-dhs-data/"
+        },
+        {
+          "source": "Wired Security",
+          "title": "Massive Leak Exposes 41,000 Homeland Security Workers—Including Undercover ICE Agents",
+          "url": "https://www.wired.com/story/massive-leak-exposes-41000-homeland-security-workers-including-undercover-ice-agents/"
+        }
+      ],
+      "_anchor": "i-c5d0fff028"
+    },
+    {
+      "title": "AI Tools Turn Into Attacker Infrastructure",
+      "area": "AI Security",
+      "latest_developments": "Cisco Talos reported on October 29, 2026 that it found NIK C2, a command-and-control framework with AI built into it, operating in the wild; Sophos reported the same day that the GOLD OGRE group used AI to build its tooling and to orchestrate and execute Aur0ra ransomware operations; Dark Reading described a relay service that supplies OpenAI Codex and Claude Code to mainland China and other regions where neither company sells, with the tools' sandbox protections switched off; and a separate actor scanned the internet for exposed credentials from behind bots posing as crawlers from OpenAI, Anthropic, and Meta.",
+      "summary": "Attackers now build AI into their own command infrastructure, run ransomware operations through it, strip safety controls out of commercial coding agents for resale, and borrow the reputation of AI company crawlers to scan for secrets unchallenged. Defenders should verify crawler identities at the network edge and watch for coding agents running outside sanctioned channels.",
+      "tags": [
+        "ai",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Cisco Talos",
+          "title": "NIK C2: The new AI-enabled command-and-control framework",
+          "url": "https://blog.talosintelligence.com/nik-c2-new-ai-enabled-framework/"
+        },
+        {
+          "source": "Sophos News",
+          "title": "AI used in Aur0ra ransomware testing and execution",
+          "url": "https://www.sophos.com/en-us/blog/ai-used-in-aur0ra-ransomware-testing-and-execution"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Shadowy AI Relay Disables OpenAI Codex, Claude Code Sandboxes",
+          "url": "https://www.darkreading.com/threat-intelligence/ai-relay-service-openai-codex-claude-code-sandboxes"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Attacker Relentlessly Scans for Credentials by Impersonating AI Bots",
+          "url": "https://www.darkreading.com/cyber-risk/attacker-impersonates-ai-bots-scans-credentials"
+        }
+      ],
+      "_anchor": "i-4faa48c4d2"
+    },
+    {
+      "title": "Belgian Tax Platform Falls as Breach Tolls Climb",
+      "area": "Data Breaches",
+      "latest_developments": "The Federal Public Service Finance, which runs taxation for Belgium, said on Wednesday, October 28, 2026 that it was measuring the extent of a cyberattack and had suspended MyMinfin, the country's main online platform for tax and financial affairs, ahead of a filing deadline; the University of New Mexico restored the systems its healthcare facilities lost to ransomware and urged people to make no contact with the hackers; iRhythm told the Department of Health and Human Services that the theft from its third-party-hosted business applications reached 8.2 million people; and SecurityWeek put Sony Network Communications' total at 2.6 million So-net and Plala customer records, 54,401 email account passwords, and 16 bank account records.",
+      "summary": "Each of these incidents ran through systems the victim shares with someone else: a national tax portal, a university hospital network, outsourced business applications at the cardiac monitoring company iRhythm, and a Sony internet subsidiary's member database. Put vendor-hosted applications inside the scope of incident response plans and write breach notification terms into supplier contracts.",
+      "tags": [
+        "breach",
+        "ransomware"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Cyberattack disrupts Belgian tax services before filing deadline",
+          "url": "https://therecord.media/cyberattack-disrupts-belgian-tax-services-before-deadline"
+        },
+        {
+          "source": "The Record",
+          "title": "University of New Mexico restores hospital systems, urges no contact with hackers",
+          "url": "https://therecord.media/new-mexico-cyberattack-hospital"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "HHS Filing Puts iRhythm Data Breach Toll at 8.2 Million",
+          "url": "https://www.securityweek.com/hhs-filing-puts-irhythm-data-breach-toll-at-8-2-million/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Hackers Steal 2.6 Million Records From Sony's Japanese ISP So-net",
+          "url": "https://www.securityweek.com/hackers-steal-2-6-million-records-from-sonys-japanese-isp-so-net/"
+        }
+      ],
+      "_anchor": "i-342c74932b"
+    },
+    {
+      "title": "Gitee Repositories Leak 26,400 Live Keys",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Independent researcher Ben Zimmermann scanned 7.25 million public repositories on Gitee, the Chinese code-hosting service, and reported on October 28, 2026 that 26,400 credentials developers had left in that code still worked when he tested them, most of them keys for cloud and AI services; GitHub opened a public preview of a package firewall that inspects npm metadata requests and downloads and blocks known malware, critical vulnerabilities, and brand-new versions before they install; and Dark Reading reported that the GhostAction wave against GitHub has slowed while its operators move toward developer endpoints and cloud access.",
+      "summary": "Valid cloud and AI keys sitting in public code hand attackers an entry point that costs them nothing, and malicious npm releases keep reaching build systems and coding agents. Scan your own public repositories for live secrets, rotate everything you find, and point npm installs at the new firewall.",
+      "tags": [
+        "supply chain",
+        "leak"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "26,400 Valid Cloud and AI Credentials Found Exposed in Public Gitee Repositories",
+          "url": "https://thehackernews.com/2026/10/26400-valid-cloud-and-ai-credentials.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "GitHub Launches npm Firewall to Block Malicious Packages Before Installation",
+          "url": "https://thehackernews.com/2026/10/github-launches-npm-firewall-to-block.html"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "GitHub's npm package firewall can block brand-new versions before they install",
+          "url": "https://www.helpnetsecurity.com/2026/10/28/github-package-firewall-npm/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "GhostAction Hacking Wave Fizzles, But Attackers Lurk on in GitHub",
+          "url": "https://www.darkreading.com/application-security/ghostaction-hacking-wave-fizzles-attackers-github"
+        }
+      ],
+      "_anchor": "i-c9e7c513e1"
     },
     {
       "title": "Warp Panda Blinds VMware ESX Logs",
@@ -114,85 +286,50 @@
       "_anchor": "i-ef44306c2f"
     },
     {
-      "title": "Icepick Leak Exposes 41,000 DHS Workers",
-      "area": "Data Breaches",
-      "latest_developments": "A hacktivist group calling itself the Department of Peace claimed the Department of Homeland Security records, handed them to the transparency collective Distributed Denial of Secrets and to the Swiss hacker and journalist maia arson crimew, and Distributed Denial of Secrets published the dataset as Icepick on October 28, 2026; Bluesky told Wired it now blocks links to the archive because the files carry workers' contact information without their consent.",
-      "summary": "The 41,000 records list Department of Homeland Security employees, among them undercover Immigration and Customs Enforcement agents, with their offices, assignments, and cell phone numbers, plus the locations of ICE and Customs and Border Protection facilities and the membership of internal groups tied to wiretap programs, Palantir software, and xAI's Grok chatbot.",
+      "title": "Attackers Race Patches on Oracle EBS and GitLab",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "The threat intelligence firm Defused said its Oracle E-Business Suite decoys recorded the first exploratory exploits against CVE-2026-101767 on the morning of October 27, 2026, an unauthenticated SQL injection in the Thin Client Framework servlet that chains to remote code execution; Alpine Linux disclosed on October 28, 2026 that an attacker tried CVE-2026-97229, the 10.0-rated GitLab flaw that runs code through a crafted regular expression in a CI configuration, against the project's own GitLab server a week after the fix shipped, and found no evidence the attempt worked.",
+      "summary": "Oracle closed the E-Business Suite flaw in its October 2026 Critical Patch Update and GitLab closed its Regular Expression Compiler bug on October 21, 2026; both now draw attempts within days of disclosure. Install both fixes and review CI configuration history on self-managed GitLab servers.",
       "tags": [
-        "breach",
-        "leak",
-        "hacktivism"
+        "exploit",
+        "patch"
       ],
       "sources": [
         {
           "source": "Help Net Security",
-          "title": "Hacktivists leak 41,000 DHS staff records, revealing undercover ICE agents",
-          "url": "https://www.helpnetsecurity.com/2026/10/29/icepick-dhs-leak-ice-undercover-agents/"
+          "title": "Exploitation attempts against recently patched Oracle EBS flaw have begun (CVE-2026-101767)",
+          "url": "https://www.helpnetsecurity.com/2026/10/29/oracle-e-business-suite-cve-2026-101767-exploitation/"
         },
         {
-          "source": "Wired Security",
-          "title": "Bluesky Is Blocking Links to a Major Leak of DHS Employee Records",
-          "url": "https://www.wired.com/story/bluesky-blocks-links-to-major-leak-of-dhs-data/"
-        },
-        {
-          "source": "Wired Security",
-          "title": "Massive Leak Exposes 41,000 Homeland Security Workers—Including Undercover ICE Agents",
-          "url": "https://www.wired.com/story/massive-leak-exposes-41000-homeland-security-workers-including-undercover-ice-agents/"
+          "source": "The Hacker News",
+          "title": "Attacker Tried to Exploit Alpine Linux's GitLab via CVSS 10.0 Flaw Its Ruby Left Open",
+          "url": "https://thehackernews.com/2026/10/attacker-tried-to-exploit-alpine-linuxs.html"
         }
       ],
-      "_anchor": "i-c5d0fff028"
+      "_anchor": "i-21ad9f9d92"
     },
     {
-      "title": "AI Tools Turn Into Attacker Infrastructure",
-      "area": "AI Security",
-      "latest_developments": "Cisco Talos reported on October 29, 2026 that it found NIK C2, a command-and-control framework with AI built into it, operating in the wild; Dark Reading described a relay service that supplies OpenAI Codex and Claude Code to mainland China and other regions where neither company sells, with the tools' sandbox protections switched off; and a separate actor scanned the internet for exposed credentials from behind bots posing as crawlers from OpenAI, Anthropic, and Meta.",
-      "summary": "Attackers now build AI into their own command infrastructure, strip safety controls out of commercial coding agents for resale, and borrow the reputation of AI company crawlers to scan for secrets unchallenged. Defenders should verify crawler identities instead of trusting user-agent strings and watch for coding agents running outside sanctioned channels.",
+      "title": "Talos Finds Vishing and Ransomware Rising",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Cisco Talos published its third-quarter 2026 incident response trends on October 29, 2026: phishing led initial access, ransomware and pre-ransomware cases grew as a share of engagements, attackers posed as information technology help desks in voice calls, and finance tied with public administration as the most-targeted industries; the Multi-State Information Sharing and Analysis Center told 808 of its 6,116 K-12 members last school year that staff accounts and credentials sat for sale on underground and dark web marketplaces, and tracked attackers who phished one district account and used it to reach the next district.",
+      "summary": "Attackers call the help desk or impersonate it, and stolen staff logins carry them from one organization into its peers. Enforce phishing-resistant authentication, verify help desk requests through a second channel, and monitor criminal markets for your own credentials.",
       "tags": [
-        "ai",
-        "malware"
+        "phishing",
+        "ransomware"
       ],
       "sources": [
         {
           "source": "Cisco Talos",
-          "title": "NIK C2: The new AI-enabled command-and-control framework",
-          "url": "https://blog.talosintelligence.com/nik-c2-new-ai-enabled-framework/"
+          "title": "IR trends Q3 2026: Actors impersonate IT help desks in vishing attacks as ransomware activity increases",
+          "url": "https://blog.talosintelligence.com/ir-trends-q3-2026/"
         },
         {
-          "source": "Dark Reading",
-          "title": "Shadowy AI Relay Disables OpenAI Codex, Claude Code Sandboxes",
-          "url": "https://www.darkreading.com/threat-intelligence/ai-relay-service-openai-codex-claude-code-sandboxes"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "Attacker Relentlessly Scans for Credentials by Impersonating AI Bots",
-          "url": "https://www.darkreading.com/cyber-risk/attacker-impersonates-ai-bots-scans-credentials"
+          "source": "Help Net Security",
+          "title": "Stolen staff logins are spreading attacks between K-12 school districts",
+          "url": "https://www.helpnetsecurity.com/2026/10/29/cis-k-12-cybersecurity/"
         }
       ],
-      "_anchor": "i-4faa48c4d2"
-    },
-    {
-      "title": "PHP2Shell Hits Palo Alto Management Interfaces",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Palo Alto Networks updated its advisory on Wednesday, October 28, 2026 to report active exploitation of CVE-2026-109618 and CVE-2026-109619 against management interfaces its customers expose to the internet, the first confirmed attacks on the company's own appliances, and the CISA deadline binding federal agencies to fix both bugs falls today, October 29, 2026.",
-      "summary": "The two PHP flaws researchers call PHP2Shell hand an unauthenticated attacker code execution through the web management consoles of firewalls, VPN gateways, and application delivery controllers. Take management interfaces off the public internet and install vendor updates as they ship.",
-      "tags": [
-        "exploit",
-        "patch",
-        "zero-day"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Attackers Exploit PHP2Shell Flaws in Internet-Exposed Palo Alto Networks Management Interfaces",
-          "url": "https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "InfraTrust report warns of exploited flaws in critical network infrastructure",
-          "url": "https://www.bleepingcomputer.com/news/security/infratrust-report-warns-of-exploited-flaws-in-critical-network-infrastructure/"
-        }
-      ],
-      "_anchor": "i-f4eff089be"
+      "_anchor": "i-d8346a01fb"
     }
   ],
   "markets": [
@@ -272,8 +409,8 @@
     "business_politics": [
       {
         "title": "Lagarde Will Leave the ECB in February",
-        "latest_developments": "Christine Lagarde said Thursday, October 29, that she will step down as president of the European Central Bank in February, 20 months before her eight-year term was set to end in October 2027, and she announced it hours before the governing council met on rates.",
-        "summary": "Lagarde has run the ECB since November 2019, and her early exit opens a succession contest among eurozone governments at a moment when inflation has picked back up and French and other eurozone bond markets have strained. Government bond yields fell on both sides of the Atlantic in European morning trade, French OATs outperformed, and the euro weakened as traders waited on the decision.",
+        "latest_developments": "The European Central Bank's governing council held its key rate at 2.5% Thursday, October 29, hours after Christine Lagarde said she will leave the presidency in February, and the euro sank to a 17-month low against the dollar as the bank refrained from signaling any future tightening.",
+        "summary": "Lagarde has run the ECB since November 2019, and her exit 20 months before her eight-year term ends in October 2027 opens a succession contest among eurozone governments at a moment when inflation has picked back up and French bond markets have strained. Eurozone yields extended their declines after the decision, and The Economist judged that whoever follows her inherits an unenviable job and probably more French turbulence.",
         "sources": [
           {
             "source": "WSJ World News",
@@ -287,6 +424,16 @@
           },
           {
             "source": "FT World",
+            "title": "ECB holds rates as Lagarde announces early departure",
+            "url": "https://www.ft.com/content/c7c8c7b4-eab7-4ffc-a6bf-f4f79358aa00"
+          },
+          {
+            "source": "The Economist",
+            "title": "Christine Lagarde departs at a moment of peril",
+            "url": "https://www.economist.com/finance-and-economics/2026/10/29/christine-lagarde-departs-at-a-moment-of-peril"
+          },
+          {
+            "source": "FT World",
             "title": "The ECB needs a smooth transmission and a smooth transition",
             "url": "https://www.ft.com/content/66bc5487-04aa-4699-a010-c446c536cf48?syn-25a6b1a6=1"
           },
@@ -294,52 +441,62 @@
             "source": "WSJ Markets",
             "title": "U.S. Treasury, European Bond Yields Fall After Fed Decision, Ahead of ECB Meeting",
             "url": "https://www.wsj.com/finance/commodities-futures/u-s-treasury-yields-fall-as-investors-digest-fed-meet-focus-shifts-to-ecb-d29ffbec?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Euro Falls Ahead of ECB Decision",
-            "url": "https://www.wsj.com/finance/currencies/asian-currencies-mixed-ahead-of-u-s-data-1ac5a50c?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-f319ba280b"
       },
       {
         "title": "Alphabet Drags AI Stocks Down Worldwide",
-        "latest_developments": "The Alphabet selloff went global Thursday, October 29, knocking technology shares down across Europe and Asia and putting Nasdaq 100 futures 1% lower, with Samsung's results feeding the same doubt.",
-        "summary": "Alphabet burned cash faster than investors expected in the quarter, and both Alphabet and Microsoft reported capital spending below forecasts, a combination that reopened the question of how any company earns a return on artificial-intelligence buildouts. Gold fell as traders digested the Federal Reserve's Wednesday hold and awaited United States inflation data later Thursday.",
+        "latest_developments": "Alphabet shed roughly $500 billion of market value as Thursday's session, October 29, opened in New York, pulling the Nasdaq down more than 1% after a global slide in technology shares, while Commerce Department figures put third-quarter United States growth at a 3.4% annual rate and Treasury yields fell despite indicators pointing to accelerating inflation.",
+        "summary": "Alphabet's sales and profits undershot expectations, the company conceded that its \"AI mode\" has cut into traditional search, and both Alphabet and Microsoft reported capital spending below forecasts, a combination that reopened the question of how any company earns a return on artificial-intelligence buildouts. Samsung's results fed the same doubt, and gold fell as traders digested the Federal Reserve's Wednesday hold.",
         "sources": [
           {
             "source": "WSJ Markets",
-            "title": "AI Stocks Fall After Alphabet Earnings Disappoint",
+            "title": "Nasdaq Slumps After Google Earnings Disappoint",
             "url": "https://www.wsj.com/finance/stocks/ai-stocks-fall-after-alphabet-earnings-disappoint-61d526ed?mod=rss_markets_main"
           },
           {
+            "source": "FT World",
+            "title": "Alphabet shares tumble in $500bn rout",
+            "url": "https://www.ft.com/content/eb386156-5bf9-4edd-80f2-803fdee1e33d?syn-25a6b1a6=1"
+          },
+          {
             "source": "FT Home",
-            "title": "US tech stocks set to fall after earnings fuel AI spending concerns",
+            "title": "US tech stocks fall after earnings fuel AI spending concerns",
             "url": "https://www.ft.com/content/1639620b-99e7-47ed-8484-49646816489e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "US economy beats forecasts to grow at 3.4% rate in third quarter",
+            "url": "https://www.ft.com/content/f2de9f3c-3290-4e87-bbc2-55430025f2ab?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Treasury Yields Fall Amid Hot U.S. Indicators",
+            "url": "https://www.wsj.com/finance/jgb-yields-rise-amid-caution-ahead-of-boj-decision-0a68d866?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
             "title": "Stock Market Today: Nasdaq Futures Slump After Google Earnings Disappoint",
             "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-10-29-2026?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Gold Falls as Investors Assess Fed Signals, Await Inflation Data",
-            "url": "https://www.wsj.com/finance/commodities-futures/gold-falls-as-traders-mull-fed-decision-d2dbef6c?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-0f566361d1"
       },
       {
         "title": "Trump Moves to Bar Peltola From the Alaska Senate Race",
-        "latest_developments": "President Trump called Thursday, October 29, for the removal of the Democratic candidate Mary Peltola from Alaska's Senate race, after a report alleged that her campaign recruited other contenders to mislead supporters of her Republican opponent.",
+        "latest_developments": "Alaska Governor Mike Dunleavy, a Republican, ordered an investigation Thursday, October 29, into the allegation that Democratic candidate Mary Peltola's campaign recruited a rival who shares the name of Republican Senator Dan Sullivan, and President Trump called for Peltola's criminal prosecution and her removal from the ballot.",
         "summary": "The demand escalates a fight that began Friday, October 23, when the Trump administration asked a federal court in Alaska to block certification of the Senate result if the Republican loses, arguing that similar candidate names could taint the count. The Wall Street Journal's politics newsletter ties the episode to a broader acceleration in the Justice Department's cases against Trump's rivals, five days before the November 3 midterms.",
         "sources": [
           {
             "source": "FT Home",
             "title": "Trump calls for Alaska Democratic candidate to be banned from Senate race",
             "url": "https://www.ft.com/content/7526e915-2590-4b42-85df-20bb89040db8?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Politics",
+            "title": "Alaska Governor Mike Dunleavy, a Republican, orders probe over same-name Senate race controversy",
+            "url": "https://www.wsj.com/politics/elections/trump-calls-for-alaska-democratic-senate-candidate-to-be-prosecuted-aec2c451?mod=rss_socialpoliticsfeed"
           },
           {
             "source": "WSJ Politics",
@@ -351,9 +508,19 @@
       },
       {
         "title": "Israel's Deadlock Leaves the Iran Front Open",
-        "latest_developments": "Security experts told the Financial Times Thursday, October 29, that Benjamin Netanyahu can launch a fresh bombing campaign against Iran alongside Washington while he serves as caretaker prime minister through coalition talks, and oil fell the same morning on the renewed American push for negotiations with Tehran.",
-        "summary": "Israel's October 27 election left neither Netanyahu's coalition nor Gadi Eisenkot's bloc with a Knesset majority, and government formation could run for weeks. Crude still trades above $100 a barrel, holding pump prices high and doubling Shell's third-quarter earnings, which funded a $5 billion buyback, with TotalEnergies and Repsol also lifting returns on soaring refining margins; Vice President JD Vance's letter to the secretary of Iran's Supreme National Security Council aims to restart talks.",
+        "latest_developments": "Benjamin Netanyahu's Likud party claimed Thursday, October 29, that \"foreign entities\" stole the election, and Israel's security service opened an inquiry into the interference allegations after heavy turnout by Palestinian citizens of Israel denied him an outright win; security experts told the Financial Times the same day that Netanyahu can still launch a fresh bombing campaign against Iran alongside Washington while he serves as caretaker prime minister.",
+        "summary": "Israel's October 27 election left neither Netanyahu's coalition nor Gadi Eisenkot's bloc with a Knesset majority, and government formation could run for weeks, with The Economist judging that his opponents' refusal to work with the Arab parties may undo them. Crude still trades above $100 a barrel, holding pump prices high and doubling Shell's third-quarter earnings, which funded a $5 billion buyback, with TotalEnergies and Repsol also lifting returns on soaring refining margins; Vice President JD Vance's letter to the secretary of Iran's Supreme National Security Council aims to restart talks.",
         "sources": [
+          {
+            "source": "FT Home",
+            "title": "Netanyahu's party claims election 'stolen' by 'foreign entities'",
+            "url": "https://www.ft.com/content/f66a684c-4073-4cf8-b5b8-8851c72e8bc0?syn-25a6b1a6=1"
+          },
+          {
+            "source": "The Economist",
+            "title": "Binyamin Netanyahu has not won, but nor has he lost",
+            "url": "https://www.economist.com/middle-east-and-africa/2026/10/29/binyamin-netanyahu-has-not-won-but-nor-has-he-lost"
+          },
           {
             "source": "FT Home",
             "title": "Israel vote leaves door open to Iran attack",
@@ -373,20 +540,51 @@
             "source": "FT Markets",
             "title": "European oil majors lift buybacks as Iran war drives bumper profits",
             "url": "https://www.ft.com/content/5ded8d57-46f5-406c-a4ce-e58415b8d4ad?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ US Business",
-            "title": "Shell to Launch $5 Billion Share Buyback After Earnings Soar",
-            "url": "https://www.wsj.com/business/earnings/shell-to-launch-5-billion-share-buyback-as-earnings-soar-258aab81?mod=pls_whats_news_us_business_f"
           }
         ],
-        "_anchor": "i-b104d4c31f"
+        "_anchor": "i-958c574ac1"
       }
     ],
     "business": [
       {
+        "title": "Wegmans Will Anchor the Galleria of Mt. Lebanon",
+        "latest_developments": "Roadside Development and Wegmans Food Markets announced Thursday, October 29, that Wegmans will anchor the Galleria of Mt. Lebanon, the chain's second store in the Pittsburgh area, with construction and renovations starting in 2028.",
+        "summary": "The 110,000-square-foot supermarket takes the anchor spot at the Galleria shopping center in Mt. Lebanon, Allegheny County, and gives the Rochester, New York, grocer a south-hills counterpart to the store it already runs in the region.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Wegmans announces second location in the Pittsburgh area, construction expected to begin in 2028",
+            "url": "https://www.cbsnews.com/pittsburgh/news/wegmans-second-pittsburgh-area-location-announced/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Another Wegmans location to open in Western Pennsylvania",
+            "url": "https://www.wpxi.com/news/local/wegmans-coming-galleria-mt-lebanon/TH2M4B6ARRDBTKM364ZVD6J4OA/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Wegmans planned for Pittsburgh area | Renovations begin in 2028",
+            "url": "https://www.wtae.com/article/wegmans-allegheny-county/74283262"
+          }
+        ],
+        "_anchor": "i-9ba3d4ed83"
+      },
+      {
+        "title": "Larrimor's Closes After 87 Years",
+        "latest_developments": "Larrimor's, the family-owned designer clothing store in downtown Pittsburgh, announced Thursday, October 29, that it is going out of business after 87 years.",
+        "summary": "The store has sold men's and women's designer apparel downtown under family ownership for 87 years, and its closing takes one of the district's long-running independent retailers off the street.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Family-owned designer clothing store in downtown Pittsburgh going out of business after 87 years",
+            "url": "https://www.wpxi.com/news/local/family-owned-designer-clothing-store-downtown-pittsburgh-going-out-business-after-87-years/WEEY2PWEHVFDLEKDS7JLQ4LOWQ/"
+          }
+        ],
+        "_anchor": "i-f9ff41bf07"
+      },
+      {
         "title": "Allegheny County Flags 97 Problems With the Springdale Data Center",
-        "latest_developments": "Allegheny County reviewers identified 97 concerns with the land development application for a data center at the former Cheswick Power Plant site, and dozens of people rallied outside the Springdale borough building Wednesday, October 28, to urge the county to deny it.",
+        "latest_developments": "The Post-Gazette reported Thursday, October 29, that Springdale residents have made a last-ditch plea to Allegheny County to vote down the data center at the former Cheswick Power Plant, a day after dozens rallied outside the Springdale borough building and county reviewers identified 97 concerns with the land development application.",
         "summary": "Springdale residents held their own public hearing to oppose the project, which would occupy the retired Cheswick Power Plant along the Allegheny River in Springdale borough, and carried the slogan \"speak up to save our community\" to the county. The county controls the land development approval the developer needs.",
         "sources": [
           {
@@ -398,6 +596,11 @@
             "source": "WTAE",
             "title": "Springdale residents hold public hearing to oppose proposed data center",
             "url": "https://www.wtae.com/article/springdale-public-hearing-oppose-data-center/74278895"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "In last-ditch effort, residents plead with Allegheny County to vote against Springdale data center",
+            "url": "https://www.post-gazette.com/business/tech-news/2026/10/29/springdale-data-center-allegheny-dc-propco-opposition/stories/202610280037"
           }
         ],
         "_anchor": "i-dcb7cb091b"
@@ -431,6 +634,32 @@
     ],
     "around_town": [
       {
+        "title": "Can Pittsburgh Tax Unearned Income?",
+        "latest_developments": "Post-Gazette columnist Brandon McGinley asked Thursday, October 29, whether state law even lets Pittsburgh tax unearned income, weighing Councilwoman Barb Warwick's bill against the city budget math and work from the Keystone Research Center.",
+        "summary": "Warwick's proposal, introduced Tuesday, October 27, would set a 2% levy on investment dividends, estate and trust disbursements, capital gains from property sales, and rental income, money the city projects at more than $50 million a year. Warwick has acknowledged the tax could draw legal challenges.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Brandon McGinley: Is Pittsburgh allowed to tax unearned income?",
+            "url": "https://www.post-gazette.com/local/city/2026/10/29/warwick-keystone-research-city-budget-unearned-income-tax/stories/202610290006"
+          }
+        ],
+        "_anchor": "i-332a82d97b"
+      },
+      {
+        "title": "The Cellphone Ban Lands Lightly on Districts That Already Act",
+        "latest_developments": "TribLive reported Thursday, October 29, that how much work Pennsylvania's statewide school cellphone ban creates depends almost entirely on whether a district already restricts the devices, and the districts that do welcome the law.",
+        "summary": "Governor Josh Shapiro signed the bell-to-bell ban in Central Bucks, Bucks County, on Monday, October 26, and it takes effect with the 2027-28 school year, which gives Western Pennsylvania districts a year to write policies that match it.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Schools welcome statewide cellphone ban",
+            "url": "https://triblive.com/local/regional/schools-welcome-statewide-cellphone-ban/"
+          }
+        ],
+        "_anchor": "i-051c2d27b1"
+      },
+      {
         "title": "Pennsylvania Latino Voters Drift From Republicans",
         "latest_developments": "The Post-Gazette reported Thursday, October 29, that the Latino voters who helped elect President Trump are moving away from Republicans, and warming to no one, five days before the November 3 general election.",
         "summary": "Interviews across Pennsylvania point to the economy as the grievance driving the shift, with those voters declining to swing toward Democrats as they pull back from the party they backed in 2024. The state's Latino electorate concentrates in Philadelphia, Reading, Allentown, and Lancaster, and it decides margins in a state both parties treat as a tossup.",
@@ -458,8 +687,8 @@
       },
       {
         "title": "The 70s Give Out After Halloween",
-        "latest_developments": "KDKA meteorologist Ron Smiley said Thursday, October 29, that Pittsburgh's run of 70-degree afternoons ends now, with temperatures sliding over the next week.",
-        "summary": "The cooling leaves the region dry and pleasant through Halloween, Saturday, October 31, and trick-or-treating across Western Pennsylvania, and WTAE forecasts the same treat-not-trick stretch of sun. Clocks fall back Sunday, November 1.",
+        "latest_developments": "KDKA meteorologist Ron Smiley said Thursday, October 29, that Pittsburgh's run of 70-degree afternoons ends now, with temperatures sliding over the next week, and WPXI holds the region above average and rain-free for several more days.",
+        "summary": "The cooling leaves Western Pennsylvania dry and pleasant through Halloween, Saturday, October 31, and trick-or-treating, which runs on a municipality-by-municipality schedule KDKA has compiled. Clocks fall back Sunday, November 1.",
         "sources": [
           {
             "source": "KDKA",
@@ -470,6 +699,16 @@
             "source": "WTAE",
             "title": "No Trick, Just a Treat for Western PA",
             "url": "https://www.wtae.com/article/no-trick-just-a-treat-for-western-pa/74280603"
+          },
+          {
+            "source": "WPXI",
+            "title": "Temperatures remain above average, with no rain expected for several days",
+            "url": "https://www.wpxi.com/weather/temperatures-remain-above-average-with-no-rain-expected-several-days/OHTBT5RSFNASVEFAY5QZQRYBNM/"
+          },
+          {
+            "source": "KDKA",
+            "title": "When is trick-or-treat in the Pittsburgh area?",
+            "url": "https://www.cbsnews.com/pittsburgh/news/trick-or-treat-pittsburgh-area-2026/"
           }
         ],
         "_anchor": "i-16b650daaa"
@@ -530,6 +769,37 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "The Pirates' Offseason Calendar Meets a Lockout",
+        "latest_developments": "The Post-Gazette laid out the Pirates' key offseason dates Thursday, October 29, and what a Major League Baseball lockout would do to them.",
+        "summary": "A lockout would freeze free agent signings and trades through the winter, pushing the Pirates' roster work into whatever window reopens. The club has already made one hire, bringing Triple-A pitching coach Sean Buchanan over from the Houston Astros.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "Key dates for the Pirates' offseason — and the impact the MLB lockout will have",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/10/29/pirates-offseason-dates/stories/202610280019"
+          },
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "The Pirates hire Triple-A pitching coach Sean Buchanan away from the Astros",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/10/27/pirates-astros-sean-buchanan-bill-murphy/stories/202610270051"
+          }
+        ],
+        "_anchor": "i-3b1a543e0e"
+      },
+      {
+        "title": "Fittipaldo Takes Browns Questions",
+        "latest_developments": "Ray Fittipaldo answered reader questions in his Post-Gazette Steelers chat Thursday, October 29, turning the conversation to the Week 8 game against the Cleveland Browns.",
+        "summary": "Pittsburgh hosts Cleveland Sunday, November 1, at 1 p.m. on CBS, carrying a 5-2 record and three straight wins into the division game.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Ray Fittipaldo's Steelers chat: 10.29.26",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/10/29/steelers-browns-analysis/stories/202610290038"
+          }
+        ],
+        "_anchor": "i-0169c710fa"
+      },
       {
         "title": "Elliott Retraces a Year of Rehab",
         "latest_developments": "The Post-Gazette published Steelers safety DeShon Elliott's own account Thursday, October 29, of the hamstring injury he calls gruesome and the year he spent getting back onto the field.",
@@ -634,126 +904,147 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "China-nexus crews keep hunting the admin plane, with Warp Panda abusing a VMware ESX logging flaw, KeyDrift inside Cisco SD-WAN controllers, and PHP2Shell on exposed Palo Alto boxes.",
+      "text": "China-nexus crews keep moving into network control planes, with KeyDrift lifting encryption keys from Cisco Catalyst SD-WAN controllers and Warp Panda scrubbing its tracks from VMware ESX logs.",
       "links": [
-        {
-          "anchor": "i-ef44306c2f",
-          "phrase": "Warp Panda",
-          "start": 53,
-          "end": 63,
-          "title": "Warp Panda Blinds VMware ESX Logs"
-        },
         {
           "anchor": "i-a4a98e0e7b",
           "phrase": "KeyDrift",
-          "start": 99,
-          "end": 107,
+          "start": 64,
+          "end": 72,
           "title": "KeyDrift Steals Cisco SD-WAN Encryption Keys"
         },
         {
-          "anchor": "i-f4eff089be",
-          "phrase": "PHP2Shell",
-          "start": 145,
-          "end": 154,
-          "title": "PHP2Shell Hits Palo Alto Management Interfaces"
+          "anchor": "i-ef44306c2f",
+          "phrase": "Warp Panda",
+          "start": 140,
+          "end": 150,
+          "title": "Warp Panda Blinds VMware ESX Logs"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "AI products are becoming attacker plumbing, from the AI-integrated NIK C2 framework found in the wild to gray-market resale of OpenAI Codex and Claude Code with sandboxes off.",
+      "text": "Cisco Talos found the AI-built NIK C2 framework and Sophos tied GOLD OGRE's Aur0ra ransomware to AI, as Talos's Q3 report flags rising vishing and ransomware.",
       "links": [
         {
           "anchor": "i-4faa48c4d2",
           "phrase": "NIK C2",
-          "start": 67,
-          "end": 73,
+          "start": 31,
+          "end": 37,
           "title": "AI Tools Turn Into Attacker Infrastructure"
+        },
+        {
+          "anchor": "i-d8346a01fb",
+          "phrase": "vishing",
+          "start": 135,
+          "end": 142,
+          "title": "Talos Finds Vishing and Ransomware Rising"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "A second Cisco ASA and FTD remote-access VPN zero-day is under active exploitation, reloading firewalls without authentication, and arrives inside a fresh patch wave.",
+      "text": "CISA's deadline to fix Palo Alto management-interface flaws fell as Cisco patched CVE-2026-76418 in ASA VPNs and decoys caught the first exploits against Oracle E-Business Suite.",
       "links": [
         {
+          "anchor": "i-f4eff089be",
+          "phrase": "Palo Alto",
+          "start": 23,
+          "end": 32,
+          "title": "PHP2Shell Hits Palo Alto Management Interfaces"
+        },
+        {
           "anchor": "i-77d976efa8",
-          "phrase": "Cisco ASA",
-          "start": 9,
-          "end": 18,
+          "phrase": "CVE-2026-76418",
+          "start": 82,
+          "end": 96,
           "title": "Cisco VPN Zero-Day Lands in a Patch Wave"
+        },
+        {
+          "anchor": "i-21ad9f9d92",
+          "phrase": "Oracle E-Business Suite",
+          "start": 154,
+          "end": 177,
+          "title": "Attackers Race Patches on Oracle EBS and GitLab"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Belgium suspended MyMinfin while measuring a cyberattack, DHS records on 41,000 workers reached DDoSecrets, and 26,400 still-valid keys surfaced across public Gitee repositories.",
+      "links": [
+        {
+          "anchor": "i-342c74932b",
+          "phrase": "MyMinfin",
+          "start": 18,
+          "end": 26,
+          "title": "Belgian Tax Platform Falls as Breach Tolls Climb"
+        },
+        {
+          "anchor": "i-c5d0fff028",
+          "phrase": "41,000 workers",
+          "start": 73,
+          "end": 87,
+          "title": "Icepick Leak Exposes 41,000 DHS Workers"
+        },
+        {
+          "anchor": "i-c9e7c513e1",
+          "phrase": "Gitee",
+          "start": 159,
+          "end": 164,
+          "title": "Gitee Repositories Leak 26,400 Live Keys"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "updated",
-      "text": "The Icepick leak of 41,000 DHS worker records spread further, with the self-styled Department of Peace handing files to Distributed Denial of Secrets and maia arson crimew.",
+      "text": "Alphabet shed roughly $500 billion as AI shares slid worldwide, hours after Christine Lagarde said she will leave the European Central Bank presidency in February.",
       "links": [
-        {
-          "anchor": "i-c5d0fff028",
-          "phrase": "Distributed Denial",
-          "start": 120,
-          "end": 138,
-          "title": "Icepick Leak Exposes 41,000 DHS Workers"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Christine Lagarde's early February exit from the ECB lands as an Alphabet-led selloff drags AI shares down worldwide and Netanyahu keeps the Iran front open.",
-      "links": [
-        {
-          "anchor": "i-f319ba280b",
-          "phrase": "Christine Lagarde",
-          "start": 0,
-          "end": 17,
-          "title": "Lagarde Will Leave the ECB in February"
-        },
         {
           "anchor": "i-0f566361d1",
           "phrase": "Alphabet",
-          "start": 65,
-          "end": 73,
+          "start": 0,
+          "end": 8,
           "title": "Alphabet Drags AI Stocks Down Worldwide"
         },
         {
-          "anchor": "i-b104d4c31f",
-          "phrase": "Iran front",
-          "start": 141,
-          "end": 151,
-          "title": "Israel's Deadlock Leaves the Iran Front Open"
+          "anchor": "i-f319ba280b",
+          "phrase": "Christine Lagarde",
+          "start": 76,
+          "end": 93,
+          "title": "Lagarde Will Leave the ECB in February"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Allegheny County reviewers flagged 97 problems with the Springdale data center while a reassessment looms, and Latino voters drift from Republicans days before November 3.",
+      "kind": "Update",
+      "status": "new",
+      "text": "Wegmans will anchor the Galleria of Mt. Lebanon, Larrimor's is closing downtown after 87 years, and Allegheny County flagged 97 problems with the Springdale data center.",
       "links": [
         {
+          "anchor": "i-9ba3d4ed83",
+          "phrase": "Wegmans",
+          "start": 0,
+          "end": 7,
+          "title": "Wegmans Will Anchor the Galleria of Mt. Lebanon"
+        },
+        {
+          "anchor": "i-f9ff41bf07",
+          "phrase": "Larrimor's",
+          "start": 49,
+          "end": 59,
+          "title": "Larrimor's Closes After 87 Years"
+        },
+        {
           "anchor": "i-dcb7cb091b",
-          "phrase": "Springdale",
-          "start": 56,
-          "end": 66,
+          "phrase": "Springdale data center",
+          "start": 146,
+          "end": 168,
           "title": "Allegheny County Flags 97 Problems With the Springdale Data Center"
-        },
-        {
-          "anchor": "i-57c7f69fd7",
-          "phrase": "reassessment",
-          "start": 87,
-          "end": 99,
-          "title": "Allegheny County Reassessment Sorts Winners and Losers"
-        },
-        {
-          "anchor": "i-3eb537e46c",
-          "phrase": "Latino voters",
-          "start": 111,
-          "end": 124,
-          "title": "Pennsylvania Latino Voters Drift From Republicans"
         }
       ]
     }
@@ -767,12 +1058,12 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 67,
+        "in_window": 72,
         "failed": [],
         "empty": [
           "Krebs on Security",
-          "Ars Technica Security",
-          "Sophos News",
+          "Schneier on Security",
+          "CISA Advisories",
           "Google Online Security Blog",
           "Google Project Zero",
           "The DFIR Report",
@@ -781,8 +1072,8 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 11,
-            "contributed": 11
+            "in_window": 14,
+            "contributed": 14
           },
           "BleepingComputer": {
             "items": 15,
@@ -796,8 +1087,8 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Dark Reading": {
             "items": 50,
@@ -816,8 +1107,8 @@
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "The Record": {
             "items": 5,
@@ -826,8 +1117,8 @@
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Help Net Security": {
             "items": 10,
@@ -841,8 +1132,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 2,
+            "contributed": 2
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -856,8 +1147,8 @@
           },
           "Cisco Talos": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 3,
+            "contributed": 3
           },
           "Graham Cluley": {
             "items": 20,
@@ -914,12 +1205,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 25
+            "contributed": 14
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 11
+            "contributed": 12
           },
           "PublicSource": {
             "items": 10,
@@ -938,23 +1229,23 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 8,
+            "in_window": 7,
             "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 6
+            "contributed": 8
           },
           "WPXI": {
             "items": 15,
-            "in_window": 15,
-            "contributed": 1
+            "in_window": 14,
+            "contributed": 6
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 14
+            "contributed": 17
           }
         }
       },
@@ -969,44 +1260,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 75,
-            "in_window": 31,
-            "contributed": 6
+            "items": 74,
+            "in_window": 32,
+            "contributed": 5
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 37,
-            "contributed": 13
+            "in_window": 38,
+            "contributed": 7
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 54,
-            "contributed": 14
+            "in_window": 55,
+            "contributed": 16
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 12,
-            "contributed": 2
+            "in_window": 11,
+            "contributed": 3
           },
           "The Economist": {
             "items": 300,
-            "in_window": 22,
-            "contributed": 5
+            "in_window": 30,
+            "contributed": 7
           },
           "FT Home": {
             "items": 11,
             "in_window": 11,
-            "contributed": 5
+            "contributed": 4
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 12
+            "contributed": 16
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 3
+            "contributed": 2
           }
         }
       },
@@ -1077,13 +1368,13 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Post-Gazette Steelers": {
             "items": 20,
             "in_window": 15,
-            "contributed": 12
+            "contributed": 11
           }
         }
       },
@@ -1093,19 +1384,19 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 23,
+        "in_window": 25,
         "failed": [],
         "empty": [],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 18,
-            "in_window": 18,
-            "contributed": 18
+            "items": 19,
+            "in_window": 19,
+            "contributed": 19
           },
           "ESPN Olympics": {
             "items": 24,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1166,24 +1457,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 29822,
+          "outputTokens": 38314,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 113057,
+          "cacheCreationInputTokens": 130023,
           "webSearchRequests": 0,
-          "costUSD": 1.8761500000000002,
+          "costUSD": 2.25811,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 15394
+          "thinkingTokens": 16686
         }
       },
-      "cost_usd": 1.8761500000000002,
-      "duration_ms": 334640,
+      "cost_usd": 2.25811,
+      "duration_ms": 402370,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-10-29 07:05 EDT",
-    "items_considered": 67,
+    "generated_at": "2026-10-29 10:06 EDT",
+    "items_considered": 72,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1264,8 +1555,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.8762,
-    "model_duration_ms": 334640,
+    "model_cost_usd": 2.2581,
+    "model_duration_ms": 402370,
     "local_from": null,
     "feed_failures": []
   }
