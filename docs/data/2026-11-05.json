@@ -1,27 +1,61 @@
 {
   "date": "2026-11-05",
-  "headline": "OpenAI said an unreleased cyber model turned 2,308 Linux kernel bug reports into 948 working root exploits in a single 30-hour run, collapsing the time defenders get between a kernel flaw going public and an exploit existing.",
+  "headline": "OpenSSH rushed out an emergency fix for a password bypass on musl-based Linux while five federal agencies told cold chain operators to harden refrigeration controls after weeks of European supermarket attacks.",
   "emerging_trends": [
     {
-      "text": "OpenAI's pipeline converted 2,308 Linux kernel findings into 948 working root exploits in 30 hours for $1.2 million in API calls, and CERT-In watched Crafty Falcon fire publicly downloadable AI offensive tools at Indian banks the same week, which puts the identical automation on both sides of the line.",
+      "text": "Microsoft Threat Intelligence watched operators point ARTEX at GitHub to harvest OAuth application secrets, and OpenAI's own pipeline turned 1,724 reproduced kernel bugs into 948 root exploits, which moves reconnaissance and exploit writing onto machine time.",
       "topic_title": "Backdoored ARTEX Exposes 62 Consoles",
-      "link_phrase": "Crafty Falcon",
+      "link_phrase": "ARTEX",
       "_anchor": "trend-1"
     },
     {
-      "text": "Binarly found that the firmware Zyxel shipped for the switches attackers hacked closed a different bug than the one the exploit actually used, a reminder that a vendor advisory names a CVE and proves nothing about the hole.",
-      "topic_title": "Zyxel GS1900 Patch Left the Zero-Day Open",
-      "link_phrase": "Binarly",
+      "text": "Attacks that spoil groceries and threaten blood supplies pushed CISA, the FBI, Health and Human Services, the Department of Agriculture, and the Department of Transportation to publish joint guidance on industrial refrigeration and cold chain monitoring systems.",
+      "topic_title": "Feds Tell Infrastructure Operators to Harden Cooling",
+      "link_phrase": "cold chain",
       "_anchor": "trend-2"
     },
     {
-      "text": "DigiCert, Chainalysis, Norad, and the Control Web Panel software channel all failed through infrastructure that other organizations depend on, so a company's exposure now tracks the weakest vendor in its chain rather than its own controls.",
-      "topic_title": "DigiCert Exposure and a Norad Portal Breach",
-      "link_phrase": "DigiCert",
+      "text": "Trust infrastructure itself gave way today, with OpenSSH admitting an oversized password on musl systems, DigiCert exposing the identity documents behind its certificates, and Zyxel firmware leaving the exploited hole open.",
+      "topic_title": "Zyxel GS1900 Patch Left the Zero-Day Open",
+      "link_phrase": "Zyxel",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "OpenSSH Bypass Hits musl-Based Linux",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "OpenSSH shipped version 10.6p2 on November 5, 2026, rating the flaw researchers call *sshole critical, and Alpine Linux published fixed packages for every supported release; an attacker needs only network access, an account name, and a password between 257 and 1,024 bytes to log into key-only or passwordless accounts on Alpine servers running the standard openssh-server package, and Ars Technica reported that distributions beyond Alpine may carry the same exposure; Cisco patched a remote code execution flaw in UCS Central Software the same day, and WatchGuard closed an authentication flaw and a man-in-the-middle flaw in its products.",
+      "summary": "The bypass defeats the setting administrators rely on to lock an account out of password logins, which turns a hardened host on a musl-based distribution into a reachable target over SSH. Administrators should patch OpenSSH on Alpine and other musl systems and test that no-password accounts reject every login attempt.",
+      "tags": [
+        "vulnerability",
+        "linux",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "OpenSSH flaw lets attackers log into password-disabled Linux accounts",
+          "url": "https://www.bleepingcomputer.com/news/security/openssh-flaw-lets-attackers-log-into-password-disabled-linux-accounts/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "OpenSSH Issues Emergency Fix for Flaw Letting Long Passwords Bypass SSH Auth on Alpine Linux",
+          "url": "https://thehackernews.com/2026/11/openssh-issues-emergency-fix-for-flaw.html"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "Meet *sshole, the vulnerability that lets hackers SSH into Linux devices",
+          "url": "https://arstechnica.com/security/2026/11/vulnerability-allows-attackers-to-log-into-some-linux-devices-sans-password/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Cisco, WatchGuard Release Patches; SonicWall Won't Fix GMS Flaws",
+          "url": "https://www.securityweek.com/cisco-watchguard-release-patches-sonicwall-wont-fix-gms-flaws/"
+        }
+      ],
+      "_anchor": "i-671b07a9ce"
+    },
     {
       "title": "OpenAI Pipeline Writes 948 Linux Root Exploits",
       "area": "AI Security",
@@ -55,6 +89,40 @@
         }
       ],
       "_anchor": "i-25c3eda20c"
+    },
+    {
+      "title": "Backdoored ARTEX Exposes 62 Consoles",
+      "area": "AI Security",
+      "latest_developments": "Microsoft Threat Intelligence reported late on November 5, 2026 that operators drive ARTEX, the AI penetration-testing framework CrowdStrike ties to the China-based group Vapor Panda, to search GitHub for OAuth application secrets and then use the compromised applications to take authenticated actions inside victims' tenants; researchers found a backdoored Docker image for ARTEX that leaves 62 of the framework's consoles open to root access; CERT-In, the Indian Computer Emergency Response Team, called the AI-assisted actor it tracks as Crafty Falcon active and ongoing against banking, financial services, and insurance companies in India; Check Point Research named Haiou, a jailbreak bundle for OpenAI Codex that rewrites the agent's trusted instructions to insert advertisements for a third-party AI gateway; and Truffle Security opened a free Secrets Revocation Program to help issuers kill 1.4 million publicly exposed secrets that still work.",
+      "summary": "Criminal crews increasingly download the same open-source AI attack frameworks, and whoever ships the container image controls the operators who run it. Security teams should watch for ARTEX traffic patterns against financial infrastructure, scrub secrets out of public repositories, and treat agent configuration files as code that attackers can edit.",
+      "tags": [
+        "ai",
+        "apt",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Microsoft Security Blog",
+          "title": "Threat actors use agentic AI tooling to find and abuse exposed secrets",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/11/05/threat-actors-use-agentic-ai-tooling-to-find-and-abuse-exposed-secrets/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "CERT-In Flags AI-Driven Attacks as Backdoored ARTEX Exposes 62 Consoles to Root Access",
+          "url": "https://thehackernews.com/2026/11/backdoored-docker-image-for-artex-ai.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Researchers Uncover Prompt Adware Hidden in OpenAI Codex Jailbreak Toolkit",
+          "url": "https://thehackernews.com/2026/11/researchers-uncover-prompt-adware.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Nearly 1.5 million exposed secrets targeted in new revocation program",
+          "url": "https://www.bleepingcomputer.com/news/security/truffle-security-launches-program-to-revoke-14-million-live-secrets/"
+        }
+      ],
+      "_anchor": "i-e2845eccba"
     },
     {
       "title": "Zyxel GS1900 Patch Left the Zero-Day Open",
@@ -91,6 +159,67 @@
       "_anchor": "i-806a92e4d6"
     },
     {
+      "title": "A Game Launcher and Calendar Invites Carry Malware",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "BleepingComputer reported on November 5, 2026 that attackers distribute a new Linux backdoor called CWPdoor inside a trojanized build of cwpsrv, the web server behind the Control Web Panel hosting management interface, and reported the same evening that crews mail counterfeit OpenAI, SpaceX, and Anthropic event invitations and run two phishing-as-a-service platforms to steal Microsoft and Google credentials and authentication sessions; the developers of Goddess of Victory: NIKKE confirmed on November 4, 2026 that attackers tampered with the game's PC launcher scripts and pushed malware that steals credentials and cryptocurrency wallet data; and Material Security detailed Operation CloudFire the same day, a campaign that mailed Google Calendar invites, bounced recipients through trusted redirects to counterfeit login pages, hijacked corporate Google sessions, bypassed multifactor authentication, and ended with the takedown of nearly 900 attacker domains.",
+      "summary": "All of these operations ride channels people already trust: a hosting panel's own web server binary, an auto-updating game launcher, and invitations arriving from Google's own domain or famous brands. Companies should verify cwpsrv binaries on Control Web Panel servers, hunt for credential and wallet theft where employees installed NIKKE, and point mail filtering at calendar and event invites.",
+      "tags": [
+        "malware",
+        "phishing"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Hackers backdoor Linux servers using trojanized CWP web server",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-backdoor-linux-servers-using-trojanized-cwp-web-server/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "NIKKE PC game launcher hacked to spread remote access, data-stealing malware",
+          "url": "https://www.bleepingcomputer.com/news/security/nikke-pc-game-launcher-hacked-to-spread-remote-access-data-stealing-malware/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Google Calendar phishing campaign hijacks sessions, bypasses MFA",
+          "url": "https://www.bleepingcomputer.com/news/security/google-calendar-phishing-campaign-hijacks-sessions-bypasses-mfa/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Fake OpenAI, SpaceX events used to steal Microsoft, Google accounts",
+          "url": "https://www.bleepingcomputer.com/news/security/fake-openai-spacex-events-used-to-steal-microsoft-google-accounts/"
+        }
+      ],
+      "_anchor": "i-5263a8e99f"
+    },
+    {
+      "title": "Feds Tell Infrastructure Operators to Harden Cooling",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "CISA, the FBI, Health and Human Services, the Department of Agriculture, and the Department of Transportation issued joint guidance on November 5, 2026 telling operators in healthcare and public health, chemical, food and agriculture, and transportation to harden industrial refrigeration and cold chain monitoring systems, saying they see malicious cyber activity against those systems globally; SecurityWeek reported the same day that an attack reached the Établissement français du sang, the only civilian blood collection and transfusion organization in France, and compromised no blood products.",
+      "summary": "Intruders have reached refrigeration controls at more than 100 grocery stores across Belgium, Sweden, Ireland, Estonia, Luxembourg, and the United Kingdom since mid-October 2026, switching evaporators into defrost mode and spoiling chilled and frozen stock. Operators should pull refrigeration and cold chain controllers off the internet, replace default vendor credentials, and alarm on temperature setpoint changes.",
+      "tags": [
+        "ics",
+        "critical-infrastructure"
+      ],
+      "sources": [
+        {
+          "source": "CISA Advisories",
+          "title": "US Government Partners Urge Hardening Industrial Refrigeration and Cold Chain Monitoring Systems",
+          "url": "https://www.cisa.gov/resources-tools/resources/us-government-partners-urge-hardening-industrial-refrigeration-and-cold-chain-monitoring-systems"
+        },
+        {
+          "source": "The Record",
+          "title": "Harden cooling systems now, feds warn critical infrastructure operators amid attacks",
+          "url": "https://therecord.media/cyberattacks-refrigeration-cisa-fbi"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Cyberattack Hits French Blood Bank Site but No Blood Products Are Compromised",
+          "url": "https://www.securityweek.com/cyberattack-hits-french-blood-bank-site-but-no-blood-products-are-compromised/"
+        }
+      ],
+      "_anchor": "i-09b5181627"
+    },
+    {
       "title": "GhostMap Loops Android, CISA Flags an Apple Bug",
       "area": "Vulnerabilities and Exploits",
       "latest_developments": "Bitdefender Labs, working back from a banking malware sample, disclosed GhostMap on November 5, 2026, a flaw in the way Android reads the ZIP structure inside an APK that lets an app carrying no executable code and requesting no permissions drop a device into a persistent crash loop on installation, which the team reproduced on a Pixel 10 running Android 17 with the August security patch and sometimes cleared only with a factory reset; CISA added CVE-2024-27834, an improper authentication flaw rated 5.5 across several Apple operating systems, to its Known Exploited Vulnerabilities catalog on Wednesday, November 4, 2026 after reports that attackers use it to deliver information-stealing malware.",
@@ -120,86 +249,6 @@
       "_anchor": "i-da77af0f43"
     },
     {
-      "title": "A Game Launcher and Calendar Invites Carry Malware",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "BleepingComputer reported on November 5, 2026 that attackers distribute a new Linux backdoor called CWPdoor inside a trojanized build of cwpsrv, the web server behind the Control Web Panel hosting management interface; the developers of Goddess of Victory: NIKKE confirmed on November 4, 2026 that attackers tampered with the game's PC launcher scripts and pushed malware that steals credentials and cryptocurrency wallet data; and Material Security detailed Operation CloudFire the same day, a campaign that mailed Google Calendar invites, bounced recipients through trusted redirects to counterfeit login pages, hijacked corporate Google sessions, bypassed multifactor authentication, and ended with the takedown of nearly 900 attacker domains.",
-      "summary": "All three operations ride channels people already trust: a hosting panel's own web server binary, an auto-updating game launcher, and an invite arriving from Google's own domain. Companies should verify cwpsrv binaries on Control Web Panel servers, hunt for credential and wallet theft where employees installed NIKKE, and point mail filtering at calendar invites.",
-      "tags": [
-        "malware",
-        "phishing"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Hackers backdoor Linux servers using trojanized CWP web server",
-          "url": "https://www.bleepingcomputer.com/news/security/hackers-backdoor-linux-servers-using-trojanized-cwp-web-server/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "NIKKE PC game launcher hacked to spread remote access, data-stealing malware",
-          "url": "https://www.bleepingcomputer.com/news/security/nikke-pc-game-launcher-hacked-to-spread-remote-access-data-stealing-malware/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Google Calendar phishing campaign hijacks sessions, bypasses MFA",
-          "url": "https://www.bleepingcomputer.com/news/security/google-calendar-phishing-campaign-hijacks-sessions-bypasses-mfa/"
-        }
-      ],
-      "_anchor": "i-5263a8e99f"
-    },
-    {
-      "title": "Phishing Sites Fake Their Own Suspension",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "SecurityWeek reported on November 5, 2026 that more than 200 bank phishing sites serve the fraudulent login page to a first-time visitor and then show a counterfeit account-suspended notice to anyone who returns, which starves takedown and abuse teams of the evidence they need; Netcraft, reviewing Grand Theft Auto VI-themed domains registered between July 1 and October 27, 2026, found lures that borrow the name of the leaker CyberLeek, promise early access, and advertise nonexistent mobile versions ahead of the game's November 19, 2026 launch; and Vercel began rolling out Device Bound Session Credentials to tie login sessions to a single device and render stolen session cookies worthless.",
-      "summary": "Phishing crews now tune what each visitor sees to survive investigation, and consumer hype cycles supply the lures. Defenders should report phishing from a clean first-visit capture, and companies holding valuable sessions should bind them to devices.",
-      "tags": [
-        "phishing",
-        "fraud"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Bank Phishing Sites Show Fake 'Suspended' Pages to Evade Takedowns",
-          "url": "https://www.securityweek.com/bank-phishing-sites-show-fake-suspended-pages-to-evade-takedowns/"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Scammers capitalize on GTA 6 hype to push malware and crypto cons",
-          "url": "https://www.helpnetsecurity.com/2026/11/05/gta-6-scams-fake-leaks-early-access/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Vercel rolls out new protection against stolen session cookie attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/vercel-rolls-out-new-protection-against-stolen-session-cookie-attacks/"
-        }
-      ],
-      "_anchor": "i-2dacffdc48"
-    },
-    {
-      "title": "OpenSSH Bypass Hits musl-Based Linux",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researchers disclosed an OpenSSH vulnerability they call *sshole on November 5, 2026 that lets an attacker log into certain accounts on Alpine Linux and other distributions built on the musl C library that administrators configured to block password authentication, by typing an oversized password; Cisco patched a remote code execution flaw in UCS Central Software the same day, and WatchGuard closed an authentication flaw and a man-in-the-middle flaw in its products.",
-      "summary": "The bypass defeats the setting administrators rely on to lock an account out of password logins, which turns a hardened host on a musl-based distribution into a reachable target over SSH. Administrators should patch OpenSSH on Alpine and other musl systems and test that no-password accounts reject every login attempt.",
-      "tags": [
-        "vulnerability",
-        "linux",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "OpenSSH flaw lets attackers log into password-disabled Linux accounts",
-          "url": "https://www.bleepingcomputer.com/news/security/openssh-flaw-lets-attackers-log-into-password-disabled-linux-accounts/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Cisco, WatchGuard Release Patches; SonicWall Won't Fix GMS Flaws",
-          "url": "https://www.securityweek.com/cisco-watchguard-release-patches-sonicwall-wont-fix-gms-flaws/"
-        }
-      ],
-      "_anchor": "i-671b07a9ce"
-    },
-    {
       "title": "DigiCert Exposure and a Norad Portal Breach",
       "area": "Data Breaches",
       "latest_developments": "DigiCert, the certificate authority, warned customers on November 5, 2026 that a server migration left an internal business system facing the internet, which gave outsiders access to customer information and identity documents; Norad, the Norwegian Agency for Development Cooperation, disclosed that attackers may hold the names and email addresses of the 20,614 people registered on its Grants Portal, the system Norad and Norway's Ministry of Foreign Affairs use to collect funding applications for aid projects.",
@@ -223,28 +272,22 @@
       "_anchor": "i-6b1d9cd5a0"
     },
     {
-      "title": "Backdoored ARTEX Exposes 62 Consoles",
-      "area": "AI Security",
-      "latest_developments": "The Indian Computer Emergency Response Team, CERT-In, disclosed on November 5, 2026 that an AI-assisted actor it tracks as Crafty Falcon is running publicly available AI-driven offensive security tools against banking, financial services, and insurance companies in India, and called the activity active and ongoing, while researchers found a backdoored Docker image for ARTEX, the AI penetration-testing framework CrowdStrike ties to the China-based group Vapor Panda, that leaves 62 of the framework's consoles open to root access; Check Point Research named Haiou, a jailbreak bundle for OpenAI Codex that rewrites the agent's trusted instructions to insert advertisements for a third-party AI gateway, a technique the firm calls prompt adware.",
-      "summary": "Criminal crews increasingly download the same open-source AI attack frameworks, and whoever ships the container image controls the operators who run it. Security teams should watch for ARTEX traffic patterns against financial infrastructure and treat agent configuration files as code that attackers can edit.",
+      "title": "White House Devices Rent Out Their Addresses",
+      "area": "Nation-State Activity",
+      "latest_developments": "Krebs on Security reported on November 5, 2026 that security researchers found several White House staffers working on computers or mobile devices that run residential proxy services, software which puts those devices' internet addresses up for rent to strangers, and that one of the proxy services belongs to a Russian company whose founder's web hosting business served as ground zero for the 2016 cyberattacks on election systems in Arizona and Illinois.",
+      "summary": "Residential proxy code arrives bundled inside free apps, games, and VPN clients, then routes other people's traffic through the host machine, which hands outsiders an address inside a trusted network and masks their activity behind it. Organizations should inventory managed devices for proxy software development kits and block the known proxy networks at the egress point.",
       "tags": [
-        "ai",
-        "apt",
+        "government",
         "malware"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "CERT-In Flags AI-Driven Attacks as Backdoored ARTEX Exposes 62 Consoles to Root Access",
-          "url": "https://thehackernews.com/2026/11/backdoored-docker-image-for-artex-ai.html"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Researchers Uncover Prompt Adware Hidden in OpenAI Codex Jailbreak Toolkit",
-          "url": "https://thehackernews.com/2026/11/researchers-uncover-prompt-adware.html"
+          "source": "Krebs on Security",
+          "title": "Want to Rent an Internet Address at the White House?",
+          "url": "https://krebsonsecurity.com/2026/11/want-to-rent-an-internet-address-at-the-white-house/"
         }
       ],
-      "_anchor": "i-4f9bb7c1ff"
+      "_anchor": "i-49bf8b366c"
     },
     {
       "title": "Chainalysis Says the Breach Touched Every User",
@@ -263,43 +306,25 @@
         }
       ],
       "_anchor": "i-350327fdd7"
-    },
-    {
-      "title": "White House Devices Rent Out Their Addresses",
-      "area": "Nation-State Activity",
-      "latest_developments": "Krebs on Security reported on November 5, 2026 that security researchers found several White House staffers working on computers or mobile devices that run residential proxy services, software which puts those devices' internet addresses up for rent to strangers, and that one of the proxy services belongs to a Russian company whose founder's web hosting business served as ground zero for the 2016 cyberattacks on election systems in Arizona and Illinois.",
-      "summary": "Residential proxy code arrives bundled inside free apps, games, and VPN clients, then routes other people's traffic through the host machine, which hands outsiders an address inside a trusted network and masks their activity behind it. Organizations should inventory managed devices for proxy software development kits and block the known proxy networks at the egress point.",
-      "tags": [
-        "government",
-        "malware"
-      ],
-      "sources": [
-        {
-          "source": "Krebs on Security",
-          "title": "Want to Rent an Internet Address at the White House?",
-          "url": "https://krebsonsecurity.com/2026/11/want-to-rent-an-internet-address-at-the-white-house/"
-        }
-      ],
-      "_anchor": "i-49bf8b366c"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,619.88",
-      "pct": "-0.9%",
+      "value": "7,546.55",
+      "pct": "-2.0%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "52,247.94",
-      "pct": "-0.4%",
+      "value": "52,084.04",
+      "pct": "-0.5%",
       "arrow": "▼"
     },
     {
       "label": "Nasdaq",
-      "value": "25,578.91",
-      "pct": "-2.5%",
+      "value": "25,204.97",
+      "pct": "-4.0%",
       "arrow": "▼"
     },
     {
@@ -310,27 +335,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1179",
-      "pct": "-0.1%",
-      "arrow": "▼"
+      "value": "1.1195",
+      "pct": "+0.1%",
+      "arrow": "▲"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3387",
-      "pct": "+0.2%",
+      "value": "1.3417",
+      "pct": "+0.5%",
       "arrow": "▲"
     },
     {
       "label": "USD/JPY",
-      "value": "157.94",
-      "pct": "+0.3%",
+      "value": "158.04",
+      "pct": "+0.5%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "This Afternoon: Sunny, high 70F.",
     "Tonight: Partly Cloudy, low 48F.",
-    "Friday: Partly Sunny then Chance Rain Showers, high 63F."
+    "Friday: Mostly Cloudy then Chance Light Rain, high 63F.",
+    "Friday Night: Chance Light Rain then Mostly Cloudy, low 38F."
   ],
   "sports": [
     {
@@ -347,17 +372,55 @@
     {
       "team": "Penguins",
       "record": "5-8",
-      "games": [],
+      "games": [
+        {
+          "date": "Thu Nov 5",
+          "result": "Bruins 0 · Penguins 1 · 8:26 - 1st (in progress at last update)",
+          "url": "https://plaintextsports.com/nhl/2026-11-05/bos-pit",
+          "recap": ""
+        }
+      ],
       "next": {
-        "matchup": "Bruins @ Penguins",
-        "when": "Thu Nov 5, 7:00 PM",
-        "url": "https://plaintextsports.com/nhl/2026-11-05/bos-pit"
+        "matchup": "Penguins @ Kings",
+        "when": "Sat Nov 7, 9:00 PM",
+        "url": "https://plaintextsports.com/nhl/2026-11-07/pit-lak"
       },
       "source": "ESPN"
     }
   ],
   "local": {
     "business_politics": [
+      {
+        "title": "Investors Balk at Anthropic's $1.5 Trillion IPO",
+        "latest_developments": "The Wall Street Journal reported Thursday evening, November 5, that major investors doubt Anthropic can carry the roughly $1.5 trillion valuation it seeks in its initial public offering and expect the artificial-intelligence company to price significantly lower.",
+        "summary": "Anthropic filed its S-1 in late October for what would rank as the largest listing Wall Street has ever attempted, and institutional buyers have pushed the number down through the autumn from the company's earlier ambitions. The repricing lands on the day technology shares suffered their worst session since April, and Blackstone has already told clients Anthropic may carry a high junk rating once it trades.",
+        "sources": [
+          {
+            "source": "WSJ Markets",
+            "title": "Major Investors Are Skeptical Anthropic IPO Can Achieve $1.5 Trillion Valuation",
+            "url": "https://www.wsj.com/finance/major-investors-are-skeptical-anthropic-ipo-can-achieve-1-5-trillion-valuation-ca965d8b?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-2a29e8b569"
+      },
+      {
+        "title": "Funds Tighten the Exits",
+        "latest_developments": "Walleye, the multi-strategy hedge fund with $17 billion under management, told clients Thursday, November 5, that it will return capital and shrink its equity business after its worst month since the coronavirus crisis, and Blackstone said the same day it will double lock-up periods for BXPE clients in Singapore and Hong Kong, penalizing withdrawals inside four years.",
+        "summary": "Both firms moved to slow the pace at which investor money can leave, Walleye by handing cash back and cutting its stock-picking pods, Blackstone by extending gates on its private-equity vehicle for wealthy Asian clients. The two decisions arrived during the week markets shed trillions on artificial-intelligence positions, the sort of stress that shows up first in redemption terms.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Hedge fund Walleye hands back capital as it slims down equity business",
+            "url": "https://www.ft.com/content/fb02c333-a439-4acd-b0b6-e50633ce863e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Markets",
+            "title": "Blackstone doubles lock-up periods for some Asian investors",
+            "url": "https://www.ft.com/content/97215edc-736f-45f3-84ee-c1ae0c89493a?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-4019637701"
+      },
       {
         "title": "Paraguay's President Resigns as a Bank Collapses",
         "latest_developments": "The Wall Street Journal reported Thursday, November 5, that Paraguayan President Santiago Peña resigned after the collapse of a bank closely tied to him touched off a financial crisis.",
@@ -373,9 +436,29 @@
       },
       {
         "title": "Bond Yields Tumble as the Blue Wave Reaches Markets",
-        "latest_developments": "The S&P 500 fell more than 3% and the Nasdaq Composite plunged in chaotic trading Thursday afternoon, November 5, with chip stocks leading the rout as investors concluded that Democrats elected up and down the ballot will slow data center construction; the Stoxx Europe 600 passed the S&P 500 for the year, gold futures extended their post-midterm gains, and oil recovered part of Wednesday's heavy loss.",
+        "latest_developments": "The selloff finished as Wall Street's worst session since the tariff turmoil last April: the Nasdaq 100 fell 6.4%, the S&P 500 fell 4.4%, the Nasdaq composite closed in correction territory, and the Financial Times counted $3.2 trillion of market value gone while the Wall Street Journal put the technology-sector loss at $2.5 trillion, with weak earnings from two major chip designers compounding the post-election bet that newly elected officials will curb data center construction; Treasury and European bond yields fell to eight-week lows and gold futures extended their gains as the dollar weakened.",
         "summary": "Investors read the Democratic sweep of Congress—which leaves President Trump facing a legislature he does not control—as a brake on fiscal expansion and on the White House policymaking that has rattled markets, and they are dumping the sectors the administration favored while Wall Street bets the margin of the Republican defeat empowers moderates in Washington. The Wall Street Journal says the result sets the stage for a debt-ceiling fight, and executives at the Financial Times Future of AI summit conceded that public hostility now threatens the trillion-dollar data center build-out.",
         "sources": [
+          {
+            "source": "FT Home",
+            "title": "Wall Street sheds $3.2tn as Democratic midterm sweep triggers brutal AI rout",
+            "url": "https://www.ft.com/content/3d079b3d-580d-400b-bf9c-56af6a08f60f?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Wall Street Gets $2.5 Trillion AI Reality Check With Historic Rout of Tech Stocks",
+            "url": "https://www.wsj.com/finance/stocks/wall-street-gets-2-5-trillion-ai-reality-check-with-historic-rout-of-tech-stocks-93985d7c?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "Will Democrats stall the AI boom?",
+            "url": "https://www.ft.com/content/5dedb9bf-bd12-4956-b2b7-ce968e1e1371?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Gold Settles Higher As Yields, U.S. Dollar Weaken",
+            "url": "https://www.wsj.com/finance/commodities-futures/gold-flat-after-midterm-linked-rebound-2d7cca6a?mod=rss_markets_main"
+          },
           {
             "source": "FT Home",
             "title": "Nasdaq tumbles nearly 4% as tech stocks slide in wake of midterms",
@@ -385,29 +468,9 @@
             "source": "WSJ Markets",
             "title": "Treasury, European Bond Yields Tumble as Markets Lifted By U.S. Democrats’ Victory",
             "url": "https://www.wsj.com/finance/investing/u-s-treasury-yields-fall-to-eight-week-lows-as-markets-digest-midterm-results-7effce3e?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "AI Selloff Extends, Treasurys Gain as Blue Wave Reverberates",
-            "url": "https://www.wsj.com/finance/stocks/ai-selloff-extends-treasurys-gain-as-blue-wave-reverberates-2d60fa21?mod=rss_markets_main"
-          },
-          {
-            "source": "FT Home",
-            "title": "Wall Street bets Democratic sweep will empower moderates in Washington",
-            "url": "https://www.ft.com/content/18739027-d5cc-4e18-825e-d43ac7d1ef9f?syn-25a6b1a6=1"
-          },
-          {
-            "source": "FT Home",
-            "title": "European stocks approach all-time high on Democratic sweep",
-            "url": "https://www.ft.com/content/1ca182d6-8d16-4ddb-98fb-cf933b4c3073?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Midterms Set Stage for Debt-Ceiling Clash",
-            "url": "https://www.wsj.com/finance/investing/apple-can-be-an-expensive-ai-safe-haven-15014fb9?mod=rss_markets_main"
           }
         ],
-        "_anchor": "i-51579df24b"
+        "_anchor": "i-d347663d90"
       },
       {
         "title": "The Bank of England Lifts Rates to 4%",
@@ -543,6 +606,55 @@
     ],
     "around_town": [
       {
+        "title": "The Justice Department Sues Penn State Over Tuition",
+        "latest_developments": "The Department of Justice filed a complaint Thursday, November 5, against Pennsylvania State University, challenging the in-state tuition rates the university charges some immigrants living in the country illegally.",
+        "summary": "Penn State extends resident tuition to certain students without legal status, and the Trump administration now asks a federal court to end the practice. The case puts the pricing policy of Pennsylvania's largest public university in front of a judge.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Trump administration sues Penn State over in-state tuition for students in the US illegally",
+            "url": "https://www.wpxi.com/news/local/trump-administration-sues-penn-state-over-in-state-tuition-students-us-illegally/FYJYT3HZQRGODOYFXGFR3RMYJY/"
+          }
+        ],
+        "_anchor": "i-1981df16ec"
+      },
+      {
+        "title": "Ross Township Proposes a 12.5% Tax Increase",
+        "latest_developments": "WPXI reported Thursday, November 5, that the Ross Township Board of Commissioners will vote next month on a proposed 12.5% property tax increase, the third increase in as many years.",
+        "summary": "Ross Township, the Allegheny County municipality north of Pittsburgh that holds the McKnight Road retail corridor, has raised its property tax rate in each of the past two years and has now written another increase into its proposed budget. Homeowners there learn the final figure when the commissioners vote in December.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Commissioners propose property tax increase in Ross Township",
+            "url": "https://www.wpxi.com/news/local/commissioners-propose-property-tax-increase-ross-township/2XTQCFJX6NCWJFX5Y56SXNX3K4/"
+          }
+        ],
+        "_anchor": "i-c8b1a1d163"
+      },
+      {
+        "title": "Summer Lee Sets the Majority's Terms",
+        "latest_developments": "Representative Summer Lee of Swissvale told PublicSource in a question-and-answer published Thursday, November 5, that the new Democratic House majority will send President Trump \"all of our top priorities\" and called him a lame-duck president who would have to find ways to regain ground.",
+        "summary": "Lee won reelection in Pennsylvania's 12th District on Tuesday, November 3, by more than 25 percentage points, and she returns to a chamber her party now controls. WTAE reported the same day that the new majorities can open oversight of the executive branch without Trump's cooperation, and that Trump has signaled he will veto Democratic legislation.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "Q&A: Summer Lee wants to send Trump ‘all of our top priorities’",
+            "url": "https://www.publicsource.org/summer-lee-democratic-majority-priorities-congress/"
+          },
+          {
+            "source": "WTAE",
+            "title": "What’s next for a Democratic Congress: Oversight. Maybe impeachment.",
+            "url": "https://www.wtae.com/article/whats-next-democratic-congress-oversight-impeachment/74350410"
+          },
+          {
+            "source": "WTAE",
+            "title": "Trump threatens veto power as Democrats prepare to lead Congress",
+            "url": "https://www.wtae.com/article/trump-threatens-veto-power-as-democrats-prepare-to-lead-congress/74349533"
+          }
+        ],
+        "_anchor": "i-e16d9369ff"
+      },
+      {
         "title": "Council Weighs More Housing Around Pitt",
         "latest_developments": "WPXI reported Thursday, November 5, that Pittsburgh City Council held a public hearing Wednesday, November 4, on a zoning amendment that would allow more housing development around the University of Pittsburgh's Oakland campus.",
         "summary": "The amendment would loosen the zoning rules that govern what developers can build in the blocks ringing Pitt, where student and staff demand presses hardest on Pittsburgh's housing supply. Council takes the measure up after the hearing.",
@@ -600,6 +712,11 @@
             "source": "WPXI",
             "title": "Road closures, parking restrictions announced for EQT Pittsburgh 10 Miler & 10K",
             "url": "https://www.wpxi.com/news/local/road-closures-parking-restrictions-announced-eqt-pittsburgh-10-miler-10k/SGWR65WMFBFFZIBRIHWTXPD3AQ/"
+          },
+          {
+            "source": "TribLive",
+            "title": "Downtown, North Shore road closures planned for 10 Miler race",
+            "url": "https://triblive.com/local/downtown-north-shore-road-closures-planned-for-10-miler-race/"
           }
         ],
         "_anchor": "i-461642a744"
@@ -637,13 +754,18 @@
       },
       {
         "title": "Morning Rain, Then a Cooler Weekend",
-        "latest_developments": "The morning rain cleared out by Thursday afternoon, November 5, and WPXI carries sunshine, winds of 10 to 20 mph, and highs near 70 through the rest of the day before cooler air arrives.",
-        "summary": "The storm that ended Pittsburgh's long dry stretch Wednesday evening left showers behind Thursday morning. WTAE's forecast carries isolated showers and a cooler weekend across Western Pennsylvania.",
+        "latest_developments": "The morning rain cleared by Thursday afternoon, November 5, and temperatures reached near 70 under sunshine and 10-to-20-mph winds; KDKA's evening forecast and WTAE both turn the region cooler with isolated showers through the weekend.",
+        "summary": "The storm that ended Pittsburgh's long dry stretch Wednesday evening left showers behind Thursday morning. Western Pennsylvania now slides back below the 70-degree readings that held through early November.",
         "sources": [
           {
             "source": "KDKA",
             "title": "Temperatures cool off in Pittsburgh with some morning rain expected on Thursday",
             "url": "https://www.cbsnews.com/pittsburgh/news/temperatures-cool-off-in-pittsburgh-with-some-morning-rain-expected-on-thursday/"
+          },
+          {
+            "source": "KDKA",
+            "title": "KDKA-TV Evening Forecast (11/5)",
+            "url": "https://www.cbsnews.com/pittsburgh/video/kdka-tv-evening-forecast-115-7/"
           },
           {
             "source": "WTAE",
@@ -674,6 +796,32 @@
     ],
     "events": [
       {
+        "title": "Billy Porter Starts the Audacity Project",
+        "latest_developments": "NEXTpittsburgh reported Thursday, November 5, that Billy Porter has launched the Audacity Project to build a pipeline for Pittsburgh young people into film and television jobs.",
+        "summary": "Porter, the Tony- and Emmy-winning performer who grew up in Pittsburgh, aims the program at on-screen and behind-the-camera careers. Project coordinator Gregory Lewis says the work centers on young people who already have the passion to do those jobs.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Arts & Entertainment",
+            "title": "Billy Porter’s new Audacity Project builds a pipeline for Pittsburgh youth in film and TV",
+            "url": "https://nextpittsburgh.com/arts-entertainment/billy-porters-new-audacity-project-builds-a-pipeline-for-pittsburgh-youth-in-film-and-tv/"
+          }
+        ],
+        "_anchor": "i-a2d4b2fdd4"
+      },
+      {
+        "title": "Herbert Blomstedt Dies at 99",
+        "latest_developments": "The Post-Gazette reported Thursday, November 5, that the conductor Herbert Blomstedt, who led the San Francisco Symphony from 1985 to 1995, has died at 99.",
+        "summary": "Blomstedt spent a decade as music director in San Francisco and kept conducting major orchestras on both sides of the Atlantic into his nineties, a career that touched most of the podiums classical audiences know.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "Herbert Blomstedt, who headed San Francisco Symphony from 1985-95, dies at age 99",
+            "url": "https://www.post-gazette.com/news/obituaries/2026/11/05/herbert-blomstedt-san-francisco-symphony-pittsburgh-honeck/stories/202611050032"
+          }
+        ],
+        "_anchor": "i-4204b0c3ce"
+      },
+      {
         "title": "Daya Headlines Light Up Night",
         "latest_developments": "Pittsburgh laid out its holiday lineup Thursday, November 5: Mt. Lebanon native Daya headlines the 65th Light Up Night on Saturday, November 21, the Holiday Market returns to a renovated Market Square, and a new winter attraction opens at Arts Landing.",
         "summary": "Light Up Night, the downtown Pittsburgh celebration that opens the holiday season on the Saturday before Thanksgiving, brings the pop singer Daya back to her hometown stage. City leaders say the added attractions are meant to pull people downtown through the season.",
@@ -687,6 +835,11 @@
             "source": "WPXI",
             "title": "Holiday Market returns to renovated Market Square as Pittsburgh announces new holiday attractions",
             "url": "https://www.wpxi.com/news/local/holiday-market-returns-renovated-market-square-pittsburgh-announces-new-holiday-attractions/PLORJKYUOJERTHI5MPOD6X7XSE/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Plans revealed for Pittsburgh's 65th annual Light Up Night celebration",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-light-up-night-2026/"
           }
         ],
         "_anchor": "i-cdb5c4277f"
@@ -738,12 +891,17 @@
       {
         "title": "Sting Plays Pittsburgh This Weekend",
         "latest_developments": "The Post-Gazette's weekend guide, published Thursday, November 5, leads with a veterans parade, a Sting concert, and the Pittsburgh Vintage Mixer.",
-        "summary": "The paper's list of things to do November 6 through November 8 pairs the Sting show with the veterans parade and the Vintage Mixer, the clothing and collectibles fair that filled the David L. Lawrence Convention Center earlier this week.",
+        "summary": "The paper's list of things to do November 6 through November 8 pairs the Sting show with the Veterans Day Parade and the Pittsburgh Vintage Mixer, the vintage clothing and collectibles fair that NEXTpittsburgh says runs this weekend.",
         "sources": [
           {
             "source": "Post-Gazette Arts & Entertainment",
             "title": "Things to do this weekend: Veterans parade, Sting in concert, Vintage Mixer and more",
             "url": "https://www.post-gazette.com/life/recreation/2026/11/05/things-to-do-in-pittsburgh-this-weekend-4/stories/202611050015"
+          },
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "8 incredible vintage finds from Pittsburgh thrift shops and the Vintage Mixer",
+            "url": "https://nextpittsburgh.com/guides-to-pittsburgh/8-incredible-vintage-finds-from-pittsburgh-thrift-shops-and-the-vintage-mixer/"
           }
         ],
         "_anchor": "i-ccb773ec61"
@@ -760,19 +918,6 @@
           }
         ],
         "_anchor": "i-6af212216e"
-      },
-      {
-        "title": "A Book Launch in Regent Square",
-        "latest_developments": "Pittsburgh City Paper's November 5 listings include the launch of Rex Martin-Hawk's book that same night.",
-        "summary": "Rex Martin-Hawk launches \"Woman Until Further Evidence\" at 7 p.m. Thursday, November 5, at Stay Gold Books, 1104 South Braddock Avenue in Regent Square. The event is free; details at staygoldbooks.com.",
-        "sources": [
-          {
-            "source": "Pittsburgh City Paper",
-            "title": "Pittsburgh’s top events: Thu., Nov. 5-Wed., Nov. 11",
-            "url": "https://www.pghcitypaper.com/listings/this-weeks-top-events/pittsburghs-top-events-thu-nov-5-wed-nov-11/"
-          }
-        ],
-        "_anchor": "i-6af212216e-2"
       },
       {
         "title": "Katie Brook Takes Over Quantum Theatre",
@@ -802,6 +947,37 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "SNR Drive Grades Every Position Group",
+        "latest_developments": "Matt Williamson and Wes Uhler handed out midseason grades for every Steelers offensive, defensive, and special teams unit on SNR Drive Thursday, November 5, and brought back Bob Labriola, the team's longtime editor they call the Dean of Doom.",
+        "summary": "SNR Drive, the daily show on the Steelers' YouTube channel, went unit by unit during the bye week with Pittsburgh at 6-2 and leading the AFC North. Labriola's return gave the hosts a second read on the roster after the NFL trade deadline passed Tuesday, November 3.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Bob Labriola Returns + Position Group Grades So Far | SNR Drive (Nov.5) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=VfH-j5NllAA"
+          }
+        ],
+        "_anchor": "i-8957c35e10"
+      },
+      {
+        "title": "McCarthy Talks the Bye on Steelers Insider",
+        "latest_developments": "The Steelers posted a bye-week edition of Steelers Insider on Thursday, November 5, in which broadcaster Bob Pompeani and head coach Mike McCarthy reviewed the first half of the season with the team's other insiders.",
+        "summary": "McCarthy, in his first season as the Steelers' head coach, used the open week to take stock of a 6-2 start built on the running game and a defense that has tightened around T.J. Watt. The team also released its Sights & Sounds film from the Week 8 win over the Cleveland Browns.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Steelers Insider featuring Mike McCarthy: Bye Week | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=zwRBgLU7m3Y"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Sights & Sounds: Week 8 Win vs Browns | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=BH27lYQHgZM"
+          }
+        ],
+        "_anchor": "i-0d66a53007"
+      },
       {
         "title": "The NFL Trade Deadline Gets Busier",
         "latest_developments": "The Post-Gazette's Steelers desk examined Thursday, November 5, why the NFL trade deadline now produces more deals than ever, two days after the November 3 cutoff passed.",
@@ -857,6 +1033,32 @@
     ],
     "team_usa": [
       {
+        "title": "Angel City Signs Maddie DiMaria",
+        "latest_developments": "Angel City FC announced Thursday, November 5, that it has signed Maddie DiMaria, the United States under-17 forward and an Under-17 World Cup record-holder, through 2030, and that she is eligible for the National Women's Soccer League playoffs now underway.",
+        "summary": "DiMaria arrives in Los Angeles straight from the youth national team pipeline, with a contract running four more seasons. The timing lets Angel City use her immediately in the postseason that Gotham FC enters as Shield winner and top seed.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Angel City signs U17 WC record-holder DiMaria, eligible for playoffs",
+            "url": "https://www.espn.com/soccer/story/_/id/50392189/angel-city-signs-u17-wc-record-holder-maddie-dimaria"
+          }
+        ],
+        "_anchor": "i-4ef1d630b4"
+      },
+      {
+        "title": "Adams Says Bournemouth Turned a Page",
+        "latest_developments": "United States midfielder Tyler Adams said Thursday, November 5, after Bournemouth beat Sparta Prague 3-1 in the Europa League, that his club has \"turned a page\" during a run of seven straight wins.",
+        "summary": "Adams, the holding midfielder who has anchored the United States men's national team through two World Cup cycles, plays that same role for Bournemouth, whose streak now spans league and European play.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Adams: Bournemouth 'turned a page' amid 7-win streak",
+            "url": "https://www.espn.com/soccer/story/_/id/50393374/tyler-adams-bournemouth-turned-page-seventh-straight-win"
+          }
+        ],
+        "_anchor": "i-306ab02c26"
+      },
+      {
         "title": "The U.S. Women Will Wear Generic Jerseys in Denmark",
         "latest_developments": "ESPN reported Wednesday night, November 4, that the United States and Canadian women's hockey teams will wear generic uniforms at the world championships in Denmark, resolving the jersey question players still could not answer a week ago.",
         "summary": "A dispute over commercial rights the International Ice Hockey Federation negotiated has stripped both national teams of their own sweaters for the tournament. The United States and Canada split a two-game exhibition series in late October ahead of the worlds.",
@@ -904,48 +1106,76 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "OpenAI's pipeline turned 2,308 Linux kernel findings into 948 root exploits while CERT-In watched Crafty Falcon aim the same publicly downloadable AI offensive tooling at Indian banks.",
+      "text": "Microsoft Threat Intelligence tracked ARTEX operators mining GitHub for OAuth secrets while OpenAI's pipeline turned kernel bugs into 948 root exploits, moving recon and exploitation onto machine time.",
       "links": [
+        {
+          "anchor": "i-e2845eccba",
+          "phrase": "ARTEX",
+          "start": 38,
+          "end": 43,
+          "title": "Backdoored ARTEX Exposes 62 Consoles"
+        },
         {
           "anchor": "i-25c3eda20c",
           "phrase": "948 root exploits",
-          "start": 58,
-          "end": 75,
+          "start": 134,
+          "end": 151,
           "title": "OpenAI Pipeline Writes 948 Linux Root Exploits"
-        },
-        {
-          "anchor": "i-4f9bb7c1ff",
-          "phrase": "Crafty Falcon",
-          "start": 98,
-          "end": 111,
-          "title": "Backdoored ARTEX Exposes 62 Consoles"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "DigiCert's exposed internal system, the Norad portal breach, Chainalysis admitting every user was touched, and a trojanized Control Web Panel server all failed through infrastructure others depend on.",
+      "text": "Trust infrastructure cracked at once, with OpenSSH 10.6p2 fixing a musl password bypass, DigiCert leaking customer identity documents, and Zyxel firmware still leaving CVE-2026-107441 exploitable.",
       "links": [
+        {
+          "anchor": "i-671b07a9ce",
+          "phrase": "OpenSSH 10.6p2",
+          "start": 43,
+          "end": 57,
+          "title": "OpenSSH Bypass Hits musl-Based Linux"
+        },
         {
           "anchor": "i-6b1d9cd5a0",
           "phrase": "DigiCert",
-          "start": 0,
-          "end": 8,
+          "start": 89,
+          "end": 97,
           "title": "DigiCert Exposure and a Norad Portal Breach"
         },
         {
-          "anchor": "i-350327fdd7",
-          "phrase": "Chainalysis",
-          "start": 61,
-          "end": 72,
-          "title": "Chainalysis Says the Breach Touched Every User"
-        },
+          "anchor": "i-806a92e4d6",
+          "phrase": "CVE-2026-107441",
+          "start": 168,
+          "end": 183,
+          "title": "Zyxel GS1900 Patch Left the Zero-Day Open"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "CISA, the FBI, and the Agriculture, Health and Human Services, and Transportation departments issued first-time guidance on industrial refrigeration and cold chain monitoring after attacks spoiled groceries and threatened blood supplies.",
+      "links": [
+        {
+          "anchor": "i-09b5181627",
+          "phrase": "cold chain monitoring",
+          "start": 153,
+          "end": 174,
+          "title": "Feds Tell Infrastructure Operators to Harden Cooling"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "updated",
+      "text": "Routine software is now the delivery vehicle, with the CWPdoor Linux backdoor riding inside a trojanized cwpsrv build alongside a game launcher and calendar invites.",
+      "links": [
         {
           "anchor": "i-5263a8e99f",
-          "phrase": "Control Web Panel",
-          "start": 124,
-          "end": 141,
+          "phrase": "CWPdoor",
+          "start": 55,
+          "end": 62,
           "title": "A Game Launcher and Calendar Invites Carry Malware"
         }
       ]
@@ -953,91 +1183,56 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Binarly showed the GS1900 firmware Zyxel shipped closed the wrong CVE, and GhostMap abuses how Android parses the ZIP inside an APK, so advisories prove little.",
+      "text": "Investors balked at Anthropic's $1.5 trillion IPO target as Walleye shrank its equity business and a $3.2 trillion selloff pulled bond yields sharply lower.",
       "links": [
         {
-          "anchor": "i-806a92e4d6",
-          "phrase": "GS1900",
-          "start": 19,
-          "end": 25,
-          "title": "Zyxel GS1900 Patch Left the Zero-Day Open"
+          "anchor": "i-2a29e8b569",
+          "phrase": "Anthropic's",
+          "start": 20,
+          "end": 31,
+          "title": "Investors Balk at Anthropic's $1.5 Trillion IPO"
         },
         {
-          "anchor": "i-da77af0f43",
-          "phrase": "GhostMap",
-          "start": 75,
-          "end": 83,
-          "title": "GhostMap Loops Android, CISA Flags an Apple Bug"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Researchers disclosed *sshole, an OpenSSH bypass that logs attackers into accounts administrators had blocked on Alpine Linux and other musl-based distributions.",
-      "links": [
+          "anchor": "i-4019637701",
+          "phrase": "Walleye",
+          "start": 60,
+          "end": 67,
+          "title": "Funds Tighten the Exits"
+        },
         {
-          "anchor": "i-671b07a9ce",
-          "phrase": "OpenSSH bypass",
-          "start": 34,
-          "end": 48,
-          "title": "OpenSSH Bypass Hits musl-Based Linux"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Chip stocks led a 3% S&P 500 rout on blue-wave data center doubts, the Bank of England hit 4%, and Paraguay's Santiago Peña resigned as a bank collapsed.",
-      "links": [
-        {
-          "anchor": "i-51579df24b",
-          "phrase": "Chip stocks",
-          "start": 0,
-          "end": 11,
+          "anchor": "i-d347663d90",
+          "phrase": "bond yields",
+          "start": 130,
+          "end": 141,
           "title": "Bond Yields Tumble as the Blue Wave Reaches Markets"
-        },
-        {
-          "anchor": "i-5e42846fbc",
-          "phrase": "Bank of England",
-          "start": 71,
-          "end": 86,
-          "title": "The Bank of England Lifts Rates to 4%"
-        },
-        {
-          "anchor": "i-9df6b32c72",
-          "phrase": "Santiago Peña",
-          "start": 110,
-          "end": 123,
-          "title": "Paraguay's President Resigns as a Bank Collapses"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Buffalo Township paused data center development as Pittsburgh City Council weighed more Oakland housing and the city named Daya to headline the 65th Light Up Night.",
+      "text": "The Justice Department sued Penn State over in-state tuition for some immigrants, Ross Township floated a 12.5% tax increase, and Summer Lee laid out the new majority's demands.",
       "links": [
         {
-          "anchor": "i-240ea53f68",
-          "phrase": "Buffalo Township",
-          "start": 0,
-          "end": 16,
-          "title": "Buffalo Township Pauses Data Centers"
+          "anchor": "i-1981df16ec",
+          "phrase": "Penn State",
+          "start": 28,
+          "end": 38,
+          "title": "The Justice Department Sues Penn State Over Tuition"
         },
         {
-          "anchor": "i-0ed813f96d",
-          "phrase": "City Council",
-          "start": 62,
-          "end": 74,
-          "title": "Council Weighs More Housing Around Pitt"
+          "anchor": "i-c8b1a1d163",
+          "phrase": "Ross Township",
+          "start": 82,
+          "end": 95,
+          "title": "Ross Township Proposes a 12.5% Tax Increase"
         },
         {
-          "anchor": "i-cdb5c4277f",
-          "phrase": "Light Up Night",
-          "start": 149,
-          "end": 163,
-          "title": "Daya Headlines Light Up Night"
+          "anchor": "i-e16d9369ff",
+          "phrase": "Summer Lee",
+          "start": 130,
+          "end": 140,
+          "title": "Summer Lee Sets the Majority's Terms"
         }
       ]
     }
@@ -1049,20 +1244,16 @@
         "group": "security",
         "label": "Security",
         "feeds": 24,
-        "loaded": 23,
+        "loaded": 24,
         "window_hours": 24,
-        "in_window": 59,
-        "failed": [
-          {
-            "name": "CISA Advisories",
-            "error": "HTTPError: HTTP Error 403: Forbidden"
-          }
-        ],
+        "in_window": 66,
+        "failed": [],
         "empty": [
           "Schneier on Security",
+          "Sophos News",
           "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
-          "Cisco Talos",
+          "Graham Cluley",
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
@@ -1071,8 +1262,8 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 10,
+            "contributed": 10
           },
           "BleepingComputer": {
             "items": 15,
@@ -1091,8 +1282,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 4,
+            "contributed": 4
           },
           "SecurityWeek": {
             "items": 10,
@@ -1105,9 +1296,9 @@
             "contributed": 2
           },
           "CISA Advisories": {
-            "items": 0,
-            "in_window": 0,
-            "contributed": 0
+            "items": 30,
+            "in_window": 2,
+            "contributed": 2
           },
           "The Record": {
             "items": 5,
@@ -1131,8 +1322,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 0,
+            "contributed": 0
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -1146,18 +1337,18 @@
           },
           "Cisco Talos": {
             "items": 15,
-            "in_window": 0,
-            "contributed": 0
-          },
-          "Graham Cluley": {
-            "items": 20,
             "in_window": 1,
             "contributed": 1
           },
+          "Graham Cluley": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          },
           "Microsoft Security Blog": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 4
           },
           "Google Project Zero": {
             "items": 7,
@@ -1176,8 +1367,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 7,
+            "contributed": 7
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1204,17 +1395,17 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 18
+            "contributed": 11
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 5
+            "contributed": 3
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 8,
-            "contributed": 0
+            "in_window": 9,
+            "contributed": 1
           },
           "Pittsburgh City Paper": {
             "items": 10,
@@ -1223,18 +1414,18 @@
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 1
+            "in_window": 3,
+            "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 3,
-            "contributed": 2
+            "in_window": 2,
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 10
+            "contributed": 19
           },
           "WPXI": {
             "items": 15,
@@ -1244,7 +1435,7 @@
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 17
+            "contributed": 19
           }
         }
       },
@@ -1260,38 +1451,38 @@
         "per_feed": {
           "WSJ World News": {
             "items": 74,
-            "in_window": 20,
+            "in_window": 19,
             "contributed": 5
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 29,
-            "contributed": 12
+            "in_window": 34,
+            "contributed": 21
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 60,
+            "in_window": 55,
             "contributed": 9
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 14,
-            "contributed": 5
+            "in_window": 17,
+            "contributed": 6
           },
           "The Economist": {
             "items": 300,
             "in_window": 67,
-            "contributed": 3
+            "contributed": 1
           },
           "FT Home": {
-            "items": 13,
-            "in_window": 13,
-            "contributed": 5
+            "items": 12,
+            "in_window": 12,
+            "contributed": 6
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 19
+            "contributed": 10
           },
           "FT Markets": {
             "items": 25,
@@ -1306,7 +1497,7 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 12,
+        "in_window": 13,
         "failed": [],
         "empty": [],
         "per_feed": {
@@ -1317,7 +1508,7 @@
           },
           "Post-Gazette Music": {
             "items": 20,
-            "in_window": 3,
+            "in_window": 4,
             "contributed": 0
           },
           "NEXTpittsburgh Events": {
@@ -1327,8 +1518,8 @@
           },
           "NEXTpittsburgh Arts & Entertainment": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 0
+            "in_window": 3,
+            "contributed": 1
           }
         }
       },
@@ -1336,10 +1527,19 @@
         "group": "sports_media",
         "label": "Sports media",
         "feeds": 6,
-        "loaded": 6,
+        "loaded": 4,
         "window_hours": 96,
-        "in_window": 30,
-        "failed": [],
+        "in_window": 29,
+        "failed": [
+          {
+            "name": "Not Just Football with Cam Heyward",
+            "error": "HTTPError: HTTP Error 404: Not Found"
+          },
+          {
+            "name": "Ben Roethlisberger / Channel Seven (YouTube)",
+            "error": "HTTPError: HTTP Error 404: Not Found"
+          }
+        ],
         "empty": [],
         "per_feed": {
           "Footbahlin with Ben Roethlisberger": {
@@ -1348,29 +1548,29 @@
             "contributed": 1
           },
           "Not Just Football with Cam Heyward": {
-            "items": 15,
-            "in_window": 6,
-            "contributed": 5
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
             "in_window": 15,
-            "contributed": 13
+            "contributed": 15
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
-            "items": 15,
-            "in_window": 1,
+            "items": 0,
+            "in_window": 0,
             "contributed": 0
           },
           "Post-Gazette Pirates": {
             "items": 20,
             "in_window": 3,
-            "contributed": 2
+            "contributed": 3
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 14,
-            "contributed": 9
+            "in_window": 10,
+            "contributed": 10
           }
         }
       },
@@ -1455,24 +1655,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 36708,
+          "outputTokens": 48385,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 131071,
+          "cacheCreationInputTokens": 140147,
           "webSearchRequests": 0,
-          "costUSD": 2.22844,
+          "costUSD": 2.611125,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14490
+          "thinkingTokens": 20759
         }
       },
-      "cost_usd": 2.22844,
-      "duration_ms": 391135,
+      "cost_usd": 2.611125,
+      "duration_ms": 516024,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-05 13:36 EST",
-    "items_considered": 59,
+    "generated_at": "2026-11-05 19:38 EST",
+    "items_considered": 66,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1553,11 +1753,12 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.2284,
-    "model_duration_ms": 391135,
+    "model_cost_usd": 2.6111,
+    "model_duration_ms": 516024,
     "local_from": null,
     "feed_failures": [
-      "CISA Advisories"
+      "Not Just Football with Cam Heyward",
+      "Ben Roethlisberger / Channel Seven (YouTube)"
     ]
   }
 }
