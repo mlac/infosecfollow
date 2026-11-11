@@ -1,27 +1,60 @@
 {
   "date": "2026-11-10",
-  "headline": "Attackers hammered the gear that runs enterprise networks—Barracuda email gateways, N-able's N-central, Xen Orchestra, and AhsayCBS backup servers—on the same day SAP shipped fixes for four flaws rated a perfect 10.0.",
+  "headline": "Microsoft closed an actively exploited Outlook zero-day among nearly 1,100 fixes while SAP patched four maximum-severity flaws and attackers hijacked the Xen Orchestra, Barracuda, and N-able consoles that administer everything else.",
   "emerging_trends": [
     {
-      "text": "The management and security appliances themselves are the way in this week: Barracuda's email gateways, N-able's N-central, Xen Orchestra, and AhsayCBS backup servers all fell to working exploits within days of disclosure, which turns the tools that administer a network into the attacker's console.",
-      "topic_title": "Xen Orchestra Bypass Hands Over Virtualization Hosts",
-      "link_phrase": "Xen Orchestra",
+      "text": "Microsoft's November Patch Tuesday ran past 1,200 fixes, SAP closed four flaws scored 10.0, and Adobe shipped 110 more, a volume that forces defenders to triage by evidence of exploitation rather than by count.",
+      "topic_title": "Microsoft Patches an Exploited Outlook Zero-Day",
+      "link_phrase": "Patch Tuesday",
       "_anchor": "trend-1"
     },
     {
-      "text": "Frontier models now sit on both sides of the ledger—Claude Fable 5.2 outscored GPT-6 Cyber on a multi-stage attack benchmark while Google DeepMind's agents formally verified the Signal protocol and Intezer's agents rebuilt Slack's source code from the shipped binary.",
-      "topic_title": "Claude 5.2 Tops an Offensive AI Benchmark",
-      "link_phrase": "Claude Fable 5.2",
+      "text": "Attackers spent the day inside administrative software itself—the Xen Orchestra console that runs XCP-ng hypervisors, N-able's N-central platform for managed service providers, and Barracuda's email gateways—where one authentication bypass reaches every machine underneath.",
+      "topic_title": "Xen Orchestra Bypass Hands Over Virtualization Hosts",
+      "link_phrase": "Xen Orchestra",
       "_anchor": "trend-2"
     },
     {
-      "text": "Standing cloud access granted to platform vendors keeps converting one credential theft into a breach of the whole customer base, as Qubole's identity and access management keys opened more than a dozen Amazon Web Services accounts and a third-party cloud compromise carried intruders into Fireworks AI's development machines.",
+      "text": "Railway's $740,000 in fraudulent AI usage, Qubole's stolen Amazon Web Services credentials, and the widening Fireworks AI intrusion show attackers treating cloud providers as a single door into every customer behind them, with the victim's model budget as the payoff.",
       "topic_title": "Qubole Credentials Open More Than a Dozen Clouds",
-      "link_phrase": "Qubole's identity",
+      "link_phrase": "Railway",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "Microsoft Patches an Exploited Outlook Zero-Day",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Microsoft fixed nearly 1,100 vulnerabilities on November 10, 2026, its second four-digit patch month in a row, among them CVE-2026-124194, a Microsoft Outlook zero-day the company says attackers already exploit, and 63 critical flaws; BleepingComputer counted 1,235 fixes once the Chromium updates for Microsoft Edge come in.",
+      "summary": "The critical set reaches Microsoft Exchange, SharePoint, Windows Search, and LDAP, so administrators should install the Outlook fix first and work down that list. Adobe, Apple, Google, and Mozilla all shipped security updates the same week, which leaves patching teams a crowded queue.",
+      "tags": [
+        "patch",
+        "zero-day"
+      ],
+      "sources": [
+        {
+          "source": "Krebs on Security",
+          "title": "Microsoft Fixes Nearly 1,100 Security Vulnerabilities",
+          "url": "https://krebsonsecurity.com/2026/11/microsoft-fixes-nearly-1100-security-vulnerabilities/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Exploited Outlook Zero-Day Among 1,094 Flaws Patched by Microsoft",
+          "url": "https://www.securityweek.com/exploited-outlook-zero-day-among-1094-flaws-patched-by-microsoft/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft November 2026 Patch Tuesday fixes 1,235 flaws, Outlook zero-day",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "November Patch Tuesday: An Overflowing Cornucopia of CVEs",
+          "url": "https://www.darkreading.com/vulnerabilities-threats/november-patch-tuesday-cornucopia-cves"
+        }
+      ],
+      "_anchor": "i-9364f9baac"
+    },
     {
       "title": "SAP Patches Four Perfect-Score Flaws",
       "area": "Vulnerabilities and Exploits",
@@ -58,7 +91,7 @@
     {
       "title": "Barracuda Gateways and N-able Fall to Public Exploits",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Barracuda Networks warned on November 10, 2026 that attackers now exploit the two Email Security Gateway flaws it patched November 2, 2026, among them CVE-2026-116606, an authorization bypass, to run commands as root, and N-able confirmed the N-central disclosure covers 33 zero-days with working proof-of-concept exploits, a set the researcher calls Able2Shell.",
+      "latest_developments": "CISA added six actively exploited flaws to its Known Exploited Vulnerabilities catalog on November 10, 2026, among them both Barracuda Email Security Gateway bugs that Barracuda confirmed attackers now chain for root—CVE-2026-116606, an authorization bypass, and CVE-2026-111560, an operating system command injection—plus CVE-2026-20320, an XML external entity flaw in Cisco BroadWorks, and CVE-2026-111793 in Openwave Messaging's Webtop media transcoder; N-able put the N-central disclosure at 33 zero-days with working proof-of-concept exploits, a set the researcher calls Able2Shell.",
       "summary": "The Barracuda chain hands an attacker with no login full control of the appliance that filters a company's email; watchTowr published the working steps on November 5, 2026. N-able keeps its hosted N-central environments offline and tells on-premises customers to shut their own servers down, because the Able2Shell bugs allow remote code execution, credential theft, and the creation of administrator accounts.",
       "tags": [
         "zero-day",
@@ -72,6 +105,11 @@
           "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-barracuda-email-security-gateway-flaws-to-get-root-access/"
         },
         {
+          "source": "CISA Advisories",
+          "title": "CISA Adds Six Known Exploited Vulnerabilities to Catalog",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/11/10/cisa-adds-six-known-exploited-vulnerabilities-catalog"
+        },
+        {
           "source": "The Hacker News",
           "title": "N-able Takes N-central Cloud Offline After Researcher Discloses 33 Zero-Days with PoC Exploits",
           "url": "https://thehackernews.com/2026/11/n-able-takes-hosted-n-central-offline.html"
@@ -80,48 +118,43 @@
           "source": "SecurityWeek",
           "title": "N-able Takes N-central Offline as Researcher Drops Over 30 Zero-Days",
           "url": "https://www.securityweek.com/n-able-takes-n-central-offline-as-researcher-drops-over-30-zero-days/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "N-able takes cloud platform offline after 30+ \"zero-days\" published",
-          "url": "https://www.bleepingcomputer.com/news/security/n-able-takes-cloud-platform-offline-after-30-plus-zero-days-published/"
         }
       ],
       "_anchor": "i-0e899e1e6c"
     },
     {
-      "title": "Turla's Cereal Toolset Siphons Government Email",
-      "area": "Nation-State Activity",
-      "latest_developments": "ESET disclosed on November 10, 2026 that Turla, the Russia-aligned group also tracked as Snake, planted a previously undocumented modular .NET toolset researchers named Cereal on the Microsoft Exchange servers of two government organizations, one in Kazakhstan and one in Romania, and copied selected messages straight out of the mail flow, among them correspondence those governments exchanged with NATO and European Union officials.",
-      "summary": "Cereal needs no attacker-owned command server: operators send instructions to the victim's own internet-facing Exchange server disguised as ordinary Outlook Web Access, Autodiscover, and ActiveSync requests, which leaves little outbound traffic to spot. Exchange administrators at government bodies should audit server-side modules and inspect those three request paths for anomalies.",
+      "title": "Xen Orchestra Bypass Hands Over Virtualization Hosts",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Vates VMS, the French company behind Xen Orchestra, tracks the exploited authentication bypass as VSA-2026-062 with no CVE identifier yet and pinned it on REST cookie parsing that turns the string authenticationToken=j:%7B%7D into an empty object the authentication check then accepts, handing attackers administrator privileges over XCP-ng virtualization hosts.",
+      "summary": "Xen Orchestra administers every virtual machine running on an XCP-ng host, so one bypass reaches the whole fleet; operators should update at once and take the console off the internet. Huntress separately detailed an October 2026 campaign that chained CVE-2026-105133 and CVE-2026-105134 in AhsayCBS backup software to bypass authentication, run arbitrary commands, and plant a sandbox-evading Python implant.",
       "tags": [
-        "apt",
-        "espionage",
-        "malware"
+        "exploit",
+        "vulnerability",
+        "patch"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Russian Turla Hackers Use New Cereal Malware to Steal Emails From Government Exchange Servers",
-          "url": "https://thehackernews.com/2026/11/russian-turla-hackers-use-new-cereal.html"
-        },
-        {
           "source": "BleepingComputer",
-          "title": "Turla hackers use new Cereal malware to spy on govt Exchange servers",
-          "url": "https://www.bleepingcomputer.com/news/security/turla-hackers-use-new-ceral-malware-to-spy-on-govt-exchange-servers/"
+          "title": "Critical Xen Orchestra auth bypass flaw exploited to hijack VM servers",
+          "url": "https://www.bleepingcomputer.com/news/security/critical-xen-orchestra-auth-bypass-flaw-exploited-to-hijack-vm-servers/"
         },
         {
-          "source": "Help Net Security",
-          "title": "Turla’s Cereal malware turns victims’ Exchange servers into spy hubs",
-          "url": "https://www.helpnetsecurity.com/2026/11/10/eset-turla-exchange-malware/"
+          "source": "The Hacker News",
+          "title": "Hackers Exploit Critical Xen Orchestra Auth Bypass Flaw to Gain Admin Access",
+          "url": "https://thehackernews.com/2026/11/hackers-exploit-critical-xen-orchestra.html"
         },
         {
-          "source": "The Record",
-          "title": "Russian hackers compromised government email servers to steal NATO, EU correspondence",
-          "url": "https://therecord.media/russia-hackers-espionage-romania-kazakhstan"
+          "source": "The Hacker News",
+          "title": "Attackers Exploit AhsayCBS Flaws to Deploy Sandbox-Evading Python Backdoor",
+          "url": "https://thehackernews.com/2026/11/attackers-exploit-ahsaycbs-flaws-to.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "IBM Aspera Faspex, SignalWire FreeSwitch Vulnerabilities Exploited in Attacks",
+          "url": "https://www.securityweek.com/ibm-aspera-faspex-signalwire-freeswitch-vulnerabilities-exploited-in-attacks/"
         }
       ],
-      "_anchor": "i-7d35c70e67"
+      "_anchor": "i-82b5e1a648"
     },
     {
       "title": "Chrome XML Zero-Day and iMessage Eavesdropping",
@@ -157,10 +190,44 @@
       "_anchor": "i-7e1f9b33c6"
     },
     {
+      "title": "Turla's Cereal Toolset Siphons Government Email",
+      "area": "Nation-State Activity",
+      "latest_developments": "ESET disclosed on November 10, 2026 that Turla, the Russia-aligned group also tracked as Snake, planted a previously undocumented modular .NET toolset researchers named Cereal on the Microsoft Exchange servers of two government organizations, one in Kazakhstan and one in Romania, and copied selected messages straight out of the mail flow, among them correspondence those governments exchanged with NATO and European Union officials.",
+      "summary": "Cereal needs no attacker-owned command server: operators send instructions to the victim's own internet-facing Exchange server disguised as ordinary Outlook Web Access, Autodiscover, and ActiveSync requests, which leaves little outbound traffic to spot. Exchange administrators at government bodies should audit server-side modules and inspect those three request paths for anomalies.",
+      "tags": [
+        "apt",
+        "espionage",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Russian Turla Hackers Use New Cereal Malware to Steal Emails From Government Exchange Servers",
+          "url": "https://thehackernews.com/2026/11/russian-turla-hackers-use-new-cereal.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Turla hackers use new Cereal malware to spy on govt Exchange servers",
+          "url": "https://www.bleepingcomputer.com/news/security/turla-hackers-use-new-ceral-malware-to-spy-on-govt-exchange-servers/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Turla's Cereal malware turns victims' Exchange servers into spy hubs",
+          "url": "https://www.helpnetsecurity.com/2026/11/10/eset-turla-exchange-malware/"
+        },
+        {
+          "source": "The Record",
+          "title": "Russian hackers compromised government email servers to steal NATO, EU correspondence",
+          "url": "https://therecord.media/russia-hackers-espionage-romania-kazakhstan"
+        }
+      ],
+      "_anchor": "i-7d35c70e67"
+    },
+    {
       "title": "Qubole Credentials Open More Than a Dozen Clouds",
       "area": "Data Breaches",
-      "latest_developments": "SecurityWeek reported on November 10, 2026 that the attacker holding Qubole's identity and access management credentials reached more than a dozen organizations' Amazon Web Services accounts and took files, secrets, keys, environment variables, and credentials, and Fireworks AI said on Monday, November 9, 2026 that the intrusion it first disclosed October 10, 2026 also reached account and billing information, secrets, datasets, and incomplete model weights for a limited set of accounts, after attackers broke into a third-party cloud provider and from there into its development machines.",
-      "summary": "Qubole, the data lake platform Idera owns, holds standing access into its customers' AWS accounts, which turned one credential theft into break-ins across the customer base between October 14 and October 26, 2026. Qubole customers should rotate every secret reachable through that access and review CloudTrail logs for those two weeks.",
+      "latest_developments": "Railway said on November 10, 2026 that attackers exploited flaws in its hosting infrastructure, stole customer authentication secrets, and ran roughly $740,000 in fraudulent AI usage, with credentials for as many as 100,000 workspaces exposed, the same day SecurityWeek reported that the attacker holding Qubole's identity and access management credentials reached more than a dozen organizations' Amazon Web Services accounts and took files, secrets, keys, environment variables, and credentials.",
+      "summary": "Qubole, the data lake platform Idera owns, holds standing access into its customers' AWS accounts, which turned one credential theft into break-ins across the customer base between October 14 and October 26, 2026. Fireworks AI said on Monday, November 9, 2026 that the intrusion it first disclosed October 10, 2026 also reached account and billing information, secrets, datasets, and incomplete model weights for a limited set of accounts; customers of all three providers should rotate every reachable secret and review cloud audit logs for October.",
       "tags": [
         "breach",
         "supply-chain"
@@ -178,13 +245,13 @@
         },
         {
           "source": "BleepingComputer",
-          "title": "Fireworks AI discloses new breach after cloud provider hack",
-          "url": "https://www.bleepingcomputer.com/news/security/fireworks-ai-discloses-new-breach-after-cloud-provider-hack/"
+          "title": "Railway breach leads to $740,000 in fraudulent AI charges",
+          "url": "https://www.bleepingcomputer.com/news/apple/railway-breach-leads-to-740-000-in-fraudulent-ai-charges/"
         },
         {
-          "source": "The Hacker News",
-          "title": "Fireworks AI Breach Widens to Expose Customer Billing Data and Incomplete Model Weights",
-          "url": "https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html"
+          "source": "BleepingComputer",
+          "title": "Fireworks AI discloses new breach after cloud provider hack",
+          "url": "https://www.bleepingcomputer.com/news/security/fireworks-ai-discloses-new-breach-after-cloud-provider-hack/"
         }
       ],
       "_anchor": "i-e7a8a4d2bb"
@@ -226,7 +293,7 @@
     {
       "title": "Claude 5.2 Tops an Offensive AI Benchmark",
       "area": "AI Security",
-      "latest_developments": "Anthropic released Claude Fable 5.2 and Claude Mythos 5.2 on Monday, November 9, 2026, and Fable 5.2 outscored OpenAI's GPT-6 Cyber on a multi-stage cyberattack benchmark; the two versions share one underlying model, and Fable's safety classifiers refuse high-risk cybersecurity work such as penetration testing and exploit generation plus most biology research, serving an Opus 4.8 answer instead.",
+      "latest_developments": "Dark Reading reported on November 10, 2026 that forks of ARTEX, the open-source AI penetration-testing framework, along with 45 similar tools, still run credential attacks and cloud break-ins at machine speed across multiple industries, a day after Anthropic released Claude Fable 5.2 and Claude Mythos 5.2, whose Fable version outscored OpenAI's GPT-6 Cyber on a multi-stage cyberattack benchmark while its safety classifiers refuse high-risk work such as penetration testing and exploit generation and serve an Opus 4.8 answer instead.",
       "summary": "The release puts a broadly available commercial model at the front of measured offensive capability, with policy classifiers rather than weaker skills doing the restraining. Acronis's Threat Research Unit counted more than 575 malicious OpenClaw skills that delivered malware to Windows and macOS machines, and traced an investigation it calls BOSSAI to one operator who wired more than 10 AI models to reconnaissance, scanning, and exploitation tools and coordinated the work over WeChat and LINE.",
       "tags": [
         "ai",
@@ -249,74 +316,12 @@
           "url": "https://www.helpnetsecurity.com/2026/11/10/acronis-ai-agent-cyberattacks-report/"
         },
         {
-          "source": "SecurityWeek",
-          "title": "Anthropic Rolls Out Mythos 5.2 With Improved Bug Hunting, Fewer Sandbox Escapes",
-          "url": "https://www.securityweek.com/anthropic-rolls-out-mythos-5-2-with-improved-bug-hunting-fewer-sandbox-escapes/"
+          "source": "Dark Reading",
+          "title": "Artex: The AI Pen-Test Tool Hackers Turned Into a Weapon",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/artex-ai-pen-test-tool-hackers-weapon"
         }
       ],
       "_anchor": "i-0e6f77f082"
-    },
-    {
-      "title": "AI Rebuilds Source Code From Shipped Binaries",
-      "area": "AI Security",
-      "latest_developments": "Intezer researchers reported on November 10, 2026 that AI agents rebuilt working source code for Slack, Apple's Finder, and a TinyTurla-NG backdoor sample using only the shipped programs and vendor documentation, and the rebuilt Slack ran well enough for the team to add an AI text autocomplete feature to it; 404 Media reported the same day that AI companies now block requests to reverse engineer anything, which pushes the work toward local and open-weight models.",
-      "summary": "Software vendors who count on compilation to keep source code private lose that protection, and malware analysts gain a far faster route into samples such as Turla's toolset. Google opened Gemini 4 Carbon to paying developers and businesses after DeepMind used agents built on it to formally verify the Signal protocol's libsignal guarantees, and Microsoft's FORGE Lab drove agentic tools to find memory-safety bugs in Rust's core and standard libraries.",
-      "tags": [
-        "ai",
-        "reverse-engineering"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "AI reverse engineering let researchers add a new feature to Slack",
-          "url": "https://www.helpnetsecurity.com/2026/11/10/slack-ai-reverse-engineering/"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "AI Makes Reverse Engineering Mainstream Software & Malware Far Easier",
-          "url": "https://www.darkreading.com/application-security/ai-reverse-engineering-apps"
-        },
-        {
-          "source": "404 Media",
-          "title": "'Reverse Engineer Anything': AI Companies Crack Down on the Coolest Thing People Were Doing With AI",
-          "url": "https://www.404media.co/reverse-engineer-anything-ai-companies-crack-down-on-the-coolest-thing-people-were-doing-with-ai/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Google Widens Gemini 4 Carbon Access After AI Agents Verify Signal Code",
-          "url": "https://www.securityweek.com/google-widens-gemini-4-carbon-access-after-ai-agents-verify-signal-code/"
-        }
-      ],
-      "_anchor": "i-4ab3567cfd"
-    },
-    {
-      "title": "Xen Orchestra Bypass Hands Over Virtualization Hosts",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Attackers are exploiting a critical authentication bypass in Xen Orchestra, the web console that manages XCP-ng virtualization hosts, to win administrator privileges and take over the hosts, BleepingComputer reported on November 10, 2026, and Huntress detailed a separate October 2026 campaign that chained CVE-2026-105133 and CVE-2026-105134 in AhsayCBS backup software to bypass authentication, run arbitrary commands, and plant a sandbox-evading Python implant.",
-      "summary": "Xen Orchestra administers every virtual machine running on an XCP-ng host, so one bypass reaches the whole fleet; operators should update at once and take the console off the internet. CISA gave federal agencies three days to patch CVE-2026-123218 in IBM Aspera Faspex and CVE-2026-116779 in SignalWire FreeSwitch after confirming attackers exploit both.",
-      "tags": [
-        "exploit",
-        "vulnerability",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "Critical Xen Orchestra auth bypass flaw exploited to hijack VM servers",
-          "url": "https://www.bleepingcomputer.com/news/security/critical-xen-orchestra-auth-bypass-flaw-exploited-to-hijack-vm-servers/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Attackers Exploit AhsayCBS Flaws to Deploy Sandbox-Evading Python Backdoor",
-          "url": "https://thehackernews.com/2026/11/attackers-exploit-ahsaycbs-flaws-to.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "IBM Aspera Faspex, SignalWire FreeSwitch Vulnerabilities Exploited in Attacks",
-          "url": "https://www.securityweek.com/ibm-aspera-faspex-signalwire-freeswitch-vulnerabilities-exploited-in-attacks/"
-        }
-      ],
-      "_anchor": "i-82b5e1a648"
     },
     {
       "title": "Unpatched iOS Sandbox Escape Risks Wallet Keys",
@@ -350,20 +355,20 @@
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,507.61",
-      "pct": "-2.0%",
+      "value": "7,498.02",
+      "pct": "-1.7%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "52,068.28",
-      "pct": "-0.2%",
-      "arrow": "▼"
+      "value": "52,157.31",
+      "pct": "+0.2%",
+      "arrow": "▲"
     },
     {
       "label": "Nasdaq",
-      "value": "25,051.22",
-      "pct": "-3.5%",
+      "value": "24,989.99",
+      "pct": "-2.9%",
       "arrow": "▼"
     },
     {
@@ -374,27 +379,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1202",
+      "value": "1.1208",
       "pct": "+0.4%",
       "arrow": "▲"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3428",
-      "pct": "+0.6%",
+      "value": "1.3434",
+      "pct": "+0.5%",
       "arrow": "▲"
     },
     {
       "label": "USD/JPY",
-      "value": "158.11",
+      "value": "158.12",
       "pct": "+0.2%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "This Afternoon: Sunny, high 63F.",
-    "Tonight: Areas Of Fog, low 39F.",
-    "Veterans Day: Areas Of Fog then Mostly Cloudy, high 62F."
+    "Tonight: Areas Of Fog, low 40F.",
+    "Veterans Day: Areas Of Fog then Mostly Cloudy, high 62F.",
+    "Wednesday Night: Light Rain, low 45F."
   ],
   "sports": [
     {
@@ -423,13 +428,46 @@
   "local": {
     "business_politics": [
       {
-        "title": "The House Moves on Hegseth's Impeachment",
-        "latest_developments": "The House scheduled a procedural vote Tuesday, November 10, on Representative Thomas Massie of Kentucky's effort to impeach Defense Secretary Pete Hegseth, and Hegseth held his first Pentagon press conference in six months to call the push a \"political spectacle\" built on \"policy disagreements\" rather than high crimes.",
-        "summary": "Hegseth defended the Iran war and his conduct of it in front of reporters while fighting for his job after the Republican losses of November 3, which handed both chambers to Democrats. The Wall Street Journal reports that the impeachment gives bruised Capitol Hill Republicans leverage over the White House, and the vote arrives as President Trump signals restraint toward Tehran, which ties the defense secretary's survival to the course of the war.",
+        "title": "Wachtell Takes Over the Nvidia Espionage Probe",
+        "latest_developments": "Nvidia retained Wachtell, Lipton, Rosen & Katz and a former acting United States attorney for the Southern District of New York to run the board's investigation into whether a foreign intelligence effort targeted Chief Executive Jensen Huang, and the Financial Times reported Tuesday, November 10, that the Commerce Department has delayed adding Megaspeed, the company connected to the alleged Chinese agent, to its trade blacklist as Nvidia shares fell further.",
+        "summary": "American intelligence officials told Huang that the executive he carried on an affair with worked as an agent for China, and Nvidia's board opened a formal inquiry on November 8 while saying it has no reason to believe the chipmaker's secrets or national security suffered. Nvidia supplies the accelerators behind nearly every large artificial-intelligence buildout, so its governance and its chief executive's refusal to groom a successor sit on every equity and credit book exposed to the trade.",
         "sources": [
           {
             "source": "FT Home",
-            "title": "Defiant Hegseth defends Iran war as he faces impeachment vote",
+            "title": "Nvidia hires former US prosecutor at Wachtell to lead Jensen Huang probe",
+            "url": "https://www.ft.com/content/8d59bf02-960e-4eb1-b5dc-55397e31cea5?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "Law Firm Wachtell Lipton to Lead Nvidia Internal Investigation",
+            "url": "https://www.wsj.com/tech/law-firm-wachtell-lipton-to-lead-nvidia-internal-investigation-d37731c7?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT Home",
+            "title": "US commerce department delays Megaspeed's inclusion on trade blacklist",
+            "url": "https://www.ft.com/content/afb6c960-a910-4d67-9588-73ba3bea5b06?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Markets",
+            "title": "Nvidia shares down as Huang affair scandal deepens",
+            "url": "https://www.ft.com/content/798a6321-41e3-407b-9b6d-e4521111208d?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-8c96262074"
+      },
+      {
+        "title": "The House Moves on Hegseth's Impeachment",
+        "latest_developments": "Republican leaders blocked Representative Thomas Massie's impeachment resolutions against Defense Secretary Pete Hegseth on the House floor Tuesday evening, November 10, and Democrats say they will revive the effort when they take control of Congress in January; House Republicans the same day elected Representative Jim Jordan of Ohio their leader for the next Congress over Steve Scalise, and Senate Republicans reelected John Thune of South Dakota.",
+        "summary": "Hegseth used his first Pentagon press conference in six months to call the impeachment push a \"political spectacle\" built on \"policy disagreements\" and to defend his conduct of the Iran war, which Republicans blame for their losses of November 3 that handed both chambers to Democrats. The Wall Street Journal reports that the impeachment hands bruised Capitol Hill Republicans leverage over the White House, and the defense secretary's survival now tracks the course of a war President Trump says he wants to settle.",
+        "sources": [
+          {
+            "source": "WSJ Politics",
+            "title": "Defense Secretary Pete Hegseth fended off an impeachment effort Tuesday evening in the House",
+            "url": "https://www.wsj.com/politics/hegseth-survives-impeachment-effort-in-house-7933bc38?mod=rss_socialpoliticsfeed"
+          },
+          {
+            "source": "FT World",
+            "title": "US House blocks Pete Hegseth impeachment",
             "url": "https://www.ft.com/content/38100c3c-af0d-440b-8350-823c5e8c80d9?syn-25a6b1a6=1"
           },
           {
@@ -446,14 +484,19 @@
             "source": "FT World",
             "title": "Pete Hegseth faces uphill battle to save his job",
             "url": "https://www.ft.com/content/ac059891-af9c-485d-8df3-5146298e9a21?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Politics",
+            "title": "House Republicans elected Rep. Jim Jordan of Ohio as their leader for the next Congress",
+            "url": "https://www.wsj.com/politics/jim-jordan-wins-secret-vote-to-lead-house-gop-after-midterm-losses-0c89ba91?mod=rss_socialpoliticsfeed"
           }
         ],
-        "_anchor": "i-b7cc8476a4"
+        "_anchor": "i-ef16cd76c5"
       },
       {
         "title": "Waller Floats a Half-Point Fed Increase",
-        "latest_developments": "The 10-year Treasury yield pushed above 5% Tuesday afternoon, November 10, after October consumer prices rose 0.4% from September against the 0.3% economists expected and Federal Reserve Governor Christopher Waller said he leans toward a quarter-point increase, having told the Financial Times he would weigh a half-point move, the largest since 2022, if inflation refused to slow.",
-        "summary": "United States stocks fell and the dollar strengthened on the print while gold reversed course, as traders firmed up bets on a Federal Reserve increase in December, a step that reprices mortgages, leveraged credit, and every rate-sensitive book on Wall Street. The 0.4% monthly pace still slowed from September's 0.6%, and last year's government shutdown interrupted data collection, which complicates the comparison; Bank of England Deputy Governor Clare Lombardelli signaled the same morning that London will likely raise its key rate again soon.",
+        "latest_developments": "United States stocks closed lower Tuesday, November 10, after October consumer prices rose 0.4% from September against the 0.3% economists expected: two-year Treasury yields jumped the most since 2024, the 10-year passed 5%, the WSJ Dollar Index rose 0.49% to 97.54, and gold settled 2.1% lower with silver down 2.8%, while Federal Reserve Governor Christopher Waller said he leans toward a quarter-point increase and told the Financial Times he would weigh a half-point move, the largest since 2022, if inflation refuses to slow.",
+        "summary": "Traders have now firmed up bets on a Federal Reserve increase in December, a step that reprices mortgages, leveraged credit, and every rate-sensitive book on Wall Street. The 0.4% monthly pace slowed from September's 0.6%, and last year's government shutdown interrupted data collection, which complicates the comparison; Bank of England Deputy Governor Clare Lombardelli signaled the same morning that London will likely raise its key rate again soon.",
         "sources": [
           {
             "source": "FT Home",
@@ -462,7 +505,7 @@
           },
           {
             "source": "FT Home",
-            "title": "Monthly US inflation eased less than expected in October",
+            "title": "Treasuries slide as 'hot' inflation sparks bets on Fed rate rise",
             "url": "https://www.ft.com/content/8b564134-dea6-4272-8ede-e0b12ef5aebd?syn-25a6b1a6=1"
           },
           {
@@ -477,21 +520,21 @@
           },
           {
             "source": "WSJ Markets",
-            "title": "Stock Market Today: Oil Prices Fall on Trump Iran Comments; Investors Await CPI Report",
-            "url": "https://www.wsj.com/livecoverage/stock-market-cpi-inflation-11-10-2026?mod=rss_markets_main"
+            "title": "Hot Inflation Revives Wall Street's Rate Hike Fears",
+            "url": "https://www.wsj.com/finance/investing/hot-inflation-revives-wall-streets-rate-hike-fears-1ce54f85?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
-            "title": "Stocks Move Lower as Inflation Remains Elevated",
-            "url": "https://www.wsj.com/finance/stocks/global-stocks-strengthen-as-oil-dips-below-90-a-barrel-557620e0?mod=rss_markets_main"
+            "title": "U.S. Stocks Slip on Inflation, AI Worries",
+            "url": "https://www.wsj.com/finance/stocks/u-s-stocks-slip-on-inflation-ai-worries-feb790bc?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-ec12a32824"
       },
       {
         "title": "Anthropic Trims Its IPO Target to $1.3 Trillion",
-        "latest_developments": "Anthropic's seven insiders will each sell roughly $250 million of stock, keep total voting control, and hold stakes worth about $18 billion apiece at the listing price, and Goldman Sachs told clients Tuesday, November 10, that it expects the company's revenue to exceed $600 billion and turn cash-flow positive by 2030, a 130-fold increase.",
-        "summary": "The Claude maker now seeks a valuation of $1.3 trillion to $1.4 trillion and as much as $64 billion of proceeds, roughly $200 billion below the figure it insisted on last week, in a debut it has promised before Thanksgiving. The same morning delivered two cautions on the artificial-intelligence trade: SoftBank Group swung to a quarterly loss of about $7 billion, its first in nearly two years, including charges tied to power-generating equipment for United States data-center projects, and credit analysts fixed on how CoreWeave funds its buildout.",
+        "latest_developments": "CoreWeave met Wall Street expectations Tuesday, November 10, reported a business backlog of $133 billion, and lined up a multibillion-dollar debt deal backed by its chips and customer prepayments; OpenAI reported revenue of $10 billion with heavy continuing losses, and the Commodity Futures Trading Commission postponed the exchanges' push to list artificial-intelligence computing futures over price-manipulation concerns.",
+        "summary": "The Claude maker now seeks a valuation of $1.3 trillion to $1.4 trillion and as much as $64 billion of proceeds, roughly $200 billion below the figure it insisted on last week, in a debut it has promised before Thanksgiving; its seven insiders will each sell about $250 million of stock, keep total voting control, and hold stakes worth roughly $18 billion apiece. Goldman Sachs told clients it expects Anthropic revenue above $600 billion and positive cash flow by 2030, while SoftBank Group swung to a quarterly loss of about $7 billion on charges tied to power-generating equipment for United States data centers.",
         "sources": [
           {
             "source": "WSJ Markets",
@@ -528,11 +571,11 @@
       },
       {
         "title": "Brent Falls Below $90 as Trump Steps Back From Iran",
-        "latest_developments": "Oil futures extended Monday's selloff Tuesday, November 10, after President Trump repeated that renewed United States escalation against Iran looks unlikely, even as the Wall Street Journal reported that American and Iranian forces have struck islands inside the Strait of Hormuz in recent days in a fight for control of the waterway.",
-        "summary": "Brent's break below $90 a barrel, its first since August, lifted European and Asian equities, with the Europe-wide Stoxx 600 tracking toward its first record close since August, and United States natural gas futures rose on a cold spell forecast for the eastern United States this weekend. The United States Air Force meanwhile pulled refueling tankers from a second base in eastern England over an Iranian threat, following the September security incident at RAF Fairford.",
+        "latest_developments": "Oil futures settled lower again Tuesday, November 10, after President Trump repeated that the United States does not expect to renew attacks on Iran while talks progress, and the absence of any breakthrough limited the decline; United States natural gas futures settled higher on a cold spell forecast for the eastern United States this weekend.",
+        "summary": "Brent's break below $90 a barrel, its first since August, lifted European and Asian equities, and a consortium of climate scientists now expects global carbon dioxide emissions to fall this year because the war has cut fossil-fuel use. The Wall Street Journal reports that American and Iranian forces have struck islands inside the Strait of Hormuz in a fight for control of the waterway, and the United States Air Force pulled refueling tankers from a second base in eastern England over an Iranian threat.",
         "sources": [
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "Oil falls below $90 as Trump pulls back from threat to strike Iran",
             "url": "https://www.ft.com/content/07bdb58c-4557-4def-b8cb-db9be304fd72?syn-25a6b1a6=1"
           },
@@ -543,7 +586,7 @@
           },
           {
             "source": "WSJ Markets",
-            "title": "Oil Futures Extend Slide as Trump Indicates Restraint on Iran",
+            "title": "Oil Futures Settle Lower as Talks Remain in Focus",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-falls-as-u-s-iran-conflict-risks-ease-32fa5d4f?mod=rss_markets_main"
           },
           {
@@ -603,6 +646,37 @@
     ],
     "business": [
       {
+        "title": "Breeze Sells Out Its First Latrobe Flights",
+        "latest_developments": "WTAE and KDKA reported Tuesday, November 10, that Breeze Airways has sold out the first three flights from Arnold Palmer Regional Airport near Latrobe and that the airport is moving to rehire workers it laid off and to staff up for the new service.",
+        "summary": "Arnold Palmer Regional Airport, the Westmoreland County field that lost commercial service and cut jobs, now has a carrier again in Breeze Airways, the low-fare airline that flies point-to-point routes from small airports. The sold-out opening flights give the airport the demand case it needs to restore ground and customer-service positions.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "First 3 Latrobe Breeze flights sold out, airport wants to bring back laid-off workers",
+            "url": "https://www.wtae.com/article/latrobe-flights-sold-out-bring-back-laid-off-workers/74392209"
+          },
+          {
+            "source": "KDKA",
+            "title": "Arnold Palmer Regional Airport preparing to hire staff for new Breeze Airways service",
+            "url": "https://www.cbsnews.com/pittsburgh/news/arnold-palmer-regional-airport-hiring-staff-breeze-airways/"
+          }
+        ],
+        "_anchor": "i-3b8cde87fb"
+      },
+      {
+        "title": "Downtown Apartments Fill as Office Conversions Stall",
+        "latest_developments": "TribLive reported Tuesday, November 10, that apartments in Pittsburgh's Golden Triangle keep filling up, and that data from the Pittsburgh Downtown Partnership points to real obstacles in turning more office towers into housing.",
+        "summary": "Downtown Pittsburgh's residential demand now outruns its supply, and the city's plan to add residents depends on converting office floors emptied since 2020. The physical and financial hurdles in those buildings set the pace at which the Golden Triangle can add units.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Downtown Pittsburgh housing demand is growing, but turning offices into apartments remains a challenge",
+            "url": "https://triblive.com/business/downtown-pittsburgh-housing-demand-is-growing-but-turning-offices-into-apartments-remains-a-challenge/"
+          }
+        ],
+        "_anchor": "i-6823294e65"
+      },
+      {
         "title": "Agility Robotics Will Double Its Pittsburgh Workforce",
         "latest_developments": "An Agility Robotics executive told WPXI Tuesday, November 10, that the humanoid robot maker will double its Pittsburgh workforce now that the company trades on the Nasdaq.",
         "summary": "Agility Robotics builds the Digit humanoid for warehouse and logistics work and runs a Pittsburgh engineering operation alongside its Oregon base. The hiring plan follows its Wall Street debut last week and puts the company among the largest robotics employers in a city whose robotics sector grew out of Carnegie Mellon University.",
@@ -614,6 +688,50 @@
           }
         ],
         "_anchor": "i-d83bacfb4d"
+      },
+      {
+        "title": "CMU and Pitt Want the Compute the Region Keeps Rejecting",
+        "latest_developments": "PublicSource reported Tuesday, November 10, that Carnegie Mellon University and the University of Pittsburgh have built their research strategies around artificial intelligence and want local computing capacity, even as municipality after municipality in the region moves to block or pause data centers.",
+        "summary": "Brian Regli, a consultant for the firm proposing a data center in Springdale Borough, told PublicSource that companies spun out of Carnegie Mellon \"could do really fantastic things if they had access to the compute and if that compute was readily available within the community.\" Buffalo Township in Butler County already imposed a data-center moratorium while it writes an ordinance, and other Allegheny Valley communities are weighing the same step.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "CMU, Pitt embrace AI as region debates data centers",
+            "url": "https://www.publicsource.org/cmu-pitt-ai-data-centers/"
+          }
+        ],
+        "_anchor": "i-9a24a670a6"
+      },
+      {
+        "title": "Walmart Pays $7.8 Million in a Pennsylvania Child-Labor Case",
+        "latest_developments": "Governor Josh Shapiro's administration announced Monday night, November 9, that Walmart will pay nearly $7.8 million to settle what state investigators called systemic child-labor violations, a record settlement for Pennsylvania.",
+        "summary": "Pennsylvania's investigation found violations of the state's child-labor law across Walmart's operations in the commonwealth, where the retailer runs more than a hundred stores and employs tens of thousands of workers. The dollar figure exceeds any previous child-labor settlement the state has secured.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Pa. secures historic $7.8M settlement with major retailer over child labor violations",
+            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/11/09/pa-settlement-child-labor-walmart/stories/202611100024"
+          },
+          {
+            "source": "KDKA",
+            "title": "Walmart to pay nearly $8 million to settle child labor violations in Pennsylvania",
+            "url": "https://www.cbsnews.com/pittsburgh/news/walmart-child-labor-violations-pennsylvania/"
+          }
+        ],
+        "_anchor": "i-a680915900"
+      },
+      {
+        "title": "Keystone and Conemaugh Coal Plants Get an Extension",
+        "latest_developments": "TribLive reported Tuesday, November 10, that the Trump administration's Environmental Protection Agency and Pennsylvania regulators granted an extension to the owners of the Keystone and Conemaugh coal-fired power plants.",
+        "summary": "Keystone, in Armstrong County, and Conemaugh, in Indiana County, rank among the last large coal-burning generators in Western Pennsylvania, and each employs hundreds of workers while anchoring the tax base of its host township. The extension keeps both units running past the compliance deadline their owners faced.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Lifeline for coal plants: EPA, state grant extension to Keystone, Conemaugh facilities",
+            "url": "https://triblive.com/local/regional/lifeline-for-coal-plants-epa-state-grant-extension-to-keystone-conemaugh-facilities/"
+          }
+        ],
+        "_anchor": "i-9239aeda36"
       },
       {
         "title": "DiCarlo's Pizza Returns in Brookline",
@@ -658,53 +776,81 @@
           }
         ],
         "_anchor": "i-6a91921789"
-      },
-      {
-        "title": "Walmart Pays $7.8 Million in a Pennsylvania Child-Labor Case",
-        "latest_developments": "Governor Josh Shapiro's administration announced Monday night, November 9, that Walmart will pay nearly $7.8 million to settle what state investigators called systemic child-labor violations, a record settlement for Pennsylvania.",
-        "summary": "Pennsylvania's investigation found violations of the state's child-labor law across Walmart's operations in the commonwealth, where the retailer runs more than a hundred stores and employs tens of thousands of workers. The dollar figure exceeds any previous child-labor settlement the state has secured.",
-        "sources": [
-          {
-            "source": "Pittsburgh Post-Gazette",
-            "title": "Pa. secures historic $7.8M settlement with major retailer over child labor violations",
-            "url": "https://www.post-gazette.com/business/pittsburgh-company-news/2026/11/09/pa-settlement-child-labor-walmart/stories/202611100024"
-          },
-          {
-            "source": "KDKA",
-            "title": "Walmart to pay nearly $8 million to settle child labor violations in Pennsylvania",
-            "url": "https://www.cbsnews.com/pittsburgh/news/walmart-child-labor-violations-pennsylvania/"
-          }
-        ],
-        "_anchor": "i-a680915900"
-      },
-      {
-        "title": "Keystone and Conemaugh Coal Plants Get an Extension",
-        "latest_developments": "TribLive reported Tuesday, November 10, that the Trump administration's Environmental Protection Agency and Pennsylvania regulators granted an extension to the owners of the Keystone and Conemaugh coal-fired power plants.",
-        "summary": "Keystone, in Armstrong County, and Conemaugh, in Indiana County, rank among the last large coal-burning generators in Western Pennsylvania, and each employs hundreds of workers while anchoring the tax base of its host township. The extension keeps both units running past the compliance deadline their owners faced.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Lifeline for coal plants: EPA, state grant extension to Keystone, Conemaugh facilities",
-            "url": "https://triblive.com/local/regional/lifeline-for-coal-plants-epa-state-grant-extension-to-keystone-conemaugh-facilities/"
-          }
-        ],
-        "_anchor": "i-9239aeda36"
-      },
-      {
-        "title": "CMU and Pitt Want the Compute the Region Keeps Rejecting",
-        "latest_developments": "PublicSource reported Tuesday, November 10, that Carnegie Mellon University and the University of Pittsburgh have built their research strategies around artificial intelligence and want local computing capacity, even as municipality after municipality in the region moves to block or pause data centers.",
-        "summary": "Brian Regli, a consultant for the firm proposing a data center in Springdale Borough, told PublicSource that companies spun out of Carnegie Mellon \"could do really fantastic things if they had access to the compute and if that compute was readily available within the community.\" Buffalo Township in Butler County already imposed a data-center moratorium while it writes an ordinance, and other Allegheny Valley communities are weighing the same step.",
-        "sources": [
-          {
-            "source": "PublicSource",
-            "title": "CMU, Pitt embrace AI as region debates data centers",
-            "url": "https://www.publicsource.org/cmu-pitt-ai-data-centers/"
-          }
-        ],
-        "_anchor": "i-9a24a670a6"
       }
     ],
     "around_town": [
+      {
+        "title": "Deluzio Ties ICE Arrests to Local Police",
+        "latest_developments": "Representative Chris Deluzio of Aspinwall released a report Tuesday, November 10, finding that local law enforcement helped federal agents make more than half the immigration arrests in his congressional district, and he called for an investigation into which agencies operate outside their jurisdictions; PublicSource traced a surge of detentions in Beaver County to 287(g) agreements between police there and Immigration and Customs Enforcement.",
+        "summary": "The federal 287(g) program deputizes local officers to carry out immigration enforcement, and Deluzio's district covers Beaver County and parts of Allegheny County. His office's tally puts a district-level number on how much the arrest total depends on cooperation from municipal and county departments.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Deluzio points to local police cooperation as driver of ICE detentions",
+            "url": "https://triblive.com/local/regional/deluzio-points-to-local-police-cooperation-as-driver-of-ice-detentions/"
+          },
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Rep. Chris Deluzio says more than half of ICE detentions in his district are tied to local law enforcement partnerships",
+            "url": "https://www.post-gazette.com/news/politics-local/2026/11/10/deluzio-ice-287g-trump/stories/202611100041"
+          },
+          {
+            "source": "PublicSource",
+            "title": "ICE detention surge tied to pacts with police in Beaver County, says congressman",
+            "url": "https://www.publicsource.org/beaver-county-ice-detentions-287g-police/"
+          }
+        ],
+        "_anchor": "i-6d30c4fb64"
+      },
+      {
+        "title": "Etna Weighs a 32% Tax Increase",
+        "latest_developments": "TribLive reported Tuesday, November 10, that Etna council may still need a 32% property tax increase next year even after cuts that include delaying repair of a sewer line and having council members hand-deliver the borough newsletter to avoid postage.",
+        "summary": "Etna, the Allegheny County borough on the north bank of the Allegheny River beside Sharpsburg, has run out of easy spending to trim, which leaves the millage rate as the lever council holds before it adopts a 2027 budget.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Etna Council struggling to reduce spending, eyeing 32% property tax increase",
+            "url": "https://triblive.com/local/etna-council-struggling-to-reduce-spending-eyeing-32-property-tax-increase/"
+          }
+        ],
+        "_anchor": "i-c6edff875a"
+      },
+      {
+        "title": "Council's Budget Director Calls the 2027 Plan Honest",
+        "latest_developments": "Pittsburgh City Council Budget Director Kiersten Walmsley told council Tuesday, November 10, that Mayor Corey O'Connor's proposed 2027 budget paints an accurate portrait of the city's finances, however unpretty that portrait looks.",
+        "summary": "O'Connor presented his first budget Monday, November 9: no tax increase, millions of dollars of spending cuts against a projected $250 million deficit over five years, and $27 million drawn from the city's reserve fund. Residents packed the council chamber to protest the cuts, and council now works through the plan toward a vote.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Pittsburgh's 2027 budget deemed ugly but honest",
+            "url": "https://triblive.com/local/pittsburghs-2027-budget-deemed-ugly-but-honest/"
+          }
+        ],
+        "_anchor": "i-c2cb515b93"
+      },
+      {
+        "title": "A Warm Tuesday, an Impact Day Thursday",
+        "latest_developments": "WTAE's Tuesday evening update, November 10, puts Wednesday cloudy and warm and flags Thursday, November 12, as an Impact Day with rain, and KDKA expects measurable snow in the region's highest elevations late Friday into Saturday morning, with a wintry mix or plain rain everywhere else.",
+        "summary": "Tuesday afternoon reached the low 60s around Pittsburgh under sun and a breeze, the week's warmest stretch. Colder air arriving behind Thursday's system turns the weekend's precipitation to a mix across Western Pennsylvania.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Sunny & Warmer Today; Impact Day Thursday",
+            "url": "https://www.wtae.com/article/sunny-warmer-today-impact-day-thursday/74384413"
+          },
+          {
+            "source": "WPXI",
+            "title": "Temperatures warm up on Tuesday",
+            "url": "https://www.wpxi.com/weather/temperatures-warm-up-tuesday/D3R4HKOYQBALFH3ZU2MNQSKEUU/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Parts of the Pittsburgh area could see snow this weekend, but most will see a wintry mix or rain",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-weather-forecast-tuesday-cool-conditions-snow-chances/"
+          }
+        ],
+        "_anchor": "i-0076ca3218"
+      },
       {
         "title": "A 38-Foot Spruce Comes to Grant Street",
         "latest_developments": "WPXI reported Tuesday, November 10, that crews will install a 38-foot blue spruce at the City-County Building downtown, closing lanes on Grant Street and nearby routes and snarling traffic through the weekend.",
@@ -773,32 +919,9 @@
         "_anchor": "i-b6b40619bc"
       },
       {
-        "title": "A Warm Tuesday, an Impact Day Thursday",
-        "latest_developments": "WPXI put Tuesday afternoon, November 10, in the low 60s under sun and a breeze, the week's warmest stretch, with Wednesday in the low 60s under more clouds, and KDKA's Tuesday forecast expects measurable snow in the region's highest elevations late Friday into Saturday morning, with a wintry mix or plain rain everywhere else.",
-        "summary": "WTAE has flagged Thursday, November 12, as an Impact Day, the system that will complicate travel around Pittsburgh before colder air arrives behind it and turns the weekend precipitation to a mix.",
-        "sources": [
-          {
-            "source": "WTAE",
-            "title": "Sunny & Warmer Today; Impact Day Thursday",
-            "url": "https://www.wtae.com/article/sunny-warmer-today-impact-day-thursday/74384413"
-          },
-          {
-            "source": "WPXI",
-            "title": "Temperatures warm up on Tuesday",
-            "url": "https://www.wpxi.com/weather/temperatures-warm-up-tuesday/D3R4HKOYQBALFH3ZU2MNQSKEUU/"
-          },
-          {
-            "source": "KDKA",
-            "title": "Parts of the Pittsburgh area could see snow this weekend, but most will see a wintry mix or rain",
-            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-weather-forecast-tuesday-cool-conditions-snow-chances/"
-          }
-        ],
-        "_anchor": "i-0076ca3218"
-      },
-      {
         "title": "Deer Crashes Climb Across Western Pennsylvania",
-        "latest_developments": "PennDOT told KDKA Tuesday, November 10, that vehicle collisions with deer across Western Pennsylvania are rising, and that the agency posts deer crossing signs on specific highway stretches because the animals cross there.",
-        "summary": "November's rut and the shift off daylight saving time put more deer on the road during the Pittsburgh region's commuting hours, and PennDOT urges drivers to slow down through marked stretches and to expect a second and third animal behind the first.",
+        "latest_developments": "PennDOT told KDKA Tuesday, November 10, that vehicle collisions with deer across Western Pennsylvania are rising, and that the agency posts deer crossing signs on specific highway stretches because the animals cross there; WTAE reported the same day that Oakmont Borough's deer management program, which allows archers in borough parks, starts Thursday, November 12, over objections from some residents.",
+        "summary": "November's rut and the shift off daylight saving time put more deer on the road during the Pittsburgh region's commuting hours, and PennDOT urges drivers to slow down through marked stretches and to expect a second and third animal behind the first. Oakmont residents split over the archery program, some questioning the need for it and others pointing to overpopulation.",
         "sources": [
           {
             "source": "KDKA",
@@ -809,6 +932,11 @@
             "source": "KDKA",
             "title": "Deer crashes on the rise in the Pittsburgh area",
             "url": "https://www.cbsnews.com/pittsburgh/video/deer-crashes-on-the-rise-in-the-pittsburgh-area/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Oakmont residents differ in support of deer management program allowing archery in parks",
+            "url": "https://www.wtae.com/article/oakmont-deer-management-program-archers/74392235"
           }
         ],
         "_anchor": "i-fdc183307b"
@@ -903,6 +1031,42 @@
     ],
     "around_teams": [
       {
+        "title": "The Steelers Stand Pat at the Deadline",
+        "latest_developments": "The NFL trade deadline passed Tuesday, November 10, with Pittsburgh making no deals, and inside linebacker Patrick Queen and Max Iheanachor met the media the same afternoon as the team came back from its bye.",
+        "summary": "The Post-Gazette reported that the Steelers, who had shopped for depth rather than a headline addition, let the deadline go by and will carry the roster they had through the open week into Sunday night at Cincinnati. Matt Williamson and Wes Uhler spent Tuesday's SNR Drive on deadline day and on the expanded 24-team College Football Playoff, and Queen said he followed the day's trades on his phone like any other fan.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The Steelers let the NFL's trade deadline pass without making any deals",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/11/10/steelers-trade-deadline-news/stories/202611100026"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "NFL Trade Deadline Day + We Go \"Around Campus\" | SNR Drive (Nov.10) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=2gWAiZ-QXbU"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Patrick Queen & Max Iheanachor Press Conference (November 10) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=iInJfyREB6M"
+          }
+        ],
+        "_anchor": "i-085196ce30"
+      },
+      {
+        "title": "Footbahlin Delivers a Bengals Reality Check",
+        "latest_developments": "Ben Roethlisberger posted Footbahlin's 146th episode Tuesday, November 10, treating the bye week as a magnifying glass on what the Steelers are now and what Sunday night at Cincinnati asks of them.",
+        "summary": "Roethlisberger and his co-hosts work through the tension heading into the first-place AFC North game, with the usual basement digressions along the way, including an argument over hotel fire alarms. The show has spent the season sorting out the team's identity under Mike McCarthy.",
+        "sources": [
+          {
+            "source": "Ben Roethlisberger / Channel Seven (YouTube)",
+            "title": "Steelers Bye Week Talk And A Bengals Reality Check Ep 146",
+            "url": "https://www.youtube.com/watch?v=eKfmN2CyvaE"
+          }
+        ],
+        "_anchor": "i-817d815fbf"
+      },
+      {
         "title": "Tomlin Talks for Two Hours With Heyward",
         "latest_developments": "Not Just Football released part one of Cam Heyward's sit-down with head coach Mike Tomlin at 6 a.m. Eastern Tuesday, November 10, and set part two for Thursday, November 12.",
         "summary": "Heyward and co-host Hayden take Tomlin through Ben Roethlisberger, how he landed the Steelers job, and Aaron Rodgers in the first installment, the longest interview the current defensive captain has run with his own coach on the show.",
@@ -941,8 +1105,21 @@
     ],
     "team_usa": [
       {
+        "title": "Florence Weighs LA28 Against His Family",
+        "latest_developments": "ESPN published an account from sea Tuesday, November 10, of the surfer John Florence weighing a run at the 2028 Los Angeles Olympics against time with his young family.",
+        "summary": "Florence, the three-time world champion from Hawaii, ranks as the most decorated American surfer of his generation and would anchor the United States team at a home Games. ESPN frames the decision around the years of travel and competition a 2028 campaign would cost him.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "The weight of gold: Inside surfing star John Florence's Olympic-sized decision",
+            "url": "https://www.espn.com/olympics/story/_/id/50433972/surfing-star-john-florence-olympics-decision"
+          }
+        ],
+        "_anchor": "i-054a5cefd0"
+      },
+      {
         "title": "Manchester United Closes In on Pochettino",
-        "latest_developments": "ESPN sources said Tuesday, November 10, that Mauricio Pochettino would welcome a return to the Premier League with Manchester United, whose executives meet minority owner Sir Jim Ratcliffe this week to settle Michael Carrick's future, and United States left back Antonee Robinson said the national team's players pay the speculation no mind.",
+        "latest_developments": "Sources told ESPN Tuesday night, November 10, that United States men's national team head coach Mauricio Pochettino would welcome a return to the Premier League with Manchester United, whose executives met minority owner Sir Jim Ratcliffe this week to settle Michael Carrick's future, and ESPN laid out the trade-offs between the two jobs; United States left back Antonee Robinson said the national team's players pay the speculation no mind.",
         "summary": "Pochettino is preparing the Americans for their Concacaf Nations League quarterfinal against Haiti later this month, a window already thinned by Gio Reyna's injury at Strasbourg. ESPN traces United's worst league position in 40 years and its relegation fight to Ratcliffe's choice of inexperienced backroom appointments, and argues Carrick's stoppage-time rescue of a 4-4 draw at Aston Villa should not save his job.",
         "sources": [
           {
@@ -964,6 +1141,11 @@
             "source": "ESPN Soccer",
             "title": "Robinson: USMNT players not distracted by Pochettino links to Man United",
             "url": "https://www.espn.com/soccer/story/_/id/50443428/usmnt-not-distracted-pochettino-man-united-robinson"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "USMNT or Manchester United: Pros and cons of Pochettino's options",
+            "url": "https://www.espn.com/soccer/story/_/id/50442775/usmnt-manchester-united-pros-cons-mauricio-pochettino-options"
           },
           {
             "source": "ESPN Soccer",
@@ -1021,20 +1203,48 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Attackers now live in the admin plane, with working exploits against Xen Orchestra virtualization consoles and the Barracuda email gateways and N-able platforms patched days earlier.",
+      "text": "November's patch load stacked up fast, with Microsoft's exploited Outlook zero-day, four perfect-score SAP NetWeaver flaws, and an emergency Chrome XML fix forcing triage by exploitation, not count.",
+      "links": [
+        {
+          "anchor": "i-9364f9baac",
+          "phrase": "Outlook",
+          "start": 66,
+          "end": 73,
+          "title": "Microsoft Patches an Exploited Outlook Zero-Day"
+        },
+        {
+          "anchor": "i-ce0b470d4d",
+          "phrase": "SAP NetWeaver",
+          "start": 103,
+          "end": 116,
+          "title": "SAP Patches Four Perfect-Score Flaws"
+        },
+        {
+          "anchor": "i-7e1f9b33c6",
+          "phrase": "Chrome XML",
+          "start": 141,
+          "end": 151,
+          "title": "Chrome XML Zero-Day and iMessage Eavesdropping"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Attackers are living in the management plane, with an authentication bypass in Xen Orchestra handing over XCP-ng hypervisors while CISA flags chained Barracuda gateway and N-able exploits.",
       "links": [
         {
           "anchor": "i-82b5e1a648",
           "phrase": "Xen Orchestra",
-          "start": 69,
-          "end": 82,
+          "start": 79,
+          "end": 92,
           "title": "Xen Orchestra Bypass Hands Over Virtualization Hosts"
         },
         {
           "anchor": "i-0e899e1e6c",
-          "phrase": "Barracuda",
-          "start": 115,
-          "end": 124,
+          "phrase": "Barracuda gateway",
+          "start": 150,
+          "end": 167,
           "title": "Barracuda Gateways and N-able Fall to Public Exploits"
         }
       ]
@@ -1042,119 +1252,98 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Frontier models cut both ways as Anthropic's Claude Fable 5.2 beat GPT-6 Cyber on an attack benchmark and Intezer agents rebuilt Slack's source from its binary.",
-      "links": [
-        {
-          "anchor": "i-0e6f77f082",
-          "phrase": "Claude Fable 5.2",
-          "start": 45,
-          "end": 61,
-          "title": "Claude 5.2 Tops an Offensive AI Benchmark"
-        },
-        {
-          "anchor": "i-4ab3567cfd",
-          "phrase": "Intezer agents",
-          "start": 106,
-          "end": 120,
-          "title": "AI Rebuilds Source Code From Shipped Binaries"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "updated",
-      "text": "Standing vendor access keeps multiplying one theft, as stolen Qubole identity keys reached more than a dozen Amazon Web Services accounts across customer organizations.",
+      "text": "Cloud providers are the single door, with Railway's $740,000 in fraudulent AI usage and stolen Qubole credentials exposed just as ARTEX forks automate credential attacks.",
       "links": [
         {
           "anchor": "i-e7a8a4d2bb",
-          "phrase": "Qubole",
-          "start": 62,
-          "end": 68,
+          "phrase": "Qubole credentials",
+          "start": 95,
+          "end": 113,
           "title": "Qubole Credentials Open More Than a Dozen Clouds"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Patch urgency piles up with SAP's four perfect-score NetWeaver flaws, an exploited Chrome XML use-after-free, and an unpatched iOS sandbox escape Binance says exposes wallet keys.",
-      "links": [
-        {
-          "anchor": "i-ce0b470d4d",
-          "phrase": "SAP",
-          "start": 28,
-          "end": 31,
-          "title": "SAP Patches Four Perfect-Score Flaws"
         },
         {
-          "anchor": "i-7e1f9b33c6",
-          "phrase": "Chrome XML",
-          "start": 83,
-          "end": 93,
-          "title": "Chrome XML Zero-Day and iMessage Eavesdropping"
-        },
-        {
-          "anchor": "i-4271579dde",
-          "phrase": "Binance",
-          "start": 146,
-          "end": 153,
-          "title": "Unpatched iOS Sandbox Escape Risks Wallet Keys"
+          "anchor": "i-0e6f77f082",
+          "phrase": "ARTEX forks",
+          "start": 130,
+          "end": 141,
+          "title": "Claude 5.2 Tops an Offensive AI Benchmark"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Washington and markets moved together as the House set a Hegseth impeachment vote, Waller floated a half-point hike, and Anthropic trimmed its IPO target.",
+      "text": "Nvidia hired Wachtell, Lipton, Rosen & Katz to probe the foreign intelligence effort targeting Jensen Huang, while Zitron and Ben Thompson weigh the governance fallout.",
       "links": [
         {
-          "anchor": "i-b7cc8476a4",
-          "phrase": "Hegseth",
-          "start": 57,
-          "end": 64,
-          "title": "The House Moves on Hegseth's Impeachment"
+          "anchor": "i-8c96262074",
+          "phrase": "Wachtell",
+          "start": 13,
+          "end": 21,
+          "title": "Wachtell Takes Over the Nvidia Espionage Probe"
         },
         {
-          "anchor": "i-ec12a32824",
-          "phrase": "Waller",
-          "start": 83,
-          "end": 89,
-          "title": "Waller Floats a Half-Point Fed Increase"
+          "anchor": "i-2decbd9aef",
+          "phrase": "Zitron",
+          "start": 115,
+          "end": 121,
+          "title": "Jensen's Bizarre Adventure"
         },
         {
-          "anchor": "i-e20ef13281",
-          "phrase": "Anthropic",
-          "start": 121,
-          "end": 130,
-          "title": "Anthropic Trims Its IPO Target to $1.3 Trillion"
+          "anchor": "i-a1393a77bc",
+          "phrase": "Ben Thompson",
+          "start": 126,
+          "end": 138,
+          "title": "The Jensen Huang Story Gets Worse, Washington vs. New York, Silicon Valley"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Locally, Agility Robotics will double its Pittsburgh workforce, DiCarlo's Pizza returns in Brookline, and a 38-foot spruce closes lanes on Grant Street through the weekend.",
+      "text": "Etna council eyes a 32% property tax increase, Pittsburgh's council budget director called the 2027 plan an accurate portrait, and Deluzio tied ICE arrests to local police.",
       "links": [
         {
-          "anchor": "i-d83bacfb4d",
-          "phrase": "Agility Robotics",
-          "start": 9,
-          "end": 25,
-          "title": "Agility Robotics Will Double Its Pittsburgh Workforce"
+          "anchor": "i-c6edff875a",
+          "phrase": "Etna council",
+          "start": 0,
+          "end": 12,
+          "title": "Etna Weighs a 32% Tax Increase"
         },
         {
-          "anchor": "i-55be3c7884",
-          "phrase": "DiCarlo's Pizza",
-          "start": 64,
+          "anchor": "i-c2cb515b93",
+          "phrase": "budget director",
+          "start": 68,
+          "end": 83,
+          "title": "Council's Budget Director Calls the 2027 Plan Honest"
+        },
+        {
+          "anchor": "i-6d30c4fb64",
+          "phrase": "Deluzio",
+          "start": 131,
+          "end": 138,
+          "title": "Deluzio Ties ICE Arrests to Local Police"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Pittsburgh stood pat at the NFL trade deadline, and Roethlisberger's Footbahlin used the bye week to measure what Sunday night at Cincinnati asks of the Steelers.",
+      "links": [
+        {
+          "anchor": "i-085196ce30",
+          "phrase": "trade deadline",
+          "start": 32,
+          "end": 46,
+          "title": "The Steelers Stand Pat at the Deadline"
+        },
+        {
+          "anchor": "i-817d815fbf",
+          "phrase": "Footbahlin",
+          "start": 69,
           "end": 79,
-          "title": "DiCarlo's Pizza Returns in Brookline"
-        },
-        {
-          "anchor": "i-ca5168816c",
-          "phrase": "Grant Street",
-          "start": 139,
-          "end": 151,
-          "title": "A 38-Foot Spruce Comes to Grant Street"
+          "title": "Footbahlin Delivers a Bengals Reality Check"
         }
       ]
     }
@@ -1168,11 +1357,10 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 71,
+        "in_window": 78,
         "failed": [],
         "empty": [
-          "Krebs on Security",
-          "CISA Advisories",
+          "Sophos News",
           "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
           "Cisco Talos",
@@ -1184,18 +1372,18 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 13,
-            "contributed": 13
+            "in_window": 17,
+            "contributed": 17
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 13,
-            "contributed": 13
+            "in_window": 14,
+            "contributed": 14
           },
           "Krebs on Security": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Schneier on Security": {
             "items": 10,
@@ -1204,8 +1392,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 7,
+            "contributed": 7
           },
           "SecurityWeek": {
             "items": 10,
@@ -1214,13 +1402,13 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 3,
+            "contributed": 3
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "The Record": {
             "items": 5,
@@ -1244,8 +1432,8 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 0,
+            "contributed": 0
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
@@ -1289,8 +1477,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 2,
+            "contributed": 2
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1317,17 +1505,17 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 19
+            "contributed": 20
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 5
+            "contributed": 6
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 3,
-            "contributed": 0
+            "in_window": 4,
+            "contributed": 1
           },
           "Pittsburgh City Paper": {
             "items": 10,
@@ -1342,22 +1530,22 @@
           "Pittsburgh Magazine": {
             "items": 30,
             "in_window": 7,
-            "contributed": 2
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 29,
-            "contributed": 5
+            "contributed": 10
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 9
+            "contributed": 4
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 20
+            "contributed": 19
           }
         }
       },
@@ -1373,43 +1561,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 70,
-            "in_window": 27,
+            "in_window": 30,
             "contributed": 8
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 37,
-            "contributed": 15
+            "contributed": 19
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 55,
-            "contributed": 11
+            "in_window": 53,
+            "contributed": 7
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 8,
-            "contributed": 2
+            "in_window": 9,
+            "contributed": 4
           },
           "The Economist": {
             "items": 300,
-            "in_window": 19,
-            "contributed": 2
+            "in_window": 22,
+            "contributed": 6
           },
           "FT Home": {
             "items": 11,
             "in_window": 11,
-            "contributed": 8
+            "contributed": 6
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 14
+            "contributed": 9
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 20,
-            "contributed": 0
+            "in_window": 21,
+            "contributed": 1
           }
         }
       },
@@ -1419,20 +1607,21 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 12,
+        "in_window": 10,
         "failed": [],
         "empty": [
-          "NEXTpittsburgh Events"
+          "NEXTpittsburgh Events",
+          "NEXTpittsburgh Arts & Entertainment"
         ],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 11,
-            "contributed": 11
+            "in_window": 10,
+            "contributed": 10
           },
           "Post-Gazette Music": {
             "items": 20,
-            "in_window": 3,
+            "in_window": 2,
             "contributed": 0
           },
           "NEXTpittsburgh Events": {
@@ -1442,8 +1631,8 @@
           },
           "NEXTpittsburgh Arts & Entertainment": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           }
         }
       },
@@ -1453,32 +1642,29 @@
         "feeds": 6,
         "loaded": 6,
         "window_hours": 96,
-        "in_window": 17,
+        "in_window": 22,
         "failed": [],
-        "empty": [
-          "Footbahlin with Ben Roethlisberger",
-          "Ben Roethlisberger / Channel Seven (YouTube)"
-        ],
+        "empty": [],
         "per_feed": {
           "Footbahlin with Ben Roethlisberger": {
-            "items": 146,
-            "in_window": 0,
+            "items": 147,
+            "in_window": 1,
             "contributed": 0
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
-          },
-          "Pittsburgh Steelers (YouTube)": {
-            "items": 15,
             "in_window": 5,
             "contributed": 5
           },
+          "Pittsburgh Steelers (YouTube)": {
+            "items": 15,
+            "in_window": 7,
+            "contributed": 7
+          },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Post-Gazette Pirates": {
             "items": 20,
@@ -1487,8 +1673,8 @@
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 7,
-            "contributed": 7
+            "in_window": 8,
+            "contributed": 8
           }
         }
       },
@@ -1498,21 +1684,21 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 28,
+        "in_window": 33,
         "failed": [],
         "empty": [
           "Guardian Olympics"
         ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 18,
-            "in_window": 18,
-            "contributed": 18
+            "items": 20,
+            "in_window": 20,
+            "contributed": 20
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 13,
+            "contributed": 13
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1575,24 +1761,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 36205,
+          "outputTokens": 52978,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 132235,
+          "cacheCreationInputTokens": 142363,
           "webSearchRequests": 0,
-          "costUSD": 2.227505,
+          "costUSD": 2.74811,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 11176
+          "thinkingTokens": 22717
         }
       },
-      "cost_usd": 2.227505,
-      "duration_ms": 382132,
+      "cost_usd": 2.74811,
+      "duration_ms": 557272,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-10 13:36 EST",
-    "items_considered": 71,
+    "generated_at": "2026-11-10 19:38 EST",
+    "items_considered": 78,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1673,8 +1859,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.2275,
-    "model_duration_ms": 382132,
+    "model_cost_usd": 2.7481,
+    "model_duration_ms": 557272,
     "local_from": null,
     "feed_failures": []
   }
