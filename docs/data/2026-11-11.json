@@ -1,0 +1,1229 @@
+{
+  "date": "2026-11-11",
+  "headline": "Microsoft's record 1,328-fix Patch Tuesday fanned out into Adobe, Intel, AMD, Apple, and Siemens advisories while attackers stripped keys, datasets, and model weights out of AI platforms.",
+  "emerging_trends": [
+    {
+      "text": "Fireworks AI, NEAR AI, and Grok Build each gave up customer material this week through the plumbing that serves models, so the inference layer now carries the same breach exposure as any production database.",
+      "topic_title": "AI Providers Lose Keys, Datasets, and Model Weights",
+      "link_phrase": "Fireworks AI",
+      "_anchor": "trend-1"
+    },
+    {
+      "text": "Exploitation of Cisco BroadWorks, Barracuda gateways, and AhsayCBS kept running well after the vendors shipped fixes, which squares with ENISA's finding that 45% of surveyed European Union IT service management providers take more than three months to apply critical patches to critical systems.",
+      "topic_title": "Barracuda, BroadWorks, and AhsayCBS Under Attack",
+      "link_phrase": "Cisco BroadWorks",
+      "_anchor": "trend-2"
+    },
+    {
+      "text": "Microsoft Research's Lazarus technique hides an attacker's command in fewer than ten edited neurons of a working agent model, which moves the AI supply chain problem from training data to the weights file itself.",
+      "topic_title": "Ten Neurons Backdoor an AI Agent",
+      "link_phrase": "Lazarus",
+      "_anchor": "trend-3"
+    }
+  ],
+  "topics": [
+    {
+      "title": "November Patch Tuesday Runs Past Microsoft",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Final counts landed higher than Microsoft's own tally: Cisco Talos put the November 2026 release at 1,328 vulnerabilities with 60 critical, 45 of them remote code execution, while Intel and AMD together disclosed more than 200 flaws, among them critical bugs in Intel TDX software and a long run of AMD graphics defects; Adobe fixed 110 across nine products including Experience Manager, Premiere, and Photoshop; Siemens flagged high-severity flaws and Node2Shell exposure alongside pre-Patch Tuesday advisories from VDE CERT, Phoenix Contact, Johnson Controls, and Hitachi Energy; and Apple closed Bluetooth and AirPlay pairing flaws, more iMessage bugs, and an exploited Brotli vulnerability across its platforms.",
+      "summary": "CVE-2026-124194, the Outlook zero-day Microsoft says attackers already exploit, remains the first fix to deploy on Windows estates. Administrators should also pull the Adobe, Intel, AMD, and Apple updates and inventory Siemens, Phoenix Contact, Johnson Controls, and Hitachi Energy equipment before the industrial advisories go stale.",
+      "tags": [
+        "patch",
+        "zero-day",
+        "ics"
+      ],
+      "sources": [
+        {
+          "source": "Cisco Talos",
+          "title": "Microsoft Patch Tuesday for November 2026 — Snort rules and prominent vulnerabilities",
+          "url": "https://blog.talosintelligence.com/microsoft-patch-tuesday-for-november-2026/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Chipmaker Patch Tuesday: Over 200 Vulnerabilities Addressed by Intel, AMD",
+          "url": "https://www.securityweek.com/chipmaker-patch-tuesday-over-200-vulnerabilities-addressed-by-intel-amd/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "ICS Patch Tuesday: Siemens Flags High-Severity Flaws, Node2Shell Exposure",
+          "url": "https://www.securityweek.com/ics-patch-tuesday-siemens-flags-high-severity-flaws-node2shell-exposure/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Bluetooth, AirPlay Pairing Vulnerabilities Patched Across Apple Platforms",
+          "url": "https://www.securityweek.com/bluetooth-airplay-pairing-vulnerabilities-patched-across-apple-platforms/"
+        }
+      ],
+      "_anchor": "i-c3c6570192"
+    },
+    {
+      "title": "Barracuda, BroadWorks, and AhsayCBS Under Attack",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Huntress detailed an attack chain from early October 2026 that strings CVE-2026-105133 and CVE-2026-105134 in AhsayCBS backup software to bypass authentication and run commands, then drops a sandbox-evading Python implant; SecurityWeek confirmed that attackers now bypass authorization and take root on Barracuda Email Security Gateway appliances; CISA detailed the two flaws it added to its Known Exploited Vulnerabilities catalog, CVE-2026-20320, an XML external entity bug in Cisco BroadWorks rated 7.5, and CVE-2026-111793 in Openwave Messaging's Webtop media transcoder, both of which leak configuration data on patched-but-unupdated systems; and the Git project shipped 2.56.1 to close CVE-2026-111760, an integer truncation that lets a malicious repository run code on any machine that clones it recursively.",
+      "summary": "Every one of these flaws has a fix available, and in each case the lag between release and installation is doing the damage. Operators of Barracuda gateways, Cisco BroadWorks, Openwave Webtop, and AhsayCBS should patch now and hunt for post-exploitation activity; developers should move to Git 2.56.1 or the matching 2.50.2 through 2.55.1 releases.",
+      "tags": [
+        "exploit",
+        "patch",
+        "backdoor"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Cisco BroadWorks and Openwave Flaws Actively Exploited Despite Available Patches",
+          "url": "https://thehackernews.com/2026/11/cisco-broadworks-and-openwave-flaws.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Recently Patched Barracuda Vulnerabilities Exploited in Attacks",
+          "url": "https://www.securityweek.com/recently-patched-barracuda-vulnerabilities-exploited-in-attacks/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Attackers Exploit AhsayCBS Flaws to Deploy Sandbox-Evading Python Backdoor",
+          "url": "https://thehackernews.com/2026/11/attackers-exploit-ahsaycbs-flaws-to.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Git Patches Flaw That Lets Malicious Repositories Execute Code During Recursive Clones",
+          "url": "https://thehackernews.com/2026/11/git-patches-flaw-that-lets-malicious.html"
+        }
+      ],
+      "_anchor": "i-cd6455aace"
+    },
+    {
+      "title": "AI Providers Lose Keys, Datasets, and Model Weights",
+      "area": "Data Breaches",
+      "latest_developments": "Fireworks AI said its inquiry into the incident it first reported October 10, 2026 turned up further malicious activity that reached account and billing information, secrets, datasets, incomplete models, and Notion AI chats for a limited set of accounts; an attacker exploited a remote code execution flaw in SGLang, the open-source inference engine, ran code on a NEAR AI inference server on Sunday, November 8, 2026, took data belonging to 18 agents and roughly 100 users, and could have read requests the server processed that day, confidential-mode requests inside a trusted execution environment included; a researcher found 35,000 Grok Build applications open to anyone who looked, spilling confidential information that in part belongs to SpaceXSI; and Railway promised to cover the roughly $740,000 in fraudulent AI charges itself wherever an AI provider refuses a refund.",
+      "summary": "Platforms that host applications, agents, and model serving now hold the credentials and artifacts of everyone who builds on them, which turns one intrusion into many. Rotate every AI provider key stored with a third-party platform and audit what hosted applications expose to the open internet.",
+      "tags": [
+        "breach",
+        "ai",
+        "cloud"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Fireworks AI Confirms Wider Breach Affecting Customer Datasets, Model Weights and Notion AI Chats",
+          "url": "https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "SGLang RCE Exploit Breaches NEAR AI, Steals Data From 18 Agents and About 100 Users",
+          "url": "https://thehackernews.com/2026/11/sglang-rce-exploit-breaches-near-ai.html"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "Grok Build coding agent leaks oodles of confidential info, some belonging to SpaceXSI",
+          "url": "https://arstechnica.com/security/2026/11/grok-build-coding-agent-leaks-oodles-of-confidential-info-some-belonging-to-spacexsi/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Railway Says Stolen Customer AI Keys Led to $740,000 in Estimated Unauthorized Usage Charges",
+          "url": "https://thehackernews.com/2026/11/railway-says-stolen-customer-ai-keys.html"
+        }
+      ],
+      "_anchor": "i-7646e96e2e"
+    },
+    {
+      "title": "Ten Neurons Backdoor an AI Agent",
+      "area": "AI Security",
+      "latest_developments": "Microsoft Research published a technique it calls Lazarus that implants a hidden backdoor in a capable agent model by editing fewer than ten rarely used neurons, with no retraining; when a chosen trigger appears, the model emits the attacker's command and the agent runs it with the agent's own permissions, and the edited model behaves normally through standard safety evaluations. Microsoft says frontier agents can detect the anomalous weight edits and that it has observed no threat actor using the method.",
+      "summary": "The attack requires write access to a model's weights, which puts model registries, fine-tuning pipelines, and insiders in the threat path for any organization that grants agents real permissions. Verify provenance and checksums of every model you load, and screen weights for anomalous edits rather than relying on behavioral safety tests.",
+      "tags": [
+        "ai",
+        "backdoor",
+        "research"
+      ],
+      "sources": [
+        {
+          "source": "Microsoft Security Blog",
+          "title": "Detecting sleeper agents hiding in AI model neurons",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/11/10/detecting-sleeper-agents-hiding-in-ai-model-neurons/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Microsoft Researchers Show AI Agents Can Be Backdoored by Editing Fewer Than 10 Neurons",
+          "url": "https://thehackernews.com/2026/11/microsoft-researchers-show-ai-agents.html"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Microsoft researchers demonstrate hidden backdoor technique for AI agents",
+          "url": "https://www.helpnetsecurity.com/2026/11/11/microsoft-hidden-ai-backdoors-lazarus/"
+        }
+      ],
+      "_anchor": "i-f91527c7bf"
+    },
+    {
+      "title": "Nitori Loses 37.6 Million Customer Records",
+      "area": "Data Breaches",
+      "latest_developments": "Nitori, the Japanese furniture and home accessories retailer, said an attacker reached a system on its network and may have taken 37.62 million customer records.",
+      "summary": "The theft lands in the same run of intrusions at Japanese companies and government agencies that pushed Tokyo to announce an emergency cybersecurity package on November 6, 2026. Nitori customers should expect phishing that cites real purchase and account details.",
+      "tags": [
+        "breach",
+        "retail"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Japanese furniture giant Nitori says hackers stole 37.6M customer records",
+          "url": "https://www.bleepingcomputer.com/news/security/japanese-furniture-giant-nitori-says-hackers-stole-376m-customer-records/"
+        }
+      ],
+      "_anchor": "i-230bcad0fa"
+    },
+    {
+      "title": "Sparrow Malware Ties Three China-Nexus Campaigns",
+      "area": "Nation-State Activity",
+      "latest_developments": "Check Point Research linked three separate threat clusters, one of which it tracks as SilentDelivery, through shared infrastructure and overlapping malware code it groups as the Sparrow ecosystem, and traced a year of operations against telecommunications providers, government organizations, military entities, research institutions, and critical infrastructure in Latin America, Asia, and Europe.",
+      "summary": "The shared tooling suggests a common developer or quartermaster supplying several China-nexus espionage teams, which means indicators from one intrusion can surface the others. Telecommunications and government defenders should hunt across all three clusters' infrastructure rather than treating each campaign separately.",
+      "tags": [
+        "apt",
+        "espionage",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Three China-Nexus Espionage Campaigns Linked Through Sparrow Malware Ecosystem",
+          "url": "https://thehackernews.com/2026/11/three-china-nexus-espionage-campaigns.html"
+        }
+      ],
+      "_anchor": "i-3ac35ff647"
+    }
+  ],
+  "markets": [
+    {
+      "label": "S&P 500",
+      "value": "7,498.02",
+      "pct": "-1.7%",
+      "arrow": "▼"
+    },
+    {
+      "label": "Dow",
+      "value": "52,157.31",
+      "pct": "+0.2%",
+      "arrow": "▲"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "24,989.99",
+      "pct": "-2.9%",
+      "arrow": "▼"
+    },
+    {
+      "label": "WTI crude",
+      "value": "88.47",
+      "pct": "-11.8%",
+      "arrow": "▼"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1208",
+      "pct": "+0.4%",
+      "arrow": "▲"
+    },
+    {
+      "label": "GBP/USD",
+      "value": "1.3434",
+      "pct": "+0.5%",
+      "arrow": "▲"
+    },
+    {
+      "label": "USD/JPY",
+      "value": "158.12",
+      "pct": "+0.2%",
+      "arrow": "▲"
+    }
+  ],
+  "weather": [
+    "Veterans Day: Partly Sunny, high 63F.",
+    "Tonight: Patchy Fog then Light Rain Likely, low 46F.",
+    "Thursday: Light Rain, high 51F."
+  ],
+  "sports": [
+    {
+      "team": "Steelers",
+      "record": "6-2",
+      "games": [],
+      "next": {
+        "matchup": "Steelers @ Bengals",
+        "when": "Sun Nov 15, 8:20 PM",
+        "url": "https://plaintextsports.com/nfl/2026/week10/pit-cin"
+      },
+      "source": "ESPN"
+    },
+    {
+      "team": "Penguins",
+      "record": "6-10",
+      "games": [],
+      "next": {
+        "matchup": "Penguins @ Sharks",
+        "when": "Wed Nov 11, 10:00 PM",
+        "url": "https://plaintextsports.com/nhl/2026-11-11/pit-sjs"
+      },
+      "source": "ESPN"
+    }
+  ],
+  "local": {
+    "business_politics": [
+      {
+        "title": "The Fed's Next Increase Looks Like a Start",
+        "latest_developments": "The dollar climbed to a four-week high Wednesday, November 11, with the Treasury market shut for Veterans Day, and the Wall Street Journal reported that traders now read a December Federal Reserve increase as the first of several, while the National Institute of Economic and Social Research urged the Bank of England to carry its key rate to roughly 5% to tame inflation within three years.",
+        "summary": "October consumer prices in the United States rose 0.4% from September against the 0.3% economists expected, and hawkish comments from Federal Reserve officials, among them Governor Christopher Waller, drove the sharpest two-year Treasury yield jump since 2024 on Tuesday, November 10. Asian bond yields followed Wednesday, and DHF Capital S.A. said the dollar needs stronger bets on a half-point Fed move to climb further.",
+        "sources": [
+          {
+            "source": "WSJ US Business",
+            "title": "One More Rate Hike Is Looking Like the Beginning, Not the End",
+            "url": "https://www.wsj.com/articles/one-more-rate-hike-is-looking-like-the-beginning-not-the-end-7c18c678?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Dollar Rises to Four-Week High, Further Gains Subject to Stronger Pricing of 50Bp Fed Hike",
+            "url": "https://www.wsj.com/finance/currencies/asian-currencies-soften-after-u-s-cpi-data-boosts-dollar-26f03632?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "U.S. Treasurys Pause on Market Holiday After Inflation-Fueled Selloff",
+            "url": "https://www.wsj.com/finance/investing/u-s-treasurys-pause-on-market-holiday-after-inflation-fueled-selloff-7ff76731?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Asian Bond Yields Rise on Growing Expectations for Fed Rate Hike",
+            "url": "https://www.wsj.com/finance/asian-bond-yields-rise-on-growing-expectations-for-fed-rate-hike-a2491a28?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "BOE Should Raise Key Rate to Around 5%, U.K. Economic Think Tank Says",
+            "url": "https://www.wsj.com/economy/global/boe-should-raise-key-rate-to-around-5-u-k-economic-think-tank-says-04090d09?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-44cb1b8253"
+      },
+      {
+        "title": "Anthropic's Bankers Push the IPO Back to $1.5 Trillion",
+        "latest_developments": "The Financial Times reported Wednesday, November 11, that Anthropic's bankers prepare to lift the valuation on its initial public offering to $1.5 trillion, reversing the trim to $1.3 trillion reported a day earlier, and Nasdaq futures led a technology rebound after CoreWeave's results beat expectations.",
+        "summary": "Anthropic plans to list before Thanksgiving in what would rank as the largest initial public offering on record; the Financial Times' Lex column calls the deal too important to fail and warns that shadow insider sales and circular supply-chain backing could sour trading after the debut. CoreWeave, the cloud provider at the center of artificial-intelligence jitters, reported a workaround to its capital constraints and lifted European semiconductor shares Wednesday, even as the Financial Times found investors pulling back from the start-ups that promise to power data centers.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "FirstFT: Anthropic bankers prepare to increase IPO valuation to $1.5tn",
+            "url": "https://www.ft.com/content/cb451a27-481d-4106-b40f-4a83e3e361fd?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Anthropic’s IPO is too important to fail",
+            "url": "https://www.ft.com/content/26fd23df-830e-481b-a3bc-19bcab48c5f6"
+          },
+          {
+            "source": "FT Home",
+            "title": "US tech stocks set to extend rebound",
+            "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "CoreWeave Finds a Workaround to Capital Constraints—for Now",
+            "url": "https://www.wsj.com/business/energy-oil/coreweave-finds-a-workaround-to-capital-constraintsfor-now-1f548211?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "European Chip Stocks Climb After CoreWeave Results Fuel AI Optimism",
+            "url": "https://www.wsj.com/finance/stocks/nikkei-flat-supported-by-bank-pharma-stocks-2c6e1b38?mod=rss_markets_main"
+          },
+          {
+            "source": "FT World",
+            "title": "‘Fear factor’ sets in as investors question AI energy start-ups",
+            "url": "https://www.ft.com/content/1bf39007-d0c1-441c-8a87-906c5284bd1a?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-0d29205225"
+      },
+      {
+        "title": "Brent Rebounds Above $92 on Fresh Middle East Strikes",
+        "latest_developments": "Brent crude rose above $92 a barrel Wednesday, November 11, ending a two-day slide, after renewed strikes in the Middle East cut into expectations that Washington and Tehran will reach a settlement.",
+        "summary": "President Trump has said repeatedly that the United States does not expect to renew attacks on Iran while talks proceed, a stance that pulled crude down by double-digit percentages over the past week from above $100 a barrel. European natural gas at the TTF hub climbed back above €85 a megawatt-hour the same morning as the region drew down storage faster than traders expected.",
+        "sources": [
+          {
+            "source": "WSJ US Business",
+            "title": "Oil Prices Rebound as Middle East Supply Risks Persist",
+            "url": "https://www.wsj.com/business/energy-oil/oil-prices-rebound-as-middle-east-supply-risks-persist-4e078d4b?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Oil Rebounds After Two-Day Drop on U.S.-Iran Conflict Uncertainty",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-as-middle-east-risks-linger-53d39c2e?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "European TTF Gas Rises as Storage Withdrawals Accelerate",
+            "url": "https://www.wsj.com/finance/commodities-futures/european-ttf-gas-rises-as-storage-withdrawals-accelerate-569c8aab?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-a57da16d18"
+      }
+    ],
+    "business": [
+      {
+        "title": "U.S. Steel's $3 Billion Mill Splits Braddock",
+        "latest_developments": "The Allegheny County Health Department took public testimony in Braddock on Tuesday afternoon, November 10, on the air permit that decides the fate of U.S. Steel's $3 billion hot strip mill, and residents, environmental advocates, and business boosters argued against each other for hours.",
+        "summary": "U.S. Steel wants to build the hot strip mill at its Edgar Thomson Works in Braddock, the largest industrial investment proposed in the Mon Valley in years. Neighbors who testified pressed the health department on breathable air; business groups told the same hearing the plant anchors the valley's economy.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Future of $3B U.S. Steel project roils Mon Valley as health department considers permit",
+            "url": "https://triblive.com/business/future-of-3b-u-s-steel-project-roils-mon-valley-as-health-department-considers-permit/"
+          },
+          {
+            "source": "WTAE",
+            "title": "People for and against proposed U.S. Steel hot strip mill speak at public hearing",
+            "url": "https://www.wtae.com/article/us-steel-hot-strip-mill-criticism-support-permit-public-hearing/74394939"
+          },
+          {
+            "source": "WPXI",
+            "title": "Residents debate breathable air, economic progress at hearing about $3 billion US Steel investment",
+            "url": "https://www.wpxi.com/news/local/residents-debate-breathable-air-economic-progress-hearing-about-3-billion-us-steel-investment/ZITTS3RENRE67AJXQUATQTXKVI/"
+          }
+        ],
+        "_anchor": "i-7ad6a62eb2"
+      },
+      {
+        "title": "Donegal Residents Fight the Rustic Ridge Mine",
+        "latest_developments": "Residents told Pennsylvania environmental regulators Tuesday, November 10, that continued coal mining in the Donegal area threatens their well water, the stability of their houses, and the quality of nearby streams, and that the damage would surface after mining ends.",
+        "summary": "The Rustic Ridge Mine would extend underground coal operations around Donegal in Westmoreland County. The opponents who organized against the permit argue that past mining has already taken enough out of the ground beneath them.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Rustic Ridge Mine foes: Donegal area damaged enough by mining",
+            "url": "https://triblive.com/local/westmoreland/rustic-ridge-mine-foes-donegal-area-damaged-enough-by-mining/"
+          }
+        ],
+        "_anchor": "i-319c9746d1"
+      },
+      {
+        "title": "Sharpsburg Dresses Up Its Business Corridor",
+        "latest_developments": "TribLive reported Wednesday, November 11, that Sharpsburg will add flower boxes, public art, and other nature-themed upgrades along its commercial district to draw shoppers and new businesses.",
+        "summary": "Sharpsburg, the Allegheny County borough on the Allegheny River, has tied its economic development hopes to a streetscape makeover meant to make the corridor more vibrant and welcoming to people walking it.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Nature-themed streetscape project aims to draw people to Sharpsburg’s business corridor",
+            "url": "https://triblive.com/local/fox-chapel/nature-themed-streetscape-project-aims-to-draw-people-to-sharpsburgs-business-corridor/"
+          }
+        ],
+        "_anchor": "i-2ff5d3de27"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "Costa Steps Into the Senate Majority",
+        "latest_developments": "PublicSource profiled Jay Costa on Wednesday, November 11, as the Forest Hills Democrat takes charge of the Pennsylvania Senate floor after 30 years in the minority, with Republican state Senator Devlin Robinson calling him a pragmatic man who will do what he thinks best.",
+        "summary": "Democrats won a Pennsylvania Senate majority on November 3, 2026, completing a Harrisburg trifecta alongside Governor Josh Shapiro and the state House for the first time in more than three decades. Costa, the Allegheny County Democrat who leads the caucus, now decides which bills reach the floor, which gives Pittsburgh its best leverage in Harrisburg in a generation.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "After 30 years in the minority, Jay Costa steps into Senate spotlight",
+            "url": "https://www.publicsource.org/jay-costa-pennsylvania-senate-majority/"
+          }
+        ],
+        "_anchor": "i-d6c20c5eac"
+      },
+      {
+        "title": "Monessen Parents Press the Board on Mold",
+        "latest_developments": "Parents confronted the Monessen City School District board Monday night, November 9, demanding answers about mold in the middle-high school, and students return to the building within the coming week.",
+        "summary": "Mold inside the Monessen City School District's middle-high school in Westmoreland County pushed students into months of remote learning, and a KDKA investigation found mold and safety problems that persist a week before the planned return.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Parents demand answers about mold in Monessen middle-high school before students return",
+            "url": "https://www.cbsnews.com/pittsburgh/news/monessen-school-board-meeting-mold/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Parents still concerned about mold as Monessen students prepare to return to classrooms",
+            "url": "https://www.wpxi.com/news/local/parents-still-concerned-about-mold-monessen-students-prepare-return-classrooms/3NVOCFO2CNFP7IJZL6WOCPAXLA/"
+          }
+        ],
+        "_anchor": "i-6ace746820"
+      },
+      {
+        "title": "Forbes Road Teachers Set a December 1 Strike Date",
+        "latest_developments": "Teachers at the Forbes Road Career and Technology Center notified the school Tuesday, November 10, that they will walk out December 1, 2026, in 20 days, unless they reach a contract.",
+        "summary": "The Forbes Road Career and Technology Center, an Allegheny County vocational school, has bargained with its teachers union for nearly a year; union members told KDKA and WTAE their wages have not kept up.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Teacher strike looms at Forbes Road Forbes Road Career and Technology Center",
+            "url": "https://www.cbsnews.com/pittsburgh/video/teacher-strike-looms-at-forbes-road-forbes-road-career-and-technology-center/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Teachers at Forbes road tech school threaten to go on strike December 1st.",
+            "url": "https://www.wtae.com/article/forbes-road-tech-school-threaten-strike/74394471"
+          }
+        ],
+        "_anchor": "i-6b45417ec4"
+      }
+    ],
+    "events": [
+      {
+        "title": "Veterans Day Ceremonies Across Western Pennsylvania",
+        "latest_developments": "WTAE listed the region's Veterans Day observances for today, Wednesday, November 11, 2026, led by the ceremony at the National Cemetery of the Alleghenies and parades in Butler, Beaver County, and Westmoreland County.",
+        "summary": "The National Cemetery of the Alleghenies in Cecil Township, Washington County, holds the region's largest Veterans Day ceremony, and parades honoring those who served step off in Butler, in Beaver County, and in Westmoreland County. Pittsburgh marched its own Veterans Day parade downtown on Saturday, November 7.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Veterans Day ceremonies and parades planned across western Pennsylvania",
+            "url": "https://www.wtae.com/article/veterans-day-ceremonies-and-parades-planned-across-western-pennsylvania/74397266"
+          }
+        ],
+        "_anchor": "i-8205b302e8"
+      }
+    ],
+    "around_teams": [
+      {
+        "title": "Metcalf and Pittman Inherit the Deadline Decision",
+        "latest_developments": "Noah Hiles wrote in the Post-Gazette Wednesday, November 11, that with the trade deadline gone and no deals made, DK Metcalf and Michael Pittman Jr. have to carry the Steelers' passing game themselves.",
+        "summary": "The Steelers let the NFL trade deadline pass Tuesday, November 10, without a move, after spending the week shopping for depth rather than a headline addition. Pittsburgh, 6-2 at its bye, plays at the Cincinnati Bengals Sunday, November 15, at 8:15 p.m. Eastern on NBC.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Noah Hiles: DK Metcalf and Michael Pittman Jr. must step up after the Steelers stood pat",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/11/11/steelers-trade-deadline-analysis-nfl/stories/202611100029"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "The Steelers let the NFL’s trade deadline pass without making any deals",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/11/10/steelers-trade-deadline-news/stories/202611100026"
+          }
+        ],
+        "_anchor": "i-69de86154a"
+      },
+      {
+        "title": "Cherington Says the Pirates Have Room to Improve",
+        "latest_developments": "The Post-Gazette reported Tuesday night, November 10, that general manager Ben Cherington came out of Major League Baseball's general managers meetings believing the Pirates hold the flexibility to add to their roster this winter, with Tampa Bay Rays infielder Brandon Lowe among the names in play.",
+        "summary": "Cherington runs the Pirates through an offseason that opens with the general managers meetings, the gathering where clubs start trade and free-agent talks. Pittsburgh went in with payroll questions and lineup holes after another season out of the playoffs.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "At MLB’s GM meetings, Ben Cherington believes the Pirates have the flexibility to improve",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/11/10/pirates-gm-meetings-ben-cherington-brandon-lowe/stories/202611100027"
+          }
+        ],
+        "_anchor": "i-75c0af4e8f"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "Manchester United Makes Contact With Pochettino",
+        "latest_developments": "Sources told ESPN Wednesday, November 11, that Manchester United has contacted United States men's national team head coach Mauricio Pochettino while Michael Carrick runs training again and waits for word on his own future.",
+        "summary": "Pochettino, who coaches the United States men's national team, would welcome a return to the Premier League, sources told ESPN, and the club job carries more money and daily work against the national team's longer cycle. United sits in its worst league position in 40 years and faces a relegation fight that ESPN attributes to minority owner Sir Jim Ratcliffe's choice of inexperienced appointments; United States left back Antonee Robinson says the squad pays the speculation no attention.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Sources: Carrick to lead Man United training as club contact Pochettino",
+            "url": "https://www.espn.com/soccer/story/_/id/50451384/michael-carrick-mauricio-pochettino-man-united"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Sources: Pochettino open to becoming Man United head coach",
+            "url": "https://www.espn.com/soccer/story/_/id/50442407/mauricio-pochettino-man-united-michael-carrick-crisis"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "USMNT or Manchester United: Pros and cons of Pochettino's options",
+            "url": "https://www.espn.com/soccer/story/_/id/50442775/usmnt-manchester-united-pros-cons-mauricio-pochettino-options"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Robinson: USMNT players not distracted by Pochettino links to Man United",
+            "url": "https://www.espn.com/soccer/story/_/id/50443428/usmnt-not-distracted-pochettino-man-united-robinson"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Ratcliffe chose to appoint rookies at Man United, and it has them facing relegation fight",
+            "url": "https://www.espn.com/soccer/story/_/id/50430907/manchester-united-transfers-carrick-premier-league-ratcliffe"
+          }
+        ],
+        "_anchor": "i-40d3469d33"
+      }
+    ],
+    "reading": [
+      {
+        "author": "Stratechery",
+        "title": "Intel Earnings, AMD Earnings, Intel and AMD’s Divergence",
+        "url": "https://stratechery.com/2026/intel-earnings-amd-earnings-intel-and-amds-divergence/",
+        "summary": "Ben Thompson reads the diverging quarterly results of Intel and AMD as the product of decades-old structural differences between the two chipmakers, and argues Intel may have to return to an older path to recover.",
+        "_anchor": "i-ccb5a1ec7d"
+      },
+      {
+        "author": "Ed Zitron",
+        "title": "Jensen's Bizarre Adventure",
+        "url": "https://www.wheresyoured.at/jensens-bizarre-adventure/",
+        "summary": "Zitron picks apart the scandal engulfing Nvidia Chief Executive Jensen Huang and what it says about the finances and governance of the artificial-intelligence boom Huang sits atop.",
+        "_anchor": "i-2decbd9aef"
+      }
+    ]
+  },
+  "glance": [
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Fireworks AI lost secrets, datasets and model weights, while Microsoft Research's Lazarus technique backdoors an agent model by editing fewer than ten neurons.",
+      "links": [
+        {
+          "anchor": "i-7646e96e2e",
+          "phrase": "Fireworks AI",
+          "start": 0,
+          "end": 12,
+          "title": "AI Providers Lose Keys, Datasets, and Model Weights"
+        },
+        {
+          "anchor": "i-f91527c7bf",
+          "phrase": "Lazarus",
+          "start": 82,
+          "end": 89,
+          "title": "Ten Neurons Backdoor an AI Agent"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Attackers kept exploiting AhsayCBS, Barracuda and Cisco BroadWorks long after fixes shipped, even as November's Patch Tuesday pushed 1,328 vulnerabilities onto the same slow-moving queues.",
+      "links": [
+        {
+          "anchor": "i-cd6455aace",
+          "phrase": "AhsayCBS",
+          "start": 26,
+          "end": 34,
+          "title": "Barracuda, BroadWorks, and AhsayCBS Under Attack"
+        },
+        {
+          "anchor": "i-c3c6570192",
+          "phrase": "Patch Tuesday",
+          "start": 112,
+          "end": 125,
+          "title": "November Patch Tuesday Runs Past Microsoft"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Nitori said an intruder may have taken 37.62 million customer records, and Check Point tied three China-nexus clusters together through its Sparrow malware ecosystem.",
+      "links": [
+        {
+          "anchor": "i-230bcad0fa",
+          "phrase": "Nitori",
+          "start": 0,
+          "end": 6,
+          "title": "Nitori Loses 37.6 Million Customer Records"
+        },
+        {
+          "anchor": "i-3ac35ff647",
+          "phrase": "Sparrow",
+          "start": 140,
+          "end": 147,
+          "title": "Sparrow Malware Ties Three China-Nexus Campaigns"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Traders now read a December Fed increase as the first of several, Anthropic's bankers lift its IPO toward $1.5 trillion, and Brent rebounded above $92.",
+      "links": [
+        {
+          "anchor": "i-44cb1b8253",
+          "phrase": "December Fed increase",
+          "start": 19,
+          "end": 40,
+          "title": "The Fed's Next Increase Looks Like a Start"
+        },
+        {
+          "anchor": "i-0d29205225",
+          "phrase": "Anthropic's bankers",
+          "start": 66,
+          "end": 85,
+          "title": "Anthropic's Bankers Push the IPO Back to $1.5 Trillion"
+        },
+        {
+          "anchor": "i-a57da16d18",
+          "phrase": "Brent",
+          "start": 125,
+          "end": 130,
+          "title": "Brent Rebounds Above $92 on Fresh Middle East Strikes"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Pennsylvania regulators heard residents oppose U.S. Steel's $3 billion Braddock mill and the Rustic Ridge coal mine in Tuesday hearings over air quality and well water.",
+      "links": [
+        {
+          "anchor": "i-7ad6a62eb2",
+          "phrase": "Braddock mill",
+          "start": 71,
+          "end": 84,
+          "title": "U.S. Steel's $3 Billion Mill Splits Braddock"
+        },
+        {
+          "anchor": "i-319c9746d1",
+          "phrase": "Rustic Ridge",
+          "start": 93,
+          "end": 105,
+          "title": "Donegal Residents Fight the Rustic Ridge Mine"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Monessen parents demanded answers on middle-high school mold days before students return, and Forbes Road teachers set a December 1 walkout unless a contract lands.",
+      "links": [
+        {
+          "anchor": "i-6ace746820",
+          "phrase": "Monessen",
+          "start": 0,
+          "end": 8,
+          "title": "Monessen Parents Press the Board on Mold"
+        },
+        {
+          "anchor": "i-6b45417ec4",
+          "phrase": "Forbes Road",
+          "start": 94,
+          "end": 105,
+          "title": "Forbes Road Teachers Set a December 1 Strike Date"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "feed_health": {
+    "groups": [
+      {
+        "group": "security",
+        "label": "Security",
+        "feeds": 24,
+        "loaded": 22,
+        "window_hours": 24,
+        "in_window": 65,
+        "failed": [
+          {
+            "name": "SANS Internet Storm Center",
+            "error": "ExpatError: syntax error: line 1, column 0"
+          },
+          {
+            "name": "Securelist (Kaspersky)",
+            "error": "TimeoutError: The read operation timed out"
+          }
+        ],
+        "empty": [
+          "CISA Advisories",
+          "Sophos News",
+          "Unit 42 (Palo Alto)",
+          "Google Online Security Blog",
+          "Google Project Zero",
+          "The DFIR Report",
+          "Kim Zetter (Zero Day)",
+          "Frank on Fraud",
+          "Wired Security"
+        ],
+        "per_feed": {
+          "The Hacker News": {
+            "items": 50,
+            "in_window": 12,
+            "contributed": 12
+          },
+          "BleepingComputer": {
+            "items": 15,
+            "in_window": 13,
+            "contributed": 13
+          },
+          "Krebs on Security": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Schneier on Security": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Dark Reading": {
+            "items": 50,
+            "in_window": 7,
+            "contributed": 7
+          },
+          "SecurityWeek": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "SANS Internet Storm Center": {
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "CISA Advisories": {
+            "items": 30,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The Record": {
+            "items": 5,
+            "in_window": 5,
+            "contributed": 5
+          },
+          "Ars Technica Security": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Help Net Security": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "Securelist (Kaspersky)": {
+            "items": 0,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Sophos News": {
+            "items": 9,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Unit 42 (Palo Alto)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Google Online Security Blog": {
+            "items": 25,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Cisco Talos": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Graham Cluley": {
+            "items": 20,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Microsoft Security Blog": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Google Project Zero": {
+            "items": 7,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The DFIR Report": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Kim Zetter (Zero Day)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "404 Media": {
+            "items": 15,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "Frank on Fraud": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Wired Security": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "pittsburgh",
+        "label": "Pittsburgh",
+        "feeds": 9,
+        "loaded": 9,
+        "window_hours": 48,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "TribLive": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 18
+          },
+          "Pittsburgh Post-Gazette": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 9
+          },
+          "PublicSource": {
+            "items": 10,
+            "in_window": 4,
+            "contributed": 1
+          },
+          "Pittsburgh City Paper": {
+            "items": 10,
+            "in_window": 3,
+            "contributed": 1
+          },
+          "NEXTpittsburgh": {
+            "items": 10,
+            "in_window": 3,
+            "contributed": 1
+          },
+          "Pittsburgh Magazine": {
+            "items": 30,
+            "in_window": 6,
+            "contributed": 0
+          },
+          "KDKA": {
+            "items": 30,
+            "in_window": 30,
+            "contributed": 9
+          },
+          "WPXI": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 10
+          },
+          "WTAE": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 11
+          }
+        }
+      },
+      {
+        "group": "bizpol",
+        "label": "Business and Politics",
+        "feeds": 8,
+        "loaded": 8,
+        "window_hours": 36,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "WSJ World News": {
+            "items": 71,
+            "in_window": 29,
+            "contributed": 6
+          },
+          "WSJ Markets": {
+            "items": 61,
+            "in_window": 34,
+            "contributed": 15
+          },
+          "WSJ US Business": {
+            "items": 85,
+            "in_window": 51,
+            "contributed": 13
+          },
+          "WSJ Politics": {
+            "items": 21,
+            "in_window": 10,
+            "contributed": 1
+          },
+          "The Economist": {
+            "items": 300,
+            "in_window": 15,
+            "contributed": 3
+          },
+          "FT Home": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 5
+          },
+          "FT World": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 16
+          },
+          "FT Markets": {
+            "items": 25,
+            "in_window": 22,
+            "contributed": 1
+          }
+        }
+      },
+      {
+        "group": "events",
+        "label": "Events",
+        "feeds": 4,
+        "loaded": 4,
+        "window_hours": 120,
+        "in_window": 11,
+        "failed": [],
+        "empty": [
+          "NEXTpittsburgh Arts & Entertainment"
+        ],
+        "per_feed": {
+          "Post-Gazette Arts & Entertainment": {
+            "items": 20,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "Post-Gazette Music": {
+            "items": 20,
+            "in_window": 2,
+            "contributed": 0
+          },
+          "NEXTpittsburgh Events": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "NEXTpittsburgh Arts & Entertainment": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "sports_media",
+        "label": "Sports media",
+        "feeds": 6,
+        "loaded": 6,
+        "window_hours": 96,
+        "in_window": 24,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Footbahlin with Ben Roethlisberger": {
+            "items": 147,
+            "in_window": 1,
+            "contributed": 0
+          },
+          "Not Just Football with Cam Heyward": {
+            "items": 15,
+            "in_window": 5,
+            "contributed": 5
+          },
+          "Pittsburgh Steelers (YouTube)": {
+            "items": 15,
+            "in_window": 7,
+            "contributed": 7
+          },
+          "Ben Roethlisberger / Channel Seven (YouTube)": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Post-Gazette Pirates": {
+            "items": 20,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "Post-Gazette Steelers": {
+            "items": 20,
+            "in_window": 9,
+            "contributed": 9
+          }
+        }
+      },
+      {
+        "group": "team_usa",
+        "label": "Team USA",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 72,
+        "in_window": 31,
+        "failed": [],
+        "empty": [
+          "Guardian Olympics"
+        ],
+        "per_feed": {
+          "ESPN Soccer": {
+            "items": 19,
+            "in_window": 19,
+            "contributed": 19
+          },
+          "ESPN Olympics": {
+            "items": 25,
+            "in_window": 12,
+            "contributed": 12
+          },
+          "Guardian Olympics": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "reading",
+        "label": "Reading",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 336,
+        "in_window": 12,
+        "failed": [],
+        "empty": [
+          "Cal Newport"
+        ],
+        "per_feed": {
+          "Ed Zitron": {
+            "items": 15,
+            "in_window": 4,
+            "contributed": 3
+          },
+          "Stratechery": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 9
+          },
+          "Cal Newport": {
+            "items": 8,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      }
+    ],
+    "aux": [
+      {
+        "label": "Markets (Yahoo Finance)",
+        "ok": true,
+        "detail": "7 of 7 rows"
+      },
+      {
+        "label": "Weather (NWS)",
+        "ok": true,
+        "detail": "3 forecast periods"
+      },
+      {
+        "label": "Scores (ESPN, plaintextsports)",
+        "ok": true,
+        "detail": "2 teams via ESPN"
+      }
+    ],
+    "cli": {
+      "models": [
+        "claude-opus-5"
+      ],
+      "usage": {
+        "claude-opus-5": {
+          "inputTokens": 6,
+          "outputTokens": 33438,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 111078,
+          "webSearchRequests": 0,
+          "costUSD": 1.94676,
+          "contextWindow": 3000000,
+          "maxOutputTokens": 192000,
+          "thinkingTokens": 20919
+        }
+      },
+      "cost_usd": 1.94676,
+      "duration_ms": 382062,
+      "calls": 3
+    }
+  },
+  "meta": {
+    "generated_at": "2026-11-11 07:06 EST",
+    "items_considered": 65,
+    "window_hours": 24,
+    "model": "opus",
+    "fallback_model": "sonnet",
+    "feeds": {
+      "security": [
+        "The Hacker News",
+        "BleepingComputer",
+        "Krebs on Security",
+        "Schneier on Security",
+        "Dark Reading",
+        "SecurityWeek",
+        "SANS Internet Storm Center",
+        "CISA Advisories",
+        "The Record",
+        "Ars Technica Security",
+        "Help Net Security",
+        "Securelist (Kaspersky)",
+        "Sophos News",
+        "Unit 42 (Palo Alto)",
+        "Google Online Security Blog",
+        "Cisco Talos",
+        "Graham Cluley",
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media",
+        "Frank on Fraud",
+        "Wired Security"
+      ],
+      "pittsburgh": [
+        "TribLive",
+        "Pittsburgh Post-Gazette",
+        "PublicSource",
+        "Pittsburgh City Paper",
+        "NEXTpittsburgh",
+        "Pittsburgh Magazine",
+        "KDKA",
+        "WPXI",
+        "WTAE"
+      ],
+      "bizpol": [
+        "WSJ World News",
+        "WSJ Markets",
+        "WSJ US Business",
+        "WSJ Politics",
+        "The Economist",
+        "FT Home",
+        "FT World",
+        "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
+      ],
+      "team_usa": [
+        "ESPN Soccer",
+        "ESPN Olympics",
+        "Guardian Olympics"
+      ],
+      "reading": [
+        "Ed Zitron",
+        "Stratechery",
+        "Cal Newport"
+      ]
+    },
+    "served_by": [
+      "claude-opus-5"
+    ],
+    "model_calls": 3,
+    "model_cost_usd": 1.9468,
+    "model_duration_ms": 382062,
+    "local_from": null,
+    "feed_failures": [
+      "SANS Internet Storm Center",
+      "Securelist (Kaspersky)"
+    ]
+  }
+}
