@@ -1,0 +1,505 @@
+================================================================
+INFOSECFOLLOW -- security, markets, business, pittsburgh
+Thursday, November 12, 2026 - 7:05 AM EST
+================================================================
+
+An attacker rode 4,837 stolen GitHub accounts into more than
+1,800 repositories to harvest continuous integration secrets and
+cloud keys, while fresh attacks through ScreenConnect extensions
+and N-able N-central turned remote management software into a
+highway to hundreds of customer machines.
+
+CONTENTS: Emerging Trends and Key Updates | Security | Business
+and Politics | Pittsburgh | Sports | Reading | Markets | Feed
+Health
+
+EMERGING TRENDS AND KEY UPDATES
+----------------------------------------------------------------
+* [TREND] A batch of 4,837 stolen GitHub accounts seeded the
+  wfx-loot secret stealer, while Darktrace showed pilfered
+  Claude API keys turning Claude Code into a remote implant.
+  see: Stolen GitHub Accounts Seed a Secret Stealer; Stolen
+  Claude Keys Turn Claude Code Into an Implant
+* [TREND] ConnectWise disabled five third-party ScreenConnect
+  extensions abused to bypass authentication, while Microsoft
+  found crews planting GSocket on Linux servers to hold access
+  long after victims patch.
+  see: ScreenConnect and N-central Attacks Reach Customer
+  Endpoints; GSocket Keeps Linux Servers Owned After Patching
+* [UPDATE (new)] Apache patched CVE-2026-119618, a critical
+  mod_http2 remote code execution flaw, in HTTP Server 2.4.71,
+  with Red Hat shipping affected builds downstream.
+  see: HTTP/2 and Pre-Auth Flaws Hit Core Server Software
+* [UPDATE (new)] Poland pulled its nationwide ePUAP government
+  services portal offline after a cyberattack, as Japan's
+  emergency package added money for incident responders.
+  see: Poland Pulls ePUAP Offline as Japan Funds Responders
+* [UPDATE (updated)] Nvidia shares fell 7% as the board met over
+  Jensen Huang's future, and Zitron argued the company's
+  dominance rests on one unaccountable executive.
+  see: Nvidia's Board Moves to Oust Huang; Jensen's Bizarre
+  Adventure
+* [TREND] Pittsburgh's civic ledger tightened as Gulf Tower
+  conversion math came up short, Monroeville Mall faced a likely
+  final holiday season, and UPMC drew fresh scrutiny.
+  see: The Money Gap in Downtown Conversions; Monroeville Mall's
+  Last Christmas; Pittsburgh's Leverage Over UPMC and Highmark
+
+SECURITY
+----------------------------------------------------------------
+
+1. SCREENCONNECT AND N-CENTRAL ATTACKS REACH CUSTOMER ENDPOINTS
+   Vulnerabilities and Exploits · [zero-day, msp, exploit]
+   Latest developments: ConnectWise disabled five third-party
+   ScreenConnect extensions in partner environments after
+   attackers exploited a flaw in one legitimate extension to
+   walk past ScreenConnect authentication and push rogue
+   remote-access clients onto at least 288 endpoints across 48
+   organizations, and the company says it sees no compromise of
+   its own infrastructure and no vulnerability in ScreenConnect
+   itself; SecurityWeek reported that attacks on N-able
+   N-central began shortly after a researcher published more
+   than 30 zero-days, and that N-able's hotfixes close the ones
+   an unauthenticated attacker can reach.
+   Both products are remote monitoring and management platforms
+   that managed service providers use to administer client
+   machines, which gives one compromised instance reach into
+   every customer it serves. Administrators should apply
+   N-able's hotfixes, check which ScreenConnect extensions their
+   environment loads, and hunt for unexpected remote-access
+   clients on managed endpoints.
+   - The Hacker News: https://thehackernews.com/2026/11/screenconnect-attacks-target-at-least.html
+   - SecurityWeek: https://www.securityweek.com/hackers-deploy-malware-in-fresh-screenconnect-campaign/
+   - SecurityWeek: https://www.securityweek.com/hackers-target-n-central-zero-days-as-n-able-rushes-patches/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/
+
+2. HTTP/2 AND PRE-AUTH FLAWS HIT CORE SERVER SOFTWARE
+   Vulnerabilities and Exploits · [patch, rce, open-source]
+   Latest developments: The Apache Software Foundation fixed
+   CVE-2026-119618, a critical remote code execution flaw in the
+   mod_http2 module that affects Apache HTTP Server 2.4.55
+   through 2.4.70, in version 2.4.71 on November 11, 2026, and
+   Red Hat, which ships the server with Red Hat Enterprise
+   Linux, says only hosts with HTTP/2 enabled face exposure;
+   Node.js closed 16 flaws in versions 22.23.5, 24.22.3, and
+   26.13.1, two of them in built-in HTTP/2 support that let an
+   unauthenticated client crash a 24.x or 26.x server or pull
+   back pieces of server memory holding other connections'
+   responses; MongoDB patched CVE-2026-118383, which lets an
+   unauthenticated attacker send two requests that crash a
+   lagging replica set member once it takes over as primary; and
+   Red Hat patched a critical Quay flaw that lets attackers
+   steal private container images, overwrite repositories, and
+   hold persistent access.
+   These are the web servers, runtimes, databases, and
+   registries sitting under most enterprise applications, and
+   three of the four flaws need no credentials at all. Inventory
+   internet-facing Apache and Node.js hosts with HTTP/2 turned
+   on, patch to 2.4.71 and the fixed Node.js lines, and update
+   MongoDB replica set members and Quay registries.
+   - The Hacker News: https://thehackernews.com/2026/11/critical-apache-http2-flaw-could-let.html
+   - The Hacker News: https://thehackernews.com/2026/11/nodejs-fixes-16-flaws-including-http2.html
+   - The Hacker News: https://thehackernews.com/2026/11/critical-pre-auth-mongodb-flaw-cve-2026.html
+   - SecurityWeek: https://www.securityweek.com/critical-red-hat-quay-vulnerability-could-expose-private-container-images/
+
+3. GSOCKET KEEPS LINUX SERVERS OWNED AFTER PATCHING
+   Ransomware and Cybercrime · [linux, malware, persistence]
+   Latest developments: Microsoft Threat Intelligence documented
+   multiple threat actors planting GSocket, a legitimate
+   open-source remote access tool, on compromised Linux servers
+   to hold encrypted command and control after the victim
+   patches the vulnerability that let the attacker in, and
+   published detection, investigation, and remediation steps;
+   the threat intelligence company Flare reported separately
+   that underground forums now trade eBPF rootkit source code,
+   tutorials, and exploits that hide activity on Linux without
+   loading a kernel module.
+   Patching an exploited flaw closes the door the attacker used
+   and leaves the attacker inside, because GSocket rides
+   outbound encrypted connections that look like administrative
+   traffic. After any Linux server compromise, hunt for GSocket
+   processes, unexpected cron and systemd persistence, and eBPF
+   programs loaded outside your own tooling.
+   - Microsoft Security Blog: https://www.microsoft.com/en-us/security/blog/2026/11/11/global-socket-how-threat-actors-weaponizing-gsocket-stealthy-c2/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/hackers-plant-gsocket-on-linux-servers-for-persistent-access/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/ebpf-rootkits-why-underground-actors-are-taking-notice/
+
+4. POLAND PULLS EPUAP OFFLINE AS JAPAN FUNDS RESPONDERS
+   Policy and Regulation · [policy, government, spyware]
+   Latest developments: Poland shut down ePUAP, the nationwide
+   platform citizens use to file official documents, correspond
+   with government agencies, and complete administrative
+   procedures online, after a cyberattack; Japan's emergency
+   cybersecurity package adds public-private cyber responders
+   and an AI-focused team run by the economy ministry, plus
+   wider latitude to use the government's new active
+   cyber-defense powers, a response to AI-assisted breaches at
+   dozens of Japanese companies and agencies; and Britain and
+   France issued the first joint guidelines for commercial cyber
+   intrusion capability vendors, calling on firms that build,
+   sell, or finance the tools to vet customers, build technical
+   safeguards against misuse, and run systems for monitoring and
+   reporting abuse.
+   Three governments moved the same week on national cyber
+   exposure, one by taking a citizen-facing service down and two
+   by funding and regulating. Organizations filing through ePUAP
+   should expect outages, and spyware vendors selling into
+   Britain or France now face a written customer due diligence
+   standard.
+   - The Record: https://therecord.media/poland-shuts-down-government-services-platform-cyberattack
+   - Dark Reading: https://www.darkreading.com/cybersecurity-operations/japan-emergency-funding-cybersecurity-ai-assisted-breaches
+   - The Record: https://therecord.media/britain-france-set-out-guidelines-for-commercial-hacking-firms
+
+5. STOLEN GITHUB ACCOUNTS SEED A SECRET STEALER
+   Software Supply Chain Security · [supply-chain, breach,
+   credentials]
+   Latest developments: Aikido Security disclosed a campaign it
+   calls wfx-loot, in which an attacker holding stolen
+   credentials for 4,837 GitHub accounts pushed a
+   credential-stealing payload into tens of thousands of
+   repositories starting Tuesday, November 10, 2026, and ran it
+   in at least 1,806 of them, shipping GitHub Actions secrets
+   and cloud credentials back out; the compromised accounts also
+   opened probe pull requests across the repositories they could
+   write to.
+   GitHub Actions workflows carry the secrets that reach cloud
+   accounts, container registries, and production systems, so
+   every secret the malware touched counts as burned. Anyone
+   whose repositories accepted commits or workflow runs since
+   November 10, 2026 should rotate Actions secrets and cloud
+   credentials, revoke tokens, and audit recent pull requests
+   and commit authors.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/12/wfx-loot-github-actions-secret-stealer/
+   - The Hacker News: https://thehackernews.com/2026/11/4837-hijacked-github-accounts-ran-ci.html
+
+6. STOLEN CLAUDE KEYS TURN CLAUDE CODE INTO AN IMPLANT
+   AI Security · [ai, credentials, c2]
+   Latest developments: Darktrace researchers showed in a lab
+   test that an attacker holding a stolen Claude API key can run
+   Claude Code as a remote-controlled implant, steering the
+   coding agent through the memory stores feature of Anthropic's
+   platform and pulling a one-gigabyte file out through the
+   Claude Files API, with every task and every result traveling
+   to api.anthropic.com, the same endpoint the agent already
+   calls for inference; Unit 42, the Palo Alto Networks research
+   group, published mitigations the same day for attacker use of
+   AI red team tools including ARTEX.
+   A coding agent already installed and trusted on a developer
+   workstation becomes the command channel, and its traffic
+   blends into ordinary agent activity that network monitoring
+   treats as benign. Treat Claude API keys as production
+   credentials, rotate exposed ones, and watch for agent
+   sessions that no developer started.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/12/stolen-claude-api-keys-remote-controlled-implant/
+   - Unit 42 (Palo Alto): https://unit42.paloaltonetworks.com/artex-and-ai-powered-red-teaming-tools/
+
+BUSINESS AND POLITICS
+----------------------------------------------------------------
+* Nvidia's Board Moves to Oust Huang
+  Latest developments: Nvidia shares fell 7% ahead of Thursday's
+  Wall Street open, November 12, as the board gathered to settle
+  Jensen Huang's fate following a report of a second affair, and
+  Beijing warned Washington against treating the scandal as a
+  pretext for new chip restrictions.
+  Huang, who co-founded Nvidia and built it into the supplier of
+  the chips behind the artificial-intelligence boom, faces
+  removal after the company's own investigation into his affair
+  with a Chinese woman whom United States intelligence
+  identifies as a spy, and the Financial Times reported a second
+  relationship with a subordinate at the company. The leadership
+  crisis knocked Nasdaq futures down 1% and pulled Asian
+  equities lower, and The Economist judged that Huang's
+  recklessness leaves the board no good options; China's
+  government accuses Washington of fabricating espionage
+  narratives.
+  - WSJ US Business: https://www.wsj.com/business/nvidia-is-preparing-to-oust-nvidia-ceo-jensen-huang-30f421ad?mod=pls_whats_news_us_business_f
+  - FT Home: https://www.ft.com/content/d3838274-a055-4d5d-a1ff-48f2979a08f0?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/66e7337e-3696-4259-84f4-57533bc185bd?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/stocks/nvidia-leadership-scandal-drags-on-u-s-stock-futures-pressures-ai-trade-e7f6e5b8?mod=rss_markets_main
+  - The Economist: https://www.economist.com/business/2026/11/12/jensen-huangs-recklessness-leaves-nvidia-with-no-good-options
+* Witkoff and Kushner Carry the Abu Dhabi Result to Putin
+  Latest developments: Steve Witkoff and Jared Kushner landed in
+  Moscow Thursday, November 12, to put the results of the Abu
+  Dhabi negotiations to Vladimir Putin, and Ukraine said
+  restrictions on its military Starlink service have returned.
+  The Kyiv and Moscow delegations agreed in Abu Dhabi only to a
+  large prisoner exchange, and President Trump's envoys now take
+  the question of a ceasefire directly to Putin while European
+  capitals argue over who among them should speak to him.
+  Ukrainian commanders say drones running on Starshield, the
+  military version of SpaceX's Starlink, lose connectivity above
+  100 miles an hour, which cripples their interception of
+  Russia's jet-powered drones.
+  - FT Home: https://www.ft.com/content/6cd890f1-2e4d-468a-807f-529f45e1678e?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/ukraine-says-its-military-starlink-is-disrupted-again-hurting-defenses-bfb00a64?mod=rss_worldnews
+  - FT World: https://www.ft.com/content/6b0c3075-482f-4d9a-8c91-1f1ce9618847?syn-25a6b1a6=1
+* Tehran Sets Terms for Reopening Hormuz
+  Latest developments: Crude fell Thursday, November 12, as
+  traders weighed renewed United States-Iran diplomacy against
+  the conditions Tehran attaches to reopening the Strait of
+  Hormuz and the continuing threats to regional shipping.
+  The war between the United States and Iran shut the strait
+  that carries roughly a fifth of the world's seaborne oil, and
+  the price of crude now turns on Tehran's terms. The Financial
+  Times reported that Russian diesel exports doubled after Trump
+  lifted sanctions on Moscow, with none of the cargo reaching
+  American buyers, and Ukraine's resumed strikes on Russian
+  refineries should cut that flow back.
+  - WSJ US Business: https://www.wsj.com/business/energy-oil/oil-prices-fall-as-investors-weigh-u-s-iran-diplomacy-296e2847?mod=pls_whats_news_us_business_f
+  - FT Home: https://www.ft.com/content/525b53ee-4817-4eb6-8292-b6ee0ac45b47?syn-25a6b1a6=1
+* France Backs Spain's Candidate for the ECB
+  Latest developments: Paris signaled Thursday, November 12,
+  that it will support Pablo Hernandez de Cos, Spain's candidate
+  to become the next president of the European Central Bank.
+  France and Germany are assembling a package deal on central
+  bank leadership, and the French signal gives momentum to the
+  Spanish bid for the job that sets monetary policy for the 20
+  countries of the euro area.
+  - FT Home: https://www.ft.com/content/b0d03a62-a75d-41f9-bac3-1518cefe400a?syn-25a6b1a6=1
+
+PITTSBURGH
+----------------------------------------------------------------
+
+Weather:
+  Today: Rain Showers, high 52F.
+  Tonight: Chance Rain Showers then Slight Chance Snow Showers,
+    low 36F.
+  Friday: Slight Chance Snow Showers then Chance Rain And Snow
+    Showers, high 46F.
+
+Business:
+* The Money Gap in Downtown Conversions
+  Latest developments: The Post-Gazette put numbers Thursday,
+  November 12, on the gap between what an office-to-apartment
+  conversion costs downtown and what the finished rents support,
+  using the Gulf Tower as its case.
+  Apartments in Pittsburgh's Golden Triangle keep filling while
+  the office towers around them empty, and the Pittsburgh
+  Downtown Partnership's figures show conversion economics that
+  fall short without subsidy. Mayor Corey O'Connor's
+  administration and downtown landlords both need the math to
+  work to keep the Golden Triangle's tax base intact.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/business/development/2026/11/12/downtown-office-residential-gulf-tower-pdp-waldrup/stories/202611120013
+* Monroeville Mall's Last Christmas
+  Latest developments: TribLive reported Thursday, November 12,
+  that Monroeville Mall may be hosting its final holiday
+  shopping season.
+  The enclosed mall on Route 22 in Monroeville, Allegheny
+  County, has anchored eastern suburban retail for decades, and
+  its tenants now face the prospect of shutting down after
+  Christmas.
+  - TribLive: https://triblive.com/local/monroeville/is-this-the-last-holiday-shopping-season-at-monroeville-mall/
+* Pittsburgh's Leverage Over UPMC and Highmark
+  Latest developments: Post-Gazette columnist Brandon McGinley
+  argued Thursday, November 12, that Pittsburgh may finally hold
+  real leverage over its largest tax-exempt nonprofits.
+  UPMC and Highmark own much of the city's most valuable real
+  estate and pay no property tax on it, and Mayor Corey O'Connor
+  opened his term facing a projected $250 million deficit over
+  five years. McGinley weighed the city's options on payments in
+  lieu of taxes and on challenging charitable exemptions
+  outright.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/local/city/2026/11/12/upmc-highmark-pilot-oconnor-nonprofit-tax-exemption-charity-hup/stories/202611120004
+
+Around town:
+* Red Light Cameras Issue 10,000 Warnings
+  Latest developments: Pittsburgh's red light cameras produced
+  more than 10,000 warnings in their first 60 days of
+  enforcement, KDKA reported Thursday, November 12.
+  The city is running its new camera program in a warning phase
+  before it starts mailing fines. KDKA's John Shumway reported
+  that cities typically see these totals spike at the start and
+  fall off as drivers learn where the cameras sit.
+  - KDKA: https://www.cbsnews.com/pittsburgh/video/pittsburghs-red-light-camera-enforcement-results-in-more-than-10000-warnings-in-first-60-days/
+* Shapiro Restates His Case for the Popular Vote
+  Latest developments: Governor Josh Shapiro told PublicSource
+  in a story published Thursday, November 12, that "the national
+  popular vote makes sense" and that he will work with lawmakers
+  on a mechanism for it.
+  Democrats took unified control of more state governments in
+  the November 3 elections, including both chambers in
+  Harrisburg, which puts electoral college changes within reach
+  of legislatures that can direct how their states award
+  presidential electors. Pennsylvania carries 19 electoral votes
+  and decides presidential elections.
+  - PublicSource: https://www.publicsource.org/shapiro-pennsylvania-electoral-college-reforms-voting/
+* Deluzio Collects Chits Against Fetterman
+  Latest developments: The Post-Gazette reported Thursday,
+  November 12, that Representative Chris Deluzio of Aspinwall
+  campaigned for Democrats who won last week, and that those
+  allies could line up behind a primary challenge to Senator
+  John Fetterman in 2028.
+  Fetterman has alienated much of the Pennsylvania Democratic
+  Party, and Governor Josh Shapiro told him publicly on November
+  8 to repair the damage. Deluzio, a second-term congressman
+  from Allegheny County, has emerged as the party figure best
+  positioned to use the goodwill he banked in the midterms.
+  - Pittsburgh Post-Gazette: https://www.post-gazette.com/news/politics-state/2026/11/12/deluzio-fetterman-midterm-pa-primary/stories/202611080049
+
+Events:
+* Jack White Headlines the Weekend
+  Latest developments: The Post-Gazette published its weekend
+  guide Thursday, November 12, led by a Jack White concert, a
+  Rush anniversary show, and Brazilian jazz.
+  The guide collects the weekend of November 13 through November
+  15 in Pittsburgh around those three music bills, with the
+  former White Stripes frontman topping the list.
+  - Post-Gazette Arts & Entertainment: https://www.post-gazette.com/life/recreation/2026/11/12/things-to-do-this-weekend-pittsburgh-14/stories/202611120012
+* City Paper's Week: Emo, Quilts, and Greek Tragedy
+  Latest developments: Pittsburgh City Paper published its
+  calendar Thursday, November 12, for Thursday, November 12,
+  through Wednesday, November 18.
+  The week's list runs a secret emo show, a quilt sew-a-long, an
+  operatic staging of a Greek tragedy, and a post-apocalyptic
+  musical across Pittsburgh venues.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/listings/this-weeks-top-events/pittsburghs-top-events-thu-nov-12-wed-nov-18/
+* Riverfront Theater Stages 'Spring Awakening'
+  Latest developments: TribLive reported Thursday, November 12,
+  that Riverfront Theater Company closes its 2026 season with
+  the rock musical "Spring Awakening."
+  The show, adapted from Frank Wedekind's play, tells a story of
+  adolescent revolt and self-discovery and carries a reputation
+  for jarring its audiences.
+  - TribLive: https://triblive.com/local/fox-chapel/riverfront-theater-company-staging-poignant-story-of-youth-revolt-with-spring-awakening/
+* Sarah Kramer Takes Over Attack Theatre
+  Latest developments: The Post-Gazette profiled Sarah Kramer on
+  Thursday, November 12, as she begins directing Attack Theatre.
+  Kramer came to the Pittsburgh dance company from the John F.
+  Kennedy Center for the Performing Arts in Washington, and she
+  brings that programming experience to a troupe known for
+  pairing contemporary dance with live music in unconventional
+  spaces.
+  - Post-Gazette Arts & Entertainment: https://www.post-gazette.com/ae/theater-dance/2026/11/12/attack-theatre-sarah-kramer-kennedy-center/stories/202610290074
+
+SPORTS
+----------------------------------------------------------------
+
+Steelers (6-2)
+  Up Next · Steelers @ Bengals · Sun Nov 15, 8:20 PM
+    https://plaintextsports.com/nfl/2026/week10/pit-cin
+
+Penguins (7-10)
+  Wed Nov 11 · Penguins 3 · Sharks 2 · Final (SO)
+    Penguins beat Sharks 3-2 in shootout after blowing 2-goal
+    lead in 3rd period
+    https://plaintextsports.com/nhl/2026-11-11/pit-sjs
+  Up Next · Senators @ Penguins · Sat Nov 14, 7:00 PM
+    https://plaintextsports.com/nhl/2026-11-14/ott-pit
+
+Around the Teams:
+* Tomlin on Retiring and Working for NBC
+  Latest developments: Not Just Football released part two of
+  Cam Heyward's interview with Mike Tomlin at 6 a.m. Eastern
+  Thursday, November 12, in which the former Steelers head coach
+  walks through his retirement decision and his new job at NBC.
+  Tomlin coached the Steelers for 18 seasons before stepping
+  away, and he sat down with Heyward and co-host Hayden for a
+  two-part conversation; part one, posted Tuesday, November 10,
+  covered Ben Roethlisberger, Aaron Rodgers, and how Tomlin got
+  the job in 2007.
+  - Not Just Football with Cam Heyward: https://www.youtube.com/watch?v=VzssPdtUtDo
+* The Pirates Measure the Gap to Milwaukee and Tampa Bay
+  Latest developments: The Post-Gazette reported Thursday,
+  November 12, that the Pirates came out of Major League
+  Baseball's general managers meetings acknowledging a
+  "significant gap" between themselves and the Milwaukee Brewers
+  and Tampa Bay Rays.
+  General manager Ben Cherington said this week that Pittsburgh
+  holds the payroll flexibility to add this winter, with Rays
+  infielder Brandon Lowe among the names in play. The Brewers
+  and Rays are the small-market clubs the Pirates measure
+  themselves against, and closing on them sets the standard for
+  the offseason.
+  - Post-Gazette Pirates: https://www.post-gazette.com/sports/pirates/2026/11/12/pirates-general-manager-meetings/stories/202611110031
+
+Team USA:
+* Manchester United Fires Carrick, Closes on Pochettino
+  Latest developments: Manchester United sacked head coach
+  Michael Carrick on Thursday, November 12, with the club
+  sitting in the relegation zone, and sources told ESPN that
+  United States men's national team head coach Mauricio
+  Pochettino is close to replacing him.
+  Pochettino has led the United States since 2024 and carries a
+  $10 million release clause, and he has spoken of wanting to
+  return to European club work; he took over Carrick's
+  predecessor's squad talk 10 months after Carrick won the Old
+  Trafford job. ESPN's analysts laid out who could take the
+  national team into the 2027 Gold Cup and beyond, with the
+  November Concacaf Nations League quarterfinal against Haiti
+  already on the calendar.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50180844/man-united-michael-carrick-sacked-pochettino
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50443809/usmnt-losing-pochettino-man-united-replace-him
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50442775/usmnt-manchester-united-pros-cons-mauricio-pochettino-options
+* The U.S. Bid for 2031 Clears FIFA's Review
+  Latest developments: FIFA found Thursday, November 12, that
+  the United States-led bid for the 2031 Women's World Cup and
+  the United Kingdom bid for 2035 both meet hosting
+  requirements, sending them to a vote of the member federations
+  later this month.
+  U.S. Soccer leads a joint North American bid for 2031 and runs
+  unopposed, which puts the women's tournament on American
+  fields five years after the 2026 men's World Cup. The
+  membership votes before the end of November.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50456267/usa-uk-womens-world-cup-bids-cleared-fifa-vote
+
+READING
+----------------------------------------------------------------
+
+* Stratechery -- An Interview With Roblox CEO David Baszucki
+  About Aggregating Play
+  Baszucki tells Ben Thompson that artificial intelligence
+  collapses the cost of building games, which lets Roblox serve
+  as both the platform developers build on and the aggregator
+  that routes players to what they make.
+  https://stratechery.com/2026/an-interview-with-roblox-ceo-david-baszucki-about-aggregating-play/
+
+* Ed Zitron -- Jensen's Bizarre Adventure
+  Zitron picks apart Jensen Huang's conduct and the governance
+  vacuum at Nvidia, arguing the company's dominance rests on a
+  single executive whose judgment he finds indefensible.
+  https://www.wheresyoured.at/jensens-bizarre-adventure/
+
+MARKETS (weekly average, change vs prior week)
+----------------------------------------------------------------
+S&P 500     7,484.17  ▼ -1.8%
+Dow        51,983.38  ▼ -0.5%
+Nasdaq     24,935.93  ▼ -2.5%
+WTI crude      88.15  ▼ -9.5%
+EUR/USD       1.1200  ▲ +0.2%
+GBP/USD       1.3417  ▲ +0.2%
+USD/JPY       158.17  ▲ +0.1%
+
+FEED HEALTH
+----------------------------------------------------------------
+Security: 24 of 24 feeds loaded, 63 items in the 24-hour window.
+  No recent items: CISA Advisories, Sophos News, Google Online
+  Security Blog, Cisco Talos, Google Project Zero, The DFIR
+  Report, Kim Zetter (Zero Day), Frank on Fraud, Wired Security.
+Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
+Business and Politics: 8 of 8 feeds loaded, 60 items in the
+  36-hour window.
+Events: 4 of 4 feeds loaded, 15 items in the 120-hour window.
+Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
+  window.
+Team USA: 3 of 3 feeds loaded, 34 items in the 72-hour window.
+  No recent items: Guardian Olympics.
+Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
+  No recent items: Cal Newport.
+Markets (Yahoo Finance): 7 of 7 rows
+Weather (NWS): 3 forecast periods
+Scores (ESPN, plaintextsports): 2 teams via ESPN
+Summaries: 3 model call(s) served by claude-opus-5 (332s of
+  model time; $1.86 at API list price).
+
+================================================================
+Generated 2026-11-12 07:05 EST. Updated weekdays at about 7:05
+AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
+8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
+feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
+beat and podcast feeds; 3 Team USA feeds; WSJ World News, WSJ
+Markets, WSJ US Business, WSJ Politics, The Economist, FT Home,
+FT World, FT Markets; and Ed Zitron, Stratechery, Cal Newport.
+Markets from Yahoo Finance, weather from the NWS, scores from
+ESPN or plaintextsports.com. Summaries are AI-generated from the
+linked reporting; verify at the sources.
+================================================================
