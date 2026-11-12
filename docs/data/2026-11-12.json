@@ -1,23 +1,23 @@
 {
   "date": "2026-11-12",
-  "headline": "An attacker rode 4,837 stolen GitHub accounts into more than 1,800 repositories to harvest continuous integration secrets and cloud keys, while fresh attacks through ScreenConnect extensions and N-able N-central turned remote management software into a highway to hundreds of customer machines.",
+  "headline": "Attackers worked the consoles administrators trust—ConnectWise ScreenConnect, N-able N-central, and tens of thousands of GitHub repositories—on the same day Europol and police in nine countries seized the servers behind Gootloader, CastleRAT, and StealC.",
   "emerging_trends": [
     {
-      "text": "Developer identity now outranks server access as a prize: the wfx-loot campaign shows how one batch of stolen GitHub logins converts into continuous integration secrets that unlock cloud accounts, package registries, and production systems.",
-      "topic_title": "Stolen GitHub Accounts Seed a Secret Stealer",
-      "link_phrase": "wfx-loot",
+      "text": "Attackers reach customers through the consoles that manage them, with ConnectWise disabling five ScreenConnect extensions after rogue remote-access clients landed on 288 endpoints and N-able fielding exploits that work on servers it already patched.",
+      "topic_title": "ScreenConnect and N-central Attacks Reach Customer Endpoints",
+      "link_phrase": "ScreenConnect",
       "_anchor": "trend-1"
     },
     {
-      "text": "ConnectWise and N-able both spent the day fighting live intrusions through their own management platforms, the shortest route an attacker has to hundreds of downstream customers at once.",
-      "topic_title": "ScreenConnect and N-central Attacks Reach Customer Endpoints",
-      "link_phrase": "ConnectWise",
+      "text": "GSocket keeps encrypted command and control alive on Linux servers long after the exploited flaw gets its patch, which turns remediation into a hunting problem.",
+      "topic_title": "GSocket Keeps Linux Servers Owned After Patching",
+      "link_phrase": "GSocket",
       "_anchor": "trend-2"
     },
     {
-      "text": "Darktrace drove Claude Code through Anthropic's own API with stolen keys, and separate crews keep GSocket running on Linux servers their victims already patched—attackers increasingly operate inside the tools and traffic defenders expect to see.",
-      "topic_title": "Stolen Claude Keys Turn Claude Code Into an Implant",
-      "link_phrase": "Claude Code",
+      "text": "Espionage crews hand the labor to software: suspected Kazakhstan-linked operators drove an AI agent through Central Asian government networks, and an attacker whose hand-typed commands failed against a United States retailer switched to AI-generated scripts and moved laterally in minutes.",
+      "topic_title": "AI Agents Enter State Espionage Campaigns",
+      "link_phrase": "Kazakhstan-linked",
       "_anchor": "trend-3"
     }
   ],
@@ -25,8 +25,8 @@
     {
       "title": "ScreenConnect and N-central Attacks Reach Customer Endpoints",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "ConnectWise disabled five third-party ScreenConnect extensions in partner environments after attackers exploited a flaw in one legitimate extension to walk past ScreenConnect authentication and push rogue remote-access clients onto at least 288 endpoints across 48 organizations, and the company says it sees no compromise of its own infrastructure and no vulnerability in ScreenConnect itself; SecurityWeek reported that attacks on N-able N-central began shortly after a researcher published more than 30 zero-days, and that N-able's hotfixes close the ones an unauthenticated attacker can reach.",
-      "summary": "Both products are remote monitoring and management platforms that managed service providers use to administer client machines, which gives one compromised instance reach into every customer it serves. Administrators should apply N-able's hotfixes, check which ScreenConnect extensions their environment loads, and hunt for unexpected remote-access clients on managed endpoints.",
+      "latest_developments": "N-able opened a second investigation on November 12, 2026 into a fresh public disclosure of more flaws in on-premises N-central 2026.4.1 HF2, the already-hotfixed release, with exploits that claim root remote code execution and Windows SYSTEM access, and the company says the server issue depends on a non-default configuration in which an administrator turns the Legacy API on and exposes it to the public internet; ConnectWise disabled five third-party ScreenConnect extensions in partner environments after attackers exploited a flaw in one legitimate extension to walk past ScreenConnect authentication and push rogue remote-access clients onto at least 288 endpoints across 48 organizations, and the company sees no compromise of its own infrastructure and no vulnerability in ScreenConnect itself.",
+      "summary": "Both products are remote monitoring and management platforms that managed service providers use to administer client machines, which gives one compromised instance reach into every customer it serves. Administrators should apply N-able's hotfixes, take the Legacy API off the internet, check which ScreenConnect extensions their environment loads, and hunt for unexpected remote-access clients on managed endpoints.",
       "tags": [
         "zero-day",
         "msp",
@@ -35,13 +35,8 @@
       "sources": [
         {
           "source": "The Hacker News",
-          "title": "ScreenConnect Attacks Target at Least 288 Endpoints Across 48 Organizations With Rogue Clients",
-          "url": "https://thehackernews.com/2026/11/screenconnect-attacks-target-at-least.html"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Hackers Deploy Malware in Fresh ScreenConnect Campaign",
-          "url": "https://www.securityweek.com/hackers-deploy-malware-in-fresh-screenconnect-campaign/"
+          "title": "New N-central Exploits Work Against Patched Servers, Enable Root RCE and Windows SYSTEM Access",
+          "url": "https://thehackernews.com/2026/11/new-n-central-exploits-work-against.html"
         },
         {
           "source": "SecurityWeek",
@@ -49,18 +44,23 @@
           "url": "https://www.securityweek.com/hackers-target-n-central-zero-days-as-n-able-rushes-patches/"
         },
         {
+          "source": "The Hacker News",
+          "title": "ScreenConnect Attacks Target at Least 288 Endpoints Across 48 Organizations With Rogue Clients",
+          "url": "https://thehackernews.com/2026/11/screenconnect-attacks-target-at-least.html"
+        },
+        {
           "source": "BleepingComputer",
           "title": "Active ScreenConnect attacks breach MSPs, impact dozens of organizations",
           "url": "https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/"
         }
       ],
-      "_anchor": "i-f1a5b4bff7"
+      "_anchor": "i-4fb3f4a554"
     },
     {
       "title": "HTTP/2 and Pre-Auth Flaws Hit Core Server Software",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "The Apache Software Foundation fixed CVE-2026-119618, a critical remote code execution flaw in the mod_http2 module that affects Apache HTTP Server 2.4.55 through 2.4.70, in version 2.4.71 on November 11, 2026, and Red Hat, which ships the server with Red Hat Enterprise Linux, says only hosts with HTTP/2 enabled face exposure; Node.js closed 16 flaws in versions 22.23.5, 24.22.3, and 26.13.1, two of them in built-in HTTP/2 support that let an unauthenticated client crash a 24.x or 26.x server or pull back pieces of server memory holding other connections' responses; MongoDB patched CVE-2026-118383, which lets an unauthenticated attacker send two requests that crash a lagging replica set member once it takes over as primary; and Red Hat patched a critical Quay flaw that lets attackers steal private container images, overwrite repositories, and hold persistent access.",
-      "summary": "These are the web servers, runtimes, databases, and registries sitting under most enterprise applications, and three of the four flaws need no credentials at all. Inventory internet-facing Apache and Node.js hosts with HTTP/2 turned on, patch to 2.4.71 and the fixed Node.js lines, and update MongoDB replica set members and Quay registries.",
+      "latest_developments": "PTC patched CVE-2026-126325, an improper input validation and untrusted deserialization flaw rated 9.2 in its Windchill and FlexPLM product lifecycle management software that hands an attacker remote code execution; the Apache Software Foundation fixed CVE-2026-119618, a critical remote code execution flaw in the mod_http2 module that affects Apache HTTP Server 2.4.55 through 2.4.70, in version 2.4.71 on November 11, 2026, and Red Hat, which ships the server with Red Hat Enterprise Linux, says only hosts with HTTP/2 enabled face exposure; Node.js closed 16 flaws in versions 22.23.5, 24.22.3, and 26.13.1, two of them in built-in HTTP/2 support that let an unauthenticated client crash a 24.x or 26.x server or pull back pieces of server memory holding other connections' responses; MongoDB patched CVE-2026-118383, which lets an unauthenticated attacker send two requests that crash a lagging replica set member once it takes over as primary; and Red Hat patched a critical Quay flaw that lets attackers steal private container images, overwrite repositories, and hold persistent access.",
+      "summary": "These are the web servers, runtimes, databases, registries, and engineering platforms sitting under most enterprise applications, and three of the flaws need no credentials at all. Inventory internet-facing Apache and Node.js hosts with HTTP/2 turned on, patch to 2.4.71 and the fixed Node.js lines, and update Windchill, FlexPLM, MongoDB replica set members, and Quay registries.",
       "tags": [
         "patch",
         "rce",
@@ -79,8 +79,8 @@
         },
         {
           "source": "The Hacker News",
-          "title": "Critical Pre-Auth MongoDB Flaw (CVE-2026-118383) Can Crash Lagging Servers on Failover",
-          "url": "https://thehackernews.com/2026/11/critical-pre-auth-mongodb-flaw-cve-2026.html"
+          "title": "PTC Patches Critical Windchill and FlexPLM Flaw That Could Enable Remote Code Execution",
+          "url": "https://thehackernews.com/2026/11/ptc-patches-critical-windchill-and.html"
         },
         {
           "source": "SecurityWeek",
@@ -89,6 +89,97 @@
         }
       ],
       "_anchor": "i-8b748363b7"
+    },
+    {
+      "title": "Windows Updates Stumble as Browsers Patch 180 Flaws",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Microsoft confirmed on November 12, 2026 that the November 2026 security updates fail to install on Windows 11 machines carrying the October preview update, throwing 0x80070306, 0x800f0989, and 0x800f0993 errors, and separately confirmed that Windows updates shipped since the October 2026 Patch Tuesday degrade SQL Server performance and stability; Google released Chrome 157 with 83 fixes and Mozilla released Firefox 160 with 99; and Google Cloud told customers running virtual machines on AMD Turin processors to patch the guest operating system and stop and start each instance to close three side-channel flaws that let code sharing a processor core infer data from other processes or the kernel inside the same virtual machine.",
+      "summary": "The largest patch month on record now carries its own failures, which leaves Windows 11 fleets unpatched and SQL Server instances slow. Sequence the October preview update out of the way before deploying November's, benchmark SQL Server hosts, roll Chrome 157 and Firefox 160, and schedule the stop-and-start that AMD Turin guests need.",
+      "tags": [
+        "patch",
+        "cloud"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft confirms Windows security updates installation issues",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-confirms-kb5132061-installation-issues-0x80070306-0x800f0989-0x800f0993-errors/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft: Recent Windows updates cause SQL Server performance issues",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-recent-windows-updates-cause-sql-server-performance-issues/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Chrome, Firefox Updates Patch Over 180 Vulnerabilities",
+          "url": "https://www.securityweek.com/chrome-firefox-updates-patch-180-vulnerabilities/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Google Cloud Warns Three AMD Turin CPU Flaws Could Leak Data Across Processes in VMs",
+          "url": "https://thehackernews.com/2026/11/google-cloud-warns-three-amd-turin-cpu.html"
+        }
+      ],
+      "_anchor": "i-a3551b4d40"
+    },
+    {
+      "title": "Stolen GitHub Accounts Seed a Secret Stealer",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "SecurityWeek put the reach of the wfx-loot campaign at roughly 60,000 GitHub repositories, extending Aikido Security's account of an attacker who holds stolen credentials for 4,837 GitHub accounts, pushed a credential-stealing payload into tens of thousands of repositories starting Tuesday, November 10, 2026, and ran it in at least 1,806 of them, shipping GitHub Actions secrets and cloud credentials back out; the compromised accounts also opened probe pull requests across the repositories they could write to.",
+      "summary": "GitHub Actions workflows carry the secrets that reach cloud accounts, container registries, and production systems, so every secret the malware touched counts as burned. Anyone whose repositories accepted commits or workflow runs since November 10, 2026 should rotate Actions secrets and cloud credentials, revoke tokens, and audit recent pull requests and commit authors.",
+      "tags": [
+        "supply-chain",
+        "breach",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Check your GitHub repos: A secret stealer hit tens of thousands of them",
+          "url": "https://www.helpnetsecurity.com/2026/11/12/wfx-loot-github-actions-secret-stealer/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Attacker Used 4,837 Hijacked GitHub Accounts to Run a CI Secret Stealer in 1,806+ Repositories",
+          "url": "https://thehackernews.com/2026/11/4837-hijacked-github-accounts-ran-ci.html"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Attacker Targets 60,000 GitHub Repositories in Credential Theft Campaign",
+          "url": "https://www.securityweek.com/attacker-targets-60000-github-repositories-in-credential-theft-campaign/"
+        }
+      ],
+      "_anchor": "i-44241255f9"
+    },
+    {
+      "title": "AI Agents Enter State Espionage Campaigns",
+      "area": "AI Security",
+      "latest_developments": "Researchers reported on November 12, 2026 that suspected Kazakhstan-linked hackers ran an AI agent to spy on Central Asian governments, steal sensitive documents, and work their way into critical infrastructure networks; Dark Reading detailed a Chinese Communist Party big data project that scrapes open information to profile people abroad and scout recruits inside Taiwan's chip industry; and Romania's intelligence service said it halted a cyber-espionage campaign by Russian state-linked hackers against government email accounts before the group moved data out.",
+      "summary": "Agentic tooling compresses the reconnaissance, document theft, and lateral movement of an espionage operation into machine-speed work, and the targets are foreign ministries, government mail systems, and semiconductor staff. Government and chip-sector organizations should audit mailbox access, watch for agent-driven traffic patterns, and brief employees who face recruitment approaches.",
+      "tags": [
+        "apt",
+        "ai",
+        "espionage"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Kazakhstan-linked hackers used AI agent to spy on Central Asian governments",
+          "url": "https://therecord.media/kazakhstan-hackers-central-asia"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Chinese AI Project Scouts Spies in Taiwan Chip Industry",
+          "url": "https://www.darkreading.com/threat-intelligence/chinese-ai-project-scouts-spies-taiwan-chip-industry"
+        },
+        {
+          "source": "The Record",
+          "title": "Romania says it stopped Russian cyberattack targeting government emails",
+          "url": "https://therecord.media/romania-russia-cyberattack-emails"
+        }
+      ],
+      "_anchor": "i-e447c2de7d"
     },
     {
       "title": "GSocket Keeps Linux Servers Owned After Patching",
@@ -120,6 +211,35 @@
       "_anchor": "i-3c5e2d75ed"
     },
     {
+      "title": "Apify Rotates Tokens as Notion Counts Fireworks Damage",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "Apify, the web scraping and automation platform, rotated critical internal secrets, revoked some third-party OAuth connections, and prompted customers to reset two-factor authentication after it detected unauthorized access to its internal systems; SecurityWeek put the downstream toll of the Fireworks AI breach at chat transcripts for fewer than 1% of Notion workspaces, most of them unattributable to a named person.",
+      "summary": "Both incidents start at a service provider and land on its customers' credentials and content, the pattern that also drove the Fireworks AI compromise Notion disclosed November 11, 2026. Rotate any API token or OAuth grant issued to Apify, re-establish integrations, and treat provider-held secrets as part of your own credential inventory.",
+      "tags": [
+        "breach",
+        "credentials",
+        "third-party"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Apify rotates API tokens, prompts 2FA resets after breach",
+          "url": "https://www.bleepingcomputer.com/news/security/apify-rotates-api-tokens-prompts-2fa-resets-after-breach/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Notion Customer Data Compromised in Fireworks AI Hack",
+          "url": "https://www.securityweek.com/notion-customer-data-compromised-in-fireworks-ai-hack/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Notion says Fireworks breach exposed customer AI chat transcripts",
+          "url": "https://www.bleepingcomputer.com/news/security/notion-says-fireworks-breach-exposed-customer-ai-chat-transcripts/"
+        }
+      ],
+      "_anchor": "i-7927f7b9de"
+    },
+    {
       "title": "Poland Pulls ePUAP Offline as Japan Funds Responders",
       "area": "Policy and Regulation",
       "latest_developments": "Poland shut down ePUAP, the nationwide platform citizens use to file official documents, correspond with government agencies, and complete administrative procedures online, after a cyberattack; Japan's emergency cybersecurity package adds public-private cyber responders and an AI-focused team run by the economy ministry, plus wider latitude to use the government's new active cyber-defense powers, a response to AI-assisted breaches at dozens of Japanese companies and agencies; and Britain and France issued the first joint guidelines for commercial cyber intrusion capability vendors, calling on firms that build, sell, or finance the tools to vet customers, build technical safeguards against misuse, and run systems for monitoring and reporting abuse.",
@@ -149,30 +269,6 @@
       "_anchor": "i-2b63f8aad1"
     },
     {
-      "title": "Stolen GitHub Accounts Seed a Secret Stealer",
-      "area": "Software Supply Chain Security",
-      "latest_developments": "Aikido Security disclosed a campaign it calls wfx-loot, in which an attacker holding stolen credentials for 4,837 GitHub accounts pushed a credential-stealing payload into tens of thousands of repositories starting Tuesday, November 10, 2026, and ran it in at least 1,806 of them, shipping GitHub Actions secrets and cloud credentials back out; the compromised accounts also opened probe pull requests across the repositories they could write to.",
-      "summary": "GitHub Actions workflows carry the secrets that reach cloud accounts, container registries, and production systems, so every secret the malware touched counts as burned. Anyone whose repositories accepted commits or workflow runs since November 10, 2026 should rotate Actions secrets and cloud credentials, revoke tokens, and audit recent pull requests and commit authors.",
-      "tags": [
-        "supply-chain",
-        "breach",
-        "credentials"
-      ],
-      "sources": [
-        {
-          "source": "Help Net Security",
-          "title": "Check your GitHub repos: A secret stealer hit tens of thousands of them",
-          "url": "https://www.helpnetsecurity.com/2026/11/12/wfx-loot-github-actions-secret-stealer/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Attacker Used 4,837 Hijacked GitHub Accounts to Run a CI Secret Stealer in 1,806+ Repositories",
-          "url": "https://thehackernews.com/2026/11/4837-hijacked-github-accounts-ran-ci.html"
-        }
-      ],
-      "_anchor": "i-44241255f9"
-    },
-    {
       "title": "Stolen Claude Keys Turn Claude Code Into an Implant",
       "area": "AI Security",
       "latest_developments": "Darktrace researchers showed in a lab test that an attacker holding a stolen Claude API key can run Claude Code as a remote-controlled implant, steering the coding agent through the memory stores feature of Anthropic's platform and pulling a one-gigabyte file out through the Claude Files API, with every task and every result traveling to api.anthropic.com, the same endpoint the agent already calls for inference; Unit 42, the Palo Alto Networks research group, published mitigations the same day for attacker use of AI red team tools including ARTEX.",
@@ -195,6 +291,25 @@
         }
       ],
       "_anchor": "i-b1687c546b"
+    },
+    {
+      "title": "Operation Endgame Seizes Gootloader and StealC Servers",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Police in nine countries, coordinating through Europol, seized the servers behind the Gootloader, CastleRAT, and StealC malware operations this week and recovered more than 6 million credentials stolen from infected computers, the newest round of Operation Endgame, the campaign aimed at the access services ransomware crews buy from.",
+      "summary": "Gootloader, CastleRAT, and StealC harvest logins from ordinary users and company machines, and their operators sell that access onward to ransomware affiliates. Treat any credential a corporate endpoint typed this year as suspect, force password resets, and revoke live sessions and tokens.",
+      "tags": [
+        "malware",
+        "takedown",
+        "cybercrime"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Operation Endgame malware takedown turns up over 6 million stolen logins",
+          "url": "https://www.helpnetsecurity.com/2026/11/12/europol-operation-endgame-malware-takedown/"
+        }
+      ],
+      "_anchor": "i-14fd5bcee5"
     }
   ],
   "markets": [
@@ -242,7 +357,7 @@
     }
   ],
   "weather": [
-    "Today: Rain Showers, high 52F.",
+    "Today: Rain Showers Likely, high 52F.",
     "Tonight: Chance Rain Showers then Slight Chance Snow Showers, low 36F.",
     "Friday: Slight Chance Snow Showers then Chance Rain And Snow Showers, high 46F."
   ],
@@ -281,41 +396,46 @@
     "business_politics": [
       {
         "title": "Nvidia's Board Moves to Oust Huang",
-        "latest_developments": "Nvidia shares fell 7% ahead of Thursday's Wall Street open, November 12, as the board gathered to settle Jensen Huang's fate following a report of a second affair, and Beijing warned Washington against treating the scandal as a pretext for new chip restrictions.",
-        "summary": "Huang, who co-founded Nvidia and built it into the supplier of the chips behind the artificial-intelligence boom, faces removal after the company's own investigation into his affair with a Chinese woman whom United States intelligence identifies as a spy, and the Financial Times reported a second relationship with a subordinate at the company. The leadership crisis knocked Nasdaq futures down 1% and pulled Asian equities lower, and The Economist judged that Huang's recklessness leaves the board no good options; China's government accuses Washington of fabricating espionage narratives.",
+        "latest_developments": "Jensen Huang resigned as Nvidia's chief executive Thursday, November 12, and the board named finance chief Colette Kress interim chief executive; the shares fell 8% at the Wall Street open and Beijing accused Washington of fabricating espionage narratives to force him out.",
+        "summary": "Huang co-founded Nvidia, served as its only chief executive, and turned graphics chips designed for videogames into the engine of the artificial-intelligence boom. Two extramarital affairs ended him—one with Alice Huang, a Chinese woman whom United States intelligence identifies as an asset and whom Singapore barred for giving police inaccurate information about her company's chip shipments, and one with an Nvidia employee. Kress spent years at Microsoft and Cisco before joining the company, and the Financial Times warns that Huang's fall could unravel the web of financial dependencies holding the artificial-intelligence trade together.",
         "sources": [
           {
             "source": "WSJ US Business",
-            "title": "Nvidia Is Preparing to Oust CEO Jensen Huang",
+            "title": "Jensen Huang Has Been Ousted as Nvidia CEO",
             "url": "https://www.wsj.com/business/nvidia-is-preparing-to-oust-nvidia-ceo-jensen-huang-30f421ad?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "Who Is Colette Kress? Meet Nvidia's New Interim CEO",
+            "url": "https://www.wsj.com/tech/colette-kress-nvidia-interim-ceo-ff26ef3a?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT Markets",
+            "title": "Nvidia shares slide as Huang resigns",
+            "url": "https://www.ft.com/content/a93307a7-e2cd-4abd-bd89-c38832d8c40e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Jensen Huang is gone. Will the AI industry pay the price?",
+            "url": "https://www.ft.com/content/dd9072bd-e8a3-4f8e-9985-550aa80a2fd4?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Singapore barred Alice Huang for giving police 'inaccurate information'",
+            "url": "https://www.ft.com/content/fa23a8ad-29bf-4971-aa44-6b25b247c193?syn-25a6b1a6=1"
           },
           {
             "source": "FT Home",
             "title": "Nvidia board to decide Jensen Huang's fate",
             "url": "https://www.ft.com/content/d3838274-a055-4d5d-a1ff-48f2979a08f0?syn-25a6b1a6=1"
-          },
-          {
-            "source": "FT Home",
-            "title": "China warns US not to use Nvidia scandal as pretext for tech curbs",
-            "url": "https://www.ft.com/content/66e7337e-3696-4259-84f4-57533bc185bd?syn-25a6b1a6=1"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Nvidia Leadership Crisis Drags on U.S. Stock Futures, Pressures AI Trade",
-            "url": "https://www.wsj.com/finance/stocks/nvidia-leadership-scandal-drags-on-u-s-stock-futures-pressures-ai-trade-e7f6e5b8?mod=rss_markets_main"
-          },
-          {
-            "source": "The Economist",
-            "title": "Jensen Huang's recklessness leaves Nvidia with no good options",
-            "url": "https://www.economist.com/business/2026/11/12/jensen-huangs-recklessness-leaves-nvidia-with-no-good-options"
           }
         ],
         "_anchor": "i-81f63e7cb7"
       },
       {
         "title": "Witkoff and Kushner Carry the Abu Dhabi Result to Putin",
-        "latest_developments": "Steve Witkoff and Jared Kushner landed in Moscow Thursday, November 12, to put the results of the Abu Dhabi negotiations to Vladimir Putin, and Ukraine said restrictions on its military Starlink service have returned.",
-        "summary": "The Kyiv and Moscow delegations agreed in Abu Dhabi only to a large prisoner exchange, and President Trump's envoys now take the question of a ceasefire directly to Putin while European capitals argue over who among them should speak to him. Ukrainian commanders say drones running on Starshield, the military version of SpaceX's Starlink, lose connectivity above 100 miles an hour, which cripples their interception of Russia's jet-powered drones.",
+        "latest_developments": "Steve Witkoff and Jared Kushner met Vladimir Putin in Moscow Thursday, November 12, carrying the results of the Abu Dhabi negotiations, and Ukraine said restrictions on its military Starlink service have returned.",
+        "summary": "The Kyiv and Moscow delegations agreed in Abu Dhabi only to a large prisoner exchange, and President Trump's envoys now put the question of a ceasefire directly to Putin while European capitals argue over who among them should speak to him. Ukrainian commanders say drones running on Starshield, the military version of SpaceX's Starlink, lose connectivity above 100 miles an hour, which cripples their interception of Russia's jet-powered drones.",
         "sources": [
           {
             "source": "FT Home",
@@ -337,13 +457,23 @@
       },
       {
         "title": "Tehran Sets Terms for Reopening Hormuz",
-        "latest_developments": "Crude fell Thursday, November 12, as traders weighed renewed United States-Iran diplomacy against the conditions Tehran attaches to reopening the Strait of Hormuz and the continuing threats to regional shipping.",
-        "summary": "The war between the United States and Iran shut the strait that carries roughly a fifth of the world's seaborne oil, and the price of crude now turns on Tehran's terms. The Financial Times reported that Russian diesel exports doubled after Trump lifted sanctions on Moscow, with none of the cargo reaching American buyers, and Ukraine's resumed strikes on Russian refineries should cut that flow back.",
+        "latest_developments": "Oil reversed its early Thursday losses, November 12, after President Trump posted on Truth Social that the United States does not need an agreement with Iran, and United States natural gas futures climbed on a cold spell moving into the eastern states.",
+        "summary": "The war between the United States and Iran shut the Strait of Hormuz, which carries roughly a fifth of the world's seaborne oil, and the price of crude now turns on the conditions Tehran attaches to reopening it. The Financial Times reported that Russian diesel exports doubled after Trump lifted sanctions on Moscow, with none of the cargo reaching American buyers, and Ukraine's resumed strikes on Russian refineries should cut that flow back.",
         "sources": [
+          {
+            "source": "WSJ Markets",
+            "title": "Oil Picks Up As Trump Post Dampens Hopes for U.S.-Iran Deal",
+            "url": "https://www.wsj.com/finance/commodities-futures/oil-resumes-decline-as-risk-premium-fades-bcdc7fc5?mod=rss_markets_main"
+          },
           {
             "source": "WSJ US Business",
             "title": "Oil Prices Fall as Investors Weigh U.S.-Iran Diplomacy",
             "url": "https://www.wsj.com/business/energy-oil/oil-prices-fall-as-investors-weigh-u-s-iran-diplomacy-296e2847?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "U.S. Natural Gas Futures Pick Up As Cold Spell Nears",
+            "url": "https://www.wsj.com/finance/commodities-futures/u-s-natural-gas-futures-pick-up-as-cold-spell-nears-b99c70a2?mod=rss_markets_main"
           },
           {
             "source": "FT Home",
@@ -351,7 +481,7 @@
             "url": "https://www.ft.com/content/525b53ee-4817-4eb6-8292-b6ee0ac45b47?syn-25a6b1a6=1"
           }
         ],
-        "_anchor": "i-ba7d562904"
+        "_anchor": "i-f4a9a588f4"
       },
       {
         "title": "France Backs Spain's Candidate for the ECB",
@@ -368,6 +498,32 @@
       }
     ],
     "business": [
+      {
+        "title": "Waymo Trains Crews for Pittsburgh Robotaxis",
+        "latest_developments": "WPXI reported Thursday, November 12, that Waymo has begun preparing to train maintenance crews for a Pittsburgh robotaxi fleet.",
+        "summary": "Waymo's cars already drive themselves around the Pittsburgh region with a safety technician behind the wheel, a step Senior Director Euan Guttridge announced in September. The maintenance hiring moves the Alphabet subsidiary closer to a fully driverless taxi service in the city where Carnegie Mellon University seeded the autonomous vehicle industry.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Waymo preparing to train maintenance crews for Pittsburgh robotaxis",
+            "url": "https://www.wpxi.com/news/local/waymo-preparing-train-maintenance-crews-pittsburgh-robotaxis/UCA5GZETDNHTNEDR6JZU3ZAKVM/"
+          }
+        ],
+        "_anchor": "i-198dae2a06"
+      },
+      {
+        "title": "F.N.B. Opens Two City Branches",
+        "latest_developments": "WPXI reported Thursday, November 12, that F.N.B. Corp. cut the ribbon on one Pittsburgh office November 5, opened the doors of a second November 9, and confirmed a third under construction.",
+        "summary": "F.N.B. Corp., the Pittsburgh bank holding company, ranks among the busiest branch builders in Western Pennsylvania banking, and the three offices deepen its retail footprint in the city where it keeps its headquarters.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "F.N.B. opens two Pittsburgh branches with more in the works",
+            "url": "https://www.wpxi.com/news/local/fnb-opens-two-pittsburgh-branches-with-more-works/XC6BEW2HXVCADGL7BDIGBI4JLQ/"
+          }
+        ],
+        "_anchor": "i-417acaac3f"
+      },
       {
         "title": "The Money Gap in Downtown Conversions",
         "latest_developments": "The Post-Gazette put numbers Thursday, November 12, on the gap between what an office-to-apartment conversion costs downtown and what the finished rents support, using the Gulf Tower as its case.",
@@ -410,6 +566,55 @@
     ],
     "around_town": [
       {
+        "title": "Pitt Dental Medicine Lands $9.4 Million",
+        "latest_developments": "The University of Pittsburgh announced Thursday, November 12, that it has received $9.4 million in state funding to expand programming at its School of Dental Medicine.",
+        "summary": "The money trains oral health workers for rural Pennsylvania, where counties outside the metropolitan areas carry the state's thinnest dental coverage. Pitt's dental school in Oakland runs the region's largest pipeline of dentists and hygienists.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pitt Dental Medicine lands $9.4M to train oral health workers in rural Pennsylvania",
+            "url": "https://www.wpxi.com/news/local/pitt-dental-medicine-lands-94m-train-oral-health-workers-rural-pennsylvania/LP6EMWMSRZECLJRPT63BQ5XD4E/"
+          }
+        ],
+        "_anchor": "i-35eece9952"
+      },
+      {
+        "title": "Beaver Falls Rebuilds Its Carnegie Library",
+        "latest_developments": "WPXI reported Thursday, November 12, that the Carnegie Free Library of Beaver Falls has launched a rehabilitation of its building and an expansion of its services.",
+        "summary": "The library occupies a 1903 structure in Beaver Falls, Beaver County, one of the Andrew Carnegie libraries still in service in the region, and the project aims to extend its programming across Beaver County.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Carnegie Free Library of Beaver Falls launches major project aimed at restoring historic building",
+            "url": "https://www.wpxi.com/news/local/carnegie-free-library-beaver-falls-launches-major-project-aimed-restoring-historic-building/PQQKG6AWGRGMJNXKGTSF2UBRI4/"
+          }
+        ],
+        "_anchor": "i-9e2f3977c6"
+      },
+      {
+        "title": "Rain Thursday, Then Cooler Air",
+        "latest_developments": "WTAE held Thursday, November 12, as an Impact Day for rain, and WPXI and KDKA put the steadiest rain over the Pittsburgh area from the morning through 2 p.m. before showers taper and temperatures fall.",
+        "summary": "Rain returned to Western Pennsylvania Thursday morning after a dry Veterans Day, most of it light, and cooler air follows it into the weekend.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Rain returns: On-and-off showers on Thursday",
+            "url": "https://www.wpxi.com/weather/rain-returns-on-and-off-showers-thursday/3P65SFOYUND3LCN27CPQZRLCEY/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Rain is expected today for the Pittsburgh area, followed by cooler temperatures",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-area-rain-forecast-today-cooler-temperatures/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Impact Day with Rain Returning to Western PA",
+            "url": "https://www.wtae.com/article/impact-day-with-rain-returning-to-western-pa/74409077"
+          }
+        ],
+        "_anchor": "i-321d0da76e"
+      },
+      {
         "title": "Red Light Cameras Issue 10,000 Warnings",
         "latest_developments": "Pittsburgh's red light cameras produced more than 10,000 warnings in their first 60 days of enforcement, KDKA reported Thursday, November 12.",
         "summary": "The city is running its new camera program in a warning phase before it starts mailing fines. KDKA's John Shumway reported that cities typically see these totals spike at the start and fall off as drivers learn where the cameras sit.",
@@ -450,6 +655,32 @@
       }
     ],
     "events": [
+      {
+        "title": "Pittsburgh Opera Dresses 'Orpheus and Eurydice'",
+        "latest_developments": "The Post-Gazette profiled costume designer Robert Perdziola on Thursday, November 12, as Pittsburgh Opera prepares its production of \"Orpheus and Eurydice.\"",
+        "summary": "Perdziola designs costumes for opera houses around the world and still draws every one of them by hand, a practice he brought to the Pittsburgh Opera staging of the Gluck work.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "Pittsburgh's world-renowned costume designer still sketches by hand",
+            "url": "https://www.post-gazette.com/ae/theater-dance/2026/11/12/costume-designer-perdziola-pittsburgh-opera-orpheus-eurydice/stories/202611120001"
+          }
+        ],
+        "_anchor": "i-cb3ae4ce5e"
+      },
+      {
+        "title": "The Glitterbox Theater's DIY Stage in Homestead",
+        "latest_developments": "NEXTpittsburgh took readers inside The Glitterbox Theater on Thursday, November 12.",
+        "summary": "The Glitterbox Theater runs a community-built, low-cost arts space in Homestead that programs experimental plays, clowning workshops, and independent festivals.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Arts & Entertainment",
+            "title": "'What can theater be?': Inside The Glitterbox Theater's playful, DIY home in Homestead",
+            "url": "https://nextpittsburgh.com/arts-entertainment/glitterbox-theater-is-diy-theater-at-its-finest/"
+          }
+        ],
+        "_anchor": "i-82c682c031"
+      },
       {
         "title": "Jack White Headlines the Weekend",
         "latest_developments": "The Post-Gazette published its weekend guide Thursday, November 12, led by a Jack White concert, a Rush anniversary show, and Brazilian jazz.",
@@ -505,6 +736,19 @@
     ],
     "around_teams": [
       {
+        "title": "The Pirates Chase Brandon Lowe",
+        "latest_developments": "The Post-Gazette laid out Thursday, November 12, what it learned at Major League Baseball's general managers meetings about Pittsburgh's pursuit of Brandon Lowe.",
+        "summary": "Lowe, the left-handed-hitting infielder who spent his career with the Tampa Bay Rays, sits atop the list of bats the Pirates have pursued this offseason, and general manager Ben Cherington says the club carries the payroll flexibility to sign one.",
+        "sources": [
+          {
+            "source": "Post-Gazette Pirates",
+            "title": "What we learned about the Pirates' pursuit of Brandon Lowe at the MLB's GM meetings",
+            "url": "https://www.post-gazette.com/sports/pirates/2026/11/12/brandon-lowe-free-agent-news/stories/202611120046"
+          }
+        ],
+        "_anchor": "i-c1d1e45441"
+      },
+      {
         "title": "Tomlin on Retiring and Working for NBC",
         "latest_developments": "Not Just Football released part two of Cam Heyward's interview with Mike Tomlin at 6 a.m. Eastern Thursday, November 12, in which the former Steelers head coach walks through his retirement decision and his new job at NBC.",
         "summary": "Tomlin coached the Steelers for 18 seasons before stepping away, and he sat down with Heyward and co-host Hayden for a two-part conversation; part one, posted Tuesday, November 10, covered Ben Roethlisberger, Aaron Rodgers, and how Tomlin got the job in 2007.",
@@ -534,9 +778,14 @@
     "team_usa": [
       {
         "title": "Manchester United Fires Carrick, Closes on Pochettino",
-        "latest_developments": "Manchester United sacked head coach Michael Carrick on Thursday, November 12, with the club sitting in the relegation zone, and sources told ESPN that United States men's national team head coach Mauricio Pochettino is close to replacing him.",
-        "summary": "Pochettino has led the United States since 2024 and carries a $10 million release clause, and he has spoken of wanting to return to European club work; he took over Carrick's predecessor's squad talk 10 months after Carrick won the Old Trafford job. ESPN's analysts laid out who could take the national team into the 2027 Gold Cup and beyond, with the November Concacaf Nations League quarterfinal against Haiti already on the calendar.",
+        "latest_developments": "Manchester United hoped to finalize an agreement with United States men's national team head coach Mauricio Pochettino on Thursday, November 12, sources told ESPN, hours after the club sacked head coach Michael Carrick with the team in the relegation zone.",
+        "summary": "Pochettino has led the United States since 2024 and carries a $10 million release clause, and he has spoken of wanting to return to European club work; Carrick won the Old Trafford job 10 months ago and lost it on a poor run of results. ESPN's analysts laid out who could take the national team into the 2027 Gold Cup and beyond, with this month's Concacaf Nations League quarterfinal against Haiti already on the calendar.",
         "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Sources: Man United hope to seal Pochettino deal on Thursday",
+            "url": "https://www.espn.com/soccer/story/_/id/50461316/man-united-mauricio-pochettino-michael-carrick-manager"
+          },
           {
             "source": "ESPN Soccer",
             "title": "Man United sack Carrick while in relegation zone, sources say Pochettino close",
@@ -553,7 +802,7 @@
             "url": "https://www.espn.com/soccer/story/_/id/50442775/usmnt-manchester-united-pros-cons-mauricio-pochettino-options"
           }
         ],
-        "_anchor": "i-5eaad21797"
+        "_anchor": "i-75b934eecb"
       },
       {
         "title": "The U.S. Bid for 2031 Clears FIFA's Review",
@@ -590,119 +839,140 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "A batch of 4,837 stolen GitHub accounts seeded the wfx-loot secret stealer, while Darktrace showed pilfered Claude API keys turning Claude Code into a remote implant.",
+      "text": "Attackers pivot through management consoles as ConnectWise disables ScreenConnect extensions and N-able reinvestigates N-central exploits, while GSocket holds encrypted control of Linux servers long after patching.",
       "links": [
         {
-          "anchor": "i-44241255f9",
-          "phrase": "wfx-loot",
-          "start": 51,
-          "end": 59,
-          "title": "Stolen GitHub Accounts Seed a Secret Stealer"
+          "anchor": "i-4fb3f4a554",
+          "phrase": "N-central",
+          "start": 119,
+          "end": 128,
+          "title": "ScreenConnect and N-central Attacks Reach Customer Endpoints"
         },
         {
-          "anchor": "i-b1687c546b",
-          "phrase": "Darktrace",
-          "start": 82,
-          "end": 91,
-          "title": "Stolen Claude Keys Turn Claude Code Into an Implant"
+          "anchor": "i-3c5e2d75ed",
+          "phrase": "GSocket",
+          "start": 145,
+          "end": 152,
+          "title": "GSocket Keeps Linux Servers Owned After Patching"
         }
       ]
     },
     {
       "kind": "Trend",
       "status": null,
-      "text": "ConnectWise disabled five third-party ScreenConnect extensions abused to bypass authentication, while Microsoft found crews planting GSocket on Linux servers to hold access long after victims patch.",
+      "text": "Espionage crews delegate the labor to software: suspected Kazakhstan-linked operators drove an AI agent through Central Asian government networks, and Darktrace turned a stolen Claude key into an implant.",
       "links": [
         {
-          "anchor": "i-f1a5b4bff7",
-          "phrase": "ScreenConnect extensions",
-          "start": 38,
-          "end": 62,
-          "title": "ScreenConnect and N-central Attacks Reach Customer Endpoints"
+          "anchor": "i-e447c2de7d",
+          "phrase": "AI agent",
+          "start": 95,
+          "end": 103,
+          "title": "AI Agents Enter State Espionage Campaigns"
         },
         {
-          "anchor": "i-3c5e2d75ed",
-          "phrase": "GSocket",
-          "start": 133,
-          "end": 140,
-          "title": "GSocket Keeps Linux Servers Owned After Patching"
+          "anchor": "i-b1687c546b",
+          "phrase": "stolen Claude key",
+          "start": 170,
+          "end": 187,
+          "title": "Stolen Claude Keys Turn Claude Code Into an Implant"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Apache patched CVE-2026-119618, a critical mod_http2 remote code execution flaw, in HTTP Server 2.4.71, with Red Hat shipping affected builds downstream.",
+      "text": "Europol's Operation Endgame seized Gootloader and StealC servers and recovered 6 million credentials, while wfx-loot spread across 60,000 GitHub repositories and Apify rotated internal secrets after an intrusion.",
       "links": [
         {
+          "anchor": "i-14fd5bcee5",
+          "phrase": "Operation Endgame",
+          "start": 10,
+          "end": 27,
+          "title": "Operation Endgame Seizes Gootloader and StealC Servers"
+        },
+        {
+          "anchor": "i-44241255f9",
+          "phrase": "wfx-loot",
+          "start": 108,
+          "end": 116,
+          "title": "Stolen GitHub Accounts Seed a Secret Stealer"
+        },
+        {
+          "anchor": "i-7927f7b9de",
+          "phrase": "Apify",
+          "start": 162,
+          "end": 167,
+          "title": "Apify Rotates Tokens as Notion Counts Fireworks Damage"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Microsoft confirmed November updates failing to install on Windows 11 with 0x80070306 errors as browsers patched 180 flaws and PTC fixed a 9.2-rated Windchill deserialization bug.",
+      "links": [
+        {
+          "anchor": "i-a3551b4d40",
+          "phrase": "Windows 11",
+          "start": 59,
+          "end": 69,
+          "title": "Windows Updates Stumble as Browsers Patch 180 Flaws"
+        },
+        {
           "anchor": "i-8b748363b7",
-          "phrase": "CVE-2026-119618",
-          "start": 15,
-          "end": 30,
+          "phrase": "Windchill",
+          "start": 149,
+          "end": 158,
           "title": "HTTP/2 and Pre-Auth Flaws Hit Core Server Software"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "Poland pulled its nationwide ePUAP government services portal offline after a cyberattack, as Japan's emergency package added money for incident responders.",
-      "links": [
-        {
-          "anchor": "i-2b63f8aad1",
-          "phrase": "ePUAP",
-          "start": 29,
-          "end": 34,
-          "title": "Poland Pulls ePUAP Offline as Japan Funds Responders"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
       "status": "updated",
-      "text": "Nvidia shares fell 7% as the board met over Jensen Huang's future, and Zitron argued the company's dominance rests on one unaccountable executive.",
+      "text": "Jensen Huang resigned as Nvidia chief executive with Colette Kress named interim and shares off 8%, sharpening Zitron's argument about the governance vacuum behind the company's dominance.",
       "links": [
         {
           "anchor": "i-81f63e7cb7",
-          "phrase": "Nvidia shares",
-          "start": 0,
-          "end": 13,
+          "phrase": "Colette Kress",
+          "start": 53,
+          "end": 66,
           "title": "Nvidia's Board Moves to Oust Huang"
         },
         {
           "anchor": "i-2decbd9aef",
           "phrase": "Zitron",
-          "start": 71,
-          "end": 77,
+          "start": 111,
+          "end": 117,
           "title": "Jensen's Bizarre Adventure"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Pittsburgh's civic ledger tightened as Gulf Tower conversion math came up short, Monroeville Mall faced a likely final holiday season, and UPMC drew fresh scrutiny.",
+      "kind": "Update",
+      "status": "new",
+      "text": "Locally, Waymo started training crews for a Pittsburgh robotaxi fleet, Pitt's dental school landed $9.4 million in state funding, and morning rain gives way to cooler air.",
       "links": [
         {
-          "anchor": "i-2a82fe18a2",
-          "phrase": "Gulf Tower",
-          "start": 39,
-          "end": 49,
-          "title": "The Money Gap in Downtown Conversions"
+          "anchor": "i-198dae2a06",
+          "phrase": "Waymo",
+          "start": 9,
+          "end": 14,
+          "title": "Waymo Trains Crews for Pittsburgh Robotaxis"
         },
         {
-          "anchor": "i-02c2ba02d7",
-          "phrase": "Monroeville Mall",
-          "start": 81,
-          "end": 97,
-          "title": "Monroeville Mall's Last Christmas"
+          "anchor": "i-35eece9952",
+          "phrase": "$9.4 million",
+          "start": 99,
+          "end": 111,
+          "title": "Pitt Dental Medicine Lands $9.4 Million"
         },
         {
-          "anchor": "i-a3f4a6cdca",
-          "phrase": "UPMC",
-          "start": 139,
-          "end": 143,
-          "title": "Pittsburgh's Leverage Over UPMC and Highmark"
+          "anchor": "i-321d0da76e",
+          "phrase": "cooler air",
+          "start": 160,
+          "end": 170,
+          "title": "Rain Thursday, Then Cooler Air"
         }
       ]
     }
@@ -716,24 +986,24 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 63,
+        "in_window": 66,
         "failed": [],
         "empty": [
           "CISA Advisories",
+          "Ars Technica Security",
           "Sophos News",
           "Google Online Security Blog",
           "Cisco Talos",
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
-          "Frank on Fraud",
-          "Wired Security"
+          "Frank on Fraud"
         ],
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 12,
+            "contributed": 12
           },
           "BleepingComputer": {
             "items": 15,
@@ -772,13 +1042,13 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 3,
-            "contributed": 3
+            "in_window": 4,
+            "contributed": 4
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Help Net Security": {
             "items": 10,
@@ -797,8 +1067,8 @@
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Google Online Security Blog": {
             "items": 25,
@@ -847,8 +1117,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           }
         }
       },
@@ -865,12 +1135,12 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 14
+            "contributed": 8
           },
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 15
+            "contributed": 16
           },
           "PublicSource": {
             "items": 10,
@@ -889,23 +1159,23 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 5,
+            "in_window": 4,
             "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 9
+            "contributed": 8
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 4
+            "contributed": 7
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 15
+            "contributed": 18
           }
         }
       },
@@ -920,39 +1190,39 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 71,
-            "in_window": 21,
-            "contributed": 1
+            "items": 72,
+            "in_window": 22,
+            "contributed": 4
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 30,
-            "contributed": 11
+            "in_window": 31,
+            "contributed": 2
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 52,
-            "contributed": 13
+            "in_window": 51,
+            "contributed": 7
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 13,
-            "contributed": 1
+            "in_window": 12,
+            "contributed": 2
           },
           "The Economist": {
             "items": 300,
-            "in_window": 26,
-            "contributed": 9
+            "in_window": 65,
+            "contributed": 39
           },
           "FT Home": {
-            "items": 11,
-            "in_window": 11,
-            "contributed": 7
+            "items": 12,
+            "in_window": 12,
+            "contributed": 5
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 17
+            "contributed": 0
           },
           "FT Markets": {
             "items": 25,
@@ -967,14 +1237,14 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 15,
+        "in_window": 14,
         "failed": [],
         "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 11,
+            "contributed": 11
           },
           "Post-Gazette Music": {
             "items": 20,
@@ -1011,7 +1281,7 @@
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 9,
-            "contributed": 8
+            "contributed": 7
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1025,12 +1295,12 @@
           },
           "Post-Gazette Pirates": {
             "items": 20,
-            "in_window": 3,
-            "contributed": 2
+            "in_window": 4,
+            "contributed": 3
           },
           "Post-Gazette Steelers": {
             "items": 20,
-            "in_window": 12,
+            "in_window": 13,
             "contributed": 9
           }
         }
@@ -1041,7 +1311,7 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 34,
+        "in_window": 35,
         "failed": [],
         "empty": [
           "Guardian Olympics"
@@ -1054,8 +1324,8 @@
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 10,
+            "contributed": 10
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1118,24 +1388,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 28439,
+          "outputTokens": 32096,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 114983,
+          "cacheCreationInputTokens": 129036,
           "webSearchRequests": 0,
-          "costUSD": 1.8608349999999998,
+          "costUSD": 2.09279,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14994
+          "thinkingTokens": 12771
         }
       },
-      "cost_usd": 1.8608349999999998,
-      "duration_ms": 332163,
+      "cost_usd": 2.09279,
+      "duration_ms": 346347,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-12 07:05 EST",
-    "items_considered": 63,
+    "generated_at": "2026-11-12 10:05 EST",
+    "items_considered": 66,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1216,8 +1486,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.8608,
-    "model_duration_ms": 332163,
+    "model_cost_usd": 2.0928,
+    "model_duration_ms": 346347,
     "local_from": null,
     "feed_failures": []
   }
