@@ -1,23 +1,23 @@
 {
   "date": "2026-11-11",
-  "headline": "The record November patch load settled above 1,300 fixes as agentic penetration-testing frameworks turned up inside live Amazon Web Services breaches and Krebs on Security placed the administrator of Qilin, the world's busiest ransomware affiliate program, in St. Petersburg.",
+  "headline": "Attackers turned managed service provider tooling into a delivery channel, breaching ScreenConnect environments and chasing 33 N-central zero-days, while Microsoft, Fortinet, Citrix, and Ivanti shipped the largest patch load of the year.",
   "emerging_trends": [
     {
-      "text": "Open-source agentic penetration-testing frameworks keep crossing over into attacker infrastructure, with AntiFox instances on Alibaba Cloud now tied to Amazon Web Services credential theft three months after ARTEX made the same trip, which means defenders face tooling that reconnoiters, steals keys, and pivots without an operator typing.",
+      "text": "Off-the-shelf agent frameworks now do the breaking in, with AntiFox instances hosted on Alibaba Cloud stealing Amazon Web Services keys and Unit 42 publishing defender guidance for the ARTEX forks that got there first.",
       "topic_title": "AntiFox Agents Steal AWS Credentials",
       "link_phrase": "AntiFox",
       "_anchor": "trend-1"
     },
     {
-      "text": "Hosting and model-serving platforms have become reservoirs of other companies' secrets, and the bills land on the victims: stolen keys held by Railway produced roughly $740,000 in fraudulent AI charges, while Fireworks AI and NEAR AI lost datasets, model weights, and agent data to single intrusions.",
+      "text": "Any platform holding a customer's keys has become a single point of failure: Notion's AI chat transcripts surfaced in the Fireworks AI breach, and Railway now owes roughly $740,000 in model usage its customers never ordered.",
       "topic_title": "AI Providers Lose Keys, Datasets, and Model Weights",
-      "link_phrase": "Railway",
+      "link_phrase": "Fireworks AI",
       "_anchor": "trend-2"
     },
     {
-      "text": "CISA added Cisco BroadWorks and Openwave Webtop to its exploited catalog weeks after fixes existed, and attackers took root on Barracuda gateways patched on November 2, 2026, which puts the real risk in the lag between a vendor's release and a customer's installation.",
-      "topic_title": "Barracuda, BroadWorks, and AhsayCBS Under Attack",
-      "link_phrase": "BroadWorks",
+      "text": "Remote monitoring software carries one intrusion into every downstream client, a pattern visible in the ScreenConnect campaign against managed service providers and in the 33 zero-days researchers published for N-able's N-central.",
+      "topic_title": "N-able Ships Hotfixes for N-central Zero-Days",
+      "link_phrase": "ScreenConnect",
       "_anchor": "trend-3"
     }
   ],
@@ -93,7 +93,7 @@
     {
       "title": "AI Providers Lose Keys, Datasets, and Model Weights",
       "area": "Data Breaches",
-      "latest_developments": "Fireworks AI said its inquiry into the incident it first reported October 10, 2026 turned up further malicious activity that reached account and billing information, secrets, datasets, incomplete models, and Notion AI chats for a limited set of accounts; an attacker exploited a remote code execution flaw in SGLang, the open-source inference engine, ran code on a NEAR AI inference server on Sunday, November 8, 2026, took data belonging to 18 agents and roughly 100 users, and could have read requests the server processed that day, confidential-mode requests inside a trusted execution environment included; the security company Claroc counted 37,571 Grok-built applications online, 35,578 of them open to anyone with no sign-in, 24 of them built by staff at X and at SpaceXSI, and about one in ten carrying internal business information or passwords; and Railway promised to cover the roughly $740,000 in fraudulent AI charges itself wherever an AI provider refuses a refund.",
+      "latest_developments": "Notion disclosed on November 11, 2026 that the breach at Fireworks AI, the infrastructure provider behind its assistant, exposed Notion AI chat transcripts in a small number of workspaces, hours after Fireworks AI said its inquiry into the incident it first reported October 10, 2026 turned up further malicious activity reaching account and billing information, secrets, datasets, incomplete models, and Notion AI chats; an attacker exploited a remote code execution flaw in SGLang, the open-source inference engine, ran code on a NEAR AI inference server on Sunday, November 8, 2026, took data belonging to 18 agents and roughly 100 users, and could have read requests the server processed that day, confidential-mode requests inside a trusted execution environment included; the security company Claroc counted 37,571 Grok-built applications online, 35,578 of them open to anyone with no sign-in, 24 of them built by staff at X and at SpaceXSI, and about one in ten carrying internal business information or passwords; and Railway promised to cover the roughly $740,000 in fraudulent AI charges itself wherever an AI provider refuses a refund.",
       "summary": "Platforms that host applications, agents, and model serving now hold the credentials and artifacts of everyone who builds on them, which turns one intrusion into many. Rotate every AI provider key stored with a third-party platform and audit what hosted applications expose to the open internet.",
       "tags": [
         "breach",
@@ -102,14 +102,14 @@
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Fireworks AI Confirms Wider Breach Affecting Customer Datasets, Model Weights and Notion AI Chats",
-          "url": "https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html"
+          "source": "BleepingComputer",
+          "title": "Notion says Fireworks breach exposed customer AI chat transcripts",
+          "url": "https://www.bleepingcomputer.com/news/security/notion-says-fireworks-breach-exposed-customer-ai-chat-transcripts/"
         },
         {
           "source": "The Hacker News",
-          "title": "SGLang RCE Exploit Breaches NEAR AI, Steals Data From 18 Agents and About 100 Users",
-          "url": "https://thehackernews.com/2026/11/sglang-rce-exploit-breaches-near-ai.html"
+          "title": "Fireworks AI Confirms Wider Breach Affecting Customer Datasets, Model Weights and Notion AI Chats",
+          "url": "https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html"
         },
         {
           "source": "Ars Technica Security",
@@ -122,7 +122,74 @@
           "url": "https://thehackernews.com/2026/11/railway-says-stolen-customer-ai-keys.html"
         }
       ],
-      "_anchor": "i-7646e96e2e"
+      "_anchor": "i-4555dea146"
+    },
+    {
+      "title": "AntiFox Agents Steal AWS Credentials",
+      "area": "AI Security",
+      "latest_developments": "Researchers tied a run of intrusions that stole Amazon Web Services credentials and then pivoted laterally through victim environments to AntiFox, an emerging open-source agentic penetration testing platform that attackers run as self-managed instances on Alibaba Cloud, and linked those hosted AntiFox interfaces to confirmed malicious actions; Unit 42, the Palo Alto Networks research group, published its own account late on November 11, 2026 of how attackers use AI-powered red team tools, ARTEX included, and the mitigations defenders can apply, and Dark Reading reported on November 10, 2026 that ARTEX forks plus 45 similar penetration-testing tools still run credential attacks and cloud break-ins at machine speed across multiple industries.",
+      "summary": "AntiFox chains reconnaissance, credential theft, and lateral movement with no operator at the keyboard, which compresses a cloud intrusion into minutes. Retire long-lived AWS access keys in favor of short-lived credentials, and alert on API calls arriving from Alibaba Cloud address ranges.",
+      "tags": [
+        "ai",
+        "cloud",
+        "exploit"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "AntiFox AI Pentesting Platform Linked to Attacks That Accessed AWS Production Secrets",
+          "url": "https://thehackernews.com/2026/11/antifox-ai-pentesting-platform-linked.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Hackers use AntiFox AI agents in AWS credential-theft attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-use-antifox-ai-agents-in-aws-credential-theft-attacks/"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "ARTEX and AI-Powered Red Teaming Tools: What Defenders Need to Know",
+          "url": "https://unit42.paloaltonetworks.com/artex-and-ai-powered-red-teaming-tools/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Artex: The AI Pen-Test Tool Hackers Turned Into a Weapon",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/artex-ai-pen-test-tool-hackers-weapon"
+        }
+      ],
+      "_anchor": "i-63cbf25606"
+    },
+    {
+      "title": "Fortinet, Citrix, and Ivanti Ship Their Own Fixes",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Fortinet patched nearly 100 vulnerabilities on November 11, 2026, a volume the company attributes to folding frontier AI models into its product security testing; Citrix and Ivanti closed critical and high-severity flaws that let attackers tamper with certificate entries, run code remotely, and compromise hosts; Zoom fixed two bugs in Zoom Workplace for Windows, among them CVE-2026-108186, an improper input validation flaw rated 9.6 that hands an unauthenticated user an escalation of privilege, and Asus closed bugs enabling command execution and memory overwrites; and the Git project shipped 2.56.1, along with 2.50.2 through 2.55.1, to close six flaws, among them CVE-2026-111760, an integer truncation in Git's index handling that lets a malicious repository run code on any machine that clones it recursively.",
+      "summary": "Fortinet, Citrix, and Ivanti gear sits at the network edge, which puts their flaws in front of every internet scanner within hours of disclosure. Schedule these appliance updates ahead of the desktop and chipset patches from the same week, and move developer workstations and build runners to the fixed Git releases.",
+      "tags": [
+        "patch",
+        "appliance"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Fortinet Patches Nearly 100 Vulnerabilities",
+          "url": "https://www.securityweek.com/fortinet-patches-nearly-100-vulnerabilities/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Citrix, Ivanti Patch Critical and High-Severity Vulnerabilities",
+          "url": "https://www.securityweek.com/citrix-ivanti-patch-critical-and-high-severity-vulnerabilities/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Critical Zoom Workplace Flaw Could Allow Unauthenticated Remote Privilege Escalation",
+          "url": "https://thehackernews.com/2026/11/critical-zoom-workplace-flaw-could.html"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Git fixes six vulnerabilities, including code execution during recursive clones",
+          "url": "https://www.helpnetsecurity.com/2026/11/11/git-project-security-updates/"
+        }
+      ],
+      "_anchor": "i-6efa2d9b4d"
     },
     {
       "title": "Ten Neurons Backdoor an AI Agent",
@@ -159,71 +226,37 @@
       "_anchor": "i-f91527c7bf"
     },
     {
-      "title": "Fortinet, Citrix, and Ivanti Ship Their Own Fixes",
+      "title": "N-able Ships Hotfixes for N-central Zero-Days",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Fortinet patched nearly 100 vulnerabilities on November 11, 2026, a volume the company attributes to folding frontier AI models into its product security testing; Citrix and Ivanti closed critical and high-severity flaws that let attackers tamper with certificate entries, run code remotely, and compromise hosts; Zoom fixed two bugs in Zoom Workplace for Windows, among them CVE-2026-108186, an improper input validation flaw rated 9.6 that hands an unauthenticated user an escalation of privilege, and Asus closed bugs enabling command execution and memory overwrites; and the Git project shipped 2.56.1, along with 2.50.2 through 2.55.1, to close six flaws, among them CVE-2026-111760, an integer truncation in Git's index handling that lets a malicious repository run code on any machine that clones it recursively.",
-      "summary": "Fortinet, Citrix, and Ivanti gear sits at the network edge, which puts their flaws in front of every internet scanner within hours of disclosure. Schedule these appliance updates ahead of the desktop and chipset patches from the same week, and move developer workstations and build runners to the fixed Git releases.",
+      "latest_developments": "N-able released hotfixes on November 11, 2026 for the N-central zero-days a researcher published over the weekend, two days after the company pulled its own hosted environments offline and told on-premises customers to shut down their servers, with the disclosure now standing at 33 zero-days carrying working proof-of-concept exploits, a set the researcher calls Able2Shell; ConnectWise opened an investigation the same day into an active campaign that works through compromised ScreenConnect environments to push rogue remote-access clients onto the devices of dozens of managed service providers' customers.",
+      "summary": "N-central and ScreenConnect are the remote monitoring and management platforms managed service providers use to administer client networks, which makes one compromised server a path into every customer it touches. Install the N-able hotfixes before restarting any server that came down, then review N-central and ScreenConnect logs and agent deployments for clients and commands no technician issued.",
       "tags": [
-        "patch",
-        "appliance"
+        "zero-day",
+        "patch"
       ],
       "sources": [
         {
-          "source": "SecurityWeek",
-          "title": "Fortinet Patches Nearly 100 Vulnerabilities",
-          "url": "https://www.securityweek.com/fortinet-patches-nearly-100-vulnerabilities/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Citrix, Ivanti Patch Critical and High-Severity Vulnerabilities",
-          "url": "https://www.securityweek.com/citrix-ivanti-patch-critical-and-high-severity-vulnerabilities/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Critical Zoom Workplace Flaw Could Allow Unauthenticated Remote Privilege Escalation",
-          "url": "https://thehackernews.com/2026/11/critical-zoom-workplace-flaw-could.html"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "Git fixes six vulnerabilities, including code execution during recursive clones",
-          "url": "https://www.helpnetsecurity.com/2026/11/11/git-project-security-updates/"
-        }
-      ],
-      "_anchor": "i-6efa2d9b4d"
-    },
-    {
-      "title": "AntiFox Agents Steal AWS Credentials",
-      "area": "AI Security",
-      "latest_developments": "Researchers tied a run of intrusions that stole Amazon Web Services credentials and then pivoted laterally through victim environments to AntiFox, an emerging open-source agentic penetration testing platform that attackers run as self-managed instances on Alibaba Cloud, and linked those hosted AntiFox interfaces to confirmed malicious actions; Dark Reading reported on November 10, 2026 that forks of ARTEX, the framework that made the same jump from published tool to attacker staple, plus 45 similar penetration-testing tools, still run credential attacks and cloud break-ins at machine speed across multiple industries.",
-      "summary": "AntiFox chains reconnaissance, credential theft, and lateral movement with no operator at the keyboard, which compresses a cloud intrusion into minutes. Retire long-lived AWS access keys in favor of short-lived credentials, and alert on API calls arriving from Alibaba Cloud address ranges.",
-      "tags": [
-        "ai",
-        "cloud",
-        "exploit"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "AntiFox AI Pentesting Platform Linked to Attacks That Accessed AWS Production Secrets",
-          "url": "https://thehackernews.com/2026/11/antifox-ai-pentesting-platform-linked.html"
+          "source": "BleepingComputer",
+          "title": "N-able releases security hotfixes for zero-day vulnerabilities",
+          "url": "https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/"
         },
         {
           "source": "BleepingComputer",
-          "title": "Hackers use AntiFox AI agents in AWS credential-theft attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/hackers-use-antifox-ai-agents-in-aws-credential-theft-attacks/"
+          "title": "Active ScreenConnect attacks breach MSPs, impact dozens of organizations",
+          "url": "https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/"
         },
         {
           "source": "Dark Reading",
-          "title": "Artex: The AI Pen-Test Tool Hackers Turned Into a Weapon",
-          "url": "https://www.darkreading.com/cyberattacks-data-breaches/artex-ai-pen-test-tool-hackers-weapon"
+          "title": "N-able Takes N-central Platform Offline After Discovery of 33 Flaws",
+          "url": "https://www.darkreading.com/endpoint-security/n-able-n-central-offline-33-flaws"
         }
       ],
-      "_anchor": "i-63cbf25606"
+      "_anchor": "i-6936798857"
     },
     {
       "title": "Qilin Unmasked as WhiteArmor Squeezes Maersk",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "Krebs on Security reported on November 11, 2026 that Qilin has become the world's most active ransomware affiliate program, claiming at least 365 victim organizations in the past three months, and that a decade of operational security mistakes by its administrator all point to a 36-year-old man living in St. Petersburg, Russia; Maersk, the Danish shipping group, confirmed the same day that a threat actor reached a local legacy system the company inherited through an earlier acquisition and pulled data out of it, while the WhiteArmor ransomware crew demands $5 million.",
+      "latest_developments": "Krebs on Security reported on November 11, 2026 that Qilin has become the world's most active ransomware affiliate program, claiming at least 365 victim organizations in the past three months, and that a decade of operational security mistakes by its administrator all point to a 36-year-old man living in St. Petersburg, Russia; Maersk, the Danish shipping group, confirmed the same day that a threat actor reached a local legacy system the company inherited through an earlier acquisition and pulled data out of it, while the WhiteArmor ransomware crew demands $5 million; and Kaspersky's Securelist detailed the Citrus Ransomware group, which tunnels its traffic over the VLESS protocol, encrypts files with a tool called Sn00py, leans on large language models during intrusions, and shares tooling with the crew Securelist tracks as Toy Ghouls.",
       "summary": "Qilin rents its encryptor and leak site to affiliates who do the breaking in, which is why its victim count outruns every rival program. Companies should hunt for the initial-access routes Qilin affiliates favor, and acquirers should treat inherited legacy systems as unmonitored attack surface until they prove otherwise.",
       "tags": [
         "ransomware",
@@ -240,9 +273,42 @@
           "source": "BleepingComputer",
           "title": "Maersk confirms data breach as WhiteArmor ransomware demands $5 million",
           "url": "https://www.bleepingcomputer.com/news/security/maersk-confirms-data-breach-as-whitearmor-ransomware-demands-5-million/"
+        },
+        {
+          "source": "Securelist (Kaspersky)",
+          "title": "Citrus Ransomware: VLESS for traffic, Sn00py for encryption, and LLMs lending a hand",
+          "url": "https://securelist.com/citrus-ransomware/121879/"
         }
       ],
       "_anchor": "i-8cdc4a0f74"
+    },
+    {
+      "title": "eMudhra Revokes Eight More Certificate Authorities",
+      "area": "Data Breaches",
+      "latest_developments": "eMudhra revoked eight more of its intermediate certificate authorities on November 11, 2026 after its investigation found that a single line in an in-house Python script mishandled private keys during certificate generation, the same authorities the company had earlier declared unaffected by its October 2026 key compromise; Ubuntu 26.10 shipped curl with certificate revocation checking built in, using upki from the rustls developers, and Ubuntu's developers say OpenSSL comes next.",
+      "summary": "An intermediate certificate authority signs the certificates customers deploy, so revoking eight of them invalidates every certificate beneath. Check whether any TLS certificate in your estate chains to an eMudhra intermediate, reissue what does, and confirm your clients and load balancers actually check revocation.",
+      "tags": [
+        "pki",
+        "breach"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "eMudhra revokes 8 more CA certificates after private key mishap",
+          "url": "https://www.bleepingcomputer.com/news/security/emudhra-revokes-8-more-ca-certificates-after-private-key-mishap/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "eMudhra Revokes 8 More CAs It Previously Declared Unaffected by Key Compromise",
+          "url": "https://thehackernews.com/2026/11/emudhra-revokes-8-more-cas-it.html"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Ubuntu certificate revocation checks arrive in curl, OpenSSL is next",
+          "url": "https://www.helpnetsecurity.com/2026/11/11/ubuntu-certificate-revocation-curl-openssl/"
+        }
+      ],
+      "_anchor": "i-a4a34375ee"
     },
     {
       "title": "Sparrow Malware Ties Three China-Nexus Campaigns",
@@ -267,61 +333,25 @@
         }
       ],
       "_anchor": "i-3ac35ff647"
-    },
-    {
-      "title": "N-able Ships Hotfixes for N-central Zero-Days",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "N-able released hotfixes on November 11, 2026 for the N-central zero-days a researcher published over the weekend, two days after the company pulled its own hosted environments offline and told on-premises customers to shut down their servers; N-able has put the disclosure at 33 zero-days with working proof-of-concept exploits, a set the researcher calls Able2Shell.",
-      "summary": "N-central is the remote monitoring and management platform managed service providers use to administer client networks, which makes one compromised server a path into every customer it touches. Install the hotfixes before restarting any server that was taken down, then review N-central logs and agent deployments for commands no technician issued.",
-      "tags": [
-        "zero-day",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "BleepingComputer",
-          "title": "N-able releases security hotfixes for zero-day vulnerabilities",
-          "url": "https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/"
-        }
-      ],
-      "_anchor": "i-6936798857"
-    },
-    {
-      "title": "Poland Shuts Down ePUAP After Cyberattack",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Poland took ePUAP offline on November 11, 2026 following a cyberattack on the platform, the nationwide system Poles use to submit official documents, correspond with government agencies, and complete administrative procedures online.",
-      "summary": "ePUAP carries the paperwork between Polish citizens, businesses, and the state, so its shutdown stalls filings countrywide until the government restores it. Anyone with Polish administrative deadlines should plan for paper or in-person alternatives and treat email claiming to be ePUAP support as phishing.",
-      "tags": [
-        "government",
-        "incident"
-      ],
-      "sources": [
-        {
-          "source": "The Record",
-          "title": "Poland shuts down government services platform ePUAP following cyberattack",
-          "url": "https://therecord.media/poland-shuts-down-government-services-platform-cyberattack"
-        }
-      ],
-      "_anchor": "i-2b63f8aad1"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,498.02",
-      "pct": "-1.7%",
+      "value": "7,484.17",
+      "pct": "-1.8%",
       "arrow": "▼"
     },
     {
       "label": "Dow",
-      "value": "52,157.31",
-      "pct": "+0.2%",
-      "arrow": "▲"
+      "value": "51,983.38",
+      "pct": "-0.5%",
+      "arrow": "▼"
     },
     {
       "label": "Nasdaq",
-      "value": "24,989.99",
-      "pct": "-2.9%",
+      "value": "24,935.93",
+      "pct": "-2.5%",
       "arrow": "▼"
     },
     {
@@ -332,27 +362,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1208",
-      "pct": "+0.4%",
+      "value": "1.1200",
+      "pct": "+0.2%",
       "arrow": "▲"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3434",
-      "pct": "+0.5%",
+      "value": "1.3417",
+      "pct": "+0.2%",
       "arrow": "▲"
     },
     {
       "label": "USD/JPY",
-      "value": "158.12",
-      "pct": "+0.2%",
+      "value": "158.17",
+      "pct": "+0.1%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "Veterans Day: Cloudy, high 64F.",
     "Tonight: Mostly Cloudy then Chance Light Rain, low 45F.",
-    "Thursday: Light Rain, high 52F."
+    "Thursday: Light Rain, high 52F.",
+    "Thursday Night: Chance Rain Showers, low 36F."
   ],
   "sports": [
     {
@@ -381,13 +411,79 @@
   "local": {
     "business_politics": [
       {
+        "title": "Nvidia Moves to Oust Jensen Huang",
+        "latest_developments": "The Wall Street Journal reported Wednesday night, November 11, that Nvidia's board prepares to remove Chief Executive Jensen Huang soon, the Financial Times reported the directors will convene after learning Huang also carried on an affair with a senior Nvidia executive, and The Economist's lead editorial the same day said Huang must resign.",
+        "summary": "Huang built Nvidia into the supplier at the center of the artificial-intelligence build-out and refused to groom a successor, which leaves the company's governance resting on one man. American intelligence officials told him that a woman he had a relationship with, an executive at a major Nvidia customer, worked as a Chinese asset; the board hired Wachtell, Lipton, Rosen & Katz to run the investigation, and the short seller Culper Research flagged Huang's China exposure six months before anyone paid attention.",
+        "sources": [
+          {
+            "source": "WSJ US Business",
+            "title": "Nvidia Is Preparing to Oust CEO Jensen Huang",
+            "url": "https://www.wsj.com/business/nvidia-is-preparing-to-oust-nvidia-ceo-jensen-huang-30f421ad?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT Home",
+            "title": "Nvidia board set to meet after revelations Huang had affair with top company executive",
+            "url": "https://www.ft.com/content/d3838274-a055-4d5d-a1ff-48f2979a08f0?syn-25a6b1a6=1"
+          },
+          {
+            "source": "The Economist",
+            "title": "Jensen Huang must resign",
+            "url": "https://www.economist.com/leaders/2026/11/11/jensen-huang-must-resign"
+          },
+          {
+            "source": "The Economist",
+            "title": "There has never been a corporate scandal like the Huang affair",
+            "url": "https://www.economist.com/business/2026/11/11/there-has-never-been-a-corporate-scandal-like-the-huang-affair"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "A Timeline of Nvidia CEO Jensen Huang's Suspected Spy Drama",
+            "url": "https://www.wsj.com/tech/ai/a-timeline-of-nvidia-ceo-jensen-huangs-suspected-spy-drama-05cbebf3?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "The 31-Year-Old Trader Who Called Out Jensen Huang's 'China Problem'—and Shorted Nvidia",
+            "url": "https://www.wsj.com/business/nvidia-short-seller-culper-jensen-huang-0e0cec38?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-81f63e7cb7"
+      },
+      {
+        "title": "Vance Takes the Lead on Iran",
+        "latest_developments": "The Wall Street Journal reported Wednesday, November 11, that Vice President JD Vance has emerged as the administration's lead Iran negotiator and weighs face-to-face talks with a hard-line Iranian security official, and that Treasury Secretary Scott Bessent has moved out of his Washington home onto a military base because of threats to his life that trace to Iran.",
+        "summary": "Vance blamed the Republican collapse in the November 3 midterms on the Iran war and has pushed President Trump toward a settlement while other advisers press for renewed strikes. Bessent runs the economic pressure campaign against Tehran, and Iranian plots now reach senior American officials and American air bases, a risk that keeps a floor under crude prices.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "Vance Considers Direct Talks With Iran Hard-Liner in Push to End War",
+            "url": "https://www.wsj.com/world/middle-east/vance-considers-direct-talks-with-iran-hardliner-in-push-to-end-war-0c2e3ea4?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "JD Vance Emerges as Lead Iran Negotiator",
+            "url": "https://www.wsj.com/world/middle-east/jd-vance-emerges-as-lead-iran-negotiator-cba55bcb?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Bessent Moved to Military Base After Threats Linked to Iran",
+            "url": "https://www.wsj.com/politics/national-security/bessent-moved-to-military-base-after-threats-linked-to-iran-95cfced1?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Opinion | Iran's Assassins Are on the Loose",
+            "url": "https://www.wsj.com/opinion/iran-assassins-irgc-scott-bessent-john-bolton-1df4ef62?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-13e4f16658"
+      },
+      {
         "title": "Hegseth Survives Impeachment as the White House Warns Congress",
-        "latest_developments": "House Republicans killed the impeachment effort against Defense Secretary Pete Hegseth and elected Representative Jim Jordan of Ohio their leader for the next Congress, and the Wall Street Journal reported Wednesday, November 11, that eleven Democratic House members missed the vote, enough to have swung it; the White House the same day sent the incoming Oversight Committee chairman a letter warning that some threats to executive-branch officials may cross into \"blatant criminality.\"",
-        "summary": "Representative Thomas Massie of Kentucky forced the impeachment resolutions over Hegseth's conduct at the Pentagon, and Republican leaders blocked them on the floor Tuesday evening, November 10. Democrats take control of both chambers in January after the November 3 midterms and plan a wave of investigations into the Trump administration, including tighter export controls in the wake of the Nvidia scandal.",
+        "latest_developments": "Representative Jamie Raskin told the Financial Times Wednesday, November 11, that he will open a sweeping investigation into President Trump and his allies while steering Democrats away from impeachment as a distraction, and the Wall Street Journal reported the incoming majorities will go after the warship named for Trump and Defense Secretary Pete Hegseth's \"War Department\" rebrand; eleven Democratic House members missed Tuesday's impeachment vote, enough to have swung it, and a soldier at the Tomb of the Unknown Soldier publicly reprimanded Hegseth's entourage on Veterans Day for laughing and chatting.",
+        "summary": "Representative Thomas Massie of Kentucky forced impeachment resolutions over Hegseth's conduct at the Pentagon, and Republican leaders blocked them on the floor Tuesday evening, November 10, the same day House Republicans elected Representative Jim Jordan of Ohio their next leader. Democrats take control of both chambers in January after the November 3 midterms, and the White House has written the incoming Oversight Committee chairman that some demands on executive-branch officials may cross into \"blatant criminality.\"",
         "sources": [
           {
             "source": "WSJ Politics",
-            "title": "Eleven Democratic House members weren’t present for the Pete Hegseth impeachment vote",
+            "title": "Eleven Democratic House members weren't present for the Pete Hegseth impeachment vote",
             "url": "https://www.wsj.com/politics/missing-democrats-fuel-party-backlash-after-hegseth-impeachment-effort-fails-0faaeaca?mod=rss_socialpoliticsfeed"
           },
           {
@@ -399,40 +495,29 @@
             "source": "WSJ Politics",
             "title": "House GOP saves Hegseth—for now—and picks Jordan to lead",
             "url": "https://www.wsj.com/politics/policy/house-gop-saves-hegsethfor-nowand-picks-jordan-to-lead-7c6f8314?mod=rss_socialpoliticsfeed"
+          },
+          {
+            "source": "FT Home",
+            "title": "Democrats pledge to expose 'absolute avalanche of corruption' under Trump",
+            "url": "https://www.ft.com/content/3d3fcb94-143d-446c-8b09-b1f830ca97e9?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Politics",
+            "title": "Democrats target Trump's warship as they look to slash his signature projects",
+            "url": "https://www.wsj.com/politics/national-security/democrats-target-trumps-warship-as-they-look-to-slash-his-signature-projects-41ceae17?mod=rss_socialpoliticsfeed"
+          },
+          {
+            "source": "WSJ Politics",
+            "title": "A soldier guarding the Tomb of the Unknown Soldier loudly admonished a group of dignitaries that included Defense Secretary Pete Hegseth",
+            "url": "https://www.wsj.com/politics/hegseth-and-aides-are-reprimanded-during-veterans-day-event-5461808c?mod=rss_socialpoliticsfeed"
           }
         ],
         "_anchor": "i-640ec5eaa8"
       },
       {
-        "title": "Turkey's Banking Regulator Offers to Resign",
-        "latest_developments": "Sahap Kavcioglu, the head of Turkey's Banking Regulation and Supervision Agency and a former governor of the country's central bank, tendered his resignation Wednesday, November 11, over a $20 billion fraud scandal, saying he acted \"to prevent any further damage\" to the regulator.",
-        "summary": "Kavcioglu supervises Turkey's lenders from the agency he moved to after running the central bank. His departure puts the credibility of Turkish bank supervision in question as the regulator works through a fraud of a size that dwarfs the capital of most banks it polices.",
-        "sources": [
-          {
-            "source": "FT World",
-            "title": "Turkey’s chief banking regulator offers to resign over $20bn fraud scandal",
-            "url": "https://www.ft.com/content/f22ce1c1-8de8-420a-b9f6-4dff0fc1f732?syn-25a6b1a6=1"
-          }
-        ],
-        "_anchor": "i-bd8267a214"
-      },
-      {
-        "title": "Abu Dhabi Talks Yield a Prisoner Swap",
-        "latest_developments": "United States-mediated negotiations among American, Russian, and Ukrainian delegations in Abu Dhabi broke up Wednesday, November 11, with an agreement on a large exchange of prisoners of war and nothing resembling a ceasefire, the first such round in roughly nine months.",
-        "summary": "The war in Iran suspended the Russia-Ukraine track for most of 2026, and American officials have told European capitals that work on a Ukraine ceasefire must run alongside talks about Europe's future security arrangements, an overture to Moscow that alarms allies. Russia has spent the autumn battering Ukraine's power grid and the bridges over the Dnipro river while Ukrainian forces strike Russia's largest oil refineries.",
-        "sources": [
-          {
-            "source": "FT Home",
-            "title": "Ukraine peace talks end with prisoner swap but no breakthrough",
-            "url": "https://www.ft.com/content/39254048-0d84-47b8-bb97-4b9d9e1f2b92?syn-25a6b1a6=1"
-          }
-        ],
-        "_anchor": "i-0405685c6f"
-      },
-      {
         "title": "The Fed's Next Increase Looks Like a Start",
-        "latest_developments": "The dollar climbed to a four-week high Wednesday, November 11, with the Treasury market shut for Veterans Day, and the Wall Street Journal reported that traders now read a December Federal Reserve increase as the first of several, while the National Institute of Economic and Social Research urged the Bank of England to carry its key rate to roughly 5% to tame inflation within three years.",
-        "summary": "October consumer prices in the United States rose 0.4% from September against the 0.3% economists expected, and hawkish comments from Federal Reserve officials, among them Governor Christopher Waller, drove the sharpest two-year Treasury yield jump since 2024 on Tuesday, November 10. Asian bond yields followed Wednesday, and DHF Capital S.A. said the dollar needs stronger bets on a half-point Fed move to climb further.",
+        "latest_developments": "The WSJ Dollar Index rose 0.44% to 97.97 Wednesday, November 11, a second straight gain and a four-week high, with the Treasury market shut for Veterans Day, and gold futures settled back under $4,000 for a second session as inflation worries held expectations for higher rates.",
+        "summary": "October consumer prices in the United States rose 0.4% from September against the 0.3% economists expected, and hawkish comments from Federal Reserve officials, among them Governor Christopher Waller, drove the sharpest two-year Treasury yield jump since 2024 on Tuesday, November 10. Traders now read a December Federal Reserve increase as the first of several, DHF Capital S.A. says the dollar needs stronger bets on a half-point move to climb further, and the National Institute of Economic and Social Research urges the Bank of England to carry its key rate to roughly 5%.",
         "sources": [
           {
             "source": "WSJ US Business",
@@ -441,13 +526,18 @@
           },
           {
             "source": "WSJ Markets",
-            "title": "Dollar Rises to Four-Week High, Further Gains Subject to Stronger Pricing of 50Bp Fed Hike",
+            "title": "WSJ Dollar Index Rises 0.44% to 97.97",
             "url": "https://www.wsj.com/finance/currencies/asian-currencies-soften-after-u-s-cpi-data-boosts-dollar-26f03632?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
             "title": "U.S. Treasurys Pause on Market Holiday After Inflation-Fueled Selloff",
             "url": "https://www.wsj.com/finance/investing/u-s-treasurys-pause-on-market-holiday-after-inflation-fueled-selloff-7ff76731?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Gold Futures Slip Back Under $4,000 Level",
+            "url": "https://www.wsj.com/finance/commodities-futures/gold-edges-higher-in-likely-technical-rebound-f73bdc8f?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
@@ -464,8 +554,8 @@
       },
       {
         "title": "Anthropic's Bankers Push the IPO Back to $1.5 Trillion",
-        "latest_developments": "The Financial Times reported Wednesday, November 11, that Anthropic's bankers prepare to lift the valuation on its initial public offering to $1.5 trillion, reversing the trim to $1.3 trillion reported a day earlier, and the Nasdaq composite led United States stocks higher through Wednesday afternoon, erasing last week's losses after CoreWeave's results beat expectations.",
-        "summary": "Anthropic plans to list before Thanksgiving in what would rank as the largest initial public offering on record; the Financial Times' Lex column calls the deal too important to fail and warns that shadow insider sales and circular supply-chain backing could sour trading after the debut. CoreWeave, the cloud provider at the center of artificial-intelligence jitters, reported a workaround to its capital constraints and lifted European semiconductor shares Wednesday, even as the Financial Times found investors pulling back from the start-ups that promise to power data centers.",
+        "latest_developments": "United States stocks closed higher Wednesday, November 11, with the Nasdaq erasing last week's historic losses as investors ran straight back into artificial-intelligence shares after CoreWeave's results, and the Financial Times reported the same morning that Anthropic's bankers prepare to lift the valuation on its initial public offering to $1.5 trillion, reversing the trim to $1.3 trillion reported a day earlier.",
+        "summary": "Anthropic plans to list before Thanksgiving in what would rank as the largest initial public offering on record; the Financial Times' Lex column calls the deal too important to fail and warns that shadow insider sales and circular supply-chain backing could sour trading after the debut. CoreWeave, the data-center operator at the center of the jitters, showed a workaround to its capital constraints and lifted European semiconductor shares, while the Wall Street Journal finds whole economies, Asian ones above all, exposed to a bust in the American data-center build-out.",
         "sources": [
           {
             "source": "FT World",
@@ -474,36 +564,36 @@
           },
           {
             "source": "FT Home",
-            "title": "Anthropic’s IPO is too important to fail",
+            "title": "Anthropic's IPO is too important to fail",
             "url": "https://www.ft.com/content/26fd23df-830e-481b-a3bc-19bcab48c5f6"
           },
           {
-            "source": "FT Home",
+            "source": "FT World",
             "title": "US tech stocks gain as AI trade revives",
             "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1"
           },
           {
             "source": "WSJ Markets",
-            "title": "Nasdaq Jumps After CoreWeave Earnings",
-            "url": "https://www.wsj.com/finance/commodities-futures/nasdaq-futures-rally-as-ai-optimism-returns-af100e62?mod=rss_markets_main"
+            "title": "U.S. Stocks Gain After CoreWeave Update Eases Some AI Concerns",
+            "url": "https://www.wsj.com/finance/stocks/u-s-stocks-rise-as-coreweave-update-eases-some-ai-worries-f8bfbaa7?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Investors Run Back to AI Stocks, Less Than a Week After a Historic Selloff",
+            "url": "https://www.wsj.com/finance/stocks/investors-run-back-to-ai-stocks-less-than-a-week-after-a-historic-selloff-854483e8?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
             "title": "CoreWeave Finds a Workaround to Capital Constraints—for Now",
             "url": "https://www.wsj.com/business/energy-oil/coreweave-finds-a-workaround-to-capital-constraintsfor-now-1f548211?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "European Chip Stocks Climb After CoreWeave Results Fuel AI Optimism",
-            "url": "https://www.wsj.com/finance/stocks/nikkei-flat-supported-by-bank-pharma-stocks-2c6e1b38?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-0d29205225"
       },
       {
         "title": "Brent Rebounds Above $92 on Fresh Middle East Strikes",
-        "latest_developments": "Brent crude rose above $92 a barrel Wednesday, November 11, ending a two-day slide, after renewed strikes in the Middle East cut into expectations that Washington and Tehran will settle; OPEC's October output neared prewar levels on a Saudi rebound, and Poland's Orlen canceled its long-term liquefied natural gas supply contract with QatarEnergy, the first known cancellation since the Iran war began.",
-        "summary": "President Trump has said repeatedly that the United States does not expect to renew attacks on Iran while talks proceed, a stance that pulled crude down by double-digit percentages over the past week from above $100 a barrel. European natural gas at the TTF hub climbed back above 85 euros a megawatt-hour the same morning as the region drew down storage faster than traders expected.",
+        "latest_developments": "Oil futures halted their slide and settled higher Wednesday, November 11, with Brent back above $92 a barrel, as continued skirmishes in the Middle East and shipping risk tempered expectations for a quick settlement between Washington and Tehran; OPEC's October output neared prewar levels on a Saudi rebound, and Poland's Orlen canceled its long-term liquefied natural gas supply contract with QatarEnergy, the first known cancellation since the Iran war began.",
+        "summary": "President Trump has said repeatedly that the United States does not expect to renew attacks on Iran while talks proceed, a stance that pulled crude down by double-digit percentages over the past week from above $100 a barrel. European natural gas at the TTF hub climbed back above 85 euros a megawatt-hour as the region drew down storage faster than traders expected.",
         "sources": [
           {
             "source": "WSJ US Business",
@@ -512,17 +602,17 @@
           },
           {
             "source": "WSJ Markets",
-            "title": "Oil Rebounds After Two-Day Drop on U.S.-Iran Conflict Uncertainty",
+            "title": "Oil Futures Halt Slide Awaiting Clarity on Middle East Talks",
             "url": "https://www.wsj.com/finance/commodities-futures/oil-rises-as-middle-east-risks-linger-53d39c2e?mod=rss_markets_main"
           },
           {
             "source": "WSJ US Business",
-            "title": "OPEC’s Oil Production Nears Prewar Levels on Saudi Rebound",
+            "title": "OPEC's Oil Production Nears Prewar Levels on Saudi Rebound",
             "url": "https://www.wsj.com/business/energy-oil/opecs-oil-production-nears-prewar-levels-on-saudi-rebound-70ffcc13?mod=pls_whats_news_us_business_f"
           },
           {
             "source": "WSJ Markets",
-            "title": "Poland’s Orlen Cancels Qatar LNG Supply Deal After Months of Force Majeure",
+            "title": "Poland's Orlen Cancels Qatar LNG Supply Deal After Months of Force Majeure",
             "url": "https://www.wsj.com/finance/commodities-futures/polands-orlen-cancels-qatar-lng-supply-deal-after-months-of-force-majeure-88f37e7b?mod=rss_markets_main"
           },
           {
@@ -532,9 +622,61 @@
           }
         ],
         "_anchor": "i-a57da16d18"
+      },
+      {
+        "title": "Abu Dhabi Talks Yield a Prisoner Swap",
+        "latest_developments": "United States-mediated negotiations among American, Russian, and Ukrainian delegations in Abu Dhabi broke up Wednesday, November 11, with an agreement on a large exchange of prisoners of war and nothing resembling a ceasefire, the first such round in roughly nine months.",
+        "summary": "The war in Iran suspended the Russia-Ukraine track for most of 2026, and American officials have told European capitals that work on a Ukraine ceasefire must run alongside talks about Europe's future security arrangements, an overture to Moscow that alarms allies. Russia has spent the autumn battering Ukraine's power grid and the bridges over the Dnipro river while Ukrainian forces strike Russia's largest oil refineries.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Ukraine peace talks end with prisoner swap but no breakthrough",
+            "url": "https://www.ft.com/content/39254048-0d84-47b8-bb97-4b9d9e1f2b92?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-0405685c6f"
+      },
+      {
+        "title": "Turkey's Banking Regulator Offers to Resign",
+        "latest_developments": "Sahap Kavcioglu, the head of Turkey's Banking Regulation and Supervision Agency and a former governor of the country's central bank, tendered his resignation Wednesday, November 11, over a $20 billion fraud scandal, saying he acted \"to prevent any further damage\" to the regulator.",
+        "summary": "Kavcioglu supervises Turkey's lenders from the agency he moved to after running the central bank. His departure puts the credibility of Turkish bank supervision in question as the regulator works through a fraud of a size that dwarfs the capital of most banks it polices.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Turkey's chief banking regulator offers to resign over $20bn fraud scandal",
+            "url": "https://www.ft.com/content/f22ce1c1-8de8-420a-b9f6-4dff0fc1f732?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-bd8267a214"
       }
     ],
     "business": [
+      {
+        "title": "Sharon Regional's Debts Pass $20 Million",
+        "latest_developments": "The Post-Gazette reported Wednesday night, November 11, that the debts tied to Sharon Regional Medical Center and Tenor Health, the group that operates it, reach at least $20 million.",
+        "summary": "Sharon Regional Medical Center serves Sharon and the surrounding Shenango Valley in Mercer County, roughly 75 miles north of Pittsburgh, and the hospital changed hands after its previous owner's financial collapse. A debt load of that size puts its services, and the jobs attached to them, back in doubt for the only full-service hospital in that corner of Pennsylvania.",
+        "sources": [
+          {
+            "source": "Pittsburgh Post-Gazette",
+            "title": "Tenor, Sharon Regional debts reach at least $20M",
+            "url": "https://www.post-gazette.com/local/2026/11/11/sharon-regional-hospital-debt/stories/202611120026"
+          }
+        ],
+        "_anchor": "i-4683ecd117"
+      },
+      {
+        "title": "The Skill Games Ban Squeezes the Sharpsburg VFW",
+        "latest_developments": "WTAE reported Wednesday, November 11, that the Veterans of Foreign Wars post in Sharpsburg already feels the revenue hole left by Pennsylvania's skill games ban, which took effect about a month ago, on top of the cost of fire damage to the building.",
+        "summary": "Pennsylvania's new skill game law pulled the machines out of the bars, social clubs, and veterans' posts that leaned on them for income. The Pennsylvania State Police reported Tuesday, November 10, that troopers visited more than 12,000 establishments and seized only 14 machines, which measures how completely the machines have gone.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Sharpsburg VFW struggles after skill games ban and fire damage",
+            "url": "https://www.wtae.com/article/sharpsburg-vfw-struggles-after-skill-games-ban-and-fire-damage/74403543"
+          }
+        ],
+        "_anchor": "i-3ad7f90b12"
+      },
       {
         "title": "U.S. Steel's $3 Billion Mill Splits Braddock",
         "latest_developments": "The Post-Gazette reported Wednesday, November 11, that Mon Valley residents and U.S. Steel workers filled the Allegheny County Health Department's hearing in Braddock on Tuesday afternoon, November 10, and argued against each other for hours over the air permit that decides the fate of the company's $3 billion hot strip mill.",
@@ -601,7 +743,7 @@
         "sources": [
           {
             "source": "TribLive",
-            "title": "Nature-themed streetscape project aims to draw people to Sharpsburg’s business corridor",
+            "title": "Nature-themed streetscape project aims to draw people to Sharpsburg's business corridor",
             "url": "https://triblive.com/local/fox-chapel/nature-themed-streetscape-project-aims-to-draw-people-to-sharpsburgs-business-corridor/"
           }
         ],
@@ -610,21 +752,62 @@
     ],
     "around_town": [
       {
-        "title": "Garrity Hunts for 475 Unclaimed Military Medals",
-        "latest_developments": "State Treasurer Stacy Garrity asked Pennsylvanians on Wednesday, November 11, to help find the service members and families owed more than 475 military decorations that sit in the Treasury vault in Harrisburg.",
-        "summary": "The Pennsylvania Treasury takes in military medals as unclaimed property and returns them to the veterans who earned them or to their relatives. Garrity has made the returns a signature piece of her office's unclaimed property work and times her appeals to Veterans Day.",
+        "title": "Point Park Narrows On-Campus Housing",
+        "latest_developments": "KDKA reported Wednesday, November 11, that Point Park University students learned of a new mandate that changes who may live in campus housing beginning with the 2027-28 school year.",
+        "summary": "Point Park University occupies a cluster of buildings in downtown Pittsburgh and houses a large share of its undergraduates there. The mandate pushes affected students into the downtown rental market, where apartments in the Golden Triangle keep filling up.",
         "sources": [
           {
-            "source": "WPXI",
-            "title": "Here’s how you can reunite veterans with Pennsylvania’s nearly 500 unclaimed military decorations",
-            "url": "https://www.wpxi.com/news/local/heres-how-you-can-reunite-veterans-with-pennsylvanias-nearly-500-unclaimed-military-decorations/O3TBME5BHRGUBPKMPL57VEDTWY/"
+            "source": "KDKA",
+            "title": "Point Park University students face new off-campus housing mandate for 2027-28 school year",
+            "url": "https://www.cbsnews.com/pittsburgh/news/point-park-university-off-campus-housing/"
           }
         ],
-        "_anchor": "i-e736a9d960"
+        "_anchor": "i-60f6cc3917"
+      },
+      {
+        "title": "PennDOT Halts the Forest Hills Sewer Work",
+        "latest_developments": "KDKA reported Wednesday, November 11, that PennDOT stopped a sewer project on Ardmore Boulevard in Forest Hills after drivers raised safety concerns about the work zone.",
+        "summary": "Ardmore Boulevard carries Route 30 through Forest Hills, the Allegheny County borough east of Pittsburgh, and serves as a main route between the eastern suburbs and the Parkway East. PennDOT owns the road and can stop utility work inside its right of way.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "PennDOT halts Forest Hills sewer project after drivers raise safety concerns",
+            "url": "https://www.cbsnews.com/pittsburgh/news/sewer-project-forest-hills-route-30/"
+          }
+        ],
+        "_anchor": "i-2f091819e7"
+      },
+      {
+        "title": "Monessen Parents Press the Board on Mold",
+        "latest_developments": "WTAE reported Wednesday, November 11, that Monessen middle and high school students return to their building Monday, November 16, after months of remote learning, and KDKA obtained district documents the same day detailing the mold remediation and moisture testing, which parents told the school board Monday night, November 9, still leaves their questions unanswered.",
+        "summary": "Mold inside the Monessen City School District's middle-high school in Westmoreland County pushed students out of the building, and a KDKA investigation found mold, moisture, and structural problems in both that building and the district's elementary school.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Parents demand answers about mold in Monessen middle-high school before students return",
+            "url": "https://www.cbsnews.com/pittsburgh/news/monessen-school-board-meeting-mold/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Parents still concerned about mold as Monessen students prepare to return to classrooms",
+            "url": "https://www.wpxi.com/news/local/parents-still-concerned-about-mold-monessen-students-prepare-return-classrooms/3NVOCFO2CNFP7IJZL6WOCPAXLA/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Monessen middle, high school students coming back to class Monday amid mold testing",
+            "url": "https://www.wtae.com/article/monessen-middle-high-school-students-return-mold/74403501"
+          },
+          {
+            "source": "KDKA",
+            "title": "New documents detail mold remediation, moisture testing at Monessen schools",
+            "url": "https://www.cbsnews.com/pittsburgh/video/new-documents-detail-mold-remediation-moisture-testing-at-monessen-schools/"
+          }
+        ],
+        "_anchor": "i-6ace746820"
       },
       {
         "title": "An Impact Day Thursday, Then Snow",
-        "latest_developments": "WTAE's Wednesday afternoon update, November 11, kept Veterans Day dry with highs in the low to mid 60s and flags Thursday, November 12, as an Impact Day for returning rain, with snow in the mix into the weekend.",
+        "latest_developments": "WTAE held Thursday, November 12, as an Impact Day for returning rain in its Wednesday evening update, November 11, after Veterans Day ran dry with highs in the low to mid 60s, and KDKA's evening forecast keeps snow in the mix into the weekend.",
         "summary": "Western Pennsylvania has run unseasonably warm through early November. KDKA expects the season's first measurable snow late Friday into Saturday morning in the region's highest elevations, with a wintry mix or plain rain at lower levels.",
         "sources": [
           {
@@ -641,9 +824,45 @@
             "source": "KDKA",
             "title": "KDKA-TV Afternoon Forecast (11/11)",
             "url": "https://www.cbsnews.com/pittsburgh/video/kdka-tv-afternoon-forecast-1111-3/"
+          },
+          {
+            "source": "KDKA",
+            "title": "KDKA-TV Evening Forecast (11/11)",
+            "url": "https://www.cbsnews.com/pittsburgh/video/kdka-tv-evening-forecast-1111-3/"
           }
         ],
         "_anchor": "i-5f6e3a4c80"
+      },
+      {
+        "title": "Forbes Road Teachers Set a December 1 Strike Date",
+        "latest_developments": "Teachers at the Forbes Road Career and Technology Center notified the school Tuesday, November 10, that they will walk out December 1, 2026, in 20 days, unless they reach a contract.",
+        "summary": "The Forbes Road Career and Technology Center, an Allegheny County vocational school, has bargained with its teachers union for nearly a year; union members told KDKA and WTAE their wages have not kept up.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Teacher strike looms at Forbes Road Forbes Road Career and Technology Center",
+            "url": "https://www.cbsnews.com/pittsburgh/video/teacher-strike-looms-at-forbes-road-forbes-road-career-and-technology-center/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Teachers at Forbes road tech school threaten to go on strike December 1st.",
+            "url": "https://www.wtae.com/article/forbes-road-tech-school-threaten-strike/74394471"
+          }
+        ],
+        "_anchor": "i-6b45417ec4"
+      },
+      {
+        "title": "Costa Steps Into the Senate Majority",
+        "latest_developments": "PublicSource profiled Jay Costa on Wednesday, November 11, as the Forest Hills Democrat takes charge of the Pennsylvania Senate floor after 30 years in the minority, with Republican state Senator Devlin Robinson calling him a pragmatic man who will do what he thinks best.",
+        "summary": "Democrats won a Pennsylvania Senate majority on November 3, 2026, completing a Harrisburg trifecta alongside Governor Josh Shapiro and the state House for the first time in more than three decades. Costa, the Allegheny County Democrat who leads the caucus, now decides which bills reach the floor, which gives Pittsburgh its best leverage in Harrisburg in a generation.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "After 30 years in the minority, Jay Costa steps into Senate spotlight",
+            "url": "https://www.publicsource.org/jay-costa-pennsylvania-senate-majority/"
+          }
+        ],
+        "_anchor": "i-d6c20c5eac"
       },
       {
         "title": "Masontown Weighs Dissolving Its Police Department",
@@ -685,56 +904,33 @@
         "_anchor": "i-ca4ea55b2e"
       },
       {
-        "title": "Costa Steps Into the Senate Majority",
-        "latest_developments": "PublicSource profiled Jay Costa on Wednesday, November 11, as the Forest Hills Democrat takes charge of the Pennsylvania Senate floor after 30 years in the minority, with Republican state Senator Devlin Robinson calling him a pragmatic man who will do what he thinks best.",
-        "summary": "Democrats won a Pennsylvania Senate majority on November 3, 2026, completing a Harrisburg trifecta alongside Governor Josh Shapiro and the state House for the first time in more than three decades. Costa, the Allegheny County Democrat who leads the caucus, now decides which bills reach the floor, which gives Pittsburgh its best leverage in Harrisburg in a generation.",
+        "title": "Garrity Hunts for 475 Unclaimed Military Medals",
+        "latest_developments": "State Treasurer Stacy Garrity asked Pennsylvanians on Wednesday, November 11, to help find the service members and families owed more than 475 military decorations that sit in the Treasury vault in Harrisburg.",
+        "summary": "The Pennsylvania Treasury takes in military medals as unclaimed property and returns them to the veterans who earned them or to their relatives. Garrity has made the returns a signature piece of her office's unclaimed property work and times her appeals to Veterans Day.",
         "sources": [
-          {
-            "source": "PublicSource",
-            "title": "After 30 years in the minority, Jay Costa steps into Senate spotlight",
-            "url": "https://www.publicsource.org/jay-costa-pennsylvania-senate-majority/"
-          }
-        ],
-        "_anchor": "i-d6c20c5eac"
-      },
-      {
-        "title": "Monessen Parents Press the Board on Mold",
-        "latest_developments": "Parents confronted the Monessen City School District board Monday night, November 9, demanding answers about mold in the middle-high school, and students return to the building within the coming week.",
-        "summary": "Mold inside the Monessen City School District's middle-high school in Westmoreland County pushed students into months of remote learning, and a KDKA investigation found mold and safety problems that persist a week before the planned return.",
-        "sources": [
-          {
-            "source": "KDKA",
-            "title": "Parents demand answers about mold in Monessen middle-high school before students return",
-            "url": "https://www.cbsnews.com/pittsburgh/news/monessen-school-board-meeting-mold/"
-          },
           {
             "source": "WPXI",
-            "title": "Parents still concerned about mold as Monessen students prepare to return to classrooms",
-            "url": "https://www.wpxi.com/news/local/parents-still-concerned-about-mold-monessen-students-prepare-return-classrooms/3NVOCFO2CNFP7IJZL6WOCPAXLA/"
+            "title": "Here's how you can reunite veterans with Pennsylvania's nearly 500 unclaimed military decorations",
+            "url": "https://www.wpxi.com/news/local/heres-how-you-can-reunite-veterans-with-pennsylvanias-nearly-500-unclaimed-military-decorations/O3TBME5BHRGUBPKMPL57VEDTWY/"
           }
         ],
-        "_anchor": "i-6ace746820"
-      },
-      {
-        "title": "Forbes Road Teachers Set a December 1 Strike Date",
-        "latest_developments": "Teachers at the Forbes Road Career and Technology Center notified the school Tuesday, November 10, that they will walk out December 1, 2026, in 20 days, unless they reach a contract.",
-        "summary": "The Forbes Road Career and Technology Center, an Allegheny County vocational school, has bargained with its teachers union for nearly a year; union members told KDKA and WTAE their wages have not kept up.",
-        "sources": [
-          {
-            "source": "KDKA",
-            "title": "Teacher strike looms at Forbes Road Forbes Road Career and Technology Center",
-            "url": "https://www.cbsnews.com/pittsburgh/video/teacher-strike-looms-at-forbes-road-forbes-road-career-and-technology-center/"
-          },
-          {
-            "source": "WTAE",
-            "title": "Teachers at Forbes road tech school threaten to go on strike December 1st.",
-            "url": "https://www.wtae.com/article/forbes-road-tech-school-threaten-strike/74394471"
-          }
-        ],
-        "_anchor": "i-6b45417ec4"
+        "_anchor": "i-e736a9d960"
       }
     ],
     "events": [
+      {
+        "title": "Artists Pour Tea at the August Wilson Center",
+        "latest_developments": "KDKA aired a preview Wednesday, November 11, of the August Wilson African American Cultural Center's Sunday program, which puts visitors in the same room as the artists whose work hangs on its walls.",
+        "summary": "President and Chief Executive Janis Burley and Artistic Director Kimberly Jacobs invite the public to the August Wilson African American Cultural Center, in Pittsburgh's Cultural District downtown, on Sunday, November 15, to drink tea and hear the artists talk about their own work.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "A cup of tea, and a work of fine art",
+            "url": "https://www.cbsnews.com/pittsburgh/video/a-cup-of-tea-and-a-work-of-fine-art/"
+          }
+        ],
+        "_anchor": "i-b81590cb81"
+      },
       {
         "title": "Pirates Tickets Go On Sale With a 4:12 Opener",
         "latest_developments": "TribLive reported Wednesday, November 11, that the Pittsburgh Pirates have set start times for the 2027 home opener and for weekday and Saturday games at PNC Park as tickets went on sale.",
@@ -763,8 +959,8 @@
       },
       {
         "title": "Veterans Day Ceremonies Across Western Pennsylvania",
-        "latest_developments": "WTAE listed the region's Veterans Day observances for today, Wednesday, November 11, 2026, led by the ceremony at the National Cemetery of the Alleghenies and parades in Butler, Beaver County, and Westmoreland County.",
-        "summary": "The National Cemetery of the Alleghenies in Cecil Township, Washington County, holds the region's largest Veterans Day ceremony, and parades honoring those who served step off in Butler, in Beaver County, and in Westmoreland County. Pittsburgh marched its own Veterans Day parade downtown on Saturday, November 7.",
+        "latest_developments": "Hundreds filled the National Cemetery of the Alleghenies in Cecil Township on Wednesday, November 11, for the region's largest Veterans Day ceremony, and a retired Navy officer told the North Huntingdon observance that veterans treat one another as family.",
+        "summary": "The National Cemetery of the Alleghenies in Cecil Township, Washington County, holds the region's largest Veterans Day ceremony, and parades honoring those who served stepped off in Butler, in Beaver County, and in Westmoreland County. Pittsburgh marched its own Veterans Day parade downtown on Saturday, November 7.",
         "sources": [
           {
             "source": "WTAE",
@@ -777,14 +973,55 @@
     ],
     "around_teams": [
       {
+        "title": "Tomlin Talks About Coaching Again",
+        "latest_developments": "The Post-Gazette reported Wednesday, November 11, that Mike Tomlin, the former Steelers head coach, described what he sees watching Pittsburgh in person now and addressed whether he returns to coaching.",
+        "summary": "Tomlin coached the Steelers for parts of two decades and won Super Bowl XLIII; Mike McCarthy now runs the team, which sits 6-2 and plays at Cincinnati Sunday, November 15. Tomlin also taped a two-part interview this week with Cam Heyward for Not Just Football.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Mike Tomlin discusses watching the Steelers in person and his future in coaching",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/11/11/mike-tomlin-comments-on-steelers/stories/202611110030"
+          }
+        ],
+        "_anchor": "i-0417da5bc6"
+      },
+      {
+        "title": "McCarthy Opens Bengals Week",
+        "latest_developments": "Mike McCarthy met the media Wednesday, November 11, before Steelers practice, the team posted the sixth episode of Forging Steel on the Paris trip, the inside linebacker duo, and the four straight wins Pittsburgh carried into its bye, and Matt Williamson and Wes Uhler spent SNR Drive the same day rating all 32 teams' Super Bowl chances and closing the book on the trade deadline.",
+        "summary": "Pittsburgh, 6-2, plays at the Cincinnati Bengals Sunday, November 15, at 8:15 p.m. Eastern on NBC in a game that settles first place in the AFC North. The Steelers let the deadline pass Tuesday, November 10, without a trade.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Coach Mike McCarthy Press Conference (November 11) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=fwDntoP1Coo"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Forging Steel: Stacking Wins (Season 1, Episode 6) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=EUH_I5_EPkw"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "What Teams Can Win The Super Bowl This Year? | SNR Drive (Nov.11) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=RSKZn1MGgaQ"
+          }
+        ],
+        "_anchor": "i-2834b5657c"
+      },
+      {
         "title": "Dick Hoak Dies at 86",
-        "latest_developments": "The Steelers announced Wednesday, November 11, that Dick Hoak has died at 86.",
+        "latest_developments": "The Steelers announced Wednesday, November 11, that Dick Hoak has died at 86, and the team posted a video tribute to his career the same evening.",
         "summary": "Hoak, a Jeannette native out of Penn State, played running back for Pittsburgh in the 1960s and then coached the team's running backs for decades, serving on the staffs of five Super Bowl winners. His tenure made him one of the longest-serving figures in franchise history.",
         "sources": [
           {
             "source": "Post-Gazette Steelers",
             "title": "Dick Hoak, former Steelers player and Super Bowl-winning assistant coach, has died at 86",
             "url": "https://www.post-gazette.com/sports/steelers/2026/11/11/dick-hoak-obituary-steelers/stories/202611110041"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Steelers Legend Dick Hoak Remembered",
+            "url": "https://www.youtube.com/watch?v=VRpz0X_AXcU"
           }
         ],
         "_anchor": "i-ac109f85ed"
@@ -814,7 +1051,7 @@
         "sources": [
           {
             "source": "Post-Gazette Steelers",
-            "title": "The Steelers might be on track to have a ‘dominant and historic’ defense after all",
+            "title": "The Steelers might be on track to have a 'dominant and historic' defense after all",
             "url": "https://www.post-gazette.com/sports/steelers/2026/11/11/steelers-defense-mike-tomlin/stories/202611100054"
           }
         ],
@@ -823,11 +1060,11 @@
       {
         "title": "Tomlin Retells Super Bowl XLIII",
         "latest_developments": "Not Just Football posted a clip Wednesday, November 11, in which Mike Tomlin describes the practice tape that set up James Harrison's pick-six in Super Bowl XLIII and Santonio Holmes pacing the sideline before the game-winning drive.",
-        "summary": "Cam Heyward and co-host Hayden taped a two-part sit-down with Tomlin for Not Just Football; part one posted Tuesday, November 10, at 6 a.m. Eastern and runs through Ben Roethlisberger, Aaron Rodgers, and how Tomlin got the Steelers job, with part two set for Thursday, November 12. Tomlin coached Pittsburgh to the Super Bowl XLIII win over the Arizona Cardinals in February 2009, the game Holmes ended with a touchdown catch in the corner of the end zone.",
+        "summary": "Cam Heyward and co-host Hayden taped a two-part sit-down with Tomlin, the former Steelers head coach, for Not Just Football; part one posted Tuesday, November 10, at 6 a.m. Eastern and runs through Ben Roethlisberger, Aaron Rodgers, and how Tomlin got the Pittsburgh job, with part two set for Thursday, November 12. Tomlin coached the Steelers to the Super Bowl XLIII win over the Arizona Cardinals in February 2009, the game Holmes ended with a touchdown catch in the corner of the end zone.",
         "sources": [
           {
             "source": "Not Just Football with Cam Heyward",
-            "title": "Mike Tomlin Reveals the Untold Story Behind Santonio Holmes’ Catch",
+            "title": "Mike Tomlin Reveals the Untold Story Behind Santonio Holmes' Catch",
             "url": "https://www.youtube.com/watch?v=odlJ5z95_mo"
           },
           {
@@ -850,7 +1087,7 @@
           },
           {
             "source": "Post-Gazette Steelers",
-            "title": "The Steelers let the NFL’s trade deadline pass without making any deals",
+            "title": "The Steelers let the NFL's trade deadline pass without making any deals",
             "url": "https://www.post-gazette.com/sports/steelers/2026/11/10/steelers-trade-deadline-news/stories/202611100026"
           }
         ],
@@ -863,7 +1100,7 @@
         "sources": [
           {
             "source": "Post-Gazette Pirates",
-            "title": "At MLB’s GM meetings, Ben Cherington believes the Pirates have the flexibility to improve",
+            "title": "At MLB's GM meetings, Ben Cherington believes the Pirates have the flexibility to improve",
             "url": "https://www.post-gazette.com/sports/pirates/2026/11/10/pirates-gm-meetings-ben-cherington-brandon-lowe/stories/202611100027"
           }
         ],
@@ -872,19 +1109,45 @@
     ],
     "team_usa": [
       {
-        "title": "Manchester United Makes Contact With Pochettino",
-        "latest_developments": "Sources told ESPN Wednesday, November 11, that Manchester United nears an agreement with United States men's national team head coach Mauricio Pochettino, while Michael Carrick took training again and waited for word on his own future, and ESPN's analysts began handicapping who would replace Pochettino with the Americans.",
-        "summary": "Pochettino, who coaches the United States men's national team, would welcome a return to the Premier League, sources told ESPN, and the club job carries more money and daily work against the national team's longer cycle. United sits in its worst league position in 40 years and faces a relegation fight that ESPN attributes to minority owner Sir Jim Ratcliffe's choice of inexperienced appointments; United States left back Antonee Robinson says the squad pays the speculation no attention.",
+        "title": "U.S. Soccer Pulls Out of the Under-17 World Cup",
+        "latest_developments": "U.S. Soccer confirmed to ESPN Wednesday, November 11, that it has withdrawn the United States men's under-17 national team from the FIFA Under-17 World Cup in Qatar over safety concerns.",
+        "summary": "FIFA stages the men's Under-17 World Cup annually in Qatar with a 48-team field, and the withdrawal takes the United States out of the sport's premier youth tournament and out of the Gulf while the war between the United States and Iran continues.",
         "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "U.S. withdraws from FIFA U17 World Cup in Qatar over safety concerns",
+            "url": "https://www.espn.com/soccer/story/_/id/50455133/usa-fifa-mens-u17-world-cup-qatar-safety"
+          }
+        ],
+        "_anchor": "i-8545b7aa28"
+      },
+      {
+        "title": "Knight's Hat Trick Completes a Perfect Group Stage",
+        "latest_developments": "Hilary Knight scored three goals Wednesday, November 11, as the defending champion United States beat the Czech Republic 8-1 at the women's ice hockey world championship in Denmark, finishing the preliminary round without a loss.",
+        "summary": "The American women opened the tournament with a 5-0 shutout of Germany, where Emma Peschel scored in her debut, and routed Austria 11-1 behind a Caroline Harvey hat trick. Knight, the veteran forward and the program's career scoring leader, carries the United States into the medal round.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "U.S. routs Czechs behind Knight's hat trick at hockey worlds",
+            "url": "https://www.espn.com/olympics/story/_/id/50455244/us-routs-czechs-knight-hat-trick-hockey-worlds"
+          }
+        ],
+        "_anchor": "i-ce4c2baf51"
+      },
+      {
+        "title": "Manchester United Makes Contact With Pochettino",
+        "latest_developments": "Sources told ESPN Wednesday, November 11, that Manchester United has contacted U.S. Soccer ahead of triggering the $10 million release clause in Mauricio Pochettino's contract and will meet Michael Carrick on Thursday, November 12, as it closes on hiring the United States men's national team head coach.",
+        "summary": "Pochettino coaches the United States men's national team and would welcome a return to the Premier League; the club job pays more and brings daily work against the national team's longer cycle. United sits in its worst league position in 40 years and faces a relegation fight that ESPN attributes to minority owner Sir Jim Ratcliffe's choice of inexperienced appointments, and United States left back Antonee Robinson says the squad pays the speculation no attention.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Sources: Man United contact U.S. Soccer over Poch; Carrick meeting Thursday",
+            "url": "https://www.espn.com/soccer/story/_/id/50455598/man-united-us-soccer-pochettino-carrick"
+          },
           {
             "source": "ESPN Soccer",
             "title": "Sources: Man United near Pochettino agreement as Carrick awaits verdict",
             "url": "https://www.espn.com/soccer/story/_/id/50451384/michael-carrick-mauricio-pochettino-man-united"
-          },
-          {
-            "source": "ESPN Soccer",
-            "title": "Sources: Pochettino open to becoming Man United head coach",
-            "url": "https://www.espn.com/soccer/story/_/id/50442407/mauricio-pochettino-man-united-michael-carrick-crisis"
           },
           {
             "source": "ESPN Soccer",
@@ -907,7 +1170,7 @@
             "url": "https://www.espn.com/soccer/story/_/id/50430907/manchester-united-transfers-carrick-premier-league-ratcliffe"
           }
         ],
-        "_anchor": "i-40d3469d33"
+        "_anchor": "i-18bded7ef1"
       },
       {
         "title": "Sullivan Joins Pulisic for the First Time",
@@ -926,7 +1189,7 @@
     "reading": [
       {
         "author": "Stratechery",
-        "title": "Intel Earnings, AMD Earnings, Intel and AMD’s Divergence",
+        "title": "Intel Earnings, AMD Earnings, Intel and AMD's Divergence",
         "url": "https://stratechery.com/2026/intel-earnings-amd-earnings-intel-and-amds-divergence/",
         "summary": "Ben Thompson reads the diverging quarterly results of Intel and AMD as the product of decades-old structural differences between the two chipmakers, and argues Intel may have to return to an older path to recover.",
         "_anchor": "i-ccb5a1ec7d"
@@ -944,77 +1207,84 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Attackers now run AntiFox, an open-source agentic pentest platform, to steal Amazon Web Services keys, while Microsoft Research shows ten neurons can backdoor an agent model.",
+      "text": "Agentic AI now sits on both sides of the breach, with AntiFox stealing AWS keys, Microsoft's Lazarus backdooring models through ten neurons, and Fireworks AI leaking Notion transcripts.",
       "links": [
         {
           "anchor": "i-63cbf25606",
           "phrase": "AntiFox",
-          "start": 18,
-          "end": 25,
+          "start": 54,
+          "end": 61,
           "title": "AntiFox Agents Steal AWS Credentials"
         },
         {
           "anchor": "i-f91527c7bf",
-          "phrase": "ten neurons",
-          "start": 134,
-          "end": 145,
+          "phrase": "Lazarus",
+          "start": 93,
+          "end": 100,
           "title": "Ten Neurons Backdoor an AI Agent"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Hosting platforms now hold other companies' secrets: stolen Railway keys drove roughly $740,000 in fraudulent charges, and Fireworks AI lost datasets, model weights, and agent data.",
-      "links": [
+        },
         {
-          "anchor": "i-7646e96e2e",
+          "anchor": "i-4555dea146",
           "phrase": "Fireworks AI",
-          "start": 123,
-          "end": 135,
+          "start": 145,
+          "end": 157,
           "title": "AI Providers Lose Keys, Datasets, and Model Weights"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "updated",
-      "text": "Microsoft's November Patch Tuesday counts ran past 1,300, Fortinet shipped nearly 100 fixes, and N-able hotfixed N-central zero-days as attackers rooted patched AhsayCBS and Barracuda gateways.",
+      "status": "new",
+      "text": "N-able shipped N-central hotfixes days after taking its hosted environments offline, and eMudhra revoked eight more intermediate authorities over a single key-mishandling line in its Python script.",
+      "links": [
+        {
+          "anchor": "i-6936798857",
+          "phrase": "N-central",
+          "start": 15,
+          "end": 24,
+          "title": "N-able Ships Hotfixes for N-central Zero-Days"
+        },
+        {
+          "anchor": "i-a4a34375ee",
+          "phrase": "eMudhra",
+          "start": 89,
+          "end": 96,
+          "title": "eMudhra Revokes Eight More Certificate Authorities"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Patch volume keeps climbing past vendor tallies, with November Patch Tuesday counts topping 1,300 and Fortinet closing nearly 100 flaws, while attackers chain AhsayCBS bugs in the wild.",
       "links": [
         {
           "anchor": "i-c3c6570192",
           "phrase": "Patch Tuesday",
-          "start": 21,
-          "end": 34,
+          "start": 63,
+          "end": 76,
           "title": "November Patch Tuesday Runs Past Microsoft"
         },
         {
           "anchor": "i-6efa2d9b4d",
           "phrase": "Fortinet",
-          "start": 58,
-          "end": 66,
+          "start": 102,
+          "end": 110,
           "title": "Fortinet, Citrix, and Ivanti Ship Their Own Fixes"
-        },
-        {
-          "anchor": "i-6936798857",
-          "phrase": "N-central",
-          "start": 113,
-          "end": 122,
-          "title": "N-able Ships Hotfixes for N-central Zero-Days"
         },
         {
           "anchor": "i-cd6455aace",
           "phrase": "AhsayCBS",
-          "start": 161,
-          "end": 169,
+          "start": 159,
+          "end": 167,
           "title": "Barracuda, BroadWorks, and AhsayCBS Under Attack"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "Krebs tied Qilin, now the busiest ransomware affiliate program with 365 victims, to WhiteArmor, while Check Point linked three China-nexus clusters through the Sparrow malware ecosystem.",
+      "status": "updated",
+      "text": "Krebs tied Qilin, now the most active ransomware affiliate program with 365 victims in three months, to a decade of operational security mistakes.",
       "links": [
         {
           "anchor": "i-8cdc4a0f74",
@@ -1022,69 +1292,55 @@
           "start": 11,
           "end": 16,
           "title": "Qilin Unmasked as WhiteArmor Squeezes Maersk"
-        },
-        {
-          "anchor": "i-3ac35ff647",
-          "phrase": "Sparrow malware",
-          "start": 160,
-          "end": 175,
-          "title": "Sparrow Malware Ties Three China-Nexus Campaigns"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Anthropic's bankers lifted the IPO valuation to $1.5 trillion, House Republicans killed the Hegseth impeachment, and Turkey's banking regulator Sahap Kavcioglu resigned over a $20 billion fraud.",
+      "text": "Nvidia's board moved toward removing Jensen Huang as the Nasdaq erased last week's losses and Anthropic's bankers pushed its IPO valuation to $1.5 trillion.",
       "links": [
+        {
+          "anchor": "i-81f63e7cb7",
+          "phrase": "Jensen Huang",
+          "start": 37,
+          "end": 49,
+          "title": "Nvidia Moves to Oust Jensen Huang"
+        },
         {
           "anchor": "i-0d29205225",
           "phrase": "Anthropic's bankers",
-          "start": 0,
-          "end": 19,
+          "start": 94,
+          "end": 113,
           "title": "Anthropic's Bankers Push the IPO Back to $1.5 Trillion"
-        },
-        {
-          "anchor": "i-640ec5eaa8",
-          "phrase": "Hegseth",
-          "start": 92,
-          "end": 99,
-          "title": "Hegseth Survives Impeachment as the White House Warns Congress"
-        },
-        {
-          "anchor": "i-bd8267a214",
-          "phrase": "Sahap Kavcioglu",
-          "start": 144,
-          "end": 159,
-          "title": "Turkey's Banking Regulator Offers to Resign"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Steelers great Dick Hoak died at 86, WTAE flagged Thursday as an Impact Day for returning rain and snow, and Pirates tickets went on sale with a 4:12 opener.",
+      "text": "Monessen students return Monday after mold remediation, Point Park narrowed who may live on campus, and PennDOT halted sewer work on Ardmore Boulevard over driver complaints.",
       "links": [
         {
-          "anchor": "i-ac109f85ed",
-          "phrase": "Dick Hoak",
-          "start": 15,
-          "end": 24,
-          "title": "Dick Hoak Dies at 86"
+          "anchor": "i-6ace746820",
+          "phrase": "Monessen",
+          "start": 0,
+          "end": 8,
+          "title": "Monessen Parents Press the Board on Mold"
         },
         {
-          "anchor": "i-5f6e3a4c80",
-          "phrase": "Impact Day",
-          "start": 65,
-          "end": 75,
-          "title": "An Impact Day Thursday, Then Snow"
+          "anchor": "i-60f6cc3917",
+          "phrase": "Point Park",
+          "start": 56,
+          "end": 66,
+          "title": "Point Park Narrows On-Campus Housing"
         },
         {
-          "anchor": "i-3b733a3c04",
-          "phrase": "Pirates tickets",
-          "start": 109,
-          "end": 124,
-          "title": "Pirates Tickets Go On Sale With a 4:12 Opener"
+          "anchor": "i-2f091819e7",
+          "phrase": "Ardmore Boulevard",
+          "start": 133,
+          "end": 150,
+          "title": "PennDOT Halts the Forest Hills Sewer Work"
         }
       ]
     }
@@ -1098,10 +1354,11 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 71,
+        "in_window": 62,
         "failed": [],
         "empty": [
           "CISA Advisories",
+          "Sophos News",
           "Google Online Security Blog",
           "Graham Cluley",
           "Google Project Zero",
@@ -1113,18 +1370,18 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 10,
+            "contributed": 10
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 13,
-            "contributed": 13
+            "in_window": 11,
+            "contributed": 11
           },
           "Krebs on Security": {
             "items": 10,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Schneier on Security": {
             "items": 10,
@@ -1133,8 +1390,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 4,
+            "contributed": 4
           },
           "SecurityWeek": {
             "items": 10,
@@ -1153,13 +1410,13 @@
           },
           "The Record": {
             "items": 5,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 3,
+            "contributed": 3
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 1,
+            "contributed": 1
           },
           "Help Net Security": {
             "items": 10,
@@ -1173,13 +1430,13 @@
           },
           "Sophos News": {
             "items": 9,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "Google Online Security Blog": {
             "items": 25,
@@ -1218,8 +1475,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 2,
-            "contributed": 2
+            "in_window": 3,
+            "contributed": 3
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1251,7 +1508,7 @@
           "Pittsburgh Post-Gazette": {
             "items": 20,
             "in_window": 20,
-            "contributed": 8
+            "contributed": 6
           },
           "PublicSource": {
             "items": 10,
@@ -1266,17 +1523,17 @@
           "NEXTpittsburgh": {
             "items": 10,
             "in_window": 2,
-            "contributed": 1
+            "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 7,
-            "contributed": 2
+            "in_window": 6,
+            "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 11
+            "contributed": 18
           },
           "WPXI": {
             "items": 15,
@@ -1286,7 +1543,7 @@
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 20
+            "contributed": 18
           }
         }
       },
@@ -1301,44 +1558,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 70,
+            "items": 71,
             "in_window": 26,
-            "contributed": 7
+            "contributed": 9
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 33,
-            "contributed": 13
+            "in_window": 32,
+            "contributed": 15
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 52,
-            "contributed": 10
+            "in_window": 51,
+            "contributed": 7
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 10,
-            "contributed": 4
+            "in_window": 12,
+            "contributed": 6
           },
           "The Economist": {
             "items": 300,
-            "in_window": 17,
-            "contributed": 3
+            "in_window": 24,
+            "contributed": 10
           },
           "FT Home": {
-            "items": 12,
-            "in_window": 12,
-            "contributed": 6
+            "items": 8,
+            "in_window": 8,
+            "contributed": 4
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 16
+            "contributed": 9
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 23,
-            "contributed": 1
+            "in_window": 22,
+            "contributed": 0
           }
         }
       },
@@ -1348,18 +1605,18 @@
         "feeds": 4,
         "loaded": 4,
         "window_hours": 120,
-        "in_window": 12,
+        "in_window": 10,
         "failed": [],
         "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 20,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 8,
+            "contributed": 8
           },
           "Post-Gazette Music": {
             "items": 20,
-            "in_window": 2,
+            "in_window": 1,
             "contributed": 0
           },
           "NEXTpittsburgh Events": {
@@ -1392,12 +1649,12 @@
           "Not Just Football with Cam Heyward": {
             "items": 15,
             "in_window": 7,
-            "contributed": 7
+            "contributed": 6
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
-            "in_window": 8,
-            "contributed": 7
+            "in_window": 11,
+            "contributed": 10
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -1412,7 +1669,7 @@
           "Post-Gazette Steelers": {
             "items": 20,
             "in_window": 13,
-            "contributed": 13
+            "contributed": 11
           }
         }
       },
@@ -1422,7 +1679,7 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 32,
+        "in_window": 31,
         "failed": [],
         "empty": [
           "Guardian Olympics"
@@ -1435,8 +1692,8 @@
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 11,
-            "contributed": 11
+            "in_window": 10,
+            "contributed": 10
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1499,24 +1756,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 46344,
+          "outputTokens": 52915,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 134150,
+          "cacheCreationInputTokens": 139441,
           "webSearchRequests": 0,
-          "costUSD": 2.5001299999999995,
+          "costUSD": 2.7173149999999997,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 22557
+          "thinkingTokens": 22271
         }
       },
-      "cost_usd": 2.5001299999999995,
-      "duration_ms": 505164,
+      "cost_usd": 2.7173149999999997,
+      "duration_ms": 572215,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-11 13:37 EST",
-    "items_considered": 71,
+    "generated_at": "2026-11-11 19:39 EST",
+    "items_considered": 62,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1597,8 +1854,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.5001,
-    "model_duration_ms": 505164,
+    "model_cost_usd": 2.7173,
+    "model_duration_ms": 572215,
     "local_from": null,
     "feed_failures": []
   }
