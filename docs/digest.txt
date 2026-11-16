@@ -1,12 +1,11 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Monday, November 16, 2026 - 7:06 AM EST
+Monday, November 16, 2026 - 10:06 AM EST
 ================================================================
 
-Amazon's decoy servers caught attacker AI agents stealing
-provider keys out of exposed LiteLLM, One API, and Dify
-installations and then spending those keys on the model calls
-that found the next batch.
+Attackers point their own AI agents at the gateways holding keys
+to commercial AI models, and Google warns that fully automated
+attack chains arrive soon.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -14,44 +13,78 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] Amazon's decoy servers caught attack agents lifting AI
-  provider keys from exposed LiteLLM and Dify installs, then
-  spending those keys on the inference that located the next
-  targets.
+* [TREND] Old code keeps paying attackers, from the 11-year-old
+  NoisyTCP Linux kernel bug to Log4Shell on a VMware vCenter box
+  BO Team hijacked and unpatched GeoVision cameras.
+  see: NoisyTCP Crashes Linux Servers; BO Team Hijacks a Russian
+  Code-Signing Server; Cryptojackers Enter Through GeoVision
+  Cameras
+* [TREND] Amazon's decoy servers captured attacker agents
+  probing internet-exposed LiteLLM, One API, and Dify
+  installations for stored AI provider keys, a preview of fully
+  automated attack chains.
   see: Attacker Agents Hunt AI Provider Keys
-* [TREND] Decade-old code keeps breaking: NoisyTCP crashes
-  default Nginx and OpenSSH hosts, unpatched GeoVision cameras
-  turned 13 organizations into miners, and attackers already
-  probe Copeland XWEB flaws.
-  see: NoisyTCP Crashes Linux Servers; Cryptojackers Enter
-  Through GeoVision Cameras; Hackers Probe 14 New Copeland
-  Controller Flaws
-* [TREND] The AI trade wobbled as Nvidia and CoreWeave slid
-  pre-market, Ben Thompson wrote Jensen Huang's obituary, and
-  Zitron dug into export-scandal supplier Megaspeed.
+* [TREND] Midnight Blue disclosed six unfixed Danfoss AK-SM800A
+  refrigeration flaws beside 14 probed Copeland bugs, as Project
+  Zero starts publishing at 90 days whether a patch exists or
+  not.
+  see: Hackers Probe 14 New Copeland Controller Flaws; Project
+  Zero Drops Its Patch Grace Period
+* [UPDATE (new)] Microsoft shipped out-of-band updates repairing
+  the Windows activation failures its own November patches
+  caused, while Pavel Durov disputed Kaspersky's claim that new
+  Telegram widgets deliver WebRAT.
+  see: Microsoft Ships Emergency Fix for Activation Failures;
+  Telegram Widgets Draw RCE Demos and WebRAT
+* [TREND] Nvidia fell 2.2% and CoreWeave 4.6% as AI shares led
+  Monday's selloff, with Ben Thompson writing Jensen Huang's
+  obituary and Zitron picking apart Megaspeed.
   see: A Pivotal Week for the AI Trade; Obituaries; Premium: The
   Hater's Guide To Megaspeed
-* [UPDATE (new)] Google's Project Zero will now publish the bugs
-  it reports after 90 days whether or not a fix exists, with
-  that deadline falling to 60 days in February.
-  see: Project Zero Drops Its Patch Grace Period
-* [UPDATE (new)] A breach at a third-party provider Uber uses
-  exposed names, addresses, and driver's license numbers for
-  150,000 people, prompting an inquiry at Australian retailer
-  Coles Group.
-  see: Uber Breach Reaches 150,000 People
-* [UPDATE (new)] Locally, Steelers beat writers failed every
-  unit after Cincinnati while Mason McCormick left Paycor
-  Stadium on a cart, and Market Square's holiday market returns
-  next week.
-  see: The Beat Writers Grade an Embarrassment; McCormick's
-  Ankle Empties the Line; The Holiday Market Returns to Market
-  Square
+* [UPDATE (new)] Monessen students walked back into their
+  mold-closed building, PennWest and IUP opened a degree track
+  for manufacturing apprentices, and the gingerbread house
+  display returns Friday.
+  see: Monessen Students Walk Back Into Their Building; PennWest
+  and IUP Put Apprentices on a Degree Track; The Gingerbread
+  House Display Returns Friday
 
 SECURITY
 ----------------------------------------------------------------
 
-1. NOISYTCP CRASHES LINUX SERVERS
+1. ATTACKER AGENTS HUNT AI PROVIDER KEYS
+   AI Security · [ai, credentials]
+   Latest developments: Amazon's threat intelligence team ran
+   decoy servers that captured the attack agents' own records,
+   which show the agents probing internet-exposed LiteLLM, One
+   API, and Dify installations for stored AI provider keys and
+   then using the stolen keys to run the models that powered the
+   search for more keys; Google warned on November 16, 2026 that
+   threat actors already chain agentic workflows through
+   offensive AI frameworks to automate vulnerability discovery
+   and exploitation at machine speed, with fully automated
+   attacks close behind; the SANS Internet Storm Center began
+   catching requests to /mcp-rest/test/tools/list at its
+   honeypots over the weekend that chain CVE-2026-42271 and
+   CVE-2026-48710 in LiteLLM and Starlette into unauthenticated
+   remote code execution, the path Horizon3.ai documented; and
+   Anthropic shipped Claude Fable 5.2 to regular users and
+   Claude Mythos 5.2 to selected partners, with Fable 5.2
+   refusing fewer security tasks than earlier versions and
+   Mythos 5.2 finding bugs better.
+   LiteLLM, One API, and Dify are self-hosted gateways that hold
+   the API keys an organization uses to reach commercial AI
+   models, which makes each exposed console a wallet. Anyone
+   running one on the public internet should rotate every key,
+   require authentication on the management interface, cap
+   spending per key, and install the fixes for CVE-2026-42271
+   and CVE-2026-48710.
+   - The Hacker News: https://thehackernews.com/2026/11/amazon-uncovers-ai-agent-campaign.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/google-warns-that-fully-automated-ai-attacks-are-coming-soon/
+   - SANS Internet Storm Center: https://isc.sans.edu/diary/rss/33522
+   - BleepingComputer: https://www.bleepingcomputer.com/news/artificial-intelligence/anthropics-claude-fable-52-blocks-fewer-security-tasks-while-mythos-gets-better-at-finding-bugs/
+
+2. NOISYTCP CRASHES LINUX SERVERS
    Vulnerabilities and Exploits · [patch, dos, linux]
    Latest developments: Researchers published NoisyTCP, an
    11-year-old Linux kernel flaw that reaches almost every
@@ -76,7 +109,30 @@ SECURITY
    - SecurityWeek: https://www.securityweek.com/tor-updates-dos-defenses-again-as-relay-attacks-continue/
    - Help Net Security: https://www.helpnetsecurity.com/2026/11/16/rspamd-4-3-0-released/
 
-2. CRYPTOJACKERS ENTER THROUGH GEOVISION CAMERAS
+3. MICROSOFT SHIPS EMERGENCY FIX FOR ACTIVATION FAILURES
+   Vulnerabilities and Exploits · [patch, phishing]
+   Latest developments: Microsoft released out-of-band updates
+   on November 16, 2026 to repair the Windows activation and
+   licensing failures its own November 2026 security updates
+   caused, ruled out a cyberattack behind last week's worldwide
+   Microsoft 365 outage, and warned that phishing emails posing
+   as Microsoft 365 service notices now cite the real outage and
+   threaten to delete held messages; the company also told
+   customers that Windows Server 2016 stops receiving security
+   updates in 60 days and opened a preview of Remote lock, which
+   lets Intune administrators lock a lost, stolen, or
+   compromised Windows device without wiping it.
+   The activation errors hit machines that installed this
+   month's patches, and the emergency packages install over
+   them. Administrators should deploy the out-of-band updates,
+   brief staff on outage-themed phishing, and move workloads off
+   Windows Server 2016 before support ends in January 2027.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/microsoft/microsoft-new-windows-emergency-updates-fix-activation-licensing-failures/
+   - SecurityWeek: https://www.securityweek.com/microsoft-rules-out-cyberattack-in-outage-warns-of-phishing-campaign/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-server-2016-reaches-end-of-support-in-60-days/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/16/microsoft-remote-lock-feature-preview/
+
+4. CRYPTOJACKERS ENTER THROUGH GEOVISION CAMERAS
    Ransomware and Cybercrime · [cryptojacking, malware]
    Latest developments: Huntress warned that attackers exploited
    unpatched GeoVision camera management software to reach
@@ -91,7 +147,9 @@ SECURITY
    administrators use to spot heavy GPU workloads; and Kaspersky
    found a new version of CoffeeLoader spreading through
    Retadup, the USB worm whose infrastructure law enforcement
-   seized in 2019.
+   seized in 2019, with an NSIS installer that drops a patched
+   7z.dll into a temporary directory and runs it through
+   rundll32.exe.
    GeoVision, the Taiwanese surveillance and access control
    company, sells into 110 countries and has issued no fix, so
    defenders should pull its management software off the network
@@ -102,44 +160,55 @@ SECURITY
    - Help Net Security: https://www.helpnetsecurity.com/2026/11/16/geovision-camera-software-vulnerabilities/
    - The Hacker News: https://thehackernews.com/2026/11/sansar-linux-cryptomining-malware-uses.html
    - Securelist (Kaspersky): https://securelist.com/retadup-delivers-coffeeloader/121908/
+   - The Hacker News: https://thehackernews.com/2026/11/retadup-worm-resurfaces-7-years-after.html
 
-3. ATTACKER AGENTS HUNT AI PROVIDER KEYS
-   AI Security · [ai, credentials]
-   Latest developments: Amazon's threat intelligence team ran
-   decoy servers that captured the attack agents' own records,
-   which show the agents probing internet-exposed LiteLLM, One
-   API, and Dify installations for stored AI provider keys and
-   then using the stolen keys to run the models that powered the
-   search for more keys; Anthropic separately shipped Claude
-   Fable 5.2 to regular users and Claude Mythos 5.2 to selected
-   partners, and Fable 5.2 refuses fewer security tasks than
-   earlier versions while Mythos 5.2 finds bugs better.
-   LiteLLM, One API, and Dify are self-hosted gateways that hold
-   the API keys an organization uses to reach commercial AI
-   models, which makes each exposed console a wallet. Anyone
-   running one on the public internet should rotate every key,
-   require authentication on the management interface, and cap
-   spending per key.
-   - The Hacker News: https://thehackernews.com/2026/11/amazon-uncovers-ai-agent-campaign.html
-   - BleepingComputer: https://www.bleepingcomputer.com/news/artificial-intelligence/anthropics-claude-fable-52-blocks-fewer-security-tasks-while-mythos-gets-better-at-finding-bugs/
+5. EU SANCTIONS DOPPELGANGER STAFF AS PEERS FAULT BRITAIN
+   Policy and Regulation · [policy, sanctions]
+   Latest developments: The European Union sanctioned a
+   pro-Russian hacktivist group and two dozen employees of the
+   Moscow firm behind the Doppelganger disinformation campaign
+   on November 16, 2026, the same day Parliament's National
+   Resilience Committee called the British government complacent
+   about cyber threats from hostile states and said the Cyber
+   Security and Resilience Bill, which faces a major vote in
+   eight days, falls short of the security standards the country
+   needs; Lithuanian Customs restored its main user management
+   portal over the weekend after a November 10, 2026 attack
+   forced the shutdown and may have exposed data.
+   Doppelganger pushes Kremlin narratives into European
+   audiences through cloned news websites, and the sanctions
+   freeze the assets and bar the travel of the people who run
+   it. Organizations in Britain's critical sectors should read
+   the committee's report as a signal that statutory security
+   duties will tighten after the vote.
+   - The Record: https://therecord.media/russia-europe-sanctions-doppelganger
+   - The Record: https://therecord.media/british-government-complacent-foreign-cyber-threats
+   - The Record: https://therecord.media/lithuania-customs-agency-cyberattack
 
-4. UBER BREACH REACHES 150,000 PEOPLE
-   Data Breaches · [breach, third-party]
-   Latest developments: Hackers compromised a third-party
-   services provider Uber uses and took the names, addresses,
-   and driver's license numbers of 150,000 people, and Coles
-   Group Limited, Australia's second-largest retailer, opened an
-   investigation into what it calls a cyber security incident
-   that has left its stores operating.
-   Driver's license numbers paired with names and addresses hold
-   identity-theft value for years, and Uber's exposure arrived
-   through a vendor's systems. Companies that hand personal data
-   to service providers should confirm what each provider stores
-   and warn the named individuals to watch for fraud.
-   - SecurityWeek: https://www.securityweek.com/uber-data-breach-impacts-150000-people/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/australian-retail-giant-coles-investigates-cybersecurity-incident/
+6. HACKERS PROBE 14 NEW COPELAND CONTROLLER FLAWS
+   Vulnerabilities and Exploits · [ics, vulnerability]
+   Latest developments: Midnight Blue, the Dutch security
+   consultancy, disclosed six flaws in Danfoss AK-SM800A
+   refrigeration controllers that let a remote attacker take
+   over a unit without logging in, said firmware 5.4.0 fixes
+   none of them, and the national cybersecurity agencies of
+   Belgium, Ireland, and Germany told operators this week to
+   respond; the disclosure follows Vulncheck's release of 14
+   vulnerabilities in Copeland XWEB EVO controllers, two of
+   which threat actors probed within days.
+   Copeland XWEB EVO and Danfoss AK-SM800A controllers run
+   refrigeration at supermarkets and cold storage sites, and
+   attackers already hijacked internet-exposed Copeland XWeb
+   units this autumn for a suspected spam botnet and proxy
+   service, and in the October 2026 attacks that spoiled food
+   and set at least 15 fires across more than 700 French retail
+   locations. Operators should pull these controllers off the
+   public internet, install Copeland's updates, and wall off the
+   Danfoss units, which have no fix.
+   - SecurityWeek: https://www.securityweek.com/hackers-probe-newly-disclosed-flaws-in-copeland-refrigeration-controllers/
+   - The Hacker News: https://thehackernews.com/2026/11/six-unpatched-danfoss-refrigeration.html
 
-5. PROJECT ZERO DROPS ITS PATCH GRACE PERIOD
+7. PROJECT ZERO DROPS ITS PATCH GRACE PERIOD
    Policy and Regulation · [policy, disclosure, patch]
    Latest developments: Google's Project Zero will publish the
    vulnerabilities it finds 90 days after it reports them to a
@@ -160,31 +229,79 @@ SECURITY
    - Help Net Security: https://www.helpnetsecurity.com/2026/11/16/google-project-zero-disclosure-policy/
    - Help Net Security: https://www.helpnetsecurity.com/2026/11/16/forescout-ai-models-vulnerability-research/
 
-6. HACKERS PROBE 14 NEW COPELAND CONTROLLER FLAWS
-   Vulnerabilities and Exploits · [ics, vulnerability]
-   Latest developments: Vulncheck disclosed 14 vulnerabilities
-   in Copeland XWEB EVO controllers, and threat actors moved
-   quickly against two of them.
-   Copeland XWEB EVO controllers run refrigeration at
-   supermarkets and cold storage sites, and attackers already
-   hijacked internet-exposed Copeland XWeb units this autumn for
-   a suspected spam botnet and proxy service, and in the October
-   2026 attacks that spoiled food and set at least 15 fires
-   across more than 700 French retail locations. Operators
-   should take these controllers off the public internet and
-   install Copeland's updates.
-   - SecurityWeek: https://www.securityweek.com/hackers-probe-newly-disclosed-flaws-in-copeland-refrigeration-controllers/
+8. UBER BREACH REACHES 150,000 PEOPLE
+   Data Breaches · [breach, third-party]
+   Latest developments: Hackers compromised a third-party
+   services provider Uber uses and took the names, addresses,
+   and driver's license numbers of 150,000 people, and Coles
+   Group Limited, Australia's second-largest retailer, opened an
+   investigation into what it calls a cyber security incident
+   that has left its stores operating.
+   Driver's license numbers paired with names and addresses hold
+   identity-theft value for years, and Uber's exposure arrived
+   through a vendor's systems. Companies that hand personal data
+   to service providers should confirm what each provider stores
+   and warn the named individuals to watch for fraud.
+   - SecurityWeek: https://www.securityweek.com/uber-data-breach-impacts-150000-people/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/australian-retail-giant-coles-investigates-cybersecurity-incident/
+
+9. BO TEAM HIJACKS A RUSSIAN CODE-SIGNING SERVER
+   Ransomware and Cybercrime · [apt, supply chain]
+   Latest developments: Kaspersky's ICS CERT team reported on
+   November 16, 2026 that BO Team, the group it also tracks as
+   Black Owl and Hoody Hyena, exploited Log4Shell in a VMware
+   vCenter server to hold a Russian software developer's
+   development infrastructure for months and reached the
+   company's code-signing server; the developer called Kaspersky
+   in June 2025.
+   Control of a code-signing server lets an attacker sign
+   malware that every customer's systems trust, which turns one
+   vendor's breach into reach across its install base.
+   Organizations should keep signing keys in hardware security
+   modules on isolated networks, audit every certificate issued
+   during an intrusion window, and finish patching Log4Shell,
+   which dates to December 2021.
+   - The Hacker News: https://thehackernews.com/2026/11/bo-team-exploits-log4shell-in-vmware.html
+
+10. TELEGRAM WIDGETS DRAW RCE DEMOS AND WEBRAT
+   Vulnerabilities and Exploits · [malware, vulnerability]
+   Latest developments: Kaspersky said it suspects attackers
+   exploit the widgets Telegram launched days ago to deliver
+   WebRAT, researchers demonstrated remote code execution
+   against the feature, and Telegram's founder, Pavel Durov,
+   disputes the claims.
+   Telegram widgets run third-party web content inside the
+   messenger, and Kaspersky ties that surface to WebRAT
+   infections. Until Telegram and the researchers settle the
+   dispute, users should avoid third-party widgets and treat
+   widget links from strangers as hostile.
+   - SecurityWeek: https://www.securityweek.com/telegram-widgets-hit-by-rce-demos-malware-warning-days-after-launch/
 
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
+* Japan's Economy Shrinks Before the Bank of Japan's December
+  Call
+  Latest developments: The Financial Times reported Monday,
+  November 16, that Japanese real gross domestic product
+  contracted on a quarterly annualized basis between the second
+  and third quarters, casting doubt on a Bank of Japan rate
+  increase in December.
+  A December increase would extend the Bank of Japan's slow exit
+  from near-zero rates, the policy that anchors the global yen
+  carry trade. Bank of America foreign exchange strategists told
+  clients the same morning that the yen, little changed against
+  the dollar, still appreciates toward year-end on improving
+  Japanese conditions, fund inflows, and eventual tightening.
+  - FT World: https://www.ft.com/content/5dfa6759-407c-4166-b221-802a5f5b936a
+  - WSJ Markets: https://www.wsj.com/finance/currencies/singapore-dollar-consolidates-but-may-be-weighed-by-risk-off-sentiment-1a00f31b?mod=rss_markets_main
 * A Pivotal Week for the AI Trade
-  Latest developments: Nvidia fell 4.5% and CoreWeave 6.8% in
-  pre-market trading Monday, November 16, after Taiwan's Taiex
-  led an Asian chip selloff, the DXY dollar index climbed to a
-  19-month high of 103.533, and the Wall Street Journal detailed
-  the open letters, phone calls, and group chats through which
-  Jensen Huang's allies now press Nvidia's board to reinstate
-  him even as legal scrutiny of his conduct intensifies.
+  Latest developments: Nvidia fell 2.2% and CoreWeave 4.6% in
+  early trading Monday, November 16, as artificial-intelligence
+  shares led a broad selloff and bitcoin and ether slid below
+  key levels, and President Trump said he "wouldn't mind" seeing
+  Jensen Huang reinstated, four days after Huang resigned and as
+  allies press the board in open letters, phone calls, and group
+  chats.
   Nvidia reports quarterly results Tuesday, November 17, under
   interim Chief Executive Colette Kress, and Anthropic prices
   its initial public offering the same week, the two events that
@@ -192,14 +309,14 @@ BUSINESS AND POLITICS
   bank, insurer, and pension fund holding the trade. The
   Financial Times calculates that 2026's ten largest flotations
   have lost more than 20% on average after four years of gains,
-  and Treasury yields slipped Monday following last week's jump
-  on hot inflation data and hawkish Federal Reserve comments.
-  - FT World: https://www.ft.com/content/12d927a9-98b1-40b9-8f75-01fb56a693d1?syn-25a6b1a6=1
+  and Treasury yields slipped Monday ahead of a speech by
+  Federal Reserve Chairman Kevin Warsh.
+  - FT Home: https://www.ft.com/content/12d927a9-98b1-40b9-8f75-01fb56a693d1?syn-25a6b1a6=1
   - WSJ Markets: https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-16-2026?mod=rss_markets_main
   - WSJ US Business: https://www.wsj.com/tech/the-campaign-to-bring-back-jensen-huang-as-nvidia-ceo-e91b0b2c?mod=pls_whats_news_us_business_f
+  - FT World: https://www.ft.com/content/e5275763-d7e2-4857-8ac6-6b888111986a?syn-25a6b1a6=1
   - FT Home: https://www.ft.com/content/7974acec-e378-4298-a1a7-2b16b00d8b32?syn-25a6b1a6=1
-  - WSJ Markets: https://www.wsj.com/finance/currencies/singapore-dollar-consolidates-but-may-be-weighed-by-risk-off-sentiment-1a00f31b?mod=rss_markets_main
-  - WSJ Markets: https://www.wsj.com/finance/stocks/asian-equities-fall-as-u-s-chip-maker-share-selloff-spills-over-f6edc8d5?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/investing/stock-futures-slip-ahead-of-pivotal-week-for-ai-trade-with-nvidia-anthropic-in-focus-c1768330?mod=rss_markets_main
 * Kyiv Hits the Crimean Bridge as Brussels Readies €45 Billion
   Latest developments: Ukraine struck the Crimean Bridge in the
   largest drone attack of the war overnight into Monday,
@@ -214,10 +331,12 @@ BUSINESS AND POLITICS
   funding gap for next year as President Trump prepares to sit
   down with Xi Jinping and Vladimir Putin in Shenzhen, a round
   in which Washington has floated NATO membership for Ukraine in
-  exchange for a withdrawal from the Donbas.
+  exchange for a withdrawal from the Donbas, and Trump said
+  Monday he might add a meeting with Kim Jong Un in China.
   - FT Home: https://www.ft.com/content/cf57a196-bcbc-4605-a977-73fa0498aeed?syn-25a6b1a6=1
   - FT Home: https://www.ft.com/content/2c9de06b-aa86-4275-b9f3-1276f8c20994?syn-25a6b1a6=1
   - The Economist: https://www.economist.com/podcasts/2026/11/16/cede-of-doubt-a-nato-offer-to-ukraine
+  - WSJ World News: https://www.wsj.com/politics/trump-says-he-might-meet-with-north-koreas-kim-during-asia-trip-1634f7f0?mod=rss_worldnews
 * Brussels Clears UniCredit for Commerzbank
   Latest developments: The European Union's merger regulator
   approved UniCredit's bid to take control of Commerzbank on
@@ -241,6 +360,16 @@ Weather:
   Tuesday: Mostly Sunny, high 54F.
 
 Business:
+* Bank of America Opens in Westmoreland County
+  Latest developments: Bank of America said its newest Western
+  Pennsylvania branch, and its first in Westmoreland County,
+  opens November 30, 2026, WPXI reported Monday, November 16.
+  The Charlotte, North Carolina, lender has been adding retail
+  offices across the Pittsburgh region, a market where Dollar
+  Bank, F.N.B. Corp., and First Commonwealth hold most of the
+  deposits. The Westmoreland location extends that push east of
+  Allegheny County.
+  - WPXI: https://www.wpxi.com/news/local/bank-america-open-newest-western-pennsylvania-branch-before-year-end/AHRNHUBW2RBKFDIXDQKGL5HWMA/
 * Charleroi Counts the Cost of Departures and Closures
   Latest developments: PublicSource reported Monday, November
   16, that Haitian residents have left Charleroi or kept a lower
@@ -269,6 +398,30 @@ Business:
   - WPXI: https://www.wpxi.com/news/local/grocery-store-wars-what-wegmans-arrival-could-mean-pittsburgh-area-shoppers/ZZKDVKKTZFB3HP6JGL2JAKDJLQ/
 
 Around town:
+* Monessen Students Walk Back Into Their Building
+  Latest developments: Monessen City School District middle and
+  high school students returned to in-person classes Monday,
+  November 16, three months after mold closed the building and
+  forced them onto remote learning, WTAE reported.
+  The Westmoreland County district kept students home through
+  the fall while contractors remediated mold and ran moisture
+  testing in the combined middle-high school. Parents pressed
+  the school board as recently as November 9 for answers about
+  the work and the air in the building.
+  - WTAE: https://www.wtae.com/article/monessen-students-return-after-mold-closure/74439691
+* PennWest and IUP Put Apprentices on a Degree Track
+  Latest developments: The Pennsylvania State System of Higher
+  Education Foundation announced Monday, November 16, a program
+  that lets manufacturing apprentices earn bachelor's degrees at
+  PennWest University and Indiana University of Pennsylvania,
+  WPXI reported.
+  The two state system universities serve Western Pennsylvania's
+  industrial counties, where manufacturers train workers through
+  apprenticeships that stop short of a degree. The initiative
+  gives those workers credit toward a four-year credential at
+  PennWest, which merged California, Clarion, and Edinboro, and
+  at IUP.
+  - WPXI: https://www.wpxi.com/news/local/pennwest-iup-lead-initiative-help-manufacturing-apprentices-earn-bachelors-degrees/PAMS3UCCEBBAJKUDA7UFQC6SYU/
 * North Huntingdon Trades Paving for Flat Taxes
   Latest developments: North Huntingdon commissioners balked at
   the tax increase proposals before them, TribLive reported
@@ -307,6 +460,16 @@ Around town:
   - WTAE: https://www.wtae.com/article/from-chilly-mornings-to-spring-like-warmth/74437176
 
 Events:
+* The Gingerbread House Display Returns Friday
+  Latest developments: WTAE reported Monday, November 16, that
+  Pittsburgh's annual gingerbread house display opens Friday,
+  November 20, for its 24th year, with 300 entries, prizes, and
+  visitor voting for a favorite.
+  The display fills a downtown Pittsburgh space with houses
+  built by bakers, families, and school groups, and it runs
+  alongside the city's holiday season downtown. Visitors pick a
+  favorite from the 300 entries.
+  - WTAE: https://www.wtae.com/article/pittsburgh-gingerbread-house-display-downtown/74439614
 * The Holiday Market Returns to Market Square
   Latest developments: WPXI reported Monday, November 16, that
   the holiday market returns to Market Square next week, and
@@ -348,6 +511,18 @@ Penguins (7-11)
     https://plaintextsports.com/nhl/2026-11-19/stl-pit
 
 Around the Teams:
+* The Passing Game Becomes Impossible to Ignore
+  Latest developments: The Post-Gazette's Week 10 analysis,
+  posted Monday morning, November 16, concludes that the
+  Steelers' passing problems under Aaron Rodgers have grown too
+  large to explain away after the trip to Cincinnati.
+  Rodgers and offensive coordinator Mike McCarthy spent the two
+  weeks before the game calling the passing game a work in
+  progress, and Pittsburgh stood pat at the November 10 trade
+  deadline, leaving DK Metcalf and Michael Pittman Jr. as the
+  receiving corps. Joe Burrow passed for more than 400 yards
+  against a Steelers defense the team had been calling historic.
+  - Post-Gazette Steelers: https://www.post-gazette.com/sports/steelers/2026/11/16/steelers-passing-game-aaron-rodgers/stories/202611160021
 * McCormick's Ankle Empties the Line
   Latest developments: A cart carried Steelers guard Mason
   McCormick off the field at Paycor Stadium Sunday night,
@@ -376,6 +551,17 @@ Around the Teams:
   - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=tM1hgM25phU
 
 Team USA:
+* The USWNT's World Cup Ticket Runs Through the W Championship
+  Latest developments: ESPN published a guide Monday, November
+  16, to how the United States women's national team can secure
+  its place at the 2027 World Cup at the Concacaf W Championship
+  later this month, laying out the format and the matchups.
+  The regional tournament doubles as World Cup qualifying for
+  Concacaf, so the United States must come through it to reach
+  the 2027 finals. Defender Naomi Girma's fitness remains a
+  question for the squad, and Alyssa Naeher retired from
+  professional soccer on November 13 after 16 years.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50474392/concacaf-w-championship-uswnt-world-cup-qualification
 * Zingas and Kolesnik Take Skate America Ice Dance
   Latest developments: Emilea Zingas and Vadym Kolesnik won the
   ice dance gold medal at Skate America on Sunday, November 15,
@@ -420,6 +606,13 @@ Team USA:
 READING
 ----------------------------------------------------------------
 
+* Cal Newport -- In Search of the Deep Life
+  Newport returns to the daily-essay streak he kept during the
+  early pandemic and uses it to work out what he means by the
+  deep life, the pursuit of depth in work and attention rather
+  than mere productivity.
+  https://calnewport.com/in-search-of-the-deep-life/
+
 * Stratechery -- Obituaries
   Ben Thompson treats Jensen Huang's fall as the end of three
   things at once: Nvidia's long-term prospects, the
@@ -445,13 +638,12 @@ USD/JPY       158.92  ▲ +0.6%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 27 items in the 24-hour window.
-  No recent items: Krebs on Security, Schneier on Security, Dark
-  Reading, CISA Advisories, The Record, Ars Technica Security,
-  Sophos News, Unit 42 (Palo Alto), Google Online Security Blog,
-  Cisco Talos, Graham Cluley, Microsoft Security Blog, Google
-  Project Zero, The DFIR Report, Kim Zetter (Zero Day), Frank on
-  Fraud, Wired Security.
+Security: 24 of 24 feeds loaded, 37 items in the 24-hour window.
+  No recent items: Krebs on Security, Dark Reading, CISA
+  Advisories, Ars Technica Security, Sophos News, Unit 42 (Palo
+  Alto), Google Online Security Blog, Cisco Talos, Graham
+  Cluley, Microsoft Security Blog, Google Project Zero, The DFIR
+  Report, Kim Zetter (Zero Day), Frank on Fraud, Wired Security.
 Pittsburgh: 9 of 9 feeds loaded, 60 items in the 48-hour window.
   No recent items: Pittsburgh Magazine.
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
@@ -460,17 +652,16 @@ Events: 4 of 4 feeds loaded, 17 items in the 120-hour window.
 Sports media: 6 of 6 feeds loaded, 30 items in the 96-hour
   window. No recent items: Footbahlin with Ben Roethlisberger,
   Ben Roethlisberger / Channel Seven (YouTube).
-Team USA: 3 of 3 feeds loaded, 32 items in the 72-hour window.
+Team USA: 3 of 3 feeds loaded, 35 items in the 72-hour window.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
-  No recent items: Cal Newport.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (402s of
-  model time; $1.94 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (363s of
+  model time; $2.06 at API list price).
 
 ================================================================
-Generated 2026-11-16 07:06 EST. Updated weekdays at about 7:05
+Generated 2026-11-16 10:06 EST. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
