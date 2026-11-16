@@ -1,0 +1,1204 @@
+{
+  "date": "2026-11-16",
+  "headline": "Amazon's decoy servers caught attacker AI agents stealing provider keys out of exposed LiteLLM, One API, and Dify installations and then spending those keys on the model calls that found the next batch.",
+  "emerging_trends": [
+    {
+      "text": "The agents attackers run now pay their own way: the run logs Amazon pulled off its decoy servers show an agent lifting AI provider keys from internet-exposed LiteLLM and Dify installations and immediately burning those keys on the inference that located the next set.",
+      "topic_title": "Attacker Agents Hunt AI Provider Keys",
+      "link_phrase": "LiteLLM",
+      "_anchor": "trend-1"
+    },
+    {
+      "text": "Decade-old code keeps producing fresh emergencies, and NoisyTCP is the week's example: 11 years inside the Linux kernel before researchers showed it crashes Nginx, Apache, and OpenSSH hosts that nobody has misconfigured.",
+      "topic_title": "NoisyTCP Crashes Linux Servers",
+      "link_phrase": "NoisyTCP",
+      "_anchor": "trend-2"
+    },
+    {
+      "text": "Attackers keep entering through the software nobody patches, from the GeoVision camera management consoles that turned machines at 13 organizations into cryptocurrency miners to the abandoned TCP/IP stacks where Forescout's AI-assisted testing just confirmed 66 unknown bugs.",
+      "topic_title": "Cryptojackers Enter Through GeoVision Cameras",
+      "link_phrase": "GeoVision",
+      "_anchor": "trend-3"
+    }
+  ],
+  "topics": [
+    {
+      "title": "NoisyTCP Crashes Linux Servers",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Researchers published NoisyTCP, an 11-year-old Linux kernel flaw that reaches almost every distribution and lets an attacker crash hosts running Nginx, Apache, and SSH servers in their default configurations; SecurityWeek confirmed that attackers now exploit CVE-2026-114713 in UnrealIRCd to execute commands with server and IRC operator privileges; the Tor Project shipped 0.4.9.17 to close several issues, among them a gap in how its built-in denial-of-service defenses handle IPv6, while relay attacks continue; and Rspamd 4.3.0 fixed bugs that let an unauthenticated attacker crash the spam filter's workers with one HTTP request, a header line carrying no colon, or an empty Deliver-To header, and let forged authentication results pass.",
+      "summary": "All four fixes land on infrastructure organizations run and forget: the kernel, the web server, the IRC daemon, and the mail filter. Patch the kernel and Rspamd, move UnrealIRCd to the fixed build, and update Tor relays.",
+      "tags": [
+        "patch",
+        "dos",
+        "linux"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "New NoisyTCP vulnerability lets attackers crash Linux servers",
+          "url": "https://www.bleepingcomputer.com/news/linux/new-noisytcp-linux-kernel-flaw-lets-attackers-crash-servers/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Recent UnrealIRCd Vulnerability Exploited in Attacks",
+          "url": "https://www.securityweek.com/recent-unrealircd-vulnerability-exploited-in-attacks/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Tor Updates DoS Defenses Again as Relay Attacks Continue",
+          "url": "https://www.securityweek.com/tor-updates-dos-defenses-again-as-relay-attacks-continue/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Rspamd 4.3.0 stops forwarded mail from softening DMARC rejects",
+          "url": "https://www.helpnetsecurity.com/2026/11/16/rspamd-4-3-0-released/"
+        }
+      ],
+      "_anchor": "i-7d4f6584a3"
+    },
+    {
+      "title": "Cryptojackers Enter Through GeoVision Cameras",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Huntress warned that attackers exploited unpatched GeoVision camera management software to reach Windows machines at 13 organizations and turn them into cryptocurrency miners, with most of the intrusions falling between November 8 and November 10, 2026 and every one starting from a service that belongs to GeoVision's software; researchers tracking the financially motivated cluster REF3364 detailed SANSAR, a Rust orchestrator that takes commands over Tor, manages CPU and GPU miners, and loads a modified NVIDIA library that falsifies the readings administrators use to spot heavy GPU workloads; and Kaspersky found a new version of CoffeeLoader spreading through Retadup, the USB worm whose infrastructure law enforcement seized in 2019.",
+      "summary": "GeoVision, the Taiwanese surveillance and access control company, sells into 110 countries and has issued no fix, so defenders should pull its management software off the network and hunt for miner processes that GeoVision services spawn. The SANSAR toolkit defeats the GPU-utilization check many Linux operators rely on, which means billing anomalies and Tor-bound traffic make better detections.",
+      "tags": [
+        "cryptojacking",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Unpatched GeoVision camera software gave cryptojackers a side door into 13 organizations",
+          "url": "https://www.helpnetsecurity.com/2026/11/16/geovision-camera-software-vulnerabilities/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "SANSAR Linux Cryptomining Malware Uses Modified NVIDIA Library to Hide GPU Activity",
+          "url": "https://thehackernews.com/2026/11/sansar-linux-cryptomining-malware-uses.html"
+        },
+        {
+          "source": "Securelist (Kaspersky)",
+          "title": "A USB worm’s second life: Retadup spreading CoffeeLoader",
+          "url": "https://securelist.com/retadup-delivers-coffeeloader/121908/"
+        }
+      ],
+      "_anchor": "i-6cd44615cf"
+    },
+    {
+      "title": "Attacker Agents Hunt AI Provider Keys",
+      "area": "AI Security",
+      "latest_developments": "Amazon's threat intelligence team ran decoy servers that captured the attack agents' own records, which show the agents probing internet-exposed LiteLLM, One API, and Dify installations for stored AI provider keys and then using the stolen keys to run the models that powered the search for more keys; Anthropic separately shipped Claude Fable 5.2 to regular users and Claude Mythos 5.2 to selected partners, and Fable 5.2 refuses fewer security tasks than earlier versions while Mythos 5.2 finds bugs better.",
+      "summary": "LiteLLM, One API, and Dify are self-hosted gateways that hold the API keys an organization uses to reach commercial AI models, which makes each exposed console a wallet. Anyone running one on the public internet should rotate every key, require authentication on the management interface, and cap spending per key.",
+      "tags": [
+        "ai",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Amazon Uncovers AI Agent Campaign Targeting LiteLLM, Dify, and Other Apps for API Keys",
+          "url": "https://thehackernews.com/2026/11/amazon-uncovers-ai-agent-campaign.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Anthropic’s Claude Fable 5.2 blocks fewer security tasks, while Mythos gets better at finding bugs",
+          "url": "https://www.bleepingcomputer.com/news/artificial-intelligence/anthropics-claude-fable-52-blocks-fewer-security-tasks-while-mythos-gets-better-at-finding-bugs/"
+        }
+      ],
+      "_anchor": "i-f159cf23a7"
+    },
+    {
+      "title": "Uber Breach Reaches 150,000 People",
+      "area": "Data Breaches",
+      "latest_developments": "Hackers compromised a third-party services provider Uber uses and took the names, addresses, and driver's license numbers of 150,000 people, and Coles Group Limited, Australia's second-largest retailer, opened an investigation into what it calls a cyber security incident that has left its stores operating.",
+      "summary": "Driver's license numbers paired with names and addresses hold identity-theft value for years, and Uber's exposure arrived through a vendor's systems. Companies that hand personal data to service providers should confirm what each provider stores and warn the named individuals to watch for fraud.",
+      "tags": [
+        "breach",
+        "third-party"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Uber Data Breach Impacts 150,000 People",
+          "url": "https://www.securityweek.com/uber-data-breach-impacts-150000-people/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Australian retail giant Coles investigates cybersecurity incident",
+          "url": "https://www.bleepingcomputer.com/news/security/australian-retail-giant-coles-investigates-cybersecurity-incident/"
+        }
+      ],
+      "_anchor": "i-9d8b7182f6"
+    },
+    {
+      "title": "Project Zero Drops Its Patch Grace Period",
+      "area": "Policy and Regulation",
+      "latest_developments": "Google's Project Zero will publish the vulnerabilities it finds 90 days after it reports them to a vendor whether or not a fix exists, ending the 90-plus-30 rule the team has followed since 2021, and the deadline falls to 60 days on February 2, 2027 and to 30 days on January 3, 2028 under a policy the team calls Full X; Forescout researchers, running generally available AI models on a limited budget against both source code and compiled binaries, confirmed 99 vulnerabilities across 10 TCP/IP stacks, 66 of them previously unknown, and found many in discontinued devices whose vendors will never issue a patch.",
+      "summary": "Vendors now get a hard 90 days before Project Zero publishes technical detail, shrinking to 30 days by January 2028. Security teams should expect public bug detail on products nobody maintains and build compensating controls, network segmentation among them, around end-of-life equipment.",
+      "tags": [
+        "policy",
+        "disclosure",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "Google Project Zero will disclose bugs after 90 days, fixed or not",
+          "url": "https://www.helpnetsecurity.com/2026/11/16/google-project-zero-disclosure-policy/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "AI uncovers flaws in discontinued devices with no vendor left to patch them",
+          "url": "https://www.helpnetsecurity.com/2026/11/16/forescout-ai-models-vulnerability-research/"
+        }
+      ],
+      "_anchor": "i-ec5543c64d"
+    },
+    {
+      "title": "Hackers Probe 14 New Copeland Controller Flaws",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Vulncheck disclosed 14 vulnerabilities in Copeland XWEB EVO controllers, and threat actors moved quickly against two of them.",
+      "summary": "Copeland XWEB EVO controllers run refrigeration at supermarkets and cold storage sites, and attackers already hijacked internet-exposed Copeland XWeb units this autumn for a suspected spam botnet and proxy service, and in the October 2026 attacks that spoiled food and set at least 15 fires across more than 700 French retail locations. Operators should take these controllers off the public internet and install Copeland's updates.",
+      "tags": [
+        "ics",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Hackers Probe Newly Disclosed Flaws in Copeland Refrigeration Controllers",
+          "url": "https://www.securityweek.com/hackers-probe-newly-disclosed-flaws-in-copeland-refrigeration-controllers/"
+        }
+      ],
+      "_anchor": "i-2b1b80c8b8"
+    }
+  ],
+  "markets": [
+    {
+      "label": "S&P 500",
+      "value": "7,568.86",
+      "pct": "+0.8%",
+      "arrow": "▲"
+    },
+    {
+      "label": "Dow",
+      "value": "52,350.55",
+      "pct": "+0.7%",
+      "arrow": "▲"
+    },
+    {
+      "label": "Nasdaq",
+      "value": "25,257.51",
+      "pct": "+0.9%",
+      "arrow": "▲"
+    },
+    {
+      "label": "WTI crude",
+      "value": "87.34",
+      "pct": "-5.5%",
+      "arrow": "▼"
+    },
+    {
+      "label": "EUR/USD",
+      "value": "1.1137",
+      "pct": "-0.6%",
+      "arrow": "▼"
+    },
+    {
+      "label": "GBP/USD",
+      "value": "1.3332",
+      "pct": "-0.8%",
+      "arrow": "▼"
+    },
+    {
+      "label": "USD/JPY",
+      "value": "158.92",
+      "pct": "+0.6%",
+      "arrow": "▲"
+    }
+  ],
+  "weather": [
+    "Today: Mostly Cloudy, high 50F.",
+    "Tonight: Partly Cloudy, low 31F.",
+    "Tuesday: Mostly Sunny, high 54F."
+  ],
+  "sports": [
+    {
+      "team": "Steelers",
+      "record": "6-3",
+      "games": [
+        {
+          "date": "Sun Nov 15",
+          "result": "Steelers 18 · Bengals 38 · Final",
+          "url": "https://plaintextsports.com/nfl/2026/week10/pit-cin",
+          "recap": "Joe Burrow and Bengals dominate Steelers 38-18 to take AFC North lead alone"
+        }
+      ],
+      "next": {
+        "matchup": "Steelers @ Eagles",
+        "when": "Sun Nov 22, 1:00 PM",
+        "url": "https://plaintextsports.com/nfl/2026/week11/pit-phi"
+      },
+      "source": "ESPN"
+    },
+    {
+      "team": "Penguins",
+      "record": "7-11",
+      "games": [],
+      "next": {
+        "matchup": "Blues @ Penguins",
+        "when": "Thu Nov 19, 7:00 PM",
+        "url": "https://plaintextsports.com/nhl/2026-11-19/stl-pit"
+      },
+      "source": "ESPN"
+    }
+  ],
+  "local": {
+    "business_politics": [
+      {
+        "title": "A Pivotal Week for the AI Trade",
+        "latest_developments": "Nvidia fell 4.5% and CoreWeave 6.8% in pre-market trading Monday, November 16, after Taiwan's Taiex led an Asian chip selloff, the DXY dollar index climbed to a 19-month high of 103.533, and the Wall Street Journal detailed the open letters, phone calls, and group chats through which Jensen Huang's allies now press Nvidia's board to reinstate him even as legal scrutiny of his conduct intensifies.",
+        "summary": "Nvidia reports quarterly results Tuesday, November 17, under interim Chief Executive Colette Kress, and Anthropic prices its initial public offering the same week, the two events that will set the price of artificial-intelligence risk for every bank, insurer, and pension fund holding the trade. The Financial Times calculates that 2026's ten largest flotations have lost more than 20% on average after four years of gains, and Treasury yields slipped Monday following last week's jump on hot inflation data and hawkish Federal Reserve comments.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "US tech stocks set to open lower amid Nvidia fallout",
+            "url": "https://www.ft.com/content/12d927a9-98b1-40b9-8f75-01fb56a693d1?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Stock Market Today: Tech Stocks Under Pressure at Start of Crucial Week for AI",
+            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-16-2026?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "The Campaign to Bring Back Jensen Huang as Nvidia CEO",
+            "url": "https://www.wsj.com/tech/the-campaign-to-bring-back-jensen-huang-as-nvidia-ceo-e91b0b2c?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT Home",
+            "title": "Biggest IPOs this year lose investors money as AI frenzy fades",
+            "url": "https://www.ft.com/content/7974acec-e378-4298-a1a7-2b16b00d8b32?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Dollar Extends Strong Upward Momentum Further",
+            "url": "https://www.wsj.com/finance/currencies/singapore-dollar-consolidates-but-may-be-weighed-by-risk-off-sentiment-1a00f31b?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Asian Equities Drop as U.S. Chip Selloff Spills Over",
+            "url": "https://www.wsj.com/finance/stocks/asian-equities-fall-as-u-s-chip-maker-share-selloff-spills-over-f6edc8d5?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-d41b976617"
+      },
+      {
+        "title": "Kyiv Hits the Crimean Bridge as Brussels Readies €45 Billion",
+        "latest_developments": "Ukraine struck the Crimean Bridge in the largest drone attack of the war overnight into Monday, November 16, with Russia's defense ministry claiming it intercepted or destroyed a record number of drones over 24 hours, and the European Commission will put a €45 billion loan for Kyiv, borrowed against the European Union budget, to member states Wednesday, November 18.",
+        "summary": "The bridge carries Russian traffic and supplies from the mainland to occupied Crimea, and Kyiv has aimed at it repeatedly through the war. The loan proposal covers Ukraine's funding gap for next year as President Trump prepares to sit down with Xi Jinping and Vladimir Putin in Shenzhen, a round in which Washington has floated NATO membership for Ukraine in exchange for a withdrawal from the Donbas.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Ukraine strikes Crimean Bridge in record drone attack",
+            "url": "https://www.ft.com/content/cf57a196-bcbc-4605-a977-73fa0498aeed?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Brussels to propose €45bn Ukraine loan borrowed against EU budget",
+            "url": "https://www.ft.com/content/2c9de06b-aa86-4275-b9f3-1276f8c20994?syn-25a6b1a6=1"
+          },
+          {
+            "source": "The Economist",
+            "title": "Cede of doubt: a NATO offer to Ukraine",
+            "url": "https://www.economist.com/podcasts/2026/11/16/cede-of-doubt-a-nato-offer-to-ukraine"
+          }
+        ],
+        "_anchor": "i-2d13742de7"
+      },
+      {
+        "title": "Brussels Clears UniCredit for Commerzbank",
+        "latest_developments": "The European Union's merger regulator approved UniCredit's bid to take control of Commerzbank on Monday, November 16.",
+        "summary": "The Milanese bank has built its Commerzbank stake since 2024 over the objections of the German government, and it signaled last week that it could fold its German arm into the Frankfurt lender earlier than planned. Clearance removes the antitrust obstacle to the largest cross-border bank takeover in the eurozone and lands in a week when Italian lenders are consolidating around Intesa Sanpaolo's offer for Monte dei Paschi di Siena.",
+        "sources": [
+          {
+            "source": "WSJ World News",
+            "title": "UniCredit's Commerzbank Bid Gets EU Approval",
+            "url": "https://www.wsj.com/business/deals/unicredits-commerzbank-bid-gets-eu-approval-44a821a6?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-3875c7d43b"
+      }
+    ],
+    "business": [
+      {
+        "title": "Charleroi Counts the Cost of Departures and Closures",
+        "latest_developments": "PublicSource reported Monday, November 16, that Haitian residents have left Charleroi or kept a lower profile since federal Temporary Protected Status ended, and that borough businesses now feel the loss of those customers while the town absorbs three factory closures.",
+        "summary": "Charleroi, the Washington County borough on the Monongahela River, drew hundreds of Haitian workers to its plants over recent years and became a national talking point when President Trump cited the town during the 2024 campaign. Shops along its business district built trade around those residents, and the combination of their departure and three shuttered factories leaves the borough looking for a way to rebound.",
+        "sources": [
+          {
+            "source": "PublicSource",
+            "title": "As Charleroi's Haitians retreat, the Mon Valley town wonders how it will rebound",
+            "url": "https://www.publicsource.org/charleroi-haitian-tps-factory-closures/"
+          }
+        ],
+        "_anchor": "i-e886ef52e3"
+      },
+      {
+        "title": "Wegmans Opens a Grocery War",
+        "latest_developments": "WPXI examined Monday, November 16, what Wegmans' arrival in the Pittsburgh region does to grocery bills, putting the question to a supermarket industry analyst.",
+        "summary": "Wegmans, the Rochester, New York, chain known for large stores and prepared foods, is entering a market long divided among Giant Eagle, Aldi, Walmart, and Shop 'n Save. The analyst's view is that new entrants force incumbents to compete on price, which reaches shoppers through promotions and private-label costs.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Grocery store wars: What Wegmans' arrival could mean for Pittsburgh-area shoppers",
+            "url": "https://www.wpxi.com/news/local/grocery-store-wars-what-wegmans-arrival-could-mean-pittsburgh-area-shoppers/ZZKDVKKTZFB3HP6JGL2JAKDJLQ/"
+          }
+        ],
+        "_anchor": "i-13faad1f54"
+      }
+    ],
+    "around_town": [
+      {
+        "title": "North Huntingdon Trades Paving for Flat Taxes",
+        "latest_developments": "North Huntingdon commissioners balked at the tax increase proposals before them, TribLive reported Monday, November 16, which spares township property owners a real estate tax rise in 2027 and cuts miles of overdue road repairs out of the budget.",
+        "summary": "North Huntingdon, the Westmoreland County township of roughly 30,000 people along Route 30, faces a backlog of street paving its current revenue cannot fund. The board's reluctance holds the millage where it stands and pushes the repair list further out.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "North Huntingdon commissioners balk at tax hike proposals",
+            "url": "https://triblive.com/local/westmoreland/north-huntingdon-commissioners-balk-at-tax-hike-proposals/"
+          }
+        ],
+        "_anchor": "i-4c4c5cabe8"
+      },
+      {
+        "title": "Wendel Gets Its Post Office Back",
+        "latest_developments": "The United States Postal Service said Friday, November 13, that it will reopen the Wendel post office in Hempfield after a five-year closure, TribLive reported Monday, November 16.",
+        "summary": "Residents of the Wendel section of Hempfield Township, Westmoreland County, have driven several miles for mail service since the office closed. The Postal Service plans a new facility in the community.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Wendel Post Office to reopen after 5-year closure in Hempfield",
+            "url": "https://triblive.com/local/westmoreland/wendel-post-office-to-reopen-after-5-year-closure-in-hempfield/"
+          }
+        ],
+        "_anchor": "i-644364616f"
+      },
+      {
+        "title": "A Dry Week and Spring-Like Warmth",
+        "latest_developments": "Pittsburgh starts the week gray and chilly with highs only in the upper 40s Monday, November 16, and WPXI, WTAE, and KDKA all put a sharp temperature climb into the second half of the week, with the next rain chance holding off until Sunday, November 22.",
+        "summary": "The pattern ends the lake-effect clouds and flurries that ran through the weekend across Western Pennsylvania. A dry stretch favors the Grant Street Christmas tree work and the downtown holiday setup, and it gives road crews a clear window before Thanksgiving travel.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Cloudy with highs only in the upper 40s Monday",
+            "url": "https://www.wpxi.com/weather/cloudy-with-highs-only-upper-40s-monday/65CVL3RM5NFYPICLZGXEF7GKIU/"
+          },
+          {
+            "source": "KDKA",
+            "title": "It's looking like a dry week ahead for the Pittsburgh area",
+            "url": "https://www.cbsnews.com/pittsburgh/news/its-looking-like-a-dry-week-ahead-for-the-pittsburgh-area/"
+          },
+          {
+            "source": "WTAE",
+            "title": "From Chilly Mornings to Spring-Like Warmth",
+            "url": "https://www.wtae.com/article/from-chilly-mornings-to-spring-like-warmth/74437176"
+          }
+        ],
+        "_anchor": "i-dba1e613a2"
+      }
+    ],
+    "events": [
+      {
+        "title": "The Holiday Market Returns to Market Square",
+        "latest_developments": "WPXI reported Monday, November 16, that the holiday market returns to Market Square next week, and that merchants around the square are preparing for the shoppers, families, and skaters it brings.",
+        "summary": "The market fills Market Square in downtown Pittsburgh with vendor chalets beside the downtown ice rink, the pairing that anchors the city's holiday season through December. Restaurants and shops on the square staff up for the foot traffic.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Market Square businesses prepare to welcome skaters, shoppers Downtown during holiday market",
+            "url": "https://www.wpxi.com/news/local/market-square-businesses-prepare-welcome-skaters-shoppers-downtown-during-holiday-market/RPOAQNLQ7VCVDCU5OA333LTBGQ/"
+          }
+        ],
+        "_anchor": "i-7098865a98"
+      },
+      {
+        "title": "Point Park Builds a Musical Outside Broadway's Odds",
+        "latest_developments": "The Post-Gazette reported Monday, November 16, that Point Park University's partnership on the new musical \"Girls Just Want to Have Fun\" offers a development model that avoids the flop rate of most new Broadway productions.",
+        "summary": "Point Park, the downtown Pittsburgh university whose Conservatory of Performing Arts trains dancers, actors, and technicians, is working with the show's creative team as the production develops. The arrangement puts students in the room on a commercial musical and gives producers a stage and a company at a fraction of New York's cost.",
+        "sources": [
+          {
+            "source": "Post-Gazette Arts & Entertainment",
+            "title": "Most new Broadway productions flop. Point Park's 'Girls Just Want to Have Fun' partnership points to a different model.",
+            "url": "https://www.post-gazette.com/ae/theater-dance/2026/11/16/girls-just-want-to-have-fun-musical/stories/202611160001"
+          }
+        ],
+        "_anchor": "i-1fdb94a71f"
+      }
+    ],
+    "around_teams": [
+      {
+        "title": "McCormick's Ankle Empties the Line",
+        "latest_developments": "A cart carried Steelers guard Mason McCormick off the field at Paycor Stadium Sunday night, November 15, with an ankle injury, and teammates told the Post-Gazette they felt \"sick to our stomachs\" watching it.",
+        "summary": "McCormick, the third-year left guard out of South Dakota State, has started every game and anchors the interior in front of Aaron Rodgers. Pittsburgh's offensive line loses its steadiest player with the AFC North lead now in Cincinnati's hands.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Steelers players were 'sick to our stomachs' after Mason McCormick went down with an injury",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/11/16/steelers-mason-mccormick-injury/stories/202611150105"
+          }
+        ],
+        "_anchor": "i-5048052f58"
+      },
+      {
+        "title": "The Beat Writers Grade an Embarrassment",
+        "latest_developments": "Ray Fittipaldo's Post-Gazette report card, posted early Monday, November 16, marked failure across every unit after the trip to Cincinnati, and Noah Hiles wrote the same morning that the Steelers have little time to sulk with the schedule rolling on.",
+        "summary": "Mike McCarthy, Aaron Rodgers, and inside linebacker Patrick Queen took questions at Paycor Stadium afterward, the first time this season the head coach has had to explain a lopsided loss to a division rival. Pittsburgh spent the two weeks before the game talking about a historic defense and a passing game it called a work in progress.",
+        "sources": [
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Ray Fittipaldo's Steelers report card: Failure all around in an embarrassing defeat",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/11/15/steelers-bengals-report-card-analysis/stories/202611150103"
+          },
+          {
+            "source": "Post-Gazette Steelers",
+            "title": "Noah Hiles: The Steelers have little time to sulk after getting blown out by the Bengals",
+            "url": "https://www.post-gazette.com/sports/steelers/2026/11/16/steelers-bengals-regroup-nfl/stories/202611150104"
+          },
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Coach McCarthy, Aaron Rodgers & Patrick Queen Postgame Press Conference (Week 10 at Bengals)",
+            "url": "https://www.youtube.com/watch?v=tM1hgM25phU"
+          }
+        ],
+        "_anchor": "i-3b989acdef"
+      }
+    ],
+    "team_usa": [
+      {
+        "title": "Zingas and Kolesnik Take Skate America Ice Dance",
+        "latest_developments": "Emilea Zingas and Vadym Kolesnik won the ice dance gold medal at Skate America on Sunday, November 15, the first Grand Prix title of their partnership and the opening of a new generation of American ice dancers.",
+        "summary": "Skate America, the United States stop on the International Skating Union Grand Prix circuit, also went to Ilia Malinin in the men's event, his fourth win at the competition. Both results start a four-year run toward the 2030 Winter Olympics in the French Alps.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "U.S. ice dancers Zingas and Kolesnik top Skate America podium",
+            "url": "https://www.espn.com/olympics/figureskating/story/_/id/50497631/us-ice-dancers-zingas-kolesnik-win-skate-america-gold"
+          },
+          {
+            "source": "ESPN Olympics",
+            "title": "American prodigy Malinin, 21, wins fourth Skate America title",
+            "url": "https://www.espn.com/olympics/figureskating/story/_/id/50487408/american-ilia-malinin-wins-fourth-skate-america-title"
+          }
+        ],
+        "_anchor": "i-a0c7fb1810"
+      },
+      {
+        "title": "Purce Calls the Semifinal Venue Inexcusable",
+        "latest_developments": "Gotham FC forward Midge Purce called playing a National Women's Soccer League semifinal at the 5,000-seat Icahn Stadium \"inexcusable\" and \"a bad look for everyone\" after Sunday's elimination, November 15, and the Kansas City Current now meet the Washington Spirit in the championship Saturday, November 21.",
+        "summary": "Gotham moved the match from Sports Illustrated Stadium to the track-and-field venue on Randall's Island because of field conditions, which capped attendance for a league semifinal involving the defending champion. Haley Hopkins scored late for Kansas City, which lost last year's playoff on home soil and reaches its first final a season later.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Purce slams venue switch after Gotham exit: 'Bad look for everyone'",
+            "url": "https://www.espn.com/soccer/story/_/id/50497071/purce-slams-venue-switch-gotham-exit-inexcusable"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Kansas City Current are in the NWSL Championship, just a year later than expected",
+            "url": "https://www.espn.com/soccer/story/_/id/50496583/kansas-city-current-nwsl-championship-just-year-later-expected"
+          }
+        ],
+        "_anchor": "i-d004ff5da7"
+      },
+      {
+        "title": "Pochettino Wants McKennie at Old Trafford",
+        "latest_developments": "ESPN's Transfer Talk reported Monday, November 16, that incoming Manchester United manager Mauricio Pochettino is eyeing a quick reunion with United States midfielder Weston McKennie.",
+        "summary": "Pochettino coached McKennie with the United States men's national team and leaves that job November 17 after Manchester United confirmed him as head coach on November 13, with Steve Cherundolo running the December camp on an interim basis. McKennie would arrive at a club sitting in the relegation zone when it fired Michael Carrick.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Transfer rumors, news: Man United eye USMNT's McKennie amid Pochettino arrival",
+            "url": "https://www.espn.com/soccer/story/_/id/50499498/transfer-rumors-news-usmnt-pochettino-mckennie-man-united"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Man United, Pochettino's to-do list based on what's gone wrong",
+            "url": "https://www.espn.com/soccer/story/_/id/50462231/mauricio-pochettino-manchester-united-transfer-usmnt"
+          }
+        ],
+        "_anchor": "i-6b42ab9ea0"
+      }
+    ],
+    "reading": [
+      {
+        "author": "Stratechery",
+        "title": "Obituaries",
+        "url": "https://stratechery.com/2026/obituaries/",
+        "summary": "Ben Thompson treats Jensen Huang's fall as the end of three things at once: Nvidia's long-term prospects, the artificial-intelligence bubble, and the exceptional way the United States has understood its own place in the world.",
+        "_anchor": "i-d2d6bb6549"
+      },
+      {
+        "author": "Ed Zitron",
+        "title": "Premium: The Hater's Guide To Megaspeed",
+        "url": "https://www.wheresyoured.at/hg-megaspeed/",
+        "summary": "Zitron digs into Megaspeed, the company at the center of the Nvidia China export scandal, and cautions that the facts are moving so fast the picture may change after he files.",
+        "_anchor": "i-04a0d4172f"
+      }
+    ]
+  },
+  "glance": [
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Amazon's decoy servers caught attack agents lifting AI provider keys from exposed LiteLLM and Dify installs, then spending those keys on the inference that located the next targets.",
+      "links": [
+        {
+          "anchor": "i-f159cf23a7",
+          "phrase": "LiteLLM",
+          "start": 82,
+          "end": 89,
+          "title": "Attacker Agents Hunt AI Provider Keys"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Decade-old code keeps breaking: NoisyTCP crashes default Nginx and OpenSSH hosts, unpatched GeoVision cameras turned 13 organizations into miners, and attackers already probe Copeland XWEB flaws.",
+      "links": [
+        {
+          "anchor": "i-7d4f6584a3",
+          "phrase": "NoisyTCP",
+          "start": 32,
+          "end": 40,
+          "title": "NoisyTCP Crashes Linux Servers"
+        },
+        {
+          "anchor": "i-6cd44615cf",
+          "phrase": "GeoVision cameras",
+          "start": 92,
+          "end": 109,
+          "title": "Cryptojackers Enter Through GeoVision Cameras"
+        },
+        {
+          "anchor": "i-2b1b80c8b8",
+          "phrase": "Copeland XWEB",
+          "start": 175,
+          "end": 188,
+          "title": "Hackers Probe 14 New Copeland Controller Flaws"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "The AI trade wobbled as Nvidia and CoreWeave slid pre-market, Ben Thompson wrote Jensen Huang's obituary, and Zitron dug into export-scandal supplier Megaspeed.",
+      "links": [
+        {
+          "anchor": "i-d41b976617",
+          "phrase": "CoreWeave",
+          "start": 35,
+          "end": 44,
+          "title": "A Pivotal Week for the AI Trade"
+        },
+        {
+          "anchor": "i-d2d6bb6549",
+          "phrase": "Ben Thompson",
+          "start": 62,
+          "end": 74,
+          "title": "Obituaries"
+        },
+        {
+          "anchor": "i-04a0d4172f",
+          "phrase": "Megaspeed",
+          "start": 150,
+          "end": 159,
+          "title": "Premium: The Hater's Guide To Megaspeed"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Google's Project Zero will now publish the bugs it reports after 90 days whether or not a fix exists, with that deadline falling to 60 days in February.",
+      "links": [
+        {
+          "anchor": "i-ec5543c64d",
+          "phrase": "Project Zero",
+          "start": 9,
+          "end": 21,
+          "title": "Project Zero Drops Its Patch Grace Period"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "A breach at a third-party provider Uber uses exposed names, addresses, and driver's license numbers for 150,000 people, prompting an inquiry at Australian retailer Coles Group.",
+      "links": [
+        {
+          "anchor": "i-9d8b7182f6",
+          "phrase": "Uber",
+          "start": 35,
+          "end": 39,
+          "title": "Uber Breach Reaches 150,000 People"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Locally, Steelers beat writers failed every unit after Cincinnati while Mason McCormick left Paycor Stadium on a cart, and Market Square's holiday market returns next week.",
+      "links": [
+        {
+          "anchor": "i-3b989acdef",
+          "phrase": "beat writers",
+          "start": 18,
+          "end": 30,
+          "title": "The Beat Writers Grade an Embarrassment"
+        },
+        {
+          "anchor": "i-5048052f58",
+          "phrase": "Mason McCormick",
+          "start": 72,
+          "end": 87,
+          "title": "McCormick's Ankle Empties the Line"
+        },
+        {
+          "anchor": "i-7098865a98",
+          "phrase": "holiday market",
+          "start": 139,
+          "end": 153,
+          "title": "The Holiday Market Returns to Market Square"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "feed_health": {
+    "groups": [
+      {
+        "group": "security",
+        "label": "Security",
+        "feeds": 24,
+        "loaded": 24,
+        "window_hours": 24,
+        "in_window": 27,
+        "failed": [],
+        "empty": [
+          "Krebs on Security",
+          "Schneier on Security",
+          "Dark Reading",
+          "CISA Advisories",
+          "The Record",
+          "Ars Technica Security",
+          "Sophos News",
+          "Unit 42 (Palo Alto)",
+          "Google Online Security Blog",
+          "Cisco Talos",
+          "Graham Cluley",
+          "Microsoft Security Blog",
+          "Google Project Zero",
+          "The DFIR Report",
+          "Kim Zetter (Zero Day)",
+          "Frank on Fraud",
+          "Wired Security"
+        ],
+        "per_feed": {
+          "The Hacker News": {
+            "items": 50,
+            "in_window": 3,
+            "contributed": 3
+          },
+          "BleepingComputer": {
+            "items": 15,
+            "in_window": 6,
+            "contributed": 6
+          },
+          "Krebs on Security": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Schneier on Security": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Dark Reading": {
+            "items": 50,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "SecurityWeek": {
+            "items": 10,
+            "in_window": 6,
+            "contributed": 6
+          },
+          "SANS Internet Storm Center": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "CISA Advisories": {
+            "items": 30,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The Record": {
+            "items": 5,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Ars Technica Security": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Help Net Security": {
+            "items": 10,
+            "in_window": 8,
+            "contributed": 8
+          },
+          "Securelist (Kaspersky)": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Sophos News": {
+            "items": 9,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Unit 42 (Palo Alto)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Google Online Security Blog": {
+            "items": 25,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Cisco Talos": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Graham Cluley": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Microsoft Security Blog": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Google Project Zero": {
+            "items": 7,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "The DFIR Report": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Kim Zetter (Zero Day)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "404 Media": {
+            "items": 15,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Frank on Fraud": {
+            "items": 10,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Wired Security": {
+            "items": 20,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      },
+      {
+        "group": "pittsburgh",
+        "label": "Pittsburgh",
+        "feeds": 9,
+        "loaded": 9,
+        "window_hours": 48,
+        "in_window": 60,
+        "failed": [],
+        "empty": [
+          "Pittsburgh Magazine"
+        ],
+        "per_feed": {
+          "TribLive": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 23
+          },
+          "Pittsburgh Post-Gazette": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 8
+          },
+          "PublicSource": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Pittsburgh City Paper": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 2
+          },
+          "NEXTpittsburgh": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "Pittsburgh Magazine": {
+            "items": 30,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "KDKA": {
+            "items": 30,
+            "in_window": 29,
+            "contributed": 6
+          },
+          "WPXI": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 8
+          },
+          "WTAE": {
+            "items": 20,
+            "in_window": 20,
+            "contributed": 11
+          }
+        }
+      },
+      {
+        "group": "bizpol",
+        "label": "Business and Politics",
+        "feeds": 8,
+        "loaded": 8,
+        "window_hours": 36,
+        "in_window": 60,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "WSJ World News": {
+            "items": 70,
+            "in_window": 16,
+            "contributed": 3
+          },
+          "WSJ Markets": {
+            "items": 61,
+            "in_window": 24,
+            "contributed": 15
+          },
+          "WSJ US Business": {
+            "items": 85,
+            "in_window": 34,
+            "contributed": 7
+          },
+          "WSJ Politics": {
+            "items": 21,
+            "in_window": 6,
+            "contributed": 1
+          },
+          "The Economist": {
+            "items": 300,
+            "in_window": 7,
+            "contributed": 2
+          },
+          "FT Home": {
+            "items": 12,
+            "in_window": 12,
+            "contributed": 9
+          },
+          "FT World": {
+            "items": 25,
+            "in_window": 25,
+            "contributed": 20
+          },
+          "FT Markets": {
+            "items": 25,
+            "in_window": 17,
+            "contributed": 3
+          }
+        }
+      },
+      {
+        "group": "events",
+        "label": "Events",
+        "feeds": 4,
+        "loaded": 4,
+        "window_hours": 120,
+        "in_window": 17,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "Post-Gazette Arts & Entertainment": {
+            "items": 20,
+            "in_window": 15,
+            "contributed": 15
+          },
+          "Post-Gazette Music": {
+            "items": 20,
+            "in_window": 4,
+            "contributed": 0
+          },
+          "NEXTpittsburgh Events": {
+            "items": 10,
+            "in_window": 1,
+            "contributed": 1
+          },
+          "NEXTpittsburgh Arts & Entertainment": {
+            "items": 10,
+            "in_window": 2,
+            "contributed": 1
+          }
+        }
+      },
+      {
+        "group": "sports_media",
+        "label": "Sports media",
+        "feeds": 6,
+        "loaded": 6,
+        "window_hours": 96,
+        "in_window": 30,
+        "failed": [],
+        "empty": [
+          "Footbahlin with Ben Roethlisberger",
+          "Ben Roethlisberger / Channel Seven (YouTube)"
+        ],
+        "per_feed": {
+          "Footbahlin with Ben Roethlisberger": {
+            "items": 147,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Not Just Football with Cam Heyward": {
+            "items": 15,
+            "in_window": 6,
+            "contributed": 3
+          },
+          "Pittsburgh Steelers (YouTube)": {
+            "items": 15,
+            "in_window": 15,
+            "contributed": 15
+          },
+          "Ben Roethlisberger / Channel Seven (YouTube)": {
+            "items": 15,
+            "in_window": 0,
+            "contributed": 0
+          },
+          "Post-Gazette Pirates": {
+            "items": 20,
+            "in_window": 3,
+            "contributed": 1
+          },
+          "Post-Gazette Steelers": {
+            "items": 20,
+            "in_window": 16,
+            "contributed": 11
+          }
+        }
+      },
+      {
+        "group": "team_usa",
+        "label": "Team USA",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 72,
+        "in_window": 32,
+        "failed": [],
+        "empty": [],
+        "per_feed": {
+          "ESPN Soccer": {
+            "items": 22,
+            "in_window": 20,
+            "contributed": 20
+          },
+          "ESPN Olympics": {
+            "items": 25,
+            "in_window": 10,
+            "contributed": 10
+          },
+          "Guardian Olympics": {
+            "items": 20,
+            "in_window": 2,
+            "contributed": 2
+          }
+        }
+      },
+      {
+        "group": "reading",
+        "label": "Reading",
+        "feeds": 3,
+        "loaded": 3,
+        "window_hours": 336,
+        "in_window": 12,
+        "failed": [],
+        "empty": [
+          "Cal Newport"
+        ],
+        "per_feed": {
+          "Ed Zitron": {
+            "items": 15,
+            "in_window": 4,
+            "contributed": 3
+          },
+          "Stratechery": {
+            "items": 10,
+            "in_window": 10,
+            "contributed": 9
+          },
+          "Cal Newport": {
+            "items": 8,
+            "in_window": 0,
+            "contributed": 0
+          }
+        }
+      }
+    ],
+    "aux": [
+      {
+        "label": "Markets (Yahoo Finance)",
+        "ok": true,
+        "detail": "7 of 7 rows"
+      },
+      {
+        "label": "Weather (NWS)",
+        "ok": true,
+        "detail": "3 forecast periods"
+      },
+      {
+        "label": "Scores (ESPN, plaintextsports)",
+        "ok": true,
+        "detail": "2 teams via ESPN"
+      }
+    ],
+    "cli": {
+      "models": [
+        "claude-opus-5"
+      ],
+      "usage": {
+        "claude-opus-5": {
+          "inputTokens": 6,
+          "outputTokens": 34658,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 107785,
+          "webSearchRequests": 0,
+          "costUSD": 1.9443300000000001,
+          "contextWindow": 3000000,
+          "maxOutputTokens": 192000,
+          "thinkingTokens": 22302
+        }
+      },
+      "cost_usd": 1.9443300000000001,
+      "duration_ms": 402267,
+      "calls": 3
+    }
+  },
+  "meta": {
+    "generated_at": "2026-11-16 07:06 EST",
+    "items_considered": 27,
+    "window_hours": 24,
+    "model": "opus",
+    "fallback_model": "sonnet",
+    "feeds": {
+      "security": [
+        "The Hacker News",
+        "BleepingComputer",
+        "Krebs on Security",
+        "Schneier on Security",
+        "Dark Reading",
+        "SecurityWeek",
+        "SANS Internet Storm Center",
+        "CISA Advisories",
+        "The Record",
+        "Ars Technica Security",
+        "Help Net Security",
+        "Securelist (Kaspersky)",
+        "Sophos News",
+        "Unit 42 (Palo Alto)",
+        "Google Online Security Blog",
+        "Cisco Talos",
+        "Graham Cluley",
+        "Microsoft Security Blog",
+        "Google Project Zero",
+        "The DFIR Report",
+        "Kim Zetter (Zero Day)",
+        "404 Media",
+        "Frank on Fraud",
+        "Wired Security"
+      ],
+      "pittsburgh": [
+        "TribLive",
+        "Pittsburgh Post-Gazette",
+        "PublicSource",
+        "Pittsburgh City Paper",
+        "NEXTpittsburgh",
+        "Pittsburgh Magazine",
+        "KDKA",
+        "WPXI",
+        "WTAE"
+      ],
+      "bizpol": [
+        "WSJ World News",
+        "WSJ Markets",
+        "WSJ US Business",
+        "WSJ Politics",
+        "The Economist",
+        "FT Home",
+        "FT World",
+        "FT Markets"
+      ],
+      "events": [
+        "Post-Gazette Arts & Entertainment",
+        "Post-Gazette Music",
+        "NEXTpittsburgh Events",
+        "NEXTpittsburgh Arts & Entertainment"
+      ],
+      "sports_media": [
+        "Footbahlin with Ben Roethlisberger",
+        "Not Just Football with Cam Heyward",
+        "Pittsburgh Steelers (YouTube)",
+        "Ben Roethlisberger / Channel Seven (YouTube)",
+        "Post-Gazette Pirates",
+        "Post-Gazette Steelers"
+      ],
+      "team_usa": [
+        "ESPN Soccer",
+        "ESPN Olympics",
+        "Guardian Olympics"
+      ],
+      "reading": [
+        "Ed Zitron",
+        "Stratechery",
+        "Cal Newport"
+      ]
+    },
+    "served_by": [
+      "claude-opus-5"
+    ],
+    "model_calls": 3,
+    "model_cost_usd": 1.9443,
+    "model_duration_ms": 402267,
+    "local_from": null,
+    "feed_failures": []
+  }
+}
