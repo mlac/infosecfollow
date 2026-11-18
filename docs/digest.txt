@@ -1,11 +1,13 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Wednesday, November 18, 2026 - 10:05 AM EST
+Wednesday, November 18, 2026 - 1:36 PM EST
 ================================================================
 
-CISA's Java4Shell alarm narrows to AVX-512 processors even as
-attackers run live exploits against Perforce Puppet and Apache
-Roller and keep mining developer infrastructure for cloud keys.
+CISA pressed enterprises to patch Java4Shell as researchers
+narrowed the OpenJDK flaw to AVX-512 processors, while attackers
+already executed code on Perforce Puppet and Apache Roller
+servers and poisoned Microsoft's own agent-framework package on
+PyPI.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -13,43 +15,41 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] Cisco Talos scored Java4Shell 9.2 while CISA logged
-  live exploitation of Perforce Puppet's CVE-2026-115731,
-  leaving defenders patching behind attackers rather than ahead
-  of them.
-  see: Java4Shell Narrows to AVX-512 Chips; Puppet and Roller
-  Fall to Live Exploits
-* [TREND] Enterprise intrusions now travel through developer and
-  vendor plumbing, from malicious agent-framework releases on
-  PyPI to Optimizely's own A/B testing machinery and
-  command-and-control hidden in public blockchains.
-  see: Poisoned Agent Framework Steals Cloud Keys; Optimizely
-  Attackers A/B Tested Their Malware; Malware C2 Moves Onto
-  Public Blockchains
-* [TREND] Russia-aligned activity runs loud and quiet at once,
-  with Cold Relic reusing a breached Google Workspace tenant to
-  phish the next victim while defacers hit the IIHF.
-  see: Cold Relic Turns One Cloud Breach Into Two; Equinor and
-  the IIHF Absorb Attacks
-* [UPDATE (new)] A United States court gave Scattered Spider
-  figure Tyler Buchanan six years, and TU Berlin researchers
-  showed a flash-chip reset that cracks BitLocker PINs on AMD
-  machines.
-  see: Scattered Spider Ringleader Draws Six Years; A Flash Chip
-  Attack Cracks BitLocker PINs
-* [UPDATE (new)] Macro risk crowds in with Waller pushing an
-  outsized December rate increase, Nvidia's raised forecast
-  failing to hold a rally, and Trump meeting Xi and Putin in
-  Shenzhen.
-  see: Waller Pushes a Supersized December Increase; Nvidia's
-  Results Steady the AI Trade; Trump, Xi, and Putin Meet in
-  China
-* [UPDATE (new)] Locally, Waymo pulled robotaxis off California
-  freeways, PublicSource opened up its Pittsburgh Budget
-  Explorer, and Pittsburgh International marked one year of its
-  $1.7 billion terminal.
-  see: Waymo Pulls Robotaxis Off Freeways; PublicSource Opens Up
-  the City Budget; The New Terminal Turns One
+* [TREND] Attackers keep riding trusted vendor code, injecting
+  malware into Optimizely's experimentation scripts and
+  publishing poisoned agent-framework builds to PyPI that steal
+  Azure credentials every time Python starts.
+  see: Optimizely Attackers A/B Tested Their Malware; Poisoned
+  Agent Framework Steals Cloud Keys
+* [UPDATE (updated)] NSANet entered a second day of disruption
+  at Fort Meade alongside Japan's Fugaku shutdown and Apple's
+  iCloud Mail outage, with only Fugaku tied to a confirmed
+  breach.
+  see: NSANet and Fugaku Go Dark
+* [UPDATE (updated)] Mandiant traced Cold Relic from one
+  compromised Google Workspace tenant into a partner
+  organization, using stolen correspondence to give follow-on
+  phishing the right names, projects, and tone.
+  see: Cold Relic Turns One Cloud Breach Into Two
+* [TREND] Exploitation and research keep narrowing to specific
+  hardware and trust anchors, from CISA-listed Puppet
+  certificate abuse to Java4Shell's AVX-512-only reach and a TPM
+  reset that cracks BitLocker PINs.
+  see: Puppet and Roller Fall to Live Exploits; Java4Shell
+  Narrows to AVX-512 Chips; A Flash Chip Attack Cracks BitLocker
+  PINs
+* [TREND] Nvidia's raised forecast steadied the AI trade only
+  briefly, while Ben Thompson reads the quarter as uneventful
+  and Zitron casts the company as the bubble's center.
+  see: Nvidia's Results Steady the AI Trade; Nvidia Earnings;
+  Office Convergence; OS Wars, AI Edition; The NVIDIA Bubble
+* [UPDATE (new)] Allegheny County leads the state in automated
+  license plate readers, Amtrak's second daily Pennsylvanian
+  round trip started carrying riders, and PennDOT closes Bathtub
+  lanes on I-376 overnight.
+  see: Allegheny County Leads the State in Plate Readers; Amtrak
+  Doubles the Pennsylvanian; Two Nights of Lane Closings in the
+  Bathtub
 
 SECURITY
 ----------------------------------------------------------------
@@ -75,9 +75,53 @@ SECURITY
    - Cisco Talos: https://blog.talosintelligence.com/java4shell/
    - Help Net Security: https://www.helpnetsecurity.com/2026/11/18/java4shell-openjdk-vulnerability-cve-2026-114938/
    - SecurityWeek: https://www.securityweek.com/java4shell-vulnerability-puts-many-enterprise-applications-at-risk-of-takeover/
-   - The Record: https://therecord.media/cisa-issues-java4shell-alert
+   - Dark Reading: https://www.darkreading.com/vulnerabilities-threats/java4shell-flaw-threatens-global-java-application-ecosystem
 
-2. PUPPET AND ROLLER FALL TO LIVE EXPLOITS
+2. POISONED AGENT FRAMEWORK STEALS CLOUD KEYS
+   Software Supply Chain Security · [supply chain, credential
+   theft, ai]
+   Latest developments: Attackers published malicious versions
+   1.26.1 and 1.26.2 of Microsoft's agent-framework package to
+   PyPI 33 minutes apart on November 17, 2026, each one running
+   a credential stealer every time Python starts and shipping
+   out Azure, Azure DevOps, and GitHub Actions credentials, with
+   Aikido, Chainguard, Endor Labs, OX Security, SafeDep, Socket,
+   StepSecurity, and Wiz all reporting the compromise.
+   agent-framework is Microsoft's Python library for building AI
+   agents, and any developer or build pipeline that installed
+   the two poisoned releases handed over its cloud and CI
+   credentials. Pin and audit package versions, rotate Azure and
+   GitHub Actions secrets, and check Docker Hub images for
+   exposed keys, which researchers watched attackers extract
+   within eight seconds of publication.
+   - SecurityWeek: https://www.securityweek.com/microsoft-agent-framework-releases-poisoned-with-credential-stealer/
+   - The Hacker News: https://thehackernews.com/2026/11/attackers-compromise-microsofts-agent.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/microsofts-agent-framework-pypi-package-compromised-to-steal-credentials/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/cloud-keys-leaked-in-docker-hub-images-are-stolen-within-seconds/
+
+3. OPTIMIZELY ATTACKERS A/B TESTED THEIR MALWARE
+   Software Supply Chain Security · [supply chain, breach,
+   malware]
+   Latest developments: Krebs on Security reported that the
+   intruders used Optimizely's own experimentation machinery to
+   A/B test which malware worked best on visitors to 178 top
+   websites, and Ars Technica detailed the payload
+   mix—cryptocurrency theft code and iOS exploits among
+   it—served to readers of the BBC, CNN, Equifax, Ledger, and
+   Zoom over roughly 24 hours.
+   Optimizely confirmed that an unauthorized party exploited a
+   flaw in its Experimentation product and injected malicious
+   JavaScript into customer projects, which the customers' sites
+   then ran against their own visitors. Few of those sites
+   enforce integrity checks on third-party scripts, so site
+   owners should pin script hashes and keep vendor code away
+   from checkout and login pages.
+   - Krebs on Security: https://krebsonsecurity.com/2026/11/attackers-used-optimizely-to-a-b-test-malware-on-top-websites/
+   - Ars Technica Security: https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/
+   - Unit 42 (Palo Alto): https://unit42.paloaltonetworks.com/optimjack-supply-chain-attack/
+   - Dark Reading: https://www.darkreading.com/cyber-risk/optimizely-malware-attacks-third-party-vendor-risks
+
+4. PUPPET AND ROLLER FALL TO LIVE EXPLOITS
    Vulnerabilities and Exploits · [patch, exploited,
    vulnerability]
    Latest developments: SecurityWeek spelled out the mechanism
@@ -101,90 +145,49 @@ SECURITY
    - SecurityWeek: https://www.securityweek.com/oracle-patches-640-vulnerabilities-with-november-2026-cspu/
    - SecurityWeek: https://www.securityweek.com/chrome-158-patches-204-vulnerabilities/
 
-3. POISONED AGENT FRAMEWORK STEALS CLOUD KEYS
-   Software Supply Chain Security · [supply chain, credential
-   theft, ai]
-   Latest developments: Attackers published malicious versions
-   1.26.1 and 1.26.2 of Microsoft's agent-framework package to
-   PyPI 33 minutes apart on November 17, 2026, each one running
-   a credential stealer every time Python starts and shipping
-   out Azure, Azure DevOps, and GitHub Actions credentials, with
-   Aikido, Chainguard, Endor Labs, OX Security, SafeDep, Socket,
-   StepSecurity, and Wiz all reporting the compromise.
-   agent-framework is Microsoft's Python library for building AI
-   agents, and any developer or build pipeline that installed
-   the two poisoned releases handed over its cloud and CI
-   credentials. Pin and audit package versions, rotate Azure and
-   GitHub Actions secrets, and check Docker Hub images for
-   exposed keys, which researchers watched attackers extract
-   within eight seconds of publication.
-   - SecurityWeek: https://www.securityweek.com/microsoft-agent-framework-releases-poisoned-with-credential-stealer/
-   - The Hacker News: https://thehackernews.com/2026/11/attackers-compromise-microsofts-agent.html
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/cloud-keys-leaked-in-docker-hub-images-are-stolen-within-seconds/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/researchers-hijack-hugging-face-account-for-popular-kokoro-ai-model/
-
-4. OPTIMIZELY ATTACKERS A/B TESTED THEIR MALWARE
-   Software Supply Chain Security · [supply chain, breach,
-   malware]
-   Latest developments: Krebs on Security reported that the
-   intruders used Optimizely's own experimentation machinery to
-   A/B test which malware worked best on visitors to 178 top
-   websites, and Ars Technica detailed the payload
-   mix—cryptocurrency theft code and iOS exploits among
-   it—served to readers of the BBC, CNN, Equifax, Ledger, and
-   Zoom over roughly 24 hours.
-   Optimizely confirmed that an unauthorized party exploited a
-   flaw in its Experimentation product and injected malicious
-   JavaScript into customer projects, which the customers' sites
-   then ran against their own visitors. Few of those sites
-   enforce integrity checks on third-party scripts, so site
-   owners should pin script hashes and keep vendor code away
-   from checkout and login pages.
-   - Krebs on Security: https://krebsonsecurity.com/2026/11/attackers-used-optimizely-to-a-b-test-malware-on-top-websites/
-   - Ars Technica Security: https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/
-   - The Record: https://therecord.media/optimizely-malicious-code-customer-sites
-   - Dark Reading: https://www.darkreading.com/cyber-risk/optimizely-malware-attacks-third-party-vendor-risks
-
 5. NSANET AND FUGAKU GO DARK
    Critical Infrastructure Security · [outage, breach]
-   Latest developments: NSANet, the classified internal network
-   National Security Agency employees use, went down and
-   disrupted the agency's operations, and Japan's RIKEN Center
-   for Computational Science pulled the Fugaku supercomputer off
-   the network after a security breach, while Apple reported
+   Latest developments: The National Security Agency entered a
+   second day of disruption on NSANet, its classified internal
+   network, with staggered arrivals and logins at Fort Meade
+   while a source told The Record that classified national
+   security work continued unimpeded; Japan's RIKEN Center for
+   Computational Science kept the Fugaku supercomputer off the
+   network after a security breach, and Apple worked through
    disruptions to iCloud Mail, iCloud Account and Sign In, Apple
    School Manager, and Schoolwork.
-   Three high-profile systems stopped serving users inside a
-   day, and only the Fugaku shutdown traces to a confirmed
-   breach. Wired laid out the signals that separate a
-   cyberattack from a failed update—vendor silence, staged
-   recovery, and the absence of attacker claims—which usually
-   point away from hacking.
+   Three high-profile systems stopped serving users inside two
+   days, and only the Fugaku shutdown traces to a confirmed
+   breach. Vendor silence, staged recovery, and the absence of
+   attacker claims usually point to a failed update rather than
+   an intrusion, so responders should establish cause before an
+   organization attributes an outage to hacking.
    - SecurityWeek: https://www.securityweek.com/classified-communications-network-at-the-national-security-agency-goes-down-defense-official-says/
+   - The Record: https://therecord.media/nsa-continues-response-to-nsa-net-problems
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/japan-takes-fugaku-supercomputer-offlline-after-cyberattack/
    - BleepingComputer: https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/
-   - Wired Security: https://www.wired.com/story/how-to-tell-if-its-a-cyberattack-or-just-an-outage/
 
-6. SCATTERED SPIDER RINGLEADER DRAWS SIX YEARS
-   Ransomware and Cybercrime · [cybercrime, law enforcement,
-   social engineering]
-   Latest developments: A United States court sentenced Tyler
-   Robert Buchanan, 24, of Dundee, Scotland, to six years in
-   prison for stealing $11.6 million in cryptocurrency and
-   conspiring to hack a dozen companies, which closes out the
-   American case against Scattered Spider with the last of five
-   defendants sentenced, the Department of Justice said.
-   Investigators have described Buchanan as the suspected
-   ringleader of Scattered Spider, the English-speaking crew
-   Microsoft calls one of the most dangerous financial criminal
-   groups, which runs help desk impersonation and SIM swapping
-   to take over employee accounts. Enterprises facing this
-   playbook should harden identity verification at the help desk
-   and require phishing-resistant authentication for account
-   recovery.
-   - The Record: https://therecord.media/british-hacker-gets-six-year-sentence-scattered-spider
-   - SecurityWeek: https://www.securityweek.com/last-of-five-defendants-sentenced-in-us-scattered-spider-hacking-case/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/british-scattered-spider-hacker-sentenced-to-6-years-in-prison/
+6. COLD RELIC TURNS ONE CLOUD BREACH INTO TWO
+   Nation-State Activity · [apt, espionage, cloud]
+   Latest developments: Google's Mandiant and Threat
+   Intelligence Group reported that Cold Relic, the
+   Russia-linked espionage group formerly tracked as COLDRIVER
+   and UNC4057, took data from a compromised Google Workspace
+   tenant at one United States organization in 2026 and used it
+   to break into a second United States organization, and
+   SecurityWeek added that the group, which Microsoft tracks as
+   Star Blizzard, impersonated an employee of the firm it hacked
+   in late 2025 to make the follow-on phishing credible against
+   that employee's professional network.
+   Cold Relic collects credentials and documents from cloud
+   accounts and mines them for the relationships that open the
+   next victim. Organizations sharing Workspace or Microsoft 365
+   collaboration with a breached partner should assume the
+   attacker read that correspondence and reset federated trust
+   and tokens accordingly.
+   - The Hacker News: https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html
+   - SecurityWeek: https://www.securityweek.com/russian-apt-poses-as-employee-of-hacked-firm-to-breach-another-us-organization/
+   - The Record: https://therecord.media/russia-cyber-espionage-google
 
 7. EQUINOR AND THE IIHF ABSORB ATTACKS
    Critical Infrastructure Security · [critical infrastructure,
@@ -208,25 +211,26 @@ SECURITY
    - The Record: https://therecord.media/russia-hockey-cyberattack-championships
    - Schneier on Security: https://www.schneier.com/blog/archives/2026/11/france-is-blaming-iran-for-the-fridge-cyberattack.html
 
-8. COLD RELIC TURNS ONE CLOUD BREACH INTO TWO
-   Nation-State Activity · [apt, espionage, cloud]
-   Latest developments: Google's Mandiant and Threat
-   Intelligence Group reported that Cold Relic, the
-   Russia-linked espionage group formerly tracked as COLDRIVER
-   and UNC4057, took data from a compromised Google Workspace
-   tenant at one United States organization in 2026 and used it
-   to break into a second United States organization, and
-   SecurityWeek added that the group, which Microsoft tracks as
-   Star Blizzard, impersonated an employee of the firm it hacked
-   in late 2025 to make the follow-on phishing credible.
-   Cold Relic collects credentials and documents from cloud
-   accounts and mines them for the relationships that open the
-   next victim. Organizations sharing Workspace or Microsoft 365
-   collaboration with a breached partner should assume the
-   attacker read that correspondence and reset federated trust
-   and tokens accordingly.
-   - The Hacker News: https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html
-   - SecurityWeek: https://www.securityweek.com/russian-apt-poses-as-employee-of-hacked-firm-to-breach-another-us-organization/
+8. SCATTERED SPIDER RINGLEADER DRAWS SIX YEARS
+   Ransomware and Cybercrime · [cybercrime, law enforcement,
+   social engineering]
+   Latest developments: A United States court sentenced Tyler
+   Robert Buchanan, 24, of Dundee, Scotland, to six years in
+   prison for stealing $11.6 million in cryptocurrency and
+   conspiring to hack a dozen companies, which closes out the
+   American case against Scattered Spider with the last of five
+   defendants sentenced, the Department of Justice said.
+   Investigators have described Buchanan as the suspected
+   ringleader of Scattered Spider, the English-speaking crew
+   Microsoft calls one of the most dangerous financial criminal
+   groups, which runs help desk impersonation and SIM swapping
+   to take over employee accounts. Enterprises facing this
+   playbook should harden identity verification at the help desk
+   and require phishing-resistant authentication for account
+   recovery.
+   - The Record: https://therecord.media/british-hacker-gets-six-year-sentence-scattered-spider
+   - SecurityWeek: https://www.securityweek.com/last-of-five-defendants-sentenced-in-us-scattered-spider-hacking-case/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/british-scattered-spider-hacker-sentenced-to-6-years-in-prison/
 
 9. MALWARE C2 MOVES ONTO PUBLIC BLOCKCHAINS
    Ransomware and Cybercrime · [malware, cybercrime, apt]
@@ -268,6 +272,19 @@ SECURITY
 
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
+* Democrats Nominate Jeffries for Speaker
+  Latest developments: House Democrats nominated Hakeem Jeffries
+  for speaker in a closed-door secret ballot Wednesday, November
+  18, with no declared opponent against him.
+  Jeffries, the 56-year-old Brooklyn Democrat who has led House
+  Democrats since 2023, worked through the fall to tamp down
+  caucus dissent after the party's large midterm gains. He
+  stands on track to become the first Black lawmaker to hold the
+  gavel when the new Congress convenes in January, which puts
+  him in charge of the chamber that writes tax, spending, and
+  financial legislation.
+  - WSJ Politics: https://www.wsj.com/politics/democrats-back-hakeem-jeffries-for-speaker-in-secret-ballot-6403e6e1?mod=rss_socialpoliticsfeed
+  - FT Home: https://www.ft.com/content/9d0998cf-ffb8-4fe4-9f85-0c403b1966f9?syn-25a6b1a6=1
 * Waller Pushes a Supersized December Increase
   Latest developments: Federal Reserve Governor Christopher
   Waller repeated his call Wednesday, November 18, for an
@@ -310,7 +327,7 @@ BUSINESS AND POLITICS
   scrutiny of its China sales, and an unfinished search for a
   permanent chief, so the questions about its future outlast the
   quarter.
-  - FT Markets: https://www.ft.com/content/f085b811-fc20-425f-88d8-9f98e178636a?syn-25a6b1a6=1
+  - FT World: https://www.ft.com/content/f085b811-fc20-425f-88d8-9f98e178636a?syn-25a6b1a6=1
   - WSJ Markets: https://www.wsj.com/business/nvidias-strong-fundamentals-give-new-ceo-a-much-needed-tailwind-65859856?mod=rss_markets_main
   - WSJ World News: https://www.wsj.com/world/nvidias-strong-results-do-little-to-settle-questions-about-its-future-d1ba999d?mod=rss_worldnews
   - WSJ Markets: https://www.wsj.com/finance/commodities-futures/stock-futures-rally-as-nvidia-earnings-calm-ai-trade-fears-96f51546?mod=rss_markets_main
@@ -335,11 +352,35 @@ PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  Today: Sunny, high 58F.
-  Tonight: Clear, low 31F.
+  This Afternoon: Sunny, high 58F.
+  Tonight: Clear, low 33F.
   Thursday: Sunny, high 62F.
 
 Business:
+* Highmark's Insurance Arm Swings to $673 Million
+  Latest developments: Highmark Health Plans posted a $673
+  million profit, WPXI reported Wednesday, November 18, and
+  Chief Financial Officer Carl Daley said one segment of the
+  business remains in a multiyear turnaround.
+  Highmark Health Plans sells coverage to roughly 7 million
+  members across Pennsylvania, Delaware, West Virginia, and New
+  York for Pittsburgh-based Highmark Health, the parent of
+  Allegheny Health Network. The swing to profit follows a
+  stretch of losses in the insurance unit, and Daley's
+  turnaround language signals more work ahead on pricing and
+  medical costs.
+  - WPXI: https://www.wpxi.com/news/local/highmark-health-plans-swings-673m-profit-while-one-segment-faces-multiyear-turnaround/I2OGFHDBHVBL5J4AA3LQNGR2JQ/
+* A $937,500 Grant for the Westinghouse Site
+  Latest developments: Pennsylvania approved a $937,500 grant
+  Wednesday, November 18, for environmental assessment and
+  cleanup at the former Westinghouse East Pittsburgh Works, with
+  leasable space as the goal.
+  The East Pittsburgh plant, where Westinghouse Electric built
+  generators and transformers for much of the 20th century, has
+  sat largely idle and contaminated along the Turtle Creek
+  valley. The grant pays for the testing and remediation that
+  must come before any tenant signs a lease.
+  - WPXI: https://www.wpxi.com/news/local/nearly-1m-approved-remediate-former-westinghouse-east-pittsburgh-works-site-create-leased-space/PT7V4N6QGBDB7AOTUVLYRZPE4U/
 * The New Terminal Turns One
   Latest developments: Pittsburgh International Airport holds a
   program Wednesday, November 18, marking the first anniversary
@@ -389,6 +430,38 @@ Business:
   - WPXI: https://www.wpxi.com/news/local/pittsburgh-union-members-push-approval-job-protections-trid-proposal/3EASWCQNSVCL7ARQAPZSGFQKYY/
 
 Around town:
+* Allegheny County Leads the State in Plate Readers
+  Latest developments: NEXTpittsburgh reported Wednesday,
+  November 18, that Allegheny County holds more automated
+  license plate readers than any other Pennsylvania county.
+  The cameras sit on poles at intersections and highway ramps
+  across the county and photograph every car that passes,
+  feeding databases that police departments search. The spread
+  raises the question of how long those records sit and who may
+  run them.
+  - NEXTpittsburgh: https://nextpittsburgh.com/latest-news/allegheny-county-has-more-license-plate-readers-than-any-other-pa-county/
+* Two Nights of Lane Closings in the Bathtub
+  Latest developments: PennDOT announced overnight lane
+  restrictions on westbound Interstate 376 through the Bathtub
+  section of the Parkway East starting Wednesday night, November
+  18, and running two nights, weather permitting.
+  The Bathtub carries Parkway East traffic below grade past
+  downtown Pittsburgh toward the Fort Pitt Tunnel, and
+  construction there squeezes the only straight route between
+  the eastern suburbs and the city. Drivers heading west late at
+  night should expect single-lane backups.
+  - WPXI: https://www.wpxi.com/news/local/construction-restrict-traffic-bathtub-section-parkway-east-2-nights/F3ZLKYJWBNGN7O4YXRWYQY74EI/
+* Amtrak Doubles the Pennsylvanian
+  Latest developments: Amtrak's second daily Pennsylvanian round
+  trip between Pittsburgh and New York began carrying passengers
+  Wednesday, November 18, stopping at Harrisburg and
+  Philadelphia along the way.
+  The Pennsylvanian has run once a day across the state,
+  stopping at Greensburg on its way east through Philadelphia to
+  New York. A second frequency gives Western Pennsylvania riders
+  a choice of departure times for the first time in decades.
+  - TribLive: https://triblive.com/local/westmoreland/amtrak-adds-2nd-daily-pennsylvanian-train-between-pittsburgh-new-york/
+  - WTAE: https://www.wtae.com/article/amtrak-pittsburgh-new-york-train-pennsylvanian/74467110
 * PublicSource Opens Up the City Budget
   Latest developments: PublicSource published an explainer
   Wednesday, November 18, on how it built its Pittsburgh Budget
@@ -423,15 +496,6 @@ Around town:
   - WPXI: https://www.wpxi.com/weather/patchy-morning-fog-before-sunshine-warms-temps-into-upper-50s/3YVLEMJQJBF2TDFB2QLCTC32PE/
   - WTAE: https://www.wtae.com/article/foggy-mornings-sunny-afternoons-for-western-pa/74462868
   - KDKA: https://www.cbsnews.com/pittsburgh/video/kdka-tv-morning-forecast-1118-3/
-* Amtrak Doubles the Pennsylvanian
-  Latest developments: Amtrak has added a second daily
-  Pennsylvanian round trip between Pittsburgh and New York,
-  TribLive reported Wednesday, November 18.
-  The Pennsylvanian has run once a day across the state,
-  stopping at Greensburg on its way east through Philadelphia to
-  New York. A second frequency gives Western Pennsylvania riders
-  a choice of departure times for the first time in decades.
-  - TribLive: https://triblive.com/local/westmoreland/amtrak-adds-2nd-daily-pennsylvanian-train-between-pittsburgh-new-york/
 * West Mifflin Consolidation Draws a Petition
   Latest developments: PublicSource reported Wednesday, November
   18, that the West Mifflin Area School District's school
@@ -457,6 +521,40 @@ Around town:
   - TribLive: https://triblive.com/local/etna-cuts-proposed-property-tax-increase-in-half-as-work-on-2027-budget-continues/
 
 Events:
+* Light Up Night Leads the Weekend
+  Latest developments: NEXTpittsburgh published its weekend
+  guide Wednesday, November 18, covering Thursday, November 19,
+  through Sunday, November 22, with more than 13 things to do.
+  The guide leads with Light Up Night downtown, Holiday Magic at
+  Phipps Conservatory and Botanical Gardens in Oakland, and a
+  Cryptid Film Festival, and fills out with fall festivals,
+  craft markets, art openings, and theater around the city.
+  - NEXTpittsburgh Events: https://nextpittsburgh.com/events/13-things-to-do-this-weekend-nov-19-22-2026/
+* Jhené Aiko Returns to PPG Paints Arena
+  Latest developments: WPXI reported Wednesday, November 18,
+  that Jhené Aiko will play PPG Paints Arena in 2027.
+  The Grammy-nominated singer and songwriter comes back to the
+  Uptown arena, her first Pittsburgh date since her last tour
+  stop here.
+  - WPXI: https://www.wpxi.com/news/local/jhen-aiko-returns-ppg-paints-arena-2027/GAIOO6DJTJAQFC5R3ZNL3C4Z7Y/
+* The Historic House Hop Returns November 28
+  Latest developments: TribLive reported Wednesday, November 18,
+  that the Historic House Hop in Washington, Pennsylvania,
+  returns Saturday, November 28, from 11 a.m. to 2 p.m.
+  The hop walks visitors through historic houses in the city of
+  Washington, Washington County, with local history the draw at
+  each stop.
+  - TribLive: https://triblive.com/news/visit-washington-county/historic-house-hop-in-washington-pa-returns-nov-28-with-unique-opportunities/
+* Three Sauropods Come to the Carnegie
+  Latest developments: Pittsburgh Magazine reported Wednesday,
+  November 18, that the Carnegie Museum of Natural History will
+  soon display three sauropod fossils named Daisy, Lucky, and
+  Lucy.
+  The three dinosaurs lived about 150 million years ago and
+  arrive in Oakland on a decades-long loan that Kenneth C.
+  Griffin facilitated, joining a hall already built on the
+  museum's Diplodocus carnegii.
+  - Pittsburgh Magazine: https://www.pittsburghmagazine.com/carnegie-museum-of-natural-history-new-dinosaurs-2026/
 * Delmont Sets Its Holidaze Date
   Latest developments: Delmont officials said Wednesday,
   November 18, that Toys for Pittsburgh Tikes will partner with
@@ -506,6 +604,41 @@ Around the Teams:
   - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/WdDnVzR65YI
 
 Team USA:
+* Coffey Returns for World Cup Qualifying
+  Latest developments: U.S. Soccer named midfielder Sam Coffey
+  to the United States women's national team roster for World
+  Cup qualifying Wednesday, November 18, bringing her back for a
+  camp that assembles later this month.
+  Coach Emma Hayes takes the squad into the Concacaf W
+  Championship, the tournament that decides the United States
+  place at the 2027 World Cup, without defender Naomi Girma,
+  whom Chelsea has ruled out with an injury. Coffey anchors the
+  midfield alongside the attacking core Hayes has built since
+  the Paris Olympics.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50520685/sam-coffey-returns-uswnt-roster-world-cup-qualifying
+* Hayes Joins the Men's Coaching Search
+  Latest developments: Emma Hayes said Wednesday, November 18,
+  that she will help U.S. Soccer search for the next men's
+  national team head coach, judging candidates "through a
+  technical lens."
+  Hayes coaches the United States women's team and now lends her
+  judgment to the federation's hunt for a replacement for
+  Mauricio Pochettino, who reported for his first day at
+  Manchester United the same day and asked fans there for time.
+  Steve Cherundolo runs the men's December camp on an interim
+  basis, with a Concacaf Nations League semifinal against Mexico
+  waiting.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50522474/uswnt-emma-hayes-role-usmnt-coach-search-technical-lens
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50518493/mauricio-pochettino-man-united-premier-league
+* USA Basketball Names Its Qualifying Roster
+  Latest developments: USA Basketball announced its roster
+  Wednesday, November 18, for FIBA World Cup qualifying games
+  late this month.
+  The United States stands on the verge of clinching a World Cup
+  berth and plays the qualifying window with a roster drawn
+  outside the NBA's in-season player pool. Two wins in the
+  window would settle the Americans' place in the tournament.
+  - ESPN Olympics: https://www.espn.com/olympics/story/_/id/50522288/usa-basketball-picks-roster-world-cup-qualifying-games
 * ESPN Leaves the U.S. Out of Its 2030 Top 15
   Latest developments: ESPN published early power rankings for
   the 2030 World Cup Wednesday, November 18, keeping Spain first
@@ -581,34 +714,35 @@ USD/JPY       159.52  ▲ +0.9%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 68 items in the 24-hour window.
+Security: 24 of 24 feeds loaded, 63 items in the 24-hour window.
   No recent items: CISA Advisories, Sophos News, Google Online
-  Security Blog, Graham Cluley, Google Project Zero, The DFIR
-  Report, Kim Zetter (Zero Day), Frank on Fraud.
+  Security Blog, Graham Cluley, Microsoft Security Blog, Google
+  Project Zero, The DFIR Report, Kim Zetter (Zero Day), Frank on
+  Fraud.
 Pittsburgh: 8 of 9 feeds loaded, 60 items in the 48-hour window.
   Failed: Pittsburgh Post-Gazette (ForbiddenXMLError: DTD or
   entity declarations are not allowed).
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
-Events: 2 of 4 feeds loaded, 0 items in the 120-hour window.
+Events: 2 of 4 feeds loaded, 1 item in the 120-hour window.
   Failed: Post-Gazette Arts & Entertainment (HTTPError: HTTP
   Error 404: Not Found); Post-Gazette Music (HTTPError: HTTP
-  Error 404: Not Found). No recent items: NEXTpittsburgh Events,
-  NEXTpittsburgh Arts & Entertainment.
+  Error 404: Not Found).
 Sports media: 4 of 6 feeds loaded, 20 items in the 96-hour
   window. Failed: Post-Gazette Pirates (HTTPError: HTTP Error
   404: Not Found); Post-Gazette Steelers (HTTPError: HTTP Error
   404: Not Found).
-Team USA: 3 of 3 feeds loaded, 38 items in the 72-hour window.
+Team USA: 3 of 3 feeds loaded, 37 items in the 72-hour window.
+  No recent items: Guardian Olympics.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (304s of
-  model time; $1.97 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (355s of
+  model time; $2.17 at API list price).
 
 ================================================================
-Generated 2026-11-18 10:05 EST. Updated weekdays at about 7:05
+Generated 2026-11-18 13:36 EST. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports

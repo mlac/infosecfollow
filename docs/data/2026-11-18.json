@@ -1,23 +1,23 @@
 {
   "date": "2026-11-18",
-  "headline": "CISA's Java4Shell alarm narrows to AVX-512 processors even as attackers run live exploits against Perforce Puppet and Apache Roller and keep mining developer infrastructure for cloud keys.",
+  "headline": "CISA pressed enterprises to patch Java4Shell as researchers narrowed the OpenJDK flaw to AVX-512 processors, while attackers already executed code on Perforce Puppet and Apache Roller servers and poisoned Microsoft's own agent-framework package on PyPI.",
   "emerging_trends": [
     {
-      "text": "AI found Java4Shell, AI models now write the Ubuntu security patches Canonical ships to Pro customers through its opt-in Edge archive before engineers finish reviewing them, and Mandiant's M-Trends 2026 puts average exploitation ahead of the patch, which compresses the window defenders have to act.",
-      "topic_title": "Java4Shell Narrows to AVX-512 Chips",
-      "link_phrase": "Java4Shell",
+      "text": "Attackers keep entering through the code enterprises already trust, injecting malware into Optimizely's experimentation scripts one day and poisoning Microsoft's agent-framework releases on PyPI the next, which turns routine vendor updates into a delivery channel.",
+      "topic_title": "Poisoned Agent Framework Steals Cloud Keys",
+      "link_phrase": "agent-framework",
       "_anchor": "trend-1"
     },
     {
-      "text": "Developer plumbing has become the shortest path into an enterprise: poisoned agent-framework releases on PyPI, cloud keys lifted out of public Docker Hub images within eight seconds, a hijacked Hugging Face account for the Kokoro text-to-speech model, and the Trigram campaign impersonating about 50 AI and blockchain brands to make engineers run infostealers themselves.",
-      "topic_title": "Poisoned Agent Framework Steals Cloud Keys",
-      "link_phrase": "agent-framework",
+      "text": "Cold Relic shows how one compromised Google Workspace tenant funds the next intrusion, because stolen correspondence supplies the names, projects, and tone that make follow-on phishing land inside a partner's inbox.",
+      "topic_title": "Cold Relic Turns One Cloud Breach Into Two",
+      "link_phrase": "Cold Relic",
       "_anchor": "trend-2"
     },
     {
-      "text": "Russia-aligned operations now run on two tracks at once, with Star Blizzard quietly wearing a breached company's identity to phish the next victim while defacers plant a pro-Russian message on the International Ice Hockey Federation homepage for everyone to see.",
-      "topic_title": "Cold Relic Turns One Cloud Breach Into Two",
-      "link_phrase": "Star Blizzard",
+      "text": "Three flagship systems—NSANet, Japan's Fugaku supercomputer, and Apple's iCloud Mail—stopped serving users inside a day, and only the Fugaku shutdown traces to a confirmed breach, which pushes responders to establish cause before executives name an attacker.",
+      "topic_title": "NSANet and Fugaku Go Dark",
+      "link_phrase": "NSANet",
       "_anchor": "trend-3"
     }
   ],
@@ -49,12 +49,80 @@
           "url": "https://www.securityweek.com/java4shell-vulnerability-puts-many-enterprise-applications-at-risk-of-takeover/"
         },
         {
-          "source": "The Record",
-          "title": "CISA warns of ‘Java4Shell,’ an AI-found Java bug touching most of the Fortune 500",
-          "url": "https://therecord.media/cisa-issues-java4shell-alert"
+          "source": "Dark Reading",
+          "title": "Java4Shell Flaw Threatens Global Enterprises, Java Application Ecosystem",
+          "url": "https://www.darkreading.com/vulnerabilities-threats/java4shell-flaw-threatens-global-java-application-ecosystem"
         }
       ],
       "_anchor": "i-d365ad8c28"
+    },
+    {
+      "title": "Poisoned Agent Framework Steals Cloud Keys",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "Attackers published malicious versions 1.26.1 and 1.26.2 of Microsoft's agent-framework package to PyPI 33 minutes apart on November 17, 2026, each one running a credential stealer every time Python starts and shipping out Azure, Azure DevOps, and GitHub Actions credentials, with Aikido, Chainguard, Endor Labs, OX Security, SafeDep, Socket, StepSecurity, and Wiz all reporting the compromise.",
+      "summary": "agent-framework is Microsoft's Python library for building AI agents, and any developer or build pipeline that installed the two poisoned releases handed over its cloud and CI credentials. Pin and audit package versions, rotate Azure and GitHub Actions secrets, and check Docker Hub images for exposed keys, which researchers watched attackers extract within eight seconds of publication.",
+      "tags": [
+        "supply chain",
+        "credential theft",
+        "ai"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Microsoft Agent Framework Releases Poisoned With Credential Stealer",
+          "url": "https://www.securityweek.com/microsoft-agent-framework-releases-poisoned-with-credential-stealer/"
+        },
+        {
+          "source": "The Hacker News",
+          "title": "Attackers Compromise Microsoft's Agent Framework PyPI Package to Steal Cloud Credentials",
+          "url": "https://thehackernews.com/2026/11/attackers-compromise-microsofts-agent.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Microsoft's Agent Framework PyPI package compromised to steal credentials",
+          "url": "https://www.bleepingcomputer.com/news/security/microsofts-agent-framework-pypi-package-compromised-to-steal-credentials/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Cloud keys leaked in Docker Hub images are stolen within seconds",
+          "url": "https://www.bleepingcomputer.com/news/security/cloud-keys-leaked-in-docker-hub-images-are-stolen-within-seconds/"
+        }
+      ],
+      "_anchor": "i-aa9ca93e66"
+    },
+    {
+      "title": "Optimizely Attackers A/B Tested Their Malware",
+      "area": "Software Supply Chain Security",
+      "latest_developments": "Krebs on Security reported that the intruders used Optimizely's own experimentation machinery to A/B test which malware worked best on visitors to 178 top websites, and Ars Technica detailed the payload mix—cryptocurrency theft code and iOS exploits among it—served to readers of the BBC, CNN, Equifax, Ledger, and Zoom over roughly 24 hours.",
+      "summary": "Optimizely confirmed that an unauthorized party exploited a flaw in its Experimentation product and injected malicious JavaScript into customer projects, which the customers' sites then ran against their own visitors. Few of those sites enforce integrity checks on third-party scripts, so site owners should pin script hashes and keep vendor code away from checkout and login pages.",
+      "tags": [
+        "supply chain",
+        "breach",
+        "malware"
+      ],
+      "sources": [
+        {
+          "source": "Krebs on Security",
+          "title": "Attackers Used Optimizely to A/B Test Malware on Top Websites",
+          "url": "https://krebsonsecurity.com/2026/11/attackers-used-optimizely-to-a-b-test-malware-on-top-websites/"
+        },
+        {
+          "source": "Ars Technica Security",
+          "title": "Hundreds of websites deliver potent malware cocktail to unsuspecting visitors",
+          "url": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/"
+        },
+        {
+          "source": "Unit 42 (Palo Alto)",
+          "title": "Borrowed Code, Real Consequences: What OPTIMJACK Teaches Us",
+          "url": "https://unit42.paloaltonetworks.com/optimjack-supply-chain-attack/"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Optimizely Malware Attacks Highlight Third-Party Vendor Risks",
+          "url": "https://www.darkreading.com/cyber-risk/optimizely-malware-attacks-third-party-vendor-risks"
+        }
+      ],
+      "_anchor": "i-c559964442"
     },
     {
       "title": "Puppet and Roller Fall to Live Exploits",
@@ -91,78 +159,10 @@
       "_anchor": "i-94321d4b37"
     },
     {
-      "title": "Poisoned Agent Framework Steals Cloud Keys",
-      "area": "Software Supply Chain Security",
-      "latest_developments": "Attackers published malicious versions 1.26.1 and 1.26.2 of Microsoft's agent-framework package to PyPI 33 minutes apart on November 17, 2026, each one running a credential stealer every time Python starts and shipping out Azure, Azure DevOps, and GitHub Actions credentials, with Aikido, Chainguard, Endor Labs, OX Security, SafeDep, Socket, StepSecurity, and Wiz all reporting the compromise.",
-      "summary": "agent-framework is Microsoft's Python library for building AI agents, and any developer or build pipeline that installed the two poisoned releases handed over its cloud and CI credentials. Pin and audit package versions, rotate Azure and GitHub Actions secrets, and check Docker Hub images for exposed keys, which researchers watched attackers extract within eight seconds of publication.",
-      "tags": [
-        "supply chain",
-        "credential theft",
-        "ai"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Microsoft Agent Framework Releases Poisoned With Credential Stealer",
-          "url": "https://www.securityweek.com/microsoft-agent-framework-releases-poisoned-with-credential-stealer/"
-        },
-        {
-          "source": "The Hacker News",
-          "title": "Attackers Compromise Microsoft's Agent Framework PyPI Package to Steal Cloud Credentials",
-          "url": "https://thehackernews.com/2026/11/attackers-compromise-microsofts-agent.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Cloud keys leaked in Docker Hub images are stolen within seconds",
-          "url": "https://www.bleepingcomputer.com/news/security/cloud-keys-leaked-in-docker-hub-images-are-stolen-within-seconds/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Researchers hijack Hugging Face account for popular Kokoro AI model",
-          "url": "https://www.bleepingcomputer.com/news/security/researchers-hijack-hugging-face-account-for-popular-kokoro-ai-model/"
-        }
-      ],
-      "_anchor": "i-aa9ca93e66"
-    },
-    {
-      "title": "Optimizely Attackers A/B Tested Their Malware",
-      "area": "Software Supply Chain Security",
-      "latest_developments": "Krebs on Security reported that the intruders used Optimizely's own experimentation machinery to A/B test which malware worked best on visitors to 178 top websites, and Ars Technica detailed the payload mix—cryptocurrency theft code and iOS exploits among it—served to readers of the BBC, CNN, Equifax, Ledger, and Zoom over roughly 24 hours.",
-      "summary": "Optimizely confirmed that an unauthorized party exploited a flaw in its Experimentation product and injected malicious JavaScript into customer projects, which the customers' sites then ran against their own visitors. Few of those sites enforce integrity checks on third-party scripts, so site owners should pin script hashes and keep vendor code away from checkout and login pages.",
-      "tags": [
-        "supply chain",
-        "breach",
-        "malware"
-      ],
-      "sources": [
-        {
-          "source": "Krebs on Security",
-          "title": "Attackers Used Optimizely to A/B Test Malware on Top Websites",
-          "url": "https://krebsonsecurity.com/2026/11/attackers-used-optimizely-to-a-b-test-malware-on-top-websites/"
-        },
-        {
-          "source": "Ars Technica Security",
-          "title": "Hundreds of websites deliver potent malware cocktail to unsuspecting visitors",
-          "url": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/"
-        },
-        {
-          "source": "The Record",
-          "title": "Website management platform Optimizely confirms hackers put malicious code into customer sites",
-          "url": "https://therecord.media/optimizely-malicious-code-customer-sites"
-        },
-        {
-          "source": "Dark Reading",
-          "title": "Optimizely Malware Attacks Highlight Third-Party Vendor Risks",
-          "url": "https://www.darkreading.com/cyber-risk/optimizely-malware-attacks-third-party-vendor-risks"
-        }
-      ],
-      "_anchor": "i-c559964442"
-    },
-    {
       "title": "NSANet and Fugaku Go Dark",
       "area": "Critical Infrastructure Security",
-      "latest_developments": "NSANet, the classified internal network National Security Agency employees use, went down and disrupted the agency's operations, and Japan's RIKEN Center for Computational Science pulled the Fugaku supercomputer off the network after a security breach, while Apple reported disruptions to iCloud Mail, iCloud Account and Sign In, Apple School Manager, and Schoolwork.",
-      "summary": "Three high-profile systems stopped serving users inside a day, and only the Fugaku shutdown traces to a confirmed breach. Wired laid out the signals that separate a cyberattack from a failed update—vendor silence, staged recovery, and the absence of attacker claims—which usually point away from hacking.",
+      "latest_developments": "The National Security Agency entered a second day of disruption on NSANet, its classified internal network, with staggered arrivals and logins at Fort Meade while a source told The Record that classified national security work continued unimpeded; Japan's RIKEN Center for Computational Science kept the Fugaku supercomputer off the network after a security breach, and Apple worked through disruptions to iCloud Mail, iCloud Account and Sign In, Apple School Manager, and Schoolwork.",
+      "summary": "Three high-profile systems stopped serving users inside two days, and only the Fugaku shutdown traces to a confirmed breach. Vendor silence, staged recovery, and the absence of attacker claims usually point to a failed update rather than an intrusion, so responders should establish cause before an organization attributes an outage to hacking.",
       "tags": [
         "outage",
         "breach"
@@ -174,6 +174,11 @@
           "url": "https://www.securityweek.com/classified-communications-network-at-the-national-security-agency-goes-down-defense-official-says/"
         },
         {
+          "source": "The Record",
+          "title": "NSA continues response to interruptions in classified internal network",
+          "url": "https://therecord.media/nsa-continues-response-to-nsa-net-problems"
+        },
+        {
           "source": "BleepingComputer",
           "title": "Japan takes Fugaku supercomputer offlline after cyberattack",
           "url": "https://www.bleepingcomputer.com/news/security/japan-takes-fugaku-supercomputer-offlline-after-cyberattack/"
@@ -182,43 +187,38 @@
           "source": "BleepingComputer",
           "title": "Apple reports outages affecting iCloud Mail, AppleCare and more",
           "url": "https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/"
-        },
-        {
-          "source": "Wired Security",
-          "title": "How to Tell If It’s a Cyberattack or Just an Outage",
-          "url": "https://www.wired.com/story/how-to-tell-if-its-a-cyberattack-or-just-an-outage/"
         }
       ],
       "_anchor": "i-19347567d0"
     },
     {
-      "title": "Scattered Spider Ringleader Draws Six Years",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "A United States court sentenced Tyler Robert Buchanan, 24, of Dundee, Scotland, to six years in prison for stealing $11.6 million in cryptocurrency and conspiring to hack a dozen companies, which closes out the American case against Scattered Spider with the last of five defendants sentenced, the Department of Justice said.",
-      "summary": "Investigators have described Buchanan as the suspected ringleader of Scattered Spider, the English-speaking crew Microsoft calls one of the most dangerous financial criminal groups, which runs help desk impersonation and SIM swapping to take over employee accounts. Enterprises facing this playbook should harden identity verification at the help desk and require phishing-resistant authentication for account recovery.",
+      "title": "Cold Relic Turns One Cloud Breach Into Two",
+      "area": "Nation-State Activity",
+      "latest_developments": "Google's Mandiant and Threat Intelligence Group reported that Cold Relic, the Russia-linked espionage group formerly tracked as COLDRIVER and UNC4057, took data from a compromised Google Workspace tenant at one United States organization in 2026 and used it to break into a second United States organization, and SecurityWeek added that the group, which Microsoft tracks as Star Blizzard, impersonated an employee of the firm it hacked in late 2025 to make the follow-on phishing credible against that employee's professional network.",
+      "summary": "Cold Relic collects credentials and documents from cloud accounts and mines them for the relationships that open the next victim. Organizations sharing Workspace or Microsoft 365 collaboration with a breached partner should assume the attacker read that correspondence and reset federated trust and tokens accordingly.",
       "tags": [
-        "cybercrime",
-        "law enforcement",
-        "social engineering"
+        "apt",
+        "espionage",
+        "cloud"
       ],
       "sources": [
         {
-          "source": "The Record",
-          "title": "British hacker gets 6 year sentence for $11.6M crypto theft scheme",
-          "url": "https://therecord.media/british-hacker-gets-six-year-sentence-scattered-spider"
+          "source": "The Hacker News",
+          "title": "Russian COLD RELIC Hackers Use Stolen Google Workspace Data to Breach Second U.S. Organization",
+          "url": "https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html"
         },
         {
           "source": "SecurityWeek",
-          "title": "Last of Five Defendants Sentenced in US Scattered Spider Hacking Case",
-          "url": "https://www.securityweek.com/last-of-five-defendants-sentenced-in-us-scattered-spider-hacking-case/"
+          "title": "Russian APT Poses as Employee of Hacked Firm to Breach Another US Organization",
+          "url": "https://www.securityweek.com/russian-apt-poses-as-employee-of-hacked-firm-to-breach-another-us-organization/"
         },
         {
-          "source": "BleepingComputer",
-          "title": "British Scattered Spider hacker sentenced to 6 years in prison",
-          "url": "https://www.bleepingcomputer.com/news/security/british-scattered-spider-hacker-sentenced-to-6-years-in-prison/"
+          "source": "The Record",
+          "title": "Russian cyber-espionage group used stolen cloud data to hack into organizations, Google says",
+          "url": "https://therecord.media/russia-cyber-espionage-google"
         }
       ],
-      "_anchor": "i-69958fa42a"
+      "_anchor": "i-ee9a23761b"
     },
     {
       "title": "Equinor and the IIHF Absorb Attacks",
@@ -250,28 +250,33 @@
       "_anchor": "i-58112a1964"
     },
     {
-      "title": "Cold Relic Turns One Cloud Breach Into Two",
-      "area": "Nation-State Activity",
-      "latest_developments": "Google's Mandiant and Threat Intelligence Group reported that Cold Relic, the Russia-linked espionage group formerly tracked as COLDRIVER and UNC4057, took data from a compromised Google Workspace tenant at one United States organization in 2026 and used it to break into a second United States organization, and SecurityWeek added that the group, which Microsoft tracks as Star Blizzard, impersonated an employee of the firm it hacked in late 2025 to make the follow-on phishing credible.",
-      "summary": "Cold Relic collects credentials and documents from cloud accounts and mines them for the relationships that open the next victim. Organizations sharing Workspace or Microsoft 365 collaboration with a breached partner should assume the attacker read that correspondence and reset federated trust and tokens accordingly.",
+      "title": "Scattered Spider Ringleader Draws Six Years",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "A United States court sentenced Tyler Robert Buchanan, 24, of Dundee, Scotland, to six years in prison for stealing $11.6 million in cryptocurrency and conspiring to hack a dozen companies, which closes out the American case against Scattered Spider with the last of five defendants sentenced, the Department of Justice said.",
+      "summary": "Investigators have described Buchanan as the suspected ringleader of Scattered Spider, the English-speaking crew Microsoft calls one of the most dangerous financial criminal groups, which runs help desk impersonation and SIM swapping to take over employee accounts. Enterprises facing this playbook should harden identity verification at the help desk and require phishing-resistant authentication for account recovery.",
       "tags": [
-        "apt",
-        "espionage",
-        "cloud"
+        "cybercrime",
+        "law enforcement",
+        "social engineering"
       ],
       "sources": [
         {
-          "source": "The Hacker News",
-          "title": "Russian COLD RELIC Hackers Use Stolen Google Workspace Data to Breach Second U.S. Organization",
-          "url": "https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html"
+          "source": "The Record",
+          "title": "British hacker gets 6 year sentence for $11.6M crypto theft scheme",
+          "url": "https://therecord.media/british-hacker-gets-six-year-sentence-scattered-spider"
         },
         {
           "source": "SecurityWeek",
-          "title": "Russian APT Poses as Employee of Hacked Firm to Breach Another US Organization",
-          "url": "https://www.securityweek.com/russian-apt-poses-as-employee-of-hacked-firm-to-breach-another-us-organization/"
+          "title": "Last of Five Defendants Sentenced in US Scattered Spider Hacking Case",
+          "url": "https://www.securityweek.com/last-of-five-defendants-sentenced-in-us-scattered-spider-hacking-case/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "British Scattered Spider hacker sentenced to 6 years in prison",
+          "url": "https://www.bleepingcomputer.com/news/security/british-scattered-spider-hacker-sentenced-to-6-years-in-prison/"
         }
       ],
-      "_anchor": "i-ee9a23761b"
+      "_anchor": "i-69958fa42a"
     },
     {
       "title": "Malware C2 Moves Onto Public Blockchains",
@@ -362,8 +367,8 @@
     }
   ],
   "weather": [
-    "Today: Sunny, high 58F.",
-    "Tonight: Clear, low 31F.",
+    "This Afternoon: Sunny, high 58F.",
+    "Tonight: Clear, low 33F.",
     "Thursday: Sunny, high 62F."
   ],
   "sports": [
@@ -392,6 +397,24 @@
   ],
   "local": {
     "business_politics": [
+      {
+        "title": "Democrats Nominate Jeffries for Speaker",
+        "latest_developments": "House Democrats nominated Hakeem Jeffries for speaker in a closed-door secret ballot Wednesday, November 18, with no declared opponent against him.",
+        "summary": "Jeffries, the 56-year-old Brooklyn Democrat who has led House Democrats since 2023, worked through the fall to tamp down caucus dissent after the party's large midterm gains. He stands on track to become the first Black lawmaker to hold the gavel when the new Congress convenes in January, which puts him in charge of the chamber that writes tax, spending, and financial legislation.",
+        "sources": [
+          {
+            "source": "WSJ Politics",
+            "title": "House Democratic Leader Hakeem Jeffries won his party's nomination for speaker in a closed-door vote with no declared opponent",
+            "url": "https://www.wsj.com/politics/democrats-back-hakeem-jeffries-for-speaker-in-secret-ballot-6403e6e1?mod=rss_socialpoliticsfeed"
+          },
+          {
+            "source": "FT Home",
+            "title": "Democrats nominate Hakeem Jeffries as US House Speaker",
+            "url": "https://www.ft.com/content/9d0998cf-ffb8-4fe4-9f85-0c403b1966f9?syn-25a6b1a6=1"
+          }
+        ],
+        "_anchor": "i-66d05a1b06"
+      },
       {
         "title": "Waller Pushes a Supersized December Increase",
         "latest_developments": "Federal Reserve Governor Christopher Waller repeated his call Wednesday, November 18, for an outsized interest rate increase at the December meeting, which lifted Treasury yields, while the euro slid against the dollar as pressure returned to French and peripheral eurozone government bonds.",
@@ -429,7 +452,7 @@
         "summary": "Nvidia reported that revenue doubled last quarter and lifted next year's guidance in its first results since Jensen Huang resigned and the board installed finance chief Kress as interim chief. The company still carries a Securities and Exchange Commission disclosure investigation, congressional scrutiny of its China sales, and an unfinished search for a permanent chief, so the questions about its future outlast the quarter.",
         "sources": [
           {
-            "source": "FT Markets",
+            "source": "FT World",
             "title": "Wall Street set to open higher after Nvidia results reassure investors",
             "url": "https://www.ft.com/content/f085b811-fc20-425f-88d8-9f98e178636a?syn-25a6b1a6=1"
           },
@@ -476,6 +499,32 @@
       }
     ],
     "business": [
+      {
+        "title": "Highmark's Insurance Arm Swings to $673 Million",
+        "latest_developments": "Highmark Health Plans posted a $673 million profit, WPXI reported Wednesday, November 18, and Chief Financial Officer Carl Daley said one segment of the business remains in a multiyear turnaround.",
+        "summary": "Highmark Health Plans sells coverage to roughly 7 million members across Pennsylvania, Delaware, West Virginia, and New York for Pittsburgh-based Highmark Health, the parent of Allegheny Health Network. The swing to profit follows a stretch of losses in the insurance unit, and Daley's turnaround language signals more work ahead on pricing and medical costs.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Highmark Health Plans swings to $673M profit while one segment faces a 'multiyear turnaround'",
+            "url": "https://www.wpxi.com/news/local/highmark-health-plans-swings-673m-profit-while-one-segment-faces-multiyear-turnaround/I2OGFHDBHVBL5J4AA3LQNGR2JQ/"
+          }
+        ],
+        "_anchor": "i-c2a68d63f4"
+      },
+      {
+        "title": "A $937,500 Grant for the Westinghouse Site",
+        "latest_developments": "Pennsylvania approved a $937,500 grant Wednesday, November 18, for environmental assessment and cleanup at the former Westinghouse East Pittsburgh Works, with leasable space as the goal.",
+        "summary": "The East Pittsburgh plant, where Westinghouse Electric built generators and transformers for much of the 20th century, has sat largely idle and contaminated along the Turtle Creek valley. The grant pays for the testing and remediation that must come before any tenant signs a lease.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Nearly $1M approved to remediate former Westinghouse East Pittsburgh Works site, create leased space",
+            "url": "https://www.wpxi.com/news/local/nearly-1m-approved-remediate-former-westinghouse-east-pittsburgh-works-site-create-leased-space/PT7V4N6QGBDB7AOTUVLYRZPE4U/"
+          }
+        ],
+        "_anchor": "i-64de2300a4"
+      },
       {
         "title": "The New Terminal Turns One",
         "latest_developments": "Pittsburgh International Airport holds a program Wednesday, November 18, marking the first anniversary of its $1.7 billion terminal and the building's effect on the region.",
@@ -546,6 +595,50 @@
     ],
     "around_town": [
       {
+        "title": "Allegheny County Leads the State in Plate Readers",
+        "latest_developments": "NEXTpittsburgh reported Wednesday, November 18, that Allegheny County holds more automated license plate readers than any other Pennsylvania county.",
+        "summary": "The cameras sit on poles at intersections and highway ramps across the county and photograph every car that passes, feeding databases that police departments search. The spread raises the question of how long those records sit and who may run them.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh",
+            "title": "Allegheny County has more license plate readers than any other Pa. county. Here's what's at stake",
+            "url": "https://nextpittsburgh.com/latest-news/allegheny-county-has-more-license-plate-readers-than-any-other-pa-county/"
+          }
+        ],
+        "_anchor": "i-9cc5b456b9"
+      },
+      {
+        "title": "Two Nights of Lane Closings in the Bathtub",
+        "latest_developments": "PennDOT announced overnight lane restrictions on westbound Interstate 376 through the Bathtub section of the Parkway East starting Wednesday night, November 18, and running two nights, weather permitting.",
+        "summary": "The Bathtub carries Parkway East traffic below grade past downtown Pittsburgh toward the Fort Pitt Tunnel, and construction there squeezes the only straight route between the eastern suburbs and the city. Drivers heading west late at night should expect single-lane backups.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Construction to restrict traffic on Bathtub section of Parkway East for 2 nights",
+            "url": "https://www.wpxi.com/news/local/construction-restrict-traffic-bathtub-section-parkway-east-2-nights/F3ZLKYJWBNGN7O4YXRWYQY74EI/"
+          }
+        ],
+        "_anchor": "i-6173ca203f"
+      },
+      {
+        "title": "Amtrak Doubles the Pennsylvanian",
+        "latest_developments": "Amtrak's second daily Pennsylvanian round trip between Pittsburgh and New York began carrying passengers Wednesday, November 18, stopping at Harrisburg and Philadelphia along the way.",
+        "summary": "The Pennsylvanian has run once a day across the state, stopping at Greensburg on its way east through Philadelphia to New York. A second frequency gives Western Pennsylvania riders a choice of departure times for the first time in decades.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Amtrak adds 2nd daily Pennsylvanian train between Pittsburgh, New York",
+            "url": "https://triblive.com/local/westmoreland/amtrak-adds-2nd-daily-pennsylvanian-train-between-pittsburgh-new-york/"
+          },
+          {
+            "source": "WTAE",
+            "title": "All aboard: Amtrak's second Pittsburgh-New York route is now running",
+            "url": "https://www.wtae.com/article/amtrak-pittsburgh-new-york-train-pennsylvanian/74467110"
+          }
+        ],
+        "_anchor": "i-74fa70222b"
+      },
+      {
         "title": "PublicSource Opens Up the City Budget",
         "latest_developments": "PublicSource published an explainer Wednesday, November 18, on how it built its Pittsburgh Budget Explorer, what role artificial intelligence played in the work, and what readers should keep in mind when using it.",
         "summary": "The tool lets residents search Mayor Corey O'Connor's proposed 2027 city budget, which City Council spent Tuesday hearing testimony on, much of it over cuts to the Stop the Violence and Housing Opportunity trust funds. Council must adopt a final budget by the end of December.",
@@ -595,19 +688,6 @@
         "_anchor": "i-33871f1f94"
       },
       {
-        "title": "Amtrak Doubles the Pennsylvanian",
-        "latest_developments": "Amtrak has added a second daily Pennsylvanian round trip between Pittsburgh and New York, TribLive reported Wednesday, November 18.",
-        "summary": "The Pennsylvanian has run once a day across the state, stopping at Greensburg on its way east through Philadelphia to New York. A second frequency gives Western Pennsylvania riders a choice of departure times for the first time in decades.",
-        "sources": [
-          {
-            "source": "TribLive",
-            "title": "Amtrak adds 2nd daily Pennsylvanian train between Pittsburgh, New York",
-            "url": "https://triblive.com/local/westmoreland/amtrak-adds-2nd-daily-pennsylvanian-train-between-pittsburgh-new-york/"
-          }
-        ],
-        "_anchor": "i-74fa70222b"
-      },
-      {
         "title": "West Mifflin Consolidation Draws a Petition",
         "latest_developments": "PublicSource reported Wednesday, November 18, that the West Mifflin Area School District's school consolidation proposal has produced a petition calling for the superintendent's termination.",
         "summary": "The district has floated closing and combining buildings, and parents say the plan arrived with too little explanation. The fight revives longer-running complaints about district leadership in the Allegheny County community.",
@@ -645,6 +725,58 @@
       }
     ],
     "events": [
+      {
+        "title": "Light Up Night Leads the Weekend",
+        "latest_developments": "NEXTpittsburgh published its weekend guide Wednesday, November 18, covering Thursday, November 19, through Sunday, November 22, with more than 13 things to do.",
+        "summary": "The guide leads with Light Up Night downtown, Holiday Magic at Phipps Conservatory and Botanical Gardens in Oakland, and a Cryptid Film Festival, and fills out with fall festivals, craft markets, art openings, and theater around the city.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "13+ things to do this weekend, from Light Up Night and Phipps Holiday Magic to a Cryptid Film Festival",
+            "url": "https://nextpittsburgh.com/events/13-things-to-do-this-weekend-nov-19-22-2026/"
+          }
+        ],
+        "_anchor": "i-766c53724f"
+      },
+      {
+        "title": "Jhené Aiko Returns to PPG Paints Arena",
+        "latest_developments": "WPXI reported Wednesday, November 18, that Jhené Aiko will play PPG Paints Arena in 2027.",
+        "summary": "The Grammy-nominated singer and songwriter comes back to the Uptown arena, her first Pittsburgh date since her last tour stop here.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Jhené Aiko returns to PPG Paints Arena in 2027",
+            "url": "https://www.wpxi.com/news/local/jhen-aiko-returns-ppg-paints-arena-2027/GAIOO6DJTJAQFC5R3ZNL3C4Z7Y/"
+          }
+        ],
+        "_anchor": "i-420c422fcb"
+      },
+      {
+        "title": "The Historic House Hop Returns November 28",
+        "latest_developments": "TribLive reported Wednesday, November 18, that the Historic House Hop in Washington, Pennsylvania, returns Saturday, November 28, from 11 a.m. to 2 p.m.",
+        "summary": "The hop walks visitors through historic houses in the city of Washington, Washington County, with local history the draw at each stop.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Historic House Hop in Washington, Pa., returns Nov. 28 with unique opportunities",
+            "url": "https://triblive.com/news/visit-washington-county/historic-house-hop-in-washington-pa-returns-nov-28-with-unique-opportunities/"
+          }
+        ],
+        "_anchor": "i-725a159f4a"
+      },
+      {
+        "title": "Three Sauropods Come to the Carnegie",
+        "latest_developments": "Pittsburgh Magazine reported Wednesday, November 18, that the Carnegie Museum of Natural History will soon display three sauropod fossils named Daisy, Lucky, and Lucy.",
+        "summary": "The three dinosaurs lived about 150 million years ago and arrive in Oakland on a decades-long loan that Kenneth C. Griffin facilitated, joining a hall already built on the museum's Diplodocus carnegii.",
+        "sources": [
+          {
+            "source": "Pittsburgh Magazine",
+            "title": "Three New Dinosaurs Will Soon Be On Display in Pittsburgh",
+            "url": "https://www.pittsburghmagazine.com/carnegie-museum-of-natural-history-new-dinosaurs-2026/"
+          }
+        ],
+        "_anchor": "i-a14264e48a"
+      },
       {
         "title": "Delmont Sets Its Holidaze Date",
         "latest_developments": "Delmont officials said Wednesday, November 18, that Toys for Pittsburgh Tikes will partner with the borough on this year's Holidaze event.",
@@ -688,6 +820,50 @@
       }
     ],
     "team_usa": [
+      {
+        "title": "Coffey Returns for World Cup Qualifying",
+        "latest_developments": "U.S. Soccer named midfielder Sam Coffey to the United States women's national team roster for World Cup qualifying Wednesday, November 18, bringing her back for a camp that assembles later this month.",
+        "summary": "Coach Emma Hayes takes the squad into the Concacaf W Championship, the tournament that decides the United States place at the 2027 World Cup, without defender Naomi Girma, whom Chelsea has ruled out with an injury. Coffey anchors the midfield alongside the attacking core Hayes has built since the Paris Olympics.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "Sam Coffey returns to USWNT roster for World Cup qualifying",
+            "url": "https://www.espn.com/soccer/story/_/id/50520685/sam-coffey-returns-uswnt-roster-world-cup-qualifying"
+          }
+        ],
+        "_anchor": "i-a6ca8c3eb8"
+      },
+      {
+        "title": "Hayes Joins the Men's Coaching Search",
+        "latest_developments": "Emma Hayes said Wednesday, November 18, that she will help U.S. Soccer search for the next men's national team head coach, judging candidates \"through a technical lens.\"",
+        "summary": "Hayes coaches the United States women's team and now lends her judgment to the federation's hunt for a replacement for Mauricio Pochettino, who reported for his first day at Manchester United the same day and asked fans there for time. Steve Cherundolo runs the men's December camp on an interim basis, with a Concacaf Nations League semifinal against Mexico waiting.",
+        "sources": [
+          {
+            "source": "ESPN Soccer",
+            "title": "USWNT's Emma Hayes on role in USMNT coach search: 'Through a technical lens'",
+            "url": "https://www.espn.com/soccer/story/_/id/50522474/uswnt-emma-hayes-role-usmnt-coach-search-technical-lens"
+          },
+          {
+            "source": "ESPN Soccer",
+            "title": "Pochettino arrives at Man United, he vows: 'You will see, give me time'",
+            "url": "https://www.espn.com/soccer/story/_/id/50518493/mauricio-pochettino-man-united-premier-league"
+          }
+        ],
+        "_anchor": "i-52a19bf93a"
+      },
+      {
+        "title": "USA Basketball Names Its Qualifying Roster",
+        "latest_developments": "USA Basketball announced its roster Wednesday, November 18, for FIBA World Cup qualifying games late this month.",
+        "summary": "The United States stands on the verge of clinching a World Cup berth and plays the qualifying window with a roster drawn outside the NBA's in-season player pool. Two wins in the window would settle the Americans' place in the tournament.",
+        "sources": [
+          {
+            "source": "ESPN Olympics",
+            "title": "USA Basketball announces roster for World Cup qualifying games in Nov.",
+            "url": "https://www.espn.com/olympics/story/_/id/50522288/usa-basketball-picks-roster-world-cup-qualifying-games"
+          }
+        ],
+        "_anchor": "i-ddc292f77d"
+      },
       {
         "title": "ESPN Leaves the U.S. Out of Its 2030 Top 15",
         "latest_developments": "ESPN published early power rankings for the 2030 World Cup Wednesday, November 18, keeping Spain first after England's win over the Spaniards and placing the United States men's national team outside the top 15.",
@@ -766,147 +942,133 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Cisco Talos scored Java4Shell 9.2 while CISA logged live exploitation of Perforce Puppet's CVE-2026-115731, leaving defenders patching behind attackers rather than ahead of them.",
+      "text": "Attackers keep riding trusted vendor code, injecting malware into Optimizely's experimentation scripts and publishing poisoned agent-framework builds to PyPI that steal Azure credentials every time Python starts.",
       "links": [
-        {
-          "anchor": "i-d365ad8c28",
-          "phrase": "Java4Shell",
-          "start": 19,
-          "end": 29,
-          "title": "Java4Shell Narrows to AVX-512 Chips"
-        },
-        {
-          "anchor": "i-94321d4b37",
-          "phrase": "Perforce Puppet",
-          "start": 73,
-          "end": 88,
-          "title": "Puppet and Roller Fall to Live Exploits"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Enterprise intrusions now travel through developer and vendor plumbing, from malicious agent-framework releases on PyPI to Optimizely's own A/B testing machinery and command-and-control hidden in public blockchains.",
-      "links": [
-        {
-          "anchor": "i-aa9ca93e66",
-          "phrase": "agent-framework",
-          "start": 87,
-          "end": 102,
-          "title": "Poisoned Agent Framework Steals Cloud Keys"
-        },
         {
           "anchor": "i-c559964442",
           "phrase": "Optimizely",
-          "start": 123,
-          "end": 133,
+          "start": 66,
+          "end": 76,
           "title": "Optimizely Attackers A/B Tested Their Malware"
         },
         {
-          "anchor": "i-e3a24527dd",
-          "phrase": "public blockchains",
-          "start": 196,
-          "end": 214,
-          "title": "Malware C2 Moves Onto Public Blockchains"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Russia-aligned activity runs loud and quiet at once, with Cold Relic reusing a breached Google Workspace tenant to phish the next victim while defacers hit the IIHF.",
-      "links": [
-        {
-          "anchor": "i-ee9a23761b",
-          "phrase": "Cold Relic",
-          "start": 58,
-          "end": 68,
-          "title": "Cold Relic Turns One Cloud Breach Into Two"
-        },
-        {
-          "anchor": "i-58112a1964",
-          "phrase": "IIHF",
-          "start": 160,
-          "end": 164,
-          "title": "Equinor and the IIHF Absorb Attacks"
+          "anchor": "i-aa9ca93e66",
+          "phrase": "agent-framework",
+          "start": 127,
+          "end": 142,
+          "title": "Poisoned Agent Framework Steals Cloud Keys"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "A United States court gave Scattered Spider figure Tyler Buchanan six years, and TU Berlin researchers showed a flash-chip reset that cracks BitLocker PINs on AMD machines.",
+      "status": "updated",
+      "text": "NSANet entered a second day of disruption at Fort Meade alongside Japan's Fugaku shutdown and Apple's iCloud Mail outage, with only Fugaku tied to a confirmed breach.",
       "links": [
         {
-          "anchor": "i-69958fa42a",
-          "phrase": "Tyler Buchanan",
-          "start": 51,
-          "end": 65,
-          "title": "Scattered Spider Ringleader Draws Six Years"
+          "anchor": "i-19347567d0",
+          "phrase": "NSANet",
+          "start": 0,
+          "end": 6,
+          "title": "NSANet and Fugaku Go Dark"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "updated",
+      "text": "Mandiant traced Cold Relic from one compromised Google Workspace tenant into a partner organization, using stolen correspondence to give follow-on phishing the right names, projects, and tone.",
+      "links": [
+        {
+          "anchor": "i-ee9a23761b",
+          "phrase": "Cold Relic",
+          "start": 16,
+          "end": 26,
+          "title": "Cold Relic Turns One Cloud Breach Into Two"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Exploitation and research keep narrowing to specific hardware and trust anchors, from CISA-listed Puppet certificate abuse to Java4Shell's AVX-512-only reach and a TPM reset that cracks BitLocker PINs.",
+      "links": [
+        {
+          "anchor": "i-94321d4b37",
+          "phrase": "Puppet",
+          "start": 98,
+          "end": 104,
+          "title": "Puppet and Roller Fall to Live Exploits"
+        },
+        {
+          "anchor": "i-d365ad8c28",
+          "phrase": "Java4Shell",
+          "start": 126,
+          "end": 136,
+          "title": "Java4Shell Narrows to AVX-512 Chips"
         },
         {
           "anchor": "i-74d12e4423",
-          "phrase": "BitLocker PINs",
-          "start": 141,
-          "end": 155,
+          "phrase": "BitLocker",
+          "start": 186,
+          "end": 195,
           "title": "A Flash Chip Attack Cracks BitLocker PINs"
         }
       ]
     },
     {
-      "kind": "Update",
-      "status": "new",
-      "text": "Macro risk crowds in with Waller pushing an outsized December rate increase, Nvidia's raised forecast failing to hold a rally, and Trump meeting Xi and Putin in Shenzhen.",
+      "kind": "Trend",
+      "status": null,
+      "text": "Nvidia's raised forecast steadied the AI trade only briefly, while Ben Thompson reads the quarter as uneventful and Zitron casts the company as the bubble's center.",
       "links": [
         {
-          "anchor": "i-3bd8766dec",
-          "phrase": "Waller",
-          "start": 26,
-          "end": 32,
-          "title": "Waller Pushes a Supersized December Increase"
-        },
-        {
           "anchor": "i-74b926ce1c",
-          "phrase": "Nvidia's",
-          "start": 77,
-          "end": 85,
+          "phrase": "raised forecast",
+          "start": 9,
+          "end": 24,
           "title": "Nvidia's Results Steady the AI Trade"
         },
         {
-          "anchor": "i-968cb4db8b",
-          "phrase": "Shenzhen",
-          "start": 161,
-          "end": 169,
-          "title": "Trump, Xi, and Putin Meet in China"
+          "anchor": "i-4618f5d2a9",
+          "phrase": "Ben Thompson",
+          "start": 67,
+          "end": 79,
+          "title": "Nvidia Earnings; Office Convergence; OS Wars, AI Edition"
+        },
+        {
+          "anchor": "i-f75c581b60",
+          "phrase": "Zitron",
+          "start": 116,
+          "end": 122,
+          "title": "The NVIDIA Bubble"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Locally, Waymo pulled robotaxis off California freeways, PublicSource opened up its Pittsburgh Budget Explorer, and Pittsburgh International marked one year of its $1.7 billion terminal.",
+      "text": "Allegheny County leads the state in automated license plate readers, Amtrak's second daily Pennsylvanian round trip started carrying riders, and PennDOT closes Bathtub lanes on I-376 overnight.",
       "links": [
         {
-          "anchor": "i-e65b7f124e",
-          "phrase": "Waymo",
-          "start": 9,
-          "end": 14,
-          "title": "Waymo Pulls Robotaxis Off Freeways"
+          "anchor": "i-9cc5b456b9",
+          "phrase": "Allegheny County",
+          "start": 0,
+          "end": 16,
+          "title": "Allegheny County Leads the State in Plate Readers"
         },
         {
-          "anchor": "i-5c863e9baa",
-          "phrase": "Budget Explorer",
-          "start": 95,
-          "end": 110,
-          "title": "PublicSource Opens Up the City Budget"
+          "anchor": "i-74fa70222b",
+          "phrase": "Pennsylvanian",
+          "start": 91,
+          "end": 104,
+          "title": "Amtrak Doubles the Pennsylvanian"
         },
         {
-          "anchor": "i-99d61a0677",
-          "phrase": "Pittsburgh International",
-          "start": 116,
-          "end": 140,
-          "title": "The New Terminal Turns One"
+          "anchor": "i-6173ca203f",
+          "phrase": "Bathtub",
+          "start": 160,
+          "end": 167,
+          "title": "Two Nights of Lane Closings in the Bathtub"
         }
       ]
     }
@@ -920,13 +1082,14 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 68,
+        "in_window": 63,
         "failed": [],
         "empty": [
           "CISA Advisories",
           "Sophos News",
           "Google Online Security Blog",
           "Graham Cluley",
+          "Microsoft Security Blog",
           "Google Project Zero",
           "The DFIR Report",
           "Kim Zetter (Zero Day)",
@@ -935,13 +1098,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 10,
+            "contributed": 10
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 10,
+            "contributed": 10
           },
           "Krebs on Security": {
             "items": 10,
@@ -955,8 +1118,8 @@
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "SecurityWeek": {
             "items": 10,
@@ -1020,8 +1183,8 @@
           },
           "Microsoft Security Blog": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Google Project Zero": {
             "items": 7,
@@ -1040,8 +1203,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 4,
+            "contributed": 4
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1050,8 +1213,8 @@
           },
           "Wired Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           }
         }
       },
@@ -1073,7 +1236,7 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 20
+            "contributed": 14
           },
           "Pittsburgh Post-Gazette": {
             "items": 0,
@@ -1083,17 +1246,17 @@
           "PublicSource": {
             "items": 10,
             "in_window": 3,
-            "contributed": 2
+            "contributed": 0
           },
           "Pittsburgh City Paper": {
             "items": 10,
             "in_window": 5,
-            "contributed": 2
+            "contributed": 0
           },
           "NEXTpittsburgh": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 0
+            "in_window": 2,
+            "contributed": 2
           },
           "Pittsburgh Magazine": {
             "items": 30,
@@ -1103,12 +1266,12 @@
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 9
+            "contributed": 13
           },
           "WPXI": {
             "items": 15,
-            "in_window": 15,
-            "contributed": 6
+            "in_window": 14,
+            "contributed": 10
           },
           "WTAE": {
             "items": 20,
@@ -1129,43 +1292,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 72,
-            "in_window": 30,
-            "contributed": 4
+            "in_window": 32,
+            "contributed": 8
           },
           "WSJ Markets": {
             "items": 61,
             "in_window": 34,
-            "contributed": 10
+            "contributed": 13
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 55,
-            "contributed": 11
+            "in_window": 57,
+            "contributed": 10
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 13,
-            "contributed": 1
+            "in_window": 14,
+            "contributed": 2
           },
           "The Economist": {
             "items": 300,
-            "in_window": 108,
-            "contributed": 24
+            "in_window": 115,
+            "contributed": 11
           },
           "FT Home": {
-            "items": 12,
-            "in_window": 12,
-            "contributed": 4
+            "items": 11,
+            "in_window": 11,
+            "contributed": 5
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 5
+            "contributed": 11
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 24,
-            "contributed": 1
+            "in_window": 21,
+            "contributed": 0
           }
         }
       },
@@ -1175,7 +1338,7 @@
         "feeds": 4,
         "loaded": 2,
         "window_hours": 120,
-        "in_window": 0,
+        "in_window": 1,
         "failed": [
           {
             "name": "Post-Gazette Arts & Entertainment",
@@ -1186,10 +1349,7 @@
             "error": "HTTPError: HTTP Error 404: Not Found"
           }
         ],
-        "empty": [
-          "NEXTpittsburgh Events",
-          "NEXTpittsburgh Arts & Entertainment"
-        ],
+        "empty": [],
         "per_feed": {
           "Post-Gazette Arts & Entertainment": {
             "items": 0,
@@ -1203,12 +1363,12 @@
           },
           "NEXTpittsburgh Events": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "NEXTpittsburgh Arts & Entertainment": {
             "items": 10,
-            "in_window": 0,
+            "in_window": 1,
             "contributed": 0
           }
         }
@@ -1270,24 +1430,26 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 38,
+        "in_window": 37,
         "failed": [],
-        "empty": [],
+        "empty": [
+          "Guardian Olympics"
+        ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 25,
-            "in_window": 25,
-            "contributed": 25
+            "items": 24,
+            "in_window": 24,
+            "contributed": 24
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 12,
-            "contributed": 12
+            "in_window": 13,
+            "contributed": 13
           },
           "Guardian Olympics": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           }
         }
       },
@@ -1343,24 +1505,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 28178,
+          "outputTokens": 33629,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 126943,
+          "cacheCreationInputTokens": 132635,
           "webSearchRequests": 0,
-          "costUSD": 1.97391,
+          "costUSD": 2.1671050000000003,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 10593
+          "thinkingTokens": 11732
         }
       },
-      "cost_usd": 1.97391,
-      "duration_ms": 303956,
+      "cost_usd": 2.1671050000000003,
+      "duration_ms": 355186,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-18 10:05 EST",
-    "items_considered": 68,
+    "generated_at": "2026-11-18 13:36 EST",
+    "items_considered": 63,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1441,8 +1603,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.9739,
-    "model_duration_ms": 303956,
+    "model_cost_usd": 2.1671,
+    "model_duration_ms": 355186,
     "local_from": null,
     "feed_failures": [
       "Pittsburgh Post-Gazette",
