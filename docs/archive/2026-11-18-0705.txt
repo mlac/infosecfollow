@@ -1,0 +1,465 @@
+================================================================
+INFOSECFOLLOW -- security, markets, business, pittsburgh
+Wednesday, November 18, 2026 - 7:05 AM EST
+================================================================
+
+Java4Shell hardened into a scored, demonstrated remote code
+execution bug in OpenJDK as attackers poisoned Microsoft's own
+agent-framework package on PyPI and harvested developer cloud
+keys within seconds of exposure.
+
+CONTENTS: Emerging Trends and Key Updates | Security | Business
+and Politics | Pittsburgh | Sports | Reading | Markets | Feed
+Health
+
+EMERGING TRENDS AND KEY UPDATES
+----------------------------------------------------------------
+* [TREND] Java4Shell's blast radius narrowed to AVX-512 chips
+  just as CISA flagged live exploitation of Perforce Puppet's
+  CVE-2026-115731, shifting the day's urgency from scoping to
+  patching.
+  see: Java4Shell Narrows to AVX-512 Chips; Puppet and Roller
+  Fall to Live Exploits
+* [TREND] Attackers are hunting developers and their visitors at
+  once, with a poisoned agent-framework release on PyPI lifting
+  Azure tokens and Optimizely's own experimentation tools A/B
+  testing malware.
+  see: Poisoned Agent Framework Steals Cloud Keys; Optimizely
+  Attackers A/B Tested Their Malware
+* [TREND] Takedown-proof tradecraft is spreading as Talos tracks
+  UAT-12643 parking command-and-control in public blockchain
+  transactions and Cold Relic pivots from one stolen Google
+  Workspace tenant into a second organization.
+  see: Malware C2 Moves Onto Public Blockchains; Cold Relic
+  Turns One Cloud Breach Into Two
+* [UPDATE (new)] NSANet went dark at the National Security
+  Agency the same day RIKEN pulled Fugaku offline after a
+  breach, leaving staff guessing between attack and bad update.
+  see: NSANet and Fugaku Go Dark
+* [UPDATE (new)] Nvidia raised its forecast and told investors
+  it's business as usual, steadying the AI trade even as Zitron
+  calls the company the bubble's center and Thompson shrugs.
+  see: Nvidia's Results Steady the AI Trade; The NVIDIA Bubble;
+  Nvidia Earnings; Office Convergence; OS Wars, AI Edition
+* [UPDATE (new)] Murrysville tabled the Meijer vote, unions
+  rallied against the downtown tax zone at Allegheny County
+  Council, and Amtrak added a second daily Pennsylvanian round
+  trip to New York.
+  see: Murrysville Tables the Meijer Vote; Unions Press the
+  Downtown Tax Zone; Amtrak Doubles the Pennsylvanian
+
+SECURITY
+----------------------------------------------------------------
+
+1. JAVA4SHELL NARROWS TO AVX-512 CHIPS
+   Vulnerabilities and Exploits · [zero-day, patch,
+   vulnerability]
+   Latest developments: Cisco Talos scored Java4Shell at 9.2
+   under CVSS 4.0, and researchers pinned down its reach: the
+   vulnerable code runs only on Java 17.0.6 and later and only
+   on x86-64 Intel and AMD processors that support the AVX-512
+   VBMI feature, with Calif demonstrating remote code execution
+   against Jira, Jenkins, and Keycloak while VulnCheck says a
+   working attack takes per-target engineering and no one has
+   yet confirmed a successful intrusion.
+   CVE-2026-114938 is an out-of-bounds write in the Base64
+   decoder of OpenJDK that hands an unauthenticated attacker
+   denial of service or code execution on Jenkins, Atlassian
+   Jira, Confluence, Keycloak, and other Java servers reaching
+   most of the Fortune 500. Oracle and the OpenJDK project
+   released fixes on November 17, 2026, and CISA tells
+   organizations to patch immediately.
+   - Cisco Talos: https://blog.talosintelligence.com/java4shell/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/18/java4shell-openjdk-vulnerability-cve-2026-114938/
+   - SecurityWeek: https://www.securityweek.com/java4shell-vulnerability-puts-many-enterprise-applications-at-risk-of-takeover/
+   - The Record: https://therecord.media/cisa-issues-java4shell-alert
+
+2. POISONED AGENT FRAMEWORK STEALS CLOUD KEYS
+   Software Supply Chain Security · [supply chain, credential
+   theft, ai]
+   Latest developments: Attackers published malicious versions
+   1.26.1 and 1.26.2 of Microsoft's agent-framework package to
+   PyPI 33 minutes apart on November 17, 2026, each one running
+   a credential stealer every time Python starts and shipping
+   out Azure, Azure DevOps, and GitHub Actions credentials, with
+   Aikido, Chainguard, Endor Labs, OX Security, SafeDep, Socket,
+   StepSecurity, and Wiz all reporting the compromise.
+   agent-framework is Microsoft's Python library for building AI
+   agents, and any developer or build pipeline that installed
+   the two poisoned releases handed over its cloud and CI
+   credentials. Pin and audit package versions, rotate Azure and
+   GitHub Actions secrets, and check Docker Hub images for
+   exposed keys, which researchers watched attackers extract
+   within eight seconds of publication.
+   - SecurityWeek: https://www.securityweek.com/microsoft-agent-framework-releases-poisoned-with-credential-stealer/
+   - The Hacker News: https://thehackernews.com/2026/11/attackers-compromise-microsofts-agent.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/cloud-keys-leaked-in-docker-hub-images-are-stolen-within-seconds/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/researchers-hijack-hugging-face-account-for-popular-kokoro-ai-model/
+
+3. OPTIMIZELY ATTACKERS A/B TESTED THEIR MALWARE
+   Software Supply Chain Security · [supply chain, breach,
+   malware]
+   Latest developments: Krebs on Security reported that the
+   intruders used Optimizely's own experimentation machinery to
+   A/B test which malware worked best on visitors to 178 top
+   websites, and Ars Technica detailed the payload
+   mix—cryptocurrency theft code and iOS exploits among
+   it—served to readers of the BBC, CNN, Equifax, Ledger, and
+   Zoom over roughly 24 hours.
+   Optimizely confirmed that an unauthorized party exploited a
+   flaw in its Experimentation product and injected malicious
+   JavaScript into customer projects, which the customers' sites
+   then ran against their own visitors. Few of those sites
+   enforce integrity checks on third-party scripts, so site
+   owners should pin script hashes and keep vendor code away
+   from checkout and login pages.
+   - Krebs on Security: https://krebsonsecurity.com/2026/11/attackers-used-optimizely-to-a-b-test-malware-on-top-websites/
+   - Ars Technica Security: https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/
+   - The Record: https://therecord.media/optimizely-malicious-code-customer-sites
+   - Dark Reading: https://www.darkreading.com/cyber-risk/optimizely-malware-attacks-third-party-vendor-risks
+
+4. NSANET AND FUGAKU GO DARK
+   Critical Infrastructure Security · [outage, breach]
+   Latest developments: NSANet, the classified internal network
+   National Security Agency employees use, went down and
+   disrupted the agency's operations, and Japan's RIKEN Center
+   for Computational Science pulled the Fugaku supercomputer off
+   the network after a security breach, while Apple reported
+   disruptions to iCloud Mail, iCloud Account and Sign In, Apple
+   School Manager, and Schoolwork.
+   Three high-profile systems stopped serving users inside a
+   day, and only the Fugaku shutdown traces to a confirmed
+   breach. Wired laid out the signals that separate a
+   cyberattack from a failed update—vendor silence, staged
+   recovery, and the absence of attacker claims—which usually
+   point away from hacking.
+   - SecurityWeek: https://www.securityweek.com/classified-communications-network-at-the-national-security-agency-goes-down-defense-official-says/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/japan-takes-fugaku-supercomputer-offlline-after-cyberattack/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/
+   - Wired Security: https://www.wired.com/story/how-to-tell-if-its-a-cyberattack-or-just-an-outage/
+
+5. PUPPET AND ROLLER FALL TO LIVE EXPLOITS
+   Vulnerabilities and Exploits · [patch, exploited,
+   vulnerability]
+   Latest developments: SecurityWeek spelled out the mechanism
+   behind CVE-2026-115731, the Perforce Puppet flaw rated 9.4
+   that CISA added to its Known Exploited Vulnerabilities
+   catalog: any client holding a certificate signed by the
+   Puppet certificate authority can run code on the server; the
+   Apache Software Foundation separately warned that attackers
+   are exploiting a critical Roller remote code execution bug
+   and shipped updates, while Oracle's November 2026 patch
+   update closed 950 vulnerabilities, more than 300 of them
+   remotely exploitable without authentication, and Google
+   released Chrome 158 with 204 fixes.
+   Perforce Puppet runs configuration management across
+   enterprise fleets, so code execution on the Puppet server
+   reaches every managed host; Apache Roller is a Java blog
+   server. Patch both now, pull Oracle's 62 critical fixes, and
+   push Chrome 158 to endpoints.
+   - SecurityWeek: https://www.securityweek.com/critical-perforce-puppet-rce-exploited-in-attacks/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/
+   - SecurityWeek: https://www.securityweek.com/oracle-patches-640-vulnerabilities-with-november-2026-cspu/
+   - SecurityWeek: https://www.securityweek.com/chrome-158-patches-204-vulnerabilities/
+
+6. MALWARE C2 MOVES ONTO PUBLIC BLOCKCHAINS
+   Ransomware and Cybercrime · [malware, cybercrime, apt]
+   Latest developments: Cisco Talos published its analysis of
+   bulletproof dead drops, the practice of parking
+   command-and-control addresses in public blockchain
+   transactions that no takedown can reach, and named UAT-12643,
+   a financially motivated group it suspects aligns with North
+   Korea, which pairs that blockchain resilience with targeted
+   infostealing.
+   Blockchain dead drops remove the single points of
+   failure—hosting providers, registrars, hardcoded domains—that
+   law enforcement seizes in operations like Endgame, since a
+   read from a public ledger looks like ordinary traffic.
+   Defenders should monitor outbound calls to blockchain RPC
+   endpoints and treat them as command-and-control candidates on
+   servers with no business reason to make them.
+   - Cisco Talos: https://blog.talosintelligence.com/the-challenge-of-defending-against-bulletproof-dead-drops-on-public-blockchains/
+   - Cisco Talos: https://blog.talosintelligence.com/uat-12643-suspected-north-korea-aligned-actor-blends-blockchain-resilience-with-targeted-infostealing/
+
+7. COLD RELIC TURNS ONE CLOUD BREACH INTO TWO
+   Nation-State Activity · [apt, espionage, cloud]
+   Latest developments: Google's Mandiant and Threat
+   Intelligence Group reported that Cold Relic, the
+   Russia-linked espionage group formerly tracked as COLDRIVER
+   and UNC4057, took data from a compromised Google Workspace
+   tenant at one United States organization in 2026 and used it
+   to break into a second United States organization, chaining a
+   single cloud compromise into a run of linked third-party
+   intrusions.
+   Cold Relic collects credentials and documents from cloud
+   accounts and mines them for the relationships that open the
+   next victim. Organizations sharing Workspace or Microsoft 365
+   collaboration with a breached partner should assume the
+   attacker read that correspondence and reset federated trust
+   and tokens accordingly.
+   - The Hacker News: https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html
+
+BUSINESS AND POLITICS
+----------------------------------------------------------------
+* Iran Widens Gulf Attacks to Kuwait
+  Latest developments: Iran fired on a United States air base in
+  Kuwait Wednesday, November 18, and launched several attacks on
+  Bahrain, widening a campaign that until now centered on
+  Bahrain and shipping in the Strait of Hormuz.
+  Tehran struck the two Gulf monarchies in apparent retaliation
+  for American strikes the day before, a day after it set a
+  natural gas tanker ablaze in the Strait of Hormuz, through
+  which a fifth of the world's seaborne oil moves. A quiet
+  United States bombing campaign against Iran continues, putting
+  Gulf host governments, energy shipments, and insurance markets
+  in the middle of the fight.
+  - WSJ World News: https://www.wsj.com/world/middle-east/iran-attacks-kuwait-and-bahrain-further-escalating-fight-over-strait-08f3a436?mod=rss_worldnews
+* Nvidia's Results Steady the AI Trade
+  Latest developments: Wall Street headed for a higher open
+  Wednesday, November 18, after Nvidia raised its forecast and
+  the new chief executive told investors "it's business as
+  usual," the first relief for the artificial-intelligence trade
+  since revelations about Jensen Huang's affairs triggered a
+  selloff.
+  Nvidia reported that revenue doubled last quarter and lifted
+  next year's guidance in its first results since Huang resigned
+  and the board installed finance chief Colette Kress as interim
+  chief. The company still carries a Securities and Exchange
+  Commission disclosure investigation, congressional scrutiny of
+  its China sales, and an unfinished search for a permanent
+  chief, so the questions about its future outlast the quarter.
+  - FT Markets: https://www.ft.com/content/f085b811-fc20-425f-88d8-9f98e178636a?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/business/nvidias-strong-fundamentals-give-new-ceo-a-much-needed-tailwind-65859856?mod=rss_markets_main
+  - WSJ World News: https://www.wsj.com/world/nvidias-strong-results-do-little-to-settle-questions-about-its-future-d1ba999d?mod=rss_worldnews
+* Trump, Xi, and Putin Meet in China
+  Latest developments: President Trump reached China Wednesday,
+  November 18, for the trilateral session with Xi Jinping and
+  Vladimir Putin, the first meeting ever to seat the American,
+  Chinese, and Russian heads of state together.
+  The three leaders convene on the sidelines of the Asia-Pacific
+  Economic Cooperation forum in Shenzhen, with Russia pressing
+  for a signed joint statement and the war in Ukraine, Chinese
+  trade, and American chip export controls on the table. Moscow
+  and Beijing each went into the week attacking Western
+  sanctions and tariffs.
+  - The Economist: https://www.economist.com/podcasts/2026/11/18/third-wheeling-xi-putin-and-trump-meet-in-china
+
+PITTSBURGH
+----------------------------------------------------------------
+
+Weather:
+  Today: Sunny, high 58F.
+  Tonight: Clear, low 31F.
+  Thursday: Sunny, high 62F.
+
+Business:
+* Murrysville Tables the Meijer Vote
+  Latest developments: Murrysville Council tabled its decision
+  Tuesday night, November 17, after residents at a public
+  hearing questioned whether the plan needs changes.
+  Meijer wants to build a grocery superstore and a gas station
+  at Route 22 and Manor Road in Murrysville, Westmoreland
+  County, and Tuesday's hearing was supposed to cover the gas
+  station alone. Residents used it to challenge the wider site
+  plan, pushing any approval into next year.
+  - WTAE: https://www.wtae.com/article/vote-tabled-proposed-meijer-development/74460093
+  - TribLive: https://triblive.com/local/westmoreland/murrysville-council-tables-vote-on-meijer-gas-station/
+  - WPXI: https://www.wpxi.com/news/local/murrysville-residents-question-if-current-plans-build-meijer-need-adjusted/GI5ICRUOSNGGBFS4QIMI2HPSBA/
+* Unions Press the Downtown Tax Zone
+  Latest developments: Labor union members rallied outside
+  Allegheny County Council Tuesday, November 17, demanding job
+  protections inside the transit revitalization investment
+  district package before council approves it.
+  The district would divert a share of future tax revenue in
+  downtown Pittsburgh into redevelopment, and building and
+  service unions want the legislation to guarantee union wages
+  and jobs on the work it finances. Council holds the vote that
+  decides how much of that money the city's office core can tap.
+  - TribLive: https://triblive.com/local/union-members-urge-allegheny-county-to-protect-jobs-with-special-tax-zone-to-revitalize-downtown/
+  - WPXI: https://www.wpxi.com/news/local/pittsburgh-union-members-push-approval-job-protections-trid-proposal/3EASWCQNSVCL7ARQAPZSGFQKYY/
+
+Around town:
+* Amtrak Doubles the Pennsylvanian
+  Latest developments: Amtrak has added a second daily
+  Pennsylvanian round trip between Pittsburgh and New York,
+  TribLive reported Wednesday, November 18.
+  The Pennsylvanian has run once a day across the state,
+  stopping at Greensburg on its way east through Philadelphia to
+  New York. A second frequency gives Western Pennsylvania riders
+  a choice of departure times for the first time in decades.
+  - TribLive: https://triblive.com/local/westmoreland/amtrak-adds-2nd-daily-pennsylvanian-train-between-pittsburgh-new-york/
+* West Mifflin Consolidation Draws a Petition
+  Latest developments: PublicSource reported Wednesday, November
+  18, that the West Mifflin Area School District's school
+  consolidation proposal has produced a petition calling for the
+  superintendent's termination.
+  The district has floated closing and combining buildings, and
+  parents say the plan arrived with too little explanation. The
+  fight revives longer-running complaints about district
+  leadership in the Allegheny County community.
+  - PublicSource: https://www.publicsource.org/west-mifflin-school-consolidation-petition/
+* Three Boroughs Hold the Line on Taxes
+  Latest developments: Aspinwall and Fox Chapel officials said
+  Wednesday, November 18, that their 2027 budgets carry no
+  property tax increase, and Etna cut its proposed increase in
+  half.
+  Aspinwall plans to hold millage flat, Fox Chapel intends to
+  keep programs and services intact without a rise, and Etna
+  continues work on a budget whose tax increase has already
+  shrunk. All three Allegheny County boroughs must adopt final
+  budgets by the end of December.
+  - TribLive: https://triblive.com/local/fox-chapel/aspinwall-officials-planning-no-tax-increase-in-2027-budget/
+  - TribLive: https://triblive.com/local/valley-news-dispatch/fox-chapel-officials-plan-to-maintain-programs-services-next-year-without-a-tax-hike/
+  - TribLive: https://triblive.com/local/etna-cuts-proposed-property-tax-increase-in-half-as-work-on-2027-budget-continues/
+
+Events:
+* Delmont Sets Its Holidaze Date
+  Latest developments: Delmont officials said Wednesday,
+  November 18, that Toys for Pittsburgh Tikes will partner with
+  the borough on this year's Holidaze event.
+  Holidaze runs Sunday, December 13, 2026, at Faith Global
+  Methodist Church in Delmont, Westmoreland County, where Santa
+  gives every child a present and each gets a chance to win a
+  new bicycle. Toys for Pittsburgh Tikes, which recently moved
+  to the borough, supplies the gifts.
+  - TribLive: https://triblive.com/local/westmoreland/toys-for-pittsburgh-tikes-partners-with-its-new-hometown-on-holidaze-event/
+
+SPORTS
+----------------------------------------------------------------
+
+Steelers (6-3)
+  Up Next · Steelers @ Eagles · Sun Nov 22, 1:00 PM
+    https://plaintextsports.com/nfl/2026/week11/pit-phi
+
+Penguins (7-11)
+  Up Next · Blues @ Penguins · Thu Nov 19, 7:00 PM
+    https://plaintextsports.com/nhl/2026-11-19/stl-pit
+
+Around the Teams:
+* Heyward's Show Turns to Philadelphia
+  Latest developments: Not Just Football with Cam Heyward posted
+  a full episode Wednesday morning, November 18, that moves past
+  the Cincinnati trip to the Philadelphia Eagles and marks the
+  show passing 70,000 subscribers with a giveaway of Heyward's
+  game-worn cleats.
+  Cam Heyward and co-host Hayden walk through the loss at Paycor
+  Stadium, Ja'Marr Chase's production against the Steelers
+  secondary, and guard Mason McCormick's ankle injury, then
+  preview the Week 11 game at Philadelphia Sunday, November 22.
+  The episode also covers rule changes they would make, unsung
+  heroes, and the Federal Aviation Administration outage that
+  grounded the Ole Miss team.
+  - Not Just Football with Cam Heyward: https://www.youtube.com/watch?v=rmlr42y_LT8
+* Kuntz Delivers Super Bowl Tickets to Canon-Mac
+  Latest developments: The Steelers posted video Tuesday night,
+  November 17, of long snapper Christian Kuntz handing
+  Canon-McMillan head football coach Mike Evans tickets to Super
+  Bowl LXI.
+  Evans, a cancer survivor who coaches at Canon-McMillan High
+  School in Washington County, got the surprise from the team
+  and Kuntz, a Mt. Lebanon native in his sixth season as the
+  Steelers' long snapper.
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/WdDnVzR65YI
+
+Team USA:
+* Pulisic's Bicycle Kick Sends Off Pochettino
+  Latest developments: Christian Pulisic scored with a bicycle
+  kick Tuesday night, November 17, to carry the United States
+  past Haiti and into the Concacaf Nations League semifinals in
+  Mauricio Pochettino's last match as head coach.
+  Pochettino leaves for Manchester United after two years in
+  charge, told reporters the squad will "achieve big things in
+  the future," and got an emotional farewell from players and
+  fans. ESPN graded Pulisic 9 out of 10; Steve Cherundolo runs
+  the December camp on an interim basis while U.S. Soccer
+  searches for a permanent replacement.
+  - ESPN Soccer: https://www.espn.com/soccer/report/_/gameId/401929766
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50516389/pochettino-dream-usmnt-finish
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50515831/usmnt-player-ratings-pulisic-haiti-pochettino-farewell
+* Mexico Draws the U.S. in the Semifinals
+  Latest developments: Mexico beat Jamaica 1-0 Tuesday, November
+  17, on a first-half goal by Jesús Corona, which sets a
+  Concacaf Nations League semifinal against the United States.
+  The win gave Rafael Márquez his first victory as Mexico's
+  coach and snapped a five-game winless run, and it hands the
+  United States its oldest rival in the next round. Whoever the
+  Americans hire to replace Mauricio Pochettino inherits that
+  fixture.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50517553/mexico-survive-jamaica-scare-give-marquez-first-win
+
+READING
+----------------------------------------------------------------
+
+* Stratechery -- Nvidia Earnings; Office Convergence; OS Wars,
+  AI Edition
+  Ben Thompson reads Nvidia's uneventful quarter as the clearest
+  argument that the board has no reason to bring Jensen Huang
+  back. He then takes up competing operating-system updates from
+  Microsoft and Anthropic and what their convergence means for
+  office software.
+  https://stratechery.com/2026/nvidia-earnings-office-convergence-os-wars-ai-edition/
+
+* Ed Zitron -- The NVIDIA Bubble
+  Zitron argues Nvidia's revenue rests on a small circle of
+  capital-spending customers whose own economics do not work,
+  which makes the company the center of the
+  artificial-intelligence bubble rather than proof against it.
+  https://www.wheresyoured.at/the-nvidia-bubble/
+
+* Cal Newport -- In Search of the Deep Life
+  Newport traces his pandemic-era essay streak to the idea he
+  has pursued since: a deliberate life built around depth,
+  craft, and attention. He lays out what that search has taught
+  him about structuring work and time.
+  https://calnewport.com/in-search-of-the-deep-life/
+
+MARKETS (weekly average, change vs prior week)
+----------------------------------------------------------------
+S&P 500     7,506.11  ▲ +0.1%
+Dow        51,899.74  ▼ -0.5%
+Nasdaq     24,961.34  ▼ -0.1%
+WTI crude      87.11  ▼ -1.5%
+EUR/USD       1.1067  ▼ -1.3%
+GBP/USD       1.3252  ▼ -1.4%
+USD/JPY       159.52  ▲ +0.9%
+
+FEED HEALTH
+----------------------------------------------------------------
+Security: 24 of 24 feeds loaded, 71 items in the 24-hour window.
+  No recent items: CISA Advisories, Sophos News, Google Online
+  Security Blog, Graham Cluley, Google Project Zero, The DFIR
+  Report, Kim Zetter (Zero Day), Frank on Fraud.
+Pittsburgh: 8 of 9 feeds loaded, 60 items in the 48-hour window.
+  Failed: Pittsburgh Post-Gazette (ForbiddenXMLError: DTD or
+  entity declarations are not allowed).
+Business and Politics: 8 of 8 feeds loaded, 60 items in the
+  36-hour window.
+Events: 2 of 4 feeds loaded, 0 items in the 120-hour window.
+  Failed: Post-Gazette Arts & Entertainment (HTTPError: HTTP
+  Error 404: Not Found); Post-Gazette Music (HTTPError: HTTP
+  Error 404: Not Found). No recent items: NEXTpittsburgh Events,
+  NEXTpittsburgh Arts & Entertainment.
+Sports media: 4 of 6 feeds loaded, 20 items in the 96-hour
+  window. Failed: Post-Gazette Pirates (HTTPError: HTTP Error
+  404: Not Found); Post-Gazette Steelers (HTTPError: HTTP Error
+  404: Not Found).
+Team USA: 3 of 3 feeds loaded, 36 items in the 72-hour window.
+Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
+Markets (Yahoo Finance): 7 of 7 rows
+Weather (NWS): 3 forecast periods
+Scores (ESPN, plaintextsports): 2 teams via ESPN
+Summaries: 3 model call(s) served by claude-opus-5 (301s of
+  model time; $1.80 at API list price).
+
+================================================================
+Generated 2026-11-18 07:05 EST. Updated weekdays at about 7:05
+AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
+8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
+feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
+beat and podcast feeds; 3 Team USA feeds; WSJ World News, WSJ
+Markets, WSJ US Business, WSJ Politics, The Economist, FT Home,
+FT World, FT Markets; and Ed Zitron, Stratechery, Cal Newport.
+Markets from Yahoo Finance, weather from the NWS, scores from
+ESPN or plaintextsports.com. Summaries are AI-generated from the
+linked reporting; verify at the sources.
+================================================================
