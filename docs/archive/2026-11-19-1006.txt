@@ -1,0 +1,675 @@
+================================================================
+INFOSECFOLLOW -- security, markets, business, pittsburgh
+Thursday, November 19, 2026 - 10:06 AM EST
+================================================================
+
+Exploit code caught up with the week's biggest server flaws as
+attackers probed Java4Shell, proof-of-concept exploits for the
+decade-old nginx2root bugs went public, and intruders took over
+clustered Cisco Expressway systems days after a researcher
+published working code.
+
+CONTENTS: Emerging Trends and Key Updates | Security | Business
+and Politics | Pittsburgh | Sports | Reading | Markets | Feed
+Health
+
+EMERGING TRENDS AND KEY UPDATES
+----------------------------------------------------------------
+* [TREND] Published proof-of-concept code now works as a
+  starting gun, with exploit attempts chasing Java4Shell, F5's
+  nginx2root HTTP/2 flaws, and clustered Cisco Expressway
+  devices within days of release.
+  see: Java4Shell Draws Live Exploit Attempts; nginx2root
+  Exploits Go Public as Splunk Patches 140 Bugs; Cisco
+  Expressway and Apache Axis Enter Active Exploitation
+* [TREND] This week's victims sit downstream of a vendor, with
+  Wellington IT exposing member records at 50 credit unions and
+  N-able losing a server inside its hosted email security cloud.
+  see: N-able Mail Cloud and Wellington IT Breaches Spread
+* [TREND] AI cuts both ways, as Nudge Security finds
+  employee-built agents inheriting their creators' access while
+  Germany rates its national cyber threat level critical amid
+  AI-driven intrusion attempts.
+  see: AI Agents Run on Their Builders' Credentials; Germany
+  Puts Its Cyber Threat Level at Critical
+* [UPDATE (new)] Ukraine arrested four suspects who phoned
+  employees posing as IT support, Washington opened a Threat
+  Disruption Center in Fairfax, and ICE was found paying AT&T
+  for call records.
+  see: Ukraine Arrests a Fake IT Support Ransomware Crew;
+  Washington Targets Scam Payments and a Palantir Spy; ICE Pays
+  AT&T to Mine Call Records
+* [UPDATE (updated)] Anthropic's Nasdaq debut raised a record
+  $81.3 billion, Trump, Xi, and Putin closed their Shenzhen
+  summit without a breakthrough, and Houthi strikes sharpened
+  the Iran-U.S. confrontation.
+  see: Anthropic Debuts on the Nasdaq; Trump, Xi, and Putin Hold
+  the First Trilateral Summit; A Houthi Strike Hits the Saudi
+  Wealth Fund's Tower
+* [UPDATE (new)] Sto-Rox teachers authorized a strike after 142
+  days under an expired contract, Shaler Area signed staff
+  through 2031-32, and Gilpin Township ordered mandatory water
+  conservation.
+  see: Sto-Rox Teachers Authorize a Strike; Shaler Area Locks Up
+  Teachers Through 2031-32; Gilpin Township Orders Water
+  Conservation
+
+SECURITY
+----------------------------------------------------------------
+
+1. NGINX2ROOT EXPLOITS GO PUBLIC AS SPLUNK PATCHES 140 BUGS
+   Vulnerabilities and Exploits · [patch, exploit, end-of-life]
+   Latest developments: F5 patched five nginx2root
+   vulnerabilities that let remote, unauthenticated attackers
+   run arbitrary code, and proof-of-concept exploits for them
+   reached the public, with researchers chaining two of the bugs
+   to a Linux kernel flaw to take root; Splunk fixed nearly 140
+   flaws across three core products, among them authentication
+   bypass, remote code execution, and privilege escalation; and
+   SonicWall told customers in a Wednesday advisory to replace
+   every Gen 6 and Gen 6.5 appliance and pull it off the
+   internet edge, because SonicOS 6.x now receives no firmware
+   or security updates regardless of severity.
+   The nginx2root bugs have sat in NGINX's open-source HTTP/2
+   code since version 1.9.5 shipped on September 22, 2015, and
+   F5 fixed them in 1.31.9 and 1.30.7. Any internet-facing NGINX
+   with HTTP/2 enabled, Splunk deployment, or SonicWall Gen 6
+   firewall needs action this week.
+   - SecurityWeek: https://www.securityweek.com/f5-patches-critical-nginx2root-flaws-as-poc-exploits-go-public/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/critical-nginx-nginx2root-bugs-let-attackers-hijack-servers/
+   - SecurityWeek: https://www.securityweek.com/splunk-patches-nearly-140-flaws-across-three-core-products/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/19/sonicwall-gen-6-firewalls-reach-end-of-support/
+
+2. CISCO EXPRESSWAY AND APACHE AXIS ENTER ACTIVE EXPLOITATION
+   Vulnerabilities and Exploits · [exploit, patch]
+   Latest developments: Attackers exploited a Cisco Expressway
+   vulnerability soon after a proof of concept went out, hacking
+   clustered Expressway devices at a Russian organization and
+   staging tooling for lateral movement; the Apache Software
+   Foundation warned of attacks on Roller through
+   CVE-2026-129448, the unauthenticated XML-RPC deserialization
+   bug rated 9.8, while a separate Apache Axis flaw now serves
+   as the way into Confluence Data Center; CISA tied its four
+   newest Known Exploited Vulnerabilities entries, covering
+   Synology DiskStation Manager, BerriAI LiteLLM, Apache Axis,
+   and Vanderbilt University's Research Electronic Data Capture
+   platform, to ransomware, cryptomining, and LLMjacking, and
+   ordered federal civilian agencies to fix the Perforce Puppet
+   Enterprise flaw CVE-2026-115731; Drupal patched a critical
+   remote code execution bug and told site owners to expect
+   exploits fast.
+   Five widely deployed products—Cisco Expressway, Apache
+   Roller, Apache Axis, Puppet Enterprise, and Drupal—now carry
+   unauthenticated paths to code execution with attacks already
+   running. Patch the internet-facing ones first and treat the
+   Puppet server as a route to every endpoint it configures.
+   - SecurityWeek: https://www.securityweek.com/hackers-exploit-cisco-expressway-vulnerability-soon-after-poc-release/
+   - SecurityWeek: https://www.securityweek.com/critical-apache-roller-axis-vulnerabilities-exploited-in-attacks/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/19/puppet-enterprise-vulnerability-cve-2026-115731-exploited/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/drupal-patches-critical-rce-flaw-warns-exploits-may-surface-quickly/
+
+3. PHP, RUBY, AND DATABASES SHIP CODE-EXECUTION FIXES
+   Vulnerabilities and Exploits · [patch, exploit]
+   Latest developments: PHP scheduled releases for November 19,
+   2026 between 2 and 2:30 p.m. UTC to close CVE-2026-115560, a
+   remote code execution flaw in session upload progress that
+   surfaced two days after the PHP2Shell patches landed and
+   reaches every supported version; Ruby fixed seven
+   memory-safety bugs in its regular expression engine and
+   string case-conversion code, and its maintainers say
+   proof-of-concept exploits run code through five of them; and
+   a researcher published working exploits that carry a
+   low-privilege database account into code execution on
+   PostgreSQL, MySQL, and ClickHouse servers, plus a separate
+   Oracle chain.
+   Three of the most widely deployed back-end runtimes now carry
+   fresh unauthenticated or low-privilege paths to the operating
+   system account under the service. Upgrade PHP and Ruby as the
+   releases land, and audit which database accounts can create
+   objects or call engine functions.
+   - SecurityWeek: https://www.securityweek.com/php-readies-critical-security-updates-to-patch-another-rce-flaw/
+   - The Hacker News: https://thehackernews.com/2026/11/php-warns-of-critical-security-flaws.html
+   - The Hacker News: https://thehackernews.com/2026/11/ruby-releases-fixes-for-7-regex-and.html
+   - The Hacker News: https://thehackernews.com/2026/11/researcher-demonstrates-database-rce.html
+
+4. AI AGENTS RUN ON THEIR BUILDERS' CREDENTIALS
+   AI Security · [ai, identity]
+   Latest developments: Nudge Security, drawing on telemetry
+   from its customers' environments, found that the AI agents
+   employees assemble inside project trackers, CRMs, and
+   automation tools run on the credentials of whoever built them
+   and inherit that person's access to company data, with no one
+   monitoring how the agents spend it; Wired documented Artex,
+   the open-source AI penetration-testing framework, as the
+   point-and-shoot tool newcomers now use to scan and attack
+   targets through chatbot prompts; Microsoft moved its
+   Perception agentic security platform out of preview, making
+   four blue team agents and the Recon Agent generally
+   available; and Palo Alto Networks agreed to buy Applied
+   Compute, which post-trains and runs open-weight models, for
+   $4.5 billion in stock.
+   Employee-built agents carry human entitlements into automated
+   workflows while attackers drive the same agent frameworks
+   offensively. Inventory which agents run in your environment,
+   whose identity each one uses, and what systems it can reach.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/19/ai-agents-employee-credentials-nudge-security-report/
+   - Wired Security: https://www.wired.com/story/artex-ai-hacking-tools/
+   - SecurityWeek: https://www.securityweek.com/microsoft-takes-perception-agentic-security-platform-out-of-preview/
+   - SecurityWeek: https://www.securityweek.com/palo-alto-networks-to-buy-ai-startup-applied-compute-for-4-5-billion/
+
+5. N-ABLE MAIL CLOUD AND WELLINGTON IT BREACHES SPREAD
+   Data Breaches · [breach, ransomware]
+   Latest developments: NVIDIA said it has found no indication
+   that anyone compromised its systems after the Gentlemen
+   ransomware crew listed the chipmaker on its dark web leak
+   site; N-able disclosed on Wednesday, November 18, 2026 that
+   unknown attackers reached a server in its Mail Assure and
+   Spam Experts Hosted Cloud, and the company disabled
+   management interfaces and APIs across three regions while its
+   investigation continues; a reported attack on Wellington IT
+   exposed sensitive member information at 50 credit unions,
+   most of them in Ireland; and Wired reported that two
+   vulnerabilities in CreditNirvana, the AI debt collection
+   platform, left 6.6 million accounts and 315,000 call
+   recordings open, along with emails, texts, and credit
+   reports.
+   Four victims this week sit downstream of a provider: a hosted
+   email security cloud, a credit union software vendor, a
+   ransomware leak-site listing, and a debt collection platform
+   holding financial records. Customers of each should force
+   credential rotation and review what access the provider
+   holds.
+   - The Hacker News: https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/data-breach-impacts-40-irish-credit-unions-in-reported-it-provider-hack/
+   - SecurityWeek: https://www.securityweek.com/nvidia-responds-to-gentlemen-ransomware-claim/
+   - Wired Security: https://www.wired.com/story/ai-debt-collection-service-exposed-66-million-accounts-and-315000-call-recordings/
+
+6. WASHINGTON TARGETS SCAM PAYMENTS AND A PALANTIR SPY
+   Policy and Regulation · [policy, fraud, espionage]
+   Latest developments: The Homeland Security Task Force opened
+   the Threat Disruption Center inside its National Coordination
+   Center in Fairfax, Virginia, giving investigators shared
+   tooling to sort victim complaints, map the criminal groups
+   behind them, and stop victims' payments before the money
+   leaves for foreign scam, cybercrime, and sextortion networks;
+   Coinbase blocked $4.7 million in cryptocurrency transfers to
+   a fake giveaway that ran an AI-generated deepfake of Elon
+   Musk during a Tesla livestream more than 500,000 people
+   watched; federal prosecutors charged Igor Andreevich D'iu, a
+   Russian national recruited through Telegram, with acting as a
+   Moscow agent in a surveillance campaign against employees of
+   a defense technology company The Record understands to be
+   Palantir Technologies; and a federal bankruptcy judge cleared
+   Google to take the data of the defunct Spirit Airlines for
+   $10 million, with protections attached, for use in AI
+   projects.
+   The United States is attacking fraud at the payment layer
+   while prosecuting human-intelligence collection against
+   defense contractor staff. Finance and insider-threat teams
+   gain a new federal contact point for both.
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/19/us-threat-disruption-center-scam-sextortion-funds/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/coinbase-blocks-47-million-in-transfers-to-elon-musk-deepfake-scam/
+   - The Record: https://therecord.media/russian-charged-with-spying-on-palantir-for-moscow
+   - The Record: https://therecord.media/judge-signs-off-google-purchase-spirit-airlines-data
+
+7. JAVA4SHELL DRAWS LIVE EXPLOIT ATTEMPTS
+   Vulnerabilities and Exploits · [exploit, patch, zero-day]
+   Latest developments: GreyNoise, watchTowr, and Cloudflare
+   each reported probing and exploit attempts against
+   CVE-2026-114938, and Cisco, Elastic, Red Hat, and Siemens
+   published advisories spelling out which of their products
+   carry the vulnerable runtime; Dark Reading reported that
+   researchers found the flaw using AI.
+   Java4Shell is a memory corruption bug in the Base64 decoder
+   of the x86-64 HotSpot Java Virtual Machine that hands an
+   attacker who never logs in remote code execution on Jenkins,
+   Atlassian Jira, Confluence, and Keycloak. Any host running
+   Java 17.0.6 or later on an Intel or AMD processor with
+   AVX-512 VBMI needs the patch now.
+   - SecurityWeek: https://www.securityweek.com/java4shell-exploitation-attempts-begin-as-vendors-rush-out-advisories/
+   - Dark Reading: https://www.darkreading.com/vulnerabilities-threats/java4shell-flaw-threatens-global-java-application-ecosystem
+   - SANS Internet Storm Center: https://isc.sans.edu/diary/rss/33532
+
+8. UKRAINE ARRESTS A FAKE IT SUPPORT RANSOMWARE CREW
+   Policy and Regulation · [ransomware, arrest]
+   Latest developments: Ukraine's National Police described how
+   the four suspects worked: they studied each target, then
+   telephoned employees posing as IT support staff to talk their
+   way into corporate networks, and the case ran more than two
+   years with the FBI; The Record identified oil and healthcare
+   companies in the United States among the 28 victims that paid
+   more than $40.5 million.
+   Ukrainian authorities detained four members of an
+   international ransomware operation that opened its intrusions
+   with voice phishing rather than malware. Help desks and their
+   callers need verification steps that survive a convincing
+   phone call.
+   - The Record: https://therecord.media/ukraine-ransomware-arrests-cyber
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/19/ukraine-ransomware-gang-arrests-fake-it-support-calls/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/ukraine-fbi-arrest-ransomware-gang-members-tied-to-40m-in-ransoms/
+
+9. ICE PAYS AT&T TO MINE CALL RECORDS
+   Policy and Regulation · [surveillance, policy]
+   Latest developments: An internal Immigration and Customs
+   Enforcement document that 404 Media obtained shows the agency
+   paying AT&T for raw data and analytical services under the
+   Hemisphere program, and privacy experts and members of
+   Congress call the arrangement a mass surveillance effort that
+   may touch trillions of phone records.
+   Hemisphere gives federal investigators searchable access to
+   AT&T call detail records, including calls that merely cross
+   AT&T's network. Anyone whose threat model includes United
+   States law enforcement demands should assume telephone
+   metadata sits inside a commercial analytics service.
+   - 404 Media: https://www.404media.co/ice-is-paying-at-t-to-dig-through-a-mountain-of-call-records-hemisphere-data-analytical-services/
+
+10. FLASH CHIP ATTACK BREAKS TPM LOCKOUT
+   Platform Security · [hardware, encryption]
+   Latest developments: Researchers at Technische Universität
+   Berlin showed that anyone who opens the case of an AMD-based
+   PC, and of some Intel PCs, can reset the TPM lockout that
+   throttles PIN guessing, and in lab tests they recovered a
+   four-digit Windows Hello PIN on an AMD laptop and a six-digit
+   BitLocker PIN on an Intel laptop in days.
+   Short Windows Hello and BitLocker PINs rely on the TPM
+   refusing repeated guesses, and physical access to the flash
+   chip removes that limit. Organizations issuing laptops should
+   require long PINs or pre-boot passphrases and treat a lost
+   machine as a machine an attacker can open.
+   - The Hacker News: https://thehackernews.com/2026/11/flash-chip-attack-bypasses-tpm-lockout.html
+
+BUSINESS AND POLITICS
+----------------------------------------------------------------
+* Germany Puts Its Cyber Threat Level at Critical
+  Latest developments: Germany's security authorities reported
+  an artificial-intelligence-driven surge in hacking attempts
+  and rated the national threat level critical, the Financial
+  Times reported Thursday, November 19.
+  New artificial-intelligence tools let attackers find and
+  exploit software flaws far faster, and the German assessment
+  lands a week after outages knocked out systems at Microsoft,
+  JPMorgan Chase, and other large companies. The Economist
+  traces those American failures to frenzied patching and
+  cyber-attack preparation that manufacture fragility of their
+  own, which puts operational risk at banks and cloud providers
+  in the same frame as the attackers.
+  - FT World: https://www.ft.com/content/cf875eb6-34a2-413e-b89d-bc609367a19e?syn-25a6b1a6=1
+  - The Economist: https://www.economist.com/united-states/2026/11/19/what-is-causing-americas-recent-outages
+* Anthropic Debuts on the Nasdaq
+  Latest developments: Anthropic's Nasdaq debut Thursday,
+  November 19, raised $81.3 billion, the largest initial public
+  offering on record, Treasury yields rose as the listing
+  rekindled risk appetite on Wall Street, and the Wall Street
+  Journal reported that a majority of the lab's more than 5,000
+  employees stand to become millionaires.
+  Anthropic, the San Francisco maker of the Claude chatbot, sold
+  stock at a $1.5 trillion valuation and becomes the first
+  artificial-intelligence lab to trade publicly. The opening
+  prints give investors their clearest read on appetite for the
+  AI build-out after weeks of selling in Nvidia and data-center
+  shares.
+  - FT Home: https://www.ft.com/content/7a6b211d-c73b-4953-97ee-ed92dab8ee07?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/stocks/what-to-know-about-anthropics-record-breaking-ipo-372a1fec?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/stocks/stock-futures-rise-as-optimism-improves-ahead-of-anthropic-trading-debut-ecdfbb2f?mod=rss_markets_main
+  - FT World: https://www.ft.com/content/62c0510b-ca65-441e-9baf-675b93903b9e?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/investing/jgbs-edge-higher-amid-mixed-developments-c690e1af?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/tech/ai/thousands-of-anthropic-employees-and-investors-are-set-to-reap-fortunes-d9c3c6ed?mod=rss_markets_main
+* Trump, Xi, and Putin Hold the First Trilateral Summit
+  Latest developments: The three leaders closed the Shenzhen
+  summit Thursday, November 19, with a joint denunciation of
+  nuclear war and a show of unity on energy security, and they
+  reached no major breakthrough.
+  Trump, Xi Jinping, and Vladimir Putin met in the southern
+  Chinese city during the week of the Asia-Pacific Economic
+  Cooperation forum, the first meeting ever to put the American,
+  Chinese, and Russian heads of state at one table, and Trump
+  told the room, "We are really making history." Germany hosted
+  40 delegations in Berlin the same day to back Kyiv and blunt
+  the summit's Yalta 2.0 optics, and the Wall Street Journal
+  argues Trump's leverage abroad is contracting even as he
+  convenes the meeting.
+  - WSJ World News: https://www.wsj.com/world/trump-xi-and-putin-convene-first-ever-summit-as-world-order-shifts-82e58aab?mod=rss_worldnews
+  - FT Home: https://www.ft.com/content/fcf6d27b-a04c-4cef-8b03-ce2423566f1f
+  - FT World: https://www.ft.com/content/b102bd7f-175c-4cd3-8f05-6c9dd10115e1?syn-25a6b1a6=1
+  - WSJ Politics: https://www.wsj.com/politics/trump-sees-new-world-order-but-strains-only-worsen-b4306673?mod=rss_socialpoliticsfeed
+  - FT World: https://www.ft.com/content/3ab490ea-825a-4ef4-9239-a2905d7f7f3c?syn-25a6b1a6=1
+* A Houthi Strike Hits the Saudi Wealth Fund's Tower
+  Latest developments: The Financial Times reported Thursday,
+  November 19, that a week of tit-for-tat strikes between Iran
+  and the United States has carried the two countries toward
+  full-scale confrontation, and The Economist concluded the same
+  day that neither side holds the means to end the war.
+  A Houthi air strike damaged several floors of Riyadh's tallest
+  building Thursday, November 19, the 80-story tower that houses
+  Saudi Arabia's Public Investment Fund, the kingdom's sovereign
+  wealth fund and one of the world's largest state investors.
+  Crude edged higher the same morning as traders weighed
+  continuing threats to Middle Eastern oil shipments.
+  - FT Home: https://www.ft.com/content/05ed47a5-7cc1-402f-ad0d-826ba09a05c8?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/middle-east/houthi-attack-damages-saudi-capitals-tallest-tower-f4e15874?mod=rss_worldnews
+  - WSJ US Business: https://www.wsj.com/business/energy-oil/oil-prices-mixed-as-traders-weigh-supply-outlook-middle-east-shipping-risks-224e2724?mod=pls_whats_news_us_business_f
+  - FT World: https://www.ft.com/content/090da02e-2ed1-491a-a2cf-3c8a6b10522e?syn-25a6b1a6=1
+  - The Economist: https://www.economist.com/middle-east-and-africa/2026/11/19/neither-america-nor-iran-has-the-means-to-end-the-war
+* TSMC and Samsung Halt Some China Shipments
+  Latest developments: Taiwan Semiconductor Manufacturing
+  Company and Samsung Electronics suspended some chip shipments
+  to Chinese customers, the Financial Times reported Thursday,
+  November 19, days after the Commerce Department imposed its
+  new export controls.
+  The two largest contract chipmakers supply processors that go
+  into Chinese phones, servers, and cars, so a sustained halt
+  starves Chinese technology firms of advanced silicon. Alibaba,
+  which reported a sharp earnings rebound Thursday on improving
+  artificial-intelligence profitability, named tighter scrutiny
+  of chip exports to China as a fresh risk to that growth
+  engine.
+  - FT World: https://www.ft.com/content/d42dd235-7b0e-4651-a8d2-f7b7b4963a74?syn-25a6b1a6=1
+  - WSJ US Business: https://www.wsj.com/business/earnings/alibaba-earnings-rebound-sharply-as-ai-profitability-improves-70fd90d5?mod=pls_whats_news_us_business_f
+  - The Economist: https://www.economist.com/briefing/2026/11/19/how-china-continues-to-evade-americas-tech-export-rules
+
+PITTSBURGH
+----------------------------------------------------------------
+
+Weather:
+  Today: Sunny, high 63F.
+  Tonight: Mostly Clear, low 37F.
+  Friday: Sunny, high 63F.
+
+Business:
+* Viatris Closes Its $1.65 Billion Pacira Deal
+  Latest developments: Viatris completed its acquisition of
+  Pacira BioSciences in a deal valued at $1.65 billion, the
+  company announced Tuesday, November 17, and WPXI reported
+  Thursday, November 19.
+  Viatris, the Canonsburg drugmaker formed in 2020 from Mylan
+  and the Upjohn business of Pfizer, ranks among the largest
+  public companies based in Western Pennsylvania. Pacira
+  develops pain medications, and the purchase pushes Viatris
+  further beyond generics into branded treatment.
+  - WPXI: https://www.wpxi.com/news/local/viatris-completes-16b-acquisition/WAH3CEIHJJCFPAHQWQG62JUFSU/
+* Achieva Names Court Hower Chief Executive
+  Latest developments: Achieva named Court Hower president and
+  chief executive effective December 14, the organization
+  announced November 17, WPXI reported Thursday, November 19.
+  Achieva runs a $57 million operation providing services,
+  family supports, employment programs, and advocacy for people
+  with disabilities across the Pittsburgh region. Hower inherits
+  one of the larger human-services employers in Allegheny
+  County.
+  - WPXI: https://www.wpxi.com/news/local/achieva-names-new-ceo-lead-57m-organization/ISOIW3CIYNHVZGEWETFZAYZ2CY/
+* U.S. Steel and the Steelworkers Reach a Tentative Contract
+  Latest developments: The United Steelworkers announced a
+  tentative agreement with U.S. Steel Thursday morning, November
+  19, covering more than 10,000 workers at 13 facilities.
+  The proposed deal commits $4.5 billion in capital investment
+  at union-represented sites of U.S. Steel, the Pittsburgh
+  company Nippon Steel acquired in 2025, and the
+  Pittsburgh-based United Steelworkers negotiated it for mills
+  that anchor employment across Western Pennsylvania. The
+  capital pledge determines which plants get modernized and
+  which workers keep their jobs.
+  - WPXI: https://www.wpxi.com/news/local/united-steelworkers-reach-tentative-agreement-with-us-steel-new-contract/KPP5YKF5KJE6HKYKOCP2EXW3GY/
+* AAA Sees Thanksgiving Travel Slip
+  Latest developments: AAA forecast that fewer people will drive
+  or fly for Thanksgiving this year, WTAE reported Thursday,
+  November 19, the first decline in three years, while cruise,
+  bus, and train bookings climb.
+  The forecast covers the holiday week leading to Thanksgiving
+  on Thursday, November 26, 2026, and sets the volume
+  expectations for Pittsburgh International Airport, the
+  Pennsylvania Turnpike, and Amtrak service through the region.
+  Airlines and hotels price the holiday off these projections,
+  and the shift toward rail and bus travel follows a month of
+  airline disruption.
+  - WTAE: https://www.wtae.com/article/aaa-thanksgiving-travel-forecast-2026/74426028
+
+Around town:
+* Shaler Area Locks Up Teachers Through 2031-32
+  Latest developments: TribLive reported Wednesday night,
+  November 18, that the Shaler Area School District and its
+  teachers signed an early-bird contract that keeps the staff
+  under agreement through the 2031-32 school year.
+  The deal settles pay and terms six years out for teachers in
+  the northern Allegheny County district, which enrolls students
+  from Shaler, Etna, Millvale, and Reserve Township. Districts
+  across the county are fighting over expired contracts, and
+  Shaler Area now takes its labor calendar off the table until
+  2032.
+  - TribLive: https://triblive.com/news/education-classroom/early-bird-contract-keeps-shaler-area-teachers-under-contract-through-2031-32-school-year/
+* Gilpin Township Orders Water Conservation
+  Latest developments: The Gilpin Township Municipal Authority
+  imposed a mandatory water conservation notice across its
+  entire service area Wednesday night, November 18, and blamed
+  insufficient water pressure coming from the Municipal
+  Authority of Westmoreland County.
+  Gilpin sits in Armstrong County along the Allegheny River and
+  buys its water through the Westmoreland County system. The
+  order takes effect immediately for every customer the township
+  authority serves.
+  - WPXI: https://www.wpxi.com/news/local/gilpin-township-municipal-authority-issues-mandatory-water-conservation-notice/Z2J3UYY7MVEDBHX6H4XVVDROHU/
+  - TribLive: https://triblive.com/local/valley-news-dispatch/gilpin-officials-announce-a-mandatory-water-conservation-notice-blames-woes-on-county-water-authority/
+* Frosty Mornings, Mild Afternoons
+  Latest developments: Widespread frost and river-valley fog
+  opened Thursday, November 19, around Pittsburgh under clear
+  skies and light winds, and KDKA, WPXI, and WTAE each carry
+  sunshine and mild, dry weather across Western Pennsylvania
+  into the weekend.
+  The dry stretch covers the downtown holiday market, which
+  opens Friday, November 20, and Light Up Night on Saturday,
+  November 21. Temperatures run above normal through the weekend
+  with no rain in the forecast.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/mild-and-dry-conditions-expected-to-continue-into-the-weekend-for-the-pittsburgh-area/
+  - WPXI: https://www.wpxi.com/weather/sunshine-warm-temperatures-after-some-fog-start-day/PRQCHEHXUJA5JNSY7GO6W556D4/
+  - WTAE: https://www.wtae.com/article/sunny-skies-and-mild-temperatures-for-western-pa/74474842
+* Charleroi Police Board Tables the ICE Agreement
+  Latest developments: The Charleroi Regional Police board voted
+  Wednesday night, November 18, to table a proposed 287(g)
+  agreement with Immigration and Customs Enforcement after
+  residents, business owners, and community leaders filled the
+  meeting room to oppose it.
+  The agreement would let Charleroi Regional Police officers act
+  as federal immigration enforcement agents in the Washington
+  County borough, where the Haitian population has thinned since
+  federal Temporary Protected Status ended. Speakers told the
+  board the deal would spread fear and cost borough businesses
+  customers they have already begun to lose.
+  - WTAE: https://www.wtae.com/article/charleroi-ice-agreement-discussion-fear-haitian-community-critics-say/74472717
+  - WPXI: https://www.wpxi.com/news/local/charleroi-regional-police-board-votes-table-decision-entering-agreement-with-ice/SNMPEDLQL5EBNBCQD6O2XFQWPI/
+  - KDKA: https://www.cbsnews.com/pittsburgh/video/residents-speak-out-against-proposed-agreement-between-ice-and-charleroi-regional-police-department/
+* Sto-Rox Teachers Authorize a Strike
+  Latest developments: WTAE reported Thursday, November 19, that
+  the Sto-Rox Education Association has now worked 142 days
+  under an expired contract, a day after members voted with full
+  support to authorize a strike, and union officials said they
+  will hold off on a walkout for now.
+  The Sto-Rox School District, which serves McKees Rocks and
+  Stowe Township in Allegheny County, has yet to settle terms
+  with its teachers, and the union had not taken a strike
+  authorization vote in decades. The vote hands union leadership
+  the power to call a walkout whenever it judges one necessary,
+  which would idle classes for the district's students.
+  - WTAE: https://www.wtae.com/article/sto-rox-teachers-authorize-strike/74472021
+  - TribLive: https://triblive.com/news/education-classroom/sto-rox-teachers-authorize-strike-in-contract-dispute/
+  - WPXI: https://www.wpxi.com/news/local/sto-rox-school-district-union-votes-authorize-strike/KGQPMKXRSBBQNG2KIOMS4JIP2I/
+  - WTAE: https://www.wtae.com/article/sto-rox-teachers-authorize-strike-contract/74476691
+* Pittsburgh's $43 Million in No-Bid Contracts
+  Latest developments: PublicSource published an analysis
+  Thursday, November 19, finding the City of Pittsburgh has
+  issued roughly $43 million in contracts since 2020 without a
+  competitive process.
+  The sum amounts to a small fraction of total city spending,
+  and it has drawn intense scrutiny of how Pittsburgh picks
+  vendors. The explainer walks through the rules that let the
+  city skip bidding and where the money went.
+  - PublicSource: https://www.publicsource.org/pittsburgh-no-bid-contracts-explained/
+
+Events:
+* The Holiday Market Opens Friday in Market Square
+  Latest developments: KDKA reported Thursday, November 19, that
+  Pittsburgh's holiday market opens Friday, November 20, in
+  Market Square, with Light Up Night following Saturday,
+  November 21.
+  Vendors in the wooden chalets downtown told KDKA they are
+  ready for the holiday shopping season to start, and Light Up
+  Night brings the crowds, skaters, and families that merchants
+  around the square count on. The market runs in Market Square
+  through the shopping season.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/pittsburgh-holiday-market-vendors-excited-shopping-season/
+  - KDKA: https://www.cbsnews.com/pittsburgh/video/vendors-ready-for-pittsburghs-holiday-market-to-open-for-business/
+* The Weekend Guide: Light Up Night to a Cryptid Film Festival
+  Latest developments: NEXTpittsburgh published its weekend
+  guide covering Thursday, November 19, through Sunday, November
+  22, with more than 13 things to do, led by Light Up Night,
+  Phipps Conservatory's Holiday Magic, and a cryptid film
+  festival.
+  The listings run to holiday attractions, fall festivals, craft
+  markets, art openings, and cultural productions around the
+  city, with times and venues on each entry.
+  - NEXTpittsburgh Events: https://nextpittsburgh.com/events/13-things-to-do-this-weekend-nov-19-22-2026/
+* City Paper's Week: Cryptid Films to a Ska Show
+  Latest developments: Pittsburgh City Paper published its
+  events calendar Thursday, November 19, covering Thursday,
+  November 19, through Wednesday, November 25.
+  The week's listings run to a cryptid film festival, a furry
+  rave, a pottery tour, and a pre-Thanksgiving ska show, with
+  venue, time, and admission details on each listing.
+  - Pittsburgh City Paper: https://www.pghcitypaper.com/listings/this-weeks-top-events/pittsburghs-top-events-thu-nov-19-wed-nov-25/
+
+SPORTS
+----------------------------------------------------------------
+
+Steelers (6-3)
+  Up Next · Steelers @ Eagles · Sun Nov 22, 1:00 PM
+    https://plaintextsports.com/nfl/2026/week11/pit-phi
+
+Penguins (7-11)
+  Up Next · Blues @ Penguins · Thu Nov 19, 7:00 PM
+    https://plaintextsports.com/nhl/2026-11-19/stl-pit
+
+Around the Teams:
+* Rodgers Takes Questions Before Philadelphia
+  Latest developments: The Steelers posted video Thursday
+  morning, November 19, of Aaron Rodgers's Wednesday news
+  conference, November 18, his first media session of the week.
+  Rodgers, the Steelers quarterback, spoke three days after the
+  loss at Cincinnati that put the passing game under scrutiny,
+  and Pittsburgh plays the Philadelphia Eagles Sunday, November
+  22, at 1 p.m. Eastern on CBS. Matt Williamson and Wes Uhler
+  opened the same week's SNR Drive on the Eagles matchup.
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=JkJgxndnlX0
+
+Team USA:
+* Arena Blasts the U.S. Coaching Search
+  Latest developments: Bruce Arena said U.S. Soccer does not
+  "have a clue" how to replace Mauricio Pochettino, ESPN
+  reported Thursday, November 19.
+  Arena, who coached the United States men's national team at
+  the 2002 and 2006 World Cups and now manages the San Jose
+  Earthquakes, took aim at the federation two days after
+  Pochettino left for Manchester United. Steve Cherundolo runs
+  the December camp on an interim basis while U.S. Soccer, with
+  women's coach Emma Hayes helping assess candidates, searches
+  for a permanent hire ahead of the 2030 cycle.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50525211/us-coach-arena-federation-clue-next-coach
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50464388/usmnt-coaching-candidates-replace-mauricio-pochettino
+* Sanchez Wins the NWSL MVP Award
+  Latest developments: The National Women's Soccer League named
+  Ashley Sanchez its 2026 Most Valuable Player Wednesday,
+  November 18, placing her ahead of Trinity Rodman in the
+  voting.
+  Sanchez, the North Carolina Courage forward and a United
+  States international, tied the league record with 20 goals
+  this season. The award caps a year that puts her in the
+  conversation for Emma Hayes's World Cup qualifying squads.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50525282/courage-sanchez-beats-rodman-wilson-nwsl-mvp
+* The NWSL Final Arrives With Old Problems
+  Latest developments: ESPN reported Thursday, November 19, that
+  record revenue has failed to solve the National Women's Soccer
+  League's stadium and scheduling problems as the Kansas City
+  Current and the Washington Spirit prepare to meet in
+  Saturday's championship, November 21.
+  Venue conflicts pushed both semifinals into unsuitable
+  buildings last weekend, and Gotham FC forward Midge Purce
+  called the 5,000-seat Icahn Stadium assignment inexcusable.
+  The final pairs Kansas City against a Washington side chasing
+  its third straight title with Trinity Rodman leading the
+  attack.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50524447/nwsl-money-problems-remain-2026-championship-stadium
+
+READING
+----------------------------------------------------------------
+
+* Stratechery -- An Interview With Eric Seufert About Agentic
+  Commerce
+  Ben Thompson and Eric Seufert work through how shopping agents
+  will pay for themselves, with Seufert arguing advertising
+  becomes the business model. Thompson makes the case for
+  retailers that build for agents rather than for human
+  browsers.
+  https://stratechery.com/2026/an-interview-with-eric-seufert-about-agentic-commerce/
+
+* Ed Zitron -- The NVIDIA Bubble
+  Zitron argues Nvidia sits at the center of an
+  artificial-intelligence bubble, and walks through the
+  financing arrangements and customer relationships that
+  manufacture demand for its chips.
+  https://www.wheresyoured.at/the-nvidia-bubble/
+
+* Cal Newport -- In Search of the Deep Life
+  Newport revisits the daily essays he wrote early in the
+  coronavirus pandemic and traces how that writing streak shaped
+  his idea of a deep life.
+  https://calnewport.com/in-search-of-the-deep-life/
+
+MARKETS (weekly average, change vs prior week)
+----------------------------------------------------------------
+S&P 500     7,446.96  ▼ -0.5%
+Dow        51,442.08  ▼ -1.0%
+Nasdaq     24,754.08  ▼ -0.7%
+WTI crude      86.46  ▼ -1.9%
+EUR/USD       1.1032  ▼ -1.5%
+GBP/USD       1.3223  ▼ -1.4%
+USD/JPY       159.68  ▲ +1.0%
+
+FEED HEALTH
+----------------------------------------------------------------
+Security: 24 of 24 feeds loaded, 61 items in the 24-hour window.
+  No recent items: Krebs on Security, Schneier on Security, CISA
+  Advisories, Securelist (Kaspersky), Sophos News, Unit 42 (Palo
+  Alto), Google Online Security Blog, Cisco Talos, Microsoft
+  Security Blog, Google Project Zero, The DFIR Report, Kim
+  Zetter (Zero Day), Frank on Fraud.
+Pittsburgh: 8 of 9 feeds loaded, 60 items in the 48-hour window.
+  Failed: Pittsburgh Post-Gazette (ForbiddenXMLError: DTD or
+  entity declarations are not allowed).
+Business and Politics: 8 of 8 feeds loaded, 60 items in the
+  36-hour window.
+Events: 2 of 4 feeds loaded, 1 item in the 120-hour window.
+  Failed: Post-Gazette Arts & Entertainment (HTTPError: HTTP
+  Error 404: Not Found); Post-Gazette Music (HTTPError: HTTP
+  Error 404: Not Found).
+Sports media: 4 of 6 feeds loaded, 19 items in the 96-hour
+  window. Failed: Post-Gazette Pirates (HTTPError: HTTP Error
+  404: Not Found); Post-Gazette Steelers (HTTPError: HTTP Error
+  404: Not Found).
+Team USA: 3 of 3 feeds loaded, 35 items in the 72-hour window.
+  No recent items: Guardian Olympics.
+Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
+Markets (Yahoo Finance): 7 of 7 rows
+Weather (NWS): 3 forecast periods
+Scores (ESPN, plaintextsports): 2 teams via ESPN
+Summaries: 3 model call(s) served by claude-opus-5 (363s of
+  model time; $2.06 at API list price).
+
+================================================================
+Generated 2026-11-19 10:06 EST. Updated weekdays at about 7:05
+AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
+8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
+feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
+beat and podcast feeds; 3 Team USA feeds; WSJ World News, WSJ
+Markets, WSJ US Business, WSJ Politics, The Economist, FT Home,
+FT World, FT Markets; and Ed Zitron, Stratechery, Cal Newport.
+Markets from Yahoo Finance, weather from the NWS, scores from
+ESPN or plaintextsports.com. Summaries are AI-generated from the
+linked reporting; verify at the sources.
+================================================================

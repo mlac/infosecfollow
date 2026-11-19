@@ -1,27 +1,94 @@
 {
   "date": "2026-11-19",
-  "headline": "Attackers began probing Java4Shell within two days of its disclosure, while PHP, Ruby, NGINX, Splunk, and three database engines each shipped or demonstrated unauthenticated code execution.",
+  "headline": "Exploit code caught up with the week's biggest server flaws as attackers probed Java4Shell, proof-of-concept exploits for the decade-old nginx2root bugs went public, and intruders took over clustered Cisco Expressway systems days after a researcher published working code.",
   "emerging_trends": [
     {
-      "text": "Java4Shell went from disclosure to live probing in two days, and nginx2root proof-of-concept code followed its own patch by hours, compressing the defender's window to a single shift.",
-      "topic_title": "Java4Shell Draws Live Exploit Attempts",
-      "link_phrase": "Java4Shell",
+      "text": "Attackers treat a published proof of concept as a starting gun: exploit traffic reached Java4Shell, the nginx2root HTTP/2 bugs, and clustered Cisco Expressway devices within days of the code going public.",
+      "topic_title": "Cisco Expressway and Apache Axis Enter Active Exploitation",
+      "link_phrase": "Cisco Expressway",
       "_anchor": "trend-1"
     },
     {
-      "text": "This week's breaches entered through somebody else's infrastructure—N-able's hosted mail security cloud, Wellington IT's credit union software, and the CreditNirvana debt collection platform—which places a supplier's weakest server inside every customer's perimeter.",
-      "topic_title": "N-able Mail Cloud and Wellington IT Breaches Spread",
-      "link_phrase": "Wellington IT",
+      "text": "Artex, the open-source AI penetration-testing framework, has become the entry-level weapon for newcomers who type a prompt instead of writing an exploit, while the same agent plumbing runs unmonitored inside companies on employees' own credentials.",
+      "topic_title": "AI Agents Run on Their Builders' Credentials",
+      "link_phrase": "Artex",
       "_anchor": "trend-2"
     },
     {
-      "text": "Artex hands point-and-shoot intrusion to beginners while the AI agents employees assemble inside their own workflow tools quietly carry those employees' credentials, so one technology widens both the attacker pool and the blast radius.",
-      "topic_title": "AI Agents Run on Their Builders' Credentials",
-      "link_phrase": "Artex",
+      "text": "This week's victims sit downstream of a vendor rather than at the point of attack, with Wellington IT exposing member records at 50 credit unions and N-able losing a server inside its hosted email security cloud.",
+      "topic_title": "N-able Mail Cloud and Wellington IT Breaches Spread",
+      "link_phrase": "Wellington IT",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "nginx2root Exploits Go Public as Splunk Patches 140 Bugs",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "F5 patched five nginx2root vulnerabilities that let remote, unauthenticated attackers run arbitrary code, and proof-of-concept exploits for them reached the public, with researchers chaining two of the bugs to a Linux kernel flaw to take root; Splunk fixed nearly 140 flaws across three core products, among them authentication bypass, remote code execution, and privilege escalation; and SonicWall told customers in a Wednesday advisory to replace every Gen 6 and Gen 6.5 appliance and pull it off the internet edge, because SonicOS 6.x now receives no firmware or security updates regardless of severity.",
+      "summary": "The nginx2root bugs have sat in NGINX's open-source HTTP/2 code since version 1.9.5 shipped on September 22, 2015, and F5 fixed them in 1.31.9 and 1.30.7. Any internet-facing NGINX with HTTP/2 enabled, Splunk deployment, or SonicWall Gen 6 firewall needs action this week.",
+      "tags": [
+        "patch",
+        "exploit",
+        "end-of-life"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "F5 Patches Critical NGINX2Root Flaws as PoC Exploits Go Public",
+          "url": "https://www.securityweek.com/f5-patches-critical-nginx2root-flaws-as-poc-exploits-go-public/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Critical NGINX 'NGINX2Root' bugs let attackers hijack servers",
+          "url": "https://www.bleepingcomputer.com/news/security/critical-nginx-nginx2root-bugs-let-attackers-hijack-servers/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Splunk Patches Nearly 140 Flaws Across Three Core Products",
+          "url": "https://www.securityweek.com/splunk-patches-nearly-140-flaws-across-three-core-products/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "SonicWall urges customers to replace Gen 6 firewalls now",
+          "url": "https://www.helpnetsecurity.com/2026/11/19/sonicwall-gen-6-firewalls-reach-end-of-support/"
+        }
+      ],
+      "_anchor": "i-e45c5124b0"
+    },
+    {
+      "title": "Cisco Expressway and Apache Axis Enter Active Exploitation",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Attackers exploited a Cisco Expressway vulnerability soon after a proof of concept went out, hacking clustered Expressway devices at a Russian organization and staging tooling for lateral movement; the Apache Software Foundation warned of attacks on Roller through CVE-2026-129448, the unauthenticated XML-RPC deserialization bug rated 9.8, while a separate Apache Axis flaw now serves as the way into Confluence Data Center; CISA tied its four newest Known Exploited Vulnerabilities entries, covering Synology DiskStation Manager, BerriAI LiteLLM, Apache Axis, and Vanderbilt University's Research Electronic Data Capture platform, to ransomware, cryptomining, and LLMjacking, and ordered federal civilian agencies to fix the Perforce Puppet Enterprise flaw CVE-2026-115731; Drupal patched a critical remote code execution bug and told site owners to expect exploits fast.",
+      "summary": "Five widely deployed products—Cisco Expressway, Apache Roller, Apache Axis, Puppet Enterprise, and Drupal—now carry unauthenticated paths to code execution with attacks already running. Patch the internet-facing ones first and treat the Puppet server as a route to every endpoint it configures.",
+      "tags": [
+        "exploit",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Hackers Exploit Cisco Expressway Vulnerability Soon After PoC Release",
+          "url": "https://www.securityweek.com/hackers-exploit-cisco-expressway-vulnerability-soon-after-poc-release/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Critical Apache Roller, Axis Vulnerabilities Exploited in Attacks",
+          "url": "https://www.securityweek.com/critical-apache-roller-axis-vulnerabilities-exploited-in-attacks/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Exploited Puppet flaw puts the server that configures your endpoint fleet at risk (CVE-2026-115731)",
+          "url": "https://www.helpnetsecurity.com/2026/11/19/puppet-enterprise-vulnerability-cve-2026-115731-exploited/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Drupal patches critical RCE flaw, warns exploits may surface quickly",
+          "url": "https://www.bleepingcomputer.com/news/security/drupal-patches-critical-rce-flaw-warns-exploits-may-surface-quickly/"
+        }
+      ],
+      "_anchor": "i-5e668a3027"
+    },
     {
       "title": "PHP, Ruby, and Databases Ship Code-Execution Fixes",
       "area": "Vulnerabilities and Exploits",
@@ -54,39 +121,6 @@
         }
       ],
       "_anchor": "i-e2e32d524f"
-    },
-    {
-      "title": "N-able Mail Cloud and Wellington IT Breaches Spread",
-      "area": "Data Breaches",
-      "latest_developments": "N-able disclosed on Wednesday, November 18, 2026 that unknown attackers reached a server in its Mail Assure and Spam Experts Hosted Cloud, and the company disabled management interfaces and APIs across three regions while its investigation continues; a reported attack on Wellington IT exposed sensitive member information at 50 credit unions, most of them in Ireland; NVIDIA opened an investigation after the Gentlemen ransomware crew listed the chipmaker on its dark web leak site; and Wired reported that two vulnerabilities in CreditNirvana, the AI debt collection platform, left 6.6 million accounts and 315,000 call recordings open, along with emails, texts, and credit reports.",
-      "summary": "Four victims this week sit downstream of a provider: a hosted email security cloud, a credit union software vendor, a ransomware leak-site listing, and a debt collection platform holding financial records. Customers of each should force credential rotation and review what access the provider holds.",
-      "tags": [
-        "breach",
-        "ransomware"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "Hackers Breach N-able Cloud Server, Disrupting Email Security Management Across 3 Regions",
-          "url": "https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Data breach impacts 40 Irish credit unions in reported IT provider hack",
-          "url": "https://www.bleepingcomputer.com/news/security/data-breach-impacts-40-irish-credit-unions-in-reported-it-provider-hack/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "NVIDIA investigating Gentlemen ransomware breach claims",
-          "url": "https://www.bleepingcomputer.com/news/security/nvidia-investigating-gentlemen-ransomware-breach-claims/"
-        },
-        {
-          "source": "Wired Security",
-          "title": "An AI Debt Collection Service Exposed 6.6 Million Accounts and 315,000 Call Recordings",
-          "url": "https://www.wired.com/story/ai-debt-collection-service-exposed-66-million-accounts-and-315000-call-recordings/"
-        }
-      ],
-      "_anchor": "i-67401cc888"
     },
     {
       "title": "AI Agents Run on Their Builders' Credentials",
@@ -122,6 +156,73 @@
       "_anchor": "i-1bcc132f92"
     },
     {
+      "title": "N-able Mail Cloud and Wellington IT Breaches Spread",
+      "area": "Data Breaches",
+      "latest_developments": "NVIDIA said it has found no indication that anyone compromised its systems after the Gentlemen ransomware crew listed the chipmaker on its dark web leak site; N-able disclosed on Wednesday, November 18, 2026 that unknown attackers reached a server in its Mail Assure and Spam Experts Hosted Cloud, and the company disabled management interfaces and APIs across three regions while its investigation continues; a reported attack on Wellington IT exposed sensitive member information at 50 credit unions, most of them in Ireland; and Wired reported that two vulnerabilities in CreditNirvana, the AI debt collection platform, left 6.6 million accounts and 315,000 call recordings open, along with emails, texts, and credit reports.",
+      "summary": "Four victims this week sit downstream of a provider: a hosted email security cloud, a credit union software vendor, a ransomware leak-site listing, and a debt collection platform holding financial records. Customers of each should force credential rotation and review what access the provider holds.",
+      "tags": [
+        "breach",
+        "ransomware"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Hackers Breach N-able Cloud Server, Disrupting Email Security Management Across 3 Regions",
+          "url": "https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Data breach impacts 40 Irish credit unions in reported IT provider hack",
+          "url": "https://www.bleepingcomputer.com/news/security/data-breach-impacts-40-irish-credit-unions-in-reported-it-provider-hack/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Nvidia Responds to Gentlemen Ransomware Claim",
+          "url": "https://www.securityweek.com/nvidia-responds-to-gentlemen-ransomware-claim/"
+        },
+        {
+          "source": "Wired Security",
+          "title": "An AI Debt Collection Service Exposed 6.6 Million Accounts and 315,000 Call Recordings",
+          "url": "https://www.wired.com/story/ai-debt-collection-service-exposed-66-million-accounts-and-315000-call-recordings/"
+        }
+      ],
+      "_anchor": "i-67401cc888"
+    },
+    {
+      "title": "Washington Targets Scam Payments and a Palantir Spy",
+      "area": "Policy and Regulation",
+      "latest_developments": "The Homeland Security Task Force opened the Threat Disruption Center inside its National Coordination Center in Fairfax, Virginia, giving investigators shared tooling to sort victim complaints, map the criminal groups behind them, and stop victims' payments before the money leaves for foreign scam, cybercrime, and sextortion networks; Coinbase blocked $4.7 million in cryptocurrency transfers to a fake giveaway that ran an AI-generated deepfake of Elon Musk during a Tesla livestream more than 500,000 people watched; federal prosecutors charged Igor Andreevich D'iu, a Russian national recruited through Telegram, with acting as a Moscow agent in a surveillance campaign against employees of a defense technology company The Record understands to be Palantir Technologies; and a federal bankruptcy judge cleared Google to take the data of the defunct Spirit Airlines for $10 million, with protections attached, for use in AI projects.",
+      "summary": "The United States is attacking fraud at the payment layer while prosecuting human-intelligence collection against defense contractor staff. Finance and insider-threat teams gain a new federal contact point for both.",
+      "tags": [
+        "policy",
+        "fraud",
+        "espionage"
+      ],
+      "sources": [
+        {
+          "source": "Help Net Security",
+          "title": "US enlists private firms to cut scammers off from victims' cash",
+          "url": "https://www.helpnetsecurity.com/2026/11/19/us-threat-disruption-center-scam-sextortion-funds/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Coinbase blocks $4.7 million in transfers to Elon Musk deepfake scam",
+          "url": "https://www.bleepingcomputer.com/news/security/coinbase-blocks-47-million-in-transfers-to-elon-musk-deepfake-scam/"
+        },
+        {
+          "source": "The Record",
+          "title": "Russian charged with spying on Palantir employees for Moscow",
+          "url": "https://therecord.media/russian-charged-with-spying-on-palantir-for-moscow"
+        },
+        {
+          "source": "The Record",
+          "title": "Judge signs off on sale of Spirit Airlines' data to Google",
+          "url": "https://therecord.media/judge-signs-off-google-purchase-spirit-airlines-data"
+        }
+      ],
+      "_anchor": "i-1b4d43f726"
+    },
+    {
       "title": "Java4Shell Draws Live Exploit Attempts",
       "area": "Vulnerabilities and Exploits",
       "latest_developments": "GreyNoise, watchTowr, and Cloudflare each reported probing and exploit attempts against CVE-2026-114938, and Cisco, Elastic, Red Hat, and Siemens published advisories spelling out which of their products carry the vulnerable runtime; Dark Reading reported that researchers found the flaw using AI.",
@@ -151,62 +252,50 @@
       "_anchor": "i-ce554e89b4"
     },
     {
-      "title": "nginx2root Exploits Go Public as Splunk Patches 140 Bugs",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "F5 patched five nginx2root vulnerabilities that let remote, unauthenticated attackers run arbitrary code, and proof-of-concept exploits for them reached the public; Splunk fixed nearly 140 flaws across three core products, among them authentication bypass, remote code execution, and privilege escalation; and SonicWall told customers in a Wednesday advisory to replace every Gen 6 and Gen 6.5 appliance and pull it off the internet edge, because SonicOS 6.x now receives no firmware or security updates regardless of severity.",
-      "summary": "The nginx2root bugs have sat in NGINX's open-source HTTP/2 code since version 1.9.5 shipped on September 22, 2015, and F5 fixed them in 1.31.9 and 1.30.7. Any internet-facing NGINX with HTTP/2 enabled, Splunk deployment, or SonicWall Gen 6 firewall needs action this week.",
+      "title": "Ukraine Arrests a Fake IT Support Ransomware Crew",
+      "area": "Policy and Regulation",
+      "latest_developments": "Ukraine's National Police described how the four suspects worked: they studied each target, then telephoned employees posing as IT support staff to talk their way into corporate networks, and the case ran more than two years with the FBI; The Record identified oil and healthcare companies in the United States among the 28 victims that paid more than $40.5 million.",
+      "summary": "Ukrainian authorities detained four members of an international ransomware operation that opened its intrusions with voice phishing rather than malware. Help desks and their callers need verification steps that survive a convincing phone call.",
       "tags": [
-        "patch",
-        "exploit",
-        "end-of-life"
+        "ransomware",
+        "arrest"
       ],
       "sources": [
         {
-          "source": "SecurityWeek",
-          "title": "F5 Patches Critical NGINX2Root Flaws as PoC Exploits Go Public",
-          "url": "https://www.securityweek.com/f5-patches-critical-nginx2root-flaws-as-poc-exploits-go-public/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Splunk Patches Nearly 140 Flaws Across Three Core Products",
-          "url": "https://www.securityweek.com/splunk-patches-nearly-140-flaws-across-three-core-products/"
+          "source": "The Record",
+          "title": "Ukraine exposes ransomware network extorting US oil, healthcare firms",
+          "url": "https://therecord.media/ukraine-ransomware-arrests-cyber"
         },
         {
           "source": "Help Net Security",
-          "title": "SonicWall urges customers to replace Gen 6 firewalls now",
-          "url": "https://www.helpnetsecurity.com/2026/11/19/sonicwall-gen-6-firewalls-reach-end-of-support/"
+          "title": "Ukraine arrests key members of ransomware gang that extorted $40.5 million posing as IT support",
+          "url": "https://www.helpnetsecurity.com/2026/11/19/ukraine-ransomware-gang-arrests-fake-it-support-calls/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Ukraine, FBI arrest ransomware gang members tied to $40M in ransoms",
+          "url": "https://www.bleepingcomputer.com/news/security/ukraine-fbi-arrest-ransomware-gang-members-tied-to-40m-in-ransoms/"
         }
       ],
-      "_anchor": "i-e45c5124b0"
+      "_anchor": "i-049017878e"
     },
     {
-      "title": "Washington Targets Scam Payments and a Palantir Spy",
+      "title": "ICE Pays AT&T to Mine Call Records",
       "area": "Policy and Regulation",
-      "latest_developments": "The Homeland Security Task Force opened the Threat Disruption Center inside its National Coordination Center in Fairfax, Virginia, giving investigators shared tooling to sort victim complaints, map the criminal groups behind them, and stop victims' payments before the money leaves for foreign scam, cybercrime, and sextortion networks; federal prosecutors charged Igor Andreevich D'iu, a Russian national recruited through Telegram, with acting as a Moscow agent in a surveillance campaign against employees of a defense technology company The Record understands to be Palantir Technologies; and a federal bankruptcy judge cleared Google to take the data of the defunct Spirit Airlines for $10 million, with protections attached, for use in AI projects.",
-      "summary": "The United States is attacking fraud at the payment layer while prosecuting human-intelligence collection against defense contractor staff. Finance and insider-threat teams gain a new federal contact point for both.",
+      "latest_developments": "An internal Immigration and Customs Enforcement document that 404 Media obtained shows the agency paying AT&T for raw data and analytical services under the Hemisphere program, and privacy experts and members of Congress call the arrangement a mass surveillance effort that may touch trillions of phone records.",
+      "summary": "Hemisphere gives federal investigators searchable access to AT&T call detail records, including calls that merely cross AT&T's network. Anyone whose threat model includes United States law enforcement demands should assume telephone metadata sits inside a commercial analytics service.",
       "tags": [
-        "policy",
-        "fraud",
-        "espionage"
+        "surveillance",
+        "policy"
       ],
       "sources": [
         {
-          "source": "Help Net Security",
-          "title": "US enlists private firms to cut scammers off from victims' cash",
-          "url": "https://www.helpnetsecurity.com/2026/11/19/us-threat-disruption-center-scam-sextortion-funds/"
-        },
-        {
-          "source": "The Record",
-          "title": "Russian charged with spying on Palantir employees for Moscow",
-          "url": "https://therecord.media/russian-charged-with-spying-on-palantir-for-moscow"
-        },
-        {
-          "source": "The Record",
-          "title": "Judge signs off on sale of Spirit Airlines' data to Google",
-          "url": "https://therecord.media/judge-signs-off-google-purchase-spirit-airlines-data"
+          "source": "404 Media",
+          "title": "ICE Is Paying AT&T to Dig Through a Mountain of Call Records",
+          "url": "https://www.404media.co/ice-is-paying-at-t-to-dig-through-a-mountain-of-call-records-hemisphere-data-analytical-services/"
         }
       ],
-      "_anchor": "i-1b4d43f726"
+      "_anchor": "i-7ad647236e"
     },
     {
       "title": "Flash Chip Attack Breaks TPM Lockout",
@@ -303,9 +392,27 @@
   "local": {
     "business_politics": [
       {
+        "title": "Germany Puts Its Cyber Threat Level at Critical",
+        "latest_developments": "Germany's security authorities reported an artificial-intelligence-driven surge in hacking attempts and rated the national threat level critical, the Financial Times reported Thursday, November 19.",
+        "summary": "New artificial-intelligence tools let attackers find and exploit software flaws far faster, and the German assessment lands a week after outages knocked out systems at Microsoft, JPMorgan Chase, and other large companies. The Economist traces those American failures to frenzied patching and cyber-attack preparation that manufacture fragility of their own, which puts operational risk at banks and cloud providers in the same frame as the attackers.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "Germany reveals AI-driven surge in cyber attacks",
+            "url": "https://www.ft.com/content/cf875eb6-34a2-413e-b89d-bc609367a19e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "The Economist",
+            "title": "What is causing America's recent outages",
+            "url": "https://www.economist.com/united-states/2026/11/19/what-is-causing-americas-recent-outages"
+          }
+        ],
+        "_anchor": "i-2f7a2445c4"
+      },
+      {
         "title": "Anthropic Debuts on the Nasdaq",
-        "latest_developments": "Anthropic shares start trading on the Nasdaq around midday Thursday, November 19, after the company sold stock at a $1.5 trillion valuation and carried its total fundraising to $107 billion, and Nasdaq futures climbed premarket on the pricing.",
-        "summary": "Anthropic, the San Francisco maker of the Claude chatbot, raised $81 billion in the largest initial public offering ever recorded and becomes the first artificial-intelligence lab to trade publicly. The opening prints give investors their clearest read on appetite for the AI build-out after weeks of selling in Nvidia and data-center shares.",
+        "latest_developments": "Anthropic's Nasdaq debut Thursday, November 19, raised $81.3 billion, the largest initial public offering on record, Treasury yields rose as the listing rekindled risk appetite on Wall Street, and the Wall Street Journal reported that a majority of the lab's more than 5,000 employees stand to become millionaires.",
+        "summary": "Anthropic, the San Francisco maker of the Claude chatbot, sold stock at a $1.5 trillion valuation and becomes the first artificial-intelligence lab to trade publicly. The opening prints give investors their clearest read on appetite for the AI build-out after weeks of selling in Nvidia and data-center shares.",
         "sources": [
           {
             "source": "FT Home",
@@ -326,14 +433,24 @@
             "source": "FT World",
             "title": "Anthropic raises $81bn in record IPO",
             "url": "https://www.ft.com/content/62c0510b-ca65-441e-9baf-675b93903b9e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Treasury Yields Rise Amid Anthropic Euphoria",
+            "url": "https://www.wsj.com/finance/investing/jgbs-edge-higher-amid-mixed-developments-c690e1af?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Thousands of Anthropic Employees and Investors Are Set to Reap Fortunes",
+            "url": "https://www.wsj.com/tech/ai/thousands-of-anthropic-employees-and-investors-are-set-to-reap-fortunes-d9c3c6ed?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-884e4442a4"
       },
       {
         "title": "Trump, Xi, and Putin Hold the First Trilateral Summit",
-        "latest_developments": "The three leaders sat down together in Shenzhen Thursday, November 19, the first meeting ever to put the American, Chinese, and Russian heads of state at one table, and President Trump told the room, \"We are really making history.\"",
-        "summary": "Trump, Xi Jinping, and Vladimir Putin met in the southern Chinese city during the week of the Asia-Pacific Economic Cooperation forum, a staged show of unity that advertises how far global leadership has shifted. Germany hosted 40 delegations in Berlin the same day to back Kyiv and blunt the summit's Yalta 2.0 optics, and the Wall Street Journal argues Trump's leverage abroad is contracting even as he convenes the meeting.",
+        "latest_developments": "The three leaders closed the Shenzhen summit Thursday, November 19, with a joint denunciation of nuclear war and a show of unity on energy security, and they reached no major breakthrough.",
+        "summary": "Trump, Xi Jinping, and Vladimir Putin met in the southern Chinese city during the week of the Asia-Pacific Economic Cooperation forum, the first meeting ever to put the American, Chinese, and Russian heads of state at one table, and Trump told the room, \"We are really making history.\" Germany hosted 40 delegations in Berlin the same day to back Kyiv and blunt the summit's Yalta 2.0 optics, and the Wall Street Journal argues Trump's leverage abroad is contracting even as he convenes the meeting.",
         "sources": [
           {
             "source": "WSJ World News",
@@ -354,14 +471,19 @@
             "source": "WSJ Politics",
             "title": "Trump sees new world order but strains only worsen",
             "url": "https://www.wsj.com/politics/trump-sees-new-world-order-but-strains-only-worsen-b4306673?mod=rss_socialpoliticsfeed"
+          },
+          {
+            "source": "FT World",
+            "title": "Trump, Putin and Xi in historic trilateral meeting",
+            "url": "https://www.ft.com/content/3ab490ea-825a-4ef4-9239-a2905d7f7f3c?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-f3ea71c65a"
       },
       {
         "title": "A Houthi Strike Hits the Saudi Wealth Fund's Tower",
-        "latest_developments": "A Houthi air strike damaged several floors of Riyadh's tallest building Thursday, November 19, the 80-story tower that houses Saudi Arabia's Public Investment Fund.",
-        "summary": "The Public Investment Fund, the kingdom's sovereign wealth fund and one of the world's largest state investors, runs its headquarters from the tower, and the attack extends a run of near-daily Houthi barrages on Saudi territory. Crude edged higher the same morning as traders weighed continuing threats to Middle Eastern oil shipments.",
+        "latest_developments": "The Financial Times reported Thursday, November 19, that a week of tit-for-tat strikes between Iran and the United States has carried the two countries toward full-scale confrontation, and The Economist concluded the same day that neither side holds the means to end the war.",
+        "summary": "A Houthi air strike damaged several floors of Riyadh's tallest building Thursday, November 19, the 80-story tower that houses Saudi Arabia's Public Investment Fund, the kingdom's sovereign wealth fund and one of the world's largest state investors. Crude edged higher the same morning as traders weighed continuing threats to Middle Eastern oil shipments.",
         "sources": [
           {
             "source": "FT Home",
@@ -377,6 +499,16 @@
             "source": "WSJ US Business",
             "title": "Oil Prices Edge Higher as Traders Weigh Middle East Shipping Risks",
             "url": "https://www.wsj.com/business/energy-oil/oil-prices-mixed-as-traders-weigh-supply-outlook-middle-east-shipping-risks-224e2724?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "FT World",
+            "title": "Gulf flare-up stokes fears of return to Iran war",
+            "url": "https://www.ft.com/content/090da02e-2ed1-491a-a2cf-3c8a6b10522e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "The Economist",
+            "title": "Neither America nor Iran has the means to end the war",
+            "url": "https://www.economist.com/middle-east-and-africa/2026/11/19/neither-america-nor-iran-has-the-means-to-end-the-war"
           }
         ],
         "_anchor": "i-cfb89713dc"
@@ -395,12 +527,43 @@
             "source": "WSJ US Business",
             "title": "Alibaba Earnings Rebound Sharply as AI Profitability Improves",
             "url": "https://www.wsj.com/business/earnings/alibaba-earnings-rebound-sharply-as-ai-profitability-improves-70fd90d5?mod=pls_whats_news_us_business_f"
+          },
+          {
+            "source": "The Economist",
+            "title": "How China continues to evade America's tech-export rules",
+            "url": "https://www.economist.com/briefing/2026/11/19/how-china-continues-to-evade-americas-tech-export-rules"
           }
         ],
         "_anchor": "i-25ab72258d"
       }
     ],
     "business": [
+      {
+        "title": "Viatris Closes Its $1.65 Billion Pacira Deal",
+        "latest_developments": "Viatris completed its acquisition of Pacira BioSciences in a deal valued at $1.65 billion, the company announced Tuesday, November 17, and WPXI reported Thursday, November 19.",
+        "summary": "Viatris, the Canonsburg drugmaker formed in 2020 from Mylan and the Upjohn business of Pfizer, ranks among the largest public companies based in Western Pennsylvania. Pacira develops pain medications, and the purchase pushes Viatris further beyond generics into branded treatment.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Viatris completes $1.6B acquisition",
+            "url": "https://www.wpxi.com/news/local/viatris-completes-16b-acquisition/WAH3CEIHJJCFPAHQWQG62JUFSU/"
+          }
+        ],
+        "_anchor": "i-c1d96f3405"
+      },
+      {
+        "title": "Achieva Names Court Hower Chief Executive",
+        "latest_developments": "Achieva named Court Hower president and chief executive effective December 14, the organization announced November 17, WPXI reported Thursday, November 19.",
+        "summary": "Achieva runs a $57 million operation providing services, family supports, employment programs, and advocacy for people with disabilities across the Pittsburgh region. Hower inherits one of the larger human-services employers in Allegheny County.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Achieva names new CEO to lead $57M organization",
+            "url": "https://www.wpxi.com/news/local/achieva-names-new-ceo-lead-57m-organization/ISOIW3CIYNHVZGEWETFZAYZ2CY/"
+          }
+        ],
+        "_anchor": "i-b4373e97e7"
+      },
       {
         "title": "U.S. Steel and the Steelworkers Reach a Tentative Contract",
         "latest_developments": "The United Steelworkers announced a tentative agreement with U.S. Steel Thursday morning, November 19, covering more than 10,000 workers at 13 facilities.",
@@ -430,6 +593,60 @@
     ],
     "around_town": [
       {
+        "title": "Shaler Area Locks Up Teachers Through 2031-32",
+        "latest_developments": "TribLive reported Wednesday night, November 18, that the Shaler Area School District and its teachers signed an early-bird contract that keeps the staff under agreement through the 2031-32 school year.",
+        "summary": "The deal settles pay and terms six years out for teachers in the northern Allegheny County district, which enrolls students from Shaler, Etna, Millvale, and Reserve Township. Districts across the county are fighting over expired contracts, and Shaler Area now takes its labor calendar off the table until 2032.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Early-bird contract keeps Shaler Area teachers under contract through 2031-32 school year",
+            "url": "https://triblive.com/news/education-classroom/early-bird-contract-keeps-shaler-area-teachers-under-contract-through-2031-32-school-year/"
+          }
+        ],
+        "_anchor": "i-24898e14af"
+      },
+      {
+        "title": "Gilpin Township Orders Water Conservation",
+        "latest_developments": "The Gilpin Township Municipal Authority imposed a mandatory water conservation notice across its entire service area Wednesday night, November 18, and blamed insufficient water pressure coming from the Municipal Authority of Westmoreland County.",
+        "summary": "Gilpin sits in Armstrong County along the Allegheny River and buys its water through the Westmoreland County system. The order takes effect immediately for every customer the township authority serves.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Gilpin Township Municipal Authority issues mandatory water conservation notice",
+            "url": "https://www.wpxi.com/news/local/gilpin-township-municipal-authority-issues-mandatory-water-conservation-notice/Z2J3UYY7MVEDBHX6H4XVVDROHU/"
+          },
+          {
+            "source": "TribLive",
+            "title": "Gilpin officials announce a mandatory water conservation notice; blame woes on county water authority",
+            "url": "https://triblive.com/local/valley-news-dispatch/gilpin-officials-announce-a-mandatory-water-conservation-notice-blames-woes-on-county-water-authority/"
+          }
+        ],
+        "_anchor": "i-1434fb08ce"
+      },
+      {
+        "title": "Frosty Mornings, Mild Afternoons",
+        "latest_developments": "Widespread frost and river-valley fog opened Thursday, November 19, around Pittsburgh under clear skies and light winds, and KDKA, WPXI, and WTAE each carry sunshine and mild, dry weather across Western Pennsylvania into the weekend.",
+        "summary": "The dry stretch covers the downtown holiday market, which opens Friday, November 20, and Light Up Night on Saturday, November 21. Temperatures run above normal through the weekend with no rain in the forecast.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Mild and dry conditions expected to continue into the weekend for the Pittsburgh area",
+            "url": "https://www.cbsnews.com/pittsburgh/news/mild-and-dry-conditions-expected-to-continue-into-the-weekend-for-the-pittsburgh-area/"
+          },
+          {
+            "source": "WPXI",
+            "title": "Sunshine, warm temperatures after some fog to start the day",
+            "url": "https://www.wpxi.com/weather/sunshine-warm-temperatures-after-some-fog-start-day/PRQCHEHXUJA5JNSY7GO6W556D4/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Sunny Skies and Mild Temperatures for Western PA",
+            "url": "https://www.wtae.com/article/sunny-skies-and-mild-temperatures-for-western-pa/74474842"
+          }
+        ],
+        "_anchor": "i-500a364f11"
+      },
+      {
         "title": "Charleroi Police Board Tables the ICE Agreement",
         "latest_developments": "The Charleroi Regional Police board voted Wednesday night, November 18, to table a proposed 287(g) agreement with Immigration and Customs Enforcement after residents, business owners, and community leaders filled the meeting room to oppose it.",
         "summary": "The agreement would let Charleroi Regional Police officers act as federal immigration enforcement agents in the Washington County borough, where the Haitian population has thinned since federal Temporary Protected Status ended. Speakers told the board the deal would spread fear and cost borough businesses customers they have already begun to lose.",
@@ -454,8 +671,8 @@
       },
       {
         "title": "Sto-Rox Teachers Authorize a Strike",
-        "latest_developments": "The Sto-Rox Education Association voted Wednesday, November 18, to authorize a strike, the first such vote in decades, after members worked 140 days under an expired contract, and union officials said they will hold off on a walkout for now.",
-        "summary": "The Sto-Rox School District, which serves McKees Rocks and Stowe Township in Allegheny County, has yet to settle terms with its teachers. The vote hands union leadership the power to call a walkout whenever it judges one necessary, which would idle classes for the district's students.",
+        "latest_developments": "WTAE reported Thursday, November 19, that the Sto-Rox Education Association has now worked 142 days under an expired contract, a day after members voted with full support to authorize a strike, and union officials said they will hold off on a walkout for now.",
+        "summary": "The Sto-Rox School District, which serves McKees Rocks and Stowe Township in Allegheny County, has yet to settle terms with its teachers, and the union had not taken a strike authorization vote in decades. The vote hands union leadership the power to call a walkout whenever it judges one necessary, which would idle classes for the district's students.",
         "sources": [
           {
             "source": "WTAE",
@@ -471,6 +688,11 @@
             "source": "WPXI",
             "title": "Sto-Rox School District union votes to authorize a strike",
             "url": "https://www.wpxi.com/news/local/sto-rox-school-district-union-votes-authorize-strike/KGQPMKXRSBBQNG2KIOMS4JIP2I/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Sto-Rox teachers vote to authorize strike amid ongoing contract negotiations",
+            "url": "https://www.wtae.com/article/sto-rox-teachers-authorize-strike-contract/74476691"
           }
         ],
         "_anchor": "i-36a3008abc"
@@ -491,6 +713,37 @@
     ],
     "events": [
       {
+        "title": "The Holiday Market Opens Friday in Market Square",
+        "latest_developments": "KDKA reported Thursday, November 19, that Pittsburgh's holiday market opens Friday, November 20, in Market Square, with Light Up Night following Saturday, November 21.",
+        "summary": "Vendors in the wooden chalets downtown told KDKA they are ready for the holiday shopping season to start, and Light Up Night brings the crowds, skaters, and families that merchants around the square count on. The market runs in Market Square through the shopping season.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Vendors say they're excited for Pittsburgh's annual holiday market to open tomorrow",
+            "url": "https://www.cbsnews.com/pittsburgh/news/pittsburgh-holiday-market-vendors-excited-shopping-season/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Vendors ready for Pittsburgh's holiday market to open for business",
+            "url": "https://www.cbsnews.com/pittsburgh/video/vendors-ready-for-pittsburghs-holiday-market-to-open-for-business/"
+          }
+        ],
+        "_anchor": "i-44df1ae28e"
+      },
+      {
+        "title": "The Weekend Guide: Light Up Night to a Cryptid Film Festival",
+        "latest_developments": "NEXTpittsburgh published its weekend guide covering Thursday, November 19, through Sunday, November 22, with more than 13 things to do, led by Light Up Night, Phipps Conservatory's Holiday Magic, and a cryptid film festival.",
+        "summary": "The listings run to holiday attractions, fall festivals, craft markets, art openings, and cultural productions around the city, with times and venues on each entry.",
+        "sources": [
+          {
+            "source": "NEXTpittsburgh Events",
+            "title": "13+ things to do this weekend, from Light Up Night and Phipps Holiday Magic to a Cryptid Film Festival",
+            "url": "https://nextpittsburgh.com/events/13-things-to-do-this-weekend-nov-19-22-2026/"
+          }
+        ],
+        "_anchor": "i-766c53724f"
+      },
+      {
         "title": "City Paper's Week: Cryptid Films to a Ska Show",
         "latest_developments": "Pittsburgh City Paper published its events calendar Thursday, November 19, covering Thursday, November 19, through Wednesday, November 25.",
         "summary": "The week's listings run to a cryptid film festival, a furry rave, a pottery tour, and a pre-Thanksgiving ska show, with venue, time, and admission details on each listing.",
@@ -504,7 +757,21 @@
         "_anchor": "i-027e7cbed9"
       }
     ],
-    "around_teams": [],
+    "around_teams": [
+      {
+        "title": "Rodgers Takes Questions Before Philadelphia",
+        "latest_developments": "The Steelers posted video Thursday morning, November 19, of Aaron Rodgers's Wednesday news conference, November 18, his first media session of the week.",
+        "summary": "Rodgers, the Steelers quarterback, spoke three days after the loss at Cincinnati that put the passing game under scrutiny, and Pittsburgh plays the Philadelphia Eagles Sunday, November 22, at 1 p.m. Eastern on CBS. Matt Williamson and Wes Uhler opened the same week's SNR Drive on the Eagles matchup.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Aaron Rodgers Press Conference (November 18) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=JkJgxndnlX0"
+          }
+        ],
+        "_anchor": "i-f002cbbb56"
+      }
+    ],
     "team_usa": [
       {
         "title": "Arena Blasts the U.S. Coaching Search",
@@ -579,41 +846,41 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Java4Shell drew live exploit attempts in two days, nginx2root proof-of-concept code followed F5's patch by hours, and PHP now rushes a remote code execution fix.",
+      "text": "Published proof-of-concept code now works as a starting gun, with exploit attempts chasing Java4Shell, F5's nginx2root HTTP/2 flaws, and clustered Cisco Expressway devices within days of release.",
       "links": [
         {
           "anchor": "i-ce554e89b4",
           "phrase": "Java4Shell",
-          "start": 0,
-          "end": 10,
+          "start": 91,
+          "end": 101,
           "title": "Java4Shell Draws Live Exploit Attempts"
         },
         {
           "anchor": "i-e45c5124b0",
           "phrase": "nginx2root",
-          "start": 51,
-          "end": 61,
+          "start": 108,
+          "end": 118,
           "title": "nginx2root Exploits Go Public as Splunk Patches 140 Bugs"
         },
         {
-          "anchor": "i-e2e32d524f",
-          "phrase": "PHP",
-          "start": 118,
-          "end": 121,
-          "title": "PHP, Ruby, and Databases Ship Code-Execution Fixes"
+          "anchor": "i-5e668a3027",
+          "phrase": "Cisco Expressway",
+          "start": 147,
+          "end": 163,
+          "title": "Cisco Expressway and Apache Axis Enter Active Exploitation"
         }
       ]
     },
     {
-      "kind": "Update",
-      "status": "new",
-      "text": "Attackers reached a server in N-able's Mail Assure and Spam Experts hosted cloud, and the company disabled management interfaces and APIs across three regions mid-investigation.",
+      "kind": "Trend",
+      "status": null,
+      "text": "This week's victims sit downstream of a vendor, with Wellington IT exposing member records at 50 credit unions and N-able losing a server inside its hosted email security cloud.",
       "links": [
         {
           "anchor": "i-67401cc888",
-          "phrase": "N-able's Mail Assure",
-          "start": 30,
-          "end": 50,
+          "phrase": "N-able",
+          "start": 115,
+          "end": 121,
           "title": "N-able Mail Cloud and Wellington IT Breaches Spread"
         }
       ]
@@ -621,55 +888,76 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Employee-built agents inherit their creators' credentials and access, Anthropic debuts on the Nasdaq at a $1.5 trillion valuation, and Zitron argues Nvidia's demand is manufactured.",
+      "text": "AI cuts both ways, as Nudge Security finds employee-built agents inheriting their creators' access while Germany rates its national cyber threat level critical amid AI-driven intrusion attempts.",
       "links": [
         {
           "anchor": "i-1bcc132f92",
-          "phrase": "Employee-built agents",
-          "start": 0,
-          "end": 21,
+          "phrase": "Nudge Security",
+          "start": 22,
+          "end": 36,
           "title": "AI Agents Run on Their Builders' Credentials"
         },
         {
-          "anchor": "i-884e4442a4",
-          "phrase": "Anthropic",
-          "start": 70,
-          "end": 79,
-          "title": "Anthropic Debuts on the Nasdaq"
-        },
-        {
-          "anchor": "i-f75c581b60",
-          "phrase": "Nvidia's demand",
-          "start": 149,
-          "end": 164,
-          "title": "The NVIDIA Bubble"
+          "anchor": "i-2f7a2445c4",
+          "phrase": "Germany",
+          "start": 105,
+          "end": 112,
+          "title": "Germany Puts Its Cyber Threat Level at Critical"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Trump, Xi, and Putin met in Shenzhen as TSMC and Samsung suspended some China chip shipments and a Houthi strike hit Riyadh's Public Investment Fund tower.",
+      "text": "Ukraine arrested four suspects who phoned employees posing as IT support, Washington opened a Threat Disruption Center in Fairfax, and ICE was found paying AT&T for call records.",
       "links": [
         {
+          "anchor": "i-049017878e",
+          "phrase": "Ukraine",
+          "start": 0,
+          "end": 7,
+          "title": "Ukraine Arrests a Fake IT Support Ransomware Crew"
+        },
+        {
+          "anchor": "i-1b4d43f726",
+          "phrase": "Threat Disruption Center",
+          "start": 94,
+          "end": 118,
+          "title": "Washington Targets Scam Payments and a Palantir Spy"
+        },
+        {
+          "anchor": "i-7ad647236e",
+          "phrase": "AT&T",
+          "start": 156,
+          "end": 160,
+          "title": "ICE Pays AT&T to Mine Call Records"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "updated",
+      "text": "Anthropic's Nasdaq debut raised a record $81.3 billion, Trump, Xi, and Putin closed their Shenzhen summit without a breakthrough, and Houthi strikes sharpened the Iran-U.S. confrontation.",
+      "links": [
+        {
+          "anchor": "i-884e4442a4",
+          "phrase": "Anthropic's Nasdaq",
+          "start": 0,
+          "end": 18,
+          "title": "Anthropic Debuts on the Nasdaq"
+        },
+        {
           "anchor": "i-f3ea71c65a",
-          "phrase": "Shenzhen",
-          "start": 28,
-          "end": 36,
+          "phrase": "Shenzhen summit",
+          "start": 90,
+          "end": 105,
           "title": "Trump, Xi, and Putin Hold the First Trilateral Summit"
         },
         {
-          "anchor": "i-25ab72258d",
-          "phrase": "TSMC and Samsung",
-          "start": 40,
-          "end": 56,
-          "title": "TSMC and Samsung Halt Some China Shipments"
-        },
-        {
           "anchor": "i-cfb89713dc",
-          "phrase": "Houthi strike",
-          "start": 99,
-          "end": 112,
+          "phrase": "Houthi strikes",
+          "start": 134,
+          "end": 148,
           "title": "A Houthi Strike Hits the Saudi Wealth Fund's Tower"
         }
       ]
@@ -677,49 +965,28 @@
     {
       "kind": "Update",
       "status": "new",
-      "text": "Charleroi's police board tabled its ICE 287(g) agreement, Sto-Rox teachers authorized their first strike in decades, and PublicSource counted $43 million in Pittsburgh no-bid contracts.",
+      "text": "Sto-Rox teachers authorized a strike after 142 days under an expired contract, Shaler Area signed staff through 2031-32, and Gilpin Township ordered mandatory water conservation.",
       "links": [
         {
-          "anchor": "i-b1903c8e21",
-          "phrase": "Charleroi's police board",
-          "start": 0,
-          "end": 24,
-          "title": "Charleroi Police Board Tables the ICE Agreement"
-        },
-        {
           "anchor": "i-36a3008abc",
-          "phrase": "Sto-Rox teachers",
-          "start": 58,
-          "end": 74,
+          "phrase": "Sto-Rox",
+          "start": 0,
+          "end": 7,
           "title": "Sto-Rox Teachers Authorize a Strike"
         },
         {
-          "anchor": "i-bdf9432985",
-          "phrase": "PublicSource",
-          "start": 121,
-          "end": 133,
-          "title": "Pittsburgh's $43 Million in No-Bid Contracts"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "new",
-      "text": "Technische Universität Berlin researchers reset the TPM lockout on opened AMD PCs to recover Windows Hello PINs, while Washington opened a Threat Disruption Center in Fairfax, Virginia.",
-      "links": [
-        {
-          "anchor": "i-74d12e4423",
-          "phrase": "TPM lockout",
-          "start": 52,
-          "end": 63,
-          "title": "Flash Chip Attack Breaks TPM Lockout"
+          "anchor": "i-24898e14af",
+          "phrase": "Shaler Area",
+          "start": 79,
+          "end": 90,
+          "title": "Shaler Area Locks Up Teachers Through 2031-32"
         },
         {
-          "anchor": "i-1b4d43f726",
-          "phrase": "Threat Disruption Center",
-          "start": 139,
-          "end": 163,
-          "title": "Washington Targets Scam Payments and a Palantir Spy"
+          "anchor": "i-1434fb08ce",
+          "phrase": "Gilpin Township",
+          "start": 125,
+          "end": 140,
+          "title": "Gilpin Township Orders Water Conservation"
         }
       ]
     }
@@ -733,10 +1000,11 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 58,
+        "in_window": 61,
         "failed": [],
         "empty": [
           "Krebs on Security",
+          "Schneier on Security",
           "CISA Advisories",
           "Securelist (Kaspersky)",
           "Sophos News",
@@ -752,13 +1020,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 11,
-            "contributed": 11
+            "in_window": 9,
+            "contributed": 9
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 9,
+            "contributed": 9
           },
           "Krebs on Security": {
             "items": 10,
@@ -767,8 +1035,8 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Dark Reading": {
             "items": 50,
@@ -777,8 +1045,8 @@
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 9,
-            "contributed": 9
+            "in_window": 10,
+            "contributed": 10
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -857,8 +1125,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 5,
+            "contributed": 5
           },
           "Frank on Fraud": {
             "items": 10,
@@ -890,7 +1158,7 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 19
+            "contributed": 15
           },
           "Pittsburgh Post-Gazette": {
             "items": 0,
@@ -914,18 +1182,18 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 8,
+            "in_window": 7,
             "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 8
+            "contributed": 11
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 11
+            "contributed": 12
           },
           "WTAE": {
             "items": 20,
@@ -946,43 +1214,43 @@
         "per_feed": {
           "WSJ World News": {
             "items": 75,
-            "in_window": 29,
-            "contributed": 5
+            "in_window": 27,
+            "contributed": 2
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 32,
-            "contributed": 13
+            "in_window": 34,
+            "contributed": 5
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 51,
-            "contributed": 9
+            "in_window": 52,
+            "contributed": 4
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 10,
-            "contributed": 1
+            "in_window": 9,
+            "contributed": 0
           },
           "The Economist": {
             "items": 300,
-            "in_window": 118,
-            "contributed": 10
+            "in_window": 160,
+            "contributed": 43
           },
           "FT Home": {
             "items": 10,
             "in_window": 10,
-            "contributed": 4
+            "contributed": 1
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 17
+            "contributed": 5
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 1
+            "contributed": 0
           }
         }
       },
@@ -1033,7 +1301,7 @@
         "feeds": 6,
         "loaded": 4,
         "window_hours": 96,
-        "in_window": 18,
+        "in_window": 19,
         "failed": [
           {
             "name": "Post-Gazette Pirates",
@@ -1058,8 +1326,8 @@
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
-            "in_window": 14,
-            "contributed": 14
+            "in_window": 15,
+            "contributed": 15
           },
           "Ben Roethlisberger / Channel Seven (YouTube)": {
             "items": 15,
@@ -1084,16 +1352,16 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 34,
+        "in_window": 35,
         "failed": [],
         "empty": [
           "Guardian Olympics"
         ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 24,
-            "in_window": 24,
-            "contributed": 24
+            "items": 25,
+            "in_window": 25,
+            "contributed": 25
           },
           "ESPN Olympics": {
             "items": 25,
@@ -1159,24 +1427,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 32784,
+          "outputTokens": 33415,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 109305,
+          "cacheCreationInputTokens": 122716,
           "webSearchRequests": 0,
-          "costUSD": 1.91268,
+          "costUSD": 2.0625649999999998,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 19881
+          "thinkingTokens": 13989
         }
       },
-      "cost_usd": 1.91268,
-      "duration_ms": 380727,
+      "cost_usd": 2.0625649999999998,
+      "duration_ms": 363466,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-19 07:06 EST",
-    "items_considered": 58,
+    "generated_at": "2026-11-19 10:06 EST",
+    "items_considered": 61,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1257,8 +1525,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.9127,
-    "model_duration_ms": 380727,
+    "model_cost_usd": 2.0626,
+    "model_duration_ms": 363466,
     "local_from": null,
     "feed_failures": [
       "Pittsburgh Post-Gazette",
