@@ -1,13 +1,13 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Wednesday, November 18, 2026 - 1:36 PM EST
+Wednesday, November 18, 2026 - 7:37 PM EST
 ================================================================
 
-CISA pressed enterprises to patch Java4Shell as researchers
-narrowed the OpenJDK flaw to AVX-512 processors, while attackers
-already executed code on Perforce Puppet and Apache Roller
-servers and poisoned Microsoft's own agent-framework package on
-PyPI.
+Two flaws that sat in code for a decade—Java4Shell in OpenJDK
+and nginx2root in NGINX—now put enterprise Java servers and the
+web's most common proxy at risk of unauthenticated takeover,
+while attackers already run code on Perforce Puppet and Apache
+Roller.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -15,41 +15,43 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] Attackers keep riding trusted vendor code, injecting
-  malware into Optimizely's experimentation scripts and
-  publishing poisoned agent-framework builds to PyPI that steal
-  Azure credentials every time Python starts.
+* [TREND] Decade-old code keeps breaking, with nginx2root
+  sitting in NGINX since 2015, Java4Shell riding every Java
+  17.0.6 build, and CISA flagging live exploits in Puppet and
+  Apache Axis.
+  see: nginx2root and F5 BIG-IP Open Unauthenticated Attacks;
+  Java4Shell Narrows to AVX-512 Chips; Puppet and Roller Fall to
+  Live Exploits
+* [TREND] Attackers rode borrowed trust, A/B testing malware via
+  Optimizely scripts, poisoning Microsoft's agent-framework on
+  PyPI for Azure keys, and letting Cold Relic turn one Workspace
+  tenant into two.
   see: Optimizely Attackers A/B Tested Their Malware; Poisoned
-  Agent Framework Steals Cloud Keys
-* [UPDATE (updated)] NSANet entered a second day of disruption
-  at Fort Meade alongside Japan's Fugaku shutdown and Apple's
-  iCloud Mail outage, with only Fugaku tied to a confirmed
-  breach.
-  see: NSANet and Fugaku Go Dark
-* [UPDATE (updated)] Mandiant traced Cold Relic from one
-  compromised Google Workspace tenant into a partner
-  organization, using stolen correspondence to give follow-on
-  phishing the right names, projects, and tone.
-  see: Cold Relic Turns One Cloud Breach Into Two
-* [TREND] Exploitation and research keep narrowing to specific
-  hardware and trust anchors, from CISA-listed Puppet
-  certificate abuse to Java4Shell's AVX-512-only reach and a TPM
-  reset that cracks BitLocker PINs.
-  see: Puppet and Roller Fall to Live Exploits; Java4Shell
-  Narrows to AVX-512 Chips; A Flash Chip Attack Cracks BitLocker
-  PINs
-* [TREND] Nvidia's raised forecast steadied the AI trade only
-  briefly, while Ben Thompson reads the quarter as uneventful
-  and Zitron casts the company as the bubble's center.
-  see: Nvidia's Results Steady the AI Trade; Nvidia Earnings;
-  Office Convergence; OS Wars, AI Edition; The NVIDIA Bubble
-* [UPDATE (new)] Allegheny County leads the state in automated
-  license plate readers, Amtrak's second daily Pennsylvanian
-  round trip started carrying riders, and PennDOT closes Bathtub
-  lanes on I-376 overnight.
-  see: Allegheny County Leads the State in Plate Readers; Amtrak
-  Doubles the Pennsylvanian; Two Nights of Lane Closings in the
-  Bathtub
+  Agent Framework Steals Cloud Keys; Cold Relic Turns One Cloud
+  Breach Into Two
+* [TREND] Enforcement landed as ransomware volume climbed toward
+  718 victims a month, with Ukraine and the FBI arresting four
+  suspects and Scattered Spider ringleader Tyler Buchanan
+  drawing six years.
+  see: Ukraine and the FBI Arrest Four Ransomware Suspects;
+  Scattered Spider Ringleader Draws Six Years
+* [UPDATE (new)] Anthropic's record $81 billion offering priced
+  above its range Wednesday evening even as Nvidia shares fell a
+  fifth straight session, leaving the AI trade split.
+  see: Anthropic Raises $81 Billion in a Record IPO; Nvidia's
+  Results Steady the AI Trade
+* [UPDATE (new)] British regulators pressed City of London firms
+  on cyber defenses after a $6 billion Binance theft, as the NSA
+  hit a second day of NSANet disruption.
+  see: Regulators Press City Firms on Cyber Defenses; NSANet and
+  Fugaku Go Dark
+* [UPDATE (new)] Amtrak's second daily Pennsylvanian round trip
+  began carrying passengers, Hempfield delayed CurvePoint's AI
+  weapon scanner after misidentifications, and the Pittsburgh
+  Zoo's polar bear Snowflake died at 30.
+  see: Amtrak Doubles the Pennsylvanian; CurvePoint's Weapon
+  Scanner Stumbles at Hempfield; Snowflake Dies at the
+  Pittsburgh Zoo
 
 SECURITY
 ----------------------------------------------------------------
@@ -75,9 +77,35 @@ SECURITY
    - Cisco Talos: https://blog.talosintelligence.com/java4shell/
    - Help Net Security: https://www.helpnetsecurity.com/2026/11/18/java4shell-openjdk-vulnerability-cve-2026-114938/
    - SecurityWeek: https://www.securityweek.com/java4shell-vulnerability-puts-many-enterprise-applications-at-risk-of-takeover/
-   - Dark Reading: https://www.darkreading.com/vulnerabilities-threats/java4shell-flaw-threatens-global-java-application-ecosystem
+   - The Hacker News: https://thehackernews.com/2026/11/java4shell-cve-2026-114938-enables-pre.html
 
-2. POISONED AGENT FRAMEWORK STEALS CLOUD KEYS
+2. PUPPET AND ROLLER FALL TO LIVE EXPLOITS
+   Vulnerabilities and Exploits · [patch, exploited,
+   vulnerability]
+   Latest developments: CISA added four more exploited
+   vulnerabilities to its Known Exploited Vulnerabilities
+   catalog on November 18, 2026—CVE-2024-10441 in Synology
+   DiskStation Manager, CVE-2026-40217 in BerriAI LiteLLM,
+   CVE-2026-90436 in Apache Axis, and CVE-2026-90817 in
+   Vanderbilt University's Research Electronic Data Capture
+   platform—and the Apache Software Foundation identified the
+   Roller bug under attack as CVE-2026-129448, an
+   unauthenticated deserialization in the XML-RPC endpoint rated
+   9.8; SecurityWeek spelled out the mechanism behind
+   CVE-2026-115731, the Perforce Puppet flaw rated 9.4, in which
+   any client holding a certificate signed by the Puppet
+   certificate authority runs code on the server.
+   Perforce Puppet runs configuration management across
+   enterprise fleets, so code execution on the Puppet server
+   reaches every managed host; Apache Roller is a Java blog
+   server. Patch both now and pull Oracle's November 2026
+   critical fixes, 62 of them critical out of 950 total.
+   - SecurityWeek: https://www.securityweek.com/critical-perforce-puppet-rce-exploited-in-attacks/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/
+   - SecurityWeek: https://www.securityweek.com/oracle-patches-640-vulnerabilities-with-november-2026-cspu/
+   - CISA Advisories: https://www.cisa.gov/news-events/alerts/2026/11/18/cisa-adds-four-known-exploited-vulnerabilities-catalog
+
+3. POISONED AGENT FRAMEWORK STEALS CLOUD KEYS
    Software Supply Chain Security · [supply chain, credential
    theft, ai]
    Latest developments: Attackers published malicious versions
@@ -99,7 +127,7 @@ SECURITY
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/microsofts-agent-framework-pypi-package-compromised-to-steal-credentials/
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/cloud-keys-leaked-in-docker-hub-images-are-stolen-within-seconds/
 
-3. OPTIMIZELY ATTACKERS A/B TESTED THEIR MALWARE
+4. OPTIMIZELY ATTACKERS A/B TESTED THEIR MALWARE
    Software Supply Chain Security · [supply chain, breach,
    malware]
    Latest developments: Krebs on Security reported that the
@@ -121,51 +149,29 @@ SECURITY
    - Unit 42 (Palo Alto): https://unit42.paloaltonetworks.com/optimjack-supply-chain-attack/
    - Dark Reading: https://www.darkreading.com/cyber-risk/optimizely-malware-attacks-third-party-vendor-risks
 
-4. PUPPET AND ROLLER FALL TO LIVE EXPLOITS
-   Vulnerabilities and Exploits · [patch, exploited,
-   vulnerability]
-   Latest developments: SecurityWeek spelled out the mechanism
-   behind CVE-2026-115731, the Perforce Puppet flaw rated 9.4
-   that CISA added to its Known Exploited Vulnerabilities
-   catalog: any client holding a certificate signed by the
-   Puppet certificate authority can run code on the server; the
-   Apache Software Foundation separately warned that attackers
-   are exploiting a critical Roller remote code execution bug
-   and shipped updates, while Oracle's November 2026 patch
-   update closed 950 vulnerabilities, more than 300 of them
-   remotely exploitable without authentication, and Google
-   released Chrome 158 with 204 fixes.
-   Perforce Puppet runs configuration management across
-   enterprise fleets, so code execution on the Puppet server
-   reaches every managed host; Apache Roller is a Java blog
-   server. Patch both now, pull Oracle's 62 critical fixes, and
-   push Chrome 158 to endpoints.
-   - SecurityWeek: https://www.securityweek.com/critical-perforce-puppet-rce-exploited-in-attacks/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/
-   - SecurityWeek: https://www.securityweek.com/oracle-patches-640-vulnerabilities-with-november-2026-cspu/
-   - SecurityWeek: https://www.securityweek.com/chrome-158-patches-204-vulnerabilities/
-
 5. NSANET AND FUGAKU GO DARK
    Critical Infrastructure Security · [outage, breach]
-   Latest developments: The National Security Agency entered a
+   Latest developments: The National Security Agency worked a
    second day of disruption on NSANet, its classified internal
    network, with staggered arrivals and logins at Fort Meade
    while a source told The Record that classified national
-   security work continued unimpeded; Japan's RIKEN Center for
-   Computational Science kept the Fugaku supercomputer off the
-   network after a security breach, and Apple worked through
-   disruptions to iCloud Mail, iCloud Account and Sign In, Apple
-   School Manager, and Schoolwork.
-   Three high-profile systems stopped serving users inside two
-   days, and only the Fugaku shutdown traces to a confirmed
-   breach. Vendor silence, staged recovery, and the absence of
-   attacker claims usually point to a failed update rather than
-   an intrusion, so responders should establish cause before an
-   organization attributes an outage to hacking.
+   security work continued unimpeded; Homeland Security
+   Secretary Markwayne Mullin told the House Homeland Security
+   Committee that the administration will press companies to
+   share more about major patches before those patches take
+   effect; and Japan's RIKEN Center for Computational Science
+   kept the Fugaku supercomputer off the network after a
+   security breach.
+   Two prominent systems stopped serving users inside two days,
+   and only the Fugaku shutdown traces to a confirmed breach.
+   Vendor silence, staged recovery, and the absence of attacker
+   claims usually point to a failed update, so responders should
+   establish cause before an organization attributes an outage
+   to hacking.
    - SecurityWeek: https://www.securityweek.com/classified-communications-network-at-the-national-security-agency-goes-down-defense-official-says/
    - The Record: https://therecord.media/nsa-continues-response-to-nsa-net-problems
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/japan-takes-fugaku-supercomputer-offlline-after-cyberattack/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/
+   - The Record: https://therecord.media/tech-disruptions-house-homeland-committee-testimony
 
 6. COLD RELIC TURNS ONE CLOUD BREACH INTO TWO
    Nation-State Activity · [apt, espionage, cloud]
@@ -174,11 +180,13 @@ SECURITY
    Russia-linked espionage group formerly tracked as COLDRIVER
    and UNC4057, took data from a compromised Google Workspace
    tenant at one United States organization in 2026 and used it
-   to break into a second United States organization, and
+   to break into a second United States organization;
    SecurityWeek added that the group, which Microsoft tracks as
    Star Blizzard, impersonated an employee of the firm it hacked
-   in late 2025 to make the follow-on phishing credible against
-   that employee's professional network.
+   in late 2025 to make the follow-on phishing credible inside
+   that employee's professional network, and Dark Reading
+   detailed the social engineering that carried those
+   impersonations.
    Cold Relic collects credentials and documents from cloud
    accounts and mines them for the relationships that open the
    next victim. Organizations sharing Workspace or Microsoft 365
@@ -188,8 +196,81 @@ SECURITY
    - The Hacker News: https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html
    - SecurityWeek: https://www.securityweek.com/russian-apt-poses-as-employee-of-hacked-firm-to-breach-another-us-organization/
    - The Record: https://therecord.media/russia-cyber-espionage-google
+   - Dark Reading: https://www.darkreading.com/cyberattacks-data-breaches/cold-relic-turns-one-cloud-breach-into-another
 
-7. EQUINOR AND THE IIHF ABSORB ATTACKS
+7. NGINX2ROOT AND F5 BIG-IP OPEN UNAUTHENTICATED ATTACKS
+   Vulnerabilities and Exploits · [vulnerability, patch, web]
+   Latest developments: F5 disclosed CVE-2026-123007, which
+   researchers call nginx2root, a flaw that has sat in NGINX's
+   open-source HTTP/2 code since version 1.9.5 shipped on
+   September 22, 2015 and lets an attacker who never logs in run
+   code on any server with HTTP/2 turned on, and released fixed
+   versions 1.31.9 and 1.30.7 on November 18, 2026; the same day
+   F5 published six critical BIG-IP bugs that crash the Traffic
+   Management Microkernel without authentication and may run
+   code, each one needing a virtual server configured with a
+   particular iRule command or an Access Policy Manager policy
+   carrying two specific agent types; the SANS Internet Storm
+   Center explained why Java4Shell, nginx2root, and last week's
+   Microsoft 365 outage together still left its Infocon below
+   Yellow.
+   NGINX serves or fronts a large share of the public web, and
+   HTTP/2 ships enabled on many of those hosts, so nginx2root
+   reaches far beyond the sites that run it deliberately.
+   Upgrade NGINX to 1.31.9 or 1.30.7, inventory BIG-IP virtual
+   servers for the iRule commands and APM agents F5 names, and
+   apply F5's BIG-IP fixes.
+   - The Hacker News: https://thehackernews.com/2026/11/10-year-old-nginx-http2-flaw-lets.html
+   - The Hacker News: https://thehackernews.com/2026/11/f5-warns-6-critical-big-ip-flaws-can.html
+   - SANS Internet Storm Center: https://isc.sans.edu/diary/rss/33532
+
+8. UKRAINE AND THE FBI ARREST FOUR RANSOMWARE SUSPECTS
+   Ransomware and Cybercrime · [ransomware, law enforcement,
+   cybercrime]
+   Latest developments: Ukrainian authorities, working with the
+   FBI, arrested four suspected members of an international
+   ransomware organization that collected more than $40.5
+   million in ransom payments from at least 28 companies;
+   ZeroFox counted about 718 victims a month through October
+   2026 against roughly 573 a month in 2025, while public dark
+   web listings selling access to hacked corporate networks fell
+   from about 620 a quarter in early 2025 to about 370 in early
+   2026 as brokers moved their deals to private channels; and
+   Kaspersky's Securelist dissected AuditTeam's OpsAgent
+   implant, rewritten in Rust, whose operators bill victims a
+   consulting fee to delete stolen data.
+   A broker advertising a foothold in a company's network used
+   to warn defenders that a ransomware crew was about to arrive,
+   and that signal is disappearing while victim counts climb.
+   Watch for exposed credentials and unexplained remote access
+   instead of broker chatter, and treat the forced-audit framing
+   AuditTeam uses as plain extortion.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/ukraine-fbi-arrest-ransomware-gang-members-tied-to-40m-in-ransoms/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/19/ransomware-access-brokers-cybercrime/
+   - Securelist (Kaspersky): https://securelist.com/auditteam-opsagent-forced-audit/122031/
+
+9. SCATTERED SPIDER RINGLEADER DRAWS SIX YEARS
+   Ransomware and Cybercrime · [cybercrime, law enforcement,
+   social engineering]
+   Latest developments: A United States court sentenced Tyler
+   Robert Buchanan, 24, of Dundee, Scotland, to six years in
+   prison for stealing $11.6 million in cryptocurrency and
+   conspiring to hack a dozen companies, which closes out the
+   American case against Scattered Spider with the last of five
+   defendants sentenced, the Department of Justice said.
+   Investigators have described Buchanan as the suspected
+   ringleader of Scattered Spider, the English-speaking crew
+   Microsoft calls one of the most dangerous financial criminal
+   groups, which runs help desk impersonation and SIM swapping
+   to take over employee accounts. Enterprises facing this
+   playbook should harden identity verification at the help desk
+   and require phishing-resistant authentication for account
+   recovery.
+   - The Record: https://therecord.media/british-hacker-gets-six-year-sentence-scattered-spider
+   - SecurityWeek: https://www.securityweek.com/last-of-five-defendants-sentenced-in-us-scattered-spider-hacking-case/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/british-scattered-spider-hacker-sentenced-to-6-years-in-prison/
+
+10. EQUINOR AND THE IIHF ABSORB ATTACKS
    Critical Infrastructure Security · [critical infrastructure,
    hacktivism, breach]
    Latest developments: Equinor, the Norwegian state-controlled
@@ -211,67 +292,45 @@ SECURITY
    - The Record: https://therecord.media/russia-hockey-cyberattack-championships
    - Schneier on Security: https://www.schneier.com/blog/archives/2026/11/france-is-blaming-iran-for-the-fridge-cyberattack.html
 
-8. SCATTERED SPIDER RINGLEADER DRAWS SIX YEARS
-   Ransomware and Cybercrime · [cybercrime, law enforcement,
-   social engineering]
-   Latest developments: A United States court sentenced Tyler
-   Robert Buchanan, 24, of Dundee, Scotland, to six years in
-   prison for stealing $11.6 million in cryptocurrency and
-   conspiring to hack a dozen companies, which closes out the
-   American case against Scattered Spider with the last of five
-   defendants sentenced, the Department of Justice said.
-   Investigators have described Buchanan as the suspected
-   ringleader of Scattered Spider, the English-speaking crew
-   Microsoft calls one of the most dangerous financial criminal
-   groups, which runs help desk impersonation and SIM swapping
-   to take over employee accounts. Enterprises facing this
-   playbook should harden identity verification at the help desk
-   and require phishing-resistant authentication for account
-   recovery.
-   - The Record: https://therecord.media/british-hacker-gets-six-year-sentence-scattered-spider
-   - SecurityWeek: https://www.securityweek.com/last-of-five-defendants-sentenced-in-us-scattered-spider-hacking-case/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/british-scattered-spider-hacker-sentenced-to-6-years-in-prison/
-
-9. MALWARE C2 MOVES ONTO PUBLIC BLOCKCHAINS
-   Ransomware and Cybercrime · [malware, cybercrime, apt]
-   Latest developments: Cisco Talos published its analysis of
-   bulletproof dead drops, the practice of parking
-   command-and-control addresses in public blockchain
-   transactions that no takedown can reach, and named UAT-12643,
-   a financially motivated group it suspects aligns with North
-   Korea, which pairs that blockchain resilience with targeted
-   infostealing.
-   Blockchain dead drops remove the single points of
-   failure—hosting providers, registrars, hardcoded domains—that
-   law enforcement seizes in operations like Endgame, since a
-   read from a public ledger looks like ordinary traffic.
-   Defenders should monitor outbound calls to blockchain RPC
-   endpoints and treat them as command-and-control candidates on
-   servers with no business reason to make them.
-   - Cisco Talos: https://blog.talosintelligence.com/the-challenge-of-defending-against-bulletproof-dead-drops-on-public-blockchains/
-   - Cisco Talos: https://blog.talosintelligence.com/uat-12643-suspected-north-korea-aligned-actor-blends-blockchain-resilience-with-targeted-infostealing/
-
-10. A FLASH CHIP ATTACK CRACKS BITLOCKER PINS
-   Vulnerabilities and Exploits · [vulnerability, encryption,
-   endpoint]
-   Latest developments: Researchers at Technische Universität
-   Berlin showed that anyone who opens a PC case can reset the
-   TPM lockout that limits guesses at Windows Hello and
-   BitLocker PINs on AMD-based machines and some Intel machines,
-   and in lab tests they recovered a four-digit Hello PIN on an
-   AMD laptop and a six-digit BitLocker PIN on an Intel laptop
-   in days.
-   The trusted platform module normally throttles PIN guessing,
-   and clearing that counter turns a short PIN into a
-   brute-force problem small enough to finish over a long
-   weekend, which puts stolen and lost laptops at risk.
-   Organizations relying on BitLocker PINs should require long
-   passphrases, add pre-boot protections beyond the PIN, and
-   treat physical access to a device as a full compromise path.
-   - The Hacker News: https://thehackernews.com/2026/11/flash-chip-attack-bypasses-tpm-lockout.html
-
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
+* Anthropic Raises $81 Billion in a Record IPO
+  Latest developments: Anthropic priced its initial public
+  offering at $83 a share Wednesday evening, November 18, above
+  the targeted range and with more shares sold than planned,
+  raising $81 billion in the largest offering on record.
+  Anthropic, the San Francisco artificial-intelligence company
+  behind the Claude models, sold into a market where investors
+  have spent two weeks dumping shares tied to the
+  artificial-intelligence build-out, and its bankers had pushed
+  the target valuation toward $1.5 trillion earlier this month.
+  The size of the deal makes it the clearest test of whether
+  public money keeps financing data centers and chip orders.
+  - FT Home: https://www.ft.com/content/62c0510b-ca65-441e-9baf-675b93903b9e?syn-25a6b1a6=1
+  - WSJ Markets: https://www.wsj.com/finance/stocks/anthropic-prices-ipo-at-83-a-share-0290494c?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/stocks/anthropic-sells-more-shares-than-planned-at-a-higher-price-than-expected-4b511002?mod=rss_markets_main
+* Regulators Press City Firms on Cyber Defenses
+  Latest developments: British regulators published new
+  directions for City of London firms Wednesday, November 18,
+  after a surge in hacking attempts and a $6 billion theft from
+  the crypto exchange Binance, and the Financial Times reported
+  the same evening that a rush to patch software flaws found by
+  artificial-intelligence tools probably destabilized the
+  systems that failed at Microsoft, JPMorgan Chase, and other
+  companies.
+  The past week has brought a 19-hour Microsoft outage that took
+  down Outlook and Teams, an online banking failure at JPMorgan
+  Chase that spread to Bank of America and Wells Fargo, an Apple
+  services outage, and the Federal Aviation Administration
+  ground stop traced to a contractor's router work. Trump
+  administration officials spent Wednesday answering House
+  questions about the string of outages alongside intelligence
+  on Iranian threats to the United States homeland, which puts
+  operational resilience at the center of the risk question for
+  large banks.
+  - FT World: https://www.ft.com/content/7cd81085-95d0-4511-b640-300a2c8791ff?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/96c565f1-f229-40b6-91e8-7a849ec4b208?syn-25a6b1a6=1
+  - WSJ Politics: https://www.wsj.com/politics/national-security/five-takeaways-from-house-hearing-on-threats-to-the-u-s-35a23029?mod=rss_socialpoliticsfeed
 * Democrats Nominate Jeffries for Speaker
   Latest developments: House Democrats nominated Hakeem Jeffries
   for speaker in a closed-door secret ballot Wednesday, November
@@ -286,19 +345,23 @@ BUSINESS AND POLITICS
   - WSJ Politics: https://www.wsj.com/politics/democrats-back-hakeem-jeffries-for-speaker-in-secret-ballot-6403e6e1?mod=rss_socialpoliticsfeed
   - FT Home: https://www.ft.com/content/9d0998cf-ffb8-4fe4-9f85-0c403b1966f9?syn-25a6b1a6=1
 * Waller Pushes a Supersized December Increase
-  Latest developments: Federal Reserve Governor Christopher
-  Waller repeated his call Wednesday, November 18, for an
-  outsized interest rate increase at the December meeting, which
-  lifted Treasury yields, while the euro slid against the dollar
-  as pressure returned to French and peripheral eurozone
-  government bonds.
+  Latest developments: The minutes of the Federal Reserve's
+  October meeting, released Wednesday, November 18, showed
+  mounting inflation concern among policymakers, which carried
+  the WSJ Dollar Index up 0.22% to 98.64 and a fresh 52-week
+  high, sent Comex gold down 3.16% to settle at $3,736.80, and
+  reinforced Governor Christopher Waller's renewed call the same
+  day for an outsized rate increase in December.
   Hawkish Fed messaging has run through markets for two weeks,
   with policymakers weighing a larger-than-usual increase after
-  strong jobs, growth, and inflation readings. Higher Treasury
-  yields and a firmer dollar tighten financing conditions for
-  borrowers worldwide and squeeze eurozone sovereign spreads.
+  strong jobs, growth, and inflation readings. Treasury yields
+  settled mixed as safe-haven demand met the hawkish talk, and a
+  firmer dollar tightens financing conditions for borrowers
+  worldwide while gold, silver, and copper set new lows for the
+  year.
   - WSJ Markets: https://www.wsj.com/finance/jgbs-edge-lower-ahead-of-20-year-auction-91707090?mod=rss_markets_main
   - WSJ Markets: https://www.wsj.com/finance/currencies/asian-currencies-consolidate-but-may-be-weighed-by-risk-off-sentiment-d2acd03c?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/commodities-futures/gold-treads-water-as-fed-dollar-keep-weighing-3f6439e8?mod=rss_markets_main
 * Iran Widens Gulf Attacks to Kuwait
   Latest developments: Iran fired on a United States air base in
   Kuwait Wednesday, November 18, and launched several attacks on
@@ -313,24 +376,26 @@ BUSINESS AND POLITICS
   in the middle of the fight.
   - WSJ World News: https://www.wsj.com/world/middle-east/iran-attacks-kuwait-and-bahrain-further-escalating-fight-over-strait-08f3a436?mod=rss_worldnews
 * Nvidia's Results Steady the AI Trade
-  Latest developments: United States tech stocks gave back an
-  early rally and slid Wednesday, November 18, hours after
-  Nvidia raised its forecast and interim Chief Executive Colette
-  Kress told investors "it's business as usual," and attention
-  shifted to Anthropic, whose bankers plan to lift the price on
-  its initial public offering.
+  Latest developments: Nvidia shares fell for a fifth straight
+  session Wednesday, November 18, as the earnings call left Wall
+  Street unconvinced and fears about the chipmaker's "neocloud"
+  customers persisted, while interim Chief Executive Colette
+  Kress accelerated pay raises at an all-hands meeting to lift
+  morale and Jensen Huang maneuvered for a return.
   Nvidia reported that revenue doubled last quarter and lifted
-  next year's guidance in its first results since Jensen Huang
-  resigned and the board installed finance chief Kress as
-  interim chief. The company still carries a Securities and
-  Exchange Commission disclosure investigation, congressional
-  scrutiny of its China sales, and an unfinished search for a
-  permanent chief, so the questions about its future outlast the
-  quarter.
+  next year's guidance in its first results since Huang resigned
+  and the board installed finance chief Kress as interim chief,
+  who told investors "it's business as usual." The company still
+  carries a Securities and Exchange Commission disclosure
+  investigation, congressional scrutiny of its China sales, and
+  an unfinished search for a permanent chief, so the questions
+  about its future outlast the quarter.
   - FT World: https://www.ft.com/content/f085b811-fc20-425f-88d8-9f98e178636a?syn-25a6b1a6=1
   - WSJ Markets: https://www.wsj.com/business/nvidias-strong-fundamentals-give-new-ceo-a-much-needed-tailwind-65859856?mod=rss_markets_main
   - WSJ World News: https://www.wsj.com/world/nvidias-strong-results-do-little-to-settle-questions-about-its-future-d1ba999d?mod=rss_worldnews
   - WSJ Markets: https://www.wsj.com/finance/commodities-futures/stock-futures-rally-as-nvidia-earnings-calm-ai-trade-fears-96f51546?mod=rss_markets_main
+  - WSJ Markets: https://www.wsj.com/finance/stocks/nvidia-says-its-business-as-usual-after-huangs-ouster-wall-street-doesnt-buy-it-954290c4?mod=rss_markets_main
+  - FT Home: https://www.ft.com/content/9ee78a67-fcab-4e43-bee7-09c9244e76b8?syn-25a6b1a6=1
 * Trump, Xi, and Putin Meet in China
   Latest developments: Xi Jinping greeted President Trump with a
   hug on his arrival in Shenzhen Wednesday, November 18, the
@@ -352,11 +417,35 @@ PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  This Afternoon: Sunny, high 58F.
   Tonight: Clear, low 33F.
   Thursday: Sunny, high 62F.
+  Thursday Night: Mostly Clear, low 37F.
 
 Business:
+* CurvePoint's Weapon Scanner Stumbles at Hempfield
+  Latest developments: Hempfield Area School District delayed
+  the rollout of its artificial-intelligence weapon detection
+  system, KDKA reported Wednesday, November 18, after the
+  technology made identification errors.
+  CurvePoint, a Pittsburgh company, picked Hempfield Area High
+  School in Westmoreland County as one of the first schools to
+  run its weapon identification software at a main entrance. The
+  glitch pushes back a deployment the company intended as a
+  showcase for school districts shopping for screening
+  technology.
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/hempfield-ai-weapon-detector-technology-delayed/
+  - KDKA: https://www.cbsnews.com/pittsburgh/video/ai-weapons-detector-delayed-at-hempfield-area-high-school/
+* Seton Hill Signs the Beam on a $29 Million Field House
+  Latest developments: The Seton Hill University community
+  signed a steel beam Wednesday, November 18, for the $29
+  million field house under construction on its Greensburg
+  campus.
+  Seton Hill, a Catholic university in Greensburg, Westmoreland
+  County, is building the field house as the largest athletic
+  project in its recent history. Signatures went onto the steel
+  before crews set it, among them that of lacrosse player Victor
+  Rossi.
+  - TribLive: https://triblive.com/local/westmoreland/seton-hill-community-signs-steel-beam-for-new-29m-field-house/
 * Highmark's Insurance Arm Swings to $673 Million
   Latest developments: Highmark Health Plans posted a $673
   million profit, WPXI reported Wednesday, November 18, and
@@ -382,16 +471,18 @@ Business:
   must come before any tenant signs a lease.
   - WPXI: https://www.wpxi.com/news/local/nearly-1m-approved-remediate-former-westinghouse-east-pittsburgh-works-site-create-leased-space/PT7V4N6QGBDB7AOTUVLYRZPE4U/
 * The New Terminal Turns One
-  Latest developments: Pittsburgh International Airport holds a
-  program Wednesday, November 18, marking the first anniversary
-  of its $1.7 billion terminal and the building's effect on the
-  region.
+  Latest developments: Pittsburgh International Airport marked
+  the first anniversary of its $1.7 billion terminal Wednesday,
+  November 18, counting 10 million passengers through the
+  building and design awards for it, and laid out what comes in
+  2027.
   The terminal opened in November 2025, consolidating ticketing,
   security, and baggage into a single building reachable without
   the airport's underground train. Airport leadership has sold
   the project as a driver of flights, jobs, and development
   around Findlay and Moon townships in Allegheny County.
   - WPXI: https://www.wpxi.com/news/local/pittsburgh-international-airport-mark-first-anniversary-its-new-terminal-wednesday/4WPCFGOKQNGMFEGZPRQ5T26FS4/
+  - WTAE: https://www.wtae.com/article/pittsburgh-international-airport-new-terminal-one-year/74469088
 * Waymo Pulls Robotaxis Off Freeways
   Latest developments: Waymo suspended all driverless rides on
   freeways Wednesday, November 18, after California barred the
@@ -430,6 +521,43 @@ Business:
   - WPXI: https://www.wpxi.com/news/local/pittsburgh-union-members-push-approval-job-protections-trid-proposal/3EASWCQNSVCL7ARQAPZSGFQKYY/
 
 Around town:
+* O'Connor Answers Two 11 Investigates Reports
+  Latest developments: Mayor Corey O'Connor promised financial
+  transparency from his administration Wednesday, November 18,
+  after WPXI's 11 Investigates found the Urban Redevelopment
+  Authority paid $250,000 in 2016 for the Old Larimer School, a
+  property appraised at $137,500, and he responded the same day
+  to the station's finding that two Pittsburgh firefighters
+  worked very few shifts over several years while collecting
+  full salaries and benefits.
+  The firefighter report has prompted an internal investigation
+  and a shakeup inside the fire bureau. The Urban Redevelopment
+  Authority, the city's development arm, bought the Larimer
+  school building nine years before O'Connor took office, and he
+  now owns the answer for both files as City Council works
+  through his proposed 2027 budget.
+  - WPXI: https://www.wpxi.com/news/local/pittsburgh-mayor-corey-oconnor-vows-financial-transparency-his-administration/AIKNZAVZ2ZC6BB4EWZUNKGKF4E/
+  - WPXI: https://www.wpxi.com/news/local/11-investigates-pittsburgh-mayor-responds-reports-2-firefighters-working-very-few-shifts/QJTAFS2AV5BQJOBESRWVKOWM74/
+* Snowflake Dies at the Pittsburgh Zoo
+  Latest developments: The Pittsburgh Zoo & Aquarium announced
+  Wednesday, November 18, that Snowflake, its lone polar bear,
+  died at 30 after a sharp decline in health.
+  Snowflake ranked among the oldest polar bears in North America
+  and anchored the zoo's Water's Edge exhibit in Highland Park
+  for years. Her death leaves the zoo without a polar bear.
+  - TribLive: https://triblive.com/local/snowflake-the-pittsburgh-zoos-lone-polar-bear-dies-at-30/
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/snowflake-polar-bear-pittsburgh-zoo-death/
+* Marchers Demand Moshannon Valley Close
+  Latest developments: Protesters marched through downtown
+  Pittsburgh Wednesday, November 18, calling for the closure of
+  the Moshannon Valley Processing Center and describing
+  conditions that detainees there have reported.
+  The Moshannon Valley Processing Center in central Pennsylvania
+  holds federal immigration detainees and ranks among the
+  largest such facilities in the Northeast. Speakers at the
+  march read detainees' accounts of conditions inside and
+  pressed for the center to shut.
+  - WTAE: https://www.wtae.com/article/protesters-pittsburgh-demand-closure-moshannon-valley-processing-center/74470028
 * Allegheny County Leads the State in Plate Readers
   Latest developments: NEXTpittsburgh reported Wednesday,
   November 18, that Allegheny County holds more automated
@@ -454,14 +582,16 @@ Around town:
 * Amtrak Doubles the Pennsylvanian
   Latest developments: Amtrak's second daily Pennsylvanian round
   trip between Pittsburgh and New York began carrying passengers
-  Wednesday, November 18, stopping at Harrisburg and
-  Philadelphia along the way.
+  Wednesday, November 18, and Greensburg marked the inaugural
+  run at its station.
   The Pennsylvanian has run once a day across the state,
-  stopping at Greensburg on its way east through Philadelphia to
-  New York. A second frequency gives Western Pennsylvania riders
-  a choice of departure times for the first time in decades.
+  stopping at Greensburg, Harrisburg, and Philadelphia on its
+  way to New York. A second frequency gives Western Pennsylvania
+  riders a choice of departure times for the first time in
+  decades.
   - TribLive: https://triblive.com/local/westmoreland/amtrak-adds-2nd-daily-pennsylvanian-train-between-pittsburgh-new-york/
   - WTAE: https://www.wtae.com/article/amtrak-pittsburgh-new-york-train-pennsylvanian/74467110
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/amtrak-expands-pittsburgh-to-new-york-service/
 * PublicSource Opens Up the City Budget
   Latest developments: PublicSource published an explainer
   Wednesday, November 18, on how it built its Pittsburgh Budget
@@ -486,16 +616,18 @@ Around town:
   - TribLive: https://triblive.com/local/westmoreland/westmoreland-voters-continue-to-opt-for-touch-screen-devices-over-paper-ballots/
 * Foggy Mornings, Sunny Afternoons
   Latest developments: Patchy fog cleared into sunshine around
-  Pittsburgh Wednesday morning, November 18, with highs reaching
-  the upper 50s, and WPXI calls it the coolest day of the week.
-  WTAE holds the same pattern of fog at dawn and sun in the
-  afternoon across Western Pennsylvania through the next few
-  days, with temperatures climbing from here. Drivers on the
-  valley roads south and east of the city face the thickest of
-  the early fog.
+  Pittsburgh Wednesday, November 18, with highs in the upper
+  50s, and WTAE's evening update holds highs in the 60s across
+  Western Pennsylvania through the weekend.
+  WPXI called Wednesday the coolest day of the week, and the
+  pattern of fog at dawn and sun in the afternoon holds for the
+  next several days as temperatures climb. Drivers on the valley
+  roads south and east of the city face the thickest of the
+  early fog.
   - WPXI: https://www.wpxi.com/weather/patchy-morning-fog-before-sunshine-warms-temps-into-upper-50s/3YVLEMJQJBF2TDFB2QLCTC32PE/
   - WTAE: https://www.wtae.com/article/foggy-mornings-sunny-afternoons-for-western-pa/74462868
   - KDKA: https://www.cbsnews.com/pittsburgh/video/kdka-tv-morning-forecast-1118-3/
+  - KDKA: https://www.cbsnews.com/pittsburgh/video/kdka-tv-evening-forecast-1118-3/
 * West Mifflin Consolidation Draws a Petition
   Latest developments: PublicSource reported Wednesday, November
   18, that the West Mifflin Area School District's school
@@ -578,6 +710,16 @@ Penguins (7-11)
     https://plaintextsports.com/nhl/2026-11-19/stl-pit
 
 Around the Teams:
+* SNR Drive Sets the Eagles Stage
+  Latest developments: Matt Williamson and Wes Uhler opened
+  Wednesday's SNR Drive, November 18, on Sunday's trip to the
+  Philadelphia Eagles, then gave most of the rest of the show to
+  a long "Around Campus" college football segment.
+  The Steelers play at Philadelphia Sunday, November 22, at 1
+  p.m. Eastern on CBS. Williamson and Uhler spent the first 20
+  minutes building the matchup and also ran their "Pick A
+  Player" segment on the Steelers roster.
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=yNJmnoWepPA
 * Heyward's Show Turns to Philadelphia
   Latest developments: Not Just Football with Cam Heyward posted
   a full episode Wednesday morning, November 18, that moves past
@@ -704,21 +846,21 @@ READING
 
 MARKETS (weekly average, change vs prior week)
 ----------------------------------------------------------------
-S&P 500     7,506.11  ▲ +0.1%
-Dow        51,899.74  ▼ -0.5%
-Nasdaq     24,961.34  ▼ -0.1%
+S&P 500     7,446.96  ▼ -0.5%
+Dow        51,442.08  ▼ -1.0%
+Nasdaq     24,754.08  ▼ -0.7%
 WTI crude      87.11  ▼ -1.5%
-EUR/USD       1.1067  ▼ -1.3%
-GBP/USD       1.3252  ▼ -1.4%
-USD/JPY       159.52  ▲ +0.9%
+EUR/USD       1.1032  ▼ -1.5%
+GBP/USD       1.3223  ▼ -1.4%
+USD/JPY       159.68  ▲ +1.0%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 63 items in the 24-hour window.
-  No recent items: CISA Advisories, Sophos News, Google Online
-  Security Blog, Graham Cluley, Microsoft Security Blog, Google
-  Project Zero, The DFIR Report, Kim Zetter (Zero Day), Frank on
-  Fraud.
+Security: 24 of 24 feeds loaded, 64 items in the 24-hour window.
+  No recent items: Ars Technica Security, Sophos News, Unit 42
+  (Palo Alto), Google Online Security Blog, Graham Cluley,
+  Microsoft Security Blog, Google Project Zero, The DFIR Report,
+  Kim Zetter (Zero Day), Frank on Fraud.
 Pittsburgh: 8 of 9 feeds loaded, 60 items in the 48-hour window.
   Failed: Pittsburgh Post-Gazette (ForbiddenXMLError: DTD or
   entity declarations are not allowed).
@@ -732,17 +874,17 @@ Sports media: 4 of 6 feeds loaded, 20 items in the 96-hour
   window. Failed: Post-Gazette Pirates (HTTPError: HTTP Error
   404: Not Found); Post-Gazette Steelers (HTTPError: HTTP Error
   404: Not Found).
-Team USA: 3 of 3 feeds loaded, 37 items in the 72-hour window.
+Team USA: 3 of 3 feeds loaded, 36 items in the 72-hour window.
   No recent items: Guardian Olympics.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (355s of
-  model time; $2.17 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (473s of
+  model time; $2.51 at API list price).
 
 ================================================================
-Generated 2026-11-18 13:36 EST. Updated weekdays at about 7:05
+Generated 2026-11-18 19:37 EST. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports

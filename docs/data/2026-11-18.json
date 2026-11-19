@@ -1,23 +1,23 @@
 {
   "date": "2026-11-18",
-  "headline": "CISA pressed enterprises to patch Java4Shell as researchers narrowed the OpenJDK flaw to AVX-512 processors, while attackers already executed code on Perforce Puppet and Apache Roller servers and poisoned Microsoft's own agent-framework package on PyPI.",
+  "headline": "Two flaws that sat in code for a decade—Java4Shell in OpenJDK and nginx2root in NGINX—now put enterprise Java servers and the web's most common proxy at risk of unauthenticated takeover, while attackers already run code on Perforce Puppet and Apache Roller.",
   "emerging_trends": [
     {
-      "text": "Attackers keep entering through the code enterprises already trust, injecting malware into Optimizely's experimentation scripts one day and poisoning Microsoft's agent-framework releases on PyPI the next, which turns routine vendor updates into a delivery channel.",
-      "topic_title": "Poisoned Agent Framework Steals Cloud Keys",
-      "link_phrase": "agent-framework",
+      "text": "Age stopped counting as evidence of safety: nginx2root has shipped with NGINX since September 22, 2015, Java4Shell rides along in every Java 17.0.6 build, and the TCP, TPM, and Puppet flaws of the past week all date to code written years before anyone fuzzed it with AI.",
+      "topic_title": "nginx2root and F5 BIG-IP Open Unauthenticated Attacks",
+      "link_phrase": "nginx2root",
       "_anchor": "trend-1"
     },
     {
-      "text": "Cold Relic shows how one compromised Google Workspace tenant funds the next intrusion, because stolen correspondence supplies the names, projects, and tone that make follow-on phishing land inside a partner's inbox.",
-      "topic_title": "Cold Relic Turns One Cloud Breach Into Two",
-      "link_phrase": "Cold Relic",
+      "text": "Attackers keep entering through somebody else's trust, injecting malware into 178 websites through Optimizely's experimentation scripts, poisoning two agent-framework releases on PyPI to harvest Azure and GitHub Actions credentials, and mining one hacked Google Workspace tenant for the relationships that opened a second company.",
+      "topic_title": "Poisoned Agent Framework Steals Cloud Keys",
+      "link_phrase": "agent-framework",
       "_anchor": "trend-2"
     },
     {
-      "text": "Three flagship systems—NSANet, Japan's Fugaku supercomputer, and Apple's iCloud Mail—stopped serving users inside a day, and only the Fugaku shutdown traces to a confirmed breach, which pushes responders to establish cause before executives name an attacker.",
-      "topic_title": "NSANet and Fugaku Go Dark",
-      "link_phrase": "NSANet",
+      "text": "Ransomware crews claimed about 718 victims a month through October 2026, up from roughly 573 a month in 2025, and the access brokers who feed them moved their sales off public dark web forums, which strips defenders of the early warning a public listing used to deliver.",
+      "topic_title": "Ukraine and the FBI Arrest Four Ransomware Suspects",
+      "link_phrase": "access brokers",
       "_anchor": "trend-3"
     }
   ],
@@ -49,12 +49,46 @@
           "url": "https://www.securityweek.com/java4shell-vulnerability-puts-many-enterprise-applications-at-risk-of-takeover/"
         },
         {
-          "source": "Dark Reading",
-          "title": "Java4Shell Flaw Threatens Global Enterprises, Java Application Ecosystem",
-          "url": "https://www.darkreading.com/vulnerabilities-threats/java4shell-flaw-threatens-global-java-application-ecosystem"
+          "source": "The Hacker News",
+          "title": "Java4Shell Flaw (CVE-2026-114938) Enables Pre-Auth RCE in Jira, Jenkins, Keycloak and More",
+          "url": "https://thehackernews.com/2026/11/java4shell-cve-2026-114938-enables-pre.html"
         }
       ],
       "_anchor": "i-d365ad8c28"
+    },
+    {
+      "title": "Puppet and Roller Fall to Live Exploits",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "CISA added four more exploited vulnerabilities to its Known Exploited Vulnerabilities catalog on November 18, 2026—CVE-2024-10441 in Synology DiskStation Manager, CVE-2026-40217 in BerriAI LiteLLM, CVE-2026-90436 in Apache Axis, and CVE-2026-90817 in Vanderbilt University's Research Electronic Data Capture platform—and the Apache Software Foundation identified the Roller bug under attack as CVE-2026-129448, an unauthenticated deserialization in the XML-RPC endpoint rated 9.8; SecurityWeek spelled out the mechanism behind CVE-2026-115731, the Perforce Puppet flaw rated 9.4, in which any client holding a certificate signed by the Puppet certificate authority runs code on the server.",
+      "summary": "Perforce Puppet runs configuration management across enterprise fleets, so code execution on the Puppet server reaches every managed host; Apache Roller is a Java blog server. Patch both now and pull Oracle's November 2026 critical fixes, 62 of them critical out of 950 total.",
+      "tags": [
+        "patch",
+        "exploited",
+        "vulnerability"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "Critical Perforce Puppet RCE Exploited in Attacks",
+          "url": "https://www.securityweek.com/critical-perforce-puppet-rce-exploited-in-attacks/"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "Apache warns of Roller RCE vulnerability exploited in attacks",
+          "url": "https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Oracle Patches 950 Vulnerabilities With November 2026 CSPU",
+          "url": "https://www.securityweek.com/oracle-patches-640-vulnerabilities-with-november-2026-cspu/"
+        },
+        {
+          "source": "CISA Advisories",
+          "title": "CISA Adds Four Known Exploited Vulnerabilities to Catalog",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/11/18/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+        }
+      ],
+      "_anchor": "i-94321d4b37"
     },
     {
       "title": "Poisoned Agent Framework Steals Cloud Keys",
@@ -125,44 +159,10 @@
       "_anchor": "i-c559964442"
     },
     {
-      "title": "Puppet and Roller Fall to Live Exploits",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "SecurityWeek spelled out the mechanism behind CVE-2026-115731, the Perforce Puppet flaw rated 9.4 that CISA added to its Known Exploited Vulnerabilities catalog: any client holding a certificate signed by the Puppet certificate authority can run code on the server; the Apache Software Foundation separately warned that attackers are exploiting a critical Roller remote code execution bug and shipped updates, while Oracle's November 2026 patch update closed 950 vulnerabilities, more than 300 of them remotely exploitable without authentication, and Google released Chrome 158 with 204 fixes.",
-      "summary": "Perforce Puppet runs configuration management across enterprise fleets, so code execution on the Puppet server reaches every managed host; Apache Roller is a Java blog server. Patch both now, pull Oracle's 62 critical fixes, and push Chrome 158 to endpoints.",
-      "tags": [
-        "patch",
-        "exploited",
-        "vulnerability"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "Critical Perforce Puppet RCE Exploited in Attacks",
-          "url": "https://www.securityweek.com/critical-perforce-puppet-rce-exploited-in-attacks/"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "Apache warns of Roller RCE vulnerability exploited in attacks",
-          "url": "https://www.bleepingcomputer.com/news/security/apache-warns-of-roller-rce-vulnerability-exploited-in-attacks/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Oracle Patches 950 Vulnerabilities With November 2026 CSPU",
-          "url": "https://www.securityweek.com/oracle-patches-640-vulnerabilities-with-november-2026-cspu/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "Chrome 158 Patches 204 Vulnerabilities",
-          "url": "https://www.securityweek.com/chrome-158-patches-204-vulnerabilities/"
-        }
-      ],
-      "_anchor": "i-94321d4b37"
-    },
-    {
       "title": "NSANet and Fugaku Go Dark",
       "area": "Critical Infrastructure Security",
-      "latest_developments": "The National Security Agency entered a second day of disruption on NSANet, its classified internal network, with staggered arrivals and logins at Fort Meade while a source told The Record that classified national security work continued unimpeded; Japan's RIKEN Center for Computational Science kept the Fugaku supercomputer off the network after a security breach, and Apple worked through disruptions to iCloud Mail, iCloud Account and Sign In, Apple School Manager, and Schoolwork.",
-      "summary": "Three high-profile systems stopped serving users inside two days, and only the Fugaku shutdown traces to a confirmed breach. Vendor silence, staged recovery, and the absence of attacker claims usually point to a failed update rather than an intrusion, so responders should establish cause before an organization attributes an outage to hacking.",
+      "latest_developments": "The National Security Agency worked a second day of disruption on NSANet, its classified internal network, with staggered arrivals and logins at Fort Meade while a source told The Record that classified national security work continued unimpeded; Homeland Security Secretary Markwayne Mullin told the House Homeland Security Committee that the administration will press companies to share more about major patches before those patches take effect; and Japan's RIKEN Center for Computational Science kept the Fugaku supercomputer off the network after a security breach.",
+      "summary": "Two prominent systems stopped serving users inside two days, and only the Fugaku shutdown traces to a confirmed breach. Vendor silence, staged recovery, and the absence of attacker claims usually point to a failed update, so responders should establish cause before an organization attributes an outage to hacking.",
       "tags": [
         "outage",
         "breach"
@@ -184,9 +184,9 @@
           "url": "https://www.bleepingcomputer.com/news/security/japan-takes-fugaku-supercomputer-offlline-after-cyberattack/"
         },
         {
-          "source": "BleepingComputer",
-          "title": "Apple reports outages affecting iCloud Mail, AppleCare and more",
-          "url": "https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/"
+          "source": "The Record",
+          "title": "Trump administration officials size-up a bad stretch for tech",
+          "url": "https://therecord.media/tech-disruptions-house-homeland-committee-testimony"
         }
       ],
       "_anchor": "i-19347567d0"
@@ -194,7 +194,7 @@
     {
       "title": "Cold Relic Turns One Cloud Breach Into Two",
       "area": "Nation-State Activity",
-      "latest_developments": "Google's Mandiant and Threat Intelligence Group reported that Cold Relic, the Russia-linked espionage group formerly tracked as COLDRIVER and UNC4057, took data from a compromised Google Workspace tenant at one United States organization in 2026 and used it to break into a second United States organization, and SecurityWeek added that the group, which Microsoft tracks as Star Blizzard, impersonated an employee of the firm it hacked in late 2025 to make the follow-on phishing credible against that employee's professional network.",
+      "latest_developments": "Google's Mandiant and Threat Intelligence Group reported that Cold Relic, the Russia-linked espionage group formerly tracked as COLDRIVER and UNC4057, took data from a compromised Google Workspace tenant at one United States organization in 2026 and used it to break into a second United States organization; SecurityWeek added that the group, which Microsoft tracks as Star Blizzard, impersonated an employee of the firm it hacked in late 2025 to make the follow-on phishing credible inside that employee's professional network, and Dark Reading detailed the social engineering that carried those impersonations.",
       "summary": "Cold Relic collects credentials and documents from cloud accounts and mines them for the relationships that open the next victim. Organizations sharing Workspace or Microsoft 365 collaboration with a breached partner should assume the attacker read that correspondence and reset federated trust and tokens accordingly.",
       "tags": [
         "apt",
@@ -216,38 +216,72 @@
           "source": "The Record",
           "title": "Russian cyber-espionage group used stolen cloud data to hack into organizations, Google says",
           "url": "https://therecord.media/russia-cyber-espionage-google"
+        },
+        {
+          "source": "Dark Reading",
+          "title": "Russia's Cold Relic APT Turns One Cloud Breach Into Another",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches/cold-relic-turns-one-cloud-breach-into-another"
         }
       ],
       "_anchor": "i-ee9a23761b"
     },
     {
-      "title": "Equinor and the IIHF Absorb Attacks",
-      "area": "Critical Infrastructure Security",
-      "latest_developments": "Equinor, the Norwegian state-controlled oil and gas company, is containing a cyberattack on its IT systems that disrupted internal services and left oil and gas production running, while the International Ice Hockey Federation confirmed an attack that replaced its homepage with a pro-Russian message protesting Russia's exclusion from international competitions, and United States intelligence agencies reached a low-confidence assessment that Iran carried out the refrigeration system attacks in France.",
-      "summary": "Energy operators and sports bodies alike now draw politically motivated intrusions, from quiet enterprise IT compromise at Equinor to a defacement meant for an audience. Operators should keep corporate IT separated from operational technology and rehearse the public communications that follow a visible attack.",
+      "title": "nginx2root and F5 BIG-IP Open Unauthenticated Attacks",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "F5 disclosed CVE-2026-123007, which researchers call nginx2root, a flaw that has sat in NGINX's open-source HTTP/2 code since version 1.9.5 shipped on September 22, 2015 and lets an attacker who never logs in run code on any server with HTTP/2 turned on, and released fixed versions 1.31.9 and 1.30.7 on November 18, 2026; the same day F5 published six critical BIG-IP bugs that crash the Traffic Management Microkernel without authentication and may run code, each one needing a virtual server configured with a particular iRule command or an Access Policy Manager policy carrying two specific agent types; the SANS Internet Storm Center explained why Java4Shell, nginx2root, and last week's Microsoft 365 outage together still left its Infocon below Yellow.",
+      "summary": "NGINX serves or fronts a large share of the public web, and HTTP/2 ships enabled on many of those hosts, so nginx2root reaches far beyond the sites that run it deliberately. Upgrade NGINX to 1.31.9 or 1.30.7, inventory BIG-IP virtual servers for the iRule commands and APM agents F5 names, and apply F5's BIG-IP fixes.",
       "tags": [
-        "critical infrastructure",
-        "hacktivism",
-        "breach"
+        "vulnerability",
+        "patch",
+        "web"
       ],
       "sources": [
         {
-          "source": "The Record",
-          "title": "Cyberattack hits Norwegian energy giant Equinor, disrupting internal services",
-          "url": "https://therecord.media/norway-equinor-cyberattack-energy"
+          "source": "The Hacker News",
+          "title": "10-Year-Old NGINX HTTP/2 Flaw Lets Unauthenticated Attackers Execute Code on Servers",
+          "url": "https://thehackernews.com/2026/11/10-year-old-nginx-http2-flaw-lets.html"
         },
         {
-          "source": "The Record",
-          "title": "Ice hockey governing body website defaced amid dispute over Russia's exclusion",
-          "url": "https://therecord.media/russia-hockey-cyberattack-championships"
+          "source": "The Hacker News",
+          "title": "F5 Warns 6 Critical BIG-IP Flaws Can Crash Traffic in Specific Setups, May Allow RCE",
+          "url": "https://thehackernews.com/2026/11/f5-warns-6-critical-big-ip-flaws-can.html"
         },
         {
-          "source": "Schneier on Security",
-          "title": "France Is Blaming Iran for the Fridge Cyberattack",
-          "url": "https://www.schneier.com/blog/archives/2026/11/france-is-blaming-iran-for-the-fridge-cyberattack.html"
+          "source": "SANS Internet Storm Center",
+          "title": "Java4Shell, NGINX2Shell and more: Why we are not at \"Yellow\"",
+          "url": "https://isc.sans.edu/diary/rss/33532"
         }
       ],
-      "_anchor": "i-58112a1964"
+      "_anchor": "i-fb8b318a04"
+    },
+    {
+      "title": "Ukraine and the FBI Arrest Four Ransomware Suspects",
+      "area": "Ransomware and Cybercrime",
+      "latest_developments": "Ukrainian authorities, working with the FBI, arrested four suspected members of an international ransomware organization that collected more than $40.5 million in ransom payments from at least 28 companies; ZeroFox counted about 718 victims a month through October 2026 against roughly 573 a month in 2025, while public dark web listings selling access to hacked corporate networks fell from about 620 a quarter in early 2025 to about 370 in early 2026 as brokers moved their deals to private channels; and Kaspersky's Securelist dissected AuditTeam's OpsAgent implant, rewritten in Rust, whose operators bill victims a consulting fee to delete stolen data.",
+      "summary": "A broker advertising a foothold in a company's network used to warn defenders that a ransomware crew was about to arrive, and that signal is disappearing while victim counts climb. Watch for exposed credentials and unexplained remote access instead of broker chatter, and treat the forced-audit framing AuditTeam uses as plain extortion.",
+      "tags": [
+        "ransomware",
+        "law enforcement",
+        "cybercrime"
+      ],
+      "sources": [
+        {
+          "source": "BleepingComputer",
+          "title": "Ukraine, FBI arrest ransomware gang members tied to $40M in ransoms",
+          "url": "https://www.bleepingcomputer.com/news/security/ukraine-fbi-arrest-ransomware-gang-members-tied-to-40m-in-ransoms/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "Ransomware access brokers are moving their deals off public forums",
+          "url": "https://www.helpnetsecurity.com/2026/11/19/ransomware-access-brokers-cybercrime/"
+        },
+        {
+          "source": "Securelist (Kaspersky)",
+          "title": "The forced audit: how AuditTeam's OpsAgent framework masks ransomware as consulting",
+          "url": "https://securelist.com/auditteam-opsagent-forced-audit/122031/"
+        }
+      ],
+      "_anchor": "i-b326b8531a"
     },
     {
       "title": "Scattered Spider Ringleader Draws Six Years",
@@ -279,66 +313,52 @@
       "_anchor": "i-69958fa42a"
     },
     {
-      "title": "Malware C2 Moves Onto Public Blockchains",
-      "area": "Ransomware and Cybercrime",
-      "latest_developments": "Cisco Talos published its analysis of bulletproof dead drops, the practice of parking command-and-control addresses in public blockchain transactions that no takedown can reach, and named UAT-12643, a financially motivated group it suspects aligns with North Korea, which pairs that blockchain resilience with targeted infostealing.",
-      "summary": "Blockchain dead drops remove the single points of failure—hosting providers, registrars, hardcoded domains—that law enforcement seizes in operations like Endgame, since a read from a public ledger looks like ordinary traffic. Defenders should monitor outbound calls to blockchain RPC endpoints and treat them as command-and-control candidates on servers with no business reason to make them.",
+      "title": "Equinor and the IIHF Absorb Attacks",
+      "area": "Critical Infrastructure Security",
+      "latest_developments": "Equinor, the Norwegian state-controlled oil and gas company, is containing a cyberattack on its IT systems that disrupted internal services and left oil and gas production running, while the International Ice Hockey Federation confirmed an attack that replaced its homepage with a pro-Russian message protesting Russia's exclusion from international competitions, and United States intelligence agencies reached a low-confidence assessment that Iran carried out the refrigeration system attacks in France.",
+      "summary": "Energy operators and sports bodies alike now draw politically motivated intrusions, from quiet enterprise IT compromise at Equinor to a defacement meant for an audience. Operators should keep corporate IT separated from operational technology and rehearse the public communications that follow a visible attack.",
       "tags": [
-        "malware",
-        "cybercrime",
-        "apt"
+        "critical infrastructure",
+        "hacktivism",
+        "breach"
       ],
       "sources": [
         {
-          "source": "Cisco Talos",
-          "title": "The challenge of defending against bulletproof dead drops on public blockchains",
-          "url": "https://blog.talosintelligence.com/the-challenge-of-defending-against-bulletproof-dead-drops-on-public-blockchains/"
+          "source": "The Record",
+          "title": "Cyberattack hits Norwegian energy giant Equinor, disrupting internal services",
+          "url": "https://therecord.media/norway-equinor-cyberattack-energy"
         },
         {
-          "source": "Cisco Talos",
-          "title": "UAT-12643: Suspected North Korea-aligned actor blends blockchain resilience with targeted infostealing",
-          "url": "https://blog.talosintelligence.com/uat-12643-suspected-north-korea-aligned-actor-blends-blockchain-resilience-with-targeted-infostealing/"
-        }
-      ],
-      "_anchor": "i-e3a24527dd"
-    },
-    {
-      "title": "A Flash Chip Attack Cracks BitLocker PINs",
-      "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researchers at Technische Universität Berlin showed that anyone who opens a PC case can reset the TPM lockout that limits guesses at Windows Hello and BitLocker PINs on AMD-based machines and some Intel machines, and in lab tests they recovered a four-digit Hello PIN on an AMD laptop and a six-digit BitLocker PIN on an Intel laptop in days.",
-      "summary": "The trusted platform module normally throttles PIN guessing, and clearing that counter turns a short PIN into a brute-force problem small enough to finish over a long weekend, which puts stolen and lost laptops at risk. Organizations relying on BitLocker PINs should require long passphrases, add pre-boot protections beyond the PIN, and treat physical access to a device as a full compromise path.",
-      "tags": [
-        "vulnerability",
-        "encryption",
-        "endpoint"
-      ],
-      "sources": [
+          "source": "The Record",
+          "title": "Ice hockey governing body website defaced amid dispute over Russia's exclusion",
+          "url": "https://therecord.media/russia-hockey-cyberattack-championships"
+        },
         {
-          "source": "The Hacker News",
-          "title": "New Attack Bypasses TPM Lockout to Crack Windows Hello and BitLocker PINs in Days, Not Years",
-          "url": "https://thehackernews.com/2026/11/flash-chip-attack-bypasses-tpm-lockout.html"
+          "source": "Schneier on Security",
+          "title": "France Is Blaming Iran for the Fridge Cyberattack",
+          "url": "https://www.schneier.com/blog/archives/2026/11/france-is-blaming-iran-for-the-fridge-cyberattack.html"
         }
       ],
-      "_anchor": "i-74d12e4423"
+      "_anchor": "i-58112a1964"
     }
   ],
   "markets": [
     {
       "label": "S&P 500",
-      "value": "7,506.11",
-      "pct": "+0.1%",
-      "arrow": "▲"
-    },
-    {
-      "label": "Dow",
-      "value": "51,899.74",
+      "value": "7,446.96",
       "pct": "-0.5%",
       "arrow": "▼"
     },
     {
+      "label": "Dow",
+      "value": "51,442.08",
+      "pct": "-1.0%",
+      "arrow": "▼"
+    },
+    {
       "label": "Nasdaq",
-      "value": "24,961.34",
-      "pct": "-0.1%",
+      "value": "24,754.08",
+      "pct": "-0.7%",
       "arrow": "▼"
     },
     {
@@ -349,27 +369,27 @@
     },
     {
       "label": "EUR/USD",
-      "value": "1.1067",
-      "pct": "-1.3%",
+      "value": "1.1032",
+      "pct": "-1.5%",
       "arrow": "▼"
     },
     {
       "label": "GBP/USD",
-      "value": "1.3252",
+      "value": "1.3223",
       "pct": "-1.4%",
       "arrow": "▼"
     },
     {
       "label": "USD/JPY",
-      "value": "159.52",
-      "pct": "+0.9%",
+      "value": "159.68",
+      "pct": "+1.0%",
       "arrow": "▲"
     }
   ],
   "weather": [
-    "This Afternoon: Sunny, high 58F.",
     "Tonight: Clear, low 33F.",
-    "Thursday: Sunny, high 62F."
+    "Thursday: Sunny, high 62F.",
+    "Thursday Night: Mostly Clear, low 37F."
   ],
   "sports": [
     {
@@ -398,6 +418,52 @@
   "local": {
     "business_politics": [
       {
+        "title": "Anthropic Raises $81 Billion in a Record IPO",
+        "latest_developments": "Anthropic priced its initial public offering at $83 a share Wednesday evening, November 18, above the targeted range and with more shares sold than planned, raising $81 billion in the largest offering on record.",
+        "summary": "Anthropic, the San Francisco artificial-intelligence company behind the Claude models, sold into a market where investors have spent two weeks dumping shares tied to the artificial-intelligence build-out, and its bankers had pushed the target valuation toward $1.5 trillion earlier this month. The size of the deal makes it the clearest test of whether public money keeps financing data centers and chip orders.",
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Anthropic raises $81bn in record IPO",
+            "url": "https://www.ft.com/content/62c0510b-ca65-441e-9baf-675b93903b9e?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Anthropic Prices IPO at $83 a Share on Strong Demand",
+            "url": "https://www.wsj.com/finance/stocks/anthropic-prices-ipo-at-83-a-share-0290494c?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Anthropic Sells More Shares Than Planned at a Higher Price Than Expected",
+            "url": "https://www.wsj.com/finance/stocks/anthropic-sells-more-shares-than-planned-at-a-higher-price-than-expected-4b511002?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-64d4bb67d4"
+      },
+      {
+        "title": "Regulators Press City Firms on Cyber Defenses",
+        "latest_developments": "British regulators published new directions for City of London firms Wednesday, November 18, after a surge in hacking attempts and a $6 billion theft from the crypto exchange Binance, and the Financial Times reported the same evening that a rush to patch software flaws found by artificial-intelligence tools probably destabilized the systems that failed at Microsoft, JPMorgan Chase, and other companies.",
+        "summary": "The past week has brought a 19-hour Microsoft outage that took down Outlook and Teams, an online banking failure at JPMorgan Chase that spread to Bank of America and Wells Fargo, an Apple services outage, and the Federal Aviation Administration ground stop traced to a contractor's router work. Trump administration officials spent Wednesday answering House questions about the string of outages alongside intelligence on Iranian threats to the United States homeland, which puts operational resilience at the center of the risk question for large banks.",
+        "sources": [
+          {
+            "source": "FT World",
+            "title": "City firms told to tighten cyber defences as AI exposes vulnerabilities",
+            "url": "https://www.ft.com/content/7cd81085-95d0-4511-b640-300a2c8791ff?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "US tech outages blamed on rush to fix bugs found by AI",
+            "url": "https://www.ft.com/content/96c565f1-f229-40b6-91e8-7a849ec4b208?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ Politics",
+            "title": "A House hearing about worldwide threats turned into a broad discussion about a string of nationwide outages and disturbing intelligence about Iranian threats to the homeland",
+            "url": "https://www.wsj.com/politics/national-security/five-takeaways-from-house-hearing-on-threats-to-the-u-s-35a23029?mod=rss_socialpoliticsfeed"
+          }
+        ],
+        "_anchor": "i-7586268f33"
+      },
+      {
         "title": "Democrats Nominate Jeffries for Speaker",
         "latest_developments": "House Democrats nominated Hakeem Jeffries for speaker in a closed-door secret ballot Wednesday, November 18, with no declared opponent against him.",
         "summary": "Jeffries, the 56-year-old Brooklyn Democrat who has led House Democrats since 2023, worked through the fall to tamp down caucus dissent after the party's large midterm gains. He stands on track to become the first Black lawmaker to hold the gavel when the new Congress convenes in January, which puts him in charge of the chamber that writes tax, spending, and financial legislation.",
@@ -417,18 +483,23 @@
       },
       {
         "title": "Waller Pushes a Supersized December Increase",
-        "latest_developments": "Federal Reserve Governor Christopher Waller repeated his call Wednesday, November 18, for an outsized interest rate increase at the December meeting, which lifted Treasury yields, while the euro slid against the dollar as pressure returned to French and peripheral eurozone government bonds.",
-        "summary": "Hawkish Fed messaging has run through markets for two weeks, with policymakers weighing a larger-than-usual increase after strong jobs, growth, and inflation readings. Higher Treasury yields and a firmer dollar tighten financing conditions for borrowers worldwide and squeeze eurozone sovereign spreads.",
+        "latest_developments": "The minutes of the Federal Reserve's October meeting, released Wednesday, November 18, showed mounting inflation concern among policymakers, which carried the WSJ Dollar Index up 0.22% to 98.64 and a fresh 52-week high, sent Comex gold down 3.16% to settle at $3,736.80, and reinforced Governor Christopher Waller's renewed call the same day for an outsized rate increase in December.",
+        "summary": "Hawkish Fed messaging has run through markets for two weeks, with policymakers weighing a larger-than-usual increase after strong jobs, growth, and inflation readings. Treasury yields settled mixed as safe-haven demand met the hawkish talk, and a firmer dollar tightens financing conditions for borrowers worldwide while gold, silver, and copper set new lows for the year.",
         "sources": [
           {
             "source": "WSJ Markets",
-            "title": "Treasury Yields Rise Amid Hawkish Fedspeak",
+            "title": "Treasury Yields Mixed Amid Hawkish Fedspeak",
             "url": "https://www.wsj.com/finance/jgbs-edge-lower-ahead-of-20-year-auction-91707090?mod=rss_markets_main"
           },
           {
             "source": "WSJ Markets",
-            "title": "Euro's Weakness Continues; Eurozone Bond Yields Fall",
+            "title": "WSJ Dollar Index Rises 0.22% to 98.64",
             "url": "https://www.wsj.com/finance/currencies/asian-currencies-consolidate-but-may-be-weighed-by-risk-off-sentiment-d2acd03c?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Comex Gold Settles 3.16% Lower at $3736.80",
+            "url": "https://www.wsj.com/finance/commodities-futures/gold-treads-water-as-fed-dollar-keep-weighing-3f6439e8?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-3bd8766dec"
@@ -448,12 +519,12 @@
       },
       {
         "title": "Nvidia's Results Steady the AI Trade",
-        "latest_developments": "United States tech stocks gave back an early rally and slid Wednesday, November 18, hours after Nvidia raised its forecast and interim Chief Executive Colette Kress told investors \"it's business as usual,\" and attention shifted to Anthropic, whose bankers plan to lift the price on its initial public offering.",
-        "summary": "Nvidia reported that revenue doubled last quarter and lifted next year's guidance in its first results since Jensen Huang resigned and the board installed finance chief Kress as interim chief. The company still carries a Securities and Exchange Commission disclosure investigation, congressional scrutiny of its China sales, and an unfinished search for a permanent chief, so the questions about its future outlast the quarter.",
+        "latest_developments": "Nvidia shares fell for a fifth straight session Wednesday, November 18, as the earnings call left Wall Street unconvinced and fears about the chipmaker's \"neocloud\" customers persisted, while interim Chief Executive Colette Kress accelerated pay raises at an all-hands meeting to lift morale and Jensen Huang maneuvered for a return.",
+        "summary": "Nvidia reported that revenue doubled last quarter and lifted next year's guidance in its first results since Huang resigned and the board installed finance chief Kress as interim chief, who told investors \"it's business as usual.\" The company still carries a Securities and Exchange Commission disclosure investigation, congressional scrutiny of its China sales, and an unfinished search for a permanent chief, so the questions about its future outlast the quarter.",
         "sources": [
           {
             "source": "FT World",
-            "title": "Wall Street set to open higher after Nvidia results reassure investors",
+            "title": "US tech stocks oscillate after Nvidia results",
             "url": "https://www.ft.com/content/f085b811-fc20-425f-88d8-9f98e178636a?syn-25a6b1a6=1"
           },
           {
@@ -468,8 +539,18 @@
           },
           {
             "source": "WSJ Markets",
-            "title": "Nasdaq Futures Rise as Nvidia Earnings Calm AI Fears, Attention Turns to Anthropic",
+            "title": "U.S. Stocks Mostly Lower After Nvidia Earnings Fail to Soothe Nerves",
             "url": "https://www.wsj.com/finance/commodities-futures/stock-futures-rally-as-nvidia-earnings-calm-ai-trade-fears-96f51546?mod=rss_markets_main"
+          },
+          {
+            "source": "WSJ Markets",
+            "title": "Nvidia Says It's 'Business as Usual' After Huang's Ouster. Wall Street Doesn't Buy It.",
+            "url": "https://www.wsj.com/finance/stocks/nvidia-says-its-business-as-usual-after-huangs-ouster-wall-street-doesnt-buy-it-954290c4?mod=rss_markets_main"
+          },
+          {
+            "source": "FT Home",
+            "title": "Nvidia accelerates pay rises as interim CEO seeks to lift staff morale",
+            "url": "https://www.ft.com/content/9ee78a67-fcab-4e43-bee7-09c9244e76b8?syn-25a6b1a6=1"
           }
         ],
         "_anchor": "i-74b926ce1c"
@@ -500,6 +581,37 @@
     ],
     "business": [
       {
+        "title": "CurvePoint's Weapon Scanner Stumbles at Hempfield",
+        "latest_developments": "Hempfield Area School District delayed the rollout of its artificial-intelligence weapon detection system, KDKA reported Wednesday, November 18, after the technology made identification errors.",
+        "summary": "CurvePoint, a Pittsburgh company, picked Hempfield Area High School in Westmoreland County as one of the first schools to run its weapon identification software at a main entrance. The glitch pushes back a deployment the company intended as a showcase for school districts shopping for screening technology.",
+        "sources": [
+          {
+            "source": "KDKA",
+            "title": "Hempfield Area School District delays rollout of AI weapon detection system due to identification issues",
+            "url": "https://www.cbsnews.com/pittsburgh/news/hempfield-ai-weapon-detector-technology-delayed/"
+          },
+          {
+            "source": "KDKA",
+            "title": "AI weapons detector delayed at Hempfield Area High School",
+            "url": "https://www.cbsnews.com/pittsburgh/video/ai-weapons-detector-delayed-at-hempfield-area-high-school/"
+          }
+        ],
+        "_anchor": "i-36ac4f9c53"
+      },
+      {
+        "title": "Seton Hill Signs the Beam on a $29 Million Field House",
+        "latest_developments": "The Seton Hill University community signed a steel beam Wednesday, November 18, for the $29 million field house under construction on its Greensburg campus.",
+        "summary": "Seton Hill, a Catholic university in Greensburg, Westmoreland County, is building the field house as the largest athletic project in its recent history. Signatures went onto the steel before crews set it, among them that of lacrosse player Victor Rossi.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Seton Hill community signs steel beam for new $29M field house",
+            "url": "https://triblive.com/local/westmoreland/seton-hill-community-signs-steel-beam-for-new-29m-field-house/"
+          }
+        ],
+        "_anchor": "i-a793e3d107"
+      },
+      {
         "title": "Highmark's Insurance Arm Swings to $673 Million",
         "latest_developments": "Highmark Health Plans posted a $673 million profit, WPXI reported Wednesday, November 18, and Chief Financial Officer Carl Daley said one segment of the business remains in a multiyear turnaround.",
         "summary": "Highmark Health Plans sells coverage to roughly 7 million members across Pennsylvania, Delaware, West Virginia, and New York for Pittsburgh-based Highmark Health, the parent of Allegheny Health Network. The swing to profit follows a stretch of losses in the insurance unit, and Daley's turnaround language signals more work ahead on pricing and medical costs.",
@@ -527,13 +639,18 @@
       },
       {
         "title": "The New Terminal Turns One",
-        "latest_developments": "Pittsburgh International Airport holds a program Wednesday, November 18, marking the first anniversary of its $1.7 billion terminal and the building's effect on the region.",
+        "latest_developments": "Pittsburgh International Airport marked the first anniversary of its $1.7 billion terminal Wednesday, November 18, counting 10 million passengers through the building and design awards for it, and laid out what comes in 2027.",
         "summary": "The terminal opened in November 2025, consolidating ticketing, security, and baggage into a single building reachable without the airport's underground train. Airport leadership has sold the project as a driver of flights, jobs, and development around Findlay and Moon townships in Allegheny County.",
         "sources": [
           {
             "source": "WPXI",
             "title": "Pittsburgh International Airport to mark first anniversary of its new terminal on Wednesday",
             "url": "https://www.wpxi.com/news/local/pittsburgh-international-airport-mark-first-anniversary-its-new-terminal-wednesday/4WPCFGOKQNGMFEGZPRQ5T26FS4/"
+          },
+          {
+            "source": "WTAE",
+            "title": "Pittsburgh International Airport marks 1 year of new terminal and looks ahead to 2027",
+            "url": "https://www.wtae.com/article/pittsburgh-international-airport-new-terminal-one-year/74469088"
           }
         ],
         "_anchor": "i-99d61a0677"
@@ -595,6 +712,55 @@
     ],
     "around_town": [
       {
+        "title": "O'Connor Answers Two 11 Investigates Reports",
+        "latest_developments": "Mayor Corey O'Connor promised financial transparency from his administration Wednesday, November 18, after WPXI's 11 Investigates found the Urban Redevelopment Authority paid $250,000 in 2016 for the Old Larimer School, a property appraised at $137,500, and he responded the same day to the station's finding that two Pittsburgh firefighters worked very few shifts over several years while collecting full salaries and benefits.",
+        "summary": "The firefighter report has prompted an internal investigation and a shakeup inside the fire bureau. The Urban Redevelopment Authority, the city's development arm, bought the Larimer school building nine years before O'Connor took office, and he now owns the answer for both files as City Council works through his proposed 2027 budget.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pittsburgh Mayor Corey O'Connor vows financial transparency from his administration",
+            "url": "https://www.wpxi.com/news/local/pittsburgh-mayor-corey-oconnor-vows-financial-transparency-his-administration/AIKNZAVZ2ZC6BB4EWZUNKGKF4E/"
+          },
+          {
+            "source": "WPXI",
+            "title": "11 Investigates: Pittsburgh mayor responds to reports of 2 firefighters working very few shifts",
+            "url": "https://www.wpxi.com/news/local/11-investigates-pittsburgh-mayor-responds-reports-2-firefighters-working-very-few-shifts/QJTAFS2AV5BQJOBESRWVKOWM74/"
+          }
+        ],
+        "_anchor": "i-6dbabae41d"
+      },
+      {
+        "title": "Snowflake Dies at the Pittsburgh Zoo",
+        "latest_developments": "The Pittsburgh Zoo & Aquarium announced Wednesday, November 18, that Snowflake, its lone polar bear, died at 30 after a sharp decline in health.",
+        "summary": "Snowflake ranked among the oldest polar bears in North America and anchored the zoo's Water's Edge exhibit in Highland Park for years. Her death leaves the zoo without a polar bear.",
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Snowflake, the Pittsburgh Zoo's lone polar bear, dies at 30",
+            "url": "https://triblive.com/local/snowflake-the-pittsburgh-zoos-lone-polar-bear-dies-at-30/"
+          },
+          {
+            "source": "KDKA",
+            "title": "Snowflake, beloved polar bear at Pittsburgh Zoo, dies at 30",
+            "url": "https://www.cbsnews.com/pittsburgh/news/snowflake-polar-bear-pittsburgh-zoo-death/"
+          }
+        ],
+        "_anchor": "i-fb6f210863"
+      },
+      {
+        "title": "Marchers Demand Moshannon Valley Close",
+        "latest_developments": "Protesters marched through downtown Pittsburgh Wednesday, November 18, calling for the closure of the Moshannon Valley Processing Center and describing conditions that detainees there have reported.",
+        "summary": "The Moshannon Valley Processing Center in central Pennsylvania holds federal immigration detainees and ranks among the largest such facilities in the Northeast. Speakers at the march read detainees' accounts of conditions inside and pressed for the center to shut.",
+        "sources": [
+          {
+            "source": "WTAE",
+            "title": "Protesters march in Pittsburgh to demand closure of Moshannon Valley Processing Center",
+            "url": "https://www.wtae.com/article/protesters-pittsburgh-demand-closure-moshannon-valley-processing-center/74470028"
+          }
+        ],
+        "_anchor": "i-d624fa92a6"
+      },
+      {
         "title": "Allegheny County Leads the State in Plate Readers",
         "latest_developments": "NEXTpittsburgh reported Wednesday, November 18, that Allegheny County holds more automated license plate readers than any other Pennsylvania county.",
         "summary": "The cameras sit on poles at intersections and highway ramps across the county and photograph every car that passes, feeding databases that police departments search. The spread raises the question of how long those records sit and who may run them.",
@@ -622,8 +788,8 @@
       },
       {
         "title": "Amtrak Doubles the Pennsylvanian",
-        "latest_developments": "Amtrak's second daily Pennsylvanian round trip between Pittsburgh and New York began carrying passengers Wednesday, November 18, stopping at Harrisburg and Philadelphia along the way.",
-        "summary": "The Pennsylvanian has run once a day across the state, stopping at Greensburg on its way east through Philadelphia to New York. A second frequency gives Western Pennsylvania riders a choice of departure times for the first time in decades.",
+        "latest_developments": "Amtrak's second daily Pennsylvanian round trip between Pittsburgh and New York began carrying passengers Wednesday, November 18, and Greensburg marked the inaugural run at its station.",
+        "summary": "The Pennsylvanian has run once a day across the state, stopping at Greensburg, Harrisburg, and Philadelphia on its way to New York. A second frequency gives Western Pennsylvania riders a choice of departure times for the first time in decades.",
         "sources": [
           {
             "source": "TribLive",
@@ -634,6 +800,11 @@
             "source": "WTAE",
             "title": "All aboard: Amtrak's second Pittsburgh-New York route is now running",
             "url": "https://www.wtae.com/article/amtrak-pittsburgh-new-york-train-pennsylvanian/74467110"
+          },
+          {
+            "source": "KDKA",
+            "title": "Amtrak officially launches expanded service between Pittsburgh and New York City",
+            "url": "https://www.cbsnews.com/pittsburgh/news/amtrak-expands-pittsburgh-to-new-york-service/"
           }
         ],
         "_anchor": "i-74fa70222b"
@@ -666,8 +837,8 @@
       },
       {
         "title": "Foggy Mornings, Sunny Afternoons",
-        "latest_developments": "Patchy fog cleared into sunshine around Pittsburgh Wednesday morning, November 18, with highs reaching the upper 50s, and WPXI calls it the coolest day of the week.",
-        "summary": "WTAE holds the same pattern of fog at dawn and sun in the afternoon across Western Pennsylvania through the next few days, with temperatures climbing from here. Drivers on the valley roads south and east of the city face the thickest of the early fog.",
+        "latest_developments": "Patchy fog cleared into sunshine around Pittsburgh Wednesday, November 18, with highs in the upper 50s, and WTAE's evening update holds highs in the 60s across Western Pennsylvania through the weekend.",
+        "summary": "WPXI called Wednesday the coolest day of the week, and the pattern of fog at dawn and sun in the afternoon holds for the next several days as temperatures climb. Drivers on the valley roads south and east of the city face the thickest of the early fog.",
         "sources": [
           {
             "source": "WPXI",
@@ -683,6 +854,11 @@
             "source": "KDKA",
             "title": "KDKA-TV Morning Forecast (11/18)",
             "url": "https://www.cbsnews.com/pittsburgh/video/kdka-tv-morning-forecast-1118-3/"
+          },
+          {
+            "source": "KDKA",
+            "title": "KDKA-TV Evening Forecast (11/18)",
+            "url": "https://www.cbsnews.com/pittsburgh/video/kdka-tv-evening-forecast-1118-3/"
           }
         ],
         "_anchor": "i-33871f1f94"
@@ -792,6 +968,19 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "SNR Drive Sets the Eagles Stage",
+        "latest_developments": "Matt Williamson and Wes Uhler opened Wednesday's SNR Drive, November 18, on Sunday's trip to the Philadelphia Eagles, then gave most of the rest of the show to a long \"Around Campus\" college football segment.",
+        "summary": "The Steelers play at Philadelphia Sunday, November 22, at 1 p.m. Eastern on CBS. Williamson and Uhler spent the first 20 minutes building the matchup and also ran their \"Pick A Player\" segment on the Steelers roster.",
+        "sources": [
+          {
+            "source": "Pittsburgh Steelers (YouTube)",
+            "title": "Setting The Stage For Sunday + We Go \"Around Campus\" | SNR Drive (Nov.18) | Pittsburgh Steelers",
+            "url": "https://www.youtube.com/watch?v=yNJmnoWepPA"
+          }
+        ],
+        "_anchor": "i-b3158f6e05"
+      },
       {
         "title": "Heyward's Show Turns to Philadelphia",
         "latest_developments": "Not Just Football with Cam Heyward posted a full episode Wednesday morning, November 18, that moves past the Cincinnati trip to the Philadelphia Eagles and marks the show passing 70,000 subscribers with a giveaway of Heyward's game-worn cleats.",
@@ -942,48 +1131,55 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Attackers keep riding trusted vendor code, injecting malware into Optimizely's experimentation scripts and publishing poisoned agent-framework builds to PyPI that steal Azure credentials every time Python starts.",
+      "text": "Decade-old code keeps breaking, with nginx2root sitting in NGINX since 2015, Java4Shell riding every Java 17.0.6 build, and CISA flagging live exploits in Puppet and Apache Axis.",
+      "links": [
+        {
+          "anchor": "i-fb8b318a04",
+          "phrase": "nginx2root",
+          "start": 37,
+          "end": 47,
+          "title": "nginx2root and F5 BIG-IP Open Unauthenticated Attacks"
+        },
+        {
+          "anchor": "i-d365ad8c28",
+          "phrase": "Java4Shell",
+          "start": 77,
+          "end": 87,
+          "title": "Java4Shell Narrows to AVX-512 Chips"
+        },
+        {
+          "anchor": "i-94321d4b37",
+          "phrase": "Puppet",
+          "start": 155,
+          "end": 161,
+          "title": "Puppet and Roller Fall to Live Exploits"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Attackers rode borrowed trust, A/B testing malware via Optimizely scripts, poisoning Microsoft's agent-framework on PyPI for Azure keys, and letting Cold Relic turn one Workspace tenant into two.",
       "links": [
         {
           "anchor": "i-c559964442",
           "phrase": "Optimizely",
-          "start": 66,
-          "end": 76,
+          "start": 55,
+          "end": 65,
           "title": "Optimizely Attackers A/B Tested Their Malware"
         },
         {
           "anchor": "i-aa9ca93e66",
           "phrase": "agent-framework",
-          "start": 127,
-          "end": 142,
+          "start": 97,
+          "end": 112,
           "title": "Poisoned Agent Framework Steals Cloud Keys"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "updated",
-      "text": "NSANet entered a second day of disruption at Fort Meade alongside Japan's Fugaku shutdown and Apple's iCloud Mail outage, with only Fugaku tied to a confirmed breach.",
-      "links": [
-        {
-          "anchor": "i-19347567d0",
-          "phrase": "NSANet",
-          "start": 0,
-          "end": 6,
-          "title": "NSANet and Fugaku Go Dark"
-        }
-      ]
-    },
-    {
-      "kind": "Update",
-      "status": "updated",
-      "text": "Mandiant traced Cold Relic from one compromised Google Workspace tenant into a partner organization, using stolen correspondence to give follow-on phishing the right names, projects, and tone.",
-      "links": [
+        },
         {
           "anchor": "i-ee9a23761b",
           "phrase": "Cold Relic",
-          "start": 16,
-          "end": 26,
+          "start": 149,
+          "end": 159,
           "title": "Cold Relic Turns One Cloud Breach Into Two"
         }
       ]
@@ -991,84 +1187,91 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Exploitation and research keep narrowing to specific hardware and trust anchors, from CISA-listed Puppet certificate abuse to Java4Shell's AVX-512-only reach and a TPM reset that cracks BitLocker PINs.",
+      "text": "Enforcement landed as ransomware volume climbed toward 718 victims a month, with Ukraine and the FBI arresting four suspects and Scattered Spider ringleader Tyler Buchanan drawing six years.",
       "links": [
         {
-          "anchor": "i-94321d4b37",
-          "phrase": "Puppet",
-          "start": 98,
-          "end": 104,
-          "title": "Puppet and Roller Fall to Live Exploits"
+          "anchor": "i-b326b8531a",
+          "phrase": "Ukraine",
+          "start": 81,
+          "end": 88,
+          "title": "Ukraine and the FBI Arrest Four Ransomware Suspects"
         },
         {
-          "anchor": "i-d365ad8c28",
-          "phrase": "Java4Shell",
-          "start": 126,
-          "end": 136,
-          "title": "Java4Shell Narrows to AVX-512 Chips"
-        },
-        {
-          "anchor": "i-74d12e4423",
-          "phrase": "BitLocker",
-          "start": 186,
-          "end": 195,
-          "title": "A Flash Chip Attack Cracks BitLocker PINs"
-        }
-      ]
-    },
-    {
-      "kind": "Trend",
-      "status": null,
-      "text": "Nvidia's raised forecast steadied the AI trade only briefly, while Ben Thompson reads the quarter as uneventful and Zitron casts the company as the bubble's center.",
-      "links": [
-        {
-          "anchor": "i-74b926ce1c",
-          "phrase": "raised forecast",
-          "start": 9,
-          "end": 24,
-          "title": "Nvidia's Results Steady the AI Trade"
-        },
-        {
-          "anchor": "i-4618f5d2a9",
-          "phrase": "Ben Thompson",
-          "start": 67,
-          "end": 79,
-          "title": "Nvidia Earnings; Office Convergence; OS Wars, AI Edition"
-        },
-        {
-          "anchor": "i-f75c581b60",
-          "phrase": "Zitron",
-          "start": 116,
-          "end": 122,
-          "title": "The NVIDIA Bubble"
+          "anchor": "i-69958fa42a",
+          "phrase": "Scattered Spider",
+          "start": 129,
+          "end": 145,
+          "title": "Scattered Spider Ringleader Draws Six Years"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "Allegheny County leads the state in automated license plate readers, Amtrak's second daily Pennsylvanian round trip started carrying riders, and PennDOT closes Bathtub lanes on I-376 overnight.",
+      "text": "Anthropic's record $81 billion offering priced above its range Wednesday evening even as Nvidia shares fell a fifth straight session, leaving the AI trade split.",
       "links": [
         {
-          "anchor": "i-9cc5b456b9",
-          "phrase": "Allegheny County",
+          "anchor": "i-64d4bb67d4",
+          "phrase": "Anthropic's",
           "start": 0,
-          "end": 16,
-          "title": "Allegheny County Leads the State in Plate Readers"
+          "end": 11,
+          "title": "Anthropic Raises $81 Billion in a Record IPO"
         },
+        {
+          "anchor": "i-74b926ce1c",
+          "phrase": "Nvidia shares",
+          "start": 89,
+          "end": 102,
+          "title": "Nvidia's Results Steady the AI Trade"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "British regulators pressed City of London firms on cyber defenses after a $6 billion Binance theft, as the NSA hit a second day of NSANet disruption.",
+      "links": [
+        {
+          "anchor": "i-7586268f33",
+          "phrase": "British regulators",
+          "start": 0,
+          "end": 18,
+          "title": "Regulators Press City Firms on Cyber Defenses"
+        },
+        {
+          "anchor": "i-19347567d0",
+          "phrase": "NSANet",
+          "start": 131,
+          "end": 137,
+          "title": "NSANet and Fugaku Go Dark"
+        }
+      ]
+    },
+    {
+      "kind": "Update",
+      "status": "new",
+      "text": "Amtrak's second daily Pennsylvanian round trip began carrying passengers, Hempfield delayed CurvePoint's AI weapon scanner after misidentifications, and the Pittsburgh Zoo's polar bear Snowflake died at 30.",
+      "links": [
         {
           "anchor": "i-74fa70222b",
           "phrase": "Pennsylvanian",
-          "start": 91,
-          "end": 104,
+          "start": 22,
+          "end": 35,
           "title": "Amtrak Doubles the Pennsylvanian"
         },
         {
-          "anchor": "i-6173ca203f",
-          "phrase": "Bathtub",
-          "start": 160,
-          "end": 167,
-          "title": "Two Nights of Lane Closings in the Bathtub"
+          "anchor": "i-36ac4f9c53",
+          "phrase": "CurvePoint's",
+          "start": 92,
+          "end": 104,
+          "title": "CurvePoint's Weapon Scanner Stumbles at Hempfield"
+        },
+        {
+          "anchor": "i-fb6f210863",
+          "phrase": "Snowflake",
+          "start": 185,
+          "end": 194,
+          "title": "Snowflake Dies at the Pittsburgh Zoo"
         }
       ]
     }
@@ -1082,11 +1285,12 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 63,
+        "in_window": 64,
         "failed": [],
         "empty": [
-          "CISA Advisories",
+          "Ars Technica Security",
           "Sophos News",
+          "Unit 42 (Palo Alto)",
           "Google Online Security Blog",
           "Graham Cluley",
           "Microsoft Security Blog",
@@ -1098,13 +1302,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 12,
+            "contributed": 12
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "Krebs on Security": {
             "items": 10,
@@ -1128,13 +1332,13 @@
           },
           "SANS Internet Storm Center": {
             "items": 10,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 2,
+            "contributed": 2
           },
           "CISA Advisories": {
             "items": 30,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "The Record": {
             "items": 5,
@@ -1143,13 +1347,13 @@
           },
           "Ars Technica Security": {
             "items": 20,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Help Net Security": {
             "items": 10,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 10,
+            "contributed": 10
           },
           "Securelist (Kaspersky)": {
             "items": 10,
@@ -1163,8 +1367,8 @@
           },
           "Unit 42 (Palo Alto)": {
             "items": 15,
-            "in_window": 1,
-            "contributed": 1
+            "in_window": 0,
+            "contributed": 0
           },
           "Google Online Security Blog": {
             "items": 25,
@@ -1203,8 +1407,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 2,
+            "contributed": 2
           },
           "Frank on Fraud": {
             "items": 10,
@@ -1236,7 +1440,7 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 14
+            "contributed": 6
           },
           "Pittsburgh Post-Gazette": {
             "items": 0,
@@ -1256,21 +1460,21 @@
           "NEXTpittsburgh": {
             "items": 10,
             "in_window": 2,
-            "contributed": 2
+            "contributed": 0
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 8,
+            "in_window": 9,
             "contributed": 1
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 13
+            "contributed": 23
           },
           "WPXI": {
             "items": 15,
-            "in_window": 14,
+            "in_window": 15,
             "contributed": 10
           },
           "WTAE": {
@@ -1291,43 +1495,43 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 72,
-            "in_window": 32,
+            "items": 73,
+            "in_window": 28,
             "contributed": 8
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 34,
-            "contributed": 13
+            "in_window": 37,
+            "contributed": 19
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 57,
+            "in_window": 56,
             "contributed": 10
           },
           "WSJ Politics": {
             "items": 21,
             "in_window": 14,
-            "contributed": 2
+            "contributed": 3
           },
           "The Economist": {
             "items": 300,
-            "in_window": 115,
-            "contributed": 11
+            "in_window": 118,
+            "contributed": 6
           },
           "FT Home": {
             "items": 11,
             "in_window": 11,
-            "contributed": 5
+            "contributed": 6
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 11
+            "contributed": 8
           },
           "FT Markets": {
             "items": 25,
-            "in_window": 21,
+            "in_window": 19,
             "contributed": 0
           }
         }
@@ -1430,21 +1634,21 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 37,
+        "in_window": 36,
         "failed": [],
         "empty": [
           "Guardian Olympics"
         ],
         "per_feed": {
           "ESPN Soccer": {
-            "items": 24,
-            "in_window": 24,
-            "contributed": 24
+            "items": 26,
+            "in_window": 26,
+            "contributed": 26
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 13,
-            "contributed": 13
+            "in_window": 10,
+            "contributed": 10
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1505,24 +1709,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 33629,
+          "outputTokens": 44395,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 132635,
+          "cacheCreationInputTokens": 139743,
           "webSearchRequests": 0,
-          "costUSD": 2.1671050000000003,
+          "costUSD": 2.5073350000000003,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 11732
+          "thinkingTokens": 18097
         }
       },
-      "cost_usd": 2.1671050000000003,
-      "duration_ms": 355186,
+      "cost_usd": 2.5073350000000003,
+      "duration_ms": 473134,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-18 13:36 EST",
-    "items_considered": 63,
+    "generated_at": "2026-11-18 19:37 EST",
+    "items_considered": 64,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1603,8 +1807,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.1671,
-    "model_duration_ms": 355186,
+    "model_cost_usd": 2.5073,
+    "model_duration_ms": 473134,
     "local_from": null,
     "feed_failures": [
       "Pittsburgh Post-Gazette",
