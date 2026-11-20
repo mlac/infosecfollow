@@ -1,27 +1,95 @@
 {
   "date": "2026-11-20",
-  "headline": "Other people's systems carried the day's damage—JPMorgan, Visa, Mastercard, SBC Medical Group, and N-able all traced exposed customer data to providers and intruders outside their own walls—while researchers pinned the September VMware vCenter zero-day on the Chinese espionage group Armory Castle.",
+  "headline": "Broadcom shipped a vCenter patch more than two months after a suspected Chinese espionage group began using the flaw as a zero-day, while F5, Ruby, and Cisco pushed defenders through another week of edge patching.",
   "emerging_trends": [
     {
-      "text": "Companies keep finding their customers' records in strangers' hands: JPMorgan, Visa, and Mastercard each pointed at third-party providers after the N0n extortion group published files, and N-able traced the outage in its hosted mail filtering to intruders who may have taken credentials.",
-      "topic_title": "N0n Leak Pulls In JPMorgan, Visa, and Mastercard",
-      "link_phrase": "N0n",
+      "text": "Attackers and researchers both went after the virtualization layer this week, with Armory Castle riding a vCenter authentication bypass to administrative control of ESX fleets and a KVM flaw letting one tenant read 127 gigabytes of a cloud host's memory.",
+      "topic_title": "Linux KVM Hands Guests the Host's Memory",
+      "link_phrase": "KVM",
       "_anchor": "trend-1"
     },
     {
-      "text": "Defenders now write AI into their incident reports and their hardware decisions alike, with the European Commission blaming a publicly available AI tool for knocking its applications offline, SonicWall telling Gen 6 firewall owners that automation finds unsupported edge devices faster than people ever did, and Postman counting a quarter of 9,000 surveyed organizations already running agents against production APIs while four in ten have yet to settle who holds the credentials.",
-      "topic_title": "European Commission Confirms an AI-Assisted Intrusion",
-      "link_phrase": "European Commission",
+      "text": "Suppliers carried the day's breaches: JPMorgan, Visa, and Mastercard each traced leaked customer data to outside providers, the Belfast processor Wellington IT turned up in more than 40 Irish credit union filings six weeks after the fact, and N-able tied its worldwide mail outage to a breached server of its own.",
+      "topic_title": "N0n Leak Pulls In JPMorgan, Visa, and Mastercard",
+      "link_phrase": "JPMorgan",
       "_anchor": "trend-2"
     },
     {
-      "text": "Branded flaws now arrive faster than triage queues clear them, with Ruby2Shell landing inside a week of nginx2root and phpAfterShell, and Cisco Talos arguing that chasing each new name grinds down the teams that have to patch.",
-      "topic_title": "F5, Ruby, and SonicWall Force an Edge Patch Cycle",
-      "link_phrase": "Ruby2Shell",
+      "text": "AI now sets the clock on both sides of the fence, with the European Commission tracing its intrusion to Artex, SonicWall telling Gen 6 firewall owners that automated scanning finds unsupported edge devices faster than ever, and Cisco Talos and Dark Reading both arguing that panic over AI-assisted exploits burns out the teams who have to patch.",
+      "topic_title": "European Commission Confirms an AI-Assisted Intrusion",
+      "link_phrase": "Artex",
       "_anchor": "trend-3"
     }
   ],
   "topics": [
+    {
+      "title": "Armory Castle Owns the vCenter Zero-Day",
+      "area": "Nation-State Activity",
+      "latest_developments": "Google Threat Intelligence Group attributed the zero-day exploitation of CVE-2026-123890 to Armory Castle, the suspected China-nexus espionage group formerly tracked as UNC5221, which has used the authentication bypass since at least early September 2026—more than two months before Broadcom released a fix—to take administrative sessions on vCenter Server and steal data.",
+      "summary": "CVE-2026-123890, rated 9.8, lets a remote, unauthenticated attacker bypass authentication in the VMware Directory Service and seize vCenter, the console that manages an organization's ESX hosts and virtual machines. Broadcom has shipped fixed builds for every supported branch and lists no workaround, so patch now and hunt for September activity.",
+      "tags": [
+        "zero-day",
+        "apt",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "China-Linked Hackers Exploit Critical VMware vCenter Zero-Day to Gain Admin Access and Steal Data",
+          "url": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html"
+        },
+        {
+          "source": "BleepingComputer",
+          "title": "VMware patches vCenter zero-day exploited in attacks since September",
+          "url": "https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "VMware vCenter zero-day exploited for months before patch (CVE-2026-123890)",
+          "url": "https://www.helpnetsecurity.com/2026/11/20/vmware-vcenter-zero-day-cve-2026-123890-exploited/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "Newly Patched VMware vCenter Flaw Exploited as Zero-Day by Chinese APT",
+          "url": "https://www.securityweek.com/newly-patched-vmware-vcenter-flaw-exploited-as-zero-day-by-chinese-apt/"
+        }
+      ],
+      "_anchor": "i-dc6901c8a6"
+    },
+    {
+      "title": "SBC Medical Group Count Passes 2 Million",
+      "area": "Data Breaches",
+      "latest_developments": "SBC Medical Group raised its count past 2 million people after threat actors reached databases holding customer information tied to its clinics in Japan, N-able attributed the worldwide outage of its Mail Assure and SpamExperts Hosted Cloud to attackers who breached one of its servers and may have taken customer credentials, Transport for London said it spotted suspicious activity on its photocard site on November 16, 2026 and took the system offline, and Ireland's Data Protection Commission said it has received more than 40 breach notifications from credit unions that used the Belfast company Wellington IT as a data processor, a compromise that ran six weeks before anyone noticed.",
+      "summary": "SBC Medical Group told the United States Securities and Exchange Commission that two incidents exposed customer and employee data; the Transport for London breach touches roughly 265,000 Oyster photocard holders, among them children with Zip cards and Londoners holding the 60+ London Oyster photocard. N-able customers should rotate credentials used with the hosted mail services.",
+      "tags": [
+        "breach",
+        "healthcare",
+        "credentials"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "SBC Medical Group Data Breach Impacts Over 2 Million",
+          "url": "https://www.securityweek.com/sbc-medical-group-data-breach-impacts-over-2-million/"
+        },
+        {
+          "source": "SecurityWeek",
+          "title": "N-able Blames Service Disruption on Cyberattack",
+          "url": "https://www.securityweek.com/n-able-blames-service-disruption-on-cyberattack/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "265,000 Oyster photocard customers’ data exposed in Transport for London breach",
+          "url": "https://www.helpnetsecurity.com/2026/11/20/transport-for-london-oyster-photocard-data-breach/"
+        },
+        {
+          "source": "The Record",
+          "title": "Dozens of credit unions hit by supplier breach that went unnoticed for six weeks",
+          "url": "https://therecord.media/dozens-of-credit-unions-hit-by-supplier-breach"
+        }
+      ],
+      "_anchor": "i-3827cbac51"
+    },
     {
       "title": "F5, Ruby, and SonicWall Force an Edge Patch Cycle",
       "area": "Vulnerabilities and Exploits",
@@ -52,59 +120,6 @@
       "_anchor": "i-6a744f24ea"
     },
     {
-      "title": "SBC Medical Group Count Passes 2 Million",
-      "area": "Data Breaches",
-      "latest_developments": "SBC Medical Group raised its count past 2 million people after threat actors reached databases holding customer information tied to its clinics in Japan, N-able attributed the disruption of its Mail Assure and SpamExperts Hosted Cloud to a cyberattack that may have exposed customer credentials, and Transport for London said it spotted suspicious activity on its photocard site on November 16, 2026 and took the system offline.",
-      "summary": "SBC Medical Group told the United States Securities and Exchange Commission that two incidents exposed customer and employee data; the Transport for London breach touches roughly 265,000 Oyster photocard holders, among them children with Zip cards and Londoners holding the 60+ London Oyster photocard. N-able customers should rotate credentials used with the hosted mail services.",
-      "tags": [
-        "breach",
-        "healthcare",
-        "credentials"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "SBC Medical Group Data Breach Impacts Over 2 Million",
-          "url": "https://www.securityweek.com/sbc-medical-group-data-breach-impacts-over-2-million/"
-        },
-        {
-          "source": "SecurityWeek",
-          "title": "N-able Blames Service Disruption on Cyberattack",
-          "url": "https://www.securityweek.com/n-able-blames-service-disruption-on-cyberattack/"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "265,000 Oyster photocard customers’ data exposed in Transport for London breach",
-          "url": "https://www.helpnetsecurity.com/2026/11/20/transport-for-london-oyster-photocard-data-breach/"
-        }
-      ],
-      "_anchor": "i-3827cbac51"
-    },
-    {
-      "title": "Armory Castle Owns the vCenter Zero-Day",
-      "area": "Nation-State Activity",
-      "latest_developments": "Researchers attributed the early-September 2026 zero-day exploitation of CVE-2026-123890 to Armory Castle, the suspected China-nexus espionage group formerly tracked as UNC5221, which used the authentication bypass to take administrative access and steal data.",
-      "summary": "CVE-2026-123890, rated 9.8, lets an attacker with network access bypass authentication in the VMware Directory Service and seize vCenter, the console that manages an organization's ESX hosts and virtual machines. Broadcom has shipped fixed builds for every supported branch and lists no workaround, so patch now and hunt for September activity.",
-      "tags": [
-        "zero-day",
-        "apt",
-        "patch"
-      ],
-      "sources": [
-        {
-          "source": "The Hacker News",
-          "title": "China-Linked Hackers Exploit Critical VMware vCenter Zero-Day to Gain Admin Access and Steal Data",
-          "url": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html"
-        },
-        {
-          "source": "BleepingComputer",
-          "title": "VMware patches vCenter zero-day exploited in attacks since September",
-          "url": "https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/"
-        }
-      ],
-      "_anchor": "i-dc6901c8a6"
-    },
-    {
       "title": "European Commission Confirms an AI-Assisted Intrusion",
       "area": "AI Security",
       "latest_developments": "Commission spokesperson Thomas Regnier confirmed the attack at Thursday's midday press briefing in Brussels, saying the intruders misused a publicly available AI tool, that the Commission pulled several applications offline to contain the incident, and that it has found no evidence anyone took data.",
@@ -127,6 +142,42 @@
         }
       ],
       "_anchor": "i-2be32b97a1"
+    },
+    {
+      "title": "Cisco Expressway Falls to a Public Proof of Concept",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Attackers exploited CVE-2026-76466, the Cisco Expressway flaw rated 9.8, within days of a public proof of concept, breaching four clustered devices at a Russian organization, reaching the internal network, and staging tooling for lateral movement.",
+      "summary": "Expressway carries video calls and collaboration traffic at the network edge, and the bug hands an unauthenticated attacker with network access a way past authentication. Patch every node, then inspect clustered peers for attacker tooling, because compromising one member of a cluster exposes the rest.",
+      "tags": [
+        "exploitation",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Hackers Exploit Critical Cisco Expressway Flaw, Breach Four Devices and Reach Internal Network",
+          "url": "https://thehackernews.com/2026/11/hackers-exploit-critical-cisco.html"
+        }
+      ],
+      "_anchor": "i-c9ddefa65f"
+    },
+    {
+      "title": "Linux KVM Hands Guests the Host's Memory",
+      "area": "Vulnerabilities and Exploits",
+      "latest_developments": "Researchers used CVE-2026-99312, a flaw in KVM, the hypervisor built into the Linux kernel, to read roughly 127 gigabytes of a DigitalOcean server's memory from inside a virtual machine of their own, which on a shared host can include other customers' virtual machines.",
+      "summary": "The flaw reaches only hosts running AMD processors with nested virtualization turned on, and fixed kernels have shipped. Cloud operators and anyone running their own KVM hypervisors should roll out the patched kernels and turn off nested virtualization where no workload needs it.",
+      "tags": [
+        "cloud",
+        "patch"
+      ],
+      "sources": [
+        {
+          "source": "The Hacker News",
+          "title": "Linux KVM Flaw CVE-2026-99312 Lets Guest VMs Access Host Memory on AMD Hosts",
+          "url": "https://thehackernews.com/2026/11/new-linux-kvm-flaw-cve-2026-99312-lets.html"
+        }
+      ],
+      "_anchor": "i-f80afcc478"
     },
     {
       "title": "N0n Leak Pulls In JPMorgan, Visa, and Mastercard",
@@ -270,7 +321,7 @@
     "business_politics": [
       {
         "title": "The AI Selloff Deepens and Metals Break Down",
-        "latest_developments": "The S&P 500 headed Friday morning, November 20, for its longest losing streak since 2020 as Anthropic shares fell below their debut level, Asian and European technology stocks tumbled, Treasuries strengthened, and gold and silver sank to their lowest prices in more than a year.",
+        "latest_developments": "Anthropic shares slid as much as 13% Friday, November 20, one day after the stock's debut, and the S&P 500 headed for its worst week since President Trump's April 2025 \"liberation day\" tariffs and its longest losing streak since 2020, while gold and silver sank to their lowest prices in more than a year and crude headed for a third straight weekly loss.",
         "summary": "Anthropic's record $81 billion initial public offering, priced at $83 a share and up 17% on its first Nasdaq session Thursday, November 19, failed to steady the artificial-intelligence trade: the Nikkei dropped 2.9% behind chip and metals shares, European AI names fell sharply, and the dollar edged lower. Traders betting on tighter Federal Reserve policy drove gold and silver down, overwhelming the usual safe-haven bid, which leaves banks and asset managers marking losses across both the AI equity complex and the metals hedge against it.",
         "sources": [
           {
@@ -279,9 +330,14 @@
             "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-20-2026?mod=rss_markets_main"
           },
           {
-            "source": "FT Home",
+            "source": "FT Markets",
             "title": "Anthropic shares slide as fears over AI boom dominate",
             "url": "https://www.ft.com/content/c7ad2e0c-efd1-40c2-a5a8-819ced8acf5b?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT Home",
+            "title": "Anthropic shares tumble as AI giant swept up in tech sell-off",
+            "url": "https://www.ft.com/content/23fa83d8-e078-4853-959e-bd1f19d14ff5?syn-25a6b1a6=1"
           },
           {
             "source": "WSJ Markets",
@@ -297,24 +353,24 @@
             "source": "WSJ Markets",
             "title": "European Tech Stocks Tumble as AI Selloff Intensifies",
             "url": "https://www.wsj.com/finance/stocks/nikkei-falls-2-9-dragged-by-chip-metals-stocks-0601645e?mod=rss_markets_main"
-          },
-          {
-            "source": "WSJ Markets",
-            "title": "Dollar Falls Modestly as AI Stock Selloff Weighs",
-            "url": "https://www.wsj.com/finance/currencies/asian-currencies-consolidate-but-may-be-weighed-by-risk-off-sentiment-38aa30b7?mod=rss_markets_main"
           }
         ],
         "_anchor": "i-b38513beb1"
       },
       {
         "title": "Washington Clears Advanced AI Chips for China",
-        "latest_developments": "The Financial Times reported in its FirstFT briefing Friday, November 20, that the United States approved the sale of advanced artificial-intelligence chips to Chinese companies.",
+        "latest_developments": "The Financial Times reported in its FirstFT briefing Friday, November 20, that the United States approved the sale of advanced artificial-intelligence chips to Chinese companies, and the Wall Street Journal's risk-compliance desk the same morning traced how Chinese AI firms now face withdrawal from Nvidia hardware.",
         "summary": "The approval cuts against the Commerce Department rule issued Monday, November 16, that tightened shipments of Nvidia and other American chips to China and pushed Taiwan Semiconductor Manufacturing Company and Samsung Electronics to suspend some Chinese orders. Export policy now swings in both directions within one week, which scrambles revenue forecasts for the chipmakers and the trade financing built around them.",
         "sources": [
           {
             "source": "FT World",
             "title": "FirstFT: US approved sale of advanced AI chips to Chinese companies",
             "url": "https://www.ft.com/content/5fbbe806-37d7-42e4-8235-ce9cbb3f2cdb?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ US Business",
+            "title": "The Morning Risk Report: China's AI Firms Are Hooked on Nvidia Chips. Now Comes the Withdrawal.",
+            "url": "https://www.wsj.com/risk-compliance-journal/the-morning-risk-report-chinas-ai-firms-are-hooked-on-nvidia-chips-now-comes-the-withdrawal-57391e23?mod=pls_whats_news_us_business_f"
           }
         ],
         "_anchor": "i-d339066c29"
@@ -344,7 +400,7 @@
       },
       {
         "title": "Russia Hits Kyiv's Bridges",
-        "latest_developments": "Waves of Russian missiles damaged bridges in Kyiv Friday, November 20, two days after the Shenzhen summit ended.",
+        "latest_developments": "Waves of Russian missiles damaged bridges in Kyiv Friday, November 20, and the Wall Street Journal reported the same morning that President Trump's envoys, among them Jared Kushner, discussed giving Ukraine NATO membership in exchange for surrendering territory in the Donbas, a reversal of longstanding United States policy.",
         "summary": "The barrage followed the first meeting ever to put President Trump, Xi Jinping, and Vladimir Putin in one room, which closed Thursday, November 19, in Shenzhen with a joint denunciation of nuclear war and no breakthrough on Ukraine. Chinese analysts cast the summit as Xi's \"Yalta 2.0\" moment and a display of Beijing's global leadership, and the renewed strikes on the Ukrainian capital show Putin pressing his terms rather than easing.",
         "sources": [
           {
@@ -356,6 +412,16 @@
             "source": "FT Home",
             "title": "China revels in Xi's 'Yalta 2.0' moment",
             "url": "https://www.ft.com/content/c1c540af-f9ba-479a-8473-4b7619859453?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "Russia Steps Up Attacks on Kyiv's Bridges",
+            "url": "https://www.wsj.com/world/russia-steps-up-attacks-on-kyivs-bridges-a5b8a8e8?mod=rss_worldnews"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "U.S. Has Floated NATO Membership for Ukraine in Recent Meetings",
+            "url": "https://www.wsj.com/world/europe/u-s-has-floated-nato-membership-for-ukraine-in-recent-meetings-d5c8243a?mod=rss_worldnews"
           }
         ],
         "_anchor": "i-4f6afa5139"
@@ -403,6 +469,19 @@
       }
     ],
     "around_town": [
+      {
+        "title": "The Turnpike Staffs Every Plaza With Interpreters",
+        "latest_developments": "The Pennsylvania Turnpike Commission announced Friday, November 20, that it now provides free visual and American Sign Language interpreting services for travelers at all 17 of its service plazas, days before the Thanksgiving rush.",
+        "summary": "The service covers every plaza on the 565-mile toll road, including the Oakmont, New Stanton, and Zelienople stops that Western Pennsylvania drivers use, and reaches blind and deaf travelers who need help reading signage or speaking with plaza staff. The commission put the program in place as holiday traffic builds across the commonwealth.",
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pennsylvania Turnpike adds free services for blind, deaf travelers at all plazas",
+            "url": "https://www.wpxi.com/news/local/pennsylvania-turnpike-adds-free-services-blind-deaf-travelers-all-plazas/4J5YZUXYL5HTJKIOHG6H75FTNI/"
+          }
+        ],
+        "_anchor": "i-11230ba8d5"
+      },
       {
         "title": "The 2027 Budgets Split on Taxes",
         "latest_developments": "Oakmont proposed a 17% real estate tax increase for 2027, TribLive reported Friday, November 20, while Westmoreland County commissioners unveiled a deficit budget Thursday, November 19, with no tax increase, and Bradford Woods put forward a $2.6 million budget that holds taxes flat.",
@@ -479,6 +558,24 @@
       }
     ],
     "around_teams": [
+      {
+        "title": "Tomlin Settles the Jacoby Jones Story",
+        "latest_developments": "Not Just Football with Cam Heyward posted the full Mike Tomlin segment Friday morning, November 20, a week after the show teased it with a clip.",
+        "summary": "Tomlin, the former Steelers head coach, tells Cameron Heyward and co-host Hayden what happened on the Jacoby Jones kickoff return that drew him a $100,000 fine for stepping toward the field, and the show cut a companion short Thursday, November 19, calling the sequence one of the biggest what-ifs in Steelers history.",
+        "sources": [
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "Mike Tomlin Finally Explains the Jacoby Jones Kickoff Incident",
+            "url": "https://www.youtube.com/watch?v=itWnREwaktE"
+          },
+          {
+            "source": "Not Just Football with Cam Heyward",
+            "title": "One of the biggest \"What If's\" in Steeler history",
+            "url": "https://www.youtube.com/shorts/WpLALT3ITuU"
+          }
+        ],
+        "_anchor": "i-11347e0f53"
+      },
       {
         "title": "McCarthy's Second Briefing of Eagles Week",
         "latest_developments": "The Steelers posted video late Thursday, November 19, of head coach Mike McCarthy's news conference before that afternoon's practice.",
@@ -559,20 +656,41 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "N0n's leak pushed JPMorgan, Visa, and Mastercard to blame third-party providers, while SBC Medical Group passed 2 million affected and N-able blamed intruders for a mail outage.",
+      "text": "Armory Castle rode a vCenter authentication bypass to administrative control of ESX fleets while researchers read 127 gigabytes of a DigitalOcean host's memory through a KVM flaw.",
+      "links": [
+        {
+          "anchor": "i-dc6901c8a6",
+          "phrase": "Armory Castle",
+          "start": 0,
+          "end": 13,
+          "title": "Armory Castle Owns the vCenter Zero-Day"
+        },
+        {
+          "anchor": "i-f80afcc478",
+          "phrase": "KVM flaw",
+          "start": 170,
+          "end": 178,
+          "title": "Linux KVM Hands Guests the Host's Memory"
+        }
+      ]
+    },
+    {
+      "kind": "Trend",
+      "status": null,
+      "text": "Outside providers drove the day's breaches as N0n published JPMorgan, Visa, and Mastercard customer data and SBC Medical passed 2 million people exposed.",
       "links": [
         {
           "anchor": "i-009f6643a8",
-          "phrase": "N0n's leak",
-          "start": 0,
-          "end": 10,
+          "phrase": "JPMorgan",
+          "start": 60,
+          "end": 68,
           "title": "N0n Leak Pulls In JPMorgan, Visa, and Mastercard"
         },
         {
           "anchor": "i-3827cbac51",
-          "phrase": "SBC Medical Group",
-          "start": 87,
-          "end": 104,
+          "phrase": "SBC Medical",
+          "start": 109,
+          "end": 120,
           "title": "SBC Medical Group Count Passes 2 Million"
         }
       ]
@@ -580,76 +698,62 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "F5's emergency BIG-IP fixes and Ruby2Shell arrived as Armory Castle was named behind the vCenter zero-day and FastUnlock shipped unpatched against locked Windows machines.",
+      "text": "AI paces both sides: the European Commission traced its intrusion to a public AI tool as automated scanning of unsupported SonicWall gear drives an edge patch cycle.",
       "links": [
         {
+          "anchor": "i-2be32b97a1",
+          "phrase": "European Commission",
+          "start": 25,
+          "end": 44,
+          "title": "European Commission Confirms an AI-Assisted Intrusion"
+        },
+        {
           "anchor": "i-6a744f24ea",
-          "phrase": "Ruby2Shell",
-          "start": 32,
-          "end": 42,
+          "phrase": "edge patch cycle",
+          "start": 148,
+          "end": 164,
           "title": "F5, Ruby, and SonicWall Force an Edge Patch Cycle"
-        },
-        {
-          "anchor": "i-dc6901c8a6",
-          "phrase": "Armory Castle",
-          "start": 54,
-          "end": 67,
-          "title": "Armory Castle Owns the vCenter Zero-Day"
-        },
-        {
-          "anchor": "i-fa700a4eb8",
-          "phrase": "FastUnlock",
-          "start": 110,
-          "end": 120,
-          "title": "FastUnlock Runs Programs on a Locked Windows PC"
         }
       ]
     },
     {
       "kind": "Update",
       "status": "new",
-      "text": "The European Commission pulled applications offline after intruders misused a publicly available AI tool, while Blackpoint found ROMULUS ClickFix delivering a new remote access trojan as a service.",
+      "text": "Attackers exploited CVE-2026-76466 on four clustered Cisco Expressway devices at a Russian organization days after a public proof of concept landed, then staged tooling for lateral movement.",
       "links": [
         {
-          "anchor": "i-2be32b97a1",
-          "phrase": "European Commission",
-          "start": 4,
-          "end": 23,
-          "title": "European Commission Confirms an AI-Assisted Intrusion"
-        },
-        {
-          "anchor": "i-ba74506a96",
-          "phrase": "ROMULUS ClickFix",
-          "start": 129,
-          "end": 145,
-          "title": "ROMULUS ClickFix Delivers a New Remote Access Trojan"
+          "anchor": "i-c9ddefa65f",
+          "phrase": "Cisco Expressway",
+          "start": 53,
+          "end": 69,
+          "title": "Cisco Expressway Falls to a Public Proof of Concept"
         }
       ]
     },
     {
-      "kind": "Trend",
-      "status": null,
-      "text": "Anthropic's slide below its debut price stretched the S&P 500's losing streak as Washington cleared advanced AI chips for China and Zitron called Nvidia the bubble's center.",
+      "kind": "Update",
+      "status": "updated",
+      "text": "Anthropic shares fell as much as 13% a day after debut as Washington cleared advanced AI chips for China and Zitron called Nvidia the center of a bubble.",
       "links": [
         {
           "anchor": "i-b38513beb1",
-          "phrase": "S&P 500's",
-          "start": 54,
-          "end": 63,
+          "phrase": "Anthropic shares",
+          "start": 0,
+          "end": 16,
           "title": "The AI Selloff Deepens and Metals Break Down"
         },
         {
           "anchor": "i-d339066c29",
-          "phrase": "Washington",
-          "start": 81,
-          "end": 91,
+          "phrase": "AI chips",
+          "start": 86,
+          "end": 94,
           "title": "Washington Clears Advanced AI Chips for China"
         },
         {
           "anchor": "i-f75c581b60",
           "phrase": "Nvidia",
-          "start": 146,
-          "end": 152,
+          "start": 123,
+          "end": 129,
           "title": "The NVIDIA Bubble"
         }
       ]
@@ -657,28 +761,21 @@
     {
       "kind": "Update",
       "status": "new",
-      "text": "Oakmont floated a 17% tax increase for 2027 while Sto-Rox teachers pressed the board for a contract and Penn Hills shelved a 255-unit townhome plan.",
+      "text": "The Pennsylvania Turnpike added free visual and ASL interpreting at all 17 service plazas before Thanksgiving, and Mike Tomlin's full Jacoby Jones segment posted Friday morning.",
       "links": [
         {
-          "anchor": "i-65fc236133",
-          "phrase": "Oakmont",
-          "start": 0,
-          "end": 7,
-          "title": "The 2027 Budgets Split on Taxes"
+          "anchor": "i-11230ba8d5",
+          "phrase": "Pennsylvania Turnpike",
+          "start": 4,
+          "end": 25,
+          "title": "The Turnpike Staffs Every Plaza With Interpreters"
         },
         {
-          "anchor": "i-0a9045ea5e",
-          "phrase": "Sto-Rox",
-          "start": 50,
-          "end": 57,
-          "title": "Sto-Rox Teachers Carry the Fight to the Board"
-        },
-        {
-          "anchor": "i-aeb6dd933e",
-          "phrase": "Penn Hills",
-          "start": 104,
-          "end": 114,
-          "title": "A 255-Unit Townhome Plan Stalls in Penn Hills"
+          "anchor": "i-11347e0f53",
+          "phrase": "Jacoby Jones",
+          "start": 134,
+          "end": 146,
+          "title": "Tomlin Settles the Jacoby Jones Story"
         }
       ]
     }
@@ -692,11 +789,10 @@
         "feeds": 24,
         "loaded": 24,
         "window_hours": 24,
-        "in_window": 63,
+        "in_window": 58,
         "failed": [],
         "empty": [
           "Krebs on Security",
-          "Schneier on Security",
           "CISA Advisories",
           "Securelist (Kaspersky)",
           "Unit 42 (Palo Alto)",
@@ -710,13 +806,13 @@
         "per_feed": {
           "The Hacker News": {
             "items": 50,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 11,
+            "contributed": 11
           },
           "BleepingComputer": {
             "items": 15,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "Krebs on Security": {
             "items": 10,
@@ -725,18 +821,18 @@
           },
           "Schneier on Security": {
             "items": 10,
-            "in_window": 0,
-            "contributed": 0
+            "in_window": 1,
+            "contributed": 1
           },
           "Dark Reading": {
             "items": 50,
-            "in_window": 5,
-            "contributed": 5
+            "in_window": 4,
+            "contributed": 4
           },
           "SecurityWeek": {
             "items": 10,
-            "in_window": 10,
-            "contributed": 10
+            "in_window": 9,
+            "contributed": 9
           },
           "SANS Internet Storm Center": {
             "items": 10,
@@ -815,8 +911,8 @@
           },
           "404 Media": {
             "items": 15,
-            "in_window": 6,
-            "contributed": 6
+            "in_window": 2,
+            "contributed": 2
           },
           "Frank on Fraud": {
             "items": 10,
@@ -848,7 +944,7 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 24
+            "contributed": 19
           },
           "Pittsburgh Post-Gazette": {
             "items": 0,
@@ -857,7 +953,7 @@
           },
           "PublicSource": {
             "items": 10,
-            "in_window": 4,
+            "in_window": 3,
             "contributed": 1
           },
           "Pittsburgh City Paper": {
@@ -872,23 +968,23 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 9,
+            "in_window": 8,
             "contributed": 0
           },
           "KDKA": {
             "items": 30,
             "in_window": 30,
-            "contributed": 12
+            "contributed": 10
           },
           "WPXI": {
             "items": 15,
             "in_window": 15,
-            "contributed": 7
+            "contributed": 10
           },
           "WTAE": {
             "items": 20,
             "in_window": 20,
-            "contributed": 15
+            "contributed": 19
           }
         }
       },
@@ -903,44 +999,44 @@
         "empty": [],
         "per_feed": {
           "WSJ World News": {
-            "items": 74,
-            "in_window": 25,
-            "contributed": 3
+            "items": 73,
+            "in_window": 28,
+            "contributed": 7
           },
           "WSJ Markets": {
             "items": 61,
-            "in_window": 41,
-            "contributed": 13
+            "in_window": 39,
+            "contributed": 15
           },
           "WSJ US Business": {
             "items": 85,
-            "in_window": 46,
-            "contributed": 7
+            "in_window": 49,
+            "contributed": 12
           },
           "WSJ Politics": {
             "items": 21,
-            "in_window": 8,
-            "contributed": 3
+            "in_window": 7,
+            "contributed": 2
           },
           "The Economist": {
             "items": 300,
-            "in_window": 59,
-            "contributed": 1
+            "in_window": 60,
+            "contributed": 2
           },
           "FT Home": {
-            "items": 10,
-            "in_window": 10,
-            "contributed": 9
+            "items": 11,
+            "in_window": 11,
+            "contributed": 6
           },
           "FT World": {
             "items": 25,
             "in_window": 25,
-            "contributed": 19
+            "contributed": 12
           },
           "FT Markets": {
             "items": 25,
             "in_window": 25,
-            "contributed": 5
+            "contributed": 4
           }
         }
       },
@@ -991,7 +1087,7 @@
         "feeds": 6,
         "loaded": 4,
         "window_hours": 96,
-        "in_window": 17,
+        "in_window": 18,
         "failed": [
           {
             "name": "Post-Gazette Pirates",
@@ -1011,8 +1107,8 @@
           },
           "Not Just Football with Cam Heyward": {
             "items": 15,
-            "in_window": 4,
-            "contributed": 4
+            "in_window": 5,
+            "contributed": 5
           },
           "Pittsburgh Steelers (YouTube)": {
             "items": 15,
@@ -1042,7 +1138,7 @@
         "feeds": 3,
         "loaded": 3,
         "window_hours": 72,
-        "in_window": 32,
+        "in_window": 33,
         "failed": [],
         "empty": [
           "Guardian Olympics"
@@ -1055,8 +1151,8 @@
           },
           "ESPN Olympics": {
             "items": 25,
-            "in_window": 8,
-            "contributed": 8
+            "in_window": 9,
+            "contributed": 9
           },
           "Guardian Olympics": {
             "items": 20,
@@ -1117,24 +1213,24 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 28913,
+          "outputTokens": 27459,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 110509,
+          "cacheCreationInputTokens": 122932,
           "webSearchRequests": 0,
-          "costUSD": 1.827945,
+          "costUSD": 1.9158250000000001,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 16837
+          "thinkingTokens": 12408
         }
       },
-      "cost_usd": 1.827945,
-      "duration_ms": 338066,
+      "cost_usd": 1.9158250000000001,
+      "duration_ms": 300599,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-20 07:05 EST",
-    "items_considered": 63,
+    "generated_at": "2026-11-20 10:05 EST",
+    "items_considered": 58,
     "window_hours": 24,
     "model": "opus",
     "fallback_model": "sonnet",
@@ -1215,8 +1311,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 1.8279,
-    "model_duration_ms": 338066,
+    "model_cost_usd": 1.9158,
+    "model_duration_ms": 300599,
     "local_from": null,
     "feed_failures": [
       "Pittsburgh Post-Gazette",
