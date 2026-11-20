@@ -703,7 +703,8 @@ class SiteWriting(TempSite):
         # rather than TODAY (the runner's local date may differ)
         stamped = re.compile(r"archive/\d{4}-\d{2}-\d{2}-\d{4}\.(html|txt)$")
         self.assertEqual([r for r in replaced if not stamped.match(r)],
-                         [f"archive/index.html", f"data/{TODAY}.json", "digest.txt", "index.html"])
+                         [f"archive/index.html", f"data/{TODAY}.json", "digest.txt", "index.html",
+                          "paper.txt"])
         self.assertEqual(len([r for r in replaced if stamped.match(r)]), 2)
         self.assertEqual(list(self.tmp.rglob("*.tmp")), [])
         rec = json.loads((self.tmp / "data" / f"{TODAY}.json").read_text())
@@ -1112,6 +1113,151 @@ class EndToEnd(TempSite):
         with self.assertRaises(SystemExit) as ctx:
             generate.main()
         self.assertIn("security feeds", str(ctx.exception))
+
+
+# ------------------------------------------------------------- smart brevity
+
+class SmartBrevity(unittest.TestCase):
+    ALLOWED = {"https://ok.example/1": "Feed One"}
+
+    def topic(self, **extra):
+        t = {"title": "Broadcom Patches vCenter", "area": "A", "latest_developments": "Lede.",
+             "tags": [], "sources": [{"url": "https://ok.example/1"}]}
+        t.update(extra)
+        return {"headline": "H", "emerging_trends": [{"text": "t"}], "topics": [t]}
+
+    def test_details_keep_known_labels_only(self):
+        out = generate.validate_digest(self.topic(
+            why_it_matters="Why.",
+            details=[{"label": "what to do:", "text": "Patch to 8.0.3."},
+                     {"label": "Vibes", "text": "dropped"},
+                     {"label": "What\u2019s next", "text": "Audit."},
+                     {"label": "By the numbers", "text": ""},
+                     {"label": "Zoom in", "text": "a"}, {"label": "Flashback", "text": "b"}]),
+            self.ALLOWED)
+        topic = out["topics"][0]
+        self.assertEqual(topic["why_it_matters"], "Why.")
+        self.assertEqual([d["label"] for d in topic["details"]],
+                         ["What to do", "What's next", "Zoom in"])
+        self.assertNotIn("summary", topic)
+
+    def test_legacy_summary_still_accepted_and_rendered(self):
+        out = generate.validate_digest(self.topic(summary="Old background."), self.ALLOWED)
+        topic = out["topics"][0]
+        self.assertEqual(topic["summary"], "Old background.")
+        html = "\n".join(generate._security_inner(out))
+        self.assertIn("read more", html)
+        self.assertNotIn("Why it matters", html)
+
+    def test_topic_needs_why_or_summary(self):
+        with self.assertRaises(ValueError):
+            generate.validate_digest(self.topic(), self.ALLOWED, strict=False)
+
+    def test_renderers_use_brevity_layout(self):
+        out = generate.validate_digest(self.topic(
+            why_it_matters="Admins lose control of ESX fleets.",
+            details=[{"label": "What to do", "text": "Patch now."}]), self.ALLOWED)
+        html = "\n".join(generate._security_inner(out))
+        self.assertIn('<p class="lede">Lede.</p>', html)
+        self.assertIn("<strong>Why it matters:</strong> Admins lose control", html)
+        self.assertIn("<li><strong>What to do:</strong> Patch now.</li>", html)
+        self.assertNotIn("Latest developments", html)
+        lines = generate._text_brevity(out["topics"][0], "   ")
+        self.assertEqual(lines[1], "   Why it matters: Admins lose control of ESX fleets.")
+        self.assertEqual(lines[2], "   - What to do: Patch now.")
+
+    def test_local_violence_check_reads_details(self):
+        allowed = {k: {"https://pgh.example/1": "TribLive"} for k in generate._LOCAL_SECTIONS}
+        allowed["reading"] = {}
+        reply = {"around_town": [{"title": "Council Meets", "latest_developments": "Vote set.",
+                                  "why_it_matters": "Taxes.",
+                                  "details": [{"label": "Zoom in", "text": "A man was fatally shot nearby."}],
+                                  "sources": [{"url": "https://pgh.example/1"}]},
+                                 {"title": "Bridge Reopens", "latest_developments": "Open.",
+                                  "why_it_matters": "Commutes.", "details": [],
+                                  "sources": [{"url": "https://pgh.example/1"}]}]}
+        out = generate.validate_local(reply, allowed, True, False, [], strict=False)
+        self.assertEqual([i["title"] for i in out["around_town"]], ["Bridge Reopens"])
+        self.assertEqual(out["around_town"][0]["why_it_matters"], "Commutes.")
+
+    def test_prompts_carry_brevity_rules_and_fields(self):
+        carried = {"topics": [{"title": "T", "area": "A", "latest_developments": "d",
+                               "why_it_matters": "w", "details": [{"label": "Zoom in", "text": "z"}],
+                               "tags": [], "sources": []}]}
+        prompt = generate.build_prompt([], 24, TODAY, today_so_far=carried)
+        self.assertIn("Smart Brevity structure", prompt)
+        self.assertIn('"why_it_matters": "w"', prompt)
+        local = generate.build_local_prompt([], [], [], [], [], [], TODAY,
+                                            today_so_far={"local": {"business": [
+                                                {"title": "B", "latest_developments": "d",
+                                                 "summary": "legacy", "sources": []}]}})
+        self.assertIn("Smart Brevity structure", local)
+        self.assertIn('"summary": "legacy"', local)
+        self.assertNotIn("{SECTION_CAPS", local)
+
+
+# ----------------------------------------------------------------- paper.txt
+
+import paper  # noqa: E402
+
+
+class Paper(unittest.TestCase):
+    def test_text_width_matches_lovyangfx_rules(self):
+        # DejaVu24: 'W' advances 24 px; a leading negative xOffset pads the left.
+        self.assertEqual(paper.text_width("", "DejaVu24"), 0)
+        widths = [paper.text_width(c, "DejaVu24") for c in "iW "]
+        self.assertTrue(all(w > 0 for w in widths))
+        self.assertEqual(paper.text_width("ab", "DejaVu24"),
+                         paper.FONTS["DejaVu24"][1][ord("a") - 32][0]
+                         + max(paper.FONTS["DejaVu24"][1][ord("b") - 32][0],
+                               paper.FONTS["DejaVu24"][1][ord("b") - 32][1]
+                               + paper.FONTS["DejaVu24"][1][ord("b") - 32][2]))
+
+    def test_to_ascii(self):
+        self.assertEqual(paper.to_ascii("Pok\u00e9mon \u2014 \u201cquoted\u201d \u2026  x"),
+                         'Pokemon -- "quoted" ... x')
+
+    def test_wrap_never_exceeds_width(self):
+        text = "Supercalifragilisticexpialidociousandthensomemoreletters " * 3 + "short words here"
+        for line in paper.wrap(text, "DejaVu24"):
+            self.assertLessEqual(paper.text_width(line, "DejaVu24"), paper.TEXT_W)
+
+    def test_every_story_fits_one_screen(self):
+        long = " ".join(["word"] * 400)
+        record = {"headline": "H", "topics": [
+            {"title": "A Very Long Headline " * 6, "area": "Area",
+             "latest_developments": long, "why_it_matters": long,
+             "details": [{"label": "What to do", "text": long}] * 3,
+             "sources": [{"source": "S", "url": "https://x"}]}],
+            "local": {}, "weather": ["Today: Sunny."], "sports": [], "glance": []}
+        for path in sorted((Path(__file__).parent.parent / "docs" / "data").glob("*.json"))[-3:] + [None]:
+            rec = record if path is None else json.loads(path.read_text())
+            for story in paper.build_stories(rec, "Friday, 1:32 PM EST"):
+                self.assertTrue(paper.fits(story), story["headline"])
+                self.assertLessEqual(len(paper.wrap(story["headline"], paper.HEAD_FONT)),
+                                     paper.MAX_HEAD_LINES)
+
+    def test_fit_drops_details_before_cutting_the_lede(self):
+        item = {"title": "Short Title", "latest_developments": "The lede stays whole.",
+                "why_it_matters": "It matters.",
+                "details": [{"label": "Zoom in", "text": " ".join(["detail"] * 150)}],
+                "sources": [{"source": "Outlet"}]}
+        story = paper.fit_story(paper.news_story("Security", item))
+        self.assertEqual(story["paras"][:2], ["The lede stays whole.", "*Why it matters:* It matters."])
+        self.assertTrue(paper.fits(story))
+
+    def test_render_format(self):
+        rec = {"headline": "Big day.", "topics": [
+            {"title": "T One", "area": "Ransomware", "latest_developments": "Lede.",
+             "why_it_matters": "Why.", "details": [], "sources": [{"source": "CISA"}]}],
+            "local": {}, "weather": [], "sports": [], "glance": []}
+        out = paper.render_paper(rec, "Friday, 9 AM")
+        stories = out.split("\f\n")
+        self.assertEqual(len(stories), 2)
+        self.assertEqual(stories[1].splitlines()[:5],
+                         ["SECURITY | RANSOMWARE", "T One", "", "Lede.", ""])
+        self.assertIn("*Why it matters:* Why.", stories[1])
+        self.assertTrue(all(ch == "\f" or ch == "\n" or 32 <= ord(ch) <= 126 for ch in out))
 
 
 if __name__ == "__main__":
