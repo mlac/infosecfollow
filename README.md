@@ -25,14 +25,20 @@ engine/pittsburgh.py     NWS weather + ESPN scores for Pittsburgh teams, with th
                          plaintextsports fallback wiring
 engine/plaintextsports.py parser for plaintextsports.com team pages (fixtures in
                          engine/testdata/pts/)
+engine/paper.py          paper.txt renderer: one story per PaperS3 screen, with a
+                         port of the device's text measurement so every story fits
+engine/paper_fonts.py    glyph metrics of the three M5GFX fonts the reader uses
 engine/feed_pubdates.py  feed publish-time sampler (schedule tuning; OPERATIONS.md §7)
 engine/feeds.json        curated feed groups: security, pittsburgh, bizpol, events,
                          sports_media, team_usa, reading
 engine/test_hardening.py, engine/test_generate.py   unit tests
 docs/index.html          today's briefing (generated)
 docs/digest.txt          plain-text rendition of today's briefing
+docs/paper.txt           today's briefing for the PaperS3 e-ink reader, one story
+                         per screen (form-feed separated)
 docs/archive/            one .html + .txt per run (YYYY-MM-DD-HHMM), plus an index
 docs/data/               one .json record per day (structured archive; rewritten by each run)
+devices/papers3/         Arduino sketch for the M5Stack PaperS3 reader of paper.txt
 deploy/                  the NAS container: Dockerfile, run-briefing.sh, scheduler.sh,
                          docker-compose.yml, .env.example, README
 .github/workflows/       ci.yml (tests on push/PR); redeploy-pages.yml (manual Pages fallback)
@@ -67,6 +73,17 @@ View the site by opening `docs/index.html` directly, or:
 ```sh
 python3 -m http.server -d docs 8000
 ```
+
+## Story format
+
+Every security topic and news item follows Axios-style Smart Brevity: a
+headline of four to eight words, a one-sentence lede (`latest_developments`),
+a one-sentence `why_it_matters`, and up to three labeled `details` drawn from a
+fixed set of labels (`DETAIL_LABELS` in `engine/generate.py`: "What to do",
+"By the numbers", "What's next", "When", "Where", "Tickets", and so on). The
+validator drops unknown labels rather than failing. Records written before the
+format carry a `summary` instead; the renderers and the carry-forward prompt
+still accept it, and the model rewrites carried items into the new shape.
 
 ## Sections
 

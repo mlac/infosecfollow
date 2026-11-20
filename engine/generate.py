@@ -37,6 +37,7 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 import market_data
+import paper
 import pittsburgh as pgh_data
 import safefetch
 
@@ -115,11 +116,27 @@ def load_feeds():
 
 
 STYLE_RULES = """Style rules for every word you write:
-- Voice: write like John McPhee — factual, dense, and conversational, never flowery and never academic. Active voice only; eliminate every passive construction. No contrastive negation, antithesis, or "X, not Y" constructions. Compress hard: deliver the most information in the fewest words, suitable for a Fortune 500 CEO. Every item stands alone; the reader never needs the source for pertinent details.
+- Voice: Axios Smart Brevity. Write for a busy executive reading on a phone: short words, short sentences, one idea per sentence, strong active verbs, and specific numbers. Cut throat-clearing, adverbs, hedges, and jargon; spell out an acronym the first time unless a security professional would know it cold (CVE, CISA, APT). Active voice only. No contrastive negation, antithesis, or "X, not Y" constructions. Every item stands alone; the reader never needs the source for pertinent details.
 - Name names: identify the specific people, organizations, and places by their actual names — the exact borough, township, municipality, company, agency, institution, and the officials involved. NEVER use vague placeholders such as "a local borough," "the neighboring township," "a local company," "a regional hospital," "officials," or "commissioners" without saying which. If a source does not supply the specific names and facts an item needs to stand alone, DROP that item entirely rather than publish a vague one — a thin, nameless item is worse than no item.
 - Capitalization: capitalize only the formal names of specific entities, people, and places; lowercase common nouns, general concepts, and statistical metrics. Capitalize professional titles only immediately before a name ("Chief Executive Jane Roe" but "the chief executive said"). Capitalize compass points only when they name recognized regions (the Midwest, Western Pennsylvania); lowercase directional uses (the storm moved east).
 - Titles and headings (topic titles, trend subjects, area names): use title case — capitalize the first word, the last word, and all principal words; lowercase articles, coordinating conjunctions, and prepositions of fewer than four letters.
 - Mechanics: American spelling (color, realize, traveling). Use the Oxford comma in series of three or more. Put periods and commas inside quotation marks; put colons and semicolons outside. Use unspaced em dashes for parenthetical interruptions—like this. One space after terminal punctuation. Write dates as Month Day, Year (June 12, 2026). Corporate entities and organizations take singular verbs.
+"""
+
+# Labels a story's "details" may use (Axios-style axioms, plus event logistics).
+DETAIL_LABELS = ("The big picture", "By the numbers", "Between the lines", "Zoom in",
+                 "What to do", "What's next", "What to watch", "Yes, but",
+                 "What they're saying", "The bottom line", "Flashback",
+                 "When", "Where", "Tickets")
+MAX_DETAILS = 3
+_DETAIL_LABEL_LIST = ", ".join(f'"{label}"' for label in DETAIL_LABELS)
+
+SMART_BREVITY_RULES = f"""Smart Brevity structure for every story object (security topics and every news item):
+- "title": a headline of 4 to 8 words that names the actor and the action, with a strong verb where one fits ("Broadcom Patches Exploited vCenter Flaw").
+- "latest_developments": the lede. ONE sentence, at most 30 words, carrying the single most important new fact. Lead with who did what.
+- "why_it_matters": ONE sentence, at most 30 words, on the consequence: who is exposed, what it costs, or what changes for the reader.
+- "details": 0 to {MAX_DETAILS} objects {{"label": ..., "text": ...}}. Each "text" is one or two short sentences, at most 35 words. Each "label" is exactly one of: {_DETAIL_LABEL_LIST}. Add a detail only when it carries a fact the lede and why_it_matters do not; leave the list empty rather than pad it. For security topics, include "What to do" whenever the items name a patch, version, mitigation, or detection step. For events, use "When", "Where", and "Tickets".
+- Never repeat a fact across the lede, why_it_matters, and details. The whole story, headline through details, runs at most 110 words.
 """
 
 
@@ -429,6 +446,15 @@ def _now_note():
             "below are UTC.")
 
 
+def _brevity_fields(item):
+    """The Smart Brevity fields of a stored item for the carry-forward blocks;
+    an item stored before the format change carries its legacy summary."""
+    if item.get("why_it_matters") or item.get("details"):
+        return {"why_it_matters": item.get("why_it_matters", ""),
+                "details": item.get("details") or []}
+    return {"summary": item.get("summary", "")}
+
+
 def _today_so_far_block(today_so_far):
     """Prompt block listing the topics this briefing already published earlier
     today, with their sources, so the model carries them forward."""
@@ -436,7 +462,7 @@ def _today_so_far_block(today_so_far):
         return ""
     topics = [{"title": t.get("title", ""), "area": t.get("area", ""),
                "latest_developments": t.get("latest_developments", ""),
-               "summary": t.get("summary", ""), "tags": t.get("tags", []),
+               **_brevity_fields(t), "tags": t.get("tags", []),
                "sources": [{"source": s.get("source", ""), "title": s.get("title", ""),
                             "url": s.get("url", "")} for s in (t.get("sources") or [])]}
               for t in today_so_far["topics"] if isinstance(t, dict)]
@@ -456,7 +482,7 @@ PREVIOUSLY_REPORTED — topics this briefing covered on PRIOR days over the last
 """
     carry_rule = ""
     if today_so_far and today_so_far.get("topics"):
-        carry_rule = f"""- Carry forward EVERY topic in TODAY_SO_FAR: keep its exact "title", "area", and "tags"; keep "latest_developments" and "summary" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them; and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR (add new items' urls when they extend the story). Merge a new item into an existing TODAY_SO_FAR topic when it is the same story rather than creating a second topic. Only if the total would exceed {MAX_TOPICS} topics, drop the least important carried-forward topics.
+        carry_rule = f"""- Carry forward EVERY topic in TODAY_SO_FAR: keep its exact "title", "area", and "tags"; keep "latest_developments", "why_it_matters", and "details" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them (a carried topic written before the Smart Brevity format, with a long "summary" and no "why_it_matters", must be rewritten into the Smart Brevity structure); and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR (add new items' urls when they extend the story). Merge a new item into an existing TODAY_SO_FAR topic when it is the same story rather than creating a second topic. Only if the total would exceed {MAX_TOPICS} topics, drop the least important carried-forward topics.
 """
     return f"""You are the editor of "infosecfollow", a daily plain-text briefing on information security. Below are {len(corpus)} news items published in the last {window} hours by major security outlets, vendors, and government sources, as a JSON array.
 
@@ -467,7 +493,7 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 
 {{
   "date": "{today}",
-  "headline": "One sentence capturing the most important security story or theme of the day.",
+  "headline": "One sentence of at most 25 words capturing the most important security story or theme of the day.",
   "emerging_trends": [
     {{"text": "A flowing natural-language sentence naming a trend visible across multiple items and why it matters (no 'Label:' prefix).",
       "topic_title": "the EXACT title, copied verbatim, of the topic in `topics` below that this trend most relates to",
@@ -475,10 +501,11 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
   ],
   "topics": [
     {{
-      "title": "Short Topic Name (a Campaign, Vulnerability, Incident, or Theme)",
+      "title": "Headline of 4 to 8 Words Naming the Actor and the Action",
       "area": "The Area of Cybersecurity This Topic Belongs To",
-      "latest_developments": "One sentence describing what is genuinely NEW about this topic today, relative to PREVIOUSLY_REPORTED.",
-      "summary": "One to two tight sentences of plain-text background: what it is, who is affected, what to do.",
+      "latest_developments": "The lede: one sentence of at most 30 words on what is genuinely NEW about this topic today, relative to PREVIOUSLY_REPORTED.",
+      "why_it_matters": "One sentence of at most 30 words on the consequence for defenders or the business.",
+      "details": [{{"label": "What to do", "text": "One or two short sentences."}}],
       "tags": ["1-3 lowercase tags like ransomware, zero-day, apt, patch, breach, policy"],
       "sources": [{{"source": "outlet name", "title": "article title", "url": "exact url copied from the items below"}}]
     }}
@@ -488,13 +515,14 @@ Cluster them into the day's trending topics and respond with ONLY a JSON object 
 Rules:
 - Aim for 5 to 6 topics on the first run of a day, ordered most to least important, and never more than {MAX_TOPICS} in total. Merge near-duplicate coverage of the same story into one topic.
 {carry_rule}- Continuity with PREVIOUSLY_REPORTED (when present): it lists PRIOR days only. "latest_developments" must describe only what is new today versus what was already reported. Add a prior-day topic again ONLY if it has a genuinely new development; let a story that has stagnated with nothing new age out by leaving it out, even if that leaves fewer than 5 topics. Brand-new topics not in PREVIOUSLY_REPORTED are always welcome. If there is no prior coverage of a topic, "latest_developments" states the key current update.
-- emerging_trends: exactly 3 entries, each a flowing sentence in "text" (no "Label:" prefix). Set "topic_title" to the exact title of the related topic from `topics`, and "link_phrase" to a 1-2 word phrase that appears verbatim inside "text" — a distinctive entity or term, never a generic word like "the" or "security" — which becomes a link jumping to that topic.
+- emerging_trends: exactly 3 entries, each a flowing sentence of at most 25 words in "text" (no "Label:" prefix). Set "topic_title" to the exact title of the related topic from `topics`, and "link_phrase" to a 1-2 word phrase that appears verbatim inside "text" — a distinctive entity or term, never a generic word like "the" or "security" — which becomes a link jumping to that topic.
 - Assign every topic an "area" naming its part of cybersecurity — e.g. Vulnerabilities and Exploits, Ransomware and Cybercrime, Nation-State Activity, AI Security, Data Breaches, Policy and Regulation. Use 2 to 5 distinct areas across the digest and repeat the exact same area string for topics that share it.
 - Each topic cites 1 to 4 sources whose "url" values are copied EXACTLY from the items below. Never invent or modify a URL.
 - Plain text only in every field: no markdown, no HTML, no bullet characters.
 - Be concrete: name the malware, CVE IDs, vendors, and threat actors that appear in the items. Do not speculate beyond them.
 - Skip vendor marketing and product-promo items unless they carry real news.
 
+{SMART_BREVITY_RULES}
 {STYLE_RULES}
 {prior_block}{_today_so_far_block(today_so_far)}
 Items:
@@ -514,7 +542,7 @@ def _today_so_far_local_block(today_so_far):
     for key in _LOCAL_SECTIONS:
         compact[key] = [
             {"title": it.get("title", ""), "latest_developments": it.get("latest_developments", ""),
-             "summary": it.get("summary", ""),
+             **_brevity_fields(it),
              "sources": [{"source": s.get("source", ""), "title": s.get("title", ""),
                           "url": s.get("url", "")} for s in (it.get("sources") or [])]}
             for it in (local.get(key) or []) if isinstance(it, dict)]
@@ -541,7 +569,7 @@ PREVIOUSLY_REPORTED_LOCAL — items this briefing covered on PRIOR days over the
 """
     carry_rule = ""
     if _today_so_far_local_block(today_so_far):
-        carry_rule = """- Carry forward EVERY item in TODAY_SO_FAR_LOCAL in its section: keep its exact "title" (or "author"); keep "latest_developments" and "summary" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them; and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR_LOCAL. The only carried-forward items to drop are events whose date has passed and stories that today's items show to be superseded. New items go on top of the carried-forward ones; the per-section limits below are for NEW items, and a section may hold at most {SECTION_CAPS['business']} items in total (business_politics {SECTION_CAPS['business_politics']}) — only when a section would exceed that, drop its least important carried-forward items.
+        carry_rule = f"""- Carry forward EVERY item in TODAY_SO_FAR_LOCAL in its section: keep its exact "title" (or "author"); keep "latest_developments", "why_it_matters", and "details" as they are unless today's items change the story or the text violates a rule in this prompt, in which case rewrite them (an item written before the Smart Brevity format, with a long "summary" and no "why_it_matters", must be rewritten into the Smart Brevity structure); and re-cite its sources by copying their "url" values exactly from TODAY_SO_FAR_LOCAL. The only carried-forward items to drop are events whose date has passed and stories that today's items show to be superseded. New items go on top of the carried-forward ones; the per-section limits below are for NEW items, and a section may hold at most {SECTION_CAPS['business']} items in total (business_politics {SECTION_CAPS['business_politics']}) — only when a section would exceed that, drop its least important carried-forward items.
 """
     reading_authors = _names(feeds, "reading") or "Ed Zitron, Stratechery, Cal Newport"
     reading_enum = "|".join(f["name"] for f in feeds.get("reading", [])) or "Ed Zitron|Stratechery|Cal Newport"
@@ -556,9 +584,10 @@ Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly t
 
 {{
   "business_politics": [
-    {{"title": "Short Title Naming the Story",
-      "latest_developments": "One sentence on what is genuinely NEW about this story today, relative to PREVIOUSLY_REPORTED_LOCAL.",
-      "summary": "One to two tight plain-text sentences of standalone background, naming the specific people, organizations, and places: what happened, who is affected, and why it matters.",
+    {{"title": "Headline of 4 to 8 Words",
+      "latest_developments": "The lede: one sentence of at most 30 words on what is genuinely NEW about this story today, relative to PREVIOUSLY_REPORTED_LOCAL, naming the specific people, organizations, and places.",
+      "why_it_matters": "One sentence of at most 30 words on the consequence: who is affected and what changes.",
+      "details": [{{"label": "By the numbers", "text": "One or two short sentences."}}],
       "sources": [{{"source": "outlet", "title": "article title", "url": "exact url from BUSINESS_POLITICS_ITEMS"}}]}}
   ],
   "business": [same shape: Pittsburgh business/economy stories, cited from PITTSBURGH_ITEMS],
@@ -567,23 +596,24 @@ Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly t
   "around_teams": [same shape: what beat writers and team podcasts/channels are saying about the Steelers, Pirates, and Penguins; cited from SPORTS_MEDIA_ITEMS],
   "team_usa": [same shape: news about United States national teams and Team USA athletes; cited from TEAM_USA_ITEMS],
   "reading": [
-    {{"author": "{reading_enum}", "title": "post title", "url": "exact url", "summary": "One or two sentences on what the post argues."}}
+    {{"author": "{reading_enum}", "title": "post title", "url": "exact url", "summary": "One sentence of at most 30 words on what the post argues."}}
   ]
 }}
 
 Rules:
-- Every item in business_politics, business, around_town, events, and around_teams is an object with "title", "latest_developments", "summary", and "sources". Keep "title" a short title-case label; put the standalone detail in "summary".
+- Every item in business_politics, business, around_town, events, around_teams, and team_usa is an object with "title", "latest_developments", "why_it_matters", "details", and "sources", following the Smart Brevity structure below.
 {carry_rule}- Continuity with PREVIOUSLY_REPORTED_LOCAL (when present): it lists PRIOR days only. "latest_developments" states only what is new today versus what was already reported. Add a prior-day item again ONLY if it has a materially new development; let stories and events that have nothing new age out by leaving them out — especially events whose date has already passed. Brand-new items are always welcome. When there is no prior coverage, "latest_developments" states the key current update.
 - business_politics: 0 to 4 items, ONLY news of extraordinary significance — developments the chief risk officer of a globally systemically important bank must know: major central-bank decisions, sovereign-debt or currency crises, systemic market dislocations, failures or rescues of major institutions, landmark federal legislation or court rulings, wars or major escalations, and Pennsylvania or Pittsburgh developments of comparable weight. A typical day has zero or one item that clears this bar; return [] when nothing does. Cite urls EXACTLY from BUSINESS_POLITICS_ITEMS.
 - business: 2-3 items. around_town: up to 3 items. Cite urls EXACTLY from PITTSBURGH_ITEMS. Prefer fewer, fully-specified items over more thin ones — drop any item you cannot name concretely.
-- events: 0-4 items, only genuinely current or upcoming relative to {today}. Make each event stand alone: in "summary" include the event name, what it is, the date and day of week, the start time, the venue and its neighborhood or address, the ticket price or range, the on-sale date, and how or where to buy — whenever the source provides them. Never invent specifics the source does not state. Specifically surface tickets going on sale for future events, what is happening at the Pittsburgh Symphony, and notable concerts around town. Cite urls EXACTLY from EVENTS_ITEMS or PITTSBURGH_ITEMS.
-- around_teams: 0-3 items covering the Pittsburgh Steelers, Pirates, and Penguins through their beat writers and team podcasts and video channels ({sports_shows}). Summarize what was actually reported or said — roster moves, injuries, signings, draft and schedule talk, and notable opinions — so the item stands alone; name the show or writer in "summary" when the take comes from one. Do NOT restate box scores or final scores; the scoreboard already covers results. Cite urls EXACTLY from SPORTS_MEDIA_ITEMS.
+- events: 0-4 items, only genuinely current or upcoming relative to {today}. Make each event stand alone: the lede names the event and what it is; "When" gives the date, day of week, and start time; "Where" gives the venue and its neighborhood or address; "Tickets" gives the price or range, the on-sale date, and how or where to buy — whenever the source provides them. Never invent specifics the source does not state. Specifically surface tickets going on sale for future events, what is happening at the Pittsburgh Symphony, and notable concerts around town. Cite urls EXACTLY from EVENTS_ITEMS or PITTSBURGH_ITEMS.
+- around_teams: 0-3 items covering the Pittsburgh Steelers, Pirates, and Penguins through their beat writers and team podcasts and video channels ({sports_shows}). Summarize what was actually reported or said — roster moves, injuries, signings, draft and schedule talk, and notable opinions — so the item stands alone; name the show or writer when the take comes from one. Do NOT restate box scores or final scores; the scoreboard already covers results. Cite urls EXACTLY from SPORTS_MEDIA_ITEMS.
 - team_usa: 0-3 items on United States national teams and Team USA athletes — the men's and women's national soccer teams, and U.S. Olympic and Paralympic athletes and teams. Cover roster moves, qualifying and tournament results and fixtures, injuries, and notable performances; name the specific players, coaches, opponents, competitions, and dates so the item stands alone. Include ONLY items genuinely about United States teams or athletes; drop general international sports news that does not involve Team USA. Cite urls EXACTLY from TEAM_USA_ITEMS.
 - ABSOLUTE EXCLUSION: do not include any item whose subject is a murder, shooting, stabbing, assault, fatal crash, abuse, or other violent or graphic event — skip those stories entirely no matter how prominent. A policy, budget, or court story that merely mentions crime statistics is fine; a story about a specific violent incident is not.
 - reading: pick the single newest worthwhile post per author from READING_ITEMS, up to one per author; "author" must be one of {reading_authors}; "url" copied EXACTLY. Skip housekeeping posts (podcast episode lists, link roundups) when a substantive essay is available.
 - Plain text only in every field: no markdown, no HTML, no bullet characters. Never invent or modify a URL.
 - Today is {today}.
 
+{SMART_BREVITY_RULES}
 {STYLE_RULES}
 {prior_block}{_today_so_far_local_block(today_so_far)}
 BUSINESS_POLITICS_ITEMS:
@@ -653,9 +683,11 @@ def validate_digest(digest, allowed, strict=True):
             continue
         title = _clean_str(topic.get("title"), 250)
         latest = _clean_str(topic.get("latest_developments"), 1500)
-        summary = _clean_str(topic.get("summary"), 1500)
-        if not (title and latest and summary):
-            dropped.append(f"topic {n}: missing title, latest_developments, or summary")
+        why = _clean_str(topic.get("why_it_matters"), 600)
+        details = _clean_details(topic.get("details"))
+        summary = _clean_str(topic.get("summary"), 1500)  # legacy (pre-Smart Brevity) field
+        if not (title and latest and (why or summary)):
+            dropped.append(f"topic {n}: missing title, latest_developments, or why_it_matters")
             continue
         sources = _valid_sources(topic.get("sources"), allowed)
         if not sources:
@@ -669,7 +701,9 @@ def validate_digest(digest, allowed, strict=True):
             "title": title,
             "area": _clean_str(topic.get("area"), 80) or "Other",
             "latest_developments": latest,
-            "summary": summary,
+            "why_it_matters": why,
+            "details": details,
+            **({"summary": summary} if summary and not why else {}),
             "tags": [t for t in tags if t][:MAX_TAGS],
             "sources": sources,
         })
@@ -832,6 +866,27 @@ def _clean_str(value, limit):
     return sanitize(value).strip()[:limit] if isinstance(value, str) else ""
 
 
+_DETAIL_LABELS_BY_KEY = {lbl.lower(): lbl for lbl in DETAIL_LABELS}
+
+
+def _clean_details(raw):
+    """Smart Brevity details: up to MAX_DETAILS {label, text} pairs whose label
+    is one of DETAIL_LABELS (matched case-insensitively, trailing colon and
+    curly apostrophes tolerated). Anything else is dropped, not an error."""
+    kept = []
+    for d in (raw if isinstance(raw, list) else []):
+        if not isinstance(d, dict):
+            continue
+        label = _clean_str(d.get("label"), 40).replace("\u2019", "'").rstrip(":").strip()
+        label = _DETAIL_LABELS_BY_KEY.get(label.lower())
+        text = _clean_str(d.get("text"), 600)
+        if label and text:
+            kept.append({"label": label, "text": text})
+        if len(kept) >= MAX_DETAILS:
+            break
+    return kept
+
+
 def _valid_sources(raw, allowed):
     """Citations whose url is in `allowed` ({url: canonical outlet name}),
     deduplicated, named after the feed rather than the model's rewording,
@@ -923,14 +978,21 @@ def validate_local(digest, allowed_by_section, have_pgh, have_reading, reading_a
             latest = _clean_str(item.get("latest_developments"), 1500)
             if not (title and latest):
                 continue  # title + latest_developments are required, like a security topic
-            summary = _clean_str(item.get("summary"), 1500)
-            if key not in _VIOLENCE_EXEMPT and _VIOLENCE_RE.search(f"{title} {latest} {summary}"):
+            why = _clean_str(item.get("why_it_matters"), 600)
+            details = _clean_details(item.get("details"))
+            summary = _clean_str(item.get("summary"), 1500)  # legacy (pre-Smart Brevity) field
+            detail_text = " ".join(d["text"] for d in details)
+            if key not in _VIOLENCE_EXEMPT and _VIOLENCE_RE.search(
+                    f"{title} {latest} {why} {detail_text} {summary}"):
                 print(f"  local: dropped violent-incident item from {key}: {title[:60]!r}")
                 continue
             sources = _valid_sources(item.get("sources"), allowed)
             if sources:  # drop items whose citations failed the allowlist
-                kept.append({"title": title, "latest_developments": latest,
-                             "summary": summary, "sources": sources})
+                entry = {"title": title, "latest_developments": latest,
+                         "why_it_matters": why, "details": details, "sources": sources}
+                if summary and not why:
+                    entry["summary"] = summary
+                kept.append(entry)
         cap = SECTION_CAPS.get(key, 12)
         if len(kept) > cap:
             print(f"  local: {key} over its cap of {cap}; dropped "
@@ -1431,7 +1493,7 @@ Grouping and linking rules:
 - Each entry's "links" is a list of {{"anchor","phrase"}}. "anchor" is copied EXACTLY from a STORIES item. "phrase" is a distinctive 1-3 word substring that appears VERBATIM (same characters) inside THIS entry's "text" — a named entity, vendor, CVE, place, team, or company, never a generic word like "the", "security", or "update". The phrases within one entry must be different substrings and must not overlap.
 - NEVER link the same anchor more than once in the WHOLE list. Every story appears at most once, in the single entry where it fits best. It is fine to leave stories unlinked — do not force coverage.
 - Keep it short: roughly 3 to 6 entries total. Order most important first: biggest themes, then the most notable updates.
-- Each "text" is ONE flowing plain-text sentence, at most ~28 words, no "Trend:"/"Update:" prefix, no markdown, no bullet. Be concrete: name the actors, vendors, CVEs, companies, places, teams.
+- Each "text" is ONE flowing plain-text sentence, at most ~25 words, in Axios Smart Brevity style (short words, strong active verbs, specific numbers), no "Trend:"/"Update:" prefix, no markdown, no bullet. Be concrete: name the actors, vendors, CVEs, companies, places, teams.
 
 Respond with ONLY a JSON object (no markdown fences, no commentary) in exactly this shape:
 {{"entries": [{{"kind": "Trend", "text": "one flowing sentence", "links": [{{"anchor": "<id from STORIES>", "phrase": "verbatim substring of text"}}]}}]}}
@@ -1593,6 +1655,11 @@ PAGE_CSS = """
   p { margin: 0.5rem 0; }
   a { color: inherit; }
   .updated { font-style: italic; }
+  /* Smart Brevity story body: lede, bolded "Why it matters", labeled details */
+  .lede { margin: 0.35rem 0; }
+  .why { margin: 0.35rem 0; }
+  ul.axioms { margin: 0.35rem 0; }
+  ul.axioms li { margin: 0.25rem 0; }
   details.more summary { cursor: pointer; opacity: 0.8; font-size: 0.85rem; }
   details.more[open] summary { margin-bottom: 0.25rem; }
   /* Sections folded away by default (reading, markets, feed health). The h2
@@ -1674,6 +1741,25 @@ def _sources_html(sources):
             '<a class="totop" href="#top">↑ top</a></p>')
 
 
+def _brevity_html(item):
+    """Smart Brevity body: the lede, a bolded "Why it matters", the labeled
+    details, and (for records written before the format) the legacy summary
+    folded under "read more"."""
+    out = [f'<p class="lede">{esc(item.get("latest_developments", ""))}</p>']
+    if item.get("why_it_matters"):
+        out.append('<p class="why"><strong>Why it matters:</strong> '
+                   f'{esc(item["why_it_matters"])}</p>')
+    details = [d for d in (item.get("details") or []) if isinstance(d, dict)]
+    if details:
+        out.append('<ul class="axioms">' + "".join(
+            f'<li><strong>{esc(d.get("label", ""))}:</strong> {esc(d.get("text", ""))}</li>'
+            for d in details) + "</ul>")
+    if item.get("summary") and not item.get("why_it_matters") and not details:
+        out.append(f'<details class="more"><summary>read more</summary>'
+                   f'<p>{esc(item["summary"])}</p></details>')
+    return out
+
+
 def _local_items_html(items, level=4):
     """Render local items like security topics: title, latest-developments line,
     a collapsible summary, and sources. `level` is the heading level, chosen by
@@ -1684,11 +1770,7 @@ def _local_items_html(items, level=4):
         anchor = item.get("_anchor")
         idattr = f' id="{esc(anchor)}"' if anchor else ""
         out.append(f'<{tag}{idattr}>{esc(item.get("title", ""))}</{tag}>')
-        out.append('<p class="updated">Latest developments: '
-                   f'{esc(item.get("latest_developments", ""))}</p>')
-        if item.get("summary"):
-            out.append(f'<details class="more"><summary>read more</summary>'
-                       f'<p>{esc(item["summary"])}</p></details>')
+        out += _brevity_html(item)
         out.append(_sources_html(item.get("sources")))
     return out
 
@@ -1777,11 +1859,7 @@ def _security_inner(digest):
             meta.append("[" + esc(", ".join(topic["tags"])) + "]")
         if meta:
             out.append(f'<p class="tags">{" &middot; ".join(meta)}</p>')
-        out.append('<p class="updated">Latest developments: '
-                   f'{esc(topic.get("latest_developments", ""))}</p>')
-        if topic.get("summary"):
-            out.append(f'<details class="more"><summary>read more</summary>'
-                       f'<p>{esc(topic["summary"])}</p></details>')
+        out += _brevity_html(topic)
         if topic.get("sources"):
             out.append(_sources_html(topic["sources"]))
     return out
@@ -2054,12 +2132,25 @@ def _text_sources(sources, indent):
     return out
 
 
+def _text_brevity(item, indent):
+    """Plain-text Smart Brevity body: lede, why it matters, labeled details, and
+    the legacy summary for records written before the format."""
+    out = [_fill(item.get("latest_developments", ""), indent)]
+    if item.get("why_it_matters"):
+        out.append(_fill(f"Why it matters: {item['why_it_matters']}", indent))
+    details = [d for d in (item.get("details") or []) if isinstance(d, dict)]
+    for d in details:
+        out.append(_fill(f"{d.get('label', '')}: {d.get('text', '')}",
+                         indent + "- ", indent + "  "))
+    if item.get("summary") and not item.get("why_it_matters") and not details:
+        out.append(_fill(item["summary"], indent))
+    return out
+
+
 def _text_local_item(item):
-    """Plain-text lines for one local item: title, developments, summary, sources."""
-    out = [_fill(item.get("title", ""), "* ", "  "),
-           _fill(f"Latest developments: {item.get('latest_developments', '')}", "  ")]
-    if item.get("summary"):
-        out.append(_fill(item["summary"], "  "))
+    """Plain-text lines for one local item: title, Smart Brevity body, sources."""
+    out = [_fill(item.get("title", ""), "* ", "  ")]
+    out += _text_brevity(item, "  ")
     out += _text_sources(item.get("sources"), "  ")
     return out
 
@@ -2142,9 +2233,7 @@ def render_text(digest, local, markets, weather, sports, feeds, generated_at,
             meta.append(f"[{', '.join(topic['tags'])}]")
         if meta:
             lines.append(_fill(" · ".join(meta), "   "))
-        lines.append(_fill(f"Latest developments: {topic.get('latest_developments', '')}", "   "))
-        if topic.get("summary"):
-            lines.append(_fill(topic["summary"], "   "))
+        lines += _text_brevity(topic, "   ")
         lines += _text_sources(topic.get("sources"), "   ")
 
     if biz:
@@ -2334,6 +2423,13 @@ def write_site(digest, local, markets, weather, sports, feeds, items_count, wind
     _atomic_write(SITE_DIR / "data" / f"{today}.json", record_json)
     _atomic_write(SITE_DIR / "index.html", index_html)
     _atomic_write(SITE_DIR / "digest.txt", text)
+    # One story per screen for the PaperS3 reader (devices/papers3/). A failure
+    # here must never cost the site its run, so it only logs.
+    try:
+        edition = f"{_display_date(today)}, {generated_time}"
+        _atomic_write(SITE_DIR / "paper.txt", paper.render_paper(record, edition))
+    except Exception as exc:  # noqa: BLE001 - optional output
+        print(f"  paper.txt not written: {type(exc).__name__}: {exc}")
     _atomic_write(SITE_DIR / "archive" / f"{stamp}.html", archive_html)
     _atomic_write(SITE_DIR / "archive" / f"{stamp}.txt", text)
     prune_old_archives(today, ARCHIVE_RETENTION_DAYS)  # before the index, so it reflects the prune
