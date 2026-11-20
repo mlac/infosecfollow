@@ -1,23 +1,23 @@
 {
   "date": "2026-11-20",
-  "headline": "A suspected Chinese espionage group held a VMware vCenter zero-day for more than two months before Broadcom shipped a fix, while another China-linked crew turned the Cairn AI framework loose on two universities and it surfaced a zero-day of its own.",
+  "headline": "China-linked Armory Castle burned a VMware vCenter zero-day for two months while AI frameworks found fresh bugs on their own.",
   "emerging_trends": [
     {
-      "text": "Offensive AI frameworks have crossed from automating known attack steps into finding new bugs, with Cairn surfacing an apparent zero-day in a medical imaging application and Artex serving as the way into the European Commission.",
+      "text": "Attackers now run AI frameworks like Cairn to find unknown bugs and seize servers with little human direction, collapsing discovery and exploitation into one step.",
       "topic_title": "Cairn Finds a Zero-Day in a Medical Imaging App",
       "link_phrase": "Cairn",
       "_anchor": "trend-1"
     },
     {
-      "text": "Suppliers now carry the breach for everyone downstream, as the N0n extortion group's leak pushed JPMorgan, Visa, and Mastercard to point at third-party providers, N-able traced a worldwide mail outage to an attacker on one of its servers, and 40-plus Irish credit unions filed notifications over Wellington IT.",
+      "text": "Third-party providers drove the day's largest exposures, with JPMorgan, Visa, Mastercard, N-able, and dozens of Irish credit unions all tracing damage to suppliers.",
       "topic_title": "N0n Leak Pulls In JPMorgan, Visa, and Mastercard",
-      "link_phrase": "N0n",
+      "link_phrase": "JPMorgan",
       "_anchor": "trend-2"
     },
     {
-      "text": "Network edge gear absorbs the week's pressure from both directions: F5 rushed emergency BIG-IP fixes, attackers took Cisco Expressway clusters days after a proof of concept went public, and SonicWall told Gen 6 owners to junk the hardware because automated scanning finds unsupported devices faster than owners can defend them.",
+      "text": "Edge and virtualization layers took the heaviest fire today, from BIG-IP and Expressway patches to a KVM flaw that leaked a host's memory.",
       "topic_title": "F5, Ruby, and SonicWall Force an Edge Patch Cycle",
-      "link_phrase": "SonicWall",
+      "link_phrase": "BIG-IP",
       "_anchor": "trend-3"
     }
   ],
@@ -25,8 +25,14 @@
     {
       "title": "Armory Castle Owns the vCenter Zero-Day",
       "area": "Nation-State Activity",
-      "latest_developments": "Google Threat Intelligence Group attributed the zero-day exploitation of CVE-2026-123890 to Armory Castle, the suspected China-nexus espionage group formerly tracked as UNC5221, which has used the authentication bypass since at least early September 2026—more than two months before Broadcom released a fix—to take administrative sessions on vCenter Server and steal data.",
-      "summary": "CVE-2026-123890, rated 9.8, lets a remote, unauthenticated attacker bypass authentication in the VMware Directory Service and seize vCenter, the console that manages an organization's ESX hosts and virtual machines. Broadcom has shipped fixed builds for every supported branch and lists no workaround, so patch now and hunt for September activity.",
+      "latest_developments": "Google Threat Intelligence Group pinned zero-day exploitation of CVE-2026-123890 on Armory Castle, the China-nexus group formerly tracked as UNC5221, which took vCenter administrator sessions since early September 2026.",
+      "why_it_matters": "vCenter manages an organization's ESX hosts and virtual machines, so one authentication bypass rated 9.8 hands an unauthenticated attacker the whole virtual estate.",
+      "details": [
+        {
+          "label": "What to do",
+          "text": "Broadcom shipped fixed builds for every supported branch and lists no workaround. Patch now, then hunt for intrusion activity reaching back to September."
+        }
+      ],
       "tags": [
         "zero-day",
         "apt",
@@ -59,8 +65,18 @@
     {
       "title": "SBC Medical Group Count Passes 2 Million",
       "area": "Data Breaches",
-      "latest_developments": "SBC Medical Group raised its count past 2 million people after threat actors reached databases holding customer information tied to its clinics in Japan, N-able attributed the worldwide outage of its Mail Assure and SpamExperts Hosted Cloud to attackers who breached one of its servers and may have taken customer credentials, Transport for London said it spotted suspicious activity on its photocard site on November 16, 2026 and took the system offline, and Ireland's Data Protection Commission said it has received more than 40 breach notifications from credit unions that used the Belfast company Wellington IT as a data processor, a compromise that ran six weeks before anyone noticed.",
-      "summary": "SBC Medical Group told the United States Securities and Exchange Commission that two incidents exposed customer and employee data; the Transport for London breach touches roughly 265,000 Oyster photocard holders, among them children with Zip cards and Londoners holding the 60+ London Oyster photocard. N-able customers should rotate credentials used with the hosted mail services.",
+      "latest_developments": "SBC Medical Group raised its breach count past 2 million people, and N-able blamed its worldwide Mail Assure and SpamExperts outage on attackers who breached a server.",
+      "why_it_matters": "Supplier compromises drive the day's biggest exposures, reaching clinic patients, credit union members, and transit riders who never dealt with the breached company.",
+      "details": [
+        {
+          "label": "By the numbers",
+          "text": "Transport for London pulled its photocard site offline on November 16, 2026. Roughly 265,000 Oyster photocard holders may have lost account details."
+        },
+        {
+          "label": "What to do",
+          "text": "Rotate every credential used with N-able's hosted mail services. Ireland's Data Protection Commission has logged more than 40 credit union notifications tied to Belfast-based Wellington IT."
+        }
+      ],
       "tags": [
         "breach",
         "healthcare",
@@ -93,8 +109,14 @@
     {
       "title": "F5, Ruby, and SonicWall Force an Edge Patch Cycle",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "F5 issued emergency patches for five critical BIG-IP flaws that attackers can drive into denial of service or remote code execution, Ruby fixed CVE-2026-132825, a heap-based buffer overflow that researchers call Ruby2Shell and that can carry an attacker to code execution, and SonicWall told every Gen 6 firewall owner to retire the hardware immediately because automated, AI-assisted scanning finds unsupported edge devices faster than ever.",
-      "summary": "BIG-IP sits in front of corporate applications, Ruby runs the web stack behind many of them, and SonicOS 6.x now receives no firmware or security updates at any severity. Patch BIG-IP and Ruby, and pull Gen 6 and Gen 6.5 appliances off the internet edge.",
+      "latest_developments": "F5 shipped emergency patches for five critical BIG-IP flaws, Ruby fixed the Ruby2Shell heap overflow CVE-2026-132825, and SonicWall told Gen 6 firewall owners to retire the hardware immediately.",
+      "why_it_matters": "BIG-IP fronts corporate applications, and SonicOS 6.x now receives no fixes at any severity while AI-assisted scanning finds unsupported edge devices faster than ever.",
+      "details": [
+        {
+          "label": "What to do",
+          "text": "Patch BIG-IP and upgrade Ruby. Pull Gen 6 and Gen 6.5 appliances off the internet edge and replace them."
+        }
+      ],
       "tags": [
         "patch",
         "zero-day",
@@ -122,8 +144,18 @@
     {
       "title": "Cairn Finds a Zero-Day in a Medical Imaging App",
       "area": "AI Security",
-      "latest_developments": "Amazon's threat intelligence researchers reported that a China-linked threat actor drove Cairn, the open-source AI penetration-testing framework, through persistent attacks on two universities, and that in one case the tool turned up a previously unknown vulnerability in a medical imaging application and took over the server.",
-      "summary": "Cairn chains reconnaissance, exploitation, and follow-on actions with little human direction, and it joins Artex, CyberStrikeAI, and PentAGI as frameworks state-backed crews already run operationally. Defenders should expect bug discovery at machine speed against niche applications that no vendor patch cycle covers quickly, and watch internet-facing clinical and research software closely.",
+      "latest_developments": "Amazon researchers said a China-linked actor ran the open-source AI framework Cairn against two universities, where it found an unknown flaw in a medical imaging application.",
+      "why_it_matters": "Bug discovery at machine speed now hits niche internet-facing software, where no vendor patch cycle moves fast enough to protect clinical and research systems.",
+      "details": [
+        {
+          "label": "Zoom in",
+          "text": "Cairn chains reconnaissance, exploitation, and follow-on actions with little human direction, and the operator used it to take over the imaging server."
+        },
+        {
+          "label": "The big picture",
+          "text": "Cairn joins Artex, CyberStrikeAI, and PentAGI as frameworks state-backed crews already run operationally."
+        }
+      ],
       "tags": [
         "ai",
         "zero-day",
@@ -144,34 +176,16 @@
       "_anchor": "i-0abe422151"
     },
     {
-      "title": "European Commission Confirms an AI-Assisted Intrusion",
-      "area": "AI Security",
-      "latest_developments": "Commission spokesperson Thomas Regnier confirmed the attack at Thursday's midday press briefing in Brussels, saying the intruders misused a publicly available AI tool, that the Commission pulled several applications offline to contain the incident, and that it has found no evidence anyone took data.",
-      "summary": "CERT-EU, the computer emergency response team for the European Union institutions, identified the attackers' tool as Artex, the open-source AI hacking platform the FBI warned about in the hands of criminals and state-sponsored groups. Reporters pressed Regnier on which systems went down and whether staff data moved, and he confined himself to the containment steps.",
-      "tags": [
-        "ai",
-        "breach",
-        "government"
-      ],
-      "sources": [
-        {
-          "source": "SecurityWeek",
-          "title": "European Commission Confirms AI-Assisted Cyberattack Disrupted Services",
-          "url": "https://www.securityweek.com/european-commission-confirms-ai-assisted-cyberattack-disrupted-services/"
-        },
-        {
-          "source": "Help Net Security",
-          "title": "European Commission confirms AI-generated cyberattack disrupted its systems",
-          "url": "https://www.helpnetsecurity.com/2026/11/20/european-commission-ai-generated-cyberattack-publicly-available-tool/"
-        }
-      ],
-      "_anchor": "i-2be32b97a1"
-    },
-    {
       "title": "N0n Leak Pulls In JPMorgan, Visa, and Mastercard",
       "area": "Data Breaches",
-      "latest_developments": "J.P. Morgan Chase warned customers that a cyberattack at a third-party service provider exposed their personal information and marketing data, hardening what began as a claim by the N0n extortion group, which published data it says belongs to customers of JPMorgan, Visa, and Mastercard; all three companies attribute the exposure to outside providers.",
-      "summary": "N0n runs a leak-site extortion operation and has now named three of the largest names in American finance and card payments. Banks and card networks should map which vendors hold cardholder and account records and demand incident timelines from them.",
+      "latest_developments": "J.P. Morgan Chase told customers that a cyberattack at a third-party service provider exposed their personal information and marketing data, confirming part of the N0n extortion group's leak.",
+      "why_it_matters": "N0n has named three of the largest American finance and card payment brands, and all three point outward to providers holding cardholder and account records.",
+      "details": [
+        {
+          "label": "What to do",
+          "text": "Map which vendors hold cardholder and account data, then demand an incident timeline and scope from each one."
+        }
+      ],
       "tags": [
         "breach",
         "extortion",
@@ -194,8 +208,18 @@
     {
       "title": "ROMULUS ClickFix Delivers a New Remote Access Trojan",
       "area": "Ransomware and Cybercrime",
-      "latest_developments": "Blackpoint researchers reported that the ROMULUS ClickFix platform now drops a previously undocumented remote access trojan that spies on users and controls their PCs, and that ROMULUS runs as a delivery service pushing CNCMachineRMS and Legion Loader through separate chains; the Dutch firm ThreatFabric separately disclosed Bazuka, an Android malware framework it found in late October 2026 while investigating an NFC-relay banking trojan, which wires a large language model into victim management and hides credential theft behind fake screen overlays.",
-      "summary": "ClickFix lures a user into pasting a command that supposedly fixes a broken page, and ROMULUS pairs that trick with signed binary sideloading to get its payloads past endpoint controls. The new trojan resembles CNCMachineRMS; defenders should block clipboard-to-run-dialog behavior and audit which signed binaries load unexpected libraries.",
+      "latest_developments": "Blackpoint reported that the ROMULUS ClickFix platform now drops a previously undocumented remote access trojan resembling CNCMachineRMS, which spies on users and controls their PCs.",
+      "why_it_matters": "ClickFix turns the victim into the installer, and ROMULUS pairs that trick with signed binary sideloading that walks payloads past endpoint controls.",
+      "details": [
+        {
+          "label": "Zoom in",
+          "text": "ThreatFabric disclosed Bazuka, an Android malware framework it found in late October 2026 that wires a large language model into victim management and hides credential theft behind fake overlays."
+        },
+        {
+          "label": "What to do",
+          "text": "Block clipboard-to-run-dialog behavior and audit which signed binaries load unexpected libraries."
+        }
+      ],
       "tags": [
         "malware",
         "social-engineering",
@@ -216,10 +240,50 @@
       "_anchor": "i-ba74506a96"
     },
     {
+      "title": "European Commission Confirms an AI-Assisted Intrusion",
+      "area": "AI Security",
+      "latest_developments": "Commission spokesperson Thomas Regnier confirmed at Thursday's midday briefing in Brussels that intruders misused a publicly available AI tool, forcing the Commission to pull several applications offline.",
+      "why_it_matters": "An off-the-shelf AI hacking tool worked against the European Union's executive arm, which moved services offline despite running its own emergency response team.",
+      "details": [
+        {
+          "label": "Zoom in",
+          "text": "CERT-EU identified the tool as Artex, the open-source AI hacking platform the FBI warned about in the hands of criminals and state-sponsored groups."
+        },
+        {
+          "label": "What they're saying",
+          "text": "Regnier told reporters the Commission has found no evidence anyone took data, and he declined to say which systems went down."
+        }
+      ],
+      "tags": [
+        "ai",
+        "breach",
+        "government"
+      ],
+      "sources": [
+        {
+          "source": "SecurityWeek",
+          "title": "European Commission Confirms AI-Assisted Cyberattack Disrupted Services",
+          "url": "https://www.securityweek.com/european-commission-confirms-ai-assisted-cyberattack-disrupted-services/"
+        },
+        {
+          "source": "Help Net Security",
+          "title": "European Commission confirms AI-generated cyberattack disrupted its systems",
+          "url": "https://www.helpnetsecurity.com/2026/11/20/european-commission-ai-generated-cyberattack-publicly-available-tool/"
+        }
+      ],
+      "_anchor": "i-2be32b97a1"
+    },
+    {
       "title": "Cisco Expressway Falls to a Public Proof of Concept",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Attackers exploited CVE-2026-76466, the Cisco Expressway flaw rated 9.8, within days of a public proof of concept, breaching four clustered devices at a Russian organization, reaching the internal network, and staging tooling for lateral movement.",
-      "summary": "Expressway carries video calls and collaboration traffic at the network edge, and the bug hands an unauthenticated attacker with network access a way past authentication. Patch every node, then inspect clustered peers for attacker tooling, because compromising one member of a cluster exposes the rest.",
+      "latest_developments": "Attackers exploited CVE-2026-76466, the Cisco Expressway flaw rated 9.8, within days of a public proof of concept, breaching four clustered devices at a Russian organization.",
+      "why_it_matters": "Expressway carries video and collaboration traffic at the network edge, and the attackers reached the internal network and staged tooling for lateral movement.",
+      "details": [
+        {
+          "label": "What to do",
+          "text": "Patch every node, then inspect clustered peers for attacker tooling, because compromising one cluster member exposes the rest."
+        }
+      ],
       "tags": [
         "exploitation",
         "patch"
@@ -234,28 +298,16 @@
       "_anchor": "i-c9ddefa65f"
     },
     {
-      "title": "Cairncross Leaves the White House Cyber Post",
-      "area": "Policy and Regulation",
-      "latest_developments": "Sean Cairncross is leaving the White House as national cyber director, and Kirsten Davies, the Pentagon's chief information officer, takes the job in an acting capacity as the administration resets its cyber leadership.",
-      "summary": "The Office of the National Cyber Director writes federal cyber strategy, coordinates agencies, and speaks for the White House to industry on incidents and regulation. The handoff lands while President Trump's pick to run the Cybersecurity and Infrastructure Security Agency, LoSapio, still awaits Senate confirmation, leaving both top civilian cyber roles unsettled.",
-      "tags": [
-        "policy",
-        "government"
-      ],
-      "sources": [
-        {
-          "source": "The Record",
-          "title": "Cyber Director Cairncross out as White House resets cyber leadership",
-          "url": "https://therecord.media/sean-cairncross-out-as-national-cyber-director"
-        }
-      ],
-      "_anchor": "i-57375f482c"
-    },
-    {
       "title": "Linux KVM Hands Guests the Host's Memory",
       "area": "Vulnerabilities and Exploits",
-      "latest_developments": "Researchers used CVE-2026-99312, a flaw in KVM, the hypervisor built into the Linux kernel, to read roughly 127 gigabytes of a DigitalOcean server's memory from inside a virtual machine of their own, which on a shared host can include other customers' virtual machines.",
-      "summary": "The flaw reaches only hosts running AMD processors with nested virtualization turned on, and fixed kernels have shipped. Cloud operators and anyone running their own KVM hypervisors should roll out the patched kernels and turn off nested virtualization where no workload needs it.",
+      "latest_developments": "Researchers used CVE-2026-99312 in KVM, the hypervisor built into the Linux kernel, to read about 127 gigabytes of a DigitalOcean server's memory from inside their own virtual machine.",
+      "why_it_matters": "On a shared host, that memory can hold other customers' virtual machines, which breaks the tenant boundary cloud customers pay for.",
+      "details": [
+        {
+          "label": "What to do",
+          "text": "The flaw reaches only AMD hosts with nested virtualization enabled. Roll out the fixed kernels and turn nested virtualization off where no workload needs it."
+        }
+      ],
       "tags": [
         "cloud",
         "patch"
@@ -268,6 +320,30 @@
         }
       ],
       "_anchor": "i-f80afcc478"
+    },
+    {
+      "title": "Cairncross Leaves the White House Cyber Post",
+      "area": "Policy and Regulation",
+      "latest_developments": "Sean Cairncross is leaving the White House as national cyber director, and Kirsten Davies, the Pentagon's chief information officer, takes the job in an acting capacity.",
+      "why_it_matters": "The Office of the National Cyber Director writes federal cyber strategy and speaks for the White House to industry on incidents and regulation.",
+      "details": [
+        {
+          "label": "Between the lines",
+          "text": "The handoff lands while President Trump's pick to run the Cybersecurity and Infrastructure Security Agency, LoSapio, still awaits Senate confirmation, leaving both top civilian cyber jobs unsettled."
+        }
+      ],
+      "tags": [
+        "policy",
+        "government"
+      ],
+      "sources": [
+        {
+          "source": "The Record",
+          "title": "Cyber Director Cairncross out as White House resets cyber leadership",
+          "url": "https://therecord.media/sean-cairncross-out-as-national-cyber-director"
+        }
+      ],
+      "_anchor": "i-57375f482c"
     }
   ],
   "markets": [
@@ -353,9 +429,71 @@
   "local": {
     "business_politics": [
       {
+        "title": "Citi Undercounted $35 Billion in Britain",
+        "latest_developments": "Citigroup undercounted $35 billion in risk-weighted assets at its United Kingdom subsidiary, the Wall Street Journal reported Friday, November 20, a setback for Chief Executive Jane Fraser's controls push.",
+        "why_it_matters": "Risk-weighted assets set regulatory capital requirements, so a miscount of that size invites fresh scrutiny from British supervisors and renews doubts about the bank's internal reporting.",
+        "details": [
+          {
+            "label": "The big picture",
+            "text": "Fraser has spent years trying to repair the data and controls failures that already drew regulatory penalties at Citigroup."
+          }
+        ],
+        "sources": [
+          {
+            "source": "WSJ Markets",
+            "title": "Citi Undercounted $35 Billion in Assets at U.K. Subsidiary",
+            "url": "https://www.wsj.com/finance/banking/citi-undercounted-35-billion-in-assets-at-u-k-subsidiary-f8328559?mod=rss_markets_main"
+          }
+        ],
+        "_anchor": "i-08c6ebe728"
+      },
+      {
+        "title": "Burnham Signs a Post-Brexit Reset With Brussels",
+        "latest_developments": "Prime Minister Andy Burnham signed trade and youth mobility agreements with the European Union in Brussels Friday, November 20, his first step toward a closer post-Brexit relationship.",
+        "why_it_matters": "British exporters and universities gain clearer rules, and the agreement reopens a political fight over whether the United Kingdom moves back toward European Union membership.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "A dispute over lower tuition fees for European students nearly derailed the summit. The two sides delayed that decision until next year."
+          },
+          {
+            "label": "What they're saying",
+            "text": "European Council President Antonio Costa said the bloc stays open to the \"closest possible relationship\" and will respect whatever Britain decides."
+          }
+        ],
+        "sources": [
+          {
+            "source": "FT Home",
+            "title": "Andy Burnham begins to undo Brexit with landmark EU deal",
+            "url": "https://www.ft.com/content/334b5f12-4344-4680-be04-a7554120ec60?syn-25a6b1a6=1"
+          },
+          {
+            "source": "FT World",
+            "title": "UK universities relieved as EU tuition fees decision delayed until next year",
+            "url": "https://www.ft.com/content/77cb4ec6-4f03-4328-b566-0f1fd74b81ae?syn-25a6b1a6=1"
+          },
+          {
+            "source": "WSJ World News",
+            "title": "EU Open to 'Closest Possible Relationship' With U.K., Chief Says",
+            "url": "https://www.wsj.com/world/europe/eu-open-to-closest-possible-relationship-with-u-k-chief-says-f2206559?mod=rss_worldnews"
+          }
+        ],
+        "_anchor": "i-b8da9a24e5"
+      },
+      {
         "title": "The AI Selloff Deepens and Metals Break Down",
-        "latest_developments": "The rout carried the S&P 500 and the Dow industrials into correction territory Friday, November 20, Anthropic shares fell as much as 13% a day after the stock's debut, gold and silver hit their lowest prices in more than a year, and crude headed for a third straight weekly loss as the dollar edged lower.",
-        "summary": "Anthropic's record $81 billion initial public offering, priced at $83 a share and up 17% on its first Nasdaq session Thursday, November 19, failed to steady the artificial-intelligence trade: the Nikkei dropped 2.9% behind chip and metals shares, European AI names fell sharply, and the S&P 500 now runs its longest losing streak since 2020. Traders betting on tighter Federal Reserve policy drove gold and silver down, overwhelming the usual safe-haven bid, which leaves banks and asset managers marking losses across both the AI equity complex and the metals hedge against it.",
+        "latest_developments": "The technology selloff dragged the S&P 500 and Dow industrials into correction territory Friday, November 20, and Anthropic shares fell as much as 13% one day after the stock's debut.",
+        "why_it_matters": "Banks and asset managers now mark losses across artificial-intelligence equities and the metals hedge against them, with United States stocks tracking one of their worst years in two decades.",
+        "details": [
+          {
+            "label": "By the numbers",
+            "text": "Gold and silver hit their lowest prices in more than a year, and crude headed for a third straight weekly loss."
+          },
+          {
+            "label": "Between the lines",
+            "text": "Bets on tighter Federal Reserve policy overwhelmed the usual safe-haven bid for metals."
+          }
+        ],
         "sources": [
           {
             "source": "WSJ Markets",
@@ -392,8 +530,18 @@
       },
       {
         "title": "Washington Clears Advanced AI Chips for China",
-        "latest_developments": "Senator Tom Cotton of Arkansas told the Wall Street Journal Friday, November 20, that Commerce Secretary Howard Lutnick repeatedly ignored his warnings that Nvidia chips were reaching China through smugglers, and President Trump said the same day that American companies building artificial-intelligence data centers abroad will pay \"a tremendous tax.\"",
-        "summary": "The Financial Times reported Friday, November 20, that the United States approved sales of advanced artificial-intelligence chips to Chinese companies, which cuts against the Commerce Department rule issued Monday, November 16, that tightened shipments of Nvidia and other American chips to China and pushed Taiwan Semiconductor Manufacturing Company and Samsung Electronics to suspend some Chinese orders. Export policy now swings in both directions inside one week, which scrambles revenue forecasts for the chipmakers and the trade financing built around them.",
+        "latest_developments": "Senator Tom Cotton told the Wall Street Journal Friday, November 20, that Commerce Secretary Howard Lutnick repeatedly ignored his warnings that Nvidia chips were reaching China through smugglers.",
+        "why_it_matters": "Export policy swung both ways inside one week, which scrambles revenue forecasts for the chipmakers and the trade financing built around them.",
+        "details": [
+          {
+            "label": "The big picture",
+            "text": "The Financial Times reported Friday, November 20, that the United States approved sales of advanced artificial-intelligence chips to Chinese companies, days after the Commerce Department tightened shipments."
+          },
+          {
+            "label": "What's next",
+            "text": "President Trump said Friday that American companies building artificial-intelligence data centers abroad will pay \"a tremendous tax.\""
+          }
+        ],
         "sources": [
           {
             "source": "FT World",
@@ -421,7 +569,13 @@
       {
         "title": "The Senate Passes a Permitting Overhaul",
         "latest_developments": "The Senate passed bipartisan permitting legislation Thursday, November 19, and sent it to the House, the first major act of Congress since the midterm elections.",
-        "summary": "The bill speeds federal permitting reviews for power plants, transmission lines, mining, and other energy infrastructure and makes data centers pay for the energy costs they add, and it split Democrats who argue it weakens environmental protection laws. Surging data center demand now drives load growth across the American grid, and the measure aims at both new supply and lower electricity prices for consumers.",
+        "why_it_matters": "Faster federal reviews for power plants and transmission lines aim to lower electricity prices, and data centers would pay for the energy costs they add.",
+        "details": [
+          {
+            "label": "Between the lines",
+            "text": "The bill split Democrats who argue it weakens environmental protection laws. Surging data center demand drives load growth across the American grid."
+          }
+        ],
         "sources": [
           {
             "source": "WSJ US Business",
@@ -443,8 +597,18 @@
       },
       {
         "title": "Russia Hits Kyiv's Bridges",
-        "latest_developments": "Russian missiles and drones hammered targets across Ukraine overnight into Friday, November 20, damaging bridges in Kyiv after Vladimir Putin vowed retaliation for this week's Ukrainian strike on the Crimean bridge, and the Financial Times reported the same day that United States officials want an agreement between Putin and President Volodymyr Zelenskyy signed before Democrats take over Congress in January.",
-        "summary": "The barrage followed the first meeting ever to put President Trump, Xi Jinping, and Vladimir Putin in one room, which closed Thursday, November 19, in Shenzhen with a joint denunciation of nuclear war and no breakthrough on Ukraine. Trump's envoys, among them Jared Kushner, have discussed giving Ukraine NATO membership in exchange for surrendering territory in the Donbas, a reversal of longstanding United States policy, and the renewed strikes on the Ukrainian capital show Putin pressing his terms.",
+        "latest_developments": "Russian missiles and drones struck targets across Ukraine overnight into Friday, November 20, damaging bridges in Kyiv after Vladimir Putin vowed retaliation for Ukraine's strike on the Crimean bridge.",
+        "why_it_matters": "Putin is pressing his terms while Washington hunts a deal, which leaves Ukraine's infrastructure and Europe's security planning exposed through the winter.",
+        "details": [
+          {
+            "label": "What's next",
+            "text": "The Financial Times reported Friday, November 20, that United States officials want an agreement between Putin and President Volodymyr Zelenskyy signed before Democrats take over Congress in January."
+          },
+          {
+            "label": "Zoom in",
+            "text": "Trump's envoys, among them Jared Kushner, discussed NATO membership for Ukraine in exchange for surrendering territory in the Donbas, a reversal of longstanding United States policy."
+          }
+        ],
         "sources": [
           {
             "source": "FT World",
@@ -477,9 +641,48 @@
     ],
     "business": [
       {
+        "title": "Daurora Takes the Helm at Leadership Pittsburgh",
+        "latest_developments": "Jennifer Daurora runs Leadership Pittsburgh Inc. as president and chief executive, WPXI reported Friday, November 20, after she joined the organization earlier this year.",
+        "why_it_matters": "The organization trains the region's business, nonprofit, and civic leaders through cohort programs, so its new chief shapes who fills Pittsburgh's leadership pipeline.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "Daurora worked at her family's business, served a prior stint on the board, and graduated from the organization's Leadership Development Initiative."
+          }
+        ],
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Jennifer Daurora went from working at family's business to developing local leadership pipeline",
+            "url": "https://www.wpxi.com/news/local/jennifer-daurora-went-working-familys-business-developing-local-leadership-pipeline/ACJTGF4IQRCFPPIZFMEDRNRKZU/"
+          }
+        ],
+        "_anchor": "i-4654e8e2b1"
+      },
+      {
+        "title": "Pitt's Innovation Office Wins National Award",
+        "latest_developments": "The University of Pittsburgh announced this week that its Office of Innovation and Entrepreneurship won a national innovation award, WPXI reported Friday, November 20.",
+        "why_it_matters": "Pitt's commercialization arm anchors the region's startup pipeline, and national recognition raises its profile with founders and investors.",
+        "details": [],
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pitt Office of Innovation and Entrepreneurship wins national innovation award",
+            "url": "https://www.wpxi.com/news/local/pitt-office-innovation-entrepreneurship-wins-national-innovation-award/GTYCAFRTRZFVVK6VLKXBLX27TU/"
+          }
+        ],
+        "_anchor": "i-cd95679c9b"
+      },
+      {
         "title": "Beam Takes Over UPMC's Hospital Division",
         "latest_developments": "Alison Beam becomes acting president of UPMC's Health Services division, the system's hospital arm, TribLive reported Friday, November 20, as UPMC opens a search for a permanent president.",
-        "summary": "Beam served as acting Pennsylvania health secretary during part of the covid-19 pandemic and now runs the division that operates the hospitals of UPMC, the Pittsburgh nonprofit that anchors health care employment across Western Pennsylvania. The interim appointment puts the system's largest business under temporary leadership while the search runs.",
+        "why_it_matters": "UPMC anchors health care employment across Western Pennsylvania, and its largest business now runs under interim leadership while the search proceeds.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "Beam served as acting Pennsylvania health secretary during part of the covid-19 pandemic."
+          }
+        ],
         "sources": [
           {
             "source": "TribLive",
@@ -492,7 +695,8 @@
       {
         "title": "ShadoBeni Closes on the North Side",
         "latest_developments": "ShadoBeni, the North Side restaurant that served vegan Trinidadian food, has closed for good and blamed rising costs, WPXI reported Friday, November 20.",
-        "summary": "The restaurant built a following on Pittsburgh's North Side around Trinidadian cooking without meat or dairy. Its owners cited the cost of operating as the reason for shutting the doors permanently.",
+        "why_it_matters": "Pittsburgh loses one of its few vegan Caribbean kitchens, another independent restaurant squeezed out by the cost of operating.",
+        "details": [],
         "sources": [
           {
             "source": "WPXI",
@@ -504,8 +708,14 @@
       },
       {
         "title": "Rice and Sheehan Take the CBS Buyout",
-        "latest_developments": "TribLive's TV Talk reported Friday, November 20, that KDKA-TV anchor Ken Rice and investigative reporter Andy Sheehan accepted the voluntary buyout CBS offered employees this week and will leave the station.",
-        "summary": "Rice anchors KDKA-TV's 5, 6, and 11 p.m. newscasts and Sheehan has worked the investigative beat for decades, and both exit under the buyout that followed Skydance's takeover of CBS. Their departures strip two of the most recognized faces from Pittsburgh's oldest television newsroom.",
+        "latest_developments": "KDKA-TV anchor Ken Rice and investigative reporter Andy Sheehan accepted the voluntary buyout CBS offered employees this week and will leave the station, TribLive's TV Talk reported Friday, November 20.",
+        "why_it_matters": "Pittsburgh's oldest television newsroom loses two of its most recognized journalists as Skydance cuts costs after its takeover of CBS.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "Rice anchors KDKA-TV's 5, 6, and 11 p.m. newscasts, and Sheehan has worked the investigative beat for decades."
+          }
+        ],
         "sources": [
           {
             "source": "TribLive",
@@ -517,8 +727,14 @@
       },
       {
         "title": "Big Beaver Weighs a Data Center on a Racetrack Site",
-        "latest_developments": "Residents pressed their objections at a Big Beaver Borough meeting Thursday, November 19, raising concerns that ranged to the hearing of children who live nearby.",
-        "summary": "Developers want to build a data center on a former racetrack property in Big Beaver Borough, Beaver County, and the borough meeting turned into a hearing on noise and quality of life. The fight mirrors data center siting disputes elsewhere in Western Pennsylvania, including the ordinance Buffalo Township drafted so neighbors would not hear, smell, or see such a building.",
+        "latest_developments": "Residents pressed their objections to a data center proposed on a former racetrack property at a Big Beaver Borough meeting Thursday, November 19, raising concerns that reached the hearing of nearby children.",
+        "why_it_matters": "Beaver County's decision adds to a string of Western Pennsylvania fights over where power-hungry data centers can go.",
+        "details": [
+          {
+            "label": "The big picture",
+            "text": "Buffalo Township drafted its own data center ordinance so that neighbors would not hear, smell, or see such a building."
+          }
+        ],
         "sources": [
           {
             "source": "WPXI",
@@ -530,8 +746,14 @@
       },
       {
         "title": "A 255-Unit Townhome Plan Stalls in Penn Hills",
-        "latest_developments": "The Penn Hills planning commission put off discussion of the 255-unit townhouse development Thursday, November 19, citing deficiencies in the application, and sent a packed room of residents home within minutes.",
-        "summary": "Residents filled the Penn Hills municipal building expecting to argue over the project, which would add 255 townhouses to the Allegheny County municipality. The incomplete application pushes the review to a later meeting and delays the largest residential proposal Penn Hills has seen in years.",
+        "latest_developments": "The Penn Hills planning commission put off discussion of a 255-unit townhouse development Thursday, November 19, citing deficiencies in the application.",
+        "why_it_matters": "The delay pushes the largest residential proposal Penn Hills has seen in years to a later meeting, and residents wait to argue it.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "Residents filled the Penn Hills municipal building expecting a fight and left within minutes."
+          }
+        ],
         "sources": [
           {
             "source": "TribLive",
@@ -544,9 +766,43 @@
     ],
     "around_town": [
       {
+        "title": "Sharpsburg Plants Free TreeVitalize Trees",
+        "latest_developments": "Volunteers planted donated trees around Sharpsburg through the TreeVitalize program, TribLive reported Friday, November 20.",
+        "why_it_matters": "The Allegheny River borough gains canopy that shades streets and absorbs stormwater at no cost to property owners.",
+        "details": [],
+        "sources": [
+          {
+            "source": "TribLive",
+            "title": "Volunteers go green with free tree planting initiative in Sharpsburg",
+            "url": "https://triblive.com/local/fox-chapel/volunteers-go-green-with-free-tree-planting-initiative-in-sharpsburg/"
+          }
+        ],
+        "_anchor": "i-b0e5186950"
+      },
+      {
+        "title": "Pitt Packs Thanksgiving Boxes for Families",
+        "latest_developments": "University of Pittsburgh staff members and athletes packed boxes of food Friday, November 20, for families who need help putting Thanksgiving dinner on the table, WPXI reported.",
+        "why_it_matters": "Families short on groceries get a holiday meal seven days before Thanksgiving.",
+        "details": [],
+        "sources": [
+          {
+            "source": "WPXI",
+            "title": "Pitt staff, athletes pack boxes of food to help families celebrate Thanksgiving",
+            "url": "https://www.wpxi.com/news/local/pitt-staff-athletes-pack-boxes-food-help-families-celebrate-thanksgiving/CXHS26GOLBC2JLAHR2TE6K72DA/"
+          }
+        ],
+        "_anchor": "i-319df6e182"
+      },
+      {
         "title": "A Sinkhole Cuts Water in Pleasant Hills",
-        "latest_developments": "A broken underground valve opened a sinkhole in a busy Pleasant Hills intersection Friday morning, November 20, closing part of the roadway and shutting off running water to nearby homes.",
-        "summary": "The failure in Pleasant Hills, the Allegheny County borough south of Pittsburgh, blocked traffic through the intersection and left residents without water while crews worked the repair. It follows water main breaks this month in Baldwin and Jefferson Hills.",
+        "latest_developments": "A broken underground valve opened a sinkhole in a busy Pleasant Hills intersection Friday morning, November 20, closing part of the roadway and cutting running water to nearby homes.",
+        "why_it_matters": "Residents of the Allegheny County borough lost water service while crews worked the repair, and drivers lost part of the intersection.",
+        "details": [
+          {
+            "label": "The big picture",
+            "text": "Water main breaks hit Baldwin and Jefferson Hills earlier this month."
+          }
+        ],
         "sources": [
           {
             "source": "WPXI",
@@ -558,8 +814,14 @@
       },
       {
         "title": "Half the Graves Lack Wreaths at the Alleghenies Cemetery",
-        "latest_developments": "Wreaths Across America has raised money for only half the graves at the National Cemetery of the Alleghenies and asked the public Friday, November 20, to sponsor the remaining 9,500.",
-        "summary": "The organization places a wreath on every veteran's grave at the national cemetery each December and now runs 9,500 short of that goal. Sponsorships from the public decide whether those graves get a wreath this season.",
+        "latest_developments": "Wreaths Across America has raised money for only half the graves at the National Cemetery of the Alleghenies and asked the public Friday, November 20, to sponsor the rest.",
+        "why_it_matters": "Without 9,500 more sponsorships, that many veterans' graves get no wreath this December.",
+        "details": [
+          {
+            "label": "What to do",
+            "text": "The organization places a wreath on every veteran's grave each December, and public sponsorships decide the total."
+          }
+        ],
         "sources": [
           {
             "source": "WPXI",
@@ -571,8 +833,9 @@
       },
       {
         "title": "Old Christmas Lights Pay for Project Bundle-Up",
-        "latest_developments": "WTAE published the list of Michael Brothers drop-off locations Friday, November 20, where Pittsburgh-area residents can leave burned-out and tangled Christmas lights to raise money for Project Bundle-Up.",
-        "summary": "Michael Brothers collects the used light strands at its locations around the Pittsburgh region, and the proceeds go to Project Bundle-Up, which buys winter coats for children and older adults across Western Pennsylvania. The drive runs as households untangle their decorations for the season.",
+        "latest_developments": "WTAE published the list of Michael Brothers drop-off locations Friday, November 20, where Pittsburgh-area residents can leave burned-out Christmas lights to raise money for Project Bundle-Up.",
+        "why_it_matters": "Proceeds buy winter coats for children and older adults across Western Pennsylvania, and households clear out tangled strands at no cost.",
+        "details": [],
         "sources": [
           {
             "source": "WTAE",
@@ -584,8 +847,14 @@
       },
       {
         "title": "The Turnpike Staffs Every Plaza With Interpreters",
-        "latest_developments": "The Pennsylvania Turnpike Commission announced Friday, November 20, that it now provides free visual and American Sign Language interpreting services for travelers at all 17 of its service plazas, days before the Thanksgiving rush.",
-        "summary": "The service covers every plaza on the 565-mile toll road, including the Oakmont, New Stanton, and Zelienople stops that Western Pennsylvania drivers use, and reaches blind and deaf travelers who need help reading signage or speaking with plaza staff. The commission put the program in place as holiday traffic builds across the commonwealth.",
+        "latest_developments": "The Pennsylvania Turnpike Commission announced Friday, November 20, free visual and American Sign Language interpreting services for travelers at all 17 of its service plazas.",
+        "why_it_matters": "Blind and deaf travelers get help reading signage and speaking with plaza staff days before Thanksgiving traffic builds.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "The service covers every plaza on the 565-mile toll road, including the Oakmont, New Stanton, and Zelienople stops."
+          }
+        ],
         "sources": [
           {
             "source": "WPXI",
@@ -597,8 +866,14 @@
       },
       {
         "title": "The 2027 Budgets Split on Taxes",
-        "latest_developments": "WPXI reported Friday, November 20, that Oakmont officials tie their proposed 17% real estate tax increase to the cost of severe storms, while Westmoreland County commissioners unveiled a deficit budget Thursday, November 19, with no tax increase, and Bradford Woods put forward a $2.6 million budget that holds taxes flat.",
-        "summary": "Oakmont property owners in Allegheny County face the steepest increase of the three, Westmoreland County's commissioners pledged no tax hike while running a deficit, and Bradford Woods leans on a new local services tax for added revenue. The three documents show municipalities around Pittsburgh choosing among tax increases, new levies, and deficits as 2027 budget season closes.",
+        "latest_developments": "Oakmont officials tie a proposed 17% real estate tax increase to the cost of severe storms, WPXI reported Friday, November 20, while Bradford Woods holds taxes flat in a $2.6 million budget.",
+        "why_it_matters": "Property owners around Pittsburgh face sharply different 2027 bills, with Oakmont absorbing the steepest increase of the three.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "Westmoreland County commissioners unveiled a deficit budget Thursday, November 19, with no tax increase. Bradford Woods leans on a new local services tax."
+          }
+        ],
         "sources": [
           {
             "source": "TribLive",
@@ -625,8 +900,14 @@
       },
       {
         "title": "Sto-Rox Teachers Carry the Fight to the Board",
-        "latest_developments": "Teachers rallied at the Sto-Rox school board meeting Thursday night, November 19, urging the board to finalize a contract, a day after the union voted to authorize a strike.",
-        "summary": "The Sto-Rox Education Association has worked 142 days under an expired contract in the district that serves McKees Rocks and Stowe Township, and its members authorized a walkout Wednesday, November 18, while holding off on setting a date. The rally puts direct pressure on the board to settle before a strike interrupts classes.",
+        "latest_developments": "Teachers rallied at the Sto-Rox school board meeting Thursday night, November 19, urging the board to finalize a contract a day after the union voted to authorize a strike.",
+        "why_it_matters": "A walkout would interrupt classes for students in McKees Rocks and Stowe Township, and the board now faces direct pressure to settle.",
+        "details": [
+          {
+            "label": "By the numbers",
+            "text": "The Sto-Rox Education Association has worked 142 days under an expired contract and has not set a strike date."
+          }
+        ],
         "sources": [
           {
             "source": "WTAE",
@@ -638,8 +919,14 @@
       },
       {
         "title": "A Warm Weekend, Then a Turn Cooler",
-        "latest_developments": "Pittsburgh climbs into the low to mid 60s Friday afternoon, November 20, under a fourth straight day of sunshine, and KDKA puts cooler air into next week.",
-        "summary": "WPXI and WTAE hold the sunshine and unusual warmth across Western Pennsylvania through the start of the weekend, which gives homeowners a dry window for outdoor holiday lights ahead of Light Up Night. The cooldown arrives as Thanksgiving week begins.",
+        "latest_developments": "Pittsburgh climbed into the low to mid 60s Friday afternoon, November 20, under a fourth straight day of sunshine, and KDKA puts cooler air into next week.",
+        "why_it_matters": "The dry, mild stretch gives homeowners a window for outdoor holiday lights before Light Up Night, and the cooldown lands as Thanksgiving week opens.",
+        "details": [
+          {
+            "label": "What to watch",
+            "text": "WPXI and WTAE hold the sunshine and unusual warmth across Western Pennsylvania through the start of the weekend."
+          }
+        ],
         "sources": [
           {
             "source": "KDKA",
@@ -663,8 +950,18 @@
     "events": [
       {
         "title": "Light Up Night Fills Downtown Saturday",
-        "latest_developments": "KDKA published its guide and a first look at what is new Friday, November 20, one day before the celebration.",
-        "summary": "The 65th annual Highmark Light Up Night opens Pittsburgh's holiday season Saturday, November 21, across downtown, with the holiday market that opened Friday, November 20, in Market Square, and Pittsburgh Regional Transit detouring 50 bus routes around the festivities.",
+        "latest_developments": "KDKA published its guide to Pittsburgh's 65th annual Highmark Light Up Night Friday, November 20, one day before the celebration opens the holiday season downtown.",
+        "why_it_matters": "Downtown fills for the region's biggest holiday kickoff, and Pittsburgh Regional Transit detours 50 bus routes around the festivities.",
+        "details": [
+          {
+            "label": "When",
+            "text": "Saturday, November 21."
+          },
+          {
+            "label": "Where",
+            "text": "Downtown Pittsburgh, including the holiday market that opened Friday, November 20, in Market Square."
+          }
+        ],
         "sources": [
           {
             "source": "KDKA",
@@ -686,8 +983,18 @@
       },
       {
         "title": "Goose Plays Two Nights at the Wylie",
-        "latest_developments": "TribLive reviewed the first of Goose's two nights at Citizens Live at the Wylie in a piece published Friday morning, November 20, with the second show still to come.",
-        "summary": "The jam band Goose stretched 13 songs across three and a half hours at Citizens Live at the Wylie, Pittsburgh's newest large music room, and drew a crowd willing to stand through all of it. The band returns for the second night of the stand.",
+        "latest_developments": "TribLive reviewed the first of the jam band Goose's two nights at Citizens Live at the Wylie in a piece published Friday morning, November 20, with the second show still to come.",
+        "why_it_matters": "Fans still have a night to catch the stand at Pittsburgh's newest large music room.",
+        "details": [
+          {
+            "label": "By the numbers",
+            "text": "Goose stretched 13 songs across three and a half hours on the first night and kept the crowd standing for all of it."
+          },
+          {
+            "label": "Where",
+            "text": "Citizens Live at the Wylie, Pittsburgh's newest large music venue."
+          }
+        ],
         "sources": [
           {
             "source": "TribLive",
@@ -701,8 +1008,14 @@
     "around_teams": [
       {
         "title": "Tomlin Settles the Jacoby Jones Story",
-        "latest_developments": "Not Just Football with Cam Heyward posted the full Mike Tomlin segment Friday morning, November 20, a week after the show teased it with a clip.",
-        "summary": "Tomlin, the former Steelers head coach, tells Cameron Heyward and co-host Hayden what happened on the Jacoby Jones kickoff return that drew him a $100,000 fine for stepping toward the field, and the show cut a companion short Thursday, November 19, calling the sequence one of the biggest what-ifs in Steelers history.",
+        "latest_developments": "Not Just Football with Cam Heyward posted its full Mike Tomlin segment Friday morning, November 20, in which Tomlin explains the Jacoby Jones kickoff return.",
+        "why_it_matters": "Tomlin, the former Steelers head coach, addresses the sideline step that drew a $100,000 fine, one of the most argued moments of his tenure.",
+        "details": [
+          {
+            "label": "What they're saying",
+            "text": "The show cut a companion short Thursday, November 19, calling the sequence one of the biggest what-ifs in Steelers history."
+          }
+        ],
         "sources": [
           {
             "source": "Not Just Football with Cam Heyward",
@@ -720,7 +1033,8 @@
       {
         "title": "McCarthy's Second Briefing of Eagles Week",
         "latest_developments": "The Steelers posted video late Thursday, November 19, of head coach Mike McCarthy's news conference before that afternoon's practice.",
-        "summary": "McCarthy met reporters for the second time during Week 11 preparation as the 6-3 Steelers get ready to visit the Philadelphia Eagles Sunday, November 22, at 1 p.m. Eastern on CBS, a building where Pittsburgh has not won since the Lyndon Johnson administration.",
+        "why_it_matters": "McCarthy's 6-3 team visits the Philadelphia Eagles Sunday, November 22, at 1 p.m. Eastern on CBS, a building where Pittsburgh has not won since the Lyndon Johnson administration.",
+        "details": [],
         "sources": [
           {
             "source": "Pittsburgh Steelers (YouTube)",
@@ -739,8 +1053,18 @@
     "team_usa": [
       {
         "title": "Pochettino's USMNT Send-Off",
-        "latest_developments": "ESPN published its account of Mauricio Pochettino's farewell to the United States men's national team Friday, November 20, and Pochettino, presented at Old Trafford the same day, said he wants a say in Manchester United's transfer decisions.",
-        "summary": "Pochettino left the United States job on his own terms after Christian Pulisic's bicycle kick beat Haiti Tuesday, November 17, and carried the Americans into the Concacaf Nations League semifinals against Mexico, and ESPN describes players and fans celebrating a departure no United States coach has had before. Steve Cherundolo runs the December camp on an interim basis while U.S. Soccer searches for a permanent replacement, and the change reopens the midfield to fringe players who fell out of Pochettino's plans.",
+        "latest_developments": "ESPN published its account of Mauricio Pochettino's farewell to the United States men's national team Friday, November 20, and Pochettino said he wants a say in Manchester United transfers.",
+        "why_it_matters": "U.S. Soccer must now hire a coach before a home World Cup, and fringe midfielders get a fresh audition.",
+        "details": [
+          {
+            "label": "Flashback",
+            "text": "Pochettino left after Christian Pulisic's bicycle kick beat Haiti Tuesday, November 17, and carried the Americans into a Concacaf Nations League semifinal against Mexico."
+          },
+          {
+            "label": "What's next",
+            "text": "Steve Cherundolo runs the December camp on an interim basis while the search continues."
+          }
+        ],
         "sources": [
           {
             "source": "ESPN Soccer",
@@ -762,8 +1086,18 @@
       },
       {
         "title": "The NWSL Championship Lands at Audi Field",
-        "latest_developments": "ESPN published its championship predictions Friday, November 20, naming Washington Spirit forward Trinity Rodman the player to watch for Saturday's final.",
-        "summary": "The Washington Spirit host the Kansas City Current in the National Women's Soccer League Championship Saturday, November 21, at Audi Field in Washington, the Spirit's third straight trip to the final. Rodman, the United States forward, called winning at home a full-circle moment that \"would mean everything,\" and the league reaches its title game with record revenue and unresolved stadium and scheduling problems.",
+        "latest_developments": "ESPN published its championship predictions Friday, November 20, naming Washington Spirit forward Trinity Rodman the player to watch in Saturday's final against the Kansas City Current.",
+        "why_it_matters": "The Spirit reach their third straight final, and the result decides the National Women's Soccer League title in front of a home crowd in Washington.",
+        "details": [
+          {
+            "label": "When",
+            "text": "Saturday, November 21, at Audi Field in Washington."
+          },
+          {
+            "label": "Yes, but",
+            "text": "ESPN reported the league arrives at its title game with record revenue and unresolved stadium and scheduling problems."
+          }
+        ],
         "sources": [
           {
             "source": "ESPN Soccer",
@@ -780,8 +1114,14 @@
       },
       {
         "title": "Dike Goes Down as Orlando's Season Ends",
-        "latest_developments": "United States forward Daryl Dike suffered an injury minutes after he came on as a substitute Thursday, November 19, as FC Cincinnati rallied past Orlando City 3-1 in the MLS Cup Eastern Conference wild-card match.",
-        "summary": "Dike, the American striker whose career has run through repeated injury layoffs, lasted only minutes in Orlando City's elimination game. The setback clouds his availability as United States coaching and roster plans reset after Mauricio Pochettino's departure for Manchester United.",
+        "latest_developments": "United States forward Daryl Dike suffered an injury minutes after he came on as a substitute Thursday, November 19, as FC Cincinnati beat Orlando City 3-1.",
+        "why_it_matters": "Another layoff clouds Dike's availability as the United States resets its roster plans without Mauricio Pochettino.",
+        "details": [
+          {
+            "label": "Zoom in",
+            "text": "The MLS Cup Eastern Conference wild-card loss ended Orlando City's season."
+          }
+        ],
         "sources": [
           {
             "source": "ESPN Soccer",
@@ -797,21 +1137,21 @@
         "author": "Ed Zitron",
         "title": "Premium: Bursting Bubbles",
         "url": "https://www.wheresyoured.at/premium-bursting-bubbles/",
-        "summary": "Zitron argues the boom-and-bust cycle of financial bubbles destroys far more than it creates and pays off mainly for the wealthiest insiders who buy earliest and sell before the collapse, which sets up his reading of the artificial-intelligence trade now unwinding.",
+        "summary": "Zitron argues bubbles destroy far more than they create and pay off mainly for wealthy insiders who buy earliest and sell before the collapse.",
         "_anchor": "i-f0794dfa65"
       },
       {
         "author": "Stratechery",
         "title": "An Interview With Eric Seufert About Agentic Commerce",
         "url": "https://stratechery.com/2026/an-interview-with-eric-seufert-about-agentic-commerce/",
-        "summary": "Ben Thompson and Eric Seufert discuss how shopping changes when software agents do the buying, with Seufert arguing advertising becomes the business model and Thompson arguing for retailers built to serve agents directly.",
+        "summary": "Ben Thompson and Eric Seufert discuss how shopping changes when software agents do the buying, with Seufert arguing advertising becomes the business model.",
         "_anchor": "i-1810ca1f74"
       },
       {
         "author": "Cal Newport",
         "title": "In Search of the Deep Life",
         "url": "https://calnewport.com/in-search-of-the-deep-life/",
-        "summary": "Newport traces the idea of the deep life back to the daily essays he wrote early in the coronavirus pandemic and makes the case for organizing a life around depth instead of reacting to whatever arrives.",
+        "summary": "Newport traces the deep life idea back to the daily essays he wrote early in the coronavirus pandemic and argues for organizing life around depth.",
         "_anchor": "i-07373ed4a8"
       }
     ]
@@ -820,20 +1160,20 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Offensive AI tooling moved from automating known steps to finding bugs, with Cairn surfacing an apparent zero-day in a medical imaging app and Artex opening the European Commission intrusion.",
+      "text": "China-linked crews pushed AI into the attack chain, using Cairn to find a medical imaging zero-day and a public AI tool to breach the European Commission.",
       "links": [
         {
           "anchor": "i-0abe422151",
           "phrase": "Cairn",
-          "start": 77,
-          "end": 82,
+          "start": 58,
+          "end": 63,
           "title": "Cairn Finds a Zero-Day in a Medical Imaging App"
         },
         {
           "anchor": "i-2be32b97a1",
           "phrase": "European Commission",
-          "start": 161,
-          "end": 180,
+          "start": 134,
+          "end": 153,
           "title": "European Commission Confirms an AI-Assisted Intrusion"
         }
       ]
@@ -841,13 +1181,13 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Third-party providers carried the damage, as the N0n leak pulled in JPMorgan, Visa, and Mastercard while N-able traced its worldwide mail outage to an attacker on one server.",
+      "text": "Suppliers drove the day's biggest exposures: J.P. Morgan, Visa and Mastercard tied to the N0n leak, plus N-able's outage and SBC Medical's 2 million.",
       "links": [
         {
           "anchor": "i-009f6643a8",
           "phrase": "N0n leak",
-          "start": 49,
-          "end": 57,
+          "start": 90,
+          "end": 98,
           "title": "N0n Leak Pulls In JPMorgan, Visa, and Mastercard"
         },
         {
@@ -862,84 +1202,105 @@
     {
       "kind": "Trend",
       "status": null,
-      "text": "Network edge gear took pressure from both directions as F5 rushed emergency BIG-IP fixes and attackers broke four Cisco Expressway devices days after a public proof of concept.",
+      "text": "Edge and virtualization took the heaviest fire, from F5's five critical BIG-IP patches and Cisco Expressway's 9.8 exploit to a KVM leak of 127GB.",
       "links": [
         {
           "anchor": "i-6a744f24ea",
           "phrase": "BIG-IP",
-          "start": 76,
-          "end": 82,
+          "start": 72,
+          "end": 78,
           "title": "F5, Ruby, and SonicWall Force an Edge Patch Cycle"
         },
         {
           "anchor": "i-c9ddefa65f",
           "phrase": "Cisco Expressway",
-          "start": 114,
-          "end": 130,
+          "start": 91,
+          "end": 107,
           "title": "Cisco Expressway Falls to a Public Proof of Concept"
+        },
+        {
+          "anchor": "i-f80afcc478",
+          "phrase": "KVM",
+          "start": 127,
+          "end": 130,
+          "title": "Linux KVM Hands Guests the Host's Memory"
         }
       ]
     },
     {
-      "kind": "Update",
-      "status": "updated",
-      "text": "Markets slid further as Anthropic shares fell as much as 13% and the Dow entered correction, while Washington cleared advanced Nvidia chips for China over Tom Cotton's warnings.",
+      "kind": "Trend",
+      "status": null,
+      "text": "The AI trade cracked: the S&P 500 slid into correction, Anthropic fell 13%, smuggled Nvidia chips reached China, and Zitron calls bubbles insider payoffs.",
       "links": [
         {
           "anchor": "i-b38513beb1",
-          "phrase": "Anthropic",
-          "start": 24,
+          "phrase": "S&P 500",
+          "start": 26,
           "end": 33,
           "title": "The AI Selloff Deepens and Metals Break Down"
         },
         {
           "anchor": "i-d339066c29",
           "phrase": "Nvidia chips",
-          "start": 127,
-          "end": 139,
+          "start": 85,
+          "end": 97,
           "title": "Washington Clears Advanced AI Chips for China"
+        },
+        {
+          "anchor": "i-f0794dfa65",
+          "phrase": "Zitron",
+          "start": 117,
+          "end": 123,
+          "title": "Premium: Bursting Bubbles"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "Sean Cairncross is leaving as national cyber director, and Pentagon chief information officer Kirsten Davies takes the job in an acting capacity.",
+      "status": "updated",
+      "text": "Google pinned the vCenter zero-day CVE-2026-123890 on China-nexus Armory Castle as Sean Cairncross exits the White House national cyber director post.",
       "links": [
+        {
+          "anchor": "i-dc6901c8a6",
+          "phrase": "Armory Castle",
+          "start": 66,
+          "end": 79,
+          "title": "Armory Castle Owns the vCenter Zero-Day"
+        },
         {
           "anchor": "i-57375f482c",
           "phrase": "Sean Cairncross",
-          "start": 0,
-          "end": 15,
+          "start": 83,
+          "end": 98,
           "title": "Cairncross Leaves the White House Cyber Post"
         }
       ]
     },
     {
       "kind": "Update",
-      "status": "new",
-      "text": "A broken valve opened a sinkhole in Pleasant Hills, Light Up Night fills downtown Saturday, and Alison Beam becomes acting president of UPMC's hospital arm.",
+      "status": "updated",
+      "text": "Locally, Light Up Night opens the holiday season downtown Saturday, a sinkhole cut water in Pleasant Hills, and Sto-Rox teachers rallied after a strike vote.",
       "links": [
-        {
-          "anchor": "i-824194b506",
-          "phrase": "Pleasant Hills",
-          "start": 36,
-          "end": 50,
-          "title": "A Sinkhole Cuts Water in Pleasant Hills"
-        },
         {
           "anchor": "i-1cc3b15b23",
           "phrase": "Light Up Night",
-          "start": 52,
-          "end": 66,
+          "start": 9,
+          "end": 23,
           "title": "Light Up Night Fills Downtown Saturday"
         },
         {
-          "anchor": "i-a39417edc3",
-          "phrase": "Alison Beam",
-          "start": 96,
-          "end": 107,
-          "title": "Beam Takes Over UPMC's Hospital Division"
+          "anchor": "i-824194b506",
+          "phrase": "Pleasant Hills",
+          "start": 92,
+          "end": 106,
+          "title": "A Sinkhole Cuts Water in Pleasant Hills"
+        },
+        {
+          "anchor": "i-0a9045ea5e",
+          "phrase": "Sto-Rox",
+          "start": 112,
+          "end": 119,
+          "title": "Sto-Rox Teachers Carry the Fight to the Board"
         }
       ]
     }
@@ -1109,7 +1470,7 @@
           "TribLive": {
             "items": 25,
             "in_window": 25,
-            "contributed": 17
+            "contributed": 16
           },
           "Pittsburgh Post-Gazette": {
             "items": 0,
@@ -1133,8 +1494,8 @@
           },
           "Pittsburgh Magazine": {
             "items": 30,
-            "in_window": 10,
-            "contributed": 3
+            "in_window": 11,
+            "contributed": 4
           },
           "KDKA": {
             "items": 30,
@@ -1378,23 +1739,23 @@
       "usage": {
         "claude-opus-5": {
           "inputTokens": 6,
-          "outputTokens": 33540,
+          "outputTokens": 44421,
           "cacheReadInputTokens": 0,
-          "cacheCreationInputTokens": 125255,
+          "cacheCreationInputTokens": 131080,
           "webSearchRequests": 0,
-          "costUSD": 2.09108,
+          "costUSD": 2.421355,
           "contextWindow": 3000000,
           "maxOutputTokens": 192000,
-          "thinkingTokens": 14310
+          "thinkingTokens": 23616
         }
       },
-      "cost_usd": 2.09108,
-      "duration_ms": 368558,
+      "cost_usd": 2.421355,
+      "duration_ms": 458191,
       "calls": 3
     }
   },
   "meta": {
-    "generated_at": "2026-11-20 13:36 EST",
+    "generated_at": "2026-11-20 13:44 EST",
     "items_considered": 54,
     "window_hours": 24,
     "model": "opus",
@@ -1476,8 +1837,8 @@
       "claude-opus-5"
     ],
     "model_calls": 3,
-    "model_cost_usd": 2.0911,
-    "model_duration_ms": 368558,
+    "model_cost_usd": 2.4214,
+    "model_duration_ms": 458191,
     "local_from": null,
     "feed_failures": [
       "Pittsburgh Post-Gazette",
