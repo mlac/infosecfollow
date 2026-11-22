@@ -1,388 +1,206 @@
 INFOSECFOLLOW
 Today's Briefing
 
-Attackers exploited a Microsoft Entra Connect Health flaw to steal tenant data as AI agents found their own zero-day in medical imaging software.
+Attackers spent months stealing AI prompts inside three inference providers, forcing OpenRouter to cut all three off.
 
-*Edition:* Saturday, November 21, 2026, 7:35 PM EST
+*Edition:* Sunday, November 22, 2026, 2:16 AM EST
 
-*Inside:* 10 security, 15 business and local, 5 sports, 3 reading.
+*Inside:* 6 security, 6 business and local, 2 sports, 3 reading.
 
-*1 big thing:* Cairn Agents Root a MONAI Label Server
+*1 big thing:* FBI Investigates Hack of NCIC Database
 
 Tap right for the next story, left to go back.
 
 AT A GLANCE
 What's Moving Today
 
-*Trend:* Compromised credentials let intruders read Kubernetes secrets on Rackspace Spot, and a bug in Microsoft's Entra Connect Health leaked tenant configuration data.
+*Trend:* Attackers now mine the AI supply chain itself, stealing months of prompts inside OpenRouter providers while Signal blocks screenshots to keep agents out of chats.
 
-*Trend:* Autonomous Cairn agents rooted a MONAI Label server with no human help, and one webpage siphoned private Meta Muse chats and memories.
+*Trend:* Federal cyber institutions wobble as the FBI probes a hack of its NCIC police database and Trump elevates Kirsten Davies to national cyber director.
 
-*Trend:* CISA added four actively exploited bugs, including SAP NetWeaver and VMware vCenter, while GnuPG shipped fixes for critical CVE-2026-129975.
+*New:* pwn.ai escaped Ghostscript's sandbox with one crafted upload, while Amazon pinned an agent-found zero-day to MONAI Label 0.8.5 and earlier default setups.
 
-*New:* Attackers breached the FBI's National Crime Information Center again, and BADBOX malware in Android TV boxes hit 40 billion daily ad requests.
+*Trend:* AI-bubble anxiety spreads as Anthropic shares sink to 5 cents above their $83 offering price and Zitron calls boom-bust cycles rigged for insiders.
 
-*New:* Pittsburgh Regional Transit approved its Bus Line Refresh for next August, and two Mon/Fayette Expressway sections opened to traffic.
+*New:* Pittsburgh's holiday season opened with the 65th Light Up Night downtown and City Mission turkey boxes, but a coastal storm threatens Thanksgiving travel.
+
+SECURITY | DATA BREACHES
+FBI Investigates Hack of NCIC Database
+
+The FBI opened an investigation into an apparent hack of the National Crime Information Center, the criminal justice database it maintains, an Associated Press source said.
+
+*Why it matters:* NCIC moves records between local, state, and federal law enforcement agencies, so stolen or altered entries touch active cases across the country.
+
+*The big picture:* This is the second reported intrusion into FBI systems in two months.
+
+Sources: SecurityWeek, BleepingComputer
 
 SECURITY | AI SECURITY
-Cairn Agents Root a MONAI Label Server
+OpenRouter Drops Three AI Inference Providers
 
-Amazon Threat Intelligence named the target software: autonomous Cairn agents found an unauthenticated file-write flaw in MONAI Label and took root on a university server.
+OpenRouter cut three AI inference providers from its routing pool after Dragos found attackers had stolen customer requests from inside them for months.
 
-*Why it matters:* An AI framework discovered and weaponized an unknown bug in one run, erasing the window defenders rely on between disclosure and exploitation.
+*Why it matters:* Prompts carry source code, credentials, and customer records, so a breached inference provider leaks the data enterprises assumed disappeared on arrival.
 
-*What to do:* Audit MONAI Label installs at version 0.8.5 or earlier, which ship exploitable in the default setup, and take the open-source imaging server off the internet.
+*Between the lines:* Some stolen requests carried the Zero Data Retention flag, the setting that promises a prompt is never stored.
 
-*Zoom in:* The flaw lets an attacker with no account write files outside the server's storage folder, which the agents turned into root access.
+*What to do:* Inventory which downstream providers your AI gateway routes prompts to. Treat retention promises as unverified until the provider proves detection works.
 
-Sources: SecurityWeek, The Hacker News, BleepingComputer, The Record
+Sources: The Hacker News
 
 SECURITY | VULNERABILITIES AND EXPLOITS
-GnuPG and WhatsApp Patch Critical Flaws
+pwn.ai Breaks Ghostscript Sandbox With Uploads
 
-GnuPG warned that a malicious OpenPGP key with an unusually long user ID triggers a critical memory bug in GPGME, tracked as CVE-2026-129975, and shipped fixes.
+Security firm pwn.ai showed that a crafted file escapes Ghostscript's security sandbox and runs commands on the server that processes it.
 
-*Why it matters:* Every application built on GPGME, the standard library programs use to work with GnuPG, can leak its data to anyone who supplies a crafted key.
+*Why it matters:* Linux servers call Ghostscript to convert uploaded PDFs, PostScript files, and images, often without the application knowing, so an ordinary upload form becomes the entry point.
 
-*What to do:* Move to GPGME 2.3.0 or later. Android users need WhatsApp or WhatsApp Business 2.26.17.4 or newer to close CVE-2026-23871.
+*What to do:* Install the Ghostscript fix. Map which applications hand user-supplied documents to Ghostscript for conversion.
 
-*Between the lines:* WhatsApp's security team found the ad-reply URL validation bug while disrupting a scam campaign and suspects attackers used it to make scam messages look credible.
+Sources: The Hacker News
+
+SECURITY | NATION-STATE ACTIVITY
+Cairn Agents Exploit MONAI Label Zero-Day
 
-Sources: The Hacker News, SecurityWeek
+Amazon Threat Intelligence pinned the agent-discovered flaw to MONAI Label 0.8.5 and earlier in default setups, where an attacker with no account writes files outside the storage folder.
+
+*Why it matters:* Every internet-exposed MONAI Label server in that configuration offers suspected China-linked operators the same unauthenticated path to root that took a university server.
+
+*What to do:* Locate MONAI Label deployments, move off 0.8.5 and earlier, and pull the servers off the public internet.
+
+Sources: SecurityWeek, The Hacker News
 
 SECURITY | AI SECURITY
-Malicious Webpage Hijacks Meta Muse Chats
+Signal Blocks AI Agents From Screenshotting Chats
 
-Researchers showed a single malicious webpage pulling a Meta Muse user's private conversations and stored memories out of the assistant with no approval prompt.
+Signal will restrict screenshots by default on Android and iOS to stop AI agents from reading private chats, and calls the protection incomplete.
 
-*Why it matters:* The same attack reaches credentials Muse holds for a user's connected accounts, turning one assistant into a silent path to every linked service.
+*Why it matters:* On-device agents read whatever the screen displays, so end-to-end encryption stops protecting a message the moment it renders.
 
-*Zoom in:* Signal will restrict screenshots by default on Android and iOS to stop AI agents from reading chats, and calls the protection incomplete.
+*Zoom in:* The restriction covers agentic systems built into iOS 27 and Android versions where Signal can detect an assistant trying to read the app.
 
-*By the numbers:* A researcher planted 2 million tracking canaries in prompts across the AI supply chain and watched secret user data escape at a high rate.
-
-Sources: The Hacker News, Ars Technica Security
-
-SECURITY | VULNERABILITIES AND EXPLOITS
-CISA Flags SAP NetWeaver and vCenter Exploits
-
-CISA added four actively exploited flaws to its Known Exploited Vulnerabilities catalog Friday, covering Apache Roller, Cisco Expressway, SAP NetWeaver, and Broadcom VMware vCenter.
-
-*Why it matters:* SAP NetWeaver joins the exploited list, pushing the current espionage campaign into enterprise resource planning estates that run finance and logistics.
-
-*What to do:* Patch all four products on CISA's federal timeline. The Apache Roller deserialization bug, CVE-2026-129448, carries a 9.8 severity score and needs no credentials.
-
-*What to watch:* Dark Reading reported that China-nexus group Armory Castle likely held its next vCenter zero-day ready during the last round of VMware updates.
-
-Sources: The Hacker News, Dark Reading
-
-SECURITY | DATA BREACHES
-Attackers Exploit Entra Connect Health Flaw
-
-Microsoft said attackers exploited a vulnerability in its Entra Connect Health service and took administrator email addresses and tenant configuration information.
-
-*Why it matters:* Tenant configuration data maps an organization's identity setup, handing attackers a targeting list for follow-on phishing against named administrators.
-
-*What to do:* Treat affected administrator addresses as public and brief those accounts on targeted phishing that cites Microsoft identity services.
-
-Sources: BleepingComputer
-
-SECURITY | DATA BREACHES
-Rackspace Spot Breach Exposes Kubernetes Secrets
-
-Rackspace told customers that attackers used compromised credentials to breach its Spot cloud platform, deploy unauthorized workloads, and read Kubernetes secrets in customer clusters.
-
-*Why it matters:* Kubernetes secrets hold the keys and tokens customer applications run on, so one platform breach carries attackers into every system those keys unlock.
-
-*What to do:* Rotate every secret stored in Rackspace Spot clusters and review those clusters for workloads nobody on the team authorized.
-
-Sources: BleepingComputer
-
-SECURITY | DATA BREACHES
-FBI's National Crime Database Reportedly Breached
-
-Attackers breached the FBI's National Crime Information Center, the nationwide police database, in the agency's second reported intrusion in two months.
-
-*Why it matters:* NCIC carries records that local, state, and federal agencies share daily, so stolen data would reach well past the FBI's own systems.
-
-*Yes, but:* The account comes from reporting rather than an FBI statement. The bureau has not publicly described the intrusion or its scope.
-
-Sources: BleepingComputer
-
-SECURITY | RANSOMWARE AND CYBERCRIME
-BADBOX Botnet Returns at Record Scale
-
-The BADBOX malware found in generic Android TV boxes returned to large-scale ad fraud, driving a record 40 billion ad requests a day.
-
-*Why it matters:* Advertisers bankroll the operation through fraudulent impressions, and every infected box sits inside a home or office network as attacker infrastructure.
-
-*Flashback:* Takedowns disrupted BADBOX last year. The operators rebuilt the botnet and now run it past its earlier volume.
-
-Sources: BleepingComputer
-
-SECURITY | RANSOMWARE AND CYBERCRIME
-RansomwareHelp Co-Founder Charged With Wire Fraud
-
-Federal prosecutors charged the chief technology officer and co-founder of ransomwarehelp.com with wire fraud after an FBI sting found the firm bought decryption keys from the attackers.
-
-*Why it matters:* Victims paid a markup for recovery work that never happened, and every ransomware negotiation vendor now faces harder questions about what it actually does.
-
-*Zoom in:* The six-year-old Florida business advertised advanced cryptographic tools to restore locked data. The FBI found it paying the ransomware crews instead.
-
-Sources: Krebs on Security
+Sources: The Hacker News
 
 SECURITY | POLICY AND REGULATION
-House Chairmen Rebuke Chinese Open Weight AI
+Trump Names Kirsten Davies National Cyber Director
 
-The House Homeland Security Committee opened an investigation into United States companies that build projects on lower-cost Chinese open weight AI models.
+President Trump tapped Kirsten Davies, the Pentagon's chief information officer, as national cyber director, lifting her out of the acting role.
 
-*Why it matters:* Firms that chose these models to cut costs now face congressional scrutiny over the code, data, and customers those models touch.
+*Why it matters:* Davies will set White House cyber strategy, which the administration frames as America First, steering federal priorities for critical infrastructure owners and their vendors.
 
-Sources: The Record
+*Flashback:* Davies took the job in an acting capacity after Sean Cairncross left the White House.
+
+Sources: SecurityWeek
 
 BUSINESS AND POLITICS
-Tentative Deal Averts West Coast Port Strike
+Argentina's Borrowing Costs Jump Before Milei's Bid
 
-Union security guards and employers at the ports of Los Angeles and Long Beach reached a tentative contract Friday, November 20, hours before the existing deal expired.
+Argentine borrowing costs jumped as President Javier Milei's approval ratings slid and investors questioned his financing plans ahead of his re-election bid, the Financial Times reported Sunday, November 22.
 
-*Why it matters:* A walkout at the two busiest United States ports would have stalled holiday-season container traffic and the supply chains running through them.
+*Why it matters:* Rising yields make Argentina's debt rollovers more expensive and test investor patience with Milei's libertarian program.
 
-Sources: WSJ US Business
+Sources: FT Home
 
 BUSINESS AND POLITICS
-Tech Stocks Fall Into a Bear Market
+U.A.E. Shuttles Oil Past Iranian Forces
 
-United States technology stocks fell into a bear market Friday, November 20, closing their worst week since the Covid-19 crisis, the Financial Times reported.
+The United Arab Emirates is shuttling oil past Iranian forces in the Strait of Hormuz with United States military help, the Wall Street Journal reported Saturday, November 21.
 
-*Why it matters:* Roughly $4 trillion of artificial-intelligence market value has vanished, repricing collateral, credit, and technology-heavy portfolios worldwide.
+*Why it matters:* Keeping crude moving through Hormuz holds down oil prices and limits the damage Iran's strikes do to Gulf exports.
 
-*By the numbers:* The Nasdaq composite turned negative for 2026. Treasury yields plunged as money moved to safety.
+*Flashback:* Volumes shipped through Hormuz have fallen as Iranian strikes increase. One analyst told the Financial Times the recovery in Middle Eastern crude exports looks increasingly fragile.
 
-*Zoom in:* Anthropic shares slid in their second trading session to 5 cents above the $83 offering price, and the blame game started.
-
-*What to watch:* The Securities and Exchange Commission opened an investigation into Nvidia's accounting, the Financial Times reported Friday.
-
-Sources: FT Home, WSJ Markets
+Sources: WSJ World News, FT Markets
 
 BUSINESS AND POLITICS
-Griffin Gives Carnegie Mellon $3 Billion
+Anthropic's Debut Sours Amid AI Selloff
 
-Citadel founder Ken Griffin will give Carnegie Mellon University $3 billion, the Wall Street Journal reported Friday, November 20, after Oxford and MIT passed on his campus plan.
+Anthropic shares slid in their second trading day to within 5 cents of the $83 offering price, and recriminations over the deal began, the Wall Street Journal reported.
 
-*Why it matters:* The gift would stand as the largest single donation in higher education and ties Carnegie Mellon to Griffin's new Miami campus.
+*Why it matters:* The weakest start for the largest initial public offering on record signals investors will no longer fund artificial-intelligence growth at any price.
 
-*Between the lines:* Griffin shopped the Miami campus to the University of Oxford and the Massachusetts Institute of Technology before Carnegie Mellon took it.
+*By the numbers:* The Wall Street Journal put last week's wipeout in artificial-intelligence shares at $4 trillion. Anthropic's listing failed to slow the selling.
 
-Sources: WSJ US Business
+Sources: WSJ Markets
 
-BUSINESS AND POLITICS
-Hormuz Oil Flows Fall as Iran Strikes
+AROUND TOWN
+Light Up Night Fills Downtown Pittsburgh
 
-Oil shipped through the Strait of Hormuz has fallen as Iranian strikes increase, the Financial Times reported Saturday, November 21, leaving Middle Eastern crude exports fragile.
+Thousands packed downtown streets Saturday night, November 21, for the 65th annual Highmark Light Up Night, with tree lightings and ice skating opening Pittsburgh's holiday season.
 
-*Why it matters:* A further drop at the world's most important oil chokepoint would raise freight, insurance, and crude costs for importers.
+*Why it matters:* The night marks the official start of the holiday shopping season in downtown Pittsburgh.
 
-*Zoom in:* The United Arab Emirates now shuttles oil past Iran with United States military help, the Wall Street Journal reported Saturday, November 21.
+*Zoom in:* The City of Pittsburgh sent violence prevention workers through the crowds alongside police as families gathered, WPXI reported.
 
-*Yes, but:* Crude futures fell for a third straight week, as rising Middle East supply outweighed the strikes, the Wall Street Journal reported.
-
-Sources: FT World, WSJ Markets, WSJ World News
+Sources: WPXI, WTAE
 
-PITTSBURGH BUSINESS
-Clark Candies Reopens in Tarentum
+AROUND TOWN
+Warm Sunday Yields to Thanksgiving Travel Storm
 
-Clark Candies, the 89-year-old chocolate shop, held its grand reopening in Tarentum Saturday morning, November 21, with 80-year-old Robert Clark arranging chocolates, TribLive reported.
+Dry, unseasonably warm air holds over Pittsburgh through Sunday, November 22, while a developing coastal storm already flooding Florida threatens East Coast Thanksgiving travel.
 
-*Why it matters:* Tarentum's business district regains a holiday-season draw as the Clark family keeps the chocolate operation running.
+*Why it matters:* Travelers heading from Pittsburgh toward the Atlantic Seaboard next week face delays as the system tracks north.
 
-*What they're saying:* The family told TribLive, "We are stewards of this legacy."
-
-Sources: TribLive
-
-PITTSBURGH BUSINESS
-Fritz Will Lead WVU Medicine's Westmoreland Hospitals
-
-Brian Fritz, a Westmoreland County native, will lead WVU Health System's three hospitals in the county, TribLive reported Saturday, November 21.
-
-*Why it matters:* Fritz takes charge of staffing, service lines, and investment decisions for hospital care across Westmoreland County.
-
-*What they're saying:* Fritz told TribLive he knows he has a big job ahead.
-
-Sources: TribLive
-
-PITTSBURGH BUSINESS
-Free Heat Pump Training Opens to Technicians
-
-The Penn Heat Pump Pathways program gives Pennsylvania heating and cooling technicians free training on heat pump systems, WTAE reported Saturday, November 21.
-
-*Why it matters:* Contractors gain certified installers as homeowners and builders across the state order more energy-efficient equipment.
-
-*The big picture:* The program aims to strengthen the state's workforce and meet rising demand for energy-efficient systems.
+*Zoom in:* Torrential rain closed roads, flooded homes, and forced high-water rescues along Florida's Atlantic coast, WTAE reported, with the threat unfolding over several days.
 
 Sources: WTAE
 
 AROUND TOWN
-PRT Approves Its Bus Line Refresh
+City Mission Hands Out Thanksgiving Boxes
 
-Pittsburgh Regional Transit approved its Bus Line Refresh plan Friday, November 20, after years of development, and will put the redrawn network into service next August, WTAE reported.
+City Mission in Washington, Pennsylvania, held its annual Boxes of Love distribution Friday, November 20, giving community members a turkey and a box of Thanksgiving side dishes.
 
-*Why it matters:* Riders across Allegheny County face new routes, schedules, and transfer points in the agency's first full network redesign in decades.
-
-Sources: WTAE
-
-AROUND TOWN
-Mon-Fayette Expressway Opens Two Sections
-
-Two sections of the southern half of the Mon/Fayette Expressway opened to traffic, WPXI reported Saturday, November 21.
-
-*Why it matters:* Mon Valley drivers gain new highway miles on a toll corridor decades in the making.
+*Why it matters:* The giveaway puts a full holiday dinner on the table for Washington County families who cannot buy one.
 
 Sources: WPXI
-
-AROUND TOWN
-Jeremiah's Place Opens Renovated Wilkinsburg Home
-
-Leaders cut the ribbon Saturday, November 21, on a renovated, larger Wilkinsburg facility for Jeremiah's Place, the region's only crisis nursery, WPXI reported.
-
-*Why it matters:* Parents in crisis across Western Pennsylvania gain more free emergency child care space.
-
-Sources: WPXI
-
-AROUND TOWN
-Costa Rules Out Taxes Under Democratic Trifecta
-
-State Senate Democratic leader Jay Costa said Pennsylvania Democrats will pursue their legislative priorities without raising taxes once the party controls both chambers and the governor's office, KDKA reported Saturday.
-
-*Why it matters:* Western Pennsylvania schools, transit, and social services stand to gain or lose depending on how the new majority spends without new revenue.
-
-*The big picture:* Democrats won control of the state Senate, the state House, and the governor's office in this month's election.
-
-Sources: KDKA
-
-AROUND TOWN
-Delmont Proposes a $2.49 Million Budget
-
-Delmont officials will vote next month on a $2.49 million 2027 budget that calls for no tax increase, TribLive reported Saturday, November 21.
-
-*Why it matters:* Delmont property owners would pay the same rates next year as the borough covers services inside existing revenue.
-
-*What's next:* Borough council takes the budget vote in December.
-
-Sources: TribLive
-
-AROUND TOWN
-A Warm, Dry Weekend Settles Over Pittsburgh
-
-Dry, unseasonably warm air holds over Pittsburgh through Sunday, November 22, WTAE reported Saturday evening, with clouds increasing overnight and lows in the 50s.
-
-*Why it matters:* Holiday shoppers, parade crowds, and Thanksgiving-week travelers get dry roads and no cold snap to plan around.
-
-*By the numbers:* Highs reached the upper 60s Saturday. Temperatures fall through the 50s Saturday evening, WPXI reported.
-
-Sources: WTAE, WPXI, KDKA
-
-EVENTS
-Light Up Night Opens the Holiday Season
-
-Pittsburgh rings in the holiday season with its annual Light Up Night celebration downtown Saturday, November 21, and KDKA published a guide to what to know before heading out.
-
-*Why it matters:* Evening temperatures near 60 degrees give the crowds the mildest conditions of any recent holiday kickoff downtown.
-
-*When:* Saturday, November 21, in the evening.
-
-*Where:* Downtown Pittsburgh, where the Holiday Market has already opened in Market Square.
-
-Sources: KDKA, WPXI
-
-EVENTS
-Greensburg Plans a Holiday Scavenger Hunt
-
-Downtown Greensburg will mark National Small Business Saturday with a holiday scavenger hunt Saturday, November 28, TribLive reported Saturday, November 21.
-
-*Why it matters:* Shoppers get a reason to spend the day with Greensburg's independent merchants during the season's biggest local retail push.
-
-*When:* Saturday, November 28.
-
-*Where:* Downtown Greensburg.
-
-Sources: TribLive
 
 PITTSBURGH
 Weather
 
-Tonight: Mostly Cloudy, low 45F.
+Overnight: Mostly Cloudy, low 45F.
 
-Sunday: Mostly Cloudy, high 67F.
+Sunday: Mostly Cloudy, high 68F.
 
-Sunday Night: Partly Cloudy, low 47F.
+Sunday Night: Partly Cloudy then Chance Rain Showers, low 47F.
 
 SPORTS
 Scoreboard
 
 *Steelers (6-3):* Next: Steelers @ Eagles, Sun Nov 22, 1:00 PM.
 
-*Penguins (7-12):* Sat Nov 21: Penguins 2 - Predators 3 - 8:03 - 2nd (in progress at last update). Next: Penguins @ Stars, Sun Nov 22, 7:00 PM.
+*Penguins (7-13):* Sat Nov 21: Penguins 3 - Predators 4 - Final. Next: Penguins @ Stars, Sun Nov 22, 7:00 PM.
 
 AROUND THE TEAMS
-McCarthy Previews Philadelphia on Steelers Insider
+SNR Drive Picks the Eagles Game
 
-Head coach Mike McCarthy and Bob Pompeani previewed the Week 11 trip to the Philadelphia Eagles on the Steelers Insider video the team posted Saturday, November 21.
+Matt Williamson and Wes Uhler gave their predictions for the Steelers' trip to the Philadelphia Eagles on SNR Drive, which the team posted Saturday night, November 21.
 
-*Why it matters:* Pittsburgh plays the Eagles Sunday, November 22, at 1 p.m. Eastern on CBS, a national window for a team under scrutiny since the Cincinnati loss.
+*Why it matters:* Pittsburgh plays at Philadelphia Sunday, November 22, at 1 p.m. Eastern on CBS.
 
 Sources: Pittsburgh Steelers (YouTube)
 
 TEAM USA
-Levito Takes Third at Finlandia Trophy
+Kansas City Current Win First NWSL Title
 
-American Isabeau Levito finished third at the Finlandia Trophy Grand Prix Saturday, November 21, behind Japan's Mao Shimada, who won her second Grand Prix of the season.
+The Kansas City Current beat the Washington Spirit 2-1 Saturday, November 21, for their first National Women's Soccer League Championship, sealed by a Vanessa DiBernardo strike.
 
-*Why it matters:* Shimada has won both her senior Grand Prix starts at 18, setting the bar American women must clear through the rest of the series.
+*Why it matters:* The Spirit lost a third straight final, and forward Trinity Rodman said this defeat hurt the most.
 
-*Zoom in:* Shimada led after the women's short program Friday, November 20, and held the lead through the free skate.
-
-Sources: ESPN Olympics
-
-TEAM USA
-Amorim Calls Pulisic Irreplaceable at Milan
-
-AC Milan head coach Ruben Amorim called Christian Pulisic "the player we cannot replace," ESPN reported Saturday, November 21.
-
-*Why it matters:* Pulisic's first-choice role in Serie A matters to a United States men's national team that awaits a new head coach and leans on him for goals.
-
-Sources: ESPN Soccer
-
-TEAM USA
-Current and Spirit Meet for the NWSL Title
-
-The Kansas City Current play the Washington Spirit for the National Women's Soccer League Championship Saturday, November 21, with defender Kayla Sharples saying her team peaks at the right time.
-
-*Why it matters:* A win would hand Kansas City its first league title, and United States internationals fill both rosters.
-
-*Flashback:* Sharples told ESPN this Kansas City squad is better positioned to win than last year's more dominant team, which came up short.
-
-Sources: ESPN Soccer
-
-TEAM USA
-Pochettino Credits the USMNT Pressure
-
-Mauricio Pochettino said Saturday, November 21, that the "massive" pressure of coaching the United States men's national team at the World Cup prepared him for Manchester United.
-
-*Why it matters:* U.S. Soccer still hunts a successor while its departed coach turns the World Cup run into leverage in the Premier League.
+*Zoom in:* DiBernardo scored direct from a corner kick, an Olimpico that put her on ESPN's list of the best alongside Megan Rapinoe and Christian Pulisic.
 
 Sources: ESPN Soccer
 
 READING | ED ZITRON
 Premium: Bursting Bubbles
 
-Zitron argues boom-and-bust bubbles destroy value broadly and enrich only the earliest, wealthiest insiders who cash out before the collapse.
+Zitron argues the boom-and-bust bubble cycle is destructive and enriches only the wealthiest insiders who buy in early and exit before the collapse.
 
 READING | STRATECHERY
 An Interview With Eric Seufert About Agentic Commerce
 
-Seufert argues advertising will pay for agentic commerce, and Ben Thompson wants retailers built to serve shopping agents.
+Ben Thompson and Eric Seufert dig into agentic commerce, with Seufert arguing advertising will pay for it and Thompson wanting retailers built for shopping agents.
 
 READING | CAL NEWPORT
 In Search of the Deep Life
 
-Newport traces his pandemic-era daily essay streak into a broader argument about how to build what he calls the deep life.
+Newport looks back on his pandemic-era essay streak and takes up his longtime question of what a deep life requires.
