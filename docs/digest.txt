@@ -1,13 +1,13 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Sunday, November 22, 2026 - 8:05 AM EST
+Sunday, November 22, 2026 - 7:36 PM EST
 ================================================================
 
-Suspected China-linked hackers let autonomous Cairn AI agents
-find and exploit a MONAI Label zero-day, taking root on a
-university server.
+Hackers exploited a GL.iNet cloud flaw to plant router backdoors
+as attacker AI agents found their own zero-day in medical
+imaging software.
 
-Quiet day: only 42 security items in the last 48 hours.
+Quiet day: only 24 security items in the last 48 hours.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -15,41 +15,57 @@ Health
 
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
-* [TREND] Cairn agents found and exploited a MONAI Label
-  zero-day, pwn.ai escaped Ghostscript's sandbox, and Signal
-  will block agents from screenshotting chats.
-  see: Cairn Agents Exploit MONAI Label Zero-Day; pwn.ai Breaks
-  Ghostscript Sandbox With Uploads; Signal Blocks AI Agents From
+* [TREND] Attackers broke GL.iNet cloud management to backdoor
+  routers and hit Cleverbridge checkout, stealing card numbers
+  and CVVs from thousands of downstream customers.
+  see: Hackers Exploit GL.iNet Cloud to Plant Backdoors;
+  Cleverbridge Breach Exposes Card Numbers and CVVs
+* [TREND] Cairn agents found the MONAI Label zero-day, Bazuka
+  wires LLMs into Android credential theft, and Signal now
+  blocks Siri and Gemini from screenshotting chats.
+  see: Cairn Agents Exploit MONAI Label Zero-Day; Bazuka Malware
+  Adds LLM Control to Android; Signal Blocks AI Agents From
   Screenshotting Chats
-* [UPDATE (new)] Unit 42 says Com affiliates phone healthcare
-  and finance staff to loot cloud accounts, while ThreatFabric's
-  Bazuka hides Android credential theft behind fake overlays.
-  see: Com Affiliates Steal Cloud Data by Phone; Bazuka Malware
-  Adds LLM Control to Android
-* [TREND] OpenRouter cut three inference providers after Dragos
-  found attackers siphoning customer prompts for months, data
-  most enterprises cannot see.
-  see: OpenRouter Drops Three AI Inference Providers
-* [TREND] NSA resumed normal operations after a network
-  disruption, the FBI probes an NCIC hack, and Trump named
-  Kirsten Davies national cyber director.
-  see: NSA Resumes Operations After Network Disruption; FBI
-  Investigates Hack of NCIC Database; Trump Names Kirsten Davies
-  National Cyber Director
-* [UPDATE (new)] Finland's prime minister blamed Ukraine for the
-  drone attack that left a sanctioned Russian cargo ship ablaze
-  in Finnish waters.
-  see: Ukraine Blamed for Ship Attack in Finnish Waters
-* [UPDATE (new)] Westmoreland would tap reserves for a $452
-  million 2027 budget, and new studies back education for Penn
-  State New Kensington's closing campus.
-  see: Westmoreland Leans on Reserves for $452 Million Budget;
-  Education Tops Reuse Ideas for New Kensington Campus
+* [TREND] Dragos traced months of stolen prompts to three
+  OpenRouter providers, the FBI probes an NCIC hack, and Com
+  affiliates phone staff to drain cloud data.
+  see: OpenRouter Drops Three AI Inference Providers; FBI
+  Investigates Hack of NCIC Database; Com Affiliates Steal Cloud
+  Data by Phone
+* [UPDATE (new)] House Democrats clinched 258 seats, COP31
+  collapsed over fossil fuels, and Bessent declined to rule out
+  Jensen Huang's return to Nvidia.
+  see: Democrats Clinch Largest House Majority Since 1992; COP31
+  Climate Talks Collapse Over Fossil Fuels; Bessent Won't Rule
+  Out Huang's Nvidia Return
+* [UPDATE (new)] Delta's automation failure delayed about 1,000
+  flights through Atlanta, a federal court voided
+  pregnant-worker accommodations, and Allegheny County flagged
+  South Side's Mad Chicken.
+  see: Delta Outage Delays Flights Before Thanksgiving; Appeals
+  Court Voids Pregnant Worker Accommodations; Health Department
+  Flags South Side's Mad Chicken
 
 SECURITY
 ----------------------------------------------------------------
 
-1. FBI INVESTIGATES HACK OF NCIC DATABASE
+1. CAIRN AGENTS EXPLOIT MONAI LABEL ZERO-DAY
+   Nation-State Activity · [zero-day, ai, apt]
+   Amazon Threat Intelligence pinned the agent-discovered flaw
+   to MONAI Label 0.8.5 and earlier in default setups, where an
+   attacker with no account writes files outside the storage
+   folder.
+   Why it matters: Every internet-exposed MONAI Label server in
+   that configuration offers suspected China-linked operators
+   the same unauthenticated path to root that took a university
+   server.
+   - What to do: Locate MONAI Label deployments, move off 0.8.5
+     and earlier, and pull the servers off the public internet.
+   - SecurityWeek: https://www.securityweek.com/amazon-china-linked-hackers-ai-agents-exploited-medical-software-zero-day/
+   - The Hacker News: https://thehackernews.com/2026/11/attackers-ai-agents-found-zero-day-in.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/hackers-use-autonomous-ai-tool-cairn-to-find-zero-day-take-over-server/
+
+2. FBI INVESTIGATES HACK OF NCIC DATABASE
    Data Breaches · [breach, government]
    The FBI opened an investigation into an apparent hack of the
    National Crime Information Center, the criminal justice
@@ -62,7 +78,7 @@ SECURITY
    - SecurityWeek: https://www.securityweek.com/fbi-investigating-apparent-hack-of-its-key-national-criminal-justice-database-ap-source-says/
    - BleepingComputer: https://www.bleepingcomputer.com/news/security/fbi-reportedly-hacked-again-this-time-targeting-nationwide-police-database/
 
-2. OPENROUTER DROPS THREE AI INFERENCE PROVIDERS
+3. OPENROUTER DROPS THREE AI INFERENCE PROVIDERS
    AI Security · [ai, breach, supply-chain]
    OpenRouter cut three AI inference providers from its routing
    pool after Dragos found attackers had stolen customer
@@ -82,7 +98,48 @@ SECURITY
    - The Hacker News: https://thehackernews.com/2026/11/openrouter-drops-3-providers-after.html
    - Ars Technica Security: https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/
 
-3. PWN.AI BREAKS GHOSTSCRIPT SANDBOX WITH UPLOADS
+4. SIGNAL BLOCKS AI AGENTS FROM SCREENSHOTTING CHATS
+   AI Security · [ai, privacy, mobile]
+   Signal will block screenshots on iOS 27 and stop assistants
+   including Apple's Siri and Google's Gemini from capturing
+   conversations on supported Android devices.
+   Why it matters: On-device agents read whatever the screen
+   displays, so end-to-end encryption stops protecting a message
+   the moment it renders.
+   - Zoom in: The restriction covers agentic systems built into
+     iOS 27 and Android versions where Signal can detect an
+     assistant trying to read the app.
+   - The Hacker News: https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/signal-to-block-siri-gemini-ai-from-capturing-chats-on-ios-android/
+
+5. HACKERS EXPLOIT GL.INET CLOUD TO PLANT BACKDOORS
+   Vulnerabilities and Exploits · [iot, malware, exploit]
+   GL.iNet confirmed that hackers exploited a flaw in its cloud
+   remote management services to install custom malware on
+   customer routers and KVM devices.
+   Why it matters: A compromised router hands attackers a
+   persistent foothold inside home and small-business networks
+   and a view of the traffic passing through.
+   - Zoom in: Affected users report backdoors and reverse shells
+     that give remote access to infected devices.
+   - What to do: Turn off GL.iNet cloud remote management.
+     Inspect routers and KVM devices for unexpected listeners
+     and outbound connections.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/
+
+6. CLEVERBRIDGE BREACH EXPOSES CARD NUMBERS AND CVVS
+   Data Breaches · [breach, payments, ecommerce]
+   Cleverbridge warned that hackers breached its systems and
+   stole customer payment card information, including credit
+   card numbers and CVV security codes.
+   Why it matters: Card numbers paired with CVVs enable
+   immediate card-not-present fraud, and Cleverbridge runs
+   checkout for software vendors worldwide.
+   - What to do: Replace cards used on Cleverbridge checkout
+     pages and watch those accounts for fraudulent charges.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/cleverbridge-warns-hackers-stole-credit-card-numbers-cvvs-in-data-breach/
+
+7. PWN.AI BREAKS GHOSTSCRIPT SANDBOX WITH UPLOADS
    Vulnerabilities and Exploits · [rce, patch, open-source]
    Security firm pwn.ai showed that a crafted file escapes
    Ghostscript's security sandbox and runs commands on the
@@ -96,49 +153,7 @@ SECURITY
      for conversion.
    - The Hacker News: https://thehackernews.com/2026/11/researchers-demonstrate-ghostscript.html
 
-4. CAIRN AGENTS EXPLOIT MONAI LABEL ZERO-DAY
-   Nation-State Activity · [zero-day, ai, apt]
-   Amazon Threat Intelligence pinned the agent-discovered flaw
-   to MONAI Label 0.8.5 and earlier in default setups, where an
-   attacker with no account writes files outside the storage
-   folder.
-   Why it matters: Every internet-exposed MONAI Label server in
-   that configuration offers suspected China-linked operators
-   the same unauthenticated path to root that took a university
-   server.
-   - What to do: Locate MONAI Label deployments, move off 0.8.5
-     and earlier, and pull the servers off the public internet.
-   - SecurityWeek: https://www.securityweek.com/amazon-china-linked-hackers-ai-agents-exploited-medical-software-zero-day/
-   - The Hacker News: https://thehackernews.com/2026/11/attackers-ai-agents-found-zero-day-in.html
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/hackers-use-autonomous-ai-tool-cairn-to-find-zero-day-take-over-server/
-
-5. SIGNAL BLOCKS AI AGENTS FROM SCREENSHOTTING CHATS
-   AI Security · [ai, privacy, mobile]
-   Signal will restrict screenshots by default on Android and
-   iOS to stop AI agents from reading private chats, and calls
-   the protection incomplete.
-   Why it matters: On-device agents read whatever the screen
-   displays, so end-to-end encryption stops protecting a message
-   the moment it renders.
-   - Zoom in: The restriction covers agentic systems built into
-     iOS 27 and Android versions where Signal can detect an
-     assistant trying to read the app.
-   - The Hacker News: https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html
-
-6. TRUMP NAMES KIRSTEN DAVIES NATIONAL CYBER DIRECTOR
-   Policy and Regulation · [policy, government]
-   President Trump tapped Kirsten Davies, the Pentagon's chief
-   information officer, as national cyber director, lifting her
-   out of the acting role.
-   Why it matters: Davies will set White House cyber strategy,
-   which the administration frames as America First, steering
-   federal priorities for critical infrastructure owners and
-   their vendors.
-   - Flashback: Davies took the job in an acting capacity after
-     Sean Cairncross left the White House.
-   - SecurityWeek: https://www.securityweek.com/president-trump-taps-kirsten-davies-as-national-cyber-director/
-
-7. COM AFFILIATES STEAL CLOUD DATA BY PHONE
+8. COM AFFILIATES STEAL CLOUD DATA BY PHONE
    Data Breaches · [social-engineering, extortion, cloud]
    Unit 42 detailed how Com affiliates phone employees at
    healthcare and finance firms, hijack their accounts, and pull
@@ -151,7 +166,7 @@ SECURITY
      cloud data stores.
    - Unit 42 (Palo Alto): https://unit42.paloaltonetworks.com/com-affiliate-vishing-attacks/
 
-8. BAZUKA MALWARE ADDS LLM CONTROL TO ANDROID
+9. BAZUKA MALWARE ADDS LLM CONTROL TO ANDROID
    AI Security · [malware, mobile, ai]
    ThreatFabric disclosed Bazuka, an Android malware framework
    that wires large language models into victim management and
@@ -164,18 +179,65 @@ SECURITY
      an investigation into an NFC-relay banking trojan.
    - The Hacker News: https://thehackernews.com/2026/11/bazuka-android-malware-uses-fake-screen.html
 
-9. NSA RESUMES OPERATIONS AFTER NETWORK DISRUPTION
-   Policy and Regulation · [government]
-   The National Security Agency resumed normal operations after
-   days of disruption on its internal networks, and kept certain
-   facilities under Code Orange.
-   Why it matters: Delayed openings and supervisor check-ins for
-   non-essential employees show the agency has not fully closed
-   out the incident.
-   - The Record: https://therecord.media/nsa-resumes-normal-operations-following-internal-disruptions
+10. TRUMP NAMES KIRSTEN DAVIES NATIONAL CYBER DIRECTOR
+   Policy and Regulation · [policy, government]
+   President Trump tapped Kirsten Davies, the Pentagon's chief
+   information officer, as national cyber director, lifting her
+   out of the acting role.
+   Why it matters: Davies will set White House cyber strategy,
+   which the administration frames as America First, steering
+   federal priorities for critical infrastructure owners and
+   their vendors.
+   - Flashback: Davies took the job in an acting capacity after
+     Sean Cairncross left the White House.
+   - SecurityWeek: https://www.securityweek.com/president-trump-taps-kirsten-davies-as-national-cyber-director/
 
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
+* Bessent Won't Rule Out Huang's Nvidia Return
+  Treasury Secretary Scott Bessent refused Sunday, November 22,
+  to rule out Jensen Huang's return to Nvidia, saying it depends
+  on "where the buck stops," as President Trump urged
+  reinstatement.
+  Why it matters: Nvidia's leadership stays unresolved, leaving
+  the stock that anchors global equity benchmarks exposed to
+  another swing.
+  - Zoom in: The Wall Street Journal reported Sunday that Li
+    Ming, the Megaspeed defendant accused of funneling Nvidia
+    chips to China, worked with Alice Huang, Jensen Huang's
+    romantic partner.
+  - FT Home: https://www.ft.com/content/91b7a3a6-8ac5-4327-ad03-6d951f287346?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/tech/li-ming-megaspeed-nvidia-chips-china-6260d836?mod=rss_worldnews
+* COP31 Climate Talks Collapse Over Fossil Fuels
+  United Nations climate talks in Turkey ended Sunday, November
+  22, with no overall agreement after a European Union-led bloc
+  rejected a draft text that omitted any mention of fossil
+  fuels.
+  Why it matters: Governments lose the shared framework that
+  guides energy transition policy, adding uncertainty for
+  companies planning emissions targets and capital spending.
+  - Between the lines: Saudi Arabia and the Arab group clashed
+    directly with the European coalition. Ireland's climate
+    minister, Darragh O'Brien, called a text with no reference
+    to fossil fuels unconscionable.
+  - WSJ World News: https://www.wsj.com/world/u-n-climate-talks-collapse-over-fossil-fuel-rift-c70ee620?mod=rss_worldnews
+  - FT Home: https://www.ft.com/content/1b6089f6-2201-43b4-8ed4-0c689a916afa?syn-25a6b1a6=1
+  - The Economist: https://www.economist.com/international/2026/11/22/the-messy-breakdown-of-the-uns-latest-climate-conference
+* Democrats Clinch Largest House Majority Since 1992
+  House Democrats will open the new Congress with at least 258
+  seats, their largest majority this century, and plan to
+  investigate corruption claims against the Trump
+  administration.
+  Why it matters: Representative Richard Neal vows hearings to
+  unwind President Trump's tax and tariff measures, putting
+  corporate trade and tax planning back in play.
+  - Between the lines: Michigan Senator-elect Abdul El-Sayed
+    helped ignite a challenge to Democratic leader Chuck
+    Schumer, a sign the incoming caucus will not move in
+    lockstep.
+  - FT Home: https://www.ft.com/content/9d2983a7-196d-4164-a0c1-e262f32fd8c9?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/8af97161-2ae0-4655-9f8b-a560f9227359?syn-25a6b1a6=1
+  - WSJ Politics: https://www.wsj.com/politics/abdul-el-sayed-is-already-shaking-up-the-senate-72675805?mod=rss_socialpoliticsfeed
 * Ukraine Blamed for Ship Attack in Finnish Waters
   Finland's prime minister attributed Saturday's drone attack on
   a sanctioned Russian cargo ship, left ablaze in Finnish
@@ -184,7 +246,11 @@ BUSINESS AND POLITICS
   Why it matters: An attack inside the waters of NATO member
   Finland pulls the Russia-Ukraine war into the Baltic and
   raises escalation risk for the alliance.
+  - Zoom in: A Russian warship sank at a Libyan port after the
+    Baltic Sea strike, the Wall Street Journal reported Sunday,
+    November 22, as the war's fallout spread far from Ukraine.
   - FT Home: https://www.ft.com/content/2c959c95-97a5-4957-9eb2-8436c34ba374?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/europe/russian-ships-struck-in-attacks-far-from-ukraine-as-wars-fallout-spreads-a51964cb?mod=rss_worldnews
 * Argentina's Borrowing Costs Jump Before Milei's Bid
   Argentine borrowing costs jumped as President Javier Milei's
   approval ratings slid and investors questioned his financing
@@ -224,18 +290,37 @@ BUSINESS AND POLITICS
     dot-com bubble, the Journal wrote Sunday, November 22.
   - WSJ Markets: https://www.wsj.com/finance/stocks/the-blame-game-has-begun-over-anthropics-turbulent-trading-debut-280a34b1?mod=rss_markets_main
   - WSJ Markets: https://www.wsj.com/finance/stocks/anthropics-ipo-bust-punctuates-4-trillion-ai-wipeout-on-wall-street-f1f1ec90?mod=rss_markets_main
-  - FT Home: https://www.ft.com/content/d501198c-14a4-4b96-8880-c3997545902e
+  - FT Markets: https://www.ft.com/content/d501198c-14a4-4b96-8880-c3997545902e
   - WSJ Markets: https://www.wsj.com/finance/stocks/has-the-ai-bubble-already-burst-2f1dcca8?mod=rss_markets_main
 
 PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  Today: Mostly Cloudy, high 68F.
-  Tonight: Partly Cloudy then Chance Rain Showers, low 47F.
-  Monday: Chance Rain Showers then Partly Sunny, high 52F.
+  Tonight: Mostly Cloudy then Chance Light Rain, low 47F.
+  Monday: Chance Light Rain then Partly Sunny, high 53F.
+  Monday Night: Mostly Clear, low 31F.
 
 Business:
+* Eat'n Park Lands on Most Loved Workplaces
+  Eat'n Park Hospitality Group earned a place on the America's
+  Most Loved Workplaces ranking, WPXI reported Sunday, November
+  22.
+  Why it matters: The recognition gives Eat'n Park a recruiting
+  edge over rival restaurant employers across Western
+  Pennsylvania.
+  - By the numbers: The list scores employee sentiment across
+    five areas: workplace collaboration, values alignment,
+    career achievement, respect at all levels, and how workers
+    view their future at the company.
+  - WPXI: https://www.wpxi.com/news/local/eatn-park-hospital-group-named-one-americas-most-loved-workplaces/IVYS2QZZHRB3JP2BTHUXFFX4TY/
+* Health Department Flags South Side's Mad Chicken
+  The Allegheny County Health Department issued a consumer alert
+  for Mad Chicken, the restaurant on Pittsburgh's South Side,
+  WPXI reported Sunday, November 22.
+  Why it matters: South Side diners now have public notice that
+  county inspectors found problems at the restaurant.
+  - WPXI: https://www.wpxi.com/news/local/mad-chicken-pittsburghs-south-side-hit-with-consumer-alert/KTRIAA5O3NDRRPRXIVXYLD2AAE/
 * Education Tops Reuse Ideas for New Kensington Campus
   Two studies of community engagement and real estate found
   education remains the favored reuse for Penn State New
@@ -255,6 +340,41 @@ Business:
   - TribLive: https://triblive.com/opinion/editorial-westmoreland-commissioners-rely-on-easy-out-with-fund-balance/
 
 Around town:
+* Delta Outage Delays Flights Before Thanksgiving
+  A failure in Delta Air Lines' automation system delayed about
+  1,000 flights Sunday, November 22, concentrated at
+  Hartsfield-Jackson Atlanta International Airport, as
+  Thanksgiving travel picked up.
+  Why it matters: Pittsburgh travelers routed through Atlanta
+  risk missed connections little more than a week after a
+  nationwide ground stop snarled air travel.
+  - By the numbers: Well over half of Delta's Sunday flights ran
+    late, WPXI reported. KDKA tied the breakdown to the
+    airline's baggage network system.
+  - WTAE: https://www.wtae.com/article/delta-flights-delayed-nov-22/74501480
+  - KDKA: https://www.cbsnews.com/pittsburgh/news/delta-air-lines-nationwide-delays-amid-baggage-network-system-issue/
+  - WPXI: https://www.wpxi.com/news/local/issue-with-automation-system-causes-delta-flight-delays-atlanta/VYIDWNOTXNAB3G6SLZOKX3ZMFI/
+* Families Fight Dissolution of USO Sports Co-op
+  Parents and student athletes urged Pittsburgh Public Schools
+  to negotiate a new cooperative before dissolving USO, the
+  shared sports program for University Prep, Science &
+  Technology Academy, and Obama Academy.
+  Why it matters: Athletes at the three city high schools risk
+  losing teams if the district ends the grouping without a
+  replacement arrangement.
+  - What they're saying: Families told TribLive that breaking up
+    USO without thoughtful planning will bring unintended
+    consequences for the students who play on the combined
+    teams.
+  - TribLive: https://triblive.com/news/education-classroom/students-parents-urge-pittsburgh-schools-to-negotiate-a-new-co-op-before-dissolving-uso-sports-grouping/
+* Appeals Court Voids Pregnant Worker Accommodations
+  A federal appeals court struck down the 2022 law requiring
+  workplaces to accommodate pregnant workers, ruling that
+  Congress violated the Constitution when it passed the measure.
+  Why it matters: Pregnant employees lose a federal guarantee of
+  accommodations such as light duty, and employers fall back on
+  a patchwork of state rules.
+  - WPXI: https://www.wpxi.com/news/national/appeals-court-says-federal-law-requiring-accommodations-pregnant-workers-is-unconstitutional/Q2KMC7LEDZDS5OZ6YAYN7XDFEI/
 * Norwin Hires Irwin Officer as Resource Officer
   The Norwin School District hired an Irwin police officer as a
   school resource officer, and the Irwin department now looks to
@@ -301,29 +421,52 @@ Around town:
 SPORTS
 ----------------------------------------------------------------
 
-Steelers (6-3)
-  Up Next · Steelers @ Eagles · Sun Nov 22, 1:00 PM
+Steelers (6-4)
+  Sun Nov 22 · Steelers 16 · Eagles 19 · Final
+    Eagles snap 7-game losing streak and keep Steelers winless
+    in Philly since 1965 with 19-16 victory
     https://plaintextsports.com/nfl/2026/week11/pit-phi
+  Up Next · Broncos @ Steelers · Fri Nov 27, 3:00 PM
+    https://plaintextsports.com/nfl/2026/week12/den-pit
 
 Penguins (7-13)
   Sat Nov 21 · Penguins 3 · Predators 4 · Final
     Struble and Marchessault lead the Predators to a 4-3 win
     over the Penguins
     https://plaintextsports.com/nhl/2026-11-21/pit-nsh
-  Up Next · Penguins @ Stars · Sun Nov 22, 7:00 PM
+  Sun Nov 22 · Penguins 0 · Stars 0 · 5:21 - 1st (in progress at
+    last update)
     https://plaintextsports.com/nhl/2026-11-22/pit-dal
+  Up Next · Flames @ Penguins · Wed Nov 25, 7:00 PM
+    https://plaintextsports.com/nhl/2026-11-25/cgy-pit
 
 Around the Teams:
-* SNR Drive Picks the Eagles Game
-  Matt Williamson and Wes Uhler gave their predictions for the
-  Steelers' trip to the Philadelphia Eagles on SNR Drive, which
-  the team posted Saturday night, November 21.
-  Why it matters: Pittsburgh plays at Philadelphia Sunday,
-  November 22, at 1 p.m. Eastern on CBS.
-  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=U9nYKq4R2-w
-  - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/RgXUpnWweAk
+* McCarthy and Rodgers Address Philadelphia Defeat
+  Mike McCarthy, Aaron Rodgers, and T.J. Watt answered questions
+  about the Week 11 loss to the Philadelphia Eagles in a
+  postgame news conference the Steelers posted Sunday, November
+  22.
+  Why it matters: The passing game draws the questions again, a
+  week after the same complaints followed the trip to
+  Cincinnati.
+  - Zoom in: Troy Fautanu, Patrick Queen, Max Hurleman, Jaylen
+    Warren, and Roman Wilson reacted on Press Pass. The team
+    flagged Wilson's return to the lineup before kickoff.
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=CHvGYDg_xuE
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=nwYRq8OFBj4
+  - Pittsburgh Steelers (YouTube): https://www.youtube.com/shorts/bRhmtiI1lh4
 
 Team USA:
+* Pulisic Caps Milan Rout With Solo Goal
+  Christian Pulisic scored a solo goal Sunday, November 22, as
+  AC Milan beat Frosinone 5-1 at San Siro and moved into the
+  Serie A top four.
+  Why it matters: Pulisic stays in form for the United States
+  men's national team while U.S. Soccer searches for a head
+  coach to replace Mauricio Pochettino.
+  - Zoom in: The result was Milan's biggest win of the season
+    under head coach Rubén Amorim.
+  - ESPN Soccer: https://www.espn.com/soccer/report/_/gameId/401874989
 * Manchester United Eye Fullback Antonee Robinson
   Fulham left back Antonee Robinson, a United States men's
   national team starter, has drawn reported interest from
@@ -372,25 +515,27 @@ MARKETS (weekly average, change vs prior week)
 S&P 500     7,233.39  ▼ -4.4%
 Dow        49,962.03  ▼ -4.6%
 Nasdaq     23,952.99  ▼ -5.2%
-WTI crude      84.32  ▼ -3.5%
+WTI crude      84.44  ▼ -3.3%
 EUR/USD       1.0992  ▼ -1.3%
 GBP/USD       1.3168  ▼ -1.2%
 USD/JPY       159.58  ▲ +0.4%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 42 items in the 48-hour window.
-  No recent items: SANS Internet Storm Center, CISA Advisories,
-  Securelist (Kaspersky), Sophos News, Google Online Security
-  Blog, Cisco Talos, Google Project Zero, The DFIR Report, Kim
-  Zetter (Zero Day), Frank on Fraud.
+Security: 24 of 24 feeds loaded, 24 items in the 48-hour window.
+  No recent items: Schneier on Security, Dark Reading, CISA
+  Advisories, The Record, Ars Technica Security, Securelist
+  (Kaspersky), Sophos News, Unit 42 (Palo Alto), Google Online
+  Security Blog, Cisco Talos, Graham Cluley, Microsoft Security
+  Blog, Google Project Zero, The DFIR Report, Kim Zetter (Zero
+  Day), Frank on Fraud.
 Pittsburgh: 8 of 9 feeds loaded, 60 items in the 48-hour window.
   Failed: Pittsburgh Post-Gazette (HTTPError: HTTP Error 301:
   The HTTP server returned a redirect error that would lead to
   an infinite loop. The last 30x error message was: Moved
   Permanently). No recent items: Pittsburgh City Paper,
-  NEXTpittsburgh.
-Business and Politics: 8 of 8 feeds loaded, 58 items in the
+  NEXTpittsburgh, Pittsburgh Magazine.
+Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
 Events: 2 of 4 feeds loaded, 3 items in the 120-hour window.
   Failed: Post-Gazette Arts & Entertainment (HTTPError: HTTP
@@ -400,7 +545,7 @@ Events: 2 of 4 feeds loaded, 3 items in the 120-hour window.
   Error 301: The HTTP server returned a redirect error that
   would lead to an infinite loop. The last 30x error message
   was: Moved Permanently).
-Sports media: 4 of 6 feeds loaded, 16 items in the 96-hour
+Sports media: 4 of 6 feeds loaded, 17 items in the 96-hour
   window. Failed: Post-Gazette Pirates (HTTPError: HTTP Error
   301: The HTTP server returned a redirect error that would lead
   to an infinite loop. The last 30x error message was: Moved
@@ -409,17 +554,16 @@ Sports media: 4 of 6 feeds loaded, 16 items in the 96-hour
   to an infinite loop. The last 30x error message was: Moved
   Permanently). No recent items: Footbahlin with Ben
   Roethlisberger, Ben Roethlisberger / Channel Seven (YouTube).
-Team USA: 3 of 3 feeds loaded, 24 items in the 72-hour window.
-  No recent items: Guardian Olympics.
+Team USA: 3 of 3 feeds loaded, 26 items in the 72-hour window.
 Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (320s of
-  model time; $1.79 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (336s of
+  model time; $1.88 at API list price).
 
 ================================================================
-Generated 2026-11-22 08:05 EST. Updated weekdays at about 7:05
+Generated 2026-11-22 19:36 EST. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
