@@ -1,10 +1,11 @@
 ================================================================
 INFOSECFOLLOW -- security, markets, business, pittsburgh
-Tuesday, November 24, 2026 - 10:05 AM EST
+Tuesday, November 24, 2026 - 1:36 PM EST
 ================================================================
 
-Broadcom patches another critical vCenter authentication bypass
-as Britain's NCSC reports a marked rise in AI-assisted attacks.
+Britain's cyber agency logs a marked rise in AI-assisted attacks
+as hacked Check Point servers and an 11-minute zero-day exploit
+show the speed.
 
 CONTENTS: Emerging Trends and Key Updates | Security | Business
 and Politics | Pittsburgh | Sports | Reading | Markets | Feed
@@ -13,114 +14,61 @@ Health
 EMERGING TRENDS AND KEY UPDATES
 ----------------------------------------------------------------
 * [TREND] Britain's NCSC logged a marked rise in AI-assisted
-  attacks since September, as Cairn agents hit root in 11
-  minutes and Shirudo ships eBPF countermeasures.
+  attacks as Cairn agents hit root in 11 minutes and OpenAI
+  countered with Shirudo.
   see: NCSC Flags Marked Rise in AI Attacks; Cairn Agents Reach
   Root in 11 Minutes; OpenAI and Cisco Ship Shirudo Shield
-* [TREND] Attackers now breach the tools defenders run: CISA
-  flagged N-able MailAssure's 9.3 SSRF, and Broadcom patched a
-  9.8 vCenter authentication bypass.
+* [TREND] Attackers are looting cloud control planes, with
+  Radware leaking customer cloud keys and token hunters raiding
+  Equinor's Azure API Management.
+  see: Radware Breach Exposes Customer Cloud Keys; Norway Names
+  Equinor in Azure Token Hunt
+* [UPDATE (updated)] CISA set a Thanksgiving deadline for N-able
+  MailAssure's 9.3 SSRF as Broadcom shipped a fix for a 9.8
+  vCenter authentication bypass.
   see: CISA Flags Exploited N-able MailAssure Flaw; Broadcom
   Patches New Critical vCenter Flaw
-* [TREND] Energy operators keep disclosing intrusions, with
-  Equinor hunted for Azure tokens and Peninsula Energy halting
-  ASX trading after its Wyoming uranium hack.
-  see: Norway Names Equinor in Azure Token Hunt; Peninsula
-  Energy Halts Trading After Mine Hack
-* [UPDATE (new)] Okta tied its O-UNC-053 voice phishing cluster,
-  long linked to ShinyHunters, to a new leak site branded
-  INCEPTION.
-  see: Okta Ties ShinyHunters Crew to INCEPTION
-* [UPDATE (updated)] The AI trade wobbled as Anthropic slid
-  below its $83 offering price and Republicans revolted over
-  Nvidia's reinstatement of Jensen Huang.
+* [UPDATE (new)] Volant Manticore backdoored Cyprus telecoms
+  with KuboShell, while ShinyHunters relaunched a leak site and
+  Okta tied its vishing crew to INCEPTION.
+  see: Volant Manticore Backdoors Cyprus Telecom Networks; Okta
+  Ties ShinyHunters Crew to INCEPTION
+* [TREND] AI euphoria is cracking as Anthropic slips below its
+  $83 offering price, Congress revolts over Jensen Huang, and
+  Zitron attacks accelerationism.
   see: Nasdaq Futures Fall as AI Doubts Return; Congress Attacks
-  Huang's Nvidia Reinstatement
-* [UPDATE (new)] Pennsylvania braces for 3.45 million Turnpike
-  vehicles this Thanksgiving, while 21 states sue HUD over its
-  housing aid citizenship rule.
-  see: Thanksgiving Rain Meets 3.45 Million Drivers; States Sue
-  HUD Over Housing Citizenship Rule
+  Huang's Nvidia Reinstatement; Defective Accelerationism
+* [UPDATE (new)] Pittsburgh waives metered parking for
+  Thanksgiving weekend as the Turkey Trot shuts downtown streets
+  Thursday and 3.45 million vehicles crowd the Turnpike.
+  see: Pittsburgh Waives Meter Fees Over Thanksgiving; Turkey
+  Trot Closes Downtown Streets Thursday; Thanksgiving Rain Meets
+  3.45 Million Drivers
 
 SECURITY
 ----------------------------------------------------------------
 
-1. NORWAY NAMES EQUINOR IN AZURE TOKEN HUNT
-   Critical Infrastructure Security · [cloud, credentials]
-   Norway's National Security Authority said an unknown actor
-   hunted access tokens, secrets, and named values in Azure API
-   Management, hitting energy firms Equinor and Skagerak Energi.
-   Why it matters: Stolen gateway credentials reach the backend
-   systems an API fronts, turning one cloud flaw into access
-   across Norwegian energy operations and other sectors.
-   - What to do: Microsoft closed the flaw in Azure API
-     Management Classic tiers. Rotate every secret, named value,
-     and subscription key stored in the service.
-   - Yes, but: The National Security Authority says it remains
-     uncertain how the actor exploited the vulnerability.
-   - The Hacker News: https://thehackernews.com/2026/11/microsoft-fixes-azure-api-management.html
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/microsoft-azure-flaw-exploited-to-steal-customers-api-credentials/
-   - SecurityWeek: https://www.securityweek.com/azure-flaw-exploited-to-target-secrets-at-norwegian-energy-firms/
-   - Help Net Security: https://www.helpnetsecurity.com/2026/11/24/azure-apim-vulnerability-credential-theft/
-
-2. OPENAI AND CISCO SHIP SHIRUDO SHIELD
-   AI Security · [ai, patch]
-   OpenAI and Cisco released Shirudo, an open-source Linux
-   runtime that lets AI agents write dynamic eBPF controls
-   blocking exploit behavior with no restart.
-   Why it matters: Testing and deploying a Linux patch takes
-   days or weeks, and the vulnerable service stays exposed the
-   whole time.
-   - What to do: Teams running exposed Linux services can deploy
-     a shield that blocks the specific behavior a vulnerability
-     depends on while they test the vendor fix.
-   - Yes, but: The tool is not yet production-ready,
-     SecurityWeek reports.
-   - The Hacker News: https://thehackernews.com/2026/11/openai-and-cisco-unveil-ai-assisted.html
-   - Help Net Security: https://www.helpnetsecurity.com/2026/11/24/cisco-openai-shirudo/
-   - SecurityWeek: https://www.securityweek.com/openai-cisco-unveil-open-source-tool-to-shield-unpatched-linux-systems/
-   - BleepingComputer: https://www.bleepingcomputer.com/news/security/new-shirudo-tool-uses-ai-to-shield-unpatched-linux-systems-from-exploits/
-
-3. CISA FLAGS EXPLOITED N-ABLE MAILASSURE FLAW
-   Vulnerabilities and Exploits · [patch, breach, zero-day]
-   CISA added N-able MailAssure flaw CVE-2026-134624, a
-   server-side request forgery rated 9.3, to its Known Exploited
-   Vulnerabilities catalog on Monday, citing active
-   exploitation.
-   Why it matters: The bug sits in the email filtering cloud
-   N-able runs for managed service providers, handing attackers
-   a route to internal systems behind that service.
-   - Zoom in: N-able found the flaw while investigating the
-     breach of its Mail Assure and SpamExperts Hosted Cloud. A
-     user with high-level API access could open connections to
-     chosen internal systems.
-   - What to do: Apply the N-able patch and audit high-level API
-     accounts. The company restored access to the affected
-     services and continues to monitor those environments.
-   - The Hacker News: https://thehackernews.com/2026/11/hackers-exploit-n-able-mailassure-flaw.html
-   - The Hacker News: https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html
-   - SecurityWeek: https://www.securityweek.com/n-able-patches-critical-flaw-disclosed-after-mail-assure-cyberattack/
-
-4. NCSC FLAGS MARKED RISE IN AI ATTACKS
+1. NCSC FLAGS MARKED RISE IN AI ATTACKS
    AI Security · [ai, breach]
-   Britain's National Cyber Security Centre said it has observed
-   a marked rise since September in cyberattacks assisted by
-   artificial intelligence.
+   Britain's National Cyber Security Centre reported a marked
+   rise since September in AI-assisted attacks, and attackers
+   compromised Check Point security management servers at 22
+   organizations.
    Why it matters: The agency says AI lifts attackers' speed,
    scale, and persistence, shrinking the window defenders get to
    spot and contain an intrusion.
-   - Zoom in: Attackers hacked Check Point security management
-     servers in an AI-assisted campaign run from 99 IP
-     addresses, hitting organizations across several industries
-     and countries.
-   - Between the lines: The European Commission found that its
-     October AI-assisted intrusion exposed names and email
+   - Zoom in: The Check Point campaign ran from 99 IP addresses
+     and chained multiple vulnerabilities, hitting organizations
+     across several industries and countries.
+   - Between the lines: The European Commission confirmed that
+     its October AI-assisted intrusion stole names and email
      addresses of EU Academy users.
    - The Record: https://therecord.media/cyberattacks-uk-artificial-intelligence
    - SecurityWeek: https://www.securityweek.com/check-point-security-management-servers-hacked-in-ai-assisted-campaign/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/hackers-compromise-check-point-servers-in-22-organizations/
    - SecurityWeek: https://www.securityweek.com/european-commission-uncovers-data-breach-in-cyberattack-investigation/
 
-5. CAIRN AGENTS REACH ROOT IN 11 MINUTES
+2. CAIRN AGENTS REACH ROOT IN 11 MINUTES
    AI Security · [ai, zero-day, apt]
    Dark Reading reported that a China-nexus actor's Cairn agents
    moved from finding the MONAI Label zero-day to root access in
@@ -138,44 +86,130 @@ SECURITY
    - Dark Reading: https://www.darkreading.com/cyberattacks-data-breaches/ai-agents-flaw-discovery-root-access-11-minutes
    - The Hacker News: https://thehackernews.com/2026/11/hackers-exploit-n-able-mailassure-flaw.html
    - Ars Technica Security: https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/
+   - Unit 42 (Palo Alto): https://unit42.paloaltonetworks.com/autonomous-ai-agent-threat-campaigns/
+
+3. NORWAY NAMES EQUINOR IN AZURE TOKEN HUNT
+   Critical Infrastructure Security · [cloud, credentials]
+   Norway's National Security Authority said an unknown actor
+   hunted access tokens, secrets, and named values in Azure API
+   Management, hitting energy firms Equinor and Skagerak Energi.
+   Why it matters: Stolen gateway credentials reach the backend
+   systems an API fronts, turning one cloud flaw into access
+   across Norwegian energy operations and other sectors.
+   - What to do: Microsoft closed the flaw in Azure API
+     Management Classic tiers. Rotate every secret, named value,
+     and subscription key stored in the service.
+   - Yes, but: The National Security Authority says it remains
+     uncertain how the actor exploited the vulnerability.
+   - The Hacker News: https://thehackernews.com/2026/11/microsoft-fixes-azure-api-management.html
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/microsoft-azure-flaw-exploited-to-steal-customers-api-credentials/
+   - SecurityWeek: https://www.securityweek.com/azure-flaw-exploited-to-target-secrets-at-norwegian-energy-firms/
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/24/azure-apim-vulnerability-credential-theft/
+
+4. CISA FLAGS EXPLOITED N-ABLE MAILASSURE FLAW
+   Vulnerabilities and Exploits · [patch, breach, zero-day]
+   CISA gave federal civilian agencies until Thanksgiving to
+   patch N-able MailAssure flaw CVE-2026-134624, a server-side
+   request forgery rated 9.3 and under active exploitation.
+   Why it matters: The bug sits in the email filtering cloud
+   N-able runs for managed service providers, handing attackers
+   a route to internal systems behind that service.
+   - Zoom in: N-able found the flaw while investigating the
+     breach of its Mail Assure and SpamExperts Hosted Cloud. A
+     user with high-level API access could open connections to
+     chosen internal systems.
+   - What to do: Apply the N-able patch and audit high-level API
+     accounts. N-able has restored access to the affected email
+     platform and keeps monitoring those environments.
+   - The Hacker News: https://thehackernews.com/2026/11/hackers-exploit-n-able-mailassure-flaw.html
+   - The Record: https://therecord.media/cisa-nable-cybersecurity-bug
+   - The Hacker News: https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html
+   - SecurityWeek: https://www.securityweek.com/n-able-patches-critical-flaw-disclosed-after-mail-assure-cyberattack/
+
+5. OPENAI AND CISCO SHIP SHIRUDO SHIELD
+   AI Security · [ai, patch]
+   OpenAI and Cisco released Shirudo, an open-source Linux
+   runtime that lets AI agents write dynamic eBPF controls
+   blocking exploit behavior with no restart.
+   Why it matters: Testing and deploying a Linux patch takes
+   days or weeks, and the vulnerable service stays exposed the
+   whole time.
+   - What to do: Teams running exposed Linux services can deploy
+     a shield that blocks the specific behavior a vulnerability
+     depends on while they test the vendor fix.
+   - Yes, but: The tool is not yet production-ready,
+     SecurityWeek reports.
+   - The Hacker News: https://thehackernews.com/2026/11/openai-and-cisco-unveil-ai-assisted.html
+   - Help Net Security: https://www.helpnetsecurity.com/2026/11/24/cisco-openai-shirudo/
+   - SecurityWeek: https://www.securityweek.com/openai-cisco-unveil-open-source-tool-to-shield-unpatched-linux-systems/
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/new-shirudo-tool-uses-ai-to-shield-unpatched-linux-systems-from-exploits/
 
 6. OKTA TIES SHINYHUNTERS CREW TO INCEPTION
    Ransomware and Cybercrime · [extortion, phishing]
-   Okta's threat intelligence team said the voice phishing
-   cluster it tracks as O-UNC-053, previously tied to
-   ShinyHunters, resurfaced behind a new leak site named
-   INCEPTION.
+   ShinyHunters claimed a comeback on a new leak site after FBI
+   arrests, signing posts with its old PGP keys, while Okta tied
+   an affiliated vishing cluster to INCEPTION.
    Why it matters: The crew calls employees at technology,
    healthcare, biotech, financial services, insurance, gaming,
    and retail firms, then extorts the data it harvests from
    them.
    - What to do: Train help desks and staff to refuse credential
-     entry and login approvals requested by phone. The cluster
-     has run campaigns since March 2026.
+     entry and login approvals requested by phone. Okta's
+     cluster O-UNC-053 has run campaigns since March 2026.
    - Flashback: The ShinyHunters leak site went dark in
      September 2026.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/shinyhunters-resurfaces-after-fbi-arrests-uses-old-pgp-keys-as-proof/
    - The Hacker News: https://thehackernews.com/2026/11/okta-links-shinyhunters-associated.html
    - Help Net Security: https://www.helpnetsecurity.com/2026/11/24/shinyhunters-inception-leak-site-okta/
 
 7. BROADCOM PATCHES NEW CRITICAL VCENTER FLAW
    Vulnerabilities and Exploits · [patch, vmware]
-   Broadcom shipped fixes for 23 vulnerabilities across VMware
-   ESX, vCenter, Workstation, Fusion, and Avi Load Balancer,
-   among them CVE-2026-123903, an authentication bypass rated
-   9.8.
+   Broadcom patched 23 vulnerabilities across VMware ESX,
+   vCenter, Workstation, Fusion, and Avi Load Balancer, among
+   them CVE-2026-123903, an authentication bypass rated 9.8.
    Why it matters: vCenter runs the virtualization layer under
    most enterprise data centers, and a China-linked group
    exploited a separate vCenter bypass as a zero-day starting in
    September 2026.
-   - Zoom in: The critical bug sits in the VMware Directory
-     Service, vmdir, which handles authentication for the
-     management stack.
+   - Zoom in: The critical bypass sits in the VMware Directory
+     Service, vmdir. Other critical bugs in the batch allow code
+     execution on ESX hosts.
    - What to do: Patch vCenter first, then work through the
      remaining products. Pull management interfaces off the
      internet edge.
    - The Hacker News: https://thehackernews.com/2026/11/vmware-vcenter-hit-by-another-critical.html
+   - SecurityWeek: https://www.securityweek.com/vmware-updates-patch-critical-esx-vcenter-vulnerabilities/
 
-8. UNSECURED DATABASES EXPOSE 3.5 BILLION RECORDS
+8. RADWARE BREACH EXPOSES CUSTOMER CLOUD KEYS
+   Data Breaches · [breach, credentials, cloud]
+   Radware said attackers reached some customers' account
+   details and cloud access keys through an internal Cloud Web
+   Application Firewall management API the company left exposed
+   online.
+   Why it matters: Those keys open the cloud environments the
+   firewall protects, so a breach at the security vendor becomes
+   a breach at every customer whose keys moved.
+   - What to do: Rotate cloud access keys and account
+     credentials tied to Radware Cloud WAF, and review cloud
+     logs for access from unfamiliar addresses.
+   - BleepingComputer: https://www.bleepingcomputer.com/news/security/radware-discloses-breach-exposing-customer-cloud-access-keys/
+
+9. VOLANT MANTICORE BACKDOORS CYPRUS TELECOM NETWORKS
+   Critical Infrastructure Security · [apt, espionage]
+   Researchers disclosed Volant Manticore, a previously
+   undocumented Iran-aligned espionage group that hit
+   telecommunications companies, airlines, and critical
+   infrastructure in Cyprus with the KuboShell backdoor.
+   Why it matters: KuboShell runs command and control over the
+   InterPlanetary File System, so defenses tuned to malicious
+   domains and IP addresses miss the channel.
+   - What to do: Hunt for InterPlanetary File System gateway
+     traffic leaving servers, and look for Homa, the
+     post-compromise framework the group reimplemented and
+     deploys after access.
+   - The Hacker News: https://thehackernews.com/2026/11/iran-aligned-volant-manticore-uses-ipfs.html
+
+10. UNSECURED DATABASES EXPOSE 3.5 BILLION RECORDS
    Data Breaches · [breach, credentials]
    Wired reported that a pair of unsecured databases exposed 3.5
    billion usernames, passwords, and documents tied to hundreds
@@ -188,34 +222,42 @@ SECURITY
      endpoints for credential stuffing spikes.
    - Wired Security: https://www.wired.com/story/3-billion-usernames-passwords-and-documents-leaked-online/
 
-9. RANSOMWARE CREWS SET RECORD VICTIM QUARTER
-   Ransomware and Cybercrime · [ransomware]
-   Check Point Research counted 2,830 victims on ransomware leak
-   sites in the third quarter of 2026, the highest quarterly
-   total it has recorded.
-   Why it matters: A wider pool of brands keeps listing victims
-   even as fewer pay, so exposure now lands on reputation and
-   regulators rather than ransom math.
-   - By the numbers: July brought 964 victims, August 1,042, and
-     September 824.
-   - Help Net Security: https://www.helpnetsecurity.com/2026/11/24/check-point-ransomware-attacks-q3-2026-report/
-
-10. PENINSULA ENERGY HALTS TRADING AFTER MINE HACK
-   Critical Infrastructure Security · [breach, ics]
-   Peninsula Energy told the Australian Securities Exchange that
-   a cybersecurity incident at its Wyoming uranium project will
-   temporarily affect operations, and halted trading in its
-   shares.
-   Why it matters: A uranium producer pulling its stock off the
-   market shows how fast an intrusion at a mine becomes a
-   disclosed financial event.
-   - The big picture: Energy operators on three continents
-     reported intrusions this week, among them Korea Electric
-     Power Corporation, Equinor, and Skagerak Energi.
-   - SecurityWeek: https://www.securityweek.com/peninsula-energy-halts-trading-after-cyber-incident-hits-us-uranium-mine/
-
 BUSINESS AND POLITICS
 ----------------------------------------------------------------
+* Trump Readies New Tariffs on Major Economies
+  President Trump is preparing a fresh round of tariffs on
+  China, the European Union, Japan, and South Korea, the
+  Financial Times reported Tuesday, November 24.
+  Why it matters: Importers and exporters across four of the
+  largest United States trading partners face new levies,
+  reviving trade-war risk days after the Shenzhen summit.
+  - Between the lines: Trump is doubling down on tariffs as his
+    central trade instrument, the Financial Times said, after
+    the Shenzhen meeting with Xi Jinping produced no broad
+    settlement.
+  - FT Home: https://www.ft.com/content/335b593d-1478-4550-ab0a-71fec6280eb0?syn-25a6b1a6=1
+* Venezuela Unveils $240 Billion Debt Pile
+  Venezuela's finance ministry published a $240 billion debt
+  tally and an economic plan Tuesday, November 24, ahead of a
+  historic restructuring, the Financial Times reported.
+  Why it matters: Bondholders and sovereign-debt desks finally
+  get official figures for what would rank among the largest
+  restructurings ever attempted.
+  - Flashback: The disclosure lands 10 months after the United
+    States removed Nicolás Maduro from power. The ministry calls
+    the plan clear and credible.
+  - FT World: https://www.ft.com/content/5975ac9e-20a2-4c20-a0e8-805892253272?syn-25a6b1a6=1
+* Xi Purge Topples Shanghai Party Boss
+  Chinese authorities placed Shanghai party secretary Chen
+  Jining under investigation for suspected severe violations of
+  party discipline and state law, escalating Xi Jinping's purge.
+  Why it matters: China's financial capital loses its top
+  official, adding political uncertainty for the foreign banks
+  and asset managers that run mainland operations there.
+  - Zoom in: Chen was once seen as a potential national leader,
+    the Wall Street Journal reported.
+  - FT Home: https://www.ft.com/content/02240d42-ccd8-4b4d-b0e3-49a04c950eea?syn-25a6b1a6=1
+  - WSJ World News: https://www.wsj.com/world/china/china-takes-down-shanghai-party-boss-once-seen-as-potential-leader-5d6d06e0?mod=rss_worldnews
 * Russian Warplanes Probe Asian Allies' Airspace
   Russian military aircraft skirted or entered the airspace of
   United States allies in Asia several times in recent days,
@@ -243,7 +285,7 @@ BUSINESS AND POLITICS
   - WSJ Markets: https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-24-2026?mod=rss_markets_main
   - WSJ Markets: https://www.wsj.com/finance/stocks/nasdaq-futures-fall-as-questions-linger-over-ai-trade-68ba6d71?mod=rss_markets_main
   - WSJ Markets: https://www.wsj.com/articles/dollar-stays-strong-after-nvidia-news-boosts-u-s-tech-stocks-a0c603c2?mod=rss_markets_main
-  - FT World: https://www.ft.com/content/c0cb932a-076e-4471-8009-91749fde5f47?syn-25a6b1a6=1
+  - FT Home: https://www.ft.com/content/c0cb932a-076e-4471-8009-91749fde5f47?syn-25a6b1a6=1
 * Congress Attacks Huang's Nvidia Reinstatement
   Republican lawmakers revolted against Nvidia's board for
   restoring Jensen Huang at President Trump's urging, The
@@ -291,11 +333,35 @@ PITTSBURGH
 ----------------------------------------------------------------
 
 Weather:
-  Today: Mostly Sunny, high 43F.
+  This Afternoon: Mostly Sunny, high 42F.
   Tonight: Partly Cloudy, low 26F.
-  Wednesday: Sunny, high 49F.
+  Wednesday: Mostly Sunny, high 49F.
 
 Business:
+* Pittsburgh Waives Meter Fees Over Thanksgiving
+  The City of Pittsburgh and the Pittsburgh Parking Authority
+  will make metered parking free citywide for Thanksgiving
+  weekend to steer shoppers to local merchants.
+  Why it matters: Restaurants and shops in Pittsburgh's business
+  districts get a free incentive for customers at the start of
+  the holiday shopping season.
+  - Between the lines: City Council is separately weighing meter
+    rate increases to raise revenue, as a budget crisis
+    threatens to drain Pittsburgh's reserves, TribLive reported
+    Tuesday, November 24.
+  - WPXI: https://www.wpxi.com/news/local/city-pittsburgh-will-have-free-metered-parking-thanksgiving-weekend/YROLF4D24VEEHHUFSPJL6J6SJA/
+  - TribLive: https://triblive.com/local/pittsburgh-weighs-raising-parking-meter-rates-to-ease-budget-woes/
+* Sheetz Opens a Dial-A-Granny Holiday Hotline
+  Sheetz is running a holiday advice line at 1-844-GRANNY1
+  through December 23 with recorded tips from grandmothers,
+  Pittsburgh Magazine reported Tuesday, November 24.
+  Why it matters: The Pennsylvania convenience chain is pitching
+  the hotline as the human alternative for shoppers who would
+  otherwise ask an artificial-intelligence chatbot.
+  - When: North Carolina-based ItsGrandmaC takes live calls
+    Wednesday, December 16, from 6 to 7 p.m., on holiday
+    etiquette and guests who overstay their welcome.
+  - Pittsburgh Magazine: https://www.pittsburghmagazine.com/sheetz-dial-a-granny/
 * Maggie's Farm Distillery Heads to Sheriff's Sale
   Maggie's Farm's Upper St. Clair distillery is headed to
   sheriff's sale, WPXI reported Tuesday, November 24.
@@ -337,6 +403,28 @@ Business:
   - WPXI: https://www.wpxi.com/news/local/women-struggling-find-estrogen-patches-lawmakers-push-fda-recognize-shortage/BWUMIFL2DFBNLFGW4Z5FXXITGI/
 
 Around town:
+* Recount Decides House Race by 30 Votes
+  A recount in Pennsylvania's 41st state House District finished
+  with a 30-vote margin, WTAE reported Tuesday, November 24.
+  Why it matters: The seat sets the size of the Democratic
+  majority that takes control of the Pennsylvania House in
+  January.
+  - WTAE: https://www.wtae.com/article/pa-state-house-district-41-recount-chambers-miller/74521733
+* Turkey Trot Closes Downtown Streets Thursday
+  Thousands of runners in the Thanksgiving Turkey Trot will shut
+  streets downtown and on the North Shore Thursday morning,
+  November 26, TribLive reported.
+  Why it matters: Drivers heading to holiday dinners face
+  closures in two of Pittsburgh's busiest districts during the
+  morning travel window.
+  - TribLive: https://triblive.com/local/thanksgiving-turkey-trot-prompts-downtown-north-shore-road-closures/
+* Wexford Interchange Could Finish Early
+  PennDOT said its Interstate 79 and Route 910 Wexford
+  interchange project is on track for possible early completion,
+  TribLive reported Tuesday, November 24.
+  Why it matters: North Hills drivers could get out of one of
+  the region's largest construction zones ahead of schedule.
+  - TribLive: https://triblive.com/local/penndots-wexford-interchange-project-on-track-for-possible-early-completion/
 * States Sue HUD Over Housing Citizenship Rule
   Twenty-one states and Pennsylvania's governor sued the United
   States Department of Housing and Urban Development over a rule
@@ -396,6 +484,35 @@ Around town:
   - WTAE: https://www.wtae.com/article/pps-fears-losing-sports-teams-amid-school-closures/74514350
 
 Events:
+* Guide Maps 13 Pittsburgh Holiday Light Shows
+  NEXTpittsburgh published a guide Tuesday, November 24, to 13
+  holiday light shows and displays around Pittsburgh, from
+  drive-through routes to walk-up installations.
+  Why it matters: Families get one list of where to see lights
+  this season, with options for staying in the car or walking
+  through.
+  - NEXTpittsburgh Events: https://nextpittsburgh.com/events/ultimate-guide-to-holiday-lights-in-the-pittsburgh-area/
+* Delmont Scales Back Monticello Lights
+  Residents of Delmont's Monticello neighborhood dropped the
+  decorating competition and opening-night kickoff from this
+  year's Monticello Lights display, TribLive reported Tuesday,
+  November 24.
+  Why it matters: Visitors can still drive the neighborhood to
+  see the holiday display, and organizers keep collecting
+  charity donations.
+  - Where: The Monticello neighborhood of Delmont, Westmoreland
+    County.
+  - TribLive: https://triblive.com/local/westmoreland/monticello-lights-in-delmont-drops-competition-keeps-charity-drive-for-2026/
+* Judges Crown Gingerbread Competition Winners
+  Pittsburgh officials announced the winners of the city's
+  annual gingerbread display and competition Tuesday, November
+  24, WPXI reported.
+  Why it matters: The judged display stays open to visitors as
+  Pittsburgh's holiday season gets underway downtown.
+  - Flashback: The 24th annual display opened Friday, November
+    20, at the City-County Building with more than 300 entries
+    from children, adults, and families.
+  - WPXI: https://www.wpxi.com/news/local/judges-decide-pittsburghs-annual-gingerbread-display-competition-winners/VYCMSXOT6ZG5PA4LX5ZZ47YJYE/
 * History Center Hosts Winter Wonderland
   The Heinz History Center hosts "Winter Wonderland: A Journey
   Through Ice and Time," a family event with campfire story
@@ -443,6 +560,18 @@ Around the Teams:
   - Pittsburgh Steelers (YouTube): https://www.youtube.com/watch?v=SxLVWyLEd0k
 
 Team USA:
+* United States Lands 2028 Copa América
+  The 2028 Copa América will be played in the United States, the
+  second straight edition staged there, ESPN reported Tuesday,
+  November 24.
+  Why it matters: The United States men's national team gets
+  another senior continental tournament at home, two years after
+  hosting the 2026 World Cup.
+  - By the numbers: The tournament comes to the United States
+    for the third time in 12 years. ESPN argued the arrangement
+    robs South America of its own competition.
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50583160/united-states-2028-copa-america
+  - ESPN Soccer: https://www.espn.com/soccer/story/_/id/50583713/us-host-copa-america-2028-usmnt
 * Pochettino May Tap USMNT Players at United
   ESPN examined Tuesday, November 24, which United States men's
   national team players Mauricio Pochettino could sign at
@@ -460,6 +589,12 @@ Team USA:
 READING
 ----------------------------------------------------------------
 
+* Ed Zitron -- Defective Accelerationism
+  Zitron breaks a planned week off to attack the accelerationist
+  case for the artificial-intelligence boom and the people
+  pushing it.
+  https://www.wheresyoured.at/defective-accelerationism/
+
 * Stratechery -- The Individual Exception
   Argues Jensen Huang won an exemption from managerial
   oversight, and that the artificial-intelligence era will
@@ -471,12 +606,6 @@ READING
   the company's AI ambitions to public-market pressure,
   deepening his longstanding criticism of its beliefs.
   https://calnewport.com/the-anthropic-ipo-concerns-me/
-
-* Ed Zitron -- Premium: Bursting Bubbles
-  Argues the boom-and-bust cycle of bubbles is destructive and
-  mainly enriches wealthy, well-connected investors who buy
-  early and exit before the collapse.
-  https://www.wheresyoured.at/premium-bursting-bubbles/
 
 MARKETS (weekly average, change vs prior week)
 ----------------------------------------------------------------
@@ -490,23 +619,22 @@ USD/JPY       159.41  ▲ +0.1%
 
 FEED HEALTH
 ----------------------------------------------------------------
-Security: 24 of 24 feeds loaded, 59 items in the 24-hour window.
-  No recent items: Krebs on Security, CISA Advisories,
-  Securelist (Kaspersky), Unit 42 (Palo Alto), Google Online
-  Security Blog, Cisco Talos, Microsoft Security Blog, Google
-  Project Zero, The DFIR Report, Kim Zetter (Zero Day), Frank on
-  Fraud.
+Security: 24 of 24 feeds loaded, 62 items in the 24-hour window.
+  No recent items: Krebs on Security, Securelist (Kaspersky),
+  Google Online Security Blog, Cisco Talos, Microsoft Security
+  Blog, Google Project Zero, The DFIR Report, Kim Zetter (Zero
+  Day), Frank on Fraud.
 Pittsburgh: 8 of 9 feeds loaded, 60 items in the 48-hour window.
   Failed: Pittsburgh Post-Gazette (ForbiddenXMLError: DTD or
   entity declarations are not allowed).
 Business and Politics: 8 of 8 feeds loaded, 60 items in the
   36-hour window.
-Events: 2 of 4 feeds loaded, 4 items in the 120-hour window.
+Events: 2 of 4 feeds loaded, 3 items in the 120-hour window.
   Failed: Post-Gazette Arts & Entertainment (ForbiddenXMLError:
   DTD or entity declarations are not allowed); Post-Gazette
   Music (ForbiddenXMLError: DTD or entity declarations are not
   allowed).
-Sports media: 4 of 6 feeds loaded, 15 items in the 96-hour
+Sports media: 4 of 6 feeds loaded, 14 items in the 96-hour
   window. Failed: Post-Gazette Pirates (ForbiddenXMLError: DTD
   or entity declarations are not allowed); Post-Gazette Steelers
   (ForbiddenXMLError: DTD or entity declarations are not
@@ -518,11 +646,11 @@ Reading: 3 of 3 feeds loaded, 12 items in the 336-hour window.
 Markets (Yahoo Finance): 7 of 7 rows
 Weather (NWS): 3 forecast periods
 Scores (ESPN, plaintextsports): 2 teams via ESPN
-Summaries: 3 model call(s) served by claude-opus-5 (294s of
-  model time; $1.83 at API list price).
+Summaries: 3 model call(s) served by claude-opus-5 (404s of
+  model time; $2.16 at API list price).
 
 ================================================================
-Generated 2026-11-24 10:05 EST. Updated weekdays at about 7:05
+Generated 2026-11-24 13:36 EST. Updated weekdays at about 7:05
 AM, 10:05 AM, 1:35 PM, and 7:35 PM ET, and weekends at about
 8:05 AM and 7:35 PM ET. Sources: 24 security feeds; 9 Pittsburgh
 feeds; 4 Pittsburgh arts and events feeds; 6 Pittsburgh sports
